@@ -1,0 +1,1826 @@
+[
+  {
+    "path": "master/nemu64.exe",
+    "size": 4796416,
+    "sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+    "machine": 332,
+    "image_base": 4194304,
+    "entry_rva": 166194,
+    "linker_version": "7.0",
+    "timestamp_raw": 1048395060,
+    "timestamp_utc": "2003-03-23T04:51:00+00:00",
+    "sections": [
+      {
+        "name": ".text",
+        "virtual_size": 190477,
+        "rva": 4096,
+        "raw_size": 192512,
+        "offset": 4096
+      },
+      {
+        "name": ".rdata",
+        "virtual_size": 61240,
+        "rva": 196608,
+        "raw_size": 61440,
+        "offset": 196608
+      },
+      {
+        "name": ".data",
+        "virtual_size": 67692888,
+        "rva": 258048,
+        "raw_size": 241664,
+        "offset": 258048
+      },
+      {
+        "name": ".rsrc",
+        "virtual_size": 4295496,
+        "rva": 67952640,
+        "raw_size": 4296704,
+        "offset": 499712
+      }
+    ],
+    "rich": {
+      "offset": 128,
+      "xor_key": "0421da8b",
+      "checksum_valid": true,
+      "records": [
+        {
+          "comp_id": "002723ca",
+          "product_id": 39,
+          "build": 9162,
+          "count": 2
+        },
+        {
+          "comp_id": "001d24fa",
+          "product_id": 29,
+          "build": 9466,
+          "count": 2
+        },
+        {
+          "comp_id": "004024fa",
+          "product_id": 64,
+          "build": 9466,
+          "count": 20
+        },
+        {
+          "comp_id": "001c24fa",
+          "product_id": 28,
+          "build": 9466,
+          "count": 93
+        },
+        {
+          "comp_id": "000420ff",
+          "product_id": 4,
+          "build": 8447,
+          "count": 2
+        },
+        {
+          "comp_id": "000a1fe8",
+          "product_id": 10,
+          "build": 8168,
+          "count": 14
+        },
+        {
+          "comp_id": "00041fe8",
+          "product_id": 4,
+          "build": 8168,
+          "count": 2
+        },
+        {
+          "comp_id": "001923fa",
+          "product_id": 25,
+          "build": 9210,
+          "count": 15
+        },
+        {
+          "comp_id": "00010000",
+          "product_id": 1,
+          "build": 0,
+          "count": 153
+        },
+        {
+          "comp_id": "002c24fa",
+          "product_id": 44,
+          "build": 9466,
+          "count": 27
+        },
+        {
+          "comp_id": "004524fa",
+          "product_id": 69,
+          "build": 9466,
+          "count": 1
+        },
+        {
+          "comp_id": "003d24fa",
+          "product_id": 61,
+          "build": 9466,
+          "count": 1
+        }
+      ]
+    },
+    "imports": [
+      {
+        "dll": "COMCTL32.dll",
+        "symbol_count": 3
+      },
+      {
+        "dll": "WINMM.dll",
+        "symbol_count": 1
+      },
+      {
+        "dll": "kailleraclient.dll",
+        "symbol_count": 6,
+        "symbols": [
+          "_kailleraShutdown@0",
+          "_kailleraEndGame@0",
+          "_kailleraModifyPlayValues@8",
+          "_kailleraInit@0",
+          "_kailleraSelectServerDialog@4",
+          "_kailleraSetInfos@4"
+        ]
+      },
+      {
+        "dll": "gs_dll.dll",
+        "symbol_count": 3,
+        "symbols": [
+          "?GSInitialize@@YAXPAD00@Z",
+          "?GSConfigure@@YAXXZ",
+          "?GSUpdate@@YAXXZ"
+        ]
+      },
+      {
+        "dll": "KERNEL32.dll",
+        "symbol_count": 84
+      },
+      {
+        "dll": "USER32.dll",
+        "symbol_count": 46
+      },
+      {
+        "dll": "GDI32.dll",
+        "symbol_count": 3
+      },
+      {
+        "dll": "comdlg32.dll",
+        "symbol_count": 2
+      },
+      {
+        "dll": "SHELL32.dll",
+        "symbol_count": 4
+      }
+    ],
+    "exports": [],
+    "debug": [],
+    "versions": [
+      {
+        "file_version": "0.8.0.0",
+        "product_version": "0.8.0.0"
+      }
+    ],
+    "delphi": null,
+    "evidence_strings": [
+      {
+        "offset": 203696,
+        "text": "Microsoft Visual C++ Runtime Library"
+      },
+      {
+        "offset": 213680,
+        "text": "NemuSettings"
+      },
+      {
+        "offset": 213704,
+        "text": "ToolGetMenuText"
+      },
+      {
+        "offset": 213720,
+        "text": "ToolFunc"
+      },
+      {
+        "offset": 213732,
+        "text": "ToolFree"
+      },
+      {
+        "offset": 213744,
+        "text": "ToolInit"
+      }
+    ]
+  },
+  {
+    "path": "master/gs_dll.dll",
+    "size": 2170928,
+    "sha256": "35a69ae0172add4355a7f4c4fa30b84adfffbd4bade67cce88631502627bc45b",
+    "machine": 332,
+    "image_base": 268435456,
+    "entry_rva": 139824,
+    "linker_version": "6.0",
+    "timestamp_raw": 1010854686,
+    "timestamp_utc": "2002-01-12T16:58:06+00:00",
+    "sections": [
+      {
+        "name": ".text",
+        "virtual_size": 1798352,
+        "rva": 4096,
+        "raw_size": 1802240,
+        "offset": 4096
+      },
+      {
+        "name": ".rdata",
+        "virtual_size": 132255,
+        "rva": 1806336,
+        "raw_size": 135168,
+        "offset": 1806336
+      },
+      {
+        "name": ".data",
+        "virtual_size": 1397972,
+        "rva": 1941504,
+        "raw_size": 86016,
+        "offset": 1941504
+      },
+      {
+        "name": ".idata",
+        "virtual_size": 22919,
+        "rva": 3342336,
+        "raw_size": 24576,
+        "offset": 2027520
+      },
+      {
+        "name": ".rsrc",
+        "virtual_size": 36272,
+        "rva": 3366912,
+        "raw_size": 36864,
+        "offset": 2052096
+      },
+      {
+        "name": ".reloc",
+        "virtual_size": 78939,
+        "rva": 3403776,
+        "raw_size": 81920,
+        "offset": 2088960
+      }
+    ],
+    "rich": {
+      "offset": 128,
+      "xor_key": "36fbdcd5",
+      "checksum_valid": true,
+      "records": [
+        {
+          "comp_id": "000c1c7b",
+          "product_id": 12,
+          "build": 7291,
+          "count": 1
+        },
+        {
+          "comp_id": "00131f56",
+          "product_id": 19,
+          "build": 8022,
+          "count": 38
+        },
+        {
+          "comp_id": "000a20ff",
+          "product_id": 10,
+          "build": 8447,
+          "count": 1
+        },
+        {
+          "comp_id": "00000000",
+          "product_id": 0,
+          "build": 0,
+          "count": 134
+        },
+        {
+          "comp_id": "00010000",
+          "product_id": 1,
+          "build": 0,
+          "count": 697
+        },
+        {
+          "comp_id": "00131f62",
+          "product_id": 19,
+          "build": 8034,
+          "count": 19
+        },
+        {
+          "comp_id": "000b1f6f",
+          "product_id": 11,
+          "build": 8047,
+          "count": 10
+        },
+        {
+          "comp_id": "000e1c83",
+          "product_id": 14,
+          "build": 7299,
+          "count": 28
+        },
+        {
+          "comp_id": "000a1f6f",
+          "product_id": 10,
+          "build": 8047,
+          "count": 153
+        },
+        {
+          "comp_id": "000b2179",
+          "product_id": 11,
+          "build": 8569,
+          "count": 145
+        },
+        {
+          "comp_id": "00312354",
+          "product_id": 49,
+          "build": 9044,
+          "count": 8
+        },
+        {
+          "comp_id": "000606c7",
+          "product_id": 6,
+          "build": 1735,
+          "count": 1
+        },
+        {
+          "comp_id": "000420ff",
+          "product_id": 4,
+          "build": 8447,
+          "count": 1
+        }
+      ]
+    },
+    "imports": [
+      {
+        "dll": "KERNEL32.dll",
+        "symbol_count": 159
+      },
+      {
+        "dll": "USER32.dll",
+        "symbol_count": 234
+      },
+      {
+        "dll": "GDI32.dll",
+        "symbol_count": 196
+      },
+      {
+        "dll": "comdlg32.dll",
+        "symbol_count": 7
+      },
+      {
+        "dll": "WINSPOOL.DRV",
+        "symbol_count": 3
+      },
+      {
+        "dll": "ADVAPI32.dll",
+        "symbol_count": 14
+      },
+      {
+        "dll": "SHELL32.dll",
+        "symbol_count": 5
+      },
+      {
+        "dll": "COMCTL32.dll",
+        "symbol_count": 33
+      },
+      {
+        "dll": "oledlg.dll",
+        "symbol_count": 7
+      },
+      {
+        "dll": "ole32.dll",
+        "symbol_count": 72
+      },
+      {
+        "dll": "OLEPRO32.DLL",
+        "symbol_count": 1
+      },
+      {
+        "dll": "OLEAUT32.dll",
+        "symbol_count": 36
+      }
+    ],
+    "exports": [
+      {
+        "name": "?GSConfigure@@YAXXZ",
+        "ordinal": 1,
+        "rva": 4136
+      },
+      {
+        "name": "?GSInitialize@@YAXPAD00@Z",
+        "ordinal": 2,
+        "rva": 4346
+      },
+      {
+        "name": "?GSUpdate@@YAXXZ",
+        "ordinal": 3,
+        "rva": 4391
+      },
+      {
+        "name": "DllCanUnloadNow",
+        "ordinal": 4,
+        "rva": 4131
+      },
+      {
+        "name": "DllGetClassObject",
+        "ordinal": 5,
+        "rva": 4181
+      },
+      {
+        "name": "DllRegisterServer",
+        "ordinal": 6,
+        "rva": 4336
+      }
+    ],
+    "debug": [
+      {
+        "type": 2,
+        "size": 48,
+        "offset": 2170880,
+        "format": "NB10",
+        "signature": "3b4816e0",
+        "age": 60,
+        "pdb": "G:\\nemu\\gs_dll\\Debug\\gs_dll.pdb"
+      }
+    ],
+    "versions": [
+      {
+        "file_version": "1.0.0.1",
+        "product_version": "1.0.0.1"
+      }
+    ],
+    "delphi": null,
+    "evidence_strings": [
+      {
+        "offset": 1611900,
+        "text": "G:\\nemu\\gs_dll\\Debug\\gs_dll.pdb"
+      },
+      {
+        "offset": 1615572,
+        "text": " \"/nologo\" \"/subsystem:windows\" \"/dll\" \"/incremental:yes\" \"/pdb:Debug/gs_dll.pdb\" \"/debug\" \"/machine:I386\" \"/def:.\\gs_dll.def\" \"/out:g:\\nemu\\new37\\gs_dll.dll\" \"/implib:g:\\nemu\\new37\\gs_dll.lib\" \"/pdbtype:sept\" \".\\Debug\\Addsubcode.obj\" \".\\Debug\\gs_dll.obj\" \".\\Debug\\gs_exeDlg.obj\" \".\\Debug\\GS_interpret.obj\" \".\\Debug\\NewCodeDlg.obj\" \".\\Debug\\PropertiesDlg.obj\" \".\\Debug\\RW_INI_files.obj\" \".\\Debug\\StdAfx.obj\" \".\\Debug\\gs_dll.res\" \"/incremental:yes\" \"/nologo\" \"/fullbuild\""
+      },
+      {
+        "offset": 1616048,
+        "text": "DEFAULTLIB:nafxcwd.lib"
+      },
+      {
+        "offset": 1616071,
+        "text": "DEFAULTLIB:libcmtd.lib"
+      },
+      {
+        "offset": 1616094,
+        "text": "DEFAULTLIB:kernel32.lib"
+      },
+      {
+        "offset": 1616118,
+        "text": "DEFAULTLIB:user32.lib"
+      },
+      {
+        "offset": 1616140,
+        "text": "DEFAULTLIB:gdi32.lib"
+      },
+      {
+        "offset": 1616161,
+        "text": "DEFAULTLIB:comdlg32.lib"
+      },
+      {
+        "offset": 1616185,
+        "text": "DEFAULTLIB:winspool.lib"
+      },
+      {
+        "offset": 1616209,
+        "text": "DEFAULTLIB:advapi32.lib"
+      },
+      {
+        "offset": 1616233,
+        "text": "DEFAULTLIB:shell32.lib"
+      },
+      {
+        "offset": 1616256,
+        "text": "DEFAULTLIB:comctl32.lib"
+      },
+      {
+        "offset": 1616331,
+        "text": "DEFAULTLIB:uuid.lib"
+      },
+      {
+        "offset": 1616351,
+        "text": "DEFAULTLIB:oledlg.lib"
+      },
+      {
+        "offset": 1616373,
+        "text": "DEFAULTLIB:ole32.lib"
+      },
+      {
+        "offset": 1616394,
+        "text": "DEFAULTLIB:olepro32.lib"
+      },
+      {
+        "offset": 1616418,
+        "text": "DEFAULTLIB:oleaut32.lib"
+      },
+      {
+        "offset": 1616442,
+        "text": "DEFAULTLIB:urlmon.lib"
+      },
+      {
+        "offset": 1616464,
+        "text": "DEFAULTLIB:odbc32.lib"
+      },
+      {
+        "offset": 1616486,
+        "text": "DEFAULTLIB:odbccp32.lib"
+      },
+      {
+        "offset": 1616510,
+        "text": "DEFAULTLIB:daouuid.lib"
+      },
+      {
+        "offset": 1616533,
+        "text": "DEFAULTLIB:LIBCMTD"
+      },
+      {
+        "offset": 1616552,
+        "text": "DEFAULTLIB:OLDNAMES"
+      },
+      {
+        "offset": 1616572,
+        "text": "EDITANDCONTINUE"
+      },
+      {
+        "offset": 1850788,
+        "text": "Microsoft Visual C++ Debug Library"
+      },
+      {
+        "offset": 1852800,
+        "text": "Microsoft Visual C++ Runtime Library"
+      },
+      {
+        "offset": 1945616,
+        "text": "G:\\nemu\\gs_dll\\Addsubcode.cpp"
+      },
+      {
+        "offset": 1945652,
+        "text": "G:\\nemu\\gs_dll\\gs_dll.cpp"
+      },
+      {
+        "offset": 1945684,
+        "text": "G:\\nemu\\gs_dll\\gs_exeDlg.cpp"
+      },
+      {
+        "offset": 1945720,
+        "text": "G:\\nemu\\gs_dll\\NewCodeDlg.cpp"
+      },
+      {
+        "offset": 1945756,
+        "text": "G:\\nemu\\gs_dll\\PropertiesDlg.cpp"
+      },
+      {
+        "offset": 2170896,
+        "text": "G:\\nemu\\gs_dll\\Debug\\gs_dll.pdb"
+      }
+    ]
+  },
+  {
+    "path": "master/Plugin/debugger.dll",
+    "size": 977408,
+    "sha256": "e10e8b27a53951dbaeba6d72bf61e3859d3e2654741f00d29798c993411637bd",
+    "machine": 332,
+    "image_base": 4194304,
+    "entry_rva": 798004,
+    "linker_version": "2.25",
+    "timestamp_raw": 708992537,
+    "timestamp_utc": "1992-06-19T22:22:17+00:00",
+    "sections": [
+      {
+        "name": "CODE",
+        "virtual_size": 793932,
+        "rva": 4096,
+        "raw_size": 794112,
+        "offset": 1024
+      },
+      {
+        "name": "DATA",
+        "virtual_size": 8124,
+        "rva": 798720,
+        "raw_size": 8192,
+        "offset": 795136
+      },
+      {
+        "name": "BSS",
+        "virtual_size": 4949,
+        "rva": 806912,
+        "raw_size": 0,
+        "offset": 803328
+      },
+      {
+        "name": ".idata",
+        "virtual_size": 9618,
+        "rva": 815104,
+        "raw_size": 9728,
+        "offset": 803328
+      },
+      {
+        "name": ".edata",
+        "virtual_size": 136,
+        "rva": 827392,
+        "raw_size": 512,
+        "offset": 813056
+      },
+      {
+        "name": ".reloc",
+        "virtual_size": 56196,
+        "rva": 831488,
+        "raw_size": 56320,
+        "offset": 813568
+      },
+      {
+        "name": ".rsrc",
+        "virtual_size": 107520,
+        "rva": 888832,
+        "raw_size": 107520,
+        "offset": 869888
+      }
+    ],
+    "rich": null,
+    "imports": [
+      {
+        "dll": "kernel32.dll",
+        "symbol_count": 43
+      },
+      {
+        "dll": "user32.dll",
+        "symbol_count": 4
+      },
+      {
+        "dll": "advapi32.dll",
+        "symbol_count": 3
+      },
+      {
+        "dll": "oleaut32.dll",
+        "symbol_count": 3
+      },
+      {
+        "dll": "kernel32.dll",
+        "symbol_count": 6
+      },
+      {
+        "dll": "advapi32.dll",
+        "symbol_count": 6
+      },
+      {
+        "dll": "kernel32.dll",
+        "symbol_count": 66
+      },
+      {
+        "dll": "version.dll",
+        "symbol_count": 3
+      },
+      {
+        "dll": "gdi32.dll",
+        "symbol_count": 74
+      },
+      {
+        "dll": "user32.dll",
+        "symbol_count": 170
+      },
+      {
+        "dll": "kernel32.dll",
+        "symbol_count": 1
+      },
+      {
+        "dll": "oleaut32.dll",
+        "symbol_count": 22
+      },
+      {
+        "dll": "comctl32.dll",
+        "symbol_count": 24
+      },
+      {
+        "dll": "shell32.dll",
+        "symbol_count": 1
+      },
+      {
+        "dll": "comdlg32.dll",
+        "symbol_count": 2
+      }
+    ],
+    "exports": [
+      {
+        "name": "ToolFree",
+        "ordinal": 3,
+        "rva": 795224
+      },
+      {
+        "name": "ToolFunc",
+        "ordinal": 1,
+        "rva": 796768
+      },
+      {
+        "name": "ToolGetMenuText",
+        "ordinal": 2,
+        "rva": 796508
+      },
+      {
+        "name": "ToolInit",
+        "ordinal": 4,
+        "rva": 793276
+      }
+    ],
+    "debug": [],
+    "versions": [],
+    "delphi": {
+      "dvclal": {
+        "offset": 891276,
+        "hex": "23785d23b6a5f31943f3400226d111c7"
+      },
+      "package": {
+        "offset": 891292,
+        "flags": 2348810241,
+        "requires": [],
+        "units": [
+          {
+            "flags": 1,
+            "hash": 244,
+            "name": "debugger"
+          },
+          {
+            "flags": 16,
+            "hash": 233,
+            "name": "ThemeMgr"
+          },
+          {
+            "flags": 16,
+            "hash": 110,
+            "name": "ComCtrls"
+          },
+          {
+            "flags": 16,
+            "hash": 176,
+            "name": "Printers"
+          },
+          {
+            "flags": 16,
+            "hash": 199,
+            "name": "Consts"
+          },
+          {
+            "flags": 0,
+            "hash": 199,
+            "name": "System"
+          },
+          {
+            "flags": 0,
+            "hash": 129,
+            "name": "SysInit"
+          },
+          {
+            "flags": 12,
+            "hash": 75,
+            "name": "Windows"
+          },
+          {
+            "flags": 16,
+            "hash": 85,
+            "name": "Types"
+          },
+          {
+            "flags": 28,
+            "hash": 87,
+            "name": "WinSpool"
+          },
+          {
+            "flags": 0,
+            "hash": 2,
+            "name": "SysUtils"
+          },
+          {
+            "flags": 16,
+            "hash": 157,
+            "name": "SysConst"
+          },
+          {
+            "flags": 0,
+            "hash": 94,
+            "name": "Classes"
+          },
+          {
+            "flags": 16,
+            "hash": 34,
+            "name": "RTLConsts"
+          },
+          {
+            "flags": 12,
+            "hash": 51,
+            "name": "Messages"
+          },
+          {
+            "flags": 16,
+            "hash": 67,
+            "name": "Variants"
+          },
+          {
+            "flags": 16,
+            "hash": 36,
+            "name": "VarUtils"
+          },
+          {
+            "flags": 16,
+            "hash": 81,
+            "name": "TypInfo"
+          },
+          {
+            "flags": 16,
+            "hash": 115,
+            "name": "ActiveX"
+          },
+          {
+            "flags": 16,
+            "hash": 43,
+            "name": "Graphics"
+          },
+          {
+            "flags": 16,
+            "hash": 179,
+            "name": "Forms"
+          },
+          {
+            "flags": 16,
+            "hash": 22,
+            "name": "Math"
+          },
+          {
+            "flags": 28,
+            "hash": 20,
+            "name": "CommCtrl"
+          },
+          {
+            "flags": 16,
+            "hash": 143,
+            "name": "FlatSB"
+          },
+          {
+            "flags": 16,
+            "hash": 223,
+            "name": "StdActns"
+          },
+          {
+            "flags": 16,
+            "hash": 184,
+            "name": "Clipbrd"
+          },
+          {
+            "flags": 16,
+            "hash": 89,
+            "name": "StrUtils"
+          },
+          {
+            "flags": 28,
+            "hash": 42,
+            "name": "ShellAPI"
+          },
+          {
+            "flags": 16,
+            "hash": 38,
+            "name": "Controls"
+          },
+          {
+            "flags": 16,
+            "hash": 165,
+            "name": "MultiMon"
+          },
+          {
+            "flags": 16,
+            "hash": 118,
+            "name": "Menus"
+          },
+          {
+            "flags": 16,
+            "hash": 135,
+            "name": "Contnrs"
+          },
+          {
+            "flags": 16,
+            "hash": 205,
+            "name": "ImgList"
+          },
+          {
+            "flags": 16,
+            "hash": 69,
+            "name": "ActnList"
+          },
+          {
+            "flags": 28,
+            "hash": 193,
+            "name": "Imm"
+          },
+          {
+            "flags": 16,
+            "hash": 100,
+            "name": "StdCtrls"
+          },
+          {
+            "flags": 16,
+            "hash": 160,
+            "name": "Dialogs"
+          },
+          {
+            "flags": 16,
+            "hash": 145,
+            "name": "ExtCtrls"
+          },
+          {
+            "flags": 28,
+            "hash": 73,
+            "name": "Dlgs"
+          },
+          {
+            "flags": 28,
+            "hash": 51,
+            "name": "CommDlg"
+          },
+          {
+            "flags": 28,
+            "hash": 40,
+            "name": "ShlObj"
+          },
+          {
+            "flags": 28,
+            "hash": 187,
+            "name": "RegStr"
+          },
+          {
+            "flags": 28,
+            "hash": 63,
+            "name": "WinInet"
+          },
+          {
+            "flags": 28,
+            "hash": 239,
+            "name": "UrlMon"
+          },
+          {
+            "flags": 16,
+            "hash": 165,
+            "name": "WinHelpViewer"
+          },
+          {
+            "flags": 16,
+            "hash": 82,
+            "name": "HelpIntfs"
+          },
+          {
+            "flags": 16,
+            "hash": 165,
+            "name": "ComStrs"
+          },
+          {
+            "flags": 16,
+            "hash": 12,
+            "name": "ExtActns"
+          },
+          {
+            "flags": 16,
+            "hash": 48,
+            "name": "Mapi"
+          },
+          {
+            "flags": 16,
+            "hash": 176,
+            "name": "ExtDlgs"
+          },
+          {
+            "flags": 16,
+            "hash": 194,
+            "name": "Buttons"
+          },
+          {
+            "flags": 0,
+            "hash": 56,
+            "name": "Registry"
+          },
+          {
+            "flags": 16,
+            "hash": 221,
+            "name": "IniFiles"
+          },
+          {
+            "flags": 28,
+            "hash": 151,
+            "name": "RichEdit"
+          },
+          {
+            "flags": 16,
+            "hash": 134,
+            "name": "ToolWin"
+          },
+          {
+            "flags": 16,
+            "hash": 223,
+            "name": "ListActns"
+          },
+          {
+            "flags": 16,
+            "hash": 5,
+            "name": "SyncObjs"
+          },
+          {
+            "flags": 16,
+            "hash": 102,
+            "name": "JwaUxTheme"
+          },
+          {
+            "flags": 16,
+            "hash": 128,
+            "name": "ThemeSrv"
+          },
+          {
+            "flags": 28,
+            "hash": 46,
+            "name": "JwaTmSchema"
+          },
+          {
+            "flags": 16,
+            "hash": 41,
+            "name": "CheckLst"
+          },
+          {
+            "flags": 0,
+            "hash": 72,
+            "name": "UnitImageView"
+          },
+          {
+            "flags": 0,
+            "hash": 78,
+            "name": "UnitMain"
+          },
+          {
+            "flags": 0,
+            "hash": 76,
+            "name": "UnitDecs"
+          },
+          {
+            "flags": 0,
+            "hash": 153,
+            "name": "RCP"
+          },
+          {
+            "flags": 0,
+            "hash": 40,
+            "name": "UnitBookmarks"
+          },
+          {
+            "flags": 0,
+            "hash": 90,
+            "name": "UnitDebugCommands"
+          },
+          {
+            "flags": 0,
+            "hash": 190,
+            "name": "UnitDisassembly"
+          },
+          {
+            "flags": 0,
+            "hash": 184,
+            "name": "UnitOpcode"
+          },
+          {
+            "flags": 0,
+            "hash": 149,
+            "name": "UnitDebugMemory"
+          },
+          {
+            "flags": 0,
+            "hash": 151,
+            "name": "UnitDump"
+          },
+          {
+            "flags": 0,
+            "hash": 57,
+            "name": "UnitMIPSToCCode"
+          },
+          {
+            "flags": 0,
+            "hash": 126,
+            "name": "UnitSearch"
+          },
+          {
+            "flags": 0,
+            "hash": 164,
+            "name": "UnitDebugRegisters"
+          },
+          {
+            "flags": 0,
+            "hash": 222,
+            "name": "r4300"
+          },
+          {
+            "flags": 0,
+            "hash": 72,
+            "name": "UnitLibOptions"
+          },
+          {
+            "flags": 0,
+            "hash": 190,
+            "name": "UnitSymbolViewer"
+          },
+          {
+            "flags": 0,
+            "hash": 5,
+            "name": "UnitStats"
+          },
+          {
+            "flags": 0,
+            "hash": 76,
+            "name": "UnitRegChange"
+          },
+          {
+            "flags": 0,
+            "hash": 164,
+            "name": "UnitDebugBreakOpcode"
+          }
+        ]
+      },
+      "forms": [
+        {
+          "resource": "TFORMBOOKMARKS",
+          "offset": 892224,
+          "size": 1847,
+          "class_name": "TFormBookmarks",
+          "object_name": "FormBookmarks",
+          "first_caption": "Bookmarks"
+        },
+        {
+          "resource": "TFORMDEBUG",
+          "offset": 894072,
+          "size": 19478,
+          "class_name": "TFormDebug",
+          "object_name": "FormDebug",
+          "first_caption": "Commands"
+        },
+        {
+          "resource": "TFORMDEBUGBREAKOPCODE",
+          "offset": 913552,
+          "size": 1877,
+          "class_name": "TFormDebugBreakOpcode",
+          "object_name": "FormDebugBreakOpcode",
+          "first_caption": "Break on opcode"
+        },
+        {
+          "resource": "TFORMDEBUGREGISTERCHANGE",
+          "offset": 915432,
+          "size": 1694,
+          "class_name": "TFormDebugRegisterChange",
+          "object_name": "FormDebugRegisterChange",
+          "first_caption": "Break on register access..."
+        },
+        {
+          "resource": "TFORMDUMP",
+          "offset": 917128,
+          "size": 2577,
+          "class_name": "TFormDump",
+          "object_name": "FormDump",
+          "first_caption": "Dump memory"
+        },
+        {
+          "resource": "TFORMIMAGEVIEW",
+          "offset": 919708,
+          "size": 1911,
+          "class_name": "TFormImageView",
+          "object_name": "FormImageView",
+          "first_caption": "Image Viewer"
+        },
+        {
+          "resource": "TFORMLIBOPTIONS",
+          "offset": 921620,
+          "size": 1162,
+          "class_name": "TFormLibOptions",
+          "object_name": "FormLibOptions",
+          "first_caption": "Library options"
+        },
+        {
+          "resource": "TFORMMEMORY",
+          "offset": 922784,
+          "size": 5303,
+          "class_name": "TFormMemory",
+          "object_name": "FormMemory",
+          "first_caption": "Memory"
+        },
+        {
+          "resource": "TFORMREGISTERS",
+          "offset": 928088,
+          "size": 42135,
+          "class_name": "TFormRegisters",
+          "object_name": "FormRegisters",
+          "first_caption": "Registers"
+        },
+        {
+          "resource": "TFORMSEARCH",
+          "offset": 970224,
+          "size": 3157,
+          "class_name": "TFormSearch",
+          "object_name": "FormSearch",
+          "first_caption": "Search"
+        },
+        {
+          "resource": "TFORMSTATS",
+          "offset": 973384,
+          "size": 2619,
+          "class_name": "TFormStats",
+          "object_name": "FormStats",
+          "first_caption": "Statistics"
+        },
+        {
+          "resource": "TFORMSYMBOLS",
+          "offset": 976004,
+          "size": 685,
+          "class_name": "TFormSymbols",
+          "object_name": "FormSymbols",
+          "first_caption": "Symbols"
+        }
+      ],
+      "tcontrol": {
+        "rtti_offset": 417144,
+        "vmt_va": 4613888,
+        "vmt_offset": 416512,
+        "instance_size": 348,
+        "preceding_dword": 1869562375,
+        "die_rule_version": "6"
+      }
+    },
+    "evidence_strings": [
+      {
+        "offset": 11808,
+        "text": "SOFTWARE\\Borland\\Delphi\\RTL"
+      },
+      {
+        "offset": 813149,
+        "text": "ToolFree"
+      },
+      {
+        "offset": 813158,
+        "text": "ToolFunc"
+      },
+      {
+        "offset": 813167,
+        "text": "ToolGetMenuText"
+      },
+      {
+        "offset": 813183,
+        "text": "ToolInit"
+      }
+    ]
+  },
+  {
+    "path": "master/Plugin/dialogs.dll",
+    "size": 644096,
+    "sha256": "73df81668476f65dcc6587dbd79c2082d6b29d05c367ffc3cf0f6e7d36af7ab5",
+    "machine": 332,
+    "image_base": 4194304,
+    "entry_rva": 546292,
+    "linker_version": "2.25",
+    "timestamp_raw": 708992537,
+    "timestamp_utc": "1992-06-19T22:22:17+00:00",
+    "sections": [
+      {
+        "name": "CODE",
+        "virtual_size": 542220,
+        "rva": 4096,
+        "raw_size": 542720,
+        "offset": 1024
+      },
+      {
+        "name": "DATA",
+        "virtual_size": 6068,
+        "rva": 548864,
+        "raw_size": 6144,
+        "offset": 543744
+      },
+      {
+        "name": "BSS",
+        "virtual_size": 3765,
+        "rva": 557056,
+        "raw_size": 0,
+        "offset": 549888
+      },
+      {
+        "name": ".idata",
+        "virtual_size": 9032,
+        "rva": 561152,
+        "raw_size": 9216,
+        "offset": 549888
+      },
+      {
+        "name": ".edata",
+        "virtual_size": 158,
+        "rva": 573440,
+        "raw_size": 512,
+        "offset": 559104
+      },
+      {
+        "name": ".reloc",
+        "virtual_size": 38336,
+        "rva": 577536,
+        "raw_size": 38400,
+        "offset": 559616
+      },
+      {
+        "name": ".rsrc",
+        "virtual_size": 46080,
+        "rva": 618496,
+        "raw_size": 46080,
+        "offset": 598016
+      }
+    ],
+    "rich": null,
+    "imports": [
+      {
+        "dll": "kernel32.dll",
+        "symbol_count": 43
+      },
+      {
+        "dll": "user32.dll",
+        "symbol_count": 4
+      },
+      {
+        "dll": "advapi32.dll",
+        "symbol_count": 3
+      },
+      {
+        "dll": "oleaut32.dll",
+        "symbol_count": 3
+      },
+      {
+        "dll": "kernel32.dll",
+        "symbol_count": 6
+      },
+      {
+        "dll": "advapi32.dll",
+        "symbol_count": 3
+      },
+      {
+        "dll": "kernel32.dll",
+        "symbol_count": 64
+      },
+      {
+        "dll": "version.dll",
+        "symbol_count": 3
+      },
+      {
+        "dll": "gdi32.dll",
+        "symbol_count": 71
+      },
+      {
+        "dll": "user32.dll",
+        "symbol_count": 162
+      },
+      {
+        "dll": "kernel32.dll",
+        "symbol_count": 1
+      },
+      {
+        "dll": "oleaut32.dll",
+        "symbol_count": 12
+      },
+      {
+        "dll": "comctl32.dll",
+        "symbol_count": 24
+      },
+      {
+        "dll": "comdlg32.dll",
+        "symbol_count": 2
+      }
+    ],
+    "exports": [
+      {
+        "name": "NemuSettings",
+        "ordinal": 1,
+        "rva": 544460
+      },
+      {
+        "name": "ToolFree",
+        "ordinal": 4,
+        "rva": 544112
+      },
+      {
+        "name": "ToolFunc",
+        "ordinal": 2,
+        "rva": 544116
+      },
+      {
+        "name": "ToolGetMenuText",
+        "ordinal": 3,
+        "rva": 544404
+      },
+      {
+        "name": "ToolInit",
+        "ordinal": 5,
+        "rva": 543988
+      }
+    ],
+    "debug": [],
+    "versions": [],
+    "delphi": {
+      "dvclal": {
+        "offset": 617376,
+        "hex": "23785d23b6a5f31943f3400226d111c7"
+      },
+      "package": {
+        "offset": 617392,
+        "flags": 2348810241,
+        "requires": [],
+        "units": [
+          {
+            "flags": 1,
+            "hash": 160,
+            "name": "dialogs"
+          },
+          {
+            "flags": 16,
+            "hash": 233,
+            "name": "ThemeMgr"
+          },
+          {
+            "flags": 16,
+            "hash": 110,
+            "name": "ComCtrls"
+          },
+          {
+            "flags": 16,
+            "hash": 176,
+            "name": "Printers"
+          },
+          {
+            "flags": 16,
+            "hash": 199,
+            "name": "Consts"
+          },
+          {
+            "flags": 0,
+            "hash": 199,
+            "name": "System"
+          },
+          {
+            "flags": 0,
+            "hash": 129,
+            "name": "SysInit"
+          },
+          {
+            "flags": 12,
+            "hash": 75,
+            "name": "Windows"
+          },
+          {
+            "flags": 16,
+            "hash": 85,
+            "name": "Types"
+          },
+          {
+            "flags": 28,
+            "hash": 87,
+            "name": "WinSpool"
+          },
+          {
+            "flags": 0,
+            "hash": 2,
+            "name": "SysUtils"
+          },
+          {
+            "flags": 16,
+            "hash": 157,
+            "name": "SysConst"
+          },
+          {
+            "flags": 0,
+            "hash": 94,
+            "name": "Classes"
+          },
+          {
+            "flags": 16,
+            "hash": 34,
+            "name": "RTLConsts"
+          },
+          {
+            "flags": 28,
+            "hash": 51,
+            "name": "Messages"
+          },
+          {
+            "flags": 16,
+            "hash": 67,
+            "name": "Variants"
+          },
+          {
+            "flags": 16,
+            "hash": 36,
+            "name": "VarUtils"
+          },
+          {
+            "flags": 16,
+            "hash": 81,
+            "name": "TypInfo"
+          },
+          {
+            "flags": 16,
+            "hash": 115,
+            "name": "ActiveX"
+          },
+          {
+            "flags": 16,
+            "hash": 43,
+            "name": "Graphics"
+          },
+          {
+            "flags": 16,
+            "hash": 179,
+            "name": "Forms"
+          },
+          {
+            "flags": 16,
+            "hash": 22,
+            "name": "Math"
+          },
+          {
+            "flags": 28,
+            "hash": 20,
+            "name": "CommCtrl"
+          },
+          {
+            "flags": 16,
+            "hash": 143,
+            "name": "FlatSB"
+          },
+          {
+            "flags": 16,
+            "hash": 223,
+            "name": "StdActns"
+          },
+          {
+            "flags": 16,
+            "hash": 184,
+            "name": "Clipbrd"
+          },
+          {
+            "flags": 16,
+            "hash": 89,
+            "name": "StrUtils"
+          },
+          {
+            "flags": 28,
+            "hash": 42,
+            "name": "ShellAPI"
+          },
+          {
+            "flags": 16,
+            "hash": 38,
+            "name": "Controls"
+          },
+          {
+            "flags": 16,
+            "hash": 165,
+            "name": "MultiMon"
+          },
+          {
+            "flags": 16,
+            "hash": 118,
+            "name": "Menus"
+          },
+          {
+            "flags": 16,
+            "hash": 135,
+            "name": "Contnrs"
+          },
+          {
+            "flags": 16,
+            "hash": 205,
+            "name": "ImgList"
+          },
+          {
+            "flags": 16,
+            "hash": 69,
+            "name": "ActnList"
+          },
+          {
+            "flags": 28,
+            "hash": 193,
+            "name": "Imm"
+          },
+          {
+            "flags": 16,
+            "hash": 100,
+            "name": "StdCtrls"
+          },
+          {
+            "flags": 16,
+            "hash": 160,
+            "name": "Dialogs"
+          },
+          {
+            "flags": 16,
+            "hash": 145,
+            "name": "ExtCtrls"
+          },
+          {
+            "flags": 28,
+            "hash": 73,
+            "name": "Dlgs"
+          },
+          {
+            "flags": 28,
+            "hash": 51,
+            "name": "CommDlg"
+          },
+          {
+            "flags": 28,
+            "hash": 40,
+            "name": "ShlObj"
+          },
+          {
+            "flags": 28,
+            "hash": 187,
+            "name": "RegStr"
+          },
+          {
+            "flags": 28,
+            "hash": 63,
+            "name": "WinInet"
+          },
+          {
+            "flags": 28,
+            "hash": 239,
+            "name": "UrlMon"
+          },
+          {
+            "flags": 16,
+            "hash": 165,
+            "name": "WinHelpViewer"
+          },
+          {
+            "flags": 16,
+            "hash": 82,
+            "name": "HelpIntfs"
+          },
+          {
+            "flags": 16,
+            "hash": 165,
+            "name": "ComStrs"
+          },
+          {
+            "flags": 16,
+            "hash": 12,
+            "name": "ExtActns"
+          },
+          {
+            "flags": 16,
+            "hash": 48,
+            "name": "Mapi"
+          },
+          {
+            "flags": 16,
+            "hash": 176,
+            "name": "ExtDlgs"
+          },
+          {
+            "flags": 16,
+            "hash": 194,
+            "name": "Buttons"
+          },
+          {
+            "flags": 16,
+            "hash": 56,
+            "name": "Registry"
+          },
+          {
+            "flags": 0,
+            "hash": 221,
+            "name": "IniFiles"
+          },
+          {
+            "flags": 28,
+            "hash": 151,
+            "name": "RichEdit"
+          },
+          {
+            "flags": 16,
+            "hash": 134,
+            "name": "ToolWin"
+          },
+          {
+            "flags": 16,
+            "hash": 223,
+            "name": "ListActns"
+          },
+          {
+            "flags": 16,
+            "hash": 5,
+            "name": "SyncObjs"
+          },
+          {
+            "flags": 16,
+            "hash": 102,
+            "name": "JwaUxTheme"
+          },
+          {
+            "flags": 16,
+            "hash": 128,
+            "name": "ThemeSrv"
+          },
+          {
+            "flags": 28,
+            "hash": 46,
+            "name": "JwaTmSchema"
+          },
+          {
+            "flags": 16,
+            "hash": 12,
+            "name": "Verlauf"
+          },
+          {
+            "flags": 0,
+            "hash": 96,
+            "name": "UnitRomSettings"
+          },
+          {
+            "flags": 0,
+            "hash": 78,
+            "name": "UnitMain"
+          },
+          {
+            "flags": 0,
+            "hash": 76,
+            "name": "UnitDecs"
+          },
+          {
+            "flags": 0,
+            "hash": 153,
+            "name": "RCP"
+          },
+          {
+            "flags": 0,
+            "hash": 49,
+            "name": "UnitNemuSettings"
+          },
+          {
+            "flags": 0,
+            "hash": 4,
+            "name": "UnitHeader"
+          }
+        ]
+      },
+      "forms": [
+        {
+          "resource": "TFORMHEADER",
+          "offset": 618112,
+          "size": 8587,
+          "class_name": "TFormHeader",
+          "object_name": "FormHeader",
+          "first_caption": "Rom info"
+        },
+        {
+          "resource": "TFORMNEMUSETTINGS",
+          "offset": 626700,
+          "size": 7280,
+          "class_name": "TFormNemuSettings",
+          "object_name": "FormNemuSettings",
+          "first_caption": "Nemu Settings"
+        },
+        {
+          "resource": "TFORMROMSETTINGS",
+          "offset": 633980,
+          "size": 9039,
+          "class_name": "TFormRomSettings",
+          "object_name": "FormRomSettings",
+          "first_caption": "Rom settings"
+        }
+      ],
+      "tcontrol": {
+        "rtti_offset": 330192,
+        "vmt_va": 4526936,
+        "vmt_offset": 329560,
+        "instance_size": 348,
+        "preceding_dword": 1869562375,
+        "die_rule_version": "6"
+      }
+    },
+    "evidence_strings": [
+      {
+        "offset": 10528,
+        "text": "SOFTWARE\\Borland\\Delphi\\RTL"
+      },
+      {
+        "offset": 559206,
+        "text": "NemuSettings"
+      },
+      {
+        "offset": 559219,
+        "text": "ToolFree"
+      },
+      {
+        "offset": 559228,
+        "text": "ToolFunc"
+      },
+      {
+        "offset": 559237,
+        "text": "ToolGetMenuText"
+      },
+      {
+        "offset": 559253,
+        "text": "ToolInit"
+      }
+    ]
+  }
+]
