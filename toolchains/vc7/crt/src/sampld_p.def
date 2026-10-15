@@ -1,0 +1,11 @@
+;************************************************************************
+;
+; This is the .DEF file for the Microsoft Visual C++ Run-Time Library DLL
+; The release version is SAMPLE_P.DLL and the debug version SAMPLD_P.DLL.
+;
+;************************************************************************
+LIBRARY SAMPLD_P
+EXPORTS
+; The following methods must be exported from msvcp70.dll for backwards
+; compatibility, but must not appear in msvcprt.lib
+    ?nothrow@std@@3Unothrow_t@1@B PRIVATE

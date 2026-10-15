@@ -1,0 +1,213 @@
+
+ Start         Length     Name                   Class
+ 0001:00000000 00002C24H .text                   CODE
+ 0002:00000000 00000034H .data                   DATA
+ 0002:00000034 00000025H .bss                    BSS
+
+
+Detailed map of segments
+
+ 0001:00000000 0000012E C=CODE     S=.text    G=(none)   M=System   ACBP=A9
+ 0001:00000130 000001EC C=CODE     S=.text    G=(none)   M=SysInit  ACBP=A9
+ 0001:0000031C 00000038 C=CODE     S=.text    G=(none)   M=Windows  ACBP=A9
+ 0001:00000354 0000000E C=CODE     S=.text    G=(none)   M=Types    ACBP=A9
+ 0001:00000364 00000026 C=CODE     S=.text    G=(none)   M=SysUtils ACBP=A9
+ 0001:0000038C 0000000E C=CODE     S=.text    G=(none)   M=SysConst ACBP=A9
+ 0001:0000039C 0000000E C=CODE     S=.text    G=(none)   M=Variants ACBP=A9
+ 0001:000003AC 0000000E C=CODE     S=.text    G=(none)   M=VarUtils ACBP=A9
+ 0001:000003BC 000000C6 C=CODE     S=.text    G=(none)   M=Classes  ACBP=A9
+ 0001:00000484 0000000E C=CODE     S=.text    G=(none)   M=ActiveX  ACBP=A9
+ 0001:00000494 00000038 C=CODE     S=.text    G=(none)   M=Messages ACBP=A9
+ 0001:000004CC 0000000E C=CODE     S=.text    G=(none)   M=TypInfo  ACBP=A9
+ 0001:000004DC 0000000E C=CODE     S=.text    G=(none)   M=RTLConsts ACBP=A9
+ 0001:000004EC 0000046E C=CODE     S=.text    G=(none)   M=DB       ACBP=A9
+ 0001:0000095C 0000000E C=CODE     S=.text    G=(none)   M=FMTBcd   ACBP=A9
+ 0001:0000096C 0000000E C=CODE     S=.text    G=(none)   M=Math     ACBP=A9
+ 0001:0000097C 0000000E C=CODE     S=.text    G=(none)   M=DBConsts ACBP=A9
+ 0001:0000098C 0000000E C=CODE     S=.text    G=(none)   M=SqlTimSt ACBP=A9
+ 0001:0000099C 0000000E C=CODE     S=.text    G=(none)   M=DateUtils ACBP=A9
+ 0001:000009AC 0000000E C=CODE     S=.text    G=(none)   M=MaskUtils ACBP=A9
+ 0001:000009BC 0000000E C=CODE     S=.text    G=(none)   M=ComObj   ACBP=A9
+ 0001:000009CC 0000000E C=CODE     S=.text    G=(none)   M=ComConst ACBP=A9
+ 0001:000009DC 00000026 C=CODE     S=.text    G=(none)   M=DBCommon ACBP=A9
+ 0001:00000A04 0000000E C=CODE     S=.text    G=(none)   M=Midas    ACBP=A9
+ 0001:00000A14 0000032E C=CODE     S=.text    G=(none)   M=DBClient ACBP=A9
+ 0001:00000D44 0000000E C=CODE     S=.text    G=(none)   M=DSIntf   ACBP=A9
+ 0001:00000D54 0000000E C=CODE     S=.text    G=(none)   M=MidConst ACBP=A9
+ 0001:00000D64 00000016 C=CODE     S=.text    G=(none)   M=Provider ACBP=A9
+ 0001:00000D7C 0000000E C=CODE     S=.text    G=(none)   M=DataBkr  ACBP=A9
+ 0001:00000D8C 0000003E C=CODE     S=.text    G=(none)   M=DBLocal  ACBP=A9
+ 0001:00000DCC 000001E6 C=CODE     S=.text    G=(none)   M=SqlExpr  ACBP=A9
+ 0001:00000FB4 0000000E C=CODE     S=.text    G=(none)   M=DBXpress ACBP=A9
+ 0001:00000FC4 0000000E C=CODE     S=.text    G=(none)   M=DBConnAdmin ACBP=A9
+ 0001:00000FD4 0000000E C=CODE     S=.text    G=(none)   M=IniFiles ACBP=A9
+ 0001:00000FE4 0000000E C=CODE     S=.text    G=(none)   M=SqlConst ACBP=A9
+ 0001:00000FF4 0000000E C=CODE     S=.text    G=(none)   M=Registry ACBP=A9
+ 0001:00001004 00001AC0 C=CODE     S=.text    G=(none)   M=DBLocalS ACBP=A9
+ 0001:00002AC4 0000015D C=CODE     S=.text    G=(none)   M=dbxcds   ACBP=A9
+ 0002:00000000 00000028 C=DATA     S=.data    G=DGROUP   M=SysInit  ACBP=A9
+ 0002:00001000 00000018 C=BSS      S=.bss     G=DGROUP   M=SysInit  ACBP=A9
+ 0002:00001018 00000004 C=BSS      S=.bss     G=DGROUP   M=Windows  ACBP=A9
+ 0002:0000101C 00000004 C=BSS      S=.bss     G=DGROUP   M=Messages ACBP=A9
+ 0002:00001020 00000004 C=BSS      S=.bss     G=DGROUP   M=DBLocalS ACBP=A9
+
+
+  Address         Publics by Name
+
+ 0002:00001010       .1
+ 0002:0000101C       .1
+ 0002:00001020       .2
+ 0002:00001018       .3
+ 0001:00002BFC       @GetPackageInfoTable
+ 0001:00000268       @InitPkg
+ 0001:000002CC       @PackageLoad
+ 0001:00002C04       @PackageLoad
+ 0001:00002C10       @PackageUnload
+ 0001:000002D8       @PackageUnload
+ 0001:00000168       AllocTlsBuffer
+ 0001:000026A0       CheckMasterSourceActive
+ 0001:00002478       CreateParamsFromMasterFields
+ 0001:00002ABC       DBLocalS
+ 0001:00002C1C       dbxcds
+ 0001:00000214       ExitProcessTLS
+ 0001:000001EC       ExitThreadTLS
+ 0001:00002A8C       Finalization
+ 0001:000002E4       Finalization
+ 0001:00000494       Finalization
+ 0001:0000031C       Finalization
+ 0001:00000130       FreeLibrary
+ 0001:00000174       GetTlsSize
+ 0002:0000100C       HInstance
+ 0001:00000238       InitializeModule
+ 0001:000001C0       InitProcessTLS
+ 0001:0000017C       InitThreadTLS
+ 0001:00000138       LocalAlloc
+ 0001:00000140       LocalFree
+ 0001:000004C4       Messages
+ 0002:00000000       Module
+ 0002:00001000       ModuleIsLib
+ 0002:00001001       ModuleIsPackage
+ 0001:00002704       SetDetailsActive
+ 0001:00001EB8       SetParamsFromSQL
+ 0001:00000314       SysInit
+ 0001:00001A90       TInternalSQLDataset.PSGetDefaultOrder
+ 0001:00000148       TlsAlloc
+ 0002:00001014       tlsBuffer
+ 0001:00000150       TlsFree
+ 0001:00000158       TlsGetValue
+ 0002:00001004       TlsIndex
+ 0002:BF95C000       TlsLast
+ 0002:00000018       TlsProc
+ 0001:00000160       TlsSetValue
+ 0001:0000184C       TSQLCDSParams.Create
+ 0001:00001890       TSQLCDSParams.Destroy
+ 0001:000018C0       TSQLCDSParams.ParseSelect
+ 0001:000029C4       TSQLClientDataSet.CloneCursor
+ 0001:00001B54       TSQLClientDataSet.Create
+ 0001:00001C3C       TSQLClientDataSet.Destroy
+ 0001:00001CD4       TSQLClientDataSet.GetCommandText
+ 0001:00001CA0       TSQLClientDataSet.GetCommandType
+ 0001:000022A8       TSQLClientDataSet.GetConnection
+ 0001:00002304       TSQLClientDataSet.GetConnectionName
+ 0001:00002434       TSQLClientDataSet.GetMasterFields
+ 0001:00002944       TSQLClientDataSet.GetMasterSource
+ 0001:000028FC       TSQLClientDataSet.GetObjectView
+ 0001:00002418       TSQLClientDataSet.GetQuoteChar
+ 0001:0000294C       TSQLClientDataSet.Loaded
+ 0001:000027A0       TSQLClientDataSet.SetActive
+ 0001:000021A4       TSQLClientDataSet.SetCommandText
+ 0001:00001CA8       TSQLClientDataSet.SetCommandType
+ 0001:000022C4       TSQLClientDataSet.SetConnection
+ 0001:0000232C       TSQLClientDataSet.SetConnectionName
+ 0001:00002904       TSQLClientDataSet.SetDataSource
+ 0001:00001CEC       TSQLClientDataSet.SetInternalCommandText
+ 0001:0000262C       TSQLClientDataSet.SetLocalParams
+ 0001:00002448       TSQLClientDataSet.SetMasterFields
+ 0001:000028F4       TSQLClientDataSet.SetObjectView
+ 0001:00000244       UninitializeModule
+ 0001:0000034C       Windows
+
+
+  Address         Publics by Value
+
+ 0002:BF95C000       TlsLast
+ 0001:00000130       FreeLibrary
+ 0001:00000138       LocalAlloc
+ 0001:00000140       LocalFree
+ 0001:00000148       TlsAlloc
+ 0001:00000150       TlsFree
+ 0001:00000158       TlsGetValue
+ 0001:00000160       TlsSetValue
+ 0001:00000168       AllocTlsBuffer
+ 0001:00000174       GetTlsSize
+ 0001:0000017C       InitThreadTLS
+ 0001:000001C0       InitProcessTLS
+ 0001:000001EC       ExitThreadTLS
+ 0001:00000214       ExitProcessTLS
+ 0001:00000238       InitializeModule
+ 0001:00000244       UninitializeModule
+ 0001:00000268       @InitPkg
+ 0001:000002CC       @PackageLoad
+ 0001:000002D8       @PackageUnload
+ 0001:000002E4       Finalization
+ 0001:00000314       SysInit
+ 0001:0000031C       Finalization
+ 0001:0000034C       Windows
+ 0001:00000494       Finalization
+ 0001:000004C4       Messages
+ 0001:0000184C       TSQLCDSParams.Create
+ 0001:00001890       TSQLCDSParams.Destroy
+ 0001:000018C0       TSQLCDSParams.ParseSelect
+ 0001:00001A90       TInternalSQLDataset.PSGetDefaultOrder
+ 0001:00001B54       TSQLClientDataSet.Create
+ 0001:00001C3C       TSQLClientDataSet.Destroy
+ 0001:00001CA0       TSQLClientDataSet.GetCommandType
+ 0001:00001CA8       TSQLClientDataSet.SetCommandType
+ 0001:00001CD4       TSQLClientDataSet.GetCommandText
+ 0001:00001CEC       TSQLClientDataSet.SetInternalCommandText
+ 0001:00001EB8       SetParamsFromSQL
+ 0001:000021A4       TSQLClientDataSet.SetCommandText
+ 0001:000022A8       TSQLClientDataSet.GetConnection
+ 0001:000022C4       TSQLClientDataSet.SetConnection
+ 0001:00002304       TSQLClientDataSet.GetConnectionName
+ 0001:0000232C       TSQLClientDataSet.SetConnectionName
+ 0001:00002418       TSQLClientDataSet.GetQuoteChar
+ 0001:00002434       TSQLClientDataSet.GetMasterFields
+ 0001:00002448       TSQLClientDataSet.SetMasterFields
+ 0001:00002478       CreateParamsFromMasterFields
+ 0001:0000262C       TSQLClientDataSet.SetLocalParams
+ 0001:000026A0       CheckMasterSourceActive
+ 0001:00002704       SetDetailsActive
+ 0001:000027A0       TSQLClientDataSet.SetActive
+ 0001:000028F4       TSQLClientDataSet.SetObjectView
+ 0001:000028FC       TSQLClientDataSet.GetObjectView
+ 0001:00002904       TSQLClientDataSet.SetDataSource
+ 0001:00002944       TSQLClientDataSet.GetMasterSource
+ 0001:0000294C       TSQLClientDataSet.Loaded
+ 0001:000029C4       TSQLClientDataSet.CloneCursor
+ 0001:00002A8C       Finalization
+ 0001:00002ABC       DBLocalS
+ 0001:00002BFC       @GetPackageInfoTable
+ 0001:00002C04       @PackageLoad
+ 0001:00002C10       @PackageUnload
+ 0001:00002C1C       dbxcds
+ 0002:00000000       Module
+ 0002:00000018       TlsProc
+ 0002:00001000       ModuleIsLib
+ 0002:00001001       ModuleIsPackage
+ 0002:00001004       TlsIndex
+ 0002:0000100C       HInstance
+ 0002:00001010       .1
+ 0002:00001014       tlsBuffer
+ 0002:00001018       .3
+ 0002:0000101C       .1
+ 0002:00001020       .2
+
+
+Bound resource files
+
+dbxcds.res
+C:\TEMP\dtf2988.tmp
+
+
+Program entry point at 0001:00002C1C

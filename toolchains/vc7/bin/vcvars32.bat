@@ -1,0 +1,1 @@
+%VSCOMNTOOLS%vsvars32.bat

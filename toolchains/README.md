@@ -4,8 +4,11 @@
 
 Each abbreviated directory contains one toolchain configuration for the Nemu
 targets. Filenames are normalized to lowercase. Compiler binaries, headers,
-libraries, and runtime sources remain local; Git tracks the extraction scripts,
-verification results, and [version/hash manifest](manifest.json).
+libraries, and runtime sources are tracked directly in Git, alongside the
+extraction scripts, verification results, and [version/hash manifest](manifest.json).
+The toolchains use ordinary Git blobs without LFS. Git attributes preserve their
+original bytes, including line endings, so checkouts retain the manifest hashes.
+Installer media in `toolchains-staging/` remains untracked.
 
 | Directory | Configuration | Main versions | Intended target |
 |-----------|---------------|---------------|-----------------|
