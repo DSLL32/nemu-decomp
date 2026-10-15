@@ -1,0 +1,2 @@
+ - For scratch space, make a new folder under ~/.ai-tmp - don't use /tmp
+ - For wine, allocate a new prefix under scratch space, and reuse it where possible
