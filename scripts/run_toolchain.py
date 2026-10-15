@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run a tool from vc6, vc7, or d6 with its local include/library paths.
+"""Run a tool from vc6, vc7, d6u1, or d6u2 with local search paths.
 
 Example: python3 scripts/run_toolchain.py vc7 cl /c example.cpp
 Set WINEPREFIX to reuse a prefix; otherwise a new one is allocated under
@@ -19,7 +19,7 @@ def winpath(path):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("toolchain", choices=("vc6", "vc7", "d6"))
+    parser.add_argument("toolchain", choices=("vc6", "vc7", "d6u1", "d6u2"))
     parser.add_argument("tool", help="e.g. cl, link, ml, rc, dcc32, brcc32")
     parser.add_argument("args", nargs=argparse.REMAINDER)
     args = parser.parse_args()

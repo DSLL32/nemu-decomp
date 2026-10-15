@@ -5,7 +5,9 @@
     "en_vs6_ent_cd1.iso": "d38250b86c3bef0d8123cade40abd1728a776e22e9633683c3e311a913ae0347",
     "VSPROD1.iso": "69c8ccb5a382bd79cd2ea21969094b1992be876d27a1839d2e68fd8038666587",
     "VSPROD2.iso": "0615595fb5db3d6d21337c92248b379d076bbbf17afe7af4390db0a4d1eb9e60",
-    "VSPROD3.iso": "edd553a6129840ff85e7ffb8a79380bb97a3b64fc5ed3b56f30bc63966af3701"
+    "VSPROD3.iso": "edd553a6129840ff85e7ffb8a79380bb97a3b64fc5ed3b56f30bc63966af3701",
+    "delphi6-updates/D6_upd1_ent.exe": "4a8b9988da444a20b67dba0726cf41bbb571100e2be97b0bc42c07bac764643e",
+    "delphi6-updates/D6_upd2_ent.exe": "7bd9a2508fd30c6bdba79acc1911068968762326ce08b4f36e6d530704a37609"
   },
   "toolchains": {
     "vc6": {
@@ -170,17 +172,17 @@
         }
       }
     },
-    "d6": {
-      "file_count": 1892,
-      "size_bytes": 105265103,
-      "tree_sha256": "a25dd98a69d38b1e7df4ac135f67a701102533e98d4db54e91e6957acaac4470",
+    "d6u1": {
+      "file_count": 1894,
+      "size_bytes": 105482331,
+      "tree_sha256": "6a55643f036ac17321a3ab90cf6b391ab083fb5b1dfe0af39d2a68ff3f0c4c10",
       "components": {
         "dcc32.exe": {
-          "sha256": "09d1c0473bc4c72bbd66d2e377a2dc0d22c7493587f57cc8d737a2bb046d13fa",
+          "sha256": "5fc2426eca8c6f321b6a6634d06b88be43a1284459f48a945ea798fdf67faa96",
           "versions": [
             {
-              "file_version": "6.0.6.163",
-              "product_version": "6.0.6.163"
+              "file_version": "6.0.6.190",
+              "product_version": "6.0.6.190"
             }
           ]
         },
@@ -201,8 +203,84 @@
               "product_version": "3.0.0.0"
             }
           ]
+        },
+        "runtime/rtl60.bpl": {
+          "sha256": "bbdca0ab52866c4e09c19b392fe0267bc6a7c1ee9c2898f333ac4671d9b4a83b",
+          "versions": [
+            {
+              "file_version": "6.0.6.190",
+              "product_version": "6.0.0.0"
+            }
+          ]
+        },
+        "runtime/vcl60.bpl": {
+          "sha256": "90d1514459cff107454b4d9b32a23df5380b63b09ceaacb46e699244fc1670a0",
+          "versions": [
+            {
+              "file_version": "6.0.6.190",
+              "product_version": "6.0.0.0"
+            }
+          ]
         }
-      }
+      },
+      "configuration": "Delphi 6 General Update 1",
+      "target": "master/Plugin/dialogs.dll",
+      "separate_rtl_updates": []
+    },
+    "d6u2": {
+      "file_count": 1913,
+      "size_bytes": 111844216,
+      "tree_sha256": "ee739385b5453da4a54bb9ca90cdbd5cbe952bfa7bd47ee34dc4c935d7ffc916",
+      "components": {
+        "dcc32.exe": {
+          "sha256": "d3b4c9024c0ac1ba09d010976031cb8bd695514b9367f80eec388f3311995dc9",
+          "versions": [
+            {
+              "file_version": "6.0.6.240",
+              "product_version": "6.0.6.240"
+            }
+          ]
+        },
+        "rlink32.dll": {
+          "sha256": "833364ab71da405335820b3c1eb731c1791c863a79a8b05f15ccef04a3ad7267",
+          "versions": [
+            {
+              "file_version": "4.0.10.10",
+              "product_version": "3.0.0.0"
+            }
+          ]
+        },
+        "brcc32.exe": {
+          "sha256": "8738bbf9ad1b31aa83b1662eb528cedd77f1470717ca81fea55a9e683a3d6ee7",
+          "versions": [
+            {
+              "file_version": "50.4.227.0",
+              "product_version": "3.0.0.0"
+            }
+          ]
+        },
+        "runtime/rtl60.bpl": {
+          "sha256": "52093bd1048d859b73840f362d4bb4fe5ad3645f027f262547e63fba472986e0",
+          "versions": [
+            {
+              "file_version": "6.0.6.240",
+              "product_version": "6.0.0.0"
+            }
+          ]
+        },
+        "runtime/vcl60.bpl": {
+          "sha256": "92e2d1cf4df636af37f4c50ad3a1f04d7e21eaeb7bfe8478ab7c23f68791826d",
+          "versions": [
+            {
+              "file_version": "6.0.6.240",
+              "product_version": "6.0.0.0"
+            }
+          ]
+        }
+      },
+      "configuration": "Delphi 6 General Update 2",
+      "target": "master/Plugin/debugger.dll",
+      "separate_rtl_updates": []
     }
   }
 }

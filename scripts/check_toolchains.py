@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compile/link probes for all three toolchains, including their build fingerprints.
+"""Compile/link probes for the selected toolchains and their build fingerprints.
 
 All generated sources, outputs, logs, and (unless WINEPREFIX is supplied) the
 Wine prefix live in a new ~/.ai-tmp directory. No target binaries are executed.
@@ -88,7 +88,7 @@ def main():
             raise RuntimeError(f"{log}: exit {process.returncode}\n{text}")
         return text
 
-    for tc in ("vc6", "vc7", "d6"):
+    for tc in ("vc6", "vc7", "d6u1", "d6u2"):
         work = scratch / tc
         work.mkdir()
         (work / "probe.rc").write_text('STRINGTABLE\nBEGIN\n  1 "Nemu toolchain probe"\nEND\n')
@@ -139,6 +139,14 @@ def main():
                           "map_generated": (work / "probe.map").is_file()}
             if not result[tc]["map_generated"]:
                 raise RuntimeError("Delphi did not generate its detailed map")
+            expected_version = "6.0.6.190" if tc == "d6u1" else "6.0.6.240"
+            versions = {}
+            for component in ("bin/dcc32.exe", "runtime/rtl60.bpl", "runtime/vcl60.bpl"):
+                versions[component] = PE32(repo / "toolchains" / tc / component).report()[
+                    "versions"][0]["file_version"]
+            if set(versions.values()) != {expected_version}:
+                raise RuntimeError(f"Unexpected {tc} component versions: {versions}")
+            result[tc]["component_versions"] = versions
         print(f"{tc}: passed", flush=True)
     text = json.dumps(result, indent=2) + "\n"
     (scratch / "results.json").write_text(text)

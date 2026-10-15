@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Extract the Nemu toolchains from the staged media without running installers.
 
-Requires Python 3, 7z, and msiinfo (Debian package msitools). Existing target
-folders are never overwritten. Scratch space is allocated under ~/.ai-tmp.
+Requires Python 3, 7z, unshield, and msiinfo (Debian package msitools).
+Existing target folders are never overwritten. Scratch space is allocated
+under ~/.ai-tmp. Delphi updates go in d6u1 and d6u2.
 """
 
 import argparse
@@ -24,7 +25,10 @@ DELPHI = "Borland Delphi 6.0 Enterprise Edition (ISO).7z"
 VS7_ROOT = "Program Files/Microsoft Visual Studio .NET/"
 DELPHI_ROOT = "Install/program files/Borland/Delphi6/"
 REQUIRED = [SP5, DELPHI, "en_vs6_ent_cd1.iso",
-            "VSPROD1.iso", "VSPROD2.iso", "VSPROD3.iso"]
+            "VSPROD1.iso", "VSPROD2.iso", "VSPROD3.iso",
+            "delphi6-updates/D6_upd1_ent.exe", "delphi6-updates/D6_upd2_ent.exe"]
+D6_UPDATES = {"u1": "D6_upd1_ent.exe", "u2": "D6_upd2_ent.exe",
+              "r1": "D6_RTL1_ent.exe", "r2": "del6_ent_rtl2.exe", "r3": "d6_rtl3.zip"}
 
 
 def extract(archive, destination, *members, compound=False):
@@ -153,7 +157,7 @@ def install_vc7(staging, scratch, destination):
         shutil.copy2(source, target)
 
 
-def install_d6(staging, scratch, destination):
+def install_d6_base(staging, scratch, destination):
     print("Extracting Delphi 6 compiler, RTL/VCL, and runtime reference packages", flush=True)
     media_root = scratch / "d6-media"
     extract(staging / DELPHI, media_root,
@@ -172,6 +176,71 @@ def install_d6(staging, scratch, destination):
     copy_tree(expanded / "Install/System32", destination / "runtime")
 
 
+def extract_d6_updates(staging, scratch, names):
+    metadata = json.loads((Path(__file__).resolve().parents[1] /
+                           "toolchains/delphi-updates.json").read_text())
+    hashes = {d["filename"]: d["sha256"] for d in metadata["downloads"]}
+    result = {}
+    for name in names:
+        filename = D6_UPDATES[name]
+        archive = staging / "delphi6-updates" / filename
+        if digest(archive) != hashes[filename]:
+            raise ValueError(f"Delphi update hash mismatch: {archive}")
+        outer, payload = scratch / (name + "-outer"), scratch / (name + "-payload")
+        extract(archive, outer)
+        if name == "r3":
+            result[name] = outer
+        else:
+            process = subprocess.run(["unshield", "-d", str(payload), "x",
+                                      str(outer / "data1.cab")],
+                                     stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                                     text=True)
+            if process.returncode:
+                raise RuntimeError(process.stdout)
+            result[name] = payload
+    return result
+
+
+def apply_d6_update(name, payload, destination):
+    if name == "r3":
+        for source, target in (
+                ("Classes.pas", "source/rtl/common/classes.pas"),
+                ("Classes.dcu", "lib/classes.dcu"),
+                ("debug/Classes.dcu", "lib/debug/classes.dcu"),
+                ("rtl.dcp", "lib/rtl.dcp"),
+                ("rtl60.bpl", "runtime/rtl60.bpl"),
+                ("rtl60.map", "runtime/rtl60.map")):
+            shutil.copy2(payload / source, destination / target)
+        return
+    # Select the English compiler/library payload, excluding localized copies
+    # and IDE-only components. Normalize case before overlaying older files.
+    program = payload / "Program_Built_Files"
+    for source in program.rglob("*"):
+        if not source.is_file():
+            continue
+        relative = Path(str(source.relative_to(program)).lower())
+        if relative.parts[0] not in ("bin", "lib", "source"):
+            continue
+        target = destination / relative
+        if relative.parts[0] == "bin" and not target.exists():
+            continue
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(source, target)
+    for source in (payload / "Windows_System_Files").iterdir():
+        if source.suffix.lower() in (".bpl", ".map"):
+            shutil.copy2(source, destination / "runtime" / source.name.lower())
+
+
+def install_d6(staging, scratch, destination):
+    base = scratch / "d6-base"
+    install_d6_base(staging, scratch, base)
+    payloads = extract_d6_updates(staging, scratch / "d6-updates", ("u1", "u2"))
+    for name in ("u1", "u2"):
+        target = destination / ("d6" + name)
+        shutil.copytree(base, target)
+        apply_d6_update(name, payloads[name], target)
+
+
 def digest(path):
     with path.open("rb") as handle:
         return hashlib.file_digest(handle, "sha256").hexdigest()
@@ -179,7 +248,7 @@ def digest(path):
 
 def manifest(staging, destination):
     result = {"sources": {name: digest(staging / name) for name in REQUIRED}, "toolchains": {}}
-    for name in ("vc6", "vc7", "d6"):
+    for name in ("vc6", "vc7", "d6u1", "d6u2"):
         root = destination / name
         files = sorted(p for p in root.rglob("*") if p.is_file())
         inventory = [(str(p.relative_to(root)), digest(p)) for p in files]
@@ -194,6 +263,15 @@ def manifest(staging, destination):
         result["toolchains"][name] = dict(file_count=len(files),
             size_bytes=sum(p.stat().st_size for p in files),
             tree_sha256=hashlib.sha256(tree).hexdigest(), components=components)
+        if name in ("d6u1", "d6u2"):
+            for filename in ("rtl60.bpl", "vcl60.bpl"):
+                path = root / "runtime" / filename
+                components["runtime/" + filename] = {
+                    "sha256": digest(path), "versions": PE32(path).report()["versions"]}
+            result["toolchains"][name].update(
+                configuration="Delphi 6 General Update " + name[-1],
+                target="master/Plugin/" + ("debugger.dll" if name == "d6u2" else "dialogs.dll"),
+                separate_rtl_updates=[])
     (destination / "manifest.json").write_text(json.dumps(result, indent=2) + "\n")
 
 
@@ -203,13 +281,13 @@ def main():
     parser.add_argument("--staging", type=Path, default=repo / "toolchains-staging")
     parser.add_argument("--dest", type=Path, default=repo / "toolchains")
     args = parser.parse_args()
-    for program in ("7z", "msiinfo"):
+    for program in ("7z", "msiinfo", "unshield"):
         if not shutil.which(program):
             parser.error(f"Missing program: {program}")
     for name in REQUIRED:
         if not (args.staging / name).is_file():
             parser.error(f"Missing media: {name}")
-    for name in ("vc6", "vc7", "d6"):
+    for name in ("vc6", "vc7", "d6u1", "d6u2"):
         if (args.dest / name).exists():
             parser.error(f"Target already exists: {args.dest / name}")
     scratch_root = Path.home() / ".ai-tmp"
@@ -219,7 +297,7 @@ def main():
     args.dest.mkdir(parents=True, exist_ok=True)
     install_vc6(args.staging, scratch, args.dest / "vc6")
     install_vc7(args.staging, scratch, args.dest / "vc7")
-    install_d6(args.staging, scratch, args.dest / "d6")
+    install_d6(args.staging, scratch, args.dest)
     manifest(args.staging, args.dest)
     print(f"Toolchains and manifest written to {args.dest}", flush=True)
 

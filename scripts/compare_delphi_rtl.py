@@ -2,7 +2,7 @@
 """Compare mapped Delphi RTL/VCL code with statically linked target DLLs.
 
 Requires python3-capstone. Supply a reference DLL and its detailed Delphi MAP
-file, e.g. the d6/probe outputs from check_toolchains.py. This is a baseline
+file, e.g. the d6u1/probe outputs from check_toolchains.py. This is a baseline
 comparison, not an update-version detector. No binaries are executed.
 """
 
@@ -17,7 +17,7 @@ import struct
 from capstone import Cs, CS_ARCH_X86, CS_MODE_32, CS_GRP_CALL, CS_GRP_JUMP
 from capstone.x86 import X86_OP_IMM
 
-from pe_fingerprints import PE32, u16
+from pe_fingerprints import PE32, u16, u32
 
 
 def identity(path):
@@ -112,8 +112,8 @@ def lstrcatn_variant(pe, template, decoder):
     This does not assign the variant to an official Delphi update.
     """
     data, mask = template["data"], bytearray(template["mask"])
-    if data[0x15:0x17] != b"\x89\xc7":
-        return dict(status="reference is not the media MOV EDI,EAX variant")
+    if data[0x15:0x17] not in (b"\x89\xc7", b"\x89\xcf"):
+        return dict(status="reference has an unsupported instruction variant")
     mask[0x16] = 0
     hits = find(pe, pattern(data, mask))
     result = []
@@ -129,8 +129,60 @@ def lstrcatn_variant(pe, template, decoder):
                            instruction_va=ins.address,
                            instruction=f"{ins.mnemonic} {ins.op_str}",
                            fixed_byte_differences=differences))
-    return dict(reference_instruction="mov edi, eax", compared_bytes=len(data),
+    reference_ins = next(decoder.disasm(data[0x15:0x17], 0))
+    return dict(reference_instruction=f"{reference_ins.mnemonic} {reference_ins.op_str}",
+                compared_bytes=len(data),
                 fixed_bytes=template["fixed_bytes"], candidates=result)
+
+
+def validate_links(ref, target, rows, decoder):
+    """Validate masked direct edges when both endpoint blocks were templated.
+
+    This does not resolve untemplated helpers, global data, imports, or indirect
+    calls. A small independent check anchors three methods to TControl's VMT.
+    """
+    by_rva = {r["reference_rva"]: r for r in rows}
+    checked = unresolved = 0
+    conflicts = []
+    for row in rows:
+        if len(row["target_rvas"]) != 1:
+            continue
+        rva, dest = row["reference_rva"], row["target_rvas"][0]
+        offset = ref.offset(rva)
+        for ins in decoder.disasm(ref.data[offset:offset + row["length"]], ref.base + rva):
+            if not ((ins.group(CS_GRP_CALL) or ins.group(CS_GRP_JUMP)) and ins.operands
+                    and ins.operands[0].type == X86_OP_IMM):
+                continue
+            callee = ins.operands[0].imm - ref.base
+            if rva <= callee < rva + row["length"]:
+                continue
+            if callee not in by_rva:
+                unresolved += 1
+                continue
+            pc = dest + ins.address - (ref.base + rva)
+            at = target.offset(pc)
+            actual = next(decoder.disasm(target.data[at:at + 15], target.base + pc))
+            actual_rva = actual.operands[0].imm - target.base
+            checked += 1
+            if actual_rva not in by_rva[callee]["target_rvas"]:
+                conflicts.append(dict(caller=row["names"], callee=by_rva[callee]["names"],
+                                      target_rva=actual_rva,
+                                      expected_rvas=by_rva[callee]["target_rvas"]))
+    anchors = []
+    ref_vmt = ref.delphi([])["tcontrol"]["vmt_offset"]
+    target_vmt = target.delphi([])["tcontrol"]["vmt_offset"]
+    for slot, name in ((-4, "TControl.Destroy"), (104, "TControl.SetParent"),
+                       (116, "TControl.WndProc")):
+        rva = u32(ref.data, ref_vmt + slot) - ref.base
+        row = by_rva[rva]
+        if name not in row["names"]:
+            raise ValueError(f"Unexpected TControl VMT slot {slot}: {row['names']}")
+        target_rva = u32(target.data, target_vmt + slot) - target.base
+        anchors.append(dict(name=name, vmt_slot=slot, reference_rva=rva,
+                            target_rva=target_rva, length=row["length"],
+                            matches=target_rva in row["target_rvas"]))
+    return dict(checked_direct_edges=checked, unresolved_direct_edges=unresolved,
+                conflicts=conflicts, tcontrol_vmt_anchors=anchors)
 
 
 def main():
@@ -140,6 +192,8 @@ def main():
     parser.add_argument("targets", nargs="+", type=Path)
     parser.add_argument("--output", type=Path)
     parser.add_argument("--matches", type=Path, help="Optional full match inventory")
+    parser.add_argument("--validate-links", action="store_true",
+                        help="Check mapped call/jump endpoints and TControl VMT anchors")
     args = parser.parse_args()
     decoder = Cs(CS_ARCH_X86, CS_MODE_32)
     decoder.detail = True
@@ -150,16 +204,20 @@ def main():
         method="Map-bounded 32..2048-byte blocks; >=24 fixed bytes; unique in reference. "
                "Mask PE HIGHLOW relocations and external rel32 branch/call operands.",
         limitations=[
-            "Matches establish normalized instruction-byte similarity; callee and global "
-            "identities are not validated, so they are not proof of semantic identity.",
+            "Matches establish normalized instruction-byte similarity; optional link checks "
+            "cover only mapped direct edges and three TControl VMT anchors, not global data "
+            "or all callees, so this is not proof of full semantic identity.",
             "Map spans may include alignment or embedded data, not just instructions.",
             "Missing matches may reflect smart linking, code changes, or block boundaries.",
             "Precompiled runtime units identify runtime code, not the exact DCC32 executable.",
-            "No updated Delphi distribution was compared; no exact update is assigned."],
+            "This single-reference report does not assign an update; compare candidate reports."],
         template_count=len(candidates), targets=[])
     examples = {"@LStrClr", "@LStrAsg", "@LStrCat3", "@LStrCmp",
-                "TObject.InitInstance", "TControl.Create", "TControl.Destroy",
-                "TControl.ChangeScale", "TReader.ReadPropValue", "TControl.WndProc"}
+            "TObject.InitInstance", "TControl.Create", "TControl.Destroy",
+                "TControl.ChangeScale", "TReader.ReadPropValue", "TControl.WndProc",
+                "@ValInt64", "TThreadLocalCounter2.Open", "TThreadLocalCounter.Open",
+                "TMultiReadExclusiveWriteSynchronizer.BeginWrite",
+                "TReader.ReadRootComponent", "TApplication.ActivateHint"}
     inventory = []
     lstr = next(t for t in candidates if "@LStrCatN" in t["names"])
     for path in args.targets:
@@ -177,6 +235,8 @@ def main():
             examples=[r for r in rows if examples.intersection(r["names"])],
             absent_names=[r["names"] for r in rows if not r["target_rvas"]],
             lstrcatn_variant=lstrcatn_variant(pe, lstr, decoder)))
+        if args.validate_links:
+            report["targets"][-1]["link_validation"] = validate_links(ref, pe, rows, decoder)
         inventory.append(dict(target=str(path), blocks=rows))
     text = json.dumps(report, indent=2) + "\n"
     if args.output:

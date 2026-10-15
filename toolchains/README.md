@@ -11,7 +11,8 @@ verification results, and [version/hash manifest](manifest.json).
 |-----------|---------------|---------------|-----------------|
 | `vc6` | VC6 RTM + SP5 + Processor Pack | CL 12.00.8804; C1 12.0.8867; C1XX 12.0.8964; C2 file version 13.0.9044; linker 6.0.8447 | `gs_dll.dll` |
 | `vc7` | Visual Studio .NET 2002 / VC7.0 | Compiler 13.00.9466; linker and MASM 7.0.9466 | `nemu64.exe` |
-| `d6` | Delphi 6 media build 6.0.6.163 | DCC32 executable banner 14.0; resource compiler 5.40 | `debugger.dll`, `dialogs.dll` |
+| `d6u1` | Delphi 6 General Update 1 | Compiler / RTL / VCL build 6.0.6.190 | `dialogs.dll` |
+| `d6u2` | Delphi 6 General Update 2 | Compiler / RTL / VCL build 6.0.6.240 | `debugger.dll` |
 
 `vc6` includes static debug MFC/CRT libraries, MFC/ATL headers and sources,
 resource tools, PDB support, and the Processor Pack headers and MASM. The
@@ -24,13 +25,13 @@ in `vs_setup.msi`, using the MSI's file and directory tables. `mspdb70.dll`,
 `msobj10.dll`, and the VC7 runtime DLLs are colocated with the compiler;
 `msobj10.dll` is required by LTCG.
 
-`d6` includes DCC32, the resource compiler and its `rw32core.dll` dependency,
+Both Delphi directories include DCC32, the resource compiler and its `rw32core.dll` dependency,
 linker support, command-line utilities, compiled units, RTL/VCL sources, and
-runtime BPL/MAP files for reference. The exact Delphi update used by the original
-plugins remains unresolved; this installation successfully reproduces their
-observed `TControl` layout. A code comparison now also shows that both original
-plugins contain a different `System.@LStrCatN` variant from this media's RTL;
-the installed unmodified runtime is therefore not an exact match.
+runtime BPL/MAP files for reference. The plugins match different Delphi runtime
+builds: Update 1 for dialogs and Update 2 for the debugger. Neither selected
+configuration includes the later standalone RTL updates. The comparison below
+records the evidence and the distinction between identifying library code and
+proving the exact compiler executable used for application code.
 
 ### Running and checking the tools
 
@@ -43,7 +44,8 @@ mkdir -p "$HOME/.ai-tmp"
 export WINEPREFIX="$(mktemp -d "$HOME/.ai-tmp/nemu-wine.XXXXXX")/wine"
 python3 scripts/run_toolchain.py vc6 cl /c example.cpp
 python3 scripts/run_toolchain.py vc7 cl /c /O2 /GL example.cpp
-python3 scripts/run_toolchain.py d6 dcc32 example.dpr
+python3 scripts/run_toolchain.py d6u1 dcc32 dialogs.dpr
+python3 scripts/run_toolchain.py d6u2 dcc32 debugger.dpr
 ```
 
 Without `WINEPREFIX`, the runner allocates a new prefix under `~/.ai-tmp` and
@@ -57,7 +59,8 @@ python3 scripts/check_toolchains.py --output analysis/toolchain-smoke.json
 
 The [verification suite](../scripts/check_toolchains.py) compiles and links a
 VC6 debug MFC DLL with PDB, MASM, and resources; a VC7 LTCG console program with
-PDB, MASM, and resources; and a Delphi VCL DLL with resources and a detailed map.
+PDB, MASM, and resources; and a Delphi VCL DLL with resources and a detailed map
+using each of the two Delphi configurations.
 It executes the generated console probe, verifies Microsoft Rich IDs and
 checksums, and checks the Delphi layout. All checks passed; the
 [recorded results](../analysis/toolchain-smoke.json) include the emitted IDs.
@@ -71,6 +74,7 @@ Generated files and logs stay under a new `~/.ai-tmp` directory.
 | `2001-03_X08-02111_X06-21660_CD_ROM.7z` | SP5 English payloads plus **`enu/PP/vcpp.exe`**, the matching Processor Pack |
 | `VSPROD1.iso`, `VSPROD2.iso`, `VSPROD3.iso` | VC7 files spread across the discs, shared compiler dependencies, and MSI-embedded SDK |
 | `Borland Delphi 6.0 Enterprise Edition (ISO).7z` | Delphi 6 compiler, units, sources, and runtime references |
+| `delphi6-updates/D6_upd1_ent.exe`, `delphi6-updates/D6_upd2_ent.exe` | English Update 1 and Update 2 overlays for the two Delphi configurations |
 | `en_vs6_ent_cd2.iso`, `en_vs6_ent_cd3.iso` | Other VS6 products/support content; no additional native compiler components needed |
 | `VSPROD4.iso` | Additional product samples/support content; no needed compiler payload |
 | `VSWCUD1.iso` | Windows component prerequisites such as IE, MDAC, and .NET Framework |
@@ -82,17 +86,19 @@ The last six rows are not applied to the native compiler layouts. None supplies
 a missing Nemu compiler component.
 
 [unpack_toolchains.py](../scripts/unpack_toolchains.py) reproduces the layouts
-from `toolchains-staging/`, requiring `7z` and `msiinfo` (`msitools` on Debian).
+from `toolchains-staging/`, requiring `7z`, `unshield`, and `msiinfo` (`msitools` on Debian).
 It extracts the SP5 MDF's 2,048-byte data payloads from 2,448-byte raw sectors,
 overlays SP5 on VC6 RTM with consistent casing, then applies the Processor Pack's
-INF mappings, including renamed intrinsic headers. It does not run installer
+INF mappings, including renamed intrinsic headers. For Delphi it verifies the
+update archive hashes, extracts the nested InstallShield cabinets, and overlays
+the English compiler, libraries, sources, and runtime packages. It does not run installer
 executables. Scratch files are allocated under `~/.ai-tmp`.
 
 ```sh
 python3 scripts/unpack_toolchains.py
 ```
 
-The script refuses to overwrite existing `vc6`, `vc7`, or `d6` directories.
+The script refuses to overwrite existing `vc6`, `vc7`, `d6u1`, or `d6u2` directories.
 Use `--dest` for a separate extraction. A fresh extraction was verified to
 reproduce every installed file byte-for-byte. The manifest records input-media
 SHA-256 hashes, component versions/hashes, file counts, sizes, and a whole-tree
@@ -109,8 +115,8 @@ generations installed above.
 |--------|--------------------------|------------|
 | `master/nemu64.exe` | Visual Studio .NET 2002 / Visual C++ 7.0, compiler 13.00.9466, linker 7.00.9466, with MASM 7.0 contributions | High; explicit Rich build records |
 | `master/gs_dll.dll` | Visual C++ 6.0 SP5 **with Processor Pack**, compiler build 9044; static debug MFC and CRT | High; Rich records and retained build metadata |
-| `master/Plugin/debugger.dll` | Borland Delphi 6, Win32 VCL | High for Delphi 6; exact update level unresolved |
-| `master/Plugin/dialogs.dll` | Borland Delphi 6, Win32 VCL | High for Delphi 6; exact update level unresolved |
+| `master/Plugin/debugger.dll` | Delphi 6 General Update 2 RTL/VCL, build 6.0.6.240 | High; unique candidate match across tested runtime configurations |
+| `master/Plugin/dialogs.dll` | Delphi 6 General Update 1 RTL/VCL, build 6.0.6.190 | High; unique candidate match across tested runtime configurations |
 
 The filename is **`dialogs.dll`**, plural. It belongs in the emulator UI scope:
 its three embedded forms are `TFormHeader` (Rom info), `TFormNemuSettings`, and
@@ -186,8 +192,8 @@ which explicitly distinguishes Delphi 6 from 7 for this VCL layout.
 Delphi 6 corresponds to compiler version **14.0**, conditional **VER140**, and
 package version **60** in
 [Embarcadero's compiler version table](https://docwiki.embarcadero.com/RADStudio/Florence/en/Compiler_Versions).
-The exact Delphi update level still requires comparison with known compiler/RTL
-builds. `DVCLAL` alone is not sufficient to select an exact installation edition.
+The update comparison below identifies the matching RTL/VCL builds.
+`DVCLAL` alone is not sufficient to select an exact installation edition.
 
 `toolchains-staging/` contains `Borland Delphi 6.0 Enterprise Edition (ISO).7z`.
 Its compiler and runtime files report version **6.0.6.163**; `DCC32.EXE`
@@ -196,8 +202,8 @@ matches the same Delphi 6 `TControl` rule (instance size `0x15c`, with the
 Delphi 6 discriminator branch). This corroborates the major-version result,
 but does not prove that the plugins used this exact update. Archive/member
 hashes and reference values are saved in
-[delphi6-reference.json](../analysis/delphi6-reference.json). That media now
-supplies `d6/`. The executed DCC32 banner reports 14.0; 14.01 above is an
+[delphi6-reference.json](../analysis/delphi6-reference.json). That media supplies
+the base for both updated directories. Its executed DCC32 banner reports 14.0; 14.01 above is an
 additional embedded compiler string.
 
 The debugger retains 80 package unit names and 12 forms: bookmarks, commands,
@@ -209,73 +215,83 @@ theming components will need to be accounted for in a reconstruction.
 
 ### Delphi runtime comparison
 
-[compare_delphi_rtl.py](../scripts/compare_delphi_rtl.py) compares the statically
-linked Delphi smoke probe with the original plugins, using the probe's detailed
-MAP to name code blocks. It keeps instruction bytes and internal branch
-distances, masking PE `HIGHLOW` relocations and external `rel32` call/jump
-operands. The [recorded comparison](../analysis/delphi-rtl-comparison.json)
-contains input hashes, examples, limitations, and a concrete RTL difference.
+The six-candidate [comparison results](../analysis/delphi-update-matches.json)
+select **General Update 1 for `dialogs.dll`** and **General Update 2 for
+`debugger.dll`**. No single supplied runtime configuration matches both plugins.
+The installed directories are therefore `d6u1` and `d6u2`.
 
-Of **1,192** eligible blocks that match uniquely within the reference probe:
+| Reference configuration | Eligible blocks | Unmatched in debugger | Unmatched in dialogs |
+|-------------------------|----------------:|----------------------:|---------------------:|
+| Original media (RTM) | 1,192 | 23 | 2 |
+| General Update 1 | 1,194 | 21 | **0** |
+| General Update 2 | 1,192 | **0** | 20 |
+| General Update 2 + RTL Update 1 | 1,195 | 4 | 24 |
+| General Update 2 + RTL Update 2 | 1,193 | 4 | 23 |
+| General Update 2 + RTL Update 2 + RTL Update 3 | 1,192 | 5 | 24 |
 
-| Target | Unique normalized matches | Ambiguous matches | No match |
-|--------|---------------------------|-------------------|----------|
-| `debugger.dll` | 1,162 | 7 | 23 |
-| `dialogs.dll` | 1,182 | 8 | 2 |
+For the winning comparisons, Update 1 has **1,186 unique** block matches in
+`dialogs.dll` and 8 blocks with multiple possible addresses. Update 2 has
+**1,185 unique** block matches in `debugger.dll` and 7 ambiguous blocks. These
+counts describe the eligible reference blocks, not every function in a plugin.
 
-These are code-similarity counts, not percentages of the whole application or
-proof of semantic identity: masked call/global addresses need separate identity
-checks. A missing match alone also does not establish a patch, since smart
-linking, alignment, and block boundaries can affect matching.
+The matcher also checks the destinations of direct calls/jumps when both
+endpoint blocks were identified. **2,464 edges** agree for Update 1/dialogs and
+**2,440 edges** agree for Update 2/debugger, with **zero conflicts**. Separately,
+RTTI locates each original `TControl` VMT; its `Destroy`, `SetParent`, and
+`WndProc` slots point to the matching bodies in both winning comparisons.
+This anchors those identities independently of scanning for a similar body.
 
-One specific difference is established in **both** plugins. In
-`System.@LStrCatN`, at routine offset `+0x15`, the installed media's RTL emits
-`89 c7` (`mov edi, eax`), while both originals contain `89 cf`
-(`mov edi, ecx`). The entire 132-byte reference block matches after masking
-four external call displacements and allowing this single changed byte.
-This is an instruction operand change, not a relocation or alignment effect.
+The discriminating evidence spans several units:
 
-| Image | Routine VA | Changed instruction VA |
-|-------|------------|------------------------|
-| Reference smoke probe | `0x4045f8` | `0x40460d` |
-| `debugger.dll` | `0x404c84` | `0x404c99` |
-| `dialogs.dll` | `0x40477c` | `0x404791` |
+- Update 1 supplies the `@LStrCatN` instruction and `TReader.ReadPropValue`
+  changes absent from RTM. The string helper's `mov edi, eax` becomes
+  `mov edi, ecx` in both originals; the [initial RTM comparison](../analysis/delphi-rtl-comparison.json)
+  records the exact byte and original addresses.
+- Update 2 matches the debugger's changed integer conversion, thread-local
+  counter, action, image-list, and control routines. The dialogs plugin instead
+  matches their Update 1 forms. `TControl.WndProc` is one VMT-anchored example.
+- RTL Updates 1 and 2 introduce different synchronization method bodies:
+  `TMultiReadExclusiveWriteSynchronizer.BeginWrite`, `EndWrite`, `BeginRead`,
+  and `EndRead` do not match the debugger. RTL Update 3 additionally changes
+  `TReader.ReadRootComponent`. The separate RTL updates are therefore not
+  applied to either installed configuration.
 
-Thus Delphi 6 remains the strong major-version identification, but the plugins'
-runtime is **not identical to the installed unmodified media runtime**. The
-difference does not yet distinguish an official update from a separately
-patched runtime. Nor does matching precompiled RTL/VCL code uniquely identify
-the `dcc32.exe` that compiled the application.
-
-To establish the update level, compare known Delphi 6 Update 1/2 and separate
-RTL update payloads in isolated directories, starting with this discriminator
-and then checking additional changed routines in `System`, `SysUtils`,
-`Classes`, and `Controls`. Track compiler and unit versions separately. Borland's
-[Update Pack 2 release notes (archived copy)](https://www.delphi.co.kr/index.php?document_srl=11604&mid=level_notice)
-state that Update 2 includes Update 1's changes. No updated Delphi payload has
-yet been compared here. Any final identification should explain all observed
-differences, including possible local runtime changes, rather than rely on one
-shared routine or the PE timestamp.
-
-To repeat the comparison, install Debian's `python3-capstone`, run the toolchain
-smoke check, and use the resulting scratch path:
+[check_delphi_updates.py](../scripts/check_delphi_updates.py) independently
+extracts the original media and all updates, builds a static VCL probe with each
+candidate's compiler and precompiled units, emits detailed maps, and compares
+both original plugins. The variants use the documented cumulative update
+chains; RTL Update 2 includes RTL Update 1. All work occurs in new scratch
+space and no original plugin is executed.
 
 ```sh
-python3 scripts/compare_delphi_rtl.py \
-  "$PROBE_DIR/d6/probe.dll" "$PROBE_DIR/d6/probe.map" \
-  master/Plugin/debugger.dll master/Plugin/dialogs.dll \
-  --output analysis/delphi-rtl-comparison.json
+python3 scripts/check_delphi_updates.py --output analysis/delphi-update-matches.json
 ```
 
-`PROBE_DIR` is the scratch directory printed by `check_toolchains.py`. Optional
-`--matches PATH` writes the complete per-block inventory. Self-comparison of
-the reference returned all 1,192 unique matches with no `@LStrCatN` difference.
+This requires `7z`, `unshield`, Wine, and Debian's `python3-capstone`.
+`WINEPREFIX` can reuse an existing scratch prefix. The full block inventories,
+reference executables/maps, and compile logs remain in the printed scratch
+folder. The JSON report retains hashes, compiler/runtime versions, matching
+counts, examples, missing block names, edge checks, and VMT anchors.
+
+[compare_delphi_rtl.py](../scripts/compare_delphi_rtl.py) is the underlying
+matcher. It selects map-bounded blocks of 32–2,048 bytes with at least 24 fixed
+bytes, requires each signature to be unique in its reference, and masks PE
+`HIGHLOW` relocations and external `rel32` operands. Internal branch distances
+and ordinary instruction operands remain fixed. `--validate-links` enables
+edge and VMT checks; `--matches PATH` writes the complete block inventory.
+
+These results identify matching **RTL/VCL builds** and justify using their
+corresponding compiler distributions for reconstruction. They do not prove
+the exact application `dcc32.exe` or every compiler switch independently of
+the precompiled libraries. Unresolved callees/global data and possible local
+patches remain limitations. A missing signature alone is not conclusive:
+smart linking, alignment, and block boundaries can also affect matching.
 
 ### Recovered Delphi update media
 
 All five reference updates were recovered on 2026-10-15 and saved under
-`toolchains-staging/delphi6-updates/`. They are staged reference material; the
-installed `d6/` still contains the original media version. The
+`toolchains-staging/delphi6-updates/`. General Updates 1 and 2 supply the installed
+configurations; the three standalone RTL updates remain comparison references. The
 [download manifest](delphi-updates.json) records exact source URLs, sizes,
 SHA-256 hashes, inspected component versions, and the extraction scratch path.
 
@@ -311,8 +327,8 @@ reference builds. RTL Update 3 is a ZIP containing `Classes.pas`, release/debug
 For reference extraction, create a new directory under `~/.ai-tmp`, unpack an
 EXE there with `7z x`, then unpack its `data1.cab` into a second directory with
 `unshield -d DEST x PATH/TO/data1.cab`. This exposes compiler binaries, units,
-sources, packages, and maps without running the installer. Actual update-level
-comparison against the Nemu plugins remains a separate step.
+sources, packages, and maps without running the installer. The automated update
+comparison performs these extractions into isolated reference configurations.
 
 ### Reproducing the inspection
 
