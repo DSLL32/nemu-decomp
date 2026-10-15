@@ -271,6 +271,49 @@ python3 scripts/compare_delphi_rtl.py \
 `--matches PATH` writes the complete per-block inventory. Self-comparison of
 the reference returned all 1,192 unique matches with no `@LStrCatN` difference.
 
+### Recovered Delphi update media
+
+All five reference updates were recovered on 2026-10-15 and saved under
+`toolchains-staging/delphi6-updates/`. They are staged reference material; the
+installed `d6/` still contains the original media version. The
+[download manifest](delphi-updates.json) records exact source URLs, sizes,
+SHA-256 hashes, inspected component versions, and the extraction scratch path.
+
+| Update | Surviving download | Verified payload version |
+|--------|--------------------|--------------------------|
+| General Update 1, Enterprise | [D6_upd1_ent.exe](http://download.borlandforum.com/delphi/Delphi6Update/D6_upd1_ent.exe) | DCC32 / RTL / VCL `6.0.6.190` |
+| General Update 2, Enterprise | [D6_upd2_ent.exe](http://download.borlandforum.com/delphi/Delphi6Update/D6_upd2_ent.exe) | DCC32 / RTL / VCL `6.0.6.240` |
+| RTL Update 1, Enterprise | [D6_RTL1_ent.exe](http://download.borlandforum.com/delphi/Delphi6Update/D6_RTL1_ent.exe) | RTL `6.0.6.241` |
+| RTL Update 2, Enterprise | [del6_ent_rtl2.exe](https://t1.daumcdn.net/cfile/tistory/241A083357BD17FE14) | RTL `6.0.6.242` |
+| RTL Update 3 | [d6_rtl3.zip](https://t1.daumcdn.net/cfile/tistory/2226563357BD17FB0D) | RTL `6.0.6.243` |
+
+The BorlandForum links work over **HTTP**; HTTPS failed in this environment.
+The last two files are attachments on [this preserved download page](https://tctt.tistory.com/57).
+The successful CDN requests supplied that page as the HTTP `Referer` and used
+`User-Agent: Mozilla/5.0`. Its General Update 2 attachment is split into EGG
+volumes; the complete EXE above avoids needing that archive format.
+
+General Update 2 was independently downloaded from
+[DowngradeFiles](https://downgradefiles.pdp-11.net/download.php?file=323e15d516e4080c4f0406b9a0eea5f8)
+and has the same SHA-256 as the BorlandForum copy. All five archives extracted
+successfully with `7z`; all four EXEs' nested InstallShield `data1.cab` payloads
+also extracted successfully with `unshield`. Included Borland release notes and
+PE version resources agree with the update labels. These checks establish
+readability and content consistency; no original publisher checksums were
+available for authentication. None of the installers was executed.
+
+The included RTL Update 2 release notes explicitly say that it includes the
+previous RTL update. General Update 2 includes General Update 1. Retaining
+the superseded updates is useful here because we need separate historical
+reference builds. RTL Update 3 is a ZIP containing `Classes.pas`, release/debug
+`Classes.dcu`, `rtl.dcp`, `rtl60.bpl`, `rtl60.map`, and `BaseRTL.Msm`.
+
+For reference extraction, create a new directory under `~/.ai-tmp`, unpack an
+EXE there with `7z x`, then unpack its `data1.cab` into a second directory with
+`unshield -d DEST x PATH/TO/data1.cab`. This exposes compiler binaries, units,
+sources, packages, and maps without running the installer. Actual update-level
+comparison against the Nemu plugins remains a separate step.
+
 ### Reproducing the inspection
 
 Run from the repository root:
