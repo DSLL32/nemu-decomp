@@ -1,0 +1,36 @@
+{
+  "original_sha256": "73df81668476f65dcc6587dbd79c2082d6b29d05c367ffc3cf0f6e7d36af7ab5",
+  "rebuilt_sha256": "8f4190fb2ea8c7e7d117d52474db0c10febaec457de884827c9c5912f203c456",
+  "scenarios": [
+    "ROM info without a ROM",
+    "ROM info with synthetic ROM data",
+    "Settings while stopped, including saved plugin selection",
+    "Settings while running; apply RDRAM, folders, graphics plugin",
+    "ROM settings; replace all three INI sections and skip lines without equals"
+  ],
+  "files": [
+    {
+      "file": "stdout.txt",
+      "equal": true,
+      "original_sha256": "d933c42e92b0e6f2d62dfdfc89c495df1731e616ea810085125a72f917aaa4be",
+      "rebuilt_sha256": "d933c42e92b0e6f2d62dfdfc89c495df1731e616ea810085125a72f917aaa4be"
+    },
+    {
+      "file": "config.ini",
+      "equal": true,
+      "original_sha256": "9f5b20ca749163c5dd156e8496815742a456b066c0d7f38601392744a3b37f45",
+      "rebuilt_sha256": "9f5b20ca749163c5dd156e8496815742a456b066c0d7f38601392744a3b37f45"
+    },
+    {
+      "file": "Nemu64.ini",
+      "equal": true,
+      "original_sha256": "d06b89528d2688b16a25053b4b1c8e2ba110768c2a660865aae735b19cebb1d5",
+      "rebuilt_sha256": "d06b89528d2688b16a25053b4b1c8e2ba110768c2a660865aae735b19cebb1d5"
+    }
+  ],
+  "expected_apply_results": true,
+  "passed": true,
+  "limitations": [
+    "Native child controls and INI output are compared; non-windowed labels, pixels, browse dialogs, error paths, and full host integration are not covered."
+  ]
+}
