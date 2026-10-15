@@ -1,10 +1,107 @@
 # Historical toolchains
 
+## Installed toolchains
+
+Each abbreviated directory contains one toolchain configuration for the Nemu
+targets. Filenames are normalized to lowercase. Compiler binaries, headers,
+libraries, and runtime sources remain local; Git tracks the extraction scripts,
+verification results, and [version/hash manifest](manifest.json).
+
+| Directory | Configuration | Main versions | Intended target |
+|-----------|---------------|---------------|-----------------|
+| `vc6` | VC6 RTM + SP5 + Processor Pack | CL 12.00.8804; C1 12.0.8867; C1XX 12.0.8964; C2 file version 13.0.9044; linker 6.0.8447 | `gs_dll.dll` |
+| `vc7` | Visual Studio .NET 2002 / VC7.0 | Compiler 13.00.9466; linker and MASM 7.0.9466 | `nemu64.exe` |
+| `d6` | Delphi 6 media build 6.0.6.163 | DCC32 executable banner 14.0; resource compiler 5.40 | `debugger.dll`, `dialogs.dll` |
+
+`vc6` includes static debug MFC/CRT libraries, MFC/ATL headers and sources,
+resource tools, PDB support, and the Processor Pack headers and MASM. The
+Processor Pack optimizer's file version starts with **13.0**, despite belonging
+to this VC6 configuration; the compiled C++ Rich ID is **00312354** as required.
+
+`vc7` includes CRT/ATL/MFC sources and libraries, MASM, resource tools, and the
+Platform SDK. The SDK's **1,525 files** were restored from **49 cabinets** embedded
+in `vs_setup.msi`, using the MSI's file and directory tables. `mspdb70.dll`,
+`msobj10.dll`, and the VC7 runtime DLLs are colocated with the compiler;
+`msobj10.dll` is required by LTCG.
+
+`d6` includes DCC32, the resource compiler and its `rw32core.dll` dependency,
+linker support, command-line utilities, compiled units, RTL/VCL sources, and
+runtime BPL/MAP files for reference. The exact Delphi update used by the original
+plugins remains unresolved; this installation successfully reproduces their
+observed `TControl` layout.
+
+### Running and checking the tools
+
+[run_toolchain.py](../scripts/run_toolchain.py) sets the appropriate Wine
+include/library paths. Use relative source paths from the working directory,
+or Windows paths for absolute filenames. Create a reusable Wine prefix first:
+
+```sh
+mkdir -p "$HOME/.ai-tmp"
+export WINEPREFIX="$(mktemp -d "$HOME/.ai-tmp/nemu-wine.XXXXXX")/wine"
+python3 scripts/run_toolchain.py vc6 cl /c example.cpp
+python3 scripts/run_toolchain.py vc7 cl /c /O2 /GL example.cpp
+python3 scripts/run_toolchain.py d6 dcc32 example.dpr
+```
+
+Without `WINEPREFIX`, the runner allocates a new prefix under `~/.ai-tmp` and
+prints its location. The Delphi runner supplies the installed unit/include/
+resource search paths. Use this runner in place of the original installer-
+dependent `vcvars32.bat` files.
+
+```sh
+python3 scripts/check_toolchains.py --output analysis/toolchain-smoke.json
+```
+
+The [verification suite](../scripts/check_toolchains.py) compiles and links a
+VC6 debug MFC DLL with PDB, MASM, and resources; a VC7 LTCG console program with
+PDB, MASM, and resources; and a Delphi VCL DLL with resources and a detailed map.
+It executes the generated console probe, verifies Microsoft Rich IDs and
+checksums, and checks the Delphi layout. All checks passed; the
+[recorded results](../analysis/toolchain-smoke.json) include the emitted IDs.
+Generated files and logs stay under a new `~/.ai-tmp` directory.
+
+### Installer inspection and reproducibility
+
+| Staged media | Use |
+|-------------|-----|
+| `en_vs6_ent_cd1.iso` | VC6 RTM compiler, headers, libraries, sources, and shared tools |
+| `2001-03_X08-02111_X06-21660_CD_ROM.7z` | SP5 English payloads plus **`enu/PP/vcpp.exe`**, the matching Processor Pack |
+| `VSPROD1.iso`, `VSPROD2.iso`, `VSPROD3.iso` | VC7 files spread across the discs, shared compiler dependencies, and MSI-embedded SDK |
+| `Borland Delphi 6.0 Enterprise Edition (ISO).7z` | Delphi 6 compiler, units, sources, and runtime references |
+| `en_vs6_ent_cd2.iso`, `en_vs6_ent_cd3.iso` | Other VS6 products/support content; no additional native compiler components needed |
+| `VSPROD4.iso` | Additional product samples/support content; no needed compiler payload |
+| `VSWCUD1.iso` | Windows component prerequisites such as IE, MDAC, and .NET Framework |
+| `en_codeadv.exe` | Code Advisor for **Visual Basic 6**, version 1.1 |
+| `en_kb3096896-x86.msi` | VB6 SP6 extended-runtime security update |
+| `en_mdac28_sp1.exe` | MDAC 2.8 SP1 data-access runtime |
+
+The last six rows are not applied to the native compiler layouts. None supplies
+a missing Nemu compiler component.
+
+[unpack_toolchains.py](../scripts/unpack_toolchains.py) reproduces the layouts
+from `toolchains-staging/`, requiring `7z` and `msiinfo` (`msitools` on Debian).
+It extracts the SP5 MDF's 2,048-byte data payloads from 2,448-byte raw sectors,
+overlays SP5 on VC6 RTM with consistent casing, then applies the Processor Pack's
+INF mappings, including renamed intrinsic headers. It does not run installer
+executables. Scratch files are allocated under `~/.ai-tmp`.
+
+```sh
+python3 scripts/unpack_toolchains.py
+```
+
+The script refuses to overwrite existing `vc6`, `vc7`, or `d6` directories.
+Use `--dest` for a separate extraction. A fresh extraction was verified to
+reproduce every installed file byte-for-byte. The manifest records input-media
+SHA-256 hashes, component versions/hashes, file counts, sizes, and a whole-tree
+digest for each layout. The tree digest is SHA-256 over UTF-8 records of
+`file_sha256`, two spaces, relative POSIX filename, and newline, in the Python
+`Path` ordering used by the extraction script.
+
 ## Nemu64 0.8 toolchain identification
 
-Static inspection of the binaries in `master/` identifies three required
-toolchain generations. None is currently installed under `toolchains/`;
-the VC4.2 and VC5 layouts above are older than all four targets.
+Static inspection of the binaries in `master/` identifies the three toolchain
+generations installed above.
 
 | Binary | Toolchain identification | Confidence |
 |--------|--------------------------|------------|
@@ -90,15 +187,16 @@ package version **60** in
 The exact Delphi update level still requires comparison with known compiler/RTL
 builds. `DVCLAL` alone is not sufficient to select an exact installation edition.
 
-The workspace also contains `Borland Delphi 6.0 Enterprise Edition (ISO).7z`.
+`toolchains-staging/` contains `Borland Delphi 6.0 Enterprise Edition (ISO).7z`.
 Its compiler and runtime files report version **6.0.6.163**; `DCC32.EXE`
 contains the compiler banner **14.01**. The media's `vcl60.bpl` independently
 matches the same Delphi 6 `TControl` rule (instance size `0x15c`, with the
 Delphi 6 discriminator branch). This corroborates the major-version result,
 but does not prove that the plugins used this exact update. Archive/member
 hashes and reference values are saved in
-[delphi6-reference.json](../analysis/delphi6-reference.json). Reference files
-were extracted into scratch space; the toolchain has not been installed.
+[delphi6-reference.json](../analysis/delphi6-reference.json). That media now
+supplies `d6/`. The executed DCC32 banner reports 14.0; 14.01 above is an
+additional embedded compiler string.
 
 The debugger retains 80 package unit names and 12 forms: bookmarks, commands,
 opcode breaks, register-access breaks, memory dumping, image viewing, library
@@ -122,7 +220,6 @@ selected build strings, Delphi package units, form identities, and the exact
 TControl discriminator values. Offsets and addresses in JSON are decimal.
 Header/import/export results were cross-checked against GNU `objdump`.
 
-For matching work, the next toolchain additions are VC7.0 build 9466 (including
-MASM and its original libraries), VC6 SP5 plus Processor Pack, and Delphi 6
-with its VCL/RTL. Compiler identification is complete at this level; no
-recompilation match or Delphi update-level identification has yet been made.
+The installed toolchains reproduce the relevant build fingerprints in fresh
+probes. Matching individual original functions and identifying the exact Delphi
+update level remain subsequent decompilation work.
