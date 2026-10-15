@@ -1,0 +1,336 @@
+{
+  "reference": {
+    "path": "/root/.ai-tmp/nemu-check.d9lc5tlu/d6/probe.dll",
+    "sha256": "6c2866e33d92e94660c1ec01efff9bce522534d3f0ae3c03e56e0047d51ed739"
+  },
+  "map": {
+    "path": "/root/.ai-tmp/nemu-check.d9lc5tlu/d6/probe.map",
+    "sha256": "5dde5cc6f57ef28cb40b55ee4a349abc81b2803a64403c07240c2734627d80de"
+  },
+  "method": "Map-bounded 32..2048-byte blocks; >=24 fixed bytes; unique in reference. Mask PE HIGHLOW relocations and external rel32 branch/call operands.",
+  "limitations": [
+    "Matches establish normalized instruction-byte similarity; callee and global identities are not validated, so they are not proof of semantic identity.",
+    "Map spans may include alignment or embedded data, not just instructions.",
+    "Missing matches may reflect smart linking, code changes, or block boundaries.",
+    "Precompiled runtime units identify runtime code, not the exact DCC32 executable.",
+    "No updated Delphi distribution was compared; no exact update is assigned."
+  ],
+  "template_count": 1192,
+  "targets": [
+    {
+      "path": "master/Plugin/debugger.dll",
+      "sha256": "e10e8b27a53951dbaeba6d72bf61e3859d3e2654741f00d29798c993411637bd",
+      "counts": {
+        "unique": 1162,
+        "absent": 23,
+        "ambiguous": 7
+      },
+      "unique_match_bytes": 129848,
+      "examples": [
+        {
+          "names": [
+            "TObject.InitInstance"
+          ],
+          "reference_rva": 13488,
+          "length": 88,
+          "fixed_bytes": 88,
+          "target_rvas": [
+            15140
+          ]
+        },
+        {
+          "names": [
+            "@LStrClr"
+          ],
+          "reference_rva": 17024,
+          "length": 36,
+          "fixed_bytes": 32,
+          "target_rvas": [
+            18700
+          ]
+        },
+        {
+          "names": [
+            "@LStrAsg"
+          ],
+          "reference_rva": 17108,
+          "length": 68,
+          "fixed_bytes": 56,
+          "target_rvas": [
+            18784
+          ]
+        },
+        {
+          "names": [
+            "@LStrCat3"
+          ],
+          "reference_rva": 17796,
+          "length": 116,
+          "fixed_bytes": 80,
+          "target_rvas": [
+            19472
+          ]
+        },
+        {
+          "names": [
+            "@LStrCmp"
+          ],
+          "reference_rva": 18044,
+          "length": 164,
+          "fixed_bytes": 164,
+          "target_rvas": [
+            19720
+          ]
+        },
+        {
+          "names": [
+            "TReader.ReadPropValue"
+          ],
+          "reference_rva": 97664,
+          "length": 804,
+          "fixed_bytes": 532,
+          "target_rvas": []
+        },
+        {
+          "names": [
+            "TControl.Destroy"
+          ],
+          "reference_rva": 268120,
+          "length": 180,
+          "fixed_bytes": 132,
+          "target_rvas": [
+            434476
+          ]
+        },
+        {
+          "names": [
+            "TControl.WndProc"
+          ],
+          "reference_rva": 276452,
+          "length": 408,
+          "fixed_bytes": 360,
+          "target_rvas": []
+        }
+      ],
+      "absent_names": [
+        [
+          "@StartLib"
+        ],
+        [
+          "@LStrCatN"
+        ],
+        [
+          "@ValInt64"
+        ],
+        [
+          "TThreadLocalCounter.Create"
+        ],
+        [
+          "TThreadLocalCounter.Destroy"
+        ],
+        [
+          "TThreadLocalCounter.Open"
+        ],
+        [
+          "TThreadLocalCounter.Close"
+        ],
+        [
+          "TThreadLocalCounter.Delete"
+        ],
+        [
+          "TThreadLocalCounter.Reattach"
+        ],
+        [
+          "TThreadLocalCounter.Recycle"
+        ],
+        [
+          "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+        ],
+        [
+          "TCustomVariantType.Destroy"
+        ],
+        [
+          "TReader.ReadPropValue"
+        ],
+        [
+          "TBasicActionLink.Execute"
+        ],
+        [
+          "THelpManager.Destroy"
+        ],
+        [
+          "TCustomAction.Execute"
+        ],
+        [
+          "TScrollingWinControl.CreateWnd"
+        ],
+        [
+          "TCustomForm.WndProc"
+        ],
+        [
+          "TApplication.ActivateHint"
+        ],
+        [
+          "TCustomImageList.CreateImageList"
+        ],
+        [
+          "TCustomImageList.ReadD3Stream"
+        ],
+        [
+          "TMenuItem.MergeWith"
+        ],
+        [
+          "TControl.WndProc"
+        ]
+      ],
+      "lstrcatn_variant": {
+        "reference_instruction": "mov edi, eax",
+        "compared_bytes": 132,
+        "fixed_bytes": 116,
+        "candidates": [
+          {
+            "rva": 19588,
+            "va": 4213892,
+            "file_offset": 16516,
+            "instruction_va": 4213913,
+            "instruction": "mov edi, ecx",
+            "fixed_byte_differences": [
+              {
+                "offset": 22,
+                "reference": "c7",
+                "target": "cf"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "path": "master/Plugin/dialogs.dll",
+      "sha256": "73df81668476f65dcc6587dbd79c2082d6b29d05c367ffc3cf0f6e7d36af7ab5",
+      "counts": {
+        "unique": 1182,
+        "absent": 2,
+        "ambiguous": 8
+      },
+      "unique_match_bytes": 134552,
+      "examples": [
+        {
+          "names": [
+            "TObject.InitInstance"
+          ],
+          "reference_rva": 13488,
+          "length": 88,
+          "fixed_bytes": 88,
+          "target_rvas": [
+            13852
+          ]
+        },
+        {
+          "names": [
+            "@LStrClr"
+          ],
+          "reference_rva": 17024,
+          "length": 36,
+          "fixed_bytes": 32,
+          "target_rvas": [
+            17412
+          ]
+        },
+        {
+          "names": [
+            "@LStrAsg"
+          ],
+          "reference_rva": 17108,
+          "length": 68,
+          "fixed_bytes": 56,
+          "target_rvas": [
+            17496
+          ]
+        },
+        {
+          "names": [
+            "@LStrCat3"
+          ],
+          "reference_rva": 17796,
+          "length": 116,
+          "fixed_bytes": 80,
+          "target_rvas": [
+            18184
+          ]
+        },
+        {
+          "names": [
+            "@LStrCmp"
+          ],
+          "reference_rva": 18044,
+          "length": 164,
+          "fixed_bytes": 164,
+          "target_rvas": [
+            18432
+          ]
+        },
+        {
+          "names": [
+            "TReader.ReadPropValue"
+          ],
+          "reference_rva": 97664,
+          "length": 804,
+          "fixed_bytes": 532,
+          "target_rvas": []
+        },
+        {
+          "names": [
+            "TControl.Destroy"
+          ],
+          "reference_rva": 268120,
+          "length": 180,
+          "fixed_bytes": 132,
+          "target_rvas": [
+            347524
+          ]
+        },
+        {
+          "names": [
+            "TControl.WndProc"
+          ],
+          "reference_rva": 276452,
+          "length": 408,
+          "fixed_bytes": 360,
+          "target_rvas": [
+            355924
+          ]
+        }
+      ],
+      "absent_names": [
+        [
+          "@LStrCatN"
+        ],
+        [
+          "TReader.ReadPropValue"
+        ]
+      ],
+      "lstrcatn_variant": {
+        "reference_instruction": "mov edi, eax",
+        "compared_bytes": 132,
+        "fixed_bytes": 116,
+        "candidates": [
+          {
+            "rva": 18300,
+            "va": 4212604,
+            "file_offset": 15228,
+            "instruction_va": 4212625,
+            "instruction": "mov edi, ecx",
+            "fixed_byte_differences": [
+              {
+                "offset": 22,
+                "reference": "c7",
+                "target": "cf"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

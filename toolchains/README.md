@@ -28,7 +28,9 @@ in `vs_setup.msi`, using the MSI's file and directory tables. `mspdb70.dll`,
 linker support, command-line utilities, compiled units, RTL/VCL sources, and
 runtime BPL/MAP files for reference. The exact Delphi update used by the original
 plugins remains unresolved; this installation successfully reproduces their
-observed `TControl` layout.
+observed `TControl` layout. A code comparison now also shows that both original
+plugins contain a different `System.@LStrCatN` variant from this media's RTL;
+the installed unmodified runtime is therefore not an exact match.
 
 ### Running and checking the tools
 
@@ -204,6 +206,70 @@ options, memory, registers, search, statistics, and symbols. The dialogs plugin
 retains 67 unit names and the three forms described above. Both also contain
 `ThemeMgr`, `ThemeSrv`, `JwaUxTheme`, and `JwaTmSchema`, so their third-party
 theming components will need to be accounted for in a reconstruction.
+
+### Delphi runtime comparison
+
+[compare_delphi_rtl.py](../scripts/compare_delphi_rtl.py) compares the statically
+linked Delphi smoke probe with the original plugins, using the probe's detailed
+MAP to name code blocks. It keeps instruction bytes and internal branch
+distances, masking PE `HIGHLOW` relocations and external `rel32` call/jump
+operands. The [recorded comparison](../analysis/delphi-rtl-comparison.json)
+contains input hashes, examples, limitations, and a concrete RTL difference.
+
+Of **1,192** eligible blocks that match uniquely within the reference probe:
+
+| Target | Unique normalized matches | Ambiguous matches | No match |
+|--------|---------------------------|-------------------|----------|
+| `debugger.dll` | 1,162 | 7 | 23 |
+| `dialogs.dll` | 1,182 | 8 | 2 |
+
+These are code-similarity counts, not percentages of the whole application or
+proof of semantic identity: masked call/global addresses need separate identity
+checks. A missing match alone also does not establish a patch, since smart
+linking, alignment, and block boundaries can affect matching.
+
+One specific difference is established in **both** plugins. In
+`System.@LStrCatN`, at routine offset `+0x15`, the installed media's RTL emits
+`89 c7` (`mov edi, eax`), while both originals contain `89 cf`
+(`mov edi, ecx`). The entire 132-byte reference block matches after masking
+four external call displacements and allowing this single changed byte.
+This is an instruction operand change, not a relocation or alignment effect.
+
+| Image | Routine VA | Changed instruction VA |
+|-------|------------|------------------------|
+| Reference smoke probe | `0x4045f8` | `0x40460d` |
+| `debugger.dll` | `0x404c84` | `0x404c99` |
+| `dialogs.dll` | `0x40477c` | `0x404791` |
+
+Thus Delphi 6 remains the strong major-version identification, but the plugins'
+runtime is **not identical to the installed unmodified media runtime**. The
+difference does not yet distinguish an official update from a separately
+patched runtime. Nor does matching precompiled RTL/VCL code uniquely identify
+the `dcc32.exe` that compiled the application.
+
+To establish the update level, compare known Delphi 6 Update 1/2 and separate
+RTL update payloads in isolated directories, starting with this discriminator
+and then checking additional changed routines in `System`, `SysUtils`,
+`Classes`, and `Controls`. Track compiler and unit versions separately. Borland's
+[Update Pack 2 release notes (archived copy)](https://www.delphi.co.kr/index.php?document_srl=11604&mid=level_notice)
+state that Update 2 includes Update 1's changes. No updated Delphi payload has
+yet been compared here. Any final identification should explain all observed
+differences, including possible local runtime changes, rather than rely on one
+shared routine or the PE timestamp.
+
+To repeat the comparison, install Debian's `python3-capstone`, run the toolchain
+smoke check, and use the resulting scratch path:
+
+```sh
+python3 scripts/compare_delphi_rtl.py \
+  "$PROBE_DIR/d6/probe.dll" "$PROBE_DIR/d6/probe.map" \
+  master/Plugin/debugger.dll master/Plugin/dialogs.dll \
+  --output analysis/delphi-rtl-comparison.json
+```
+
+`PROBE_DIR` is the scratch directory printed by `check_toolchains.py`. Optional
+`--matches PATH` writes the complete per-block inventory. Self-comparison of
+the reference returned all 1,192 unique matches with no `@LStrCatN` difference.
 
 ### Reproducing the inspection
 
