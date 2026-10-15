@@ -1,3 +1,4 @@
  - For scratch space, make a new folder under ~/.ai-tmp - don't use /tmp
  - For wine, allocate a new prefix under scratch space, and reuse it where possible
  - Commit as you please per substantial change
+ - Decompilation is the honest reconstruction of original source code, in its original file/folder structure (inferred if unknown), and the compiled code is byte exact to the input
