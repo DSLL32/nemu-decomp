@@ -47,7 +47,7 @@ def main():
     else:
         include, lib = (), ()
         env["WINEPATH"] += ";" + winpath(root / "runtime")
-        if name == "dcc32.exe":
+        if name in ("dcc32.exe", "dcc32-personal.exe"):
             args.args = ["-U" + winpath(root / "lib"), "-I" + winpath(root / "lib"),
                          "-R" + winpath(root / "lib"), *args.args]
     if include:

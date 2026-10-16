@@ -205,7 +205,38 @@
         "User-Agent": "Mozilla/5.0",
         "Referer": "https://tctt.tistory.com/57"
       }
+    },
+    {
+      "update": "General Update 1",
+      "local_path": "toolchains-staging/delphi6-updates/D6_upd1_per.exe",
+      "filename": "D6_upd1_per.exe",
+      "bytes": 14810655,
+      "sha256": "bb42c02e4028c2de0645424616ecead4bbda30d957c891ac03d904097f7c0a9c",
+      "source_page": "http://download.borlandforum.com/delphi/Delphi6Update/D6_upd1_per.exe",
+      "download_url": "http://download.borlandforum.com/delphi/Delphi6Update/D6_upd1_per.exe",
+      "edition": "Personal",
+      "request_headers": {
+        "User-Agent": "Mozilla/5.0"
+      },
+      "installed_files": [
+        "toolchains/d6u1/bin/dcc32-personal.exe"
+      ],
+      "components": [
+        {
+          "payload_path": "Program_Built_Files/bin/DCC32.EXE",
+          "bytes": 706048,
+          "sha256": "fa7c2c74ad45f5f0d9bd23db6d4c9471476456f4064812c96b8f0b0b983e1600",
+          "versions": [
+            {
+              "file_version": "6.0.6.190",
+              "product_version": "6.0.6.190"
+            }
+          ]
+        }
+      ],
+      "verification": "7z and unshield extraction; no installer executed. Unmodified compiler produces the original dialogs.dll DVCLAL stamp and all linked code when used with the tracked Update 1 libraries."
     }
   ],
-  "selection_report": "analysis/delphi-update-matches.json"
+  "selection_report": "analysis/delphi-update-matches.json",
+  "personal_compiler_verification_date": "2026-10-16"
 }

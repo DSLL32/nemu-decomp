@@ -26,8 +26,10 @@ VS7_ROOT = "Program Files/Microsoft Visual Studio .NET/"
 DELPHI_ROOT = "Install/program files/Borland/Delphi6/"
 REQUIRED = [SP5, DELPHI, "en_vs6_ent_cd1.iso",
             "VSPROD1.iso", "VSPROD2.iso", "VSPROD3.iso",
-            "delphi6-updates/D6_upd1_ent.exe", "delphi6-updates/D6_upd2_ent.exe"]
+            "delphi6-updates/D6_upd1_ent.exe", "delphi6-updates/D6_upd2_ent.exe",
+            "delphi6-updates/D6_upd1_per.exe"]
 D6_UPDATES = {"u1": "D6_upd1_ent.exe", "u2": "D6_upd2_ent.exe",
+              "u1p": "D6_upd1_per.exe",
               "r1": "D6_RTL1_ent.exe", "r2": "del6_ent_rtl2.exe", "r3": "d6_rtl3.zip"}
 
 
@@ -234,11 +236,15 @@ def apply_d6_update(name, payload, destination):
 def install_d6(staging, scratch, destination):
     base = scratch / "d6-base"
     install_d6_base(staging, scratch, base)
-    payloads = extract_d6_updates(staging, scratch / "d6-updates", ("u1", "u2"))
+    payloads = extract_d6_updates(staging, scratch / "d6-updates", ("u1", "u2", "u1p"))
     for name in ("u1", "u2"):
         target = destination / ("d6" + name)
         shutil.copytree(base, target)
         apply_d6_update(name, payloads[name], target)
+    # Same compiler build, different edition's automatic DVCLAL resource.
+    # Retain both original executables; the dialogs build selects Personal.
+    shutil.copy2(payloads["u1p"] / "Program_Built_Files/bin/DCC32.EXE",
+                 destination / "d6u1/bin/dcc32-personal.exe")
 
 
 def digest(path):
@@ -256,6 +262,7 @@ def manifest(staging, destination):
         components = {}
         for filename in ("cl.exe", "c1.dll", "c1xx.dll", "c2.dll", "link.exe", "ml.exe",
                          "mspdb60.dll", "mspdb70.dll", "msobj10.dll", "rc.exe", "dcc32.exe",
+                         "dcc32-personal.exe",
                          "rlink32.dll", "brcc32.exe"):
             path = root / "bin" / filename
             if path.exists():

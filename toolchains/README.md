@@ -36,6 +36,14 @@ configuration includes the later standalone RTL updates. The comparison below
 records the evidence and the distinction between identifying library code and
 proving the exact compiler executable used for application code.
 
+`d6u1/bin/dcc32-personal.exe` is the unmodified Personal-edition compiler from
+General Update 1, also build 6.0.6.190. The existing `dcc32.exe` is Enterprise.
+The dialogs reconstruction uses Personal because its automatic 16-byte `DVCLAL`
+resource matches the original. Both compilers generate matching executable code
+with the tracked Update 1 libraries; the edition stamp distinguishes them.
+The Personal compiler stays in the same version directory, and its installer
+URL and hashes are recorded in [delphi-updates.json](delphi-updates.json).
+
 ### Running and checking the tools
 
 [run_toolchain.py](../scripts/run_toolchain.py) sets the appropriate Wine
@@ -48,6 +56,7 @@ export WINEPREFIX="$(mktemp -d "$HOME/.ai-tmp/nemu-wine.XXXXXX")/wine"
 python3 scripts/run_toolchain.py vc6 cl /c example.cpp
 python3 scripts/run_toolchain.py vc7 cl /c /O2 /GL example.cpp
 python3 scripts/run_toolchain.py d6u1 dcc32 dialogs.dpr
+python3 scripts/run_toolchain.py d6u1 dcc32-personal dialogs.dpr
 python3 scripts/run_toolchain.py d6u2 dcc32 debugger.dpr
 ```
 
@@ -78,6 +87,7 @@ Generated files and logs stay under a new `~/.ai-tmp` directory.
 | `VSPROD1.iso`, `VSPROD2.iso`, `VSPROD3.iso` | VC7 files spread across the discs, shared compiler dependencies, and MSI-embedded SDK |
 | `Borland Delphi 6.0 Enterprise Edition (ISO).7z` | Delphi 6 compiler, units, sources, and runtime references |
 | `delphi6-updates/D6_upd1_ent.exe`, `delphi6-updates/D6_upd2_ent.exe` | English Update 1 and Update 2 overlays for the two Delphi configurations |
+| `delphi6-updates/D6_upd1_per.exe` | Update 1 Personal compiler, installed alongside Enterprise for the original dialogs edition stamp |
 | `en_vs6_ent_cd2.iso`, `en_vs6_ent_cd3.iso` | Other VS6 products/support content; no additional native compiler components needed |
 | `VSPROD4.iso` | Additional product samples/support content; no needed compiler payload |
 | `VSWCUD1.iso` | Windows component prerequisites such as IE, MDAC, and .NET Framework |
