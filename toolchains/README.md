@@ -44,6 +44,12 @@ with the tracked Update 1 libraries; the edition stamp distinguishes them.
 The Personal compiler stays in the same version directory, and its installer
 URL and hashes are recorded in [delphi-updates.json](delphi-updates.json).
 
+`d6u2/bin/dcc32-personal.exe` similarly provides the unmodified General Update 2
+Personal compiler (6.0.6.240) for the debugger's matching edition stamp. A full
+VCL/theme probe emits identical code, data, imports and relocations with the
+Update 2 Personal and Enterprise compilers; the Personal DVCLAL stamp matches
+the original debugger.
+
 ### Running and checking the tools
 
 [run_toolchain.py](../scripts/run_toolchain.py) sets the appropriate Wine
@@ -58,6 +64,7 @@ python3 scripts/run_toolchain.py vc7 cl /c /O2 /GL example.cpp
 python3 scripts/run_toolchain.py d6u1 dcc32 dialogs.dpr
 python3 scripts/run_toolchain.py d6u1 dcc32-personal dialogs.dpr
 python3 scripts/run_toolchain.py d6u2 dcc32 debugger.dpr
+python3 scripts/run_toolchain.py d6u2 dcc32-personal debugger.dpr
 ```
 
 Without `WINEPREFIX`, the runner allocates a new prefix under `~/.ai-tmp` and
@@ -88,6 +95,7 @@ Generated files and logs stay under a new `~/.ai-tmp` directory.
 | `Borland Delphi 6.0 Enterprise Edition (ISO).7z` | Delphi 6 compiler, units, sources, and runtime references |
 | `delphi6-updates/D6_upd1_ent.exe`, `delphi6-updates/D6_upd2_ent.exe` | English Update 1 and Update 2 overlays for the two Delphi configurations |
 | `delphi6-updates/D6_upd1_per.exe` | Update 1 Personal compiler, installed alongside Enterprise for the original dialogs edition stamp |
+| `delphi6-updates/D6_upd2_per.exe` | Update 2 Personal compiler for the original debugger edition stamp |
 | `en_vs6_ent_cd2.iso`, `en_vs6_ent_cd3.iso` | Other VS6 products/support content; no additional native compiler components needed |
 | `VSPROD4.iso` | Additional product samples/support content; no needed compiler payload |
 | `VSWCUD1.iso` | Windows component prerequisites such as IE, MDAC, and .NET Framework |
