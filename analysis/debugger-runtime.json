@@ -1,0 +1,39 @@
+{
+  "passed": true,
+  "scratch": "/root/.ai-tmp/nemu-debugger-probe.y423_bof",
+  "runs": [
+    {
+      "name": "original",
+      "dll_sha256": "e10e8b27a53951dbaeba6d72bf61e3859d3e2654741f00d29798c993411637bd",
+      "exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "stdout_sha256": "e04f2053233c0197c16fa01ffadefd2c53674c2d08e221d2f680f0731a84d132",
+      "generated_files": {}
+    },
+    {
+      "name": "rebuilt",
+      "dll_sha256": "e10e8b27a53951dbaeba6d72bf61e3859d3e2654741f00d29798c993411637bd",
+      "exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "stdout_sha256": "e04f2053233c0197c16fa01ffadefd2c53674c2d08e221d2f680f0731a84d132",
+      "generated_files": {}
+    }
+  ],
+  "stdout_equal": true,
+  "generated_files_equal": true,
+  "scenarios": [
+    "Public export loading, ToolInit return value, menu text",
+    "All ten ToolFunc(1, index) windows and native control snapshots",
+    "CPU/RSP debugger notification and bookmark reload notifications",
+    "Register-access breakpoint enable, trigger, and clear",
+    "Opcode breakpoint enable and clear with host ABI table observation",
+    "Window close, ToolFree, and DLL unload"
+  ],
+  "limitations": [
+    "Synthetic RAM, registers, and peripheral reads replace real emulation.",
+    "Native control text/state is hashed; non-windowed labels, rendered pixels, and every interactive operation are not exercised.",
+    "This smoke check does not establish byte equality or complete behavior equivalence."
+  ]
+}

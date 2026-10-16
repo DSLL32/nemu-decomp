@@ -1,0 +1,355 @@
+{
+  "original_file": "master/Plugin/debugger.dll",
+  "original_sha256": "e10e8b27a53951dbaeba6d72bf61e3859d3e2654741f00d29798c993411637bd",
+  "scope": "Evidence for inferred Pascal global identifiers and Delphi 6 imported-data ordering. Identifiers were selected from meaning and compiler layout; original private/global spellings are not recoverable uniquely.",
+  "table": {
+    "start_va": "0x004c4abc",
+    "end_va_exclusive": "0x004c4fbc",
+    "count": 320,
+    "reference_library_entries": 278,
+    "additional_application_globals": 34,
+    "additional_resource_strings": 8
+  },
+  "hash": {
+    "formula": "sum(character_weights[c] for c in identifier.upper()) modulo 256",
+    "verified_candidate_count": 16625,
+    "occupied_buckets": 256,
+    "character_weights": {
+      "A": 71,
+      "B": 65,
+      "C": 53,
+      "D": 111,
+      "E": 230,
+      "F": 14,
+      "G": 18,
+      "H": 94,
+      "I": 65,
+      "J": 242,
+      "K": 130,
+      "L": 46,
+      "M": 64,
+      "N": 94,
+      "O": 207,
+      "P": 104,
+      "Q": 45,
+      "R": 252,
+      "S": 154,
+      "T": 49,
+      "U": 88,
+      "V": 79,
+      "W": 234,
+      "X": 80,
+      "Y": 60,
+      "Z": 23,
+      "_": 234,
+      "3": 122,
+      "2": 208,
+      "0": 23,
+      "1": 198,
+      "6": 146,
+      "4": 58
+    },
+    "unknown_character_weights": "Digits 5, 7, 8 and 9 were not present in the oracle; all characters used by the listed globals were verified.",
+    "derivation": "A compiled 16625-name Delphi 6 probe populated every bucket. Reverse sequential-reference runs reveal bucket boundaries. The OracleA through OracleZ family determines alphabet weights algebraically; one-unknown-character equations determine digits and underscore. Every tested candidate agrees with the resulting sum.",
+    "collision_order": "Within-bucket order depends on linker reference discovery. A minimal compiled probe reversed statement references and reversed the resulting imported-symbol pair, independently of variable declaration order."
+  },
+  "application_globals": [
+    {
+      "unit": "UnitSymbolViewer",
+      "name": "FormSymbols",
+      "original_import_slot_va": "0x4c4ae4",
+      "original_storage_va": "0x4c5e50",
+      "hash_bucket": 7
+    },
+    {
+      "unit": "UnitDecs",
+      "name": "NemuMainWinHandle",
+      "original_import_slot_va": "0x4c4b08",
+      "original_storage_va": "0x4c5b28",
+      "hash_bucket": 17
+    },
+    {
+      "unit": "UnitBookmarks",
+      "name": "FormBookmarks",
+      "original_import_slot_va": "0x4c4b30",
+      "original_storage_va": "0x4c5e2c",
+      "hash_bucket": 25
+    },
+    {
+      "unit": "UnitDebugCommands",
+      "name": "FormDebug",
+      "original_import_slot_va": "0x4c4b34",
+      "original_storage_va": "0x4c5e58",
+      "hash_bucket": 25
+    },
+    {
+      "unit": "UnitDisassembly",
+      "name": "DebuggerAddressReg",
+      "original_import_slot_va": "0x4c4b54",
+      "original_storage_va": "0x4c5b40",
+      "hash_bucket": 35,
+      "earlier_inferred_name": "MemoryBase"
+    },
+    {
+      "unit": "UnitRegChange",
+      "name": "FormDebugRegisterChange",
+      "original_import_slot_va": "0x4c4b7c",
+      "original_storage_va": "0x4c6210",
+      "hash_bucket": 43
+    },
+    {
+      "unit": "UnitDisassembly",
+      "name": "MemAccess",
+      "original_import_slot_va": "0x4c4b84",
+      "original_storage_va": "0x4c5b44",
+      "hash_bucket": 49,
+      "earlier_inferred_name": "HasMemoryBase"
+    },
+    {
+      "unit": "UnitRegChange",
+      "name": "RegBreakpointEnabled",
+      "original_import_slot_va": "0x4c4ba0",
+      "original_storage_va": "0x4c6214",
+      "hash_bucket": 54,
+      "earlier_inferred_name": "RegisterAccessBreakpointsEnabled"
+    },
+    {
+      "unit": "UnitImageView",
+      "name": "FormImageView",
+      "original_import_slot_va": "0x4c4bac",
+      "original_storage_va": "0x4c6348",
+      "hash_bucket": 57
+    },
+    {
+      "unit": "UnitLibOptions",
+      "name": "FormLibOptions",
+      "original_import_slot_va": "0x4c4bb0",
+      "original_storage_va": "0x4c5e24",
+      "hash_bucket": 57
+    },
+    {
+      "unit": "UnitDebugCommands",
+      "name": "SymbolCount",
+      "original_import_slot_va": "0x4c4bd8",
+      "original_storage_va": "0x4c5e60",
+      "hash_bucket": 63
+    },
+    {
+      "unit": "UnitDisassembly",
+      "name": "Reg3",
+      "original_import_slot_va": "0x4c4cd4",
+      "original_storage_va": "0x4c5b3c",
+      "hash_bucket": 110,
+      "earlier_inferred_name": "Register3"
+    },
+    {
+      "unit": "UnitSearch",
+      "name": "FormSearch",
+      "original_import_slot_va": "0x4c4cd8",
+      "original_storage_va": "0x4c5e1c",
+      "hash_bucket": 111
+    },
+    {
+      "unit": "UnitDecs",
+      "name": "Nemu64_API",
+      "original_import_slot_va": "0x4c4d38",
+      "original_storage_va": "0x4c5a34",
+      "hash_bucket": 130
+    },
+    {
+      "unit": "UnitDebugMemory",
+      "name": "FormMemory",
+      "original_import_slot_va": "0x4c4d48",
+      "original_storage_va": "0x4c5e38",
+      "hash_bucket": 134
+    },
+    {
+      "unit": "UnitDump",
+      "name": "FormDump",
+      "original_import_slot_va": "0x4c4d54",
+      "original_storage_va": "0x4c5e14",
+      "hash_bucket": 136
+    },
+    {
+      "unit": "UnitDebugBreakOpcode",
+      "name": "FormDebugBreakOpcode",
+      "original_import_slot_va": "0x4c4d84",
+      "original_storage_va": "0x4c6208",
+      "hash_bucket": 149
+    },
+    {
+      "unit": "UnitDebugRegisters",
+      "name": "FormRegisters",
+      "original_import_slot_va": "0x4c4d88",
+      "original_storage_va": "0x4c5e48",
+      "hash_bucket": 149
+    },
+    {
+      "unit": "UnitDebugCommands",
+      "name": "BreakOnAList",
+      "original_import_slot_va": "0x4c4db8",
+      "original_storage_va": "0x4c61f1",
+      "hash_bucket": 154,
+      "earlier_inferred_name": "BreakAfterAudioList"
+    },
+    {
+      "unit": "UnitDisassembly",
+      "name": "PC",
+      "original_import_slot_va": "0x4c4dc8",
+      "original_storage_va": "0x4c5b4c",
+      "hash_bucket": 157,
+      "earlier_inferred_name": "CurrentPC"
+    },
+    {
+      "unit": "UnitDebugCommands",
+      "name": "DebugFormHandle",
+      "original_import_slot_va": "0x4c4dcc",
+      "original_storage_va": "0x4c5e5c",
+      "hash_bucket": 159,
+      "earlier_inferred_name": "DebugWindowHandle"
+    },
+    {
+      "unit": "UnitBookmarks",
+      "name": "BookmarksFormHandle",
+      "original_import_slot_va": "0x4c4dd0",
+      "original_storage_va": "0x4c5e30",
+      "hash_bucket": 159,
+      "earlier_inferred_name": "BookmarksWindowHandle"
+    },
+    {
+      "unit": "UnitDisassembly",
+      "name": "Reg1",
+      "original_import_slot_va": "0x4c4e4c",
+      "original_storage_va": "0x4c5b34",
+      "hash_bucket": 186,
+      "earlier_inferred_name": "Register1"
+    },
+    {
+      "unit": "UnitDebugCommands",
+      "name": "BreakOnDList",
+      "original_import_slot_va": "0x4c4e6c",
+      "original_storage_va": "0x4c61f0",
+      "hash_bucket": 194,
+      "earlier_inferred_name": "BreakAfterDisplayList"
+    },
+    {
+      "unit": "UnitDisassembly",
+      "name": "ImmValue",
+      "original_import_slot_va": "0x4c4e74",
+      "original_storage_va": "0x4c5b48",
+      "hash_bucket": 195,
+      "earlier_inferred_name": "Displacement"
+    },
+    {
+      "unit": "UnitDisassembly",
+      "name": "Reg2",
+      "original_import_slot_va": "0x4c4e78",
+      "original_storage_va": "0x4c5b38",
+      "hash_bucket": 196,
+      "earlier_inferred_name": "Register2"
+    },
+    {
+      "unit": "RCP",
+      "name": "RSPCOP0RegNames",
+      "original_import_slot_va": "0x4c4ee8",
+      "original_storage_va": "0x4c36b4",
+      "hash_bucket": 218,
+      "earlier_inferred_name": "RSPRegisterNames"
+    },
+    {
+      "unit": "RCP",
+      "name": "GPRNames",
+      "original_import_slot_va": "0x4c4eec",
+      "original_storage_va": "0x4c37b4",
+      "hash_bucket": 219,
+      "earlier_inferred_name": "GeneralRegisterNames"
+    },
+    {
+      "unit": "RCP",
+      "name": "COP0RegNames",
+      "original_import_slot_va": "0x4c4efc",
+      "original_storage_va": "0x4c3634",
+      "hash_bucket": 220,
+      "earlier_inferred_name": "CPURegisterNames"
+    },
+    {
+      "unit": "UnitDebugCommands",
+      "name": "BreakpointCount",
+      "original_import_slot_va": "0x4c4f08",
+      "original_storage_va": "0x4c5e68",
+      "hash_bucket": 222,
+      "earlier_inferred_name": "CPUBreakpointCount"
+    },
+    {
+      "unit": "UnitDebugCommands",
+      "name": "NemuFileDir",
+      "original_import_slot_va": "0x4c4f50",
+      "original_storage_va": "0x4c61f4",
+      "hash_bucket": 235
+    },
+    {
+      "unit": "UnitStats",
+      "name": "FormStats",
+      "original_import_slot_va": "0x4c4f80",
+      "original_storage_va": "0x4c6340",
+      "hash_bucket": 246
+    },
+    {
+      "unit": "RCP",
+      "name": "RSPFlagNames",
+      "original_import_slot_va": "0x4c4f8c",
+      "original_storage_va": "0x4c3734",
+      "hash_bucket": 248,
+      "earlier_inferred_name": "VectorControlNames"
+    },
+    {
+      "unit": "UnitImageView",
+      "name": "RefreshAfterEveryFrame",
+      "original_import_slot_va": "0x4c4fa4",
+      "original_storage_va": "0x4c634c",
+      "hash_bucket": 252,
+      "earlier_inferred_name": "RefreshEveryFrame"
+    }
+  ],
+  "final_collision_groups": [
+    {
+      "bucket": 25,
+      "ordered_symbols": [
+        "UnitBookmarks.FormBookmarks",
+        "UnitDebugCommands.FormDebug"
+      ],
+      "ordered_import_slot_vas": [
+        "0x004c4b30",
+        "0x004c4b34"
+      ]
+    },
+    {
+      "bucket": 159,
+      "ordered_symbols": [
+        "UnitDebugCommands.DebugFormHandle",
+        "UnitBookmarks.BookmarksFormHandle"
+      ],
+      "ordered_import_slot_vas": [
+        "0x004c4dcc",
+        "0x004c4dd0"
+      ]
+    },
+    {
+      "bucket": 193,
+      "ordered_symbols": [
+        "Consts.SErrorSettingCount",
+        "Consts.SScanLine"
+      ],
+      "resource_texts": [
+        "Error setting %s.Count",
+        "Scan line index out of range"
+      ],
+      "ordered_import_slot_vas": [
+        "0x004c4e5c",
+        "0x004c4e60"
+      ]
+    }
+  ],
+  "final_ordering_evidence": "Declaring the exported routines in ToolInit, ToolFree, ToolGetMenuText, ToolFunc order fixes all three remaining collision pairs while preserving all 80 CODE spans, initialization ordering and PACKAGEINFO ordering. Each original imported-data slot then contains the exact original address.",
+  "investigation_limits": "Relocation masking was used only to identify library routines and names during reconstruction. Whole-file byte equality remains the completion criterion. No executable bytes or DCU symbol tables are patched to arrange the imports."
+}

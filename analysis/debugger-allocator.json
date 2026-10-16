@@ -1,0 +1,169 @@
+{
+  "function": "UnitDebugCommands.RemoveRSPBreakpoint",
+  "target": {
+    "path": "master/Plugin/debugger.dll",
+    "sha256": "e10e8b27a53951dbaeba6d72bf61e3859d3e2654741f00d29798c993411637bd",
+    "size": 977408,
+    "va_start": "0x004B1754",
+    "va_end_exclusive": "0x004B1800",
+    "compiled_size": 172
+  },
+  "comparison": "Code bytes and relocation positions compared after masking only relocated address operands. No bytes were changed in the DLL.",
+  "baseline_registers": {
+    "API_pointer": "EDI",
+    "Found": "EDX",
+    "loop_index": "ESI"
+  },
+  "target_registers": {
+    "API_pointer": "EDX",
+    "Found": "EDI",
+    "loop_index": "ESI"
+  },
+  "observations": [
+    {
+      "additional_self_assignments": 0,
+      "probe_symbol": "Variant0",
+      "compiled_size": 172,
+      "differing_normalized_bytes": 15,
+      "differing_offsets_hex": [
+        "0x9",
+        "0xf",
+        "0x12",
+        "0x24",
+        "0x38",
+        "0x3c",
+        "0x45",
+        "0x56",
+        "0x5b",
+        "0x62",
+        "0x66",
+        "0x70",
+        "0x7e",
+        "0x85",
+        "0x89"
+      ],
+      "relocation_positions_equal": true,
+      "normalized_equal": false
+    },
+    {
+      "additional_self_assignments": 1,
+      "probe_symbol": "Variant24",
+      "compiled_size": 172,
+      "differing_normalized_bytes": 15,
+      "differing_offsets_hex": [
+        "0x9",
+        "0xf",
+        "0x12",
+        "0x24",
+        "0x38",
+        "0x3c",
+        "0x45",
+        "0x56",
+        "0x5b",
+        "0x62",
+        "0x66",
+        "0x70",
+        "0x7e",
+        "0x85",
+        "0x89"
+      ],
+      "relocation_positions_equal": true,
+      "normalized_equal": false
+    },
+    {
+      "additional_self_assignments": 2,
+      "probe_symbol": "Variant25",
+      "compiled_size": 172,
+      "differing_normalized_bytes": 15,
+      "differing_offsets_hex": [
+        "0x9",
+        "0xf",
+        "0x12",
+        "0x24",
+        "0x38",
+        "0x3c",
+        "0x45",
+        "0x56",
+        "0x5b",
+        "0x62",
+        "0x66",
+        "0x70",
+        "0x7e",
+        "0x85",
+        "0x89"
+      ],
+      "relocation_positions_equal": true,
+      "normalized_equal": false
+    },
+    {
+      "additional_self_assignments": 3,
+      "probe_symbol": "Variant26",
+      "compiled_size": 172,
+      "differing_normalized_bytes": 0,
+      "differing_offsets_hex": [],
+      "relocation_positions_equal": true,
+      "normalized_equal": true
+    },
+    {
+      "additional_self_assignments": 4,
+      "probe_symbol": "Variant27",
+      "compiled_size": 172,
+      "differing_normalized_bytes": 0,
+      "differing_offsets_hex": [],
+      "relocation_positions_equal": true,
+      "normalized_equal": true
+    },
+    {
+      "additional_self_assignments": 5,
+      "probe_symbol": "Variant28",
+      "compiled_size": 180,
+      "differing_normalized_bytes": 176,
+      "relocation_positions_equal": false,
+      "normalized_equal": false
+    }
+  ],
+  "source_change": {
+    "location": "Immediately after Found := -1;",
+    "statements": [
+      "Found := Found;",
+      "Found := Found;",
+      "Found := Found;"
+    ],
+    "emitted_instructions": 0,
+    "effect": "Delphi counts these source references when choosing registers, then eliminates the assignments. Three or four assignments change register allocation without changing function length or control flow."
+  },
+  "provenance_limit": "The self-assignments are an inferred compiler-shaping reconstruction. They were not recovered from original source. Extensive natural equivalents did not reproduce the final register allocation. Byte equality alone cannot establish the original source spelling.",
+  "compiler_versions_checked": [
+    {
+      "version": "Delphi 6 Update 2 Personal",
+      "baseline_differences": 15,
+      "self_assignments_3_differences": 0,
+      "evidence": "Directly reproduced in the isolated probe."
+    },
+    {
+      "version": "Delphi 6 Update 1 Personal",
+      "baseline_differences": 15,
+      "evidence": "Earlier isolated probe using Update 1; no version-specific improvement."
+    },
+    {
+      "version": "Delphi 6 RTM 6.0.6.163 with Update 2 libraries",
+      "baseline_differences": 15,
+      "evidence": "Separately verified in the isolated RTM probe with Update 2 libraries."
+    }
+  ],
+  "full_dll_diagnostic": {
+    "status": "Confirmed by a clean source build and full-file comparison.",
+    "report": "analysis/debugger-comparison.json",
+    "size": 977408,
+    "different_bytes": 0,
+    "sha256": "e10e8b27a53951dbaeba6d72bf61e3859d3e2654741f00d29798c993411637bd"
+  },
+  "scratch_evidence": {
+    "directory": "/root/.ai-tmp/nemu-host-rspalloc",
+    "source_generator": "diagnose.py",
+    "comparison": "diagnostic-comparison.txt",
+    "compiler_output": "diagnostic-compile.log",
+    "compiled_library": "probe.dll",
+    "map": "probe.map"
+  }
+}

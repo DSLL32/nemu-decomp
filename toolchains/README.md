@@ -367,5 +367,6 @@ TControl discriminator values. Offsets and addresses in JSON are decimal.
 Header/import/export results were cross-checked against GNU `objdump`.
 
 The installed toolchains reproduce the relevant build fingerprints in fresh
-probes. Matching individual original functions and identifying the exact Delphi
-update level remain subsequent decompilation work.
+probes. The Delphi update selections are backed by the library comparisons
+above; complete reconstructed DLLs are checked separately by their build and
+verification scripts.
