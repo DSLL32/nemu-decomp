@@ -13,6 +13,7 @@ Installer media in `toolchains-staging/` remains untracked.
 | Directory | Configuration | Main versions | Intended target |
 |-----------|---------------|---------------|-----------------|
 | `vc6` | VC6 RTM + SP5 + Processor Pack | CL 12.00.8804; C1 12.0.8867; C1XX 12.0.8964; C2 file version 13.0.9044; linker 6.0.8447 | `gs_dll.dll` |
+| `vc6rtm` | VC6 RTM C compiler and import tools | CL/C1/C2 12.0.8168; linker/MSPDB 6.0.8168 | zlib 1.1.3 and unzip 0.15 in `nemu64.exe` |
 | `vc7` | Visual Studio .NET 2002 / VC7.0 | Compiler 13.00.9466; linker and MASM 7.0.9466 | `nemu64.exe` |
 | `d6u1` | Delphi 6 General Update 1 | Compiler / RTL / VCL build 6.0.6.190 | `dialogs.dll` |
 | `d6u2` | Delphi 6 General Update 2 | Compiler / RTL / VCL build 6.0.6.240 | `debugger.dll` |
@@ -28,6 +29,18 @@ resource converter with this native CRT and Wine's Windows 98 application
 settings to reproduce the original incremental linker's memory layout.
 Its SHA-256 is
 `887eb5ce93edb7192ca3e9220f07f9ca0f94db02af5862ebcbdfcb852db99fd1`.
+
+`vc6rtm` contains the original C compiler and its six required CRT headers,
+extracted from `en_vs6_ent_cd1.iso` without applying updates. The unchanged zlib
+1.1.3 and minizip 0.15 sources compile with `/O2 /ML` to the original 72 functions
+at `0x421210`–`0x427BF0`; the comparison covers 27,104 bytes including alignment,
+with only COFF relocation fields left for the final link to resolve. The
+Processor Pack optimizer changes instruction scheduling in this code. This
+subset also includes the RTM linker and librarian for rebuilding the original
+Kaillera import library. Nemu's final link uses `vc7` and its CRT libraries. The
+six headers were identified from preprocessing every zlib and unzip translation
+unit. `install_vc6rtm` in the extraction script reproduces
+the subset, and the manifest records its original file hashes and versions.
 
 `vc7` includes CRT/ATL/MFC sources and libraries, MASM, resource tools, and the
 Platform SDK. The SDK's **1,525 files** were restored from **49 cabinets** embedded

@@ -66,6 +66,22 @@ def convert_mdf(source, target):
                 dst.write(sector[16:2064])
 
 
+VC6RTM_HEADERS = ("errno.h", "stdarg.h", "stddef.h", "stdio.h", "stdlib.h", "string.h")
+
+
+def install_vc6rtm(staging, scratch, destination):
+    """C compiler and headers used by the original zlib/minizip objects."""
+    print("Extracting VC6 RTM C compiler for zlib", flush=True)
+    base = scratch / "vc6rtm-base"
+    extract(staging / "en_vs6_ent_cd1.iso", base,
+            *["VC98/BIN/" + name for name in ("CL.EXE", "C1.DLL", "C2.DLL", "LINK.EXE", "LIB.EXE")],
+            *["VC98/INCLUDE/" + name.upper() for name in VC6RTM_HEADERS],
+            "COMMON/MSDEV98/BIN/MSPDB60.DLL")
+    copy_tree(base / "VC98", destination)
+    shutil.copy2(base / "COMMON/MSDEV98/BIN/MSPDB60.DLL",
+                 destination / "bin/mspdb60.dll")
+
+
 def install_vc6(staging, scratch, destination):
     print("Extracting VC6 RTM, SP5, and Processor Pack", flush=True)
     base, patch, pp = (scratch / p for p in ("vc6-base", "sp5", "vc6-pp"))
@@ -260,14 +276,14 @@ def digest(path):
 
 def manifest(staging, destination):
     result = {"sources": {name: digest(staging / name) for name in REQUIRED}, "toolchains": {}}
-    for name in ("vc6", "vc7", "d6u1", "d6u2"):
+    for name in ("vc6", "vc6rtm", "vc7", "d6u1", "d6u2"):
         root = destination / name
         files = sorted(p for p in root.rglob("*") if p.is_file())
         inventory = [(str(p.relative_to(root)), digest(p)) for p in files]
         tree = "".join(f"{sha}  {path}\n" for path, sha in inventory).encode()
         components = {}
         for filename in ("cl.exe", "c1.dll", "c1xx.dll", "c2.dll", "link.exe", "ml.exe",
-                         "mspdb60.dll", "mspdb70.dll", "msobj10.dll", "rc.exe", "dcc32.exe",
+                         "mspdb60.dll", "mspdb70.dll", "msobj10.dll", "lib.exe", "rc.exe", "dcc32.exe",
                          "dcc32-personal.exe",
                          "rlink32.dll", "brcc32.exe"):
             path = root / "bin" / filename
@@ -304,7 +320,7 @@ def main():
     for name in REQUIRED:
         if not (args.staging / name).is_file():
             parser.error(f"Missing media: {name}")
-    for name in ("vc6", "vc7", "d6u1", "d6u2"):
+    for name in ("vc6", "vc6rtm", "vc7", "d6u1", "d6u2"):
         if (args.dest / name).exists():
             parser.error(f"Target already exists: {args.dest / name}")
     scratch_root = Path.home() / ".ai-tmp"
@@ -313,6 +329,7 @@ def main():
     print(f"Scratch: {scratch}", flush=True)
     args.dest.mkdir(parents=True, exist_ok=True)
     install_vc6(args.staging, scratch, args.dest / "vc6")
+    install_vc6rtm(args.staging, scratch, args.dest / "vc6rtm")
     install_vc7(args.staging, scratch, args.dest / "vc7")
     install_d6(args.staging, scratch, args.dest)
     manifest(args.staging, args.dest)
