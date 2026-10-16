@@ -4,3 +4,7 @@
 /toolchains/vc7/** -text -filter
 /toolchains/d6u1/** -text -filter
 /toolchains/d6u2/** -text -filter
+
+# Retain upstream zlib source bytes and the original embedded XML payload.
+/src/nemu64/vendor/zlib-1.1.3/** -text -filter -whitespace
+/src/nemu64/nemu64.manifest -text -filter -whitespace

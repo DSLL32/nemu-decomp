@@ -1,0 +1,1744 @@
+{
+  "original": "master/nemu64.exe",
+  "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+  "source": "src/nemu64/vendor/zlib-1.1.3",
+  "source_archive_url": "https://www.zlib.net/fossils/zlib-1.1.3.tar.gz",
+  "source_archive_sha256": "cae5847bc0e1cf113d3f70d037400da3e47c2e2b7b1c96b0b08447a5fbb906f4",
+  "source_modified": false,
+  "compiler": "toolchains/vc6rtm/bin/cl.exe",
+  "compiler_version": "12.00.8168",
+  "compile_flags": [
+    "/O2",
+    "/ML",
+    "/DWIN32",
+    "/DNDEBUG"
+  ],
+  "summary": {
+    "unique_function_blocks": 72,
+    "compared_bytes": 27104,
+    "start_va": "0x421210",
+    "end_va_exclusive": "0x427bf0",
+    "gaps": 0,
+    "operand_reference_conflicts": 0,
+    "identified_functions_including_folded_helper": 73,
+    "independently_validated_code_relocations": 257,
+    "unvalidated_data_relocations": 93,
+    "rejected_zlib_candidates": 0
+  },
+  "notes": [
+    "The unique matches compare every byte except fields explicitly recorded as COFF relocations. Internal branch displacements and function alignment remain exact.",
+    "Compared spans include alignment padding and any embedded jump tables, so compared_bytes is not necessarily a source function instruction count.",
+    "Only unambiguous complete scan matches are included in symbols. Three tiny functions had ambiguous scan results; the additional _tr_static_init helper is corroborated by an incoming call and exact body and recorded separately. Unselected library functions are not claimed to exist in the target.",
+    "Reference addresses are inferred from corresponding relocation operands in complete matching functions. The final executable link must independently resolve them and pass whole-file equality.",
+    "/ML selects the single-thread static CRT. /MD changes stdio call instructions and fails to match unzip. /MT may emit identical machine code for these functions; final CRT selection corroborates /ML.",
+    "scripts/map_nemu_libraries.py independently checked all 257 code relocations in the 73 identified zlib functions against corresponding callee bodies or PE import identities, using the compiled zlib objects and toolchains/vc7/lib/libc.lib. No zlib candidate was rejected. The remaining 93 DIR32 data operands await complete link validation."
+  ],
+  "symbols": [
+    {
+      "name": "_uncompress",
+      "va": "0x421210",
+      "compared_bytes": 160,
+      "masked_bytes": 20,
+      "source": "uncompr.c",
+      "object": "uncompr.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_compress2",
+      "va": "0x4212b0",
+      "compared_bytes": 176,
+      "masked_bytes": 20,
+      "source": "compress.c",
+      "object": "compress.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_unzOpen",
+      "va": "0x421360",
+      "compared_bytes": 432,
+      "masked_bytes": 64,
+      "source": "contrib/minizip/unzip.c",
+      "object": "unzip.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_unzlocal_getShort",
+      "va": "0x421510",
+      "compared_bytes": 80,
+      "masked_bytes": 8,
+      "source": "contrib/minizip/unzip.c",
+      "object": "unzip.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_unzlocal_getByte",
+      "va": "0x421560",
+      "compared_bytes": 64,
+      "masked_bytes": 4,
+      "source": "contrib/minizip/unzip.c",
+      "object": "unzip.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_unzlocal_getLong",
+      "va": "0x4215a0",
+      "compared_bytes": 144,
+      "masked_bytes": 16,
+      "source": "contrib/minizip/unzip.c",
+      "object": "unzip.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_unzlocal_SearchCentralDir",
+      "va": "0x421630",
+      "compared_bytes": 304,
+      "masked_bytes": 24,
+      "source": "contrib/minizip/unzip.c",
+      "object": "unzip.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_unzClose",
+      "va": "0x421760",
+      "compared_bytes": 64,
+      "masked_bytes": 12,
+      "source": "contrib/minizip/unzip.c",
+      "object": "unzip.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_unzGetCurrentFileInfo",
+      "va": "0x4217a0",
+      "compared_bytes": 64,
+      "masked_bytes": 4,
+      "source": "contrib/minizip/unzip.c",
+      "object": "unzip.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_unzlocal_GetCurrentFileInfoInternal",
+      "va": "0x4217e0",
+      "compared_bytes": 848,
+      "masked_bytes": 92,
+      "source": "contrib/minizip/unzip.c",
+      "object": "unzip.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_unzlocal_DosDateToTmuDate",
+      "va": "0x421b30",
+      "compared_bytes": 80,
+      "masked_bytes": 0,
+      "source": "contrib/minizip/unzip.c",
+      "object": "unzip.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_unzGoToFirstFile",
+      "va": "0x421b80",
+      "compared_bytes": 80,
+      "masked_bytes": 4,
+      "source": "contrib/minizip/unzip.c",
+      "object": "unzip.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_unzGoToNextFile",
+      "va": "0x421bd0",
+      "compared_bytes": 128,
+      "masked_bytes": 4,
+      "source": "contrib/minizip/unzip.c",
+      "object": "unzip.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_unzOpenCurrentFile",
+      "va": "0x421c50",
+      "compared_bytes": 320,
+      "masked_bytes": 28,
+      "source": "contrib/minizip/unzip.c",
+      "object": "unzip.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_unzlocal_CheckCurrentFileCoherencyHeader",
+      "va": "0x421d90",
+      "compared_bytes": 512,
+      "masked_bytes": 44,
+      "source": "contrib/minizip/unzip.c",
+      "object": "unzip.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_unzReadCurrentFile",
+      "va": "0x421f90",
+      "compared_bytes": 496,
+      "masked_bytes": 20,
+      "source": "contrib/minizip/unzip.c",
+      "object": "unzip.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_unzCloseCurrentFile",
+      "va": "0x422180",
+      "compared_bytes": 144,
+      "masked_bytes": 12,
+      "source": "contrib/minizip/unzip.c",
+      "object": "unzip.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_inflateReset",
+      "va": "0x422210",
+      "compared_bytes": 80,
+      "masked_bytes": 4,
+      "source": "inflate.c",
+      "object": "inflate.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_inflateEnd",
+      "va": "0x422260",
+      "compared_bytes": 80,
+      "masked_bytes": 4,
+      "source": "inflate.c",
+      "object": "inflate.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_inflateInit2_",
+      "va": "0x4222b0",
+      "compared_bytes": 272,
+      "masked_bytes": 32,
+      "source": "inflate.c",
+      "object": "inflate.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_inflateInit_",
+      "va": "0x4223c0",
+      "compared_bytes": 32,
+      "masked_bytes": 4,
+      "source": "inflate.c",
+      "object": "inflate.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_inflate",
+      "va": "0x4223e0",
+      "compared_bytes": 1072,
+      "masked_bytes": 88,
+      "source": "inflate.c",
+      "object": "inflate.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_deflateInit_",
+      "va": "0x422810",
+      "compared_bytes": 48,
+      "masked_bytes": 4,
+      "source": "deflate.c",
+      "object": "deflate.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_deflateInit2_",
+      "va": "0x422840",
+      "compared_bytes": 512,
+      "masked_bytes": 24,
+      "source": "deflate.c",
+      "object": "deflate.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_deflateReset",
+      "va": "0x422a40",
+      "compared_bytes": 128,
+      "masked_bytes": 8,
+      "source": "deflate.c",
+      "object": "deflate.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_deflate",
+      "va": "0x422ac0",
+      "compared_bytes": 688,
+      "masked_bytes": 60,
+      "source": "deflate.c",
+      "object": "deflate.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_putShortMSB",
+      "va": "0x422d70",
+      "compared_bytes": 48,
+      "masked_bytes": 0,
+      "source": "deflate.c",
+      "object": "deflate.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_flush_pending",
+      "va": "0x422da0",
+      "compared_bytes": 128,
+      "masked_bytes": 0,
+      "source": "deflate.c",
+      "object": "deflate.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_deflateEnd",
+      "va": "0x422e20",
+      "compared_bytes": 176,
+      "masked_bytes": 0,
+      "source": "deflate.c",
+      "object": "deflate.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_lm_init",
+      "va": "0x422ed0",
+      "compared_bytes": 160,
+      "masked_bytes": 16,
+      "source": "deflate.c",
+      "object": "deflate.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_deflate_stored",
+      "va": "0x422f70",
+      "compared_bytes": 352,
+      "masked_bytes": 28,
+      "source": "deflate.c",
+      "object": "deflate.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_fill_window",
+      "va": "0x4230d0",
+      "compared_bytes": 304,
+      "masked_bytes": 4,
+      "source": "deflate.c",
+      "object": "deflate.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_read_buf",
+      "va": "0x423200",
+      "compared_bytes": 128,
+      "masked_bytes": 4,
+      "source": "deflate.c",
+      "object": "deflate.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_deflate_fast",
+      "va": "0x423280",
+      "compared_bytes": 816,
+      "masked_bytes": 36,
+      "source": "deflate.c",
+      "object": "deflate.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_longest_match",
+      "va": "0x4235b0",
+      "compared_bytes": 368,
+      "masked_bytes": 0,
+      "source": "deflate.c",
+      "object": "deflate.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_deflate_slow",
+      "va": "0x423720",
+      "compared_bytes": 1072,
+      "masked_bytes": 44,
+      "source": "deflate.c",
+      "object": "deflate.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_crc32",
+      "va": "0x423b50",
+      "compared_bytes": 320,
+      "masked_bytes": 36,
+      "source": "crc32.c",
+      "object": "crc32.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_inflate_blocks_reset",
+      "va": "0x423c90",
+      "compared_bytes": 128,
+      "masked_bytes": 4,
+      "source": "infblock.c",
+      "object": "infblock.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_inflate_blocks_new",
+      "va": "0x423d10",
+      "compared_bytes": 160,
+      "masked_bytes": 4,
+      "source": "infblock.c",
+      "object": "infblock.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_inflate_blocks",
+      "va": "0x423db0",
+      "compared_bytes": 3328,
+      "masked_bytes": 208,
+      "source": "infblock.c",
+      "object": "infblock.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_inflate_blocks_free",
+      "va": "0x424ab0",
+      "compared_bytes": 64,
+      "masked_bytes": 4,
+      "source": "infblock.c",
+      "object": "infblock.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_adler32",
+      "va": "0x424af0",
+      "compared_bytes": 304,
+      "masked_bytes": 0,
+      "source": "adler32.c",
+      "object": "adler32.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_zcalloc",
+      "va": "0x424c20",
+      "compared_bytes": 32,
+      "masked_bytes": 4,
+      "source": "zutil.c",
+      "object": "zutil.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_zcfree",
+      "va": "0x424c40",
+      "compared_bytes": 16,
+      "masked_bytes": 4,
+      "source": "zutil.c",
+      "object": "zutil.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "__tr_init",
+      "va": "0x424c50",
+      "compared_bytes": 112,
+      "masked_bytes": 20,
+      "source": "trees.c",
+      "object": "trees.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_init_block",
+      "va": "0x424cc0",
+      "compared_bytes": 112,
+      "masked_bytes": 0,
+      "source": "trees.c",
+      "object": "trees.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "__tr_stored_block",
+      "va": "0x424d30",
+      "compared_bytes": 160,
+      "masked_bytes": 4,
+      "source": "trees.c",
+      "object": "trees.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "__tr_align",
+      "va": "0x424dd0",
+      "compared_bytes": 608,
+      "masked_bytes": 24,
+      "source": "trees.c",
+      "object": "trees.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "__tr_flush_block",
+      "va": "0x425030",
+      "compared_bytes": 496,
+      "masked_bytes": 48,
+      "source": "trees.c",
+      "object": "trees.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_build_tree",
+      "va": "0x425220",
+      "compared_bytes": 576,
+      "masked_bytes": 20,
+      "source": "trees.c",
+      "object": "trees.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_pqdownheap",
+      "va": "0x425460",
+      "compared_bytes": 224,
+      "masked_bytes": 0,
+      "source": "trees.c",
+      "object": "trees.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_gen_bitlen",
+      "va": "0x425540",
+      "compared_bytes": 560,
+      "masked_bytes": 0,
+      "source": "trees.c",
+      "object": "trees.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_gen_codes",
+      "va": "0x425770",
+      "compared_bytes": 128,
+      "masked_bytes": 4,
+      "source": "trees.c",
+      "object": "trees.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_build_bl_tree",
+      "va": "0x4257f0",
+      "compared_bytes": 112,
+      "masked_bytes": 16,
+      "source": "trees.c",
+      "object": "trees.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_scan_tree",
+      "va": "0x425860",
+      "compared_bytes": 240,
+      "masked_bytes": 0,
+      "source": "trees.c",
+      "object": "trees.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_send_all_trees",
+      "va": "0x425950",
+      "compared_bytes": 624,
+      "masked_bytes": 16,
+      "source": "trees.c",
+      "object": "trees.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_send_tree",
+      "va": "0x425bc0",
+      "compared_bytes": 1408,
+      "masked_bytes": 0,
+      "source": "trees.c",
+      "object": "trees.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_compress_block",
+      "va": "0x426140",
+      "compared_bytes": 1088,
+      "masked_bytes": 28,
+      "source": "trees.c",
+      "object": "trees.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_set_data_type",
+      "va": "0x426580",
+      "compared_bytes": 128,
+      "masked_bytes": 0,
+      "source": "trees.c",
+      "object": "trees.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_bi_reverse",
+      "va": "0x426600",
+      "compared_bytes": 32,
+      "masked_bytes": 0,
+      "source": "trees.c",
+      "object": "trees.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_bi_flush",
+      "va": "0x426620",
+      "compared_bytes": 144,
+      "masked_bytes": 0,
+      "source": "trees.c",
+      "object": "trees.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_bi_windup",
+      "va": "0x4266b0",
+      "compared_bytes": 128,
+      "masked_bytes": 0,
+      "source": "trees.c",
+      "object": "trees.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_copy_block",
+      "va": "0x426730",
+      "compared_bytes": 160,
+      "masked_bytes": 4,
+      "source": "trees.c",
+      "object": "trees.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_inflate_codes_new",
+      "va": "0x4267d0",
+      "compared_bytes": 64,
+      "masked_bytes": 0,
+      "source": "infcodes.c",
+      "object": "infcodes.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_inflate_codes",
+      "va": "0x426810",
+      "compared_bytes": 1968,
+      "masked_bytes": 112,
+      "source": "infcodes.c",
+      "object": "infcodes.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_inflate_codes_free",
+      "va": "0x426fc0",
+      "compared_bytes": 32,
+      "masked_bytes": 0,
+      "source": "infcodes.c",
+      "object": "infcodes.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_inflate_trees_bits",
+      "va": "0x426fe0",
+      "compared_bytes": 176,
+      "masked_bytes": 12,
+      "source": "inftrees.c",
+      "object": "inftrees.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_huft_build",
+      "va": "0x427090",
+      "compared_bytes": 1232,
+      "masked_bytes": 0,
+      "source": "inftrees.c",
+      "object": "inftrees.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_inflate_trees_dynamic",
+      "va": "0x427560",
+      "compared_bytes": 400,
+      "masked_bytes": 44,
+      "source": "inftrees.c",
+      "object": "inftrees.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_inflate_trees_fixed",
+      "va": "0x4276f0",
+      "compared_bytes": 48,
+      "masked_bytes": 16,
+      "source": "inftrees.c",
+      "object": "inftrees.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_inflate_flush",
+      "va": "0x427720",
+      "compared_bytes": 320,
+      "masked_bytes": 0,
+      "source": "infutil.c",
+      "object": "infutil.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    },
+    {
+      "name": "_inflate_fast",
+      "va": "0x427860",
+      "compared_bytes": 912,
+      "masked_bytes": 32,
+      "source": "inffast.c",
+      "object": "inffast.obj",
+      "match_kind": "unique_complete_coff_function_block"
+    }
+  ],
+  "referenced_symbols": [
+    {
+      "name": "??_C@_02JKAF@rb?$AA@",
+      "va": "0x43f048",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_unzOpen",
+          "operand_va": "0x421388",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "??_C@_05NLJN@1?41?43?$AA@",
+      "va": "0x43f040",
+      "reference_count": 4,
+      "evidence": [
+        {
+          "function": "_uncompress",
+          "operand_va": "0x421236",
+          "relocation_type": "DIR32"
+        },
+        {
+          "function": "_compress2",
+          "operand_va": "0x4212da",
+          "relocation_type": "DIR32"
+        },
+        {
+          "function": "_unzOpenCurrentFile",
+          "operand_va": "0x421d39",
+          "relocation_type": "DIR32"
+        },
+        {
+          "function": "_inflateInit2_",
+          "operand_va": "0x4222c4",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "??_C@_0BA@FKCH@need?5dictionary?$AA@",
+      "va": "0x43f04c",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_inflate",
+          "operand_va": "0x4227a5",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "??_C@_0BD@IFBC@invalid?5block?5type?$AA@",
+      "va": "0x43f120",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_inflate_blocks",
+          "operand_va": "0x4245b6",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "??_C@_0BE@FAJE@invalid?5window?5size?$AA@",
+      "va": "0x43f08c",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_inflate",
+          "operand_va": "0x42249c",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "??_C@_0BF@OBFI@incorrect?5data?5check?$AA@",
+      "va": "0x43f05c",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_inflate",
+          "operand_va": "0x422682",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "??_C@_0BG@EGK@invalid?5distance?5code?$AA@",
+      "va": "0x43f214",
+      "reference_count": 2,
+      "evidence": [
+        {
+          "function": "_inflate_codes",
+          "operand_va": "0x426e01",
+          "relocation_type": "DIR32"
+        },
+        {
+          "function": "_inflate_fast",
+          "operand_va": "0x427ae5",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "??_C@_0BH@NLIB@incorrect?5header?5check?$AA@",
+      "va": "0x43f074",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_inflate",
+          "operand_va": "0x4224fc",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "??_C@_0BJ@NKOC@incomplete?5distance?5tree?$AA@",
+      "va": "0x440404",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_inflate_trees_dynamic",
+          "operand_va": "0x42766b",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "??_C@_0BK@BNJN@invalid?5bit?5length?5repeat?$AA@",
+      "va": "0x43f0c0",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_inflate_blocks",
+          "operand_va": "0x424874",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "??_C@_0BL@KPEJ@unknown?5compression?5method?$AA@",
+      "va": "0x43f0a0",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_inflate",
+          "operand_va": "0x422477",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "??_C@_0BM@CHJP@invalid?5literal?1length?5code?$AA@",
+      "va": "0x43f22c",
+      "reference_count": 2,
+      "evidence": [
+        {
+          "function": "_inflate_codes",
+          "operand_va": "0x426db3",
+          "relocation_type": "DIR32"
+        },
+        {
+          "function": "_inflate_fast",
+          "operand_va": "0x427ba9",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "??_C@_0BN@DBOJ@invalid?5stored?5block?5lengths?$AA@",
+      "va": "0x43f100",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_inflate_blocks",
+          "operand_va": "0x42463a",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "??_C@_0BN@OAAG@oversubscribed?5distance?5tree?$AA@",
+      "va": "0x440420",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_inflate_trees_dynamic",
+          "operand_va": "0x42764c",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "??_C@_0BP@KPP@incomplete?5literal?1length?5tree?$AA@",
+      "va": "0x44039c",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_inflate_trees_dynamic",
+          "operand_va": "0x4276cd",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "??_C@_0CB@INA@empty?5distance?5tree?5with?5lengths@",
+      "va": "0x4403e0",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_inflate_trees_dynamic",
+          "operand_va": "0x42768a",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "??_C@_0CD@ODII@oversubscribed?5literal?1length?5tr@",
+      "va": "0x4403bc",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_inflate_trees_dynamic",
+          "operand_va": "0x4276b3",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "??_C@_0CE@LAKP@too?5many?5length?5or?5distance?5symb@",
+      "va": "0x43f0dc",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_inflate_blocks",
+          "operand_va": "0x424786",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "??_C@_0CE@MFNM@incomplete?5dynamic?5bit?5lengths?5t@",
+      "va": "0x440350",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_inflate_trees_bits",
+          "operand_va": "0x427067",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "??_C@_0CI@BBGL@oversubscribed?5dynamic?5bit?5lengt@",
+      "va": "0x440374",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_inflate_trees_bits",
+          "operand_va": "0x427047",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "__dist_code",
+      "va": "0x430df8",
+      "reference_count": 6,
+      "evidence": [
+        {
+          "function": "_deflate_fast",
+          "operand_va": "0x4233ab",
+          "relocation_type": "DIR32"
+        },
+        {
+          "function": "_deflate_fast",
+          "operand_va": "0x4233bf",
+          "relocation_type": "DIR32"
+        },
+        {
+          "function": "_deflate_slow",
+          "operand_va": "0x4238a4",
+          "relocation_type": "DIR32"
+        },
+        {
+          "function": "_deflate_slow",
+          "operand_va": "0x4238b8",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "__length_code",
+      "va": "0x430ff8",
+      "reference_count": 3,
+      "evidence": [
+        {
+          "function": "_deflate_fast",
+          "operand_va": "0x423389",
+          "relocation_type": "DIR32"
+        },
+        {
+          "function": "_deflate_slow",
+          "operand_va": "0x423882",
+          "relocation_type": "DIR32"
+        },
+        {
+          "function": "_compress_block",
+          "operand_va": "0x42621a",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "__tr_align",
+      "va": "0x424dd0",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_deflate",
+          "operand_va": "0x422c8b",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "__tr_flush_block",
+      "va": "0x425030",
+      "reference_count": 8,
+      "evidence": [
+        {
+          "function": "_deflate_stored",
+          "operand_va": "0x422fef",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_deflate_stored",
+          "operand_va": "0x42303c",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_deflate_stored",
+          "operand_va": "0x423081",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_deflate_fast",
+          "operand_va": "0x423517",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "__tr_init",
+      "va": "0x424c50",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_deflateReset",
+          "operand_va": "0x422a9b",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "__tr_stored_block",
+      "va": "0x424d30",
+      "reference_count": 2,
+      "evidence": [
+        {
+          "function": "_deflate",
+          "operand_va": "0x422c9c",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "__tr_flush_block",
+          "operand_va": "0x4250b2",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_adler32",
+      "va": "0x424af0",
+      "reference_count": 2,
+      "evidence": [
+        {
+          "function": "_inflateInit2_",
+          "operand_va": "0x42236b",
+          "relocation_type": "DIR32"
+        },
+        {
+          "function": "_read_buf",
+          "operand_va": "0x423237",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_calloc",
+      "va": "0x428b0b",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_zcalloc",
+          "operand_va": "0x424c2b",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_crc32",
+      "va": "0x423b50",
+      "reference_count": 2,
+      "evidence": [
+        {
+          "function": "_unzReadCurrentFile",
+          "operand_va": "0x4220b6",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_unzReadCurrentFile",
+          "operand_va": "0x42211d",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_deflate",
+      "va": "0x422ac0",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_compress2",
+          "operand_va": "0x421314",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_deflateEnd",
+      "va": "0x422e20",
+      "reference_count": 3,
+      "evidence": [
+        {
+          "function": "_compress2",
+          "operand_va": "0x421328",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_compress2",
+          "operand_va": "0x42134c",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_deflateInit2_",
+          "operand_va": "0x422a1e",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_deflateInit2_",
+      "va": "0x422840",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_deflateInit_",
+          "operand_va": "0x42282d",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_deflateInit_",
+      "va": "0x422810",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_compress2",
+          "operand_va": "0x421301",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_deflateReset",
+      "va": "0x422a40",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_deflateInit2_",
+          "operand_va": "0x422a08",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_fclose",
+      "va": "0x427e09",
+      "reference_count": 2,
+      "evidence": [
+        {
+          "function": "_unzOpen",
+          "operand_va": "0x4214a8",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_unzClose",
+          "operand_va": "0x421784",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_fopen",
+      "va": "0x427c2c",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_unzOpen",
+          "operand_va": "0x42138e",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_fread",
+      "va": "0x427d20",
+      "reference_count": 6,
+      "evidence": [
+        {
+          "function": "_unzlocal_getByte",
+          "operand_va": "0x421570",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_unzlocal_SearchCentralDir",
+          "operand_va": "0x4216f6",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_unzlocal_GetCurrentFileInfoInternal",
+          "operand_va": "0x4219e6",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_unzlocal_GetCurrentFileInfoInternal",
+          "operand_va": "0x421a59",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_free",
+      "va": "0x427e5f",
+      "reference_count": 6,
+      "evidence": [
+        {
+          "function": "_unzlocal_SearchCentralDir",
+          "operand_va": "0x421746",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_unzClose",
+          "operand_va": "0x42178a",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_unzOpenCurrentFile",
+          "operand_va": "0x421cf5",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_unzCloseCurrentFile",
+          "operand_va": "0x4221c4",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_fseek",
+      "va": "0x42819d",
+      "reference_count": 8,
+      "evidence": [
+        {
+          "function": "_unzOpen",
+          "operand_va": "0x4213bc",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_unzlocal_SearchCentralDir",
+          "operand_va": "0x421651",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_unzlocal_SearchCentralDir",
+          "operand_va": "0x4216e1",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_unzlocal_GetCurrentFileInfoInternal",
+          "operand_va": "0x421809",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_ftell",
+      "va": "0x428044",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_unzlocal_SearchCentralDir",
+          "operand_va": "0x421667",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_inflate",
+      "va": "0x4223e0",
+      "reference_count": 2,
+      "evidence": [
+        {
+          "function": "_uncompress",
+          "operand_va": "0x421267",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_unzReadCurrentFile",
+          "operand_va": "0x422109",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_inflateEnd",
+      "va": "0x422260",
+      "reference_count": 5,
+      "evidence": [
+        {
+          "function": "_uncompress",
+          "operand_va": "0x42127b",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_uncompress",
+          "operand_va": "0x42129f",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_unzCloseCurrentFile",
+          "operand_va": "0x4221dd",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_inflateInit2_",
+          "operand_va": "0x422389",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_inflateInit2_",
+      "va": "0x4222b0",
+      "reference_count": 2,
+      "evidence": [
+        {
+          "function": "_unzOpenCurrentFile",
+          "operand_va": "0x421d4d",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_inflateInit_",
+          "operand_va": "0x4223d2",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_inflateInit_",
+      "va": "0x4223c0",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_uncompress",
+          "operand_va": "0x421254",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_inflateReset",
+      "va": "0x422210",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_inflateInit2_",
+          "operand_va": "0x422399",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_inflate_blocks",
+      "va": "0x423db0",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_inflate",
+          "operand_va": "0x42252c",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_inflate_blocks_free",
+      "va": "0x424ab0",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_inflateEnd",
+          "operand_va": "0x422281",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_inflate_blocks_new",
+      "va": "0x423d10",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_inflateInit2_",
+          "operand_va": "0x422372",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_inflate_blocks_reset",
+      "va": "0x423c90",
+      "reference_count": 4,
+      "evidence": [
+        {
+          "function": "_inflateReset",
+          "operand_va": "0x422241",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_inflate",
+          "operand_va": "0x422570",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_inflate_blocks_new",
+          "operand_va": "0x423da3",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_inflate_blocks_free",
+          "operand_va": "0x424abf",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_inflate_codes",
+      "va": "0x426810",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_inflate_blocks",
+          "operand_va": "0x4244b6",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_inflate_codes_free",
+      "va": "0x426fc0",
+      "reference_count": 2,
+      "evidence": [
+        {
+          "function": "_inflate_blocks_reset",
+          "operand_va": "0x423ccc",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_inflate_blocks",
+          "operand_va": "0x4244d4",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_inflate_codes_new",
+      "va": "0x4267d0",
+      "reference_count": 2,
+      "evidence": [
+        {
+          "function": "_inflate_blocks",
+          "operand_va": "0x423ebe",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_inflate_blocks",
+          "operand_va": "0x424464",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_inflate_fast",
+      "va": "0x427860",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_inflate_codes",
+          "operand_va": "0x4268bb",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_inflate_flush",
+      "va": "0x427720",
+      "reference_count": 31,
+      "evidence": [
+        {
+          "function": "_inflate_blocks",
+          "operand_va": "0x423fc4",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_inflate_blocks",
+          "operand_va": "0x424554",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_inflate_blocks",
+          "operand_va": "0x424590",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_inflate_blocks",
+          "operand_va": "0x4245df",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_inflate_mask",
+      "va": "0x440440",
+      "reference_count": 12,
+      "evidence": [
+        {
+          "function": "_inflate_blocks",
+          "operand_va": "0x42429b",
+          "relocation_type": "DIR32"
+        },
+        {
+          "function": "_inflate_blocks",
+          "operand_va": "0x42434a",
+          "relocation_type": "DIR32"
+        },
+        {
+          "function": "_inflate_codes",
+          "operand_va": "0x42696b",
+          "relocation_type": "DIR32"
+        },
+        {
+          "function": "_inflate_codes",
+          "operand_va": "0x426a5f",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "_inflate_trees_bits",
+      "va": "0x426fe0",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_inflate_blocks",
+          "operand_va": "0x424210",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_inflate_trees_dynamic",
+      "va": "0x427560",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_inflate_blocks",
+          "operand_va": "0x42442c",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_inflate_trees_fixed",
+      "va": "0x4276f0",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_inflate_blocks",
+          "operand_va": "0x423ea0",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_malloc",
+      "va": "0x427f09",
+      "reference_count": 4,
+      "evidence": [
+        {
+          "function": "_unzOpen",
+          "operand_va": "0x4214de",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_unzlocal_SearchCentralDir",
+          "operand_va": "0x421688",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_unzOpenCurrentFile",
+          "operand_va": "0x421cb6",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_unzOpenCurrentFile",
+          "operand_va": "0x421cd5",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_unzCloseCurrentFile",
+      "va": "0x422180",
+      "reference_count": 2,
+      "evidence": [
+        {
+          "function": "_unzClose",
+          "operand_va": "0x421779",
+          "relocation_type": "REL32"
+        },
+        {
+          "function": "_unzOpenCurrentFile",
+          "operand_va": "0x421c84",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_unzGoToFirstFile",
+      "va": "0x421b80",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_unzOpen",
+          "operand_va": "0x4214f3",
+          "relocation_type": "REL32"
+        }
+      ]
+    },
+    {
+      "name": "_unz_copyright",
+      "va": "0x430288",
+      "reference_count": 1,
+      "evidence": [
+        {
+          "function": "_unzOpen",
+          "operand_va": "0x421361",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "_z_errmsg",
+      "va": "0x43f134",
+      "reference_count": 5,
+      "evidence": [
+        {
+          "function": "_deflateInit2_",
+          "operand_va": "0x422a15",
+          "relocation_type": "DIR32"
+        },
+        {
+          "function": "_deflate",
+          "operand_va": "0x422b26",
+          "relocation_type": "DIR32"
+        },
+        {
+          "function": "_deflate",
+          "operand_va": "0x422bf9",
+          "relocation_type": "DIR32"
+        },
+        {
+          "function": "_deflate",
+          "operand_va": "0x422c1d",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "_zcalloc",
+      "va": "0x424c20",
+      "reference_count": 2,
+      "evidence": [
+        {
+          "function": "_inflateInit2_",
+          "operand_va": "0x4222f8",
+          "relocation_type": "DIR32"
+        },
+        {
+          "function": "_deflateInit2_",
+          "operand_va": "0x42288e",
+          "relocation_type": "DIR32"
+        }
+      ]
+    },
+    {
+      "name": "_zcfree",
+      "va": "0x424c40",
+      "reference_count": 2,
+      "evidence": [
+        {
+          "function": "_inflateInit2_",
+          "operand_va": "0x422307",
+          "relocation_type": "DIR32"
+        },
+        {
+          "function": "_deflateInit2_",
+          "operand_va": "0x42289d",
+          "relocation_type": "DIR32"
+        }
+      ]
+    }
+  ],
+  "folded_helpers": [
+    {
+      "name": "_tr_static_init",
+      "va": "0x41fef0",
+      "compared_bytes": 16,
+      "source": "trees.c",
+      "object": "trees.obj",
+      "address_basis": "direct call from independently matched _tr_init plus exact callee bytes",
+      "note": "Empty helper folds to the same RET body as other functions under identical COMDAT folding; the unique body scan alone cannot identify it."
+    }
+  ]
+}

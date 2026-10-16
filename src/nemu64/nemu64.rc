@@ -1,0 +1,234 @@
+// Reconstructed Nemu64 resources. Symbolic names are inferred.
+#include "resource.h"
+#include "winres.h"
+
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+
+IDR_MAINMENU MENU
+BEGIN
+    POPUP "&Rom"
+    BEGIN
+        MENUITEM "&Load rom...\tF2", ID_LOAD_ROM
+        MENUITEM "&Close rom\tF3", ID_CLOSE_ROM, GRAYED
+        MENUITEM "&Directory Up", ID_DIRECTORY_UP
+        MENUITEM SEPARATOR
+        MENUITEM "Nemu movie start record", ID_NEMU_MOVIE_START_RECORD
+        MENUITEM "Nemu movie stop record", ID_NEMU_MOVIE_STOP_RECORD
+        MENUITEM "Nemu movie play start", ID_NEMU_MOVIE_PLAY_START
+        MENUITEM "Nemu movie play stop", ID_NEMU_MOVIE_PLAY_STOP
+        MENUITEM "&Save state\tShift+F5", ID_SAVE_STATE
+        MENUITEM "&Quick savestate\tF5", ID_QUICK_SAVESTATE
+        MENUITEM "L&oad state\tShift+F7", ID_LOAD_STATE
+        MENUITEM "Quick lo&adstate\tF7", ID_QUICK_LOADSTATE
+        MENUITEM "Use &virtual save files...", ID_USE_VIRTUAL_SAVE_FILES, HELP
+        MENUITEM SEPARATOR
+        MENUITEM "&Pause\tF4", ID_PAUSE
+        MENUITEM "Ac&tive pause\tShift+F4", ID_ACTIVE_PAUSE
+        MENUITEM "&Reset\tCtrl+R", ID_RESET
+        MENUITEM SEPARATOR
+        MENUITEM "E&xit", ID_EXIT
+    END
+    POPUP "&Multiplayer"
+    BEGIN
+        MENUITEM "&Start Netplay...", ID_START_NETPLAY
+    END
+    POPUP "&Options"
+    BEGIN
+        POPUP "R&esolution"
+        BEGIN
+            MENUITEM "320x240", ID_320X240
+            MENUITEM "400x300", ID_400X300
+            MENUITEM "640x480", ID_640X480
+            MENUITEM "800x600", ID_800X600
+            MENUITEM "1024x768", ID_1024X768
+            MENUITEM "1152x864", ID_1152X864
+            MENUITEM "1280x960", ID_1280X960
+            MENUITEM "1600x1200", ID_1600X1200
+            MENUITEM "Full Screen", ID_FULL_SCREEN
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Show Errors", ID_SHOW_ERRORS, CHECKED
+        MENUITEM SEPARATOR
+        MENUITEM "&Settings...\tF8", ID_SETTINGS
+        MENUITEM "&Gameshark Cheats", ID_GAMESHARK_CHEATS
+    END
+    POPUP "&Plugins"
+    BEGIN
+        MENUITEM "Configure &Audio Plugin...\tF9", ID_CONFIGURE_AUDIO_PLUGIN
+        MENUITEM "Configure &Input Plugin...\tF11", ID_CONFIGURE_INPUT_PLUGIN
+        MENUITEM "Configure &Video Plugin...\tF12", ID_CONFIGURE_VIDEO_PLUGIN
+    END
+    POPUP "&Debug"
+    BEGIN
+        MENUITEM "&Logging...", ID_LOGGING
+        MENUITEM "Cheat DP Int", ID_CHEAT_DP_INT
+        MENUITEM "Reset Dynrec\tCtrl+K", ID_RESET_DYNREC
+        MENUITEM "Show Compiler Stats", ID_SHOW_COMPILER_STATS
+        MENUITEM "Show Clock Cycles (PROFILE)...", ID_SHOW_CLOCK_CYCLES_PROFILE
+        MENUITEM "Reset Clock Cycles", ID_RESET_CLOCK_CYCLES
+        MENUITEM SEPARATOR
+        POPUP "Cheat Count increase"
+        BEGIN
+            MENUITEM "1", ID_1
+            MENUITEM "2", ID_2
+            MENUITEM "4", ID_4
+            MENUITEM "8", ID_8
+        END
+        MENUITEM SEPARATOR
+        MENUITEM "Reset Block Profiling", ID_RESET_BLOCK_PROFILING
+        MENUITEM "Write Block Profiling to bprof.stats", ID_WRITE_BLOCK_PROFILING_TO_BPROF_STATS
+        MENUITEM SEPARATOR
+        MENUITEM "Test Pre-MNI\tCtrl+M", ID_TEST_PRE_MNI
+        MENUITEM SEPARATOR
+        MENUITEM "Disable Exception", ID_DISABLE_EXCEPTION
+        MENUITEM SEPARATOR
+        MENUITEM "Disable Video HLE (1)", ID_DISABLE_VIDEO_HLE_1
+        MENUITEM "Force CFB", ID_FORCE_CFB
+        MENUITEM "Disable Audio HLE (2)", ID_DISABLE_AUDIO_HLE_2
+    END
+    POPUP "&Help"
+    BEGIN
+        MENUITEM "About video plugin...", ID_ABOUT_VIDEO_PLUGIN
+        MENUITEM SEPARATOR
+        MENUITEM "&About ...", ID_ABOUT
+    END
+END
+
+IDR_MAINMENU ACCELERATORS
+BEGIN
+    "K", ID_RESET_DYNREC, VIRTKEY, NOINVERT, CONTROL
+    "M", ID_TEST_PRE_MNI, VIRTKEY, NOINVERT, CONTROL
+    "R", ID_RESET, VIRTKEY, NOINVERT, CONTROL
+    VK_F1, ID_ABOUT, VIRTKEY, NOINVERT
+    VK_F11, ID_CONFIGURE_INPUT_PLUGIN, VIRTKEY, NOINVERT
+    VK_F12, ID_CONFIGURE_VIDEO_PLUGIN, VIRTKEY, NOINVERT
+    VK_F2, ID_LOAD_ROM_ACCELERATOR, VIRTKEY, NOINVERT
+    VK_F3, ID_CLOSE_ROM, VIRTKEY, NOINVERT
+    VK_F4, ID_PAUSE, VIRTKEY, NOINVERT
+    VK_F4, ID_ACTIVE_PAUSE, VIRTKEY, NOINVERT, SHIFT
+    VK_F5, ID_QUICK_SAVESTATE, VIRTKEY, NOINVERT
+    VK_F5, ID_SAVE_STATE, VIRTKEY, NOINVERT, SHIFT
+    VK_F7, ID_QUICK_LOADSTATE, VIRTKEY, NOINVERT
+    VK_F7, ID_LOAD_STATE, VIRTKEY, NOINVERT, SHIFT
+    VK_F8, ID_SETTINGS, VIRTKEY, NOINVERT
+    VK_F9, ID_CONFIGURE_AUDIO_PLUGIN, VIRTKEY, NOINVERT
+    VK_RETURN, ID_FULL_SCREEN, VIRTKEY, NOINVERT, ALT
+END
+
+IDD_LOGGING DIALOG 0, 0, 190, 95
+STYLE 0x80c800c0L
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL "OK", IDOK, "Button", 0x50010001L, 132, 7, 50, 14
+    CONTROL "Compiler logging", IDC_LOG_COMPILER, "Button", 0x50010003L, 7, 7, 67, 10
+    CONTROL "COP0 Register logging", IDC_LOG_COP0, "Button", 0x50010003L, 7, 17, 87, 10
+    CONTROL "COP1 Register CACHE logging", IDC_LOG_COP1_CACHE, "Button", 0x50010003L, 7, 29, 113, 10
+    CONTROL "X87 assembly Logging", IDC_LOG_X87, "Button", 0x50010003L, 7, 39, 87, 10
+END
+
+IDD_DISCLAIMER DIALOG 0, 0, 156, 157
+STYLE 0x80c800c0L
+CAPTION "Disclaimer"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL "OK", IDOK, "Button", 0x50010001L, 56, 136, 50, 14
+    CONTROL "", IDC_DISCLAIMER, "Edit", 0x50810804L, 8, 8, 140, 122
+END
+
+IDD_ROM_PREVIEW DIALOGEX 0, 0, 110, 83
+STYLE 0x54000044L
+FONT 8, "MS Sans Serif", 0, 0, 1
+BEGIN
+    CONTROL "", IDC_STATIC, "Static", 0x50000005L, 0, 0, 83, 63, 0x00000200L
+END
+
+IDD_REMOVE_FAVOURITES DIALOG 0, 0, 207, 166
+STYLE 0x80c800c0L
+CAPTION "Remove favourites..."
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL "OK", IDC_FAVOURITES_OK, "Button", 0x50010001L, 150, 7, 50, 14
+    CONTROL "Cancel", IDC_FAVOURITES_CANCEL, "Button", 0x50010000L, 150, 24, 50, 14
+    CONTROL "", IDC_FAVOURITES, "ListBox", 0x50a10901L, 7, 7, 140, 152
+END
+
+VS_VERSION_INFO VERSIONINFO
+ FILEVERSION 0,8,0,0
+ PRODUCTVERSION 0,8,0,0
+ FILEFLAGSMASK 0x3fL
+ FILEFLAGS 0x0L
+ FILEOS VOS__WINDOWS32
+ FILETYPE VFT_APP
+ FILESUBTYPE 0x0L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "000004b0"
+        BEGIN
+            VALUE "Comments", "Nintendo 64 (c) Emulator - www.nemu.com\0"
+            VALUE "FileDescription", "Nemu64\0"
+            VALUE "FileVersion", "0, 8, 0, 0\0"
+            VALUE "InternalName", "nemu64\0"
+            VALUE "LegalCopyright", "Copyright © 2000 NemuTeam\0"
+            VALUE "OriginalFilename", "nemu64.exe\0"
+            VALUE "ProductVersion", "0, 8, 0, 0\0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0, 1200
+    END
+END
+
+IDB_ABOUT BITMAP "res\\about.bmp"
+
+IDB_BITMAP143 BITMAP "res\\bitmap143.bmp"
+
+IDI_NEMU64 ICON "res\\nemu64.ico"
+
+IDI_ICON159 ICON "res\\icon159.ico"
+
+IDI_ICON160 ICON "res\\icon160.ico"
+
+IDI_ICON161 ICON "res\\icon161.ico"
+
+IDI_ICON162 ICON "res\\icon162.ico"
+
+IDI_ICON163 ICON "res\\icon163.ico"
+
+IDI_ICON164 ICON "res\\icon164.ico"
+
+1 24 "nemu64.manifest"
+
+// Generated by res/generate_pif_table.py; CIC challenge-response lookup data.
+IDR_CIC6105_TABLE RCDATA "res\\pif-table.bin"
+
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+
+IDD_ABOUT DIALOG 22, 17, 248, 266
+STYLE 0x00c800c0L
+CAPTION "About"
+FONT 8, "MS Sans Serif"
+BEGIN
+    CONTROL "OK", IDOK, "Button", 0x50010001L, 180, 200, 60, 16
+    CONTROL "Nemu64 - Version 0.8", IDC_STATIC, "Static", 0x50000000L, 24, 144, 71, 8
+    CONTROL IDB_ABOUT, IDCANCEL, "Static", 0x5000100eL, 24, 12, 201, 124
+    CONTROL "N64 Emulator made by Lemmy and LaC", IDC_STATIC, "Static", 0x50000000L, 24, 156, 125, 8
+    CONTROL "Credits go to: hWnd, Zilmar, Atila, Demo, schibo, Duddie, myzar, F|res, rcp, EmuManiac, Coolbest, Zoric and everyone I forgot to mention", IDC_STATIC, "Static", 0x50000000L, 24, 168, 200, 24
+    CONTROL "&Disclaimer", IDC_DISCLAIMER, "Button", 0x50010000L, 180, 220, 60, 16
+    CONTROL "Other N64 Emulators", IDC_STATIC, "Button", 0x50000007L, 24, 196, 152, 60
+    CONTROL "1964: www.emuhq.com/1964", IDC_STATIC, "Static", 0x50000000L, 28, 208, 95, 8
+    CONTROL "TrueReality: www.emuhq.com/truereality", IDC_STATIC, "Static", 0x50020000L, 28, 218, 129, 8
+    CONTROL "Corn: www.emuhq.com/corn", IDC_STATIC, "Static", 0x50020000L, 28, 228, 92, 8
+    CONTROL "UltraHLE: www.ultrahle.com", IDC_STATIC, "Static", 0x50020000L, 28, 238, 90, 8
+    CONTROL "Official page: www.nemu.com", IDC_STATIC, "Static", 0x50020000L, 128, 140, 95, 8
+    CONTROL "www.nemu.com", IDC_WEBSITE, "Button", 0x50010000L, 180, 240, 60, 16
+END
+
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+
+STRINGTABLE
+BEGIN
+    IDS_STRING110 "l"
+END
