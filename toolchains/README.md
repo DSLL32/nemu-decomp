@@ -22,6 +22,13 @@ resource tools, PDB support, and the Processor Pack headers and MASM. The
 Processor Pack optimizer's file version starts with **13.0**, despite belonging
 to this VC6 configuration; the compiled C++ Rich ID is **00312354** as required.
 
+`vc6/runtime/msvcrt.dll` is the unmodified 6.0.8797.0 runtime extracted from
+the tracked `vc6/redist/vcredist.exe`. The GameShark build runs the linker and
+resource converter with this native CRT and Wine's Windows 98 application
+settings to reproduce the original incremental linker's memory layout.
+Its SHA-256 is
+`887eb5ce93edb7192ca3e9220f07f9ca0f94db02af5862ebcbdfcb852db99fd1`.
+
 `vc7` includes CRT/ATL/MFC sources and libraries, MASM, resource tools, and the
 Platform SDK. The SDK's **1,525 files** were restored from **49 cabinets** embedded
 in `vs_setup.msi`, using the MSI's file and directory tables. `mspdb70.dll`,

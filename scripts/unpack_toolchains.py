@@ -96,6 +96,10 @@ def install_vc6(staging, scratch, destination):
     shutil.copy2(pp / "align.c", destination / "crt/src/align.c")
     for name in ("PPreadme.htm", "MasmRef.doc", "procpack.chm"):
         shutil.copy2(pp / name, destination / name.lower())
+    runtime = scratch / "vc6-redist"
+    extract(destination / "redist/vcredist.exe", runtime, "msvcrt.dll")
+    (destination / "runtime").mkdir(exist_ok=True)
+    shutil.copy2(runtime / "msvcrt.dll", destination / "runtime/msvcrt.dll")
 
 
 def sdk_files(msi):
@@ -272,6 +276,10 @@ def manifest(staging, destination):
         result["toolchains"][name] = dict(file_count=len(files),
             size_bytes=sum(p.stat().st_size for p in files),
             tree_sha256=hashlib.sha256(tree).hexdigest(), components=components)
+        if name == "vc6":
+            path = root / "runtime/msvcrt.dll"
+            components["runtime/msvcrt.dll"] = {
+                "sha256": digest(path), "versions": PE32(path).report()["versions"]}
         if name in ("d6u1", "d6u2"):
             for filename in ("rtl60.bpl", "vcl60.bpl"):
                 path = root / "runtime" / filename
