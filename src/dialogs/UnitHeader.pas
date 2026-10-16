@@ -3,8 +3,8 @@ unit UnitHeader;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, ComCtrls;
+  Windows, Messages, SysUtils, Variants, Classes, UnitMain, UnitDecs, Graphics, Controls, Forms,
+  Dialogs, StdCtrls, ExtCtrls;
 
 type
   TFormHeader = class(TForm)
@@ -41,7 +41,7 @@ var
 
 implementation
 
-uses UnitMain, UnitDecs, UnitNemuSettings, IniFiles;
+uses UnitNemuSettings, IniFiles;
 
 {$R *.dfm}
 
@@ -69,7 +69,7 @@ procedure TFormHeader.UpdateInfo;
 var
   Manufacturer: Cardinal;
 begin
-  if Nemu.RomSize^ = 0 then
+  if Nemu64_API.RomSize^ = 0 then
   begin
     EditFilename.Text := '(no rom loaded)';
     EditEntrypoint.Text := '-';
@@ -79,41 +79,39 @@ begin
     LabelManufacturerID.Caption := '';
     LabelCartID.Caption := '-';
     LabelCountryCode.Caption := '';
-  end
+    Exit;
+  end;
+  EditFilename.Text := Nemu64_API.RomFilename;
+  EditEntrypoint.Text := '0x' + IntToHex(Nemu64_API.ReadWord($10000008), 8);
+  EditCRC1.Text := '0x' + IntToHex(Nemu64_API.ReadWord($10000010), 8);
+  EditCRC2.Text := '0x' + IntToHex(Nemu64_API.ReadWord($10000014), 8);
+  EditCartname.Text := Nemu64_API.RomName;
+  Manufacturer := Nemu64_API.ReadWord($10000038);
+  if Manufacturer = 0 then
+    LabelManufacturerID.Caption := '(not specified)'
   else
   begin
-    EditFilename.Text := Nemu.RomFilename;
-    EditEntrypoint.Text := '0x' + IntToHex(Nemu.ReadWord($10000008), 8);
-    EditCRC1.Text := '0x' + IntToHex(Nemu.ReadWord($10000010), 8);
-    EditCRC2.Text := '0x' + IntToHex(Nemu.ReadWord($10000014), 8);
-    EditCartname.Text := Nemu.RomName;
-    Manufacturer := Nemu.ReadWord($10000038);
-    if Manufacturer = 0 then
-      LabelManufacturerID.Caption := '(not specified)'
+    case Char(Manufacturer) of
+      'N': LabelManufacturerID.Caption := 'Nintendo';
     else
-    begin
-      case Char(Manufacturer) of
-        'N': LabelManufacturerID.Caption := 'Nintendo';
-      else
-        LabelManufacturerID.Caption := Char(Manufacturer) + ' (0x' +
-          IntToHex(Manufacturer, 2) + ')';
-      end;
+      LabelManufacturerID.Caption := Char(Manufacturer) + ' (0x' +
+        IntToHex(Manufacturer, 2) + ')';
     end;
-    LabelCartID.Caption := Char(ReadHeaderByte($3C)) + Char(ReadHeaderByte($3D)) +
-      ' (0x' + IntToHex(ReadHeaderByte($3C), 2) + IntToHex(ReadHeaderByte($3D), 2) + ')';
-    if ReadHeaderByte($3E) = 0 then
-      LabelCountryCode.Caption := '(not specified)'
-    else
-      case ReadHeaderByte($3E) of
-        Ord('D'): LabelCountryCode.Caption := 'D (Germany)';
-        Ord('E'): LabelCountryCode.Caption := 'E (USA)';
-        Ord('J'): LabelCountryCode.Caption := 'J (Japan)';
-        Ord('P'): LabelCountryCode.Caption := 'P (Europe)';
-        Ord('U'): LabelCountryCode.Caption := 'U (Australia)';
-      else
-        LabelCountryCode.Caption := Char(ReadHeaderByte($3E));
-      end;
   end;
+  LabelCartID.Caption := Char(ReadHeaderByte($3C)) + Char(ReadHeaderByte($3D)) +
+    ' (0x' + IntToHex(ReadHeaderByte($3C), 2) + IntToHex(ReadHeaderByte($3D), 2) + ')';
+  if ReadHeaderByte($3E) = 0 then
+    LabelCountryCode.Caption := '(not specified)'
+  else
+    case ReadHeaderByte($3E) of
+      Ord('D'): LabelCountryCode.Caption := 'D (Germany)';
+      Ord('E'): LabelCountryCode.Caption := 'E (USA)';
+      Ord('J'): LabelCountryCode.Caption := 'J (Japan)';
+      Ord('P'): LabelCountryCode.Caption := 'P (Europe)';
+      Ord('U'): LabelCountryCode.Caption := 'U (Australia)';
+    else
+      LabelCountryCode.Caption := Char(ReadHeaderByte($3E));
+    end;
 end;
 
 procedure TFormHeader.FormCreate(Sender: TObject);

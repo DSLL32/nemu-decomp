@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, ComCtrls;
+  Dialogs, StdCtrls, ExtCtrls;
 
 type
   TFormRomSettings = class(TForm)
@@ -43,7 +43,7 @@ var
 
 implementation
 
-uses UnitMain, UnitDecs, UnitNemuSettings, IniFiles;
+uses UnitMain, UnitDecs, UnitNemuSettings, UnitHeader, IniFiles;
 
 {$R *.dfm}
 
@@ -85,14 +85,14 @@ procedure TFormRomSettings.FormCreate(Sender: TObject);
 var
   Ini: TIniFile;
 begin
-  GroupBoxName.Caption := 'Settings for ''' + string(Nemu.RomName) +
+  GroupBoxName.Caption := 'Settings for ''' + string(Nemu64_API.RomName) +
     ''' - this can include other country codes';
   GroupBoxCRC.Caption := 'Settings for this specific rom (CRC is ' +
-    string(Nemu.RomCRC) + ')';
-  Ini := TIniFile.Create(NemuPath + 'Nemu64.ini');
+    string(Nemu64_API.RomCRC) + ')';
+  Ini := TIniFile.Create(NemuFileDir + 'Nemu64.ini');
   ReadSection('Default', Ini, MemoDefault.Lines);
-  ReadSection(Nemu.RomName, Ini, MemoName.Lines);
-  ReadSection(Nemu.RomCRC, Ini, MemoCRC.Lines);
+  ReadSection(Nemu64_API.RomName, Ini, MemoName.Lines);
+  ReadSection(Nemu64_API.RomCRC, Ini, MemoCRC.Lines);
   MemoDefaultChange(MemoDefault);
   MemoNameChange(MemoName);
   MemoCRCChange(MemoCRC);
@@ -123,10 +123,10 @@ procedure TFormRomSettings.ButtonApplyClick(Sender: TObject);
 var
   Ini: TIniFile;
 begin
-  Ini := TIniFile.Create(NemuPath + 'Nemu64.ini');
+  Ini := TIniFile.Create(NemuFileDir + 'Nemu64.ini');
   WriteSection('Default', Ini, MemoDefault.Lines);
-  WriteSection(Nemu.RomName, Ini, MemoName.Lines);
-  WriteSection(Nemu.RomCRC, Ini, MemoCRC.Lines);
+  WriteSection(Nemu64_API.RomName, Ini, MemoName.Lines);
+  WriteSection(Nemu64_API.RomCRC, Ini, MemoCRC.Lines);
   Ini.Free;
 end;
 

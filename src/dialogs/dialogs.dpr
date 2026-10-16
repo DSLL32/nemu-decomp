@@ -1,12 +1,15 @@
 library dialogs;
 
+{$IMPLICITBUILD OFF}
+
 uses
-  Windows, SysUtils, Classes, Forms, IniFiles,
-  UnitRomSettings in 'UnitRomSettings.pas',
+  SysUtils, Windows, Classes, IniFiles,
+  UnitHeader in 'UnitHeader.pas',
   UnitMain in 'UnitMain.pas',
   UnitDecs in 'UnitDecs.pas',
+  RCP in 'RCP.pas',
   UnitNemuSettings in 'UnitNemuSettings.pas',
-  UnitHeader in 'UnitHeader.pas';
+  UnitRomSettings in 'UnitRomSettings.pas';
 
 {$R XPManifest.res}
 
@@ -16,20 +19,20 @@ type
     Size: Cardinal;
     Version: Word;
     PluginType: Word;
-    Name: array[0..99] of Char;
+    Name: array[1..100] of Char;
     NormalMemory: LongBool;
     MemoryBswapped: LongBool;
-    Filename: array[0..MAX_PATH - 1] of Char;
+    Filename: array[1..MAX_PATH] of Char;
   end;
 
 function ToolInit(Info: PNemu): Integer; cdecl;
 begin
   Result := 1;
-  Move(Info^, Nemu, SizeOf(Nemu));
-  NemuInstance := Nemu.Instance;
-  GetDir(0, NemuPath);
-  if NemuPath[Length(NemuPath)] <> '\' then
-    NemuPath := NemuPath + '\';
+  Move(Info^, Nemu64_API, SizeOf(Nemu64_API));
+  NemuMainWinHandle := Nemu64_API.Instance;
+  GetDir(0, NemuFileDir);
+  if NemuFileDir[Length(NemuFileDir)] <> '\' then
+    NemuFileDir := NemuFileDir + '\';
 end;
 
 procedure ToolFree; cdecl;
@@ -44,18 +47,18 @@ begin
         0:
           begin
             FormHeader := TFormHeader.Create(nil);
-            FormHeader.ParentWindow := Nemu.MainWindow^;
+            FormHeader.ParentWindow := Nemu64_API.MainWindow^;
             FormHeader.ShowModal;
           end;
         1:
-          if Length(string(Nemu.RomName)) > 0 then
+          if Length(string(Nemu64_API.RomName)) > 0 then
           begin
             FormRomSettings := TFormRomSettings.Create(nil);
-            FormRomSettings.ParentWindow := Nemu.MainWindow^;
+            FormRomSettings.ParentWindow := Nemu64_API.MainWindow^;
             FormRomSettings.ShowModal;
           end
           else
-            MessageBox(Nemu.MainWindow^, 'Please select a rom', 'No rom selected', MB_ICONERROR);
+            MessageBox(Nemu64_API.MainWindow^, 'Please select a rom', 'No rom selected', MB_ICONERROR);
       end;
   end;
 end;
@@ -66,6 +69,8 @@ begin
 end;
 
 procedure NemuSettings(Count: Integer; Plugins: PPlugin); cdecl;
+label
+  NextPlugin;
 var
   Running: Boolean;
   Ini: TIniFile;
@@ -73,12 +78,12 @@ var
   Plugin: PPlugin;
   I: Integer;
 begin
-  Running := Nemu.Running^;
+  Running := Nemu64_API.Running^;
   FormNemuSettings := TFormNemuSettings.Create(nil);
-  FormNemuSettings.ParentWindow := Nemu.MainWindow^;
+  FormNemuSettings.ParentWindow := Nemu64_API.MainWindow^;
   FormNemuSettings.ComboBoxRDRAMSize.Enabled := not Running;
   FormNemuSettings.LabelRDRAMSizeRunning.Visible := Running;
-  Ini := TIniFile.Create(NemuPath + 'config.ini');
+  Ini := TIniFile.Create(NemuFileDir + 'config.ini');
   case Ini.ReadInteger('Configuration', 'RDRAMSize', 8) of
     4: FormNemuSettings.ComboBoxRDRAMSize.ItemIndex := 0;
     8: FormNemuSettings.ComboBoxRDRAMSize.ItemIndex := 1;
@@ -104,10 +109,12 @@ begin
       begin
         Name := Trim(Plugin^.Name);
         FormNemuSettings.ComboBoxPlugins.Items.Add(Name + ' <' + Trim(Plugin^.Filename) + '>');
-        if Selected <> '' then
-          if UpperCase(Trim(Selected)) = UpperCase(Trim(Plugin^.Filename)) then
-            FormNemuSettings.ComboBoxPlugins.ItemIndex := FormNemuSettings.ComboBoxPlugins.Items.Count - 1;
+        if Selected = '' then
+          goto NextPlugin;
+        if UpperCase(Trim(Selected)) = UpperCase(Trim(Plugin^.Filename)) then
+          FormNemuSettings.ComboBoxPlugins.ItemIndex := FormNemuSettings.ComboBoxPlugins.Items.Count - 1;
       end;
+NextPlugin:
       Plugin := Pointer(Cardinal(Plugin) + Plugin^.Size);
     end;
   if FormNemuSettings.ComboBoxPlugins.ItemIndex = -1 then

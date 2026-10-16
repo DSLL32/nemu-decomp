@@ -39,9 +39,11 @@ type
   end;
   PNemu = ^TNemu;
 
+{ Global names are inferred, including the Delphi imported-data ordering.
+  Matching that ordering does not establish the original spelling. }
 var
-  Nemu: TNemu;
-  NemuInstance: THandle;
+  Nemu64_API: TNemu;
+  NemuMainWinHandle: THandle;
 
 function ReadWord(Address: Cardinal): Cardinal;
 
@@ -52,17 +54,17 @@ var
   ShowErrors: Boolean;
   I: Cardinal;
 begin
-  ShowErrors := Nemu.ShowErrors^;
-  Nemu.ReadError^ := False;
-  Nemu.ShowErrors^ := False;
-  Result := Nemu.ReadWord(Address);
-  Nemu.ShowErrors^ := ShowErrors;
+  ShowErrors := Nemu64_API.ShowErrors^;
+  Nemu64_API.ReadError^ := False;
+  Nemu64_API.ShowErrors^ := False;
+  Result := Nemu64_API.ReadWord(Address);
+  Nemu64_API.ShowErrors^ := ShowErrors;
   if Result shr 26 = $3B then
-    if Nemu.BreakpointCount^ > 0 then
-      for I := Nemu.BreakpointCount^ - 1 downto 0 do
-        if Nemu.Breakpoints^[I].Address = Address then
+    if Nemu64_API.BreakpointCount^ > 0 then
+      for I := Nemu64_API.BreakpointCount^ - 1 downto 0 do
+        if Nemu64_API.Breakpoints^[I].Address = Address then
         begin
-          Result := Nemu.Breakpoints^[I].Instruction;
+          Result := Nemu64_API.Breakpoints^[I].Instruction;
           Break;
         end;
 end;

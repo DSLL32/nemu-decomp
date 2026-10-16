@@ -18,6 +18,7 @@ from capstone.x86 import X86_OP_IMM
 from compare_delphi_rtl import relocations
 from inspect_delphi_forms import inspect
 from pe_fingerprints import PE32, u32
+from stamp_pe_resources import resource_time_offsets
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -28,6 +29,61 @@ PRIVATE_SYMBOLS = {
     'ReadSection': 0x84648,
     'WriteSection': 0x84968,
 }
+
+# Original unit boundaries recovered from the linked routines, VMTs and unit
+# initialization/finalization code. Lengths exclude linker alignment padding.
+COMPONENT_UNITS = {
+    'JwaUxTheme': (0x64814, 0x9B7),
+    'JwaTmSchema': (0x651CC, 0x38),
+    'ThemeSrv': (0x65204, 0x8AC),
+    'ThemeMgr': (0x803C0, 0x24D3),
+}
+
+
+def component_units(target, candidate, map_text):
+    segments = {name: (int(offset, 16) + 0x1000, int(size, 16))
+                for offset, size, name in re.findall(
+                    r'^ 0001:([0-9A-F]+) ([0-9A-F]+) C=CODE.*?M=(\w+)',
+                    map_text, re.M)}
+    target_fixups, candidate_fixups = relocations(target), relocations(candidate)
+
+    def canonical(pe, start, size, fixups):
+        offset = pe.offset(start)
+        data = bytearray(pe.data[offset:offset + size])
+        positions = set()
+        for address in fixups:
+            if start <= address <= start + size - 4:
+                at = address - start
+                positions.add(at)
+                value = int.from_bytes(data[at:at + 4], 'little')
+                # Delphi's imported-data table can be reordered by inferred
+                # source identifiers. Compare the referenced global's address,
+                # rather than accepting an arbitrary masked operand.
+                if 0x487390 <= value < 0x4877B4 and value % 4 == 0:
+                    value = u32(pe.data, pe.offset(value - pe.base))
+                    data[at:at + 4] = value.to_bytes(4, 'little')
+        return bytes(data), positions
+
+    result = []
+    for name, (original_rva, size) in COMPONENT_UNITS.items():
+        rebuilt = segments.get(name)
+        row = dict(name=name, original_rva=original_rva, original_bytes=size,
+                   rebuilt_rva=rebuilt[0] if rebuilt else None,
+                   rebuilt_bytes=rebuilt[1] if rebuilt else None)
+        if rebuilt and rebuilt[1] == size:
+            a, af = canonical(target, original_rva, size, target_fixups)
+            b, bf = canonical(candidate, rebuilt[0], size, candidate_fixups)
+            row.update(import_targets_resolved_equal=a == b and af == bf,
+                       differing_bytes=sum(x != y for x, y in zip(a, b)),
+                       relocation_positions_equal=af == bf,
+                       raw_bytes_equal=target.data[target.offset(original_rva):
+                                                  target.offset(original_rva) + size] ==
+                                       candidate.data[candidate.offset(rebuilt[0]):
+                                                      candidate.offset(rebuilt[0]) + size])
+        else:
+            row['import_targets_resolved_equal'] = False
+        result.append(row)
+    return result
 
 
 def normalized(pe, rva, size, fixups):
@@ -88,8 +144,11 @@ def compare(rebuilt, map_path):
         a, am = normalized(target, target_rva, size, target_fixups)
         b, bm = normalized(candidate, candidate_rva, size, candidate_fixups)
         differences = [i for i, (x, y) in enumerate(zip(a, b)) if x != y]
+        raw_a = target.data[target.offset(target_rva):target.offset(target_rva) + size]
+        raw_b = candidate.data[candidate.offset(candidate_rva):candidate.offset(candidate_rva) + size]
         blocks.append(dict(name=name, original_rva=target_rva,
                            rebuilt_rva=candidate_rva, compared_bytes=size,
+                           raw_bytes_equal=raw_a == raw_b,
                            differing_bytes=len(differences),
                            first_differences=differences[:12],
                            mask_positions_equal=am == bm,
@@ -121,7 +180,7 @@ def compare(rebuilt, map_path):
     original_fields = host_fields(target, PRIVATE_SYMBOLS['ReadWord'],
                                   target_fixups, 0x488A30)
     rebuilt_fields = host_fields(candidate, mapped['ReadWord'],
-                                 candidate_fixups, data_symbols['Nemu'])
+                                 candidate_fixups, data_symbols['Nemu64_API'])
 
     def string_table(pe, va):
         entries = []
@@ -143,18 +202,57 @@ def compare(rebuilt, map_path):
         return (pe.data[resource['offset']:resource['offset'] + resource['size']]
                 if resource else None)
 
+    def difference_count(a, b):
+        return sum(x != y for x, y in zip(a, b)) + abs(len(a) - len(b))
+
+    sections = []
+    candidate_sections = {s['name']: s for s in candidate.sections}
+    for section in target.sections:
+        other = candidate_sections.get(section['name'])
+        a = target.data[section['offset']:section['offset'] + section['raw_size']]
+        b = (candidate.data[other['offset']:other['offset'] + other['raw_size']]
+             if other else b'')
+        sections.append(dict(name=section['name'], layout_exact=section == other,
+                             original_bytes=len(a), rebuilt_bytes=len(b),
+                             raw_bytes_equal=bool(other and a == b),
+                             differing_bytes=difference_count(a, b)))
+
+    resources = []
+    candidate_resources = {tuple(r['path']): r for r in candidate.resources()}
+    for resource in target.resources():
+        other = candidate_resources.get(tuple(resource['path']))
+        a = target.data[resource['offset']:resource['offset'] + resource['size']]
+        b = (candidate.data[other['offset']:other['offset'] + other['size']]
+             if other else b'')
+        resources.append(dict(path=resource['path'], original_bytes=len(a),
+                              rebuilt_bytes=len(b), byte_exact=bool(other and a == b),
+                              differing_bytes=difference_count(a, b)))
+    target_times = [(at, u32(target.data, at)) for at in resource_time_offsets(target)]
+    rebuilt_times = [(at, u32(candidate.data, at)) for at in resource_time_offsets(candidate)]
+    header_size = u32(target.data, target.opt + 60)
+    candidate_header_size = u32(candidate.data, candidate.opt + 60)
+
     return dict(
         original_sha256=hashlib.sha256(target.data).hexdigest(),
         rebuilt_sha256=hashlib.sha256(candidate.data).hexdigest(),
         original_bytes=len(target.data), rebuilt_bytes=len(candidate.data),
         full_dll_byte_exact=target.data == candidate.data,
+        differing_file_bytes=difference_count(target.data, candidate.data),
+        pe_headers_byte_exact=target.data[:header_size] == candidate.data[:candidate_header_size],
+        sections=sections, resources=resources,
+        resource_directory_times=dict(
+            original_values=sorted({value for _, value in target_times}),
+            rebuilt_values=sorted({value for _, value in rebuilt_times}),
+            field_count=len(target_times), exact=target_times == rebuilt_times),
         export_names_and_ordinals_exact=export_signature(target) == export_signature(candidate),
         manifest_byte_exact=manifest(target) == manifest(candidate),
         register_name_tables=tables,
         read_word_host_field_offsets=dict(original=original_fields, rebuilt=rebuilt_fields,
                                          exact=original_fields == rebuilt_fields),
         forms=forms, application_blocks=blocks,
+        component_units=component_units(target, candidate, map_text),
         address_masked_matches=sum(b['status'] == 'address-masked match' for b in blocks),
+        raw_application_matches=sum(b.get('raw_bytes_equal', False) for b in blocks),
         missing_units=sorted(units_before - units_after),
         extra_units=sorted(units_after - units_before),
         limitations=[
@@ -169,8 +267,13 @@ def compare(rebuilt, map_path):
 def summarize(result):
     exact_forms = sum(f['resource_exact'] for f in result['forms'])
     print(f"Form resources: {exact_forms}/{len(result['forms'])} byte exact")
-    print(f"Application blocks: {result['address_masked_matches']}/"
-          f"{len(result['application_blocks'])} address-masked matches")
+    print(f"Application blocks: {result['raw_application_matches']}/"
+          f"{len(result['application_blocks'])} byte exact")
+    components = result['component_units']
+    print(f"Theme units: {sum(c.get('raw_bytes_equal', False) for c in components)}/"
+          f"{len(components)} byte exact")
+    print(f"PE sections: {sum(s['raw_bytes_equal'] and s['layout_exact'] for s in result['sections'])}/"
+          f"{len(result['sections'])} byte exact, including layout and padding")
     for block in result['application_blocks']:
         if block['status'] != 'address-masked match':
             print(f"  {block['name']}: {block['status']}")

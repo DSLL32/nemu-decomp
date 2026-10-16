@@ -1,7 +1,7 @@
 unit UnitMain;
 
-{ The unit name is preserved in PACKAGEINFO. Its original declarations and
-  uses clauses remain unresolved; no routine is assigned to it yet. }
+{ The unit name is preserved in PACKAGEINFO. Only empty initialization and
+  finalization are linked. Any unused original declarations are unrecoverable. }
 
 interface
 

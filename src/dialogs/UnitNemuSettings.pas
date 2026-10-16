@@ -4,7 +4,7 @@ interface
 
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, ComCtrls, ThemeMgr, Verlauf;
+  Dialogs, StdCtrls, ExtCtrls, ThemeMgr, Verlauf, ComCtrls;
 
 type
   TFormNemuSettings = class(TForm)
@@ -66,7 +66,7 @@ type
 
 var
   FormNemuSettings: TFormNemuSettings;
-  NemuPath: string;
+  NemuFileDir: string;
 
 implementation
 
@@ -125,7 +125,7 @@ var
   Ini: TIniFile;
   Plugin: string;
 begin
-  Ini := TIniFile.Create(NemuPath + 'config.ini');
+  Ini := TIniFile.Create(NemuFileDir + 'config.ini');
   case ComboBoxRDRAMSize.ItemIndex of
     0: Ini.WriteInteger('Configuration', 'RDRAMSize', 4);
     1: Ini.WriteInteger('Configuration', 'RDRAMSize', 8);

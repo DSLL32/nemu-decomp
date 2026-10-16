@@ -57,7 +57,7 @@ def worker(scratch, rebuilt, report):
             (work / 'config.ini').write_text(CONFIG)
             (work / 'Nemu64.ini').write_text(ROM_CONFIG)
             # Both fixture directories are disposable. ToolInit takes the
-            # current directory as NemuPath; Apply writes only to these files.
+            # current directory as NemuFileDir; Apply writes only to these files.
             with (work / 'stdout.txt').open('w') as out, (work / 'stderr.txt').open('w') as err:
                 result = subprocess.run(['wine', str(scratch / 'dialogs_probe.exe'),
                                          'Z:' + str(dll).replace('/', '\\')],
