@@ -1,0 +1,62 @@
+{
+  "original": "master/gs_dll.dll",
+  "original_size": 2170928,
+  "original_sha256": "35a69ae0172add4355a7f4c4fa30b84adfffbd4bade67cce88631502627bc45b",
+  "canonical_sha256": "e7b410a8abdb6829e8ecac94fe9c773857a0584ed58036f2edbe744834bea2e1",
+  "residue_asset": "gs-linker-residue.bin",
+  "residue_size": 496644,
+  "residue_sha256": "66c8a85a424fb3acdb8282e55f400a6c0d08b71da54b3ba1e145b71767418945",
+  "classification": "Historical noncode linker state and explicitly identified PE/CodeView build metadata. No linked executable instructions, program data, resources, import entries, export entries or relocation entries are restored.",
+  "provenance_limit": "The residue is preserved from the original file, not regenerated from reconstructed source. Its uninitialized allocator contents depend on unavailable historical process state. Every byte outside the listed regions must already match before restoration.",
+  "regions": [
+    {
+      "name": "incremental_linker_heap_residue",
+      "offset": 1305808,
+      "size": 496640,
+      "asset_offset": 0,
+      "kind": "archival_residue"
+    },
+    {
+      "name": "debug_directory_alignment_residue",
+      "offset": 1806364,
+      "size": 4,
+      "asset_offset": 496640,
+      "kind": "archival_residue"
+    },
+    {
+      "name": "pe_timestamp",
+      "offset": 272,
+      "size": 4,
+      "kind": "uint32",
+      "value": 1010854686
+    },
+    {
+      "name": "debug_directory_timestamp",
+      "offset": 1806340,
+      "size": 4,
+      "kind": "uint32",
+      "value": 1010854686
+    },
+    {
+      "name": "export_directory_timestamp",
+      "offset": 1938068,
+      "size": 4,
+      "kind": "uint32",
+      "value": 1010854686
+    },
+    {
+      "name": "pdb_signature",
+      "offset": 2170888,
+      "size": 4,
+      "kind": "uint32",
+      "value": 994580192
+    },
+    {
+      "name": "pdb_age",
+      "offset": 2170892,
+      "size": 4,
+      "kind": "uint32",
+      "value": 60
+    }
+  ]
+}

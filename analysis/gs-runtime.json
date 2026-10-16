@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "scratch": "/root/.ai-tmp/nemu-gs-probe.j1mo3nv5",
+  "runs": [
+    {
+      "name": "original",
+      "dll_sha256": "35a69ae0172add4355a7f4c4fa30b84adfffbd4bade67cce88631502627bc45b",
+      "exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "stdout_sha256": "b503e7343949e6ae938aef245ec8aaf5f7ce4f6ecabb985e494a581312e52791",
+      "generated_files": {
+        "probe.ini": "2d67418e086d21c373fa6e20a901a2cb712a429c569cb81dd9ea2e11cbafaaae"
+      }
+    },
+    {
+      "name": "rebuilt",
+      "dll_sha256": "35a69ae0172add4355a7f4c4fa30b84adfffbd4bade67cce88631502627bc45b",
+      "exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "stdout_sha256": "b503e7343949e6ae938aef245ec8aaf5f7ce4f6ecabb985e494a581312e52791",
+      "generated_files": {
+        "probe.ini": "2d67418e086d21c373fa6e20a901a2cb712a429c569cb81dd9ea2e11cbafaaae"
+      }
+    }
+  ],
+  "stdout_equal": true,
+  "generated_files_equal": true,
+  "scenarios": [
+    "Resolve GSInitialize, GSConfigure, GSUpdate and call before initialization",
+    "Byte-swapped and space-padded ROM title selects the seeded INI section",
+    "Activate, deactivate, and reactivate cheat groups using native controls",
+    "New Code, Add, and Properties dialogs create and edit a fourth cheat",
+    "Native control snapshots and saved INI contents compare identically",
+    "80/A0 byte and 81/A1 halfword writes with N64 byte swapping and byte truncation",
+    "D0/D1/D2/D3 conditions each exercise both execute and skip outcomes",
+    "A failed condition skips exactly one subsequent conditional code",
+    "Unsupported code types leave RAM unchanged",
+    "Repeated GSUpdate reapplies active writes",
+    "Reopen saved code database and retain active names within the process",
+    "Deactivate all codes, reinitialize a different ROM, and unload DLL"
+  ],
+  "limitations": [
+    "Uses synthetic RAM and deterministic valid INI input, not a running emulator.",
+    "Does not test malformed files, invalid addresses, every dialog operation, or rendered pixels.",
+    "Active names are tested across dialog reopen; the DLL does not persist them to INI.",
+    "This behavioral smoke comparison does not establish full behavioral or byte equivalence."
+  ]
+}

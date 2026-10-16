@@ -1,0 +1,177 @@
+{
+  "original": {
+    "path": "master/gs_dll.dll",
+    "bytes": 2170928,
+    "sha256": "35a69ae0172add4355a7f4c4fa30b84adfffbd4bade67cce88631502627bc45b"
+  },
+  "raw_compiler_output": {
+    "sha256": "e5e5ab457d629d37e08903ede986e934221a906d61daf9a8915dd5a2617892df",
+    "full_file_byte_exact": false,
+    "sections": [
+      {
+        "name": ".text",
+        "layout_exact": true,
+        "raw_differing_bytes": 306477
+      },
+      {
+        "name": ".rdata",
+        "layout_exact": true,
+        "raw_differing_bytes": 12
+      },
+      {
+        "name": ".data",
+        "layout_exact": true,
+        "raw_differing_bytes": 0
+      },
+      {
+        "name": ".idata",
+        "layout_exact": true,
+        "raw_differing_bytes": 0
+      },
+      {
+        "name": ".rsrc",
+        "layout_exact": true,
+        "raw_differing_bytes": 0
+      },
+      {
+        "name": ".reloc",
+        "layout_exact": true,
+        "raw_differing_bytes": 0
+      }
+    ],
+    "executable_prefix": {
+      "file_start": "0x1000",
+      "file_end_exclusive": "0x13ecd0",
+      "bytes": 1301712,
+      "differing_bytes": 0
+    }
+  },
+  "toolchain": {
+    "compiler": "VC6 SP5 Processor Pack, build 9044; /MTd /Gm /GX /GZ /ZI /Od",
+    "linker": "VC6 SP5, build 8447; original incremental link command reconstructed",
+    "rich_records_exact": true,
+    "platform": "Wine application version win98 for link.exe and cvtres.exe",
+    "heap_base_observation": {
+      "default_wine": "0x43ff0000",
+      "win98": "0x90000000",
+      "original": "0x90000000"
+    },
+    "native_crt": {
+      "path": "toolchains/vc6/runtime/msvcrt.dll",
+      "source": "tracked toolchains/vc6/redist/vcredist.exe payload msvcrt.dll",
+      "sha256": "887eb5ce93edb7192ca3e9220f07f9ca0f94db02af5862ebcbdfcb852db99fd1",
+      "observation": "Native CRT reproduces the linker heap marker 0x780012c0; Wine builtin CRT does not. The complete generated ILK contains 697 instances."
+    },
+    "fullbuild_caveat": "Experiments show /fullbuild still accepts an existing incremental ILK; the retained switch does not prove a clean original link."
+  },
+  "nonprogram_residue_regions": [
+    {
+      "section": ".text",
+      "map_contribution": ".textbss",
+      "map_contribution_rva": "0x13ecc4",
+      "map_contribution_size": "0x7940c",
+      "archival_start_rva": "0x13ecd0",
+      "archival_end_rva_exclusive": "0x1b80d0",
+      "bytes": 496640,
+      "nonzero_original_bytes": 306477,
+      "description": "Linker-generated uninitialized Edit and Continue reserve. The first 12 bytes of the mapped contribution are compiler/linker alignment 0xcc and already match. The remaining reserve contains leaked linker heap state in the original and zeroes in the clean build.",
+      "base_relocations_in_region": [],
+      "base_relocations_targeting_region": []
+    },
+    {
+      "section": ".rdata",
+      "archival_start_rva": "0x1b901c",
+      "archival_end_rva_exclusive": "0x1b9020",
+      "bytes": 4,
+      "original_ascii": "LUMN",
+      "description": "Four alignment bytes between the 28-byte PE debug-directory entry and the first application message-map contribution."
+    }
+  ],
+  "ilk_origin_evidence": {
+    "original_heap_pointer_to_dll_file_offset": "pointer - 0x90080000",
+    "original_dll_file_offset_to_ilk_offset": "file offset + 0x80000",
+    "example": {
+      "original_library_path_file_offset": "0x14c94c",
+      "stored_heap_pointer": "0x901cc94c",
+      "library_path": "E:\\Microsoft Visual Studio\\VC98\\LIB\\comdlg32.lib"
+    },
+    "generated_structured_heap_shift_bytes": -252,
+    "generated_name_pool_shift_bytes": -228,
+    "shift_difference_explanation": "The diagnostic link command contains a 24-byte /map option absent from the original retained command.",
+    "name_pool": {
+      "original_file_start": "0x18ab34",
+      "original_file_end_exclusive": "0x1b80d0",
+      "generated_ilk_start": "0x20aa50",
+      "bytes": 185756,
+      "complete_names": 5408,
+      "all_bytes_exact_after_alignment": true
+    },
+    "alignment_fragment": {
+      "original_file_offset": "0x1b901c",
+      "predicted_original_ilk_offset": "0x23901c",
+      "generated_ilk_offset": "0x238f38",
+      "generated_bytes_ascii": "LUMN",
+      "symbol": "_COLUMN_NAME"
+    },
+    "structured_heap_diagnostic": {
+      "original_file_start": "0x13ecd0",
+      "original_file_end_exclusive": "0x18a6d4",
+      "dword_categories": {
+        "equal": 62742,
+        "other_metadata_or_allocator_state": 2545,
+        "heap_pointer": 12154
+      },
+      "differing_bytes_by_category": {
+        "equal": 0,
+        "other_metadata_or_allocator_state": 6943,
+        "heap_pointer": 24042
+      },
+      "caveat": "This aligned statistical comparison identifies heap-pointer fields; it is not a byte-equality verification or a reconstruction of the lost heap."
+    },
+    "historical_state_examples": [
+      {
+        "file_offset": "0x188ccc",
+        "meaning": "retained export-object timestamp",
+        "value": "0x3b4d0ec2",
+        "utc": "2001-07-12T02:43:14+00:00",
+        "description": "Older than the final DLL timestamp; the original link retained historical build inputs."
+      },
+      {
+        "file_offset": "0x188b58",
+        "meaning": "installed wininet.lib modification time",
+        "value": "0x355928d0",
+        "utc": "1998-05-13T05:00:00+00:00",
+        "description": "Differs from the staged cabinet payload timestamp without changing library bytes."
+      },
+      {
+        "file_offset": "0x188af8",
+        "meaning": "unused allocator contents",
+        "ascii_fragment": "pping empty key '%s'.",
+        "description": "Fragment of an MFC library diagnostic string left between live linker structures; the clean generated ILK contains zeroes here."
+      }
+    ]
+  },
+  "conclusion": {
+    "source_reconstruction": "Every emitted executable byte and all initialized application/library data, imports, resources, and relocations match the original. Complete raw DLL equality is prevented by incidental build metadata and uninitialized linker residue.",
+    "generation_limit": "The rebuilt ILK independently reproduces every surviving external symbol name and explains the LUMN fragment, but it does not reproduce the original process addresses, old input timestamps, or unused allocator contents. These bytes are not uniquely determined by the reconstructed source.",
+    "permitted_archival_scope": "Preserve only the two explicitly identified nonprogram residue ranges, separately from application source, plus typed PE timestamp and NB10 identity normalization. Preserve the raw compiler output and verify every byte outside those ranges and typed fields before applying archival metadata.",
+    "claim_limit": "An archival byte-exact artifact must not be described as the native compiler independently regenerating the original incidental linker state."
+  },
+  "quoted_def_experiment": {
+    "source_change": "LIBRARY gs_dll -> LIBRARY \"gs_dll\"",
+    "old_export_object_bytes": 1289,
+    "new_export_object_bytes": 1291,
+    "original_export_object_bytes_in_retained_metadata": 1291,
+    "export_directive": " /DLL /OUT:\"gs_dll.dll\"",
+    "raw_dll_differences_vs_unquoted": [
+      "0x110",
+      "0x111",
+      "0x1b9004",
+      "0x1b9005",
+      "0x1d9294",
+      "0x1d9295",
+      "0x21200c"
+    ],
+    "conclusion": "Quoted AppWizard-style LIBRARY declaration reproduces the original export-object size and directive size; no executable or initialized program bytes change."
+  }
+}
