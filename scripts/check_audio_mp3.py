@@ -1,0 +1,126 @@
+#!/usr/bin/env python3
+"""Build and measure the native JPEG/MP3 reconstruction without modifying a PE.
+
+This is a component diagnostic. A matching object contribution does not establish
+whole-DLL identity; missing Mp3DCT and unresolved storage identities remain explicit.
+"""
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+
+from pe_fingerprints import PE32
+from verify_gs import COFF, compare_object
+
+ROOT = Path(__file__).resolve().parents[1]
+UNITS = ('Jpeg', 'transform', 'Mp3Primitives', 'Mp3Butterfly')
+SOURCES = [ROOT / 'src/audio/ahle_ds' / (name + '.c') for name in UNITS]
+DATA = (
+    ('Jpeg', '_JpegZigZag', 0x1003ad48, 256),
+    ('Jpeg', '_JpegCosine', 0x1003ae48, 256),
+    ('Jpeg', '__real@4069000000000000', 0x10031110, 8),
+    ('Jpeg', '__real@4000000000000000', 0x10031118, 8),
+    ('Jpeg', '__real@3fc921fb54442d18', 0x10031120, 8),
+    ('transform', '_t_dewindow', 0x1003a4c8, 2176),
+    ('transform', '_b1', 0x10031090, 124),
+    ('transform', '_nch', 0x1003af48, 4),
+)
+
+
+def digest(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def winpath(path):
+    return 'Z:' + str(path.resolve()).replace('/', '\\')
+
+
+def run(output):
+    env = os.environ.copy()
+    env.update(WINEPREFIX=str(output / 'wine'), WINEDEBUG='-all')
+    flags = ['/nologo', '/c', '/O2', '/Ob1', '/MT']
+    for source in SOURCES:
+        subprocess.run([sys.executable, str(ROOT / 'scripts/run_toolchain.py'),
+                        'vc7', 'cl', *flags,
+                        '/Fo' + winpath(output / (source.stem + '.obj')),
+                        winpath(source)], cwd=ROOT, env=env, check=True)
+    original = ROOT / 'master/Plugin/audio.dll'
+    image = PE32(original)
+    address_map = ROOT / 'analysis/audio-mp3-addresses.json'
+    reports = [compare_object(output / (unit + '.obj'), original, address_map)
+               for unit in UNITS]
+    objects = {unit: COFF(output / (unit + '.obj')) for unit in UNITS}
+    data = []
+    for unit, name, address, size in DATA:
+        obj = objects[unit]
+        symbol = next(s for s in obj.symbols if s['name'] == name and s['section'] > 0)
+        section = obj.sections[symbol['section'] - 1]
+        rebuilt = section['data'][symbol['value']:symbol['value'] + size]
+        offset = image.offset(address - image.base)
+        target = image.data[offset:offset + size]
+        data.append(dict(unit=unit, symbol=name, va=hex(address), size=size,
+                         equal=rebuilt == target,
+                         rebuilt_sha256=hashlib.sha256(rebuilt).hexdigest(),
+                         original_sha256=hashlib.sha256(target).hexdigest(),
+                         unique_raw_occurrence=image.data.count(target) == 1,
+                         relocation_fields=sum(symbol['value'] <= r['offset'] <
+                                               symbol['value'] + size
+                                               for r in section['relocations'])))
+    functions = [f for r in reports for f in r['functions']]
+    result = dict(
+        status='partial_native_source_reconstruction',
+        original=str(original.relative_to(ROOT)), original_sha256=digest(original),
+        compiler_flags=flags,
+        compiler={str(p.relative_to(ROOT)): digest(p)
+                  for p in [ROOT / 'toolchains/vc7/bin' / n
+                            for n in ('cl.exe', 'c1.dll', 'c2.dll')]},
+        source_sha256={str(p.relative_to(ROOT)): digest(p)
+                       for p in [*SOURCES, ROOT / 'src/audio/ahle_ds/transform.h']},
+        address_map_sha256=digest(address_map), objects=reports, initialized_data=data,
+        summary=dict(functions=len(functions),
+                     original_function_bytes=sum(f.get('original_bytes', 0) for f in functions),
+                     matching_complete_extents=sum(f.get('relocation_masked_equal', False)
+                                                   for f in functions),
+                     matching_complete_extent_bytes=sum(f.get('original_bytes', 0)
+                                                         for f in functions
+                                                         if f.get('relocation_masked_equal')),
+                     matching_extents_with_consistent_symbolic_relocations=sum(
+                         f.get('inferred_relocated_bytes_equal', False) for f in functions),
+                     initialized_data_bytes=sum(r['size'] for r in data),
+                     initialized_data_equal=all(r['equal'] for r in data)),
+        missing=[dict(name='Mp3DCT', start='0x10009ae0', end='0x1000aed0', bytes=5104)],
+        whole_dll_byte_exact=False,
+        notes=[
+            'Code comparisons cover complete function extents, including stock compiler alignment.',
+            'Only recorded COFF relocation fields are masked; local branches and SIB bytes are compared.',
+            'Reconstruction names and BSS addresses inferred from operands remain explicitly labelled.',
+            'Independent initialized-data comparisons do not identify zero-filled storage.',
+            'No target bytes are injected into compiler output or emitted as executable data.',
+        ])
+    return result
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output-dir', type=Path)
+    parser.add_argument('--report', type=Path, default=ROOT / 'analysis/audio-mp3-comparison.json')
+    args = parser.parse_args()
+    if args.output_dir is None:
+        parent = Path.home() / '.ai-tmp'
+        parent.mkdir(exist_ok=True)
+        output = Path(tempfile.mkdtemp(prefix='audio-mp3.', dir=parent))
+    else:
+        output = args.output_dir.resolve()
+        output.mkdir(parents=True, exist_ok=True)
+    result = run(output)
+    args.report.write_text(json.dumps(result, indent=2) + '\n')
+    print(json.dumps(result['summary'], indent=2))
+    print('Whole DLL byte exact: false; component reconstruction remains incomplete.')
+
+
+if __name__ == '__main__':
+    main()

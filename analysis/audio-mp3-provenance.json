@@ -1,0 +1,30 @@
+{
+  "status": "partial_native_source_reconstruction",
+  "target": "master/Plugin/audio.dll",
+  "target_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "sources": [
+    {
+      "upstream_url": "https://sources.debian.org/data/non-free/a/amp/0.7.6-1/transform.c",
+      "sha256": "35cab7a8eeb8be7a5b972a1aa108c7fc24ab05496962a33b43e8ba421b4703e0",
+      "evidence": "Exact native compilation of poly: 6000 byte complete function extent after symbolic relocations. Target adds caller-owned sample_buffer parameter."
+    },
+    {
+      "upstream_url": "https://sources.debian.org/data/non-free/a/amp/0.7.6-1/transform.h",
+      "sha256": "fd3d1442c03e314c3368af8aff64eaa2fb290fc7992fa8d58bb5283ffca6995d",
+      "evidence": "All31 float constants and17x32 dewindow table retained; initialized spans checked separately."
+    }
+  ],
+  "notes": [
+    "JPEG and fixed-point MP3 sources are reconstructed directly from target dataflow. Filenames and proprietary internal names inferred.",
+    "AziAudio ABI3mp3.cpp and mupen64plus-rsp-hle/src/mp3.c were inspected only to interpret the N64 synthesis stages; no modern replacement decoder is used.",
+    "No original x86 blobs, byte patches, dummy computation or synthetic padding are used. Compiler alignment belongs to complete measured function extents."
+  ],
+  "unreconstructed": [
+    {
+      "start": "0x10009ae0",
+      "end": "0x1000aed0",
+      "name": "Mp3DCT",
+      "status": "not_yet_reconstructed"
+    }
+  ]
+}

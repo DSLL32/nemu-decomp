@@ -1,0 +1,625 @@
+{
+  "symbols": [
+    {
+      "name": "_Mp3Narrow",
+      "va": "0x100093f0",
+      "size": 16,
+      "address_evidence": "Function boundary established by complete disassembly to terminal return/tail call. Name inferred from decoded fixed-point semantics."
+    },
+    {
+      "name": "_Mp3Add",
+      "va": "0x10009400",
+      "size": 16,
+      "address_evidence": "Function boundary established by complete disassembly to terminal return/tail call. Name inferred from decoded fixed-point semantics."
+    },
+    {
+      "name": "_Mp3Subtract",
+      "va": "0x10009410",
+      "size": 16,
+      "address_evidence": "Function boundary established by complete disassembly to terminal return/tail call. Name inferred from decoded fixed-point semantics."
+    },
+    {
+      "name": "_Mp3MultiplyFraction",
+      "va": "0x10009420",
+      "size": 32,
+      "address_evidence": "Function boundary established by complete disassembly to terminal return/tail call. Name inferred from decoded fixed-point semantics."
+    },
+    {
+      "name": "_Mp3MultiplyUnsigned",
+      "va": "0x10009440",
+      "size": 32,
+      "address_evidence": "Function boundary established by complete disassembly to terminal return/tail call. Name inferred from decoded fixed-point semantics."
+    },
+    {
+      "name": "_Mp3MultiplySplit",
+      "va": "0x10009460",
+      "size": 32,
+      "address_evidence": "Function boundary established by complete disassembly to terminal return/tail call. Name inferred from decoded fixed-point semantics."
+    },
+    {
+      "name": "_Mp3AccumulateFraction",
+      "va": "0x10009480",
+      "size": 80,
+      "address_evidence": "Function boundary established by complete disassembly to terminal return/tail call. Name inferred from decoded fixed-point semantics."
+    },
+    {
+      "name": "_Mp3AccumulateUnsigned",
+      "va": "0x100094d0",
+      "size": 48,
+      "address_evidence": "Function boundary established by complete disassembly to terminal return/tail call. Name inferred from decoded fixed-point semantics."
+    },
+    {
+      "name": "_Mp3ReadSamples",
+      "va": "0x10009500",
+      "size": 80,
+      "address_evidence": "Function boundary established by complete disassembly to terminal return/tail call. Name inferred from decoded fixed-point semantics."
+    },
+    {
+      "name": "_ReadAudioMemory",
+      "va": "0x10004230",
+      "address_evidence": "Inferred native memory copy identity at0x10004230, confirmed by its complete 32bit byte-swap copy loop; integration owner DSound."
+    },
+    {
+      "name": "__allshr",
+      "va": 268573872,
+      "address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+      "address_basis": "independent_library_mapping"
+    },
+    {
+      "name": "_JpegReadBlock",
+      "va": "0x10006cb0",
+      "size": 96,
+      "address_evidence": "Complete function extent decoded through terminal return and compiler alignment. Name inferred from semantics."
+    },
+    {
+      "name": "_JpegWriteBlock",
+      "va": "0x10006d10",
+      "size": 96,
+      "address_evidence": "Complete function extent decoded through terminal return and compiler alignment. Name inferred from semantics."
+    },
+    {
+      "name": "_JpegInitializeCosine",
+      "va": "0x10006d70",
+      "size": 96,
+      "address_evidence": "Complete function extent decoded through terminal return and compiler alignment. Name inferred from semantics."
+    },
+    {
+      "name": "_JpegSwapSample",
+      "va": "0x10006dd0",
+      "size": 16,
+      "address_evidence": "Complete function extent decoded through terminal return and compiler alignment. Name inferred from semantics."
+    },
+    {
+      "name": "_JpegCopyBlock",
+      "va": "0x10006de0",
+      "size": 32,
+      "address_evidence": "Complete function extent decoded through terminal return and compiler alignment. Name inferred from semantics."
+    },
+    {
+      "name": "_RDRAM",
+      "va": "0x1016bae4",
+      "address_evidence": "Inferred data/function identity from decoded operands; requires separate corroboration."
+    },
+    {
+      "name": "_JpegZigZag",
+      "va": "0x1003ad48",
+      "address_evidence": "Inferred data/function identity from decoded operands; requires separate corroboration."
+    },
+    {
+      "name": "_JpegCosine",
+      "va": "0x1003ae48",
+      "address_evidence": "Inferred data/function identity from decoded operands; requires separate corroboration."
+    },
+    {
+      "name": "_JpegBlock",
+      "va": "0x100e8fd8",
+      "address_evidence": "Inferred data/function identity from decoded operands; requires separate corroboration."
+    },
+    {
+      "name": "_JpegOutput",
+      "va": "0x100e95d8",
+      "address_evidence": "Inferred data/function identity from decoded operands; requires separate corroboration."
+    },
+    {
+      "name": "_JpegQuantizationCb",
+      "va": "0x100e99d8",
+      "address_evidence": "Inferred data/function identity from decoded operands; requires separate corroboration."
+    },
+    {
+      "name": "_JpegPixels",
+      "va": "0x100e9ad8",
+      "address_evidence": "Inferred data/function identity from decoded operands; requires separate corroboration."
+    },
+    {
+      "name": "_JpegQuantizationCr",
+      "va": "0x100eaad8",
+      "address_evidence": "Inferred data/function identity from decoded operands; requires separate corroboration."
+    },
+    {
+      "name": "_JpegQuantizationY",
+      "va": "0x100ebcd8",
+      "address_evidence": "Inferred data/function identity from decoded operands; requires separate corroboration."
+    },
+    {
+      "name": "__ftol2",
+      "va": 268571568,
+      "address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+      "address_basis": "independent_library_mapping"
+    },
+    {
+      "name": "_JpegInverseDCT",
+      "va": "0x10006e00",
+      "size": 976,
+      "address_evidence": "Complete function extent decoded through terminal return and compiler alignment. Name inferred from semantics."
+    },
+    {
+      "name": "_JpegInverseDCTAlternate",
+      "va": "0x100071d0",
+      "size": 976,
+      "address_evidence": "Complete function extent decoded through terminal return and compiler alignment. Name inferred from semantics."
+    },
+    {
+      "name": "_JpegDecodeMacroblock",
+      "va": "0x100075a0",
+      "size": 1408,
+      "address_evidence": "Complete function extent decoded through terminal return and compiler alignment. Name inferred from semantics."
+    },
+    {
+      "name": "_DCTList",
+      "va": "0x10007b20",
+      "size": 352,
+      "address_evidence": "DLL export name and complete disassembly extent."
+    },
+    {
+      "name": "_Mp3V0",
+      "va": "0x101686e8",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V1",
+      "va": "0x10168712",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V2",
+      "va": "0x101686cc",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V3",
+      "va": "0x101686f6",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V4",
+      "va": "0x101686fe",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V5",
+      "va": "0x101686ee",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V6",
+      "va": "0x101686c4",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V7",
+      "va": "0x101686fc",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V8",
+      "va": "0x101686da",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V9",
+      "va": "0x1016870c",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V10",
+      "va": "0x101686d6",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V11",
+      "va": "0x101686e6",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V12",
+      "va": "0x101686de",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V13",
+      "va": "0x10168716",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V14",
+      "va": "0x10168700",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V15",
+      "va": "0x1016871a",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V16",
+      "va": "0x101686fa",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V17",
+      "va": "0x101686c2",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V18",
+      "va": "0x101686c8",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V19",
+      "va": "0x10168708",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V20",
+      "va": "0x101686e2",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V21",
+      "va": "0x101686dc",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V22",
+      "va": "0x10168702",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V23",
+      "va": "0x101686f0",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V24",
+      "va": "0x101686d4",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V25",
+      "va": "0x101686f4",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V26",
+      "va": "0x101686c6",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V27",
+      "va": "0x101686ec",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V28",
+      "va": "0x101686ea",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V29",
+      "va": "0x10168710",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V30",
+      "va": "0x10169020",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3V31",
+      "va": "0x101686f2",
+      "size": 2,
+      "address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array."
+    },
+    {
+      "name": "_Mp3Butterfly",
+      "va": "0x10009550",
+      "size": 1424,
+      "address_evidence": "Complete function extent9550\u20139ae0; inferred MP3 four-stage butterfly semantics from paired sums/differences and signed/unsigned fixed-point multipliers."
+    },
+    {
+      "name": "_poly",
+      "va": "0x10007c80",
+      "size": 6000,
+      "address_evidence": "AMP 0.7.6 poly source recovered by exact constants, res dimensions, u dimensions and complete butterfly/dewindow formulas; complete disassembly extent."
+    },
+    {
+      "name": "?u@?1??poly@@9@9",
+      "va": "0x100eabd8",
+      "address_evidence": "Inferred data identity from complete AMP poly dataflow; initialized data separately compared."
+    },
+    {
+      "name": "?u_start@?1??poly@@9@9",
+      "va": "0x100ebde0",
+      "address_evidence": "Inferred data identity from complete AMP poly dataflow; initialized data separately compared."
+    },
+    {
+      "name": "?u_div@?1??poly@@9@9",
+      "va": "0x100ebde8",
+      "address_evidence": "Inferred data identity from complete AMP poly dataflow; initialized data separately compared."
+    },
+    {
+      "name": "_res",
+      "va": "0x10168720",
+      "address_evidence": "Inferred data identity from complete AMP poly dataflow; initialized data separately compared."
+    },
+    {
+      "name": "_nch",
+      "va": "0x1003af48",
+      "address_evidence": "Inferred data identity from complete AMP poly dataflow; initialized data separately compared."
+    },
+    {
+      "name": "_t_dewindow",
+      "va": "0x1003a4c8",
+      "address_evidence": "Inferred data identity from complete AMP poly dataflow; initialized data separately compared."
+    },
+    {
+      "name": "_b1",
+      "va": "0x10031090",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b2",
+      "va": "0x10031094",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b3",
+      "va": "0x10031098",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b4",
+      "va": "0x1003109c",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b5",
+      "va": "0x100310a0",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b6",
+      "va": "0x100310a4",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b7",
+      "va": "0x100310a8",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b8",
+      "va": "0x100310ac",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b9",
+      "va": "0x100310b0",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b10",
+      "va": "0x100310b4",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b11",
+      "va": "0x100310b8",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b12",
+      "va": "0x100310bc",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b13",
+      "va": "0x100310c0",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b14",
+      "va": "0x100310c4",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b15",
+      "va": "0x100310c8",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b16",
+      "va": "0x100310cc",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b17",
+      "va": "0x100310d0",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b18",
+      "va": "0x100310d4",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b19",
+      "va": "0x100310d8",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b20",
+      "va": "0x100310dc",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b21",
+      "va": "0x100310e0",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b22",
+      "va": "0x100310e4",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b23",
+      "va": "0x100310e8",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b24",
+      "va": "0x100310ec",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b25",
+      "va": "0x100310f0",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b26",
+      "va": "0x100310f4",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b27",
+      "va": "0x100310f8",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b28",
+      "va": "0x100310fc",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b29",
+      "va": "0x10031100",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b30",
+      "va": "0x10031104",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "_b31",
+      "va": "0x10031108",
+      "size": 4,
+      "address_evidence": "AMP 0.7.6 float constant table, independently compared as contiguous data."
+    },
+    {
+      "name": "?initialized@?1??JpegInverseDCT@@9@9",
+      "va": "0x100ebdd8",
+      "size": 4,
+      "address_evidence": "Inferred from full-function operands; source value and initialized bytes compared separately."
+    },
+    {
+      "name": "?initialized@?1??JpegInverseDCTAlternate@@9@9",
+      "va": "0x100ebddc",
+      "size": 4,
+      "address_evidence": "Inferred from full-function operands; source value and initialized bytes compared separately."
+    },
+    {
+      "name": "__real@4069000000000000",
+      "va": "0x10031110",
+      "size": 8,
+      "address_evidence": "Inferred from full-function operands; source value and initialized bytes compared separately."
+    },
+    {
+      "name": "__real@4000000000000000",
+      "va": "0x10031118",
+      "size": 8,
+      "address_evidence": "Inferred from full-function operands; source value and initialized bytes compared separately."
+    },
+    {
+      "name": "__real@3fc921fb54442d18",
+      "va": "0x10031120",
+      "size": 8,
+      "address_evidence": "Inferred from full-function operands; source value and initialized bytes compared separately."
+    }
+  ],
+  "extent_policy": "Sizes cover each original function and all following compiler alignment up to the next identified function."
+}
