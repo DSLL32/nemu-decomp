@@ -26,24 +26,28 @@ unsigned long BrowserRomCount;
 
 int CALLBACK CompareBrowserItems(LPARAM first, LPARAM second, LPARAM)
 {
+    // Inferred grouping of real locals: the item and conversion end pointer
+    // occupy adjacent slots in the original frame. The source type is unknown.
+    struct { LVITEMA a; char* end; } local;
+    LVITEMA b;
     LVFINDINFOA find;
-    LVITEMA a, b;
-    char aText[100], bText[100];
-    char* end;
+    char aText[100];
+    char bText[100];
     find.flags = LVFI_PARAM;
     find.lParam = first;
     int firstIndex = ListView_FindItem(BrowserWindow, -1, &find);
     find.lParam = second;
-    b.iItem = ListView_FindItem(BrowserWindow, -1, &find);
-    a.pszText = aText;
-    b.cchTextMax = a.cchTextMax = 100;
-    b.mask = a.mask = LVIF_TEXT | LVIF_IMAGE;
-    a.iItem = firstIndex;
-    b.iSubItem = a.iSubItem = 0;
+    int secondIndex = ListView_FindItem(BrowserWindow, -1, &find);
+    local.a.pszText = aText;
+    b.cchTextMax = local.a.cchTextMax = 100;
+    b.mask = local.a.mask = LVIF_TEXT | LVIF_IMAGE;
+    local.a.iItem = firstIndex;
+    b.iItem = secondIndex;
+    b.iSubItem = local.a.iSubItem = 0;
     b.pszText = bText;
-    ListView_GetItem(BrowserWindow, &a);
+    ListView_GetItem(BrowserWindow, &local.a);
     ListView_GetItem(BrowserWindow, &b);
-    if (a.iImage == 5) {
+    if (local.a.iImage == 5) {
         if (b.iImage != 5)
             goto negative;
         goto compareText;
@@ -52,32 +56,32 @@ int CALLBACK CompareBrowserItems(LPARAM first, LPARAM second, LPARAM)
         return BrowserSortMode;
     switch (BrowserSortMode) {
     case -2: case 2:
-        b.iSubItem = a.iSubItem = 1;
-        ListView_GetItem(BrowserWindow, &a);
+        b.iSubItem = local.a.iSubItem = 1;
+        ListView_GetItem(BrowserWindow, &local.a);
         ListView_GetItem(BrowserWindow, &b);
     case -1: case 1:
 compareText:
-        return stricmp(a.pszText, b.pszText) * BrowserSortMode;
+        return stricmp(local.a.pszText, b.pszText) * BrowserSortMode;
     case -3: case 3: {
-        b.iSubItem = a.iSubItem = 2;
-        ListView_GetItem(BrowserWindow, &a);
+        b.iSubItem = local.a.iSubItem = 2;
+        ListView_GetItem(BrowserWindow, &local.a);
         ListView_GetItem(BrowserWindow, &b);
-        int left = strtol(a.pszText, &end, 10);
-        int right = strtol(b.pszText, &end, 10);
+        int left = strtol(local.a.pszText, &local.end, 10);
+        int right = strtol(b.pszText, &local.end, 10);
         if (left < right) return BrowserSortMode;
         if (left > right) { negative: return -BrowserSortMode; }
         return 0;
     }
     case -4: case 4:
-        b.iSubItem = a.iSubItem = 3;
-        ListView_GetItem(BrowserWindow, &a);
+        b.iSubItem = local.a.iSubItem = 3;
+        ListView_GetItem(BrowserWindow, &local.a);
         ListView_GetItem(BrowserWindow, &b);
-        return stricmp(a.pszText, b.pszText) * BrowserSortMode;
+        return stricmp(local.a.pszText, b.pszText) * BrowserSortMode;
     case -5: case 5:
-        b.iSubItem = a.iSubItem = 4;
-        ListView_GetItem(BrowserWindow, &a);
+        b.iSubItem = local.a.iSubItem = 4;
+        ListView_GetItem(BrowserWindow, &local.a);
         ListView_GetItem(BrowserWindow, &b);
-        return stricmp(a.pszText, b.pszText) * BrowserSortMode;
+        return stricmp(local.a.pszText, b.pszText) * BrowserSortMode;
     }
     return 0;
 }

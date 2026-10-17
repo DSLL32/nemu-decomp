@@ -1278,7 +1278,39 @@
     },
     "scope": "Earlier source snapshot and earlier comparator; source hashes identify that historical compiler input, not the current working tree."
   },
-  "validation": {
+  "rejected_source_hypotheses": [
+    {
+      "description": "All5040 individual local declaration orders and480 grouped orders yield identical comparator code",
+      "report": "/root/.ai-tmp/nemu-browser-decl-order.vbama_qx/summary.json",
+      "sha256": "95f43f4d0683274366b8b9b024a002f316d318ab98941bef1dd59b981fcaa562",
+      "promoted": false
+    },
+    {
+      "description": "1920 real-field aggregate and assignment-order variants; none reproduces required initialization sequence",
+      "report": "/root/.ai-tmp/nemu-browser-aggregate-order.i4zoo1mb/summary.json",
+      "sha256": "d9306c2991e718a47c42b1637b91ac230ff39b1c7206d7e1af01751879b2708c",
+      "promoted": false
+    },
+    {
+      "description": "Two-index aggregate assignment forms:7680 adjacent-index placements plus420 independently placed index stores; none improves the retained60-byte residual",
+      "report": "/root/.ai-tmp/nemu-browser-two-index.kad_kdl7/summary.json",
+      "sha256": "7d44f9edcc643411ec173eb3469172ec0d3881ca3ab83320249fac9fc9268a0d",
+      "promoted": false
+    },
+    {
+      "description": "48 pointer caching/address-expression forms compile identically to the retained aggregate candidate",
+      "report": "/root/.ai-tmp/nemu-browser-pointer-exprs._kyei8_6/summary.json",
+      "sha256": "43fe17bc594a521934c2421970706cb792bf204843a0b4022b5bae9703c7aa9a",
+      "promoted": false
+    },
+    {
+      "description": "26 index declaration/storage/parameter-reuse forms compile identically to the retained aggregate candidate",
+      "report": "/root/.ai-tmp/nemu-browser-index-storage.48bnd556/summary.json",
+      "sha256": "902e2c46cb126e0e477ae1bcfbdbcbe9d64049b3436bf24576af8d827e6613d8",
+      "promoted": false
+    }
+  ],
+  "historical_validation_before_two_index_refinement": {
     "fixture": "/root/.ai-tmp/nemu-complete-relocs.kvcg2ypy/nemu64.exe",
     "sha256": "1c44cc1a0d6f5243d4d860e5397b3c189b87aa48c87fd447963a87a9f95bfdcb",
     "map": "/root/.ai-tmp/nemu-complete-relocs.kvcg2ypy/nemu64.map",
@@ -1308,18 +1340,48 @@
       "src/nemu64/WinMain.cpp": "ea37bc07285c522fdf60a0f93de0c99307fbb05c7667dd95476e61a7af442683"
     }
   },
-  "rejected_source_hypotheses": [
-    {
-      "description": "All5040 individual local declaration orders and480 grouped orders yield identical comparator code",
-      "report": "/root/.ai-tmp/nemu-browser-decl-order.vbama_qx/summary.json",
-      "sha256": "95f43f4d0683274366b8b9b024a002f316d318ab98941bef1dd59b981fcaa562",
-      "promoted": false
+  "validation": {
+    "fixture": "/root/.ai-tmp/nemu-browser-aggregate-full.g9onzxeb/full.exe",
+    "sha256": "0ffb4f6dea1bf9dadf37ab67ae4bc5218cb041adb160455f070cf4767f998d02",
+    "map": "/root/.ai-tmp/nemu-browser-aggregate-full.g9onzxeb/full.map",
+    "map_sha256": "362d4017609463bb332ad235a29126708f13d7d4f519cfda57352a807258be8f",
+    "comparison_report": "/root/.ai-tmp/nemu-browser-aggregate-full.g9onzxeb/comparison.json",
+    "comparison_report_sha256": "75faf639489a59374d9124942b2698d97e3afc0b4275914325850436824a7754",
+    "regression_report": "/root/.ai-tmp/nemu-browser-aggregate-full.g9onzxeb/regression.json",
+    "regression_report_sha256": "9309049b6123461b3de93824d0a821ed40a5b331bda7249b71adfe26ecf45a97",
+    "matching_functions": 29,
+    "covered_original_bytes": 11168,
+    "known_target_mismatches": 0,
+    "unresolved_targets": 189,
+    "unverified_targets": 308,
+    "remaining_function": "CompareBrowserItems",
+    "remaining_normalized_differences": 56,
+    "method": "Complete unforced LTCG link using the immutable kvcg2ypy project with only the comparator replaced. All other29 browser MAP blocks remain raw-byte-identical at the same addresses. General comparator normalizes only real HIGHLOW/call address fields; the unmatched body does not acquire target proof through masking.",
+    "source_sha256": {
+      "src/nemu64/RomBrowser.cpp": "125eb45caba2fa114fa6c5724e27dfa3ef2e702b4a18b704604aa5c537e45a44"
     },
-    {
-      "description": "1920 real-field aggregate and assignment-order variants; none reproduces required initialization sequence",
-      "report": "/root/.ai-tmp/nemu-browser-aggregate-order.i4zoo1mb/summary.json",
-      "sha256": "d9306c2991e718a47c42b1637b91ac230ff39b1c7206d7e1af01751879b2708c",
-      "promoted": false
-    }
-  ]
+    "limitations": [
+      "Byte-normalized comparisons are not whole-executable equality.",
+      "The general comparer leaves all32 address fields in this unmatched body uncertified."
+    ]
+  },
+  "comparator_refinement": {
+    "inference": "Retaining both list-search indexes as real scalar locals and grouping LVITEMA a with the conversion end pointer reproduces every original stack slot. Grouping both LVITEMs and the end pointer instead produces identical output, so the original local declaration/type spelling is nonunique and remains unknown. No invented fields or padding.",
+    "body_bytes": 675,
+    "complete_span_bytes": 720,
+    "strictly_remapped_differing_bytes": 60,
+    "first_difference_offset": "0x5e",
+    "exact_ranges_after_explicit_operand_mapping": [
+      "0x101..0x2a3 code",
+      "0x2a3..0x2d0 tables and padding"
+    ],
+    "remaining": "Initialization store scheduling/register allocation within0x5e..0xbc and two switch-index register bytes at0xf5 and0xfc.",
+    "strict_report": "/root/.ai-tmp/nemu-browser-aggregate-full.g9onzxeb/aggregate1-summary.json",
+    "strict_report_sha256": "817a55c4f8261c2dd89fb622647c94a94131bdf313402fb217002e643729c275",
+    "strict_remapper": "/root/.ai-tmp/nemu-browser-aggregate-full.g9onzxeb/strict-remap.py",
+    "strict_remapper_sha256": "d855291204bb9ec741ffe099e558e8961d01fbd1817f07754a3ee651a825a108",
+    "strict_residual_report": "/root/.ai-tmp/nemu-browser-aggregate-full.g9onzxeb/aggregate1-residuals.json",
+    "strict_residual_sha256": "5eefa1590c371588d642495efea3f3183f85b9b88e4d7a1120ddf9be2e7fe01a",
+    "limits": "Explicit mappings cover BrowserWindow, BrowserSortMode, SendMessageA, strtol and stricmp plus relative inline-table destinations. This separate diagnostic remaps those known target addresses; it does not confer a full function match. The general comparer reports56 differences because4 bytes occur inside otherwise masked address fields."
+  }
 }
