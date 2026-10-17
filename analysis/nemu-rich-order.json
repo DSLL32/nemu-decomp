@@ -1,0 +1,2443 @@
+{
+  "schema_version": 1,
+  "status": "Supported ordinary archive organization; the first C++/alias Rich pair still differs.",
+  "original": "master/nemu64.exe",
+  "linker": "toolchains/vc7/bin/link.exe",
+  "linker_sha256": "1560d85164dfb763dd13f90f33ff9c6f1cd80f2afada03eed8d0a314593581f1",
+  "writer": {
+    "va_start": "0x457320",
+    "va_end_exclusive": "0x4574ee",
+    "model": "Seed the output list with linker comp-id003d24fa/count1. Walk library records, then each library's module records. Increment an existing count, or prepend a record for a newly encountered compiler ID. Emit the resulting list in its linked order.",
+    "library_list_offset": "project+0x200",
+    "library_next_offset": "0x44",
+    "library_first_module_offset": "0x40",
+    "module_next_offset": "0x54",
+    "module_comp_id_offset": "0x38",
+    "dynamic_observation": "/root/.ai-tmp/nemu-rich-order.iz9gcqni/module-walk.json",
+    "predicted_order": [
+      "001d24fa",
+      "002723ca",
+      "004024fa",
+      "000420ff",
+      "00041fe8",
+      "001923fa",
+      "00010000",
+      "001c24fa",
+      "002c24fa",
+      "000a1fe8",
+      "004524fa",
+      "003d24fa"
+    ],
+    "actual_order": [
+      "001d24fa",
+      "002723ca",
+      "004024fa",
+      "000420ff",
+      "00041fe8",
+      "001923fa",
+      "00010000",
+      "001c24fa",
+      "002c24fa",
+      "000a1fe8",
+      "004524fa",
+      "003d24fa"
+    ],
+    "model_prediction_equal": true,
+    "first_occurrence_groups": [
+      {
+        "library_index": 0,
+        "library": null,
+        "new_ids_in_traversal_order": [
+          {
+            "comp_id": "004524fa",
+            "member": "obj/nemu64.res"
+          },
+          {
+            "comp_id": "000a1fe8",
+            "member": "obj/zlib/inffast.obj"
+          },
+          {
+            "comp_id": "002c24fa",
+            "member": "obj/app/NemuZeroStorage.obj"
+          },
+          {
+            "comp_id": "001c24fa",
+            "member": "obj/app/ByteSwap.obj"
+          }
+        ]
+      },
+      {
+        "library_index": 1,
+        "library": "obj\\link-inputs\\chronology-000.lib",
+        "new_ids_in_traversal_order": [
+          {
+            "comp_id": "00010000",
+            "member": "COMCTL32.dll"
+          }
+        ]
+      },
+      {
+        "library_index": 4,
+        "library": "obj\\link-inputs\\chronology-003.lib",
+        "new_ids_in_traversal_order": [
+          {
+            "comp_id": "001923fa",
+            "member": "COMCTL32.dll"
+          }
+        ]
+      },
+      {
+        "library_index": 13,
+        "library": "obj\\link-inputs\\chronology-012.lib",
+        "new_ids_in_traversal_order": [
+          {
+            "comp_id": "00041fe8",
+            "member": "kailleraclient.dll"
+          }
+        ]
+      },
+      {
+        "library_index": 17,
+        "library": "obj\\link-inputs\\chronology-016.lib",
+        "new_ids_in_traversal_order": [
+          {
+            "comp_id": "000420ff",
+            "member": "gs_dll.dll"
+          }
+        ]
+      },
+      {
+        "library_index": 161,
+        "library": "obj\\link-inputs\\crt-chronological.lib",
+        "new_ids_in_traversal_order": [
+          {
+            "comp_id": "004024fa",
+            "member": "build\\intel\\st_obj\\_stricmp.obj"
+          },
+          {
+            "comp_id": "002723ca",
+            "member": "build\\intel\\st_obj\\oldnames\\itoa.obj"
+          },
+          {
+            "comp_id": "001d24fa",
+            "member": "..\\build\\intel\\st_obj\\initsect.obj"
+          }
+        ]
+      }
+    ]
+  },
+  "original_rich": {
+    "offset": 128,
+    "xor_key": "0421da8b",
+    "checksum_valid": true,
+    "records": [
+      {
+        "comp_id": "002723ca",
+        "product_id": 39,
+        "build": 9162,
+        "count": 2
+      },
+      {
+        "comp_id": "001d24fa",
+        "product_id": 29,
+        "build": 9466,
+        "count": 2
+      },
+      {
+        "comp_id": "004024fa",
+        "product_id": 64,
+        "build": 9466,
+        "count": 20
+      },
+      {
+        "comp_id": "001c24fa",
+        "product_id": 28,
+        "build": 9466,
+        "count": 93
+      },
+      {
+        "comp_id": "000420ff",
+        "product_id": 4,
+        "build": 8447,
+        "count": 2
+      },
+      {
+        "comp_id": "000a1fe8",
+        "product_id": 10,
+        "build": 8168,
+        "count": 14
+      },
+      {
+        "comp_id": "00041fe8",
+        "product_id": 4,
+        "build": 8168,
+        "count": 2
+      },
+      {
+        "comp_id": "001923fa",
+        "product_id": 25,
+        "build": 9210,
+        "count": 15
+      },
+      {
+        "comp_id": "00010000",
+        "product_id": 1,
+        "build": 0,
+        "count": 153
+      },
+      {
+        "comp_id": "002c24fa",
+        "product_id": 44,
+        "build": 9466,
+        "count": 27
+      },
+      {
+        "comp_id": "004524fa",
+        "product_id": 69,
+        "build": 9466,
+        "count": 1
+      },
+      {
+        "comp_id": "003d24fa",
+        "product_id": 61,
+        "build": 9466,
+        "count": 1
+      }
+    ]
+  },
+  "probe_rich": {
+    "offset": 128,
+    "xor_key": "0421da8b",
+    "checksum_valid": true,
+    "records": [
+      {
+        "comp_id": "001d24fa",
+        "product_id": 29,
+        "build": 9466,
+        "count": 2
+      },
+      {
+        "comp_id": "002723ca",
+        "product_id": 39,
+        "build": 9162,
+        "count": 2
+      },
+      {
+        "comp_id": "004024fa",
+        "product_id": 64,
+        "build": 9466,
+        "count": 20
+      },
+      {
+        "comp_id": "001c24fa",
+        "product_id": 28,
+        "build": 9466,
+        "count": 93
+      },
+      {
+        "comp_id": "000420ff",
+        "product_id": 4,
+        "build": 8447,
+        "count": 2
+      },
+      {
+        "comp_id": "000a1fe8",
+        "product_id": 10,
+        "build": 8168,
+        "count": 14
+      },
+      {
+        "comp_id": "00041fe8",
+        "product_id": 4,
+        "build": 8168,
+        "count": 2
+      },
+      {
+        "comp_id": "001923fa",
+        "product_id": 25,
+        "build": 9210,
+        "count": 15
+      },
+      {
+        "comp_id": "00010000",
+        "product_id": 1,
+        "build": 0,
+        "count": 153
+      },
+      {
+        "comp_id": "002c24fa",
+        "product_id": 44,
+        "build": 9466,
+        "count": 27
+      },
+      {
+        "comp_id": "004524fa",
+        "product_id": 69,
+        "build": 9466,
+        "count": 1
+      },
+      {
+        "comp_id": "003d24fa",
+        "product_id": 61,
+        "build": 9466,
+        "count": 1
+      }
+    ]
+  },
+  "same_comp_id_count_pairs": true,
+  "same_xor_key": true,
+  "record_order_equal": false,
+  "ordinary_archive_inference": [
+    "Freshly compiled zlib objects belong to one ordinary archive after Kaillera metadata and before GS metadata.",
+    "The native ByteSwap object belongs to an ordinary archive after GS metadata. Original archive names and membership are inferred.",
+    "The same selected historical CRT and alias members stay in the already verified chronology recipe.",
+    "This ordering agrees with original Rich traversal and also selects the independently identified empty application return at0x41fef0."
+  ],
+  "scratch_probe": {
+    "directory": "/root/.ai-tmp/nemu-rich-order.iz9gcqni",
+    "executable": "/root/.ai-tmp/nemu-rich-order.iz9gcqni/archives.exe",
+    "relocated_fixture": "/root/.ai-tmp/nemu-archive-grouping._et4py7e",
+    "comparison": {
+      "original": "/root/nemu-decomp/master/nemu64.exe",
+      "rebuilt": "/root/.ai-tmp/nemu-rich-order.iz9gcqni/archives.exe",
+      "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+      "rebuilt_sha256": "00a012cad9c7f64190e81eb88b19b9918c6a66d49bf00d2ed3b2dfad8558a9f6",
+      "original_bytes": 4796416,
+      "rebuilt_bytes": 4796416,
+      "full_exe_byte_exact": false,
+      "differing_file_bytes": 17158,
+      "sections": [
+        {
+          "name": ".text",
+          "original": {
+            "name": ".text",
+            "virtual_size": 190477,
+            "rva": 4096,
+            "raw_size": 192512,
+            "offset": 4096
+          },
+          "rebuilt": {
+            "name": ".text",
+            "virtual_size": 190477,
+            "rva": 4096,
+            "raw_size": 192512,
+            "offset": 4096
+          },
+          "layout_equal": true,
+          "raw_bytes_equal": false,
+          "differing_bytes": 16759
+        },
+        {
+          "name": ".rdata",
+          "original": {
+            "name": ".rdata",
+            "virtual_size": 61240,
+            "rva": 196608,
+            "raw_size": 61440,
+            "offset": 196608
+          },
+          "rebuilt": {
+            "name": ".rdata",
+            "virtual_size": 61240,
+            "rva": 196608,
+            "raw_size": 61440,
+            "offset": 196608
+          },
+          "layout_equal": true,
+          "raw_bytes_equal": false,
+          "differing_bytes": 86
+        },
+        {
+          "name": ".data",
+          "original": {
+            "name": ".data",
+            "virtual_size": 67692888,
+            "rva": 258048,
+            "raw_size": 241664,
+            "offset": 258048
+          },
+          "rebuilt": {
+            "name": ".data",
+            "virtual_size": 67692888,
+            "rva": 258048,
+            "raw_size": 241664,
+            "offset": 258048
+          },
+          "layout_equal": true,
+          "raw_bytes_equal": false,
+          "differing_bytes": 303
+        },
+        {
+          "name": ".rsrc",
+          "original": {
+            "name": ".rsrc",
+            "virtual_size": 4295496,
+            "rva": 67952640,
+            "raw_size": 4296704,
+            "offset": 499712
+          },
+          "rebuilt": {
+            "name": ".rsrc",
+            "virtual_size": 4295496,
+            "rva": 67952640,
+            "raw_size": 4296704,
+            "offset": 499712
+          },
+          "layout_equal": true,
+          "raw_bytes_equal": true,
+          "differing_bytes": 0
+        }
+      ],
+      "resources": [
+        {
+          "path": [
+            2,
+            137,
+            1031
+          ],
+          "original_bytes": 61064,
+          "rebuilt_bytes": 61064,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            2,
+            143,
+            1031
+          ],
+          "original_bytes": 13096,
+          "rebuilt_bytes": 13096,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            3,
+            1,
+            1031
+          ],
+          "original_bytes": 2216,
+          "rebuilt_bytes": 2216,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            3,
+            2,
+            1031
+          ],
+          "original_bytes": 3752,
+          "rebuilt_bytes": 3752,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            3,
+            3,
+            1031
+          ],
+          "original_bytes": 2216,
+          "rebuilt_bytes": 2216,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            3,
+            4,
+            1031
+          ],
+          "original_bytes": 2216,
+          "rebuilt_bytes": 2216,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            3,
+            5,
+            1031
+          ],
+          "original_bytes": 2216,
+          "rebuilt_bytes": 2216,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            3,
+            6,
+            1031
+          ],
+          "original_bytes": 2216,
+          "rebuilt_bytes": 2216,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            3,
+            7,
+            1031
+          ],
+          "original_bytes": 2216,
+          "rebuilt_bytes": 2216,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            3,
+            8,
+            1031
+          ],
+          "original_bytes": 296,
+          "rebuilt_bytes": 296,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            3,
+            9,
+            1031
+          ],
+          "original_bytes": 2216,
+          "rebuilt_bytes": 2216,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            4,
+            109,
+            1031
+          ],
+          "original_bytes": 2134,
+          "rebuilt_bytes": 2134,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            5,
+            103,
+            1033
+          ],
+          "original_bytes": 1166,
+          "rebuilt_bytes": 1166,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            5,
+            132,
+            1031
+          ],
+          "original_bytes": 362,
+          "rebuilt_bytes": 362,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            5,
+            138,
+            1031
+          ],
+          "original_bytes": 134,
+          "rebuilt_bytes": 134,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            5,
+            166,
+            1031
+          ],
+          "original_bytes": 100,
+          "rebuilt_bytes": 100,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            5,
+            168,
+            1031
+          ],
+          "original_bytes": 194,
+          "rebuilt_bytes": 194,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            6,
+            7,
+            1031
+          ],
+          "original_bytes": 34,
+          "rebuilt_bytes": 34,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            9,
+            109,
+            1031
+          ],
+          "original_bytes": 136,
+          "rebuilt_bytes": 136,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            10,
+            187,
+            1031
+          ],
+          "original_bytes": 4194304,
+          "rebuilt_bytes": 4194304,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            14,
+            107,
+            1031
+          ],
+          "original_bytes": 34,
+          "rebuilt_bytes": 34,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            14,
+            159,
+            1031
+          ],
+          "original_bytes": 20,
+          "rebuilt_bytes": 20,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            14,
+            160,
+            1031
+          ],
+          "original_bytes": 20,
+          "rebuilt_bytes": 20,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            14,
+            161,
+            1031
+          ],
+          "original_bytes": 20,
+          "rebuilt_bytes": 20,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            14,
+            162,
+            1031
+          ],
+          "original_bytes": 20,
+          "rebuilt_bytes": 20,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            14,
+            163,
+            1031
+          ],
+          "original_bytes": 20,
+          "rebuilt_bytes": 20,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            14,
+            164,
+            1031
+          ],
+          "original_bytes": 34,
+          "rebuilt_bytes": 34,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            16,
+            1,
+            1031
+          ],
+          "original_bytes": 696,
+          "rebuilt_bytes": 696,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            24,
+            1,
+            1031
+          ],
+          "original_bytes": 633,
+          "rebuilt_bytes": 633,
+          "payload_equal": true,
+          "differing_bytes": 0
+        }
+      ],
+      "resource_count_equal": true
+    },
+    "layout": {
+      "executable_sha256": "00a012cad9c7f64190e81eb88b19b9918c6a66d49bf00d2ed3b2dfad8558a9f6",
+      "native_functions": {
+        "expected": 187,
+        "present": 187,
+        "missing_or_ambiguous": [],
+        "address_delta_counts": {
+          "0": 187
+        },
+        "uniform_displacement": true,
+        "order_inversions": 0,
+        "qualification": "Placement only; independent library-body evidence is in the inventory."
+      },
+      "observed_native_storage": {
+        "observations": 72,
+        "map_symbols": 54,
+        "exact": 54,
+        "mismatches": [],
+        "unavailable": [
+          "_FloatFormat",
+          "?_pgmname@?1??_setargv@@9@9",
+          "?f_use@?1??__crtGetEnvironmentStringsA@@9@9",
+          "?f_use@?1??__crtGetStringTypeA@@9@9",
+          "_fSystemSet",
+          "?pfnMessageBoxA@?1??__crtMessageBoxA@@9@9",
+          "?pfnGetActiveWindow@?1??__crtMessageBoxA@@9@9",
+          "?pfnGetLastActivePopup@?1??__crtMessageBoxA@@9@9",
+          "?pfnGetProcessWindowStation@?1??__crtMessageBoxA@@9@9",
+          "?pfnGetUserObjectInformationA@?1??__crtMessageBoxA@@9@9",
+          "_user_handler",
+          "?f_use@?1??__crtLCMapStringA@@9@9",
+          "_g_pflt",
+          "_g_fmt",
+          "_g_magnitude",
+          "_g_round_expansion",
+          "_fos",
+          "_ret"
+        ],
+        "qualification": "Library-operand observations, not independently proved original identities; includes initialized storage and BSS."
+      },
+      "imports": {
+        "expected_count": 152,
+        "actual_count": 152,
+        "identity_sets_equal": true,
+        "exact_iat_slots": 115,
+        "names_and_slots_equal": false,
+        "relative_order_excluding_recorded_insertions_equal": true,
+        "relative_order_count": 148,
+        "excluded_insertion_positions": [
+          {
+            "dll": "kernel32.dll",
+            "name": "GetOEMCP"
+          },
+          {
+            "dll": "kernel32.dll",
+            "name": "GetSystemInfo"
+          },
+          {
+            "dll": "kernel32.dll",
+            "name": "VirtualQuery"
+          },
+          {
+            "dll": "kernel32.dll",
+            "name": "RtlUnwind"
+          }
+        ],
+        "ranges": [
+          {
+            "name": "import_descriptors_and_lookup_arrays",
+            "rva_start": 254232,
+            "rva_end": 255092,
+            "bytes": 860,
+            "equal": false,
+            "differing_bytes": 41
+          },
+          {
+            "name": "complete_hint_and_dll_name_pool",
+            "rva_start": 255092,
+            "rva_end": 257848,
+            "bytes": 2756,
+            "equal": true,
+            "differing_bytes": 0
+          }
+        ]
+      },
+      "alias_alignment": {
+        "original_start": 4381845,
+        "original_end": 4381856,
+        "rebuilt_start": 4381845,
+        "rebuilt_end": 4381856,
+        "bytes_equal": true,
+        "original_bytes": 11,
+        "rebuilt_bytes": 11
+      },
+      "rich_counts": {
+        "original": {
+          "002723ca": 2,
+          "001d24fa": 2,
+          "004024fa": 20,
+          "001c24fa": 93,
+          "000420ff": 2,
+          "000a1fe8": 14,
+          "00041fe8": 2,
+          "001923fa": 15,
+          "00010000": 153,
+          "002c24fa": 27,
+          "004524fa": 1,
+          "003d24fa": 1
+        },
+        "rebuilt": {
+          "001d24fa": 2,
+          "002723ca": 2,
+          "004024fa": 20,
+          "001c24fa": 93,
+          "000420ff": 2,
+          "000a1fe8": 14,
+          "00041fe8": 2,
+          "001923fa": 15,
+          "00010000": 153,
+          "002c24fa": 27,
+          "004524fa": 1,
+          "003d24fa": 1
+        }
+      }
+    }
+  },
+  "icf_audit": {
+    "code_names_before": 920,
+    "code_names_after": 920,
+    "code_name_sets_equal": true,
+    "folded_identity_groups_before": 10,
+    "folded_identity_groups_after": 10,
+    "folded_identity_groups_equal": true,
+    "removed_groups": [],
+    "added_groups": [],
+    "ambiguous_names": [
+      "$$$00003"
+    ],
+    "changed_addresses": [
+      {
+        "name": "?HashSignatureInstruction@@YAIIIIPBI@Z",
+        "old": [
+          4325104
+        ],
+        "new": [
+          4325120
+        ]
+      },
+      {
+        "name": "?SaveFunctionSignatures@@YAXPAI@Z",
+        "old": [
+          4325264
+        ],
+        "new": [
+          4325280
+        ]
+      },
+      {
+        "name": "?ResetRuntimeReplacements@@YAXXZ",
+        "old": [
+          4325936
+        ],
+        "new": [
+          4325952
+        ]
+      },
+      {
+        "name": "?FindRuntimeReplacement@@YAP6AXXZI@Z",
+        "old": [
+          4325984
+        ],
+        "new": [
+          4326000
+        ]
+      },
+      {
+        "name": "?EnablePIFSuccess@@YAXXZ",
+        "old": [
+          4326064
+        ],
+        "new": [
+          4326080
+        ]
+      },
+      {
+        "name": "?FindCICInput@@YAXPAU_iobuf@@PBE@Z",
+        "old": [
+          4326080
+        ],
+        "new": [
+          4326096
+        ]
+      },
+      {
+        "name": "?SaveCICInput@@YAXPBE@Z",
+        "old": [
+          4326192
+        ],
+        "new": [
+          4326208
+        ]
+      },
+      {
+        "name": "?CICUseTable1@@YAHPBE@Z",
+        "old": [
+          4326288
+        ],
+        "new": [
+          4326304
+        ]
+      },
+      {
+        "name": "?CIC6105Challenge@@YAXPAE@Z",
+        "old": [
+          4326416
+        ],
+        "new": [
+          4326432
+        ]
+      },
+      {
+        "name": "?PIFDataCRC@@YAEPBE@Z",
+        "old": [
+          4326800
+        ],
+        "new": [
+          4326816
+        ]
+      },
+      {
+        "name": "?InitializePIFCommandLengths@@YAXXZ",
+        "old": [
+          4326896
+        ],
+        "new": [
+          4326912
+        ]
+      },
+      {
+        "name": "?ProcessPIF@@YAXXZ",
+        "old": [
+          4327024
+        ],
+        "new": [
+          4327040
+        ]
+      },
+      {
+        "name": "?SaveEEPROM@@YAXII@Z",
+        "old": [
+          4328928
+        ],
+        "new": [
+          4328944
+        ]
+      },
+      {
+        "name": "?SaveMemPack@@YAXII@Z",
+        "old": [
+          4329072
+        ],
+        "new": [
+          4329088
+        ]
+      },
+      {
+        "name": "?RecordMovieInput@@YAXXZ",
+        "old": [
+          4329216
+        ],
+        "new": [
+          4329232
+        ]
+      },
+      {
+        "name": "?PlayMovieInput@@YAXXZ",
+        "old": [
+          4329456
+        ],
+        "new": [
+          4329472
+        ]
+      },
+      {
+        "name": "?StopMovie@@YAXXZ",
+        "old": [
+          4329680
+        ],
+        "new": [
+          4329696
+        ]
+      },
+      {
+        "name": "?SaveSRAM@@YAXII@Z",
+        "old": [
+          4329744
+        ],
+        "new": [
+          4329760
+        ]
+      },
+      {
+        "name": "?WriteSRAM@@YAXIPBXI@Z",
+        "old": [
+          4329888
+        ],
+        "new": [
+          4329904
+        ]
+      },
+      {
+        "name": "?ReadSRAM@@YAXPAXII@Z",
+        "old": [
+          4329936
+        ],
+        "new": [
+          4329952
+        ]
+      },
+      {
+        "name": "_uncompress",
+        "old": [
+          4329984
+        ],
+        "new": [
+          4330000
+        ]
+      },
+      {
+        "name": "_compress2",
+        "old": [
+          4330144
+        ],
+        "new": [
+          4330160
+        ]
+      },
+      {
+        "name": "_unzOpen",
+        "old": [
+          4330320
+        ],
+        "new": [
+          4330336
+        ]
+      },
+      {
+        "name": "_unzClose",
+        "old": [
+          4331344
+        ],
+        "new": [
+          4331360
+        ]
+      },
+      {
+        "name": "_unzGetCurrentFileInfo",
+        "old": [
+          4331408
+        ],
+        "new": [
+          4331424
+        ]
+      },
+      {
+        "name": "_unzGoToFirstFile",
+        "old": [
+          4332400
+        ],
+        "new": [
+          4332416
+        ]
+      },
+      {
+        "name": "_unzGoToNextFile",
+        "old": [
+          4332480
+        ],
+        "new": [
+          4332496
+        ]
+      },
+      {
+        "name": "_unzOpenCurrentFile",
+        "old": [
+          4332608
+        ],
+        "new": [
+          4332624
+        ]
+      },
+      {
+        "name": "_unzReadCurrentFile",
+        "old": [
+          4333440
+        ],
+        "new": [
+          4333456
+        ]
+      },
+      {
+        "name": "_unzCloseCurrentFile",
+        "old": [
+          4333936
+        ],
+        "new": [
+          4333952
+        ]
+      },
+      {
+        "name": "_inflateReset",
+        "old": [
+          4334080
+        ],
+        "new": [
+          4334096
+        ]
+      },
+      {
+        "name": "_inflateEnd",
+        "old": [
+          4334160
+        ],
+        "new": [
+          4334176
+        ]
+      },
+      {
+        "name": "_inflateInit2_",
+        "old": [
+          4334240
+        ],
+        "new": [
+          4334256
+        ]
+      },
+      {
+        "name": "_inflateInit_",
+        "old": [
+          4334512
+        ],
+        "new": [
+          4334528
+        ]
+      },
+      {
+        "name": "_inflate",
+        "old": [
+          4334544
+        ],
+        "new": [
+          4334560
+        ]
+      },
+      {
+        "name": "_deflateInit_",
+        "old": [
+          4335616
+        ],
+        "new": [
+          4335632
+        ]
+      },
+      {
+        "name": "_deflateInit2_",
+        "old": [
+          4335664
+        ],
+        "new": [
+          4335680
+        ]
+      },
+      {
+        "name": "_deflateReset",
+        "old": [
+          4336176
+        ],
+        "new": [
+          4336192
+        ]
+      },
+      {
+        "name": "_deflate",
+        "old": [
+          4336304
+        ],
+        "new": [
+          4336320
+        ]
+      },
+      {
+        "name": "_deflateEnd",
+        "old": [
+          4337168
+        ],
+        "new": [
+          4337184
+        ]
+      },
+      {
+        "name": "_crc32",
+        "old": [
+          4340544
+        ],
+        "new": [
+          4340560
+        ]
+      },
+      {
+        "name": "_inflate_blocks_reset",
+        "old": [
+          4340864
+        ],
+        "new": [
+          4340880
+        ]
+      },
+      {
+        "name": "_inflate_blocks_new",
+        "old": [
+          4340992
+        ],
+        "new": [
+          4341008
+        ]
+      },
+      {
+        "name": "_inflate_blocks",
+        "old": [
+          4341152
+        ],
+        "new": [
+          4341168
+        ]
+      },
+      {
+        "name": "_inflate_blocks_free",
+        "old": [
+          4344480
+        ],
+        "new": [
+          4344496
+        ]
+      },
+      {
+        "name": "_adler32",
+        "old": [
+          4344544
+        ],
+        "new": [
+          4344560
+        ]
+      },
+      {
+        "name": "_zcalloc",
+        "old": [
+          4344848
+        ],
+        "new": [
+          4344864
+        ]
+      },
+      {
+        "name": "_zcfree",
+        "old": [
+          4344880
+        ],
+        "new": [
+          4344896
+        ]
+      },
+      {
+        "name": "__tr_init",
+        "old": [
+          4344896
+        ],
+        "new": [
+          4344912
+        ]
+      },
+      {
+        "name": "?DynarecNoOperation@@YAXXZ",
+        "old": [
+          4345008
+        ],
+        "new": [
+          4325104
+        ]
+      },
+      {
+        "name": "?CheckGraphicsInterrupts@@YAXXZ",
+        "old": [
+          4345008
+        ],
+        "new": [
+          4325104
+        ]
+      },
+      {
+        "name": "_tr_static_init",
+        "old": [
+          4345008
+        ],
+        "new": [
+          4325104
+        ]
+      },
+      {
+        "name": "_putShortMSB",
+        "old": [
+          4336992
+        ],
+        "new": [
+          4337008
+        ]
+      },
+      {
+        "name": "_flush_pending",
+        "old": [
+          4337040
+        ],
+        "new": [
+          4337056
+        ]
+      },
+      {
+        "name": "_lm_init",
+        "old": [
+          4337344
+        ],
+        "new": [
+          4337360
+        ]
+      },
+      {
+        "name": "_deflate_stored",
+        "old": [
+          4337504
+        ],
+        "new": [
+          4337520
+        ]
+      },
+      {
+        "name": "_fill_window",
+        "old": [
+          4337856
+        ],
+        "new": [
+          4337872
+        ]
+      },
+      {
+        "name": "_read_buf",
+        "old": [
+          4338160
+        ],
+        "new": [
+          4338176
+        ]
+      },
+      {
+        "name": "_deflate_fast",
+        "old": [
+          4338288
+        ],
+        "new": [
+          4338304
+        ]
+      },
+      {
+        "name": "_longest_match",
+        "old": [
+          4339104
+        ],
+        "new": [
+          4339120
+        ]
+      },
+      {
+        "name": "_deflate_slow",
+        "old": [
+          4339472
+        ],
+        "new": [
+          4339488
+        ]
+      },
+      {
+        "name": "_unzlocal_getShort",
+        "old": [
+          4330752
+        ],
+        "new": [
+          4330768
+        ]
+      },
+      {
+        "name": "_unzlocal_getByte",
+        "old": [
+          4330832
+        ],
+        "new": [
+          4330848
+        ]
+      },
+      {
+        "name": "_unzlocal_getLong",
+        "old": [
+          4330896
+        ],
+        "new": [
+          4330912
+        ]
+      },
+      {
+        "name": "_unzlocal_SearchCentralDir",
+        "old": [
+          4331040
+        ],
+        "new": [
+          4331056
+        ]
+      },
+      {
+        "name": "_unzlocal_GetCurrentFileInfoInternal",
+        "old": [
+          4331472
+        ],
+        "new": [
+          4331488
+        ]
+      },
+      {
+        "name": "_unzlocal_DosDateToTmuDate",
+        "old": [
+          4332320
+        ],
+        "new": [
+          4332336
+        ]
+      },
+      {
+        "name": "_unzlocal_CheckCurrentFileCoherencyHeader",
+        "old": [
+          4332928
+        ],
+        "new": [
+          4332944
+        ]
+      }
+    ],
+    "empty_group": {
+      "names": [
+        "?CheckGraphicsInterrupts@@YAXXZ",
+        "?DynarecNoOperation@@YAXXZ",
+        "_tr_static_init"
+      ],
+      "old_address": "0x424cb0",
+      "new_address": "0x41fef0",
+      "original_address": "0x41fef0",
+      "original_16_bytes": "c3909090909090909090909090909090",
+      "old_16_bytes": "c3909090909090909090909090909090",
+      "new_16_bytes": "c3909090909090909090909090909090"
+    }
+  },
+  "data_identity_audit": {
+    "old": "/root/.ai-tmp/nemu-complete-relocs.ufk06ns2",
+    "new": "/root/.ai-tmp/nemu-archive-grouping._et4py7e",
+    "old_sha256": "f245a64a054705fcbbfadf40ccdf8530d778dd760ac62264e3bfcd251081a535",
+    "new_sha256": "5436a4a3da6ed6a6d3bc89d20d88f1ce3ce7bb60422935ba3c7075d772f84a69",
+    "section": ".data",
+    "changed_identified_relocated_pointers": 16,
+    "changed_fields": [
+      {
+        "field_va": "0x477774",
+        "old": "0x424cb0",
+        "new": "0x41fef0",
+        "identities": [
+          "?CheckGraphicsInterrupts@@YAXXZ",
+          "?DynarecNoOperation@@YAXXZ",
+          "_tr_static_init"
+        ]
+      },
+      {
+        "field_va": "0x477778",
+        "old": "0x424cb0",
+        "new": "0x41fef0",
+        "identities": [
+          "?CheckGraphicsInterrupts@@YAXXZ",
+          "?DynarecNoOperation@@YAXXZ",
+          "_tr_static_init"
+        ]
+      },
+      {
+        "field_va": "0x47777c",
+        "old": "0x424cb0",
+        "new": "0x41fef0",
+        "identities": [
+          "?CheckGraphicsInterrupts@@YAXXZ",
+          "?DynarecNoOperation@@YAXXZ",
+          "_tr_static_init"
+        ]
+      },
+      {
+        "field_va": "0x477780",
+        "old": "0x424cb0",
+        "new": "0x41fef0",
+        "identities": [
+          "?CheckGraphicsInterrupts@@YAXXZ",
+          "?DynarecNoOperation@@YAXXZ",
+          "_tr_static_init"
+        ]
+      },
+      {
+        "field_va": "0x477784",
+        "old": "0x424cb0",
+        "new": "0x41fef0",
+        "identities": [
+          "?CheckGraphicsInterrupts@@YAXXZ",
+          "?DynarecNoOperation@@YAXXZ",
+          "_tr_static_init"
+        ]
+      },
+      {
+        "field_va": "0x477788",
+        "old": "0x424cb0",
+        "new": "0x41fef0",
+        "identities": [
+          "?CheckGraphicsInterrupts@@YAXXZ",
+          "?DynarecNoOperation@@YAXXZ",
+          "_tr_static_init"
+        ]
+      },
+      {
+        "field_va": "0x47778c",
+        "old": "0x424cb0",
+        "new": "0x41fef0",
+        "identities": [
+          "?CheckGraphicsInterrupts@@YAXXZ",
+          "?DynarecNoOperation@@YAXXZ",
+          "_tr_static_init"
+        ]
+      },
+      {
+        "field_va": "0x477790",
+        "old": "0x424cb0",
+        "new": "0x41fef0",
+        "identities": [
+          "?CheckGraphicsInterrupts@@YAXXZ",
+          "?DynarecNoOperation@@YAXXZ",
+          "_tr_static_init"
+        ]
+      },
+      {
+        "field_va": "0x477794",
+        "old": "0x424cb0",
+        "new": "0x41fef0",
+        "identities": [
+          "?CheckGraphicsInterrupts@@YAXXZ",
+          "?DynarecNoOperation@@YAXXZ",
+          "_tr_static_init"
+        ]
+      },
+      {
+        "field_va": "0x47795c",
+        "old": "0x424cb0",
+        "new": "0x41fef0",
+        "identities": [
+          "?CheckGraphicsInterrupts@@YAXXZ",
+          "?DynarecNoOperation@@YAXXZ",
+          "_tr_static_init"
+        ]
+      },
+      {
+        "field_va": "0x477e5c",
+        "old": "0x424cb0",
+        "new": "0x41fef0",
+        "identities": [
+          "?CheckGraphicsInterrupts@@YAXXZ",
+          "?DynarecNoOperation@@YAXXZ",
+          "_tr_static_init"
+        ]
+      },
+      {
+        "field_va": "0x477e60",
+        "old": "0x424cb0",
+        "new": "0x41fef0",
+        "identities": [
+          "?CheckGraphicsInterrupts@@YAXXZ",
+          "?DynarecNoOperation@@YAXXZ",
+          "_tr_static_init"
+        ]
+      },
+      {
+        "field_va": "0x477e70",
+        "old": "0x424cb0",
+        "new": "0x41fef0",
+        "identities": [
+          "?CheckGraphicsInterrupts@@YAXXZ",
+          "?DynarecNoOperation@@YAXXZ",
+          "_tr_static_init"
+        ]
+      },
+      {
+        "field_va": "0x477e80",
+        "old": "0x424cb0",
+        "new": "0x41fef0",
+        "identities": [
+          "?CheckGraphicsInterrupts@@YAXXZ",
+          "?DynarecNoOperation@@YAXXZ",
+          "_tr_static_init"
+        ]
+      },
+      {
+        "field_va": "0x477e90",
+        "old": "0x424cb0",
+        "new": "0x41fef0",
+        "identities": [
+          "?CheckGraphicsInterrupts@@YAXXZ",
+          "?DynarecNoOperation@@YAXXZ",
+          "_tr_static_init"
+        ]
+      },
+      {
+        "field_va": "0x477edc",
+        "old": "0x424cb0",
+        "new": "0x41fef0",
+        "identities": [
+          "?CheckGraphicsInterrupts@@YAXXZ",
+          "?DynarecNoOperation@@YAXXZ",
+          "_tr_static_init"
+        ]
+      }
+    ],
+    "residual_changed_bytes": []
+  },
+  "readonly_identity_audit": {
+    "old": "/root/.ai-tmp/nemu-complete-relocs.ufk06ns2",
+    "new": "/root/.ai-tmp/nemu-archive-grouping._et4py7e",
+    "old_sha256": "f245a64a054705fcbbfadf40ccdf8530d778dd760ac62264e3bfcd251081a535",
+    "new_sha256": "5436a4a3da6ed6a6d3bc89d20d88f1ce3ce7bb60422935ba3c7075d772f84a69",
+    "section": ".rdata",
+    "changed_identified_relocated_pointers": 10,
+    "changed_fields": [
+      {
+        "field_va": "0x4302f8",
+        "old": "0x422f60",
+        "new": "0x422f70",
+        "identities": [
+          "_deflate_stored"
+        ]
+      },
+      {
+        "field_va": "0x430304",
+        "old": "0x423270",
+        "new": "0x423280",
+        "identities": [
+          "_deflate_fast"
+        ]
+      },
+      {
+        "field_va": "0x430310",
+        "old": "0x423270",
+        "new": "0x423280",
+        "identities": [
+          "_deflate_fast"
+        ]
+      },
+      {
+        "field_va": "0x43031c",
+        "old": "0x423270",
+        "new": "0x423280",
+        "identities": [
+          "_deflate_fast"
+        ]
+      },
+      {
+        "field_va": "0x430328",
+        "old": "0x423710",
+        "new": "0x423720",
+        "identities": [
+          "_deflate_slow"
+        ]
+      },
+      {
+        "field_va": "0x430334",
+        "old": "0x423710",
+        "new": "0x423720",
+        "identities": [
+          "_deflate_slow"
+        ]
+      },
+      {
+        "field_va": "0x430340",
+        "old": "0x423710",
+        "new": "0x423720",
+        "identities": [
+          "_deflate_slow"
+        ]
+      },
+      {
+        "field_va": "0x43034c",
+        "old": "0x423710",
+        "new": "0x423720",
+        "identities": [
+          "_deflate_slow"
+        ]
+      },
+      {
+        "field_va": "0x430358",
+        "old": "0x423710",
+        "new": "0x423720",
+        "identities": [
+          "_deflate_slow"
+        ]
+      },
+      {
+        "field_va": "0x430364",
+        "old": "0x423710",
+        "new": "0x423720",
+        "identities": [
+          "_deflate_slow"
+        ]
+      }
+    ],
+    "residual_changed_bytes": []
+  },
+  "rejected_exact_rich_variant": {
+    "description": "Move unchanged aliases into the late CRT archive.",
+    "rich_records_equal_to_original": true,
+    "native_function_address_delta_counts": {
+      "-16": 46,
+      "-14": 3,
+      "-10": 4,
+      "0": 134
+    },
+    "text_virtual_size": 190461,
+    "reason": "Breaks the original alias alignment and native code placement; metadata equality alone is insufficient.",
+    "promoted": false
+  },
+  "limits": [
+    "No Rich record, header field, object body or instruction byte is edited. Archive indexes and response files are generated normally.",
+    "The original C++/alias order remains unresolved; the variant that fixes it but breaks native layout is rejected.",
+    "Full executable equality remains the completion criterion."
+  ],
+  "fresh_tracked_recipe_build": {
+    "artifact": "/root/.ai-tmp/nemu-build.674anu41/artifacts/6e717f534aedf201b339314a087d5f708933a1663f2da45cb690c3ebdbdf36ae",
+    "sha256": "6e717f534aedf201b339314a087d5f708933a1663f2da45cb690c3ebdbdf36ae",
+    "compiled_archives": [
+      {
+        "archive": "zlib-native.lib",
+        "file": "/root/.ai-tmp/nemu-build.674anu41/src/nemu64/obj/link-inputs/zlib-native.lib",
+        "after": {
+          "kind": "descriptor",
+          "dll": "kailleraclient.dll"
+        },
+        "members": [
+          {
+            "object": "obj/zlib/uncompr.obj",
+            "root": "_uncompress",
+            "sha256": "59999ae7b447c5d04ed711b83076c4647b007650d8caa0fce09ab5d6d79c1bff"
+          },
+          {
+            "object": "obj/zlib/compress.obj",
+            "root": "_compress2",
+            "sha256": "60ed0007bc3b59f4fd6c9223682aa2d516283af358b71b8e267535b741bc4357"
+          },
+          {
+            "object": "obj/zlib/unzip.obj",
+            "root": "_unzOpen",
+            "sha256": "8fa86120f904c7cd7cec192bbe68b1a741462a219884c51b14dac52f2f41e8c8"
+          },
+          {
+            "object": "obj/zlib/inflate.obj",
+            "root": "_inflateReset",
+            "sha256": "30709aab2c9eee7a481a38997b9df7d608627f19b26232f904e40ea4598b9b87"
+          },
+          {
+            "object": "obj/zlib/deflate.obj",
+            "root": "_deflateInit_",
+            "sha256": "ac62e0b0430fbb0ea6c5e8f47774e6dfc380244734850e186b949041f7796873"
+          },
+          {
+            "object": "obj/zlib/crc32.obj",
+            "root": "_crc32",
+            "sha256": "62c22ccd009bf48c9f827fcdc5e7273ad8c7cfde82e3872debcad8ca4b108ea7"
+          },
+          {
+            "object": "obj/zlib/infblock.obj",
+            "root": "_inflate_blocks_reset",
+            "sha256": "3eec733feba836fdc81221b6942a6b7cdbe0995a1f60aa9d34d3bd1dda1dfae0"
+          },
+          {
+            "object": "obj/zlib/adler32.obj",
+            "root": "_adler32",
+            "sha256": "f287746f57f10e0f9789260e4aa659bf381942c16a8b721b9fefdddb9f0fef2e"
+          },
+          {
+            "object": "obj/zlib/zutil.obj",
+            "root": "_zcalloc",
+            "sha256": "ce07fc4f4ae388ad0f3295c459a46c90947a2416d6888feeace9e2d9ec204de1"
+          },
+          {
+            "object": "obj/zlib/trees.obj",
+            "root": "__tr_init",
+            "sha256": "cdf87f6164897fd84529ed3f6dc1eb9775bf6f601028104b4bc4f0dca3e2b6ac"
+          },
+          {
+            "object": "obj/zlib/infcodes.obj",
+            "root": "_inflate_codes_new",
+            "sha256": "72ffbd435462aa16aa7b2934bf82aadcf5244015db4384f8e7acf211dd941d08"
+          },
+          {
+            "object": "obj/zlib/inftrees.obj",
+            "root": "_inflate_trees_bits",
+            "sha256": "c3f5cac2b7f9340365bc71abe30abbcc16b35d99246c8b4124e14174183f36f9"
+          },
+          {
+            "object": "obj/zlib/infutil.obj",
+            "root": "_inflate_flush",
+            "sha256": "caead48f35a0a624e564816a7bdee468e706b74c874acdeb6ac231ca70a6c5dd"
+          },
+          {
+            "object": "obj/zlib/inffast.obj",
+            "root": "_inflate_fast",
+            "sha256": "e214df4600f09ce24512ddc2e96e9fc09e001b4cbe1fee7af90db99d4be3972f"
+          }
+        ],
+        "member_bytes_unchanged": true
+      },
+      {
+        "archive": "byteswap-native.lib",
+        "file": "/root/.ai-tmp/nemu-build.674anu41/src/nemu64/obj/link-inputs/byteswap-native.lib",
+        "after": {
+          "kind": "descriptor",
+          "dll": "gs_dll.dll"
+        },
+        "members": [
+          {
+            "object": "obj/app/ByteSwap.obj",
+            "sha256": "ec6487d13cb8359599a7f802b1b4c8d1e4ff95104fca8a6d31ee61a76982ff87"
+          }
+        ],
+        "member_bytes_unchanged": true
+      }
+    ],
+    "comparison": {
+      "original": "/root/nemu-decomp/master/nemu64.exe",
+      "rebuilt": "/root/.ai-tmp/nemu-build.674anu41/output/nemu64.exe",
+      "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+      "rebuilt_sha256": "6e717f534aedf201b339314a087d5f708933a1663f2da45cb690c3ebdbdf36ae",
+      "original_bytes": 4796416,
+      "rebuilt_bytes": 4796416,
+      "full_exe_byte_exact": false,
+      "differing_file_bytes": 17158,
+      "sections": [
+        {
+          "name": ".text",
+          "original": {
+            "name": ".text",
+            "virtual_size": 190477,
+            "rva": 4096,
+            "raw_size": 192512,
+            "offset": 4096
+          },
+          "rebuilt": {
+            "name": ".text",
+            "virtual_size": 190477,
+            "rva": 4096,
+            "raw_size": 192512,
+            "offset": 4096
+          },
+          "layout_equal": true,
+          "raw_bytes_equal": false,
+          "differing_bytes": 16759
+        },
+        {
+          "name": ".rdata",
+          "original": {
+            "name": ".rdata",
+            "virtual_size": 61240,
+            "rva": 196608,
+            "raw_size": 61440,
+            "offset": 196608
+          },
+          "rebuilt": {
+            "name": ".rdata",
+            "virtual_size": 61240,
+            "rva": 196608,
+            "raw_size": 61440,
+            "offset": 196608
+          },
+          "layout_equal": true,
+          "raw_bytes_equal": false,
+          "differing_bytes": 86
+        },
+        {
+          "name": ".data",
+          "original": {
+            "name": ".data",
+            "virtual_size": 67692888,
+            "rva": 258048,
+            "raw_size": 241664,
+            "offset": 258048
+          },
+          "rebuilt": {
+            "name": ".data",
+            "virtual_size": 67692888,
+            "rva": 258048,
+            "raw_size": 241664,
+            "offset": 258048
+          },
+          "layout_equal": true,
+          "raw_bytes_equal": false,
+          "differing_bytes": 303
+        },
+        {
+          "name": ".rsrc",
+          "original": {
+            "name": ".rsrc",
+            "virtual_size": 4295496,
+            "rva": 67952640,
+            "raw_size": 4296704,
+            "offset": 499712
+          },
+          "rebuilt": {
+            "name": ".rsrc",
+            "virtual_size": 4295496,
+            "rva": 67952640,
+            "raw_size": 4296704,
+            "offset": 499712
+          },
+          "layout_equal": true,
+          "raw_bytes_equal": true,
+          "differing_bytes": 0
+        }
+      ],
+      "resources": [
+        {
+          "path": [
+            2,
+            137,
+            1031
+          ],
+          "original_bytes": 61064,
+          "rebuilt_bytes": 61064,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            2,
+            143,
+            1031
+          ],
+          "original_bytes": 13096,
+          "rebuilt_bytes": 13096,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            3,
+            1,
+            1031
+          ],
+          "original_bytes": 2216,
+          "rebuilt_bytes": 2216,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            3,
+            2,
+            1031
+          ],
+          "original_bytes": 3752,
+          "rebuilt_bytes": 3752,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            3,
+            3,
+            1031
+          ],
+          "original_bytes": 2216,
+          "rebuilt_bytes": 2216,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            3,
+            4,
+            1031
+          ],
+          "original_bytes": 2216,
+          "rebuilt_bytes": 2216,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            3,
+            5,
+            1031
+          ],
+          "original_bytes": 2216,
+          "rebuilt_bytes": 2216,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            3,
+            6,
+            1031
+          ],
+          "original_bytes": 2216,
+          "rebuilt_bytes": 2216,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            3,
+            7,
+            1031
+          ],
+          "original_bytes": 2216,
+          "rebuilt_bytes": 2216,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            3,
+            8,
+            1031
+          ],
+          "original_bytes": 296,
+          "rebuilt_bytes": 296,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            3,
+            9,
+            1031
+          ],
+          "original_bytes": 2216,
+          "rebuilt_bytes": 2216,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            4,
+            109,
+            1031
+          ],
+          "original_bytes": 2134,
+          "rebuilt_bytes": 2134,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            5,
+            103,
+            1033
+          ],
+          "original_bytes": 1166,
+          "rebuilt_bytes": 1166,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            5,
+            132,
+            1031
+          ],
+          "original_bytes": 362,
+          "rebuilt_bytes": 362,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            5,
+            138,
+            1031
+          ],
+          "original_bytes": 134,
+          "rebuilt_bytes": 134,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            5,
+            166,
+            1031
+          ],
+          "original_bytes": 100,
+          "rebuilt_bytes": 100,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            5,
+            168,
+            1031
+          ],
+          "original_bytes": 194,
+          "rebuilt_bytes": 194,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            6,
+            7,
+            1031
+          ],
+          "original_bytes": 34,
+          "rebuilt_bytes": 34,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            9,
+            109,
+            1031
+          ],
+          "original_bytes": 136,
+          "rebuilt_bytes": 136,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            10,
+            187,
+            1031
+          ],
+          "original_bytes": 4194304,
+          "rebuilt_bytes": 4194304,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            14,
+            107,
+            1031
+          ],
+          "original_bytes": 34,
+          "rebuilt_bytes": 34,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            14,
+            159,
+            1031
+          ],
+          "original_bytes": 20,
+          "rebuilt_bytes": 20,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            14,
+            160,
+            1031
+          ],
+          "original_bytes": 20,
+          "rebuilt_bytes": 20,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            14,
+            161,
+            1031
+          ],
+          "original_bytes": 20,
+          "rebuilt_bytes": 20,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            14,
+            162,
+            1031
+          ],
+          "original_bytes": 20,
+          "rebuilt_bytes": 20,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            14,
+            163,
+            1031
+          ],
+          "original_bytes": 20,
+          "rebuilt_bytes": 20,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            14,
+            164,
+            1031
+          ],
+          "original_bytes": 34,
+          "rebuilt_bytes": 34,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            16,
+            1,
+            1031
+          ],
+          "original_bytes": 696,
+          "rebuilt_bytes": 696,
+          "payload_equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "path": [
+            24,
+            1,
+            1031
+          ],
+          "original_bytes": 633,
+          "rebuilt_bytes": 633,
+          "payload_equal": true,
+          "differing_bytes": 0
+        }
+      ],
+      "resource_count_equal": true
+    },
+    "layout": {
+      "executable_sha256": "6e717f534aedf201b339314a087d5f708933a1663f2da45cb690c3ebdbdf36ae",
+      "native_functions": {
+        "expected": 187,
+        "present": 187,
+        "missing_or_ambiguous": [],
+        "address_delta_counts": {
+          "0": 187
+        },
+        "uniform_displacement": true,
+        "order_inversions": 0,
+        "qualification": "Placement only; independent library-body evidence is in the inventory."
+      },
+      "observed_native_storage": {
+        "observations": 72,
+        "map_symbols": 54,
+        "exact": 54,
+        "mismatches": [],
+        "unavailable": [
+          "_FloatFormat",
+          "?_pgmname@?1??_setargv@@9@9",
+          "?f_use@?1??__crtGetEnvironmentStringsA@@9@9",
+          "?f_use@?1??__crtGetStringTypeA@@9@9",
+          "_fSystemSet",
+          "?pfnMessageBoxA@?1??__crtMessageBoxA@@9@9",
+          "?pfnGetActiveWindow@?1??__crtMessageBoxA@@9@9",
+          "?pfnGetLastActivePopup@?1??__crtMessageBoxA@@9@9",
+          "?pfnGetProcessWindowStation@?1??__crtMessageBoxA@@9@9",
+          "?pfnGetUserObjectInformationA@?1??__crtMessageBoxA@@9@9",
+          "_user_handler",
+          "?f_use@?1??__crtLCMapStringA@@9@9",
+          "_g_pflt",
+          "_g_fmt",
+          "_g_magnitude",
+          "_g_round_expansion",
+          "_fos",
+          "_ret"
+        ],
+        "qualification": "Library-operand observations, not independently proved original identities; includes initialized storage and BSS."
+      },
+      "imports": {
+        "expected_count": 152,
+        "actual_count": 152,
+        "identity_sets_equal": true,
+        "exact_iat_slots": 115,
+        "names_and_slots_equal": false,
+        "relative_order_excluding_recorded_insertions_equal": true,
+        "relative_order_count": 148,
+        "excluded_insertion_positions": [
+          {
+            "dll": "kernel32.dll",
+            "name": "GetOEMCP"
+          },
+          {
+            "dll": "kernel32.dll",
+            "name": "GetSystemInfo"
+          },
+          {
+            "dll": "kernel32.dll",
+            "name": "VirtualQuery"
+          },
+          {
+            "dll": "kernel32.dll",
+            "name": "RtlUnwind"
+          }
+        ],
+        "ranges": [
+          {
+            "name": "import_descriptors_and_lookup_arrays",
+            "rva_start": 254232,
+            "rva_end": 255092,
+            "bytes": 860,
+            "equal": false,
+            "differing_bytes": 41
+          },
+          {
+            "name": "complete_hint_and_dll_name_pool",
+            "rva_start": 255092,
+            "rva_end": 257848,
+            "bytes": 2756,
+            "equal": true,
+            "differing_bytes": 0
+          }
+        ]
+      },
+      "alias_alignment": {
+        "original_start": 4381845,
+        "original_end": 4381856,
+        "rebuilt_start": 4381845,
+        "rebuilt_end": 4381856,
+        "bytes_equal": true,
+        "original_bytes": 11,
+        "rebuilt_bytes": 11
+      },
+      "rich_counts": {
+        "original": {
+          "002723ca": 2,
+          "001d24fa": 2,
+          "004024fa": 20,
+          "001c24fa": 93,
+          "000420ff": 2,
+          "000a1fe8": 14,
+          "00041fe8": 2,
+          "001923fa": 15,
+          "00010000": 153,
+          "002c24fa": 27,
+          "004524fa": 1,
+          "003d24fa": 1
+        },
+        "rebuilt": {
+          "001d24fa": 2,
+          "002723ca": 2,
+          "004024fa": 20,
+          "001c24fa": 93,
+          "000420ff": 2,
+          "000a1fe8": 14,
+          "00041fe8": 2,
+          "001923fa": 15,
+          "00010000": 153,
+          "002c24fa": 27,
+          "004524fa": 1,
+          "003d24fa": 1
+        }
+      }
+    },
+    "all_four_program_sections_equal_reviewed_probe": true,
+    "command": "python3 scripts/build_nemu.py --chronological-libraries --stage-storage --function-order src/nemu64/application.order",
+    "full_file_equal": false,
+    "relocation_fixture": "/root/.ai-tmp/nemu-chronology-relocs.5e_shkse",
+    "relocation_fixture_all_parent_program_sections_unchanged": true,
+    "header_difference_classification": {
+      "total_differing_header_bytes": 10,
+      "reversed_first_two_rich_records_bytes": 6,
+      "coff_timestamp_bytes": 4,
+      "other_header_differences": 0,
+      "restoration_or_patching_performed": false
+    }
+  },
+  "canonical_generator_control": {
+    "compared_files": 250,
+    "all_unchanged": true,
+    "evidence": "/root/.ai-tmp/nemu-rich-order.iz9gcqni/canonical-check/inputs.json"
+  },
+  "independent_original_data_audit": {
+    "evidence": "/root/.ai-tmp/nemu-data-independent.xmg4p480/report.json",
+    "remaining_different_bytes": 303,
+    "known_rsp_function_pointer_slots": 300,
+    "all_other_initialized_data_bytes_original_exact": true,
+    "empty_callback_slots_restored": 16,
+    "all_553_audited_slots_have_highlow_fixups": true
+  },
+  "independent_complete_function_regression": {
+    "evidence_directory": "/root/.ai-tmp/nemu-archive-regression.5mvvxrkw",
+    "fixture": "/root/.ai-tmp/nemu-chronology-relocs.5e_shkse",
+    "matched_functions": 635,
+    "total_functions": 648,
+    "covered_original_bytes": 109139,
+    "passing_set_preserved": true,
+    "function_size_or_instruction_difference_metrics_changed": 0,
+    "known_target_or_data_conflicts": 0,
+    "invalid_operands": 0,
+    "code_names_preserved": 920,
+    "icf_identity_groups_preserved": 10,
+    "new_nonempty_aliases": 0,
+    "measured_extents_and_host_selector_proof_pass": true,
+    "remaining_unresolved_selected_operands": 512,
+    "qualification": "Address-normalized diagnostic, not complete executable equality. The operand-count reduction from523 to512 comes from an independently committed float proof, not archive grouping."
+  }
+}

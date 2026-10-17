@@ -7,12 +7,12 @@
     "The 95 public CRT anchors select already retained members in their observed order; the final 19 members remain lazy.",
     "The two unchanged weak-alias members follow setmode, so their empty text sections naturally produce the observed alignment before RtlUnwind.",
     "Import wrappers follow original hint/name and DLL-name positions; ordinal-only InitCommonControls has no hint/name record and is selected first.",
-    "This compatible recipe is not a uniquely recovered original link command."
+    "This compatible recipe is not a uniquely recovered original link command.",
+    "Ordinary archives for the freshly compiled zlib and native ByteSwap members reproduce the original relative Rich grouping and select the original empty application ICF representative at0x41fef0. Archive names and original native-helper membership remain inferred."
   ],
   "limitations": [
     "Only 115 of 152 IAT slots currently match. GetOEMCP, GetSystemInfo, VirtualQuery and RtlUnwind have incorrect insertion positions; the remaining 148 imports have the original relative order.",
-    "The native function block retains a uniform address displacement until application text lengths match.",
-    "The original has 27 LTCG contributions; the reconstruction currently has 20."
+    "All original Rich comp-id/count pairs and XOR key match after the supported source partitions, but the first C++ and alias records remain in reversed order."
   ],
   "crt_roots": [
     {
@@ -1404,6 +1404,85 @@
     {
       "dll": "kernel32.dll",
       "name": "RtlUnwind"
+    }
+  ],
+  "compiled_archives": [
+    {
+      "archive": "zlib-native.lib",
+      "after": {
+        "kind": "descriptor",
+        "dll": "kailleraclient.dll"
+      },
+      "members": [
+        {
+          "object": "obj/zlib/uncompr.obj",
+          "root": "_uncompress"
+        },
+        {
+          "object": "obj/zlib/compress.obj",
+          "root": "_compress2"
+        },
+        {
+          "object": "obj/zlib/unzip.obj",
+          "root": "_unzOpen"
+        },
+        {
+          "object": "obj/zlib/inflate.obj",
+          "root": "_inflateReset"
+        },
+        {
+          "object": "obj/zlib/deflate.obj",
+          "root": "_deflateInit_"
+        },
+        {
+          "object": "obj/zlib/crc32.obj",
+          "root": "_crc32"
+        },
+        {
+          "object": "obj/zlib/infblock.obj",
+          "root": "_inflate_blocks_reset"
+        },
+        {
+          "object": "obj/zlib/adler32.obj",
+          "root": "_adler32"
+        },
+        {
+          "object": "obj/zlib/zutil.obj",
+          "root": "_zcalloc"
+        },
+        {
+          "object": "obj/zlib/trees.obj",
+          "root": "__tr_init"
+        },
+        {
+          "object": "obj/zlib/infcodes.obj",
+          "root": "_inflate_codes_new"
+        },
+        {
+          "object": "obj/zlib/inftrees.obj",
+          "root": "_inflate_trees_bits"
+        },
+        {
+          "object": "obj/zlib/infutil.obj",
+          "root": "_inflate_flush"
+        },
+        {
+          "object": "obj/zlib/inffast.obj",
+          "root": "_inflate_fast"
+        }
+      ]
+    },
+    {
+      "archive": "byteswap-native.lib",
+      "after": {
+        "kind": "descriptor",
+        "dll": "gs_dll.dll"
+      },
+      "members": [
+        {
+          "object": "obj/app/ByteSwap.obj"
+        }
+      ]
     }
   ]
 }

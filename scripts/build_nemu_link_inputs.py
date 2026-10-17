@@ -123,7 +123,7 @@ def write_archive(file, members):
         raise ValueError('Generated archive changed member bytes: ' + str(file))
 
 
-def chronological_inputs(recipe, chronology, output, imports, report):
+def chronological_inputs(recipe, chronology, output, imports, report, compiled_project=None):
     """Select unchanged members with stock archive indexes and /INCLUDE roots."""
     if chronology['original_sha256'] != recipe['original_sha256']:
         raise ValueError('Chronology refers to a different original executable')
@@ -165,7 +165,29 @@ def chronological_inputs(recipe, chronology, output, imports, report):
         raise ValueError('Chronology must cover every selected import exactly once')
     if set(dlls) != {dll for dll, name in expected} or len(dlls) != len(set(dlls)):
         raise ValueError('Chronology must cover each import descriptor exactly once')
+    compiled_archives, compiled_roots = [], []
+    report['compiled_archives'] = []
+    for row in chronology.get('compiled_archives', []):
+        if compiled_project is None:
+            raise ValueError('This chronology requires --compiled-project')
+        members, records = [], []
+        for member in row['members']:
+            path = compiled_project / member['object']
+            data = path.read_bytes()
+            symbols = defined_symbols(data)
+            if member.get('root'):
+                if member['root'] not in symbols:
+                    raise ValueError('Compiled archive root is not defined: ' + member['root'])
+                compiled_roots.append(member['root'])
+            members.append((path.name, data, symbols))
+            records.append(dict(member, sha256=hashlib.sha256(data).hexdigest()))
+        file = output / row['archive']
+        write_archive(file, members)
+        compiled_archives.append((row['after'], file))
+        report['compiled_archives'].append(dict(archive=row['archive'], file=str(file),
+            after=row['after'], members=records, member_bytes_unchanged=True))
     objects, import_roots, descriptor_roots = [], [], []
+    inserted_compiled_archives = []
     for index, row in enumerate(timeline):
         if row['kind'] == 'import':
             key = row['dll'], row['name']
@@ -188,6 +210,12 @@ def chronological_inputs(recipe, chronology, output, imports, report):
             objects.append(file)
         else:
             raise ValueError('Unknown chronology entry kind: ' + row['kind'])
+        for placement, file in compiled_archives:
+            if all(row.get(key) == value for key, value in placement.items()):
+                objects.append(file)
+                inserted_compiled_archives.append(file)
+    if sorted(inserted_compiled_archives) != sorted(file for _, file in compiled_archives):
+        raise ValueError('Compiled archive placement must select exactly one chronology entry')
     if sorted(descriptor_roots) != sorted(chronology['descriptor_roots']):
         raise ValueError('Import descriptor roots changed')
     objects.extend([archive, output / 'crt-late.lib'])
@@ -195,10 +223,11 @@ def chronological_inputs(recipe, chronology, output, imports, report):
         descriptor_roots=chronology['descriptor_roots'], limitations=chronology['limitations'],
         combined_archive=str(archive), selected_member_count=len(members),
         note='Only archive indexes, headers and response files are generated. Member bodies are unchanged.')
-    return objects, ['/INCLUDE:' + name for name in roots + import_roots + chronology['descriptor_roots']]
+    return objects, ['/INCLUDE:' + name for name in compiled_roots + roots + import_roots
+                     + chronology['descriptor_roots']]
 
 
-def generate(recipe, import_dir, output, chronology=None):
+def generate(recipe, import_dir, output, chronology=None, compiled_project=None):
     output.mkdir(parents=True, exist_ok=True)
     objects, early, report = [], [], dict(crt=[], imports=[], aliases=[], member_bytes_unchanged=True)
     aliases = recipe.get('aliases')
@@ -282,7 +311,7 @@ def generate(recipe, import_dir, output, chronology=None):
         report['imports'].append(dict(row, **provenance, file=str(file)))
     roots = []
     if chronology:
-        objects, roots = chronological_inputs(recipe, chronology, output, imports, report)
+        objects, roots = chronological_inputs(recipe, chronology, output, imports, report, compiled_project)
         early = []
     report['mode'] = 'chronological' if chronology else 'ordered'
     def response_path(file):
@@ -303,6 +332,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--order', type=Path, default=ROOT / 'src/nemu64/imports/link-order.json')
     parser.add_argument('--chronology', type=Path, help='optional native and import chronology recipe')
+    parser.add_argument('--compiled-project', type=Path,
+                        help='build tree containing freshly compiled native objects for chronology archives')
     parser.add_argument('--import-dir', type=Path, required=True)
     parser.add_argument('--output-dir', type=Path, required=True)
     args = parser.parse_args()
@@ -310,7 +341,8 @@ def main():
     if not output.is_relative_to((Path.home() / '.ai-tmp').resolve()):
         parser.error('--output-dir must be under ~/.ai-tmp')
     chronology = json.loads(args.chronology.read_text()) if args.chronology else None
-    report = generate(json.loads(args.order.read_text()), args.import_dir.resolve(), output, chronology)
+    report = generate(json.loads(args.order.read_text()), args.import_dir.resolve(), output, chronology,
+                      args.compiled_project.resolve() if args.compiled_project else None)
     report.update(order_file=str(args.order), order_sha256=hashlib.sha256(args.order.read_bytes()).hexdigest())
     if args.chronology:
         report.update(chronology_file=str(args.chronology),

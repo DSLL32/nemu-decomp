@@ -208,15 +208,6 @@ def main():
         run('import-libraries', [sys.executable, str(ROOT / 'scripts/build_nemu_imports.py'),
                                 '--build-dir', str(project / 'imports'),
                                 '--source-dir', str(project / 'imports')])
-        if args.ordered_libraries:
-            run('ordered-library-inputs', [sys.executable,
-                str(ROOT / 'scripts/build_nemu_link_inputs.py'),
-                '--order', 'imports/link-order.json', '--import-dir', 'imports',
-                '--output-dir', 'obj/link-inputs',
-                *(['--chronology', 'imports/link-chronology.json']
-                  if args.chronological_libraries else [])])
-            report['ordered_library_inputs'] = json.loads(
-                (project / 'obj/link-inputs/inputs.json').read_text())
         zlib_objects = []
         for source in ZLIB_ORDER:
             name = Path(source).stem
@@ -232,6 +223,25 @@ def main():
             tool('compile-' + source.as_posix().replace('/', '-'), 'vc7', 'cl',
                  *flags, '/Fo' + obj.as_posix(), source.as_posix())
             application_objects.append(obj.as_posix())
+        if args.ordered_libraries:
+            run('ordered-library-inputs', [sys.executable,
+                str(ROOT / 'scripts/build_nemu_link_inputs.py'),
+                '--order', 'imports/link-order.json', '--import-dir', 'imports',
+                '--output-dir', 'obj/link-inputs',
+                *(['--chronology', 'imports/link-chronology.json', '--compiled-project', '.']
+                  if args.chronological_libraries else [])])
+            report['ordered_library_inputs'] = json.loads(
+                (project / 'obj/link-inputs/inputs.json').read_text())
+            # These freshly compiled members are supplied through the inferred
+            # ordinary archives, never both directly and through an archive.
+            archived = [member['object']
+                        for archive in report['ordered_library_inputs'].get('compiled_archives', [])
+                        for member in archive['members']]
+            if len(archived) != len(set(archived)) or not set(archived).issubset(
+                    application_objects + zlib_objects):
+                raise ValueError('Compiled archive members must each replace one build input')
+            application_objects = [obj for obj in application_objects if obj not in archived]
+            zlib_objects = [obj for obj in zlib_objects if obj not in archived]
         tool('resources', 'vc7', 'rc', '/foobj/nemu64.res', 'nemu64.rc')
         # Absolute Wine paths avoid depending on the source tree's depth.
         winoutput = 'Z:' + str(output).replace('/', '\\')

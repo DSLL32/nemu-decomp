@@ -379,8 +379,29 @@
   },
   "limitations": [
     "Only115 of152 IAT slots match in this optional recipe; the canonical recipe still matches all152.",
-    "The current187 native function placements are uniformly48bytes below original; this is placement evidence, not a new claim that every native instruction operand matches.",
-    "Original LTCG contribution count27 remains reconstructed20; all other Rich count identities agree.",
-    "No complete-executable match is claimed; the raw whole-file comparison remains the completion criterion."
-  ]
+    "No complete-executable match is claimed; the raw whole-file comparison remains the completion criterion.",
+    "The current supported archive grouping and source partitions match every original Rich count and native address, but the first two Rich records remain reversed."
+  ],
+  "current_native_archive_grouping": {
+    "report": "analysis/nemu-rich-order.json",
+    "artifact": "/root/.ai-tmp/nemu-build.674anu41/artifacts/6e717f534aedf201b339314a087d5f708933a1663f2da45cb690c3ebdbdf36ae",
+    "sha256": "6e717f534aedf201b339314a087d5f708933a1663f2da45cb690c3ebdbdf36ae",
+    "source_partitions": "analysis/nemu-translation-units.json",
+    "native_function_count": 187,
+    "native_function_address_delta": 0,
+    "available_observed_native_storage_addresses_exact": 54,
+    "empty_callback_va": "0x41fef0",
+    "all_original_rich_count_pairs_equal": true,
+    "rich_xor_key_equal": true,
+    "rich_record_order_equal": false,
+    "remaining_rich_order": "First two records: C++ and weak aliases.",
+    "differing_file_bytes": 17158,
+    "section_differing_bytes": {
+      ".text": 16759,
+      ".rdata": 86,
+      ".data": 303,
+      ".rsrc": 0
+    },
+    "scope": "Later supported archive organization and source partitions; earlier paired canonical/chronological builds above remain historical, not same-source controls for this artifact."
+  }
 }
