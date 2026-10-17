@@ -201,6 +201,33 @@ class ComparisonEvidenceTests(unittest.TestCase):
                                        self.original, self.candidate)
         self.assertEqual(result['status'], 'invalid_link_operand')
 
+    def test_complete_fixture_kinds_require_matching_recorded_image_hash(self):
+        scratch = Path.home() / '.ai-tmp'
+        scratch.mkdir(exist_ok=True)
+        image = Image(b'fixture-image')
+        with tempfile.TemporaryDirectory(prefix='nemu-manifest-test.', dir=scratch) as directory:
+            path = Path(directory) / 'diagnostic.json'
+            for kind in ('complete_relocation_diagnostic', 'resolved_relocation_diagnostic'):
+                with self.subTest(kind=kind):
+                    document = dict(kind=kind, sha256=compare.digest(image.data), command=['link'])
+                    path.write_text(json.dumps(document))
+                    result = compare.fixture_manifest(image, path)
+                    self.assertTrue(result['image_hash_verified'])
+                    self.assertFalse(result['forced_unresolved_link'])
+                    document['sha256'] = compare.digest(b'a different image')
+                    path.write_text(json.dumps(document))
+                    with self.assertRaisesRegex(ValueError, 'fixture image hash does not match'):
+                        compare.fixture_manifest(image, path)
+
+    def test_unrelated_manifest_top_level_hash_does_not_verify_fixture(self):
+        scratch = Path.home() / '.ai-tmp'
+        scratch.mkdir(exist_ok=True)
+        image = Image(b'fixture-image')
+        with tempfile.TemporaryDirectory(prefix='nemu-manifest-test.', dir=scratch) as directory:
+            path = Path(directory) / 'diagnostic.json'
+            path.write_text(json.dumps(dict(kind='unrelated', sha256=compare.digest(image.data))))
+            self.assertFalse(compare.fixture_manifest(image, path)['image_hash_verified'])
+
     def test_missing_metadata_remains_in_inventory(self):
         scratch = Path.home() / '.ai-tmp'
         scratch.mkdir(exist_ok=True)

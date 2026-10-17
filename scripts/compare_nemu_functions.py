@@ -801,7 +801,7 @@ def fixture_manifest(image, explicit_path=None):
     document = json.loads(path.read_text())
     row = document.get(image.path.name, {})
     recorded_hash = row.get('sha256') if isinstance(row, dict) else None
-    if document.get('kind') == 'complete_relocation_diagnostic':
+    if document.get('kind') in ('complete_relocation_diagnostic', 'resolved_relocation_diagnostic'):
         recorded_hash = document.get('sha256')
     # An unrelated diagnostic.json must not silently authorize fixture claims.
     if recorded_hash and recorded_hash != digest(image.data):
