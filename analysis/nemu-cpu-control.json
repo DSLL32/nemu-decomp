@@ -1,0 +1,759 @@
+{
+  "binary": "master/nemu64.exe",
+  "binary_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+  "source": "src/nemu64/CpuControl.cpp",
+  "status": "typed source reconstructed; resolved VC7 LTCG build validated; 16 complete normalized function matches, two functions pending",
+  "globals": [
+    {
+      "address": "0x03E69480",
+      "symbol": "CPU_HostFpuControl",
+      "type": "WORD",
+      "size": 2,
+      "source": "src/nemu64/CpuControl.cpp",
+      "initial_value": "zero"
+    },
+    {
+      "address": "0x03E69370",
+      "symbol": "CPU_CycleShift",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CpuControl.cpp",
+      "initial_value": "zero"
+    },
+    {
+      "address": "0x02F73478",
+      "symbol": "CPU_DisableExceptions",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CpuControl.cpp",
+      "initial_value": "zero"
+    },
+    {
+      "address": "0x03E651F0",
+      "symbol": "CPU_DisableVideoHLE",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CpuControl.cpp",
+      "initial_value": "zero"
+    },
+    {
+      "address": "0x03E5AE00",
+      "symbol": "CPU_DisableAudioHLE",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CpuControl.cpp",
+      "initial_value": "zero"
+    },
+    {
+      "address": "0x0406B018",
+      "symbol": "CPU_PeripheralRegisters",
+      "type": "CpuU32[2]",
+      "size": 8,
+      "source": "src/nemu64/CpuControl.cpp",
+      "initial_value": "zero"
+    },
+    {
+      "address": "0x00477814",
+      "symbol": "CPU_FpuControlDouble",
+      "type": "WORD",
+      "size": 2,
+      "source": "src/nemu64/CpuControl.cpp",
+      "initial_value": "3f0f"
+    },
+    {
+      "address": "0x00477818",
+      "symbol": "CPU_FpuControlSingle",
+      "type": "WORD",
+      "size": 2,
+      "source": "src/nemu64/CpuControl.cpp",
+      "initial_value": "3f0c"
+    },
+    {
+      "address": "0x0047781C",
+      "symbol": "CPU_FpuControlExtended",
+      "type": "WORD",
+      "size": 2,
+      "source": "src/nemu64/CpuControl.cpp",
+      "initial_value": "3f0e"
+    },
+    {
+      "address": "0x0406F304",
+      "symbol": "CPU_Executing",
+      "type": "int",
+      "size": 4,
+      "source": "src/nemu64/CpuControl.cpp",
+      "initial_value": "zero"
+    },
+    {
+      "address": "0x03E64E6C",
+      "symbol": "CPU_ThreadId",
+      "type": "DWORD",
+      "size": 4,
+      "source": "src/nemu64/CpuControl.cpp",
+      "initial_value": "zero"
+    },
+    {
+      "address": "0x03E69560",
+      "symbol": "SelectedRomFilename",
+      "type": "char[256]",
+      "size": 256,
+      "source": "src/nemu64/CpuControl.cpp",
+      "initial_value": "zero"
+    },
+    {
+      "address": "0x03E6A020",
+      "symbol": "FaultingInstructions",
+      "type": "BYTE[2097152]",
+      "size": 2097152,
+      "source": "src/nemu64/CpuControl.cpp",
+      "initial_value": "zero"
+    },
+    {
+      "address": "0x0406F0CC",
+      "symbol": "MemoryBreakHit",
+      "type": "int",
+      "size": 4,
+      "source": "src/nemu64/CpuControl.cpp",
+      "initial_value": "zero"
+    },
+    {
+      "address": "0x03E64FC4",
+      "symbol": "ResetUnknownWord",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CpuControl.cpp",
+      "initial_value": "zero"
+    },
+    {
+      "address": "0x03E5ADF8",
+      "symbol": "PerformanceTicksPerMillisecond",
+      "type": "CpuS64",
+      "size": 8,
+      "source": "src/nemu64/CpuControl.cpp",
+      "initial_value": "zero"
+    },
+    {
+      "address": "0x0406F2D8",
+      "symbol": "LastPerformanceCounter",
+      "type": "CpuS64",
+      "size": 8,
+      "source": "src/nemu64/CpuControl.cpp",
+      "initial_value": "zero"
+    },
+    {
+      "address": "0x0406F2D0",
+      "symbol": "FrameCounter",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CpuControl.cpp",
+      "initial_value": "zero"
+    },
+    {
+      "address": "0x03E651FC",
+      "symbol": "AudioTimingFlag",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CpuControl.cpp",
+      "initial_value": "zero"
+    },
+    {
+      "address": "0x03E69378",
+      "symbol": "LastRspCpuCount",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CpuControl.cpp",
+      "initial_value": "zero"
+    },
+    {
+      "address": "0x004777E0",
+      "symbol": "RspEnabled",
+      "type": "int",
+      "size": 4,
+      "source": "src/nemu64/CpuControl.cpp",
+      "initial_value": "01000000"
+    },
+    {
+      "address": "0x03E65300",
+      "symbol": "RspSavedPC",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CpuControl.cpp",
+      "initial_value": "zero"
+    },
+    {
+      "address": "0x03E696FC",
+      "symbol": "ViMeasureCount",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CpuControl.cpp",
+      "initial_value": "zero"
+    },
+    {
+      "address": "0x03E69FC8",
+      "symbol": "ViMeasureTime",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CpuControl.cpp",
+      "initial_value": "zero"
+    },
+    {
+      "address": "0x02F7347C",
+      "symbol": "RecompilerStepMode",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CpuControl.cpp",
+      "initial_value": "zero"
+    }
+  ],
+  "assets": [
+    {
+      "name": "BootRspImem",
+      "address": "0x004348E0",
+      "size": 4096,
+      "sha256": "1535b1ecfcb8f371c868e76991a071520481c3a8ce2baa79f2f5e496fa3bdf1b",
+      "consumer": "ResetCPU at 0x00415120",
+      "purpose": "MIPS boot program copied to guest SP instruction memory by ResetCPU",
+      "path": "src/nemu64/res/BootRspImem.inc"
+    },
+    {
+      "name": "DefaultMemPack",
+      "address": "0x004358E0",
+      "size": 32768,
+      "sha256": "6fe0eb6d4cf6a8c3961a5a92ee8f71fa4092229518d976daec3289ab3a9ba86e",
+      "consumer": "ResetCPU at 0x00415120",
+      "purpose": "formatted controller memory-pack image used when the save file is absent",
+      "path": "src/nemu64/res/DefaultMemPack.inc"
+    }
+  ],
+  "functions": [
+    {
+      "address": "0x00414420",
+      "symbol": "ContextRegister",
+      "size": 100,
+      "source": "src/nemu64/CpuControl.cpp",
+      "extent_basis": "raw x86 function and local table extent excluding trailing alignment",
+      "byte_match": "pending",
+      "normalized_comparison": {
+        "rebuilt_size": 100,
+        "rebuilt_extent_verified": true,
+        "full_function_shape_match": true,
+        "instruction_and_known_target_match": true,
+        "normalized_differing_bytes": 0,
+        "fully_verified_relocations": true,
+        "target_comparison_performed": true,
+        "unresolved_targets": 0,
+        "unverified_targets": 0,
+        "not_compared_target_fields": 0
+      }
+    },
+    {
+      "address": "0x00414490",
+      "symbol": "CPUHostException",
+      "size": 1802,
+      "source": "src/nemu64/CpuControl.cpp",
+      "extent_basis": "raw x86 function and local table extent excluding trailing alignment",
+      "byte_match": "pending",
+      "normalized_comparison": {
+        "rebuilt_size": 1782,
+        "rebuilt_extent_verified": true,
+        "full_function_shape_match": false,
+        "instruction_and_known_target_match": false,
+        "normalized_differing_bytes": 496,
+        "fully_verified_relocations": false,
+        "target_comparison_performed": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 0,
+        "not_compared_target_fields": 100
+      }
+    },
+    {
+      "address": "0x00414BA0",
+      "symbol": "MultiplyUnsigned64",
+      "size": 121,
+      "source": "src/nemu64/CpuControl.cpp",
+      "extent_basis": "raw x86 function and local table extent excluding trailing alignment",
+      "byte_match": "pending",
+      "normalized_comparison": {
+        "rebuilt_size": 121,
+        "rebuilt_extent_verified": true,
+        "full_function_shape_match": true,
+        "instruction_and_known_target_match": true,
+        "normalized_differing_bytes": 0,
+        "fully_verified_relocations": true,
+        "target_comparison_performed": true,
+        "unresolved_targets": 0,
+        "unverified_targets": 0,
+        "not_compared_target_fields": 0
+      }
+    },
+    {
+      "address": "0x00414C20",
+      "symbol": "MultiplySigned64",
+      "size": 201,
+      "source": "src/nemu64/CpuControl.cpp",
+      "extent_basis": "raw x86 function and local table extent excluding trailing alignment",
+      "byte_match": "pending",
+      "normalized_comparison": {
+        "rebuilt_size": 201,
+        "rebuilt_extent_verified": true,
+        "full_function_shape_match": true,
+        "instruction_and_known_target_match": true,
+        "normalized_differing_bytes": 0,
+        "fully_verified_relocations": true,
+        "target_comparison_performed": true,
+        "unresolved_targets": 0,
+        "unverified_targets": 0,
+        "not_compared_target_fields": 0
+      }
+    },
+    {
+      "address": "0x00414CF0",
+      "symbol": "DivideUnsigned64",
+      "size": 94,
+      "source": "src/nemu64/CpuControl.cpp",
+      "extent_basis": "raw x86 function and local table extent excluding trailing alignment",
+      "byte_match": "pending",
+      "normalized_comparison": {
+        "rebuilt_size": 94,
+        "rebuilt_extent_verified": true,
+        "full_function_shape_match": true,
+        "instruction_and_known_target_match": true,
+        "normalized_differing_bytes": 0,
+        "fully_verified_relocations": true,
+        "target_comparison_performed": true,
+        "unresolved_targets": 0,
+        "unverified_targets": 0,
+        "not_compared_target_fields": 0
+      }
+    },
+    {
+      "address": "0x00414D50",
+      "symbol": "DivideSigned64",
+      "size": 94,
+      "source": "src/nemu64/CpuControl.cpp",
+      "extent_basis": "raw x86 function and local table extent excluding trailing alignment",
+      "byte_match": "pending",
+      "normalized_comparison": {
+        "rebuilt_size": 94,
+        "rebuilt_extent_verified": true,
+        "full_function_shape_match": true,
+        "instruction_and_known_target_match": true,
+        "normalized_differing_bytes": 0,
+        "fully_verified_relocations": true,
+        "target_comparison_performed": true,
+        "unresolved_targets": 0,
+        "unverified_targets": 0,
+        "not_compared_target_fields": 0
+      }
+    },
+    {
+      "address": "0x00414DB0",
+      "symbol": "ReportCPUErrorFormat",
+      "size": 116,
+      "source": "src/nemu64/CpuControl.cpp",
+      "extent_basis": "raw x86 function and local table extent excluding trailing alignment",
+      "byte_match": "pending",
+      "normalized_comparison": {
+        "rebuilt_size": 116,
+        "rebuilt_extent_verified": true,
+        "full_function_shape_match": true,
+        "instruction_and_known_target_match": true,
+        "normalized_differing_bytes": 0,
+        "fully_verified_relocations": false,
+        "target_comparison_performed": true,
+        "unresolved_targets": 1,
+        "unverified_targets": 1,
+        "not_compared_target_fields": 0
+      }
+    },
+    {
+      "address": "0x00414E30",
+      "symbol": "ReportMemoryError",
+      "size": 119,
+      "source": "src/nemu64/CpuControl.cpp",
+      "extent_basis": "raw x86 function and local table extent excluding trailing alignment",
+      "byte_match": "pending",
+      "normalized_comparison": {
+        "rebuilt_size": 119,
+        "rebuilt_extent_verified": true,
+        "full_function_shape_match": true,
+        "instruction_and_known_target_match": true,
+        "normalized_differing_bytes": 0,
+        "fully_verified_relocations": false,
+        "target_comparison_performed": true,
+        "unresolved_targets": 2,
+        "unverified_targets": 2,
+        "not_compared_target_fields": 0
+      }
+    },
+    {
+      "address": "0x00414EB0",
+      "symbol": "ReportCPUError",
+      "size": 78,
+      "source": "src/nemu64/CpuControl.cpp",
+      "extent_basis": "raw x86 function and local table extent excluding trailing alignment",
+      "byte_match": "pending",
+      "normalized_comparison": {
+        "rebuilt_size": 78,
+        "rebuilt_extent_verified": true,
+        "full_function_shape_match": true,
+        "instruction_and_known_target_match": true,
+        "normalized_differing_bytes": 0,
+        "fully_verified_relocations": false,
+        "target_comparison_performed": true,
+        "unresolved_targets": 1,
+        "unverified_targets": 1,
+        "not_compared_target_fields": 0
+      }
+    },
+    {
+      "address": "0x00414F00",
+      "symbol": "ReportInterpreterError",
+      "size": 78,
+      "source": "src/nemu64/CpuControl.cpp",
+      "extent_basis": "raw x86 function and local table extent excluding trailing alignment",
+      "byte_match": "pending",
+      "normalized_comparison": {
+        "rebuilt_size": 78,
+        "rebuilt_extent_verified": true,
+        "full_function_shape_match": true,
+        "instruction_and_known_target_match": true,
+        "normalized_differing_bytes": 0,
+        "fully_verified_relocations": false,
+        "target_comparison_performed": true,
+        "unresolved_targets": 1,
+        "unverified_targets": 1,
+        "not_compared_target_fields": 0
+      }
+    },
+    {
+      "address": "0x00414F50",
+      "symbol": "ReportCompilerError",
+      "size": 78,
+      "source": "src/nemu64/CpuControl.cpp",
+      "extent_basis": "raw x86 function and local table extent excluding trailing alignment",
+      "byte_match": "pending",
+      "normalized_comparison": {
+        "rebuilt_size": 78,
+        "rebuilt_extent_verified": true,
+        "full_function_shape_match": true,
+        "instruction_and_known_target_match": true,
+        "normalized_differing_bytes": 0,
+        "fully_verified_relocations": false,
+        "target_comparison_performed": true,
+        "unresolved_targets": 1,
+        "unverified_targets": 1,
+        "not_compared_target_fields": 0
+      }
+    },
+    {
+      "address": "0x00414FA0",
+      "symbol": "SetFpuRounding",
+      "size": 133,
+      "source": "src/nemu64/CpuControl.cpp",
+      "extent_basis": "raw x86 function and local table extent excluding trailing alignment",
+      "byte_match": "pending",
+      "normalized_comparison": {
+        "rebuilt_size": 133,
+        "rebuilt_extent_verified": true,
+        "full_function_shape_match": true,
+        "instruction_and_known_target_match": true,
+        "normalized_differing_bytes": 0,
+        "fully_verified_relocations": true,
+        "target_comparison_performed": true,
+        "unresolved_targets": 0,
+        "unverified_targets": 0,
+        "not_compared_target_fields": 0
+      }
+    },
+    {
+      "address": "0x00415030",
+      "symbol": "ResetRecompiler",
+      "size": 225,
+      "source": "src/nemu64/CpuControl.cpp",
+      "extent_basis": "raw x86 function and local table extent excluding trailing alignment",
+      "byte_match": "pending",
+      "normalized_comparison": {
+        "rebuilt_size": 225,
+        "rebuilt_extent_verified": true,
+        "full_function_shape_match": true,
+        "instruction_and_known_target_match": true,
+        "normalized_differing_bytes": 0,
+        "fully_verified_relocations": false,
+        "target_comparison_performed": true,
+        "unresolved_targets": 0,
+        "unverified_targets": 2,
+        "not_compared_target_fields": 0
+      }
+    },
+    {
+      "address": "0x00415120",
+      "symbol": "ResetCPU",
+      "size": 1610,
+      "source": "src/nemu64/CpuControl.cpp",
+      "extent_basis": "raw x86 function and local table extent excluding trailing alignment",
+      "byte_match": "pending",
+      "normalized_comparison": {
+        "rebuilt_size": 1611,
+        "rebuilt_extent_verified": true,
+        "full_function_shape_match": false,
+        "instruction_and_known_target_match": false,
+        "normalized_differing_bytes": 320,
+        "fully_verified_relocations": false,
+        "target_comparison_performed": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 0,
+        "not_compared_target_fields": 199
+      }
+    },
+    {
+      "address": "0x00415770",
+      "symbol": "InitializeCPU",
+      "size": 94,
+      "source": "src/nemu64/CpuControl.cpp",
+      "extent_basis": "raw x86 function and local table extent excluding trailing alignment",
+      "byte_match": "pending",
+      "normalized_comparison": {
+        "rebuilt_size": 94,
+        "rebuilt_extent_verified": true,
+        "full_function_shape_match": true,
+        "instruction_and_known_target_match": true,
+        "normalized_differing_bytes": 0,
+        "fully_verified_relocations": false,
+        "target_comparison_performed": true,
+        "unresolved_targets": 0,
+        "unverified_targets": 1,
+        "not_compared_target_fields": 0
+      }
+    },
+    {
+      "address": "0x004157D0",
+      "symbol": "UpdateAudioTiming",
+      "size": 102,
+      "source": "src/nemu64/CpuControl.cpp",
+      "extent_basis": "raw x86 function and local table extent excluding trailing alignment",
+      "byte_match": "pending",
+      "normalized_comparison": {
+        "rebuilt_size": 102,
+        "rebuilt_extent_verified": true,
+        "full_function_shape_match": true,
+        "instruction_and_known_target_match": true,
+        "normalized_differing_bytes": 0,
+        "fully_verified_relocations": false,
+        "target_comparison_performed": true,
+        "unresolved_targets": 1,
+        "unverified_targets": 1,
+        "not_compared_target_fields": 0
+      }
+    },
+    {
+      "address": "0x00415840",
+      "symbol": "RunCPU",
+      "size": 4503,
+      "source": "src/nemu64/CpuControl.cpp",
+      "extent_basis": "4483 code bytes through RET at0x004169C2, followed by five DWORD switch targets referenced by JMP at0x0041609F; table0x004169C3..0x004169D6",
+      "byte_match": "pending",
+      "emitted_block_size": 4512,
+      "trailing_padding": {
+        "address": "0x004169D7",
+        "size": 9,
+        "bytes": "cccccccccccccccccc",
+        "next_function": "StartCPUThread",
+        "next_address": "0x004169E0"
+      },
+      "inferred_locals": [
+        {
+          "base": "EBP",
+          "offset": -408,
+          "size": 32,
+          "source_symbol": "inferredUnusedStack",
+          "classification": "unreferenced stack storage; unknown original name, type, count and purpose",
+          "evidence": "All943 instructions (including both SEH filter/handler pairs) and all20 switch-table bytes audited. No reference overlaps EBP-0x198..EBP-0x179. Nested uninitialized storage preserves all existing local offsets and reproduces compiler temporary offsets."
+        }
+      ],
+      "normalized_comparison": {
+        "rebuilt_size": 4503,
+        "rebuilt_extent_verified": true,
+        "full_function_shape_match": true,
+        "instruction_and_known_target_match": true,
+        "normalized_differing_bytes": 0,
+        "fully_verified_relocations": false,
+        "target_comparison_performed": true,
+        "unresolved_targets": 20,
+        "unverified_targets": 75,
+        "not_compared_target_fields": 0
+      }
+    },
+    {
+      "address": "0x004169E0",
+      "symbol": "StartCPUThread",
+      "size": 30,
+      "source": "src/nemu64/CpuControl.cpp",
+      "extent_basis": "raw x86 function and local table extent excluding trailing alignment",
+      "byte_match": "pending",
+      "normalized_comparison": {
+        "rebuilt_size": 30,
+        "rebuilt_extent_verified": true,
+        "full_function_shape_match": true,
+        "instruction_and_known_target_match": true,
+        "normalized_differing_bytes": 0,
+        "fully_verified_relocations": false,
+        "target_comparison_performed": true,
+        "unresolved_targets": 0,
+        "unverified_targets": 1,
+        "not_compared_target_fields": 0
+      }
+    }
+  ],
+  "notes": [
+    "Symbolic inline assembly preserves the generated-code entry register ABI: EDI contains low32 guest SP; ESI contains cycle budget. This is a boundary implementation, not embedded target host code.",
+    "Host access violation handler retains observed uninitialized-value paths.",
+    "MultiplyUnsigned64 retains the observed low-left by high-left cross product.",
+    "Both multiply helpers preserve original inline assembly: signed helper has nested EBP/EDI/ESI saves inside compiler prologue; unsigned helper uses explicit carry updates of HI/LO.",
+    "ROMAlternateBase 0x13FCB4D0 is the observed guest-ROM word-reader/compiler mirror offset, also used in ReadPhysicalWord and WritePhysicalWord. It is not a host address.",
+    "The resolved VC7 /O2 /ML /GL /Ob1 fixture validates 16 full function bodies after relocation normalization. Raw byte exactness remains pending, and unresolved or unverified operand identities are reported separately.",
+    "ResetCPU retains a remaining MMIO-clear scheduling discrepancy. CPUHostException retains register-allocation and expression-shape discrepancies.",
+    "WritePhysicalByte and WritePhysicalHalf retain narrow formals. Implicit conversion of ContextRegister DWORD values reproduces the original full-DWORD pushes; explicit casts changed caller code generation.",
+    "RunCPU action bits 0x1000 and 0x2000 call SaveState and LoadState(false), respectively, matching the interpreter and original call targets.",
+    "RunCPU uses the evidenced local optimization-off setting and symbolic generated-code dispatcher. Its original frame contains32 unreferenced bytes after all used locals and before compiler temporaries. A nested uninitialized byte array models that measured storage; original source-level type, count, name and purpose remain unknown. Changing inferred buffer capacities moved already-correct used-local offsets and was rejected.",
+    "RunCPU exact body-plus-table extent is4503bytes; the previous4504 included one alignment byte. Its emitted block to StartCPUThread is4512bytes, including9 CC bytes. StartCPUThread is30bytes followed by2 NOP bytes before0x00416A00.",
+    "CPUHostException uses separate 60-byte diagnostic buffers in the early exception and invalid-index branches, an explicit valid-index else, and a POD breakpoint assignment loop. These reproduce every instruction through the opcode dispatch; opcode decoding still has CSE/register-allocation differences. Explicit memcpy emitted a redundant byte tail absent from the original; the typed assignment loop emits the observed word copy naturally.",
+    "Relocation target comparisons are performed only when instruction layouts align. The two remaining instruction mismatches leave 299 target fields not compared; these fields are separate from unresolved or unverified targets in matching functions.",
+    "The two nonmatching candidate extents are independently measured and pinned to the validated image: CPUHostException is 1782 bytes versus 1802 original bytes; ResetCPU is 1611 versus 1610. Their full-extent normalized difference counts are 496 and 320; earlier original-sized-prefix counts were 495 and 319.",
+    "An outer switch on ExceptionCode, with the access-violation case before the general-exception default, restores the original order of all four diagnostic literals. A full .text comparison against the prior candidate changes only 19 literal PUSH operands, each retaining the same string contents; every other code byte is unchanged. This supports the source structure independently of the unresolved opcode-dispatch shape."
+  ],
+  "shared_aliases": [
+    {
+      "address": "0x0406F314",
+      "symbol": "BypassMemoryProtection",
+      "type": "BYTE",
+      "size": 1,
+      "source": "shared header",
+      "initial_value": "zero",
+      "canonical_alias": "AllowRomWrites",
+      "definition_removed": true
+    },
+    {
+      "address": "0x03E6952C",
+      "symbol": "ResetUnknownCount",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "shared header",
+      "initial_value": "zero",
+      "canonical_alias": "SIAddress",
+      "definition_removed": true
+    },
+    {
+      "address": "0x03E651F4",
+      "symbol": "CPU_LoadLinked",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "shared header",
+      "initial_value": "zero",
+      "canonical_alias": "CPU_Random",
+      "definition_removed": true
+    },
+    {
+      "address": "0x03E62E14",
+      "symbol": "PifBootReady",
+      "type": "int",
+      "size": 4,
+      "source": "shared header",
+      "initial_value": "zero",
+      "canonical_alias": "CPU_FRMode",
+      "definition_removed": true
+    },
+    {
+      "address": "0x0087AE4C",
+      "symbol": "CheatsState",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "shared header",
+      "initial_value": "zero",
+      "canonical_alias": "UndoPosition",
+      "definition_removed": true
+    },
+    {
+      "address": "0x044CC540",
+      "symbol": "AutoResume",
+      "type": "int",
+      "size": 4,
+      "source": "shared header",
+      "initial_value": "zero",
+      "canonical_alias": "ActivePause",
+      "definition_removed": true
+    },
+    {
+      "address": "0x0408B7C8",
+      "symbol": "RestoreFullscreen",
+      "type": "int",
+      "size": 4,
+      "source": "shared header",
+      "initial_value": "zero",
+      "canonical_alias": "RuntimeLibraryEnabled",
+      "definition_removed": true
+    }
+  ],
+  "validation": {
+    "fixture": "/root/.ai-tmp/nemu-control-outer-switch-n_c3p7lk",
+    "report": "/root/.ai-tmp/nemu-control-outer-switch-n_c3p7lk/comparison.json",
+    "source_sha256": "34ea4d574c4a786526a5e0bce2f01204745e3fa70af75df2eb684c12283e4648",
+    "image_sha256": "09e9d604917d72b16d9db37ddf9edde66137889e5648b691d922193c52b557c8",
+    "full_instruction_and_known_target_matches": 16,
+    "matched_bytes": 6166,
+    "known_target_mismatches": 0,
+    "unresolved_targets": 27,
+    "targets_not_independently_verified": 86,
+    "raw_byte_exact": false,
+    "comparison_tool_sha256": "68a389f46698cbaea256019bf4d03f2546027d0a6475ec80207690c3894b6b5b",
+    "target_fields_not_compared": 299,
+    "fixture_manifest": "/root/.ai-tmp/nemu-control-outer-switch-n_c3p7lk/diagnostic.json",
+    "fixture_image_hash_verified": true,
+    "candidate_extent_audit": "/root/.ai-tmp/nemu-control-outer-switch-n_c3p7lk/candidate-extents.json",
+    "remaining_source_shape_audits": {
+      "CPUHostException": {
+        "audit": "/root/.ai-tmp/nemu-exception.v4at4C/CPUHOST-NOTES.txt",
+        "supported_refinements": "separate scoped diagnostic buffers, valid-index else, typed breakpoint assignment loop",
+        "remaining_issue": "ExceptionAddress and opcode common-subexpression elimination across switch cases",
+        "unsupported_diagnostic": "Selective volatile exception-record access reduces differences but lacks independent source evidence and is not used.",
+        "independent_followup": "/root/.ai-tmp/nemu-exception-cse.86b7ht3w/audit.json",
+        "literal_order_audit": "/root/.ai-tmp/nemu-control-outer-switch-n_c3p7lk/outer-switch-invariance.json"
+      },
+      "ResetCPU": {
+        "audit": "/root/.ai-tmp/nemu-reset-second.fewu_pzo/audit.json",
+        "compiled_cases": 91,
+        "byte_identical_to_baseline_cases": 56,
+        "remaining_issue": "MI register and RSP flag clear scheduling/register selection",
+        "result": "No source change promoted; alternate storage, types, loop and grouping forms were identical or worse.",
+        "aggregate_followup": {
+          "audit": "/root/.ai-tmp/nemu-reset-aggregate.j0xcshe5/audit.json",
+          "sha256": "3c6b3ebd61d17aba099b0df8c5360d7cb4509c3ff2faad2b2cae908ba27e2f45",
+          "layouts": 9,
+          "result": "No source change promoted; layouts preserve observed field offsets, but all retain a 1611-byte candidate."
+        }
+      }
+    },
+    "historical_prefix_validation": {
+      "report": "/root/.ai-tmp/nemu-control-validation-w2073vh8/comparison-original-prefix.json",
+      "report_sha256": "c21984015cc719035e14eeecfcbe57acb3a9fd289e01ee2f85427237c10b3b1d",
+      "comparison_tool_sha256": "5c22c017dfa37e8be21b0224a3b668fbb3f42484a24ceb54843d5cb81093972d",
+      "image_sha256": "65ccf9edbf883bf23b5e0a2cd935520643b8ef869e9a7eddabda8850c4af56c5",
+      "scope": "The two nonmatching functions used original-sized candidate prefixes. CPUHostException reported 495 differences; ResetCPU reported 319. This is superseded by the current measured full-extent report."
+    },
+    "source_checkpoint": "94d0e84f5138cd23070daa5d97449be50ce630e6",
+    "proof_artifact_sha256": {
+      "comparison.json": "5089a3f51190d87e1721280bcf1823b8286abad988115b543a0fea520a79f83e",
+      "nemu64.map": "d7ee02abe27e536facb14d18f192eb1ae74b10f3797bacd0e4e2d8f74becca06",
+      "diagnostic.json": "85dfbc7005e03cd14e3d9de4319f2f522095d8dcd0c92f48ae4c2e8d660bca7a",
+      "metadata.json": "1657b2d7a5a7e222aa23eda0d717b51611f456aebcd2865b4456cef61355de86",
+      "candidate-extents.json": "1b2474e1e53f1b07d90913f4c542a4a1821e7ce20fc4aa4a22b9d3400b45cf93",
+      "outer-switch-invariance.json": "8acbf9278c67ec9a26761635dff0f43eda3b685148e9bac9f8485476c4b378b9",
+      "run-stack-audit.json": "f292d88d2fe13413e16eb82f6f8a3c6e32a5f75f36ea017940faff84978e5eb7"
+    }
+  },
+  "extent_field_semantics": {
+    "functions[].size": "Measured original code and referenced local data, excluding trailing alignment.",
+    "functions[].emitted_block_size": "Original body and alignment up to the next separately identified function.",
+    "functions[].normalized_comparison.rebuilt_size": "Measured candidate extent in the historical linked image identified by validation.image_sha256; not a claim about other builds."
+  }
+}

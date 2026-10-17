@@ -4156,7 +4156,22 @@
         "original_argument_setup_restored": true,
         "original_and_rebuilt_extent": 6368,
         "remaining_normalized_differing_bytes": 11,
-        "note": "The call ABI matches; the complete memory-write routine remains unmatched."
+        "note": "The Save call ABI matches. The complete memory-write routine retains 11 non-address byte differences and two commutative global-load identity-order differences.",
+        "independent_operand_audit": {
+          "identified_fields": 386,
+          "remaining_identity_order_mismatches": 2,
+          "offsets": [
+            "0x161A",
+            "0x1620"
+          ],
+          "detail": "The candidate loads RDRAM then FlashRamAddress; the original loads FlashRamAddress then RDRAM. All calls, literals, SEH data, tables and other global identities match in the independent audit.",
+          "other_memory_functions_unchanged": 13,
+          "other_memory_matched_bytes": 5056,
+          "other_memory_verified_fields": 341,
+          "script": "scripts/verify_nemu_memory.py",
+          "report": "/root/.ai-tmp/nemu-memory.1792142990/combined-save-verified.json",
+          "report_sha256": "db6cfa16f338708ae6de1c642701388403876c9d3a003597fc33eab731a9dd9e"
+        }
       },
       "remaining_differences": [
         "FILE and length use reversed stack slots.",
