@@ -116,14 +116,11 @@
       "address_basis": "identified_symbol"
     },
     {
-      "name": "_AudioPluginReserved",
+      "name": "_RaiseAudioInterrupt",
       "va": 268515264,
-      "address_basis": "identified_symbol"
-    },
-    {
-      "name": "_AudioPluginReservedEnd",
-      "va": 268516112,
-      "address_basis": "identified_symbol"
+      "address_basis": "identified_symbol",
+      "size": 16,
+      "address_evidence": "Empty callback directly called by the independently reconstructed DirectSound CompleteAudioDMA path."
     },
     {
       "name": "_get_feature_flags",
@@ -168,8 +165,9 @@
     {
       "name": "_PluginName",
       "va": 268688208,
-      "address_basis": "observed_operand_inference",
-      "address_evidence": "Consistent accesses from reconstructed native API/CPU-feature routines; private identifier inferred"
+      "address_basis": "identified_symbol",
+      "address_evidence": "Complete literal LaC's Audio DLL - Little Endian in original .data; exported GetDllInfo and DllAbout both reference it.",
+      "size": 31
     },
     {
       "name": "_PluginInitialized",

@@ -6,6 +6,9 @@
 
 // Unit name inferred: export names, ABI types and literal strings survive;
 // the original source filename is not present in the stripped DLL.
+char PluginName[] = "LaC's Audio DLL - Little Endian";
+BYTE *RDRAM;
+int DumpMicrocode;
 BYTE *PluginIMEM;
 BYTE *PluginDMEM;
 HMODULE AttachedAudio;
@@ -23,7 +26,7 @@ void (__cdecl *AttachedProcessAList)();
 void (__cdecl *AttachedRomClosed)();
 void (__cdecl *AttachedAiUpdate)(BOOL);
 
-void AudioPluginReserved(void) {}
+void RaiseAudioInterrupt(void) {}
 
 void AiUpdate(BOOL wait) { AttachedAiUpdate(wait); }
 void AiDacrateChanged(int system) { AttachedAiDacrateChanged(system); }
@@ -108,4 +111,3 @@ void ProcessAList()
 }
 
 void RomClosed() { AttachedRomClosed(); }
-void AudioPluginReservedEnd(void) {}

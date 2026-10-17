@@ -92,6 +92,7 @@ def main():
             tool('link','link','/nologo','/dll','/incremental:no','/debug','/opt:noref','/opt:noicf',
                  '/subsystem:windows','/machine:I386','/base:0x10000000','/align:4096','/filealign:4096',
                  '/out:audio.dll','/pdb:audio.pdb','/map:audio.map','/def:audio.def',
+                 '/libpath:Z:'+str(ROOT/'toolchains/vc7/platformsdk/lib/prerelease').replace('/','\\'),
                  *[str(p.relative_to(work)) for p in objects],*resources,
                  'dsound.lib','winmm.lib','kernel32.lib','user32.lib','gdi32.lib')
             shutil.copyfile(work/'audio.dll',work/'audio.unstamped.dll')
