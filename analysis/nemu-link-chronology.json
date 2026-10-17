@@ -1,0 +1,386 @@
+{
+  "schema_version": 1,
+  "status": "Optional reproducible input recipe; complete executable does not match.",
+  "original": "master/nemu64.exe",
+  "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+  "recipe": "src/nemu64/imports/link-chronology.json",
+  "recipe_sha256": "6cef4d07a0fc5a8c54dc21e2a9d973db1347c8f62c5c0d6fae41e37e07ab4af5",
+  "builder": "scripts/build_nemu.py",
+  "generator": "scripts/build_nemu_link_inputs.py",
+  "layout_inspector": "scripts/inspect_nemu_link_layout.py",
+  "command": "python3 scripts/build_nemu.py --chronological-libraries --stage-storage --function-order src/nemu64/application.order",
+  "canonical_default_unchanged": true,
+  "source_snapshot_hashes_identical": true,
+  "source_file_count": 96,
+  "member_bodies_unchanged": true,
+  "mechanism": [
+    "The first 95 selected unchanged native CRT members share one standard archive and are selected by ordered roots for symbols already present in those members.",
+    "The two unchanged Machine=0 oldnames alias members follow setmode; their empty text sections naturally create the original eleven CC alignment bytes before the unchanged short RtlUnwind import.",
+    "The final 19 native CRT members remain in the deferred archive, preserving post-LTCG floating data/literal placement.",
+    "Every other selected short import has a one-member ordinary archive; each DLL has a separate unchanged metadata archive. Input chronology follows original hint/name and DLL-name positions.",
+    "No object body, instruction, data, PE header, or padding byte is patched. Only ordinary archive indexes/headers and response files are generated."
+  ],
+  "canonical": {
+    "artifact": "/root/.ai-tmp/nemu-build.7zi4t73x/artifacts/827ba6b25744599645f554ba325c1ecf5f1c57a4b2f434feaf22095be1699f45",
+    "sha256": "827ba6b25744599645f554ba325c1ecf5f1c57a4b2f434feaf22095be1699f45",
+    "file_bytes": 4796416,
+    "differing_file_bytes": 185228,
+    "full_file_equal": false,
+    "sections": [
+      {
+        "name": ".text",
+        "virtual_size": 190413,
+        "layout_equal": false,
+        "raw_bytes_equal": false,
+        "differing_bytes": 180670
+      },
+      {
+        "name": ".rdata",
+        "virtual_size": 61240,
+        "layout_equal": true,
+        "raw_bytes_equal": false,
+        "differing_bytes": 3249
+      },
+      {
+        "name": ".data",
+        "virtual_size": 67692888,
+        "layout_equal": true,
+        "raw_bytes_equal": false,
+        "differing_bytes": 1185
+      },
+      {
+        "name": ".rsrc",
+        "virtual_size": 4295496,
+        "layout_equal": true,
+        "raw_bytes_equal": true,
+        "differing_bytes": 0
+      }
+    ],
+    "all_resource_payloads_equal": true,
+    "resource_payload_count": 29,
+    "function_order_ignored_entries": [],
+    "native_and_import_layout": {
+      "executable_sha256": "827ba6b25744599645f554ba325c1ecf5f1c57a4b2f434feaf22095be1699f45",
+      "native_functions": {
+        "expected": 187,
+        "present": 187,
+        "missing_or_ambiguous": [],
+        "address_delta_counts": {
+          "-81": 4,
+          "-80": 1,
+          "-66": 15,
+          "-64": 163,
+          "-56": 4
+        },
+        "uniform_displacement": false,
+        "order_inversions": 0,
+        "qualification": "Placement only; independent library-body evidence is in the inventory."
+      },
+      "observed_native_storage": {
+        "observations": 72,
+        "map_symbols": 54,
+        "exact": 54,
+        "mismatches": [],
+        "unavailable": [
+          "_FloatFormat",
+          "?_pgmname@?1??_setargv@@9@9",
+          "?f_use@?1??__crtGetEnvironmentStringsA@@9@9",
+          "?f_use@?1??__crtGetStringTypeA@@9@9",
+          "_fSystemSet",
+          "?pfnMessageBoxA@?1??__crtMessageBoxA@@9@9",
+          "?pfnGetActiveWindow@?1??__crtMessageBoxA@@9@9",
+          "?pfnGetLastActivePopup@?1??__crtMessageBoxA@@9@9",
+          "?pfnGetProcessWindowStation@?1??__crtMessageBoxA@@9@9",
+          "?pfnGetUserObjectInformationA@?1??__crtMessageBoxA@@9@9",
+          "_user_handler",
+          "?f_use@?1??__crtLCMapStringA@@9@9",
+          "_g_pflt",
+          "_g_fmt",
+          "_g_magnitude",
+          "_g_round_expansion",
+          "_fos",
+          "_ret"
+        ],
+        "qualification": "Library-operand observations, not independently proved original identities; includes initialized storage and BSS."
+      },
+      "imports": {
+        "expected_count": 152,
+        "actual_count": 152,
+        "identity_sets_equal": true,
+        "exact_iat_slots": 152,
+        "names_and_slots_equal": true,
+        "relative_order_excluding_recorded_insertions_equal": true,
+        "relative_order_count": 148,
+        "excluded_insertion_positions": [
+          {
+            "dll": "kernel32.dll",
+            "name": "GetOEMCP"
+          },
+          {
+            "dll": "kernel32.dll",
+            "name": "GetSystemInfo"
+          },
+          {
+            "dll": "kernel32.dll",
+            "name": "VirtualQuery"
+          },
+          {
+            "dll": "kernel32.dll",
+            "name": "RtlUnwind"
+          }
+        ],
+        "ranges": [
+          {
+            "name": "import_descriptors_and_lookup_arrays",
+            "rva_start": 254232,
+            "rva_end": 255092,
+            "bytes": 860,
+            "equal": false,
+            "differing_bytes": 311
+          },
+          {
+            "name": "complete_hint_and_dll_name_pool",
+            "rva_start": 255092,
+            "rva_end": 257848,
+            "bytes": 2756,
+            "equal": false,
+            "differing_bytes": 2611
+          }
+        ]
+      },
+      "alias_alignment": {
+        "original_start": 4381845,
+        "original_end": 4381856,
+        "rebuilt_start": 4381781,
+        "rebuilt_end": 4382254,
+        "bytes_equal": false,
+        "original_bytes": 11,
+        "rebuilt_bytes": null
+      },
+      "rich_counts": {
+        "original": {
+          "002723ca": 2,
+          "001d24fa": 2,
+          "004024fa": 20,
+          "001c24fa": 93,
+          "000420ff": 2,
+          "000a1fe8": 14,
+          "00041fe8": 2,
+          "001923fa": 15,
+          "00010000": 153,
+          "002c24fa": 27,
+          "004524fa": 1,
+          "003d24fa": 1
+        },
+        "rebuilt": {
+          "00041fe8": 2,
+          "000420ff": 2,
+          "001923fa": 15,
+          "00010000": 153,
+          "002723ca": 2,
+          "002c24fa": 20,
+          "000a1fe8": 14,
+          "001d24fa": 2,
+          "001c24fa": 93,
+          "004024fa": 20,
+          "004524fa": 1,
+          "003d24fa": 1
+        }
+      }
+    }
+  },
+  "chronological": {
+    "artifact": "/root/.ai-tmp/nemu-build.7zi4t73x/artifacts/18f0e04312bbb2498d67ef4b28dc850f3753a2d39b7aa2321978d316f390e5fa",
+    "sha256": "18f0e04312bbb2498d67ef4b28dc850f3753a2d39b7aa2321978d316f390e5fa",
+    "file_bytes": 4796416,
+    "differing_file_bytes": 182042,
+    "full_file_equal": false,
+    "sections": [
+      {
+        "name": ".text",
+        "virtual_size": 190429,
+        "layout_equal": false,
+        "raw_bytes_equal": false,
+        "differing_bytes": 180593
+      },
+      {
+        "name": ".rdata",
+        "virtual_size": 61240,
+        "layout_equal": true,
+        "raw_bytes_equal": false,
+        "differing_bytes": 142
+      },
+      {
+        "name": ".data",
+        "virtual_size": 67692888,
+        "layout_equal": true,
+        "raw_bytes_equal": false,
+        "differing_bytes": 1184
+      },
+      {
+        "name": ".rsrc",
+        "virtual_size": 4295496,
+        "layout_equal": true,
+        "raw_bytes_equal": true,
+        "differing_bytes": 0
+      }
+    ],
+    "all_resource_payloads_equal": true,
+    "resource_payload_count": 29,
+    "function_order_ignored_entries": [],
+    "native_and_import_layout": {
+      "executable_sha256": "18f0e04312bbb2498d67ef4b28dc850f3753a2d39b7aa2321978d316f390e5fa",
+      "native_functions": {
+        "expected": 187,
+        "present": 187,
+        "missing_or_ambiguous": [],
+        "address_delta_counts": {
+          "-48": 187
+        },
+        "uniform_displacement": true,
+        "order_inversions": 0,
+        "qualification": "Placement only; independent library-body evidence is in the inventory."
+      },
+      "observed_native_storage": {
+        "observations": 72,
+        "map_symbols": 54,
+        "exact": 54,
+        "mismatches": [],
+        "unavailable": [
+          "_FloatFormat",
+          "?_pgmname@?1??_setargv@@9@9",
+          "?f_use@?1??__crtGetEnvironmentStringsA@@9@9",
+          "?f_use@?1??__crtGetStringTypeA@@9@9",
+          "_fSystemSet",
+          "?pfnMessageBoxA@?1??__crtMessageBoxA@@9@9",
+          "?pfnGetActiveWindow@?1??__crtMessageBoxA@@9@9",
+          "?pfnGetLastActivePopup@?1??__crtMessageBoxA@@9@9",
+          "?pfnGetProcessWindowStation@?1??__crtMessageBoxA@@9@9",
+          "?pfnGetUserObjectInformationA@?1??__crtMessageBoxA@@9@9",
+          "_user_handler",
+          "?f_use@?1??__crtLCMapStringA@@9@9",
+          "_g_pflt",
+          "_g_fmt",
+          "_g_magnitude",
+          "_g_round_expansion",
+          "_fos",
+          "_ret"
+        ],
+        "qualification": "Library-operand observations, not independently proved original identities; includes initialized storage and BSS."
+      },
+      "imports": {
+        "expected_count": 152,
+        "actual_count": 152,
+        "identity_sets_equal": true,
+        "exact_iat_slots": 115,
+        "names_and_slots_equal": false,
+        "relative_order_excluding_recorded_insertions_equal": true,
+        "relative_order_count": 148,
+        "excluded_insertion_positions": [
+          {
+            "dll": "kernel32.dll",
+            "name": "GetOEMCP"
+          },
+          {
+            "dll": "kernel32.dll",
+            "name": "GetSystemInfo"
+          },
+          {
+            "dll": "kernel32.dll",
+            "name": "VirtualQuery"
+          },
+          {
+            "dll": "kernel32.dll",
+            "name": "RtlUnwind"
+          }
+        ],
+        "ranges": [
+          {
+            "name": "import_descriptors_and_lookup_arrays",
+            "rva_start": 254232,
+            "rva_end": 255092,
+            "bytes": 860,
+            "equal": false,
+            "differing_bytes": 41
+          },
+          {
+            "name": "complete_hint_and_dll_name_pool",
+            "rva_start": 255092,
+            "rva_end": 257848,
+            "bytes": 2756,
+            "equal": true,
+            "differing_bytes": 0
+          }
+        ]
+      },
+      "alias_alignment": {
+        "original_start": 4381845,
+        "original_end": 4381856,
+        "rebuilt_start": 4381797,
+        "rebuilt_end": 4381808,
+        "bytes_equal": true,
+        "original_bytes": 11,
+        "rebuilt_bytes": 11
+      },
+      "rich_counts": {
+        "original": {
+          "002723ca": 2,
+          "001d24fa": 2,
+          "004024fa": 20,
+          "001c24fa": 93,
+          "000420ff": 2,
+          "000a1fe8": 14,
+          "00041fe8": 2,
+          "001923fa": 15,
+          "00010000": 153,
+          "002c24fa": 27,
+          "004524fa": 1,
+          "003d24fa": 1
+        },
+        "rebuilt": {
+          "001d24fa": 2,
+          "002723ca": 2,
+          "004024fa": 20,
+          "000420ff": 2,
+          "00041fe8": 2,
+          "001923fa": 15,
+          "00010000": 153,
+          "001c24fa": 93,
+          "002c24fa": 20,
+          "000a1fe8": 14,
+          "004524fa": 1,
+          "003d24fa": 1
+        }
+      }
+    }
+  },
+  "relocation_fixtures": [
+    {
+      "mode": "ordered",
+      "path": "/root/.ai-tmp/nemu-complete-relocs.lq0snspy",
+      "sha256": "f21ef0d193bd05820514c74bc82f30ea0cc566fa97609ebb5a2bb303519d6d44",
+      "parent_artifact": "/root/.ai-tmp/nemu-build.7zi4t73x/artifacts/827ba6b25744599645f554ba325c1ecf5f1c57a4b2f434feaf22095be1699f45"
+    },
+    {
+      "mode": "chronological",
+      "path": "/root/.ai-tmp/nemu-chronology-relocs.63xfsqei",
+      "sha256": "e3ccfb618cf9ff56478b1cbe5789f6fb9e60b2c830ef382c69cafcd41eec3ac3",
+      "parent_artifact": "/root/.ai-tmp/nemu-build.7zi4t73x/artifacts/18f0e04312bbb2498d67ef4b28dc850f3753a2d39b7aa2321978d316f390e5fa"
+    }
+  ],
+  "corrections_to_prior_scratch_notes": [
+    "The minimal displaced-import set has FOUR members: GetOEMCP, GetSystemInfo, VirtualQuery and RtlUnwind. Removing all four restores the other148 relative identities; removing only the latter three does not. The earlier149/three-insertion shorthand was incorrect.",
+    "The54 available observed native storage addresses include initialized tables as well as BSS. They retain the library inventory's observation-only qualification;18 further observations have no unique corresponding MAP symbol."
+  ],
+  "independent_generator_replay": {
+    "evidence": "/root/.ai-tmp/nemu-chronology-recipe-review/report.json",
+    "all_sections_equal_to_prior_scratch_alias_recipe": true,
+    "unchanged_canonical_generated_files": 250
+  },
+  "limitations": [
+    "Only115 of152 IAT slots match in this optional recipe; the canonical recipe still matches all152.",
+    "The current187 native function placements are uniformly48bytes below original; this is placement evidence, not a new claim that every native instruction operand matches.",
+    "Original LTCG contribution count27 remains reconstructed20; all other Rich count identities agree.",
+    "No complete-executable match is claimed; the raw whole-file comparison remains the completion criterion."
+  ]
+}

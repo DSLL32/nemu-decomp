@@ -1963,8 +1963,8 @@
   },
   "build_script": "scripts/build_nemu.py",
   "integration_validation": {
-    "command": "python3 scripts/build_nemu.py --work /root/.ai-tmp/nemu-build-investigate.ULGEobKx --ordered-libraries --function-order src/nemu64/application.order --stage-storage",
-    "build_report": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/bb842ed8647642a47c9c840c326f2cbaa8fc8bfcf184d809f8201e85789ea6d4/build.json",
+    "command": "python3 scripts/build_nemu.py --ordered-libraries --stage-storage --function-order src/nemu64/application.order",
+    "build_report": "/root/.ai-tmp/nemu-build.7zi4t73x/artifacts/827ba6b25744599645f554ba325c1ecf5f1c57a4b2f434feaf22095be1699f45/build.json",
     "status": "All current real source units compile and link successfully; full executable bytes differ.",
     "application_units_compiled": 21,
     "application_units": [
@@ -1997,15 +1997,15 @@
     "resource_compilation": "passed",
     "link_unresolved_externals": 0,
     "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
-    "rebuilt_sha256": "bb842ed8647642a47c9c840c326f2cbaa8fc8bfcf184d809f8201e85789ea6d4",
+    "rebuilt_sha256": "827ba6b25744599645f554ba325c1ecf5f1c57a4b2f434feaf22095be1699f45",
     "original_file_bytes": 4796416,
     "rebuilt_file_bytes": 4796416,
-    "differing_file_bytes": 184736,
+    "differing_file_bytes": 185228,
     "resource_payloads_equal": true,
     "resource_payload_count": 29,
     "full_executable_match_claimed": false,
-    "immutable_source_and_object_snapshot": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/bb842ed8647642a47c9c840c326f2cbaa8fc8bfcf184d809f8201e85789ea6d4",
-    "relocation_diagnostic": "/root/.ai-tmp/nemu-complete-relocs.isffxrc_",
+    "immutable_source_and_object_snapshot": "/root/.ai-tmp/nemu-build.7zi4t73x/artifacts/827ba6b25744599645f554ba325c1ecf5f1c57a4b2f434feaf22095be1699f45",
+    "relocation_diagnostic": "/root/.ai-tmp/nemu-complete-relocs.lq0snspy",
     "relocation_diagnostic_preserves_all_existing_section_bytes": true,
     "note": "Raw whole-file comparison includes all code, data, resources, padding and metadata. No bytes are restored or patched. Diagnostic /FIXED:NO adds relocation records for independent operand comparison; it is not the intended original output.",
     "function_order": {
@@ -2039,9 +2039,9 @@
       "position_invariance_evidence": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/storage-order-invariance.json"
     },
     "section_differing_bytes": {
-      ".text": 180107,
-      ".rdata": 3258,
-      ".data": 1247,
+      ".text": 180670,
+      ".rdata": 3249,
+      ".data": 1185,
       ".rsrc": 0
     },
     "readonly_input_grouping_evidence": {
@@ -2051,10 +2051,12 @@
       "unique_application_literals_checked": 499,
       "limitation": "Inferred coherent translation-unit grouping preserves reconstructed bodies; original filenames were not retained."
     },
-    "current_text_virtual_size": 190365,
+    "current_text_virtual_size": 190413,
     "original_text_virtual_size": 190477,
     "source_refinements_since_previous_snapshot": [
-      "CPUHostException inferred typed storage view and control-flow reconstruction matches the owner1802-byte code body; full1808-byte central span is being independently checked. Other current bodies and canonical linker inputs were preserved."
+      "CompareBrowserItems closer supported control-flow/register-source reconstruction from e007bcb.",
+      "RSP_VCL closer supported branch reconstruction from d0619d4.",
+      "Both are still explicitly partial; the fresh complete build and central comparison retain all differences."
     ],
     "data_change_identity_audit": {
       "evidence": "/root/.ai-tmp/nemu-data-refresh.cuq07m2x/report.json",
@@ -2115,7 +2117,7 @@
       "identification_status": "Consistent inferred spellings; the original selected aliases are not uniquely identifiable from equivalent program bytes."
     },
     "experimental_selection_chronology": {
-      "status": "Scratch investigation only; canonical build still prioritizes152 exact import slots.",
+      "status": "Reproducible optional --chronological-libraries mode; canonical build still prioritizes152 exact IAT slots.",
       "first95_single_archive_evidence": "/root/.ai-tmp/nemu-crt-single-archive.4m5c1j7j/report.json",
       "single_archive_forward_roots": {
         "runtime_function_order_count": 187,
@@ -2140,6 +2142,7 @@
         "all_187_native_function_address_deltas_equal": -192
       },
       "remaining_import_insertions": [
+        "GetOEMCP",
         "GetSystemInfo",
         "VirtualQuery",
         "RtlUnwind"
@@ -2197,7 +2200,28 @@
             "_RtlUnwind@16"
           ]
         }
-      }
+      },
+      "correction": "Earlier notes omitted GetOEMCP: excluding four insertions restores148 relative identities, not149. Historical54-BSS labels refer to54 available observed native storage addresses including initialized tables."
+    },
+    "optional_chronology": {
+      "recipe": "src/nemu64/imports/link-chronology.json",
+      "report": "analysis/nemu-link-chronology.json",
+      "flag": "--chronological-libraries",
+      "canonical_default_unchanged": true,
+      "original_source_snapshot_shared_with_canonical": true,
+      "exact_iat_slots": 115,
+      "total_iat_slots": 152,
+      "exact_hint_and_dll_name_pool": true,
+      "all_187_native_functions_uniform_displacement": -48,
+      "available_observed_native_storage_addresses_exact": 54,
+      "original_alias_alignment_bytes_equal": true,
+      "remaining_moved_imports": [
+        "GetOEMCP",
+        "GetSystemInfo",
+        "VirtualQuery",
+        "RtlUnwind"
+      ],
+      "full_executable_match_claimed": false
     }
   }
 }

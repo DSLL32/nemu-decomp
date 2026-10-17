@@ -92,7 +92,113 @@ def import_name(data):
     return dll.lower(), public, symbol
 
 
-def generate(recipe, import_dir, output):
+def weak_aliases(data):
+    """Read the Machine=0 weak aliases used by the unchanged oldnames members."""
+    machine, sections, stamp, table, count, optional, flags = struct.unpack_from('<HHIIIHH', data)
+    if machine != 0 or sections != 1:
+        raise ValueError('Expected an oldnames weak-alias member')
+    strings, symbols, aliases, index = table + 18 * count, {}, {}, 0
+    while index < count:
+        position = table + 18 * index
+        name = data[position:position + 8]
+        name = (data[strings + struct.unpack_from('<I', name, 4)[0]:].split(b'\0', 1)[0]
+                if name[:4] == bytes(4) else name.split(b'\0', 1)[0]).decode('cp1252')
+        value, section, kind, storage, auxiliary = struct.unpack_from('<IhHBB', data, position + 8)
+        symbols[index] = name
+        if storage == 105:
+            if section != 0 or auxiliary != 1:
+                raise ValueError('Unexpected weak alias layout')
+            target, search = struct.unpack_from('<II', data, position + 18)
+            if search != 3:
+                raise ValueError('Expected IMAGE_WEAK_EXTERN_SEARCH_ALIAS')
+            aliases[name] = target
+        index += auxiliary + 1
+    return {name: symbols[target] for name, target in aliases.items()}
+
+
+def write_archive(file, members):
+    file.write_bytes(archive_for(members))
+    actual = list(archive_members(file))
+    if [(name, data) for name, _, data in actual] != [(name, data) for name, data, _ in members]:
+        raise ValueError('Generated archive changed member bytes: ' + str(file))
+
+
+def chronological_inputs(recipe, chronology, output, imports, report):
+    """Select unchanged members with stock archive indexes and /INCLUDE roots."""
+    if chronology['original_sha256'] != recipe['original_sha256']:
+        raise ValueError('Chronology refers to a different original executable')
+    crt = [row for row in report['crt'] if not row['deferred']]
+    if [row['object'] for row in crt] != [row['object'] for row in chronology['crt_roots']]:
+        raise ValueError('Chronology roots do not cover the selected CRT members in order')
+    members, roots = [], []
+    for row, anchor in zip(crt, chronology['crt_roots']):
+        data = Path(row['file']).read_bytes()
+        symbols = defined_symbols(data)
+        if anchor['symbol'] not in symbols:
+            raise ValueError('CRT anchor is not defined by its member: ' + anchor['symbol'])
+        members.append((row['object'], data, symbols))
+        roots.append(anchor['symbol'])
+    position = [row['object'] for row in crt].index(chronology['insert_after']) + 1
+    alias_members, aliases = [], {}
+    for row in report['aliases']:
+        data = Path(row['file']).read_bytes()
+        definitions = weak_aliases(data)
+        aliases.update(definitions)
+        alias_members.append((row['object'], data, list(definitions)))
+    if set(aliases) != set(chronology['alias_roots']):
+        raise ValueError('Chronology roots do not cover the unchanged weak aliases')
+    embedded = chronology['embedded_import']
+    embedded_key = embedded['dll'], embedded['name']
+    import_member = imports[embedded_key][0][-1]
+    if embedded['root'] not in import_member[2]:
+        raise ValueError('Embedded import root is not defined by its member')
+    members[position:position] = alias_members + [import_member]
+    roots[position:position] = chronology['alias_roots'] + [embedded['root']]
+    archive = output / 'crt-chronological.lib'
+    write_archive(archive, members)
+
+    expected = {(row['dll'], row['name']) for row in recipe['imports']['input_order']}
+    timeline = chronology['input_order']
+    selected = [(row['dll'], row['name']) for row in timeline if row['kind'] == 'import']
+    dlls = [row['dll'] for row in timeline if row['kind'] == 'descriptor']
+    if set(selected) != expected or len(selected) != len(expected):
+        raise ValueError('Chronology must cover every selected import exactly once')
+    if set(dlls) != {dll for dll, name in expected} or len(dlls) != len(set(dlls)):
+        raise ValueError('Chronology must cover each import descriptor exactly once')
+    objects, import_roots, descriptor_roots = [], [], []
+    for index, row in enumerate(timeline):
+        if row['kind'] == 'import':
+            key = row['dll'], row['name']
+            original, provenance = imports[key]
+            if key == embedded_key:
+                file = archive
+            else:
+                file = output / ('chronology-%03d.lib' % index)
+                write_archive(file, [original[-1]])
+                objects.append(file)
+                import_roots.append(original[-1][2][1])
+            report['imports'].append(dict(row, **provenance, file=str(file)))
+        elif row['kind'] == 'descriptor':
+            original = next(value[0] for key, value in imports.items() if key[0] == row['dll'])
+            metadata = original[:-1]
+            descriptor_roots.extend(symbol for _, _, symbols in metadata for symbol in symbols
+                                    if symbol.startswith('__IMPORT_DESCRIPTOR_'))
+            file = output / ('chronology-%03d.lib' % index)
+            write_archive(file, metadata)
+            objects.append(file)
+        else:
+            raise ValueError('Unknown chronology entry kind: ' + row['kind'])
+    if sorted(descriptor_roots) != sorted(chronology['descriptor_roots']):
+        raise ValueError('Import descriptor roots changed')
+    objects.extend([archive, output / 'crt-late.lib'])
+    report['chronology'] = dict(crt_roots=roots, alias_targets=aliases,
+        descriptor_roots=chronology['descriptor_roots'], limitations=chronology['limitations'],
+        combined_archive=str(archive), selected_member_count=len(members),
+        note='Only archive indexes, headers and response files are generated. Member bodies are unchanged.')
+    return objects, ['/INCLUDE:' + name for name in roots + import_roots + chronology['descriptor_roots']]
+
+
+def generate(recipe, import_dir, output, chronology=None):
     output.mkdir(parents=True, exist_ok=True)
     objects, early, report = [], [], dict(crt=[], imports=[], aliases=[], member_bytes_unchanged=True)
     aliases = recipe.get('aliases')
@@ -164,7 +270,7 @@ def generate(recipe, import_dir, output):
             imports[dll, public] = (metadata + [(name, data, [symbol, '__imp_' + symbol])],
                                    dict(library=str(library), archive_offset=offset,
                                         import_member_sha256=hashlib.sha256(data).hexdigest()))
-    for index, row in enumerate(recipe['imports']['input_order']):
+    for index, row in enumerate([] if chronology else recipe['imports']['input_order']):
         members, provenance = imports[row['dll'], row['name']]
         file = output / ('import-%03d.lib' % index)
         file.write_bytes(archive_for(members))
@@ -174,6 +280,11 @@ def generate(recipe, import_dir, output):
             raise ValueError('Generated import archive changed member bytes')
         objects.append(file)
         report['imports'].append(dict(row, **provenance, file=str(file)))
+    roots = []
+    if chronology:
+        objects, roots = chronological_inputs(recipe, chronology, output, imports, report)
+        early = []
+    report['mode'] = 'chronological' if chronology else 'ordered'
     def response_path(file):
         try:
             path = str(file.relative_to(Path.cwd())).replace('/', '\\')
@@ -182,7 +293,7 @@ def generate(recipe, import_dir, output):
         if any(character in path for character in '\r\n"'):
             raise ValueError('Unsupported character in linker input path')
         return '"' + path + '"'
-    response = ['/NODEFAULTLIB:libc'] + [response_path(file) for file in objects]
+    response = ['/NODEFAULTLIB:libc'] + roots + [response_path(file) for file in objects]
     (output / 'link.rsp').write_text('\n'.join(response) + '\n')
     (output / 'early.rsp').write_text('\n'.join(response_path(file) for file in early) + '\n')
     return report
@@ -191,16 +302,21 @@ def generate(recipe, import_dir, output):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--order', type=Path, default=ROOT / 'src/nemu64/imports/link-order.json')
+    parser.add_argument('--chronology', type=Path, help='optional native and import chronology recipe')
     parser.add_argument('--import-dir', type=Path, required=True)
     parser.add_argument('--output-dir', type=Path, required=True)
     args = parser.parse_args()
     output = args.output_dir.resolve()
     if not output.is_relative_to((Path.home() / '.ai-tmp').resolve()):
         parser.error('--output-dir must be under ~/.ai-tmp')
-    report = generate(json.loads(args.order.read_text()), args.import_dir.resolve(), output)
+    chronology = json.loads(args.chronology.read_text()) if args.chronology else None
+    report = generate(json.loads(args.order.read_text()), args.import_dir.resolve(), output, chronology)
     report.update(order_file=str(args.order), order_sha256=hashlib.sha256(args.order.read_bytes()).hexdigest())
+    if args.chronology:
+        report.update(chronology_file=str(args.chronology),
+                      chronology_sha256=hashlib.sha256(args.chronology.read_bytes()).hexdigest())
     (output / 'inputs.json').write_text(json.dumps(report, indent=2) + '\n')
-    print(f'{len(report["crt"])} CRT objects and {len(report["imports"])} import archives: {output / "link.rsp"}')
+    print(f'{len(report["crt"])} CRT objects and {len(report["imports"])} imports: {output / "link.rsp"}')
 
 
 if __name__ == '__main__':

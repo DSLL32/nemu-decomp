@@ -21,6 +21,7 @@ import tempfile
 from verify_nemu import compare
 from inspect_gs_symbols import imported_symbols
 from pe_fingerprints import PE32
+from inspect_nemu_link_layout import inspect as inspect_link_layout
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -61,6 +62,7 @@ RECIPE_FILES = [
     'verify_nemu.py', 'verify_gs.py', 'pe_fingerprints.py',
     'build_nemu_link_inputs.py', 'map_nemu_libraries.py', 'inspect_gs_symbols.py',
     'stage_nemu_storage.py', 'nemu_storage_source.py', 'map_nemu_globals.py',
+    'inspect_nemu_link_layout.py',
 ]
 
 
@@ -72,10 +74,16 @@ def main():
                         help='VC7 /ORDER file for reconstructed application functions')
     parser.add_argument('--ordered-libraries', action='store_true',
                         help='use the inferred unchanged CRT/import-member input order')
+    parser.add_argument('--chronological-libraries', action='store_true',
+                        help='optional native/alias/import chronology (implies --ordered-libraries)')
     parser.add_argument('--stage-storage', action='store_true',
                         help='stage typed initialized and zero storage in observed address order')
     parser.add_argument('--report', type=Path, help='also write the build/comparison report here')
     args = parser.parse_args()
+    if args.chronological_libraries:
+        args.ordered_libraries = True
+        if args.no_map:
+            parser.error('--chronological-libraries requires a MAP for layout verification')
     parent = Path.home() / '.ai-tmp'
     parent.mkdir(exist_ok=True)
     scratch = (args.work.resolve() if args.work else
@@ -142,6 +150,9 @@ def main():
                 sha256=hashlib.sha256(data).hexdigest()))
         compiler_inputs = source_inputs
         storage_inputs = {}
+        if args.ordered_libraries and not args.no_map:
+            storage_inputs['nemu-library-addresses.json'] = (
+                ROOT / 'analysis/nemu-library-addresses.json').read_bytes()
         if args.stage_storage:
             stage_root = Path(tempfile.mkdtemp(prefix='storage.', dir=scratch))
             stage_source = stage_root / 'original-source'
@@ -200,7 +211,9 @@ def main():
             run('ordered-library-inputs', [sys.executable,
                 str(ROOT / 'scripts/build_nemu_link_inputs.py'),
                 '--order', 'imports/link-order.json', '--import-dir', 'imports',
-                '--output-dir', 'obj/link-inputs'])
+                '--output-dir', 'obj/link-inputs',
+                *(['--chronology', 'imports/link-chronology.json']
+                  if args.chronological_libraries else [])])
             report['ordered_library_inputs'] = json.loads(
                 (project / 'obj/link-inputs/inputs.json').read_text())
         zlib_objects = []
@@ -225,7 +238,8 @@ def main():
             '/nologo', '/LTCG', '/SUBSYSTEM:WINDOWS', '/OPT:WIN98',
             '/INCREMENTAL:NO', '/MACHINE:I386', '/BASE:0x400000', '/FIXED',
             '/OUT:' + winoutput + r'\nemu64.exe',
-            *(['@obj/link-inputs/early.rsp'] if args.ordered_libraries else []),
+            *(['@obj/link-inputs/early.rsp']
+              if args.ordered_libraries and not args.chronological_libraries else []),
             *application_objects, *zlib_objects, 'obj/nemu64.res',
             *(['@obj/link-inputs/link.rsp'] if args.ordered_libraries else []),
             'comctl32.lib', 'winmm.lib', 'imports/kailleraclient.lib',
@@ -257,6 +271,13 @@ def main():
             report['import_layout'] = dict(expected_count=len(expected), actual_count=len(actual),
                 exact_iat_slots=sum(observed.get(key) == address for key, address in wanted.items()),
                 names_and_slots_equal=wanted == observed)
+            if not args.no_map:
+                report['native_and_import_layout'] = inspect_link_layout(
+                    executable, output / 'nemu64.map',
+                    json.loads(storage_inputs['nemu-library-addresses.json']),
+                    json.loads(source_inputs[Path('imports/link-chronology.json')]))
+            report['library_input_mode'] = ('chronological' if args.chronological_libraries
+                                            else 'ordered')
         comparison = compare(executable)
         (scratch / 'comparison.json').write_text(json.dumps(comparison, indent=2) + '\n')
         artifact = scratch / 'artifacts' / comparison['rebuilt_sha256']

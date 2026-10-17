@@ -1,0 +1,1409 @@
+{
+  "schema_version": 1,
+  "kind": "inferred_optional_native_and_import_chronology",
+  "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+  "scope": "Ordinary library selection and input order only; every selected library member body remains unchanged.",
+  "inference": [
+    "The 95 public CRT anchors select already retained members in their observed order; the final 19 members remain lazy.",
+    "The two unchanged weak-alias members follow setmode, so their empty text sections naturally produce the observed alignment before RtlUnwind.",
+    "Import wrappers follow original hint/name and DLL-name positions; ordinal-only InitCommonControls has no hint/name record and is selected first.",
+    "This compatible recipe is not a uniquely recovered original link command."
+  ],
+  "limitations": [
+    "Only 115 of 152 IAT slots currently match. GetOEMCP, GetSystemInfo, VirtualQuery and RtlUnwind have incorrect insertion positions; the remaining 148 imports have the original relative order.",
+    "The native function block retains a uniform address displacement until application text lengths match.",
+    "The original has 27 LTCG contributions; the reconstruction currently has 20."
+  ],
+  "crt_roots": [
+    {
+      "object": "build\\intel\\st_obj\\fopen.obj",
+      "symbol": "__fsopen"
+    },
+    {
+      "object": "build\\intel\\st_obj\\fprintf.obj",
+      "symbol": "_fprintf"
+    },
+    {
+      "object": "build\\intel\\st_obj\\sprintf.obj",
+      "symbol": "_sprintf"
+    },
+    {
+      "object": "build\\intel\\st_obj\\vsprintf.obj",
+      "symbol": "_vsprintf"
+    },
+    {
+      "object": "build\\intel\\st_obj\\fread.obj",
+      "symbol": "_fread"
+    },
+    {
+      "object": "build\\intel\\st_obj\\fclose.obj",
+      "symbol": "_fclose"
+    },
+    {
+      "object": "build\\intel\\st_obj\\free.obj",
+      "symbol": "_free"
+    },
+    {
+      "object": "build\\intel\\st_obj\\malloc.obj",
+      "symbol": "__heap_alloc"
+    },
+    {
+      "object": "build\\intel\\st_obj\\fgetpos.obj",
+      "symbol": "_fgetpos"
+    },
+    {
+      "object": "build\\intel\\st_obj\\fwrite.obj",
+      "symbol": "_fwrite"
+    },
+    {
+      "object": "build\\intel\\st_obj\\ftell.obj",
+      "symbol": "_ftell"
+    },
+    {
+      "object": "build\\intel\\st_obj\\fseek.obj",
+      "symbol": "_fseek"
+    },
+    {
+      "object": "build\\intel\\st_obj\\strncpy.obj",
+      "symbol": "_strncpy"
+    },
+    {
+      "object": "build\\intel\\st_obj\\fgets.obj",
+      "symbol": "_fgets"
+    },
+    {
+      "object": "build\\intel\\st_obj\\realloc.obj",
+      "symbol": "_realloc"
+    },
+    {
+      "object": "build\\intel\\st_obj\\strchr.obj",
+      "symbol": "_strchr"
+    },
+    {
+      "object": "build\\intel\\st_obj\\atox.obj",
+      "symbol": "_atol"
+    },
+    {
+      "object": "build\\intel\\st_obj\\strtol.obj",
+      "symbol": "_strtol"
+    },
+    {
+      "object": "build\\intel\\st_obj\\fflush.obj",
+      "symbol": "__flush"
+    },
+    {
+      "object": "build\\intel\\st_obj\\wincrt0.obj",
+      "symbol": "__amsg_exit"
+    },
+    {
+      "object": "build\\intel\\st_obj\\calloc.obj",
+      "symbol": "_calloc"
+    },
+    {
+      "object": "build\\intel\\st_obj\\_open.obj",
+      "symbol": "__openfile"
+    },
+    {
+      "object": "build\\intel\\st_obj\\crt0dat.obj",
+      "symbol": "___crtExitProcess"
+    },
+    {
+      "object": "build\\intel\\st_obj\\stream.obj",
+      "symbol": "__getstream"
+    },
+    {
+      "object": "build\\intel\\st_obj\\_sftbuf.obj",
+      "symbol": "__stbuf"
+    },
+    {
+      "object": "build\\intel\\st_obj\\output.obj",
+      "symbol": "__output"
+    },
+    {
+      "object": "build\\intel\\st_obj\\_flsbuf.obj",
+      "symbol": "__flsbuf"
+    },
+    {
+      "object": "build\\intel\\st_obj\\_filbuf.obj",
+      "symbol": "__filbuf"
+    },
+    {
+      "object": "build\\intel\\st_obj\\read.obj",
+      "symbol": "__read"
+    },
+    {
+      "object": "build\\intel\\st_obj\\memcpy.obj",
+      "symbol": "_memcpy"
+    },
+    {
+      "object": "build\\intel\\st_obj\\close.obj",
+      "symbol": "__close"
+    },
+    {
+      "object": "build\\intel\\st_obj\\_freebuf.obj",
+      "symbol": "__freebuf"
+    },
+    {
+      "object": "build\\intel\\st_obj\\heapinit.obj",
+      "symbol": "___heap_select"
+    },
+    {
+      "object": "build\\intel\\st_obj\\sbheap.obj",
+      "symbol": "___sbh_heap_init"
+    },
+    {
+      "object": "build\\intel\\st_obj\\handler.obj",
+      "symbol": "__callnewh"
+    },
+    {
+      "object": "build\\intel\\st_obj\\ftelli64.obj",
+      "symbol": "__ftelli64"
+    },
+    {
+      "object": "build\\intel\\st_obj\\write.obj",
+      "symbol": "__write"
+    },
+    {
+      "object": "build\\intel\\st_obj\\ioinit.obj",
+      "symbol": "__ioinit"
+    },
+    {
+      "object": "build\\intel\\st_obj\\lseek.obj",
+      "symbol": "__lseek"
+    },
+    {
+      "object": "build\\intel\\st_obj\\ismbspc.obj",
+      "symbol": "__ismbcspace"
+    },
+    {
+      "object": "build\\intel\\st_obj\\llmul.obj",
+      "symbol": "__allmul"
+    },
+    {
+      "object": "build\\intel\\st_obj\\isctype.obj",
+      "symbol": "__isctype"
+    },
+    {
+      "object": "build\\intel\\st_obj\\commit.obj",
+      "symbol": "__commit"
+    },
+    {
+      "object": "build\\intel\\st_obj\\ctype.obj",
+      "symbol": "__pwctype"
+    },
+    {
+      "object": "build\\intel\\st_obj\\crt0init.obj",
+      "symbol": "___xi_a"
+    },
+    {
+      "object": "build\\intel\\st_obj\\nlsdata1.obj",
+      "symbol": "___decimal_point_length"
+    },
+    {
+      "object": "build\\intel\\st_obj\\_newmode.obj",
+      "symbol": "__newmode"
+    },
+    {
+      "object": "build\\intel\\st_obj\\_file.obj",
+      "symbol": "___initstdio"
+    },
+    {
+      "object": "build\\intel\\st_obj\\crt0msg.obj",
+      "symbol": "__NMSG_WRITE"
+    },
+    {
+      "object": "build\\intel\\st_obj\\winxfltr.obj",
+      "symbol": "__XcptFilter"
+    },
+    {
+      "object": "build\\intel\\st_obj\\wincmdln.obj",
+      "symbol": "__wincmdln"
+    },
+    {
+      "object": "build\\intel\\st_obj\\stdenvp.obj",
+      "symbol": "__setenvp"
+    },
+    {
+      "object": "build\\intel\\st_obj\\stdargv.obj",
+      "symbol": "__setargv"
+    },
+    {
+      "object": "build\\intel\\st_obj\\a_env.obj",
+      "symbol": "___crtGetEnvironmentStringsA"
+    },
+    {
+      "object": "..\\build\\intel\\st_obj\\initsect.obj",
+      "symbol": "__RTC_Initialize"
+    },
+    {
+      "object": "build\\intel\\st_obj\\sehprolg.obj",
+      "symbol": "__SEH_prolog"
+    },
+    {
+      "object": "build\\intel\\st_obj\\chkstk.obj",
+      "symbol": "__chkstk"
+    },
+    {
+      "object": "build\\intel\\st_obj\\memset.obj",
+      "symbol": "_memset"
+    },
+    {
+      "object": "build\\intel\\st_obj\\open.obj",
+      "symbol": "__sopen"
+    },
+    {
+      "object": "build\\intel\\st_obj\\onexit.obj",
+      "symbol": "__onexit"
+    },
+    {
+      "object": "build\\intel\\st_obj\\isatty.obj",
+      "symbol": "__isatty"
+    },
+    {
+      "object": "build\\intel\\st_obj\\strlen.obj",
+      "symbol": "_strlen"
+    },
+    {
+      "object": "build\\intel\\st_obj\\wctomb.obj",
+      "symbol": "_wctomb"
+    },
+    {
+      "object": "build\\intel\\st_obj\\cmiscdat.obj",
+      "symbol": "__cfltcvt_tab"
+    },
+    {
+      "object": "build\\intel\\st_obj\\seccook.obj",
+      "symbol": "@__security_check_cookie@4"
+    },
+    {
+      "object": "build\\intel\\st_obj\\ulldvrm.obj",
+      "symbol": "__aulldvrm"
+    },
+    {
+      "object": "build\\intel\\st_obj\\_getbuf.obj",
+      "symbol": "__getbuf"
+    },
+    {
+      "object": "build\\intel\\st_obj\\dosmap.obj",
+      "symbol": "__dosmaperr"
+    },
+    {
+      "object": "build\\intel\\st_obj\\osfinfo.obj",
+      "symbol": "__alloc_osfhnd"
+    },
+    {
+      "object": "build\\intel\\st_obj\\memmove.obj",
+      "symbol": "_memmove"
+    },
+    {
+      "object": "build\\intel\\st_obj\\lseeki64.obj",
+      "symbol": "__lseeki64"
+    },
+    {
+      "object": "build\\intel\\st_obj\\ncommode.obj",
+      "symbol": "__commode"
+    },
+    {
+      "object": "build\\intel\\st_obj\\a_str.obj",
+      "symbol": "___crtGetStringTypeA"
+    },
+    {
+      "object": "build\\intel\\st_obj\\mbctype.obj",
+      "symbol": "__setmbcp"
+    },
+    {
+      "object": "build\\intel\\st_obj\\closeall.obj",
+      "symbol": "__fcloseall"
+    },
+    {
+      "object": "build\\intel\\st_obj\\nlsdata2.obj",
+      "symbol": "___lc_collate_cp"
+    },
+    {
+      "object": "build\\intel\\st_obj\\crtmbox.obj",
+      "symbol": "___crtMessageBoxA"
+    },
+    {
+      "object": "build\\intel\\st_obj\\strcat.obj",
+      "symbol": "_strcpy"
+    },
+    {
+      "object": "build\\intel\\st_obj\\ismbbyte.obj",
+      "symbol": "__ismbblead"
+    },
+    {
+      "object": "build\\intel\\st_obj\\exsup3.obj",
+      "symbol": "__except_handler3"
+    },
+    {
+      "object": "build\\intel\\st_obj\\chsize.obj",
+      "symbol": "__chsize"
+    },
+    {
+      "object": "build\\intel\\st_obj\\msize.obj",
+      "symbol": "__msize"
+    },
+    {
+      "object": "build\\intel\\st_obj\\crt0fp.obj",
+      "symbol": "__fptrap"
+    },
+    {
+      "object": "build\\intel\\st_obj\\seccinit.obj",
+      "symbol": "___security_init_cookie"
+    },
+    {
+      "object": "build\\intel\\st_obj\\txtmode.obj",
+      "symbol": "__fmode"
+    },
+    {
+      "object": "build\\intel\\st_obj\\secfail.obj",
+      "symbol": "___security_error_handler"
+    },
+    {
+      "object": "build\\intel\\st_obj\\convrtcp.obj",
+      "symbol": "___ansicp"
+    },
+    {
+      "object": "build\\intel\\st_obj\\resetstk.obj",
+      "symbol": "__resetstkoflw"
+    },
+    {
+      "object": "build\\intel\\st_obj\\a_map.obj",
+      "symbol": "___crtLCMapStringA"
+    },
+    {
+      "object": "build\\intel\\st_obj\\exsup.obj",
+      "symbol": "__global_unwind2"
+    },
+    {
+      "object": "build\\intel\\st_obj\\setmode.obj",
+      "symbol": "__setmode"
+    },
+    {
+      "object": "build\\intel\\st_obj\\xtoa.obj",
+      "symbol": "__itoa"
+    },
+    {
+      "object": "build\\intel\\st_obj\\stricmp.obj",
+      "symbol": "__stricmp"
+    },
+    {
+      "object": "build\\intel\\st_obj\\tolower.obj",
+      "symbol": "_tolower"
+    },
+    {
+      "object": "build\\intel\\st_obj\\_stricmp.obj",
+      "symbol": "___ascii_stricmp"
+    }
+  ],
+  "insert_after": "build\\intel\\st_obj\\setmode.obj",
+  "alias_roots": [
+    "_itoa",
+    "_stricmp"
+  ],
+  "embedded_import": {
+    "dll": "kernel32.dll",
+    "name": "RtlUnwind",
+    "root": "_RtlUnwind@16"
+  },
+  "descriptor_roots": [
+    "__IMPORT_DESCRIPTOR_COMCTL32",
+    "__IMPORT_DESCRIPTOR_comdlg32",
+    "__IMPORT_DESCRIPTOR_GDI32",
+    "__IMPORT_DESCRIPTOR_gs_dll",
+    "__IMPORT_DESCRIPTOR_kailleraclient",
+    "__IMPORT_DESCRIPTOR_KERNEL32",
+    "__IMPORT_DESCRIPTOR_SHELL32",
+    "__IMPORT_DESCRIPTOR_USER32",
+    "__IMPORT_DESCRIPTOR_WINMM"
+  ],
+  "input_order": [
+    {
+      "kind": "import",
+      "dll": "comctl32.dll",
+      "name": "ordinal:17",
+      "original_name_rva": 255134
+    },
+    {
+      "kind": "import",
+      "dll": "comctl32.dll",
+      "name": "ImageList_AddMasked",
+      "original_name_rva": 255092
+    },
+    {
+      "kind": "import",
+      "dll": "comctl32.dll",
+      "name": "ImageList_Create",
+      "original_name_rva": 255114
+    },
+    {
+      "kind": "descriptor",
+      "dll": "comctl32.dll",
+      "original_name_rva": 255134
+    },
+    {
+      "kind": "import",
+      "dll": "winmm.dll",
+      "name": "timeGetTime",
+      "original_name_rva": 255148
+    },
+    {
+      "kind": "descriptor",
+      "dll": "winmm.dll",
+      "original_name_rva": 255162
+    },
+    {
+      "kind": "import",
+      "dll": "kailleraclient.dll",
+      "name": "_kailleraModifyPlayValues@8",
+      "original_name_rva": 255172
+    },
+    {
+      "kind": "import",
+      "dll": "kailleraclient.dll",
+      "name": "_kailleraEndGame@0",
+      "original_name_rva": 255202
+    },
+    {
+      "kind": "import",
+      "dll": "kailleraclient.dll",
+      "name": "_kailleraInit@0",
+      "original_name_rva": 255224
+    },
+    {
+      "kind": "import",
+      "dll": "kailleraclient.dll",
+      "name": "_kailleraSelectServerDialog@4",
+      "original_name_rva": 255242
+    },
+    {
+      "kind": "import",
+      "dll": "kailleraclient.dll",
+      "name": "_kailleraShutdown@0",
+      "original_name_rva": 255274
+    },
+    {
+      "kind": "import",
+      "dll": "kailleraclient.dll",
+      "name": "_kailleraSetInfos@4",
+      "original_name_rva": 255296
+    },
+    {
+      "kind": "descriptor",
+      "dll": "kailleraclient.dll",
+      "original_name_rva": 255318
+    },
+    {
+      "kind": "import",
+      "dll": "gs_dll.dll",
+      "name": "?GSInitialize@@YAXPAD00@Z",
+      "original_name_rva": 255338
+    },
+    {
+      "kind": "import",
+      "dll": "gs_dll.dll",
+      "name": "?GSUpdate@@YAXXZ",
+      "original_name_rva": 255366
+    },
+    {
+      "kind": "import",
+      "dll": "gs_dll.dll",
+      "name": "?GSConfigure@@YAXXZ",
+      "original_name_rva": 255386
+    },
+    {
+      "kind": "descriptor",
+      "dll": "gs_dll.dll",
+      "original_name_rva": 255408
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "VirtualProtect",
+      "original_name_rva": 255420
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "SuspendThread",
+      "original_name_rva": 255438
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "QueryPerformanceCounter",
+      "original_name_rva": 255454
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "Sleep",
+      "original_name_rva": 255480
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "SetThreadPriority",
+      "original_name_rva": 255488
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "QueryPerformanceFrequency",
+      "original_name_rva": 255508
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "CloseHandle",
+      "original_name_rva": 255536
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "CreateThread",
+      "original_name_rva": 255550
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "FreeLibrary",
+      "original_name_rva": 255566
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "FindFirstFileA",
+      "original_name_rva": 255580
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetProcAddress",
+      "original_name_rva": 255598
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "FindClose",
+      "original_name_rva": 255616
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "LoadLibraryA",
+      "original_name_rva": 255628
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "FindNextFileA",
+      "original_name_rva": 255644
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "FindResourceA",
+      "original_name_rva": 255660
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "lstrlenA",
+      "original_name_rva": 255676
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "lstrcpynA",
+      "original_name_rva": 255688
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "LoadResource",
+      "original_name_rva": 255700
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetLogicalDrives",
+      "original_name_rva": 255716
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "VirtualFree",
+      "original_name_rva": 255736
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetDriveTypeA",
+      "original_name_rva": 255750
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetVolumeInformationA",
+      "original_name_rva": 255766
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "lstrcatA",
+      "original_name_rva": 255790
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "SetCurrentDirectoryA",
+      "original_name_rva": 255802
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetLastError",
+      "original_name_rva": 255826
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "VirtualAlloc",
+      "original_name_rva": 255842
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "MoveFileA",
+      "original_name_rva": 255858
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "LockResource",
+      "original_name_rva": 255870
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetPrivateProfileStructA",
+      "original_name_rva": 255886
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetCurrentDirectoryA",
+      "original_name_rva": 255914
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "ResumeThread",
+      "original_name_rva": 255938
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "DeleteFileA",
+      "original_name_rva": 255954
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetFileSize",
+      "original_name_rva": 255968
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "OpenFile",
+      "original_name_rva": 255982
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "WritePrivateProfileStructA",
+      "original_name_rva": 255994
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "ReadFile",
+      "original_name_rva": 256024
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetPrivateProfileStringA",
+      "original_name_rva": 256036
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "WritePrivateProfileStringA",
+      "original_name_rva": 256064
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "lstrcpyA",
+      "original_name_rva": 256094
+    },
+    {
+      "kind": "descriptor",
+      "dll": "kernel32.dll",
+      "original_name_rva": 256106
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "MessageBoxA",
+      "original_name_rva": 256120
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "EnableMenuItem",
+      "original_name_rva": 256134
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "GetMenu",
+      "original_name_rva": 256152
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "SendMessageA",
+      "original_name_rva": 256162
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "MoveWindow",
+      "original_name_rva": 256178
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "GetWindow",
+      "original_name_rva": 256192
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "CheckMenuItem",
+      "original_name_rva": 256204
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "DialogBoxParamA",
+      "original_name_rva": 256220
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "LoadCursorA",
+      "original_name_rva": 256238
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "DestroyMenu",
+      "original_name_rva": 256252
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "AdjustWindowRect",
+      "original_name_rva": 256266
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "EnableWindow",
+      "original_name_rva": 256286
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "UpdateWindow",
+      "original_name_rva": 256302
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "LoadImageA",
+      "original_name_rva": 256318
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "DispatchMessageA",
+      "original_name_rva": 256332
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "DrawMenuBar",
+      "original_name_rva": 256352
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "CreatePopupMenu",
+      "original_name_rva": 256366
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "ShowWindow",
+      "original_name_rva": 256384
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "LoadAcceleratorsA",
+      "original_name_rva": 256398
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "GetMenuItemInfoA",
+      "original_name_rva": 256418
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "SetWindowPos",
+      "original_name_rva": 256438
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "DefWindowProcA",
+      "original_name_rva": 256454
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "EndDialog",
+      "original_name_rva": 256472
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "TranslateAcceleratorA",
+      "original_name_rva": 256484
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "ReleaseDC",
+      "original_name_rva": 256508
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "CreateWindowExA",
+      "original_name_rva": 256520
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "InvalidateRect",
+      "original_name_rva": 256538
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "CheckMenuRadioItem",
+      "original_name_rva": 256556
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "TrackPopupMenuEx",
+      "original_name_rva": 256578
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "TranslateMessage",
+      "original_name_rva": 256598
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "GetDC",
+      "original_name_rva": 256618
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "BeginPaint",
+      "original_name_rva": 256626
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "SetFocus",
+      "original_name_rva": 256640
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "GetClientRect",
+      "original_name_rva": 256652
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "FindWindowExA",
+      "original_name_rva": 256668
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "LoadIconA",
+      "original_name_rva": 256684
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "LoadStringA",
+      "original_name_rva": 256696
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "PostQuitMessage",
+      "original_name_rva": 256710
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "RegisterClassExA",
+      "original_name_rva": 256728
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "InsertMenuItemA",
+      "original_name_rva": 256748
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "GetWindowRect",
+      "original_name_rva": 256766
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "GetMessageA",
+      "original_name_rva": 256782
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "DestroyWindow",
+      "original_name_rva": 256796
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "ClientToScreen",
+      "original_name_rva": 256812
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "EndPaint",
+      "original_name_rva": 256830
+    },
+    {
+      "kind": "import",
+      "dll": "user32.dll",
+      "name": "SetWindowTextA",
+      "original_name_rva": 256842
+    },
+    {
+      "kind": "descriptor",
+      "dll": "user32.dll",
+      "original_name_rva": 256860
+    },
+    {
+      "kind": "import",
+      "dll": "gdi32.dll",
+      "name": "GetPixel",
+      "original_name_rva": 256872
+    },
+    {
+      "kind": "import",
+      "dll": "gdi32.dll",
+      "name": "SetPixelV",
+      "original_name_rva": 256884
+    },
+    {
+      "kind": "import",
+      "dll": "gdi32.dll",
+      "name": "DeleteObject",
+      "original_name_rva": 256896
+    },
+    {
+      "kind": "descriptor",
+      "dll": "gdi32.dll",
+      "original_name_rva": 256912
+    },
+    {
+      "kind": "import",
+      "dll": "comdlg32.dll",
+      "name": "GetSaveFileNameA",
+      "original_name_rva": 256922
+    },
+    {
+      "kind": "import",
+      "dll": "comdlg32.dll",
+      "name": "GetOpenFileNameA",
+      "original_name_rva": 256942
+    },
+    {
+      "kind": "descriptor",
+      "dll": "comdlg32.dll",
+      "original_name_rva": 256962
+    },
+    {
+      "kind": "import",
+      "dll": "shell32.dll",
+      "name": "DragQueryFileA",
+      "original_name_rva": 256976
+    },
+    {
+      "kind": "import",
+      "dll": "shell32.dll",
+      "name": "ShellExecuteA",
+      "original_name_rva": 256994
+    },
+    {
+      "kind": "import",
+      "dll": "shell32.dll",
+      "name": "DragAcceptFiles",
+      "original_name_rva": 257010
+    },
+    {
+      "kind": "import",
+      "dll": "shell32.dll",
+      "name": "DragFinish",
+      "original_name_rva": 257028
+    },
+    {
+      "kind": "descriptor",
+      "dll": "shell32.dll",
+      "original_name_rva": 257042
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "HeapFree",
+      "original_name_rva": 257054
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "HeapAlloc",
+      "original_name_rva": 257066
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "HeapReAlloc",
+      "original_name_rva": 257078
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetModuleHandleA",
+      "original_name_rva": 257092
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetStartupInfoA",
+      "original_name_rva": 257112
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetCommandLineA",
+      "original_name_rva": 257130
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetVersionExA",
+      "original_name_rva": 257148
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "ExitProcess",
+      "original_name_rva": 257164
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "TerminateProcess",
+      "original_name_rva": 257178
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetCurrentProcess",
+      "original_name_rva": 257198
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "HeapDestroy",
+      "original_name_rva": 257218
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "HeapCreate",
+      "original_name_rva": 257232
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "WriteFile",
+      "original_name_rva": 257246
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "SetHandleCount",
+      "original_name_rva": 257258
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetStdHandle",
+      "original_name_rva": 257276
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetFileType",
+      "original_name_rva": 257292
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "SetFilePointer",
+      "original_name_rva": 257306
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "FlushFileBuffers",
+      "original_name_rva": 257324
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetModuleFileNameA",
+      "original_name_rva": 257344
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "UnhandledExceptionFilter",
+      "original_name_rva": 257366
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "FreeEnvironmentStringsA",
+      "original_name_rva": 257394
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetEnvironmentStrings",
+      "original_name_rva": 257420
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "FreeEnvironmentStringsW",
+      "original_name_rva": 257444
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "WideCharToMultiByte",
+      "original_name_rva": 257470
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetEnvironmentStringsW",
+      "original_name_rva": 257492
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "CreateFileA",
+      "original_name_rva": 257518
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "SetStdHandle",
+      "original_name_rva": 257532
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetStringTypeA",
+      "original_name_rva": 257548
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "MultiByteToWideChar",
+      "original_name_rva": 257566
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetStringTypeW",
+      "original_name_rva": 257588
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetACP",
+      "original_name_rva": 257606
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetOEMCP",
+      "original_name_rva": 257616
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetCPInfo",
+      "original_name_rva": 257628
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "SetEndOfFile",
+      "original_name_rva": 257640
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "HeapSize",
+      "original_name_rva": 257656
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetTickCount",
+      "original_name_rva": 257668
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetCurrentThreadId",
+      "original_name_rva": 257684
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetCurrentProcessId",
+      "original_name_rva": 257706
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetSystemTimeAsFileTime",
+      "original_name_rva": 257728
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetLocaleInfoA",
+      "original_name_rva": 257754
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "GetSystemInfo",
+      "original_name_rva": 257772
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "VirtualQuery",
+      "original_name_rva": 257788
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "LCMapStringA",
+      "original_name_rva": 257804
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "LCMapStringW",
+      "original_name_rva": 257820
+    },
+    {
+      "kind": "import",
+      "dll": "kernel32.dll",
+      "name": "RtlUnwind",
+      "original_name_rva": 257836
+    }
+  ],
+  "comparison_ranges": [
+    {
+      "name": "import_descriptors_and_lookup_arrays",
+      "rva_start": 254232,
+      "rva_end": 255092
+    },
+    {
+      "name": "complete_hint_and_dll_name_pool",
+      "rva_start": 255092,
+      "rva_end": 257848
+    }
+  ],
+  "remaining_insertion_positions": [
+    {
+      "dll": "kernel32.dll",
+      "name": "GetOEMCP"
+    },
+    {
+      "dll": "kernel32.dll",
+      "name": "GetSystemInfo"
+    },
+    {
+      "dll": "kernel32.dll",
+      "name": "VirtualQuery"
+    },
+    {
+      "dll": "kernel32.dll",
+      "name": "RtlUnwind"
+    }
+  ]
+}

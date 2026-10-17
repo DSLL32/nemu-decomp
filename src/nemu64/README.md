@@ -30,6 +30,29 @@ are saved separately. Regenerate the order file with
 `scripts/order_nemu_functions.py CANDIDATE.map --output application.order` when
 a source change alters symbol decoration.
 
+An optional library chronology recipe can be tested with:
+
+```sh
+python3 scripts/build_nemu.py --chronological-libraries --stage-storage \
+  --function-order src/nemu64/application.order
+```
+
+This option implies `--ordered-libraries`. It selects the same unchanged
+historical members through ordinary archives and explicit linker roots. The
+two empty alias sections follow `setmode`, producing the original alignment
+before `RtlUnwind`; the import hint/name pool also matches. The 187 identified
+native functions retain their original relative placement. Their absolute
+addresses still depend on the unfinished application code.
+
+This remains an alternative under investigation: **115 of 152 IAT slots
+match**, compared with 152 in the canonical recipe. Four imports have the
+wrong insertion positions, displacing 37 slots. The other 148 retain their
+original relative order. Neither recipe produces an exact executable. The
+build report records native placement, observed native storage addresses,
+import positions, Rich counts, resources, and every complete-file difference.
+The inferred recipe is in `imports/link-chronology.json`; no scratch files or
+modified object bodies are required.
+
 The application uses Visual C++ 7.0, compiler 13.00.9466, with the static
 single-thread runtime and whole-program optimization. `ByteSwap.c` is a native
 C contribution; its separate compilation reproduces the original helper's
