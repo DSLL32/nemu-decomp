@@ -1,0 +1,173 @@
+{
+  "status": "byte_exact_failure_with_seven_equivalent_address_encodings",
+  "byte_exact": false,
+  "differing_bytes": 7,
+  "function": "_PoleFilterAudioCommand",
+  "original_va": "0x10011040",
+  "complete_bytes": 2320,
+  "original_complete_sha256": "1ec859b5bae203b49adc5adf9712a952e313a0bc84a86d2dc7e040752a5aef69",
+  "object_sha256": "82f5c1ba7d47f5470d12b94320ba926999f24ad1e746125456069907d3157941",
+  "candidate_after_standard_relocations_sha256": "b793fb93331a64793cc99ab5a020c6fc59d690066b0bca44976711bd9f492275",
+  "relocations": [
+    {
+      "offset": 24,
+      "symbol": "_RDRAM",
+      "address_basis": "observed_operand_inference",
+      "target": "0x1016bae4"
+    },
+    {
+      "offset": 1047,
+      "symbol": "__alldiv",
+      "address_basis": "independent_library_mapping",
+      "target": "0x10021e90"
+    },
+    {
+      "offset": 1067,
+      "symbol": "__allmul",
+      "address_basis": "independent_library_mapping",
+      "target": "0x10021e50"
+    },
+    {
+      "offset": 1189,
+      "symbol": "__alldiv",
+      "address_basis": "independent_library_mapping",
+      "target": "0x10021e90"
+    },
+    {
+      "offset": 1207,
+      "symbol": "__allmul",
+      "address_basis": "independent_library_mapping",
+      "target": "0x10021e50"
+    },
+    {
+      "offset": 1328,
+      "symbol": "__alldiv",
+      "address_basis": "independent_library_mapping",
+      "target": "0x10021e90"
+    },
+    {
+      "offset": 1348,
+      "symbol": "__allmul",
+      "address_basis": "independent_library_mapping",
+      "target": "0x10021e50"
+    },
+    {
+      "offset": 1477,
+      "symbol": "__alldiv",
+      "address_basis": "independent_library_mapping",
+      "target": "0x10021e90"
+    },
+    {
+      "offset": 1497,
+      "symbol": "__allmul",
+      "address_basis": "independent_library_mapping",
+      "target": "0x10021e50"
+    },
+    {
+      "offset": 1626,
+      "symbol": "__alldiv",
+      "address_basis": "independent_library_mapping",
+      "target": "0x10021e90"
+    },
+    {
+      "offset": 1646,
+      "symbol": "__allmul",
+      "address_basis": "independent_library_mapping",
+      "target": "0x10021e50"
+    },
+    {
+      "offset": 1775,
+      "symbol": "__alldiv",
+      "address_basis": "independent_library_mapping",
+      "target": "0x10021e90"
+    },
+    {
+      "offset": 1795,
+      "symbol": "__allmul",
+      "address_basis": "independent_library_mapping",
+      "target": "0x10021e50"
+    },
+    {
+      "offset": 1924,
+      "symbol": "__alldiv",
+      "address_basis": "independent_library_mapping",
+      "target": "0x10021e90"
+    },
+    {
+      "offset": 1944,
+      "symbol": "__allmul",
+      "address_basis": "independent_library_mapping",
+      "target": "0x10021e50"
+    },
+    {
+      "offset": 2073,
+      "symbol": "__alldiv",
+      "address_basis": "independent_library_mapping",
+      "target": "0x10021e90"
+    },
+    {
+      "offset": 2093,
+      "symbol": "__allmul",
+      "address_basis": "independent_library_mapping",
+      "target": "0x10021e50"
+    },
+    {
+      "offset": 2252,
+      "symbol": "_RDRAM",
+      "address_basis": "observed_operand_inference",
+      "target": "0x1016bae4"
+    }
+  ],
+  "differences": [
+    {
+      "offset": "0x2b3",
+      "original_bytes": "8d4c38fa",
+      "candidate_bytes": "8d4c07fa",
+      "original": "lea ecx, [eax + edi - 6]",
+      "candidate": "lea ecx, [edi + eax - 6]"
+    },
+    {
+      "offset": "0x2ee",
+      "original_bytes": "0fbf443afe",
+      "candidate_bytes": "0fbf4417fe",
+      "original": "movsx eax, word ptr [edx + edi - 2]",
+      "candidate": "movsx eax, word ptr [edi + edx - 2]"
+    },
+    {
+      "offset": "0x30b",
+      "original_bytes": "0fbf0438",
+      "candidate_bytes": "0fbf0407",
+      "original": "movsx eax, word ptr [eax + edi]",
+      "candidate": "movsx eax, word ptr [edi + eax]"
+    },
+    {
+      "offset": "0x32d",
+      "original_bytes": "0fbf443a02",
+      "candidate_bytes": "0fbf441702",
+      "original": "movsx eax, word ptr [edx + edi + 2]",
+      "candidate": "movsx eax, word ptr [edi + edx + 2]"
+    },
+    {
+      "offset": "0x34a",
+      "original_bytes": "0fbf443804",
+      "candidate_bytes": "0fbf440704",
+      "original": "movsx eax, word ptr [eax + edi + 4]",
+      "candidate": "movsx eax, word ptr [edi + eax + 4]"
+    },
+    {
+      "offset": "0x371",
+      "original_bytes": "0fbf443a06",
+      "candidate_bytes": "0fbf441706",
+      "original": "movsx eax, word ptr [edx + edi + 6]",
+      "candidate": "movsx eax, word ptr [edi + edx + 6]"
+    },
+    {
+      "offset": "0x38e",
+      "original_bytes": "0fbf443808",
+      "candidate_bytes": "0fbf440708",
+      "original": "movsx eax, word ptr [eax + edi + 8]",
+      "candidate": "movsx eax, word ptr [edi + eax + 8]"
+    }
+  ],
+  "limitation": "All seven differences exchange base and index at scale one, with the same non-stack default segment. These remain seven real byte differences and do not satisfy the reconstruction criterion. RDRAM identity remains an observed operand inference."
+}
