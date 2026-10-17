@@ -24,7 +24,7 @@
     "AziAudio ABI3mp3.cpp and mupen64plus-rsp-hle/src/mp3.c were inspected only to interpret the N64 synthesis stages; no modern replacement decoder is used.",
     "No original x86 blobs, byte patches, dummy computation or synthetic padding are used. Compiler alignment belongs to complete measured function extents.",
     "The integer primitives, butterfly and Mp3DCT share one inferred Mp3.c unit: VC7 uses callee information to hoist invariant calls out of the synthesis loop.",
-    "The inlined MultiplyFraction, AccumulateFraction and AccumulateUnsigned results stay 32-bit in the target caller. Their int-return declarations preserve all three out-of-line byte matches and remove unsupported caller narrowing; Mp3DCT remains unmatched at 5120 versus 5104 bytes."
+    "The inlined MultiplyFraction, AccumulateFraction and AccumulateUnsigned results stay 32-bit in the target caller. Their int-return declarations preserve all three out-of-line byte matches and remove unsupported caller narrowing; Mp3DCT remains unmatched."
   ],
   "unreconstructed": [],
   "unmatched": [
@@ -34,7 +34,15 @@
       "name": "Mp3DCT",
       "status": "native_source_candidate_not_byte_exact",
       "source": "src/audio/ahle_ds/Mp3.c",
-      "report": "analysis/audio-mp3-main-comparison.json"
+      "report": "analysis/audio-mp3-main-comparison.json",
+      "structural_evidence": {
+        "dewindow": "Indexing each output position and accumulating four fractional products per inner iteration produces the target's sixteen advancing input/coefficient pointers and the same sixteen-product order for the first output. Individual operand load order and complete bytes still differ.",
+        "rebuilt_extent_bytes": 5040,
+        "original_extent_bytes": 5104,
+        "non_relocation_differing_positions": 3986,
+        "finite_behavioral_cases_matching": 48,
+        "finite_behavioral_cases": 48
+      }
     }
   ],
   "unit_groups": [

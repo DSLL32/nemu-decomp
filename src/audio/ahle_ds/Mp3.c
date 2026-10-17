@@ -199,7 +199,6 @@ void Mp3DCT(unsigned char *input, const void *table, const void *state, unsigned
     t5 = 0xac0;
     Mp3ReadSamples(memory + 0x8a0 / 2, state, 0x440);
     t6 = 0x8a0;
-    offset = 0x80 - t4;
     for (outer = 0; outer < 3; ++outer) {
         Mp3ReadSamples((unsigned short *) samples, input, 0x180);
         input += 0x180;
@@ -318,28 +317,35 @@ void Mp3DCT(unsigned char *input, const void *table, const void *state, unsigned
             memory[(t0 - 0x20) >> 1] = v13 + v2;
             memory[(t0 - 0x60) >> 1] = v5 - v9 - v2;
             t6 &= 0xffe0;
+            offset = 0x80 - t4;
             {
                 short *out = output;
                 unsigned int address = t6, window = offset;
                 for (x = 0; x < 8; ++x) {
-                    int a = 0, b = 0, c = 0, d = 0;
-                    for (i = 0; i < 4; ++i) {
-                        a += MP3_FRACTION(memory[((address + 0x00) >> 1) + i], coefficients[((window + 0x00) >> 1) + i]);
-                        b += MP3_FRACTION(memory[((address + 0x08) >> 1) + i], coefficients[((window + 0x08) >> 1) + i]);
-                        c += MP3_FRACTION(memory[((address + 0x10) >> 1) + i], coefficients[((window + 0x10) >> 1) + i]);
-                        d += MP3_FRACTION(memory[((address + 0x18) >> 1) + i], coefficients[((window + 0x18) >> 1) + i]);
+                    int sum = 0;
+                    for (i = 1; i <= 4; ++i) {
+                        sum += MP3_FRACTION(memory[((address + 0x00) >> 1) + (i - 1) + x * 32],
+                                            coefficients[((window + 0x00) >> 1) + (i - 1) + x * 32])
+                             + MP3_FRACTION(memory[((address + 0x08) >> 1) + (i - 1) + x * 32],
+                                            coefficients[((window + 0x08) >> 1) + (i - 1) + x * 32])
+                             + MP3_FRACTION(memory[((address + 0x10) >> 1) + (i - 1) + x * 32],
+                                            coefficients[((window + 0x10) >> 1) + (i - 1) + x * 32])
+                             + MP3_FRACTION(memory[((address + 0x18) >> 1) + (i - 1) + x * 32],
+                                            coefficients[((window + 0x18) >> 1) + (i - 1) + x * 32]);
                     }
-                    *out++ = a + b + c + d;
-                    a = b = c = d = 0;
-                    for (i = 0; i < 4; ++i) {
-                        a += MP3_FRACTION(memory[((address + 0x20) >> 1) + i], coefficients[((window + 0x40) >> 1) + i]);
-                        b += MP3_FRACTION(memory[((address + 0x28) >> 1) + i], coefficients[((window + 0x48) >> 1) + i]);
-                        c += MP3_FRACTION(memory[((address + 0x30) >> 1) + i], coefficients[((window + 0x50) >> 1) + i]);
-                        d += MP3_FRACTION(memory[((address + 0x38) >> 1) + i], coefficients[((window + 0x58) >> 1) + i]);
+                    *out++ = sum;
+                    sum = 0;
+                    for (i = 1; i <= 4; ++i) {
+                        sum += MP3_FRACTION(memory[((address + 0x20) >> 1) + (i - 1) + x * 32],
+                                            coefficients[((window + 0x40) >> 1) + (i - 1) + x * 32])
+                             + MP3_FRACTION(memory[((address + 0x28) >> 1) + (i - 1) + x * 32],
+                                            coefficients[((window + 0x48) >> 1) + (i - 1) + x * 32])
+                             + MP3_FRACTION(memory[((address + 0x30) >> 1) + (i - 1) + x * 32],
+                                            coefficients[((window + 0x50) >> 1) + (i - 1) + x * 32])
+                             + MP3_FRACTION(memory[((address + 0x38) >> 1) + (i - 1) + x * 32],
+                                            coefficients[((window + 0x58) >> 1) + (i - 1) + x * 32]);
                     }
-                    *out++ = a + b + c + d;
-                    address += 0x40;
-                    window += 0x40;
+                    *out++ = sum;
                 }
             }
         }
