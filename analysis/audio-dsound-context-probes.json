@@ -12,7 +12,9 @@
     "/G6",
     "/Op",
     "/Ow",
-    "/Oa"
+    "/Oa",
+    "/Zi",
+    "/Z7"
   ],
   "tool_sha256": {
     "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
@@ -26,7 +28,10 @@
     "A separate signed float sample-distance value gives the original 0x2c SubmitAudio frame and observed floating-point operation tree. The routine still has register/scheduling differences and remains unmatched.",
     "Separate inline reset/time helpers, initialization-order variants, ordinary clearing loops, and scalar memset variants do not recover AllocateSoundBuffer.",
     "Default VC7 processor choice is /GB. Explicit /G6 does not change these bodies; /G3, /G4, /Op, /Ow and /Oa do not solve them.",
-    "No new volatile qualifier, barrier, padding or artificial retained work was adopted."
+    "No new volatile qualifier, barrier, padding or artificial retained work was adopted.",
+    "The complete, correctly ordered first audio band followed by DirectSound in native C++ also preserves both target mismatches.",
+    "/Zi and /Z7 preserve the target bodies when their actual aligned extents are compared; auxiliary COFF code-size records alone exclude natural padding.",
+    "An attempted /Gy- control was rejected by this compiler as an unknown /G- option and is not treated as a valid compilation hypothesis."
   ],
   "upstream_audit": {
     "source": "/root/.ai-tmp/audio-envelope-ancestry.c5DMoPAf/ultrahle/src/SOUND.C",
@@ -686,6 +691,78 @@
           "relocation_masked_equal": false
         }
       ]
+    },
+    {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/control-zi.obj",
+      "object_sha256": "1c27e5f021b63ec6f7fef703065e5e99792add63e92cf46f00ff9617c4bc7839",
+      "sources": {
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/control.c": "d52554d19365e2226dd06323d06a67f7fc98574a179e62a53521941571f75cfa"
+      },
+      "targets": [
+        {
+          "probe_name": "_AllocateSoundBuffer",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 440,
+          "relocation_masked_equal": false
+        }
+      ],
+      "extent_note": "Debug auxiliary symbols record code size before padding. These diagnostics read the entire naturally aligned section extent, without adding bytes, to compare the same full routine extent as the original."
+    },
+    {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/control-z7.obj",
+      "object_sha256": "44b9835497a63c520f8d211d1842eaa4ec76481771ab8aa7056cb8bd7244894d",
+      "sources": {
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/control.c": "d52554d19365e2226dd06323d06a67f7fc98574a179e62a53521941571f75cfa"
+      },
+      "targets": [
+        {
+          "probe_name": "_AllocateSoundBuffer",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 440,
+          "relocation_masked_equal": false
+        }
+      ],
+      "extent_note": "Debug auxiliary symbols record code size before padding. These diagnostics read the entire naturally aligned section extent, without adding bytes, to compare the same full routine extent as the original."
+    },
+    {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/exact-firstband.obj",
+      "object_sha256": "464d00c5c3073b97599b22961ce681104f6bfb2793d213a05a8507f6db6f41ec",
+      "sources": {
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/exact-firstband.cpp": "83029c885a13faacf7cba72faa1cbc23110e915621a2e18d2167f7b7a54060cc"
+      },
+      "targets": [
+        {
+          "probe_name": "_AllocateSoundBuffer",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 440,
+          "relocation_masked_equal": false
+        }
+      ]
     }
-  ]
+  ],
+  "base_source_note": "The frozen control source predates promotion of the sample pass and SubmitAudio refinements. Its target differences are 50 and 440; current adopted source is compared separately in audio-dsound-comparison.json."
 }
