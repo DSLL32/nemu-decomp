@@ -1,0 +1,859 @@
+{
+  "source": "src/nemu64/DynarecFPU.cpp",
+  "source_organization": "Inferred grouping from adjacent COP1 translator handlers and floating point register/rounding helpers; original filenames are not retained.",
+  "compiler": "VC7 13.00.9466 /O2 /Ob1 /ML /GL",
+  "validation": {
+    "compile": "Passed with tracked VC7 /O2 /Ob1 /ML /GL in complete application context; DynarecFPU.cpp emitted no warnings.",
+    "byte_exact": false,
+    "instruction_comparison": {
+      "candidate_image_sha256": "62cb2d65ceb59c98319acb8c9b161ca88f1bfad5140a994692ac4c5df906b024",
+      "candidate_map_sha256": "e437b4599313757bb3d33983705b6691e504ac499f76ba9d874ce9b44bc98ffe",
+      "functions": 45,
+      "full_extents_verified": 45,
+      "normalized_instruction_matches": 45,
+      "known_target_mismatches": 0,
+      "covered_bytes": 9020,
+      "unresolved_relocation_fields": 64,
+      "not_independently_verified_relocation_fields": 1008,
+      "extent_metadata": "analysis/nemu-dynarec-fpu-extents.json",
+      "full_diagnostic_report": "/root/.ai-tmp/nemu-fpu-evidence.1x7ldak_/comparison.json",
+      "full_diagnostic_report_sha256": "60bb15d59019ff49564bc3b92e8e852c55e676c3806c9e0cd2a7bc2b463c89fb",
+      "comparison_tool_sha256": "50bf055c1ab6a3350b0b4117e297a82eb35cef73d976f58931c401921d14210b",
+      "command_line": [
+        "python3",
+        "scripts/compare_nemu_functions.py",
+        "--metadata",
+        "analysis/nemu-dynarec-fpu.json",
+        "--symbols",
+        "analysis/nemu-dynarec.json",
+        "--symbols",
+        "analysis/nemu-cpu.json",
+        "--symbols",
+        "analysis/nemu-cpu-control.json",
+        "--symbols",
+        "analysis/nemu-plugins.json",
+        "--symbols",
+        "analysis/nemu-dynarec-opcodes.json",
+        "--extents",
+        "/root/.ai-tmp/nemu-fpu-evidence.1x7ldak_/extents.json",
+        "--image",
+        "/root/.ai-tmp/nemu-fpu.Dp8av68/link-probe2/nemu64.exe",
+        "--map",
+        "/root/.ai-tmp/nemu-fpu.Dp8av68/link-probe2/nemu64.map",
+        "--report",
+        "/root/.ai-tmp/nemu-fpu-evidence.1x7ldak_/comparison.json"
+      ]
+    },
+    "semantic_execution": {
+      "source_sha256": "e1988d8783875eec0dfa8aa5108b9bd476c013e45ea7d9af6915ff6f37f1ae52",
+      "object_sha256": "cd67017d70d30acb33eb797488d91b6ff6b0506be4e7bcabea4d19bf83a72e6d",
+      "tests": 8192,
+      "passed": 8192,
+      "functions": 45,
+      "failed_function_names": [],
+      "description": "Run original and unlinked compiled C++ function bodies in Unicorn; callee hooks record typed emitter/helper calls and selected globals. Original register ABI and candidate cdecl ABI are decoded separately. This semantic diagnostic does not certify linked bytes.",
+      "command_line": [
+        "/usr/bin/python3",
+        "scripts/verify_nemu_fpu.py",
+        "--object",
+        "/root/.ai-tmp/nemu-fpu-evidence.1x7ldak_/src/DynarecFPU.obj",
+        "--report",
+        "/root/.ai-tmp/nemu-fpu-evidence.1x7ldak_/semantic.json"
+      ],
+      "tool_sha256": "97e31e819e25a77321cf10c2c78fef9a51d61f3bcd2d189aacafa1cdcdce0ae7",
+      "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+      "object_path": "/root/.ai-tmp/nemu-fpu-evidence.1x7ldak_/src/DynarecFPU.obj",
+      "metadata_inputs": [
+        {
+          "path": "analysis/nemu-cpu.json",
+          "sha256": "cb0d676174fbc0d0e6128811f0428ac5d296cfc15977aae6d1b5d7286255454c"
+        },
+        {
+          "path": "analysis/nemu-dynarec.json",
+          "sha256": "720e5ddceb9fad4126e6bd0b6b75138754aa3d230e71b54533a54210a04a6852"
+        },
+        {
+          "path": "analysis/nemu-cpu-control.json",
+          "sha256": "02116bdebe293ca21f9a1c041da1241f6cd65ebf7a690b842732b83fd79f5849"
+        },
+        {
+          "path": "analysis/nemu-plugins.json",
+          "sha256": "e1289fb9e6333d1cceb742c9dd1f1ad442152614faaa5975b38dfad1bddbe5b9"
+        },
+        {
+          "path": "analysis/nemu-dynarec-fpu.json",
+          "sha256": "0bd7c27fdc8f854d4a22d60e96c1bdf5fad399e23646b5a1cd926d05bc708b2b"
+        }
+      ],
+      "source_binding": "The source hash identifies the current working-tree source. The separately supplied object must be tied to that source by its compilation record; this runner does not compile it.",
+      "compilation_record": "/root/.ai-tmp/nemu-fpu-evidence.1x7ldak_/compile.json",
+      "compilation_record_sha256": "a61288db5774f573e4e210b665826a01bdd634494f196d43ab9ff7a0b47c8f47",
+      "compile_command": [
+        "python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob0",
+        "/ML",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/DWINVER=0x0500",
+        "/D_WIN32_WINNT=0x0400",
+        "/FoDynarecFPU.obj",
+        "DynarecFPU.cpp"
+      ],
+      "compile_cwd": "/root/.ai-tmp/nemu-fpu-evidence.1x7ldak_/src",
+      "compile_source_sha256": "e1988d8783875eec0dfa8aa5108b9bd476c013e45ea7d9af6915ff6f37f1ae52",
+      "compile_log_sha256": "996cf67c9e1e6e8f0f9498811b88e0340d13261091c057085aa7893b397eacfd",
+      "full_diagnostic_report": "/root/.ai-tmp/nemu-fpu-evidence.1x7ldak_/semantic.json",
+      "full_diagnostic_report_sha256": "9c10c14e62cf51e43a7b25b277f74db2792a306d868f7c2437a19626110f48a5"
+    },
+    "limitation": "All instruction bytes and complete function extents match after real PE relocation fields and external relative branches are normalized. Linked placement is still different. Application identities, interior data operands, source-local controls and literal addresses are not all independently verified; this is not byte-exact EXE certification.",
+    "proof_snapshot": {
+      "kind": "historical_complete_application_link",
+      "source_directory": "/root/.ai-tmp/nemu-fpu.Dp8av68/link-probe2/src/nemu64",
+      "source_sha256": "e1988d8783875eec0dfa8aa5108b9bd476c013e45ea7d9af6915ff6f37f1ae52",
+      "header_sha256": "e7de7f99bf2d9509098e45da88c327c225896759b2d9c4c298896e70b5873b09",
+      "live_fpu_source_matches_snapshot": true,
+      "source_audit_commit": "7e7a531",
+      "scope": "Only the FPU source/header are asserted unchanged from this pinned link. Other application translation units and linked placement have since changed. This report does not certify the current complete executable.",
+      "link_command_record": "/root/.ai-tmp/nemu-fpu.Dp8av68/link-probe2/link-command.json",
+      "link_command_record_sha256": "36b2a783e15de9d69294ec08fdef2981f1902f156587660633d86240edde799c",
+      "link_command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "link",
+        "/nologo",
+        "/LTCG",
+        "/SUBSYSTEM:WINDOWS",
+        "/OPT:WIN98",
+        "/INCREMENTAL:NO",
+        "/MACHINE:I386",
+        "/BASE:0x400000",
+        "/FIXED:NO",
+        "/OUT:Z:\\root\\.ai-tmp\\nemu-fpu.Dp8av68\\link-probe2\\nemu64.exe",
+        "obj/app/CPU.obj",
+        "obj/app/CpuControl.obj",
+        "obj/app/Memory.obj",
+        "obj/app/ByteSwap.obj",
+        "obj/app/Dynarec.obj",
+        "obj/app/FrontendIni.obj",
+        "obj/app/Rom.obj",
+        "obj/app/State.obj",
+        "obj/app/WinMain.obj",
+        "obj/app/RomBrowser.obj",
+        "obj/app/Plugins.obj",
+        "obj/app/RSP.obj",
+        "obj/app/PIF.obj",
+        "obj/app/Globals.obj",
+        "obj/app/DynarecFPU.obj",
+        "obj/app/DynarecMemoryOps.obj",
+        "obj/app/DynarecOpcodes.obj",
+        "obj/zlib/uncompr.obj",
+        "obj/zlib/compress.obj",
+        "obj/zlib/unzip.obj",
+        "obj/zlib/inflate.obj",
+        "obj/zlib/deflate.obj",
+        "obj/zlib/crc32.obj",
+        "obj/zlib/infblock.obj",
+        "obj/zlib/adler32.obj",
+        "obj/zlib/zutil.obj",
+        "obj/zlib/trees.obj",
+        "obj/zlib/infcodes.obj",
+        "obj/zlib/inftrees.obj",
+        "obj/zlib/infutil.obj",
+        "obj/zlib/inffast.obj",
+        "obj/nemu64.res",
+        "comctl32.lib",
+        "winmm.lib",
+        "imports/kailleraclient.lib",
+        "imports/gs_dll.lib",
+        "kernel32.lib",
+        "user32.lib",
+        "gdi32.lib",
+        "comdlg32.lib",
+        "shell32.lib",
+        "/MAP:Z:\\root\\.ai-tmp\\nemu-fpu.Dp8av68\\link-probe2\\nemu64.map"
+      ],
+      "link_cwd": "/root/.ai-tmp/nemu-fpu.Dp8av68/link-probe2/src/nemu64",
+      "wine_prefix": "/root/.ai-tmp/nemu-fpu.Dp8av68/wine",
+      "forced_unresolved_link": false
+    }
+  },
+  "functions": [
+    {
+      "name": "Recompile_MFC1",
+      "mnemonics": [
+        "MFC1"
+      ],
+      "original_va": "0x004111C0",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 224,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_DMFC1",
+      "mnemonics": [
+        "DMFC1"
+      ],
+      "original_va": "0x004112A0",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 290,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_CFC1",
+      "mnemonics": [
+        "CFC1"
+      ],
+      "original_va": "0x004113D0",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 87,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_MTC1",
+      "mnemonics": [
+        "MTC1"
+      ],
+      "original_va": "0x00411430",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 229,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_DMTC1",
+      "mnemonics": [
+        "DMTC1"
+      ],
+      "original_va": "0x00411520",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 288,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_CTC1",
+      "mnemonics": [
+        "CTC1"
+      ],
+      "original_va": "0x00411640",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 78,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_BC",
+      "mnemonics": [
+        "BC"
+      ],
+      "original_va": "0x00411690",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 176,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_S",
+      "mnemonics": [
+        "S"
+      ],
+      "original_va": "0x00411740",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 66,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_D",
+      "mnemonics": [
+        "D"
+      ],
+      "original_va": "0x00411790",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 66,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_W",
+      "mnemonics": [
+        "W"
+      ],
+      "original_va": "0x004117E0",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 66,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_L",
+      "mnemonics": [
+        "L"
+      ],
+      "original_va": "0x00411830",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 66,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_ADD",
+      "mnemonics": [
+        "ADD"
+      ],
+      "original_va": "0x00411880",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 317,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_SUB",
+      "mnemonics": [
+        "SUB"
+      ],
+      "original_va": "0x004119C0",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 317,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_MUL",
+      "mnemonics": [
+        "MUL"
+      ],
+      "original_va": "0x00411B00",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 317,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_DIV",
+      "mnemonics": [
+        "DIV"
+      ],
+      "original_va": "0x00411C40",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 317,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_SQRT",
+      "mnemonics": [
+        "SQRT"
+      ],
+      "original_va": "0x00411D80",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 177,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_ABS",
+      "mnemonics": [
+        "ABS"
+      ],
+      "original_va": "0x00411E40",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 177,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_MOV",
+      "mnemonics": [
+        "MOV"
+      ],
+      "original_va": "0x00411F00",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 167,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_NEG",
+      "mnemonics": [
+        "NEG"
+      ],
+      "original_va": "0x00411FB0",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 177,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_ROUND_L",
+      "mnemonics": [
+        "ROUND.L"
+      ],
+      "original_va": "0x00412070",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 206,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_TRUNC_L",
+      "mnemonics": [
+        "TRUNC.L"
+      ],
+      "original_va": "0x00412140",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 206,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_CEIL_L",
+      "mnemonics": [
+        "CEIL.L"
+      ],
+      "original_va": "0x00412210",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 206,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_FLOOR_L",
+      "mnemonics": [
+        "FLOOR.L"
+      ],
+      "original_va": "0x004122E0",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 206,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_ROUND_W",
+      "mnemonics": [
+        "ROUND.W"
+      ],
+      "original_va": "0x004123B0",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 206,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_TRUNC_W",
+      "mnemonics": [
+        "TRUNC.W"
+      ],
+      "original_va": "0x00412480",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 206,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_CEIL_W",
+      "mnemonics": [
+        "CEIL.W"
+      ],
+      "original_va": "0x00412550",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 206,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_FLOOR_W",
+      "mnemonics": [
+        "FLOOR.W"
+      ],
+      "original_va": "0x00412620",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 206,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_CVT_S",
+      "mnemonics": [
+        "CVT.S"
+      ],
+      "original_va": "0x004126F0",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 206,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_CVT_D",
+      "mnemonics": [
+        "CVT.D"
+      ],
+      "original_va": "0x004127C0",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 206,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_CVT_W",
+      "mnemonics": [
+        "CVT.W"
+      ],
+      "original_va": "0x00412890",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 206,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_CVT_L",
+      "mnemonics": [
+        "CVT.L"
+      ],
+      "original_va": "0x00412960",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 177,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_C_F",
+      "mnemonics": [
+        "C.F"
+      ],
+      "original_va": "0x00412A20",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 21,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_C_UN",
+      "mnemonics": [
+        "C.UN"
+      ],
+      "original_va": "0x00412A40",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 387,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_C_SF",
+      "mnemonics": [
+        "C.SF"
+      ],
+      "original_va": "0x00412BD0",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 347,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_C_NGLE",
+      "mnemonics": [
+        "C.NGLE"
+      ],
+      "original_va": "0x00412D30",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 368,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_C_EQ",
+      "mnemonics": [
+        "C.EQ",
+        "C.UEQ",
+        "C.SEQ",
+        "C.NGL"
+      ],
+      "original_va": "0x00412EA0",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 9,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_C_OLT",
+      "mnemonics": [
+        "C.OLT",
+        "C.ULT",
+        "C.LT",
+        "C.NGE"
+      ],
+      "original_va": "0x00412EB0",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 9,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "Recompile_COP1_C_OLE",
+      "mnemonics": [
+        "C.OLE",
+        "C.ULE",
+        "C.LE",
+        "C.NGT"
+      ],
+      "original_va": "0x00412EC0",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 9,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "CheckFPUEnabled",
+      "inputs": [],
+      "original_va": "0x004133F0",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 162,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "LoadFpuOperand",
+      "inputs": [
+        {
+          "name": "fullMode",
+          "location": "AL",
+          "type": "unsigned char"
+        }
+      ],
+      "original_va": "0x004134A0",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 252,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "StoreFpuResult",
+      "inputs": [
+        {
+          "name": "fullMode",
+          "location": "AL",
+          "type": "unsigned char"
+        }
+      ],
+      "original_va": "0x004135A0",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 120,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "StoreFpuResultAs",
+      "inputs": [
+        {
+          "name": "format",
+          "location": "EAX",
+          "type": "unsigned"
+        },
+        {
+          "name": "fullMode",
+          "location": "CL",
+          "type": "unsigned char"
+        }
+      ],
+      "original_va": "0x00413620",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 268,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "GetFpuRegisterAddress",
+      "inputs": [
+        {
+          "name": "reg",
+          "location": "EAX",
+          "type": "unsigned"
+        },
+        {
+          "name": "format",
+          "location": "ECX",
+          "type": "unsigned"
+        },
+        {
+          "name": "fullMode",
+          "location": "DL",
+          "type": "unsigned char"
+        }
+      ],
+      "original_va": "0x00413730",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 116,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "FpuRoundingControl",
+      "inputs": [
+        {
+          "name": "format",
+          "location": "EAX",
+          "type": "unsigned"
+        },
+        {
+          "name": "mode",
+          "location": "ECX",
+          "type": "unsigned"
+        }
+      ],
+      "original_va": "0x00414080",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 424,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    },
+    {
+      "name": "RecompileFpuCompare",
+      "inputs": [
+        {
+          "name": "condition",
+          "location": "S4",
+          "type": "unsigned char"
+        }
+      ],
+      "original_va": "0x00414230",
+      "source": "src/nemu64/DynarecFPU.cpp",
+      "status": "full_normalized_instructions_and_known_targets_match",
+      "original_size": 483,
+      "extent_basis": "Contiguous decoded instruction body plus original inline switch tables where present; excludes trailing alignment."
+    }
+  ],
+  "globals": [
+    {
+      "name": "Dynarec_DynamicFpuMode",
+      "va": "0x03E64E84",
+      "type": "unsigned",
+      "size": 4,
+      "status": "inferred_original_object_identity"
+    },
+    {
+      "name": "Dynarec_FpuChecked",
+      "va": "0x01240E68",
+      "type": "unsigned",
+      "size": 4,
+      "status": "inferred_original_object_identity"
+    },
+    {
+      "name": "Dynarec_FpuEndLabel",
+      "va": "0x03E5ADEC",
+      "type": "unsigned",
+      "size": 4,
+      "status": "inferred_original_object_identity"
+    },
+    {
+      "name": "Dynarec_FpuModeLabel",
+      "va": "0x03E5ADF0",
+      "type": "unsigned",
+      "size": 4,
+      "status": "inferred_original_object_identity"
+    },
+    {
+      "name": "FpuTruncateInteger",
+      "va": "0x004777E4",
+      "type": "unsigned short",
+      "size": 2,
+      "status": "inferred_original_object_identity"
+    },
+    {
+      "name": "FpuTruncateSingle",
+      "va": "0x004777E8",
+      "type": "unsigned short",
+      "size": 2,
+      "status": "inferred_original_object_identity"
+    },
+    {
+      "name": "FpuTruncateDouble",
+      "va": "0x004777EC",
+      "type": "unsigned short",
+      "size": 2,
+      "status": "inferred_original_object_identity"
+    },
+    {
+      "name": "FpuNearestInteger",
+      "va": "0x004777F0",
+      "type": "unsigned short",
+      "size": 2,
+      "status": "inferred_original_object_identity"
+    },
+    {
+      "name": "FpuNearestSingle",
+      "va": "0x004777F4",
+      "type": "unsigned short",
+      "size": 2,
+      "status": "inferred_original_object_identity"
+    },
+    {
+      "name": "FpuNearestDouble",
+      "va": "0x004777F8",
+      "type": "unsigned short",
+      "size": 2,
+      "status": "inferred_original_object_identity"
+    },
+    {
+      "name": "FpuFloorInteger",
+      "va": "0x004777FC",
+      "type": "unsigned short",
+      "size": 2,
+      "status": "inferred_original_object_identity"
+    },
+    {
+      "name": "FpuFloorSingle",
+      "va": "0x00477800",
+      "type": "unsigned short",
+      "size": 2,
+      "status": "inferred_original_object_identity"
+    },
+    {
+      "name": "FpuFloorDouble",
+      "va": "0x00477804",
+      "type": "unsigned short",
+      "size": 2,
+      "status": "inferred_original_object_identity"
+    },
+    {
+      "name": "FpuCeilInteger",
+      "va": "0x00477808",
+      "type": "unsigned short",
+      "size": 2,
+      "status": "inferred_original_object_identity"
+    },
+    {
+      "name": "FpuCeilSingle",
+      "va": "0x0047780C",
+      "type": "unsigned short",
+      "size": 2,
+      "status": "inferred_original_object_identity"
+    },
+    {
+      "name": "FpuCeilDouble",
+      "va": "0x00477810",
+      "type": "unsigned short",
+      "size": 2,
+      "status": "inferred_original_object_identity"
+    }
+  ],
+  "notes": [
+    "Register argument locations are recovered from the original machine code; C++ prototypes expose semantic parameters and LTCG chooses register allocation.",
+    "Repeated FR-mode emission guards are represented as macros to retain both conditional emission paths.",
+    "C.SF and C.NGLE preserve the original empty emitted exception paths.",
+    "Invalid GetFpuRegisterAddress formats report GetCOP1Reg: Error 0 and return zero; FpuRoundingControl invalid formats still emit a load from zero.",
+    "0x03E64E80 and 0x03E64E84 are separate mode-change/dynamic-mode DWORD globals; the former provisional CPU_LLAddress64 alias was incorrect.",
+    "Source cases and byte casts preserve original VC7 LTCG allocation: explicit GetFpuRegisterAddress return cases and a byte-narrowed FR0 upper-register index restore the original custom ABI and instruction stream."
+  ]
+}
