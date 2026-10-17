@@ -1,6 +1,6 @@
 {
   "passed": true,
-  "scratch": "/root/.ai-tmp/nemu-startup-probe.7qea49ll",
+  "scratch": "/root/.ai-tmp/nemu-startup-probe.o348bu5u",
   "runs": [
     {
       "name": "original",
@@ -31,7 +31,7 @@
     },
     {
       "name": "rebuilt",
-      "exe_sha256": "bb842ed8647642a47c9c840c326f2cbaa8fc8bfcf184d809f8201e85789ea6d4",
+      "exe_sha256": "516de1c174cd4d02d0031d14e6ab2d4111635c209a8abd4aa665aa009c15317b",
       "exit_code": 0,
       "timed_out": false,
       "completed": true,
@@ -57,7 +57,7 @@
       }
     }
   ],
-  "candidate_path": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/bb842ed8647642a47c9c840c326f2cbaa8fc8bfcf184d809f8201e85789ea6d4/nemu64.exe",
+  "candidate_path": "/root/.ai-tmp/nemu-build.hngf789h/artifacts/516de1c174cd4d02d0031d14e6ab2d4111635c209a8abd4aa665aa009c15317b/nemu64.exe",
   "kind": "behavioral smoke comparison",
   "wine_launch": "setarch i386 -R wine (deterministic host address layout)",
   "frozen_dependencies": {
@@ -104,13 +104,13 @@
     "The unchanged ANSI WM_GETTEXT probe reports Disclaimer edit text as only l; this comparison does not validate the complete Disclaimer text or bitmap/static image content."
   ],
   "candidate_provenance": {
-    "artifact_directory": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/bb842ed8647642a47c9c840c326f2cbaa8fc8bfcf184d809f8201e85789ea6d4",
+    "artifact_directory": "/root/.ai-tmp/nemu-build.hngf789h/artifacts/516de1c174cd4d02d0031d14e6ab2d4111635c209a8abd4aa665aa009c15317b",
     "original_executable_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
-    "candidate_executable_sha256": "bb842ed8647642a47c9c840c326f2cbaa8fc8bfcf184d809f8201e85789ea6d4",
-    "candidate_build_report_sha256": "dbc200f5596acd5cee4f7e9bb994424cf544213558e1e55a2966c242d7b30b7a",
-    "candidate_snapshot_manifest_sha256": "459ba03be8e686929daefd2c7d157a5012f8fd225cc03e2bc25af72f1e8f9b66",
+    "candidate_executable_sha256": "516de1c174cd4d02d0031d14e6ab2d4111635c209a8abd4aa665aa009c15317b",
+    "candidate_build_report_sha256": "b7a961ca6629e0ce3773f69cbfc02576384dd675bcc061f439d7acb7009a8182",
+    "candidate_snapshot_manifest_sha256": "6e2dae356e05844325af1c4d468f283682bbc8e69cfb9424778d9ed254fef1ca",
     "candidate_toolchain_manifest_sha256": "4eba497c2daaf104dc1df034658069751313d930b7552f81ada3ba98d7b8e985",
-    "snapshot_entries_verified": 110,
+    "snapshot_entries_verified": 120,
     "snapshot_mismatches": [],
     "workflow_sources": {
       "check_nemu.py": "09dce3d9511f8d90554d06ca23410ddaf94288219aea77c713ccfc0fa42cf346",
@@ -118,14 +118,16 @@
     }
   },
   "validation_audit": {
-    "raw_report": "/root/.ai-tmp/nemu-startup-probe.7qea49ll/comparison.json",
-    "raw_report_sha256": "1f8ff74aaa98ff12b4d64ec26206b8cfe05e6c4f606a465534531b236389e735",
+    "raw_report": "/root/.ai-tmp/nemu-startup-probe.o348bu5u/comparison.json",
+    "raw_report_sha256": "e088b324b940c6afa3e4cfebaa4e15ed8f916d161cd3805e1e9fbdd0a8503b19",
     "command": [
       "python3",
       "scripts/check_nemu.py",
-      "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/bb842ed8647642a47c9c840c326f2cbaa8fc8bfcf184d809f8201e85789ea6d4/nemu64.exe"
+      "/root/.ai-tmp/nemu-build.hngf789h/artifacts/516de1c174cd4d02d0031d14e6ab2d4111635c209a8abd4aa665aa009c15317b/nemu64.exe",
+      "--report",
+      "analysis/nemu-runtime.json"
     ],
-    "fresh_wine_prefix": "/root/.ai-tmp/nemu-startup-probe.7qea49ll/wine",
+    "fresh_wine_prefix": "/root/.ai-tmp/nemu-startup-probe.o348bu5u/wine",
     "prefix_reset": "Full initialized prefix restored at the same path before each executable run.",
     "master_inputs_unchanged_after_validation": true,
     "stdout_bytes_per_run": 14973,
@@ -162,19 +164,15 @@
       },
       "nemu_probe.exe": {
         "bytes": 45056,
-        "sha256": "33e8937d1b578a1649c23e3750d1f500658f7412daf675791fdb86052bd50179"
+        "sha256": "565aa7aca416420daae748186aa4365eb511ced773e44fb576800988cc4862fd"
       },
       "nemu_menu_probe.dll": {
         "bytes": 32768,
-        "sha256": "0862540de4b68a0e89d8b2a8b557b85d3e650dd9fff6e9a20ee315e6293ae30f"
+        "sha256": "e90f3052cbe67e0344d7391172dea8d326567609dfb8873d1c685ded2370738d"
       },
       "compiler.log": {
         "bytes": 196,
-        "sha256": "e3ec484ef4b4afab238306e8e900364f7785b578f78f1d58acf377015e26d06a"
-      },
-      "provenance.json": {
-        "bytes": 946,
-        "sha256": "db5c84b022b34a48a1da5ac04a0a4a106180a05c5df7710a3aa8907d07553148"
+        "sha256": "e7e85a0255b12310e6c83c534adcee70937051e3326a9d9a232a756619c772e7"
       }
     }
   }
