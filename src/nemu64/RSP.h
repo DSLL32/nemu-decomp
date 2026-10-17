@@ -1,0 +1,143 @@
+#ifndef NEMU64_RSP_H
+#define NEMU64_RSP_H
+
+#include "CPU.h"
+
+union RSPInstructionWord {
+    CpuU32 Value;
+    CpuU8 Bytes[4];
+    struct { CpuU32 funct:6, sa:5, rd:5, rt:5, rs:5, op:6; };
+};
+
+struct RSPMemoryBreakpoint { CpuU32 Address, Access; };
+extern CpuU32 MemoryBreakpointCount;
+extern RSPMemoryBreakpoint MemoryBreakpoints[];
+extern CpuU32 RSPBreakpointInhibit;
+
+extern CpuU32 RSPRegisters[32];
+extern CpuU16 RSPVectors[32][8];
+extern CpuU16 RSPFlags[3];
+extern CpuS64 RSPAccumulator[8];
+extern unsigned char SPMemory[0x4000];
+extern CpuU32 RSPDelayPC;
+
+typedef void (*RSPOpcodeHandler)();
+extern RSPOpcodeHandler RSP_MainDispatch[64];
+extern RSPOpcodeHandler RSP_SpecialDispatch[64];
+extern RSPOpcodeHandler RSP_RegImmDispatch[32];
+extern RSPOpcodeHandler RSP_Cop0Dispatch[32];
+extern RSPOpcodeHandler RSP_Cop2Dispatch[32];
+extern RSPOpcodeHandler RSP_VectorLoadDispatch[32];
+extern RSPOpcodeHandler RSP_VectorStoreDispatch[32];
+extern RSPOpcodeHandler RSP_VectorDispatch[64];
+
+void RSP_VectorMultiply();
+void RSP_LoadVector();
+void RSP_StoreVector();
+void RSP_InvalidOpcode();
+void RSP_SPECIAL();
+void RSP_REGIMM();
+void RSP_J();
+void RSP_JAL();
+void RSP_BEQ();
+void RSP_BNE();
+void RSP_BLEZ();
+void RSP_BGTZ();
+void RSP_ADDI();
+void RSP_SLTI();
+void RSP_SLTIU();
+void RSP_ANDI();
+void RSP_ORI();
+void RSP_XORI();
+void RSP_LUI();
+void RSP_COP0();
+void RSP_COP2();
+void RSP_LB();
+void RSP_LH();
+void RSP_LW();
+void RSP_LBU();
+void RSP_LHU();
+void RSP_SB();
+void RSP_SH();
+void RSP_SW();
+void RSP_LWC2();
+void RSP_SWC2();
+void RSP_SLL();
+void RSP_SRL();
+void RSP_SRA();
+void RSP_SLLV();
+void RSP_SRLV();
+void RSP_SRAV();
+void RSP_JR();
+void RSP_JALR();
+void RSP_BREAK();
+void RSP_ADD();
+void RSP_SUB();
+void RSP_AND();
+void RSP_OR();
+void RSP_XOR();
+void RSP_NOR();
+void RSP_SLT();
+void RSP_SLTU();
+void RSP_BLTZ();
+void RSP_BGEZ();
+void RSP_BLTZAL();
+void RSP_BGEZAL();
+void RSP_MFC0();
+void RSP_MTC0();
+void RSP_MFC2();
+void RSP_CFC2();
+void RSP_MTC2();
+void RSP_CTC2();
+void RSP_VECTOR();
+void RSP_VADD();
+void RSP_VSUB();
+void RSP_VSUT();
+void RSP_VABS();
+void RSP_VADDC();
+void RSP_VSUBC();
+void RSP_VADDB();
+void RSP_VSUBB();
+void RSP_VACCB();
+void RSP_VSUCB();
+void RSP_VSAD();
+void RSP_VSAC();
+void RSP_VSUM();
+void RSP_VSAW();
+void RSP_VLT();
+void RSP_VEQ();
+void RSP_VNE();
+void RSP_VGE();
+void RSP_VCL();
+void RSP_VCH();
+void RSP_VCR();
+void RSP_VMRG();
+void RSP_VAND();
+void RSP_VNAND();
+void RSP_VOR();
+void RSP_VNOR();
+void RSP_VXOR();
+void RSP_VNXOR();
+void RSP_VNOOP();
+void RSP_VEXTT();
+void RSP_VEXTQ();
+void RSP_VEXTN();
+void RSP_VINST();
+void RSP_VINSQ();
+void RSP_VINSN();
+void RSP_ReciprocalInstruction();
+void RSP_InitializeReciprocalTable();
+
+extern CpuU32 RSPMemoryAddress;
+extern CpuU32 RSPElementLaneMask[8], RSPElementIndexMask[8];
+extern CpuU8 RSPCompareNotEqual[8], RSPCompareCarry[8];
+extern bool RSPUseReciprocalROM;
+extern CpuU32 RSPReciprocalROM[1024], RSPComputedReciprocalROM[1024];
+extern CpuU32 RSPReciprocalElement[16];
+extern CpuU32 *RSPReciprocalTable;
+extern CpuS32 RSPReciprocalInput, RSPMoveResult;
+extern CpuU32 RSPReciprocalResult, RSPReciprocalHighPending;
+extern bool RSPReciprocalInitialized;
+CpuU32 RSP_Reciprocal(CpuS32 value, CpuU32 squareRoot, CpuU32 singlePrecision);
+
+#endif

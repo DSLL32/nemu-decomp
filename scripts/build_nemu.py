@@ -1,0 +1,200 @@
+#!/usr/bin/env python3
+"""Build the reconstructed Nemu64 sources with the tracked historical tools.
+
+The current reconstruction may produce ordinary compiler/linker errors while
+units are still being recovered. Missing implementations are never supplied by
+stubs, and no original executable bytes are copied into the output. Successful
+linking is followed by an unmasked, complete-file comparison.
+"""
+
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import tempfile
+
+from verify_nemu import compare
+
+
+ROOT = Path(__file__).resolve().parents[1]
+SOURCE = ROOT / 'src/nemu64'
+
+# Inferred application ordering. Include every additional real source unit
+# after these; this list is not a claim that the original filenames survived.
+APPLICATION_ORDER = [
+    'CPU.cpp', 'CpuControl.cpp', 'Memory.cpp', 'ByteSwap.c', 'Dynarec.cpp', 'FrontendIni.cpp', 'Rom.cpp',
+    'State.cpp', 'WinMain.cpp', 'RomBrowser.cpp', 'Plugins.cpp', 'RSP.cpp',
+    'PIF.cpp', 'Globals.cpp', 'Data.cpp',
+]
+
+# These 14 VC6 RTM contributions are identified in the original code. gzio.c
+# is part of upstream zlib but none of its functions occurs in this executable.
+ZLIB_ORDER = [
+    'uncompr.c', 'compress.c', 'contrib/minizip/unzip.c', 'inflate.c',
+    'deflate.c', 'crc32.c', 'infblock.c', 'adler32.c', 'zutil.c', 'trees.c',
+    'infcodes.c', 'inftrees.c', 'infutil.c', 'inffast.c',
+]
+APPLICATION_FLAGS = [
+    '/nologo', '/c', '/O2', '/Ob1', '/ML', '/GL', '/W3',
+    '/DWIN32', '/DNDEBUG', '/D_WINDOWS', '/DWINVER=0x0500',
+    '/D_WIN32_WINNT=0x0400', '/Ivendor/zlib-1.1.3',
+]
+# CopyAndSwapWords retains a native C/cdecl boundary in the original. Its
+# independent 36-byte match and sole residual VC7 C Rich contribution support
+# this inferred unit boundary; compiling it with /GL changes its callers.
+NATIVE_C_FLAGS = [flag for flag in APPLICATION_FLAGS if flag not in ('/GL', '/Ob1')]
+ZLIB_FLAGS = [
+    '/nologo', '/c', '/O2', '/ML', '/DWIN32', '/DNDEBUG',
+    '/Ivendor/zlib-1.1.3',
+]
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--work', type=Path, help='reusable build directory under ~/.ai-tmp')
+    parser.add_argument('--no-map', action='store_true')
+    parser.add_argument('--report', type=Path, help='also write the build/comparison report here')
+    args = parser.parse_args()
+    parent = Path.home() / '.ai-tmp'
+    parent.mkdir(exist_ok=True)
+    scratch = (args.work.resolve() if args.work else
+               Path(tempfile.mkdtemp(prefix='nemu-build.', dir=parent)))
+    if not scratch.is_relative_to(parent.resolve()):
+        parser.error('--work must be under ~/.ai-tmp')
+    project, output, logs = scratch / 'src/nemu64', scratch / 'output', scratch / 'logs'
+    for directory in [project, output, logs, project / 'obj/app', project / 'obj/zlib']:
+        directory.mkdir(parents=True, exist_ok=True)
+    prefix = scratch / 'wine'
+    env = dict(os.environ, WINEPREFIX=str(prefix), WINEARCH='win32',
+               WINEDEBUG='-all', PYTHONDONTWRITEBYTECODE='1')
+    report = dict(project=str(project), wine_prefix=str(prefix),
+                  output_dir=str(output), status='building',
+                  build_constraints='analysis/nemu-build.json',
+                  source_files=[], commands=[], metadata_restoration=None)
+    print(f'Build directory: {project}\nWine prefix: {prefix}', flush=True)
+
+    def write_report():
+        serialized = json.dumps(report, indent=2) + '\n'
+        (scratch / 'build.json').write_text(serialized)
+        if args.report:
+            args.report.parent.mkdir(parents=True, exist_ok=True)
+            args.report.write_text(serialized)
+
+    def run(label, command, cwd=project, timeout=600):
+        print(label, flush=True)
+        log = logs / (label + '.log')
+        row = dict(stage=label, command=command, cwd=str(cwd), log=str(log))
+        report['commands'].append(row)
+        with log.open('w') as stream:
+            process = subprocess.run(command, cwd=cwd, env=env, stdout=stream,
+                                     stderr=subprocess.STDOUT, timeout=timeout)
+        row['returncode'] = process.returncode
+        if process.returncode:
+            raise RuntimeError(f'{label} failed ({process.returncode}); {log}\n'
+                               + log.read_text(errors='replace'))
+
+    def tool(label, toolchain, name, *arguments):
+        run(label, [sys.executable, str(ROOT / 'scripts/run_toolchain.py'),
+                    toolchain, name, *arguments])
+
+    try:
+        # Preserve source bytes, including the Windows-1252 resource script.
+        # Build from this snapshot; no generated files are written into src/.
+        application = []
+        for source in sorted(SOURCE.rglob('*')):
+            if not source.is_file() or '__pycache__' in source.parts:
+                continue
+            relative = source.relative_to(SOURCE)
+            destination = project / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            data = source.read_bytes()
+            destination.write_bytes(data)
+            report['source_files'].append(dict(path=str(relative),
+                sha256=hashlib.sha256(data).hexdigest()))
+            if relative.parts[0] not in ('vendor', 'imports', 'res') and source.suffix in ('.cpp', '.c'):
+                application.append(relative)
+        rank = {name: i for i, name in enumerate(APPLICATION_ORDER)}
+        application.sort(key=lambda path: (rank.get(path.as_posix(), len(rank)), path.as_posix()))
+        report['application_units'] = [str(path) for path in application]
+        report['application_flags'] = APPLICATION_FLAGS
+        report['native_c_flags'] = NATIVE_C_FLAGS
+        report['zlib_units'] = ZLIB_ORDER
+        report['zlib_flags'] = ZLIB_FLAGS
+        if not (prefix / 'system.reg').exists():
+            run('wineboot', ['wineboot', '-u'])
+        run('generate-cic-resource', [sys.executable, 'res/generate_pif_table.py',
+                                     'res/pif-table.bin'])
+        run('generate-cic-data', [sys.executable, 'res/generate_pif_tables.py',
+                                 'PifTables.inc', '--report', str(scratch / 'cic-data.json')])
+        run('import-libraries', [sys.executable, str(ROOT / 'scripts/build_nemu_imports.py'),
+                                '--build-dir', str(project / 'imports'),
+                                '--source-dir', str(project / 'imports')])
+        zlib_objects = []
+        for source in ZLIB_ORDER:
+            name = Path(source).stem
+            obj = 'obj/zlib/' + name + '.obj'
+            tool('compile-zlib-' + name, 'vc6rtm', 'cl', *ZLIB_FLAGS,
+                 '/Fo' + obj, 'vendor/zlib-1.1.3/' + source)
+            zlib_objects.append(obj)
+        application_objects = []
+        for source in application:
+            obj = Path('obj/app') / source.with_suffix('.obj')
+            (project / obj).parent.mkdir(parents=True, exist_ok=True)
+            flags = NATIVE_C_FLAGS if source.suffix == '.c' else APPLICATION_FLAGS
+            tool('compile-' + source.as_posix().replace('/', '-'), 'vc7', 'cl',
+                 *flags, '/Fo' + obj.as_posix(), source.as_posix())
+            application_objects.append(obj.as_posix())
+        tool('resources', 'vc7', 'rc', '/foobj/nemu64.res', 'nemu64.rc')
+        # Absolute Wine paths avoid depending on the source tree's depth.
+        winoutput = 'Z:' + str(output).replace('/', '\\')
+        options = [
+            '/nologo', '/LTCG', '/SUBSYSTEM:WINDOWS', '/OPT:WIN98',
+            '/INCREMENTAL:NO', '/MACHINE:I386', '/BASE:0x400000', '/FIXED',
+            '/OUT:' + winoutput + r'\nemu64.exe',
+            *application_objects, *zlib_objects, 'obj/nemu64.res',
+            'comctl32.lib', 'winmm.lib', 'imports/kailleraclient.lib',
+            'imports/gs_dll.lib', 'kernel32.lib', 'user32.lib', 'gdi32.lib',
+            'comdlg32.lib', 'shell32.lib',
+        ]
+        if not args.no_map:
+            options.append('/MAP:' + winoutput + r'\nemu64.map')
+        # Previous successful outputs have immutable copies under artifacts/.
+        # Remove only this build's known outputs so failure cannot leave a stale
+        # executable looking like a newly successful link.
+        for name in ['nemu64.exe', 'nemu64.linked.exe', 'nemu64.map']:
+            (output / name).unlink(missing_ok=True)
+        tool('link', 'vc7', 'link', *options)
+        executable = output / 'nemu64.exe'
+        raw = output / 'nemu64.linked.exe'
+        shutil.copyfile(executable, raw)
+        comparison = compare(executable)
+        (scratch / 'comparison.json').write_text(json.dumps(comparison, indent=2) + '\n')
+        artifact = scratch / 'artifacts' / comparison['rebuilt_sha256']
+        artifact.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(raw, artifact / raw.name)
+        shutil.copyfile(executable, artifact / executable.name)
+        if not args.no_map:
+            shutil.copyfile(output / 'nemu64.map', artifact / 'nemu64.map')
+        report.update(status='byte_exact' if comparison['full_exe_byte_exact'] else 'different',
+                      raw_linked_exe=str(raw), executable=str(executable),
+                      immutable_artifact_dir=str(artifact), comparison=comparison)
+        write_report()
+        shutil.copyfile(scratch / 'build.json', artifact / 'build.json')
+        print(f'Raw linker output: {raw}\n'
+              f'Immutable artifact: {artifact}\n'
+              f'Complete executable byte exact: {comparison["full_exe_byte_exact"]}\n'
+              f'Differing file bytes: {comparison["differing_file_bytes"]}', flush=True)
+        return 0 if comparison['full_exe_byte_exact'] else 1
+    except (RuntimeError, OSError, ValueError, subprocess.TimeoutExpired) as error:
+        report.update(status='build_failed', error=str(error))
+        write_report()
+        print(str(error), file=sys.stderr, flush=True)
+        return 1
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

@@ -1,0 +1,1966 @@
+{
+  "schema_version": 1,
+  "original": "master/nemu64.exe",
+  "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+  "file_size": 4796416,
+  "status": "Build constraints and import libraries verified; full emulator reconstruction is in progress.",
+  "scratch": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx",
+  "toolchain": {
+    "application_compiler": "toolchains/vc7/bin/cl.exe",
+    "compiler_version": "13.00.9466",
+    "linker": "toolchains/vc7/bin/link.exe",
+    "linker_version": "7.00.9466",
+    "crt": "toolchains/vc7/lib/libc.lib",
+    "crt_flavor": "static single-thread release (/ML)",
+    "vendor_compiler": "toolchains/vc6rtm/bin/cl.exe",
+    "vendor_compiler_build": 8168,
+    "gs_import_librarian": "toolchains/vc6/bin/lib.exe",
+    "gs_import_linker_build": 8447,
+    "kaillera_import_librarian": "toolchains/vc6rtm/bin/lib.exe",
+    "kaillera_import_linker_build": 8168
+  },
+  "pe": {
+    "image_base": "0x400000",
+    "entry_rva": "0x28932",
+    "entry_va": "0x428932",
+    "timestamp": 1048395060,
+    "timestamp_utc": "2003-03-23T04:51:00+00:00",
+    "coff_characteristics": "0x10f",
+    "linker_version": [
+      7,
+      0
+    ],
+    "section_alignment": 4096,
+    "file_alignment": 4096,
+    "os_version": [
+      4,
+      0
+    ],
+    "image_version": [
+      0,
+      0
+    ],
+    "subsystem_version": [
+      4,
+      0
+    ],
+    "subsystem": "Windows GUI (2)",
+    "dll_characteristics": "0x0",
+    "image_size": 72249344,
+    "header_size": 4096,
+    "checksum": 0,
+    "stack_reserve_commit": [
+      1048576,
+      4096
+    ],
+    "heap_reserve_commit": [
+      1048576,
+      4096
+    ],
+    "sections": [
+      {
+        "name": ".text",
+        "virtual_size": 190477,
+        "rva": 4096,
+        "raw_size": 192512,
+        "offset": 4096,
+        "characteristics": "60000020",
+        "va": "0x401000",
+        "file_alignment_padding": {
+          "size": 2035,
+          "all_zero": true
+        }
+      },
+      {
+        "name": ".rdata",
+        "virtual_size": 61240,
+        "rva": 196608,
+        "raw_size": 61440,
+        "offset": 196608,
+        "characteristics": "40000040",
+        "va": "0x430000",
+        "file_alignment_padding": {
+          "size": 200,
+          "all_zero": true
+        }
+      },
+      {
+        "name": ".data",
+        "virtual_size": 67692888,
+        "rva": 258048,
+        "raw_size": 241664,
+        "offset": 258048,
+        "characteristics": "c0000040",
+        "va": "0x43f000"
+      },
+      {
+        "name": ".rsrc",
+        "virtual_size": 4295496,
+        "rva": 67952640,
+        "raw_size": 4296704,
+        "offset": 499712,
+        "characteristics": "40000040",
+        "va": "0x44ce000",
+        "file_alignment_padding": {
+          "size": 1208,
+          "all_zero": true
+        }
+      }
+    ],
+    "directories": [
+      {
+        "index": 0,
+        "rva": "0x0",
+        "size": 0
+      },
+      {
+        "index": 1,
+        "rva": "0x3e128",
+        "size": 200
+      },
+      {
+        "index": 2,
+        "rva": "0x40ce000",
+        "size": 4295496
+      },
+      {
+        "index": 3,
+        "rva": "0x0",
+        "size": 0
+      },
+      {
+        "index": 4,
+        "rva": "0x0",
+        "size": 0
+      },
+      {
+        "index": 5,
+        "rva": "0x0",
+        "size": 0
+      },
+      {
+        "index": 6,
+        "rva": "0x0",
+        "size": 0
+      },
+      {
+        "index": 7,
+        "rva": "0x0",
+        "size": 0
+      },
+      {
+        "index": 8,
+        "rva": "0x0",
+        "size": 0
+      },
+      {
+        "index": 9,
+        "rva": "0x0",
+        "size": 0
+      },
+      {
+        "index": 10,
+        "rva": "0x0",
+        "size": 0
+      },
+      {
+        "index": 11,
+        "rva": "0x0",
+        "size": 0
+      },
+      {
+        "index": 12,
+        "rva": "0x30000",
+        "size": 644
+      },
+      {
+        "index": 13,
+        "rva": "0x0",
+        "size": 0
+      },
+      {
+        "index": 14,
+        "rva": "0x0",
+        "size": 0
+      },
+      {
+        "index": 15,
+        "rva": "0x0",
+        "size": 0
+      }
+    ],
+    "exports": []
+  },
+  "crt_startup": {
+    "symbol": "_WinMainCRTStartup",
+    "va": "0x428932",
+    "size": 473,
+    "archive_member": "build\\intel\\st_obj\\wincrt0.obj",
+    "source": "toolchains/vc7/crt/src/crt0.c",
+    "comparison": [
+      {
+        "runtime": "st",
+        "function": "WinMainCRTStartup",
+        "size": 473,
+        "relocations": 38,
+        "nonrelocation_differences": 0
+      },
+      {
+        "runtime": "mt",
+        "function": "WinMainCRTStartup",
+        "size": 466,
+        "relocations": 37,
+        "nonrelocation_differences": 160
+      }
+    ],
+    "comparison_method": "Compare the complete function section to target bytes, masking only the four-byte operands named by the original COFF relocations. All 321 nonrelocation bytes agree for libc; the libcmt function differs in length and 160 nonrelocation bytes. Startup is not reconstructed as application source: use the original tracked CRT archive.",
+    "WinMain_va": "0x41ba40",
+    "WinMain_call_operand": "0x428ab6",
+    "relocations": [
+      {
+        "name": "$T20117",
+        "target": "0x431400",
+        "relocation_type": 6,
+        "source_operand": "0x428935",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__SEH_prolog",
+        "target": "0x42bb5c",
+        "relocation_type": 20,
+        "source_operand": "0x42893a",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__alloca_probe",
+        "target": "0x42bbb0",
+        "relocation_type": 20,
+        "source_operand": "0x428946",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__imp__GetVersionExA@4",
+        "target": "0x430144",
+        "relocation_type": 6,
+        "source_operand": "0x428954",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__osplatform",
+        "target": "0x479c5c",
+        "relocation_type": 6,
+        "source_operand": "0x42895d",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__winmajor",
+        "target": "0x479c68",
+        "relocation_type": 6,
+        "source_operand": "0x428965",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__winminor",
+        "target": "0x479c6c",
+        "relocation_type": 6,
+        "source_operand": "0x42896e",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__osver",
+        "target": "0x479c60",
+        "relocation_type": 6,
+        "source_operand": "0x42897d",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__osver",
+        "target": "0x479c60",
+        "relocation_type": 6,
+        "source_operand": "0x42898e",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__winver",
+        "target": "0x479c64",
+        "relocation_type": 6,
+        "source_operand": "0x428998",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__imp__GetModuleHandleA@4",
+        "target": "0x430150",
+        "relocation_type": 6,
+        "source_operand": "0x4289a1",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__heap_init",
+        "target": "0x429ff5",
+        "relocation_type": 20,
+        "source_operand": "0x4289fb",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "___error_mode",
+        "target": "0x479c4c",
+        "relocation_type": 6,
+        "source_operand": "0x428a06",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__FF_MSGBANNER",
+        "target": "0x42b4ca",
+        "relocation_type": 20,
+        "source_operand": "0x428a0e",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__NMSG_WRITE",
+        "target": "0x42b353",
+        "relocation_type": 20,
+        "source_operand": "0x428a15",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "___crtExitProcess",
+        "target": "0x428cee",
+        "relocation_type": 20,
+        "source_operand": "0x428a1f",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__RTC_Initialize",
+        "target": "0x42bad4",
+        "relocation_type": 20,
+        "source_operand": "0x428a26",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__ioinit",
+        "target": "0x42aec0",
+        "relocation_type": 20,
+        "source_operand": "0x428a2e",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__amsg_exit",
+        "target": "0x42890d",
+        "relocation_type": 20,
+        "source_operand": "0x428a39",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__imp__GetCommandLineA@0",
+        "target": "0x430148",
+        "relocation_type": 6,
+        "source_operand": "0x428a40",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__acmdln",
+        "target": "0x44cd954",
+        "relocation_type": 6,
+        "source_operand": "0x428a45",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "___crtGetEnvironmentStringsA",
+        "target": "0x42b9b2",
+        "relocation_type": 20,
+        "source_operand": "0x428a4a",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__aenvptr",
+        "target": "0x479c44",
+        "relocation_type": 6,
+        "source_operand": "0x428a4f",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__setargv",
+        "target": "0x42b910",
+        "relocation_type": 20,
+        "source_operand": "0x428a54",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__amsg_exit",
+        "target": "0x42890d",
+        "relocation_type": 20,
+        "source_operand": "0x428a5f",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__setenvp",
+        "target": "0x42b6dd",
+        "relocation_type": 20,
+        "source_operand": "0x428a65",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__amsg_exit",
+        "target": "0x42890d",
+        "relocation_type": 20,
+        "source_operand": "0x428a70",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__cinit",
+        "target": "0x428d1e",
+        "relocation_type": 20,
+        "source_operand": "0x428a76",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__amsg_exit",
+        "target": "0x42890d",
+        "relocation_type": 20,
+        "source_operand": "0x428a83",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__imp__GetStartupInfoA@4",
+        "target": "0x43014c",
+        "relocation_type": 6,
+        "source_operand": "0x428a91",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__wincmdln",
+        "target": "0x42b674",
+        "relocation_type": 20,
+        "source_operand": "0x428a96",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "_WinMain@16",
+        "target": "0x41ba40",
+        "relocation_type": 20,
+        "source_operand": "0x428ab6",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "_exit",
+        "target": "0x428e45",
+        "relocation_type": 20,
+        "source_operand": "0x428ac6",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__cexit",
+        "target": "0x428e67",
+        "relocation_type": 20,
+        "source_operand": "0x428acb",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__XcptFilter",
+        "target": "0x42b503",
+        "relocation_type": 20,
+        "source_operand": "0x428ade",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__exit",
+        "target": "0x428e56",
+        "relocation_type": 20,
+        "source_operand": "0x428af3",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__c_exit",
+        "target": "0x428e76",
+        "relocation_type": 20,
+        "source_operand": "0x428af8",
+        "object_addend": "0x0"
+      },
+      {
+        "name": "__SEH_epilog",
+        "target": "0x42bb97",
+        "relocation_type": 20,
+        "source_operand": "0x428b06",
+        "object_addend": "0x0"
+      }
+    ],
+    "warning": "Observed symbol addresses from relocation operands are not independent proof of the contents of those targets. See nemu-library-addresses.json for separate code/import validation."
+  },
+  "rich": {
+    "offset": 128,
+    "xor_key": "0421da8b",
+    "checksum_valid": true,
+    "records": [
+      {
+        "comp_id": "002723ca",
+        "product_id": 39,
+        "build": 9162,
+        "count": 2
+      },
+      {
+        "comp_id": "001d24fa",
+        "product_id": 29,
+        "build": 9466,
+        "count": 2
+      },
+      {
+        "comp_id": "004024fa",
+        "product_id": 64,
+        "build": 9466,
+        "count": 20
+      },
+      {
+        "comp_id": "001c24fa",
+        "product_id": 28,
+        "build": 9466,
+        "count": 93
+      },
+      {
+        "comp_id": "000420ff",
+        "product_id": 4,
+        "build": 8447,
+        "count": 2
+      },
+      {
+        "comp_id": "000a1fe8",
+        "product_id": 10,
+        "build": 8168,
+        "count": 14
+      },
+      {
+        "comp_id": "00041fe8",
+        "product_id": 4,
+        "build": 8168,
+        "count": 2
+      },
+      {
+        "comp_id": "001923fa",
+        "product_id": 25,
+        "build": 9210,
+        "count": 15
+      },
+      {
+        "comp_id": "00010000",
+        "product_id": 1,
+        "build": 0,
+        "count": 153
+      },
+      {
+        "comp_id": "002c24fa",
+        "product_id": 44,
+        "build": 9466,
+        "count": 27
+      },
+      {
+        "comp_id": "004524fa",
+        "product_id": 69,
+        "build": 9466,
+        "count": 1
+      },
+      {
+        "comp_id": "003d24fa",
+        "product_id": 61,
+        "build": 9466,
+        "count": 1
+      }
+    ]
+  },
+  "rich_interpretation": [
+    {
+      "comp_id": "002723ca",
+      "count": 2,
+      "meaning": "VC7 Machine=0 alias COFF objects",
+      "evidence": "Tracked libc.lib contains 44 alias objects with this @comp.id. Which two were selected remains unresolved; these contain no code. No CRT relocations reference the aliases, suggesting application use; candidates with independently present target bodies include __mbscat -> _strcat, __mbscpy -> _strcpy and __strcmpi -> __stricmp."
+    },
+    {
+      "comp_id": "001d24fa",
+      "count": 2,
+      "meaning": "VC7 C++ non-LTCG",
+      "evidence": "Both matched to CRT contributions; a minimal /ML GUI probe also links two such CRT objects."
+    },
+    {
+      "comp_id": "004024fa",
+      "count": 20,
+      "meaning": "VC7 MASM",
+      "evidence": "All 20 matched to CRT contributions. This is not evidence of 20 application assembly files."
+    },
+    {
+      "comp_id": "001c24fa",
+      "count": 93,
+      "meaning": "VC7 C",
+      "evidence": "82 code-bearing CRT members independently mapped; dependency closure identifies ten more uniquely defined CRT members (ctype,nlsdata1,nlsdata2,_newmode,txtmode,cmiscdat,crt0init,ncommode,constpow,crt0fp), giving92 of93 records. One contribution remains unattributed; do not assume all application units are C++."
+    },
+    {
+      "comp_id": "000420ff",
+      "count": 2,
+      "meaning": "VC6 SP5 linker import metadata",
+      "evidence": "Generated gs_dll import descriptor and per-DLL null thunk reproduce count2 in probe."
+    },
+    {
+      "comp_id": "000a1fe8",
+      "count": 14,
+      "meaning": "VC6 RTM C",
+      "evidence": "zlib1.1.3/minizip0.15 match with VC6 RTM /O2 /ML; see nemu-zlib-addresses.json."
+    },
+    {
+      "comp_id": "00041fe8",
+      "count": 2,
+      "meaning": "VC6 RTM linker import metadata",
+      "evidence": "Generated Kaillera import descriptor and per-DLL null thunk reproduce count2 in probe."
+    },
+    {
+      "comp_id": "001923fa",
+      "count": 15,
+      "meaning": "VC7 SDK import metadata",
+      "evidence": "Seven Windows DLLs contribute two objects each plus the common null import descriptor. Tracked SDK import hints all match."
+    },
+    {
+      "comp_id": "00010000",
+      "count": 153,
+      "meaning": "Imported-function records",
+      "evidence": "152 target imports, plus one linker record; minimal probe also records one more than its imported-function total."
+    },
+    {
+      "comp_id": "002c24fa",
+      "count": 27,
+      "meaning": "VC7 C++ LTCG input contributions",
+      "evidence": "Likely application compilation group. Exact historical source filenames and boundaries remain inferred, not recovered from this count alone."
+    },
+    {
+      "comp_id": "004524fa",
+      "count": 1,
+      "meaning": "VC7 resource converter",
+      "evidence": "Resource input; see nemu-resources.json."
+    },
+    {
+      "comp_id": "003d24fa",
+      "count": 1,
+      "meaning": "VC7 linker",
+      "evidence": "Matches tracked linker build9466."
+    }
+  ],
+  "library_mapping_snapshot": {
+    "report": "analysis/nemu-library-addresses.json",
+    "validated_functions": 187,
+    "members": 114,
+    "contribution_comp_ids": {
+      "001c24fa": 92,
+      "004024fa": 20,
+      "001d24fa": 2
+    }
+  },
+  "application_compile_baseline": {
+    "flags": [
+      "/O2",
+      "/Ob1",
+      "/ML",
+      "/GL"
+    ],
+    "evidence": "Parent reconstruction probes reproduce plugin function sizes and LTCG custom-register calling conventions with /Ob1. Plain /O2 /GL changes wrapper inlining. This is a tested baseline, not proof that every historical unit used identical flags."
+  },
+  "link_baseline": {
+    "flags": [
+      "/LTCG",
+      "/SUBSYSTEM:WINDOWS",
+      "/OPT:WIN98"
+    ],
+    "evidence": [
+      "/LTCG follows the 27 LTCG contributions. VC7 automatically restarts an ordinary link with LTCG when these are present.",
+      "A minimal VC7 GUI probe defaults to FileAlignment512; adding /OPT:WIN98 changes it to4096 and reproduces the target alignment. Explicit /FILEALIGN:4096 is another possible historical choice.",
+      "Target image base, OS/subsystem4.0, stack/heap sizes, fixed-image flags and absent debug/relocation directories agree with the tested release GUI defaults."
+    ],
+    "not_yet_established": [
+      "Application translation-unit order and original names",
+      "Exact /OPT:REF and /OPT:ICF history",
+      "Per-unit exception, RTTI, packing, processor and /GS settings",
+      "Identity of two selected libc alias objects",
+      "Complete final contribution layout"
+    ],
+    "link_order_note": "The current build uses the 14 identified vendor objects directly in their observed target function order. Archive provenance/order has not survived; a demand-loaded original archive is plausible. Application unit ordering remains inferred."
+  },
+  "imports": [
+    {
+      "dll": "COMCTL32.dll",
+      "original_first_thunk": "0x3e1f0",
+      "iat": "0x30000",
+      "symbols": [
+        {
+          "name": "ImageList_AddMasked",
+          "hint": 35,
+          "iat_va": "0x430000"
+        },
+        {
+          "name": "ImageList_Create",
+          "hint": 38,
+          "iat_va": "0x430004"
+        },
+        {
+          "name": "ordinal:17",
+          "hint": null,
+          "iat_va": "0x430008"
+        }
+      ]
+    },
+    {
+      "dll": "WINMM.dll",
+      "original_first_thunk": "0x3e434",
+      "iat": "0x30244",
+      "symbols": [
+        {
+          "name": "timeGetTime",
+          "hint": 163,
+          "iat_va": "0x430244"
+        }
+      ]
+    },
+    {
+      "dll": "kailleraclient.dll",
+      "original_first_thunk": "0x3e458",
+      "iat": "0x30268",
+      "symbols": [
+        {
+          "name": "_kailleraShutdown@0",
+          "hint": 7,
+          "iat_va": "0x430268"
+        },
+        {
+          "name": "_kailleraEndGame@0",
+          "hint": 1,
+          "iat_va": "0x43026c"
+        },
+        {
+          "name": "_kailleraModifyPlayValues@8",
+          "hint": 4,
+          "iat_va": "0x430270"
+        },
+        {
+          "name": "_kailleraInit@0",
+          "hint": 3,
+          "iat_va": "0x430274"
+        },
+        {
+          "name": "_kailleraSelectServerDialog@4",
+          "hint": 5,
+          "iat_va": "0x430278"
+        },
+        {
+          "name": "_kailleraSetInfos@4",
+          "hint": 6,
+          "iat_va": "0x43027c"
+        }
+      ]
+    },
+    {
+      "dll": "gs_dll.dll",
+      "original_first_thunk": "0x3e448",
+      "iat": "0x30258",
+      "symbols": [
+        {
+          "name": "?GSInitialize@@YAXPAD00@Z",
+          "hint": 1,
+          "iat_va": "0x430258"
+        },
+        {
+          "name": "?GSConfigure@@YAXXZ",
+          "hint": 0,
+          "iat_va": "0x43025c"
+        },
+        {
+          "name": "?GSUpdate@@YAXXZ",
+          "hint": 2,
+          "iat_va": "0x430260"
+        }
+      ]
+    },
+    {
+      "dll": "KERNEL32.dll",
+      "original_first_thunk": "0x3e210",
+      "iat": "0x30020",
+      "symbols": [
+        {
+          "name": "GetLocaleInfoA",
+          "hint": 349,
+          "iat_va": "0x430020"
+        },
+        {
+          "name": "GetSystemTimeAsFileTime",
+          "hint": 428,
+          "iat_va": "0x430024"
+        },
+        {
+          "name": "GetCurrentProcessId",
+          "hint": 304,
+          "iat_va": "0x430028"
+        },
+        {
+          "name": "GetCurrentThreadId",
+          "hint": 306,
+          "iat_va": "0x43002c"
+        },
+        {
+          "name": "GetTickCount",
+          "hint": 446,
+          "iat_va": "0x430030"
+        },
+        {
+          "name": "HeapSize",
+          "hint": 507,
+          "iat_va": "0x430034"
+        },
+        {
+          "name": "SetEndOfFile",
+          "hint": 744,
+          "iat_va": "0x430038"
+        },
+        {
+          "name": "GetCPInfo",
+          "hint": 241,
+          "iat_va": "0x43003c"
+        },
+        {
+          "name": "GetOEMCP",
+          "hint": 380,
+          "iat_va": "0x430040"
+        },
+        {
+          "name": "VirtualProtect",
+          "hint": 859,
+          "iat_va": "0x430044"
+        },
+        {
+          "name": "SuspendThread",
+          "hint": 811,
+          "iat_va": "0x430048"
+        },
+        {
+          "name": "QueryPerformanceCounter",
+          "hint": 638,
+          "iat_va": "0x43004c"
+        },
+        {
+          "name": "Sleep",
+          "hint": 809,
+          "iat_va": "0x430050"
+        },
+        {
+          "name": "SetThreadPriority",
+          "hint": 792,
+          "iat_va": "0x430054"
+        },
+        {
+          "name": "QueryPerformanceFrequency",
+          "hint": 639,
+          "iat_va": "0x430058"
+        },
+        {
+          "name": "CloseHandle",
+          "hint": 44,
+          "iat_va": "0x43005c"
+        },
+        {
+          "name": "CreateThread",
+          "hint": 101,
+          "iat_va": "0x430060"
+        },
+        {
+          "name": "FreeLibrary",
+          "hint": 229,
+          "iat_va": "0x430064"
+        },
+        {
+          "name": "FindFirstFileA",
+          "hint": 197,
+          "iat_va": "0x430068"
+        },
+        {
+          "name": "GetProcAddress",
+          "hint": 393,
+          "iat_va": "0x43006c"
+        },
+        {
+          "name": "FindClose",
+          "hint": 193,
+          "iat_va": "0x430070"
+        },
+        {
+          "name": "LoadLibraryA",
+          "hint": 558,
+          "iat_va": "0x430074"
+        },
+        {
+          "name": "FindNextFileA",
+          "hint": 206,
+          "iat_va": "0x430078"
+        },
+        {
+          "name": "FindResourceA",
+          "hint": 212,
+          "iat_va": "0x43007c"
+        },
+        {
+          "name": "lstrlenA",
+          "hint": 926,
+          "iat_va": "0x430080"
+        },
+        {
+          "name": "lstrcpynA",
+          "hint": 923,
+          "iat_va": "0x430084"
+        },
+        {
+          "name": "LoadResource",
+          "hint": 563,
+          "iat_va": "0x430088"
+        },
+        {
+          "name": "GetLogicalDrives",
+          "hint": 353,
+          "iat_va": "0x43008c"
+        },
+        {
+          "name": "VirtualFree",
+          "hint": 856,
+          "iat_va": "0x430090"
+        },
+        {
+          "name": "GetDriveTypeA",
+          "hint": 317,
+          "iat_va": "0x430094"
+        },
+        {
+          "name": "GetVolumeInformationA",
+          "hint": 458,
+          "iat_va": "0x430098"
+        },
+        {
+          "name": "lstrcatA",
+          "hint": 911,
+          "iat_va": "0x43009c"
+        },
+        {
+          "name": "SetCurrentDirectoryA",
+          "hint": 740,
+          "iat_va": "0x4300a0"
+        },
+        {
+          "name": "GetLastError",
+          "hint": 346,
+          "iat_va": "0x4300a4"
+        },
+        {
+          "name": "VirtualAlloc",
+          "hint": 853,
+          "iat_va": "0x4300a8"
+        },
+        {
+          "name": "MoveFileA",
+          "hint": 586,
+          "iat_va": "0x4300ac"
+        },
+        {
+          "name": "LockResource",
+          "hint": 577,
+          "iat_va": "0x4300b0"
+        },
+        {
+          "name": "GetPrivateProfileStructA",
+          "hint": 391,
+          "iat_va": "0x4300b4"
+        },
+        {
+          "name": "GetCurrentDirectoryA",
+          "hint": 301,
+          "iat_va": "0x4300b8"
+        },
+        {
+          "name": "GetSystemInfo",
+          "hint": 424,
+          "iat_va": "0x4300bc"
+        },
+        {
+          "name": "DeleteFileA",
+          "hint": 120,
+          "iat_va": "0x4300c0"
+        },
+        {
+          "name": "GetFileSize",
+          "hint": 333,
+          "iat_va": "0x4300c4"
+        },
+        {
+          "name": "OpenFile",
+          "hint": 602,
+          "iat_va": "0x4300c8"
+        },
+        {
+          "name": "WritePrivateProfileStructA",
+          "hint": 893,
+          "iat_va": "0x4300cc"
+        },
+        {
+          "name": "ReadFile",
+          "hint": 656,
+          "iat_va": "0x4300d0"
+        },
+        {
+          "name": "GetPrivateProfileStringA",
+          "hint": 389,
+          "iat_va": "0x4300d4"
+        },
+        {
+          "name": "WritePrivateProfileStringA",
+          "hint": 891,
+          "iat_va": "0x4300d8"
+        },
+        {
+          "name": "lstrcpyA",
+          "hint": 920,
+          "iat_va": "0x4300dc"
+        },
+        {
+          "name": "GetACP",
+          "hint": 235,
+          "iat_va": "0x4300e0"
+        },
+        {
+          "name": "GetStringTypeW",
+          "hint": 418,
+          "iat_va": "0x4300e4"
+        },
+        {
+          "name": "MultiByteToWideChar",
+          "hint": 593,
+          "iat_va": "0x4300e8"
+        },
+        {
+          "name": "GetStringTypeA",
+          "hint": 415,
+          "iat_va": "0x4300ec"
+        },
+        {
+          "name": "SetStdHandle",
+          "hint": 780,
+          "iat_va": "0x4300f0"
+        },
+        {
+          "name": "CreateFileA",
+          "hint": 74,
+          "iat_va": "0x4300f4"
+        },
+        {
+          "name": "GetEnvironmentStringsW",
+          "hint": 321,
+          "iat_va": "0x4300f8"
+        },
+        {
+          "name": "WideCharToMultiByte",
+          "hint": 873,
+          "iat_va": "0x4300fc"
+        },
+        {
+          "name": "FreeEnvironmentStringsW",
+          "hint": 228,
+          "iat_va": "0x430100"
+        },
+        {
+          "name": "GetEnvironmentStrings",
+          "hint": 319,
+          "iat_va": "0x430104"
+        },
+        {
+          "name": "FreeEnvironmentStringsA",
+          "hint": 227,
+          "iat_va": "0x430108"
+        },
+        {
+          "name": "UnhandledExceptionFilter",
+          "hint": 834,
+          "iat_va": "0x43010c"
+        },
+        {
+          "name": "GetModuleFileNameA",
+          "hint": 357,
+          "iat_va": "0x430110"
+        },
+        {
+          "name": "FlushFileBuffers",
+          "hint": 219,
+          "iat_va": "0x430114"
+        },
+        {
+          "name": "SetFilePointer",
+          "hint": 753,
+          "iat_va": "0x430118"
+        },
+        {
+          "name": "GetFileType",
+          "hint": 336,
+          "iat_va": "0x43011c"
+        },
+        {
+          "name": "GetStdHandle",
+          "hint": 414,
+          "iat_va": "0x430120"
+        },
+        {
+          "name": "SetHandleCount",
+          "hint": 762,
+          "iat_va": "0x430124"
+        },
+        {
+          "name": "WriteFile",
+          "hint": 886,
+          "iat_va": "0x430128"
+        },
+        {
+          "name": "HeapCreate",
+          "hint": 497,
+          "iat_va": "0x43012c"
+        },
+        {
+          "name": "HeapDestroy",
+          "hint": 499,
+          "iat_va": "0x430130"
+        },
+        {
+          "name": "GetCurrentProcess",
+          "hint": 303,
+          "iat_va": "0x430134"
+        },
+        {
+          "name": "TerminateProcess",
+          "hint": 817,
+          "iat_va": "0x430138"
+        },
+        {
+          "name": "RtlUnwind",
+          "hint": 689,
+          "iat_va": "0x43013c"
+        },
+        {
+          "name": "ExitProcess",
+          "hint": 171,
+          "iat_va": "0x430140"
+        },
+        {
+          "name": "GetVersionExA",
+          "hint": 456,
+          "iat_va": "0x430144"
+        },
+        {
+          "name": "GetCommandLineA",
+          "hint": 253,
+          "iat_va": "0x430148"
+        },
+        {
+          "name": "GetStartupInfoA",
+          "hint": 412,
+          "iat_va": "0x43014c"
+        },
+        {
+          "name": "GetModuleHandleA",
+          "hint": 359,
+          "iat_va": "0x430150"
+        },
+        {
+          "name": "HeapReAlloc",
+          "hint": 505,
+          "iat_va": "0x430154"
+        },
+        {
+          "name": "HeapAlloc",
+          "hint": 495,
+          "iat_va": "0x430158"
+        },
+        {
+          "name": "HeapFree",
+          "hint": 501,
+          "iat_va": "0x43015c"
+        },
+        {
+          "name": "VirtualQuery",
+          "hint": 861,
+          "iat_va": "0x430160"
+        },
+        {
+          "name": "LCMapStringA",
+          "hint": 544,
+          "iat_va": "0x430164"
+        },
+        {
+          "name": "LCMapStringW",
+          "hint": 545,
+          "iat_va": "0x430168"
+        },
+        {
+          "name": "ResumeThread",
+          "hint": 684,
+          "iat_va": "0x43016c"
+        }
+      ]
+    },
+    {
+      "dll": "USER32.dll",
+      "original_first_thunk": "0x3e378",
+      "iat": "0x30188",
+      "symbols": [
+        {
+          "name": "DestroyWindow",
+          "hint": 153,
+          "iat_va": "0x430188"
+        },
+        {
+          "name": "ClientToScreen",
+          "hint": 64,
+          "iat_va": "0x43018c"
+        },
+        {
+          "name": "EndPaint",
+          "hint": 200,
+          "iat_va": "0x430190"
+        },
+        {
+          "name": "SetWindowTextA",
+          "hint": 646,
+          "iat_va": "0x430194"
+        },
+        {
+          "name": "GetMessageA",
+          "hint": 314,
+          "iat_va": "0x430198"
+        },
+        {
+          "name": "LoadIconA",
+          "hint": 443,
+          "iat_va": "0x43019c"
+        },
+        {
+          "name": "FindWindowExA",
+          "hint": 228,
+          "iat_va": "0x4301a0"
+        },
+        {
+          "name": "GetClientRect",
+          "hint": 255,
+          "iat_va": "0x4301a4"
+        },
+        {
+          "name": "MessageBoxA",
+          "hint": 476,
+          "iat_va": "0x4301a8"
+        },
+        {
+          "name": "EnableMenuItem",
+          "hint": 194,
+          "iat_va": "0x4301ac"
+        },
+        {
+          "name": "GetMenu",
+          "hint": 300,
+          "iat_va": "0x4301b0"
+        },
+        {
+          "name": "GetWindowRect",
+          "hint": 372,
+          "iat_va": "0x4301b4"
+        },
+        {
+          "name": "InsertMenuItemA",
+          "hint": 398,
+          "iat_va": "0x4301b8"
+        },
+        {
+          "name": "RegisterClassExA",
+          "hint": 535,
+          "iat_va": "0x4301bc"
+        },
+        {
+          "name": "LoadStringA",
+          "hint": 456,
+          "iat_va": "0x4301c0"
+        },
+        {
+          "name": "PostQuitMessage",
+          "hint": 513,
+          "iat_va": "0x4301c4"
+        },
+        {
+          "name": "SetFocus",
+          "hint": 598,
+          "iat_va": "0x4301c8"
+        },
+        {
+          "name": "BeginPaint",
+          "hint": 13,
+          "iat_va": "0x4301cc"
+        },
+        {
+          "name": "GetDC",
+          "hint": 268,
+          "iat_va": "0x4301d0"
+        },
+        {
+          "name": "TranslateMessage",
+          "hint": 682,
+          "iat_va": "0x4301d4"
+        },
+        {
+          "name": "TrackPopupMenuEx",
+          "hint": 677,
+          "iat_va": "0x4301d8"
+        },
+        {
+          "name": "CheckMenuRadioItem",
+          "hint": 58,
+          "iat_va": "0x4301dc"
+        },
+        {
+          "name": "InvalidateRect",
+          "hint": 403,
+          "iat_va": "0x4301e0"
+        },
+        {
+          "name": "CreateWindowExA",
+          "hint": 96,
+          "iat_va": "0x4301e4"
+        },
+        {
+          "name": "TranslateAcceleratorA",
+          "hint": 679,
+          "iat_va": "0x4301e8"
+        },
+        {
+          "name": "EndDialog",
+          "hint": 198,
+          "iat_va": "0x4301ec"
+        },
+        {
+          "name": "DefWindowProcA",
+          "hint": 142,
+          "iat_va": "0x4301f0"
+        },
+        {
+          "name": "SetWindowPos",
+          "hint": 643,
+          "iat_va": "0x4301f4"
+        },
+        {
+          "name": "GetMenuItemInfoA",
+          "hint": 308,
+          "iat_va": "0x4301f8"
+        },
+        {
+          "name": "LoadAcceleratorsA",
+          "hint": 435,
+          "iat_va": "0x4301fc"
+        },
+        {
+          "name": "ShowWindow",
+          "hint": 658,
+          "iat_va": "0x430200"
+        },
+        {
+          "name": "CreatePopupMenu",
+          "hint": 94,
+          "iat_va": "0x430204"
+        },
+        {
+          "name": "DrawMenuBar",
+          "hint": 184,
+          "iat_va": "0x430208"
+        },
+        {
+          "name": "DispatchMessageA",
+          "hint": 161,
+          "iat_va": "0x43020c"
+        },
+        {
+          "name": "LoadImageA",
+          "hint": 445,
+          "iat_va": "0x430210"
+        },
+        {
+          "name": "UpdateWindow",
+          "hint": 699,
+          "iat_va": "0x430214"
+        },
+        {
+          "name": "EnableWindow",
+          "hint": 196,
+          "iat_va": "0x430218"
+        },
+        {
+          "name": "AdjustWindowRect",
+          "hint": 1,
+          "iat_va": "0x43021c"
+        },
+        {
+          "name": "DestroyMenu",
+          "hint": 151,
+          "iat_va": "0x430220"
+        },
+        {
+          "name": "LoadCursorA",
+          "hint": 439,
+          "iat_va": "0x430224"
+        },
+        {
+          "name": "DialogBoxParamA",
+          "hint": 158,
+          "iat_va": "0x430228"
+        },
+        {
+          "name": "CheckMenuItem",
+          "hint": 57,
+          "iat_va": "0x43022c"
+        },
+        {
+          "name": "GetWindow",
+          "hint": 362,
+          "iat_va": "0x430230"
+        },
+        {
+          "name": "MoveWindow",
+          "hint": 489,
+          "iat_va": "0x430234"
+        },
+        {
+          "name": "SendMessageA",
+          "hint": 571,
+          "iat_va": "0x430238"
+        },
+        {
+          "name": "ReleaseDC",
+          "hint": 554,
+          "iat_va": "0x43023c"
+        }
+      ]
+    },
+    {
+      "dll": "GDI32.dll",
+      "original_first_thunk": "0x3e200",
+      "iat": "0x30010",
+      "symbols": [
+        {
+          "name": "SetPixelV",
+          "hint": 561,
+          "iat_va": "0x430010"
+        },
+        {
+          "name": "DeleteObject",
+          "hint": 143,
+          "iat_va": "0x430014"
+        },
+        {
+          "name": "GetPixel",
+          "hint": 412,
+          "iat_va": "0x430018"
+        }
+      ]
+    },
+    {
+      "dll": "comdlg32.dll",
+      "original_first_thunk": "0x3e43c",
+      "iat": "0x3024c",
+      "symbols": [
+        {
+          "name": "GetSaveFileNameA",
+          "hint": 11,
+          "iat_va": "0x43024c"
+        },
+        {
+          "name": "GetOpenFileNameA",
+          "hint": 9,
+          "iat_va": "0x430250"
+        }
+      ]
+    },
+    {
+      "dll": "SHELL32.dll",
+      "original_first_thunk": "0x3e364",
+      "iat": "0x30174",
+      "symbols": [
+        {
+          "name": "DragAcceptFiles",
+          "hint": 20,
+          "iat_va": "0x430174"
+        },
+        {
+          "name": "ShellExecuteA",
+          "hint": 152,
+          "iat_va": "0x430178"
+        },
+        {
+          "name": "DragQueryFileA",
+          "hint": 23,
+          "iat_va": "0x43017c"
+        },
+        {
+          "name": "DragFinish",
+          "hint": 21,
+          "iat_va": "0x430180"
+        }
+      ]
+    }
+  ],
+  "sdk_import_verification": {
+    "total": 143,
+    "all_hints_and_names_match": true,
+    "libraries": [
+      {
+        "dll": "COMCTL32.dll",
+        "library": "toolchains/vc7/platformsdk/lib/comctl32.lib",
+        "count": 3
+      },
+      {
+        "dll": "WINMM.dll",
+        "library": "toolchains/vc7/platformsdk/lib/winmm.lib",
+        "count": 1
+      },
+      {
+        "dll": "KERNEL32.dll",
+        "library": "toolchains/vc7/platformsdk/lib/kernel32.lib",
+        "count": 84
+      },
+      {
+        "dll": "USER32.dll",
+        "library": "toolchains/vc7/platformsdk/lib/user32.lib",
+        "count": 46
+      },
+      {
+        "dll": "GDI32.dll",
+        "library": "toolchains/vc7/platformsdk/lib/gdi32.lib",
+        "count": 3
+      },
+      {
+        "dll": "comdlg32.dll",
+        "library": "toolchains/vc7/platformsdk/lib/comdlg32.lib",
+        "count": 2
+      },
+      {
+        "dll": "SHELL32.dll",
+        "library": "toolchains/vc7/platformsdk/lib/shell32.lib",
+        "count": 4
+      }
+    ],
+    "ordinal17": {
+      "dll": "COMCTL32.dll",
+      "symbol": "_InitCommonControls@0",
+      "source": "toolchains/vc7/platformsdk/lib/comctl32.lib"
+    }
+  },
+  "external_import_reconstruction": {
+    "script": "scripts/build_nemu_imports.py",
+    "sources": [
+      "src/nemu64/imports/gs_dll.def",
+      "src/nemu64/imports/kailleraclient.def",
+      "src/nemu64/imports/kailleraclient_symbols.asm"
+    ],
+    "verification": {
+      "build_dir": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx",
+      "wine_prefix": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/wine",
+      "libraries": [
+        {
+          "path": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/kailleraclient.lib",
+          "dll": "kailleraclient.dll",
+          "imports": [
+            {
+              "name": "_kailleraChatSend@4",
+              "hint": 0
+            },
+            {
+              "name": "_kailleraEndGame@0",
+              "hint": 1
+            },
+            {
+              "name": "_kailleraGetVersion@4",
+              "hint": 2
+            },
+            {
+              "name": "_kailleraInit@0",
+              "hint": 3
+            },
+            {
+              "name": "_kailleraModifyPlayValues@8",
+              "hint": 4
+            },
+            {
+              "name": "_kailleraSelectServerDialog@4",
+              "hint": 5
+            },
+            {
+              "name": "_kailleraSetInfos@4",
+              "hint": 6
+            },
+            {
+              "name": "_kailleraShutdown@0",
+              "hint": 7
+            }
+          ],
+          "descriptor_compiler_id": "00041fe8",
+          "descriptor_objects": 3,
+          "contains_implementation": false
+        },
+        {
+          "path": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/gs_dll.lib",
+          "dll": "gs_dll.dll",
+          "imports": [
+            {
+              "name": "?GSConfigure@@YAXXZ",
+              "hint": 0
+            },
+            {
+              "name": "?GSInitialize@@YAXPAD00@Z",
+              "hint": 1
+            },
+            {
+              "name": "?GSUpdate@@YAXXZ",
+              "hint": 2
+            }
+          ],
+          "descriptor_compiler_id": "000420ff",
+          "descriptor_objects": 3,
+          "contains_implementation": false
+        }
+      ]
+    },
+    "probe": {
+      "rich": {
+        "offset": 128,
+        "xor_key": "8ee4da9f",
+        "checksum_valid": true,
+        "records": [
+          {
+            "comp_id": "001d24fa",
+            "product_id": 29,
+            "build": 9466,
+            "count": 2
+          },
+          {
+            "comp_id": "001c24fa",
+            "product_id": 28,
+            "build": 9466,
+            "count": 35
+          },
+          {
+            "comp_id": "004024fa",
+            "product_id": 64,
+            "build": 9466,
+            "count": 11
+          },
+          {
+            "comp_id": "00041fe8",
+            "product_id": 4,
+            "build": 8168,
+            "count": 2
+          },
+          {
+            "comp_id": "000420ff",
+            "product_id": 4,
+            "build": 8447,
+            "count": 2
+          },
+          {
+            "comp_id": "001923fa",
+            "product_id": 25,
+            "build": 9210,
+            "count": 5
+          },
+          {
+            "comp_id": "00010000",
+            "product_id": 1,
+            "build": 0,
+            "count": 58
+          },
+          {
+            "comp_id": "002c24fa",
+            "product_id": 44,
+            "build": 9466,
+            "count": 1
+          },
+          {
+            "comp_id": "003d24fa",
+            "product_id": 61,
+            "build": 9466,
+            "count": 1
+          }
+        ]
+      },
+      "imports": [
+        {
+          "dll": "gs_dll.dll",
+          "symbols": [
+            {
+              "name": "?GSInitialize@@YAXPAD00@Z",
+              "hint": 1
+            },
+            {
+              "name": "?GSUpdate@@YAXXZ",
+              "hint": 2
+            },
+            {
+              "name": "?GSConfigure@@YAXXZ",
+              "hint": 0
+            }
+          ]
+        },
+        {
+          "dll": "kailleraclient.dll",
+          "symbols": [
+            {
+              "name": "_kailleraShutdown@0",
+              "hint": 7
+            },
+            {
+              "name": "_kailleraEndGame@0",
+              "hint": 1
+            },
+            {
+              "name": "_kailleraSelectServerDialog@4",
+              "hint": 5
+            },
+            {
+              "name": "_kailleraSetInfos@4",
+              "hint": 6
+            },
+            {
+              "name": "_kailleraInit@0",
+              "hint": 3
+            },
+            {
+              "name": "_kailleraModifyPlayValues@8",
+              "hint": 4
+            }
+          ]
+        }
+      ]
+    },
+    "notes": [
+      "All eight Kaillera exports are declared, including unused ChatSend and GetVersion, to preserve alphabetical import hints0..7.",
+      "RTM LIB /DEF prepends a C underscore unless decorated names are recognized in an input COFF symbol table. The assembly helper consists entirely of PUBLIC absolute symbols, emitting no code or data; /DEF output contains no helper member.",
+      "DEF ordinals are omitted because these historical librarians otherwise generate ordinal imports; Nemu64 uses named imports.",
+      "The reconstruction script verifies every archive member is an import record or import/debug metadata and every generated name and hint.",
+      "No Kaillera or GameShark implementations are included in these import libraries."
+    ],
+    "rebuild_command": "python3 scripts/build_nemu_imports.py"
+  },
+  "probes": {
+    "probe.exe": {
+      "source": "#include <windows.h>\n#include <stdlib.h>\nint WINAPI WinMain(HINSTANCE h, HINSTANCE p, LPSTR c, int n) { return MessageBoxA(0,c,\"Probe\",0); }\n",
+      "section_alignment": 4096,
+      "file_alignment": 512,
+      "rich": {
+        "offset": 128,
+        "xor_key": "8ec3d305",
+        "checksum_valid": true,
+        "records": [
+          {
+            "comp_id": "001d24fa",
+            "product_id": 29,
+            "build": 9466,
+            "count": 2
+          },
+          {
+            "comp_id": "001c24fa",
+            "product_id": 28,
+            "build": 9466,
+            "count": 35
+          },
+          {
+            "comp_id": "004024fa",
+            "product_id": 64,
+            "build": 9466,
+            "count": 11
+          },
+          {
+            "comp_id": "001923fa",
+            "product_id": 25,
+            "build": 9210,
+            "count": 5
+          },
+          {
+            "comp_id": "00010000",
+            "product_id": 1,
+            "build": 0,
+            "count": 49
+          },
+          {
+            "comp_id": "002c24fa",
+            "product_id": 44,
+            "build": 9466,
+            "count": 1
+          },
+          {
+            "comp_id": "003d24fa",
+            "product_id": 61,
+            "build": 9466,
+            "count": 1
+          }
+        ]
+      }
+    },
+    "probe-win98.exe": {
+      "source": "#include <windows.h>\n#include <stdlib.h>\nint WINAPI WinMain(HINSTANCE h, HINSTANCE p, LPSTR c, int n) { return MessageBoxA(0,c,\"Probe\",0); }\n",
+      "section_alignment": 4096,
+      "file_alignment": 4096,
+      "rich": {
+        "offset": 128,
+        "xor_key": "8ec3d305",
+        "checksum_valid": true,
+        "records": [
+          {
+            "comp_id": "001d24fa",
+            "product_id": 29,
+            "build": 9466,
+            "count": 2
+          },
+          {
+            "comp_id": "001c24fa",
+            "product_id": 28,
+            "build": 9466,
+            "count": 35
+          },
+          {
+            "comp_id": "004024fa",
+            "product_id": 64,
+            "build": 9466,
+            "count": 11
+          },
+          {
+            "comp_id": "001923fa",
+            "product_id": 25,
+            "build": 9210,
+            "count": 5
+          },
+          {
+            "comp_id": "00010000",
+            "product_id": 1,
+            "build": 0,
+            "count": 49
+          },
+          {
+            "comp_id": "002c24fa",
+            "product_id": 44,
+            "build": 9466,
+            "count": 1
+          },
+          {
+            "comp_id": "003d24fa",
+            "product_id": 61,
+            "build": 9466,
+            "count": 1
+          }
+        ]
+      }
+    },
+    "importprobe.exe": {
+      "source": "#include <windows.h>\n__declspec(dllimport) void GSInitialize(char*,char*,char*);\n__declspec(dllimport) void GSConfigure();\n__declspec(dllimport) void GSUpdate();\nextern \"C\" {\n__declspec(dllimport) void __stdcall kailleraShutdown();\n__declspec(dllimport) void __stdcall kailleraEndGame();\n__declspec(dllimport) int __stdcall kailleraModifyPlayValues(void*,int);\n__declspec(dllimport) void __stdcall kailleraInit();\n__declspec(dllimport) void __stdcall kailleraSelectServerDialog(void*);\n__declspec(dllimport) void __stdcall kailleraSetInfos(void*);\n}\nint WINAPI WinMain(HINSTANCE h,HINSTANCE p,LPSTR c,int n) {\n GSInitialize(c,c,c); GSConfigure(); GSUpdate();\n kailleraShutdown(); kailleraEndGame(); kailleraModifyPlayValues(c,n);\n kailleraInit(); kailleraSelectServerDialog(0); kailleraSetInfos(0);\n return MessageBoxA(0,c,\"Probe\",0);\n}\n",
+      "section_alignment": 4096,
+      "file_alignment": 4096,
+      "rich": {
+        "offset": 128,
+        "xor_key": "8ee4da9f",
+        "checksum_valid": true,
+        "records": [
+          {
+            "comp_id": "001d24fa",
+            "product_id": 29,
+            "build": 9466,
+            "count": 2
+          },
+          {
+            "comp_id": "001c24fa",
+            "product_id": 28,
+            "build": 9466,
+            "count": 35
+          },
+          {
+            "comp_id": "004024fa",
+            "product_id": 64,
+            "build": 9466,
+            "count": 11
+          },
+          {
+            "comp_id": "00041fe8",
+            "product_id": 4,
+            "build": 8168,
+            "count": 2
+          },
+          {
+            "comp_id": "000420ff",
+            "product_id": 4,
+            "build": 8447,
+            "count": 2
+          },
+          {
+            "comp_id": "001923fa",
+            "product_id": 25,
+            "build": 9210,
+            "count": 5
+          },
+          {
+            "comp_id": "00010000",
+            "product_id": 1,
+            "build": 0,
+            "count": 58
+          },
+          {
+            "comp_id": "002c24fa",
+            "product_id": 44,
+            "build": 9466,
+            "count": 1
+          },
+          {
+            "comp_id": "003d24fa",
+            "product_id": 61,
+            "build": 9466,
+            "count": 1
+          }
+        ]
+      }
+    }
+  },
+  "surviving_strings": [
+    {
+      "va": "0x430288",
+      "value": " unzip 0.15 Copyright 1998 Gilles Vollant "
+    },
+    {
+      "va": "0x4302b8",
+      "value": " deflate 1.1.3 Copyright 1995-1998 Jean-loup Gailly "
+    },
+    {
+      "va": "0x4311e4",
+      "value": " inflate 1.1.3 Copyright 1995-1998 Mark Adler "
+    },
+    {
+      "va": "0x431f5c",
+      "value": "d:\\n64\\lastin.cic",
+      "meaning": "Application runtime file path, not a recovered source path"
+    }
+  ],
+  "metadata_scan": {
+    "range": "PE headers and program sections before file0x7a000; resources excluded",
+    "source_or_project_or_pdb_paths_found": false,
+    "retained_link_command_found": false,
+    "debug_directory_present": false,
+    "incremental_heap_residue_found": false,
+    "file_section_alignment_padding": "All2035 text,200 rdata and1208 resource padding bytes are zero. No GS-style leaked linker heap was found."
+  },
+  "build_script": "scripts/build_nemu.py",
+  "integration_validation": {
+    "command": "python3 scripts/build_nemu.py --work /root/.ai-tmp/nemu-build-investigate.ULGEobKx",
+    "build_report": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/build.json",
+    "status": "All current source units and resources compile; linking awaits reconstructed routines/globals.",
+    "application_units_compiled": 12,
+    "vendor_units_compiled": 14,
+    "import_library_validation": "passed",
+    "cic_resource_generation": "passed exact expected SHA256",
+    "cic_initialized_data_generation": "passed exact expected SHA256",
+    "resource_compilation": "passed",
+    "link_unresolved_externals": 48,
+    "link_log": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/logs/link.log",
+    "full_executable_match_claimed": false,
+    "note": "This is a snapshot while other source units are being reconstructed; current symbols may have advanced since the recorded build."
+  }
+}
