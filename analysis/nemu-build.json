@@ -1964,7 +1964,7 @@
   "build_script": "scripts/build_nemu.py",
   "integration_validation": {
     "command": "python3 scripts/build_nemu.py --work /root/.ai-tmp/nemu-build-investigate.ULGEobKx --ordered-libraries --function-order /root/.ai-tmp/nemu-build-investigate.ULGEobKx/application.order --stage-storage",
-    "build_report": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/8ea38c74e51bd11f400767ac4ddfc7357e5af407e4502d5ef3e9962e29032830/build.json",
+    "build_report": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/5d7b30487b460005452b71de72aa71304a8b49f900fbe2fd068e4d29f707e06f/build.json",
     "status": "All current real source units compile and link successfully; full executable bytes differ.",
     "application_units_compiled": 21,
     "application_units": [
@@ -1978,10 +1978,10 @@
       "Memory.cpp",
       "Plugins.cpp",
       "State.cpp",
-      "RomBrowser.cpp",
       "WinMain.cpp",
       "FrontendIni.cpp",
       "Rom.cpp",
+      "RomBrowser.cpp",
       "NemuInitializedStorage.cpp",
       "RuntimeSignatures.cpp",
       "PIF.cpp",
@@ -1997,15 +1997,15 @@
     "resource_compilation": "passed",
     "link_unresolved_externals": 0,
     "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
-    "rebuilt_sha256": "8ea38c74e51bd11f400767ac4ddfc7357e5af407e4502d5ef3e9962e29032830",
+    "rebuilt_sha256": "5d7b30487b460005452b71de72aa71304a8b49f900fbe2fd068e4d29f707e06f",
     "original_file_bytes": 4796416,
     "rebuilt_file_bytes": 4796416,
-    "differing_file_bytes": 196303,
+    "differing_file_bytes": 185798,
     "resource_payloads_equal": true,
     "resource_payload_count": 29,
     "full_executable_match_claimed": false,
-    "immutable_source_and_object_snapshot": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/8ea38c74e51bd11f400767ac4ddfc7357e5af407e4502d5ef3e9962e29032830",
-    "relocation_diagnostic": "/root/.ai-tmp/nemu-complete-relocs.qj3p8i4s",
+    "immutable_source_and_object_snapshot": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/5d7b30487b460005452b71de72aa71304a8b49f900fbe2fd068e4d29f707e06f",
+    "relocation_diagnostic": "/root/.ai-tmp/nemu-complete-relocs.q7uf3wsx",
     "relocation_diagnostic_preserves_all_existing_section_bytes": true,
     "note": "Raw whole-file comparison includes all code, data, resources, padding and metadata. No bytes are restored or patched. Diagnostic /FIXED:NO adds relocation records for independent operand comparison; it is not the intended original output.",
     "function_order": {
@@ -2029,6 +2029,7 @@
       "inferred_retained_zero_ranges": 12,
       "inferred_retained_zero_bytes": 4213360,
       "exact_section_layouts": [
+        ".rdata",
         ".data",
         ".rsrc"
       ],
@@ -2038,10 +2039,17 @@
       "position_invariance_evidence": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/storage-order-invariance.json"
     },
     "section_differing_bytes": {
-      ".text": 180716,
-      ".rdata": 14224,
+      ".text": 180726,
+      ".rdata": 3711,
       ".data": 1237,
       ".rsrc": 0
+    },
+    "readonly_input_grouping_evidence": {
+      "frontend": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/frontend-promotion.json",
+      "cache": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/cache-invariance.json",
+      "unique_application_literal_addresses_exact": 484,
+      "unique_application_literals_checked": 499,
+      "limitation": "Inferred coherent translation-unit grouping preserves reconstructed bodies; original filenames were not retained."
     }
   },
   "native_library_ordering": {

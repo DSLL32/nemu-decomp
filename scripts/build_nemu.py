@@ -31,8 +31,8 @@ SOURCE = ROOT / 'src/nemu64'
 APPLICATION_ORDER = [
     'RSP.cpp', 'Dynarec.cpp', 'CPU.cpp', 'DynarecOpcodes.cpp',
     'DynarecMemoryOps.cpp', 'DynarecFPU.cpp', 'CpuControl.cpp', 'Memory.cpp',
-    'Plugins.cpp', 'State.cpp', 'RomBrowser.cpp', 'WinMain.cpp',
-    'FrontendIni.cpp', 'Rom.cpp', 'RuntimeSignatures.cpp', 'PIF.cpp',
+    'Plugins.cpp', 'State.cpp', 'WinMain.cpp',
+    'FrontendIni.cpp', 'Rom.cpp', 'RomBrowser.cpp', 'RuntimeSignatures.cpp', 'PIF.cpp',
     'Globals.cpp', 'LegacyData.cpp', 'ByteSwap.c',
 ]
 
