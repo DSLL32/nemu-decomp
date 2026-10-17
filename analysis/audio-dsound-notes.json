@@ -48,7 +48,9 @@
         "LARGE_INTEGER versus __int64 counter/frequency declarations and /Zp4 do not resolve the frame difference.",
         "Two-DWORD counter structures accessed as signed 64-bit values do not alter the result.",
         "Original 0x100052aa contains a dead load of its local write cursor. Volatile local play/write cursors preserve that load and reduce differing bytes to 273, but still leave the wrong stack frame and other scheduling differences. This remains a probe.",
-        "/G5 increases differing non-relocation bytes to 614."
+        "/G5 increases differing non-relocation bytes to 614.",
+        "A separate float samples local, assigned from the signed cursor difference, restores the original 0x2c stack frame and exact x87 operation sequence. With volatile cursor locals this leaves 263 differing bytes, principally register/scheduling differences and branch-offset propagation; complete equality is not achieved.",
+        "Separate pending-byte and write-position locals, a copied length local, counter/frequency arrays, and relocating LastBlockLength assignment do not resolve the remaining differences. A double samples local or volatile LastBlockLength worsens the match."
       ]
     }
   },
@@ -69,6 +71,11 @@
     "/root/.ai-tmp/audio-dsound.6t4_1qa3/buffer-context.c": "f717eb46685ce6b014a240471c111f884d36574199ca8d38cc054d8b6793f711",
     "/root/.ai-tmp/audio-dsound.6t4_1qa3/error-probes.c": "94eefe5f7602d9fb9409499449ec1b84fb9acdd4267ce599450dd385599a12c1",
     "/root/.ai-tmp/audio-dsound.6t4_1qa3/error-varargs.c": "bd25a295a4cbc430884b52dc0c9c91bca498151f3365cda77ffac456b1cb1df1",
-    "/root/.ai-tmp/audio-dsound.6t4_1qa3/submit-probes.c": "8b41968275064d932cdeb1fdb54865493b094d99c7a6657b3d3fa71176ef6791"
+    "/root/.ai-tmp/audio-dsound.6t4_1qa3/submit-probes.c": "8b41968275064d932cdeb1fdb54865493b094d99c7a6657b3d3fa71176ef6791",
+    "/root/.ai-tmp/audio-dsound.6t4_1qa3/submit-float-probes.c": "577f6177460ca1047d0fe9f4a9ef05dfb9593aa7331b0e203860780b37215ad0",
+    "/root/.ai-tmp/audio-dsound.6t4_1qa3/submit-float-signed.c": "0c6794083b593ec32b3963a042ea3dc32d5b79394a24a9c6805476326aa8c1d7",
+    "/root/.ai-tmp/audio-dsound.6t4_1qa3/submit-pending.c": "7807a5c02392ae2ef5240e4b0a3c82e495f742c18447ce498c0662b2e5eba894",
+    "/root/.ai-tmp/audio-dsound.6t4_1qa3/submit-pending-volatile.c": "8511678ec28489707a5c71a55d51589988080b5bee8619e372604913a811bb3d",
+    "/root/.ai-tmp/audio-dsound.6t4_1qa3/submit-order.c": "5b5057d81d8aee104d6752f216a6b566941a46ad750d405aba7541c2faccb440"
   }
 }
