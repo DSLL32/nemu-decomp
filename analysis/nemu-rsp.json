@@ -1733,6 +1733,39 @@
             "source_sha256": "02535a3eff3dc0e8a7cf235dbff3d686dfd9e4c4f0de474277ce62987dfd663c"
           }
         ]
+      },
+      {
+        "hypothesis": "Coherent volatile Instruction union view, or a whole volatile VCL high-bit local",
+        "result": "Rejected in five full-TU probes. Volatile Instruction regresses58 established functions (35/101 remain exact). Volatile high preserves the other93 but inhibits four-lane unrolling: VCL becomes a496-byte single-lane loop, with extra mandatory stack stores/loads absent from the original first lane. Current and closest near VCL source produce the same failure mode.",
+        "instruction_evidence": "Closest volatile-high candidate stores high to [esp+0x14] at function+0xe8, conditionally stores at+0x16f, then reloads at+0x173 and+0x186. Original first lane instead keeps high in EDI through its output flag shift.",
+        "report": "/root/.ai-tmp/nemu-rsp-volatile-opcode.qp0r1318/summary.json",
+        "fixtures": [
+          {
+            "name": "control",
+            "image_sha256": "5c0428b1e093835ff40d86fe852bc38dc27f3f2e69aa05092c9a8946a199f2f8",
+            "source_sha256": "5a3dfcc71492f763a563746595773d5fa3d9a41189b5536d22e0538452363b92"
+          },
+          {
+            "name": "opcode",
+            "image_sha256": "1e2f4c56c2c21f904c7e3d2a2aac09a8c91fb3e6dcac40d8b0109a27692f8830",
+            "source_sha256": "96162554cdafe70218f534b58fbe86a4499d1466cb04d43f2f3e45bfb2fe4b1a"
+          },
+          {
+            "name": "high-current",
+            "image_sha256": "c0c28c40277f429ae473e6356de0057609d2343348320c967d70150fc845c494",
+            "source_sha256": "0d74c8dce058e4b31a77fc7776895381038f8dd6d2a9fb4d7704735c499636c2"
+          },
+          {
+            "name": "near-control",
+            "image_sha256": "4d8e97eb93a5168a9499bba7ba71fb8e4011ee6472a474b9247453148449bc2b",
+            "source_sha256": "3f87bf4332b737751f9a4b967a604338084d9fbe02650484751ff96abd37d4a8"
+          },
+          {
+            "name": "high-near",
+            "image_sha256": "a7b2bf809a313de9956bfcc56fa24dae72f2614f5a5a776ec6e9ac9065038fa3",
+            "source_sha256": "ff5457e894685759f9742f5b8cb2a16b9a34fe53366b142102ae919f0bc7b88b"
+          }
+        ]
       }
     ],
     "variants": [
