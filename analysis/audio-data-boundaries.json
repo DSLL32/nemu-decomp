@@ -840,10 +840,12 @@
     "limits": [
       "Data order constrains initialized definitions, not by itself the source order of all functions.",
       "The ABI1/ABI2 variadic helper boundary is being verified by integration.",
-      "Shared inline function definitions may appear in multiple units and coalesce as COMDATs.",
-      "Current separate RSP kernel compilation reproduces some bodies better than a shared unit; the common-RSP hypothesis needs a source-visibility explanation."
+      "Shared helper definitions require real compiler/linker emission checks; an external definition plus an inline ANY COMDAT can produce a duplicate-symbol error.",
+      "The full fourteen-unit link and original runtime member selection remain to be verified."
     ],
-    "followup": "Audio integrator independently compiled the first five natural units: ABI1 27/28, ABI2 24/25, HLE10/11, ABI3 18/19, ABI4 18/18 extents match. All previously exact functions are preserved with ordinary shared inline helpers; the same four pre-existing code mismatches remain."
+    "initial_group_probe": "Audio integrator independently compiled the first five natural units: ABI1 27/28, ABI2 24/25, HLE10/11, ABI3 18/19, ABI4 18/18 extents match. All previously exact functions were preserved; four source mismatches remained at that checkpoint.",
+    "followup": "All100 complete first-band instruction spans now match in a fresh common-unit diagnostic, with88 independently identified relocation matches and12 retaining inferred globals. Physical five-unit helper emission remains under integration.",
+    "rsp_grouping_resolution": "Commit b5c61b7 reconstructs one RSP.cpp unit with a natural20-byte instruction/comparison/flag control aggregate. All180 prior function hashes are preserved,148 original spans match,29 typed objects match, and the retained2176-byte header table immediately precedes the guest program. This resolves the former separate-kernel visibility conflict; see analysis/audio-rsp-organization.json."
   },
   "frozen_inputs": [
     {
