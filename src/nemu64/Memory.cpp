@@ -551,52 +551,55 @@ void __stdcall WritePhysicalWord(unsigned address, unsigned value)
             unsigned dram = SPReg.DramAddress & 0xffffff;
             unsigned task = ReadPhysicalWord(dram);
             unsigned length = (SPReg.ReadLength & 0xff8 | 7) + 1;
-            if (dram + length >= RDRAMSize) {
-                ReportCPUError("Error: Start+Size of sp dma not in rdram");
-                return;
-            }
-            bool forceLowLevel = false;
-            if (CurrentRom.CRC1 == 0xaa18b1a5 && CurrentRom.CRC2 == 0x07db6aeb &&
-                ReadPhysicalWord(SPReg.DramAddress + 0x30) == 0)
-                forceLowLevel = true;
-            if (!forceLowLevel && SPReg.MemAddress == 0x04000fc0 &&
-                ((task == 1 && !CPU_DisableVideoHLE) ||
-                 (task == 2 && !CPU_DisableAudioHLE))) {
-                HLETaskActive = 1;
-                HLETaskAddress = SPReg.DramAddress;
-                memcpy(RSPShadowMemory + 0xfc0, RDRAM + dram, length);
-                return;
-            }
-            if (HLETaskActive) {
-                memcpy(RSPShadowMemory + (SPReg.MemAddress & 0x1fff), RDRAM + dram, length);
-                return;
-            }
-            unsigned count = (SPReg.ReadLength >> 12) & 0xff;
-            unsigned skip = SPReg.ReadLength >> 20;
-            unsigned sp = SPReg.MemAddress & 0x1fff;
-            for (unsigned block = 0; block <= count; ++block) {
-                if (sp + length > 0x2000 || dram + length > RDRAMSize) {
-                    ReportCPUError("SP DMA out of bounds");
+            if (dram + length < RDRAMSize) {
+                int forceLowLevel = 0;
+                if (CurrentRom.CRC1 == 0xaa18b1a5 && CurrentRom.CRC2 == 0x07db6aeb &&
+                    ReadPhysicalWord(SPReg.DramAddress + 0x30) == 0)
+                    forceLowLevel = 1;
+                if (!forceLowLevel && SPReg.MemAddress == 0x04000fc0 &&
+                    ((task == 1 && !CPU_DisableVideoHLE) ||
+                     (task == 2 && !CPU_DisableAudioHLE))) {
+                    HLETaskActive = 1;
+                    HLETaskAddress = SPReg.DramAddress;
+                    memcpy(RSPShadowMemory + 0xfc0, RDRAM + dram, length);
                     return;
                 }
-                CopyAndSwapWords(SPMemory + sp, RDRAM + dram, length);
-                dram += skip + length;
-                sp += length;
+                if (!HLETaskActive) {
+                    unsigned count = (SPReg.ReadLength >> 12) & 0xff;
+                    unsigned skip = SPReg.ReadLength >> 20;
+                    unsigned sp = SPReg.MemAddress & 0x1fff;
+                    for (unsigned block = 0; block <= count; ++block) {
+                        if (sp + length > 0x2000 || dram + length > RDRAMSize) {
+                            ReportCPUError("SP DMA out of bounds");
+                            return;
+                        }
+                        CopyAndSwapWords(SPMemory + sp, RDRAM + dram, length);
+                        dram += skip + length;
+                        sp += length;
+                    }
+                } else {
+                    memcpy(RSPShadowMemory + (SPReg.MemAddress & 0x1fff), RDRAM + dram, length);
+                }
+            } else {
+                ReportCPUError("Error: Start+Size of sp dma not in rdram");
             }
             return;
         }
         case 0x0404000c: {
             SPReg.WriteLength = value;
             unsigned length = (value & 0xff8 | 7) + 1;
-            unsigned count = ((value >> 12) & 0xff) + 1;
-            unsigned stride = (value >> 20) + length;
+            unsigned count = (value >> 12) & 0xff;
+            value >>= 20;
             unsigned dram = SPReg.DramAddress & 0xffffff;
             unsigned sp = SPReg.MemAddress & 0x1fff;
+            unsigned stride = value + length;
             InvalidateRecompiledRange(dram, stride * count);
+            unsigned char *source = SPMemory + sp;
+            ++count;
             do {
-                CopyAndSwapWords(RDRAM + dram, SPMemory + sp, length);
+                CopyAndSwapWords(RDRAM + dram, source, length);
                 dram += stride;
-                sp += length;
+                source += length;
             } while (--count);
             return;
         }
@@ -628,60 +631,60 @@ void __stdcall WritePhysicalWord(unsigned address, unsigned value)
             if (value & 0x1000000) SPReg.Status |=  0x4000;
             if (SPReg.Status & 1) return;
             CPU_RSPCycles = 3001;
-            if (!HLETaskActive) {
-                CPU_ActionFlags |= 0x4000;
-                return;
-            }
-            switch (ReadPhysicalWord(HLETaskAddress)) {
-            case 1: {
-                NotifyTools(4, 1);
-                __try {
-                    do {
-                        if (SelectedGraphicsPlugin->ProcessDList && !CPU_ForceCFB)
-                            SelectedGraphicsPlugin->ProcessDList();
-                        if (!ActivePause) break;
-                        if (CPU_ActionFlags & 0x200000) {
-                            if (SelectedGraphicsPlugin->UpdateScreen)
-                                SelectedGraphicsPlugin->UpdateScreen();
-                            Sleep(100);
-                        }
-                    } while (ActivePause && (CPU_ActionFlags & 0x200000));
-                } __except (EXCEPTION_EXECUTE_HANDLER) {
-                    ReportCPUError("The graphics plugin raised an exception. It might be incompatible with this game");
-                }
-                ++DisplayListCount;
-                if (DisplayListCount > 11) {
-                    DWORD now = timeGetTime();
-                    if (now != DisplayListLastTime && DisplayListLastTime) {
-                        char text[100];
-                        sprintf(text, "DL/s: %3.2f", 12.0f / ((float)(now - DisplayListLastTime) * 0.001f));
-                        if (!FullScreen) SetStatusText(2, text);
+            if (HLETaskActive) {
+                switch (ReadPhysicalWord(HLETaskAddress)) {
+                case 1: {
+                    NotifyTools(4, 1);
+                    __try {
+                        do {
+                            if (SelectedGraphicsPlugin->ProcessDList && !CPU_ForceCFB)
+                                SelectedGraphicsPlugin->ProcessDList();
+                            if (!ActivePause) break;
+                            if (CPU_ActionFlags & 0x200000) {
+                                if (SelectedGraphicsPlugin->UpdateScreen)
+                                    SelectedGraphicsPlugin->UpdateScreen();
+                                Sleep(100);
+                            }
+                        } while (ActivePause && (CPU_ActionFlags & 0x200000));
+                    } __except (EXCEPTION_EXECUTE_HANDLER) {
+                        ReportCPUError("The graphics plugin raised an exception. It might be incompatible with this game");
                     }
-                    DisplayListCount = 0;
-                    DisplayListLastTime = now;
+                    ++DisplayListCount;
+                    if (DisplayListCount >= 12) {
+                        DWORD now = timeGetTime();
+                        if (now != DisplayListLastTime && DisplayListLastTime) {
+                            char text[100];
+                            sprintf(text, "DL/s: %3.2f", 12.0f / ((float)(now - DisplayListLastTime) * 0.001f));
+                            if (!FullScreen) SetStatusText(2, text);
+                        }
+                        DisplayListLastTime = now;
+                        DisplayListCount = 0;
+                    }
+                    CPU_ActionFlags |= 0x20;
+                    NotifyTools(4, 0);
+                    break;
                 }
-                CPU_ActionFlags |= 0x20;
-                NotifyTools(4, 0);
-                break;
+                case 2:
+                    NotifyTools(8, 1);
+                    AUDList(HLETaskAddress);
+                    NotifyTools(8, 0);
+                    break;
+                case 4:
+                    NotifyTools(0x20, 1);
+                    NotifyTools(0x20, 0);
+                    break;
+                case 7:
+                    break;
+                default:
+                    ReportCPUError("Unhandled RCP List sent");
+                    break;
+                }
+                if (SPReg.Status & 0x40) CPU_ActionFlags |= 8;
+                SPReg.Status |= 0x201;
+                HLETaskActive = 0;
+            } else {
+                CPU_ActionFlags |= 0x4000;
             }
-            case 2:
-                NotifyTools(8, 1);
-                AUDList(HLETaskAddress);
-                NotifyTools(8, 0);
-                break;
-            case 4:
-                NotifyTools(0x20, 1);
-                NotifyTools(0x20, 0);
-                break;
-            case 7:
-                break;
-            default:
-                ReportCPUError("Unhandled RCP List sent");
-                break;
-            }
-            if (SPReg.Status & 0x40) CPU_ActionFlags |= 8;
-            SPReg.Status |= 0x201;
-            HLETaskActive = 0;
             return;
         case 0x0404001c:
             if (!value) SPReg.Semaphore = 0;
@@ -691,7 +694,8 @@ void __stdcall WritePhysicalWord(unsigned address, unsigned value)
     if (address == 0x04080000) { SPReg.PC = value & 0xfff; return; }
     if (address == 0x04080004) { SPReg.Bist = value; return; }
     if (address >= 0x04300000 && address <= 0x0430000c) {
-        if (address == 0x04300000) {
+        switch (address) {
+        case 0x04300000:
             MIReg.Mode ^= (MIReg.Mode ^ value) & 0x7f;
             if (value & 0x0080) MIReg.Mode &= ~0x080;
             if (value & 0x0100) MIReg.Mode |=  0x080;
@@ -701,8 +705,7 @@ void __stdcall WritePhysicalWord(unsigned address, unsigned value)
             if (value & 0x1000) MIReg.Mode &= ~0x200;
             if (value & 0x2000) MIReg.Mode |=  0x200;
             return;
-        }
-        if (address == 0x0430000c) {
+        case 0x0430000c:
             if (value & 0x001) MIReg.InterruptMask &= ~0x01;
             if (value & 0x002) MIReg.InterruptMask |=  0x01;
             if (value & 0x004) MIReg.InterruptMask &= ~0x02;
@@ -719,20 +722,25 @@ void __stdcall WritePhysicalWord(unsigned address, unsigned value)
         }
     }
     if (address >= 0x04500000 && address <= 0x04500014) {
-        if (address == 0x04500004) {
-            if (!AIReg.Length) {
+        switch (address) {
+        case 0x04500004:
+            if (AIReg.Length) {
+                AIReg.NextLength = value & 0x3ffff;
+                AIReg.Status |= 0x80000000;
+            } else {
                 AIReg.Length = value & 0x3ffff;
                 UpdateAudioTiming();
                 AISetReg(0, 0);
-            } else {
-                AIReg.NextLength = value & 0x3ffff;
-                AIReg.Status |= 0x80000000;
             }
             return;
+        case 0x0450000c:
+            MIReg.Interrupt &= ~4;
+            AISetReg(0x0450000c, value);
+            return;
+        default:
+            AISetReg(address, value);
+            return;
         }
-        if (address == 0x0450000c) MIReg.Interrupt &= ~4;
-        AISetReg(address, value);
-        return;
     }
     if (address >= 0x04400000 && address <= 0x04400034) {
         switch (address) {
@@ -782,20 +790,23 @@ void __stdcall WritePhysicalWord(unsigned address, unsigned value)
         switch (address) {
         case 0x04600000: PIReg.DramAddress = value & 0xfffffffc; return;
         case 0x04600004: PIReg.CartAddress = value & 0xfffffffe; return;
-        case 0x04600008:
+        case 0x04600008: {
             PIReg.ReadLength = value;
+            unsigned length = (value + 1) & 0xffffff;
+            unsigned dram = PIReg.DramAddress;
             if (PIReg.CartAddress >= 0x08000000 && PIReg.CartAddress <= 0x0803ffff) {
                 unsigned offset = (PIReg.CartAddress & 0xfffffffe) - 0x08000000;
                 if (offset < 0x20000 && FlashEnabled)
-                    FlashRamAddress = PIReg.DramAddress;
+                    FlashRamAddress = dram;
                 else
-                    WriteSRAM(offset, RDRAM + PIReg.DramAddress, (value + 1) & 0xffffff);
+                    WriteSRAM(offset, RDRAM + dram, length);
                 CPU_ActionFlags |= 4;
             } else {
                 ReportMemoryError("PI read (rdram to unhandled memory): ", PIReg.CartAddress);
                 CPU_ActionFlags |= 4;
             }
             return;
+        }
         case 0x0460000c: {
             PIReg.WriteLength = value;
             unsigned length = (value + 1) & 0xffffff;
@@ -803,29 +814,28 @@ void __stdcall WritePhysicalWord(unsigned address, unsigned value)
             if (dram + length >= RDRAMSize - 1)
                 length = RDRAMSize - 1 - dram;
             InvalidateRecompiledRange(dram, length);
-            unsigned cart = PIReg.CartAddress;
-            if (cart >= 0x10000000 && cart <= 0x1fbfffff) {
-                cart -= 0x10000000;
+            if (PIReg.CartAddress >= 0x10000000 && PIReg.CartAddress <= 0x1fbfffff) {
+                unsigned cart = PIReg.CartAddress - 0x10000000;
                 if (cart + length > ROMSize) {
                     if (cart >= ROMSize) return;
                     length = ROMSize - 1 - cart;
                 }
                 CopyByteSwapped(RDRAM + dram, ROMImage + cart, length);
                 if (Dynarec_Mode == 0 || Dynarec_Mode == 5) {
-                    unsigned first = dram & 0xfffff000;
-                    unsigned size = ((dram + length) | 0xfff) - first + 1;
-                    memset(Dynarec_BlockCode + (first >> 2), 0, size);
+                    memset(Dynarec_BlockCode + ((dram >> 2) & 0x3ffffc00), 0,
+                        ((dram + length) | 0xfff) - (dram & 0xfffff000) + 1);
                 }
-            } else if (cart >= 0x08000000 && cart <= 0x0803ffff) {
-                ReadSRAM(RDRAM + dram, cart - 0x08000000, length);
-                if (FlashEnabled && cart == 0x08000000 && FlashCommand != 0xf0000000) {
+            } else if (PIReg.CartAddress >= 0x08000000 && PIReg.CartAddress <= 0x0803ffff) {
+                unsigned offset = PIReg.CartAddress - 0x08000000;
+                ReadSRAM(RDRAM + dram, offset, length);
+                if (FlashEnabled && offset == 0 && FlashCommand != 0xf0000000) {
                     *(unsigned *)(RDRAM + dram) = FlashStatus;
                     *(unsigned *)(RDRAM + dram + 4) = 0x00c2001d;
                 }
-            } else if (cart < RDRAMSize) {
-                CopyByteSwapped(RDRAM + dram, RDRAM + cart, length);
+            } else if (PIReg.CartAddress < RDRAMSize) {
+                CopyByteSwapped(RDRAM + dram, RDRAM + PIReg.CartAddress, length);
             } else {
-                ReportMemoryError("PI write (unhandled cart memory to rdram): ", cart);
+                ReportMemoryError("PI write (unhandled cart memory to rdram): ", PIReg.CartAddress);
             }
             CPU_ActionFlags |= 4;
             return;
@@ -861,12 +871,12 @@ void __stdcall WritePhysicalWord(unsigned address, unsigned value)
         }
     }
     if (address >= 0x04100000 && address <= 0x0410001c) {
-        if (address == 0x04100000) {
+        switch (address) {
+        case 0x04100000:
             DPCReg.Start = value & 0xffffff;
             DPCReg.Current = value & 0xffffff;
             return;
-        }
-        if (address == 0x04100004) {
+        case 0x04100004: {
             DPCReg.End = value & 0xffffff;
             while (DPCReg.Current < DPCReg.End) {
                 unsigned first, second;
@@ -888,7 +898,7 @@ void __stdcall WritePhysicalWord(unsigned address, unsigned value)
             }
             return;
         }
-        if (address == 0x0410000c) {
+        case 0x0410000c:
             if (value & 0x001) DPCReg.Status &= ~1;
             if (value & 0x002) DPCReg.Status |= 1;
             if (value & 0x004) DPCReg.Status &= ~2;
@@ -914,16 +924,19 @@ void __stdcall WritePhysicalWord(unsigned address, unsigned value)
         if (value == 0xf0000000) FlashCommand = value;
         if ((value & 0xff000000) == 0x78000000) FlashStatus = 0x00080008;
         if ((value & 0xff000000) == 0xa5000000) {
-            WriteSRAM((value & 0xffff) << 7, RDRAM + FlashRamAddress, 128);
+            value = (value & 0xffff) << 7;
+            WriteSRAM(value, RDRAM + FlashRamAddress, 128);
             FlashStatus = 0x00040004;
         }
         return;
     }
     if (address >= 0x10000000 && address <= 0x1fbfffff && AllowRomWrites) {
-        if (address - 0x10000000 < ROMSize)
-            *(unsigned *)(ROMImage + address - 0x10000000) = value;
-        if (address - 0x13fcb4d0 < ROMSize)
-            *(unsigned *)(ROMImage + address - 0x13fcb4d0) = value;
+        unsigned offset = address - 0x10000000;
+        if (offset < ROMSize)
+            *(unsigned *)(ROMImage + offset) = value;
+        offset = address - 0x13fcb4d0;
+        if (offset < ROMSize)
+            *(unsigned *)(ROMImage + offset) = value;
     } else if (address >= RDRAMSize + 0x400000) {
         ReadError = 1;
         ReportMemoryError("Trying to Write32 to unhandled or invalid memory", address);

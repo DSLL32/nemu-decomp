@@ -1,0 +1,4974 @@
+{
+  "status": "reconstruction_in_progress_not_byte_exact",
+  "original_file": "master/nemu64.exe",
+  "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+  "source_files": [
+    "src/nemu64/Memory.cpp",
+    "src/nemu64/Memory.h",
+    "src/nemu64/ByteSwap.c"
+  ],
+  "limitations": [
+    "C++ identifiers and source unit names inferred from behavior; original errors identify ua_memcpy and TLBWI.",
+    "LTCG changes internal calling conventions. Non-LTCG COFF comparisons are diagnostic and do not establish whole-executable byte equality.",
+    "Link spans include jump tables, exception handlers and alignment. Ghidra reachable-byte counts omit some of these."
+  ],
+  "functions": [
+    {
+      "name": "CopyByteSwapped",
+      "va": 4286976,
+      "end_va_exclusive": 4287328,
+      "link_span": 352,
+      "calling_convention_evidence": "custom LTCG: length EAX, destination EDX, source stack",
+      "source_file": "src/nemu64/Memory.cpp",
+      "size": 352,
+      "extent_evidence": "Original contiguous function/link boundary, including internal handlers, tables and alignment."
+    },
+    {
+      "name": "TLBRead",
+      "va": 4287328,
+      "end_va_exclusive": 4287424,
+      "link_span": 96,
+      "calling_convention_evidence": "no arguments",
+      "source_file": "src/nemu64/Memory.cpp",
+      "size": 96,
+      "extent_evidence": "Original contiguous function/link boundary, including internal handlers, tables and alignment."
+    },
+    {
+      "name": "TLBWrite",
+      "va": 4287424,
+      "end_va_exclusive": 4288160,
+      "link_span": 736,
+      "calling_convention_evidence": "stdcall, index stack",
+      "source_file": "src/nemu64/Memory.cpp",
+      "size": 736,
+      "extent_evidence": "Original contiguous function/link boundary, including internal handlers, tables and alignment."
+    },
+    {
+      "name": "TLBProbe",
+      "va": 4288160,
+      "end_va_exclusive": 4288256,
+      "link_span": 96,
+      "calling_convention_evidence": "no arguments",
+      "source_file": "src/nemu64/Memory.cpp",
+      "size": 96,
+      "extent_evidence": "Original contiguous function/link boundary, including internal handlers, tables and alignment."
+    },
+    {
+      "name": "CopyAndSwapWords",
+      "va": 4288256,
+      "end_va_exclusive": 4288304,
+      "link_span": 48,
+      "calling_convention_evidence": "cdecl",
+      "source_file": "src/nemu64/ByteSwap.c",
+      "size": 48,
+      "extent_evidence": "Original contiguous function/link boundary, including internal handlers, tables and alignment."
+    },
+    {
+      "name": "InvalidateRecompiledRange",
+      "va": 4288304,
+      "end_va_exclusive": 4288400,
+      "link_span": 96,
+      "calling_convention_evidence": "custom LTCG: address EAX, length stack",
+      "source_file": "src/nemu64/Memory.cpp",
+      "size": 96,
+      "extent_evidence": "Original contiguous function/link boundary, including internal handlers, tables and alignment."
+    },
+    {
+      "name": "ReadPhysicalByte",
+      "va": 4288400,
+      "end_va_exclusive": 4288608,
+      "link_span": 208,
+      "calling_convention_evidence": "stdcall",
+      "source_file": "src/nemu64/Memory.cpp",
+      "size": 208,
+      "extent_evidence": "Original contiguous function/link boundary, including internal handlers, tables and alignment."
+    },
+    {
+      "name": "ReadPhysicalHalf",
+      "va": 4288608,
+      "end_va_exclusive": 4288896,
+      "link_span": 288,
+      "calling_convention_evidence": "stdcall",
+      "source_file": "src/nemu64/Memory.cpp",
+      "size": 288,
+      "extent_evidence": "Original contiguous function/link boundary, including internal handlers, tables and alignment."
+    },
+    {
+      "name": "ReadPhysicalWord",
+      "va": 4288896,
+      "end_va_exclusive": 4291088,
+      "link_span": 2192,
+      "calling_convention_evidence": "stdcall",
+      "source_file": "src/nemu64/Memory.cpp",
+      "size": 2192,
+      "extent_evidence": "Original contiguous function/link boundary, including internal handlers, tables and alignment."
+    },
+    {
+      "name": "WritePhysicalByte",
+      "va": 4291088,
+      "end_va_exclusive": 4291376,
+      "link_span": 288,
+      "calling_convention_evidence": "stdcall, unsigned32 address and unsigned char value. Narrow formals reproduce the CPU SB/SH XOR-plus-MOV CL/CX argument setup and exact setter bodies. CPUHostException also pushes its complete context DWORD with narrow formals when the source omits an explicit narrowing cast; full-DWORD pushes alone do not establish a wide formal type.",
+      "source_file": "src/nemu64/Memory.cpp",
+      "size": 288,
+      "extent_evidence": "Original contiguous function/link boundary, including internal handlers, tables and alignment."
+    },
+    {
+      "name": "WritePhysicalHalf",
+      "va": 4291376,
+      "end_va_exclusive": 4291696,
+      "link_span": 320,
+      "calling_convention_evidence": "stdcall, unsigned32 address and unsigned short value. Narrow formals reproduce the CPU SB/SH XOR-plus-MOV CL/CX argument setup and exact setter bodies. CPUHostException also pushes its complete context DWORD with narrow formals when the source omits an explicit narrowing cast; full-DWORD pushes alone do not establish a wide formal type.",
+      "source_file": "src/nemu64/Memory.cpp",
+      "size": 320,
+      "extent_evidence": "Original contiguous function/link boundary, including internal handlers, tables and alignment."
+    },
+    {
+      "name": "WritePhysicalWord",
+      "va": 4291696,
+      "end_va_exclusive": 4298064,
+      "link_span": 6368,
+      "calling_convention_evidence": "stdcall",
+      "source_file": "src/nemu64/Memory.cpp",
+      "size": 6368,
+      "extent_evidence": "Original contiguous function/link boundary, including internal handlers, tables and alignment."
+    },
+    {
+      "name": "WritePhysicalDoubleWord",
+      "va": 4298064,
+      "end_va_exclusive": 4298112,
+      "link_span": 48,
+      "calling_convention_evidence": "stdcall, address, low word, high word; separate low/high parameters reproduce SD and SDC1 callers. SD uses an unsigned64 right shift (__aullshr); SDC1 directly passes the two FPR words.",
+      "source_file": "src/nemu64/Memory.cpp",
+      "size": 48,
+      "extent_evidence": "Original contiguous function/link boundary, including internal handlers, tables and alignment."
+    },
+    {
+      "name": "TranslateTLB",
+      "va": 4298112,
+      "end_va_exclusive": 4298400,
+      "link_span": 288,
+      "calling_convention_evidence": "stdcall, address and byte write flag in 4-byte stack slot",
+      "source_file": "src/nemu64/Memory.cpp",
+      "size": 288,
+      "extent_evidence": "Original contiguous function/link boundary, including internal handlers, tables and alignment."
+    }
+  ],
+  "globals": [
+    {
+      "name": "RDRAM",
+      "va": 65443156,
+      "type": "unsigned char *",
+      "size": 4,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "RDRAMSize",
+      "va": 65425000,
+      "type": "unsigned",
+      "size": 4,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "ROMImage",
+      "va": 65425340,
+      "type": "unsigned char *",
+      "size": 4,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "ROMSize",
+      "va": 65443088,
+      "type": "unsigned",
+      "size": 4,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "ReadError",
+      "va": 67547200,
+      "type": "int",
+      "size": 4,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "ShowErrors",
+      "va": 65424920,
+      "type": "int",
+      "size": 4,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "TranslationError",
+      "va": 65445904,
+      "type": "unsigned",
+      "size": 4,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "TLBAddress",
+      "va": 65445760,
+      "type": "unsigned",
+      "size": 4,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "TLBWriteAccess",
+      "va": 65425068,
+      "type": "unsigned",
+      "size": 4,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "TLBEnabled",
+      "va": 65443576,
+      "type": "int",
+      "size": 4,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "TLBRamMapped",
+      "va": 65443080,
+      "type": "int",
+      "size": 4,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "TLB",
+      "va": 65443584,
+      "type": "TLBEntry[32]",
+      "size": 2176,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "MIReg",
+      "va": 65443092,
+      "type": "MIRegisters",
+      "size": 12,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "AIReg",
+      "va": 65425032,
+      "type": "AIRegisters",
+      "size": 36,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "SPReg",
+      "va": 65443124,
+      "type": "SPRegisters",
+      "size": 32,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "VIReg",
+      "va": 65426184,
+      "type": "VIRegisters",
+      "size": 56,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "PIReg",
+      "va": 67543076,
+      "type": "PIRegisters",
+      "size": 52,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "RIReg",
+      "va": 67547168,
+      "type": "RIRegisters",
+      "size": 32,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "DPCReg",
+      "va": 67564256,
+      "type": "DPCRegisters",
+      "size": 32,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "RDRAMReg",
+      "va": 65425352,
+      "type": "RDRAMRegisters",
+      "size": 40,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "SIAddress",
+      "va": 65443116,
+      "type": "unsigned",
+      "size": 4,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "PIFRam",
+      "va": 65424928,
+      "type": "unsigned char[64]",
+      "size": 64,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "PIFRom",
+      "va": 67543128,
+      "type": "unsigned char[0x7c0]",
+      "size": 1984,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "RSPShadowMemory",
+      "va": 65426248,
+      "type": "unsigned char[0x2000]",
+      "size": 8192,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "FlashEnabled",
+      "va": 71877884,
+      "type": "unsigned",
+      "size": 4,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "FlashRamAddress",
+      "va": 71877888,
+      "type": "unsigned",
+      "size": 4,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "FlashStatus",
+      "va": 71877892,
+      "type": "unsigned",
+      "size": 4,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "FlashCommand",
+      "va": 72140040,
+      "type": "unsigned",
+      "size": 4,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "HLETaskActive",
+      "va": 65442648,
+      "type": "unsigned",
+      "size": 4,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "HLETaskAddress",
+      "va": 65443108,
+      "type": "unsigned",
+      "size": 4,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "VICurrentLine",
+      "va": 67543072,
+      "type": "unsigned",
+      "size": 4,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "RDPHistory",
+      "va": 65416728,
+      "type": "unsigned[2048]",
+      "size": 8192,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "RDPHistoryPosition",
+      "va": 65442640,
+      "type": "unsigned",
+      "size": 4,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "DisplayListCount",
+      "va": 67564312,
+      "type": "unsigned",
+      "size": 4,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "DisplayListLastTime",
+      "va": 67564304,
+      "type": "unsigned",
+      "size": 4,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    },
+    {
+      "name": "AllowRomWrites",
+      "va": 67564308,
+      "type": "bool",
+      "size": 1,
+      "declaration": "src/nemu64/Memory.h",
+      "current_definition": "src/nemu64/Memory.cpp",
+      "initializer_evidence": "Original location lies in zero-filled virtual .data beyond initialized raw bytes."
+    }
+  ],
+  "layout_notes": [
+    "TLBEntry is 68 bytes, with 17 unsigned fields in header order; all32 entries cover03E69700..03E69F7F.",
+    "AIReg has eight known registers and one unknown trailing DWORD, confirmed by CPU reset memset36 bytes.",
+    "RSPShadowMemory+0xFC0 holds the task structure; +0x1000 is plugin IMEM. Physical SPMemory[0x4000]@0406B048 is owned by RSP.cpp.",
+    "SRAMData[0x40000]@0448C508 is owned by PIF.cpp and ends exactly at FlashCommand.",
+    "TLBEnabled@03E696F8 is runtime activation, distinct from CPU_TLBEnabled configuration@03E69364.",
+    "RSPShadowMemory observed accesses establish0x2000 bytes only; no clear/sizeof or direct3E67348 reference establishes a larger allocation. The following unreferenced0x2000 interval remains unexplained."
+  ],
+  "notable_original_behaviors": [
+    "TLBRead masks Index to6bits for most accesses but uses unmasked Index in the PageMask complement access.",
+    "ROM byte/halfword reads apply an extra +2 for the upper half of a word.",
+    "Read32 has a second ROM mapping base13FCB4D0.",
+    "Unimplemented AI register reads return the supplied address.",
+    "RDRAM configuration reads shift the whole physical address by10 without masking; the resulting switch is unreachable for normal RDRAM-register addresses.",
+    "RAM write SEH catches a host page fault, invalidates/unprotects4 bytes, and retries the store."
+  ],
+  "verified_functions": {
+    "scope": "COFF function comparison; complete instruction bodies and alignment, with every recorded relocation target checked against independently recovered original symbols. This is not a linked-executable equality claim.",
+    "compiler": "VC7 13.00.9466, /O2 /ML /Gy; Memory.cpp /GL whole-program comparison remains required. ByteSwap.c is intentionally native C, without /GL.",
+    "source_sha256": {
+      "src/nemu64/Memory.cpp": "2727e5b81003fb9188946d60cc538273126aca287241c0bb81e38b8e995b43bd",
+      "src/nemu64/Memory.h": "d16ebdffdaf423d74a3f4269b0dc5dd038289420816ddc30a4303d8ebcec5e16",
+      "src/nemu64/ByteSwap.c": "52c57f81489f14d8d629ba0647ac7a7eaadb1d5fe82e1b1a1bcff0c172110c33"
+    },
+    "validated_functions": [
+      {
+        "name": "TLBRead",
+        "object": "Memory.obj",
+        "object_sha256": "7c3072930858f018606281f80c939924b494af796690dafe9b5b578bc6b2d2de",
+        "original_va": 4287328,
+        "instruction_body_bytes": 81,
+        "link_span_bytes": 96,
+        "nonrelocation_bytes_equal": true,
+        "all_recorded_relocation_targets_independently_validated": true,
+        "relocations": [
+          {
+            "offset": 2,
+            "symbol": "CPU_COP0",
+            "addend": 0,
+            "observed_target_va": 67563592,
+            "independent_expected_target_va": 67563592,
+            "equal": true
+          },
+          {
+            "offset": 13,
+            "symbol": "TLB",
+            "addend": 12,
+            "observed_target_va": 65443596,
+            "independent_expected_target_va": 65443596,
+            "equal": true
+          },
+          {
+            "offset": 25,
+            "symbol": "TLB",
+            "addend": 12,
+            "observed_target_va": 65443596,
+            "independent_expected_target_va": 65443596,
+            "equal": true
+          },
+          {
+            "offset": 31,
+            "symbol": "CPU_COP0",
+            "addend": 20,
+            "observed_target_va": 67563612,
+            "independent_expected_target_va": 67563612,
+            "equal": true
+          },
+          {
+            "offset": 37,
+            "symbol": "TLB",
+            "addend": 4,
+            "observed_target_va": 65443588,
+            "independent_expected_target_va": 65443588,
+            "equal": true
+          },
+          {
+            "offset": 47,
+            "symbol": "TLB",
+            "addend": 8,
+            "observed_target_va": 65443592,
+            "independent_expected_target_va": 65443592,
+            "equal": true
+          },
+          {
+            "offset": 53,
+            "symbol": "TLB",
+            "addend": 0,
+            "observed_target_va": 65443584,
+            "independent_expected_target_va": 65443584,
+            "equal": true
+          },
+          {
+            "offset": 65,
+            "symbol": "CPU_COP0",
+            "addend": 40,
+            "observed_target_va": 67563632,
+            "independent_expected_target_va": 67563632,
+            "equal": true
+          },
+          {
+            "offset": 71,
+            "symbol": "CPU_COP0",
+            "addend": 12,
+            "observed_target_va": 67563604,
+            "independent_expected_target_va": 67563604,
+            "equal": true
+          },
+          {
+            "offset": 76,
+            "symbol": "CPU_COP0",
+            "addend": 8,
+            "observed_target_va": 67563600,
+            "independent_expected_target_va": 67563600,
+            "equal": true
+          }
+        ],
+        "raw_instruction_body_equal": false,
+        "raw_link_span_equal": false
+      },
+      {
+        "name": "TLBProbe",
+        "object": "Memory.obj",
+        "object_sha256": "7c3072930858f018606281f80c939924b494af796690dafe9b5b578bc6b2d2de",
+        "original_va": 4288160,
+        "instruction_body_bytes": 87,
+        "link_span_bytes": 96,
+        "nonrelocation_bytes_equal": true,
+        "all_recorded_relocation_targets_independently_validated": true,
+        "relocations": [
+          {
+            "offset": 3,
+            "symbol": "CPU_COP0",
+            "addend": 40,
+            "observed_target_va": 67563632,
+            "independent_expected_target_va": 67563632,
+            "equal": true
+          },
+          {
+            "offset": 18,
+            "symbol": "TLB",
+            "addend": 24,
+            "observed_target_va": 65443608,
+            "independent_expected_target_va": 65443608,
+            "equal": true
+          },
+          {
+            "offset": 28,
+            "symbol": "TLB",
+            "addend": 56,
+            "observed_target_va": 65443640,
+            "independent_expected_target_va": 65443640,
+            "equal": true
+          },
+          {
+            "offset": 34,
+            "symbol": "TLB",
+            "addend": 52,
+            "observed_target_va": 65443636,
+            "independent_expected_target_va": 65443636,
+            "equal": true
+          },
+          {
+            "offset": 44,
+            "symbol": "TLB",
+            "addend": 40,
+            "observed_target_va": 65443624,
+            "independent_expected_target_va": 65443624,
+            "equal": true
+          },
+          {
+            "offset": 68,
+            "symbol": "CPU_COP0",
+            "addend": 0,
+            "observed_target_va": 67563592,
+            "independent_expected_target_va": 67563592,
+            "equal": true
+          },
+          {
+            "offset": 81,
+            "symbol": "CPU_COP0",
+            "addend": 0,
+            "observed_target_va": 67563592,
+            "independent_expected_target_va": 67563592,
+            "equal": true
+          }
+        ],
+        "raw_instruction_body_equal": false,
+        "raw_link_span_equal": false
+      },
+      {
+        "name": "WritePhysicalDoubleWord",
+        "object": "Memory.obj",
+        "object_sha256": "7c3072930858f018606281f80c939924b494af796690dafe9b5b578bc6b2d2de",
+        "original_va": 4298064,
+        "instruction_body_bytes": 34,
+        "link_span_bytes": 48,
+        "nonrelocation_bytes_equal": true,
+        "all_recorded_relocation_targets_independently_validated": true,
+        "relocations": [
+          {
+            "offset": 12,
+            "symbol": "WritePhysicalWord",
+            "addend": 0,
+            "observed_target_va": 4291696,
+            "independent_expected_target_va": 4291696,
+            "equal": true
+          },
+          {
+            "offset": 26,
+            "symbol": "WritePhysicalWord",
+            "addend": 0,
+            "observed_target_va": 4291696,
+            "independent_expected_target_va": 4291696,
+            "equal": true
+          }
+        ],
+        "raw_instruction_body_equal": false,
+        "raw_link_span_equal": false
+      },
+      {
+        "name": "TranslateTLB",
+        "object": "Memory.obj",
+        "object_sha256": "7c3072930858f018606281f80c939924b494af796690dafe9b5b578bc6b2d2de",
+        "original_va": 4298112,
+        "instruction_body_bytes": 287,
+        "link_span_bytes": 288,
+        "nonrelocation_bytes_equal": true,
+        "all_recorded_relocation_targets_independently_validated": true,
+        "relocations": [
+          {
+            "offset": 12,
+            "symbol": "TranslationError",
+            "addend": 0,
+            "observed_target_va": 65445904,
+            "independent_expected_target_va": 65445904,
+            "equal": true
+          },
+          {
+            "offset": 20,
+            "symbol": "TLB",
+            "addend": 24,
+            "observed_target_va": 65443608,
+            "independent_expected_target_va": 65443608,
+            "equal": true
+          },
+          {
+            "offset": 34,
+            "symbol": "TLB",
+            "addend": 56,
+            "observed_target_va": 65443640,
+            "independent_expected_target_va": 65443640,
+            "equal": true
+          },
+          {
+            "offset": 40,
+            "symbol": "TLB",
+            "addend": 52,
+            "observed_target_va": 65443636,
+            "independent_expected_target_va": 65443636,
+            "equal": true
+          },
+          {
+            "offset": 46,
+            "symbol": "TLB",
+            "addend": 40,
+            "observed_target_va": 65443624,
+            "independent_expected_target_va": 65443624,
+            "equal": true
+          },
+          {
+            "offset": 75,
+            "symbol": "TranslationError",
+            "addend": 0,
+            "observed_target_va": 65445904,
+            "independent_expected_target_va": 65445904,
+            "equal": true
+          },
+          {
+            "offset": 85,
+            "symbol": "TLBAddress",
+            "addend": 0,
+            "observed_target_va": 65445760,
+            "independent_expected_target_va": 65445760,
+            "equal": true
+          },
+          {
+            "offset": 97,
+            "symbol": "TLBWriteAccess",
+            "addend": 0,
+            "observed_target_va": 65425068,
+            "independent_expected_target_va": 65425068,
+            "equal": true
+          },
+          {
+            "offset": 122,
+            "symbol": "TLB",
+            "addend": 16,
+            "observed_target_va": 65443600,
+            "independent_expected_target_va": 65443600,
+            "equal": true
+          },
+          {
+            "offset": 132,
+            "symbol": "TranslationError",
+            "addend": 0,
+            "observed_target_va": 65445904,
+            "independent_expected_target_va": 65445904,
+            "equal": true
+          },
+          {
+            "offset": 148,
+            "symbol": "TLB",
+            "addend": 28,
+            "observed_target_va": 65443612,
+            "independent_expected_target_va": 65443612,
+            "equal": true
+          },
+          {
+            "offset": 158,
+            "symbol": "TranslationError",
+            "addend": 0,
+            "observed_target_va": 65445904,
+            "independent_expected_target_va": 65445904,
+            "equal": true
+          },
+          {
+            "offset": 170,
+            "symbol": "TLB",
+            "addend": 44,
+            "observed_target_va": 65443628,
+            "independent_expected_target_va": 65443628,
+            "equal": true
+          },
+          {
+            "offset": 176,
+            "symbol": "TLB",
+            "addend": 60,
+            "observed_target_va": 65443644,
+            "independent_expected_target_va": 65443644,
+            "equal": true
+          },
+          {
+            "offset": 182,
+            "symbol": "TLB",
+            "addend": 64,
+            "observed_target_va": 65443648,
+            "independent_expected_target_va": 65443648,
+            "equal": true
+          },
+          {
+            "offset": 204,
+            "symbol": "TLB",
+            "addend": 20,
+            "observed_target_va": 65443604,
+            "independent_expected_target_va": 65443604,
+            "equal": true
+          },
+          {
+            "offset": 214,
+            "symbol": "TranslationError",
+            "addend": 0,
+            "observed_target_va": 65445904,
+            "independent_expected_target_va": 65445904,
+            "equal": true
+          },
+          {
+            "offset": 233,
+            "symbol": "TLB",
+            "addend": 32,
+            "observed_target_va": 65443616,
+            "independent_expected_target_va": 65443616,
+            "equal": true
+          },
+          {
+            "offset": 243,
+            "symbol": "TranslationError",
+            "addend": 0,
+            "observed_target_va": 65445904,
+            "independent_expected_target_va": 65445904,
+            "equal": true
+          },
+          {
+            "offset": 258,
+            "symbol": "TLB",
+            "addend": 60,
+            "observed_target_va": 65443644,
+            "independent_expected_target_va": 65443644,
+            "equal": true
+          },
+          {
+            "offset": 264,
+            "symbol": "TLB",
+            "addend": 48,
+            "observed_target_va": 65443632,
+            "independent_expected_target_va": 65443632,
+            "equal": true
+          },
+          {
+            "offset": 272,
+            "symbol": "TLB",
+            "addend": 64,
+            "observed_target_va": 65443648,
+            "independent_expected_target_va": 65443648,
+            "equal": true
+          }
+        ],
+        "raw_instruction_body_equal": false,
+        "raw_link_span_equal": false
+      },
+      {
+        "name": "CopyAndSwapWords",
+        "object": "ByteSwap.obj",
+        "object_sha256": "4610b60ff08a4c2adc4af3958544a6f500597dfd6f0bd929eaf99169e85e49f2",
+        "original_va": 4288256,
+        "instruction_body_bytes": 36,
+        "link_span_bytes": 48,
+        "nonrelocation_bytes_equal": true,
+        "all_recorded_relocation_targets_independently_validated": true,
+        "relocations": [],
+        "raw_instruction_body_equal": true,
+        "raw_link_span_equal": true
+      }
+    ],
+    "instruction_body_bytes": 525,
+    "link_span_bytes": 576,
+    "validated_relocations": 41
+  },
+  "inferred_source_boundary": {
+    "file": "src/nemu64/ByteSwap.c",
+    "filename_status": "inferred; original filename unknown",
+    "compiler": "VC7 13.00.9466 /O2 /ML, native C without /GL",
+    "evidence": [
+      "All 36 instruction bytes and following 12 alignment bytes reproduce exactly in the native C COFF function, with no relocations.",
+      "Every original call to 00416F00 supplies three stack arguments; compiling this helper as part of the /GL C++ Memory unit instead changes arguments to registers.",
+      "The original image contains no absolute pointer value00416F00; no address-taking evidence was found to explain retaining cdecl within LTCG.",
+      "Independent CRT closure identifies92 of93 native VC7 C contributions in the original Rich header. This helper accounts for the sole remaining contribution; the count corroborates rather than independently proves the unit boundary."
+    ]
+  },
+  "verified_complete_link": {
+    "scope": "Complete linked function spans; individually identified relocated operands. This does not certify whole-image equality.",
+    "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+    "rebuilt_sha256": "f425e1799f07514acb7eb1708db288478b8593656157d3ec34a22025e4876314",
+    "map_sha256": "4ce497c0609c13aad0f4efa9145375357e1cd62eac63ae8d97755453ddd44182",
+    "fixture": "/root/.ai-tmp/nemu-save-integration.p7t3fs20",
+    "source_sha256": {
+      "Memory.cpp": "ceb72aeec2763dd372f461702979c8820b9c442f27f25339411b4d0502c748bd",
+      "Memory.h": "d16ebdffdaf423d74a3f4269b0dc5dd038289420816ddc30a4303d8ebcec5e16",
+      "ByteSwap.c": "52c57f81489f14d8d629ba0647ac7a7eaadb1d5fe82e1b1a1bcff0c172110c33"
+    },
+    "functions": [
+      {
+        "name": "CopyByteSwapped",
+        "original_va": 4286976,
+        "rebuilt_va": 4286864,
+        "instruction_body_bytes": 327,
+        "complete_link_span_bytes": 352,
+        "all_nonrelocation_bytes_equal": true,
+        "non_address_differences": [],
+        "all_address_fields_independently_identified": true,
+        "all_address_targets_equal": true,
+        "function_match": true,
+        "raw_bytes_equal": false,
+        "validated_address_fields": [
+          {
+            "offset": 19,
+            "kind": "absolute",
+            "candidate_target": 4409188,
+            "original_target": 4409188,
+            "independent_expected_target": 4409188,
+            "basis": "exact_source_literal",
+            "symbol_or_literal": "Error 0 in ua_memcpy",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 24,
+            "kind": "relative",
+            "candidate_target": 4279872,
+            "original_target": 4279984,
+            "independent_expected_target": 4279984,
+            "basis": "independent_function_identity",
+            "symbol_or_literal": "ReportCPUError",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 139,
+            "kind": "absolute",
+            "candidate_target": 4287192,
+            "original_target": 4287304,
+            "independent_expected_target": 4287304,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "CopyByteSwapped",
+            "addend": 328,
+            "equal": true
+          },
+          {
+            "offset": 328,
+            "kind": "absolute",
+            "candidate_target": 4287007,
+            "original_target": 4287119,
+            "independent_expected_target": 4287119,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "CopyByteSwapped",
+            "addend": 143,
+            "equal": true
+          },
+          {
+            "offset": 332,
+            "kind": "absolute",
+            "candidate_target": 4287032,
+            "original_target": 4287144,
+            "independent_expected_target": 4287144,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "CopyByteSwapped",
+            "addend": 168,
+            "equal": true
+          },
+          {
+            "offset": 336,
+            "kind": "absolute",
+            "candidate_target": 4287080,
+            "original_target": 4287192,
+            "independent_expected_target": 4287192,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "CopyByteSwapped",
+            "addend": 216,
+            "equal": true
+          },
+          {
+            "offset": 340,
+            "kind": "absolute",
+            "candidate_target": 4287107,
+            "original_target": 4287219,
+            "independent_expected_target": 4287219,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "CopyByteSwapped",
+            "addend": 243,
+            "equal": true
+          }
+        ]
+      },
+      {
+        "name": "TLBRead",
+        "original_va": 4287328,
+        "rebuilt_va": 4287216,
+        "instruction_body_bytes": 81,
+        "complete_link_span_bytes": 96,
+        "all_nonrelocation_bytes_equal": true,
+        "non_address_differences": [],
+        "all_address_fields_independently_identified": true,
+        "all_address_targets_equal": true,
+        "function_match": true,
+        "raw_bytes_equal": true,
+        "validated_address_fields": [
+          {
+            "offset": 2,
+            "kind": "absolute",
+            "candidate_target": 67563592,
+            "original_target": 67563592,
+            "independent_expected_target": 67563592,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "CPU_COP0",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 13,
+            "kind": "absolute",
+            "candidate_target": 65443596,
+            "original_target": 65443596,
+            "independent_expected_target": 65443596,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 12,
+            "equal": true
+          },
+          {
+            "offset": 25,
+            "kind": "absolute",
+            "candidate_target": 65443596,
+            "original_target": 65443596,
+            "independent_expected_target": 65443596,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 12,
+            "equal": true
+          },
+          {
+            "offset": 31,
+            "kind": "absolute",
+            "candidate_target": 67563612,
+            "original_target": 67563612,
+            "independent_expected_target": 67563612,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "CPU_COP0",
+            "addend": 20,
+            "equal": true
+          },
+          {
+            "offset": 37,
+            "kind": "absolute",
+            "candidate_target": 65443588,
+            "original_target": 65443588,
+            "independent_expected_target": 65443588,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 4,
+            "equal": true
+          },
+          {
+            "offset": 47,
+            "kind": "absolute",
+            "candidate_target": 65443592,
+            "original_target": 65443592,
+            "independent_expected_target": 65443592,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 8,
+            "equal": true
+          },
+          {
+            "offset": 53,
+            "kind": "absolute",
+            "candidate_target": 65443584,
+            "original_target": 65443584,
+            "independent_expected_target": 65443584,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 65,
+            "kind": "absolute",
+            "candidate_target": 67563632,
+            "original_target": 67563632,
+            "independent_expected_target": 67563632,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "CPU_COP0",
+            "addend": 40,
+            "equal": true
+          },
+          {
+            "offset": 71,
+            "kind": "absolute",
+            "candidate_target": 67563604,
+            "original_target": 67563604,
+            "independent_expected_target": 67563604,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "CPU_COP0",
+            "addend": 12,
+            "equal": true
+          },
+          {
+            "offset": 76,
+            "kind": "absolute",
+            "candidate_target": 67563600,
+            "original_target": 67563600,
+            "independent_expected_target": 67563600,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "CPU_COP0",
+            "addend": 8,
+            "equal": true
+          }
+        ]
+      },
+      {
+        "name": "TLBWrite",
+        "original_va": 4287424,
+        "rebuilt_va": 4287312,
+        "instruction_body_bytes": 725,
+        "complete_link_span_bytes": 736,
+        "all_nonrelocation_bytes_equal": true,
+        "non_address_differences": [],
+        "all_address_fields_independently_identified": true,
+        "all_address_targets_equal": true,
+        "function_match": true,
+        "raw_bytes_equal": true,
+        "validated_address_fields": [
+          {
+            "offset": 12,
+            "kind": "absolute",
+            "candidate_target": 4409164,
+            "original_target": 4409164,
+            "independent_expected_target": 4409164,
+            "basis": "exact_source_literal",
+            "symbol_or_literal": "TLB Error 0 in TLBWI",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 17,
+            "kind": "relative",
+            "candidate_target": 4279872,
+            "original_target": 4279984,
+            "independent_expected_target": 4279984,
+            "basis": "independent_function_identity",
+            "symbol_or_literal": "ReportCPUError",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 25,
+            "kind": "absolute",
+            "candidate_target": 67563612,
+            "original_target": 67563612,
+            "independent_expected_target": 67563612,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "CPU_COP0",
+            "addend": 20,
+            "equal": true
+          },
+          {
+            "offset": 34,
+            "kind": "absolute",
+            "candidate_target": 67563604,
+            "original_target": 67563604,
+            "independent_expected_target": 67563604,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "CPU_COP0",
+            "addend": 12,
+            "equal": true
+          },
+          {
+            "offset": 40,
+            "kind": "absolute",
+            "candidate_target": 65443596,
+            "original_target": 65443596,
+            "independent_expected_target": 65443596,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 12,
+            "equal": true
+          },
+          {
+            "offset": 49,
+            "kind": "absolute",
+            "candidate_target": 67563632,
+            "original_target": 67563632,
+            "independent_expected_target": 67563632,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "CPU_COP0",
+            "addend": 40,
+            "equal": true
+          },
+          {
+            "offset": 57,
+            "kind": "absolute",
+            "candidate_target": 65443588,
+            "original_target": 65443588,
+            "independent_expected_target": 65443588,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 4,
+            "equal": true
+          },
+          {
+            "offset": 68,
+            "kind": "absolute",
+            "candidate_target": 65443592,
+            "original_target": 65443592,
+            "independent_expected_target": 65443592,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 8,
+            "equal": true
+          },
+          {
+            "offset": 73,
+            "kind": "absolute",
+            "candidate_target": 67563600,
+            "original_target": 67563600,
+            "independent_expected_target": 67563600,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "CPU_COP0",
+            "addend": 8,
+            "equal": true
+          },
+          {
+            "offset": 84,
+            "kind": "absolute",
+            "candidate_target": 65443584,
+            "original_target": 65443584,
+            "independent_expected_target": 65443584,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 98,
+            "kind": "absolute",
+            "candidate_target": 65443620,
+            "original_target": 65443620,
+            "independent_expected_target": 65443620,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 36,
+            "equal": true
+          },
+          {
+            "offset": 105,
+            "kind": "absolute",
+            "candidate_target": 4409128,
+            "original_target": 4409128,
+            "independent_expected_target": 4409128,
+            "basis": "exact_source_literal",
+            "symbol_or_literal": "Missing feature: ASID used by ROM",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 110,
+            "kind": "relative",
+            "candidate_target": 4279872,
+            "original_target": 4279984,
+            "independent_expected_target": 4279984,
+            "basis": "independent_function_identity",
+            "symbol_or_literal": "ReportCPUError",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 115,
+            "kind": "absolute",
+            "candidate_target": 67563600,
+            "original_target": 67563600,
+            "independent_expected_target": 67563600,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "CPU_COP0",
+            "addend": 8,
+            "equal": true
+          },
+          {
+            "offset": 121,
+            "kind": "absolute",
+            "candidate_target": 67563604,
+            "original_target": 67563604,
+            "independent_expected_target": 67563604,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "CPU_COP0",
+            "addend": 12,
+            "equal": true
+          },
+          {
+            "offset": 127,
+            "kind": "absolute",
+            "candidate_target": 67563632,
+            "original_target": 67563632,
+            "independent_expected_target": 67563632,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "CPU_COP0",
+            "addend": 40,
+            "equal": true
+          },
+          {
+            "offset": 160,
+            "kind": "absolute",
+            "candidate_target": 65443608,
+            "original_target": 65443608,
+            "independent_expected_target": 65443608,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 24,
+            "equal": true
+          },
+          {
+            "offset": 168,
+            "kind": "absolute",
+            "candidate_target": 65443612,
+            "original_target": 65443612,
+            "independent_expected_target": 65443612,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 28,
+            "equal": true
+          },
+          {
+            "offset": 197,
+            "kind": "absolute",
+            "candidate_target": 65443628,
+            "original_target": 65443628,
+            "independent_expected_target": 65443628,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 44,
+            "equal": true
+          },
+          {
+            "offset": 203,
+            "kind": "absolute",
+            "candidate_target": 65443596,
+            "original_target": 65443596,
+            "independent_expected_target": 65443596,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 12,
+            "equal": true
+          },
+          {
+            "offset": 226,
+            "kind": "absolute",
+            "candidate_target": 65443616,
+            "original_target": 65443616,
+            "independent_expected_target": 65443616,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 32,
+            "equal": true
+          },
+          {
+            "offset": 232,
+            "kind": "absolute",
+            "candidate_target": 65443600,
+            "original_target": 65443600,
+            "independent_expected_target": 65443600,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 16,
+            "equal": true
+          },
+          {
+            "offset": 238,
+            "kind": "absolute",
+            "candidate_target": 65443604,
+            "original_target": 65443604,
+            "independent_expected_target": 65443604,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 20,
+            "equal": true
+          },
+          {
+            "offset": 244,
+            "kind": "absolute",
+            "candidate_target": 65443632,
+            "original_target": 65443632,
+            "independent_expected_target": 65443632,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 48,
+            "equal": true
+          },
+          {
+            "offset": 290,
+            "kind": "absolute",
+            "candidate_target": 65443636,
+            "original_target": 65443636,
+            "independent_expected_target": 65443636,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 52,
+            "equal": true
+          },
+          {
+            "offset": 300,
+            "kind": "absolute",
+            "candidate_target": 65443640,
+            "original_target": 65443640,
+            "independent_expected_target": 65443640,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 56,
+            "equal": true
+          },
+          {
+            "offset": 310,
+            "kind": "absolute",
+            "candidate_target": 65443648,
+            "original_target": 65443648,
+            "independent_expected_target": 65443648,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 64,
+            "equal": true
+          },
+          {
+            "offset": 320,
+            "kind": "absolute",
+            "candidate_target": 65443624,
+            "original_target": 65443624,
+            "independent_expected_target": 65443624,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 40,
+            "equal": true
+          },
+          {
+            "offset": 333,
+            "kind": "absolute",
+            "candidate_target": 65443636,
+            "original_target": 65443636,
+            "independent_expected_target": 65443636,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 52,
+            "equal": true
+          },
+          {
+            "offset": 343,
+            "kind": "absolute",
+            "candidate_target": 65443640,
+            "original_target": 65443640,
+            "independent_expected_target": 65443640,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 56,
+            "equal": true
+          },
+          {
+            "offset": 353,
+            "kind": "absolute",
+            "candidate_target": 65443648,
+            "original_target": 65443648,
+            "independent_expected_target": 65443648,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 64,
+            "equal": true
+          },
+          {
+            "offset": 376,
+            "kind": "absolute",
+            "candidate_target": 65443636,
+            "original_target": 65443636,
+            "independent_expected_target": 65443636,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 52,
+            "equal": true
+          },
+          {
+            "offset": 382,
+            "kind": "absolute",
+            "candidate_target": 65443644,
+            "original_target": 65443644,
+            "independent_expected_target": 65443644,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 60,
+            "equal": true
+          },
+          {
+            "offset": 393,
+            "kind": "absolute",
+            "candidate_target": 65443640,
+            "original_target": 65443640,
+            "independent_expected_target": 65443640,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 56,
+            "equal": true
+          },
+          {
+            "offset": 403,
+            "kind": "absolute",
+            "candidate_target": 65443648,
+            "original_target": 65443648,
+            "independent_expected_target": 65443648,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 64,
+            "equal": true
+          },
+          {
+            "offset": 413,
+            "kind": "absolute",
+            "candidate_target": 65443624,
+            "original_target": 65443624,
+            "independent_expected_target": 65443624,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 40,
+            "equal": true
+          },
+          {
+            "offset": 426,
+            "kind": "absolute",
+            "candidate_target": 65443636,
+            "original_target": 65443636,
+            "independent_expected_target": 65443636,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 52,
+            "equal": true
+          },
+          {
+            "offset": 436,
+            "kind": "absolute",
+            "candidate_target": 65443640,
+            "original_target": 65443640,
+            "independent_expected_target": 65443640,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 56,
+            "equal": true
+          },
+          {
+            "offset": 446,
+            "kind": "absolute",
+            "candidate_target": 65443648,
+            "original_target": 65443648,
+            "independent_expected_target": 65443648,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 64,
+            "equal": true
+          },
+          {
+            "offset": 480,
+            "kind": "absolute",
+            "candidate_target": 65443636,
+            "original_target": 65443636,
+            "independent_expected_target": 65443636,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 52,
+            "equal": true
+          },
+          {
+            "offset": 490,
+            "kind": "absolute",
+            "candidate_target": 65443640,
+            "original_target": 65443640,
+            "independent_expected_target": 65443640,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 56,
+            "equal": true
+          },
+          {
+            "offset": 500,
+            "kind": "absolute",
+            "candidate_target": 65443648,
+            "original_target": 65443648,
+            "independent_expected_target": 65443648,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 64,
+            "equal": true
+          },
+          {
+            "offset": 510,
+            "kind": "absolute",
+            "candidate_target": 65443624,
+            "original_target": 65443624,
+            "independent_expected_target": 65443624,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 40,
+            "equal": true
+          },
+          {
+            "offset": 520,
+            "kind": "absolute",
+            "candidate_target": 65443636,
+            "original_target": 65443636,
+            "independent_expected_target": 65443636,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 52,
+            "equal": true
+          },
+          {
+            "offset": 530,
+            "kind": "absolute",
+            "candidate_target": 65443640,
+            "original_target": 65443640,
+            "independent_expected_target": 65443640,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 56,
+            "equal": true
+          },
+          {
+            "offset": 540,
+            "kind": "absolute",
+            "candidate_target": 65443648,
+            "original_target": 65443648,
+            "independent_expected_target": 65443648,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 64,
+            "equal": true
+          },
+          {
+            "offset": 553,
+            "kind": "absolute",
+            "candidate_target": 65443624,
+            "original_target": 65443624,
+            "independent_expected_target": 65443624,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 40,
+            "equal": true
+          },
+          {
+            "offset": 559,
+            "kind": "absolute",
+            "candidate_target": 65443644,
+            "original_target": 65443644,
+            "independent_expected_target": 65443644,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 60,
+            "equal": true
+          },
+          {
+            "offset": 598,
+            "kind": "absolute",
+            "candidate_target": 65443576,
+            "original_target": 65443576,
+            "independent_expected_target": 65443576,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLBEnabled",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 608,
+            "kind": "absolute",
+            "candidate_target": 65442664,
+            "original_target": 65442664,
+            "independent_expected_target": 65442664,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "CPU_ActionFlags",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 616,
+            "kind": "absolute",
+            "candidate_target": 65443576,
+            "original_target": 65443576,
+            "independent_expected_target": 65443576,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLBEnabled",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 626,
+            "kind": "absolute",
+            "candidate_target": 53755272,
+            "original_target": 53755272,
+            "independent_expected_target": 53755272,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "Dynarec_Use32BitMemoryAccess",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 636,
+            "kind": "absolute",
+            "candidate_target": 65442664,
+            "original_target": 65442664,
+            "independent_expected_target": 65442664,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "CPU_ActionFlags",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 644,
+            "kind": "absolute",
+            "candidate_target": 65443576,
+            "original_target": 65443576,
+            "independent_expected_target": 65443576,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLBEnabled",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 654,
+            "kind": "absolute",
+            "candidate_target": 65443080,
+            "original_target": 65443080,
+            "independent_expected_target": 65443080,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLBRamMapped",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 672,
+            "kind": "absolute",
+            "candidate_target": 65443588,
+            "original_target": 65443588,
+            "independent_expected_target": 65443588,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 4,
+            "equal": true
+          },
+          {
+            "offset": 678,
+            "kind": "absolute",
+            "candidate_target": 65425000,
+            "original_target": 65425000,
+            "independent_expected_target": 65425000,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RDRAMSize",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 686,
+            "kind": "absolute",
+            "candidate_target": 9940580,
+            "original_target": 9940580,
+            "independent_expected_target": 9940580,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "CPU_Use32BitMemoryAccess",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 692,
+            "kind": "absolute",
+            "candidate_target": 53755272,
+            "original_target": 53755272,
+            "independent_expected_target": 53755272,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "Dynarec_Use32BitMemoryAccess",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 698,
+            "kind": "absolute",
+            "candidate_target": 65442664,
+            "original_target": 65442664,
+            "independent_expected_target": 65442664,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "CPU_ActionFlags",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 706,
+            "kind": "absolute",
+            "candidate_target": 65443080,
+            "original_target": 65443080,
+            "independent_expected_target": 65443080,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLBRamMapped",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 716,
+            "kind": "absolute",
+            "candidate_target": 65442664,
+            "original_target": 65442664,
+            "independent_expected_target": 65442664,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "CPU_ActionFlags",
+            "addend": 0,
+            "equal": true
+          }
+        ]
+      },
+      {
+        "name": "TLBProbe",
+        "original_va": 4288160,
+        "rebuilt_va": 4288048,
+        "instruction_body_bytes": 87,
+        "complete_link_span_bytes": 96,
+        "all_nonrelocation_bytes_equal": true,
+        "non_address_differences": [],
+        "all_address_fields_independently_identified": true,
+        "all_address_targets_equal": true,
+        "function_match": true,
+        "raw_bytes_equal": true,
+        "validated_address_fields": [
+          {
+            "offset": 3,
+            "kind": "absolute",
+            "candidate_target": 67563632,
+            "original_target": 67563632,
+            "independent_expected_target": 67563632,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "CPU_COP0",
+            "addend": 40,
+            "equal": true
+          },
+          {
+            "offset": 18,
+            "kind": "absolute",
+            "candidate_target": 65443608,
+            "original_target": 65443608,
+            "independent_expected_target": 65443608,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 24,
+            "equal": true
+          },
+          {
+            "offset": 28,
+            "kind": "absolute",
+            "candidate_target": 65443640,
+            "original_target": 65443640,
+            "independent_expected_target": 65443640,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 56,
+            "equal": true
+          },
+          {
+            "offset": 34,
+            "kind": "absolute",
+            "candidate_target": 65443636,
+            "original_target": 65443636,
+            "independent_expected_target": 65443636,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 52,
+            "equal": true
+          },
+          {
+            "offset": 44,
+            "kind": "absolute",
+            "candidate_target": 65443624,
+            "original_target": 65443624,
+            "independent_expected_target": 65443624,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 40,
+            "equal": true
+          },
+          {
+            "offset": 68,
+            "kind": "absolute",
+            "candidate_target": 67563592,
+            "original_target": 67563592,
+            "independent_expected_target": 67563592,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "CPU_COP0",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 81,
+            "kind": "absolute",
+            "candidate_target": 67563592,
+            "original_target": 67563592,
+            "independent_expected_target": 67563592,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "CPU_COP0",
+            "addend": 0,
+            "equal": true
+          }
+        ]
+      },
+      {
+        "name": "CopyAndSwapWords",
+        "original_va": 4288256,
+        "rebuilt_va": 4288144,
+        "instruction_body_bytes": 36,
+        "complete_link_span_bytes": 48,
+        "all_nonrelocation_bytes_equal": true,
+        "non_address_differences": [],
+        "all_address_fields_independently_identified": true,
+        "all_address_targets_equal": true,
+        "function_match": true,
+        "raw_bytes_equal": true,
+        "validated_address_fields": []
+      },
+      {
+        "name": "InvalidateRecompiledRange",
+        "original_va": 4288304,
+        "rebuilt_va": 4288192,
+        "instruction_body_bytes": 94,
+        "complete_link_span_bytes": 96,
+        "all_nonrelocation_bytes_equal": true,
+        "non_address_differences": [],
+        "all_address_fields_independently_identified": true,
+        "all_address_targets_equal": true,
+        "function_match": true,
+        "raw_bytes_equal": true,
+        "validated_address_fields": [
+          {
+            "offset": 3,
+            "kind": "absolute",
+            "candidate_target": 19140184,
+            "original_target": 19140184,
+            "independent_expected_target": 19140184,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "Dynarec_Mode",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 21,
+            "kind": "absolute",
+            "candidate_target": 65443156,
+            "original_target": 65443156,
+            "independent_expected_target": 65443156,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RDRAM",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 58,
+            "kind": "absolute",
+            "candidate_target": 4390980,
+            "original_target": 4390980,
+            "independent_expected_target": 4390980,
+            "basis": "import_table_identity",
+            "symbol_or_literal": "__imp__VirtualProtect",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 77,
+            "kind": "absolute",
+            "candidate_target": 19140336,
+            "original_target": 19140336,
+            "independent_expected_target": 19140336,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "Dynarec_BlockCode",
+            "addend": 0,
+            "equal": true
+          }
+        ]
+      },
+      {
+        "name": "ReadPhysicalByte",
+        "original_va": 4288400,
+        "rebuilt_va": 4288288,
+        "instruction_body_bytes": 199,
+        "complete_link_span_bytes": 208,
+        "all_nonrelocation_bytes_equal": true,
+        "non_address_differences": [],
+        "all_address_fields_independently_identified": true,
+        "all_address_targets_equal": true,
+        "function_match": true,
+        "raw_bytes_equal": true,
+        "validated_address_fields": [
+          {
+            "offset": 6,
+            "kind": "absolute",
+            "candidate_target": 65425000,
+            "original_target": 65425000,
+            "independent_expected_target": 65425000,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RDRAMSize",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 14,
+            "kind": "absolute",
+            "candidate_target": 65443156,
+            "original_target": 65443156,
+            "independent_expected_target": 65443156,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RDRAM",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 43,
+            "kind": "absolute",
+            "candidate_target": 438344,
+            "original_target": 438344,
+            "independent_expected_target": 438344,
+            "basis": "source_guest_base_subtraction",
+            "symbol_or_literal": "SPMemory",
+            "addend": -67108864,
+            "equal": true
+          },
+          {
+            "offset": 66,
+            "kind": "absolute",
+            "candidate_target": 3827713632,
+            "original_target": 3827713632,
+            "independent_expected_target": 3827713632,
+            "basis": "source_guest_base_subtraction",
+            "symbol_or_literal": "PIFRam",
+            "addend": -532678592,
+            "equal": true
+          },
+          {
+            "offset": 89,
+            "kind": "absolute",
+            "candidate_target": 3829833816,
+            "original_target": 3829833816,
+            "independent_expected_target": 3829833816,
+            "basis": "source_guest_base_subtraction",
+            "symbol_or_literal": "PIFRom",
+            "addend": -532676608,
+            "equal": true
+          },
+          {
+            "offset": 112,
+            "kind": "absolute",
+            "candidate_target": 65443088,
+            "original_target": 65443088,
+            "independent_expected_target": 65443088,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "ROMSize",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 143,
+            "kind": "absolute",
+            "candidate_target": 65425340,
+            "original_target": 65425340,
+            "independent_expected_target": 65425340,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "ROMImage",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 161,
+            "kind": "absolute",
+            "candidate_target": 65425340,
+            "original_target": 65425340,
+            "independent_expected_target": 65425340,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "ROMImage",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 175,
+            "kind": "absolute",
+            "candidate_target": 4409076,
+            "original_target": 4409076,
+            "independent_expected_target": 4409076,
+            "basis": "exact_source_literal",
+            "symbol_or_literal": "Trying to Read8 from unhandled or invalid memory",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 181,
+            "kind": "absolute",
+            "candidate_target": 67547200,
+            "original_target": 67547200,
+            "independent_expected_target": 67547200,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "ReadError",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 190,
+            "kind": "relative",
+            "candidate_target": 4279744,
+            "original_target": 4279856,
+            "independent_expected_target": 4279856,
+            "basis": "independent_function_identity",
+            "symbol_or_literal": "ReportMemoryError",
+            "addend": 0,
+            "equal": true
+          }
+        ]
+      },
+      {
+        "name": "ReadPhysicalHalf",
+        "original_va": 4288608,
+        "rebuilt_va": 4288496,
+        "instruction_body_bytes": 273,
+        "complete_link_span_bytes": 288,
+        "all_nonrelocation_bytes_equal": true,
+        "non_address_differences": [],
+        "all_address_fields_independently_identified": true,
+        "all_address_targets_equal": true,
+        "function_match": true,
+        "raw_bytes_equal": true,
+        "validated_address_fields": [
+          {
+            "offset": 7,
+            "kind": "absolute",
+            "candidate_target": 65425000,
+            "original_target": 65425000,
+            "independent_expected_target": 65425000,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RDRAMSize",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 15,
+            "kind": "absolute",
+            "candidate_target": 65443156,
+            "original_target": 65443156,
+            "independent_expected_target": 65443156,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RDRAM",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 46,
+            "kind": "absolute",
+            "candidate_target": 65443088,
+            "original_target": 65443088,
+            "independent_expected_target": 65443088,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "ROMSize",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 69,
+            "kind": "absolute",
+            "candidate_target": 65425340,
+            "original_target": 65425340,
+            "independent_expected_target": 65425340,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "ROMImage",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 89,
+            "kind": "absolute",
+            "candidate_target": 65425340,
+            "original_target": 65425340,
+            "independent_expected_target": 65425340,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "ROMImage",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 123,
+            "kind": "absolute",
+            "candidate_target": 3827713632,
+            "original_target": 3827713632,
+            "independent_expected_target": 3827713632,
+            "basis": "source_guest_base_subtraction",
+            "symbol_or_literal": "PIFRam",
+            "addend": -532678592,
+            "equal": true
+          },
+          {
+            "offset": 169,
+            "kind": "absolute",
+            "candidate_target": 3829833816,
+            "original_target": 3829833816,
+            "independent_expected_target": 3829833816,
+            "basis": "source_guest_base_subtraction",
+            "symbol_or_literal": "PIFRom",
+            "addend": -532676608,
+            "equal": true
+          },
+          {
+            "offset": 217,
+            "kind": "absolute",
+            "candidate_target": 438344,
+            "original_target": 438344,
+            "independent_expected_target": 438344,
+            "basis": "source_guest_base_subtraction",
+            "symbol_or_literal": "SPMemory",
+            "addend": -67108864,
+            "equal": true
+          },
+          {
+            "offset": 247,
+            "kind": "absolute",
+            "candidate_target": 4409024,
+            "original_target": 4409024,
+            "independent_expected_target": 4409024,
+            "basis": "exact_source_literal",
+            "symbol_or_literal": "Trying to Read16 from unhandled or invalid memory",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 253,
+            "kind": "absolute",
+            "candidate_target": 67547200,
+            "original_target": 67547200,
+            "independent_expected_target": 67547200,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "ReadError",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 262,
+            "kind": "relative",
+            "candidate_target": 4279744,
+            "original_target": 4279856,
+            "independent_expected_target": 4279856,
+            "basis": "independent_function_identity",
+            "symbol_or_literal": "ReportMemoryError",
+            "addend": 0,
+            "equal": true
+          }
+        ]
+      },
+      {
+        "name": "ReadPhysicalWord",
+        "original_va": 4288896,
+        "rebuilt_va": 4288784,
+        "instruction_body_bytes": 1640,
+        "complete_link_span_bytes": 2192,
+        "all_nonrelocation_bytes_equal": true,
+        "non_address_differences": [],
+        "all_address_fields_independently_identified": true,
+        "all_address_targets_equal": true,
+        "function_match": true,
+        "raw_bytes_equal": false,
+        "validated_address_fields": [
+          {
+            "offset": 8,
+            "kind": "absolute",
+            "candidate_target": 65425000,
+            "original_target": 65425000,
+            "independent_expected_target": 65425000,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RDRAMSize",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 18,
+            "kind": "absolute",
+            "candidate_target": 65443156,
+            "original_target": 65443156,
+            "independent_expected_target": 65443156,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RDRAM",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 46,
+            "kind": "absolute",
+            "candidate_target": 438344,
+            "original_target": 438344,
+            "independent_expected_target": 438344,
+            "basis": "source_guest_base_subtraction",
+            "symbol_or_literal": "SPMemory",
+            "addend": -67108864,
+            "equal": true
+          },
+          {
+            "offset": 89,
+            "kind": "absolute",
+            "candidate_target": 3827713632,
+            "original_target": 3827713632,
+            "independent_expected_target": 3827713632,
+            "basis": "source_guest_base_subtraction",
+            "symbol_or_literal": "PIFRam",
+            "addend": -532678592,
+            "equal": true
+          },
+          {
+            "offset": 132,
+            "kind": "absolute",
+            "candidate_target": 3829833816,
+            "original_target": 3829833816,
+            "independent_expected_target": 3829833816,
+            "basis": "source_guest_base_subtraction",
+            "symbol_or_literal": "PIFRom",
+            "addend": -532676608,
+            "equal": true
+          },
+          {
+            "offset": 175,
+            "kind": "absolute",
+            "candidate_target": 65443088,
+            "original_target": 65443088,
+            "independent_expected_target": 65443088,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "ROMSize",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 191,
+            "kind": "absolute",
+            "candidate_target": 65425340,
+            "original_target": 65425340,
+            "independent_expected_target": 65425340,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "ROMImage",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 218,
+            "kind": "absolute",
+            "candidate_target": 65425340,
+            "original_target": 65425340,
+            "independent_expected_target": 65425340,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "ROMImage",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 258,
+            "kind": "absolute",
+            "candidate_target": 4290452,
+            "original_target": 4290564,
+            "independent_expected_target": 4290564,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1668,
+            "equal": true
+          },
+          {
+            "offset": 265,
+            "kind": "absolute",
+            "candidate_target": 4290424,
+            "original_target": 4290536,
+            "independent_expected_target": 4290536,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1640,
+            "equal": true
+          },
+          {
+            "offset": 270,
+            "kind": "absolute",
+            "candidate_target": 67547168,
+            "original_target": 67547168,
+            "independent_expected_target": 67547168,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RIReg",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 280,
+            "kind": "absolute",
+            "candidate_target": 67547172,
+            "original_target": 67547172,
+            "independent_expected_target": 67547172,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RIReg",
+            "addend": 4,
+            "equal": true
+          },
+          {
+            "offset": 290,
+            "kind": "absolute",
+            "candidate_target": 67547180,
+            "original_target": 67547180,
+            "independent_expected_target": 67547180,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RIReg",
+            "addend": 12,
+            "equal": true
+          },
+          {
+            "offset": 300,
+            "kind": "absolute",
+            "candidate_target": 67547184,
+            "original_target": 67547184,
+            "independent_expected_target": 67547184,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RIReg",
+            "addend": 16,
+            "equal": true
+          },
+          {
+            "offset": 310,
+            "kind": "absolute",
+            "candidate_target": 67547188,
+            "original_target": 67547188,
+            "independent_expected_target": 67547188,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RIReg",
+            "addend": 20,
+            "equal": true
+          },
+          {
+            "offset": 320,
+            "kind": "absolute",
+            "candidate_target": 67547192,
+            "original_target": 67547192,
+            "independent_expected_target": 67547192,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RIReg",
+            "addend": 24,
+            "equal": true
+          },
+          {
+            "offset": 357,
+            "kind": "absolute",
+            "candidate_target": 4290500,
+            "original_target": 4290612,
+            "independent_expected_target": 4290612,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1716,
+            "equal": true
+          },
+          {
+            "offset": 364,
+            "kind": "absolute",
+            "candidate_target": 4290480,
+            "original_target": 4290592,
+            "independent_expected_target": 4290592,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1696,
+            "equal": true
+          },
+          {
+            "offset": 369,
+            "kind": "absolute",
+            "candidate_target": 65443092,
+            "original_target": 65443092,
+            "independent_expected_target": 65443092,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "MIReg",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 389,
+            "kind": "absolute",
+            "candidate_target": 65443100,
+            "original_target": 65443100,
+            "independent_expected_target": 65443100,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "MIReg",
+            "addend": 8,
+            "equal": true
+          },
+          {
+            "offset": 399,
+            "kind": "absolute",
+            "candidate_target": 65443096,
+            "original_target": 65443096,
+            "independent_expected_target": 65443096,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "MIReg",
+            "addend": 4,
+            "equal": true
+          },
+          {
+            "offset": 453,
+            "kind": "absolute",
+            "candidate_target": 67605272,
+            "original_target": 67605272,
+            "independent_expected_target": 67605272,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "AIGetReg",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 466,
+            "kind": "absolute",
+            "candidate_target": 65425328,
+            "original_target": 65425328,
+            "independent_expected_target": 65425328,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "CPU_AudioEnabled",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 476,
+            "kind": "absolute",
+            "candidate_target": 65442644,
+            "original_target": 65442644,
+            "independent_expected_target": 65442644,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "VideoNTSC",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 481,
+            "kind": "absolute",
+            "candidate_target": 65425344,
+            "original_target": 65425344,
+            "independent_expected_target": 65425344,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "CPU_AudioCyclesRemaining",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 508,
+            "kind": "relative",
+            "candidate_target": 4370704,
+            "original_target": 4370832,
+            "independent_expected_target": 4370832,
+            "basis": "independent_function_identity",
+            "symbol_or_literal": "__allmul",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 522,
+            "kind": "relative",
+            "candidate_target": 4382416,
+            "original_target": 4382544,
+            "independent_expected_target": 4382544,
+            "basis": "independent_function_identity",
+            "symbol_or_literal": "__alldiv",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 528,
+            "kind": "absolute",
+            "candidate_target": 65425056,
+            "original_target": 65425056,
+            "independent_expected_target": 65425056,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "AIReg",
+            "addend": 24,
+            "equal": true
+          },
+          {
+            "offset": 539,
+            "kind": "relative",
+            "candidate_target": 4382416,
+            "original_target": 4382544,
+            "independent_expected_target": 4382544,
+            "basis": "independent_function_identity",
+            "symbol_or_literal": "__alldiv",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 553,
+            "kind": "absolute",
+            "candidate_target": 65425040,
+            "original_target": 65425040,
+            "independent_expected_target": 65425040,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "AIReg",
+            "addend": 8,
+            "equal": true
+          },
+          {
+            "offset": 602,
+            "kind": "absolute",
+            "candidate_target": 4290572,
+            "original_target": 4290684,
+            "independent_expected_target": 4290684,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1788,
+            "equal": true
+          },
+          {
+            "offset": 609,
+            "kind": "absolute",
+            "candidate_target": 4290516,
+            "original_target": 4290628,
+            "independent_expected_target": 4290628,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1732,
+            "equal": true
+          },
+          {
+            "offset": 614,
+            "kind": "absolute",
+            "candidate_target": 67543076,
+            "original_target": 67543076,
+            "independent_expected_target": 67543076,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "PIReg",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 624,
+            "kind": "absolute",
+            "candidate_target": 67543080,
+            "original_target": 67543080,
+            "independent_expected_target": 67543080,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "PIReg",
+            "addend": 4,
+            "equal": true
+          },
+          {
+            "offset": 634,
+            "kind": "absolute",
+            "candidate_target": 67543084,
+            "original_target": 67543084,
+            "independent_expected_target": 67543084,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "PIReg",
+            "addend": 8,
+            "equal": true
+          },
+          {
+            "offset": 644,
+            "kind": "absolute",
+            "candidate_target": 67543088,
+            "original_target": 67543088,
+            "independent_expected_target": 67543088,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "PIReg",
+            "addend": 12,
+            "equal": true
+          },
+          {
+            "offset": 654,
+            "kind": "absolute",
+            "candidate_target": 67543092,
+            "original_target": 67543092,
+            "independent_expected_target": 67543092,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "PIReg",
+            "addend": 16,
+            "equal": true
+          },
+          {
+            "offset": 664,
+            "kind": "absolute",
+            "candidate_target": 67543096,
+            "original_target": 67543096,
+            "independent_expected_target": 67543096,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "PIReg",
+            "addend": 20,
+            "equal": true
+          },
+          {
+            "offset": 674,
+            "kind": "absolute",
+            "candidate_target": 67543100,
+            "original_target": 67543100,
+            "independent_expected_target": 67543100,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "PIReg",
+            "addend": 24,
+            "equal": true
+          },
+          {
+            "offset": 684,
+            "kind": "absolute",
+            "candidate_target": 67543104,
+            "original_target": 67543104,
+            "independent_expected_target": 67543104,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "PIReg",
+            "addend": 28,
+            "equal": true
+          },
+          {
+            "offset": 694,
+            "kind": "absolute",
+            "candidate_target": 67543108,
+            "original_target": 67543108,
+            "independent_expected_target": 67543108,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "PIReg",
+            "addend": 32,
+            "equal": true
+          },
+          {
+            "offset": 704,
+            "kind": "absolute",
+            "candidate_target": 67543112,
+            "original_target": 67543112,
+            "independent_expected_target": 67543112,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "PIReg",
+            "addend": 36,
+            "equal": true
+          },
+          {
+            "offset": 714,
+            "kind": "absolute",
+            "candidate_target": 67543116,
+            "original_target": 67543116,
+            "independent_expected_target": 67543116,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "PIReg",
+            "addend": 40,
+            "equal": true
+          },
+          {
+            "offset": 724,
+            "kind": "absolute",
+            "candidate_target": 67543120,
+            "original_target": 67543120,
+            "independent_expected_target": 67543120,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "PIReg",
+            "addend": 44,
+            "equal": true
+          },
+          {
+            "offset": 734,
+            "kind": "absolute",
+            "candidate_target": 67543124,
+            "original_target": 67543124,
+            "independent_expected_target": 67543124,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "PIReg",
+            "addend": 48,
+            "equal": true
+          },
+          {
+            "offset": 751,
+            "kind": "absolute",
+            "candidate_target": 65443148,
+            "original_target": 65443148,
+            "independent_expected_target": 65443148,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "SPReg",
+            "addend": 24,
+            "equal": true
+          },
+          {
+            "offset": 768,
+            "kind": "absolute",
+            "candidate_target": 65443152,
+            "original_target": 65443152,
+            "independent_expected_target": 65443152,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "SPReg",
+            "addend": 28,
+            "equal": true
+          },
+          {
+            "offset": 831,
+            "kind": "absolute",
+            "candidate_target": 4290668,
+            "original_target": 4290780,
+            "independent_expected_target": 4290780,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1884,
+            "equal": true
+          },
+          {
+            "offset": 838,
+            "kind": "absolute",
+            "candidate_target": 4290624,
+            "original_target": 4290736,
+            "independent_expected_target": 4290736,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1840,
+            "equal": true
+          },
+          {
+            "offset": 857,
+            "kind": "absolute",
+            "candidate_target": 4290708,
+            "original_target": 4290820,
+            "independent_expected_target": 4290820,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1924,
+            "equal": true
+          },
+          {
+            "offset": 894,
+            "kind": "absolute",
+            "candidate_target": 65425356,
+            "original_target": 65425356,
+            "independent_expected_target": 65425356,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RDRAMReg",
+            "addend": 4,
+            "equal": true
+          },
+          {
+            "offset": 904,
+            "kind": "absolute",
+            "candidate_target": 65425360,
+            "original_target": 65425360,
+            "independent_expected_target": 65425360,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RDRAMReg",
+            "addend": 8,
+            "equal": true
+          },
+          {
+            "offset": 914,
+            "kind": "absolute",
+            "candidate_target": 65425364,
+            "original_target": 65425364,
+            "independent_expected_target": 65425364,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RDRAMReg",
+            "addend": 12,
+            "equal": true
+          },
+          {
+            "offset": 924,
+            "kind": "absolute",
+            "candidate_target": 65425368,
+            "original_target": 65425368,
+            "independent_expected_target": 65425368,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RDRAMReg",
+            "addend": 16,
+            "equal": true
+          },
+          {
+            "offset": 934,
+            "kind": "absolute",
+            "candidate_target": 65425372,
+            "original_target": 65425372,
+            "independent_expected_target": 65425372,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RDRAMReg",
+            "addend": 20,
+            "equal": true
+          },
+          {
+            "offset": 944,
+            "kind": "absolute",
+            "candidate_target": 65425376,
+            "original_target": 65425376,
+            "independent_expected_target": 65425376,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RDRAMReg",
+            "addend": 24,
+            "equal": true
+          },
+          {
+            "offset": 954,
+            "kind": "absolute",
+            "candidate_target": 65425380,
+            "original_target": 65425380,
+            "independent_expected_target": 65425380,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RDRAMReg",
+            "addend": 28,
+            "equal": true
+          },
+          {
+            "offset": 964,
+            "kind": "absolute",
+            "candidate_target": 65425384,
+            "original_target": 65425384,
+            "independent_expected_target": 65425384,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RDRAMReg",
+            "addend": 32,
+            "equal": true
+          },
+          {
+            "offset": 974,
+            "kind": "absolute",
+            "candidate_target": 65425388,
+            "original_target": 65425388,
+            "independent_expected_target": 65425388,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RDRAMReg",
+            "addend": 36,
+            "equal": true
+          },
+          {
+            "offset": 1013,
+            "kind": "absolute",
+            "candidate_target": 65443100,
+            "original_target": 65443100,
+            "independent_expected_target": 65443100,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "MIReg",
+            "addend": 8,
+            "equal": true
+          },
+          {
+            "offset": 1029,
+            "kind": "absolute",
+            "candidate_target": 65443116,
+            "original_target": 65443116,
+            "independent_expected_target": 65443116,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "SIAddress",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 1070,
+            "kind": "absolute",
+            "candidate_target": 4290760,
+            "original_target": 4290872,
+            "independent_expected_target": 4290872,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1976,
+            "equal": true
+          },
+          {
+            "offset": 1077,
+            "kind": "absolute",
+            "candidate_target": 4290724,
+            "original_target": 4290836,
+            "independent_expected_target": 4290836,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1940,
+            "equal": true
+          },
+          {
+            "offset": 1082,
+            "kind": "absolute",
+            "candidate_target": 65443124,
+            "original_target": 65443124,
+            "independent_expected_target": 65443124,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "SPReg",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 1092,
+            "kind": "absolute",
+            "candidate_target": 65443128,
+            "original_target": 65443128,
+            "independent_expected_target": 65443128,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "SPReg",
+            "addend": 4,
+            "equal": true
+          },
+          {
+            "offset": 1102,
+            "kind": "absolute",
+            "candidate_target": 65443132,
+            "original_target": 65443132,
+            "independent_expected_target": 65443132,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "SPReg",
+            "addend": 8,
+            "equal": true
+          },
+          {
+            "offset": 1112,
+            "kind": "absolute",
+            "candidate_target": 65443136,
+            "original_target": 65443136,
+            "independent_expected_target": 65443136,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "SPReg",
+            "addend": 12,
+            "equal": true
+          },
+          {
+            "offset": 1122,
+            "kind": "absolute",
+            "candidate_target": 65443140,
+            "original_target": 65443140,
+            "independent_expected_target": 65443140,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "SPReg",
+            "addend": 16,
+            "equal": true
+          },
+          {
+            "offset": 1132,
+            "kind": "absolute",
+            "candidate_target": 65443140,
+            "original_target": 65443140,
+            "independent_expected_target": 65443140,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "SPReg",
+            "addend": 16,
+            "equal": true
+          },
+          {
+            "offset": 1148,
+            "kind": "absolute",
+            "candidate_target": 65443140,
+            "original_target": 65443140,
+            "independent_expected_target": 65443140,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "SPReg",
+            "addend": 16,
+            "equal": true
+          },
+          {
+            "offset": 1164,
+            "kind": "absolute",
+            "candidate_target": 65443144,
+            "original_target": 65443144,
+            "independent_expected_target": 65443144,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "SPReg",
+            "addend": 20,
+            "equal": true
+          },
+          {
+            "offset": 1170,
+            "kind": "absolute",
+            "candidate_target": 65443144,
+            "original_target": 65443144,
+            "independent_expected_target": 65443144,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "SPReg",
+            "addend": 20,
+            "equal": true
+          },
+          {
+            "offset": 1223,
+            "kind": "absolute",
+            "candidate_target": 4290852,
+            "original_target": 4290964,
+            "independent_expected_target": 4290964,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 2068,
+            "equal": true
+          },
+          {
+            "offset": 1230,
+            "kind": "absolute",
+            "candidate_target": 4290792,
+            "original_target": 4290904,
+            "independent_expected_target": 4290904,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 2008,
+            "equal": true
+          },
+          {
+            "offset": 1235,
+            "kind": "absolute",
+            "candidate_target": 65426184,
+            "original_target": 65426184,
+            "independent_expected_target": 65426184,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "VIReg",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 1245,
+            "kind": "absolute",
+            "candidate_target": 65426188,
+            "original_target": 65426188,
+            "independent_expected_target": 65426188,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "VIReg",
+            "addend": 4,
+            "equal": true
+          },
+          {
+            "offset": 1255,
+            "kind": "absolute",
+            "candidate_target": 65426192,
+            "original_target": 65426192,
+            "independent_expected_target": 65426192,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "VIReg",
+            "addend": 8,
+            "equal": true
+          },
+          {
+            "offset": 1265,
+            "kind": "absolute",
+            "candidate_target": 65426196,
+            "original_target": 65426196,
+            "independent_expected_target": 65426196,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "VIReg",
+            "addend": 12,
+            "equal": true
+          },
+          {
+            "offset": 1275,
+            "kind": "absolute",
+            "candidate_target": 67543072,
+            "original_target": 67543072,
+            "independent_expected_target": 67543072,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "VICurrentLine",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 1283,
+            "kind": "absolute",
+            "candidate_target": 67543072,
+            "original_target": 67543072,
+            "independent_expected_target": 67543072,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "VICurrentLine",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 1301,
+            "kind": "absolute",
+            "candidate_target": 65426204,
+            "original_target": 65426204,
+            "independent_expected_target": 65426204,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "VIReg",
+            "addend": 20,
+            "equal": true
+          },
+          {
+            "offset": 1311,
+            "kind": "absolute",
+            "candidate_target": 65426208,
+            "original_target": 65426208,
+            "independent_expected_target": 65426208,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "VIReg",
+            "addend": 24,
+            "equal": true
+          },
+          {
+            "offset": 1321,
+            "kind": "absolute",
+            "candidate_target": 65426212,
+            "original_target": 65426212,
+            "independent_expected_target": 65426212,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "VIReg",
+            "addend": 28,
+            "equal": true
+          },
+          {
+            "offset": 1331,
+            "kind": "absolute",
+            "candidate_target": 65426216,
+            "original_target": 65426216,
+            "independent_expected_target": 65426216,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "VIReg",
+            "addend": 32,
+            "equal": true
+          },
+          {
+            "offset": 1341,
+            "kind": "absolute",
+            "candidate_target": 65426220,
+            "original_target": 65426220,
+            "independent_expected_target": 65426220,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "VIReg",
+            "addend": 36,
+            "equal": true
+          },
+          {
+            "offset": 1351,
+            "kind": "absolute",
+            "candidate_target": 65426224,
+            "original_target": 65426224,
+            "independent_expected_target": 65426224,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "VIReg",
+            "addend": 40,
+            "equal": true
+          },
+          {
+            "offset": 1361,
+            "kind": "absolute",
+            "candidate_target": 65426228,
+            "original_target": 65426228,
+            "independent_expected_target": 65426228,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "VIReg",
+            "addend": 44,
+            "equal": true
+          },
+          {
+            "offset": 1371,
+            "kind": "absolute",
+            "candidate_target": 65426232,
+            "original_target": 65426232,
+            "independent_expected_target": 65426232,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "VIReg",
+            "addend": 48,
+            "equal": true
+          },
+          {
+            "offset": 1381,
+            "kind": "absolute",
+            "candidate_target": 65426236,
+            "original_target": 65426236,
+            "independent_expected_target": 65426236,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "VIReg",
+            "addend": 52,
+            "equal": true
+          },
+          {
+            "offset": 1418,
+            "kind": "absolute",
+            "candidate_target": 4290944,
+            "original_target": 4291056,
+            "independent_expected_target": 4291056,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 2160,
+            "equal": true
+          },
+          {
+            "offset": 1425,
+            "kind": "absolute",
+            "candidate_target": 4290908,
+            "original_target": 4291020,
+            "independent_expected_target": 4291020,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 2124,
+            "equal": true
+          },
+          {
+            "offset": 1430,
+            "kind": "absolute",
+            "candidate_target": 67564256,
+            "original_target": 67564256,
+            "independent_expected_target": 67564256,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "DPCReg",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 1440,
+            "kind": "absolute",
+            "candidate_target": 67564260,
+            "original_target": 67564260,
+            "independent_expected_target": 67564260,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "DPCReg",
+            "addend": 4,
+            "equal": true
+          },
+          {
+            "offset": 1450,
+            "kind": "absolute",
+            "candidate_target": 67564264,
+            "original_target": 67564264,
+            "independent_expected_target": 67564264,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "DPCReg",
+            "addend": 8,
+            "equal": true
+          },
+          {
+            "offset": 1460,
+            "kind": "absolute",
+            "candidate_target": 67564268,
+            "original_target": 67564268,
+            "independent_expected_target": 67564268,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "DPCReg",
+            "addend": 12,
+            "equal": true
+          },
+          {
+            "offset": 1470,
+            "kind": "absolute",
+            "candidate_target": 67564272,
+            "original_target": 67564272,
+            "independent_expected_target": 67564272,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "DPCReg",
+            "addend": 16,
+            "equal": true
+          },
+          {
+            "offset": 1480,
+            "kind": "absolute",
+            "candidate_target": 67564276,
+            "original_target": 67564276,
+            "independent_expected_target": 67564276,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "DPCReg",
+            "addend": 20,
+            "equal": true
+          },
+          {
+            "offset": 1490,
+            "kind": "absolute",
+            "candidate_target": 67564280,
+            "original_target": 67564280,
+            "independent_expected_target": 67564280,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "DPCReg",
+            "addend": 24,
+            "equal": true
+          },
+          {
+            "offset": 1500,
+            "kind": "absolute",
+            "candidate_target": 67564284,
+            "original_target": 67564284,
+            "independent_expected_target": 67564284,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "DPCReg",
+            "addend": 28,
+            "equal": true
+          },
+          {
+            "offset": 1525,
+            "kind": "absolute",
+            "candidate_target": 72140040,
+            "original_target": 72140040,
+            "independent_expected_target": 72140040,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "FlashCommand",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 1536,
+            "kind": "absolute",
+            "candidate_target": 71877892,
+            "original_target": 71877892,
+            "independent_expected_target": 71877892,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "FlashStatus",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 1546,
+            "kind": "absolute",
+            "candidate_target": 71877896,
+            "original_target": 71877896,
+            "independent_expected_target": 71877896,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "SRAMData",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 1614,
+            "kind": "absolute",
+            "candidate_target": 4408972,
+            "original_target": 4408972,
+            "independent_expected_target": 4408972,
+            "basis": "exact_source_literal",
+            "symbol_or_literal": "Trying to Read32 from unhandled or invalid memory",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 1620,
+            "kind": "absolute",
+            "candidate_target": 67547200,
+            "original_target": 67547200,
+            "independent_expected_target": 67547200,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "ReadError",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 1629,
+            "kind": "relative",
+            "candidate_target": 4279744,
+            "original_target": 4279856,
+            "independent_expected_target": 4279856,
+            "basis": "independent_function_identity",
+            "symbol_or_literal": "ReportMemoryError",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 1640,
+            "kind": "absolute",
+            "candidate_target": 4289053,
+            "original_target": 4289165,
+            "independent_expected_target": 4289165,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 269,
+            "equal": true
+          },
+          {
+            "offset": 1644,
+            "kind": "absolute",
+            "candidate_target": 4289063,
+            "original_target": 4289175,
+            "independent_expected_target": 4289175,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 279,
+            "equal": true
+          },
+          {
+            "offset": 1648,
+            "kind": "absolute",
+            "candidate_target": 4289073,
+            "original_target": 4289185,
+            "independent_expected_target": 4289185,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 289,
+            "equal": true
+          },
+          {
+            "offset": 1652,
+            "kind": "absolute",
+            "candidate_target": 4289083,
+            "original_target": 4289195,
+            "independent_expected_target": 4289195,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 299,
+            "equal": true
+          },
+          {
+            "offset": 1656,
+            "kind": "absolute",
+            "candidate_target": 4289093,
+            "original_target": 4289205,
+            "independent_expected_target": 4289205,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 309,
+            "equal": true
+          },
+          {
+            "offset": 1660,
+            "kind": "absolute",
+            "candidate_target": 4289103,
+            "original_target": 4289215,
+            "independent_expected_target": 4289215,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 319,
+            "equal": true
+          },
+          {
+            "offset": 1664,
+            "kind": "absolute",
+            "candidate_target": 4289113,
+            "original_target": 4289225,
+            "independent_expected_target": 4289225,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 329,
+            "equal": true
+          },
+          {
+            "offset": 1696,
+            "kind": "absolute",
+            "candidate_target": 4289152,
+            "original_target": 4289264,
+            "independent_expected_target": 4289264,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 368,
+            "equal": true
+          },
+          {
+            "offset": 1700,
+            "kind": "absolute",
+            "candidate_target": 4289162,
+            "original_target": 4289274,
+            "independent_expected_target": 4289274,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 378,
+            "equal": true
+          },
+          {
+            "offset": 1704,
+            "kind": "absolute",
+            "candidate_target": 4289172,
+            "original_target": 4289284,
+            "independent_expected_target": 4289284,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 388,
+            "equal": true
+          },
+          {
+            "offset": 1708,
+            "kind": "absolute",
+            "candidate_target": 4289182,
+            "original_target": 4289294,
+            "independent_expected_target": 4289294,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 398,
+            "equal": true
+          },
+          {
+            "offset": 1712,
+            "kind": "absolute",
+            "candidate_target": 4289192,
+            "original_target": 4289304,
+            "independent_expected_target": 4289304,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 408,
+            "equal": true
+          },
+          {
+            "offset": 1732,
+            "kind": "absolute",
+            "candidate_target": 4289397,
+            "original_target": 4289509,
+            "independent_expected_target": 4289509,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 613,
+            "equal": true
+          },
+          {
+            "offset": 1736,
+            "kind": "absolute",
+            "candidate_target": 4289407,
+            "original_target": 4289519,
+            "independent_expected_target": 4289519,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 623,
+            "equal": true
+          },
+          {
+            "offset": 1740,
+            "kind": "absolute",
+            "candidate_target": 4289417,
+            "original_target": 4289529,
+            "independent_expected_target": 4289529,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 633,
+            "equal": true
+          },
+          {
+            "offset": 1744,
+            "kind": "absolute",
+            "candidate_target": 4289427,
+            "original_target": 4289539,
+            "independent_expected_target": 4289539,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 643,
+            "equal": true
+          },
+          {
+            "offset": 1748,
+            "kind": "absolute",
+            "candidate_target": 4289437,
+            "original_target": 4289549,
+            "independent_expected_target": 4289549,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 653,
+            "equal": true
+          },
+          {
+            "offset": 1752,
+            "kind": "absolute",
+            "candidate_target": 4289447,
+            "original_target": 4289559,
+            "independent_expected_target": 4289559,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 663,
+            "equal": true
+          },
+          {
+            "offset": 1756,
+            "kind": "absolute",
+            "candidate_target": 4289457,
+            "original_target": 4289569,
+            "independent_expected_target": 4289569,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 673,
+            "equal": true
+          },
+          {
+            "offset": 1760,
+            "kind": "absolute",
+            "candidate_target": 4289467,
+            "original_target": 4289579,
+            "independent_expected_target": 4289579,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 683,
+            "equal": true
+          },
+          {
+            "offset": 1764,
+            "kind": "absolute",
+            "candidate_target": 4289477,
+            "original_target": 4289589,
+            "independent_expected_target": 4289589,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 693,
+            "equal": true
+          },
+          {
+            "offset": 1768,
+            "kind": "absolute",
+            "candidate_target": 4289487,
+            "original_target": 4289599,
+            "independent_expected_target": 4289599,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 703,
+            "equal": true
+          },
+          {
+            "offset": 1772,
+            "kind": "absolute",
+            "candidate_target": 4289497,
+            "original_target": 4289609,
+            "independent_expected_target": 4289609,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 713,
+            "equal": true
+          },
+          {
+            "offset": 1776,
+            "kind": "absolute",
+            "candidate_target": 4289507,
+            "original_target": 4289619,
+            "independent_expected_target": 4289619,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 723,
+            "equal": true
+          },
+          {
+            "offset": 1780,
+            "kind": "absolute",
+            "candidate_target": 4289517,
+            "original_target": 4289629,
+            "independent_expected_target": 4289629,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 733,
+            "equal": true
+          },
+          {
+            "offset": 1784,
+            "kind": "absolute",
+            "candidate_target": 4289527,
+            "original_target": 4289639,
+            "independent_expected_target": 4289639,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 743,
+            "equal": true
+          },
+          {
+            "offset": 1840,
+            "kind": "absolute",
+            "candidate_target": 4289626,
+            "original_target": 4289738,
+            "independent_expected_target": 4289738,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 842,
+            "equal": true
+          },
+          {
+            "offset": 1844,
+            "kind": "absolute",
+            "candidate_target": 4289677,
+            "original_target": 4289789,
+            "independent_expected_target": 4289789,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 893,
+            "equal": true
+          },
+          {
+            "offset": 1848,
+            "kind": "absolute",
+            "candidate_target": 4289687,
+            "original_target": 4289799,
+            "independent_expected_target": 4289799,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 903,
+            "equal": true
+          },
+          {
+            "offset": 1852,
+            "kind": "absolute",
+            "candidate_target": 4289697,
+            "original_target": 4289809,
+            "independent_expected_target": 4289809,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 913,
+            "equal": true
+          },
+          {
+            "offset": 1856,
+            "kind": "absolute",
+            "candidate_target": 4289707,
+            "original_target": 4289819,
+            "independent_expected_target": 4289819,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 923,
+            "equal": true
+          },
+          {
+            "offset": 1860,
+            "kind": "absolute",
+            "candidate_target": 4289717,
+            "original_target": 4289829,
+            "independent_expected_target": 4289829,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 933,
+            "equal": true
+          },
+          {
+            "offset": 1864,
+            "kind": "absolute",
+            "candidate_target": 4289727,
+            "original_target": 4289839,
+            "independent_expected_target": 4289839,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 943,
+            "equal": true
+          },
+          {
+            "offset": 1868,
+            "kind": "absolute",
+            "candidate_target": 4289737,
+            "original_target": 4289849,
+            "independent_expected_target": 4289849,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 953,
+            "equal": true
+          },
+          {
+            "offset": 1872,
+            "kind": "absolute",
+            "candidate_target": 4289747,
+            "original_target": 4289859,
+            "independent_expected_target": 4289859,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 963,
+            "equal": true
+          },
+          {
+            "offset": 1876,
+            "kind": "absolute",
+            "candidate_target": 4289757,
+            "original_target": 4289869,
+            "independent_expected_target": 4289869,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 973,
+            "equal": true
+          },
+          {
+            "offset": 1880,
+            "kind": "absolute",
+            "candidate_target": 4290417,
+            "original_target": 4290529,
+            "independent_expected_target": 4290529,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1633,
+            "equal": true
+          },
+          {
+            "offset": 1924,
+            "kind": "absolute",
+            "candidate_target": 4289645,
+            "original_target": 4289757,
+            "independent_expected_target": 4289757,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 861,
+            "equal": true
+          },
+          {
+            "offset": 1928,
+            "kind": "absolute",
+            "candidate_target": 4289645,
+            "original_target": 4289757,
+            "independent_expected_target": 4289757,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 861,
+            "equal": true
+          },
+          {
+            "offset": 1932,
+            "kind": "absolute",
+            "candidate_target": 4289655,
+            "original_target": 4289767,
+            "independent_expected_target": 4289767,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 871,
+            "equal": true
+          },
+          {
+            "offset": 1936,
+            "kind": "absolute",
+            "candidate_target": 4289655,
+            "original_target": 4289767,
+            "independent_expected_target": 4289767,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 871,
+            "equal": true
+          },
+          {
+            "offset": 1940,
+            "kind": "absolute",
+            "candidate_target": 4289865,
+            "original_target": 4289977,
+            "independent_expected_target": 4289977,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1081,
+            "equal": true
+          },
+          {
+            "offset": 1944,
+            "kind": "absolute",
+            "candidate_target": 4289875,
+            "original_target": 4289987,
+            "independent_expected_target": 4289987,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1091,
+            "equal": true
+          },
+          {
+            "offset": 1948,
+            "kind": "absolute",
+            "candidate_target": 4289885,
+            "original_target": 4289997,
+            "independent_expected_target": 4289997,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1101,
+            "equal": true
+          },
+          {
+            "offset": 1952,
+            "kind": "absolute",
+            "candidate_target": 4289895,
+            "original_target": 4290007,
+            "independent_expected_target": 4290007,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1111,
+            "equal": true
+          },
+          {
+            "offset": 1956,
+            "kind": "absolute",
+            "candidate_target": 4289905,
+            "original_target": 4290017,
+            "independent_expected_target": 4290017,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1121,
+            "equal": true
+          },
+          {
+            "offset": 1960,
+            "kind": "absolute",
+            "candidate_target": 4289915,
+            "original_target": 4290027,
+            "independent_expected_target": 4290027,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1131,
+            "equal": true
+          },
+          {
+            "offset": 1964,
+            "kind": "absolute",
+            "candidate_target": 4289931,
+            "original_target": 4290043,
+            "independent_expected_target": 4290043,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1147,
+            "equal": true
+          },
+          {
+            "offset": 1968,
+            "kind": "absolute",
+            "candidate_target": 4289947,
+            "original_target": 4290059,
+            "independent_expected_target": 4290059,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1163,
+            "equal": true
+          },
+          {
+            "offset": 1972,
+            "kind": "absolute",
+            "candidate_target": 4289967,
+            "original_target": 4290079,
+            "independent_expected_target": 4290079,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1183,
+            "equal": true
+          },
+          {
+            "offset": 2008,
+            "kind": "absolute",
+            "candidate_target": 4290018,
+            "original_target": 4290130,
+            "independent_expected_target": 4290130,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1234,
+            "equal": true
+          },
+          {
+            "offset": 2012,
+            "kind": "absolute",
+            "candidate_target": 4290028,
+            "original_target": 4290140,
+            "independent_expected_target": 4290140,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1244,
+            "equal": true
+          },
+          {
+            "offset": 2016,
+            "kind": "absolute",
+            "candidate_target": 4290038,
+            "original_target": 4290150,
+            "independent_expected_target": 4290150,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1254,
+            "equal": true
+          },
+          {
+            "offset": 2020,
+            "kind": "absolute",
+            "candidate_target": 4290048,
+            "original_target": 4290160,
+            "independent_expected_target": 4290160,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1264,
+            "equal": true
+          },
+          {
+            "offset": 2024,
+            "kind": "absolute",
+            "candidate_target": 4290058,
+            "original_target": 4290170,
+            "independent_expected_target": 4290170,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1274,
+            "equal": true
+          },
+          {
+            "offset": 2028,
+            "kind": "absolute",
+            "candidate_target": 4290084,
+            "original_target": 4290196,
+            "independent_expected_target": 4290196,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1300,
+            "equal": true
+          },
+          {
+            "offset": 2032,
+            "kind": "absolute",
+            "candidate_target": 4290094,
+            "original_target": 4290206,
+            "independent_expected_target": 4290206,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1310,
+            "equal": true
+          },
+          {
+            "offset": 2036,
+            "kind": "absolute",
+            "candidate_target": 4290104,
+            "original_target": 4290216,
+            "independent_expected_target": 4290216,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1320,
+            "equal": true
+          },
+          {
+            "offset": 2040,
+            "kind": "absolute",
+            "candidate_target": 4290114,
+            "original_target": 4290226,
+            "independent_expected_target": 4290226,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1330,
+            "equal": true
+          },
+          {
+            "offset": 2044,
+            "kind": "absolute",
+            "candidate_target": 4290124,
+            "original_target": 4290236,
+            "independent_expected_target": 4290236,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1340,
+            "equal": true
+          },
+          {
+            "offset": 2048,
+            "kind": "absolute",
+            "candidate_target": 4290134,
+            "original_target": 4290246,
+            "independent_expected_target": 4290246,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1350,
+            "equal": true
+          },
+          {
+            "offset": 2052,
+            "kind": "absolute",
+            "candidate_target": 4290144,
+            "original_target": 4290256,
+            "independent_expected_target": 4290256,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1360,
+            "equal": true
+          },
+          {
+            "offset": 2056,
+            "kind": "absolute",
+            "candidate_target": 4290154,
+            "original_target": 4290266,
+            "independent_expected_target": 4290266,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1370,
+            "equal": true
+          },
+          {
+            "offset": 2060,
+            "kind": "absolute",
+            "candidate_target": 4290164,
+            "original_target": 4290276,
+            "independent_expected_target": 4290276,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1380,
+            "equal": true
+          },
+          {
+            "offset": 2064,
+            "kind": "absolute",
+            "candidate_target": 4290174,
+            "original_target": 4290286,
+            "independent_expected_target": 4290286,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1390,
+            "equal": true
+          },
+          {
+            "offset": 2124,
+            "kind": "absolute",
+            "candidate_target": 4290213,
+            "original_target": 4290325,
+            "independent_expected_target": 4290325,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1429,
+            "equal": true
+          },
+          {
+            "offset": 2128,
+            "kind": "absolute",
+            "candidate_target": 4290223,
+            "original_target": 4290335,
+            "independent_expected_target": 4290335,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1439,
+            "equal": true
+          },
+          {
+            "offset": 2132,
+            "kind": "absolute",
+            "candidate_target": 4290233,
+            "original_target": 4290345,
+            "independent_expected_target": 4290345,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1449,
+            "equal": true
+          },
+          {
+            "offset": 2136,
+            "kind": "absolute",
+            "candidate_target": 4290243,
+            "original_target": 4290355,
+            "independent_expected_target": 4290355,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1459,
+            "equal": true
+          },
+          {
+            "offset": 2140,
+            "kind": "absolute",
+            "candidate_target": 4290253,
+            "original_target": 4290365,
+            "independent_expected_target": 4290365,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1469,
+            "equal": true
+          },
+          {
+            "offset": 2144,
+            "kind": "absolute",
+            "candidate_target": 4290263,
+            "original_target": 4290375,
+            "independent_expected_target": 4290375,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1479,
+            "equal": true
+          },
+          {
+            "offset": 2148,
+            "kind": "absolute",
+            "candidate_target": 4290273,
+            "original_target": 4290385,
+            "independent_expected_target": 4290385,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1489,
+            "equal": true
+          },
+          {
+            "offset": 2152,
+            "kind": "absolute",
+            "candidate_target": 4290283,
+            "original_target": 4290395,
+            "independent_expected_target": 4290395,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1499,
+            "equal": true
+          },
+          {
+            "offset": 2156,
+            "kind": "absolute",
+            "candidate_target": 4290293,
+            "original_target": 4290405,
+            "independent_expected_target": 4290405,
+            "basis": "same_function_label_and_table_entry",
+            "symbol_or_literal": "ReadPhysicalWord",
+            "addend": 1509,
+            "equal": true
+          }
+        ]
+      },
+      {
+        "name": "WritePhysicalByte",
+        "original_va": 4291088,
+        "rebuilt_va": 4290976,
+        "instruction_body_bytes": 286,
+        "complete_link_span_bytes": 288,
+        "all_nonrelocation_bytes_equal": true,
+        "non_address_differences": [],
+        "all_address_fields_independently_identified": true,
+        "all_address_targets_equal": true,
+        "function_match": true,
+        "raw_bytes_equal": false,
+        "validated_address_fields": [
+          {
+            "offset": 6,
+            "kind": "absolute",
+            "candidate_target": 4448376,
+            "original_target": 4448376,
+            "independent_expected_target": 4448376,
+            "basis": "validated_SEH_filter_and_handler_offsets",
+            "symbol_or_literal": "single RAM-store exception scope",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 11,
+            "kind": "absolute",
+            "candidate_target": 4378612,
+            "original_target": 4378740,
+            "independent_expected_target": 4378740,
+            "basis": "independent_function_identity",
+            "symbol_or_literal": "__except_handler3",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 43,
+            "kind": "absolute",
+            "candidate_target": 65425000,
+            "original_target": 65425000,
+            "independent_expected_target": 65425000,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RDRAMSize",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 75,
+            "kind": "relative",
+            "candidate_target": 4288192,
+            "original_target": 4288304,
+            "independent_expected_target": 4288304,
+            "basis": "independent_function_identity",
+            "symbol_or_literal": "InvalidateRecompiledRange",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 92,
+            "kind": "absolute",
+            "candidate_target": 65443156,
+            "original_target": 65443156,
+            "independent_expected_target": 65443156,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RDRAM",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 108,
+            "kind": "absolute",
+            "candidate_target": 19140184,
+            "original_target": 19140184,
+            "independent_expected_target": 19140184,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "Dynarec_Mode",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 125,
+            "kind": "absolute",
+            "candidate_target": 19140336,
+            "original_target": 19140336,
+            "independent_expected_target": 19140336,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "Dynarec_BlockCode",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 173,
+            "kind": "absolute",
+            "candidate_target": 438344,
+            "original_target": 438344,
+            "independent_expected_target": 438344,
+            "basis": "source_guest_base_subtraction",
+            "symbol_or_literal": "SPMemory",
+            "addend": -67108864,
+            "equal": true
+          },
+          {
+            "offset": 217,
+            "kind": "absolute",
+            "candidate_target": 3827713632,
+            "original_target": 3827713632,
+            "independent_expected_target": 3827713632,
+            "basis": "source_guest_base_subtraction",
+            "symbol_or_literal": "PIFRam",
+            "addend": -532678592,
+            "equal": true
+          },
+          {
+            "offset": 222,
+            "kind": "relative",
+            "candidate_target": 4326912,
+            "original_target": 4327040,
+            "independent_expected_target": 4327040,
+            "basis": "independent_function_identity",
+            "symbol_or_literal": "ProcessPIF",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 247,
+            "kind": "absolute",
+            "candidate_target": 67547200,
+            "original_target": 67547200,
+            "independent_expected_target": 67547200,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "ReadError",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 258,
+            "kind": "absolute",
+            "candidate_target": 4408924,
+            "original_target": 4408924,
+            "independent_expected_target": 4408924,
+            "basis": "exact_source_literal",
+            "symbol_or_literal": "Trying to Write8 to unhandled or invalid memory",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 263,
+            "kind": "relative",
+            "candidate_target": 4279744,
+            "original_target": 4279856,
+            "independent_expected_target": 4279856,
+            "basis": "independent_function_identity",
+            "symbol_or_literal": "ReportMemoryError",
+            "addend": 0,
+            "equal": true
+          }
+        ]
+      },
+      {
+        "name": "WritePhysicalHalf",
+        "original_va": 4291376,
+        "rebuilt_va": 4291264,
+        "instruction_body_bytes": 312,
+        "complete_link_span_bytes": 320,
+        "all_nonrelocation_bytes_equal": true,
+        "non_address_differences": [],
+        "all_address_fields_independently_identified": true,
+        "all_address_targets_equal": true,
+        "function_match": true,
+        "raw_bytes_equal": false,
+        "validated_address_fields": [
+          {
+            "offset": 6,
+            "kind": "absolute",
+            "candidate_target": 4448360,
+            "original_target": 4448360,
+            "independent_expected_target": 4448360,
+            "basis": "validated_SEH_filter_and_handler_offsets",
+            "symbol_or_literal": "single RAM-store exception scope",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 11,
+            "kind": "absolute",
+            "candidate_target": 4378612,
+            "original_target": 4378740,
+            "independent_expected_target": 4378740,
+            "basis": "independent_function_identity",
+            "symbol_or_literal": "__except_handler3",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 43,
+            "kind": "absolute",
+            "candidate_target": 65425000,
+            "original_target": 65425000,
+            "independent_expected_target": 65425000,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RDRAMSize",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 75,
+            "kind": "relative",
+            "candidate_target": 4288192,
+            "original_target": 4288304,
+            "independent_expected_target": 4288304,
+            "basis": "independent_function_identity",
+            "symbol_or_literal": "InvalidateRecompiledRange",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 93,
+            "kind": "absolute",
+            "candidate_target": 65443156,
+            "original_target": 65443156,
+            "independent_expected_target": 65443156,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "RDRAM",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 110,
+            "kind": "absolute",
+            "candidate_target": 19140184,
+            "original_target": 19140184,
+            "independent_expected_target": 19140184,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "Dynarec_Mode",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 127,
+            "kind": "absolute",
+            "candidate_target": 19140336,
+            "original_target": 19140336,
+            "independent_expected_target": 19140336,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "Dynarec_BlockCode",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 187,
+            "kind": "absolute",
+            "candidate_target": 438344,
+            "original_target": 438344,
+            "independent_expected_target": 438344,
+            "basis": "source_guest_base_subtraction",
+            "symbol_or_literal": "SPMemory",
+            "addend": -67108864,
+            "equal": true
+          },
+          {
+            "offset": 243,
+            "kind": "absolute",
+            "candidate_target": 3827713632,
+            "original_target": 3827713632,
+            "independent_expected_target": 3827713632,
+            "basis": "source_guest_base_subtraction",
+            "symbol_or_literal": "PIFRam",
+            "addend": -532678592,
+            "equal": true
+          },
+          {
+            "offset": 248,
+            "kind": "relative",
+            "candidate_target": 4326912,
+            "original_target": 4327040,
+            "independent_expected_target": 4327040,
+            "basis": "independent_function_identity",
+            "symbol_or_literal": "ProcessPIF",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 273,
+            "kind": "absolute",
+            "candidate_target": 67547200,
+            "original_target": 67547200,
+            "independent_expected_target": 67547200,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "ReadError",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 284,
+            "kind": "absolute",
+            "candidate_target": 4408872,
+            "original_target": 4408872,
+            "independent_expected_target": 4408872,
+            "basis": "exact_source_literal",
+            "symbol_or_literal": "Trying to Write16 to unhandled or invalid memory",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 289,
+            "kind": "relative",
+            "candidate_target": 4279744,
+            "original_target": 4279856,
+            "independent_expected_target": 4279856,
+            "basis": "independent_function_identity",
+            "symbol_or_literal": "ReportMemoryError",
+            "addend": 0,
+            "equal": true
+          }
+        ]
+      },
+      {
+        "name": "WritePhysicalDoubleWord",
+        "original_va": 4298064,
+        "rebuilt_va": 4297952,
+        "instruction_body_bytes": 34,
+        "complete_link_span_bytes": 48,
+        "all_nonrelocation_bytes_equal": true,
+        "non_address_differences": [],
+        "all_address_fields_independently_identified": true,
+        "all_address_targets_equal": true,
+        "function_match": true,
+        "raw_bytes_equal": true,
+        "validated_address_fields": [
+          {
+            "offset": 12,
+            "kind": "relative",
+            "candidate_target": 4291584,
+            "original_target": 4291696,
+            "independent_expected_target": 4291696,
+            "basis": "independent_function_identity",
+            "symbol_or_literal": "WritePhysicalWord",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 26,
+            "kind": "relative",
+            "candidate_target": 4291584,
+            "original_target": 4291696,
+            "independent_expected_target": 4291696,
+            "basis": "independent_function_identity",
+            "symbol_or_literal": "WritePhysicalWord",
+            "addend": 0,
+            "equal": true
+          }
+        ]
+      },
+      {
+        "name": "TranslateTLB",
+        "original_va": 4298112,
+        "rebuilt_va": 4298000,
+        "instruction_body_bytes": 287,
+        "complete_link_span_bytes": 288,
+        "all_nonrelocation_bytes_equal": true,
+        "non_address_differences": [],
+        "all_address_fields_independently_identified": true,
+        "all_address_targets_equal": true,
+        "function_match": true,
+        "raw_bytes_equal": true,
+        "validated_address_fields": [
+          {
+            "offset": 12,
+            "kind": "absolute",
+            "candidate_target": 65445904,
+            "original_target": 65445904,
+            "independent_expected_target": 65445904,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TranslationError",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 20,
+            "kind": "absolute",
+            "candidate_target": 65443608,
+            "original_target": 65443608,
+            "independent_expected_target": 65443608,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 24,
+            "equal": true
+          },
+          {
+            "offset": 34,
+            "kind": "absolute",
+            "candidate_target": 65443640,
+            "original_target": 65443640,
+            "independent_expected_target": 65443640,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 56,
+            "equal": true
+          },
+          {
+            "offset": 40,
+            "kind": "absolute",
+            "candidate_target": 65443636,
+            "original_target": 65443636,
+            "independent_expected_target": 65443636,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 52,
+            "equal": true
+          },
+          {
+            "offset": 46,
+            "kind": "absolute",
+            "candidate_target": 65443624,
+            "original_target": 65443624,
+            "independent_expected_target": 65443624,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 40,
+            "equal": true
+          },
+          {
+            "offset": 75,
+            "kind": "absolute",
+            "candidate_target": 65445904,
+            "original_target": 65445904,
+            "independent_expected_target": 65445904,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TranslationError",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 85,
+            "kind": "absolute",
+            "candidate_target": 65445760,
+            "original_target": 65445760,
+            "independent_expected_target": 65445760,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLBAddress",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 97,
+            "kind": "absolute",
+            "candidate_target": 65425068,
+            "original_target": 65425068,
+            "independent_expected_target": 65425068,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLBWriteAccess",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 122,
+            "kind": "absolute",
+            "candidate_target": 65443600,
+            "original_target": 65443600,
+            "independent_expected_target": 65443600,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 16,
+            "equal": true
+          },
+          {
+            "offset": 132,
+            "kind": "absolute",
+            "candidate_target": 65445904,
+            "original_target": 65445904,
+            "independent_expected_target": 65445904,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TranslationError",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 148,
+            "kind": "absolute",
+            "candidate_target": 65443612,
+            "original_target": 65443612,
+            "independent_expected_target": 65443612,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 28,
+            "equal": true
+          },
+          {
+            "offset": 158,
+            "kind": "absolute",
+            "candidate_target": 65445904,
+            "original_target": 65445904,
+            "independent_expected_target": 65445904,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TranslationError",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 170,
+            "kind": "absolute",
+            "candidate_target": 65443628,
+            "original_target": 65443628,
+            "independent_expected_target": 65443628,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 44,
+            "equal": true
+          },
+          {
+            "offset": 176,
+            "kind": "absolute",
+            "candidate_target": 65443644,
+            "original_target": 65443644,
+            "independent_expected_target": 65443644,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 60,
+            "equal": true
+          },
+          {
+            "offset": 182,
+            "kind": "absolute",
+            "candidate_target": 65443648,
+            "original_target": 65443648,
+            "independent_expected_target": 65443648,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 64,
+            "equal": true
+          },
+          {
+            "offset": 204,
+            "kind": "absolute",
+            "candidate_target": 65443604,
+            "original_target": 65443604,
+            "independent_expected_target": 65443604,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 20,
+            "equal": true
+          },
+          {
+            "offset": 214,
+            "kind": "absolute",
+            "candidate_target": 65445904,
+            "original_target": 65445904,
+            "independent_expected_target": 65445904,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TranslationError",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 233,
+            "kind": "absolute",
+            "candidate_target": 65443616,
+            "original_target": 65443616,
+            "independent_expected_target": 65443616,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 32,
+            "equal": true
+          },
+          {
+            "offset": 243,
+            "kind": "absolute",
+            "candidate_target": 65445904,
+            "original_target": 65445904,
+            "independent_expected_target": 65445904,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TranslationError",
+            "addend": 0,
+            "equal": true
+          },
+          {
+            "offset": 258,
+            "kind": "absolute",
+            "candidate_target": 65443644,
+            "original_target": 65443644,
+            "independent_expected_target": 65443644,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 60,
+            "equal": true
+          },
+          {
+            "offset": 264,
+            "kind": "absolute",
+            "candidate_target": 65443632,
+            "original_target": 65443632,
+            "independent_expected_target": 65443632,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 48,
+            "equal": true
+          },
+          {
+            "offset": 272,
+            "kind": "absolute",
+            "candidate_target": 65443648,
+            "original_target": 65443648,
+            "independent_expected_target": 65443648,
+            "basis": "declared_object_and_field_offset",
+            "symbol_or_literal": "TLB",
+            "addend": 64,
+            "equal": true
+          }
+        ]
+      }
+    ],
+    "verified_function_count": 13,
+    "verified_link_span_bytes": 5056,
+    "verified_address_fields": 341,
+    "verified_instruction_body_bytes": 4381,
+    "fixture_manifest_sha256": "4e2037460e3fe384128125294b8778da141989f6660aaab5e9fd6382e44a2933"
+  },
+  "remaining_functions": [
+    {
+      "name": "WritePhysicalWord",
+      "status": "Supported source refinements promoted and linked with natural SaveFunctionSignatures EAX source. Not byte exact: SP-write DMA loop exchanges EBX and EDI; two commutative flash pointer loads are reversed. Full source partition can also affect the commutative load ordering."
+    }
+  ],
+  "source_type_refinements": [
+    {
+      "change": "SwapHalf input unsigned short; symbolic XCHG AL, AH operand order",
+      "evidence": "Input width recovers original XOR-plus-MOV16 zero extensions at ReadPhysicalHalf PIFRam/SPMemory loads. Original opcode is 86 C4; swapped textual operands emit a different opcode. Isolated /GL comparison now matches the full 288-byte ReadPhysicalHalf span and preserves both setter spans. Complete-link fixture 6r3eywlv now verifies the full 288-byte span and all eleven address fields independently."
+    },
+    {
+      "change": "Public byte/half setters retain narrow value parameters",
+      "evidence": "Narrow formals with corrected SwapHalf reproduce callees and CPU SB/SH. CPUHostException narrow/no-explicit-cast full-context experiment produces original full-DWORD push. Previous wide-formal inference was caused by an explicit-cast artifact in reconstructed caller source."
+    }
+  ],
+  "source_refinements_validated": [
+    {
+      "name": "CopyByteSwapped",
+      "span_bytes": 352,
+      "evidence": "/root/.ai-tmp/nemu-copybytes.dyx6kair/validated",
+      "source_inference": "Original pointer parameters stay live through the copy loop; odd-byte remainder uses a switch.",
+      "combined_fixture": "/root/.ai-tmp/nemu-complete-relocs.qj3p8i4s"
+    },
+    {
+      "name": "TLBWrite",
+      "span_bytes": 736,
+      "evidence": "/root/.ai-tmp/nemu-tlb-host.IAGiiTrS/valid_first-strict.json",
+      "source_inference": "Valid flags precede Dirty flags; Global uses full-width AND; state updates precede CPU_ActionFlags updates.",
+      "combined_fixture": "/root/.ai-tmp/nemu-complete-relocs.qj3p8i4s"
+    },
+    {
+      "name": "ReadPhysicalWord",
+      "span_bytes": 2192,
+      "evidence": "/root/.ai-tmp/nemu-readword._rc04lnw/validated",
+      "source_inference": "Only second ROM fallback caches a local offset; AI switch returns an uninitialized local for unhandled registers, matching the original bug; VI line is shifted arithmetically.",
+      "combined_fixture": "/root/.ai-tmp/nemu-complete-relocs.qj3p8i4s"
+    }
+  ],
+  "write_word_refinement": {
+    "status": "supported_source_promoted_not_byte_exact",
+    "original_va": "0x00417C70",
+    "complete_link_span_bytes": 6368,
+    "instruction_bytes": 5856,
+    "fixture": "/root/.ai-tmp/nemu-save-integration.p7t3fs20",
+    "strict_evidence": "/root/.ai-tmp/nemu-memory.1792142990/combined-save-verified.json",
+    "source_sha256": "773f4cd7229488e3d26ab0e4263377f9ee77d36465e7839908a29a083a4926ca",
+    "independently_checked_address_fields": 386,
+    "remaining_non_address_byte_offsets": [
+      1207,
+      1209,
+      1212,
+      1221,
+      1227,
+      1254,
+      1257,
+      1278,
+      1291,
+      1302,
+      1307
+    ],
+    "remaining_address_identity_mismatches": [
+      {
+        "offset": "0x161A",
+        "expected": "FlashRamAddress",
+        "observed": "RDRAM"
+      },
+      {
+        "offset": "0x1620",
+        "expected": "RDRAM",
+        "observed": "FlashRamAddress"
+      }
+    ],
+    "semantic_correction": "SP write DMA invalidates stride times the raw encoded block count, then copies raw count plus one blocks, exactly as the original instructions do. The previous reconstruction invalidated one extra block.",
+    "source_inferences": [
+      "SP read transfer is the successful bounds branch; the error branch follows it.",
+      "AI, MI, SI and DPC register dispatch use switches.",
+      "Display-list time is stored before its count is cleared.",
+      "ROM transfer branches use local offset lifetimes, with the second fallback reusing the offset.",
+      "Flash write mutates the incoming value into its sector offset."
+    ],
+    "cross_unit_dependency": "Natural SaveFunctionSignatures advancing candidate pointer is promoted in commit 2a8a585. The combined real link emits original LEA EAX plus CALL without stack argument or cleanup.",
+    "source_partition_diagnostic": {
+      "fixtures": "/root/.ai-tmp/nemu-word-partitions.5f7fnduy/{cop1,dynarec,auxiliary}",
+      "evidence": "Same Memory source, real complete link: COP1 or combined dynarec splits restore the Flash load order but exchange SIAddress/RDRAM order; expanded 27-unit partition restores SI order and exchanges Flash loads. No source partition was selected solely to force this function."
+    },
+    "limitations": "These diagnostics establish complete function structure and independently check operand identities. They do not establish whole-image byte equality, and the listed mismatches remain uncorrected.",
+    "reproducible_command": "python3 scripts/verify_nemu_memory.py /root/.ai-tmp/nemu-save-integration.p7t3fs20 --allow-unmatched WritePhysicalWord --output REPORT.json"
+  }
+}
