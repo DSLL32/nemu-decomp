@@ -68,19 +68,20 @@ static __forceinline unsigned short SwapHalf(unsigned short value)
 // Original 00416A00; the error text identifies the historical helper ua_memcpy.
 void CopyByteSwapped(void *destination, const void *source, unsigned length)
 {
-    unsigned dest = (unsigned)destination;
-    unsigned src = (unsigned)source;
-    if (dest & 2) {
+    if ((unsigned)destination & 2) {
         ReportCPUError("Error 0 in ua_memcpy");
         return;
     }
-    if (src & 2) {
+    if ((unsigned)source & 2) {
         for (unsigned i = 0; i < (length >> 1); ++i)
-            *(unsigned short *)((dest + i * 2) ^ 2) =
-                *(const unsigned short *)((src + i * 2) ^ 2);
-        if ((length & 1) == 1)
-            *(unsigned char *)((dest + length - 1) ^ 3) =
-                *(const unsigned char *)((src + length - 1) ^ 3);
+            *(unsigned short *)(((unsigned)destination + i * 2) ^ 2) =
+                *(const unsigned short *)(((unsigned)source + i * 2) ^ 2);
+        switch (length & 1) {
+        case 1:
+            *(unsigned char *)(((unsigned)destination + length - 1) ^ 3) =
+                *(const unsigned char *)(((unsigned)source + length - 1) ^ 3);
+            break;
+        }
     } else {
         switch (length & 3) {
         case 0:
@@ -88,24 +89,24 @@ void CopyByteSwapped(void *destination, const void *source, unsigned length)
             break;
         case 1:
             memcpy(destination, source, length - 1);
-            *(unsigned char *)((dest + length - 1) ^ 3) =
-                *(const unsigned char *)((src + length - 1) ^ 3);
+            *(unsigned char *)(((unsigned)destination + length - 1) ^ 3) =
+                *(const unsigned char *)(((unsigned)source + length - 1) ^ 3);
             break;
         case 2:
             memcpy(destination, source, length - 2);
-            *(unsigned char *)((dest + length - 2) ^ 3) =
-                *(const unsigned char *)((src + length - 2) ^ 3);
-            *(unsigned char *)((dest + length - 1) ^ 3) =
-                *(const unsigned char *)((src + length - 1) ^ 3);
+            *(unsigned char *)(((unsigned)destination + length - 2) ^ 3) =
+                *(const unsigned char *)(((unsigned)source + length - 2) ^ 3);
+            *(unsigned char *)(((unsigned)destination + length - 1) ^ 3) =
+                *(const unsigned char *)(((unsigned)source + length - 1) ^ 3);
             break;
         case 3:
             memcpy(destination, source, length - 3);
-            *(unsigned char *)((dest + length - 3) ^ 3) =
-                *(const unsigned char *)((src + length - 3) ^ 3);
-            *(unsigned char *)((dest + length - 2) ^ 3) =
-                *(const unsigned char *)((src + length - 2) ^ 3);
-            *(unsigned char *)((dest + length - 1) ^ 3) =
-                *(const unsigned char *)((src + length - 1) ^ 3);
+            *(unsigned char *)(((unsigned)destination + length - 3) ^ 3) =
+                *(const unsigned char *)(((unsigned)source + length - 3) ^ 3);
+            *(unsigned char *)(((unsigned)destination + length - 2) ^ 3) =
+                *(const unsigned char *)(((unsigned)source + length - 2) ^ 3);
+            *(unsigned char *)(((unsigned)destination + length - 1) ^ 3) =
+                *(const unsigned char *)(((unsigned)source + length - 1) ^ 3);
             break;
         }
     }
@@ -134,21 +135,20 @@ void __stdcall TLBWrite(unsigned index)
     TLB[index].ASID = CPU_COP0[CP0_EntryHi] & 0xff;
     if (TLB[index].ASID)
         ReportCPUError("Missing feature: ASID used by ROM");
-    TLB[index].Global = ((unsigned char)CPU_COP0[CP0_EntryLo0] &
-                        (unsigned char)CPU_COP0[CP0_EntryLo1] & 1) != 0;
-    TLB[index].Dirty0 = (CPU_COP0[CP0_EntryLo0] >> 2) & 1;
-    TLB[index].Dirty1 = (CPU_COP0[CP0_EntryLo1] >> 2) & 1;
+    TLB[index].Global = (CPU_COP0[CP0_EntryLo0] & CPU_COP0[CP0_EntryLo1] & 1) != 0;
     TLB[index].Valid0 = (CPU_COP0[CP0_EntryLo0] >> 1) & 1;
     TLB[index].Valid1 = (CPU_COP0[CP0_EntryLo1] >> 1) & 1;
+    TLB[index].Dirty0 = (CPU_COP0[CP0_EntryLo0] >> 2) & 1;
+    TLB[index].Dirty1 = (CPU_COP0[CP0_EntryLo1] >> 2) & 1;
     TLB[index].PFN0 = (CPU_COP0[CP0_EntryLo0] >> 6) & 0xffffff;
     TLB[index].PFN1 = (CPU_COP0[CP0_EntryLo1] >> 6) & 0xffffff;
     switch (TLB[index].PageMask) {
     case 0:
         TLB[index].PageShift = 12;
+        TLB[index].PFNShift = 12;
         TLB[index].AddressMask = 0xfffff000;
         TLB[index].OffsetMask = 0xfff;
         TLB[index].VPN = CPU_COP0[CP0_EntryHi] >> 13;
-        TLB[index].PFNShift = 12;
         break;
     case 0x6000:
         TLB[index].PageShift = 14;
@@ -189,16 +189,16 @@ void __stdcall TLBWrite(unsigned index)
     if ((CPU_COP0[CP0_EntryHi] != 0xc0000000 || index != 31) &&
         (TLB[index].Valid0 || TLB[index].Valid1)) {
         if (!TLBEnabled) {
-            CPU_ActionFlags |= 0x400;
             TLBEnabled = 1;
             Dynarec_Use32BitMemoryAccess = 0;
+            CPU_ActionFlags |= 0x400;
         }
     }
     if (TLBEnabled && !TLBRamMapped &&
         (TLB[index].Valid0 || TLB[index].Valid1) && TLB[index].EntryHi < RDRAMSize) {
         Dynarec_Use32BitMemoryAccess = CPU_Use32BitMemoryAccess;
-        CPU_ActionFlags |= 0x400;
         TLBRamMapped = 1;
+        CPU_ActionFlags |= 0x400;
     }
 }
 
@@ -295,8 +295,9 @@ unsigned __stdcall ReadPhysicalWord(unsigned address)
     if (address >= 0x10000000 && address <= 0x1fbfffff) {
         if (address - 0x10000000 < ROMSize)
             return *(unsigned *)(ROMImage + address - 0x10000000);
-        if (address - 0x13fcb4d0 < ROMSize)
-            return *(unsigned *)(ROMImage + address - 0x13fcb4d0);
+        unsigned offset = address - 0x13fcb4d0;
+        if (offset < ROMSize)
+            return *(unsigned *)(ROMImage + offset);
     }
     if (address >= 0x04700000 && address <= 0x0470001c) {
         switch (address) {
@@ -317,21 +318,25 @@ unsigned __stdcall ReadPhysicalWord(unsigned address)
         }
     }
     if (address >= 0x04500000 && address <= 0x04500014) {
+        unsigned result;
         switch (address) {
         case 0x04500004:
-            if (CPU_AudioEnabled) {
-                AIReg.Length = (unsigned)(((__int64)CPU_AudioCyclesRemaining *
-                    (VideoNTSC ? 48681812 : 49656530) / 46875000 /
-                    (__int64)(unsigned)(AIReg.Dacrate + 1)) << 2);
-                if ((int)AIReg.Length >= 0)
-                    return AIReg.Length;
+            {
+                if (CPU_AudioEnabled) {
+                    unsigned rate;
+                    if (VideoNTSC) rate = 48681812; else rate = 49656530;
+                    result = (int)((rate * (__int64)CPU_AudioCyclesRemaining / 46875000 /
+                        (__int64)(unsigned)(AIReg.Dacrate + 1)) << 2);
+                    if ((int)result < 0) result = 0;
+                } else result = 0;
+                AIReg.Length = result;
+                break;
             }
-            AIReg.Length = 0;
-            return 0;
         case 0x0450000c:
-            return AIGetReg(0x0450000c);
+            result = AIGetReg(0x0450000c);
+            break;
         }
-        return address;
+        return result;
     }
     if (address >= 0x04600000 && address <= 0x04600030) {
         switch (address) {
@@ -375,8 +380,10 @@ unsigned __stdcall ReadPhysicalWord(unsigned address)
         return 0;
     }
     if (address >= 0x04800000 && address <= 0x04800018) {
-        if (address == 0x04800000) return SIAddress;
-        if (address == 0x04800018) return (MIReg.Interrupt & 2) << 11;
+        switch (address) {
+        case 0x04800000: return SIAddress;
+        case 0x04800018: return (MIReg.Interrupt & 2) << 11;
+        }
     }
     if (address >= 0x04040000 && address <= 0x0404001c) {
         switch (address) {
@@ -402,7 +409,7 @@ unsigned __stdcall ReadPhysicalWord(unsigned address)
         case 0x0440000c: return VIReg.Interrupt;
         case 0x04400010:
             VICurrentLine += 2;
-            return (VICurrentLine >> 4) & 0x3ff;
+            return ((int)VICurrentLine >> 4) & 0x3ff;
         case 0x04400014: return VIReg.Burst;
         case 0x04400018: return VIReg.VSync;
         case 0x0440001c: return VIReg.HSync;
@@ -427,9 +434,14 @@ unsigned __stdcall ReadPhysicalWord(unsigned address)
         }
     }
     if (address >= 0x08000000 && address <= 0x0803ffff) {
-        if (FlashCommand == 0xf0000000)
-            return SwapWord(*(unsigned *)SRAMData);
-        return FlashStatus;
+        if (FlashCommand != 0xf0000000) return FlashStatus;
+        unsigned result;
+        __asm {
+            mov eax, dword ptr SRAMData
+            bswap eax
+            mov result, eax
+        }
+        return result;
     }
     if (address != 0x06001010 && address != 0x06000000) {
         if (address == 0x05000508) return 0x05080508;
@@ -441,9 +453,6 @@ unsigned __stdcall ReadPhysicalWord(unsigned address)
     return 0;
 }
 
-void ProcessPIF();
-
-// Original 00417A10. The host fault handler unprotects RAM and retries the store.
 void __stdcall WritePhysicalByte(unsigned address, unsigned char value)
 {
     if (address < RDRAMSize) {

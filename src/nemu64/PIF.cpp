@@ -142,137 +142,140 @@ void ProcessPIF()
             return;
         }
     }
-    if (PIFRam[0] != 0xfe) {
-        while (position < 64 && channel < 6) {
-            while (PIFRam[position] == 0xff || (PIFRam[position] == 0 && channel < 6)) {
-                if (PIFRam[position] == 0 || PIFRam[position] == 0xfd) ++channel;
-                ++position;
-            }
-            tx = PIFRam[position];
-            if (tx == 0xfe || channel > 4) break;
-            rx = PIFRam[position + 1] & 0x3f;
-            position += 2;
-            ++channel;
-            if (tx > 64 - position) tx = 64 - position;
-            if (tx > 64) tx = 64;
-            memcpy(PIFCommand, PIFRam + position, tx);
-            if (PIFCommand[0] == 255) PIFCommand[0] = 0;
-            position += tx;
-            int valid = tx > 0;
-            if (rx > PIFCommandLengths[PIFCommand[0]].Rx) {
-                PIFRam[position - tx - 1] |= 0x40;
-                rx = PIFCommandLengths[PIFCommand[0]].Rx;
-            }
-            if (tx > PIFCommandLengths[PIFCommand[0]].Tx) {
-                PIFRam[position - tx - 1] |= 0x40;
-                valid = 0;
-            }
-            if (valid) {
-                switch (PIFCommand[0]) {
-                case 0:
-                    if (channel < 4) {
-                        if ((!NetPlayActive && Controllers[channel].Present) ||
-                            (NetPlayActive && channel < NetPlayPlayerCount)) {
-                            PIFResponse[0] = 5;
-                            PIFResponse[1] = 0;
-                            PIFResponse[2] = (!NetPlayActive &&
-                                (Controllers[channel].MemPak || Controllers[channel].RumblePak)) ? 1 : 2;
-                            memcpy(PIFRam + position, PIFResponse, rx);
-                        } else PIFRam[position - 2] |= 0x80;
-                    } else if (channel < 6) {
-                        if (EEPROMEnabled) {
-                            PIFResponse[0] = 0;
-                            PIFResponse[1] = EEPROMSize == 0x800 ? 0xc0 : 0x80;
-                            PIFResponse[2] = 0;
-                            memcpy(PIFRam + position, PIFResponse, rx);
-                        } else PIFRam[position - 2] |= 0x80;
-                    } else if (rx) PIFRam[position - 2] |= 0x80;
-                    break;
-                case 1:
-                    if (channel < 4) {
-                        if ((!NetPlayActive && Controllers[channel].Present) ||
-                            (NetPlayActive && channel < NetPlayPlayerCount)) {
-                            if (!inputUpdated && !NetPlayActive) {
-                                CIGetJoyData();
-                                inputUpdated = 1;
+    while (true) {
+        if (PIFRam[position] == 0xfe) break;
+        if (position >= 64 || channel >= 6) break;
+        while (PIFRam[position] == 0xff || (PIFRam[position] == 0 && channel < 6)) {
+            if (PIFRam[position] == 0 || PIFRam[position] == 0xfd) ++channel;
+            ++position;
+        }
+        tx = PIFRam[position];
+        if (tx == 0xfe || channel > 4) break;
+        ++channel;
+        rx = PIFRam[position + 1] & 0x3f;
+        position += 2;
+        if (tx > 64 - position) tx = 64 - position;
+        if (tx > 64) tx = 64;
+        memcpy(PIFCommand, PIFRam + position, tx);
+        if (PIFCommand[0] == 255) PIFCommand[0] = 0;
+        position += tx;
+        int valid = tx > 0;
+        if (rx > PIFCommandLengths[PIFCommand[0]].Rx) {
+            PIFRam[position - tx - 1] |= 0x40;
+            rx = PIFCommandLengths[PIFCommand[0]].Rx;
+        }
+        if (tx > PIFCommandLengths[PIFCommand[0]].Tx) {
+            PIFRam[position - tx - 1] |= 0x40;
+            valid = 0;
+        }
+        if (valid) {
+            switch (PIFCommand[0]) {
+            case 0:
+                if (channel < 4) {
+                    if ((!NetPlayActive && Controllers[channel].Present) ||
+                        (NetPlayActive && channel < NetPlayPlayerCount)) {
+                        PIFResponse[0] = 5;
+                        PIFResponse[1] = 0;
+                        PIFResponse[2] = (!NetPlayActive &&
+                            (Controllers[channel].MemPak || Controllers[channel].RumblePak)) ? 1 : 2;
+                        memcpy(PIFRam + position, PIFResponse, rx);
+                    } else PIFRam[position - 2] |= 0x80;
+                } else if (channel < 6) {
+                    if (EEPROMEnabled) {
+                        PIFResponse[0] = 0;
+                        PIFResponse[1] = EEPROMSize == 0x800 ? 0xc0 : 0x80;
+                        PIFResponse[2] = 0;
+                        memcpy(PIFRam + position, PIFResponse, rx);
+                    } else PIFRam[position - 2] |= 0x80;
+                } else if (rx > 0) PIFRam[position - 2] |= 0x80;
+                break;
+            case 1:
+                if (channel < 4) {
+                    if ((!NetPlayActive && Controllers[channel].Present) ||
+                        (NetPlayActive && channel < NetPlayPlayerCount)) {
+                        if (!inputUpdated && !NetPlayActive) {
+                            CIGetJoyData();
+                            inputUpdated = 1;
+                        }
+                        PIFResponse[0] = Controllers[channel].Buttons >> 24;
+                        PIFResponse[1] = Controllers[channel].Buttons >> 16;
+                        PIFResponse[2] = Controllers[channel].Buttons >> 8;
+                        PIFResponse[3] = Controllers[channel].Buttons;
+                        if (MovieRecord) RecordMovieInput();
+                        else if (MoviePlay) PlayMovieInput();
+                        memcpy(PIFRam + position, PIFResponse, rx);
+                    } else if (rx > 0) PIFRam[position - 2] |= 0x80;
+                } else PIFRam[position - tx - 1] |= 0x40;
+                break;
+            case 2:
+                if (channel < 4) {
+                    if ((!NetPlayActive && Controllers[channel].Present) ||
+                        (NetPlayActive && channel < NetPlayPlayerCount)) {
+                        int address = ((PIFCommand[1] << 8) | PIFCommand[2]) >> 5 & 0xffff;
+                        if (address >= 0x400) {
+                            for (int i = 0; i < 32; ++i) {
+                                if (!NetPlayActive && Controllers[channel].RumblePak)
+                                    PackBlock[i] = 0x80;
+                                else PackBlock[i] = 0;
                             }
-                            unsigned buttons = Controllers[channel].Buttons;
-                            PIFResponse[0] = buttons >> 24;
-                            PIFResponse[1] = buttons >> 16;
-                            PIFResponse[2] = buttons >> 8;
-                            PIFResponse[3] = buttons;
-                            if (MovieRecord) RecordMovieInput();
-                            else if (MoviePlay) PlayMovieInput();
-                            memcpy(PIFRam + position, PIFResponse, rx);
-                        } else if (rx) PIFRam[position - 2] |= 0x80;
-                    } else PIFRam[position - tx - 1] |= 0x40;
-                    break;
-                case 2:
-                    if (channel < 4) {
-                        if ((!NetPlayActive && Controllers[channel].Present) ||
-                            (NetPlayActive && channel < NetPlayPlayerCount)) {
-                            int address = ((PIFCommand[1] << 8) | PIFCommand[2]) >> 5 & 0xffff;
-                            if (address >= 0x400) {
-                                for (int i = 0; i < 32; ++i)
-                                    PackBlock[i] = !NetPlayActive && Controllers[channel].RumblePak ? 0x80 : 0;
-                            } else if (!NetPlayActive && Controllers[channel].RumblePak) {
-                                memset(PackBlock, 0x80, 32);
-                            } else {
-                                memcpy(PackBlock, MemPackData + address * 32, 32);
+                        } else if (!NetPlayActive && Controllers[channel].RumblePak) {
+                            memset(PackBlock, 0x80, 32);
+                        } else {
+                            memcpy(PackBlock, MemPackData + address * 32, 32);
+                            MemPackUsed = 1;
+                        }
+                        memcpy(PIFRam + position, PackBlock, 32);
+                        if (!NetPlayActive && (Controllers[channel].MemPak || Controllers[channel].RumblePak))
+                            PIFRam[position + rx - 1] = PIFDataCRC(PackBlock);
+                        else PIFRam[position + rx - 1] = ~PIFDataCRC(PackBlock);
+                    } else PIFRam[position - tx - 1] |= 0x80;
+                } else PIFRam[position - tx - 1] |= 0x40;
+                break;
+            case 3:
+                if (channel < 4) {
+                    if ((!NetPlayActive && Controllers[channel].Present) ||
+                        (NetPlayActive && channel < NetPlayPlayerCount)) {
+                        int address = ((PIFCommand[1] << 8) | PIFCommand[2]) >> 5 & 0xffff;
+                        if (tx - 3 > 32) tx = 35;
+                        if (tx - 3 < 0) MessageBox(0, "PIFRAM command write ram. tx too small.", "", 0);
+                        memcpy(PackBlock, PIFCommand + 3, tx - 3);
+                        if (address >= 0x400 && address == 0x600 && !NetPlayActive && Controllers[channel].RumblePak) {
+                            if (PIFCommand[5] == 1 && PIFCommand[6] == 1)
+                                Controllers[channel].RumbleActive = true;
+                            else Controllers[channel].RumbleActive = false;
+                            CIRumble(channel);
+                        }
+                        if ((!NetPlayActive && Controllers[channel].MemPak) || Controllers[channel].RumblePak) {
+                            if (address < 0x400 && !Controllers[channel].RumblePak) {
+                                address *= 32;
+                                if (address + tx - 3 >= 0x8000)
+                                    MessageBox(0, "PIFRAM command write ram. MemPackAddr too big.", "", 0);
+                                memcpy(MemPackData + address, PackBlock, tx - 3);
+                                SaveMemPack(address, tx - 3);
                                 MemPackUsed = 1;
                             }
-                            memcpy(PIFRam + position, PackBlock, 32);
-                            if (!NetPlayActive && (Controllers[channel].MemPak || Controllers[channel].RumblePak))
-                                PIFRam[position + rx - 1] = PIFDataCRC(PackBlock);
-                            else PIFRam[position + rx - 1] = ~PIFDataCRC(PackBlock);
-                        } else PIFRam[position - tx - 1] |= 0x80;
-                    } else PIFRam[position - tx - 1] |= 0x40;
-                    break;
-                case 3:
-                    if (channel < 4) {
-                        if ((!NetPlayActive && Controllers[channel].Present) ||
-                            (NetPlayActive && channel < NetPlayPlayerCount)) {
-                            int address = ((PIFCommand[1] << 8) | PIFCommand[2]) >> 5 & 0xffff;
-                            if (tx - 3 > 32) tx = 35;
-                            if (tx - 3 < 0) MessageBox(0, "PIFRAM command write ram. tx too small.", "", 0);
-                            memcpy(PackBlock, PIFCommand + 3, tx - 3);
-                            if (address >= 0x400 && address == 0x600 && !NetPlayActive && Controllers[channel].RumblePak) {
-                                Controllers[channel].RumbleActive = PIFCommand[5] == 1 && PIFCommand[6] == 1;
-                                CIRumble(channel);
-                            }
-                            if ((!NetPlayActive && Controllers[channel].MemPak) || Controllers[channel].RumblePak) {
-                                if (address < 0x400 && !Controllers[channel].RumblePak) {
-                                    address *= 32;
-                                    if (address + tx - 3 >= 0x8000)
-                                        MessageBox(0, "PIFRAM command write ram. MemPackAddr too big.", "", 0);
-                                    memcpy(MemPackData + address, PackBlock, tx - 3);
-                                    SaveMemPack(address, tx - 3);
-                                    MemPackUsed = 1;
-                                }
-                                PIFRam[position + rx - 1] = PIFDataCRC(PackBlock);
-                            } else PIFRam[position + rx - 1] = ~PIFDataCRC(PackBlock);
-                        } else PIFRam[position - tx - 1] |= 0x80;
-                    } else PIFRam[position - tx - 1] |= 0x40;
-                    break;
-                case 4:
-                    if (channel == 4 || channel == 5) {
-                        memcpy(PIFRam + position, EEPROMData + PIFCommand[1] * 8, rx);
-                        EEPROMUsed = 1;
-                    } else ReportCPUError("Pif command read eeprom (unsupported channel).");
-                    break;
-                case 5:
-                    if (channel == 4 || channel == 5) {
-                        memcpy(EEPROMData + PIFCommand[1] * 8, PIFCommand + 2, tx - 2);
-                        EEPROMUsed = 1;
-                        SaveEEPROM(PIFCommand[1] * 8, tx - 2);
-                        PIFRam[position] = 0;
-                    } else ReportCPUError("Pif command write eeprom (unsupported channel).");
-                    break;
-                }
+                            PIFRam[position + rx - 1] = PIFDataCRC(PackBlock);
+                        } else PIFRam[position + rx - 1] = ~PIFDataCRC(PackBlock);
+                    } else PIFRam[position - tx - 1] |= 0x80;
+                } else PIFRam[position - tx - 1] |= 0x40;
+                break;
+            case 4:
+                if (channel == 4 || channel == 5) {
+                    memcpy(PIFRam + position, EEPROMData + PIFCommand[1] * 8, rx);
+                    EEPROMUsed = 1;
+                } else ReportCPUError("Pif command read eeprom (unsupported channel).");
+                break;
+            case 5:
+                if (channel == 4 || channel == 5) {
+                    memcpy(EEPROMData + PIFCommand[1] * 8, PIFCommand + 2, tx - 2);
+                    EEPROMUsed = 1;
+                    SaveEEPROM(PIFCommand[1] * 8, tx - 2);
+                    PIFRam[position] = 0;
+                } else ReportCPUError("Pif command write eeprom (unsupported channel).");
+                break;
             }
-            position += rx;
-            if (PIFRam[position] == 0xfe) break;
         }
+        position += rx;
     }
     if (ForcePIFSuccess) PIFRam[63] = 0x80;
     else {

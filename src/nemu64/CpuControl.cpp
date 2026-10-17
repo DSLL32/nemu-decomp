@@ -50,13 +50,6 @@ CpuU32 RecompilerStepMode;
 // Alternate cartridge mapping used by the original word readers and compiler.
 enum { ROMAlternateBase = 0x13FCB4D0 };
 
-static const BYTE BootRspImem[0x1000] = {
-#include "res/BootRspImem.inc"
-};
-static const BYTE DefaultMemPack[0x8000] = {
-#include "res/DefaultMemPack.inc"
-};
-
 // 00414490. Names are inferred; the exception-context accesses are recovered.
 LONG CPUHostException(EXCEPTION_POINTERS *exception)
 {
@@ -119,7 +112,7 @@ LONG CPUHostException(EXCEPTION_POINTERS *exception)
                     if (index + 1 <= CPUBreakpointCount - 1) {
                         if (index < CPUBreakpointCount)
                             memcpy(&CPUBreakpoints[index], &CPUBreakpoints[index + 1],
-                                   ((CPUBreakpointCount - index) * 3) << 2);
+                                   (CPUBreakpointCount - index) * sizeof(DebugBreakpoint));
                         --CPUBreakpointCount;
                     }
                 }
@@ -208,6 +201,13 @@ finishException:
         CPU_GPR[29] = exception->ContextRecord->Edi;
     return disposition;
 }
+
+static const BYTE BootRspImem[0x1000] = {
+#include "res/BootRspImem.inc"
+};
+static const BYTE DefaultMemPack[0x8000] = {
+#include "res/DefaultMemPack.inc"
+};
 
 // 00414BA0. The original uses inline assembly for the four partial products.
 // The first cross-product uses leftLow * leftHigh, as observed in the input.
@@ -610,6 +610,7 @@ void InitializeCPU(void)
 // symbolic inline-assembly entry sequences, including timing and guest SP.
 // The original retains unoptimized C++ loop and condition sequences around
 // its generated-code boundary, including the explicit while (1) test.
+// The original dispatcher mixes symbolic assembly with unoptimized SEH/event code.
 #pragma optimize("", off)
 void RunCPU(void)
 {
@@ -672,29 +673,29 @@ blockOffsetReady:
                 mov Dynarec_EntryPoint, eax
             }
 executeBlock:
-                __try {
-                    __asm {
-                        mov eax, Dynarec_EntryPoint
-                        push ebx
-                        push esi
-                        push ebp
-                        push edi
-                        mov edi, dword ptr CPU_GPR[232]
-                        mov esi, 10000
-                        call eax
-                        mov dword ptr CPU_GPR[232], edi
-                        sub esi, 10000
-                        mov ecx, CPU_CycleShift
-                        shl esi, cl
-                        add CPU_VideoCyclesRemaining, esi
-                        add CPU_AudioCyclesRemaining, esi
-                        sub dword ptr CPU_COP0[36], esi
-                        pop edi
-                        pop ebp
-                        pop esi
-                        pop ebx
-                    }
-                } __except (CPUHostException(GetExceptionInformation())) { }
+            __try {
+                __asm {
+                    mov eax, Dynarec_EntryPoint
+                    push ebx
+                    push esi
+                    push ebp
+                    push edi
+                    mov edi, dword ptr CPU_GPR[232]
+                    mov esi, 10000
+                    call eax
+                    mov dword ptr CPU_GPR[232], edi
+                    sub esi, 10000
+                    mov ecx, CPU_CycleShift
+                    shl esi, cl
+                    add CPU_VideoCyclesRemaining, esi
+                    add CPU_AudioCyclesRemaining, esi
+                    sub dword ptr CPU_COP0[36], esi
+                    pop edi
+                    pop ebp
+                    pop esi
+                    pop ebx
+                }
+            } __except (CPUHostException(GetExceptionInformation())) { }
 processEvents:
             if (CPU_COP0[9] < 20000 && !CPU_CompareReset) {
                 CPU_ComparePending = 1;
@@ -753,202 +754,202 @@ processEvents:
                 CPU_ComparePending = 0;
             }
             if (CPU_ActionFlags) {
-            if (CPU_ActionFlags & 1)
-                GSUpdate();
-            RaisePendingInterrupt(1, 8);
-            RaisePendingInterrupt(2, 2);
-            RaisePendingInterrupt(4, 0x10);
-            RaisePendingInterrupt(8, 1);
-            RaisePendingInterrupt(0x10, 4);
-            RaisePendingInterrupt(0x20, 0x20);
-            if ((CPU_ActionFlags & 0x40) && (CPU_COP0[12] & 0x8000) &&
-                (CPU_COP0[12] & 1) && !(CPU_COP0[12] & 6)) {
-                CPU_COP0[13] |= 0x8000;
-                CPU_COP0[13] &= 0x7FFFFF83;
-                CPU_COP0[12] |= 2;
-                CPU_COP0[14] = CPU_PC;
-                CPU_PC = 0x80000180;
-                CPU_ActionFlags &= ~0x40;
-            }
-            if ((CPU_ActionFlags & 0x08000000) && (CPU_COP0[12] & 0x1000) && (CPU_COP0[12] & 1)) {
-                CPU_COP0[13] |= 0x1000;
-                CPU_COP0[13] &= 0x7FFFFF83;
-                CPU_COP0[12] |= 2;
-                CPU_COP0[14] = CPU_PC;
-                CPU_PC = 0x80000180;
-                CPU_ActionFlags &= ~0x08000000;
-            }
-            if (CPU_ActionFlags & 0x02000000) {
-                if (!(CPU_COP0[12] & 2)) CPU_COP0[14] = CPU_PC;
-                else ReportCPUError("Doing cop1 unusable exception while exception is already being executed. Dunno if this will work");
-                if (CPU_Cop1UnusableDelay) CPU_COP0[13] |= 0x80000000;
-                else CPU_COP0[13] &= 0x7FFFFFFF;
-                CPU_COP0[13] &= 0xFFFFFF83;
-                CPU_COP0[13] |= 0x2C;
-                CPU_COP0[12] |= 2;
-                CPU_COP0[13] &= 0xCFFFFFFF;
-                CPU_COP0[13] |= 0x10000000;
-                CPU_PC = 0x80000180;
-                CPU_ActionFlags &= ~0x02000000;
-            }
-            if (CPU_ActionFlags & 0x80000) {
-                ReportCPUError("COP1 Exception trap taken");
-                if (!(CPU_COP0[12] & 2)) CPU_COP0[14] = CPU_PC;
-                else ReportCPUError("Doing cop1 trap exception while exception is already being executed. Dunno if this will work");
-                if (CPU_FpuExceptionDelay) CPU_COP0[13] |= 0x80000000;
-                else CPU_COP0[13] &= 0x7FFFFFFF;
-                CPU_COP0[13] &= 0xFFFFFF83;
-                CPU_COP0[13] |= 0x3C;
-                CPU_COP0[12] |= 2;
-                CPU_PC = 0x80000180;
-                CPU_ActionFlags &= ~0x80000;
-            }
-            if (CPU_ActionFlags & 0x40000) {
-                if (!(CPU_COP0[12] & 2)) CPU_COP0[14] = CPU_PC;
-                else ReportCPUError("Doing tlb exception while exception is already being executed. Dunno if this will work");
-                if (CPU_TLBExceptionDelay) {
-                    CPU_COP0[13] |= 0x80000000;
-                    CPU_TLBExceptionDelay = 0;
-                } else CPU_COP0[13] &= 0x7FFFFFFF;
-                CPU_COP0[13] &= 0xFFFFFF83;
-                switch (TranslationError) {
-                case 1:
-                    if (TLBWriteAccess) CPU_COP0[13] |= 0xC;
-                    else CPU_COP0[13] |= 8;
-                    if (CPU_COP0[12] & 2) CPU_PC = 0x80000180;
-                    else CPU_PC = 0x80000000;
-                    break;
-                case 2: case 3:
-                    if (TLBWriteAccess) CPU_COP0[13] |= 0xC;
-                    else CPU_COP0[13] |= 8;
+                if (CPU_ActionFlags & 1)
+                    GSUpdate();
+                RaisePendingInterrupt(1, 8);
+                RaisePendingInterrupt(2, 2);
+                RaisePendingInterrupt(4, 0x10);
+                RaisePendingInterrupt(8, 1);
+                RaisePendingInterrupt(0x10, 4);
+                RaisePendingInterrupt(0x20, 0x20);
+                if ((CPU_ActionFlags & 0x40) && (CPU_COP0[12] & 0x8000) &&
+                    (CPU_COP0[12] & 1) && !(CPU_COP0[12] & 6)) {
+                    CPU_COP0[13] |= 0x8000;
+                    CPU_COP0[13] &= 0x7FFFFF83;
+                    CPU_COP0[12] |= 2;
+                    CPU_COP0[14] = CPU_PC;
                     CPU_PC = 0x80000180;
-                    break;
-                case 4: case 5:
-                    CPU_COP0[13] |= 4;
-                    CPU_PC = 0x80000180;
-                    break;
+                    CPU_ActionFlags &= ~0x40;
                 }
-                CPU_COP0[4] = (CPU_COP0[4] & 0xFF800000) | ((TLBAddress >> 9) & 0x007FFFF0);
-                CPU_COP0[8] = TLBAddress;
-                CPU_COP0[10] = (CPU_COP0[10] & 0xFF) | (TLBAddress & 0xFFFFE000);
-                CPU_COP0[12] |= 2;
-                CPU_ActionFlags &= ~0x40000;
-            }
-            if (CPU_ActionFlags & 0x01000000) {
-                CPU_COP0[13] &= 0x7FFFFF83;
-                CPU_COP0[13] |= 0x20;
-                CPU_COP0[14] = CPU_PC;
-                CPU_COP0[12] |= 2;
-                CPU_PC = 0x80000180;
-                CPU_ActionFlags &= ~0x01000000;
-            }
-            if (CPU_ActionFlags & 0x400) { ResetRecompiler(); CPU_ActionFlags &= ~0x400; }
-            if (CPU_ActionFlags & 0x800) { ResetCPU(); CPU_ActionFlags &= ~0x800; }
-            if (CPU_ActionFlags & 0x4000) {
-                NotifyTools(0x200, 1);
-                if (RspEnabled) {
-                    if (CPU_RSPCycles > 3000) {
-                        CPU_RSPCycles = 0;
-                        do {
-                            for (CpuU32 i = 0; i < RSPBreakpointCount; ++i)
-                                if (RSPBreakpoints[i] == (SPReg.PC & 0xFFF)) CPU_ActionFlags |= 0x20000;
-                            if (CPU_ActionFlags & 0x20000) {
-                                NotifyTools(2, 1);
-                                SuspendThread(CPU_Thread);
-                                RSPBreakpointInhibit = 1;
-                            } else RSPBreakpointInhibit = 0;
-                            CPU_Instruction = ReadPhysicalWord((SPReg.PC & 0xFFF) + 0x04001000);
-                            RSPRegisters[0] = 0;
-                            RSP_MainDispatch[(CPU_Instruction >> 26) & 63]();
-                            --CPU_RSPCycles;
-                            if (RSPDelayPC) {
-                                RspSavedPC = SPReg.PC;
-                                SPReg.PC = RSPDelayPC;
-                                CpuU32 i;
-                                int interrupted = 0;
-                                if (!(CPU_ActionFlags & 0x20000)) {
-                                    for (i = 0; i < RSPBreakpointCount; ++i)
-                                        if (RSPBreakpoints[i] == (SPReg.PC & 0xFFF)) {
-                                            CPU_ActionFlags |= 0x20000;
-                                            interrupted = 1;
-                                            RSPDelayPC = 0;
-                                            SPReg.PC -= 4;
-                                        }
-                                }
-                                if (!interrupted) {
-                                    CPU_Instruction = ReadPhysicalWord((SPReg.PC & 0xFFF) + 0x04001000);
-                                    RSP_MainDispatch[(CPU_Instruction >> 26) & 63]();
-                                    SPReg.PC = RspSavedPC;
-                                    RSPDelayPC = 0;
-                                    --CPU_RSPCycles;
-                                }
-                            }
-                        } while (CPU_RSPCycles > -3000 && (CPU_ActionFlags & 0x4000));
-                    } else {
-                        if (LastRspCpuCount)
-                            CPU_RSPCycles += CPU_COP0[9] - LastRspCpuCount;
-                        LastRspCpuCount = CPU_COP0[9];
+                if ((CPU_ActionFlags & 0x08000000) && (CPU_COP0[12] & 0x1000) && (CPU_COP0[12] & 1)) {
+                    CPU_COP0[13] |= 0x1000;
+                    CPU_COP0[13] &= 0x7FFFFF83;
+                    CPU_COP0[12] |= 2;
+                    CPU_COP0[14] = CPU_PC;
+                    CPU_PC = 0x80000180;
+                    CPU_ActionFlags &= ~0x08000000;
+                }
+                if (CPU_ActionFlags & 0x02000000) {
+                    if (!(CPU_COP0[12] & 2)) CPU_COP0[14] = CPU_PC;
+                    else ReportCPUError("Doing cop1 unusable exception while exception is already being executed. Dunno if this will work");
+                    if (CPU_Cop1UnusableDelay) CPU_COP0[13] |= 0x80000000;
+                    else CPU_COP0[13] &= 0x7FFFFFFF;
+                    CPU_COP0[13] &= 0xFFFFFF83;
+                    CPU_COP0[13] |= 0x2C;
+                    CPU_COP0[12] |= 2;
+                    CPU_COP0[13] &= 0xCFFFFFFF;
+                    CPU_COP0[13] |= 0x10000000;
+                    CPU_PC = 0x80000180;
+                    CPU_ActionFlags &= ~0x02000000;
+                }
+                if (CPU_ActionFlags & 0x80000) {
+                    ReportCPUError("COP1 Exception trap taken");
+                    if (!(CPU_COP0[12] & 2)) CPU_COP0[14] = CPU_PC;
+                    else ReportCPUError("Doing cop1 trap exception while exception is already being executed. Dunno if this will work");
+                    if (CPU_FpuExceptionDelay) CPU_COP0[13] |= 0x80000000;
+                    else CPU_COP0[13] &= 0x7FFFFFFF;
+                    CPU_COP0[13] &= 0xFFFFFF83;
+                    CPU_COP0[13] |= 0x3C;
+                    CPU_COP0[12] |= 2;
+                    CPU_PC = 0x80000180;
+                    CPU_ActionFlags &= ~0x80000;
+                }
+                if (CPU_ActionFlags & 0x40000) {
+                    if (!(CPU_COP0[12] & 2)) CPU_COP0[14] = CPU_PC;
+                    else ReportCPUError("Doing tlb exception while exception is already being executed. Dunno if this will work");
+                    if (CPU_TLBExceptionDelay) {
+                        CPU_COP0[13] |= 0x80000000;
+                        CPU_TLBExceptionDelay = 0;
+                    } else CPU_COP0[13] &= 0x7FFFFFFF;
+                    CPU_COP0[13] &= 0xFFFFFF83;
+                    switch (TranslationError) {
+                    case 1:
+                        if (TLBWriteAccess) CPU_COP0[13] |= 0xC;
+                        else CPU_COP0[13] |= 8;
+                        if (CPU_COP0[12] & 2) CPU_PC = 0x80000180;
+                        else CPU_PC = 0x80000000;
+                        break;
+                    case 2: case 3:
+                        if (TLBWriteAccess) CPU_COP0[13] |= 0xC;
+                        else CPU_COP0[13] |= 8;
+                        CPU_PC = 0x80000180;
+                        break;
+                    case 4: case 5:
+                        CPU_COP0[13] |= 4;
+                        CPU_PC = 0x80000180;
+                        break;
                     }
+                    CPU_COP0[4] = (CPU_COP0[4] & 0xFF800000) | ((TLBAddress >> 9) & 0x007FFFF0);
+                    CPU_COP0[8] = TLBAddress;
+                    CPU_COP0[10] = (CPU_COP0[10] & 0xFF) | (TLBAddress & 0xFFFFE000);
+                    CPU_COP0[12] |= 2;
+                    CPU_ActionFlags &= ~0x40000;
                 }
-                NotifyTools(0x200, 0);
-            }
-            if (CPU_ActionFlags & 0x10000) {
-                NotifyTools(2, 0);
-                SuspendThread(CPU_Thread);
-                CPU_LastPC = CPU_PC;
-                CPU_Instruction = ReadPhysicalWord(((CPU_LastPC & 0xC0000000) == 0x80000000) ?
-                    CPU_LastPC & 0x1FFFFFFF : TranslateTLB(CPU_LastPC, FALSE));
-                CpuU32 savedCodePosition = Dynarec_MainCodeUsed;
-                Dynarec_BranchPending = 1;
-                RecompilerStepMode = 1;
-                Dynarec_BlockInstructionCount = 1;
-                ResetInstructionBuffer(0);
-                TrackInstructionChanges();
-                Dynarec_MainDispatch[(CPU_Instruction >> 26) & 63]();
-                FinishInstruction();
-                EmitReturn();
-                AssembleInstructions(0);
-                Dynarec_RecordAddresses = 1;
-                Dynarec_MainCodeUsed = savedCodePosition;
-                Dynarec_BranchPending = 0;
-                RecompilerStepMode = 0;
-                CPU_PC += 4;
-                savedCodePosition += (CpuU32)Dynarec_MainCode;
-                __asm {
-                    push ebx
-                    push esi
-                    push ebp
-                    mov esi, 10000
-                    mov edi, dword ptr CPU_GPR[232]
-                    call savedCodePosition
-                    mov dword ptr CPU_GPR[232], edi
-                    sub esi, 10000
-                    sub dword ptr CPU_COP0[36], esi
-                    add CPU_VideoCyclesRemaining, esi
-                    add CPU_AudioCyclesRemaining, esi
-                    pop ebp
-                    pop esi
-                    pop ebx
+                if (CPU_ActionFlags & 0x01000000) {
+                    CPU_COP0[13] &= 0x7FFFFF83;
+                    CPU_COP0[13] |= 0x20;
+                    CPU_COP0[14] = CPU_PC;
+                    CPU_COP0[12] |= 2;
+                    CPU_PC = 0x80000180;
+                    CPU_ActionFlags &= ~0x01000000;
                 }
-                goto processEvents;
-            }
-            if ((CPU_ActionFlags & 0x200000) && !ActivePause)
-                SuspendThread(CPU_Thread);
-            if (CPU_ActionFlags & 0x1000) { CPU_ActionFlags &= ~0x1000; SaveState(); }
-            if (CPU_ActionFlags & 0x2000) { CPU_ActionFlags &= ~0x2000; LoadState(false); }
-            if (CPU_ActionFlags & 0x04000000) {
-                CPU_ActionFlags &= ~0x04000000;
-                if (SelectedGraphicsPlugin->CloseDLL) SelectedGraphicsPlugin->CloseDLL();
-                if (SelectedGraphicsPlugin->RomClosed) SelectedGraphicsPlugin->RomClosed();
-                SelectedGraphicsPlugin = PendingGraphicsPlugin;
-                PendingGraphicsPlugin = 0;
-                InitializeGraphicsPlugin();
-                if (SelectedGraphicsPlugin->RomOpen) SelectedGraphicsPlugin->RomOpen();
-            }
-            if (CPU_ActionFlags & 0x400000) {
-                CPU_ActionFlags &= ~0x400000;
-                break;
-            }
+                if (CPU_ActionFlags & 0x400) { ResetRecompiler(); CPU_ActionFlags &= ~0x400; }
+                if (CPU_ActionFlags & 0x800) { ResetCPU(); CPU_ActionFlags &= ~0x800; }
+                if (CPU_ActionFlags & 0x4000) {
+                    NotifyTools(0x200, 1);
+                    if (RspEnabled) {
+                        if (CPU_RSPCycles > 3000) {
+                            CPU_RSPCycles = 0;
+                            do {
+                                for (CpuU32 i = 0; i < RSPBreakpointCount; ++i)
+                                    if (RSPBreakpoints[i] == (SPReg.PC & 0xFFF)) CPU_ActionFlags |= 0x20000;
+                                if (CPU_ActionFlags & 0x20000) {
+                                    NotifyTools(2, 1);
+                                    SuspendThread(CPU_Thread);
+                                    RSPBreakpointInhibit = 1;
+                                } else RSPBreakpointInhibit = 0;
+                                CPU_Instruction = ReadPhysicalWord((SPReg.PC & 0xFFF) + 0x04001000);
+                                RSPRegisters[0] = 0;
+                                RSP_MainDispatch[(CPU_Instruction >> 26) & 63]();
+                                --CPU_RSPCycles;
+                                if (RSPDelayPC) {
+                                    RspSavedPC = SPReg.PC;
+                                    SPReg.PC = RSPDelayPC;
+                                    CpuU32 i;
+                                    int interrupted = 0;
+                                    if (!(CPU_ActionFlags & 0x20000)) {
+                                        for (i = 0; i < RSPBreakpointCount; ++i)
+                                            if (RSPBreakpoints[i] == (SPReg.PC & 0xFFF)) {
+                                                CPU_ActionFlags |= 0x20000;
+                                                interrupted = 1;
+                                                RSPDelayPC = 0;
+                                                SPReg.PC -= 4;
+                                            }
+                                    }
+                                    if (!interrupted) {
+                                        CPU_Instruction = ReadPhysicalWord((SPReg.PC & 0xFFF) + 0x04001000);
+                                        RSP_MainDispatch[(CPU_Instruction >> 26) & 63]();
+                                        SPReg.PC = RspSavedPC;
+                                        RSPDelayPC = 0;
+                                        --CPU_RSPCycles;
+                                    }
+                                }
+                            } while (CPU_RSPCycles > -3000 && (CPU_ActionFlags & 0x4000));
+                        } else {
+                            if (LastRspCpuCount)
+                                CPU_RSPCycles += CPU_COP0[9] - LastRspCpuCount;
+                            LastRspCpuCount = CPU_COP0[9];
+                        }
+                    }
+                    NotifyTools(0x200, 0);
+                }
+                if (CPU_ActionFlags & 0x10000) {
+                    NotifyTools(2, 0);
+                    SuspendThread(CPU_Thread);
+                    CPU_LastPC = CPU_PC;
+                    CPU_Instruction = ReadPhysicalWord(((CPU_LastPC & 0xC0000000) == 0x80000000) ?
+                        CPU_LastPC & 0x1FFFFFFF : TranslateTLB(CPU_LastPC, FALSE));
+                    CpuU32 savedCodePosition = Dynarec_MainCodeUsed;
+                    Dynarec_BranchPending = 1;
+                    RecompilerStepMode = 1;
+                    Dynarec_BlockInstructionCount = 1;
+                    ResetInstructionBuffer(0);
+                    TrackInstructionChanges();
+                    Dynarec_MainDispatch[(CPU_Instruction >> 26) & 63]();
+                    FinishInstruction();
+                    EmitReturn();
+                    AssembleInstructions(0);
+                    Dynarec_RecordAddresses = 1;
+                    Dynarec_MainCodeUsed = savedCodePosition;
+                    Dynarec_BranchPending = 0;
+                    RecompilerStepMode = 0;
+                    CPU_PC += 4;
+                    savedCodePosition += (CpuU32)Dynarec_MainCode;
+                    __asm {
+                        push ebx
+                        push esi
+                        push ebp
+                        mov esi, 10000
+                        mov edi, dword ptr CPU_GPR[232]
+                        call savedCodePosition
+                        mov dword ptr CPU_GPR[232], edi
+                        sub esi, 10000
+                        sub dword ptr CPU_COP0[36], esi
+                        add CPU_VideoCyclesRemaining, esi
+                        add CPU_AudioCyclesRemaining, esi
+                        pop ebp
+                        pop esi
+                        pop ebx
+                    }
+                    goto processEvents;
+                }
+                if ((CPU_ActionFlags & 0x200000) && !ActivePause)
+                    SuspendThread(CPU_Thread);
+                if (CPU_ActionFlags & 0x1000) { CPU_ActionFlags &= ~0x1000; SaveState(); }
+                if (CPU_ActionFlags & 0x2000) { CPU_ActionFlags &= ~0x2000; LoadState(false); }
+                if (CPU_ActionFlags & 0x04000000) {
+                    CPU_ActionFlags &= ~0x04000000;
+                    if (SelectedGraphicsPlugin->CloseDLL) SelectedGraphicsPlugin->CloseDLL();
+                    if (SelectedGraphicsPlugin->RomClosed) SelectedGraphicsPlugin->RomClosed();
+                    SelectedGraphicsPlugin = PendingGraphicsPlugin;
+                    PendingGraphicsPlugin = 0;
+                    InitializeGraphicsPlugin();
+                    if (SelectedGraphicsPlugin->RomOpen) SelectedGraphicsPlugin->RomOpen();
+                }
+                if (CPU_ActionFlags & 0x400000) {
+                    CPU_ActionFlags &= ~0x400000;
+                    break;
+                }
             }
         } while (1);
     }
@@ -977,6 +978,11 @@ processEvents:
     if (NetPlayActive) {
         kailleraEndGame();
         NetPlayActive = 0;
+    }
+    {
+        // Inferred from the original frame: these 32 bytes have no references.
+        // The original variable count, types and purpose are unknown.
+        BYTE inferredUnusedStack[32];
     }
     return;
 
