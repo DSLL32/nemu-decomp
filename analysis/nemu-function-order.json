@@ -1,0 +1,89 @@
+{
+  "original": "master/nemu64.exe",
+  "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+  "scope": "Stock VC7 /ORDER application function sequence. This does not establish matching function bodies, absolute addresses, original project options, or full executable equality.",
+  "generator": "scripts/order_nemu_functions.py",
+  "generator_sha256": "1df2b0d5c2ca96677191faba61bb09df2ce7b10c8ccad650811e7231d8204e71",
+  "scratch": "/root/.ai-tmp/nemu-link-order.ldmmzo1i",
+  "inputs": {
+    "map": "/root/.ai-tmp/nemu-link-order.ldmmzo1i/public-track.map",
+    "map_sha256": "1e608bd9914e2453c93ca238516ffda4981c166eb5aec3a13782119b9856fe56",
+    "metadata_sha256": {
+      "/root/nemu-decomp/analysis/nemu-rsp.json": "f8133ad3bcf96db2d4b0de513e2fe01d879899823a446d78988c035763f8f4f2",
+      "/root/nemu-decomp/analysis/nemu-dynarec.json": "61d1ae1bfe19abd103112160c6113465e38413fe9ab95e9a44ac7611977bdae6",
+      "/root/nemu-decomp/analysis/nemu-cpu.json": "f2e2c2d265ab6ca5c1115f245e8bf5b6e0102ffa5ba3120a0ea3c0916b9746b4",
+      "/root/nemu-decomp/analysis/nemu-cpu-control.json": "c21da4a35ca72f86cd344f7aa46a68e70ff4b2926bde5a56a974114694e747ec",
+      "/root/nemu-decomp/analysis/nemu-dynarec-opcodes.json": "d3de036edfd8679a60ee468098af8b186536e71c339f36e4bbeb71b4b14cd08f",
+      "/root/nemu-decomp/analysis/nemu-dynarec-memory.json": "32b4ad3ae97e94ee54f7961e74161e95be455e943cc549422dc4d0ea74e6b766",
+      "/root/nemu-decomp/analysis/nemu-dynarec-fpu.json": "0bd7c27fdc8f854d4a22d60e96c1bdf5fad399e23646b5a1cd926d05bc708b2b",
+      "/root/nemu-decomp/analysis/nemu-memory.json": "badaef353c648e812547961a13be3cbac88405f19e4e52c9ee0d91293f69a3d2",
+      "/root/nemu-decomp/analysis/nemu-plugins.json": "e1289fb9e6333d1cceb742c9dd1f1ad442152614faaa5975b38dfad1bddbe5b9",
+      "/root/nemu-decomp/analysis/nemu-frontend.json": "570bc4f1df91f604008e6ef886c5ac966d03764492cdad14b882b86487f5a5a8",
+      "/root/nemu-decomp/analysis/nemu-browser.json": "59e3c012a8d4dbc64fea0ff875eb4fe16485c73503fd8b1928ced685a2fc7cb4",
+      "/root/nemu-decomp/analysis/nemu-pif.json": "3417adaac43f20319af2a91ae86f2511f5b7b346afaa07a63ef9e5d0823cdfc4"
+    }
+  },
+  "order": {
+    "path": "/root/.ai-tmp/nemu-link-order.ldmmzo1i/application.order",
+    "sha256": "4a39e7981a8be428d2de4983ed6796424d8b82761047751db529119fbed9eee5",
+    "symbols": 648,
+    "missing": [],
+    "ambiguous": []
+  },
+  "verification": {
+    "map": "/root/.ai-tmp/nemu-link-order.ldmmzo1i/application-ordered.map",
+    "map_sha256": "fab21faf630325e646b3e030b2649bbf731b3451d978ffbd567d27bd6c89f68a",
+    "observed_symbols": 648,
+    "original_entries": 647,
+    "missing": [],
+    "ambiguous": [],
+    "folded_disagreements": [],
+    "inversions": [],
+    "passed": true
+  },
+  "negative_control": {
+    "map": "/root/.ai-tmp/nemu-link-order.ldmmzo1i/public-track.map",
+    "map_sha256": "1e608bd9914e2453c93ca238516ffda4981c166eb5aec3a13782119b9856fe56",
+    "inversions": 41,
+    "passed": false
+  },
+  "visibility_experiment": {
+    "change": "Remove inferred static qualifiers from eight Track helper definitions, leaving all function bodies unchanged. Public visibility permits standard linker /ORDER. Original source visibility is unknown.",
+    "all_sections_unchanged": [
+      {
+        "section": ".text",
+        "old_size": 189021,
+        "new_size": 189021,
+        "differing_bytes": 0
+      },
+      {
+        "section": ".rdata",
+        "old_size": 61256,
+        "new_size": 61256,
+        "differing_bytes": 0
+      },
+      {
+        "section": ".data",
+        "old_size": 63479384,
+        "new_size": 63479384,
+        "differing_bytes": 0
+      },
+      {
+        "section": ".rsrc",
+        "old_size": 4295496,
+        "new_size": 4295496,
+        "differing_bytes": 0
+      }
+    ]
+  },
+  "limitations": [
+    "Native CRT and zlib function ordering is separate; including unsupported private or assembly entries in /ORDER produces linker warnings.",
+    "Translation unit boundaries and original linker input order remain inferred.",
+    "Regenerate order when C++ symbol decoration changes. The generator rejects missing or ambiguous functions."
+  ],
+  "reproduction": [
+    "python3 scripts/order_nemu_functions.py CANDIDATE.map --output application.order --report order.json",
+    "python3 scripts/build_nemu.py --function-order application.order",
+    "python3 scripts/order_nemu_functions.py CANDIDATE.map --output application.order --verify-map ORDERED.map --report verified-order.json"
+  ]
+}
