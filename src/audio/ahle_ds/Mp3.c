@@ -22,7 +22,7 @@ short Mp3Subtract(int left, int right)
     return left - right;
 }
 
-__inline short Mp3MultiplyFraction(short left, short right)
+__inline int Mp3MultiplyFraction(short left, short right)
 {
     return ((left * right) * 2 + 0x8000) >> 16;
 }
@@ -37,7 +37,7 @@ short Mp3MultiplySplit(short value, unsigned short low, short high)
     return (value * (low + (high << 16))) >> 16;
 }
 
-__inline short Mp3AccumulateFraction(short first, short second,
+__inline int Mp3AccumulateFraction(short first, short second,
                             unsigned short low, short high)
 {
     __int64 accumulator = (second * high) * 2 + 0x8000;
@@ -45,7 +45,7 @@ __inline short Mp3AccumulateFraction(short first, short second,
     return accumulator >> 16;
 }
 
-__inline short Mp3AccumulateUnsigned(short first, short second,
+__inline int Mp3AccumulateUnsigned(short first, short second,
                             unsigned short low, unsigned short high)
 {
     return (((first * low) & 0xffff0000) + second * high) >> 16;
@@ -181,27 +181,28 @@ void Mp3Butterfly(unsigned short *coefficients)
  * The original routine repeats each input block six times without advancing
  * its output base; it does not write the loaded synthesis state back.
  */
-void Mp3DCT(unsigned char * input, const void * table, const void * state, unsigned int index)
+void Mp3DCT(unsigned char *input, const void *table, const void *state, unsigned int index)
 {
     unsigned short coefficients[0x1120];
     short memory[0x800];
     unsigned char samples[0x300];
-    short * output = (short *) input;
+    short *output = (short *) input;
     unsigned int t6, t5, t4, t0, t2, t3;
     int outer, inner, x, i, offset;
 
-    int v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v17;
+    int v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15;
     input += 8;
     Mp3ReadSamples(coefficients + 8, table, 0x890);
     memset(memory, 0, sizeof(memory));
-    t4 = index & 0x1e; t5 = 0xac0;
+    t4 = index & 0x1e;
+    t5 = 0xac0;
     Mp3ReadSamples(memory + 0x8a0 / 2, state, 0x440);
     t6 = 0x8a0;
     offset = 0x80 - t4;
-    for (outer = 0; outer < 3;++ outer) {
+    for (outer = 0; outer < 3; ++outer) {
         Mp3ReadSamples((unsigned short *) samples, input, 0x180);
         input += 0x180;
-        for (inner = 0; inner < 6;++ inner) {
+        for (inner = 0; inner < 6; ++inner) {
             Mp3V0 = Mp3Add(*(int *) (samples + 0), *(int *) (samples + 62));
             Mp3V1 = Mp3Add(*(int *) (samples + 2), *(int *) (samples + 60));
             Mp3V3 = Mp3Add(*(int *) (samples + 4), *(int *) (samples + 58));
@@ -218,19 +219,23 @@ void Mp3DCT(unsigned char * input, const void * table, const void * state, unsig
             Mp3V11 = Mp3Add(*(int *) (samples + 26), *(int *) (samples + 36));
             Mp3V9 = Mp3Add(*(int *) (samples + 28), *(int *) (samples + 34));
             Mp3V8 = Mp3Add(*(int *) (samples + 30), *(int *) (samples + 32));
-            t5 &= 0xffe0; t5 |= t4; t6 |= t4;
+            t5 &= 0xffe0;
+            t5 |= t4;
+            t6 |= t4;
             Mp3Butterfly(coefficients);
-            t0 = t6 + 0x100; t2 = t5 + 0x100; t3 = t5 + 0x200;
+            t0 = t6 + 0x100;
+            t2 = t5 + 0x100;
+            t3 = t5 + 0x200;
             v11 = MP3_SPLIT(MP3_SUB16(Mp3V16, Mp3V17), coefficients[40]);
-            v0 = - MP3_ADD16(Mp3V16, Mp3V17);
+            v0 = -MP3_ADD16(Mp3V16, Mp3V17);
             memory[t6 >> 1] = v11;
             memory[t3 >> 1] = v0;
-            v2 = - MP3_ADD16(Mp3V18, Mp3V19);
+            v2 = -MP3_ADD16(Mp3V18, Mp3V19);
             memory[t2 >> 1] = v2;
             v3 = MP3_SPLIT(MP3_SUB16(Mp3V18, Mp3V19), (coefficients[43] + ((short) coefficients[42] << 16))) - v2;
             memory[t0 >> 1] = v3;
-            memory[t5 >> 1] = - v11;
-            v4 = - MP3_ADD16(Mp3V20, Mp3V21);
+            memory[t5 >> 1] = -v11;
+            v4 = -MP3_ADD16(Mp3V20, Mp3V21);
             v5 = MP3_SPLIT(MP3_SUB16(Mp3V20, Mp3V21), (coefficients[43] + ((short) coefficients[42] << 16)));
             memory[(t3 - 0x80) >> 1] = v4;
             v7 = MP3_SPLIT(MP3_SUB16(Mp3V22, Mp3V23), (coefficients[45] + ((short) coefficients[44] << 16)));
@@ -240,7 +245,7 @@ void Mp3DCT(unsigned char * input, const void * table, const void * state, unsig
             v4 += v6;
             v5 -= v6;
             memory[(t6 + 0x180) >> 1] = v7;
-            memory[(t2 - 0x80) >> 1] = - v4;
+            memory[(t2 - 0x80) >> 1] = -v4;
             memory[(t0 - 0x80) >> 1] = v5;
             v8 = MP3_ADD16(Mp3V24, Mp3V25);
             v9 = MP3_SPLIT(MP3_SUB16(Mp3V24, Mp3V25), (coefficients[43] + ((short) coefficients[42] << 16)));
@@ -250,14 +255,14 @@ void Mp3DCT(unsigned char * input, const void * table, const void * state, unsig
             Mp3V12 = MP3_ADD16(Mp3V28, Mp3V29) * 2;
             v13 = MP3_SPLIT(MP3_SUB16(Mp3V28, Mp3V29), (coefficients[45] + ((short) coefficients[44] << 16))) - v2 + Mp3V12;
             memory[(t0 - 0x40) >> 1] = v13 - Mp3V10;
-            Mp3V14 = v8 - MP3_ADD16(Mp3V30, Mp3V31) * 4 + Mp3V10;
+            Mp3V14 = v8 -MP3_ADD16(Mp3V30, Mp3V31) * 4 + Mp3V10;
             v15 = MP3_SUB16(Mp3V30, Mp3V31);
             memory[(t6 + 0x40) >> 1] = v9 - Mp3V14;
             v11 = MP3_SPLIT(v11, (coefficients[45] + ((short) coefficients[44] << 16))) - v8 - v9 - v13 + v2;
             memory[(t0 + 0x40) >> 1] = v11;
-            memory[(t6 + 0x1c0) >> 1] = - MP3_SPLIT(v15, (coefficients[47] + ((short) coefficients[46] << 16)));
+            memory[(t6 + 0x1c0) >> 1] = -MP3_SPLIT(v15, (coefficients[47] + ((short) coefficients[46] << 16)));
             memory[(t2 + 0x40) >> 1] = v8 - Mp3V12;
-            memory[(t3 - 0x40) >> 1] = - v8;
+            memory[(t3 - 0x40) >> 1] = -v8;
             memory[(t5 + 0x40) >> 1] = Mp3V14;
             memory[(t2 - 0x40) >> 1] = Mp3V10;
             Mp3V0 = (((short) Mp3Subtract(*(int *) (samples + 0), *(int *) (samples + 62)) * coefficients[24]) >> 16) * 2;
@@ -279,21 +284,21 @@ void Mp3DCT(unsigned char * input, const void * table, const void * state, unsig
             Mp3Butterfly(coefficients);
             v1 = MP3_ACCUMULATE_FRACTION(Mp3V16, Mp3V17, coefficients[40], coefficients[41]);
             v0 = MP3_ACCUMULATE_UNSIGNED(Mp3V16, Mp3V17, coefficients[22], coefficients[22]);
-            v2 = - MP3_ADD16(Mp3V18, Mp3V19);
+            v2 = -MP3_ADD16(Mp3V18, Mp3V19);
             v3 = MP3_SPLIT(MP3_SUB16(Mp3V18, Mp3V19), (coefficients[43] + ((short) coefficients[42] << 16)));
             v4 = MP3_ADD16(v0, MP3_ADD16(Mp3V20, Mp3V21));
             v5 = MP3_SPLIT(MP3_SUB16(Mp3V20, Mp3V21), (coefficients[43] + ((short) coefficients[42] << 16))) + v1;
             v6 = MP3_ADD16(Mp3V22, Mp3V23) * 2 - v2 + v0;
             v7 = MP3_SPLIT(MP3_SUB16(Mp3V22, Mp3V23), (coefficients[45] + ((short) coefficients[44] << 16))) + v0 + v1 + v3;
-            memory[(t3 - 0x20) >> 1] = - v0;
+            memory[(t3 - 0x20) >> 1] = -v0;
             v8 = MP3_ADD16(Mp3V24, Mp3V25);
             v9 = MP3_SPLIT(MP3_SUB16(Mp3V24, Mp3V25), (coefficients[43] + ((short) coefficients[42] << 16)));
             v10 = MP3_ADD16(Mp3V26, Mp3V27) * 2 + v8;
             v11 = MP3_SPLIT(MP3_SUB16(Mp3V26, Mp3V27), (coefficients[45] + ((short) coefficients[44] << 16))) + v9 + v8;
-            v12 = v4 - MP3_ADD16(Mp3V28, Mp3V29) * 2;
+            v12 = v4 -MP3_ADD16(Mp3V28, Mp3V29) * 2;
             memory[(t2 + 0x20) >> 1] = v12;
             v13 = MP3_SPLIT(MP3_SUB16(Mp3V28, Mp3V29), (coefficients[45] + ((short) coefficients[44] << 16))) - v5 - v12;
-            v14 = v6 - MP3_ADD16(Mp3V30, Mp3V31) * 4;
+            v14 = v6 -MP3_ADD16(Mp3V30, Mp3V31) * 4;
             memory[(t5 + 0x20) >> 1] = v14;
             memory[(t6 + 0x20) >> 1] = v14 + v1;
             v15 = MP3_SPLIT(MP3_SUB16(Mp3V30, Mp3V31), (coefficients[47] + ((short) coefficients[46] << 16))) - v7;
@@ -313,26 +318,27 @@ void Mp3DCT(unsigned char * input, const void * table, const void * state, unsig
             memory[(t0 - 0x60) >> 1] = v5 - v9 - v2;
             t6 &= 0xffe0;
             {
-                short * out = output;
+                short *out = output;
                 unsigned int address = t6, window = offset;
-                for (x = 0; x < 8;++ x) {
+                for (x = 0; x < 8; ++x) {
                     int a = 0, b = 0, c = 0, d = 0;
-                    for (i = 0; i < 4;++ i) {
+                    for (i = 0; i < 4; ++i) {
                         a += MP3_FRACTION(memory[((address + 0x00) >> 1) + i], coefficients[((window + 0x00) >> 1) + i]);
                         b += MP3_FRACTION(memory[((address + 0x08) >> 1) + i], coefficients[((window + 0x08) >> 1) + i]);
                         c += MP3_FRACTION(memory[((address + 0x10) >> 1) + i], coefficients[((window + 0x10) >> 1) + i]);
                         d += MP3_FRACTION(memory[((address + 0x18) >> 1) + i], coefficients[((window + 0x18) >> 1) + i]);
                     }
-                    * out++ = a + b + c + d;
+                    *out++ = a + b + c + d;
                     a = b = c = d = 0;
-                    for (i = 0; i < 4;++ i) {
+                    for (i = 0; i < 4; ++i) {
                         a += MP3_FRACTION(memory[((address + 0x20) >> 1) + i], coefficients[((window + 0x40) >> 1) + i]);
                         b += MP3_FRACTION(memory[((address + 0x28) >> 1) + i], coefficients[((window + 0x48) >> 1) + i]);
                         c += MP3_FRACTION(memory[((address + 0x30) >> 1) + i], coefficients[((window + 0x50) >> 1) + i]);
                         d += MP3_FRACTION(memory[((address + 0x38) >> 1) + i], coefficients[((window + 0x58) >> 1) + i]);
                     }
-                    * out++ = a + b + c + d;
-                    address += 0x40; window += 0x40;
+                    *out++ = a + b + c + d;
+                    address += 0x40;
+                    window += 0x40;
                 }
             }
         }

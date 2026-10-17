@@ -18,7 +18,8 @@
     "JPEG and fixed-point MP3 sources are reconstructed directly from target dataflow. Filenames and proprietary internal names inferred.",
     "AziAudio ABI3mp3.cpp and mupen64plus-rsp-hle/src/mp3.c were inspected only to interpret the N64 synthesis stages; no modern replacement decoder is used.",
     "No original x86 blobs, byte patches, dummy computation or synthetic padding are used. Compiler alignment belongs to complete measured function extents.",
-    "The integer primitives, butterfly and Mp3DCT share one inferred Mp3.c unit: VC7 uses callee information to hoist invariant calls out of the synthesis loop."
+    "The integer primitives, butterfly and Mp3DCT share one inferred Mp3.c unit: VC7 uses callee information to hoist invariant calls out of the synthesis loop.",
+    "The inlined MultiplyFraction, AccumulateFraction and AccumulateUnsigned results stay 32-bit in the target caller. Their int-return declarations preserve all three out-of-line byte matches and remove unsupported caller narrowing; Mp3DCT remains unmatched at 5120 versus 5104 bytes."
   ],
   "unreconstructed": [],
   "unmatched": [

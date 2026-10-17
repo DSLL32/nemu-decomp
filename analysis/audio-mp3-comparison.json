@@ -17,14 +17,14 @@
   "source_sha256": {
     "src/audio/ahle_ds/Jpeg.c": "8754d6438e1f4a250e8dc6fc6b28d7926943ba183cd5972666521c82c936ba3d",
     "src/audio/ahle_ds/transform.c": "b180da5ba72e8396d9764fe50f2cf50752968d74bb4a6bfbc20d9ea978e063e5",
-    "src/audio/ahle_ds/Mp3.c": "0a3e06f21fe454b2d416bda2948c5a3dfa77b8107ed0260ae18d0490ad76d365",
+    "src/audio/ahle_ds/Mp3.c": "e7d2744be8afd509887397d990832fb10cefbfde25daeb4f54f6dadd78ee0745",
     "src/audio/ahle_ds/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f"
   },
   "address_map_sha256": "8c5b6f817b7f7287ed0c6c5e716dd5173ea1c0b62cc240929d8470597dc1b2af",
   "objects": [
     {
       "object": "/root/.ai-tmp/audio-mp3-20261017/Jpeg.obj",
-      "sha256": "47ccf5219994bc661abbd4bc0a1dd1e83a3667d4e75339828b9c06b47c2ca2c0",
+      "sha256": "6bfd4c085263bbeba39e6de70e96a79fcb9bed0170db59df9d5a3accf346efbc",
       "original": "/root/nemu-decomp/master/Plugin/audio.dll",
       "functions": [
         {
@@ -1341,7 +1341,7 @@
     },
     {
       "object": "/root/.ai-tmp/audio-mp3-20261017/transform.obj",
-      "sha256": "a3b5a6fa9b35f3b74a00b01184bdbd6bb49225763eb0993fc3602bbbb668d80b",
+      "sha256": "f60d71ed853a59cfeecfc67838bcd32e8dd1b9ccffcc2ee90e4ec53dab98ad89",
       "original": "/root/nemu-decomp/master/Plugin/audio.dll",
       "functions": [
         {
@@ -3846,7 +3846,7 @@
     },
     {
       "object": "/root/.ai-tmp/audio-mp3-20261017/Mp3.obj",
-      "sha256": "d91e0363ac952ba9a90202e99874ff027b91b60b18978bff0fe33e6edd2d0f43",
+      "sha256": "4881ce5da0d406ba79b25859633ba49dadbf81a792fe3cd79754837d6c249b47",
       "original": "/root/nemu-decomp/master/Plugin/audio.dll",
       "functions": [
         {
@@ -6627,12 +6627,12 @@
         {
           "name": "_Mp3DCT",
           "object": "Mp3.obj",
-          "rebuilt_bytes": 5200,
+          "rebuilt_bytes": 5120,
           "status": "compared",
           "original_va": 268475104,
           "raw_bytes_equal": false,
-          "raw_differing_bytes": 4751,
-          "compared_bytes": 5200,
+          "raw_differing_bytes": 4625,
+          "compared_bytes": 5120,
           "original_size_verified": true,
           "original_bytes": 5104,
           "size_equal": false,
@@ -8083,11 +8083,11 @@
               "target_identity_verified": false
             },
             {
-              "offset": 2767,
+              "offset": 2769,
               "type": "REL32",
               "symbol": "__allshr",
               "addend": 0,
-              "original_target_va": 2495591811,
+              "original_target_va": 841296500,
               "original_target_symbols": [],
               "expected_target_va": 268573872,
               "resolution_basis": "independent_library_mapping",
@@ -8097,11 +8097,11 @@
               "target_identity_verified": false
             },
             {
-              "offset": 2774,
+              "offset": 2776,
               "type": "DIR32",
               "symbol": "_Mp3V16",
               "addend": 0,
-              "original_target_va": 2936995840,
+              "original_target_va": 2379263759,
               "original_target_symbols": [],
               "expected_target_va": 269911802,
               "resolution_basis": "observed_operand_inference",
@@ -8111,25 +8111,11 @@
               "target_identity_verified": false
             },
             {
-              "offset": 2811,
-              "type": "DIR32",
-              "symbol": "_Mp3V18",
-              "addend": 0,
-              "original_target_va": 4293034495,
-              "original_target_symbols": [],
-              "expected_target_va": 269911752,
-              "resolution_basis": "observed_operand_inference",
-              "target_address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array.",
-              "status": "resolved",
-              "target_equal": false,
-              "target_identity_verified": false
-            },
-            {
-              "offset": 2824,
+              "offset": 2800,
               "type": "DIR32",
               "symbol": "_Mp3V19",
               "addend": 0,
-              "original_target_va": 1149878803,
+              "original_target_va": 251658260,
               "original_target_symbols": [],
               "expected_target_va": 269911816,
               "resolution_basis": "observed_operand_inference",
@@ -8139,11 +8125,39 @@
               "target_identity_verified": false
             },
             {
-              "offset": 2847,
+              "offset": 2817,
+              "type": "DIR32",
+              "symbol": "_Mp3V18",
+              "addend": 0,
+              "original_target_va": 2346189568,
+              "original_target_symbols": [],
+              "expected_target_va": 269911752,
+              "resolution_basis": "observed_operand_inference",
+              "target_address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array.",
+              "status": "resolved",
+              "target_equal": false,
+              "target_identity_verified": false
+            },
+            {
+              "offset": 2838,
+              "type": "DIR32",
+              "symbol": "_Mp3V21",
+              "addend": 0,
+              "original_target_va": 3018330289,
+              "original_target_symbols": [],
+              "expected_target_va": 269911772,
+              "resolution_basis": "observed_operand_inference",
+              "target_address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array.",
+              "status": "resolved",
+              "target_equal": false,
+              "target_identity_verified": false
+            },
+            {
+              "offset": 2849,
               "type": "DIR32",
               "symbol": "_Mp3V20",
               "addend": 0,
-              "original_target_va": 335291540,
+              "original_target_va": 5116,
               "original_target_symbols": [],
               "expected_target_va": 269911778,
               "resolution_basis": "observed_operand_inference",
@@ -8153,27 +8167,11 @@
               "target_identity_verified": false
             },
             {
-              "offset": 2863,
-              "type": "DIR32",
-              "symbol": "_Mp3V21",
-              "addend": 0,
-              "original_target_va": 269911816,
-              "original_target_symbols": [
-                "_Mp3V19"
-              ],
-              "expected_target_va": 269911772,
-              "resolution_basis": "observed_operand_inference",
-              "target_address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array.",
-              "status": "resolved",
-              "target_equal": false,
-              "target_identity_verified": false
-            },
-            {
-              "offset": 2923,
+              "offset": 2899,
               "type": "DIR32",
               "symbol": "_Mp3V23",
               "addend": 0,
-              "original_target_va": 4145026694,
+              "original_target_va": 3793587046,
               "original_target_symbols": [],
               "expected_target_va": 269911792,
               "resolution_basis": "observed_operand_inference",
@@ -8183,11 +8181,11 @@
               "target_identity_verified": false
             },
             {
-              "offset": 2930,
+              "offset": 2909,
               "type": "DIR32",
               "symbol": "_Mp3V22",
               "addend": 0,
-              "original_target_va": 3205441572,
+              "original_target_va": 1725104998,
               "original_target_symbols": [],
               "expected_target_va": 269911810,
               "resolution_basis": "observed_operand_inference",
@@ -8197,11 +8195,11 @@
               "target_identity_verified": false
             },
             {
-              "offset": 2958,
+              "offset": 2948,
               "type": "DIR32",
               "symbol": "_Mp3V22",
               "addend": 0,
-              "original_target_va": 2301371460,
+              "original_target_va": 1420758995,
               "original_target_symbols": [],
               "expected_target_va": 269911810,
               "resolution_basis": "observed_operand_inference",
@@ -8211,11 +8209,11 @@
               "target_identity_verified": false
             },
             {
-              "offset": 2965,
+              "offset": 2955,
               "type": "DIR32",
               "symbol": "_Mp3V23",
               "addend": 0,
-              "original_target_va": 2333145793,
+              "original_target_va": 1149833471,
               "original_target_symbols": [],
               "expected_target_va": 269911792,
               "resolution_basis": "observed_operand_inference",
@@ -8225,25 +8223,11 @@
               "target_identity_verified": false
             },
             {
-              "offset": 3008,
-              "type": "DIR32",
-              "symbol": "_Mp3V25",
-              "addend": 0,
-              "original_target_va": 1712330375,
-              "original_target_symbols": [],
-              "expected_target_va": 269911796,
-              "resolution_basis": "observed_operand_inference",
-              "target_address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array.",
-              "status": "resolved",
-              "target_equal": false,
-              "target_identity_verified": false
-            },
-            {
-              "offset": 3015,
+              "offset": 2997,
               "type": "DIR32",
               "symbol": "_Mp3V24",
               "addend": 0,
-              "original_target_va": 2198869638,
+              "original_target_va": 1149833252,
               "original_target_symbols": [],
               "expected_target_va": 269911764,
               "resolution_basis": "observed_operand_inference",
@@ -8253,11 +8237,41 @@
               "target_identity_verified": false
             },
             {
-              "offset": 3039,
+              "offset": 3004,
+              "type": "DIR32",
+              "symbol": "_Mp3V25",
+              "addend": 0,
+              "original_target_va": 44132032,
+              "original_target_symbols": [],
+              "expected_target_va": 269911796,
+              "resolution_basis": "observed_operand_inference",
+              "target_address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array.",
+              "status": "resolved",
+              "target_equal": false,
+              "target_identity_verified": false
+            },
+            {
+              "offset": 3014,
+              "type": "DIR32",
+              "symbol": "_Mp3V25",
+              "addend": 0,
+              "original_target_va": 269911792,
+              "original_target_symbols": [
+                "_Mp3V23"
+              ],
+              "expected_target_va": 269911796,
+              "resolution_basis": "observed_operand_inference",
+              "target_address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array.",
+              "status": "resolved",
+              "target_equal": false,
+              "target_identity_verified": false
+            },
+            {
+              "offset": 3038,
               "type": "DIR32",
               "symbol": "_Mp3V27",
               "addend": 0,
-              "original_target_va": 3495726217,
+              "original_target_va": 1552714086,
               "original_target_symbols": [],
               "expected_target_va": 269911788,
               "resolution_basis": "observed_operand_inference",
@@ -8267,11 +8281,11 @@
               "target_identity_verified": false
             },
             {
-              "offset": 3046,
+              "offset": 3045,
               "type": "DIR32",
               "symbol": "_Mp3V26",
               "addend": 0,
-              "original_target_va": 1143229577,
+              "original_target_va": 608995584,
               "original_target_symbols": [],
               "expected_target_va": 269911750,
               "resolution_basis": "observed_operand_inference",
@@ -8281,11 +8295,11 @@
               "target_identity_verified": false
             },
             {
-              "offset": 3066,
+              "offset": 3065,
               "type": "DIR32",
               "symbol": "_Mp3V26",
               "addend": 0,
-              "original_target_va": 227239625,
+              "original_target_va": 2338769203,
               "original_target_symbols": [],
               "expected_target_va": 269911750,
               "resolution_basis": "observed_operand_inference",
@@ -8295,11 +8309,11 @@
               "target_identity_verified": false
             },
             {
-              "offset": 3073,
+              "offset": 3072,
               "type": "DIR32",
               "symbol": "_Mp3V27",
               "addend": 0,
-              "original_target_va": 1728000784,
+              "original_target_va": 4281536534,
               "original_target_symbols": [],
               "expected_target_va": 269911788,
               "resolution_basis": "observed_operand_inference",
@@ -8309,12 +8323,14 @@
               "target_identity_verified": false
             },
             {
-              "offset": 3104,
+              "offset": 3106,
               "type": "DIR32",
               "symbol": "_Mp3V29",
               "addend": 0,
-              "original_target_va": 2261138827,
-              "original_target_symbols": [],
+              "original_target_va": 269911750,
+              "original_target_symbols": [
+                "_Mp3V26"
+              ],
               "expected_target_va": 269911824,
               "resolution_basis": "observed_operand_inference",
               "target_address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array.",
@@ -8323,11 +8339,27 @@
               "target_identity_verified": false
             },
             {
-              "offset": 3111,
+              "offset": 3113,
               "type": "DIR32",
               "symbol": "_Mp3V28",
               "addend": 0,
-              "original_target_va": 2263629059,
+              "original_target_va": 269911788,
+              "original_target_symbols": [
+                "_Mp3V27"
+              ],
+              "expected_target_va": 269911786,
+              "resolution_basis": "observed_operand_inference",
+              "target_address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array.",
+              "status": "resolved",
+              "target_equal": false,
+              "target_identity_verified": false
+            },
+            {
+              "offset": 3155,
+              "type": "DIR32",
+              "symbol": "_Mp3V28",
+              "addend": 0,
+              "original_target_va": 51445697,
               "original_target_symbols": [],
               "expected_target_va": 269911786,
               "resolution_basis": "observed_operand_inference",
@@ -8337,25 +8369,11 @@
               "target_identity_verified": false
             },
             {
-              "offset": 3156,
-              "type": "DIR32",
-              "symbol": "_Mp3V28",
-              "addend": 0,
-              "original_target_va": 4177727743,
-              "original_target_symbols": [],
-              "expected_target_va": 269911786,
-              "resolution_basis": "observed_operand_inference",
-              "target_address_evidence": "Inferred scalar identity from complete butterfly dataflow; discontiguous scalar globals, not an invented array.",
-              "status": "resolved",
-              "target_equal": false,
-              "target_identity_verified": false
-            },
-            {
-              "offset": 3163,
+              "offset": 3162,
               "type": "DIR32",
               "symbol": "_Mp3V29",
               "addend": 0,
-              "original_target_va": 1724462073,
+              "original_target_va": 3375626499,
               "original_target_symbols": [],
               "expected_target_va": 269911824,
               "resolution_basis": "observed_operand_inference",
@@ -8365,11 +8383,11 @@
               "target_identity_verified": false
             },
             {
-              "offset": 3193,
+              "offset": 3191,
               "type": "DIR32",
               "symbol": "_Mp3V31",
               "addend": 0,
-              "original_target_va": 1552639524,
+              "original_target_va": 1713644620,
               "original_target_symbols": [],
               "expected_target_va": 269911794,
               "resolution_basis": "observed_operand_inference",
@@ -8379,11 +8397,11 @@
               "target_identity_verified": false
             },
             {
-              "offset": 3200,
+              "offset": 3198,
               "type": "DIR32",
               "symbol": "_Mp3V30",
               "addend": 0,
-              "original_target_va": 227239625,
+              "original_target_va": 1724461860,
               "original_target_symbols": [],
               "expected_target_va": 269914144,
               "resolution_basis": "observed_operand_inference",
@@ -8393,11 +8411,11 @@
               "target_identity_verified": false
             },
             {
-              "offset": 3257,
+              "offset": 3254,
               "type": "DIR32",
               "symbol": "_Mp3V30",
               "addend": 0,
-              "original_target_va": 1076120713,
+              "original_target_va": 2311793610,
               "original_target_symbols": [],
               "expected_target_va": 269914144,
               "resolution_basis": "observed_operand_inference",
@@ -8407,11 +8425,11 @@
               "target_identity_verified": false
             },
             {
-              "offset": 3264,
+              "offset": 3261,
               "type": "DIR32",
               "symbol": "_Mp3V31",
               "addend": 0,
-              "original_target_va": 2418019723,
+              "original_target_va": 2338769203,
               "original_target_symbols": [],
               "expected_target_va": 269911794,
               "resolution_basis": "observed_operand_inference",
@@ -8421,11 +8439,11 @@
               "target_identity_verified": false
             }
           ],
-          "relocation_target_mismatch_count": 119,
-          "inferred_target_count": 87,
+          "relocation_target_mismatch_count": 120,
+          "inferred_target_count": 88,
           "unresolved_target_count": 0,
           "relocation_masked_equal": false,
-          "relocation_masked_differing_bytes": 4328,
+          "relocation_masked_differing_bytes": 4202,
           "relocations_all_resolved": true,
           "relocation_values_consistent": false,
           "relocation_targets_verified": false,
@@ -8472,8 +8490,8 @@
       "relocation_masked_matches": 10,
       "relocation_consistent_matches": 10,
       "relocation_checked_matches": 8,
-      "relocation_target_mismatches": 119,
-      "inferred_targets": 243,
+      "relocation_target_mismatches": 120,
+      "inferred_targets": 244,
       "unresolved_targets": 0
     }
   ],
