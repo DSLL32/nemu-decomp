@@ -1,0 +1,209 @@
+{
+  "scope": "Reproduction of historical link metadata only. This does not establish full audio.dll equality.",
+  "original": {
+    "path": "master/Plugin/audio.dll",
+    "sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+    "codeview_kind": "RSDS",
+    "guid": "53a2b525-689f-4912-82cd-8a849f0d4dcb",
+    "age": 8,
+    "path_in_record": "e:\\nemu\\audiohle\\ahle_ds\\ahle_ds___Win32_Release_nemu8\\audio.pdb",
+    "record_size": 89,
+    "record_sha256": "e22a3dec65221be54118acdd7f2819315eb425e17f2ea18f8ca6e948308cae7f",
+    "coff_timestamp": 1048395386,
+    "debug_timestamp": 1048395386
+  },
+  "reconstruction": {
+    "helper": "scripts/seed_audio_pdb.py",
+    "helper_sha256": "b859e9313f889553d0f2f57a8fe29708d60dd133db0a28b397026c3c6651dfb0",
+    "native_toolchain": "Unmodified tracked VC7 LINK 7.00.9466; native generated PDB, not recovered original PDB.",
+    "fields": [
+      "PDB Info stream1 age at8: set7",
+      "PDB Info stream1 GUID at12: restore original GUID",
+      "DBI stream3 age at8: set7"
+    ],
+    "inference": "Revision7 is a seed chosen to make native LINK increment to the observed revision8. It does not reconstruct the seven historical builds.",
+    "preservation": "Initial linked DLL and generated PDB retained. Final DLL receives no byte edits.",
+    "recipe": [
+      "Create a fresh private Wine prefix under ~/.ai-tmp. Map e: to a private E directory; create nemu/audiohle/ahle_ds/ahle_ds___Win32_Release_nemu8 beneath it.",
+      "Initialize Wine using real advancing time. For the final link clock, start a persistent Wine server with the dynamic clock environment below, whose file initially contains +0. Run wineboot -u and wait for completion.",
+      "Link the reconstructed application objects normally with /debug /incremental:no, preserving the first DLL and native PDB.",
+      "Run seed_audio_pdb.py INITIAL_PDB SEEDED_PDB --report REPORT, preserving INITIAL_PDB. Place SEEDED_PDB at the historical e: path.",
+      "Atomically replace the dynamic clock file content with 2003-03-23 04:56:26 followed by newline.",
+      "Link the same objects using /pdb:e:\\nemu\\audiohle\\ahle_ds\\ahle_ds___Win32_Release_nemu8\\audio.pdb under that clock environment. LINK preserves GUID and increments age7 to8.",
+      "Verify the final complete DLL against the original independently; successful metadata reconstruction does not imply code or layout equality."
+    ],
+    "clock_environment": {
+      "LD_PRELOAD": "/usr/$LIB/faketime/libfaketime.so.1",
+      "FAKETIME_TIMESTAMP_FILE": "ABSOLUTE_SCRATCH_PATH/link-clock.txt",
+      "FAKETIME_NO_CACHE": "1",
+      "FAKETIME_DONT_FAKE_MONOTONIC": "1",
+      "FAKETIME_DISABLE_SHM": "1",
+      "NO_FAKE_STAT": "1",
+      "TZ": "UTC"
+    },
+    "wine_startup_constraint": "Freezing time during wineboot CPU calibration caused a wineboot.exe division by zero. Warm startup with the same persistent server under +0 and only then freezing the dynamic clock eliminated the diagnostic. Redirect server logs to files, not inherited capture pipes."
+  },
+  "native_repeat_probe": {
+    "scope": "Two unchanged native links from freshly seeded generated PDBs under a warmed Wine server, then exact original clock. No executable edits.",
+    "clock_environment": {
+      "LD_PRELOAD": "/usr/$LIB/faketime/libfaketime.so.1",
+      "FAKETIME_TIMESTAMP_FILE": "/root/.ai-tmp/audio-pdb-seed.hfbl68jc/link-clock.txt",
+      "FAKETIME_NO_CACHE": "1",
+      "FAKETIME_DONT_FAKE_MONOTONIC": "1",
+      "FAKETIME_DISABLE_SHM": "1",
+      "NO_FAKE_STAT": "1",
+      "TZ": "UTC"
+    },
+    "warmup_clock": "+0",
+    "link_clock": "2003-03-23 04:56:26",
+    "wineboot_issue": "An immediately frozen clock makes Wine wineboot.exe divide by zero in __divdi3 at0040138b during CPU calibration. Warm startup under the real advancing clock resolves this; the fixed clock is enabled only afterward.",
+    "runs": [
+      {
+        "run": 0,
+        "codeview_exact": true,
+        "coff_timestamp": 1048395386,
+        "debug_timestamp": 1048395386,
+        "dll_sha256": "001daab98edf41d84eb79c47bc69f64eb7c3663f2f70619dfe0235dd4ff304c5"
+      },
+      {
+        "run": 1,
+        "codeview_exact": true,
+        "coff_timestamp": 1048395386,
+        "debug_timestamp": 1048395386,
+        "dll_sha256": "001daab98edf41d84eb79c47bc69f64eb7c3663f2f70619dfe0235dd4ff304c5"
+      }
+    ],
+    "repeated_dll_equal": true
+  },
+  "helper_validation": {
+    "helper": "scripts/seed_audio_pdb.py",
+    "helper_sha256": "b859e9313f889553d0f2f57a8fe29708d60dd133db0a28b397026c3c6651dfb0",
+    "native_link_matches_prior_two_links": true,
+    "dll_sha256": "001daab98edf41d84eb79c47bc69f64eb7c3663f2f70619dfe0235dd4ff304c5",
+    "whole_diagnostic_pdb": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/rbtcws_9/build/audio.pdb",
+    "whole_diagnostic_pdb_metadata_only": {
+      "scope": "Historical PDB identity restored in toolchain-generated metadata; no executable edits.",
+      "original_sha256": "5e1f593e5e79fa5b1f813fcfc2bfeb712cfefe4986c6ac70715c21e217dd53b3",
+      "seeded_sha256": "6479e25036d9803707724634aa651754248505f237dedc2f282e9759c6b1b3e9",
+      "size": 560128,
+      "guid": "53a2b525-689f-4912-82cd-8a849f0d4dcb",
+      "prior_age": 7,
+      "expected_link_age": 8,
+      "fields": [
+        {
+          "name": "Info.Age",
+          "stream": 1,
+          "stream_offset": 8,
+          "file_offsets": [
+            550920,
+            550921,
+            550922,
+            550923
+          ],
+          "before": "01000000",
+          "after": "07000000"
+        },
+        {
+          "name": "Info.Guid",
+          "stream": 1,
+          "stream_offset": 12,
+          "file_offsets": [
+            550924,
+            550925,
+            550926,
+            550927,
+            550928,
+            550929,
+            550930,
+            550931,
+            550932,
+            550933,
+            550934,
+            550935,
+            550936,
+            550937,
+            550938,
+            550939
+          ],
+          "before": "3b7bd534d1124f48a7584980f3082310",
+          "after": "25b5a2539f68124982cd8a849f0d4dcb"
+        },
+        {
+          "name": "DBI.Age",
+          "stream": 3,
+          "stream_offset": 8,
+          "file_offsets": [
+            401416,
+            401417,
+            401418,
+            401419
+          ],
+          "before": "01000000",
+          "after": "07000000"
+        }
+      ],
+      "changed_file_offsets": [
+        401416,
+        550920,
+        550924,
+        550925,
+        550926,
+        550927,
+        550928,
+        550929,
+        550930,
+        550931,
+        550932,
+        550933,
+        550934,
+        550935,
+        550936,
+        550937,
+        550938,
+        550939
+      ]
+    },
+    "malformed_rejections": [
+      {
+        "case": "truncated",
+        "rejection": "Expected a native MSF 7.00 PDB"
+      },
+      {
+        "case": "bad-magic",
+        "rejection": "Expected a native MSF 7.00 PDB"
+      },
+      {
+        "case": "unsupported-info-version",
+        "rejection": "Expected VC7 PDB Info stream version 20000404"
+      }
+    ]
+  },
+  "evidence": {
+    "directory": "/root/.ai-tmp/audio-pdb-seed.hfbl68jc",
+    "files": {
+      "probe.py": "9481d2a44f49719920de6c85ab57768787010f9671e112ef3aded9c5defab3a5",
+      "seed_identity.py": "9dcbbf121e5fe5624b1b903d12eaf1ef830cf5737c2ebe8fa135abd2d2689581",
+      "warm_clock.py": "5dbea3aa5cd3f5ff0631bfa204a1132b80156bd966d63be91c48df1de628826f",
+      "warm-proof.json": "19082a7d7b8c43ab457b2c149cc0d0e8338361120d35ba6e9a97825ae2c82bcd",
+      "helper-validation.json": "a937e04d899c318c5645de5c2507eb678267e2a4374aa7ecea25db60f793d684",
+      "first.pdb": "d6ab153e153772f3e6eed28e51466d464e0a7a957aa02bb643343c8a820e7855",
+      "helper-seed.pdb": "0c04d15762368c8840dc61d68aafd1de88794b8ec1221b14a68266b6b72e1b8f",
+      "helper-seed.json": "4a5371996f46374675a4d33139c37679427a52c087c39d6254ae4e1370bb8481",
+      "helper-result.dll": "001daab98edf41d84eb79c47bc69f64eb7c3663f2f70619dfe0235dd4ff304c5",
+      "warm-result-0.dll": "001daab98edf41d84eb79c47bc69f64eb7c3663f2f70619dfe0235dd4ff304c5",
+      "warm-result-1.dll": "001daab98edf41d84eb79c47bc69f64eb7c3663f2f70619dfe0235dd4ff304c5",
+      "warm-wineboot.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "warm-link-0.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "warm-link-1.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "helper-link.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "whole-diagnostic-seed.json": "6dc00fba8cb0756b6b6a502479c9fdf24ca3bde2acdd111c121a4a2c90315968",
+      "link-args-correct.json": "49e44cdfa6141d3c8ce8bfc4b63bd7978bca8ccdb35850751f926d34ee74bbfd",
+      "E/nemu/audiohle/ahle_ds/ahle_ds___Win32_Release_nemu8/toy.c": "dbf8ba87eca2e1f95ba339572eb8ed86435d76ede4c28d546f60fbcb7bc71f51"
+    }
+  },
+  "limitations": [
+    "The repeat-link probe uses an ordinary minimal DLL; it is not the reconstructed audio.dll.",
+    "The helper also parsed the full diagnostic application PDB and changed only the three identity fields. That application DLL still has code and layout differences.",
+    "Filename/source layout and original project history remain inferred."
+  ]
+}
