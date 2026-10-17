@@ -1710,6 +1710,29 @@
       {
         "hypothesis": "WriteByte value parameter is signed byte,16-bit or32-bit integer",
         "result": "Signed byte is indistinguishable; widening preserves standalone helper code but worsens vector store callers."
+      },
+      {
+        "hypothesis": "Manual or macro-style 2/4/8-lane source expansion instead of ordinary compiler-unrolled loops",
+        "result": "No exact function in130 linked probes across all8 outstanding handlers. Four-lane arithmetic expansions often emit the same code as ordinary loops; multiply expansion contradicts the original one-lane backedge and substantially increases function size; VCL and memory expansions do not improve instruction structure. No source promoted.",
+        "instruction_evidence": "Original VADD/SUB/SUT contain four lane operations inside a two-iteration loop; VMAD/VMUL dispatcher retains one lane operation inside an eight-iteration loop. Literal eight-lane expansion also changes original variable shifts into immediate operations.",
+        "reports": [
+          "/root/.ai-tmp/nemu-rsp-unroll._2vtifh6/summary.json",
+          "/root/.ai-tmp/nemu-rsp-unroll._2vtifh6/memory-summary.json"
+        ],
+        "fixtures": [
+          {
+            "image": "/root/.ai-tmp/nemu-rsp-unroll._2vtifh6/unroll.dll",
+            "image_sha256": "e5a1f70f9866654606b2a23146f6c8c093a65a67f1d16c89fa354b5e2c7f9de3",
+            "compiler_input": "/root/.ai-tmp/nemu-rsp-unroll._2vtifh6/unroll.cpp",
+            "source_sha256": "02b360658d38d8d109d548da463b0c938ae2c5866967210ff9489869e05f2c6a"
+          },
+          {
+            "image": "/root/.ai-tmp/nemu-rsp-unroll._2vtifh6/memory.dll",
+            "image_sha256": "3740c143b6798b95ba2116d069574e30dfba8eaf6cab67ab19ef65564c0ea48e",
+            "compiler_input": "/root/.ai-tmp/nemu-rsp-unroll._2vtifh6/memory.cpp",
+            "source_sha256": "02535a3eff3dc0e8a7cf235dbff3d686dfd9e4c4f0de474277ce62987dfd663c"
+          }
+        ]
       }
     ],
     "variants": [
