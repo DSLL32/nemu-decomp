@@ -1,0 +1,1983 @@
+{
+  "original": "master/Plugin/audio.dll",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "symbols": [
+    {
+      "name": "_ToggleLogWindow",
+      "va": 268461584,
+      "size": 64,
+      "object": "AudioLog.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_ClearLogWindow",
+      "va": 268461648,
+      "size": 32,
+      "object": "AudioLog.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_DestroyLogWindow",
+      "va": 268461680,
+      "size": 32,
+      "object": "AudioLog.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_CreateLogWindow",
+      "va": 268461712,
+      "size": 96,
+      "object": "AudioLog.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_FilePrint",
+      "va": 268461808,
+      "size": 80,
+      "object": "AudioLog.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_DebugPrint",
+      "va": 268461888,
+      "size": 96,
+      "object": "AudioLog.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_FlushAudioLog",
+      "va": 268461984,
+      "size": 16,
+      "object": "AudioLog.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_CloseAudioLog",
+      "va": 268462000,
+      "size": 16,
+      "object": "AudioLog.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_LogWindowProc@16",
+      "va": 268462016,
+      "size": 480,
+      "object": "AudioLog.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_RegisterLogWindow",
+      "va": 268462496,
+      "size": 160,
+      "object": "AudioLog.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_OpenAudioLog",
+      "va": 268462656,
+      "size": 32,
+      "object": "AudioLog.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "??_C@_07PCJELJIA@CONSOLE?$AA@",
+      "va": 268636080,
+      "size": 8,
+      "object": "AudioLog.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0P@BBGNDAGL@Console?5Window?$AA@",
+      "va": 268636088,
+      "size": 15,
+      "object": "AudioLog.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_08LEEMBKAB@dout?4txt?$AA@",
+      "va": 268636104,
+      "size": 9,
+      "object": "AudioLog.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_02GMLFBBN@wb?$AA@",
+      "va": 268633292,
+      "size": 3,
+      "object": "AudioLog.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_04BMCEDOKO@EDIT?$AA@",
+      "va": 268636116,
+      "size": 5,
+      "object": "AudioLog.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "_AudioError",
+      "va": 268450880,
+      "size": 640,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "identified_symbol",
+      "address_evidence": "The complete original body independently dispatches all fifteen DirectSound HRESULT errors, uses their exact error-name strings, formats the unknown-code case, and invokes MessageBoxA. Reconstructed source default-path instruction scheduling remains unmatched."
+    },
+    {
+      "name": "_InitializeDirectSound",
+      "va": 268451520,
+      "size": 128,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_AIStop",
+      "va": 268451648,
+      "size": 16,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "identified_symbol",
+      "address_evidence": "Exact public export name and address from original PE export directory."
+    },
+    {
+      "name": "_AIKillSound",
+      "va": 268451664,
+      "size": 224,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "identified_symbol",
+      "address_evidence": "Exact public export name and address from original PE export directory."
+    },
+    {
+      "name": "_AISetUCodeID",
+      "va": 268451888,
+      "size": 48,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_AudioReserved",
+      "va": 268451936,
+      "size": 16,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_UpdateAudioFrequency",
+      "va": 268451952,
+      "size": 208,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_AudioSampleLoop",
+      "va": 268452160,
+      "size": 32,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_SwapSampleBytes",
+      "va": 268452192,
+      "size": 96,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_ConvertAudioSamples",
+      "va": 268452288,
+      "size": 16,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_CopyAudioSamples",
+      "va": 268452304,
+      "size": 48,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_CopyOutputSamples",
+      "va": 268452352,
+      "size": 48,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_ReadAudioMemory",
+      "va": 268452400,
+      "size": 48,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_AllocateAudioQueue",
+      "va": 268452448,
+      "size": 96,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_FreeAudioQueue",
+      "va": 268452544,
+      "size": 64,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_ReadAudioQueue",
+      "va": 268452608,
+      "size": 128,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_AllocateSoundBuffer",
+      "va": 268452736,
+      "size": 96,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_ClearAudio",
+      "va": 268452832,
+      "size": 48,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_WaitForSoundBuffer",
+      "va": 268452880,
+      "size": 192,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_ClearSoundBuffer",
+      "va": 268453072,
+      "size": 224,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_AudioNotificationThread",
+      "va": 268453296,
+      "size": 176,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_GetSoundPosition",
+      "va": 268453472,
+      "size": 80,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_AudioTimerReserved@20",
+      "va": 268453552,
+      "size": 16,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_ShowDriverInfo",
+      "va": 268453568,
+      "size": 864,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_WriteWaveHeader",
+      "va": 268454432,
+      "size": 240,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_ReadIniString",
+      "va": 268454672,
+      "size": 48,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_ReadIniInt",
+      "va": 268454720,
+      "size": 80,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_WriteIniString",
+      "va": 268454800,
+      "size": 32,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_WriteIniInt",
+      "va": 268454832,
+      "size": 64,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_ReadAudioSettings",
+      "va": 268454896,
+      "size": 448,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_DllMain@12",
+      "va": 268455344,
+      "size": 48,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_StopAudio",
+      "va": 268455392,
+      "size": 192,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_AIFree",
+      "va": 268455584,
+      "size": 64,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "identified_symbol",
+      "address_evidence": "Exact public export name and address from original PE export directory."
+    },
+    {
+      "name": "_ReleaseAudioBlock",
+      "va": 268455648,
+      "size": 32,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_WriteAudioSamples",
+      "va": 268455680,
+      "size": 32,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_WriteAudioBytes",
+      "va": 268455712,
+      "size": 48,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_WriteSoundBuffer",
+      "va": 268455760,
+      "size": 192,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_SubmitAudio",
+      "va": 268455952,
+      "size": 1120,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_AudioTimer@20",
+      "va": 268457072,
+      "size": 752,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_StartAudio",
+      "va": 268459952,
+      "size": 480,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_AIInit",
+      "va": 268460432,
+      "size": 304,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "identified_symbol",
+      "address_evidence": "Exact public export name and address from original PE export directory."
+    },
+    {
+      "name": "_ProcessAudioRegisters",
+      "va": 268460736,
+      "size": 224,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_AISetReg",
+      "va": 268460960,
+      "size": 288,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "identified_symbol",
+      "address_evidence": "Exact public export name and address from original PE export directory."
+    },
+    {
+      "name": "_AppendRegisterAudio",
+      "va": 268461248,
+      "size": 112,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_CompleteAudioDMA",
+      "va": 268461360,
+      "size": 144,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_ReadAudioLength",
+      "va": 268461504,
+      "size": 16,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_AIGetReg",
+      "va": 268461520,
+      "size": 64,
+      "object": "DirectSound.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "identified_symbol",
+      "address_evidence": "Exact public export name and address from original PE export directory."
+    },
+    {
+      "name": "??_C@_0CH@OFPLDLGK@Greets?5to?5TNSe?5and?5Jabo?5for?5SIMD@",
+      "va": 268633584,
+      "size": 39,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0DF@ECPCAJLJ@LaC?8s?5Nemu64?5Audio?5DLL?6Little?5En@",
+      "va": 268633624,
+      "size": 53,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BC@GIADANFI@unknown?5error?5?$CFlu?$AA@",
+      "va": 268633804,
+      "size": 18,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BE@BMJCAPGM@DSERR_UNINITIALIZED?$AA@",
+      "va": 268633824,
+      "size": 20,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BG@JFJBCEJM@DSERR_OTHERAPPHASPRIO?$AA@",
+      "va": 268633844,
+      "size": 22,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BB@MLKAOHBD@DSERR_BUFFERLOST?$AA@",
+      "va": 268633868,
+      "size": 17,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BJ@PODLOCNP@DSERR_ALREADYINITIALIZED?$AA@",
+      "va": 268633888,
+      "size": 25,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0P@HJFILJLC@DSERR_NODRIVER?$AA@",
+      "va": 268633916,
+      "size": 15,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BA@ECKDOBJD@DSERR_BADFORMAT?$AA@",
+      "va": 268633932,
+      "size": 16,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BG@FGFOLLAI@DSERR_PRIOLEVELNEEDED?$AA@",
+      "va": 268633948,
+      "size": 22,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BC@NMCDDLDP@DSERR_INVALIDCALL?$AA@",
+      "va": 268633972,
+      "size": 18,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BD@MODBPMIE@DSERR_INVALIDPARAM?$AA@",
+      "va": 268633992,
+      "size": 19,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BD@JOINHKAA@DSerrtxt_ALLOCATED?$AA@",
+      "va": 268634012,
+      "size": 19,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BF@KBGGCPDE@DSERR_CONTROLUNAVAIL?$AA@",
+      "va": 268634032,
+      "size": 21,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BC@KCMPJMLN@DSERR_OUTOFMEMORY?$AA@",
+      "va": 268634056,
+      "size": 18,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BC@IMOOOGNJ@DSERR_UNSUPPORTED?$AA@",
+      "va": 268634076,
+      "size": 18,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0O@PDIJJBF@DSERR_GENERIC?$AA@",
+      "va": 268634096,
+      "size": 14,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BE@FNFJCFJP@DSERR_NOAGGREGATION?$AA@",
+      "va": 268634112,
+      "size": 20,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BD@IMDJDONF@Audio?5Plugin?5Error?$AA@",
+      "va": 268634132,
+      "size": 19,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BH@PEJNLNKL@DirectSoundBuffer_Play?$AA@",
+      "va": 268634152,
+      "size": 23,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BC@CADLDLCM@ds?5unlock?5error?52?$AA@",
+      "va": 268634176,
+      "size": 18,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BA@JGMKKKI@ds?5lock?5error?51?$AA@",
+      "va": 268634196,
+      "size": 16,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BH@CNPFCILC@ds?5get?5current?5postion?$AA@",
+      "va": 268634212,
+      "size": 23,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BA@FLKGHMAM@ds?5unlock?5error?$AA@",
+      "va": 268634236,
+      "size": 16,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BA@HEBLFOON@ds?5lock?5error?54?$AA@",
+      "va": 268634252,
+      "size": 16,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0CF@LBMDLLCK@ds?5get?5current?5postion?5?5in?5Get_P@",
+      "va": 268634268,
+      "size": 37,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0CB@GIILPCIA@dwPlayCpuOverheadSwBuffers?50x?$CFX?6@",
+      "va": 268634308,
+      "size": 33,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0CE@PMNINND@dwUnlockTransferRateHwBuffers?50x@",
+      "va": 268634344,
+      "size": 36,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0CA@LLEBDIKA@dwMaxContigFreeHwMemBytes?50x?$CFX?6?$AA@",
+      "va": 268634380,
+      "size": 32,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BH@CENOCNPG@dwFreeHwMemBytes?50x?$CFX?6?$AA@",
+      "va": 268634412,
+      "size": 23,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BI@DKGLPOBK@dwTotalHwMemBytes?50x?$CFX?6?$AA@",
+      "va": 268634436,
+      "size": 24,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0CB@BPFPAIIC@dwFreeHw3DStreamingBuffers?50x?$CFX?6@",
+      "va": 268634460,
+      "size": 33,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BO@ICBHACLJ@dwFreeHw3DStaticBuffers?50x?$CFX?6?$AA@",
+      "va": 268634496,
+      "size": 30,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BL@LNADNLAM@dwFreeHw3DAllBuffers?50x?$CFX?6?$AA@",
+      "va": 268634528,
+      "size": 27,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0CA@HHAFJJEI@dwMaxHw3DStreamingBuffers?50x?$CFX?6?$AA@",
+      "va": 268634556,
+      "size": 32,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BN@HMDMAHEC@dwMaxHw3DStaticBuffers?50x?$CFX?6?$AA@",
+      "va": 268634588,
+      "size": 29,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BK@FLOAFONH@dwMaxHw3DAllBuffers?50x?$CFX?6?$AA@",
+      "va": 268634620,
+      "size": 26,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0CF@FPKEMKAP@dwFreeHwMixingStreamingBuffers?50@",
+      "va": 268634648,
+      "size": 37,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0CC@MNMFEADG@dwFreeHwMixingStaticBuffers?50x?$CFX@",
+      "va": 268634688,
+      "size": 34,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BP@HOCJIGD@dwFreeHwMixingAllBuffers?50x?$CFX?6?$AA@",
+      "va": 268634724,
+      "size": 31,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0CE@LJLIEKBO@dwMaxHwMixingStreamingBuffers?50x@",
+      "va": 268634756,
+      "size": 36,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0CB@LGBMDBAJ@dwMaxHwMixingStaticBuffers?50x?$CFX?6@",
+      "va": 268634792,
+      "size": 33,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BO@CNHDJIPC@dwMaxHwMixingAllBuffers?50x?$CFX?6?$AA@",
+      "va": 268634828,
+      "size": 30,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BH@HNFBJJHP@dwPrimaryBuffers?50x?$CFX?6?$AA@",
+      "va": 268634860,
+      "size": 23,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0CA@EHBGECFD@dwMaxSecondarySampleRate?5?50x?$CFX?6?$AA@",
+      "va": 268634884,
+      "size": 32,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0CA@PHCJFIGP@dwMinSecondarySampleRate?5?50x?$CFX?6?$AA@",
+      "va": 268634916,
+      "size": 32,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0L@PKLMJCON@Hardware?3?6?$AA@",
+      "va": 268634948,
+      "size": 11,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BL@GGBGDACB@DSCAPS_SECONDARYSTEREO?5?$CFs?6?$AA@",
+      "va": 268634960,
+      "size": 27,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BJ@JJKOBGOJ@DSCAPS_SECONDARYMONO?5?$CFs?6?$AA@",
+      "va": 268634988,
+      "size": 25,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BJ@BECJEJHE@DSCAPS_SECONDARY8BIT?5?$CFs?6?$AA@",
+      "va": 268635016,
+      "size": 25,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BK@EKLPOPKL@DSCAPS_SECONDARY16BIT?5?$CFs?6?$AA@",
+      "va": 268635044,
+      "size": 26,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BJ@DKKNPFJL@DSCAPS_PRIMARYSTEREO?5?$CFs?6?$AA@",
+      "va": 268635072,
+      "size": 25,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BH@FLCNIAKE@DSCAPS_PRIMARYMONO?5?$CFs?6?$AA@",
+      "va": 268635100,
+      "size": 23,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BH@NGKKNPDJ@DSCAPS_PRIMARY8BIT?5?$CFs?6?$AA@",
+      "va": 268635124,
+      "size": 23,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BI@ECBAFBBA@DSCAPS_PRIMARY16BIT?5?$CFs?6?$AA@",
+      "va": 268635148,
+      "size": 24,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BG@HHHCHEEC@DSCAPS_EMULDRIVER?5?$CFs?6?$AA@",
+      "va": 268635172,
+      "size": 22,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BK@NEIOOPDB@DSCAPS_CONTINUOUSRATE?5?$CFs?6?$AA@",
+      "va": 268635196,
+      "size": 26,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BF@OMEFHHNO@DSCAPS_CERTIFIED?5?$CFs?6?$AA@",
+      "va": 268635224,
+      "size": 21,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_03IPHJCBHH@YES?$AA@",
+      "va": 268635252,
+      "size": 4,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_07HLBKDNHB@Flags?3?6?$AA@",
+      "va": 268635256,
+      "size": 8,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_02PHMGELLB@?6?6?$AA@",
+      "va": 268635264,
+      "size": 3,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0DJ@PABPFGJF@DirectSound?5not?5initialized?4?5Try@",
+      "va": 268635268,
+      "size": 57,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BG@POPMPPDD@?6Unable?5to?5get?5info?4?6?$AA@",
+      "va": 268635328,
+      "size": 22,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BE@FDNKEBMB@Audio?5Driver?5Info?3?6?$AA@",
+      "va": 268635352,
+      "size": 20,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_09IJHIGKFI@SyncAudio?$AA@",
+      "va": 268635372,
+      "size": 10,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0M@BOMBJMEL@HighQuality?$AA@",
+      "va": 268635384,
+      "size": 12,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0N@DHMFODCD@HlePreBuffer?$AA@",
+      "va": 268635396,
+      "size": 13,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0P@DIPCPKMO@StereoReversed?$AA@",
+      "va": 268635412,
+      "size": 15,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_08PAKMJGNH@HLEAudio?$AA@",
+      "va": 268635428,
+      "size": 9,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_09CIMAPFDM@DummyMode?$AA@",
+      "va": 268635440,
+      "size": 10,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0P@MGBFMAN@ScrollBuffSize?$AA@",
+      "va": 268635452,
+      "size": 15,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_09DAMNBEKD@DebugMode?$AA@",
+      "va": 268635468,
+      "size": 10,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BA@HLKKGEAA@NemuAudio08?4ini?$AA@",
+      "va": 268635480,
+      "size": 16,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BH@PNMMCOEI@DirectSoundBuffer_Stop?$AA@",
+      "va": 268635500,
+      "size": 23,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BA@DLFKMICK@ds?5lock?5error?53?$AA@",
+      "va": 268635524,
+      "size": 16,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BA@EGCNDMGP@ds?5lock?5error?56?$AA@",
+      "va": 268635540,
+      "size": 16,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "__real@4f800000",
+      "va": 268635560,
+      "size": 4,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BM@PBKKOMGN@DirectSoundBuffer_SetFormat?$AA@",
+      "va": 268635760,
+      "size": 28,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BO@BHPLGNFP@DirectSound_CreateSoundBuffer?$AA@",
+      "va": 268635788,
+      "size": 30,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0CD@DNDJOBBK@Could?5not?5initialize?5direct?5soun@",
+      "va": 268635820,
+      "size": 35,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "__real@4c3d6cb4",
+      "va": 268635856,
+      "size": 4,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "__real@4c39b4d5",
+      "va": 268635864,
+      "size": 4,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0CK@DLDKMOOI@AI?5Reg?5?9?5write?5word32?5to?5unknown@",
+      "va": 268635868,
+      "size": 42,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0CJ@FAPIOFCI@AI?5Reg?5read?5word32?5from?5unknown?5@",
+      "va": 268635912,
+      "size": 41,
+      "object": "DirectSound.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "_AudioConfigDialog@16",
+      "va": 268457824,
+      "size": 2064,
+      "object": "AudioConfig.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "_AIConfigure",
+      "va": 268459888,
+      "size": 64,
+      "object": "AudioConfig.obj",
+      "source": "routine boundaries, explicit control flow and call sites",
+      "address_basis": "observed_operand_inference"
+    },
+    {
+      "name": "??_C@_0BK@FLDJNAJK@?$CFs?6Compiled?5on?3?$CFs?5?$CF5s?6?6?$CFs?$AA@",
+      "va": 268635572,
+      "size": 26,
+      "object": "AudioConfig.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0M@MPIDGHNK@Mar?522?52003?$AA@",
+      "va": 268635600,
+      "size": 12,
+      "object": "AudioConfig.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_08NPEPFAJP@23?320?337?$AA@",
+      "va": 268635612,
+      "size": 9,
+      "object": "AudioConfig.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_09IJHIGKFI@SyncAudio?$AA@",
+      "va": 268635372,
+      "size": 10,
+      "object": "AudioConfig.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0M@BOMBJMEL@HighQuality?$AA@",
+      "va": 268635384,
+      "size": 12,
+      "object": "AudioConfig.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0N@DHMFODCD@HlePreBuffer?$AA@",
+      "va": 268635396,
+      "size": 13,
+      "object": "AudioConfig.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0P@DIPCPKMO@StereoReversed?$AA@",
+      "va": 268635412,
+      "size": 15,
+      "object": "AudioConfig.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_08PAKMJGNH@HLEAudio?$AA@",
+      "va": 268635428,
+      "size": 9,
+      "object": "AudioConfig.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_09CIMAPFDM@DummyMode?$AA@",
+      "va": 268635440,
+      "size": 10,
+      "object": "AudioConfig.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0P@MGBFMAN@ScrollBuffSize?$AA@",
+      "va": 268635452,
+      "size": 15,
+      "object": "AudioConfig.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0L@KFOGAHGH@Record?4Abi?$AA@",
+      "va": 268635624,
+      "size": 11,
+      "object": "AudioConfig.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0BE@CKGIAJNK@g?3?1roms?1n64?1hle?4log?$AA@",
+      "va": 268635636,
+      "size": 20,
+      "object": "AudioConfig.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_06NIMAEPGF@ai?4wav?$AA@",
+      "va": 268635656,
+      "size": 7,
+      "object": "AudioConfig.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_07DFJFFFMH@hle?4wav?$AA@",
+      "va": 268635664,
+      "size": 8,
+      "object": "AudioConfig.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_02GMLFBBN@wb?$AA@",
+      "va": 268633292,
+      "size": 3,
+      "object": "AudioConfig.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0EI@GLGBEOH@You?5have?5made?5changes?5that?5will?5@",
+      "va": 268635672,
+      "size": 72,
+      "object": "AudioConfig.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "??_C@_0O@MLOIAGBH@Audio?5Warning?$AA@",
+      "va": 268635744,
+      "size": 14,
+      "object": "AudioConfig.obj",
+      "source": "unique complete compiler literal bytes in original image",
+      "address_basis": "identified_symbol"
+    },
+    {
+      "name": "_LogInstance",
+      "va": 269914148,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_LogEdit",
+      "va": 269914152,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_LogWindow",
+      "va": 269914156,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_LogHidden",
+      "va": 269389772,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_DriverInfoVisible",
+      "va": 269389776,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_DebugOutput",
+      "va": 269389780,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_AudioInstance",
+      "va": 269925104,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_AudioWindow",
+      "va": 269925116,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_DirectSound",
+      "va": 269926624,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_SoundBuffer",
+      "va": 269925096,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_PrimaryBuffer",
+      "va": 269924980,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_BufferDescription",
+      "va": 269915424,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_WaveFormat",
+      "va": 269926336,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_SoundCriticalSection",
+      "va": 269926656,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_CriticalSectionReady",
+      "va": 269389540,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_DebugMode",
+      "va": 269389544,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_DummyMode",
+      "va": 269389552,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_RecordHLE",
+      "va": 269389556,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_RecordAI",
+      "va": 269389560,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_FilterHLE",
+      "va": 269389568,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_StereoReversed",
+      "va": 269389572,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_Prebuffer",
+      "va": 269389576,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_HighQuality",
+      "va": 269389580,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_RecordABI",
+      "va": 269389584,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_DumpMicrocode",
+      "va": 269389564,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_RequestedBufferSize",
+      "va": 268669856,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_SoundBufferSize",
+      "va": 268669860,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_DirectHLEAudio",
+      "va": 268669864,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_SyncAudio",
+      "va": 268669868,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_SampleRate",
+      "va": 268669872,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_PreviousSampleRate",
+      "va": 268669876,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_AudioClock",
+      "va": 268669884,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_IsNTSC",
+      "va": 269926632,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_AudioDescription",
+      "va": 268669848,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_AudioCredits",
+      "va": 268669852,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_AudioErrorText",
+      "va": 269915488,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_DirectSoundReady",
+      "va": 269389688,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_AudioRunning",
+      "va": 269389644,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_QueueAllocated",
+      "va": 269389652,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_QueuedBlocks",
+      "va": 269925120,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_QueuedBlockReady",
+      "va": 269923712,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_QueuedBlockLength",
+      "va": 269914208,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_QueueRead",
+      "va": 269914176,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_QueueWrite",
+      "va": 269924984,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_QueueCount",
+      "va": 269914168,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_QueueBytes",
+      "va": 269924996,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_AudioBuffer",
+      "va": 268701392,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_AllocatedBuffer",
+      "va": 269225680,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_PALRates",
+      "va": 269225688,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_NTSCRates",
+      "va": 269324000,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_RegisterAudioBuffer",
+      "va": 269291232,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_TimerID",
+      "va": 269291224,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_NotificationPosition",
+      "va": 269291228,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_PlayPosition",
+      "va": 269389660,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_LastBlockLength",
+      "va": 269389668,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_WritePosition",
+      "va": 269389672,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_PreviousPosition",
+      "va": 269389676,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_PositionState",
+      "va": 269389680,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_LastWritePosition",
+      "va": 269389684,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_BufferPosition",
+      "va": 269925088,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_CurrentPlayPosition",
+      "va": 269923688,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_BufferLimit",
+      "va": 269924912,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_CurrentAudio",
+      "va": 269389636,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_CurrentAudioLength",
+      "va": 269924960,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_ClearCount",
+      "va": 269389612,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_DroppedBlocks",
+      "va": 269389608,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_TotalBytes",
+      "va": 269389616,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_TotalBlocks",
+      "va": 269389620,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_QueueEnabled",
+      "va": 269389640,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_ReleasedPosition",
+      "va": 269389708,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_CopiedLength",
+      "va": 269389692,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_BufferUnderrun",
+      "va": 269389724,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_TimerIdleCount",
+      "va": 269389728,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_ResetPosition",
+      "va": 269389732,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_PendingBytes",
+      "va": 269389736,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_BufferDuration",
+      "va": 269389740,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_LastBufferTime",
+      "va": 269389752,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_ScrollLockDown",
+      "va": 269389744,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_ScrollLockReleased",
+      "va": 269389748,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_TimerActive",
+      "va": 269389764,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_SoundEvents",
+      "va": 269925024,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_TimerUser",
+      "va": 269923684,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_AIRegisters",
+      "va": 269915408,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_MIRegisters",
+      "va": 269924988,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_CPURegisters",
+      "va": 269923680,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_AudioEvents",
+      "va": 269925100,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_AudioCount",
+      "va": 269389648,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_RequestedLength",
+      "va": 269389656,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_SubmittedLength",
+      "va": 269389700,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_RemainingLength",
+      "va": 269389696,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_LegacyAudioState",
+      "va": 269389632,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_AIWritePending",
+      "va": 269389588,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_HLEWaveFile",
+      "va": 269924964,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_AIWaveFile",
+      "va": 269914172,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_HLELogFile",
+      "va": 269924992,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_ABIFile",
+      "va": 269926360,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_AudioUCode",
+      "va": 269927168,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_RDRAM",
+      "va": 269925092,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_AudioAboutText",
+      "va": 269926368,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_AudioIniFile",
+      "va": 269926688,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_AudioIniSection",
+      "va": 269926976,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_AudioIniKey",
+      "va": 269924928,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_SelectAudioABI",
+      "va": 268446272,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_DetectCPUFeatures",
+      "va": 268463232,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_FreeAudioHLE",
+      "va": 268446144,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_RaiseAudioInterrupt",
+      "va": 268515264,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    },
+    {
+      "name": "_DirectSoundCreate@12",
+      "va": 268570160,
+      "address_basis": "observed_operand_inference",
+      "source": "original instruction operands and reconstructed dataflow"
+    }
+  ]
+}

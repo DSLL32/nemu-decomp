@@ -1,0 +1,74 @@
+{
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "scope": "Complete routine extents 0x10003c40 through 0x10006a60, including the configuration dialog and console, plus RT_DIALOG/101 and VERSION/1 payloads.",
+  "status": "Partial native source reconstruction; integrated DLL equality is not established.",
+  "source_structure": "DirectSound.c, AudioConfig.c and AudioLog.c filenames and unit separation are inferred. The original PDB path identifies ahle_ds, but does not establish these private filenames.",
+  "compiler": "Tracked VC7 13.00.9466, native /O2 /Ob1 /MT. These options reproduce 56 of 60 complete aligned bodies; remaining routines may require different source or compilation context.",
+  "unmatched": {
+    "AudioError": {
+      "va": "0x10003c40",
+      "original_size": 640,
+      "current_differing_non_relocation_bytes": 19,
+      "finding": "All fifteen known HRESULT cases match. The default path reloads the original text argument from its stack slot; current source reuses ESI.",
+      "probes": [
+        "Using the parameter itself as the output message, using a separate message local, making the default MessageBox call directly, and parsing the HRESULT through va_list do not recover the original default path.",
+        "A volatile text parameter with a nonvolatile local message copy produces an exact native body. This qualifier is not adopted because original-source evidence for a volatile stack argument is missing."
+      ]
+    },
+    "AudioSampleLoop": {
+      "va": "0x10004140",
+      "original_size": 32,
+      "rebuilt_size": 16,
+      "finding": "The original performs a runtime empty sample-count loop with register index and bound. Default VC7 optimization removes the empty loop.",
+      "negative_hypotheses": [
+        "Signed or unsigned int index against bytes/2; direct bytes>>1 and separately extracted unsigned count; long index/unsigned long bound.",
+        "Returning the index or bound computes the result without preserving the observed loop.",
+        "Native C++ produces the same eliminated 16-byte aligned routine as C.",
+        "/Og- retains a frame-based 38-byte loop. Register index plus register extracted bound under /Og- produces 46 bytes, not the observed 32-byte register loop."
+      ],
+      "constraint": "No dummy work, empty assembly, or instruction padding was added to retain the loop."
+    },
+    "AllocateSoundBuffer": {
+      "va": "0x10004380",
+      "original_size": 96,
+      "rebuilt_size": 80,
+      "finding": "The original stores three immediate zero values before the memset register-zero operation; current source shares the zero register. Native source initialization and memset scheduling remain unresolved.",
+      "negative_hypotheses": [
+        "All eight combinations of volatile qualification for CurrentPlayPosition, CurrentAudioLength and CurrentAudio were examined.",
+        "/Og- produces 99 bytes; /G5 still produces 80 bytes and worsens the instruction differences."
+      ]
+    },
+    "SubmitAudio": {
+      "va": "0x10005010",
+      "original_size": 1120,
+      "rebuilt_size": 1120,
+      "current_differing_non_relocation_bytes": 440,
+      "finding": "Rebuilt stack allocation is 0x30 versus original 0x2c; pending-byte register allocation and floating-point expression scheduling differ.",
+      "probes": [
+        "LARGE_INTEGER versus __int64 counter/frequency declarations and /Zp4 do not resolve the frame difference.",
+        "Two-DWORD counter structures accessed as signed 64-bit values do not alter the result.",
+        "Original 0x100052aa contains a dead load of its local write cursor. Volatile local play/write cursors preserve that load and reduce differing bytes to 273, but still leave the wrong stack frame and other scheduling differences. This remains a probe.",
+        "/G5 increases differing non-relocation bytes to 614."
+      ]
+    }
+  },
+  "layout_limits": [
+    "All globals identified solely from observed operands remain explicitly tagged observed_operand_inference in the address map.",
+    "AudioIniSection is provisionally 128 bytes at 0x1016c240; its full original extent is unproved. A 256-byte declaration would overlap separately identified AudioUCode at 0x1016c300.",
+    "Initialized AudioDescription and AudioCredits pointers require integrated linker relocation/layout checks.",
+    "Literal strings with multiple full or suffix occurrences remain unresolved when not independently attributable.",
+    "Common zero initialization does not prove original symbol dimensions or a unique address."
+  ],
+  "resources": "Readable CP1252 Audio.rc compiles to byte-exact complete dialog and version payloads. The resource directory and full PE layout remain integration work.",
+  "probe_source_sha256": {
+    "/root/.ai-tmp/audio-dsound.6t4_1qa3/loop-probes.c": "02b0e969f75dd52ffa38ec34640864ce1644285f43d09a1049f436d83dbbf5fb",
+    "/root/.ai-tmp/audio-dsound.6t4_1qa3/loop-context.c": "1436603192619f5f158e77bd7d91d49f8cd366d36c04f330a0b62e443669deda",
+    "/root/.ai-tmp/audio-dsound.6t4_1qa3/loop-context.cpp": "3eff81147b091e29d8167753034504f2f3180b22f39c1f0ae2be31c06a90380d",
+    "/root/.ai-tmp/audio-dsound.6t4_1qa3/loop-register.c": "85a0276ce2f8b453d6a4e697a11f8890d86fec311cb1cd4e449cd2bd9c74b9c9",
+    "/root/.ai-tmp/audio-dsound.6t4_1qa3/buffer-probes.c": "246edbd982c367f5c663e19856d3482257f9f4ffaba3950a272ea2b5be41c2cc",
+    "/root/.ai-tmp/audio-dsound.6t4_1qa3/buffer-context.c": "f717eb46685ce6b014a240471c111f884d36574199ca8d38cc054d8b6793f711",
+    "/root/.ai-tmp/audio-dsound.6t4_1qa3/error-probes.c": "94eefe5f7602d9fb9409499449ec1b84fb9acdd4267ce599450dd385599a12c1",
+    "/root/.ai-tmp/audio-dsound.6t4_1qa3/error-varargs.c": "bd25a295a4cbc430884b52dc0c9c91bca498151f3365cda77ffac456b1cb1df1",
+    "/root/.ai-tmp/audio-dsound.6t4_1qa3/submit-probes.c": "8b41968275064d932cdeb1fdb54865493b094d99c7a6657b3d3fa71176ef6791"
+  }
+}
