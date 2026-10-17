@@ -20,8 +20,14 @@ Metadata example:
 
 Function/global dictionaries keyed by name and length instead of size are also
 accepted. Repeated --metadata files add known application address constraints.
-Containing MAP ranges and conflicting exact data names are observations, since
-MAP files cannot identify an operand's original source symbol and signed addend.
+Unique, conflict-free objects in the hash-pinned map_nemu_globals inventory
+constrain linked data addresses. A decoded memory access to the wrong mapped
+object is a mismatch. Containing-range conflicts and pointer boundary aliases
+remain unresolved; a MAP does not recover the source symbol and signed addend.
+Reviewed aliases can use per-function linked_operand_provenance entries with
+offset, symbol, addend, candidate_image_sha256, source_file, source_sha256, and
+evidence. They apply only to that image and an existing PE HIGHLOW operand;
+the actual linked operand must equal the unique linked symbol plus addend.
 Adjacent diagnostic.json manifests flag forced unresolved links automatically;
 invalid header/out-of-image operands cannot support matching coverage.
 No files are modified except explicitly requested JSON reports.
@@ -47,7 +53,7 @@ ORIGINAL = ROOT / 'master/nemu64.exe'
 LIBRARIES = ROOT / 'analysis/nemu-library-addresses.json'
 VERIFIED_BASES = {'independent_library_mapping', 'import_table',
                   'independently_validated_application', 'absolute_coff_symbol',
-                  'same_function_label'}
+                  'same_function_label', 'authoritative_application_storage'}
 
 
 def integer(value):
@@ -86,10 +92,27 @@ def aliases(name):
     return names
 
 
-def load_metadata(paths):
+def load_metadata(paths, input_hashes=None):
     functions, symbols = [], []
     for path in paths:
-        document = json.loads(Path(path).read_text())
+        content = Path(path).read_bytes()
+        if input_hashes is not None:
+            key, value = str(path), digest(content)
+            if key in input_hashes and input_hashes[key] != value:
+                raise ValueError(f'{path}: metadata changed between reads in one comparison')
+            input_hashes[key] = value
+        document = json.loads(content)
+        storage_inventory = (isinstance(document, dict) and
+                             document.get('generator') == 'scripts/map_nemu_globals.py' and
+                             bool(document.get('original_sha256')))
+        conflicting_storage = set()
+        if storage_inventory:
+            for conflict in document.get('conflicts', []):
+                if conflict.get('kind') == 'missing_nonzero_initializer':
+                    continue
+                conflicting_storage.update(conflict.get('symbols', []))
+                if conflict.get('symbol'):
+                    conflicting_storage.add(conflict['symbol'])
         for key in ('functions', 'globals', 'symbols'):
             entries = document.get(key, []) if isinstance(document, dict) else document
             if isinstance(entries, dict):
@@ -104,7 +127,16 @@ def load_metadata(paths):
                 row['kind'] = 'function' if key == 'functions' else 'data'
                 row['address_basis'] = row.get('address_basis', 'application_function_metadata'
                                                if key == 'functions' else 'application_observation')
-                row['size'] = integer(row.get('original_size', row.get('size', row.get('length', row.get('extent')))))
+                row['size'] = integer(row.get('original_size', row.get('size', row.get('length', row.get('extent', row.get('extent_bytes'))))))
+                if storage_inventory and key == 'globals':
+                    addresses = {integer(o['va']) for o in row.get('observations', []) if o.get('va') is not None}
+                    if (row['name'] not in conflicting_storage and row['va'] is not None and
+                            addresses == {row['va']} and row['size'] and
+                            row.get('original_storage', {}).get('section') and
+                            row.get('storage_kind') != 'compile_time_guest_address_constant'):
+                        row.update(address_basis='authoritative_application_storage',
+                                   original_image_sha256=document['original_sha256'],
+                                   identity_scope='Mapped concrete storage and offset; inferred source spelling is not an original symbol claim.')
                 if row['size'] is None and key == 'functions' and row.get('link_span') is not None:
                     row['size'] = integer(row['link_span'])
                     row['extent_basis'] = 'explicit_link_span_including_alignment'
@@ -165,7 +197,7 @@ def image_imports(image):
                 name = image.data[n:image.data.index(0, n)].decode('ascii')
             for symbol in ('__imp_' + name, '__imp__' + name):
                 rows.append(dict(name=symbol, va=image.base + iat + index * 4,
-                                 kind='import', address_basis='import_table', dll=dll))
+                                 kind='import', address_basis='import_table', dll=dll, import_name=name))
             index += 1
         pos += 20
     return rows
@@ -188,6 +220,7 @@ class Symbols:
         # An exact independent library symbol defeats an inferred wrong alias.
         ranks = {'independent_library_mapping': 4, 'import_table': 4,
                  'independently_validated_application': 3,
+                 'authoritative_application_storage': 3,
                  'application_function_metadata': 2}
         if rows:
             rank = max(ranks.get(r.get('address_basis'), 0) for r in rows)
@@ -206,9 +239,16 @@ class Symbols:
 
 
 def target_symbols(image, metadata, library_path):
+    image_hash = digest(image.data)
+    for row in metadata:
+        if row.get('original_image_sha256') not in (None, image_hash):
+            raise ValueError('Authoritative storage inventory does not describe the original image')
     rows = list(metadata) + image_imports(image)
+    library_hash = None
     if library_path and Path(library_path).exists():
-        document = json.loads(Path(library_path).read_text())
+        content = Path(library_path).read_bytes()
+        document = json.loads(content)
+        library_hash = digest(content)
         if document['original_sha256'] != digest(image.data):
             raise ValueError('Independent library map does not describe the original image')
         rows += [dict(r, kind='function') for r in document['symbols']
@@ -216,6 +256,7 @@ def target_symbols(image, metadata, library_path):
         # Deliberately do not load observed_data_symbols as established identities.
     result = Symbols(rows)
     result.image = image
+    result.library_map_sha256 = library_hash
     return result
 
 
@@ -377,6 +418,21 @@ def linked_fields(data, va, size, fixups, candidate_symbols, infer_map_addresses
                                candidate_target=int.from_bytes(data[off:off + 4], 'little'))
     for ins in reachable_instructions(data, va, fixups, extra_entries, table_data, table_reads):
         off = ins.address - va
+        # PE fixups certify the field; decoding only describes its use. A
+        # concrete memory access differs from a pointer value that may denote
+        # one-past an array, or a signed addend to a neighboring symbol.
+        for operand in ins.operands:
+            if operand.type == X86_OP_MEM:
+                field = fields.get(off + ins.disp_offset)
+                if field is not None and ins.disp_size == 4:
+                    field.update(address_use='address_calculation' if ins.mnemonic == 'lea' else 'memory_access',
+                                 instruction_offset=off, instruction_size=ins.size,
+                                 instruction=f'{ins.mnemonic} {ins.op_str}')
+            elif operand.type == X86_OP_IMM:
+                field = fields.get(off + ins.imm_offset)
+                if field is not None and ins.imm_size == 4:
+                    field.update(address_use='immediate_address', instruction_offset=off,
+                                 instruction_size=ins.size, instruction=f'{ins.mnemonic} {ins.op_str}')
         # An instruction overlapping a recorded
         # relocation field cannot provide additional branch-mask authority.
         overlaps_fixup = any(byte in fixup_bytes for byte in range(ins.address, ins.address + ins.size))
@@ -413,6 +469,61 @@ def read_original_target(data, field, va):
     return value
 
 
+def import_thunk_identity(symbols, address):
+    """Identify the concrete FF25 [IAT] thunk at a direct branch destination."""
+    image = getattr(symbols, 'image', None)
+    if image is None:
+        return None
+    try:
+        code = image_bytes(image, address, 6)
+    except ValueError:
+        return None
+    if code[:2] != b'\xff\x25':
+        return None
+    slot = int.from_bytes(code[2:], 'little')
+    identities = {(row['dll'].lower(), row['import_name'])
+                  for row in symbols.addresses.get(slot, [])
+                  if row.get('address_basis') == 'import_table' and row.get('import_name')}
+    if len(identities) != 1:
+        return None
+    dll, name = next(iter(identities))
+    return dict(dll=dll, name=name, iat_va=slot, thunk_va=address)
+
+
+def apply_operand_provenance(function, fields, candidates, targets, image_hash):
+    """Apply reviewed source expressions only to their exact recorded operands.
+
+    This supports proven array-end/signed-addend aliases that a MAP alone
+    cannot disambiguate. The source and image are hash-pinned, and both linked
+    and original addresses remain constrained by independently mapped symbols.
+    No new normalization field is created by this evidence.
+    """
+    applied = []
+    by_offset = {field['offset']: field for field in fields}
+    for proof in function.get('linked_operand_provenance', []):
+        if proof.get('candidate_image_sha256') != image_hash:
+            continue
+        source = Path(proof['source_file'])
+        if digest(source.read_bytes()) != proof['source_sha256'] or not proof.get('evidence'):
+            raise ValueError(f'{function["name"]}: source operand provenance is not hash-pinned/reviewed')
+        offset, addend = integer(proof['offset']), integer(proof.get('addend', 0))
+        field = by_offset.get(offset)
+        if field is None or (field['kind'], field['width'], field['authority']) != ('DIR32', 4, 'PE_HIGHLOW'):
+            raise ValueError(f'{function["name"]}+{offset:#x}: provenance lacks an actual PE HIGHLOW field')
+        linked = {row['va'] for row in candidates.named(proof['symbol']) if row.get('kind') == 'data'}
+        known = [row for row in targets.named(proof['symbol'])
+                 if row.get('address_basis') == 'authoritative_application_storage']
+        if len(linked) != 1 or len({row['va'] for row in known}) != 1:
+            raise ValueError(f'{function["name"]}+{offset:#x}: provenance symbol lacks a unique linked/original storage mapping')
+        if (next(iter(linked)) + addend) & 0xffffffff != field['candidate_target']:
+            raise ValueError(f'{function["name"]}+{offset:#x}: recorded operand does not equal the claimed linked symbol+addend')
+        field.update(symbol=proof['symbol'], addend=addend, source_operand_provenance=proof)
+        applied.append(dict(offset=offset, symbol=proof['symbol'], addend=addend,
+                            source_file=str(source), source_sha256=proof['source_sha256'],
+                            evidence=proof['evidence']))
+    return applied
+
+
 def resolve_field(field, function, target, candidate_symbols=None):
     """Resolve a recorded field without learning identities from its target."""
     observed = field['original_target']
@@ -429,6 +540,15 @@ def resolve_field(field, function, target, candidate_symbols=None):
             result.update(status='invalid_link_operand', identity_verified=False,
                           invalid_link_operand=True,
                           note='Forced unresolved linker fixture: this target is not a valid linked identity.')
+            return result
+    if candidate_symbols is not None and field['kind'] == 'REL':
+        before = import_thunk_identity(target, observed)
+        after = import_thunk_identity(candidate_symbols, field['candidate_target'])
+        if before is not None and after is not None:
+            match = (before['dll'], before['name']) == (after['dll'], after['name'])
+            result.update(status='matching' if match else 'mismatch', identity_verified=match,
+                          resolution_bases=['decoded_import_thunk_and_import_tables'],
+                          original_import_thunk=before, candidate_import_thunk=after)
             return result
     if field.get('literal_data'):
         literal = bytes.fromhex(field['literal_data'])
@@ -464,7 +584,8 @@ def resolve_field(field, function, target, candidate_symbols=None):
                 row = dict(known, va=(known['va'] + addend) & 0xffffffff)
                 if addend:
                     range_inferences.append(dict(name=symbol['name'], addend=addend,
-                                                 expected_target=row['va']))
+                                                 expected_target=row['va'],
+                                                 address_basis=known.get('address_basis')))
                 else:
                     candidates.append(row)
         result['candidate_target_names'] = sorted(set(r['name'] for r, _ in references))
@@ -473,10 +594,19 @@ def resolve_field(field, function, target, candidate_symbols=None):
             # ApplicationDirectory[-1], for example, can land inside the
             # preceding ToolbarWindow variable in one link layout. A guessed
             # containing range must never establish a wrong-source-target claim.
-            result.update(status='unresolved', identity_verified=False,
-                          resolution_bases=['containing_symbol_range_inference'],
+            authoritative = [row for row in range_inferences
+                             if row.get('address_basis') == 'authoritative_application_storage']
+            expected = {row['expected_target'] for row in authoritative}
+            # A matching, independently mapped object+offset establishes the
+            # concrete storage location, without claiming its source expression.
+            match = bool(authoritative) and expected == {observed}
+            result.update(status='matching' if match else 'unresolved',
+                          identity_verified=match and field['authority'] != 'MAP_address_inference',
+                          resolution_bases=['authoritative_application_storage_offset'] if match else ['containing_symbol_range_inference'],
                           candidate_range_observations=range_inferences,
-                          note='Containing MAP ranges do not identify the source symbol or signed addend.')
+                          potential_data_target_mismatch=bool(authoritative) and not match,
+                          note='Concrete mapped storage offset agrees; source expression is not inferred.' if match else
+                               'Containing MAP ranges do not identify the source symbol or signed addend.')
             return result
         if len(result['candidate_target_names']) > 1 and unmapped:
             result.update(status='ambiguous', identity_verified=False,
@@ -510,9 +640,15 @@ def resolve_field(field, function, target, candidate_symbols=None):
                 # Even an exact data-symbol address can instead denote the
                 # end of a preceding array. PE fixups prove address operands;
                 # a MAP alone does not recover their source symbol/addend.
-                result.update(status='matching' if match else 'unresolved', identity_verified=False,
-                              potential_data_target_mismatch=not match,
-                              note='Exact MAP data name lacks source-operand provenance; an array-end or signed-addend alias can have this address.')
+                authoritative = all(r.get('address_basis') == 'authoritative_application_storage'
+                                    for r in candidates)
+                if authoritative and (match or field.get('address_use') == 'memory_access'):
+                    result.update(identity_verified=match,
+                                  note='Unique authoritative inventory mapping constrains the concrete storage accessed; source spelling is inferred.')
+                else:
+                    result.update(status='matching' if match else 'unresolved', identity_verified=False,
+                                  potential_data_target_mismatch=not match,
+                                  note='Exact MAP data name lacks source-operand provenance; an array-end or signed-addend alias can have this address.')
     if field['authority'] == 'MAP_address_inference':
         result['identity_verified'] = False
     return result
@@ -577,8 +713,8 @@ def compare_bytes(function, candidate_data, candidate_size, candidate_va, fields
                 rebuilt_extent_verified=extent_verified, size_equal=size_equal,
                 raw_bytes_equal=before == after, raw_differing_bytes=differences(before, after),
                 normalized_prefix_equal=shape, full_function_shape_match=shape and size_equal and not inferred_masks,
-                prefix_instruction_and_known_target_match=shape and not mismatches and not inferred_masks and not invalid_link_operands,
-                instruction_and_known_target_match=shape and size_equal and not mismatches and not inferred_masks and not invalid_link_operands,
+                prefix_instruction_and_known_target_match=shape and not mismatches and not possible_data_mismatches and not inferred_masks and not invalid_link_operands,
+                instruction_and_known_target_match=shape and size_equal and not mismatches and not possible_data_mismatches and not inferred_masks and not invalid_link_operands,
                 fully_verified_relocations=shape and size_equal and not unverified and not inferred_masks,
                 normalized_differing_bytes=differences(a, b), masked_bytes=len(occupied),
                 inferred_absolute_masks=inferred_masks, target_mismatches=mismatches,
@@ -677,7 +813,8 @@ def fixture_manifest(image, explicit_path=None):
     return dict(path=str(path), sha256=digest(path.read_bytes()), status=document.get('status'),
                 forced_unresolved_link=forced, image_hash_verified=bool(recorded_hash),
                 invalid_symbols=sorted(set(unresolved)), parent_artifact=document.get('parent_artifact'),
-                existing_sections=document.get('existing_sections'))
+                existing_sections=document.get('existing_sections'),
+                provenance_chain=document.get('provenance_chain'))
 
 
 def compare_linked(path, map_path, functions, original, targets, infer_map_addresses=False,
@@ -695,6 +832,7 @@ def compare_linked(path, map_path, functions, original, targets, infer_map_addre
             size = next(iter(sizes))
             symbol['size'] = min(size, following - symbol['va']) if following else size
     candidates = Symbols(rows + image_imports(image))
+    candidates.image = image
     manifest = fixture_manifest(image, manifest_path)
     candidates.invalid_link_fixture = bool(manifest and manifest['forced_unresolved_link'])
     candidates.invalid_names = {a for name in (manifest or {}).get('invalid_symbols', []) for a in aliases(name)}
@@ -737,12 +875,14 @@ def compare_linked(path, map_path, functions, original, targets, infer_map_addre
         table_reads = []
         fields = linked_fields(data, symbol['va'], size, fixups, candidates, infer_map_addresses, entries,
                                table_data, table_reads)
+        source_operands = apply_operand_provenance(function, fields, candidates, targets, image_hash)
         result = compare_bytes(function, data, size, symbol['va'], fields, original, targets,
                                candidates, extent_verified=extent_verified)
         result.update(status='compared', candidate_symbol=symbol['name'],
                       candidate_extent_basis=basis, candidate_map_span=spans.get(symbol['va']),
                       candidate_extent_metadata_file=function.get('rebuilt_extent_metadata_file'),
                       seh_scope_entries=scopes,
+                      applied_source_operand_provenance=source_operands,
                       switch_table_reads=table_reads,
                       candidate_extent_hash_matches=extent_hash == image_hash if extent_hash else None)
         results.append(result)
@@ -791,12 +931,15 @@ def coverage(reports, functions):
                     ('different_function_size', lambda r: r['rebuilt_extent_verified'] and not r['size_equal']),
                     ('instruction_mismatch', lambda r: not r['normalized_prefix_equal']),
                     ('target_mismatch', lambda r: r['target_mismatches'] > 0),
+                    ('unresolved_data_target_conflict', lambda r: r.get('possible_data_target_mismatches', 0) > 0),
                     ('invalid_link_operand', lambda r: r.get('invalid_link_operands', 0) > 0),
                     ('inferred_operand_normalization', lambda r: r['inferred_absolute_masks'] > 0)):
                     if any(test(r) for r in compared_matches):
                         reasons.append(label)
                 if any(r.get('target_mismatches', 0) for r in compared_matches):
                     status = 'target_mismatch'
+                elif any(r.get('possible_data_target_mismatches', 0) for r in compared_matches):
+                    status = 'unresolved_data_target_conflict'
                 elif any(r.get('invalid_link_operands', 0) for r in compared_matches):
                     status = 'invalid_link_operand'
                 elif any(r.get('prefix_instruction_and_known_target_match') and not r['rebuilt_extent_verified']
@@ -824,7 +967,8 @@ def coverage(reports, functions):
                 'unverified_targets', 'invalid_link_operands', 'possible_data_target_mismatches') if key in r} for r in matches],
             target_findings=[{key: operand[key] for key in (
                 'offset', 'kind', 'status', 'original_target', 'original_target_names', 'expected_target',
-                'candidate_target_names', 'symbol', 'potential_data_target_mismatch', 'note') if key in operand}
+                'candidate_target', 'candidate_target_names', 'symbol', 'potential_data_target_mismatch',
+                'address_use', 'instruction', 'resolution_bases', 'note') if key in operand}
                 for row in matches for operand in row.get('relocations', [])
                 if operand['status'] == 'mismatch' or
                 (row.get('target_comparison_performed') and operand.get('potential_data_target_mismatch'))]))
@@ -894,10 +1038,11 @@ def main():
     if args.image and not args.map:
         parser.error('--image requires --map')
     original = PE32(args.original)
-    functions, known = load_metadata(args.metadata)
+    input_hashes = {}
+    functions, known = load_metadata(args.metadata, input_hashes)
     if args.extents:
         image_hash = digest(args.image.read_bytes()) if args.image else None
-        extents, _ = load_metadata(args.extents)
+        extents, _ = load_metadata(args.extents, input_hashes)
         for function in functions:
             matching = [row for row in extents if row.get('rebuilt_size') is not None and
                         row.get('extent_verified', True) and row.get('rebuilt_image_sha256') == image_hash and
@@ -910,7 +1055,7 @@ def main():
                 function.update({k: v for k, v in row.items() if k.startswith('rebuilt_')})
                 function['rebuilt_extent_metadata_file'] = row['metadata_file']
     for path in args.symbols:
-        _, extra = load_metadata([path])
+        _, extra = load_metadata([path], input_hashes)
         known.extend(extra)
     if args.function:
         functions = [f for f in functions if args.function in (f['name'] or '')]
@@ -926,10 +1071,11 @@ def main():
                                           args.infer_map_addresses, args.fixture_manifest, True))
     result = dict(diagnostic_only=True, original=str(args.original), original_sha256=digest(original.data),
                   tool_sha256=digest(Path(__file__).read_bytes()), command_line=sys.argv,
-                  metadata=[dict(path=str(p), sha256=digest(p.read_bytes())) for p in args.metadata],
-                  symbol_metadata=[dict(path=str(p), sha256=digest(p.read_bytes())) for p in args.symbols],
-                  extent_metadata=[dict(path=str(p), sha256=digest(p.read_bytes())) for p in args.extents],
-                  library_map=str(args.libraries), comparisons=reports, coverage=coverage(reports, functions))
+                  metadata=[dict(path=str(p), sha256=input_hashes[str(p)]) for p in args.metadata],
+                  symbol_metadata=[dict(path=str(p), sha256=input_hashes[str(p)]) for p in args.symbols],
+                  extent_metadata=[dict(path=str(p), sha256=input_hashes[str(p)]) for p in args.extents],
+                  library_map=str(args.libraries), library_map_sha256=target.library_map_sha256,
+                  comparisons=reports, coverage=coverage(reports, functions))
     if args.report:
         args.report.write_text(json.dumps(result, indent=2) + '\n')
     if args.coverage_report:

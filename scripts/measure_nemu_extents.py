@@ -103,7 +103,8 @@ def main():
     fixups = base_relocations(image)
     if not fixups:
         parser.error('candidate has no PE HIGHLOW fixups; use a verified /FIXED:NO diagnostic')
-    functions, _ = load_metadata(args.metadata)
+    input_hashes = {}
+    functions, _ = load_metadata(args.metadata, input_hashes)
     rows = []
     for function in functions:
         candidates = [s for s in symbols
@@ -128,7 +129,7 @@ def main():
                   measurement_script='scripts/measure_nemu_extents.py',
                   measurement_script_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                   comparison_tool_sha256=hashlib.sha256(Path(__file__).with_name('compare_nemu_functions.py').read_bytes()).hexdigest(),
-                  metadata=[dict(path=str(p), sha256=hashlib.sha256(p.read_bytes()).hexdigest()) for p in args.metadata],
+                  metadata=[dict(path=str(p), sha256=input_hashes[str(p)]) for p in args.metadata],
                   functions=rows)
     args.report.write_text(json.dumps(report, indent=2) + '\n')
     good = sum(r['extent_verified'] for r in rows)

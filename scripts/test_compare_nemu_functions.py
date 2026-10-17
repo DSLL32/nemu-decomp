@@ -53,6 +53,14 @@ class ComparisonEvidenceTests(unittest.TestCase):
         self.assertFalse(result['instruction_and_known_target_match'])
         self.assertEqual(result['masked_bytes'], 0)
 
+    def test_relocated_internal_switch_target_preserves_relative_destination(self):
+        before = b'\xc3\x90\x90\x90' + struct.pack('<I', 0x401001)
+        after = b'\xc3\x90\x90\x90' + struct.pack('<I', 0x501002)
+        result = self.compare_code(before, after, [0x501004])
+        self.assertTrue(result['normalized_prefix_equal'])
+        self.assertEqual(result['target_mismatches'], 1)
+        self.assertFalse(result['instruction_and_known_target_match'])
+
     def test_register_difference_survives_address_normalization(self):
         result = self.compare_code(bytes.fromhex('b800004200c3'), bytes.fromhex('b900005200c3'), [0x501001])
         self.assertFalse(result['instruction_and_known_target_match'])
@@ -94,6 +102,95 @@ class ComparisonEvidenceTests(unittest.TestCase):
             self.assertEqual(result['status'], 'unresolved')
             self.assertFalse(result['identity_verified'])
 
+    def test_authoritative_memory_target_rejects_wrong_global(self):
+        self.original.rows[0]['address_basis'] = 'authoritative_application_storage'
+        before = b'\xa1' + struct.pack('<I', 0x430000) + b'\xc3'
+        after = b'\xa1' + struct.pack('<I', 0x520000) + b'\xc3'
+        result = self.compare_code(before, after, [0x501001])
+        self.assertTrue(result['normalized_prefix_equal'])
+        self.assertFalse(result['instruction_and_known_target_match'])
+        self.assertEqual(result['target_mismatches'], 1)
+        self.assertEqual(result['relocations'][0]['address_use'], 'memory_access')
+
+    def test_authoritative_matching_storage_offsets_are_verified(self):
+        self.original.rows[0]['address_basis'] = 'authoritative_application_storage'
+        for offset in (0, 4):
+            before = b'\xa1' + struct.pack('<I', 0x420000 + offset) + b'\xc3'
+            after = b'\xa1' + struct.pack('<I', 0x520000 + offset) + b'\xc3'
+            result = self.compare_code(before, after, [0x501001])
+            self.assertTrue(result['fully_verified_relocations'])
+        field = dict(offset=1, kind='DIR32', width=4, authority='MAP_address_inference',
+                     candidate_target=0x520004, original_target=0x420004)
+        result = compare.resolve_field(field, dict(name='Function', va=0x401000, size=6),
+                                       self.original, self.candidate)
+        self.assertFalse(result['identity_verified'])
+
+    def test_authoritative_pointer_alias_conflict_stays_unresolved_and_blocks_match(self):
+        self.original.rows[0]['address_basis'] = 'authoritative_application_storage'
+        before = b'\xb8' + struct.pack('<I', 0x430000) + b'\xc3'
+        after = b'\xb8' + struct.pack('<I', 0x520000) + b'\xc3'
+        result = self.compare_code(before, after, [0x501001])
+        self.assertEqual(result['relocations'][0]['status'], 'unresolved')
+        self.assertEqual(result['possible_data_target_mismatches'], 1)
+        self.assertFalse(result['instruction_and_known_target_match'])
+
+    def test_storage_inventory_requires_unique_conflict_free_observation(self):
+        scratch = Path.home() / '.ai-tmp'
+        scratch.mkdir(exist_ok=True)
+        with tempfile.TemporaryDirectory(prefix='nemu-comparison-test.', dir=scratch) as directory:
+            path = Path(directory) / 'globals.json'
+            row = dict(symbol='Setting', va='0x420000', extent_bytes=4,
+                       observations=[dict(va='0x420000')], original_storage=dict(section='.data'))
+            document = dict(generator='scripts/map_nemu_globals.py', original_sha256='original-hash',
+                            globals=[row], conflicts=[])
+            path.write_text(json.dumps(document))
+            _, symbols = compare.load_metadata([path])
+            self.assertEqual(symbols[0]['address_basis'], 'authoritative_application_storage')
+            self.assertEqual(symbols[0]['size'], 4)
+            document['conflicts'] = [dict(kind='address', symbol='Setting')]
+            path.write_text(json.dumps(document))
+            _, symbols = compare.load_metadata([path])
+            self.assertEqual(symbols[0]['address_basis'], 'application_observation')
+
+    def test_import_thunk_identity_comes_from_decoded_thunk_and_iat(self):
+        before = Image(b'\xff\x25' + struct.pack('<I', 0x430000))
+        after = Image(b'\xff\x25' + struct.pack('<I', 0x530000))
+        after.base = 0x500000
+        original = compare.Symbols([dict(name='__imp_Function', va=0x430000,
+            kind='import', dll='Plugin.dll', import_name='Function', address_basis='import_table')])
+        candidate = compare.Symbols([dict(name='__imp_Function', va=0x530000,
+            kind='import', dll='PLUGIN.dll', import_name='Function', address_basis='import_table')])
+        original.image, candidate.image = before, after
+        field = dict(offset=1, width=4, kind='REL', authority='decoded_external_branch',
+                     original_target=0x401000, candidate_target=0x501000)
+        result = compare.resolve_field(field, dict(name='Caller', va=0x402000, size=6), original, candidate)
+        self.assertTrue(result['identity_verified'])
+        candidate.rows[0]['import_name'] = 'WrongFunction'
+        result = compare.resolve_field(field, dict(name='Caller', va=0x402000, size=6), original, candidate)
+        self.assertEqual(result['status'], 'mismatch')
+
+    def test_source_operand_proof_requires_both_hashes_and_real_symbol_addend(self):
+        self.original.rows[0]['address_basis'] = 'authoritative_application_storage'
+        scratch = Path.home() / '.ai-tmp'
+        with tempfile.TemporaryDirectory(prefix='nemu-comparison-test.', dir=scratch) as directory:
+            source = Path(directory) / 'source.cpp'
+            source.write_text('int *end = Array + 4;\n')
+            proof = dict(offset=1, symbol='Array', addend=16,
+                         candidate_image_sha256='candidate-hash', source_file=str(source),
+                         source_sha256=compare.digest(source.read_bytes()), evidence='Reviewed array-end expression.')
+            function = dict(name='Function', va=0x401000, size=6, linked_operand_provenance=[proof])
+            field = dict(offset=1, kind='DIR32', width=4, authority='PE_HIGHLOW',
+                         candidate_target=0x520010, original_target=0x420010)
+            self.assertEqual(compare.apply_operand_provenance(function, [field], self.candidate,
+                             self.original, 'other-image'), [])
+            self.assertEqual(len(compare.apply_operand_provenance(function, [field], self.candidate,
+                                 self.original, 'candidate-hash')), 1)
+            result = compare.resolve_field(field, function, self.original, self.candidate)
+            self.assertTrue(result['identity_verified'])
+            field['candidate_target'] += 1
+            with self.assertRaises(ValueError):
+                compare.apply_operand_provenance(function, [field], self.candidate, self.original, 'candidate-hash')
+
     def test_forced_unresolved_header_address_is_invalid(self):
         self.candidate.invalid_link_fixture = True
         self.candidate.invalid_names = set()
@@ -116,6 +213,19 @@ class ComparisonEvidenceTests(unittest.TestCase):
             result = compare.coverage([], functions)
             self.assertEqual(result['inventory_entries'], 2)
             self.assertEqual(result['incomplete_metadata_entries'], 2)
+
+    def test_metadata_hash_is_bound_to_parsed_bytes(self):
+        scratch = Path.home() / '.ai-tmp'
+        with tempfile.TemporaryDirectory(prefix='nemu-comparison-test.', dir=scratch) as directory:
+            path = Path(directory) / 'metadata.json'
+            content = b'{"globals": {"Array": "0x420000"}}'
+            path.write_bytes(content)
+            hashes = {}
+            compare.load_metadata([path], hashes)
+            path.write_text('{"globals": {"Other": "0x430000"}}')
+            self.assertEqual(hashes[str(path)], compare.digest(content))
+            with self.assertRaises(ValueError):
+                compare.load_metadata([path], hashes)
 
     def test_seh_funclets_require_prolog_and_relocation_evidence(self):
         code = bytearray(b'\x6a\xff\x68' + struct.pack('<I', 0x402000) +
