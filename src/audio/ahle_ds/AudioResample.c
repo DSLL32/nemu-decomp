@@ -165,8 +165,10 @@ void DecodeAudioADPCMWideCommand(AudioCommand *command, AudioContext *context)
 /* Legacy 32-bit ADPCM decoder. Private filename and entry name are inferred.
  *
  * Adapted from the Azimer ADPCM formulation retained in Wii64 ucode1.cpp.
- * The historical source relationship is inferred; the Wii64 file itself is
- * newer. See analysis/audio-adpcm-legacy-provenance.json and the accompanying
+ * Azimer's December 2003 ABI1.cpp also preserves the unused Gain, in, and
+ * catchme locals, which affect VC7's expression ordering. The historical
+ * relationship and target-specific array bounds remain inferred. See
+ * analysis/audio-adpcm-legacy-provenance.json and the accompanying
  * AudioADPCM-LICENSE.txt. The reconstruction retains the original DLL's
  * unusual short-buffer indexing and signed count behavior.
  */
@@ -176,11 +178,13 @@ void DecodeAudioADPCMWideCommand(AudioCommand *command, AudioContext *context)
 void DecodeAudioADPCMLegacy(AudioCommand *command, AudioContext *context) {
     BYTE Flags=command->bytes[2];
 
+    WORD Gain=command->halfwords[0];
     DWORD Address=command->words[1];
     WORD inPtr=0;
 
     short *out=context->buffer+(context->output >> 1);
 
+    BYTE *in=(BYTE *)(context->buffer+(context->input >> 1));
     short count=(short)context->count;
     BYTE icode;
     BYTE code;
@@ -190,8 +194,9 @@ void DecodeAudioADPCMLegacy(AudioCommand *command, AudioContext *context) {
     int a[8];
     short *book1,*book2;
     int l1,l2;
-    int inp1[8];
-    int inp2[8];
+    /* Inferred ninth elements reproduce the two unused target stack slots. */
+    int inp1[9];
+    int inp2[9];
     count >>= 1;
 
     memset(out,0,32);
@@ -199,8 +204,9 @@ void DecodeAudioADPCMLegacy(AudioCommand *command, AudioContext *context) {
     if(!(Flags&0x1))
     {
         if(Flags&0x2) {
-            for(j=0;j<16;j++)
-                out[j]=*(short *)&RDRAM[(context->loopAddress+j*2)^2];
+            WORD historyIndex;
+            for(historyIndex=0;historyIndex<16;historyIndex++)
+                out[historyIndex]=*(short *)&RDRAM[(context->loopAddress+historyIndex*2)^2];
         } else {
             memcpy(out,&RDRAM[Address],32);
         }
@@ -231,12 +237,14 @@ void DecodeAudioADPCMLegacy(AudioCommand *command, AudioContext *context) {
             inp1[j]=(short)((icode&0xf0)<<8);
             if(code<12)
                 inp1[j]=((int)((int)inp1[j]*(int)vscale)>>16);
+            else { int catchme=1; }
 
             j++;
 
             inp1[j]=(short)((icode&0xf)<<12);
             if(code<12)
                 inp1[j]=((int)((int)inp1[j]*(int)vscale)>>16);
+            else { int catchme=1; }
 
             j++;
         }
@@ -249,12 +257,14 @@ void DecodeAudioADPCMLegacy(AudioCommand *command, AudioContext *context) {
             inp2[j]=(short)((icode&0xf0)<<8);
             if(code<12)
                 inp2[j]=((int)((int)inp2[j]*(int)vscale)>>16);
+            else { int catchme=1; }
 
             j++;
 
             inp2[j]=(short)((icode&0xf)<<12);
             if(code<12)
                 inp2[j]=((int)((int)inp2[j]*(int)vscale)>>16);
+            else { int catchme=1; }
 
             j++;
         }

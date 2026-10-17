@@ -1,0 +1,113 @@
+{
+  "scope": "Complete legacy ADPCM function including compiler alignment; not a complete DLL.",
+  "original": "master/Plugin/audio.dll",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "source": "src/audio/ahle_ds/AudioResample.c",
+  "source_sha256": "de605ba58f179efe567ffd40740c65c2cc90647a3e980cb0115cd9c14ef42907",
+  "compiler_flags": [
+    "/nologo",
+    "/c",
+    "/O2",
+    "/Ob1",
+    "/MT",
+    "/W3",
+    "/DWIN32",
+    "/DNDEBUG",
+    "/D_WINDOWS",
+    "/D_USRDLL"
+  ],
+  "artifact": "/root/.ai-tmp/audio-adpcm-resume.dzk82si3/canonical",
+  "manifest_sha256": "4ade4591bb4a1a27f007ff9ba9f9b1bde318e2c4e8e5117b942599b7d4bebb26",
+  "function": {
+    "name": "_DecodeAudioADPCMLegacy",
+    "object": "AudioResample.obj",
+    "rebuilt_bytes": 1936,
+    "status": "compared",
+    "original_va": 268512352,
+    "raw_bytes_equal": false,
+    "raw_differing_bytes": 12,
+    "compared_bytes": 1936,
+    "original_size_verified": true,
+    "original_bytes": 1936,
+    "size_equal": true,
+    "relocations": [
+      {
+        "offset": 104,
+        "type": "DIR32",
+        "symbol": "_RDRAM",
+        "addend": 0,
+        "original_target_va": 269925092,
+        "original_target_symbols": [
+          "_RDRAM"
+        ],
+        "expected_target_va": 269925092,
+        "resolution_basis": "identified_symbol",
+        "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+        "status": "resolved",
+        "target_equal": true,
+        "target_identity_verified": true
+      },
+      {
+        "offset": 138,
+        "type": "DIR32",
+        "symbol": "_RDRAM",
+        "addend": 0,
+        "original_target_va": 269925092,
+        "original_target_symbols": [
+          "_RDRAM"
+        ],
+        "expected_target_va": 269925092,
+        "resolution_basis": "identified_symbol",
+        "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+        "status": "resolved",
+        "target_equal": true,
+        "target_identity_verified": true
+      },
+      {
+        "offset": 1896,
+        "type": "DIR32",
+        "symbol": "_RDRAM",
+        "addend": 0,
+        "original_target_va": 269925092,
+        "original_target_symbols": [
+          "_RDRAM"
+        ],
+        "expected_target_va": 269925092,
+        "resolution_basis": "identified_symbol",
+        "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+        "status": "resolved",
+        "target_equal": true,
+        "target_identity_verified": true
+      }
+    ],
+    "relocation_target_mismatch_count": 0,
+    "inferred_target_count": 0,
+    "unresolved_target_count": 0,
+    "relocation_masked_equal": true,
+    "relocation_masked_differing_bytes": 0,
+    "relocations_all_resolved": true,
+    "relocation_values_consistent": true,
+    "relocation_targets_verified": true,
+    "relocation_targets_equal": true,
+    "inferred_relocated_bytes_equal": true,
+    "relocated_bytes_equal": true,
+    "first_unmasked_differences": []
+  },
+  "body_sha256": "9684c1a8e8a6de416c4afbfe735418a77b50f8d85e5e501edfe35cc762dcf5c8",
+  "source_inferences": [
+    "Original Azimer December 2003 ABI1.cpp preserves the unused Gain, input-pointer, and catchme locals. These are historical source constructs, not invented optimizer barriers.",
+    "Nemu adds a separate WORD counter for its endian-adjusted history-copy loop.",
+    "Two nine-element residual arrays are inferred from the target stack layout and exact native replay. The primary source declares eight elements. Each unused ninth element accounts for one observed DWORD slot.",
+    "All eight first-block addition orders and all 558 normalized instructions already match in the eight-element control; changing only the inferred bounds completes byte equality."
+  ],
+  "behavioral_replay": {
+    "artifact": "/root/.ai-tmp/audio-adpcm-resume.dzk82si3/checkpoint",
+    "manifest_sha256": "6b2ae412661248e7b99977fd4865382e56d7e63cde80f10c04746292aab3acce",
+    "matching": 216,
+    "cases": 216
+  },
+  "independent_native_replay": {
+    "artifact": "/root/.ai-tmp/audio-adpcm-stack.zZH1S8oQ/match-replay",
+    "manifest_sha256": "4cf25ac11e26e5710c01671f7d3c1fdcab8a667ad7c62c6e60896839ce40dd8d"
+  }
+}

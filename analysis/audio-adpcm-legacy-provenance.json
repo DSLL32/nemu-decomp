@@ -1,24 +1,28 @@
 {
-  "status": "incomplete; not a byte-exact reconstruction",
+  "status": "complete native legacy function; all 1936 relocated bytes exact",
   "entry": "_DecodeAudioADPCMLegacy",
   "original_va": "0x10012C60",
   "original_end": "0x100133F0",
   "original_extent": 1936,
   "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
-  "source_sha256": "cb2e07cf774d8d9887883cd7fc67a98dc08a5b576e0d70a3405786bb281ada52",
-  "artifact": "/root/.ai-tmp/audio-adpcm-legacy/artifacts/cb2e07cf774d8d9887883cd7fc67a98dc08a5b576e0d70a3405786bb281ada52",
-  "artifact_comparison_sha256": "84284b28a4805c1f0416db191d9db46121319c1093c326ca5f2d795bc2ae63da",
+  "source_sha256": "de605ba58f179efe567ffd40740c65c2cc90647a3e980cb0115cd9c14ef42907",
+  "artifact": "/root/.ai-tmp/audio-adpcm-resume.dzk82si3/canonical",
+  "artifact_comparison_sha256": "b07ed3a7caa3700de45f2ae62c99ecc69b7529b9e81296e094eb023f1b989f65",
   "source_snapshot": {
-    "src/audio/ahle_ds/AudioADPCMLegacy.c": "cb2e07cf774d8d9887883cd7fc67a98dc08a5b576e0d70a3405786bb281ada52",
-    "src/audio/ahle_ds/AudioADPCMLegacy.h": "8509a1760c9dcc9b45334d103d4f09b656502bda0b8d35d039d75d7a75720f32",
-    "src/audio/ahle_ds/AudioHLE.h": "82e6544a76ee5d0e361f785773e5da8bd91070019a65367d89d6cb0defd8b3ee",
-    "src/audio/ahle_ds/AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
-    "src/audio/ahle_ds/AudioADPCM-LICENSE.txt": "9f8db578ada6153af1024a206324a03b9703abbec0e96b6ee3da72ff6eee335e",
-    "analysis/audio-adpcm-legacy-addresses.json": "d0063241bba197bc1006989a371bd5da6ee1febafea91b8b5d895e24bdca750b",
-    "scripts/verify_audio.py": "44d65d751129d51d5296a68f81735be23f068c7e0d3b8694d5074333dcc0d490",
-    "scripts/verify_gs.py": "9096c1ce5e759dc60f4fc7b84c97678b5946b7b15f6bfb56cd1fa3b9e730854c",
-    "scripts/pe_fingerprints.py": "e83e1698ecfc7b8ca06ba0919578cbd225885745a96f601891bffff831d995dd",
-    "scripts/run_toolchain.py": "489681186d7cde23f42d0a6f154f3e9723b060fa769a1ce2d0f31e656074ea9e"
+    "AudioADPCMBlock.h": "f506d6ea97b83fcaaa78dc9ff7300bebe37aa36b9f1a01277247ee41767b4c1b",
+    "AudioADPCMLegacy.h": "8509a1760c9dcc9b45334d103d4f09b656502bda0b8d35d039d75d7a75720f32",
+    "AudioCommands.h": "35cae30632b3a466adc0dea680c808b80995cf311b0024d25331224e7368e5f3",
+    "AudioEnvelope.h": "8acbac16a6bc16a06782b48dea25af4e49b99c5a845f866ffe41098ec14517b7",
+    "AudioHLE.h": "98475c4c2e034a7e1b16a94662078f731afcca5529140bf0d30c7e6901bdd441",
+    "AudioLegacy.h": "8f5810c3d8ae923119c733c304064310630cca3201c4b472047267d1417bee98",
+    "AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
+    "AudioProcessing.h": "661ae00c480be2d2a2341214fe95e52c21630af602bae4ef4d3dbd7516c8962c",
+    "AudioResampleTables.h": "5b95bd2db83cf7eea18b347cdf32c7a332073868cbcbd45a939f8de4537236f1",
+    "AudioSIMD.h": "627d71fd2a53dcc36e099c214824e397454c8b78d80be503f29f08c91a18bf63",
+    "DirectSound.h": "d16ad18d42c6d3081e7fc1f99caa62638965c0e6a971fab987b43f141679fb38",
+    "RSP.h": "9489748e5025a27cdcbcf9853751b72d0c6c73658ddb4d62893d3f40f297b7ab",
+    "transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
+    "AudioResample.c": "de605ba58f179efe567ffd40740c65c2cc90647a3e980cb0115cd9c14ef42907"
   },
   "compiler": {
     "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
@@ -31,16 +35,25 @@
     "/O2",
     "/Ob1",
     "/MT",
-    "/W3"
+    "/W3",
+    "/DWIN32",
+    "/DNDEBUG",
+    "/D_WINDOWS",
+    "/D_USRDLL"
   ],
-  "wine_prefix": "/root/.ai-tmp/audio-adpcm-legacy/wine",
+  "wine_prefix": "/root/.ai-tmp/audio-adpcm-resume.dzk82si3/wine",
   "result": {
     "rebuilt_extent": 1936,
-    "differing_bytes_after_relocation_mask": 1336,
+    "differing_bytes_after_relocation_mask": 0,
     "frame_target": "0x98",
-    "frame_candidate": "0x90",
-    "complete_body_exact": false,
-    "relocation_positions_do_not_align": true
+    "frame_candidate": "0x98",
+    "complete_body_exact": true,
+    "relocations_all_resolved": true,
+    "relocation_targets_verified": true,
+    "relocated_bytes_equal": true,
+    "relocations": 3,
+    "body_sha256": "9684c1a8e8a6de416c4afbfe735418a77b50f8d85e5e501edfe35cc762dcf5c8",
+    "comparison": "analysis/audio-adpcm-legacy-comparison.json"
   },
   "upstream_reference": {
     "url": "https://github.com/emukidid/Wii64/blob/508e73ec83d5a355eefc782f947e365c7c0fbefc/rsp_hle/ucode1.cpp",
@@ -64,7 +77,8 @@
     "frozen_artifact": "/root/.ai-tmp/audio-adpcm-legacy/replay.b1mlzom4/symbolic-proof",
     "frozen_replay_script": "/root/.ai-tmp/audio-adpcm-legacy/replay.b1mlzom4/symbolic-proof/replay-proof.py",
     "frozen_replay_script_sha256": "030c39e48c806ab3f2b34a3548287c518208683e0d7c31fa62f403e7408dc925",
-    "frozen_replay_exit_code": 0
+    "frozen_replay_exit_code": 0,
+    "scope_note": "This earlier symbolic audit applies to the preserved incomplete checkpoint and its control body."
   },
   "bounded_probes": [
     {
@@ -862,10 +876,8 @@
   ],
   "additional_audit": "/root/.ai-tmp/audio-adpcm-declarations.vi6c95h0/types-products-results.json",
   "independent_replay": {
-    "artifact": "/root/.ai-tmp/audio-adpcm-legacy/replay.b1mlzom4",
-    "manifest_sha256": "b5bcdf54aaeaf9588ff987689bc06d99c5ae7b3026314fdaca0c163794b0c327",
-    "comparison_sha256": "20405e3c9a101abc8b4d0e7044a9ce435eff1b0aafd9b997d8474ac8ffa755f1",
-    "source_body_identical_to_checkpoint": true
+    "artifact": "/root/.ai-tmp/audio-adpcm-stack.zZH1S8oQ/match-replay",
+    "manifest_sha256": "4cf25ac11e26e5710c01671f7d3c1fdcab8a667ad7c62c6e60896839ce40dd8d"
   },
   "additional_negative_probes": {
     "frontend_function_names": "/root/.ai-tmp/audio-adpcm-legacy/probe-names.py",
@@ -877,5 +889,80 @@
       "/root/.ai-tmp/legacy-audit-symbolic/withclamp-inline/comparison.json",
       "/root/.ai-tmp/legacy-audit-symbolic/withclamp-forceinline/comparison.json"
     ]
-  }
+  },
+  "previous_incomplete_checkpoint": {
+    "status": "incomplete; not a byte-exact reconstruction",
+    "source_sha256": "cb2e07cf774d8d9887883cd7fc67a98dc08a5b576e0d70a3405786bb281ada52",
+    "artifact": "/root/.ai-tmp/audio-adpcm-legacy/artifacts/cb2e07cf774d8d9887883cd7fc67a98dc08a5b576e0d70a3405786bb281ada52",
+    "artifact_comparison_sha256": "84284b28a4805c1f0416db191d9db46121319c1093c326ca5f2d795bc2ae63da",
+    "source_snapshot": {
+      "src/audio/ahle_ds/AudioADPCMLegacy.c": "cb2e07cf774d8d9887883cd7fc67a98dc08a5b576e0d70a3405786bb281ada52",
+      "src/audio/ahle_ds/AudioADPCMLegacy.h": "8509a1760c9dcc9b45334d103d4f09b656502bda0b8d35d039d75d7a75720f32",
+      "src/audio/ahle_ds/AudioHLE.h": "82e6544a76ee5d0e361f785773e5da8bd91070019a65367d89d6cb0defd8b3ee",
+      "src/audio/ahle_ds/AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
+      "src/audio/ahle_ds/AudioADPCM-LICENSE.txt": "9f8db578ada6153af1024a206324a03b9703abbec0e96b6ee3da72ff6eee335e",
+      "analysis/audio-adpcm-legacy-addresses.json": "d0063241bba197bc1006989a371bd5da6ee1febafea91b8b5d895e24bdca750b",
+      "scripts/verify_audio.py": "44d65d751129d51d5296a68f81735be23f068c7e0d3b8694d5074333dcc0d490",
+      "scripts/verify_gs.py": "9096c1ce5e759dc60f4fc7b84c97678b5946b7b15f6bfb56cd1fa3b9e730854c",
+      "scripts/pe_fingerprints.py": "e83e1698ecfc7b8ca06ba0919578cbd225885745a96f601891bffff831d995dd",
+      "scripts/run_toolchain.py": "489681186d7cde23f42d0a6f154f3e9723b060fa769a1ce2d0f31e656074ea9e"
+    },
+    "result": {
+      "rebuilt_extent": 1936,
+      "differing_bytes_after_relocation_mask": 1336,
+      "frame_target": "0x98",
+      "frame_candidate": "0x90",
+      "complete_body_exact": false,
+      "relocation_positions_do_not_align": true
+    },
+    "independent_replay": {
+      "artifact": "/root/.ai-tmp/audio-adpcm-legacy/replay.b1mlzom4",
+      "manifest_sha256": "b5bcdf54aaeaf9588ff987689bc06d99c5ae7b3026314fdaca0c163794b0c327",
+      "comparison_sha256": "20405e3c9a101abc8b4d0e7044a9ce435eff1b0aafd9b997d8474ac8ffa755f1",
+      "source_body_identical_to_checkpoint": true
+    }
+  },
+  "source_path": "src/audio/ahle_ds/AudioResample.c",
+  "historical_primary_reference": {
+    "source_archive": {
+      "url": "https://dlf.emu-land.net/n64/AziAudioSrc0551.rar",
+      "sha256": "35463291f3bfc91c86bdeafa0702ed54ee5c1700ba9661d8c60c2c853594585c",
+      "abi1_file_date": "2003-12-03 01:16:28 (archive member; timezone unknown)",
+      "abi1_sha256": "6bc569d35ae385a0926295a172fe53b15e1346aeef0a7739ec8a8343c21f739c",
+      "observations": [
+        "ADPCM uses BYTE icode/code, WORD j, int histories, three int[8] arrays.",
+        "Predictors use the same expanded += convolution retained in Wii64.",
+        "Gain, input pointer, and catchme locals remain present but dead in released source."
+      ]
+    },
+    "author_repository": {
+      "url": "https://github.com/Azimer/apollo64.com",
+      "commit": "286712e848da4b89f3fc4af182908019537f6b67",
+      "observations": [
+        "Includes April 2001 AudioHLEv12b and June 2001 AziAudio binary releases.",
+        "Both binaries have identical first-pass accumulation term order, rotating residual terms from I4."
+      ]
+    },
+    "prediction_order_report": "/root/.ai-tmp/audio-adpcm-history.7rbu07c3/prediction-order.json",
+    "prediction_order_report_sha256": "0cd3e0f2de0a25958ec3a4f4ce382c58746a156afde0573c05fbdff013cd86f4",
+    "tracer": "/root/.ai-tmp/audio-adpcm-history.7rbu07c3/prediction-order.py",
+    "tracer_sha256": "66edfebcf67e12334de8814bc39d6c590b2b8e2907f5901d612081891f7af568",
+    "result": "Parent historical-primary source plus separate WORD history-copy loop counter reproduces all eight target first-pass term orders. Entire function still unmatched; stack placement/spill differences remain.",
+    "scope_limit": "This proves the decoded first-pass products and their machine addition order, not a whole-function or whole-DLL match.",
+    "no_live_source_changes": true,
+    "scope_note": "The historical audit predates the successful nine-element target-specific reconstruction; its unmatched result describes the eight-element control."
+  },
+  "target_specific_inferences": [
+    "Original Azimer December 2003 ABI1.cpp preserves the unused Gain, input-pointer, and catchme locals. These are historical source constructs, not invented optimizer barriers.",
+    "Nemu adds a separate WORD counter for its endian-adjusted history-copy loop.",
+    "Two nine-element residual arrays are inferred from the target stack layout and exact native replay. The primary source declares eight elements. Each unused ninth element accounts for one observed DWORD slot.",
+    "All eight first-block addition orders and all 558 normalized instructions already match in the eight-element control; changing only the inferred bounds completes byte equality."
+  ],
+  "behavioral_replay": {
+    "artifact": "/root/.ai-tmp/audio-adpcm-resume.dzk82si3/checkpoint",
+    "manifest_sha256": "6b2ae412661248e7b99977fd4865382e56d7e63cde80f10c04746292aab3acce",
+    "matching": 216,
+    "cases": 216
+  },
+  "canonical_manifest_sha256": "4ade4591bb4a1a27f007ff9ba9f9b1bde318e2c4e8e5117b942599b7d4bebb26"
 }
