@@ -1,0 +1,4136 @@
+{
+  "target": "master/nemu64.exe",
+  "sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+  "source": "src/nemu64/Dynarec.cpp",
+  "header": "src/nemu64/Dynarec.h",
+  "status": "All owned functions implemented; integrated executable links without unresolved symbols. Full byte equality not achieved.",
+  "compiler": {
+    "family": "Microsoft Visual C++ 7.0",
+    "baseline_flags": [
+      "/O2",
+      "/Ob1",
+      "/ML",
+      "/GL",
+      "/LTCG"
+    ],
+    "evidence": "VC7 /O2 /Ob1 /ML /GL plus /LTCG reproduces the custom argument registers and full instruction spans of 136 of 137 helpers in a complete linked probe. Absolute operands and full image layout remain under verification.",
+    "translation_unit_compiles": true
+  },
+  "source_organization": {
+    "inferred": true,
+    "evidence": "Adjacent emitter constructors, opcode emitters, and MIPS translation tables support the dynarec grouping. Runtime signature names occupy a separate original literal run at 0x431F70..0x432AD8, while emitter diagnostics occupy 0x43DD54..0x43DDE9; a separate RuntimeSignatures.cpp preserves this grouping. Names and filenames remain inferred.",
+    "sources": [
+      "src/nemu64/Dynarec.cpp",
+      "src/nemu64/RuntimeSignatures.cpp"
+    ]
+  },
+  "globals": [
+    {
+      "name": "Dynarec_Mode",
+      "va": "0x01240E58",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_Inlining",
+      "va": "0x00A3FE4C",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_BlockCode",
+      "va": "0x01240EF0",
+      "type": "unsigned[2097152]",
+      "extent": 8388608,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_MainCode",
+      "va": "0x01A40EF8",
+      "type": "unsigned char[20971520]",
+      "extent": 20971520,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_FastCode",
+      "va": "0x0087AE60",
+      "type": "unsigned char[1048576]",
+      "extent": 1048576,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_MainCodeUsed",
+      "va": "0x02E4AB40",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_FastCodeUsed",
+      "va": "0x02E4BB4C",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_CodePointer",
+      "va": "0x0087AE54",
+      "type": "unsigned char*",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_EntryPoint",
+      "va": "0x03E6A014",
+      "type": "unsigned char*",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_Use32BitMemoryAccess",
+      "va": "0x03343D88",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_DelaySlot",
+      "va": "0x00A3FE40",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_BlockFinished",
+      "va": "0x03343D8C",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_NextPC",
+      "va": "0x0097BE08",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_BranchPending",
+      "va": "0x00A3FE44",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_InstructionCount",
+      "va": "0x03E51198",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_LabelCount",
+      "va": "0x03B43D90",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_Instructions",
+      "va": "0x03B43D98",
+      "type": "RecompiledInstruction[50000]",
+      "extent": 3200000,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_LabelInstructions",
+      "va": "0x03E511A0",
+      "type": "unsigned[10000]",
+      "extent": 40000,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_JumpCount",
+      "va": "0x00A3FB10",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_PendingCount",
+      "va": "0x02E4C4EC",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_JumpFixups",
+      "va": "0x0097BE10",
+      "type": "DynarecJumpFixup[100000]",
+      "extent": 800000,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_PendingAddresses",
+      "va": "0x02E40F00",
+      "type": "unsigned[10000]",
+      "extent": 40000,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_ConversionCount",
+      "va": "0x02E4BB54",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_AddressMap",
+      "va": "0x02F73488",
+      "type": "DynarecAddressMap[500000]",
+      "extent": 4000000,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_RecordAddresses",
+      "va": "0x03E5ADE0",
+      "type": "unsigned char",
+      "extent": 1,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_LastWasGuestJump",
+      "va": "0x02E4BB48",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_InlineAddressCount",
+      "va": "0x02F71470",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_InlineAddresses",
+      "va": "0x02E4AB48",
+      "type": "unsigned[1024]",
+      "extent": 4096,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_PageCode",
+      "va": "0x0123FE58",
+      "type": "unsigned[1024]",
+      "extent": 4096,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_PageAddress",
+      "va": "0x02F73480",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_PhysicalPC",
+      "va": "0x00A3FB18",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_BlockStart",
+      "va": "0x02E4BB50",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_BlockInstructionCount",
+      "va": "0x00A3FB14",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_TrackingLoaded",
+      "va": "0x0087AE50",
+      "type": "unsigned char",
+      "extent": 1,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "RuntimeLibraryEnabled",
+      "va": "0x0408B7C8",
+      "type": "int",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail",
+      "source": "src/nemu64/RuntimeSignatures.cpp"
+    },
+    {
+      "name": "RuntimeReplacementCount",
+      "va": "0x0408A7C0",
+      "type": "int",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail",
+      "source": "src/nemu64/RuntimeSignatures.cpp"
+    },
+    {
+      "name": "RuntimeReplacements",
+      "va": "0x0408A7C8",
+      "type": "RuntimeReplacement[512]",
+      "extent": 4096,
+      "initializer": "zero-filled PE data tail",
+      "source": "src/nemu64/RuntimeSignatures.cpp"
+    },
+    {
+      "name": "RuntimeSignatures",
+      "va": "0x00460D18",
+      "type": "FunctionSignature[173]",
+      "extent": 3460,
+      "initializer": "recovered table",
+      "source": "src/nemu64/RuntimeSignatures.cpp"
+    },
+    {
+      "name": "RuntimeRelocations",
+      "va": "0x00461AA0",
+      "type": "FunctionRelocations[173]",
+      "extent": 89268,
+      "initializer": "recovered table",
+      "source": "src/nemu64/RuntimeSignatures.cpp"
+    },
+    {
+      "name": "Dynarec_CompiledPages",
+      "va": "0x00A3F310",
+      "type": "unsigned char[2048]",
+      "extent": 2048,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_ResetRequired",
+      "va": "0x01A40EF0",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_ProfileStartLow",
+      "va": "0x01240E60",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail"
+    },
+    {
+      "name": "Dynarec_ProfileStartHigh",
+      "va": "0x00A3FE48",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail"
+    }
+  ],
+  "functions": [
+    {
+      "name": "TrackWord",
+      "va": "0x00406A60",
+      "original_size": 144,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 136,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "TrackDoubleWord",
+      "va": "0x00406AF0",
+      "original_size": 192,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 178,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "TrackGPR",
+      "va": "0x00406BB0",
+      "original_size": 16,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 15,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "TrackFPR",
+      "va": "0x00406BC0",
+      "original_size": 240,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 233,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "TrackRegister64",
+      "va": "0x00406CB0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "TrackRegister32",
+      "va": "0x00406CE0",
+      "original_size": 32,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 19,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "TrackMemory",
+      "va": "0x00406D00",
+      "original_size": 96,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 87,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "TrackProgramCounter",
+      "va": "0x00406D60",
+      "original_size": 32,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 22,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "TrackInstructionChanges",
+      "va": "0x00406D80",
+      "original_size": 816,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 479,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "AddJumpTarget",
+      "va": "0x004070B0",
+      "original_size": 176,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 172,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "AddInstruction",
+      "va": "0x00407160",
+      "original_size": 224,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 209,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "AddInstructionThreeSources",
+      "va": "0x00407240",
+      "original_size": 224,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 221,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "AddInstructionTwoDestinations",
+      "va": "0x00407320",
+      "original_size": 224,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitLabel",
+      "va": "0x00407400",
+      "original_size": 16,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 8,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitAdc",
+      "va": "0x00407410",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 38,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitAdcImmediate",
+      "va": "0x00407440",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitAdd",
+      "va": "0x00407470",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 38,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitAddImmediate",
+      "va": "0x004074A0",
+      "original_size": 64,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 51,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitAddMemory",
+      "va": "0x004074E0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 46,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitAndMemory",
+      "va": "0x00407510",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitAndImmediate",
+      "va": "0x00407540",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitAnd",
+      "va": "0x00407570",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 38,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitSignExtend",
+      "va": "0x004075A0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 37,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitCompare",
+      "va": "0x004075D0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 39,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitCompareImmediate",
+      "va": "0x00407600",
+      "original_size": 64,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 51,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitCall",
+      "va": "0x00407640",
+      "original_size": 32,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitDivide",
+      "va": "0x00407660",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 40,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitSignedDivide",
+      "va": "0x00407690",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 40,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitSignedMultiply",
+      "va": "0x004076C0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 40,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitConditionalJump",
+      "va": "0x004076F0",
+      "original_size": 64,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 52,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitConditionalJumpOffset",
+      "va": "0x00407730",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 34,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitJump",
+      "va": "0x00407760",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitJumpOffset",
+      "va": "0x00407790",
+      "original_size": 32,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitJumpGuest",
+      "va": "0x004077B0",
+      "original_size": 32,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitMove",
+      "va": "0x004077D0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 39,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitLoad",
+      "va": "0x00407800",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 38,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitStore",
+      "va": "0x00407830",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 38,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitStoreHalf",
+      "va": "0x00407860",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 36,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitMoveImmediate",
+      "va": "0x00407890",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 36,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitStoreImmediate",
+      "va": "0x004078C0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitLoadSigned",
+      "va": "0x004078F0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 37,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitMoveSigned",
+      "va": "0x00407920",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 39,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitLoadUnsigned",
+      "va": "0x00407950",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 37,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitMoveUnsigned",
+      "va": "0x00407980",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 39,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitMultiply",
+      "va": "0x004079B0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 40,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitNegate",
+      "va": "0x004079E0",
+      "original_size": 32,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitNot",
+      "va": "0x00407A00",
+      "original_size": 32,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitOrAccumulator",
+      "va": "0x00407A20",
+      "original_size": 32,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 30,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitOrMemory",
+      "va": "0x00407A40",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitOr",
+      "va": "0x00407A70",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 38,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitPop",
+      "va": "0x00407AA0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 42,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitPush",
+      "va": "0x00407AD0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitReadTimestamp",
+      "va": "0x00407B00",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 40,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitReturn",
+      "va": "0x00407B30",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 33,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitStoreFlags",
+      "va": "0x00407B60",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 33,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitArithmeticShiftRight",
+      "va": "0x00407B90",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 38,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitArithmeticShiftRightCL",
+      "va": "0x00407BC0",
+      "original_size": 32,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitSbb",
+      "va": "0x00407BE0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 38,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitSetMemory",
+      "va": "0x00407C10",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 36,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitSet",
+      "va": "0x00407C40",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 37,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitShiftLeftCL",
+      "va": "0x00407C70",
+      "original_size": 32,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitShiftLeft",
+      "va": "0x00407C90",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 38,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitDoubleShiftLeftCL",
+      "va": "0x00407CC0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 41,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitDoubleShiftLeft",
+      "va": "0x00407CF0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 38,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitShiftRightCL",
+      "va": "0x00407D20",
+      "original_size": 32,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitShiftRight",
+      "va": "0x00407D40",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 38,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitDoubleShiftRightCL",
+      "va": "0x00407D70",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 41,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitDoubleShiftRight",
+      "va": "0x00407DA0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 38,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitSubtract",
+      "va": "0x00407DD0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 38,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitExchange",
+      "va": "0x00407E00",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 40,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitTestMemory",
+      "va": "0x00407E30",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitXorAccumulator",
+      "va": "0x00407E60",
+      "original_size": 32,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 30,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitXor",
+      "va": "0x00407E80",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 38,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitFpuAbsolute",
+      "va": "0x00407EB0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 36,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitFpuAddSingle",
+      "va": "0x00407EE0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitFpuAddDouble",
+      "va": "0x00407F10",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitFpuChangeSign",
+      "va": "0x00407F40",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 36,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitFpuClearExceptions",
+      "va": "0x00407F70",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 36,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitFpuCompareSingle",
+      "va": "0x00407FA0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitFpuCompareDouble",
+      "va": "0x00407FD0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitFpuDivideSingle",
+      "va": "0x00408000",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitFpuDivideDouble",
+      "va": "0x00408030",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitFpuLoadInt32",
+      "va": "0x00408060",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitFpuLoadInt64",
+      "va": "0x00408090",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitFpuStoreInt32",
+      "va": "0x004080C0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitFpuStoreInt64",
+      "va": "0x004080F0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitFpuLoadSingle",
+      "va": "0x00408120",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitFpuLoadDouble",
+      "va": "0x00408150",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitFpuLoadControl",
+      "va": "0x00408180",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitFpuMultiplySingle",
+      "va": "0x004081B0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitFpuMultiplyDouble",
+      "va": "0x004081E0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitFpuSquareRoot",
+      "va": "0x00408210",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 36,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitFpuPopSingle",
+      "va": "0x00408240",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitFpuPopDouble",
+      "va": "0x00408270",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitFpuStoreStatus",
+      "va": "0x004082A0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 36,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitFpuSubtractSingle",
+      "va": "0x004082D0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitFpuSubtractDouble",
+      "va": "0x00408300",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "RequiresMemoryCheck",
+      "va": "0x00408370",
+      "original_size": 176,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 167,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "AddPendingAddress",
+      "va": "0x00408420",
+      "original_size": 80,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 66,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "AddJumpFixup",
+      "va": "0x00408470",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 44,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "AddAddressMapping",
+      "va": "0x004084A0",
+      "original_size": 64,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 61,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "IsOpcodeBreakpoint",
+      "va": "0x004084E0",
+      "original_size": 64,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 54,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "CheckInlineFunction",
+      "va": "0x00408520",
+      "original_size": 608,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 583,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "AddInlineAddress",
+      "va": "0x00408780",
+      "original_size": 32,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 19,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "CompileInstructions",
+      "va": "0x004087A0",
+      "original_size": 432,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "CompileBlock",
+      "va": "0x00408950",
+      "original_size": 1184,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 1158,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "SetLabelInstruction",
+      "va": "0x00408DF0",
+      "original_size": 16,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 8,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "ResetInstructionBuffer",
+      "va": "0x00408E00",
+      "original_size": 32,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 19,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "AssembleInstructions",
+      "va": "0x00408E20",
+      "original_size": 4064,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 3636,
+      "extent_basis": "Code through RET at00409C53, 70-entry switch table00409C54, 36-entry switch table00409D6C, then four alignment bytes before00409E00.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "BeginBlockTiming",
+      "va": "0x00412ED0",
+      "original_size": 80,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 66,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EndBlockTiming",
+      "va": "0x00412F20",
+      "original_size": 176,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 175,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitWatchHitCheck",
+      "va": "0x00412FD0",
+      "original_size": 192,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 183,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "LoadGPRWord",
+      "va": "0x00413090",
+      "original_size": 112,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 105,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "StoreGPRWord",
+      "va": "0x00413100",
+      "original_size": 96,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 92,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "LoadGPRLow",
+      "va": "0x00413160",
+      "original_size": 16,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 11,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "LoadGPRPairLow",
+      "va": "0x00413170",
+      "original_size": 32,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 30,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "LoadGPR64",
+      "va": "0x00413190",
+      "original_size": 32,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 26,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "LoadTwoGPR64",
+      "va": "0x004131B0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 46,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "StoreGPRSigned32",
+      "va": "0x004131E0",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 35,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "StoreGPRSigned32From",
+      "va": "0x00413210",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 33,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "StoreGPR64",
+      "va": "0x00413240",
+      "original_size": 32,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 29,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitWatchCheck",
+      "va": "0x00413260",
+      "original_size": 400,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 384,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitTranslateAddress",
+      "va": "0x004137B0",
+      "original_size": 320,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 309,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitBranchTarget",
+      "va": "0x004138F0",
+      "original_size": 240,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 227,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitProgramCounter",
+      "va": "0x004139E0",
+      "original_size": 32,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 18,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "RecompileEqualityBranch",
+      "va": "0x00413A00",
+      "original_size": 368,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 360,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "RecompileSignedBranch",
+      "va": "0x00413B70",
+      "original_size": 384,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 366,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "RecompileDelaySlot",
+      "va": "0x00413CF0",
+      "original_size": 608,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 596,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "EmitLinkRegister",
+      "va": "0x00413F50",
+      "original_size": 96,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 90,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "StoreMultiplyResult",
+      "va": "0x00413FB0",
+      "original_size": 96,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 90,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "FinishInstruction",
+      "va": "0x00414010",
+      "original_size": 112,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 107,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "DynarecNoOperation",
+      "va": "0x0041FEF0",
+      "original_size": 16,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 1,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/Dynarec.cpp"
+    },
+    {
+      "name": "HashSignatureInstruction",
+      "va": "0x0041FF00",
+      "original_size": 160,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 148,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/RuntimeSignatures.cpp"
+    },
+    {
+      "name": "SaveFunctionSignatures",
+      "va": "0x0041FFA0",
+      "original_size": 672,
+      "status": "source implemented and compiled; host byte equality pending",
+      "original_code_size": 646,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/RuntimeSignatures.cpp"
+    },
+    {
+      "name": "ResetRuntimeReplacements",
+      "va": "0x00420240",
+      "original_size": 48,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 33,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/RuntimeSignatures.cpp"
+    },
+    {
+      "name": "FindRuntimeReplacement",
+      "va": "0x00420270",
+      "original_size": 80,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 56,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/RuntimeSignatures.cpp"
+    },
+    {
+      "name": "EnablePIFSuccess",
+      "va": "0x004202C0",
+      "original_size": 16,
+      "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
+      "original_code_size": 11,
+      "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
+      "source": "src/nemu64/RuntimeSignatures.cpp"
+    }
+  ],
+  "wrapper_argument_evidence": [
+    {
+      "va": "0x00407410",
+      "name": "EmitAdc",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "S4"
+        },
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "source",
+          "type": "unsigned char",
+          "location": "CL"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "1",
+        "destination",
+        "destination",
+        "source",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "1",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407440",
+      "name": "EmitAdcImmediate",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "S4"
+        },
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "value",
+          "type": "unsigned",
+          "location": "ECX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "2",
+        "destination",
+        "destination",
+        "-1",
+        "0",
+        "value",
+        "-1",
+        "-1",
+        "-1",
+        "1",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407470",
+      "name": "EmitAdd",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "S4"
+        },
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "source",
+          "type": "unsigned char",
+          "location": "CL"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "3",
+        "destination",
+        "source",
+        "destination",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407510",
+      "name": "EmitAndMemory",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "S4"
+        },
+        {
+          "name": "mode",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EDX"
+        },
+        {
+          "name": "value",
+          "type": "unsigned",
+          "location": "ECX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "8",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "value",
+        "mode",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407540",
+      "name": "EmitAndImmediate",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "S4"
+        },
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "value",
+          "type": "unsigned",
+          "location": "ECX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "9",
+        "destination",
+        "destination",
+        "-1",
+        "0",
+        "value",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407570",
+      "name": "EmitAnd",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "S4"
+        },
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "source",
+          "type": "unsigned char",
+          "location": "CL"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "10",
+        "destination",
+        "source",
+        "destination",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x004075A0",
+      "name": "EmitSignExtend",
+      "inputs": [
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "CL"
+        },
+        {
+          "name": "source",
+          "type": "unsigned char",
+          "location": "AL"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "12",
+        "destination",
+        "source",
+        "-1",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x004075D0",
+      "name": "EmitCompare",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "S4"
+        },
+        {
+          "name": "left",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "right",
+          "type": "unsigned char",
+          "location": "CL"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "13",
+        "-1",
+        "right",
+        "left",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407640",
+      "name": "EmitCall",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EAX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "17",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00407660",
+      "name": "EmitDivide",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "DL"
+        },
+        {
+          "name": "source",
+          "type": "unsigned char",
+          "location": "AL"
+        }
+      ],
+      "constructor": "AddInstructionTwoDestinations",
+      "arguments": [
+        "size",
+        "18",
+        "0",
+        "2",
+        "source",
+        "0",
+        "2",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407690",
+      "name": "EmitSignedDivide",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "DL"
+        },
+        {
+          "name": "source",
+          "type": "unsigned char",
+          "location": "AL"
+        }
+      ],
+      "constructor": "AddInstructionTwoDestinations",
+      "arguments": [
+        "size",
+        "19",
+        "0",
+        "2",
+        "source",
+        "0",
+        "2",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x004076C0",
+      "name": "EmitSignedMultiply",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "DL"
+        },
+        {
+          "name": "source",
+          "type": "unsigned char",
+          "location": "AL"
+        }
+      ],
+      "constructor": "AddInstructionTwoDestinations",
+      "arguments": [
+        "size",
+        "20",
+        "0",
+        "2",
+        "source",
+        "0",
+        "2",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407730",
+      "name": "EmitConditionalJumpOffset",
+      "inputs": [
+        {
+          "name": "condition",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "offset",
+          "type": "unsigned",
+          "location": "ECX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "22",
+        "-1",
+        "-1",
+        "-1",
+        "offset",
+        "0",
+        "-1",
+        "condition",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00407790",
+      "name": "EmitJumpOffset",
+      "inputs": [
+        {
+          "name": "offset",
+          "type": "unsigned",
+          "location": "EAX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "24",
+        "-1",
+        "-1",
+        "-1",
+        "offset",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x004077B0",
+      "name": "EmitJumpGuest",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EAX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "65",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x004077D0",
+      "name": "EmitMove",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "S4"
+        },
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "CL"
+        },
+        {
+          "name": "source",
+          "type": "unsigned char",
+          "location": "AL"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "26",
+        "destination",
+        "source",
+        "-1",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00407800",
+      "name": "EmitLoad",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "S4"
+        },
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "DL"
+        },
+        {
+          "name": "mode",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "ECX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "27",
+        "destination",
+        "-1",
+        "-1",
+        "address",
+        "0",
+        "mode",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00407830",
+      "name": "EmitStore",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "S4"
+        },
+        {
+          "name": "source",
+          "type": "unsigned char",
+          "location": "DL"
+        },
+        {
+          "name": "mode",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "ECX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "28",
+        "-1",
+        "source",
+        "-1",
+        "address",
+        "0",
+        "mode",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00407860",
+      "name": "EmitStoreHalf",
+      "inputs": [
+        {
+          "name": "source",
+          "type": "unsigned char",
+          "location": "DL"
+        },
+        {
+          "name": "mode",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "ECX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "29",
+        "-1",
+        "source",
+        "-1",
+        "address",
+        "0",
+        "mode",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00407890",
+      "name": "EmitMoveImmediate",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "S4"
+        },
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "CL"
+        },
+        {
+          "name": "value",
+          "type": "unsigned",
+          "location": "EAX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "30",
+        "destination",
+        "-1",
+        "-1",
+        "0",
+        "value",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x004078C0",
+      "name": "EmitStoreImmediate",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "S4"
+        },
+        {
+          "name": "mode",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EDX"
+        },
+        {
+          "name": "value",
+          "type": "unsigned",
+          "location": "ECX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "31",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "value",
+        "mode",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x004078F0",
+      "name": "EmitLoadSigned",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "S4"
+        },
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "mode",
+          "type": "unsigned char",
+          "location": "CL"
+        },
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EDX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "66",
+        "destination",
+        "destination",
+        "-1",
+        "address",
+        "0",
+        "mode",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00407920",
+      "name": "EmitMoveSigned",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "S4"
+        },
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "CL"
+        },
+        {
+          "name": "source",
+          "type": "unsigned char",
+          "location": "AL"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "32",
+        "destination",
+        "source",
+        "-1",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00407950",
+      "name": "EmitLoadUnsigned",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "S4"
+        },
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "mode",
+          "type": "unsigned char",
+          "location": "CL"
+        },
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EDX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "67",
+        "destination",
+        "destination",
+        "-1",
+        "address",
+        "0",
+        "mode",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00407980",
+      "name": "EmitMoveUnsigned",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "S4"
+        },
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "CL"
+        },
+        {
+          "name": "source",
+          "type": "unsigned char",
+          "location": "AL"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "33",
+        "destination",
+        "source",
+        "-1",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x004079B0",
+      "name": "EmitMultiply",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "DL"
+        },
+        {
+          "name": "source",
+          "type": "unsigned char",
+          "location": "AL"
+        }
+      ],
+      "constructor": "AddInstructionTwoDestinations",
+      "arguments": [
+        "size",
+        "34",
+        "0",
+        "2",
+        "source",
+        "0",
+        "2",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x004079E0",
+      "name": "EmitNegate",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "CL"
+        },
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "AL"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "35",
+        "destination",
+        "destination",
+        "-1",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407A00",
+      "name": "EmitNot",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "CL"
+        },
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "AL"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "37",
+        "destination",
+        "destination",
+        "-1",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00407A20",
+      "name": "EmitOrAccumulator",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "CL"
+        },
+        {
+          "name": "value",
+          "type": "unsigned",
+          "location": "EAX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "68",
+        "0",
+        "0",
+        "-1",
+        "0",
+        "value",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407A40",
+      "name": "EmitOrMemory",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "S4"
+        },
+        {
+          "name": "mode",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EDX"
+        },
+        {
+          "name": "value",
+          "type": "unsigned",
+          "location": "ECX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "39",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "value",
+        "mode",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407A70",
+      "name": "EmitOr",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "S4"
+        },
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "source",
+          "type": "unsigned char",
+          "location": "CL"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "40",
+        "destination",
+        "source",
+        "destination",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407AA0",
+      "name": "EmitPop",
+      "inputs": [
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "AL"
+        }
+      ],
+      "constructor": "AddInstructionTwoDestinations",
+      "arguments": [
+        "1",
+        "41",
+        "destination",
+        "4",
+        "4",
+        "-1",
+        "-1",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00407AD0",
+      "name": "EmitPush",
+      "inputs": [
+        {
+          "name": "source",
+          "type": "unsigned char",
+          "location": "AL"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "42",
+        "-1",
+        "source",
+        "4",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00407B00",
+      "name": "EmitReadTimestamp",
+      "inputs": [],
+      "constructor": "AddInstructionTwoDestinations",
+      "arguments": [
+        "1",
+        "69",
+        "0",
+        "2",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00407B30",
+      "name": "EmitReturn",
+      "inputs": [],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "43",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00407B60",
+      "name": "EmitStoreFlags",
+      "inputs": [],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "44",
+        "-1",
+        "0",
+        "-1",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407B90",
+      "name": "EmitArithmeticShiftRight",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "S4"
+        },
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "count",
+          "type": "unsigned char",
+          "location": "CL"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "45",
+        "destination",
+        "destination",
+        "-1",
+        "0",
+        "count",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407BC0",
+      "name": "EmitArithmeticShiftRightCL",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "CL"
+        },
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "AL"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "46",
+        "destination",
+        "destination",
+        "1",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407BE0",
+      "name": "EmitSbb",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "S4"
+        },
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "source",
+          "type": "unsigned char",
+          "location": "CL"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "47",
+        "destination",
+        "destination",
+        "source",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "1",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407C10",
+      "name": "EmitSetMemory",
+      "inputs": [
+        {
+          "name": "condition",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "mode",
+          "type": "unsigned char",
+          "location": "CL"
+        },
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EDX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "48",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "0",
+        "mode",
+        "condition",
+        "-1",
+        "1",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00407C40",
+      "name": "EmitSet",
+      "inputs": [
+        {
+          "name": "condition",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "CL"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "49",
+        "destination",
+        "-1",
+        "-1",
+        "0",
+        "0",
+        "-1",
+        "condition",
+        "-1",
+        "1",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00407C70",
+      "name": "EmitShiftLeftCL",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "CL"
+        },
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "AL"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "51",
+        "destination",
+        "destination",
+        "1",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "1",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407C90",
+      "name": "EmitShiftLeft",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "S4"
+        },
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "count",
+          "type": "unsigned char",
+          "location": "CL"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "50",
+        "destination",
+        "destination",
+        "-1",
+        "0",
+        "count",
+        "-1",
+        "-1",
+        "-1",
+        "1",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407CC0",
+      "name": "EmitDoubleShiftLeftCL",
+      "inputs": [
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "source",
+          "type": "unsigned char",
+          "location": "CL"
+        }
+      ],
+      "constructor": "AddInstructionThreeSources",
+      "arguments": [
+        "1",
+        "52",
+        "destination",
+        "source",
+        "destination",
+        "1",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407CF0",
+      "name": "EmitDoubleShiftLeft",
+      "inputs": [
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "source",
+          "type": "unsigned char",
+          "location": "DL"
+        },
+        {
+          "name": "count",
+          "type": "unsigned char",
+          "location": "CL"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "53",
+        "destination",
+        "source",
+        "destination",
+        "0",
+        "count",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407D20",
+      "name": "EmitShiftRightCL",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "CL"
+        },
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "AL"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "55",
+        "destination",
+        "destination",
+        "1",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "1",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407D40",
+      "name": "EmitShiftRight",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "S4"
+        },
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "count",
+          "type": "unsigned char",
+          "location": "CL"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "54",
+        "destination",
+        "destination",
+        "-1",
+        "0",
+        "count",
+        "-1",
+        "-1",
+        "-1",
+        "1",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407D70",
+      "name": "EmitDoubleShiftRightCL",
+      "inputs": [
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "source",
+          "type": "unsigned char",
+          "location": "CL"
+        }
+      ],
+      "constructor": "AddInstructionThreeSources",
+      "arguments": [
+        "1",
+        "56",
+        "destination",
+        "source",
+        "destination",
+        "1",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407DA0",
+      "name": "EmitDoubleShiftRight",
+      "inputs": [
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "source",
+          "type": "unsigned char",
+          "location": "DL"
+        },
+        {
+          "name": "count",
+          "type": "unsigned char",
+          "location": "CL"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "57",
+        "destination",
+        "source",
+        "destination",
+        "0",
+        "count",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407DD0",
+      "name": "EmitSubtract",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "S4"
+        },
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "source",
+          "type": "unsigned char",
+          "location": "CL"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "58",
+        "destination",
+        "destination",
+        "source",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407E00",
+      "name": "EmitExchange",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "DL"
+        },
+        {
+          "name": "left",
+          "type": "unsigned char",
+          "location": "CL"
+        },
+        {
+          "name": "right",
+          "type": "unsigned char",
+          "location": "AL"
+        }
+      ],
+      "constructor": "AddInstructionTwoDestinations",
+      "arguments": [
+        "size",
+        "59",
+        "left",
+        "right",
+        "left",
+        "right",
+        "-1",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00407E30",
+      "name": "EmitTestMemory",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "S4"
+        },
+        {
+          "name": "mode",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EDX"
+        },
+        {
+          "name": "value",
+          "type": "unsigned",
+          "location": "ECX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "60",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "value",
+        "mode",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407E60",
+      "name": "EmitXorAccumulator",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "CL"
+        },
+        {
+          "name": "value",
+          "type": "unsigned",
+          "location": "EAX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "61",
+        "0",
+        "0",
+        "-1",
+        "0",
+        "value",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407E80",
+      "name": "EmitXor",
+      "inputs": [
+        {
+          "name": "size",
+          "type": "unsigned char",
+          "location": "S4"
+        },
+        {
+          "name": "destination",
+          "type": "unsigned char",
+          "location": "AL"
+        },
+        {
+          "name": "source",
+          "type": "unsigned char",
+          "location": "CL"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "size",
+        "62",
+        "destination",
+        "source",
+        "destination",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407EB0",
+      "name": "EmitFpuAbsolute",
+      "inputs": [],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "1000",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00407EE0",
+      "name": "EmitFpuAddSingle",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EAX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "1001",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "0",
+        "5",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00407F10",
+      "name": "EmitFpuAddDouble",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EAX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "1002",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "0",
+        "5",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00407F40",
+      "name": "EmitFpuChangeSign",
+      "inputs": [],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "1003",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00407F70",
+      "name": "EmitFpuClearExceptions",
+      "inputs": [],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "1004",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00407FA0",
+      "name": "EmitFpuCompareSingle",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EAX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "1005",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "0",
+        "5",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00407FD0",
+      "name": "EmitFpuCompareDouble",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EAX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "1006",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "0",
+        "5",
+        "-1",
+        "-1",
+        "0",
+        "1"
+      ]
+    },
+    {
+      "va": "0x00408000",
+      "name": "EmitFpuDivideSingle",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EAX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "1007",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "0",
+        "5",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00408030",
+      "name": "EmitFpuDivideDouble",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EAX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "1008",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "0",
+        "5",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00408060",
+      "name": "EmitFpuLoadInt32",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EAX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "1009",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "0",
+        "5",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00408090",
+      "name": "EmitFpuLoadInt64",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EAX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "1010",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "0",
+        "5",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x004080C0",
+      "name": "EmitFpuStoreInt32",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EAX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "1011",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "0",
+        "5",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x004080F0",
+      "name": "EmitFpuStoreInt64",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EAX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "1012",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "0",
+        "5",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00408120",
+      "name": "EmitFpuLoadSingle",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EAX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "1013",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "0",
+        "5",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00408150",
+      "name": "EmitFpuLoadDouble",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EAX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "1014",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "0",
+        "5",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00408180",
+      "name": "EmitFpuLoadControl",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EAX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "1015",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "0",
+        "5",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x004081B0",
+      "name": "EmitFpuMultiplySingle",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EAX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "1016",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "0",
+        "5",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x004081E0",
+      "name": "EmitFpuMultiplyDouble",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EAX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "1017",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "0",
+        "5",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00408210",
+      "name": "EmitFpuSquareRoot",
+      "inputs": [],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "1019",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00408240",
+      "name": "EmitFpuPopSingle",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EAX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "1023",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "0",
+        "5",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00408270",
+      "name": "EmitFpuPopDouble",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EAX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "1024",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "0",
+        "5",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x004082A0",
+      "name": "EmitFpuStoreStatus",
+      "inputs": [],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "1025",
+        "-1",
+        "-1",
+        "-1",
+        "0",
+        "0",
+        "-1",
+        "-1",
+        "-1",
+        "1",
+        "0"
+      ]
+    },
+    {
+      "va": "0x004082D0",
+      "name": "EmitFpuSubtractSingle",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EAX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "1026",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "0",
+        "5",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    },
+    {
+      "va": "0x00408300",
+      "name": "EmitFpuSubtractDouble",
+      "inputs": [
+        {
+          "name": "address",
+          "type": "unsigned",
+          "location": "EAX"
+        }
+      ],
+      "constructor": "AddInstruction",
+      "arguments": [
+        "1",
+        "1027",
+        "-1",
+        "-1",
+        "-1",
+        "address",
+        "0",
+        "5",
+        "-1",
+        "-1",
+        "0",
+        "0"
+      ]
+    }
+  ],
+  "instruction_record": {
+    "size": 64,
+    "fields": {
+      "code": 0,
+      "opcode": 4,
+      "destination": 8,
+      "destination2": 12,
+      "source": 16,
+      "source2": 20,
+      "source3": 24,
+      "immediate": 28,
+      "address": 32,
+      "condition": 36,
+      "mode": 40,
+      "target": 44,
+      "label": 48,
+      "guestPC": 52,
+      "size": 56,
+      "longJump": 57,
+      "readsFlags": 58,
+      "writesFlags": 59,
+      "reserved": 60
+    }
+  },
+  "observations": [
+    "BlockCode contains offsets relative to MainCode, not host pointers.",
+    "The three-source and two-destination constructors store opcode into target even though a target argument is passed. This observed behavior is preserved.",
+    "EmitAddImmediate tests its unsigned value against both <=127 and >=unsigned(-128); both comparisons are preserved.",
+    "The emitter generates x86 instruction bytes algorithmically. No target host-code bytes are embedded or patched.",
+    "Runtime signature tables contain 172 named records plus a null sentinel; replacement function pointers are all initially null.",
+    "SaveFunctionSignatures writes a .cod file under the application cod directory.",
+    "EmitFpuAbsolute at00407EB0 uses IR opcode1000 and emits D9 E1; EmitFpuChangeSign at00407F40 uses IR opcode1003 and emits D9 E0.",
+    "EmitAddMemory retains an unused addressSize argument between the original size and address stack arguments.",
+    "4202D0 file-pattern scanning belongs to PIF.cpp as FindCICInput;4202C0 sets shared ForcePIFSuccess."
+  ],
+  "shared_globals": [
+    {
+      "name": "OpcodeBreakpointCount",
+      "va": "0x01240E64",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail",
+      "owner": "shared globals / Plugins.h"
+    },
+    {
+      "name": "OpcodeBreakpoints",
+      "va": "0x02E4BCE8",
+      "type": "DynarecOpcodeBreakpoint[256]",
+      "extent": 2048,
+      "initializer": "zero-filled PE data tail",
+      "owner": "shared globals / Plugins.h"
+    },
+    {
+      "name": "CPUBreakpointCount",
+      "va": "0x0123FE50",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail",
+      "owner": "shared globals / Plugins.h"
+    },
+    {
+      "name": "CPUBreakpoints",
+      "va": "0x02E4C4F0",
+      "type": "DebugBreakpoint[100000]",
+      "extent": 1200000,
+      "initializer": "zero-filled PE data tail",
+      "owner": "shared globals / Plugins.h"
+    },
+    {
+      "name": "OpcodeStatsEnabled",
+      "va": "0x01240E6C",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail",
+      "owner": "shared globals / Plugins.h"
+    },
+    {
+      "name": "BlockStatsEnabled",
+      "va": "0x02F71474",
+      "type": "unsigned",
+      "extent": 4,
+      "initializer": "zero-filled PE data tail",
+      "owner": "shared globals / Plugins.h"
+    },
+    {
+      "name": "OpcodeStats",
+      "va": "0x0097AE68",
+      "type": "unsigned[544]",
+      "extent": 2176,
+      "initializer": "zero-filled PE data tail",
+      "owner": "shared globals / Plugins.h"
+    },
+    {
+      "name": "BlockExecutionCounts",
+      "va": "0x03343D90",
+      "type": "unsigned[2097152]",
+      "extent": 8388608,
+      "initializer": "zero-filled PE data tail",
+      "owner": "shared globals / Plugins.h"
+    },
+    {
+      "name": "UndoEnabled",
+      "va": "0x0087AE51",
+      "type": "bool",
+      "extent": 1,
+      "initializer": "zero-filled PE data tail",
+      "owner": "shared globals / Plugins.h"
+    }
+  ],
+  "delegated_sources": [
+    "analysis/nemu-dynarec-opcodes.json",
+    "analysis/nemu-dynarec-memory.json",
+    "analysis/nemu-dynarec-fpu.json"
+  ],
+  "validation": {
+    "translation_unit_compile": "Passed VC7 /O2 /Ob1 /ML /GL",
+    "integrated_build": "First complete real link passed; no /FORCE",
+    "host_byte_equality": false,
+    "emitter_semantics": {
+      "script": "scripts/verify_nemu_dynarec_emitter.py",
+      "command": "python3 scripts/verify_nemu_dynarec_emitter.py --artifact BUILD_DIRECTORY --report REPORT.json",
+      "cases": 514,
+      "mismatches": 0,
+      "scope": "Both complete PE images execute their real assembler in Unicorn. Generated bytes and side effects match across integer and FPU opcodes, both widths and buffers, branch widening, label fixups, and guest-address recording. This is behavior validation, not host byte equality."
+    },
+    "full_context_probe": {
+      "artifact": "/root/.ai-tmp/nemu-dynarec-complete.xjue4jd0",
+      "functions": 137,
+      "instruction_and_known_target_matches": 136,
+      "matched_span_bytes": 17040,
+      "raw_equal_function_spans": 95,
+      "target_mismatches": 0,
+      "unresolved_target_identities": 327,
+      "unverified_target_identities": 1078,
+      "not_matched": [
+        "SaveFunctionSignatures"
+      ],
+      "rebuilt_sha256": "4aa59280527307ed70297ec591537ba2f400372790008d259a4f65a183c2ad4f",
+      "rebuilt_map_sha256": "44b4f405713932194fb0bb984de6d7ab5c5008ed4401bde19cada0e64b4cf2d0",
+      "scope": "Diagnostic comparison of complete link spans, using genuine PE relocation records. It is not full image byte equality."
+    },
+    "watch_semantics": {
+      "EmitWatchCheck": {
+        "cases": 584,
+        "mismatches": 0
+      },
+      "EmitWatchHitCheck": {
+        "cases": 144,
+        "mismatches": 0
+      },
+      "scope": "Original machine-code execution compared with the reconstructed helper emitter traces; count mutation cases verify the do/while entry behavior."
+    },
+    "source_recovery_notes": [
+      "Direct IR array-field assignments restore the original constructor ABIs; local-reference rewrites changed whole-program register allocation.",
+      "Binary emitter source/destination formal order is supported by both wrapper instructions and caller argument preparation.",
+      "AssembleInstructions uses the shared output cursor while patching labels, restores it afterward, and retries with widened branches. Its complete 4064-byte span matches after relocation normalization.",
+      "TrackInstructionChanges switch ordering and fallthroughs reproduce its 816-byte span, including inline tables and alignment.",
+      "Valid RecompileSignedBranch callers supply condition values 12..15; both local condition fields are initialized in those four cases. No invented default initialization is present.",
+      "RecompileSignedBranch duplicates completion statements in its two source branches; VC7 merges the tails to reproduce the observed register allocation.",
+      "CompileBlock selects a ROM-cache byte offset before converting it to a word pointer; both cache read and write paths use the same source structure."
+    ],
+    "translator_regression": {
+      "script": "scripts/verify_nemu_dynarec_ir.py",
+      "cases": 1361,
+      "mismatches": 0,
+      "translators": 83,
+      "dispatch_targets": 352,
+      "dispatch_mismatches": 0
+    }
+  }
+}

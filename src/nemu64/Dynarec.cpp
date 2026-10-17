@@ -1222,136 +1222,6 @@ widenJump:
         Dynarec_MainCodeUsed = Dynarec_CodePointer - Dynarec_MainCode;
 }
 
-#include "DynarecSignatures.inc"
-
-int RuntimeLibraryEnabled;
-int RuntimeReplacementCount;
-RuntimeReplacement RuntimeReplacements[512];
-
-unsigned HashSignatureInstruction(unsigned hash, unsigned signature,
-    unsigned offset, const unsigned *instruction)
-{
-    FunctionRelocations &relocations = RuntimeRelocations[signature];
-    bool ordinary = true;
-    for (int i = 0; i < relocations.count; ++i) {
-        if (relocations.offsets[i] == offset) {
-            unsigned word = *instruction;
-            unsigned opcode = word >> 26;
-            ordinary = false;
-            if (opcode == 3 || opcode == 2)
-                hash ^= opcode;
-            else if (opcode == 15) {
-                unsigned immediate = word & 0xffff;
-                if (immediate >= 0xa400 && immediate <= 0xafff)
-                    hash += word;
-                else
-                    hash ^= word >> 16;
-            } else if (opcode == 13 || opcode == 35)
-                hash ^= word >> 16;
-            else
-                hash += word >> 16;
-        }
-    }
-    if (ordinary) {
-        if (*instruction)
-            hash += *instruction;
-        else
-            hash ^= 0xdeadbeef;
-    }
-    return hash;
-}
-
-void SaveFunctionSignatures(unsigned *start)
-{
-    char filename[260];
-    char status[256];
-    unsigned *lastMatch = 0;
-    if (start < (unsigned *)RDRAM)
-        start = (unsigned *)RDRAM;
-    strcpy(filename, ApplicationDirectory);
-    if (filename[strlen(filename) - 1] == '\\')
-        strcat(filename, "cod\\");
-    else
-        strcat(filename, "\\cod\\");
-    strcat(filename, CurrentRom.FileName);
-    ReplaceExtension(filename, ".cod");
-    FILE *file = fopen(filename, "wb");
-    if (!file)
-        return;
-    unsigned *candidate = start;
-    unsigned signature = 0;
-    for (;;) {
-        FunctionSignature &entry = RuntimeSignatures[signature];
-        if (!entry.name)
-            break;
-        if (!*candidate) {
-            do {
-                ++candidate;
-                if (candidate >= start + 0x40000)
-                    break;
-            } while (!*candidate);
-        }
-        int length = entry.length;
-        if (length > 256)
-            length = 256;
-        if ((unsigned char *)candidate + length < (unsigned char *)(start + 0x40000)) {
-            unsigned hash = 0;
-            unsigned *instruction = candidate;
-            if ((*candidate >> 16) == entry.firstWord) {
-                for (int offset = 0; offset < length; offset += 4)
-                    hash = HashSignatureInstruction(hash, signature, offset, instruction++);
-            }
-            if (hash == entry.hash) {
-                fprintf(file, "0x%X,%s\r\n", (unsigned)candidate - (unsigned)RDRAM - 0x80000000,
-                    entry.name);
-                fflush(file);
-                if (lastMatch) lastMatch = instruction;
-                else lastMatch = start;
-                unsigned address = ((unsigned)candidate - (unsigned)RDRAM) | 0x80000000;
-                RuntimeReplacements[signature].function = entry.replacement;
-                RuntimeReplacements[signature].address = address;
-                sprintf(status, "Searching... 0x%X, %s", address, entry.name);
-                SetStatusText(0, status);
-                candidate = start;
-                RuntimeReplacementCount = ++signature;
-                if (signature == 512)
-                    break;
-            } else
-                ++candidate;
-        } else {
-            RuntimeReplacements[signature].address = 0;
-            RuntimeReplacements[signature].function = 0;
-            RuntimeReplacementCount = ++signature;
-            candidate = start;
-        }
-    }
-    fclose(file);
-    SetStatusText(0, "Nemulating...");
-}
-
-void ResetRuntimeReplacements()
-{
-    RuntimeLibraryEnabled = 1;
-    for (int i = 0; i < 512; ++i) {
-        RuntimeReplacements[i].address = 0;
-        RuntimeReplacements[i].function = 0;
-    }
-}
-
-void (*FindRuntimeReplacement(unsigned address))()
-{
-    for (int i = 0; i < RuntimeReplacementCount; ++i)
-        if ((RuntimeReplacements[i].address & 0xffffff) == (address & 0xffffff))
-            return RuntimeReplacements[i].function;
-    return 0;
-}
-
-void EnablePIFSuccess()
-{
-    ForcePIFSuccess = 1;
-}
-
-
 void DynarecNoOperation()
 {
 }
@@ -1475,8 +1345,10 @@ void EmitWatchHitCheck()
         EmitLoad(1, X86_EAX, 5, (unsigned)&CPU_ActionFlags);
         EmitOrAccumulator(1, 0x10000);
         EmitStore(1, X86_EAX, 5, (unsigned)&CPU_ActionFlags);
-        EmitStoreImmediate(1, 5, (unsigned)&CPU_PC,
-            Dynarec_DelaySlot ? CPU_LastPC - 4 : CPU_LastPC);
+        if (Dynarec_DelaySlot)
+            EmitStoreImmediate(1, 5, (unsigned)&CPU_PC, CPU_LastPC - 4);
+        else
+            EmitStoreImmediate(1, 5, (unsigned)&CPU_PC, CPU_LastPC);
         FinishInstruction();
         EmitReturn();
         EmitLabel(skip);
@@ -1490,15 +1362,18 @@ void EmitWatchCheck(unsigned flags, unsigned char doubleword)
     EmitPush(X86_EBX);
     EmitMove(1, X86_EAX, X86_EBX);
     EmitAndImmediate(1, X86_EBX, 0xfffffffc);
-    for (unsigned i = 0; i < MemoryBreakpointCount; ++i) {
+    unsigned i = 0;
+    do {
         if (MemoryBreakpoints[i].Access & flags) {
             EmitCompareImmediate(1, X86_EBX, MemoryBreakpoints[i].Address);
             unsigned skip = EmitConditionalJump(5);
             EmitLoad(1, X86_EAX, 5, (unsigned)&CPU_ActionFlags);
             EmitOrAccumulator(1, 0x10000);
             EmitStore(1, X86_EAX, 5, (unsigned)&CPU_ActionFlags);
-            EmitStoreImmediate(1, 5, (unsigned)&CPU_PC,
-                Dynarec_DelaySlot ? CPU_LastPC - 4 : CPU_LastPC);
+            if (Dynarec_DelaySlot)
+                EmitStoreImmediate(1, 5, (unsigned)&CPU_PC, CPU_LastPC - 4);
+            else
+                EmitStoreImmediate(1, 5, (unsigned)&CPU_PC, CPU_LastPC);
             FinishInstruction();
             EmitPop(X86_EBX);
             EmitReturn();
@@ -1509,15 +1384,17 @@ void EmitWatchCheck(unsigned flags, unsigned char doubleword)
                 EmitLoad(1, X86_EAX, 5, (unsigned)&CPU_ActionFlags);
                 EmitOrAccumulator(1, 0x10000);
                 EmitStore(1, X86_EAX, 5, (unsigned)&CPU_ActionFlags);
-                EmitStoreImmediate(1, 5, (unsigned)&CPU_PC,
-                    Dynarec_DelaySlot ? CPU_LastPC - 4 : CPU_LastPC);
+                if (Dynarec_DelaySlot)
+                    EmitStoreImmediate(1, 5, (unsigned)&CPU_PC, CPU_LastPC - 4);
+                else
+                    EmitStoreImmediate(1, 5, (unsigned)&CPU_PC, CPU_LastPC);
                 FinishInstruction();
                 EmitPop(X86_EBX);
                 EmitReturn();
                 EmitLabel(skip);
             }
         }
-    }
+    } while (++i < MemoryBreakpointCount);
     EmitPop(X86_EBX);
 }
 
@@ -1611,10 +1488,13 @@ void EmitTranslateAddress(unsigned char writing)
         EmitCompareImmediate(1, X86_EAX, 0x800001);
         done = EmitConditionalJump(5);
         EmitOrMemory(1, 5, (unsigned)&CPU_ActionFlags, 0x40000);
-        EmitStoreImmediate(1, 5, (unsigned)&CPU_PC,
-            Dynarec_DelaySlot ? CPU_LastPC - 4 : CPU_LastPC);
-        EmitStoreImmediate(1, 5, (unsigned)&CPU_TLBExceptionDelay,
-            Dynarec_DelaySlot ? 1 : 0);
+        if (Dynarec_DelaySlot) {
+            EmitStoreImmediate(1, 5, (unsigned)&CPU_PC, CPU_LastPC - 4);
+            EmitStoreImmediate(1, 5, (unsigned)&CPU_TLBExceptionDelay, 1);
+        } else {
+            EmitStoreImmediate(1, 5, (unsigned)&CPU_PC, CPU_LastPC);
+            EmitStoreImmediate(1, 5, (unsigned)&CPU_TLBExceptionDelay, 0);
+        }
         EmitReturn();
         EmitLabel(direct);
     }
@@ -1800,9 +1680,10 @@ void TrackInstructionChanges()
             break;
         case 9:
             TrackGPR((unsigned char)((CPU_Instruction >> 11) & 31));
+        case 8:
             TrackProgramCounter();
             break;
-        case 8: case 12: case 13: case 15: case 48: case 49:
+        case 12: case 13: case 15: case 48: case 49:
         case 50: case 51: case 52: case 54:
             TrackProgramCounter();
             break;
@@ -1812,8 +1693,6 @@ void TrackInstructionChanges()
         case 24: case 25: case 26: case 27: case 28: case 29:
         case 30: case 31:
             TrackRegister64(&CPU_LO);
-            TrackRegister64(&CPU_HI);
-            break;
         case 17:
             TrackRegister64(&CPU_HI);
             break;
@@ -1824,19 +1703,6 @@ void TrackInstructionChanges()
     case 1:
         TrackProgramCounter();
         break;
-    case 3:
-        TrackGPR(31);
-        TrackProgramCounter();
-        break;
-    case 2: case 4: case 5: case 6: case 7:
-    case 20: case 21: case 22: case 23:
-        TrackProgramCounter();
-        break;
-    case 8: case 9: case 10: case 11: case 12: case 13: case 14: case 15:
-    case 24: case 25: case 26: case 27: case 32: case 33: case 34: case 35:
-    case 36: case 37: case 38: case 39: case 55:
-        TrackGPR((unsigned char)((CPU_Instruction >> 16) & 31));
-        break;
     case 16:
         switch ((CPU_Instruction >> 21) & 31) {
         case 0:
@@ -1846,7 +1712,7 @@ void TrackInstructionChanges()
             TrackRegister32(&CPU_COP0[(CPU_Instruction >> 11) & 31]);
             break;
         case 16:
-            if ((CPU_Instruction & 63) != 24)
+            if (((unsigned char)CPU_Instruction & 63) != 24)
                 return;
             TrackProgramCounter();
             break;
@@ -1887,12 +1753,23 @@ void TrackInstructionChanges()
             return;
         }
         break;
-    case 40: case 41: case 42: case 43: case 44: case 45: case 46:
-    case 57: case 61: case 63:
-        TrackMemory();
+    case 8: case 9: case 10: case 11: case 12: case 13: case 14: case 15:
+    case 24: case 25: case 26: case 27: case 32: case 33: case 34: case 35:
+    case 36: case 37: case 38: case 39: case 55:
+        TrackGPR((unsigned char)((CPU_Instruction >> 16) & 31));
+        break;
+    case 3:
+        TrackGPR(31);
+    case 2: case 4: case 5: case 6: case 7:
+    case 20: case 21: case 22: case 23:
+        TrackProgramCounter();
         break;
     case 49: case 53:
         TrackFPR((CPU_Instruction >> 16) & 31);
+        break;
+    case 40: case 41: case 42: case 43: case 44: case 45: case 46:
+    case 57: case 61: case 63:
+        TrackMemory();
         break;
     }
     if (Dynarec_TrackingLoaded) {
@@ -1924,11 +1801,17 @@ void RecompileEqualityBranch(unsigned char likely, unsigned char equal)
     } else {
         if (Dynarec_ResetRequired) {
             EmitCall((unsigned)ResetRecompiler);
-            EmitStoreImmediate(1, 5, (unsigned)&CPU_PC, CPU_LastPC + (likely ? 8 : 4));
+            if (likely)
+                EmitStoreImmediate(1, 5, (unsigned)&CPU_PC, CPU_LastPC + 8);
+            else
+                EmitStoreImmediate(1, 5, (unsigned)&CPU_PC, CPU_LastPC + 4);
             FinishInstruction();
             EmitReturn();
         }
-        EmitBranchTarget(CPU_LastPC + (likely ? 8 : 4));
+        if (likely)
+            EmitBranchTarget(CPU_LastPC + 8);
+        else
+            EmitBranchTarget(CPU_LastPC + 4);
         EmitLabel(highDifferent);
         EmitLabel(lowDifferent);
         RecompileDelaySlot();
@@ -1942,12 +1825,12 @@ void RecompileSignedBranch(unsigned char condition, unsigned char likely, unsign
     if ((unsigned short)CPU_Instruction == 0xffff)
         Dynarec_BlockInstructionCount += 100;
     unsigned char lowCondition;
-    unsigned char testLow = link;
+    unsigned char testLow;
     switch (condition) {
+    case 15: lowCondition = 7; testLow = 1; break;
     case 12: lowCondition = 2; testLow = 0; break;
     case 13: lowCondition = 3; testLow = 0; break;
     case 14: lowCondition = 6; testLow = 1; break;
-    case 15: lowCondition = 7; testLow = 1; break;
     }
     if (link)
         EmitLinkRegister(31);
@@ -1968,14 +1851,21 @@ void RecompileSignedBranch(unsigned char condition, unsigned char likely, unsign
         else
             EmitBranchTarget(CPU_LastPC + 4);
         EmitLabel(lowTaken);
+        EmitLabel(taken);
+        RecompileDelaySlot();
+        EmitBranchTarget(CPU_LastPC + (short)CPU_Instruction * 4 + 4);
+        Dynarec_BlockFinished = 1;
     } else {
         taken = EmitConditionalJump(condition);
-        EmitBranchTarget(CPU_LastPC + (likely ? 8 : 4));
+        if (likely)
+            EmitBranchTarget(CPU_LastPC + 8);
+        else
+            EmitBranchTarget(CPU_LastPC + 4);
+        EmitLabel(taken);
+        RecompileDelaySlot();
+        EmitBranchTarget(CPU_LastPC + (short)CPU_Instruction * 4 + 4);
+        Dynarec_BlockFinished = 1;
     }
-    EmitLabel(taken);
-    RecompileDelaySlot();
-    EmitBranchTarget(CPU_LastPC + (short)CPU_Instruction * 4 + 4);
-    Dynarec_BlockFinished = 1;
 }
 
 void RecompileDelaySlot()
@@ -1984,8 +1874,8 @@ void RecompileDelaySlot()
         return;
     unsigned savedInstruction = CPU_Instruction;
     unsigned savedPC = CPU_LastPC;
-    CPU_LastPC += 4;
     Dynarec_DelaySlot = 1;
+    CPU_LastPC += 4;
     unsigned physical = (CPU_LastPC & 0xc0000000) == 0x80000000
         ? CPU_LastPC & 0x1fffffff : TranslateTLB(CPU_LastPC, 0);
     if (physical == 0x800001) {
@@ -2022,10 +1912,10 @@ void RecompileDelaySlot()
             EmitAddMemory(1, 0, 5, (unsigned)&OpcodeStats[CPU_Instruction >> 26], 1);
         Dynarec_MainDispatch[CPU_Instruction >> 26]();
     }
-    Dynarec_DelaySlot = 0;
     ++Dynarec_BlockInstructionCount;
     CPU_LastPC = savedPC;
     CPU_Instruction = savedInstruction;
+    Dynarec_DelaySlot = 0;
 }
 
 void CompileInstructions()
@@ -2082,12 +1972,14 @@ void CompileBlock()
         ? (unsigned)CPU_PC & 0x1fffffff : TranslateTLB(CPU_PC, 0);
     Dynarec_PageAddress = physical & 0xfffff000;
     if (Dynarec_PageAddress < RDRAMSize)
-        Dynarec_CompiledPages[physical >> 12] = 1;
+        Dynarec_CompiledPages[Dynarec_PageAddress >> 12] = 1;
     if (ROMCacheEnabled && Dynarec_PageAddress >= 0x10000000 && Dynarec_PageAddress <= 0x1fbfffff) {
-        unsigned offset = Dynarec_PageAddress - 0x10000000;
-        if (offset > 0x03ffffff)
+        unsigned offset;
+        if (Dynarec_PageAddress - 0x10000000 >= 0x04000000)
             offset = Dynarec_PageAddress - 0x13fcb4d0;
-        memcpy(Dynarec_PageCode, ROMCache + offset, 4096);
+        else
+            offset = Dynarec_PageAddress - 0x10000000;
+        memcpy(Dynarec_PageCode, &((unsigned *)ROMCache)[offset >> 2], 4096);
     } else {
         switch (Dynarec_Mode) {
         case 0: case 3: case 4: case 5:
@@ -2098,12 +1990,14 @@ void CompileBlock()
             break;
         case 1: case 2:
             if (Dynarec_PageAddress < RDRAMSize) {
+                unsigned address = Dynarec_PageAddress;
                 unsigned end = Dynarec_PageAddress + 0x1000;
-                unsigned index = 0;
-                for (unsigned address = Dynarec_PageAddress; address < end; address += 4) {
+                for (; address < end; address += 4) {
                     unsigned instruction = *(unsigned *)(RDRAM + address);
-                    Dynarec_PageCode[index++] = (instruction & 0xfc000000) == 0xec000000
-                        ? instruction & 0x03ffffff : 0;
+                    if ((instruction & 0xfc000000) == 0xec000000)
+                        Dynarec_PageCode[(address - Dynarec_PageAddress) >> 2] = instruction & 0x03ffffff;
+                    else
+                        Dynarec_PageCode[(address - Dynarec_PageAddress) >> 2] = 0;
                 }
             } else
                 memset(Dynarec_PageCode, 0, 4096);
@@ -2121,23 +2015,23 @@ void CompileBlock()
         if (16 - (Dynarec_MainCodeUsed & 15) < 8)
             Dynarec_MainCodeUsed += 16 - (Dynarec_MainCodeUsed & 15);
         CPU_LastPC = Dynarec_PendingAddresses[--Dynarec_PendingCount];
-        physical = (CPU_LastPC & 0xc0000000) == 0x80000000
+        Dynarec_PhysicalPC = (CPU_LastPC & 0xc0000000) == 0x80000000
             ? CPU_LastPC & 0x1fffffff : TranslateTLB(CPU_LastPC, 0);
-        Dynarec_PhysicalPC = physical;
-        Dynarec_BlockStart = physical;
+        Dynarec_BlockStart = Dynarec_PhysicalPC;
         Dynarec_BlockFinished = 0;
         Dynarec_BlockInstructionCount = 0;
         if (firstOffset == unsigned(-1)) {
-            firstOffset = Dynarec_PageCode[(physical >> 2) & 0x3ff];
-            if (firstOffset) {
+            unsigned existingOffset = Dynarec_PageCode[(Dynarec_PhysicalPC >> 2) & 0x3ff];
+            if (existingOffset) {
+                firstOffset = existingOffset;
                 Dynarec_BlockFinished = 1;
                 continue;
             }
-            Dynarec_PageCode[(physical - Dynarec_PageAddress) >> 2] = Dynarec_MainCodeUsed;
             firstOffset = Dynarec_MainCodeUsed;
+            Dynarec_PageCode[(Dynarec_PhysicalPC - Dynarec_PageAddress) >> 2] = Dynarec_MainCodeUsed;
         } else
-            Dynarec_PageCode[(physical - Dynarec_PageAddress) >> 2] = Dynarec_MainCodeUsed;
-        if (BlockStatsEnabled && physical < RDRAMSize) {
+            Dynarec_PageCode[(Dynarec_PhysicalPC - Dynarec_PageAddress) >> 2] = Dynarec_MainCodeUsed;
+        if (BlockStatsEnabled && Dynarec_PhysicalPC < RDRAMSize) {
             BeginBlockTiming(&Dynarec_ProfileStartLow, &Dynarec_ProfileStartHigh);
             EmitAddMemory(1, 1, 5, (unsigned)&BlockExecutionCounts[Dynarec_BlockStart >> 2], 1);
         }
@@ -2173,11 +2067,14 @@ void CompileBlock()
     if (Dynarec_MainCodeUsed > 0x900000)
         CPU_ActionFlags |= 0x400;
     if (ROMCacheEnabled && Dynarec_PageAddress >= 0x10000000 && Dynarec_PageAddress <= 0x1fbfffff) {
-        unsigned offset = Dynarec_PageAddress - 0x10000000;
-        if (offset >= 0x04000000)
+        unsigned offset;
+        if (Dynarec_PageAddress - 0x10000000 >= 0x04000000)
             offset = Dynarec_PageAddress - 0x13fcb4d0;
-        memcpy(ROMCache + (offset & ~3), Dynarec_PageCode, 4096);
-    } else if ((Dynarec_Mode == 0 || (Dynarec_Mode >= 3 && Dynarec_Mode <= 5)) &&
+        else
+            offset = Dynarec_PageAddress - 0x10000000;
+        unsigned *destination = &((unsigned *)ROMCache)[offset >> 2];
+        memcpy(destination, Dynarec_PageCode, 4096);
+    } else if ((Dynarec_Mode == 0 || (Dynarec_Mode > 2 && Dynarec_Mode <= 5)) &&
         Dynarec_PageAddress < RDRAMSize)
         memcpy(&Dynarec_BlockCode[Dynarec_PageAddress >> 2], Dynarec_PageCode, 4096);
     Dynarec_EntryPoint = Dynarec_MainCode + firstOffset;
