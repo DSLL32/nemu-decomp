@@ -57,6 +57,14 @@
       "hypothesis": "Could Rich identify only the compiler frontend while a different C2 backend explains remaining output?",
       "result": "C2 itself constructs the LTCG C++ product/build identifier using hardcoded build 9466. All four local VC7 C2 copies are identical. No provenance-backed distinct backend was found; Rich still does not prove original binary identity.",
       "source_promoted": false
+    },
+    {
+      "name": "State and existing callers share float conversion helper",
+      "evidence": "/root/.ai-tmp/nemu-state-float-helper.qm3ui2d1/report.json",
+      "evidence_sha256": "adeb0a16fae12c97e50ed08c4f668fe3cd021b3419c07813313981abb8fc41c3",
+      "hypothesis": "Use one ordinary inline unsigned-to-float helper at the three existing single-precision sites and the unsigned length conversion inside WriteStateChunk double arithmetic.",
+      "result": "WriteStateChunk changes FADD from a qword to a dword memory operand. Its formerly exact body changes by four bytes; the single-precision constant moves to43e020 instead of43e01c and the double2^32 constant disappears. Full link changes42 code bytes and3398 readonly bytes against the frozen control. Both represented correction constants are exactly2^32; this audit proves a code mismatch, not a runtime precision discrepancy.",
+      "source_promoted": false
     }
   ],
   "limitations": "The RSP probes are complete subsystem fixtures, not full executable builds. They compare every existing function and relocation field set, with unknown target identities still explicitly unresolved. Same span, fewer differing positions, or behavior equivalence alone does not establish reconstruction. Detailed frozen inputs and commands remain in the referenced scratch reports; this file is an audit index, not a replacement for those inputs."
