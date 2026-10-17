@@ -62,6 +62,27 @@
         }
       ],
       "observation": "Final fixture disables host ASLR with setarch i386 -R; both complete transcripts and all resulting fixture files match."
+    },
+    {
+      "report": "/root/.ai-tmp/nemu-startup-probe.7qea49ll/comparison.json",
+      "report_sha256": "1f8ff74aaa98ff12b4d64ec26206b8cfe05e6c4f606a465534531b236389e735",
+      "passed": true,
+      "runs": [
+        {
+          "name": "original",
+          "exe_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+          "completed": true,
+          "exit_code": 0
+        },
+        {
+          "name": "rebuilt",
+          "exe_sha256": "bb842ed8647642a47c9c840c326f2cbaa8fc8bfcf184d809f8201e85789ea6d4",
+          "completed": true,
+          "exit_code": 0
+        }
+      ],
+      "observation": "Latest fixed canonical executable rerun in a fresh disposable Wine prefix, restored identically before each run. Both 14,973-byte / 230-line transcripts match exactly, both stderr files are empty, all 14 resulting fixture files match, and both applications exit normally. All 110 candidate source-snapshot entries were hash-verified. Startup/UI only; no ROM or gameplay coverage.",
+      "candidate_snapshot_manifest_sha256": "459ba03be8e686929daefd2c7d157a5012f8fd225cc03e2bc25af72f1e8f9b66"
     }
   ],
   "scope": "Behavioral startup/UI smoke only; no claim of whole-program equivalence or byte equality."
