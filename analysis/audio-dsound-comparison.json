@@ -10,7 +10,7 @@
     "/c"
   ],
   "work": "/root/.ai-tmp/audio-dsound.6t4_1qa3",
-  "artifact": "/root/.ai-tmp/audio-dsound.6t4_1qa3/run.4pnjw77c",
+  "artifact": "/root/.ai-tmp/audio-dsound.6t4_1qa3/run.q_19y_1j",
   "commands": [
     [
       "python3",
@@ -22,8 +22,8 @@
       "/Ob1",
       "/MT",
       "/c",
-      "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.4pnjw77c\\DirectSound.obj",
-      "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.4pnjw77c\\source\\DirectSound.c"
+      "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.q_19y_1j\\DirectSound.obj",
+      "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.q_19y_1j\\source\\DirectSound.c"
     ],
     [
       "python3",
@@ -35,8 +35,8 @@
       "/Ob1",
       "/MT",
       "/c",
-      "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.4pnjw77c\\AudioLog.obj",
-      "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.4pnjw77c\\source\\AudioLog.c"
+      "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.q_19y_1j\\AudioLog.obj",
+      "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.q_19y_1j\\source\\AudioLog.c"
     ],
     [
       "python3",
@@ -45,12 +45,12 @@
       "rc",
       "/l",
       "0x409",
-      "/foZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.4pnjw77c\\Audio.res",
-      "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.4pnjw77c\\source\\Audio.rc"
+      "/foZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.q_19y_1j\\Audio.res",
+      "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.q_19y_1j\\source\\Audio.rc"
     ]
   ],
   "source_sha256": {
-    "src/audio/ahle_ds/DirectSound.c": "04db0271fe4fb71345e088917946672b2a7ae87b3971c66f33fb957aa05d325f",
+    "src/audio/ahle_ds/DirectSound.c": "33b9d09733353eb21f6a3536981892e5ba93e488a405e37a81745938aa89c8af",
     "src/audio/ahle_ds/AudioLog.c": "84a6f797caaf244d44300550ed13225276bf1c45bf6fb3193be9047dc01226f0",
     "src/audio/ahle_ds/DirectSound.h": "d16ad18d42c6d3081e7fc1f99caa62638965c0e6a971fab987b43f141679fb38",
     "src/audio/ahle_ds/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
@@ -64,8 +64,8 @@
   },
   "objects": [
     {
-      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/run.4pnjw77c/DirectSound.obj",
-      "sha256": "15861b6c5d1ca0c7321eb501e824b89ecf15115df4ffe20eb1797833868c7c81",
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/run.q_19y_1j/DirectSound.obj",
+      "sha256": "7da1333ceb50476ee26b92558f3455a3879f01aa704f660c8bc52fb59c1eda3e",
       "original": "/root/nemu-decomp/master/Plugin/audio.dll",
       "functions": [
         {
@@ -5031,14 +5031,16 @@
             {
               "offset": 16,
               "type": "REL32",
-              "symbol": "__itoa",
+              "symbol": "_itoa",
               "addend": 0,
               "original_target_va": 268622997,
               "original_target_symbols": [
-                "__itoa"
+                "__itoa",
+                "_itoa"
               ],
               "expected_target_va": 268622997,
               "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "The archive member defines _itoa with IMAGE_SYM_CLASS_WEAK_EXTERNAL105 and auxiliary fallback symbol index1 (__itoa), search characteristic3 (SEARCH_ALIAS). The __itoa body at0x1002dc95 is independently attributed in analysis/audio-libraries.json.",
               "status": "resolved",
               "target_equal": true,
               "target_identity_verified": true
@@ -5147,14 +5149,16 @@
             {
               "offset": 16,
               "type": "REL32",
-              "symbol": "__itoa",
+              "symbol": "_itoa",
               "addend": 0,
               "original_target_va": 268622997,
               "original_target_symbols": [
-                "__itoa"
+                "__itoa",
+                "_itoa"
               ],
               "expected_target_va": 268622997,
               "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "The archive member defines _itoa with IMAGE_SYM_CLASS_WEAK_EXTERNAL105 and auxiliary fallback symbol index1 (__itoa), search characteristic3 (SEARCH_ALIAS). The __itoa body at0x1002dc95 is independently attributed in analysis/audio-libraries.json.",
               "status": "resolved",
               "target_equal": true,
               "target_identity_verified": true
@@ -14803,8 +14807,8 @@
       "unresolved_targets": 18
     },
     {
-      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/run.4pnjw77c/AudioLog.obj",
-      "sha256": "15d82bfce2ed30c35981edbac0964826e33e3ba83cf880e253e168f4bd680420",
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/run.q_19y_1j/AudioLog.obj",
+      "sha256": "1a39a64ba5f43a9055bd8bbed0751b7c43a1f5709d831af8a70a53e42d3fb1bb",
       "original": "/root/nemu-decomp/master/Plugin/audio.dll",
       "functions": [
         {

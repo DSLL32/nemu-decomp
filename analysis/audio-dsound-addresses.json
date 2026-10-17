@@ -1976,6 +1976,22 @@
       "va": 269389596,
       "address_basis": "observed_operand_inference",
       "address_evidence": "Consistent accesses from reconstructed native API/CPU-feature routines; private identifier inferred"
+    },
+    {
+      "name": "_itoa",
+      "va": 268622997,
+      "size": 42,
+      "address_basis": "independent_library_mapping",
+      "source": "Tracked VC7 oldnames.lib itoa.obj weak-external alias to independently matched CRT __itoa.",
+      "address_evidence": "The archive member defines _itoa with IMAGE_SYM_CLASS_WEAK_EXTERNAL105 and auxiliary fallback symbol index1 (__itoa), search characteristic3 (SEARCH_ALIAS). The __itoa body at0x1002dc95 is independently attributed in analysis/audio-libraries.json.",
+      "library": "toolchains/vc7/lib/oldnames.lib",
+      "library_sha256": "61d891d7f53dee0b38d22d6dce04374ce85e101a5a1b6c981269274979f073c5",
+      "archive_member": "build\\intel\\st_obj\\oldnames\\itoa.obj",
+      "archive_offset": 51278,
+      "member_bytes": 136,
+      "member_sha256": "09ed16ef1706c489d115d8b58d9f3330f020b41468a03464c615458cc0f86f84",
+      "comp_id": "002723ca",
+      "weak_alias_target": "__itoa"
     }
   ]
 }

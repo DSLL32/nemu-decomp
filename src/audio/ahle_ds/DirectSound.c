@@ -481,7 +481,7 @@ BOOL ReadIniString(char *section, char *key, char *fallback, char *value, char *
 int ReadIniInt(char *section, char *key, int fallback, char *file)
 {
     char defaultText[32], value[32];
-    _itoa(fallback, defaultText, 10);
+    itoa(fallback, defaultText, 10);
     GetPrivateProfileString(section, key, defaultText, value, 256, file);
     return atoi(value);
 }
@@ -492,7 +492,7 @@ BOOL WriteIniString(char *section, char *key, char *value, char *file)
 BOOL WriteIniInt(char *section, char *key, int value, char *file)
 {
     char text[32];
-    _itoa(value, text, 10);
+    itoa(value, text, 10);
     return WritePrivateProfileString(section, key, text, file);
 }
 char AudioIniFile[MAX_PATH];

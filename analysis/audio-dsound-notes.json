@@ -86,5 +86,11 @@
     "AudioLog": "Genuine transform.h array at0x100393c8; no following initialized application data.",
     "checked": "Complete native initialized contributions match all2220 DirectSound and2176 AudioLog bytes after resolving the two independently identified literal-pointer relocations for comparison. All named data offsets match. This is an attributed diagnostic, not proof of final linker placement or whole-DLL equality."
   },
-  "storage_recovery": "See analysis/audio-dsound-storage.json. Native explicit zero initialization preserves57 matches and recovers the first seven strong-BSS offsets;48 bytes of later DS state and a four-byte DS/Log boundary interval remain unexplained. Five shared storage definitions were coordinated into DirectSound. No gap-filling objects were introduced."
+  "storage_recovery": "See analysis/audio-dsound-storage.json. Native explicit zero initialization preserves57 matches and recovers the first seven strong-BSS offsets;48 bytes of later DS state and a four-byte DS/Log boundary interval remain unexplained. Five shared storage definitions were coordinated into DirectSound. No gap-filling objects were introduced.",
+  "legacy_itoa_spelling": {
+    "source_change": "Both integer-to-string calls use itoa, whose COFF _itoa reference naturally selects oldnames.lib itoa.obj and resolves its weak alias to __itoa.",
+    "independent_provenance": "Tracked136-byte oldnames member has comp.id002723ca and SEARCH_ALIAS fallback to __itoa; full member/library hashes and original CRT body attribution are recorded in audio-dsound-addresses.json.",
+    "whole_link_evidence": "/root/.ai-tmp/nemu-audio-recovery/link-storage.i405gw6a/report.json",
+    "whole_link_finding": "Together with the integration-owned VC6 dsound.lib selection, the ordinary source spelling reproduces the original ordered Rich records/counts and CRT order. No additional executable alias body or metadata patch is introduced."
+  }
 }
