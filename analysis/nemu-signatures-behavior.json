@@ -1,0 +1,7566 @@
+{
+  "kind": "controlled_original_and_rebuilt_full_pe_machine_code_signature_writer_validation",
+  "status": "passed",
+  "paired_case_count": 14,
+  "history_perturbation_count": 4,
+  "original": {
+    "path": "/root/nemu-decomp/master/nemu64.exe",
+    "sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a"
+  },
+  "rebuilt": {
+    "path": "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah/nemu64.exe",
+    "sha256": "21c96e53c6f6e476a80b45ae8ff6118753110add09652586a2d4c718561fc6d0",
+    "map_sha256": "b1197916970dfc9bf4ed4bc25c1bb97db41c55f3d073cda4fb173f70bcb945ad",
+    "diagnostic_sha256": "88f7ee943f5de339d52438441a6fb2174d0a2ccaab40211c5a6cd185a747c82b"
+  },
+  "script_sha256": "726b9dd9809ae5dda1b0a11c19021b3480a0578ec3cfe85a9a5b5aea262ab2e8",
+  "unicorn_version": "2.1.0",
+  "proof_input_hashes": {
+    "/root/nemu-decomp/scripts/verify_nemu_signatures.py": "726b9dd9809ae5dda1b0a11c19021b3480a0578ec3cfe85a9a5b5aea262ab2e8",
+    "/root/nemu-decomp/scripts/compare_nemu_functions.py": "a79f010ca12fa4a77a60dbc4de7d5b82b247abbd56df2261d4f878bae9074551",
+    "/root/nemu-decomp/scripts/pe_fingerprints.py": "e83e1698ecfc7b8ca06ba0919578cbd225885745a96f601891bffff831d995dd",
+    "/root/nemu-decomp/master/nemu64.exe": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+    "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah/nemu64.exe": "21c96e53c6f6e476a80b45ae8ff6118753110add09652586a2d4c718561fc6d0",
+    "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah/nemu64.map": "b1197916970dfc9bf4ed4bc25c1bb97db41c55f3d073cda4fb173f70bcb945ad",
+    "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah/diagnostic.json": "88f7ee943f5de339d52438441a6fb2174d0a2ccaab40211c5a6cd185a747c82b",
+    "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah/src/nemu64/RuntimeSignatures.cpp": "3cd2bddac95a910c3cc563c86290b14f2e291a4c6d391442712bac8087948d7b"
+  },
+  "source_snapshot": {
+    "path": "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah/src/nemu64/RuntimeSignatures.cpp",
+    "sha256": "3cd2bddac95a910c3cc563c86290b14f2e291a4c6d391442712bac8087948d7b",
+    "save_body_sha256": "fd444ce48b0fcbd17c3191560abf4ceb31957063397d7fdd92d7cd2ddf079051",
+    "scope": "Associated compiler-input snapshot; hash association is not source-operand provenance."
+  },
+  "reproduce_argv": [
+    "/usr/bin/python3",
+    "/root/nemu-decomp/scripts/verify_nemu_signatures.py",
+    "--artifact",
+    "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah",
+    "--source",
+    "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah/src/nemu64/RuntimeSignatures.cpp",
+    "--report",
+    "analysis/nemu-signatures-behavior.json"
+  ],
+  "code_mutations": false,
+  "host_file_writes_from_modeled_functions": false,
+  "executed_actual_bodies": [
+    "SaveFunctionSignatures",
+    "HashSignatureInstruction",
+    "ReplaceExtension"
+  ],
+  "modeled_boundaries": [
+    "fopen",
+    "fprintf",
+    "fflush",
+    "sprintf",
+    "fclose",
+    "SetStatusText",
+    "KERNEL32.lstrcatA"
+  ],
+  "entry_abi": "candidate pointer in EAX; actual x86 call/return stack and callee-saved registers",
+  "input_policy": "PE loaded at preferred base; only synthetic data/stack/RDRAM/table/name inputs and resolved lstrcatA IAT binding are changed; code bytes retained.",
+  "guards": [
+    "Original hash and complete unforced candidate-manifest hash checked.",
+    "Unique MAP symbols and original-compatible frame/entry ABI required.",
+    "Every executed basic block must lie in the three reviewed bodies or begin at a modeled boundary.",
+    "Every emulated write must lie in the private stack, replacement table or count.",
+    "Full4096-byte replacement state checked against explicit expected values; RDRAM and code bytes unchanged.",
+    "Return stack and all callee-saved registers checked; instruction limit and unmapped-memory guards active."
+  ],
+  "boundary_model_scope": "records are formatted fprintf attempts captured by the model, including when a negative return is injected; no real FILE buffering, filesystem persistence or GUI behavior is claimed. Volatile registers are deliberately clobbered at each modeled call.",
+  "original_history_slot": {
+    "relative_to_entry_esp": -528,
+    "relative_to_frame_esp": 24,
+    "initialization_offset": 19,
+    "read_offset": 457,
+    "read_esp_delta": -20,
+    "read_displacement": 44,
+    "write_offsets": [
+      466,
+      472
+    ],
+    "dataflow": "Read value is tested for zero; it selects whether the same private slot retains start or is overwritten with the advanced hash cursor. No use reaches records, status, count, replacement table, or scan cursor."
+  },
+  "cases": [
+    {
+      "case": {
+        "name": "three_matches_rescan_from_base",
+        "entries": [
+          {
+            "name": "alpha",
+            "words": [
+              606142465,
+              0,
+              65011720,
+              874643458
+            ],
+            "length": 16,
+            "relocations": [],
+            "first_word": 9249,
+            "match_offset": 64,
+            "hash": 848215800,
+            "replacement_token": 1611661312
+          },
+          {
+            "name": "beta",
+            "words": [
+              1007161908,
+              889738872,
+              16777224,
+              0
+            ],
+            "length": 16,
+            "relocations": [],
+            "first_word": 15368,
+            "match_offset": 512,
+            "hash": 2898122331,
+            "replacement_token": 1611661568
+          },
+          {
+            "name": "gamma",
+            "words": [
+              666763232,
+              2948530204,
+              65011720,
+              666697760
+            ],
+            "length": 16,
+            "relocations": [],
+            "first_word": 10173,
+            "match_offset": 260,
+            "hash": 52035620,
+            "replacement_token": 1611661824
+          }
+        ],
+        "seeds": [
+          [
+            64,
+            [
+              606142465,
+              0,
+              65011720,
+              874643458
+            ]
+          ],
+          [
+            512,
+            [
+              1007161908,
+              889738872,
+              16777224,
+              0
+            ]
+          ],
+          [
+            260,
+            [
+              666763232,
+              2948530204,
+              65011720,
+              666697760
+            ]
+          ]
+        ],
+        "start_offset": 0,
+        "directory": "C:\\Nemu",
+        "rom": "Demo.z64",
+        "fopen_failure": false,
+        "initial_count": 77
+      },
+      "matched": true,
+      "original": {
+        "observables": {
+          "records": [
+            "0x80000040,alpha\r\n",
+            "0x80000200,beta\r\n",
+            "0x80000104,gamma\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "part": 0,
+              "text": "Searching... 0x80000200, beta"
+            },
+            {
+              "part": 0,
+              "text": "Searching... 0x80000104, gamma"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 3,
+          "replacements_sha256": "8181b3c4dac8aa47886e1e1dd6406593d72be4f14616937dc59540df533f5101",
+          "replacements_prefix": [
+            [
+              2147483712,
+              1611661312
+            ],
+            [
+              2147484160,
+              1611661568
+            ],
+            [
+              2147483908,
+              1611661824
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483712,
+              "name": "alpha",
+              "text": "0x80000040,alpha\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483712,
+              "name": "alpha",
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147484160,
+              "name": "beta",
+              "text": "0x80000200,beta\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147484160,
+              "name": "beta",
+              "text": "Searching... 0x80000200, beta"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000200, beta"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483908,
+              "name": "gamma",
+              "text": "0x80000104,gamma\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483908,
+              "name": "gamma",
+              "text": "Searching... 0x80000104, gamma"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000104, gamma"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 457,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 466,
+            "esp_from_frame": 0,
+            "value": 268435456
+          },
+          {
+            "kind": "read",
+            "save_offset": 457,
+            "esp_from_frame": -20,
+            "value": 268435456
+          },
+          {
+            "kind": "write",
+            "save_offset": 466,
+            "esp_from_frame": 0,
+            "value": 268435456
+          },
+          {
+            "kind": "write",
+            "save_offset": 472,
+            "esp_from_frame": 0,
+            "value": 268435984
+          },
+          {
+            "kind": "read",
+            "save_offset": 457,
+            "esp_from_frame": -20,
+            "value": 268435984
+          },
+          {
+            "kind": "write",
+            "save_offset": 466,
+            "esp_from_frame": 0,
+            "value": 268435456
+          },
+          {
+            "kind": "write",
+            "save_offset": 472,
+            "esp_from_frame": 0,
+            "value": 268435732
+          }
+        ],
+        "hash_machine_code_calls": 12,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 130,
+          "RuntimeReplacements": 6,
+          "RuntimeReplacementCount": 3
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            350,
+            360,
+            364,
+            370,
+            378,
+            395,
+            399,
+            412,
+            447,
+            457,
+            472,
+            476,
+            535,
+            552,
+            576,
+            583,
+            627,
+            637,
+            652
+          ],
+          "HashSignatureInstruction": [
+            0,
+            131,
+            137,
+            144
+          ],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 607,
+          "ReplaceExtension": 34,
+          "HashSignatureInstruction": 36
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "0055c109921f063ec1442bf49f0dae3da8671f9a288d5c34e5bd52219cde3d87"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.014440479688346386
+      },
+      "rebuilt": {
+        "observables": {
+          "records": [
+            "0x80000040,alpha\r\n",
+            "0x80000200,beta\r\n",
+            "0x80000104,gamma\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "part": 0,
+              "text": "Searching... 0x80000200, beta"
+            },
+            {
+              "part": 0,
+              "text": "Searching... 0x80000104, gamma"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 3,
+          "replacements_sha256": "8181b3c4dac8aa47886e1e1dd6406593d72be4f14616937dc59540df533f5101",
+          "replacements_prefix": [
+            [
+              2147483712,
+              1611661312
+            ],
+            [
+              2147484160,
+              1611661568
+            ],
+            [
+              2147483908,
+              1611661824
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483712,
+              "name": "alpha",
+              "text": "0x80000040,alpha\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483712,
+              "name": "alpha",
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147484160,
+              "name": "beta",
+              "text": "0x80000200,beta\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147484160,
+              "name": "beta",
+              "text": "Searching... 0x80000200, beta"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000200, beta"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483908,
+              "name": "gamma",
+              "text": "0x80000104,gamma\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483908,
+              "name": "gamma",
+              "text": "Searching... 0x80000104, gamma"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000104, gamma"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 454,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 467,
+            "esp_from_frame": 0,
+            "value": 268435456
+          },
+          {
+            "kind": "read",
+            "save_offset": 454,
+            "esp_from_frame": -20,
+            "value": 268435456
+          },
+          {
+            "kind": "write",
+            "save_offset": 467,
+            "esp_from_frame": 0,
+            "value": 268435456
+          },
+          {
+            "kind": "write",
+            "save_offset": 473,
+            "esp_from_frame": 0,
+            "value": 268435984
+          },
+          {
+            "kind": "read",
+            "save_offset": 454,
+            "esp_from_frame": -20,
+            "value": 268435984
+          },
+          {
+            "kind": "write",
+            "save_offset": 467,
+            "esp_from_frame": 0,
+            "value": 268435456
+          },
+          {
+            "kind": "write",
+            "save_offset": 473,
+            "esp_from_frame": 0,
+            "value": 268435732
+          }
+        ],
+        "hash_machine_code_calls": 12,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 130,
+          "RuntimeReplacements": 6,
+          "RuntimeReplacementCount": 3
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            350,
+            360,
+            364,
+            370,
+            378,
+            395,
+            399,
+            408,
+            444,
+            454,
+            473,
+            477,
+            535,
+            552,
+            574,
+            587,
+            635,
+            645,
+            660
+          ],
+          "HashSignatureInstruction": [
+            0,
+            131,
+            137,
+            144
+          ],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 607,
+          "ReplaceExtension": 34,
+          "HashSignatureInstruction": 36
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "59b43ed88fa2770e4a9a7adc1b0d60d013e4efd6741695003c1f6cc9668c3203"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.01223587803542614
+      }
+    },
+    {
+      "case": {
+        "name": "match_miss_match",
+        "entries": [
+          {
+            "name": "alpha",
+            "words": [
+              606142465,
+              0,
+              65011720,
+              874643458
+            ],
+            "length": 16,
+            "relocations": [],
+            "first_word": 9249,
+            "match_offset": 64,
+            "hash": 848215800,
+            "replacement_token": 1611661312
+          },
+          {
+            "name": "absent",
+            "words": [
+              1007161908,
+              889738872,
+              16777224,
+              0
+            ],
+            "length": 16,
+            "relocations": [],
+            "first_word": 15368,
+            "match_offset": null,
+            "hash": 2898122331,
+            "replacement_token": 1611661568
+          },
+          {
+            "name": "gamma",
+            "words": [
+              666763232,
+              2948530204,
+              65011720,
+              666697760
+            ],
+            "length": 16,
+            "relocations": [],
+            "first_word": 10173,
+            "match_offset": 260,
+            "hash": 52035620,
+            "replacement_token": 1611661824
+          }
+        ],
+        "seeds": [
+          [
+            64,
+            [
+              606142465,
+              0,
+              65011720,
+              874643458
+            ]
+          ],
+          [
+            260,
+            [
+              666763232,
+              2948530204,
+              65011720,
+              666697760
+            ]
+          ]
+        ],
+        "start_offset": 0,
+        "directory": "C:\\Nemu\\",
+        "rom": "Demo.z64",
+        "fopen_failure": false,
+        "initial_count": 77
+      },
+      "matched": true,
+      "original": {
+        "observables": {
+          "records": [
+            "0x80000040,alpha\r\n",
+            "0x80000104,gamma\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "part": 0,
+              "text": "Searching... 0x80000104, gamma"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 3,
+          "replacements_sha256": "ae58143393893e969cd2667354105c939ec49c66cb3d2804df10015ac48e2d89",
+          "replacements_prefix": [
+            [
+              2147483712,
+              1611661312
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              2147483908,
+              1611661824
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483712,
+              "name": "alpha",
+              "text": "0x80000040,alpha\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483712,
+              "name": "alpha",
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483908,
+              "name": "gamma",
+              "text": "0x80000104,gamma\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483908,
+              "name": "gamma",
+              "text": "Searching... 0x80000104, gamma"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000104, gamma"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 457,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 466,
+            "esp_from_frame": 0,
+            "value": 268435456
+          },
+          {
+            "kind": "read",
+            "save_offset": 457,
+            "esp_from_frame": -20,
+            "value": 268435456
+          },
+          {
+            "kind": "write",
+            "save_offset": 466,
+            "esp_from_frame": 0,
+            "value": 268435456
+          },
+          {
+            "kind": "write",
+            "save_offset": 472,
+            "esp_from_frame": 0,
+            "value": 268435732
+          }
+        ],
+        "hash_machine_code_calls": 8,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 104,
+          "RuntimeReplacements": 6,
+          "RuntimeReplacementCount": 3
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            128,
+            136,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            350,
+            360,
+            364,
+            370,
+            378,
+            395,
+            399,
+            412,
+            447,
+            457,
+            472,
+            476,
+            535,
+            552,
+            576,
+            583,
+            593,
+            627,
+            637,
+            652
+          ],
+          "HashSignatureInstruction": [
+            0,
+            131,
+            137,
+            144
+          ],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 524623,
+          "ReplaceExtension": 34,
+          "HashSignatureInstruction": 24
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "0055c109921f063ec1442bf49f0dae3da8671f9a288d5c34e5bd52219cde3d87"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 1.463859043084085
+      },
+      "rebuilt": {
+        "observables": {
+          "records": [
+            "0x80000040,alpha\r\n",
+            "0x80000104,gamma\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "part": 0,
+              "text": "Searching... 0x80000104, gamma"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 3,
+          "replacements_sha256": "ae58143393893e969cd2667354105c939ec49c66cb3d2804df10015ac48e2d89",
+          "replacements_prefix": [
+            [
+              2147483712,
+              1611661312
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              2147483908,
+              1611661824
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483712,
+              "name": "alpha",
+              "text": "0x80000040,alpha\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483712,
+              "name": "alpha",
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483908,
+              "name": "gamma",
+              "text": "0x80000104,gamma\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483908,
+              "name": "gamma",
+              "text": "Searching... 0x80000104, gamma"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000104, gamma"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 454,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 467,
+            "esp_from_frame": 0,
+            "value": 268435456
+          },
+          {
+            "kind": "read",
+            "save_offset": 454,
+            "esp_from_frame": -20,
+            "value": 268435456
+          },
+          {
+            "kind": "write",
+            "save_offset": 467,
+            "esp_from_frame": 0,
+            "value": 268435456
+          },
+          {
+            "kind": "write",
+            "save_offset": 473,
+            "esp_from_frame": 0,
+            "value": 268435732
+          }
+        ],
+        "hash_machine_code_calls": 8,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 104,
+          "RuntimeReplacements": 6,
+          "RuntimeReplacementCount": 3
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            128,
+            136,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            350,
+            360,
+            364,
+            370,
+            378,
+            395,
+            399,
+            408,
+            444,
+            454,
+            473,
+            477,
+            535,
+            552,
+            574,
+            587,
+            601,
+            635,
+            645,
+            660
+          ],
+          "HashSignatureInstruction": [
+            0,
+            131,
+            137,
+            144
+          ],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 524623,
+          "ReplaceExtension": 34,
+          "HashSignatureInstruction": 24
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "59b43ed88fa2770e4a9a7adc1b0d60d013e4efd6741695003c1f6cc9668c3203"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 1.538135233335197
+      }
+    },
+    {
+      "case": {
+        "name": "all_zero_ram",
+        "entries": [
+          {
+            "name": "alpha",
+            "words": [
+              606142465,
+              0,
+              65011720,
+              874643458
+            ],
+            "length": 16,
+            "relocations": [],
+            "first_word": 9249,
+            "match_offset": null,
+            "hash": 848215800,
+            "replacement_token": 1611661312
+          },
+          {
+            "name": "beta",
+            "words": [
+              1007161908,
+              889738872,
+              16777224,
+              0
+            ],
+            "length": 16,
+            "relocations": [],
+            "first_word": 15368,
+            "match_offset": null,
+            "hash": 2898122331,
+            "replacement_token": 1611661568
+          },
+          {
+            "name": "gamma",
+            "words": [
+              666763232,
+              2948530204,
+              65011720,
+              666697760
+            ],
+            "length": 16,
+            "relocations": [],
+            "first_word": 10173,
+            "match_offset": null,
+            "hash": 52035620,
+            "replacement_token": 1611661824
+          }
+        ],
+        "seeds": [],
+        "start_offset": 0,
+        "directory": "C:\\Nemu",
+        "rom": "Demo.z64",
+        "fopen_failure": false,
+        "initial_count": 77
+      },
+      "matched": true,
+      "original": {
+        "observables": {
+          "records": [],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 3,
+          "replacements_sha256": "5dbad6f78fe35967151ca38aab12327e34ad96700a313324aff792efe4cdb7db",
+          "replacements_prefix": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          }
+        ],
+        "hash_machine_code_calls": 0,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 40,
+          "RuntimeReplacements": 6,
+          "RuntimeReplacementCount": 3
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            593,
+            627,
+            637,
+            652
+          ],
+          "HashSignatureInstruction": [],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 1572939,
+          "ReplaceExtension": 34
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "0055c109921f063ec1442bf49f0dae3da8671f9a288d5c34e5bd52219cde3d87"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 4.362010228447616
+      },
+      "rebuilt": {
+        "observables": {
+          "records": [],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 3,
+          "replacements_sha256": "5dbad6f78fe35967151ca38aab12327e34ad96700a313324aff792efe4cdb7db",
+          "replacements_prefix": [
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          }
+        ],
+        "hash_machine_code_calls": 0,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 40,
+          "RuntimeReplacements": 6,
+          "RuntimeReplacementCount": 3
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            601,
+            635,
+            645,
+            660
+          ],
+          "HashSignatureInstruction": [],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 1572939,
+          "ReplaceExtension": 34
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "59b43ed88fa2770e4a9a7adc1b0d60d013e4efd6741695003c1f6cc9668c3203"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 4.369510263204575
+      }
+    },
+    {
+      "case": {
+        "name": "strict_end_boundary",
+        "entries": [
+          {
+            "name": "at_end",
+            "words": [
+              606142465
+            ],
+            "length": 4,
+            "relocations": [],
+            "first_word": 9249,
+            "match_offset": null,
+            "hash": 606142465,
+            "replacement_token": 1611661312
+          },
+          {
+            "name": "before_end",
+            "words": [
+              874643458
+            ],
+            "length": 4,
+            "relocations": [],
+            "first_word": 13346,
+            "match_offset": 1048568,
+            "hash": 874643458,
+            "replacement_token": 1611661568
+          }
+        ],
+        "seeds": [
+          [
+            1048572,
+            [
+              606142465
+            ]
+          ],
+          [
+            1048568,
+            [
+              874643458
+            ]
+          ]
+        ],
+        "start_offset": 0,
+        "directory": "C:\\Nemu",
+        "rom": "Demo.z64",
+        "fopen_failure": false,
+        "initial_count": 77
+      },
+      "matched": true,
+      "original": {
+        "observables": {
+          "records": [
+            "0x800FFFF8,before_end\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x800FFFF8, before_end"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 2,
+          "replacements_sha256": "b7cb464c5e2a8ddacb671e134aed532140744a2ac4fa4bd20b05ea4743d6a1c2",
+          "replacements_prefix": [
+            [
+              0,
+              0
+            ],
+            [
+              2148532216,
+              1611661568
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2148532216,
+              "name": "before_end",
+              "text": "0x800FFFF8,before_end\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2148532216,
+              "name": "before_end",
+              "text": "Searching... 0x800FFFF8, before_end"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x800FFFF8, before_end"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 457,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 466,
+            "esp_from_frame": 0,
+            "value": 268435456
+          }
+        ],
+        "hash_machine_code_calls": 1,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 56,
+          "RuntimeReplacements": 4,
+          "RuntimeReplacementCount": 2
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            350,
+            360,
+            364,
+            370,
+            378,
+            395,
+            399,
+            412,
+            447,
+            457,
+            476,
+            535,
+            552,
+            576,
+            583,
+            593,
+            627,
+            637,
+            652
+          ],
+          "HashSignatureInstruction": [
+            0,
+            131,
+            144
+          ],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 1048660,
+          "ReplaceExtension": 34,
+          "HashSignatureInstruction": 3
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "0055c109921f063ec1442bf49f0dae3da8671f9a288d5c34e5bd52219cde3d87"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 2.8987479638308287
+      },
+      "rebuilt": {
+        "observables": {
+          "records": [
+            "0x800FFFF8,before_end\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x800FFFF8, before_end"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 2,
+          "replacements_sha256": "b7cb464c5e2a8ddacb671e134aed532140744a2ac4fa4bd20b05ea4743d6a1c2",
+          "replacements_prefix": [
+            [
+              0,
+              0
+            ],
+            [
+              2148532216,
+              1611661568
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2148532216,
+              "name": "before_end",
+              "text": "0x800FFFF8,before_end\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2148532216,
+              "name": "before_end",
+              "text": "Searching... 0x800FFFF8, before_end"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x800FFFF8, before_end"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 454,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 467,
+            "esp_from_frame": 0,
+            "value": 268435456
+          }
+        ],
+        "hash_machine_code_calls": 1,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 56,
+          "RuntimeReplacements": 4,
+          "RuntimeReplacementCount": 2
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            350,
+            360,
+            364,
+            370,
+            378,
+            395,
+            399,
+            408,
+            444,
+            454,
+            477,
+            535,
+            552,
+            574,
+            587,
+            601,
+            635,
+            645,
+            660
+          ],
+          "HashSignatureInstruction": [
+            0,
+            131,
+            144
+          ],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 1048660,
+          "ReplaceExtension": 34,
+          "HashSignatureInstruction": 3
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "59b43ed88fa2770e4a9a7adc1b0d60d013e4efd6741695003c1f6cc9668c3203"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 2.8674036161974072
+      }
+    },
+    {
+      "case": {
+        "name": "firstword_and_hash_mismatch_then_match",
+        "entries": [
+          {
+            "name": "alpha",
+            "words": [
+              606142465,
+              0,
+              65011720,
+              874643458
+            ],
+            "length": 16,
+            "relocations": [],
+            "first_word": 9249,
+            "match_offset": 256,
+            "hash": 848215800,
+            "replacement_token": 1611661312
+          }
+        ],
+        "seeds": [
+          [
+            32,
+            [
+              286335522
+            ]
+          ],
+          [
+            64,
+            [
+              606142465,
+              305419896,
+              65011720,
+              874643458
+            ]
+          ],
+          [
+            256,
+            [
+              606142465,
+              0,
+              65011720,
+              874643458
+            ]
+          ]
+        ],
+        "start_offset": 0,
+        "directory": "C:\\Nemu",
+        "rom": "Demo.z64",
+        "fopen_failure": false,
+        "initial_count": 77
+      },
+      "matched": true,
+      "original": {
+        "observables": {
+          "records": [
+            "0x80000100,alpha\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x80000100, alpha"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 1,
+          "replacements_sha256": "130b4e7a419a916c2451bc182a31bdb46bec29d2e5608a5988e17ad248b9b436",
+          "replacements_prefix": [
+            [
+              2147483904,
+              1611661312
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483904,
+              "name": "alpha",
+              "text": "0x80000100,alpha\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483904,
+              "name": "alpha",
+              "text": "Searching... 0x80000100, alpha"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000100, alpha"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 457,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 466,
+            "esp_from_frame": 0,
+            "value": 268435456
+          }
+        ],
+        "hash_machine_code_calls": 8,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 79,
+          "RuntimeReplacements": 2,
+          "RuntimeReplacementCount": 1
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            350,
+            360,
+            364,
+            370,
+            378,
+            395,
+            399,
+            412,
+            447,
+            457,
+            476,
+            535,
+            552,
+            576,
+            583,
+            627,
+            637,
+            652
+          ],
+          "HashSignatureInstruction": [
+            0,
+            131,
+            137,
+            144
+          ],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 251,
+          "ReplaceExtension": 34,
+          "HashSignatureInstruction": 24
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "0055c109921f063ec1442bf49f0dae3da8671f9a288d5c34e5bd52219cde3d87"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.007863041944801807
+      },
+      "rebuilt": {
+        "observables": {
+          "records": [
+            "0x80000100,alpha\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x80000100, alpha"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 1,
+          "replacements_sha256": "130b4e7a419a916c2451bc182a31bdb46bec29d2e5608a5988e17ad248b9b436",
+          "replacements_prefix": [
+            [
+              2147483904,
+              1611661312
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483904,
+              "name": "alpha",
+              "text": "0x80000100,alpha\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483904,
+              "name": "alpha",
+              "text": "Searching... 0x80000100, alpha"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000100, alpha"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 454,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 467,
+            "esp_from_frame": 0,
+            "value": 268435456
+          }
+        ],
+        "hash_machine_code_calls": 8,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 79,
+          "RuntimeReplacements": 2,
+          "RuntimeReplacementCount": 1
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            350,
+            360,
+            364,
+            370,
+            378,
+            395,
+            399,
+            408,
+            444,
+            454,
+            477,
+            535,
+            552,
+            574,
+            587,
+            635,
+            645,
+            660
+          ],
+          "HashSignatureInstruction": [
+            0,
+            131,
+            137,
+            144
+          ],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 251,
+          "ReplaceExtension": 34,
+          "HashSignatureInstruction": 24
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "59b43ed88fa2770e4a9a7adc1b0d60d013e4efd6741695003c1f6cc9668c3203"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.007890048436820507
+      }
+    },
+    {
+      "case": {
+        "name": "overlapping_hash_retry",
+        "entries": [
+          {
+            "name": "alpha",
+            "words": [
+              606142465,
+              0,
+              65011720,
+              874643458
+            ],
+            "length": 16,
+            "relocations": [],
+            "first_word": 9249,
+            "match_offset": 68,
+            "hash": 848215800,
+            "replacement_token": 1611661312
+          }
+        ],
+        "seeds": [
+          [
+            64,
+            [
+              606142465,
+              606142465,
+              0,
+              65011720,
+              874643458
+            ]
+          ]
+        ],
+        "start_offset": 0,
+        "directory": "C:\\Nemu",
+        "rom": "Demo.z64",
+        "fopen_failure": false,
+        "initial_count": 77
+      },
+      "matched": true,
+      "original": {
+        "observables": {
+          "records": [
+            "0x80000044,alpha\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x80000044, alpha"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 1,
+          "replacements_sha256": "272ba92969b65494945353da2eebf11962d219bb84ef815e8819c322c3585923",
+          "replacements_prefix": [
+            [
+              2147483716,
+              1611661312
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483716,
+              "name": "alpha",
+              "text": "0x80000044,alpha\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483716,
+              "name": "alpha",
+              "text": "Searching... 0x80000044, alpha"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000044, alpha"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 457,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 466,
+            "esp_from_frame": 0,
+            "value": 268435456
+          }
+        ],
+        "hash_machine_code_calls": 8,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 75,
+          "RuntimeReplacements": 2,
+          "RuntimeReplacementCount": 1
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            350,
+            364,
+            370,
+            378,
+            395,
+            412,
+            447,
+            457,
+            476,
+            535,
+            552,
+            576,
+            583,
+            627,
+            637,
+            652
+          ],
+          "HashSignatureInstruction": [
+            0,
+            131,
+            137,
+            144
+          ],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 133,
+          "ReplaceExtension": 34,
+          "HashSignatureInstruction": 24
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "0055c109921f063ec1442bf49f0dae3da8671f9a288d5c34e5bd52219cde3d87"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.007380851544439793
+      },
+      "rebuilt": {
+        "observables": {
+          "records": [
+            "0x80000044,alpha\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x80000044, alpha"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 1,
+          "replacements_sha256": "272ba92969b65494945353da2eebf11962d219bb84ef815e8819c322c3585923",
+          "replacements_prefix": [
+            [
+              2147483716,
+              1611661312
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483716,
+              "name": "alpha",
+              "text": "0x80000044,alpha\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483716,
+              "name": "alpha",
+              "text": "Searching... 0x80000044, alpha"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000044, alpha"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 454,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 467,
+            "esp_from_frame": 0,
+            "value": 268435456
+          }
+        ],
+        "hash_machine_code_calls": 8,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 75,
+          "RuntimeReplacements": 2,
+          "RuntimeReplacementCount": 1
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            350,
+            364,
+            370,
+            378,
+            395,
+            408,
+            444,
+            454,
+            477,
+            535,
+            552,
+            574,
+            587,
+            635,
+            645,
+            660
+          ],
+          "HashSignatureInstruction": [
+            0,
+            131,
+            137,
+            144
+          ],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 133,
+          "ReplaceExtension": 34,
+          "HashSignatureInstruction": 24
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "59b43ed88fa2770e4a9a7adc1b0d60d013e4efd6741695003c1f6cc9668c3203"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.0075021544471383095
+      }
+    },
+    {
+      "case": {
+        "name": "input_clamped_to_rdram",
+        "entries": [
+          {
+            "name": "alpha",
+            "words": [
+              606142465,
+              0,
+              65011720,
+              874643458
+            ],
+            "length": 16,
+            "relocations": [],
+            "first_word": 9249,
+            "match_offset": 64,
+            "hash": 848215800,
+            "replacement_token": 1611661312
+          }
+        ],
+        "seeds": [
+          [
+            64,
+            [
+              606142465,
+              0,
+              65011720,
+              874643458
+            ]
+          ]
+        ],
+        "start_offset": -256,
+        "directory": "C:\\Nemu",
+        "rom": "Demo.z64",
+        "fopen_failure": false,
+        "initial_count": 77
+      },
+      "matched": true,
+      "original": {
+        "observables": {
+          "records": [
+            "0x80000040,alpha\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 1,
+          "replacements_sha256": "4da02309034b1f45c576a5b3b9d12c47f28a1536159dd1ffd5bbe8c4572c94f7",
+          "replacements_prefix": [
+            [
+              2147483712,
+              1611661312
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483712,
+              "name": "alpha",
+              "text": "0x80000040,alpha\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483712,
+              "name": "alpha",
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 457,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 466,
+            "esp_from_frame": 0,
+            "value": 268435456
+          }
+        ],
+        "hash_machine_code_calls": 4,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 62,
+          "RuntimeReplacements": 2,
+          "RuntimeReplacementCount": 1
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            29,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            350,
+            364,
+            370,
+            378,
+            395,
+            412,
+            447,
+            457,
+            476,
+            535,
+            552,
+            576,
+            627,
+            637,
+            652
+          ],
+          "HashSignatureInstruction": [
+            0,
+            131,
+            137,
+            144
+          ],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 117,
+          "ReplaceExtension": 34,
+          "HashSignatureInstruction": 12
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "0055c109921f063ec1442bf49f0dae3da8671f9a288d5c34e5bd52219cde3d87"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.007081332616508007
+      },
+      "rebuilt": {
+        "observables": {
+          "records": [
+            "0x80000040,alpha\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 1,
+          "replacements_sha256": "4da02309034b1f45c576a5b3b9d12c47f28a1536159dd1ffd5bbe8c4572c94f7",
+          "replacements_prefix": [
+            [
+              2147483712,
+              1611661312
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483712,
+              "name": "alpha",
+              "text": "0x80000040,alpha\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483712,
+              "name": "alpha",
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 454,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 467,
+            "esp_from_frame": 0,
+            "value": 268435456
+          }
+        ],
+        "hash_machine_code_calls": 4,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 62,
+          "RuntimeReplacements": 2,
+          "RuntimeReplacementCount": 1
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            29,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            350,
+            364,
+            370,
+            378,
+            395,
+            408,
+            444,
+            454,
+            477,
+            535,
+            552,
+            574,
+            635,
+            645,
+            660
+          ],
+          "HashSignatureInstruction": [
+            0,
+            131,
+            137,
+            144
+          ],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 117,
+          "ReplaceExtension": 34,
+          "HashSignatureInstruction": 12
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "59b43ed88fa2770e4a9a7adc1b0d60d013e4efd6741695003c1f6cc9668c3203"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.007303588092327118
+      }
+    },
+    {
+      "case": {
+        "name": "nonzero_scan_base",
+        "entries": [
+          {
+            "name": "beta",
+            "words": [
+              1007161908,
+              889738872,
+              16777224,
+              0
+            ],
+            "length": 16,
+            "relocations": [],
+            "first_word": 15368,
+            "match_offset": 384,
+            "hash": 2898122331,
+            "replacement_token": 1611661312
+          }
+        ],
+        "seeds": [
+          [
+            64,
+            [
+              606142465,
+              0,
+              65011720,
+              874643458
+            ]
+          ],
+          [
+            384,
+            [
+              1007161908,
+              889738872,
+              16777224,
+              0
+            ]
+          ]
+        ],
+        "start_offset": 256,
+        "directory": "C:\\Nemu",
+        "rom": "Demo.z64",
+        "fopen_failure": false,
+        "initial_count": 77
+      },
+      "matched": true,
+      "original": {
+        "observables": {
+          "records": [
+            "0x80000180,beta\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x80000180, beta"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 1,
+          "replacements_sha256": "df1bdd79d721f798db88fc274178236bfd2c5beaf61c65f8e11d628b8cbead6a",
+          "replacements_prefix": [
+            [
+              2147484032,
+              1611661312
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147484032,
+              "name": "beta",
+              "text": "0x80000180,beta\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147484032,
+              "name": "beta",
+              "text": "Searching... 0x80000180, beta"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000180, beta"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 457,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 466,
+            "esp_from_frame": 0,
+            "value": 268435712
+          }
+        ],
+        "hash_machine_code_calls": 4,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 62,
+          "RuntimeReplacements": 2,
+          "RuntimeReplacementCount": 1
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            350,
+            364,
+            370,
+            378,
+            395,
+            412,
+            447,
+            457,
+            476,
+            535,
+            552,
+            576,
+            627,
+            637,
+            652
+          ],
+          "HashSignatureInstruction": [
+            0,
+            131,
+            137,
+            144
+          ],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 149,
+          "ReplaceExtension": 34,
+          "HashSignatureInstruction": 12
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "0055c109921f063ec1442bf49f0dae3da8671f9a288d5c34e5bd52219cde3d87"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.007327897474169731
+      },
+      "rebuilt": {
+        "observables": {
+          "records": [
+            "0x80000180,beta\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x80000180, beta"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 1,
+          "replacements_sha256": "df1bdd79d721f798db88fc274178236bfd2c5beaf61c65f8e11d628b8cbead6a",
+          "replacements_prefix": [
+            [
+              2147484032,
+              1611661312
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147484032,
+              "name": "beta",
+              "text": "0x80000180,beta\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147484032,
+              "name": "beta",
+              "text": "Searching... 0x80000180, beta"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000180, beta"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 454,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 467,
+            "esp_from_frame": 0,
+            "value": 268435712
+          }
+        ],
+        "hash_machine_code_calls": 4,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 62,
+          "RuntimeReplacements": 2,
+          "RuntimeReplacementCount": 1
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            350,
+            364,
+            370,
+            378,
+            395,
+            408,
+            444,
+            454,
+            477,
+            535,
+            552,
+            574,
+            635,
+            645,
+            660
+          ],
+          "HashSignatureInstruction": [
+            0,
+            131,
+            137,
+            144
+          ],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 149,
+          "ReplaceExtension": 34,
+          "HashSignatureInstruction": 12
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "59b43ed88fa2770e4a9a7adc1b0d60d013e4efd6741695003c1f6cc9668c3203"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.00760144367814064
+      }
+    },
+    {
+      "case": {
+        "name": "length_capped_at_256",
+        "entries": [
+          {
+            "name": "long",
+            "words": [
+              666763232,
+              604045313,
+              604045314,
+              604045315,
+              604045316,
+              604045317,
+              604045318,
+              604045319,
+              604045320,
+              604045321,
+              604045322,
+              604045323,
+              604045324,
+              604045325,
+              604045326,
+              604045327,
+              604045328,
+              604045329,
+              604045330,
+              604045331,
+              604045332,
+              604045333,
+              604045334,
+              604045335,
+              604045336,
+              604045337,
+              604045338,
+              604045339,
+              604045340,
+              604045341,
+              604045342,
+              604045343,
+              604045344,
+              604045345,
+              604045346,
+              604045347,
+              604045348,
+              604045349,
+              604045350,
+              604045351,
+              604045352,
+              604045353,
+              604045354,
+              604045355,
+              604045356,
+              604045357,
+              604045358,
+              604045359,
+              604045360,
+              604045361,
+              604045362,
+              604045363,
+              604045364,
+              604045365,
+              604045366,
+              604045367,
+              604045368,
+              604045369,
+              604045370,
+              604045371,
+              604045372,
+              604045373,
+              604045374,
+              604045375,
+              604045376,
+              604045377,
+              604045378,
+              604045379,
+              604045380,
+              604045381,
+              604045382,
+              604045383,
+              604045384,
+              604045385,
+              604045386
+            ],
+            "length": 300,
+            "relocations": [],
+            "first_word": 10173,
+            "match_offset": 128,
+            "hash": 66914240,
+            "replacement_token": 1611661312
+          }
+        ],
+        "seeds": [
+          [
+            128,
+            [
+              666763232,
+              604045313,
+              604045314,
+              604045315,
+              604045316,
+              604045317,
+              604045318,
+              604045319,
+              604045320,
+              604045321,
+              604045322,
+              604045323,
+              604045324,
+              604045325,
+              604045326,
+              604045327,
+              604045328,
+              604045329,
+              604045330,
+              604045331,
+              604045332,
+              604045333,
+              604045334,
+              604045335,
+              604045336,
+              604045337,
+              604045338,
+              604045339,
+              604045340,
+              604045341,
+              604045342,
+              604045343,
+              604045344,
+              604045345,
+              604045346,
+              604045347,
+              604045348,
+              604045349,
+              604045350,
+              604045351,
+              604045352,
+              604045353,
+              604045354,
+              604045355,
+              604045356,
+              604045357,
+              604045358,
+              604045359,
+              604045360,
+              604045361,
+              604045362,
+              604045363,
+              604045364,
+              604045365,
+              604045366,
+              604045367,
+              604045368,
+              604045369,
+              604045370,
+              604045371,
+              604045372,
+              604045373,
+              604045374,
+              604045375,
+              604045376,
+              604045377,
+              604045378,
+              604045379,
+              604045380,
+              604045381,
+              604045382,
+              604045383,
+              604045384,
+              604045385,
+              604045386
+            ]
+          ]
+        ],
+        "start_offset": 0,
+        "directory": "C:\\Nemu",
+        "rom": "Demo.z64",
+        "fopen_failure": false,
+        "initial_count": 77
+      },
+      "matched": true,
+      "original": {
+        "observables": {
+          "records": [
+            "0x80000080,long\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x80000080, long"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 1,
+          "replacements_sha256": "4ead1952cd5540d81a1f1b889f54b43c1582e5bfd56e82dde5d1e5267cc229e9",
+          "replacements_prefix": [
+            [
+              2147483776,
+              1611661312
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483776,
+              "name": "long",
+              "text": "0x80000080,long\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483776,
+              "name": "long",
+              "text": "Searching... 0x80000080, long"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000080, long"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 457,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 466,
+            "esp_from_frame": 0,
+            "value": 268435456
+          }
+        ],
+        "hash_machine_code_calls": 64,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 243,
+          "RuntimeReplacements": 2,
+          "RuntimeReplacementCount": 1
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            321,
+            350,
+            364,
+            370,
+            378,
+            395,
+            412,
+            447,
+            457,
+            476,
+            535,
+            552,
+            576,
+            627,
+            637,
+            652
+          ],
+          "HashSignatureInstruction": [
+            0,
+            131,
+            144
+          ],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 269,
+          "ReplaceExtension": 34,
+          "HashSignatureInstruction": 192
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "0055c109921f063ec1442bf49f0dae3da8671f9a288d5c34e5bd52219cde3d87"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.008600564673542976
+      },
+      "rebuilt": {
+        "observables": {
+          "records": [
+            "0x80000080,long\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x80000080, long"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 1,
+          "replacements_sha256": "4ead1952cd5540d81a1f1b889f54b43c1582e5bfd56e82dde5d1e5267cc229e9",
+          "replacements_prefix": [
+            [
+              2147483776,
+              1611661312
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483776,
+              "name": "long",
+              "text": "0x80000080,long\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483776,
+              "name": "long",
+              "text": "Searching... 0x80000080, long"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000080, long"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 454,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 467,
+            "esp_from_frame": 0,
+            "value": 268435456
+          }
+        ],
+        "hash_machine_code_calls": 64,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 243,
+          "RuntimeReplacements": 2,
+          "RuntimeReplacementCount": 1
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            321,
+            350,
+            364,
+            370,
+            378,
+            395,
+            408,
+            444,
+            454,
+            477,
+            535,
+            552,
+            574,
+            635,
+            645,
+            660
+          ],
+          "HashSignatureInstruction": [
+            0,
+            131,
+            144
+          ],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 269,
+          "ReplaceExtension": 34,
+          "HashSignatureInstruction": 192
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "59b43ed88fa2770e4a9a7adc1b0d60d013e4efd6741695003c1f6cc9668c3203"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.008794927969574928
+      }
+    },
+    {
+      "case": {
+        "name": "relocation_hash_paths",
+        "entries": [
+          {
+            "name": "relocated",
+            "words": [
+              134222388,
+              201348728,
+              1007199232,
+              1007255552,
+              889852468,
+              2370502688,
+              627834881,
+              0,
+              1007464448,
+              65011720
+            ],
+            "length": 40,
+            "relocations": [
+              0,
+              4,
+              8,
+              12,
+              16,
+              20,
+              24,
+              32
+            ],
+            "first_word": 2048,
+            "match_offset": 128,
+            "hash": 3867527006,
+            "replacement_token": 1611661312
+          }
+        ],
+        "seeds": [
+          [
+            128,
+            [
+              134222388,
+              201348728,
+              1007199232,
+              1007255552,
+              889852468,
+              2370502688,
+              627834881,
+              0,
+              1007464448,
+              65011720
+            ]
+          ]
+        ],
+        "start_offset": 0,
+        "directory": "C:\\Nemu",
+        "rom": "Demo.z64",
+        "fopen_failure": false,
+        "initial_count": 77
+      },
+      "matched": true,
+      "original": {
+        "observables": {
+          "records": [
+            "0x80000080,relocated\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x80000080, relocated"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 1,
+          "replacements_sha256": "4ead1952cd5540d81a1f1b889f54b43c1582e5bfd56e82dde5d1e5267cc229e9",
+          "replacements_prefix": [
+            [
+              2147483776,
+              1611661312
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483776,
+              "name": "relocated",
+              "text": "0x80000080,relocated\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483776,
+              "name": "relocated",
+              "text": "Searching... 0x80000080, relocated"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000080, relocated"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 457,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 466,
+            "esp_from_frame": 0,
+            "value": 268435456
+          }
+        ],
+        "hash_machine_code_calls": 10,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 100,
+          "RuntimeReplacements": 2,
+          "RuntimeReplacementCount": 1
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            350,
+            364,
+            370,
+            378,
+            395,
+            412,
+            447,
+            457,
+            476,
+            535,
+            552,
+            576,
+            627,
+            637,
+            652
+          ],
+          "HashSignatureInstruction": [
+            0,
+            22,
+            32,
+            41,
+            55,
+            60,
+            65,
+            81,
+            89,
+            93,
+            98,
+            105,
+            113,
+            117,
+            119,
+            125,
+            131,
+            137,
+            144,
+            146
+          ],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 161,
+          "ReplaceExtension": 34,
+          "HashSignatureInstruction": 229
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "0055c109921f063ec1442bf49f0dae3da8671f9a288d5c34e5bd52219cde3d87"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.008531957864761353
+      },
+      "rebuilt": {
+        "observables": {
+          "records": [
+            "0x80000080,relocated\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x80000080, relocated"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 1,
+          "replacements_sha256": "4ead1952cd5540d81a1f1b889f54b43c1582e5bfd56e82dde5d1e5267cc229e9",
+          "replacements_prefix": [
+            [
+              2147483776,
+              1611661312
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483776,
+              "name": "relocated",
+              "text": "0x80000080,relocated\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483776,
+              "name": "relocated",
+              "text": "Searching... 0x80000080, relocated"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000080, relocated"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 454,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 467,
+            "esp_from_frame": 0,
+            "value": 268435456
+          }
+        ],
+        "hash_machine_code_calls": 10,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 100,
+          "RuntimeReplacements": 2,
+          "RuntimeReplacementCount": 1
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            350,
+            364,
+            370,
+            378,
+            395,
+            408,
+            444,
+            454,
+            477,
+            535,
+            552,
+            574,
+            635,
+            645,
+            660
+          ],
+          "HashSignatureInstruction": [
+            0,
+            22,
+            32,
+            41,
+            55,
+            60,
+            65,
+            81,
+            89,
+            93,
+            98,
+            105,
+            113,
+            117,
+            119,
+            125,
+            131,
+            137,
+            144,
+            146
+          ],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 161,
+          "ReplaceExtension": 34,
+          "HashSignatureInstruction": 229
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "59b43ed88fa2770e4a9a7adc1b0d60d013e4efd6741695003c1f6cc9668c3203"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.008950216695666313
+      }
+    },
+    {
+      "case": {
+        "name": "zero_hash_firstword_mismatch",
+        "entries": [
+          {
+            "name": "zero_hash",
+            "words": [
+              2576941056
+            ],
+            "length": 4,
+            "relocations": [],
+            "first_word": 39321,
+            "match_offset": 64,
+            "hash": 0,
+            "replacement_token": 1611661312
+          }
+        ],
+        "seeds": [
+          [
+            64,
+            [
+              305419896
+            ]
+          ]
+        ],
+        "start_offset": 0,
+        "directory": "C:\\Nemu",
+        "rom": "Demo.z64",
+        "fopen_failure": false,
+        "initial_count": 77
+      },
+      "matched": true,
+      "original": {
+        "observables": {
+          "records": [
+            "0x80000040,zero_hash\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x80000040, zero_hash"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 1,
+          "replacements_sha256": "4da02309034b1f45c576a5b3b9d12c47f28a1536159dd1ffd5bbe8c4572c94f7",
+          "replacements_prefix": [
+            [
+              2147483712,
+              1611661312
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483712,
+              "name": "zero_hash",
+              "text": "0x80000040,zero_hash\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483712,
+              "name": "zero_hash",
+              "text": "Searching... 0x80000040, zero_hash"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000040, zero_hash"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 457,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 466,
+            "esp_from_frame": 0,
+            "value": 268435456
+          }
+        ],
+        "hash_machine_code_calls": 0,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 50,
+          "RuntimeReplacements": 2,
+          "RuntimeReplacementCount": 1
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            350,
+            360,
+            399,
+            412,
+            447,
+            457,
+            476,
+            535,
+            552,
+            576,
+            627,
+            637,
+            652
+          ],
+          "HashSignatureInstruction": [],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 109,
+          "ReplaceExtension": 34
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "0055c109921f063ec1442bf49f0dae3da8671f9a288d5c34e5bd52219cde3d87"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.007078815251588821
+      },
+      "rebuilt": {
+        "observables": {
+          "records": [
+            "0x80000040,zero_hash\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x80000040, zero_hash"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 1,
+          "replacements_sha256": "4da02309034b1f45c576a5b3b9d12c47f28a1536159dd1ffd5bbe8c4572c94f7",
+          "replacements_prefix": [
+            [
+              2147483712,
+              1611661312
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483712,
+              "name": "zero_hash",
+              "text": "0x80000040,zero_hash\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483712,
+              "name": "zero_hash",
+              "text": "Searching... 0x80000040, zero_hash"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000040, zero_hash"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 454,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 467,
+            "esp_from_frame": 0,
+            "value": 268435456
+          }
+        ],
+        "hash_machine_code_calls": 0,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 50,
+          "RuntimeReplacements": 2,
+          "RuntimeReplacementCount": 1
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            350,
+            360,
+            399,
+            408,
+            444,
+            454,
+            477,
+            535,
+            552,
+            574,
+            635,
+            645,
+            660
+          ],
+          "HashSignatureInstruction": [],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 109,
+          "ReplaceExtension": 34
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "59b43ed88fa2770e4a9a7adc1b0d60d013e4efd6741695003c1f6cc9668c3203"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.007373749278485775
+      }
+    },
+    {
+      "case": {
+        "name": "fopen_failure",
+        "entries": [
+          {
+            "name": "alpha",
+            "words": [
+              606142465,
+              0,
+              65011720,
+              874643458
+            ],
+            "length": 16,
+            "relocations": [],
+            "first_word": 9249,
+            "match_offset": 64,
+            "hash": 848215800,
+            "replacement_token": 1611661312
+          },
+          {
+            "name": "beta",
+            "words": [
+              1007161908,
+              889738872,
+              16777224,
+              0
+            ],
+            "length": 16,
+            "relocations": [],
+            "first_word": 15368,
+            "match_offset": 512,
+            "hash": 2898122331,
+            "replacement_token": 1611661568
+          }
+        ],
+        "seeds": [
+          [
+            64,
+            [
+              606142465,
+              0,
+              65011720,
+              874643458
+            ]
+          ],
+          [
+            512,
+            [
+              1007161908,
+              889738872,
+              16777224,
+              0
+            ]
+          ]
+        ],
+        "start_offset": 0,
+        "directory": "C:\\Nemu",
+        "rom": "Demo.z64",
+        "fopen_failure": true,
+        "initial_count": 77
+      },
+      "matched": true,
+      "original": {
+        "observables": {
+          "records": [],
+          "statuses": [],
+          "count": 77,
+          "replacements_sha256": "f600eca824e84a43f0691b267bd620e462c50da165c5b80e17aecb7a924f1fa8",
+          "replacements_prefix": [
+            [
+              2779096485,
+              2779096485
+            ],
+            [
+              2779096485,
+              2779096485
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            }
+          ],
+          "file_closed": false
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          }
+        ],
+        "hash_machine_code_calls": 0,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 30
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            652
+          ],
+          "HashSignatureInstruction": [],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 59,
+          "ReplaceExtension": 34
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "0055c109921f063ec1442bf49f0dae3da8671f9a288d5c34e5bd52219cde3d87"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.004733158275485039
+      },
+      "rebuilt": {
+        "observables": {
+          "records": [],
+          "statuses": [],
+          "count": 77,
+          "replacements_sha256": "f600eca824e84a43f0691b267bd620e462c50da165c5b80e17aecb7a924f1fa8",
+          "replacements_prefix": [
+            [
+              2779096485,
+              2779096485
+            ],
+            [
+              2779096485,
+              2779096485
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            }
+          ],
+          "file_closed": false
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          }
+        ],
+        "hash_machine_code_calls": 0,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 30
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            660
+          ],
+          "HashSignatureInstruction": [],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 59,
+          "ReplaceExtension": 34
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "59b43ed88fa2770e4a9a7adc1b0d60d013e4efd6741695003c1f6cc9668c3203"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.005767287686467171
+      }
+    },
+    {
+      "case": {
+        "name": "empty_signature_table",
+        "entries": [],
+        "seeds": [],
+        "start_offset": 0,
+        "directory": "C:\\Nemu",
+        "rom": "Demo.z64",
+        "fopen_failure": false,
+        "initial_count": 77
+      },
+      "matched": true,
+      "original": {
+        "observables": {
+          "records": [],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 77,
+          "replacements_sha256": "f600eca824e84a43f0691b267bd620e462c50da165c5b80e17aecb7a924f1fa8",
+          "replacements_prefix": [
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          }
+        ],
+        "hash_machine_code_calls": 0,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 34
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            627,
+            637,
+            652
+          ],
+          "HashSignatureInstruction": [],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 63,
+          "ReplaceExtension": 34
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "0055c109921f063ec1442bf49f0dae3da8671f9a288d5c34e5bd52219cde3d87"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.005575067363679409
+      },
+      "rebuilt": {
+        "observables": {
+          "records": [],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 77,
+          "replacements_sha256": "f600eca824e84a43f0691b267bd620e462c50da165c5b80e17aecb7a924f1fa8",
+          "replacements_prefix": [
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          }
+        ],
+        "hash_machine_code_calls": 0,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 34
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            635,
+            645,
+            660
+          ],
+          "HashSignatureInstruction": [],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 63,
+          "ReplaceExtension": 34
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "59b43ed88fa2770e4a9a7adc1b0d60d013e4efd6741695003c1f6cc9668c3203"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.0055126016959548
+      }
+    },
+    {
+      "case": {
+        "name": "ignored_output_error_returns",
+        "entries": [
+          {
+            "name": "alpha",
+            "words": [
+              606142465,
+              0,
+              65011720,
+              874643458
+            ],
+            "length": 16,
+            "relocations": [],
+            "first_word": 9249,
+            "match_offset": 64,
+            "hash": 848215800,
+            "replacement_token": 1611661312
+          },
+          {
+            "name": "beta",
+            "words": [
+              1007161908,
+              889738872,
+              16777224,
+              0
+            ],
+            "length": 16,
+            "relocations": [],
+            "first_word": 15368,
+            "match_offset": 512,
+            "hash": 2898122331,
+            "replacement_token": 1611661568
+          }
+        ],
+        "seeds": [
+          [
+            64,
+            [
+              606142465,
+              0,
+              65011720,
+              874643458
+            ]
+          ],
+          [
+            512,
+            [
+              1007161908,
+              889738872,
+              16777224,
+              0
+            ]
+          ]
+        ],
+        "start_offset": 0,
+        "directory": "C:\\Nemu",
+        "rom": "Demo.z64",
+        "fopen_failure": false,
+        "initial_count": 77,
+        "file_error_returns": true
+      },
+      "matched": true,
+      "original": {
+        "observables": {
+          "records": [
+            "0x80000040,alpha\r\n",
+            "0x80000200,beta\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "part": 0,
+              "text": "Searching... 0x80000200, beta"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 2,
+          "replacements_sha256": "c32d8c7c2163c9216b7d28e2a6f543b6b45f5b5a15a718b9d6fa724a2263fb50",
+          "replacements_prefix": [
+            [
+              2147483712,
+              1611661312
+            ],
+            [
+              2147484160,
+              1611661568
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483712,
+              "name": "alpha",
+              "text": "0x80000040,alpha\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483712,
+              "name": "alpha",
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147484160,
+              "name": "beta",
+              "text": "0x80000200,beta\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147484160,
+              "name": "beta",
+              "text": "Searching... 0x80000200, beta"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000200, beta"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 457,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 466,
+            "esp_from_frame": 0,
+            "value": 268435456
+          },
+          {
+            "kind": "read",
+            "save_offset": 457,
+            "esp_from_frame": -20,
+            "value": 268435456
+          },
+          {
+            "kind": "write",
+            "save_offset": 466,
+            "esp_from_frame": 0,
+            "value": 268435456
+          },
+          {
+            "kind": "write",
+            "save_offset": 472,
+            "esp_from_frame": 0,
+            "value": 268435984
+          }
+        ],
+        "hash_machine_code_calls": 8,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 94,
+          "RuntimeReplacements": 4,
+          "RuntimeReplacementCount": 2
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            350,
+            360,
+            364,
+            370,
+            378,
+            395,
+            399,
+            412,
+            447,
+            457,
+            472,
+            476,
+            535,
+            552,
+            576,
+            583,
+            627,
+            637,
+            652
+          ],
+          "HashSignatureInstruction": [
+            0,
+            131,
+            137,
+            144
+          ],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 413,
+          "ReplaceExtension": 34,
+          "HashSignatureInstruction": 24
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "0055c109921f063ec1442bf49f0dae3da8671f9a288d5c34e5bd52219cde3d87"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.009160417132079601
+      },
+      "rebuilt": {
+        "observables": {
+          "records": [
+            "0x80000040,alpha\r\n",
+            "0x80000200,beta\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "part": 0,
+              "text": "Searching... 0x80000200, beta"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 2,
+          "replacements_sha256": "c32d8c7c2163c9216b7d28e2a6f543b6b45f5b5a15a718b9d6fa724a2263fb50",
+          "replacements_prefix": [
+            [
+              2147483712,
+              1611661312
+            ],
+            [
+              2147484160,
+              1611661568
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483712,
+              "name": "alpha",
+              "text": "0x80000040,alpha\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483712,
+              "name": "alpha",
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147484160,
+              "name": "beta",
+              "text": "0x80000200,beta\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147484160,
+              "name": "beta",
+              "text": "Searching... 0x80000200, beta"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000200, beta"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 454,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 467,
+            "esp_from_frame": 0,
+            "value": 268435456
+          },
+          {
+            "kind": "read",
+            "save_offset": 454,
+            "esp_from_frame": -20,
+            "value": 268435456
+          },
+          {
+            "kind": "write",
+            "save_offset": 467,
+            "esp_from_frame": 0,
+            "value": 268435456
+          },
+          {
+            "kind": "write",
+            "save_offset": 473,
+            "esp_from_frame": 0,
+            "value": 268435984
+          }
+        ],
+        "hash_machine_code_calls": 8,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 94,
+          "RuntimeReplacements": 4,
+          "RuntimeReplacementCount": 2
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            350,
+            360,
+            364,
+            370,
+            378,
+            395,
+            399,
+            408,
+            444,
+            454,
+            473,
+            477,
+            535,
+            552,
+            574,
+            587,
+            635,
+            645,
+            660
+          ],
+          "HashSignatureInstruction": [
+            0,
+            131,
+            137,
+            144
+          ],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 413,
+          "ReplaceExtension": 34,
+          "HashSignatureInstruction": 24
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "59b43ed88fa2770e4a9a7adc1b0d60d013e4efd6741695003c1f6cc9668c3203"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.009529288858175278
+      }
+    }
+  ],
+  "history_perturbations": [
+    {
+      "image": "original",
+      "forced_history_read": 0,
+      "observables_unchanged": true,
+      "execution": {
+        "observables": {
+          "records": [
+            "0x80000040,alpha\r\n",
+            "0x80000200,beta\r\n",
+            "0x80000104,gamma\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "part": 0,
+              "text": "Searching... 0x80000200, beta"
+            },
+            {
+              "part": 0,
+              "text": "Searching... 0x80000104, gamma"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 3,
+          "replacements_sha256": "8181b3c4dac8aa47886e1e1dd6406593d72be4f14616937dc59540df533f5101",
+          "replacements_prefix": [
+            [
+              2147483712,
+              1611661312
+            ],
+            [
+              2147484160,
+              1611661568
+            ],
+            [
+              2147483908,
+              1611661824
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483712,
+              "name": "alpha",
+              "text": "0x80000040,alpha\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483712,
+              "name": "alpha",
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147484160,
+              "name": "beta",
+              "text": "0x80000200,beta\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147484160,
+              "name": "beta",
+              "text": "Searching... 0x80000200, beta"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000200, beta"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483908,
+              "name": "gamma",
+              "text": "0x80000104,gamma\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483908,
+              "name": "gamma",
+              "text": "Searching... 0x80000104, gamma"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000104, gamma"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 457,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 466,
+            "esp_from_frame": 0,
+            "value": 268435456
+          },
+          {
+            "kind": "read",
+            "save_offset": 457,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 466,
+            "esp_from_frame": 0,
+            "value": 268435456
+          },
+          {
+            "kind": "read",
+            "save_offset": 457,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 466,
+            "esp_from_frame": 0,
+            "value": 268435456
+          }
+        ],
+        "hash_machine_code_calls": 12,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 128,
+          "RuntimeReplacements": 6,
+          "RuntimeReplacementCount": 3
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            350,
+            360,
+            364,
+            370,
+            378,
+            395,
+            399,
+            412,
+            447,
+            457,
+            476,
+            535,
+            552,
+            576,
+            583,
+            627,
+            637,
+            652
+          ],
+          "HashSignatureInstruction": [
+            0,
+            131,
+            137,
+            144
+          ],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 607,
+          "ReplaceExtension": 34,
+          "HashSignatureInstruction": 36
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "0055c109921f063ec1442bf49f0dae3da8671f9a288d5c34e5bd52219cde3d87"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.011036371812224388
+      }
+    },
+    {
+      "image": "original",
+      "forced_history_read": 4294967295,
+      "observables_unchanged": true,
+      "execution": {
+        "observables": {
+          "records": [
+            "0x80000040,alpha\r\n",
+            "0x80000200,beta\r\n",
+            "0x80000104,gamma\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "part": 0,
+              "text": "Searching... 0x80000200, beta"
+            },
+            {
+              "part": 0,
+              "text": "Searching... 0x80000104, gamma"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 3,
+          "replacements_sha256": "8181b3c4dac8aa47886e1e1dd6406593d72be4f14616937dc59540df533f5101",
+          "replacements_prefix": [
+            [
+              2147483712,
+              1611661312
+            ],
+            [
+              2147484160,
+              1611661568
+            ],
+            [
+              2147483908,
+              1611661824
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483712,
+              "name": "alpha",
+              "text": "0x80000040,alpha\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483712,
+              "name": "alpha",
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147484160,
+              "name": "beta",
+              "text": "0x80000200,beta\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147484160,
+              "name": "beta",
+              "text": "Searching... 0x80000200, beta"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000200, beta"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483908,
+              "name": "gamma",
+              "text": "0x80000104,gamma\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483908,
+              "name": "gamma",
+              "text": "Searching... 0x80000104, gamma"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000104, gamma"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 457,
+            "esp_from_frame": -20,
+            "value": 4294967295
+          },
+          {
+            "kind": "write",
+            "save_offset": 466,
+            "esp_from_frame": 0,
+            "value": 268435456
+          },
+          {
+            "kind": "write",
+            "save_offset": 472,
+            "esp_from_frame": 0,
+            "value": 268435536
+          },
+          {
+            "kind": "read",
+            "save_offset": 457,
+            "esp_from_frame": -20,
+            "value": 4294967295
+          },
+          {
+            "kind": "write",
+            "save_offset": 466,
+            "esp_from_frame": 0,
+            "value": 268435456
+          },
+          {
+            "kind": "write",
+            "save_offset": 472,
+            "esp_from_frame": 0,
+            "value": 268435984
+          },
+          {
+            "kind": "read",
+            "save_offset": 457,
+            "esp_from_frame": -20,
+            "value": 4294967295
+          },
+          {
+            "kind": "write",
+            "save_offset": 466,
+            "esp_from_frame": 0,
+            "value": 268435456
+          },
+          {
+            "kind": "write",
+            "save_offset": 472,
+            "esp_from_frame": 0,
+            "value": 268435732
+          }
+        ],
+        "hash_machine_code_calls": 12,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 131,
+          "RuntimeReplacements": 6,
+          "RuntimeReplacementCount": 3
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            350,
+            360,
+            364,
+            370,
+            378,
+            395,
+            399,
+            412,
+            447,
+            457,
+            472,
+            535,
+            552,
+            576,
+            583,
+            627,
+            637,
+            652
+          ],
+          "HashSignatureInstruction": [
+            0,
+            131,
+            137,
+            144
+          ],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 607,
+          "ReplaceExtension": 34,
+          "HashSignatureInstruction": 36
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "0055c109921f063ec1442bf49f0dae3da8671f9a288d5c34e5bd52219cde3d87"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.010538221336901188
+      }
+    },
+    {
+      "image": "rebuilt",
+      "forced_history_read": 0,
+      "observables_unchanged": true,
+      "execution": {
+        "observables": {
+          "records": [
+            "0x80000040,alpha\r\n",
+            "0x80000200,beta\r\n",
+            "0x80000104,gamma\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "part": 0,
+              "text": "Searching... 0x80000200, beta"
+            },
+            {
+              "part": 0,
+              "text": "Searching... 0x80000104, gamma"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 3,
+          "replacements_sha256": "8181b3c4dac8aa47886e1e1dd6406593d72be4f14616937dc59540df533f5101",
+          "replacements_prefix": [
+            [
+              2147483712,
+              1611661312
+            ],
+            [
+              2147484160,
+              1611661568
+            ],
+            [
+              2147483908,
+              1611661824
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483712,
+              "name": "alpha",
+              "text": "0x80000040,alpha\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483712,
+              "name": "alpha",
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147484160,
+              "name": "beta",
+              "text": "0x80000200,beta\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147484160,
+              "name": "beta",
+              "text": "Searching... 0x80000200, beta"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000200, beta"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483908,
+              "name": "gamma",
+              "text": "0x80000104,gamma\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483908,
+              "name": "gamma",
+              "text": "Searching... 0x80000104, gamma"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000104, gamma"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 454,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 467,
+            "esp_from_frame": 0,
+            "value": 268435456
+          },
+          {
+            "kind": "read",
+            "save_offset": 454,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 467,
+            "esp_from_frame": 0,
+            "value": 268435456
+          },
+          {
+            "kind": "read",
+            "save_offset": 454,
+            "esp_from_frame": -20,
+            "value": 0
+          },
+          {
+            "kind": "write",
+            "save_offset": 467,
+            "esp_from_frame": 0,
+            "value": 268435456
+          }
+        ],
+        "hash_machine_code_calls": 12,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 128,
+          "RuntimeReplacements": 6,
+          "RuntimeReplacementCount": 3
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            350,
+            360,
+            364,
+            370,
+            378,
+            395,
+            399,
+            408,
+            444,
+            454,
+            477,
+            535,
+            552,
+            574,
+            587,
+            635,
+            645,
+            660
+          ],
+          "HashSignatureInstruction": [
+            0,
+            131,
+            137,
+            144
+          ],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 607,
+          "ReplaceExtension": 34,
+          "HashSignatureInstruction": 36
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "59b43ed88fa2770e4a9a7adc1b0d60d013e4efd6741695003c1f6cc9668c3203"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.010758878663182259
+      }
+    },
+    {
+      "image": "rebuilt",
+      "forced_history_read": 4294967295,
+      "observables_unchanged": true,
+      "execution": {
+        "observables": {
+          "records": [
+            "0x80000040,alpha\r\n",
+            "0x80000200,beta\r\n",
+            "0x80000104,gamma\r\n"
+          ],
+          "statuses": [
+            {
+              "part": 0,
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "part": 0,
+              "text": "Searching... 0x80000200, beta"
+            },
+            {
+              "part": 0,
+              "text": "Searching... 0x80000104, gamma"
+            },
+            {
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "count": 3,
+          "replacements_sha256": "8181b3c4dac8aa47886e1e1dd6406593d72be4f14616937dc59540df533f5101",
+          "replacements_prefix": [
+            [
+              2147483712,
+              1611661312
+            ],
+            [
+              2147484160,
+              1611661568
+            ],
+            [
+              2147483908,
+              1611661824
+            ],
+            [
+              2779096485,
+              2779096485
+            ]
+          ],
+          "boundary_calls": [
+            {
+              "function": "lstrcatA",
+              "suffix": ".cod"
+            },
+            {
+              "function": "fopen",
+              "filename": "C:\\Nemu\\cod\\Demo.cod",
+              "mode": "wb"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483712,
+              "name": "alpha",
+              "text": "0x80000040,alpha\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483712,
+              "name": "alpha",
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000040, alpha"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147484160,
+              "name": "beta",
+              "text": "0x80000200,beta\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147484160,
+              "name": "beta",
+              "text": "Searching... 0x80000200, beta"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000200, beta"
+            },
+            {
+              "function": "fprintf",
+              "format": "0x%X,%s\r\n",
+              "address": 2147483908,
+              "name": "gamma",
+              "text": "0x80000104,gamma\r\n"
+            },
+            {
+              "function": "fflush"
+            },
+            {
+              "function": "sprintf",
+              "format": "Searching... 0x%X, %s",
+              "address": 2147483908,
+              "name": "gamma",
+              "text": "Searching... 0x80000104, gamma"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Searching... 0x80000104, gamma"
+            },
+            {
+              "function": "fclose"
+            },
+            {
+              "function": "SetStatusText",
+              "part": 0,
+              "text": "Nemulating..."
+            }
+          ],
+          "file_closed": true
+        },
+        "history_slot_trace": [
+          {
+            "kind": "write",
+            "save_offset": 19,
+            "esp_from_frame": 0,
+            "value": 0
+          },
+          {
+            "kind": "read",
+            "save_offset": 454,
+            "esp_from_frame": -20,
+            "value": 4294967295
+          },
+          {
+            "kind": "write",
+            "save_offset": 467,
+            "esp_from_frame": 0,
+            "value": 268435456
+          },
+          {
+            "kind": "write",
+            "save_offset": 473,
+            "esp_from_frame": 0,
+            "value": 268435536
+          },
+          {
+            "kind": "read",
+            "save_offset": 454,
+            "esp_from_frame": -20,
+            "value": 4294967295
+          },
+          {
+            "kind": "write",
+            "save_offset": 467,
+            "esp_from_frame": 0,
+            "value": 268435456
+          },
+          {
+            "kind": "write",
+            "save_offset": 473,
+            "esp_from_frame": 0,
+            "value": 268435984
+          },
+          {
+            "kind": "read",
+            "save_offset": 454,
+            "esp_from_frame": -20,
+            "value": 4294967295
+          },
+          {
+            "kind": "write",
+            "save_offset": 467,
+            "esp_from_frame": 0,
+            "value": 268435456
+          },
+          {
+            "kind": "write",
+            "save_offset": 473,
+            "esp_from_frame": 0,
+            "value": 268435732
+          }
+        ],
+        "hash_machine_code_calls": 12,
+        "extension_machine_code_calls": 1,
+        "callee_saved_registers_preserved": true,
+        "stack_restored": true,
+        "rdram_unchanged": true,
+        "invalid_memory_accesses": [],
+        "code_unchanged": true,
+        "guard_violations": [],
+        "writes_by_permitted_region": {
+          "stack": 131,
+          "RuntimeReplacements": 6,
+          "RuntimeReplacementCount": 3
+        },
+        "executed_basic_blocks": {
+          "SaveFunctionSignatures": [
+            0,
+            31,
+            48,
+            63,
+            70,
+            77,
+            93,
+            96,
+            104,
+            152,
+            160,
+            167,
+            176,
+            184,
+            191,
+            193,
+            207,
+            209,
+            214,
+            229,
+            244,
+            256,
+            272,
+            283,
+            288,
+            294,
+            301,
+            306,
+            333,
+            350,
+            360,
+            364,
+            370,
+            378,
+            395,
+            399,
+            408,
+            444,
+            454,
+            473,
+            535,
+            552,
+            574,
+            587,
+            635,
+            645,
+            660
+          ],
+          "HashSignatureInstruction": [
+            0,
+            131,
+            137,
+            144
+          ],
+          "ReplaceExtension": [
+            0,
+            6,
+            13,
+            18,
+            24,
+            27,
+            31,
+            47
+          ]
+        },
+        "basic_block_visits": {
+          "SaveFunctionSignatures": 607,
+          "ReplaceExtension": 34,
+          "HashSignatureInstruction": 36
+        },
+        "actual_body_spans": {
+          "SaveFunctionSignatures": {
+            "va": 4325280,
+            "size": 672,
+            "sha256": "59b43ed88fa2770e4a9a7adc1b0d60d013e4efd6741695003c1f6cc9668c3203"
+          },
+          "HashSignatureInstruction": {
+            "va": 4325120,
+            "size": 160,
+            "sha256": "ca61abbe54494b2ffb38e6b2c8f50ed92d43ba44c4f5dbe80d3771a59989ed1a"
+          },
+          "ReplaceExtension": {
+            "va": 4318752,
+            "size": 48,
+            "sha256": "1182b95e07f45a4ab1936b4f2da7f9e6af2688965ee9cf9b5da183366e42c4f3"
+          }
+        },
+        "seconds": 0.010777945630252361
+      }
+    }
+  ],
+  "guard_self_checks": [
+    {
+      "guard": "unexpected_code",
+      "rejected": true,
+      "observation": {
+        "kind": "unexpected_code",
+        "address": 4325952,
+        "size": 32
+      }
+    },
+    {
+      "guard": "unexpected_write",
+      "rejected": true,
+      "observation": {
+        "kind": "unexpected_write",
+        "address": 403684836,
+        "size": 4,
+        "eip": 4325286
+      }
+    }
+  ],
+  "limitations": [
+    "Finite controlled inputs are not a universal equivalence proof.",
+    "CRT file/format functions, SetStatusText and lstrcatA are boundary models; real OS, CRT FILE internals, GUI and filesystem behavior are not exercised.",
+    "Only the stated normal bounded strings and synthetic tables are tested; undefined buffer-overflow inputs are excluded.",
+    "Preferred-base execution does not establish rebasing or source-operand provenance.",
+    "Behavioral agreement does not certify exact compiled bytes or recover original source declarations."
+  ]
+}
