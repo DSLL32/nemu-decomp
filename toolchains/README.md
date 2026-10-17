@@ -15,6 +15,7 @@ Installer media in `toolchains-staging/` remains untracked.
 | `vc6` | VC6 RTM + SP5 + Processor Pack | CL 12.00.8804; C1 12.0.8867; C1XX 12.0.8964; C2 file version 13.0.9044; linker 6.0.8447 | `gs_dll.dll` |
 | `vc6rtm` | VC6 RTM C compiler and import tools | CL/C1/C2 12.0.8168; linker/MSPDB 6.0.8168 | zlib 1.1.3 and unzip 0.15 in `nemu64.exe` |
 | `vc7` | Visual Studio .NET 2002 / VC7.0 | Compiler 13.00.9466; linker and MASM 7.0.9466 | `nemu64.exe` |
+| `d6rtm` | Delphi 6 RTM RTL/VCL + Update 1 Personal compiler | DCC32 6.0.6.190; RTM compiled units | `profile.dll` |
 | `d6u1` | Delphi 6 General Update 1 | Compiler / RTL / VCL build 6.0.6.190 | `dialogs.dll` |
 | `d6u2` | Delphi 6 General Update 2 | Compiler / RTL / VCL build 6.0.6.240 | `debugger.dll` |
 
@@ -69,6 +70,22 @@ Personal compiler (6.0.6.240) for the debugger's matching edition stamp. A full
 VCL/theme probe emits identical code, data, imports and relocations with the
 Update 2 Personal and Enterprise compilers; the Personal DVCLAL stamp matches
 the original debugger.
+
+`d6rtm` is the 46-file build subset for `profile.dll`: the 43 required RTM
+compiled units, `controls.res`, the unchanged resource-linker DLL, and the General Update 1 Personal
+compiler. This combination reproduces the complete original DLL after restoring
+only resource-directory clock fields. It does **not** establish which compiler
+executable originally produced Profile. Static comparisons identify its RTM
+runtime: all 1,192 eligible reference blocks match, compared with two absent
+blocks for Update 1 and 22 for Update 2. No later runtime updates are applied.
+
+The [file provenance and hashes](profile-toolchain.json) distinguish the RTM
+Enterprise media from the Personal Update 1 compiler installer. Re-extract this
+subset without overwriting the installed files with:
+
+```sh
+python3 scripts/install_profile_toolchain.py --dest "$HOME/.ai-tmp/<scratch>/d6rtm"
+```
 
 ### Running and checking the tools
 

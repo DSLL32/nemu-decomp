@@ -1,0 +1,372 @@
+{
+  "original": "master/Plugin/profile.dll",
+  "original_sha256": "b082cfd8a8146a5ea967c219e699658d9232347c66f8469a4a741e59becc5e68",
+  "library_identification": "Delphi 6 RTM",
+  "original_compiler_identified": false,
+  "matching_build_configuration": "Unmodified Delphi 6 General Update 1 Personal compiler 6.0.6.190 with RTM RTL/VCL DCUs",
+  "runtime_comparisons": {
+    "rtm": {
+      "reference": {
+        "path": "/root/.ai-tmp/nemu-d6-check._u5f1cf2/rtm/probe/probe.dll",
+        "sha256": "2f9c85d04ae9061eff2ade4897eab177b0d2c9d92cad29fcb55c70eda0c31352"
+      },
+      "map": {
+        "path": "/root/.ai-tmp/nemu-d6-check._u5f1cf2/rtm/probe/probe.map",
+        "sha256": "eaf23c78461105040111697908ba4345ef23a9ba5208c8cb904f47c23c542e00"
+      },
+      "template_count": 1192,
+      "counts": {
+        "unique": 1192
+      },
+      "link_validation": {
+        "checked_direct_edges": 2468,
+        "unresolved_direct_edges": 2713,
+        "conflicts": [],
+        "tcontrol_vmt_anchors": [
+          {
+            "name": "TControl.Destroy",
+            "vmt_slot": -4,
+            "reference_rva": 268120,
+            "target_rva": 273436,
+            "length": 180,
+            "matches": true
+          },
+          {
+            "name": "TControl.SetParent",
+            "vmt_slot": 104,
+            "reference_rva": 271428,
+            "target_rva": 276760,
+            "length": 76,
+            "matches": true
+          },
+          {
+            "name": "TControl.WndProc",
+            "vmt_slot": 116,
+            "reference_rva": 276452,
+            "target_rva": 281784,
+            "length": 408,
+            "matches": true
+          }
+        ]
+      }
+    },
+    "u1": {
+      "reference": {
+        "path": "/root/.ai-tmp/nemu-d6-check._u5f1cf2/u1/probe/probe.dll",
+        "sha256": "baa41d42f98eb317a744cbe068ee2efdb602462a5d819f4339f97bd7b885f3b5"
+      },
+      "map": {
+        "path": "/root/.ai-tmp/nemu-d6-check._u5f1cf2/u1/probe/probe.map",
+        "sha256": "7414f1f3b7a900c1fc80f70eea261afe4e72487223e7bc5ea72c86caea9e7c1b"
+      },
+      "template_count": 1194,
+      "counts": {
+        "unique": 1192,
+        "absent": 2
+      },
+      "link_validation": {
+        "checked_direct_edges": 2470,
+        "unresolved_direct_edges": 2693,
+        "conflicts": [],
+        "tcontrol_vmt_anchors": [
+          {
+            "name": "TControl.Destroy",
+            "vmt_slot": -4,
+            "reference_rva": 279888,
+            "target_rva": 273436,
+            "length": 180,
+            "matches": true
+          },
+          {
+            "name": "TControl.SetParent",
+            "vmt_slot": 104,
+            "reference_rva": 283196,
+            "target_rva": 276760,
+            "length": 76,
+            "matches": true
+          },
+          {
+            "name": "TControl.WndProc",
+            "vmt_slot": 116,
+            "reference_rva": 288220,
+            "target_rva": 281784,
+            "length": 408,
+            "matches": true
+          }
+        ]
+      }
+    },
+    "u2": {
+      "reference": {
+        "path": "/root/.ai-tmp/nemu-d6-check._u5f1cf2/u2/probe/probe.dll",
+        "sha256": "e559e3eb73167eb86ebbdf002b0d0e49716db34317c0f26092921f6a19cbfa61"
+      },
+      "map": {
+        "path": "/root/.ai-tmp/nemu-d6-check._u5f1cf2/u2/probe/probe.map",
+        "sha256": "9d5181a29e99318c79bf6b554d1a22bb24551e07d0bf578519c3c60a1f6dfcbe"
+      },
+      "template_count": 1192,
+      "counts": {
+        "unique": 1170,
+        "absent": 22
+      },
+      "link_validation": {
+        "checked_direct_edges": 2393,
+        "unresolved_direct_edges": 2602,
+        "conflicts": [
+          {
+            "caller": [
+              "@InitLib"
+            ],
+            "callee": [
+              "@StartLib"
+            ],
+            "target_rva": 16228,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.Create"
+            ],
+            "callee": [
+              "TObject.Create"
+            ],
+            "target_rva": 44440,
+            "expected_rvas": [
+              13428
+            ]
+          },
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.Destroy"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 45344,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.EndWrite"
+            ],
+            "callee": [
+              "TThreadLocalCounter2.Open"
+            ],
+            "target_rva": 44628,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginRead"
+            ],
+            "callee": [
+              "TThreadLocalCounter2.Open"
+            ],
+            "target_rva": 44628,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.EndRead"
+            ],
+            "callee": [
+              "TThreadLocalCounter2.Open"
+            ],
+            "target_rva": 44628,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCollection.Assign"
+            ],
+            "callee": [
+              "TCollection.Add"
+            ],
+            "target_rva": 82632,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TReader.ReadCollection"
+            ],
+            "callee": [
+              "TCollection.Add"
+            ],
+            "target_rva": 82632,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TReader.ReadRootComponent"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 45344,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomForm.Create"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 45344,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomForm.BeforeDestruction"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 45344,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomForm.Destroy"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 45344,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TApplication.HintMouseMessage"
+            ],
+            "callee": [
+              "TApplication.ActivateHint"
+            ],
+            "target_rva": 223800,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TApplication.HintTimerExpired"
+            ],
+            "callee": [
+              "TApplication.ActivateHint"
+            ],
+            "target_rva": 223800,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomImageList.ReadData"
+            ],
+            "callee": [
+              "TCustomImageList.ReadD3Stream"
+            ],
+            "target_rva": 230088,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMenuItem.Destroy"
+            ],
+            "callee": [
+              "TMenuItem.MergeWith"
+            ],
+            "target_rva": 238040,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMenuItem.Notification"
+            ],
+            "callee": [
+              "TMenuItem.MergeWith"
+            ],
+            "target_rva": 238040,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TWinControl.WndProc"
+            ],
+            "callee": [
+              "TControl.WndProc"
+            ],
+            "target_rva": 281784,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TWinControl.WndProc"
+            ],
+            "callee": [
+              "TControl.WndProc"
+            ],
+            "target_rva": 281784,
+            "expected_rvas": []
+          }
+        ],
+        "tcontrol_vmt_anchors": [
+          {
+            "name": "TControl.Destroy",
+            "vmt_slot": -4,
+            "reference_rva": 289824,
+            "target_rva": 273436,
+            "length": 180,
+            "matches": true
+          },
+          {
+            "name": "TControl.SetParent",
+            "vmt_slot": 104,
+            "reference_rva": 293132,
+            "target_rva": 276760,
+            "length": 76,
+            "matches": true
+          },
+          {
+            "name": "TControl.WndProc",
+            "vmt_slot": 116,
+            "reference_rva": 298156,
+            "target_rva": 281784,
+            "length": 404,
+            "matches": false
+          }
+        ]
+      }
+    }
+  },
+  "imported_globals": [
+    {
+      "unit": "UnitMain",
+      "name": "Nemu64_API",
+      "storage_va": "0x452a2c",
+      "import_slot_va": "0x450f98"
+    },
+    {
+      "unit": "UnitMain",
+      "name": "NemuMainWinHandle",
+      "storage_va": "0x452afc",
+      "import_slot_va": "0x450e18"
+    },
+    {
+      "unit": "UnitProfiling",
+      "name": "FormProfiler",
+      "storage_va": "0x452d04",
+      "import_slot_va": "0x451014"
+    },
+    {
+      "unit": "UnitProfiling",
+      "name": "ProfilerFormHandle",
+      "storage_va": "0x452d08",
+      "import_slot_va": "0x450e50"
+    },
+    {
+      "unit": "UnitProfiling",
+      "name": "DoProfiling",
+      "storage_va": "0x452d0c",
+      "import_slot_va": "0x450fec"
+    }
+  ],
+  "identifier_evidence": "Names are inferred, with imported-data ordering constrained by the Delphi hash model documented in analysis/input-imports.json. Matching ordering does not identify original private/global spellings."
+}
