@@ -12,12 +12,15 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import sys
 import tempfile
 
 from verify_nemu import compare
+from inspect_gs_symbols import imported_symbols
+from pe_fingerprints import PE32
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -51,12 +54,21 @@ ZLIB_FLAGS = [
     '/nologo', '/c', '/O2', '/ML', '/DWIN32', '/DNDEBUG',
     '/Ivendor/zlib-1.1.3',
 ]
+RECIPE_FILES = [
+    'build_nemu.py', 'build_nemu_imports.py', 'run_toolchain.py',
+    'verify_nemu.py', 'verify_gs.py', 'pe_fingerprints.py',
+    'build_nemu_link_inputs.py', 'map_nemu_libraries.py', 'inspect_gs_symbols.py',
+]
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--work', type=Path, help='reusable build directory under ~/.ai-tmp')
     parser.add_argument('--no-map', action='store_true')
+    parser.add_argument('--function-order', type=Path,
+                        help='VC7 /ORDER file for reconstructed application functions')
+    parser.add_argument('--ordered-libraries', action='store_true',
+                        help='use the inferred unchanged CRT/import-member input order')
     parser.add_argument('--report', type=Path, help='also write the build/comparison report here')
     args = parser.parse_args()
     parent = Path.home() / '.ai-tmp'
@@ -102,6 +114,16 @@ def main():
                     toolchain, name, *arguments])
 
     try:
+        # Capture the recipe before building: other reconstruction work may
+        # continue in the shared checkout while the compiler runs.
+        recipe = {name: (ROOT / 'scripts' / name).read_bytes()
+                  for name in RECIPE_FILES}
+        toolchain_manifest = (ROOT / 'toolchains/manifest.json').read_bytes()
+        function_order = args.function_order.read_bytes() if args.function_order else None
+        if function_order is not None:
+            (project / 'function-order.txt').write_bytes(function_order)
+            report['function_order'] = dict(source=str(args.function_order.resolve()),
+                copied_file='function-order.txt', sha256=hashlib.sha256(function_order).hexdigest())
         # Preserve source bytes, including the Windows-1252 resource script.
         # Build from this snapshot; no generated files are written into src/.
         application = []
@@ -133,6 +155,13 @@ def main():
         run('import-libraries', [sys.executable, str(ROOT / 'scripts/build_nemu_imports.py'),
                                 '--build-dir', str(project / 'imports'),
                                 '--source-dir', str(project / 'imports')])
+        if args.ordered_libraries:
+            run('ordered-library-inputs', [sys.executable,
+                str(ROOT / 'scripts/build_nemu_link_inputs.py'),
+                '--order', 'imports/link-order.json', '--import-dir', 'imports',
+                '--output-dir', 'obj/link-inputs'])
+            report['ordered_library_inputs'] = json.loads(
+                (project / 'obj/link-inputs/inputs.json').read_text())
         zlib_objects = []
         for source in ZLIB_ORDER:
             name = Path(source).stem
@@ -156,12 +185,15 @@ def main():
             '/INCREMENTAL:NO', '/MACHINE:I386', '/BASE:0x400000', '/FIXED',
             '/OUT:' + winoutput + r'\nemu64.exe',
             *application_objects, *zlib_objects, 'obj/nemu64.res',
+            *(['@obj/link-inputs/link.rsp'] if args.ordered_libraries else []),
             'comctl32.lib', 'winmm.lib', 'imports/kailleraclient.lib',
             'imports/gs_dll.lib', 'kernel32.lib', 'user32.lib', 'gdi32.lib',
             'comdlg32.lib', 'shell32.lib',
         ]
         if not args.no_map:
             options.append('/MAP:' + winoutput + r'\nemu64.map')
+        if function_order is not None:
+            options.append('/ORDER:@function-order.txt')
         # Previous successful outputs have immutable copies under artifacts/.
         # Remove only this build's known outputs so failure cannot leave a stale
         # executable looking like a newly successful link.
@@ -171,6 +203,18 @@ def main():
         executable = output / 'nemu64.exe'
         raw = output / 'nemu64.linked.exe'
         shutil.copyfile(executable, raw)
+        if function_order is not None:
+            report['function_order']['ignored_entries'] = re.findall(
+                r'[^\r\n]*LNK4037[^\r\n]*', (logs / 'link.log').read_text(errors='replace'))
+        if args.ordered_libraries:
+            expected = json.loads((project / 'imports/link-order.json').read_text())['imports']['expected_layout']
+            actual = imported_symbols(PE32(executable))
+            identity = lambda row: (row['dll'].lower(), row['name'])
+            wanted = {identity(row): row['iat_va'] for row in expected}
+            observed = {identity(row): row['iat_va'] for row in actual}
+            report['import_layout'] = dict(expected_count=len(expected), actual_count=len(actual),
+                exact_iat_slots=sum(observed.get(key) == address for key, address in wanted.items()),
+                names_and_slots_equal=wanted == observed)
         comparison = compare(executable)
         (scratch / 'comparison.json').write_text(json.dumps(comparison, indent=2) + '\n')
         artifact = scratch / 'artifacts' / comparison['rebuilt_sha256']
@@ -182,6 +226,41 @@ def main():
         report.update(status='byte_exact' if comparison['full_exe_byte_exact'] else 'different',
                       raw_linked_exe=str(raw), executable=str(executable),
                       immutable_artifact_dir=str(artifact), comparison=comparison)
+        # Keep the exact input source and generated object tree alongside every
+        # successful link. This permits isolated relinks and reproducing earlier
+        # checkpoints after the shared sources have changed.
+        snapshot = artifact / 'source-snapshot'
+        records = []
+        for row in report['source_files']:
+            data = (project / row['path']).read_bytes()
+            if hashlib.sha256(data).hexdigest() != row['sha256']:
+                raise RuntimeError('Build source changed during compilation: ' + row['path'])
+            destination = snapshot / 'src/nemu64' / row['path']
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(data)
+            records.append(dict(path=str(destination.relative_to(snapshot)), sha256=row['sha256']))
+        for name, data in recipe.items():
+            destination = snapshot / 'scripts' / name
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(data)
+            records.append(dict(path=str(destination.relative_to(snapshot)),
+                                sha256=hashlib.sha256(data).hexdigest()))
+        if function_order is not None:
+            destination = snapshot / 'build-inputs/function-order.txt'
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(function_order)
+            records.append(dict(path=str(destination.relative_to(snapshot)),
+                                sha256=hashlib.sha256(function_order).hexdigest()))
+        for name in ['toolchains', 'master']:
+            link = snapshot / name
+            if not link.exists():
+                link.symlink_to(ROOT / name, target_is_directory=True)
+        shutil.copytree(project, artifact / 'build-tree', dirs_exist_ok=True)
+        (artifact / 'toolchain-manifest.json').write_bytes(toolchain_manifest)
+        (artifact / 'snapshot-manifest.json').write_text(json.dumps(dict(
+            parent_artifact=str(artifact), source_file_hashes_verified=True,
+            source_files_from_build_report=len(report['source_files']),
+            scripts_captured_before_build=RECIPE_FILES, files=records), indent=2) + '\n')
         write_report()
         shutil.copyfile(scratch / 'build.json', artifact / 'build.json')
         print(f'Raw linker output: {raw}\n'

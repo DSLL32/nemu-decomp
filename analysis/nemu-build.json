@@ -588,7 +588,7 @@
       "comp_id": "001c24fa",
       "count": 93,
       "meaning": "VC7 C",
-      "evidence": "82 code-bearing CRT members independently mapped; dependency closure identifies ten more uniquely defined CRT members (ctype,nlsdata1,nlsdata2,_newmode,txtmode,cmiscdat,crt0init,ncommode,constpow,crt0fp), giving92 of93 records. One contribution remains unattributed; do not assume all application units are C++."
+      "evidence": "92 independently supported VC7 CRT members plus the inferred native C CopyAndSwapWords unit account for93 target records. CopyAndSwapWords has a36-byte exact native /O2 /ML body and retains cdecl at every observed caller; compilation without /GL restores that boundary. ByteSwap.c is an inferred filename. See nemu-memory.json and nemu-library-addresses.json."
     },
     {
       "comp_id": "000420ff",
@@ -1918,6 +1918,20 @@
           }
         ]
       }
+    },
+    "ltcg_source_language": {
+      "scratch": "/root/.ai-tmp/nemu-ltcg-language._8yhbjq3",
+      "flags": [
+        "/O2",
+        "/Ob1",
+        "/ML",
+        "/GL"
+      ],
+      "c_product": "002b24fa",
+      "cpp_product": "002c24fa",
+      "source_identical": true,
+      "target_has_ltcg_c": false,
+      "target_ltcg_cpp_count": 27
     }
   },
   "surviving_strings": [
@@ -1949,18 +1963,75 @@
   },
   "build_script": "scripts/build_nemu.py",
   "integration_validation": {
-    "command": "python3 scripts/build_nemu.py --work /root/.ai-tmp/nemu-build-investigate.ULGEobKx",
-    "build_report": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/build.json",
-    "status": "All current source units and resources compile; linking awaits reconstructed routines/globals.",
-    "application_units_compiled": 12,
+    "command": "python3 scripts/build_nemu.py --work /root/.ai-tmp/nemu-build-investigate.ULGEobKx --ordered-libraries --function-order /root/.ai-tmp/nemu-build-investigate.ULGEobKx/application.order",
+    "build_report": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/b4969a2b18259a0c06d7b0c6862c9ef49e59591d2b1ce3a6aac77407048b496f/build.json",
+    "status": "All current real source units compile and link successfully; full executable bytes differ.",
+    "application_units_compiled": 18,
+    "application_units": [
+      "CPU.cpp",
+      "CpuControl.cpp",
+      "Memory.cpp",
+      "ByteSwap.c",
+      "Dynarec.cpp",
+      "FrontendIni.cpp",
+      "Rom.cpp",
+      "State.cpp",
+      "WinMain.cpp",
+      "RomBrowser.cpp",
+      "Plugins.cpp",
+      "RSP.cpp",
+      "PIF.cpp",
+      "Globals.cpp",
+      "DynarecFPU.cpp",
+      "DynarecMemoryOps.cpp",
+      "DynarecOpcodes.cpp",
+      "LegacyData.cpp"
+    ],
     "vendor_units_compiled": 14,
     "import_library_validation": "passed",
     "cic_resource_generation": "passed exact expected SHA256",
     "cic_initialized_data_generation": "passed exact expected SHA256",
     "resource_compilation": "passed",
-    "link_unresolved_externals": 48,
-    "link_log": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/logs/link.log",
+    "link_unresolved_externals": 0,
+    "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+    "rebuilt_sha256": "b4969a2b18259a0c06d7b0c6862c9ef49e59591d2b1ce3a6aac77407048b496f",
+    "original_file_bytes": 4796416,
+    "rebuilt_file_bytes": 4796416,
+    "differing_file_bytes": 280765,
+    "resource_payloads_equal": true,
+    "resource_payload_count": 29,
     "full_executable_match_claimed": false,
-    "note": "This is a snapshot while other source units are being reconstructed; current symbols may have advanced since the recorded build."
+    "immutable_source_and_object_snapshot": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/b4969a2b18259a0c06d7b0c6862c9ef49e59591d2b1ce3a6aac77407048b496f",
+    "relocation_diagnostic": "/root/.ai-tmp/nemu-complete-relocs.6r3eywlv",
+    "relocation_diagnostic_preserves_all_existing_section_bytes": true,
+    "note": "Raw whole-file comparison includes all code, data, resources, padding and metadata. No bytes are restored or patched. Diagnostic /FIXED:NO adds relocation records for independent operand comparison; it is not the intended original output.",
+    "function_order": {
+      "source": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/application.order",
+      "copied_file": "function-order.txt",
+      "sha256": "2c05598a5f08940e572fbf483a6e75cb4febf444926fc43b368f8192e2e256a4",
+      "ignored_entries": []
+    },
+    "import_slot_layout": {
+      "expected_count": 152,
+      "actual_count": 152,
+      "exact_iat_slots": 152,
+      "names_and_slots_equal": true
+    }
+  },
+  "native_library_ordering": {
+    "recipe": "src/nemu64/imports/link-order.json",
+    "builder": "scripts/build_nemu_link_inputs.py",
+    "crt_order_recovery": "scripts/order_nemu_crt.py",
+    "crt_members": 114,
+    "acyclic_code_and_noncomdat_data_constraints": 141,
+    "crt_members_unchanged": true,
+    "imports": 152,
+    "import_archive_members_unchanged": true,
+    "source_libraries": "Tracked VC7 SDK/runtime libraries and historical import libraries generated from the reconstructed DEF sources.",
+    "evidence": "/root/.ai-tmp/nemu-all-import-order.rpod99bh/report.json",
+    "independent_replay_exact_api_to_iat_slots": 152,
+    "limitation": "API identities occupy the original IAT addresses, but the import descriptor and hint/name-pool order is still different. This is not a claim that complete import bytes match. The target contains two alias contributions and27 C++ LTCG contributions not yet reproduced by the current17 C++ input units.",
+    "native_code_order_note": "Explicit unchanged CRT members satisfy every mapped function and non-COMDAT data contribution ordering constraint. Remaining absolute code addresses depend on application code lengths and alignment.",
+    "inference": "These are inferred ordinary linker-input ordering recipes, not evidence that the historical project used explicit CRT members or /ORDER."
   }
 }
