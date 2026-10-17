@@ -1,0 +1,501 @@
+{
+  "original": "master/nemu64.exe",
+  "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+  "scope": "Evidence constraining source/data reconstruction; no original translation-unit names or ordering asserted",
+  "memory_breakpoints": {
+    "base": "0xa3fb20",
+    "record_size": 8,
+    "fields": [
+      {
+        "offset": 0,
+        "type": "unsigned int",
+        "purpose": "Address"
+      },
+      {
+        "offset": 4,
+        "type": "unsigned int",
+        "purpose": "Access flags"
+      }
+    ],
+    "next_live_object": "Dynarec_DelaySlot at 0xa3fe40",
+    "maximum_nonoverlapping_records": 100,
+    "reconstructed_bound": 100,
+    "bound_status": "inferred from next live independent object; no original sizeof, fixed-size clear, or producer capacity check recovered",
+    "adjacent_objects": [
+      {
+        "symbol": "Dynarec_JumpCount",
+        "va": "0xa3fb10",
+        "extent_bytes": 4
+      },
+      {
+        "symbol": "Dynarec_BlockInstructionCount",
+        "va": "0xa3fb14",
+        "extent_bytes": 4
+      },
+      {
+        "symbol": "Dynarec_PhysicalPC",
+        "va": "0xa3fb18",
+        "extent_bytes": 4
+      },
+      {
+        "symbol": "MemoryBreakpoints",
+        "va": "0xa3fb20",
+        "extent_bytes": 800
+      },
+      {
+        "symbol": "Dynarec_DelaySlot",
+        "va": "0xa3fe40",
+        "extent_bytes": 4
+      },
+      {
+        "symbol": "Dynarec_BranchPending",
+        "va": "0xa3fe44",
+        "extent_bytes": 4
+      },
+      {
+        "symbol": "Dynarec_ProfileStartHigh",
+        "va": "0xa3fe48",
+        "extent_bytes": 4
+      },
+      {
+        "symbol": "Dynarec_Inlining",
+        "va": "0xa3fe4c",
+        "extent_bytes": 4
+      },
+      {
+        "symbol": "BlockCycleCounts",
+        "va": "0xa3fe50",
+        "extent_bytes": 8388608
+      }
+    ],
+    "notes": [
+      "Debugger PWatchArray bounds [0..$FFFF] describe a pointer view, not the native allocation capacity.",
+      "Four bytes at 0xa3fb1c remain unassigned; no padding object is invented."
+    ]
+  },
+  "source_order_constraints": {
+    "semantic_code_bands": [
+      {
+        "start": 4198400,
+        "end_exclusive": 4221536,
+        "description": "RSP memory checks, scalar/vector interpreter and reciprocal ROM",
+        "confidence": "semantic_band_not_original_object_or_function_extent"
+      },
+      {
+        "start": 4221536,
+        "end_exclusive": 4234752,
+        "description": "Dynarec tracking, intermediate representation and x86 emission helpers",
+        "confidence": "semantic_band_not_original_object_or_function_extent"
+      },
+      {
+        "start": 4234752,
+        "end_exclusive": 4245920,
+        "description": "CPU interpreter, including COP0/COP1",
+        "confidence": "semantic_band_not_original_object_or_function_extent"
+      },
+      {
+        "start": 4245920,
+        "end_exclusive": 4248976,
+        "description": "Execution loop and exception/event scheduling",
+        "confidence": "semantic_band_not_original_object_or_function_extent"
+      },
+      {
+        "start": 4248976,
+        "end_exclusive": 4273072,
+        "description": "CPU dynarec opcode handlers",
+        "confidence": "semantic_band_not_original_object_or_function_extent"
+      },
+      {
+        "start": 4273072,
+        "end_exclusive": 4277280,
+        "description": "Dynarec register management and block compilation helpers",
+        "confidence": "semantic_band_not_original_object_or_function_extent"
+      }
+    ],
+    "initialized_dispatch_order": [
+      {
+        "family": "dynrec",
+        "start": "0x477820",
+        "end_exclusive": "0x477da0",
+        "tables": [
+          {
+            "kind": "primary",
+            "va": "0x477820",
+            "entries": 64
+          },
+          {
+            "kind": "special",
+            "va": "0x477920",
+            "entries": 64
+          },
+          {
+            "kind": "regimm",
+            "va": "0x477a20",
+            "entries": 32
+          },
+          {
+            "kind": "cop0",
+            "va": "0x477aa0",
+            "entries": 32
+          },
+          {
+            "kind": "tlb",
+            "va": "0x477b20",
+            "entries": 64
+          },
+          {
+            "kind": "cop1",
+            "va": "0x477c20",
+            "entries": 32
+          },
+          {
+            "kind": "cop1_function",
+            "va": "0x477ca0",
+            "entries": 64
+          }
+        ]
+      },
+      {
+        "family": "cpu_interpreter",
+        "start": "0x477da0",
+        "end_exclusive": "0x478320",
+        "tables": [
+          {
+            "kind": "primary",
+            "va": "0x477da0",
+            "entries": 64
+          },
+          {
+            "kind": "special",
+            "va": "0x477ea0",
+            "entries": 64
+          },
+          {
+            "kind": "regimm",
+            "va": "0x477fa0",
+            "entries": 32
+          },
+          {
+            "kind": "cop0",
+            "va": "0x478020",
+            "entries": 32
+          },
+          {
+            "kind": "tlb",
+            "va": "0x4780a0",
+            "entries": 64
+          },
+          {
+            "kind": "cop1",
+            "va": "0x4781a0",
+            "entries": 32
+          },
+          {
+            "kind": "cop1_function",
+            "va": "0x478220",
+            "entries": 64
+          }
+        ]
+      },
+      {
+        "family": "rsp",
+        "start": "0x479368",
+        "end_exclusive": "0x4798e8",
+        "tables": [
+          {
+            "kind": "primary",
+            "va": "0x479368",
+            "entries": 64
+          },
+          {
+            "kind": "special",
+            "va": "0x479468",
+            "entries": 64
+          },
+          {
+            "kind": "regimm",
+            "va": "0x479568",
+            "entries": 32
+          },
+          {
+            "kind": "cop0",
+            "va": "0x4795e8",
+            "entries": 32
+          },
+          {
+            "kind": "cop2",
+            "va": "0x479668",
+            "entries": 32
+          },
+          {
+            "kind": "vector_load",
+            "va": "0x4796e8",
+            "entries": 32
+          },
+          {
+            "kind": "vector_store",
+            "va": "0x479768",
+            "entries": 32
+          },
+          {
+            "kind": "vector_function",
+            "va": "0x4797e8",
+            "entries": 64
+          }
+        ]
+      }
+    ],
+    "diagnostic_literal_order": [
+      {
+        "va": "0x43de14",
+        "text": "RSP_VINSN",
+        "references": [
+          "0x4064e9"
+        ]
+      },
+      {
+        "va": "0x43de20",
+        "text": "RSP_VINSQ",
+        "references": [
+          "0x4064c9"
+        ]
+      },
+      {
+        "va": "0x43de2c",
+        "text": "RSP_VINST",
+        "references": [
+          "0x4064a9"
+        ]
+      },
+      {
+        "va": "0x43de38",
+        "text": "RSP_VEXTN",
+        "references": [
+          "0x406489"
+        ]
+      },
+      {
+        "va": "0x43de44",
+        "text": "RSP_VEXTQ",
+        "references": [
+          "0x406469"
+        ]
+      },
+      {
+        "va": "0x43de50",
+        "text": "RSP_VEXTT",
+        "references": [
+          "0x406449"
+        ]
+      },
+      {
+        "va": "0x43de5c",
+        "text": "RSP_VNOOP",
+        "references": [
+          "0x406429"
+        ]
+      },
+      {
+        "va": "0x43de68",
+        "text": "RSP_VCR",
+        "references": [
+          "0x405929"
+        ]
+      },
+      {
+        "va": "0x43de70",
+        "text": "RSP_VCH",
+        "references": [
+          "0x405909"
+        ]
+      },
+      {
+        "va": "0x43de78",
+        "text": "RSP_VNE",
+        "references": [
+          "0x404f49"
+        ]
+      },
+      {
+        "va": "0x43de80",
+        "text": "RSP_VEQ",
+        "references": [
+          "0x404f29"
+        ]
+      },
+      {
+        "va": "0x43de88",
+        "text": "RSP_VSAW error: invalid element",
+        "references": [
+          "0x404b31"
+        ]
+      },
+      {
+        "va": "0x43dea8",
+        "text": "RSP_VSUM",
+        "references": [
+          "0x4048c9"
+        ]
+      },
+      {
+        "va": "0x43deb4",
+        "text": "RSP_VSAC",
+        "references": [
+          "0x4048a9"
+        ]
+      },
+      {
+        "va": "0x43dec0",
+        "text": "RSP_VSAD",
+        "references": [
+          "0x404889"
+        ]
+      },
+      {
+        "va": "0x43decc",
+        "text": "RSP_VSUCB",
+        "references": [
+          "0x404869"
+        ]
+      },
+      {
+        "va": "0x43ded8",
+        "text": "RSP_VACCB",
+        "references": [
+          "0x404849"
+        ]
+      },
+      {
+        "va": "0x43dee4",
+        "text": "RSP_VSUBB",
+        "references": [
+          "0x404829"
+        ]
+      },
+      {
+        "va": "0x43def0",
+        "text": "RSP_VADDB",
+        "references": [
+          "0x404809"
+        ]
+      },
+      {
+        "va": "0x43defc",
+        "text": "RSP_CTC2 error: unknown control reg",
+        "references": [
+          "0x403aae"
+        ]
+      },
+      {
+        "va": "0x43df20",
+        "text": "RSP_CFC2 error: unknown control reg",
+        "references": [
+          "0x4039d8"
+        ]
+      },
+      {
+        "va": "0x43df44",
+        "text": "Access (write) to invalid RSP COP0 register",
+        "references": [
+          "0x403892"
+        ]
+      },
+      {
+        "va": "0x43dfb4",
+        "text": "Access (read) from invalid RSP COP0 register",
+        "references": [
+          "0x40362f"
+        ]
+      },
+      {
+        "va": "0x43e004",
+        "text": "RSP_swv",
+        "references": [
+          "0x402308"
+        ]
+      },
+      {
+        "va": "0x43e00c",
+        "text": "RSP_VmultExec",
+        "references": [
+          "0x4012c7",
+          "0x4014de"
+        ]
+      }
+    ],
+    "conclusions": [
+      "Initialized dispatch tables occur dynarec, CPU, RSP, whereas their semantic code bands occur RSP, emitter, CPU, dynarec. Table address order therefore does not establish original translation-unit order.",
+      "The ascending RSP diagnostic literal addresses correspond predominantly to descending code addresses, including adjacent handlers. This is consistent with reverse literal-pool emission and does not demonstrate a separate translation unit for each string group.",
+      "The empty function at 0x41fef0 is shared by application no-ops and the library _tr_static_init through identical-code folding. Its address alone cannot identify the original source owner.",
+      "LegacyData.cpp is a provisional grouping of retained typed objects; no original file naming or array grouping claim follows from their adjacency."
+    ]
+  },
+  "original_source_path_evidence": {
+    "original_source_paths_recovered": false,
+    "source_like_strings": [],
+    "absolute_data_file_paths": [
+      {
+        "va": 4398940,
+        "text": "d:\\n64\\lastin.cic",
+        "section": ".rdata",
+        "references": [
+          {
+            "at": 4326214,
+            "offset": 0,
+            "instruction": "push",
+            "preceding_entry_candidate": 4326208
+          },
+          {
+            "at": 4326238,
+            "offset": 0,
+            "instruction": "push",
+            "preceding_entry_candidate": 4326208
+          }
+        ]
+      }
+    ],
+    "note": "d:\\n64\\lastin.cic is a runtime data/dump path, not an original C/C++ source filename."
+  },
+  "related_reports": [
+    "analysis/nemu-data-coverage.json",
+    "analysis/nemu-globals.json",
+    "analysis/nemu-legacy-data.json",
+    "analysis/nemu-vendor-data.json"
+  ],
+  "initialized_to_bss_boundary": {
+    "start": "0x479c2c",
+    "end_exclusive": "0x479c40",
+    "size": 20,
+    "preceding_section": {
+      "object": "constpow.obj",
+      "kind": ".data",
+      "size": 700,
+      "coff_alignment": 8
+    },
+    "following_section": {
+      "object": "zutil.obj",
+      "kind": ".bss",
+      "size": 1,
+      "coff_alignment": 4
+    },
+    "status": "zero-valued gap; original cause unproven; no synthetic storage object",
+    "linker_experiment": {
+      "toolchain": "VC7",
+      "work": "/root/.ai-tmp/nemu-data-layout.iux2um2i/alignment",
+      "map_sha256": "3a2eec0d0f2944f50d72b05f9c7e873df4091a3d89f6a14338f23a50567c3add",
+      "inputs": {
+        "Initialized.c": "unsigned char Initialized[44] = {1};\n",
+        "First.c": "unsigned char First = 0;\nconst char* GetEmpty() { return \"\"; }\n",
+        "Last.c": "__declspec(align(32)) unsigned char Last[4096];\n"
+      },
+      "commands": [
+        "cl /nologo /c /O2 /ML Initialized.c First.c Last.c",
+        "link /nologo /DLL /NOENTRY /NODEFAULTLIB /OPT:NOREF /MAP:group-explicit.map /OUT:group-explicit.dll Initialized.obj First.obj Last.obj"
+      ],
+      "observed_initialized_size": 44,
+      "observed_first_bss_offset": 64,
+      "observed_later_aligned_array_offset": 96,
+      "conclusion": "A later 32-aligned contribution raises the beginning of the whole .bss group, including earlier low-alignment objects. This explains how a 20-byte gap can occur naturally; it does not establish that the original had any particular 32-aligned object."
+    }
+  }
+}

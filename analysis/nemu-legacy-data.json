@@ -1,0 +1,122 @@
+{
+  "original": "master/nemu64.exe",
+  "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+  "source": "src/nemu64/LegacyData.cpp",
+  "source_sha256": "753acfca3f97ac33a181a229d65c0a98a629d5a549212dc76b1b259c486d113a",
+  "status": "116 literal data bytes exact; nine callback pointer identities exact; final section layout not matched",
+  "compiler": "Microsoft Visual C++ 7.0 /O2 /Ob1 /ML /GL; /LTCG /DLL /NOENTRY /NODEFAULTLIB",
+  "candidate_sha256": "b3135282fad9519abaf78afbcec398182beab87575f9482deaa3a5039f3dc396",
+  "globals": [
+    {
+      "name": "LegacyNibblePermutation",
+      "va": "0x440b00",
+      "size": 16,
+      "type": "unsigned char[16]",
+      "source": "src/nemu64/LegacyData.cpp",
+      "spelling": "inferred",
+      "original_file_and_grouping": "unknown; provisional LegacyData.cpp",
+      "purpose": "Nibble permutation (5*i+11)&15; original use unknown.",
+      "compiled_va": "0x10002000",
+      "original_sha256": "868f069e5a6affe5ccb8608aa29312a15906ae5f7c27416c50e8f51f71d8a9dd",
+      "validation": {
+        "kind": "complete_compiled_bytes",
+        "equal": true,
+        "sha256": "868f069e5a6affe5ccb8608aa29312a15906ae5f7c27416c50e8f51f71d8a9dd"
+      }
+    },
+    {
+      "name": "LegacyHighNibbleBitLength",
+      "va": "0x477754",
+      "size": 16,
+      "type": "unsigned char[16]",
+      "source": "src/nemu64/LegacyData.cpp",
+      "spelling": "inferred",
+      "original_file_and_grouping": "unknown; provisional LegacyData.cpp",
+      "purpose": "High-nibble bit length, with zero mapped to zero; original use unknown.",
+      "compiled_va": "0x10002010",
+      "original_sha256": "4ef6196534709a0c05653005c4433dc9c18537216b1ef432c79d4b87e5a4a47a",
+      "validation": {
+        "kind": "complete_compiled_bytes",
+        "equal": true,
+        "sha256": "4ef6196534709a0c05653005c4433dc9c18537216b1ef432c79d4b87e5a4a47a"
+      }
+    },
+    {
+      "name": "LegacyLowNibbleBitLength",
+      "va": "0x477764",
+      "size": 16,
+      "type": "unsigned char[16]",
+      "source": "src/nemu64/LegacyData.cpp",
+      "spelling": "inferred",
+      "original_file_and_grouping": "unknown; provisional LegacyData.cpp",
+      "purpose": "Low-nibble bit length; original use unknown.",
+      "compiled_va": "0x10002020",
+      "original_sha256": "16a83df3f20c6f25456971a4e6db9bfd813c5eb5b0c466a45efbf9aa978dd624",
+      "validation": {
+        "kind": "complete_compiled_bytes",
+        "equal": true,
+        "sha256": "16a83df3f20c6f25456971a4e6db9bfd813c5eb5b0c466a45efbf9aa978dd624"
+      }
+    },
+    {
+      "name": "LegacyEmptyCallbacks",
+      "va": "0x477774",
+      "size": 36,
+      "type": "void (__cdecl *[9])()",
+      "source": "src/nemu64/LegacyData.cpp",
+      "spelling": "inferred",
+      "original_file_and_grouping": "unknown; provisional LegacyData.cpp",
+      "purpose": "Nine references to a shared empty function; signatures and array versus separate declarations are inferred.",
+      "compiled_va": "0x10002030",
+      "original_sha256": "d656e07599919c3b7d856d5b5ee8f9d898ca3215c9e7c9d07b2e810cfd8e0e84",
+      "validation": {
+        "kind": "symbolic_function_pointer_identity",
+        "count": 9,
+        "original_target": "0x41fef0",
+        "reconstructed_symbol": "DynarecNoOperation",
+        "equal": true,
+        "note": "Pointer values are compared through independently known function identity, not masked or patched."
+      }
+    },
+    {
+      "name": "LegacyNtscClockRate",
+      "va": "0x477798",
+      "size": 4,
+      "type": "unsigned int",
+      "source": "src/nemu64/LegacyData.cpp",
+      "spelling": "inferred",
+      "original_file_and_grouping": "unknown; provisional LegacyData.cpp",
+      "purpose": "48681812 equals the NTSC rate used by CPU control and memory code; no reference to this object survives.",
+      "compiled_va": "0x10002054",
+      "original_sha256": "4f910af26e454ed6cca3c995a3bc64823625656b5861fa630dd73609dfabf312",
+      "validation": {
+        "kind": "complete_compiled_bytes",
+        "equal": true,
+        "sha256": "4f910af26e454ed6cca3c995a3bc64823625656b5861fa630dd73609dfabf312"
+      }
+    },
+    {
+      "name": "LegacyIdentityMatrix",
+      "va": "0x4777a0",
+      "size": 64,
+      "type": "float[4][4]",
+      "source": "src/nemu64/LegacyData.cpp",
+      "spelling": "inferred",
+      "original_file_and_grouping": "unknown; provisional LegacyData.cpp",
+      "purpose": "Single-precision identity matrix; original owner and use unknown.",
+      "compiled_va": "0x10002058",
+      "original_sha256": "5998e9d1dd9bf48af6af87a1ef8c7783b818ac8329637ada08cc5fb329042376",
+      "validation": {
+        "kind": "complete_compiled_bytes",
+        "equal": true,
+        "sha256": "5998e9d1dd9bf48af6af87a1ef8c7783b818ac8329637ada08cc5fb329042376"
+      }
+    }
+  ],
+  "notes": [
+    "No original native machine-code bytes are emitted as data.",
+    "No storage definition is introduced for the four zero bytes at 0x47779C.",
+    "No direct native code or initialized-data references to these retained objects were found.",
+    "The 16-byte permutation is adjacent to PIF tables; this does not prove its original source filename."
+  ]
+}
