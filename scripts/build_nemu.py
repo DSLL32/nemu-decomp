@@ -8,6 +8,7 @@ linking is followed by an unmasked, complete-file comparison.
 """
 
 import argparse
+from datetime import datetime, timezone
 import hashlib
 import json
 import os
@@ -80,6 +81,8 @@ def main():
     parser.add_argument('--stage-storage', action='store_true',
                         help='stage typed initialized and zero storage in observed address order')
     parser.add_argument('--report', type=Path, help='also write the build/comparison report here')
+    parser.add_argument('--current-link-time', action='store_true',
+                        help='use the current clock instead of reproducing the original COFF timestamp')
     args = parser.parse_args()
     if args.chronological_libraries:
         args.ordered_libraries = True
@@ -110,28 +113,32 @@ def main():
             args.report.parent.mkdir(parents=True, exist_ok=True)
             args.report.write_text(serialized)
 
-    def run(label, command, cwd=project, timeout=600):
+    def run(label, command, cwd=project, timeout=600, extra_env=None):
         print(label, flush=True)
         log = logs / (label + '.log')
         row = dict(stage=label, command=command, cwd=str(cwd), log=str(log))
+        if extra_env:
+            row['environment'] = extra_env
         report['commands'].append(row)
         with log.open('w') as stream:
-            process = subprocess.run(command, cwd=cwd, env=env, stdout=stream,
+            process = subprocess.run(command, cwd=cwd, env=dict(env, **(extra_env or {})), stdout=stream,
                                      stderr=subprocess.STDOUT, timeout=timeout)
         row['returncode'] = process.returncode
         if process.returncode:
             raise RuntimeError(f'{label} failed ({process.returncode}); {log}\n'
                                + log.read_text(errors='replace'))
 
-    def tool(label, toolchain, name, *arguments):
+    def tool(label, toolchain, name, *arguments, extra_env=None):
         run(label, [sys.executable, str(ROOT / 'scripts/run_toolchain.py'),
-                    toolchain, name, *arguments])
+                    toolchain, name, *arguments], extra_env=extra_env)
 
     try:
         # Capture the recipe before building: other reconstruction work may
         # continue in the shared checkout while the compiler runs.
         recipe = {name: (ROOT / 'scripts' / name).read_bytes()
                   for name in RECIPE_FILES}
+        constraints_bytes = (ROOT / 'analysis/nemu-build.json').read_bytes()
+        constraints = json.loads(constraints_bytes)
         toolchain_manifest = (ROOT / 'toolchains/manifest.json').read_bytes()
         function_order = args.function_order.read_bytes() if args.function_order else None
         if function_order is not None:
@@ -150,7 +157,7 @@ def main():
             report['source_files'].append(dict(path=str(relative),
                 sha256=hashlib.sha256(data).hexdigest()))
         compiler_inputs = source_inputs
-        storage_inputs = {}
+        storage_inputs = {'nemu-build.json': constraints_bytes}
         if args.ordered_libraries and not args.no_map:
             storage_inputs['nemu-library-addresses.json'] = (
                 ROOT / 'analysis/nemu-library-addresses.json').read_bytes()
@@ -266,8 +273,42 @@ def main():
         # executable looking like a newly successful link.
         for name in ['nemu64.exe', 'nemu64.linked.exe', 'nemu64.map']:
             (output / name).unlink(missing_ok=True)
-        tool('link', 'vc7', 'link', *options)
+        clock_env = None
+        if not args.current_link_time:
+            # Let the unchanged linker emit its timestamp from the clock. A
+            # fresh server is necessary because Wine shares time with clients.
+            # Disable libfaketime's cross-process shared memory: Wine startup
+            # otherwise hangs in this mixed-architecture setup.
+            libraries = [Path('/usr/lib') / architecture / 'faketime/libfaketime.so.1'
+                         for architecture in ('x86_64-linux-gnu', 'i386-linux-gnu')]
+            if not all(path.is_file() for path in libraries):
+                raise RuntimeError('Reproducing the linker clock requires the amd64 and i386 '
+                                   'libfaketime libraries; use --current-link-time for a clock control.')
+            timestamp = constraints['pe']['timestamp']
+            clock_env = dict(LD_PRELOAD='/usr/$LIB/faketime/libfaketime.so.1',
+                FAKETIME=datetime.fromtimestamp(timestamp, timezone.utc).strftime('%Y-%m-%d %H:%M:%S'),
+                FAKETIME_DONT_FAKE_MONOTONIC='1', FAKETIME_DISABLE_SHM='1',
+                NO_FAKE_STAT='1', TZ='UTC')
+            report['link_clock'] = dict(timestamp=timestamp, environment=clock_env,
+                libraries=[dict(path=str(path), sha256=hashlib.sha256(path.read_bytes()).hexdigest())
+                           for path in libraries],
+                note='Only the isolated linker process and its Wine server see this clock; '
+                     'the executable is not patched.')
+            # This prefix belongs to this build. A missing server is harmless.
+            stop = subprocess.run(['wineserver', '-k'], env=env, capture_output=True)
+            if stop.returncode not in (0, 1):
+                raise RuntimeError('Could not stop this build\'s Wine server: '
+                                   + stop.stderr.decode(errors='replace'))
+            run('wait-link-clock-server', ['wineserver', '-w'], timeout=30)
+        else:
+            report['link_clock'] = dict(mode='current_clock')
+        tool('link', 'vc7', 'link', *options, extra_env=clock_env)
         executable = output / 'nemu64.exe'
+        linked_pe = PE32(executable)
+        linked_timestamp = int.from_bytes(linked_pe.data[linked_pe.pe + 8:linked_pe.pe + 12], 'little')
+        report['link_clock']['observed_timestamp'] = linked_timestamp
+        if clock_env is not None and linked_timestamp != timestamp:
+            raise RuntimeError('The linker did not observe the requested historical clock')
         raw = output / 'nemu64.linked.exe'
         shutil.copyfile(executable, raw)
         if function_order is not None:

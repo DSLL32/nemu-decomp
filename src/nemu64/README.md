@@ -21,6 +21,12 @@ compares every byte with the original. Its exit status remains nonzero while
 that comparison fails, even when compilation and linking succeed. Use
 `--work ~/.ai-tmp/<directory>` to reuse a build directory and its Wine prefix.
 
+The final link runs with its isolated clock set to the original COFF timestamp,
+2003-03-23 04:51:00 UTC. This uses the host's amd64 and i386 `libfaketime`
+libraries; their hashes and clock settings are recorded in the build report.
+The stock linker writes the timestamp itself. No output bytes are patched.
+Use `--current-link-time` to retain the current clock as a comparison control.
+
 The checked-in order file places the 648 application symbols in their observed
 original order using the stock linker. The other two options use the recovered
 CRT/import-library chronology and stage typed storage definitions at the inferred
