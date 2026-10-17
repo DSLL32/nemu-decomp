@@ -19,7 +19,7 @@
     "native_language_control": "analysis/audio-rsp-language-control.json"
   },
   "source_sha256": {
-    "RSP.cpp": "fa61f9951774a96a1735483240b17944cc2ec2f5db25399560e4591963efac67",
+    "RSP.cpp": "e2ebc258be25fca598896c4bc9639e24c61c859aaf34bab5682d034df2fd3a43",
     "RSPKernel.inc": "7a218993560c457a5149266e391a28fcdb0a1df5a812209c9a9b7111238eb961",
     "RSPData.inc": "f7a6f57795b41b7203b63302205c50de7bbd459971f9d2974d9d12b1c74bbd4d",
     "RSP.h": "9489748e5025a27cdcbcf9853751b72d0c6c73658ddb4d62893d3f40f297b7ab",
@@ -39,7 +39,8 @@
       "C-linkage opcode helpers take RSPInstructionWord unions by value. The original caller MOV-immediate/PUSH-register sequence distinguishes this from a scalar unsigned argument.",
       "All 180 materialized native function hashes are unchanged from the earlier separate-unit reconstruction. The retained header table is restored before the guest program.",
       "The earlier C/C++ frontend comparison is historical evidence from its recorded source snapshot, not a whole-unit language control on this final organization.",
-      "Signed lane indices recover the observed four-lane countdown loops in all twelve retained multiply functions. The code remains unmatched; two complete suffixes now match after their first 41 bytes."
+      "Signed lane indices recover the observed four-lane countdown loops in all twelve retained multiply functions. The code remains unmatched; two complete suffixes now match after their first 41 bytes.",
+      "Three-arm signed clamping in VMUDM, VMUDN and VMUDH recovers their complete suffixes after the first 41 bytes. Together with VMULF and VMUDL, five still-unmatched functions now have identical 25-byte entry residuals."
     ],
     "invariance_evidence": "analysis/audio-rsp-organization.json",
     "language_control": "analysis/audio-rsp-language-control.json",
@@ -51,7 +52,8 @@
       "behavior_failures": 0,
       "other_core_functions_unchanged": 175
     },
-    "retained_multiply_refinement": "analysis/audio-rsp-multiply-refinement.json"
+    "retained_multiply_refinement": "analysis/audio-rsp-multiply-refinement.json",
+    "retained_multiply_clamp_refinement": "analysis/audio-rsp-clamp-refinement.json"
   },
   "coverage": {
     "start": "0x10013b10",
@@ -71,9 +73,9 @@
     "zero_initialized_object_bytes": 17152,
     "unresolved_relocations": 0,
     "method": "Ordinary COFF DIR32 and REL32 relocations materialized using separately identified original targets. Every byte of each recorded span is compared; no masks or executable patches.",
-    "artifact": "/root/.ai-tmp/nemu-audio-rsp.3f9d460s/runs/7rvk63lk/rsp-strict.json",
-    "artifact_sha256": "86be58a8cd695e329b782cf0471c01f4488d15712eb1dcc2d28596f52a657c6f",
-    "source_snapshot": "/root/.ai-tmp/nemu-audio-rsp.3f9d460s/runs/7rvk63lk"
+    "artifact": "/root/.ai-tmp/audio-rsp-signed-clamp.3br9fbl5/comparison.json",
+    "artifact_sha256": "532cd6868f785fde61fb730fcb6443f732ee8e650b6315e36745a357eb6b8b17",
+    "source_snapshot": "/root/.ai-tmp/audio-rsp-signed-clamp.3br9fbl5"
   },
   "functions": [
     {
@@ -1304,9 +1306,9 @@
       "original_size": 960,
       "candidate_size": 960,
       "exact": false,
-      "differing_bytes": 718,
+      "differing_bytes": 25,
       "original_sha256": "325d0f0968fb00ee99c7886117903cda4fcb0e153a5edd72a718400e52f3dce6",
-      "candidate_materialized_sha256": "fabee3e5f25c2352e0ae7785c5f46c67c12307415947bd10ffd6c8346a3e565b"
+      "candidate_materialized_sha256": "b4bf0bf3118282b3a0676e14f75253ca65e0de0ff1453d747fd1a5918d16a18c"
     },
     {
       "name": "RSP_VMUDN",
@@ -1315,20 +1317,20 @@
       "original_size": 896,
       "candidate_size": 896,
       "exact": false,
-      "differing_bytes": 623,
+      "differing_bytes": 25,
       "original_sha256": "bc7362adfdb380e636fb4e009ca35c266167f53de8131615785e134bf9f0ad7f",
-      "candidate_materialized_sha256": "ab6457676a287b512b6b31d293281a976385f2cfbf5de966c2cb3db7cc6f081c"
+      "candidate_materialized_sha256": "95e4ba60f01fb0b5ef0babd032f98faee994dedd887fd652d5e11e398191f5e8"
     },
     {
       "name": "RSP_VMUDH",
       "symbol": "_RSP_VMUDH",
       "va": 268532640,
       "original_size": 960,
-      "candidate_size": 944,
+      "candidate_size": 960,
       "exact": false,
-      "differing_bytes": 735,
+      "differing_bytes": 25,
       "original_sha256": "6e0631ad884c5cecb63f55cacc2d4ef10e6b3191594dee0be35d79bf97f0a5da",
-      "candidate_materialized_sha256": "8479c075efb21408a73f2fdf222acd9711ba18fd8e6ddcc24b579724746da6e5"
+      "candidate_materialized_sha256": "4c858d2516ef559b10bd84687ec5b8196602419021dc66dc5914dd0c6822302d"
     },
     {
       "name": "RSP_VMACF",
@@ -2350,7 +2352,7 @@
     }
   ],
   "behavior": {
-    "total_cases": 146304,
+    "total_cases": 152448,
     "failures": 0,
     "scope": "Differential execution of original native Audio code and reconstructed candidate code. This supplements instruction comparison and does not establish byte identity for unmatched functions.",
     "reports": [
@@ -2415,12 +2417,21 @@
         "area": "retained_multiply_signed_indices",
         "cases": 6144,
         "path": "/root/.ai-tmp/nemu-audio-rsp-multiply.9wwzhw2p/legacy-behavior.json",
-        "sha256": "1795baf925dc3ef1d475afc08f4618056cc2d51adced8e12ef072947e68512b4"
+        "sha256": "1795baf925dc3ef1d475afc08f4618056cc2d51adced8e12ef072947e68512b4",
+        "historical_superseded_cases": 1536,
+        "current_unchanged_function_cases": 4608,
+        "note": "The 512 cases each for VMUDM, VMUDN and VMUDH are superseded by 2048 fresh cases each in retained_multiply_signed_clamp_branches."
+      },
+      {
+        "area": "retained_multiply_signed_clamp_branches",
+        "cases": 6144,
+        "path": "/root/.ai-tmp/audio-rsp-signed-clamp.3br9fbl5/behavior.json",
+        "sha256": "fd66c33a7ed4eb766bcabec8d7db7b922bf865206926ab9c28ab679c66eb2d0d"
       }
     ],
-    "organization_change": "The unit-organization checkpoint preserves all 180 earlier native hashes. The later signed-index refinement changes twelve unmatched functions and has 6144 new differential cases; all 168 other function hashes and 29 data hashes are unchanged.",
-    "current_code_cases": 144768,
-    "historical_superseded_cases": 1536
+    "organization_change": "The unit-organization checkpoint preserves all 180 earlier native hashes. The later signed-index refinement changes twelve unmatched functions and has 6144 new differential cases; all 168 other function hashes and 29 data hashes are unchanged. The later three-arm clamp refinement changes three of those unmatched functions and has 6144 additional native cases; all 177 other function hashes and 29 data hashes remain unchanged.",
+    "current_code_cases": 149376,
+    "historical_superseded_cases": 3072
   },
   "shared_nemu_evidence": "analysis/audio-rsp-cross-image.json",
   "limitations": [

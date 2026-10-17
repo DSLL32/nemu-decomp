@@ -1,0 +1,128 @@
+{
+  "original": "master/Plugin/audio.dll",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "status": "source_control_flow_refinement_with_remaining_entry_scheduling_differences",
+  "full_dll_byte_exact": false,
+  "source_change": "Assign the signed clamp result in three branches in VMUDM, VMUDN and VMUDH, including the unsaturated final else. This matches the observed native branch-local assignments of both halves of the 64-bit temporary.",
+  "source_sha256": "e2ebc258be25fca598896c4bc9639e24c61c859aaf34bab5682d034df2fd3a43",
+  "compiler_flags": [
+    "/O2",
+    "/Ob1",
+    "/MT"
+  ],
+  "compiler_source_snapshot": "/root/.ai-tmp/audio-rsp-signed-clamp.3br9fbl5/source",
+  "object": {
+    "path": "/root/.ai-tmp/audio-rsp-signed-clamp.3br9fbl5/source/RSP.obj",
+    "sha256": "975ba56768c52805be538e5d48c31853ae5ecbd60f22d82e0b7802f528a5267a"
+  },
+  "baseline": {
+    "path": "/root/.ai-tmp/audio-rsp-signed-clamp.3br9fbl5/baseline-report.json",
+    "sha256": "4954f8c42d1ebe4e9a79de3d9712cb52873212ff6d36ad06be2e7946d013df27"
+  },
+  "comparison": {
+    "path": "/root/.ai-tmp/audio-rsp-signed-clamp.3br9fbl5/comparison.json",
+    "sha256": "532cd6868f785fde61fb730fcb6443f732ee8e650b6315e36745a357eb6b8b17",
+    "changed": [
+      "RSP_VMUDM",
+      "RSP_VMUDN",
+      "RSP_VMUDH"
+    ],
+    "unchanged_functions": 177,
+    "exact_functions": 148,
+    "typed_data_exact": 29,
+    "unresolved": 0
+  },
+  "functions": [
+    {
+      "name": "RSP_VMUDM",
+      "original_size": 960,
+      "previous_size": 960,
+      "candidate_size": 960,
+      "previous_differing_bytes": 718,
+      "candidate_differing_bytes": 25,
+      "exact": false,
+      "candidate_materialized_sha256": "b4bf0bf3118282b3a0676e14f75253ca65e0de0ff1453d747fd1a5918d16a18c"
+    },
+    {
+      "name": "RSP_VMUDN",
+      "original_size": 896,
+      "previous_size": 896,
+      "candidate_size": 896,
+      "previous_differing_bytes": 623,
+      "candidate_differing_bytes": 25,
+      "exact": false,
+      "candidate_materialized_sha256": "95e4ba60f01fb0b5ef0babd032f98faee994dedd887fd652d5e11e398191f5e8"
+    },
+    {
+      "name": "RSP_VMUDH",
+      "original_size": 960,
+      "previous_size": 944,
+      "candidate_size": 960,
+      "previous_differing_bytes": 735,
+      "candidate_differing_bytes": 25,
+      "exact": false,
+      "candidate_materialized_sha256": "4c858d2516ef559b10bd84687ec5b8196602419021dc66dc5914dd0c6822302d"
+    }
+  ],
+  "complete_suffix_matches": [
+    {
+      "name": "RSP_VMULF",
+      "original_va": "0x100169c0",
+      "complete_extent": 928,
+      "suffix_offset": 41,
+      "matching_suffix_bytes": 887,
+      "suffix_sha256": "b5b2551f8f522b0a4f80f0501a984291ac9de454ce36db79a7011f3f3c793454",
+      "remaining_differing_bytes": 25
+    },
+    {
+      "name": "RSP_VMUDL",
+      "original_va": "0x10017180",
+      "complete_extent": 736,
+      "suffix_offset": 41,
+      "matching_suffix_bytes": 695,
+      "suffix_sha256": "6c23f302ca1b8c9625558ac3bb4bde10d8a1b28c04f849637302d11bc113184e",
+      "remaining_differing_bytes": 25
+    },
+    {
+      "name": "RSP_VMUDM",
+      "original_va": "0x10017460",
+      "complete_extent": 960,
+      "suffix_offset": 41,
+      "matching_suffix_bytes": 919,
+      "suffix_sha256": "aeda5549123e9131abe1b4a8f14d750b6da2614b14eaedbcfef5744fa58e7fee",
+      "remaining_differing_bytes": 25
+    },
+    {
+      "name": "RSP_VMUDN",
+      "original_va": "0x10017820",
+      "complete_extent": 896,
+      "suffix_offset": 41,
+      "matching_suffix_bytes": 855,
+      "suffix_sha256": "14b017a133879c382b53a2e994d4fceabe2e6d0b63f59ea79abe76b3224b69b2",
+      "remaining_differing_bytes": 25
+    },
+    {
+      "name": "RSP_VMUDH",
+      "original_va": "0x10017ba0",
+      "complete_extent": 960,
+      "suffix_offset": 41,
+      "matching_suffix_bytes": 919,
+      "suffix_sha256": "27cad9fb68bcad4b4f1cf5926e7b7d44fe658a42ec365f7acfe619dea10f3ca5",
+      "remaining_differing_bytes": 25
+    }
+  ],
+  "behavior": {
+    "path": "/root/.ai-tmp/audio-rsp-signed-clamp.3br9fbl5/behavior.json",
+    "sha256": "fd66c33a7ed4eb766bcabec8d7db7b922bf865206926ab9c28ab679c66eb2d0d",
+    "script": "/root/.ai-tmp/audio-rsp-signed-clamp.3br9fbl5/behavior.py",
+    "script_sha256": "7b4700e1ccbefea46cb066886b8bf02d54bd0b2e9bed448a1b11723f977a7fcd",
+    "cases": 6144,
+    "failures": 0,
+    "method": "Original and compiled x86 functions executed in independent Unicorn memory images. Compared all17408 bytes of RSP state, stack balance and preserved registers. No executable files modified."
+  },
+  "limits": [
+    "All three modified functions remain unmatched because of 25 bytes in their first 41-byte entry sequences. The five exact suffixes do not count as complete function matches.",
+    "Equivalent three-arm changes to accumulating multiply variants remain scratch experiments because their instruction allocation still diverges.",
+    "No new operations, barriers, padding or copied machine instructions were introduced."
+  ]
+}

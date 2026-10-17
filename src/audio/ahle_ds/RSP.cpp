@@ -1254,9 +1254,10 @@ void RSP_VMUDM()
         else if ((element & 12) == 4) lane = (i & 12) + (element & 3);
         else lane = element & 7;
         AccumulatorValue(i) = RSPVectors[vt][lane] * (CpuS16)RSPVectors[vs][i];
-        CpuS64 result = AccumulatorValue(i) >> 16;
+        CpuS64 result;
         if (((CpuS32)AccumulatorValue(i) >> 16) > 32767) result = 32767;
         else if (((CpuS32)AccumulatorValue(i) >> 16) < -32768) result = -32768;
+        else result = AccumulatorValue(i) >> 16;
         RSPVectors[vd][i] = (CpuU16)result;
     }
 }
@@ -1275,9 +1276,10 @@ void RSP_VMUDN()
         else if ((element & 12) == 4) lane = (i & 12) + (element & 3);
         else lane = element & 7;
         AccumulatorValue(i) = (CpuS16)(RSPVectors[vt][lane] * RSPVectors[vs][i]);
-        CpuS64 result = AccumulatorValue(i);
-        if ((CpuS32)result > 32767) result = 32767;
-        else if ((CpuS32)result < -32768) result = -32768;
+        CpuS64 result;
+        if ((CpuS32)AccumulatorValue(i) > 32767) result = 32767;
+        else if ((CpuS32)AccumulatorValue(i) < -32768) result = -32768;
+        else result = AccumulatorValue(i);
         RSPVectors[vd][i] = (CpuU16)result;
     }
 }
@@ -1296,9 +1298,10 @@ void RSP_VMUDH()
         else if ((element & 12) == 4) lane = (i & 12) + (element & 3);
         else lane = element & 7;
         AccumulatorValue(i) = (CpuS64)((CpuS16)RSPVectors[vt][lane] * (CpuS16)RSPVectors[vs][i]) << 16;
-        CpuS64 result = AccumulatorValue(i) >> 16;
+        CpuS64 result;
         if (((CpuS32)AccumulatorValue(i) >> 16) > 32767) result = 32767;
         else if (((CpuS32)AccumulatorValue(i) >> 16) < -32768) result = -32768;
+        else result = AccumulatorValue(i) >> 16;
         RSPVectors[vd][i] = (CpuU16)result;
     }
 }
