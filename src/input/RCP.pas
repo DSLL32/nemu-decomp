@@ -2,7 +2,9 @@ unit RCP;
 
 interface
 
-{ These four typed-constant tables survive smart linking in dialogs.dll.
+uses UnitDecs;
+
+{ These four typed-constant tables survive smart linking in Input.dll.
   Table names are inferred; entries, order, and array bounds come from the binary. }
 const
   CPURegisterNames: array[0..31] of string = (

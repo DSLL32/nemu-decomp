@@ -3,8 +3,8 @@ unit UnitSettings;
 interface
 
 uses
-  Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,
-  StdCtrls, ExtCtrls, Menus, ComCtrls, UnitDecs;
+  DInput, RCP, UnitDecs, Windows, Messages, SysUtils, Classes, Graphics, Controls,
+  Forms, Dialogs, StdCtrls, ExtCtrls, Menus, ComCtrls;
 
 type
   PButtonMapping = ^TButtonMapping;
@@ -143,7 +143,7 @@ procedure AutoConfigureKeyboard(Controller: Integer);
 
 implementation
 
-uses UnitDIStuff, UnitSelectInputDevices, UnitAdaptoid, UnitSensitivity, UnitWaitKey, Registry;
+uses UnitSelectInputDevices, UnitDIStuff, UnitAdaptoid, UnitSensitivity, UnitWaitKey, Registry;
 
 {$R *.dfm}
 

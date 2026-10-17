@@ -3,8 +3,8 @@ unit UnitSelectInputDevices;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
-  Dialogs, StdCtrls, ExtCtrls, ComCtrls, Buttons, CheckLst;
+  UnitDecs, RCP, Windows, Messages, SysUtils, Variants, Classes, Graphics,
+  Controls, Forms, Dialogs, StdCtrls, ExtCtrls, ComCtrls, CheckLst;
 
 type
   TFormSelectInputDevices = class(TForm)

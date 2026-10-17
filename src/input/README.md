@@ -3,6 +3,8 @@
 This directory reconstructs `master/Plugin/Input.dll` as Delphi source. The
 original file is 634,880 bytes, with SHA-256
 `2c0fb513c6c34115ef070c9f33767f7cf15d28de4becbd74bd90fe515e496298`.
+A fresh build reproduces the complete file byte-for-byte; see the
+[comparison and build provenance](../../analysis/input-comparison.json).
 
 Build with the tracked Delphi 6 Personal Update 2 compiler:
 
@@ -24,6 +26,11 @@ The compiler produces all code, initialized data, imports, exports, relocation
 records, and resource payloads. Only the 54 resource-directory clock fields are
 restored after linking, to `2002-07-26T23:26:24`. The untouched compiler output is
 retained as `input.unstamped.dll`.
+
+The build first recompiles the local units, then runs two Delphi make passes to
+refresh cached interfaces across the circular unit dependencies before the
+final link. Plain linking can recompile a stale unit in memory without updating
+its DCU, which changes the generated unit metadata on later builds.
 
 | Source | Reconstructed responsibility |
 | --- | --- |
@@ -47,6 +54,13 @@ and the flat application folder structure are inferred. The global identifiers
 also reproduce Delphi's imported-data hash ordering; that constraint does not
 establish their original spelling. Lost comments, unused declarations, and
 unlinked code are not uniquely recoverable.
+
+The dependency graph reproduces Delphi's initialization table and PACKAGEINFO
+resource naturally. Some clauses remain nonunique: RCP can import UnitDecs in
+either its interface or implementation and produce the same DLL. The interface
+variant is retained. Empty compiler-only unit identities follow the matching
+dependency graph; see
+[dependency evidence](../../analysis/input-dependency-recovery.json).
 
 Observed behavior is preserved, including fixed-length conversion of all 40
 button-name characters, the device-selection form's repeated registry-key

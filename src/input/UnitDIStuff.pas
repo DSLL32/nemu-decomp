@@ -2,7 +2,7 @@ unit UnitDIStuff;
 
 interface
 
-uses Windows, Forms, DInput;
+uses Windows, Forms, DInput, UnitSettings, UnitDecs;
 
 var
   DI: IDirectInputA;
@@ -124,7 +124,7 @@ procedure FreeDirectInput;
 
 implementation
 
-uses SysUtils, Classes, Registry, UnitSettings, UnitDecs;
+uses SysUtils, Classes, Registry;
 
 procedure DIErrorCheck(HR: HRESULT);
 begin

@@ -7,7 +7,7 @@ unit DInput;
 
 interface
 
-uses Windows;
+uses Windows, MMSystem;
 
 type
   PDIDevCaps = ^TDIDevCaps;

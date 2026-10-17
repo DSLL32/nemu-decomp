@@ -3,24 +3,19 @@ library Input;
 {$IMPLICITBUILD OFF}
 
 uses
-  Windows,
   SysUtils,
+  Windows,
   Classes,
   Registry,
-  MMSystem,
-  Forms,
   DInput in 'DInput.pas',
-  UnitDecs in 'UnitDecs.pas',
-  RCP in 'RCP.pas',
-  ToolWin,
-  ComCtrls,
-  CheckLst,
   UnitSettings in 'UnitSettings.pas',
-  UnitWaitKey in 'UnitWaitKey.pas',
   UnitDIStuff in 'UnitDIStuff.pas',
   UnitSelectInputDevices in 'UnitSelectInputDevices.pas',
+  UnitDecs in 'UnitDecs.pas',
+  RCP in 'RCP.pas',
   UnitAdaptoid in 'UnitAdaptoid.pas',
-  UnitSensitivity in 'UnitSensitivity.pas';
+  UnitSensitivity in 'UnitSensitivity.pas',
+  UnitWaitKey in 'UnitWaitKey.pas';
 
 type
   PControllerSettings = ^TControllerSettings;

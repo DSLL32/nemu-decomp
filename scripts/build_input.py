@@ -77,8 +77,10 @@ def main():
         staged_sources[path.name] = destination
     tool('compiler-units', '-Q', *([] if args.incremental else ['-B']),
          '-GD', 'Input.dpr')
-    # Emit local DCUs before the final link so cached-unit dependency traversal
-    # is reproducible and independent of earlier build-directory contents.
+    # Refresh cyclic unit interfaces on disk before the final cached link.
+    # A plain link may rebuild stale units in memory without updating their DCUs.
+    tool('compiler-make-1', '-Q', '-M', '-GD', 'Input.dpr')
+    tool('compiler-make-2', '-Q', '-M', '-GD', 'Input.dpr')
     tool('compiler', '-Q', '-GD', 'Input.dpr')
     raw = work / 'input.unstamped.dll'
     shutil.copyfile(work / 'Input.dll', raw)
