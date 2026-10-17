@@ -797,8 +797,15 @@
               "symbol": "??_C@_01EEMJAFIK@?6?$AA@",
               "addend": 0,
               "original_target_va": 268637004,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "??_C@_01EEMJAFIK@?6?$AA@"
+              ],
+              "expected_target_va": 268637004,
+              "resolution_basis": "observed_operand_inference",
+              "target_address_evidence": "Nonunique literal bytes verified at the decoded operand address; see analysis/audio-processing-operands.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": false
             },
             {
               "offset": 18,
@@ -806,8 +813,15 @@
               "symbol": "_fprintf",
               "addend": 0,
               "original_target_va": 268573299,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "_fprintf"
+              ],
+              "expected_target_va": 268573299,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 40,
@@ -831,8 +845,15 @@
               "symbol": "??_C@_05OFBGOFBN@?5?$CF02X?$AA@",
               "addend": 0,
               "original_target_va": 268636996,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "??_C@_05OFBGOFBN@?5?$CF02X?$AA@"
+              ],
+              "expected_target_va": 268636996,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Unique complete NUL-terminated literal match; see analysis/audio-processing-operands.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 52,
@@ -840,8 +861,15 @@
               "symbol": "_fprintf",
               "addend": 0,
               "original_target_va": 268573299,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "_fprintf"
+              ],
+              "expected_target_va": 268573299,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 73,
@@ -865,8 +893,15 @@
               "symbol": "??_C@_05OFBGOFBN@?5?$CF02X?$AA@",
               "addend": 0,
               "original_target_va": 268636996,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "??_C@_05OFBGOFBN@?5?$CF02X?$AA@"
+              ],
+              "expected_target_va": 268636996,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Unique complete NUL-terminated literal match; see analysis/audio-processing-operands.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 85,
@@ -874,8 +909,15 @@
               "symbol": "_fprintf",
               "addend": 0,
               "original_target_va": 268573299,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "_fprintf"
+              ],
+              "expected_target_va": 268573299,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 97,
@@ -899,8 +941,15 @@
               "symbol": "??_C@_02PHMGELLB@?6?6?$AA@",
               "addend": 0,
               "original_target_va": 268635264,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "??_C@_02PHMGELLB@?6?6?$AA@"
+              ],
+              "expected_target_va": 268635264,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Unique complete NUL-terminated literal match; see analysis/audio-processing-operands.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 108,
@@ -908,31 +957,38 @@
               "symbol": "_fprintf",
               "addend": 0,
               "original_target_va": 268573299,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "_fprintf"
+              ],
+              "expected_target_va": 268573299,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             }
           ],
           "relocation_target_mismatch_count": 0,
-          "inferred_target_count": 4,
-          "unresolved_target_count": 8,
+          "inferred_target_count": 5,
+          "unresolved_target_count": 0,
           "relocation_masked_equal": true,
           "relocation_masked_differing_bytes": 0,
-          "relocations_all_resolved": false,
-          "relocation_values_consistent": false,
+          "relocations_all_resolved": true,
+          "relocation_values_consistent": true,
           "relocation_targets_verified": false,
           "relocation_targets_equal": false,
-          "inferred_relocated_bytes_equal": false,
+          "inferred_relocated_bytes_equal": true,
           "relocated_bytes_equal": false,
           "first_unmasked_differences": []
         }
       ],
       "functions_compared": 12,
       "relocation_masked_matches": 12,
-      "relocation_consistent_matches": 11,
+      "relocation_consistent_matches": 12,
       "relocation_checked_matches": 5,
       "relocation_target_mismatches": 0,
-      "inferred_targets": 29,
-      "unresolved_targets": 8
+      "inferred_targets": 30,
+      "unresolved_targets": 0
     },
     {
       "object": "/root/.ai-tmp/audio-processing.bGaifE/AudioADPCM.obj",
@@ -1161,8 +1217,15 @@
               "symbol": "__alldiv",
               "addend": 0,
               "original_target_va": 268574352,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "__alldiv"
+              ],
+              "expected_target_va": 268574352,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 1067,
@@ -1170,8 +1233,15 @@
               "symbol": "__allmul",
               "addend": 0,
               "original_target_va": 268574288,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "__allmul"
+              ],
+              "expected_target_va": 268574288,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 1189,
@@ -1179,8 +1249,15 @@
               "symbol": "__alldiv",
               "addend": 0,
               "original_target_va": 268574352,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "__alldiv"
+              ],
+              "expected_target_va": 268574352,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 1207,
@@ -1188,8 +1265,15 @@
               "symbol": "__allmul",
               "addend": 0,
               "original_target_va": 268574288,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "__allmul"
+              ],
+              "expected_target_va": 268574288,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 1328,
@@ -1197,8 +1281,15 @@
               "symbol": "__alldiv",
               "addend": 0,
               "original_target_va": 268574352,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "__alldiv"
+              ],
+              "expected_target_va": 268574352,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 1348,
@@ -1206,8 +1297,15 @@
               "symbol": "__allmul",
               "addend": 0,
               "original_target_va": 268574288,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "__allmul"
+              ],
+              "expected_target_va": 268574288,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 1477,
@@ -1215,8 +1313,15 @@
               "symbol": "__alldiv",
               "addend": 0,
               "original_target_va": 268574352,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "__alldiv"
+              ],
+              "expected_target_va": 268574352,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 1497,
@@ -1224,8 +1329,15 @@
               "symbol": "__allmul",
               "addend": 0,
               "original_target_va": 268574288,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "__allmul"
+              ],
+              "expected_target_va": 268574288,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 1626,
@@ -1233,8 +1345,15 @@
               "symbol": "__alldiv",
               "addend": 0,
               "original_target_va": 268574352,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "__alldiv"
+              ],
+              "expected_target_va": 268574352,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 1646,
@@ -1242,8 +1361,15 @@
               "symbol": "__allmul",
               "addend": 0,
               "original_target_va": 268574288,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "__allmul"
+              ],
+              "expected_target_va": 268574288,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 1775,
@@ -1251,8 +1377,15 @@
               "symbol": "__alldiv",
               "addend": 0,
               "original_target_va": 268574352,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "__alldiv"
+              ],
+              "expected_target_va": 268574352,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 1795,
@@ -1260,8 +1393,15 @@
               "symbol": "__allmul",
               "addend": 0,
               "original_target_va": 268574288,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "__allmul"
+              ],
+              "expected_target_va": 268574288,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 1924,
@@ -1269,8 +1409,15 @@
               "symbol": "__alldiv",
               "addend": 0,
               "original_target_va": 268574352,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "__alldiv"
+              ],
+              "expected_target_va": 268574352,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 1944,
@@ -1278,8 +1425,15 @@
               "symbol": "__allmul",
               "addend": 0,
               "original_target_va": 268574288,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "__allmul"
+              ],
+              "expected_target_va": 268574288,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 2073,
@@ -1287,8 +1441,15 @@
               "symbol": "__alldiv",
               "addend": 0,
               "original_target_va": 268574352,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "__alldiv"
+              ],
+              "expected_target_va": 268574352,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 2093,
@@ -1296,8 +1457,15 @@
               "symbol": "__allmul",
               "addend": 0,
               "original_target_va": 268574288,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "__allmul"
+              ],
+              "expected_target_va": 268574288,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 2252,
@@ -1318,11 +1486,11 @@
           ],
           "relocation_target_mismatch_count": 0,
           "inferred_target_count": 2,
-          "unresolved_target_count": 16,
+          "unresolved_target_count": 0,
           "relocation_masked_equal": false,
           "relocation_masked_differing_bytes": 7,
-          "relocations_all_resolved": false,
-          "relocation_values_consistent": false,
+          "relocations_all_resolved": true,
+          "relocation_values_consistent": true,
           "relocation_targets_verified": false,
           "relocation_targets_equal": false,
           "inferred_relocated_bytes_equal": false,
@@ -1344,11 +1512,11 @@
       "relocation_checked_matches": 0,
       "relocation_target_mismatches": 0,
       "inferred_targets": 2,
-      "unresolved_targets": 16
+      "unresolved_targets": 0
     },
     {
       "object": "/root/.ai-tmp/audio-processing.bGaifE/AudioResample.obj",
-      "sha256": "438cabeb1b45853fbf07f0c8eb157985afb0e15dd9c0bd492e20ec89bcb03047",
+      "sha256": "e64c4c9a692ffc36090a0a062bbb0d50a1f606a3fc0c2e91d6b27d2b3ab24a84",
       "original": "master/Plugin/audio.dll",
       "functions": [
         {
@@ -1627,8 +1795,15 @@
               "symbol": "__aulldiv",
               "addend": 0,
               "original_target_va": 268574176,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "__aulldiv"
+              ],
+              "expected_target_va": 268574176,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 43,
@@ -1661,14 +1836,14 @@
           ],
           "relocation_target_mismatch_count": 0,
           "inferred_target_count": 6,
-          "unresolved_target_count": 1,
+          "unresolved_target_count": 0,
           "relocation_masked_equal": true,
           "relocation_masked_differing_bytes": 0,
-          "relocations_all_resolved": false,
-          "relocation_values_consistent": false,
+          "relocations_all_resolved": true,
+          "relocation_values_consistent": true,
           "relocation_targets_verified": false,
           "relocation_targets_equal": false,
-          "inferred_relocated_bytes_equal": false,
+          "inferred_relocated_bytes_equal": true,
           "relocated_bytes_equal": false,
           "first_unmasked_differences": []
         },
@@ -1747,8 +1922,15 @@
               "symbol": "__aulldiv",
               "addend": 0,
               "original_target_va": 268574176,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "__aulldiv"
+              ],
+              "expected_target_va": 268574176,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 50,
@@ -1781,14 +1963,14 @@
           ],
           "relocation_target_mismatch_count": 0,
           "inferred_target_count": 6,
-          "unresolved_target_count": 1,
+          "unresolved_target_count": 0,
           "relocation_masked_equal": true,
           "relocation_masked_differing_bytes": 0,
-          "relocations_all_resolved": false,
-          "relocation_values_consistent": false,
+          "relocations_all_resolved": true,
+          "relocation_values_consistent": true,
           "relocation_targets_verified": false,
           "relocation_targets_equal": false,
-          "inferred_relocated_bytes_equal": false,
+          "inferred_relocated_bytes_equal": true,
           "relocated_bytes_equal": false,
           "first_unmasked_differences": []
         },
@@ -2191,11 +2373,11 @@
       ],
       "functions_compared": 5,
       "relocation_masked_matches": 5,
-      "relocation_consistent_matches": 3,
+      "relocation_consistent_matches": 5,
       "relocation_checked_matches": 0,
       "relocation_target_mismatches": 0,
       "inferred_targets": 37,
-      "unresolved_targets": 2
+      "unresolved_targets": 0
     },
     {
       "object": "/root/.ai-tmp/audio-processing.bGaifE/AudioSSE.obj",
@@ -2247,8 +2429,15 @@
               "symbol": "$T73174",
               "addend": 0,
               "original_target_va": 268636584,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "$T73174"
+              ],
+              "expected_target_va": 268636584,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Unique complete SEH scope-table match after resolving both labels inside the matched AudioOSHasSSE body; see analysis/audio-processing-operands.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 11,
@@ -2256,8 +2445,15 @@
               "symbol": "__except_handler3",
               "addend": 0,
               "original_target_va": 268573644,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "__except_handler3"
+              ],
+              "expected_target_va": 268573644,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 17,
@@ -2265,8 +2461,15 @@
               "symbol": "__except_list",
               "addend": 0,
               "original_target_va": 0,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "__except_list"
+              ],
+              "expected_target_va": 0,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Absolute COFF symbol with value zero in VC7 libcmt exsup.obj, used as FS:[0]; see analysis/audio-processing-operands.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 25,
@@ -2274,8 +2477,15 @@
               "symbol": "__except_list",
               "addend": 0,
               "original_target_va": 0,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "__except_list"
+              ],
+              "expected_target_va": 0,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Absolute COFF symbol with value zero in VC7 libcmt exsup.obj, used as FS:[0]; see analysis/audio-processing-operands.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
               "offset": 93,
@@ -2283,21 +2493,28 @@
               "symbol": "__except_list",
               "addend": 0,
               "original_target_va": 0,
-              "original_target_symbols": [],
-              "status": "unresolved"
+              "original_target_symbols": [
+                "__except_list"
+              ],
+              "expected_target_va": 0,
+              "resolution_basis": "independent_library_mapping",
+              "target_address_evidence": "Absolute COFF symbol with value zero in VC7 libcmt exsup.obj, used as FS:[0]; see analysis/audio-processing-operands.json.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
             }
           ],
           "relocation_target_mismatch_count": 0,
           "inferred_target_count": 0,
-          "unresolved_target_count": 5,
+          "unresolved_target_count": 0,
           "relocation_masked_equal": true,
           "relocation_masked_differing_bytes": 0,
-          "relocations_all_resolved": false,
-          "relocation_values_consistent": false,
-          "relocation_targets_verified": false,
-          "relocation_targets_equal": false,
-          "inferred_relocated_bytes_equal": false,
-          "relocated_bytes_equal": false,
+          "relocations_all_resolved": true,
+          "relocation_values_consistent": true,
+          "relocation_targets_verified": true,
+          "relocation_targets_equal": true,
+          "inferred_relocated_bytes_equal": true,
+          "relocated_bytes_equal": true,
           "first_unmasked_differences": []
         },
         {
@@ -2329,11 +2546,11 @@
       ],
       "functions_compared": 3,
       "relocation_masked_matches": 3,
-      "relocation_consistent_matches": 2,
-      "relocation_checked_matches": 2,
+      "relocation_consistent_matches": 3,
+      "relocation_checked_matches": 3,
       "relocation_target_mismatches": 0,
       "inferred_targets": 0,
-      "unresolved_targets": 5
+      "unresolved_targets": 0
     }
   ],
   "object_summary": {
@@ -2343,7 +2560,7 @@
     "original_sizes_verified": true,
     "relocation_masked_matches": 21,
     "relocation_target_mismatches": 8,
-    "inferred_targets": 74,
-    "unresolved_targets": 31
+    "inferred_targets": 75,
+    "unresolved_targets": 0
   }
 }

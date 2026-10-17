@@ -235,6 +235,66 @@
       "size": 2320,
       "address_basis": "identified_symbol",
       "address_evidence": "Complete pole-filter body through return and alignment;64-bit intermediate accumulations and floor division."
+    },
+    {
+      "name": "_fprintf",
+      "va": 268573299,
+      "address_basis": "independent_library_mapping",
+      "address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json."
+    },
+    {
+      "name": "__aulldiv",
+      "va": 268574176,
+      "address_basis": "independent_library_mapping",
+      "address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json."
+    },
+    {
+      "name": "__alldiv",
+      "va": 268574352,
+      "address_basis": "independent_library_mapping",
+      "address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json."
+    },
+    {
+      "name": "__allmul",
+      "va": 268574288,
+      "address_basis": "independent_library_mapping",
+      "address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json."
+    },
+    {
+      "name": "__except_handler3",
+      "va": 268573644,
+      "address_basis": "independent_library_mapping",
+      "address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json."
+    },
+    {
+      "name": "??_C@_01EEMJAFIK@?6?$AA@",
+      "va": 268637004,
+      "address_basis": "observed_operand_inference",
+      "address_evidence": "Nonunique literal bytes verified at the decoded operand address; see analysis/audio-processing-operands.json."
+    },
+    {
+      "name": "??_C@_05OFBGOFBN@?5?$CF02X?$AA@",
+      "va": 268636996,
+      "address_basis": "identified_symbol",
+      "address_evidence": "Unique complete NUL-terminated literal match; see analysis/audio-processing-operands.json."
+    },
+    {
+      "name": "??_C@_02PHMGELLB@?6?6?$AA@",
+      "va": 268635264,
+      "address_basis": "identified_symbol",
+      "address_evidence": "Unique complete NUL-terminated literal match; see analysis/audio-processing-operands.json."
+    },
+    {
+      "name": "$T73174",
+      "va": 268636584,
+      "address_basis": "identified_symbol",
+      "address_evidence": "Unique complete SEH scope-table match after resolving both labels inside the matched AudioOSHasSSE body; see analysis/audio-processing-operands.json."
+    },
+    {
+      "name": "__except_list",
+      "va": 0,
+      "address_basis": "independent_library_mapping",
+      "address_evidence": "Absolute COFF symbol with value zero in VC7 libcmt exsup.obj, used as FS:[0]; see analysis/audio-processing-operands.json."
     }
   ]
 }

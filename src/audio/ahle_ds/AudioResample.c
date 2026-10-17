@@ -1,7 +1,7 @@
 /* Scalar polyphase resampling; original filename is unknown. */
 #include "AudioProcessing.h"
 
-extern const short AudioResampleTable[64][4];
+extern short AudioResampleTable[64][4];
 
 void ResampleAudioScalar(AudioCommand *command, AudioContext *context)
 {

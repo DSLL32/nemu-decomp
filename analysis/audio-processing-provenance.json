@@ -16,14 +16,15 @@
     "src/audio/ahle_ds/AudioSSE.c": "37da4a9d22e3e1b8e33e5d381dac340ad2b38a59dacf7492f4aa6e5ad87c954f",
     "src/audio/ahle_ds/AudioADPCM.c": "cfbdae568921ae83e104173dff5b0697759cd70fa694a9cbc7eb61e8265db662",
     "src/audio/ahle_ds/AudioPoleFilter.c": "b65d389c08d2d48bb4e78bbfbfa39bfedcccb0e474410ccc13c9b8ce2a1c6f65",
-    "src/audio/ahle_ds/AudioResample.c": "7c2cc74e3d65c5890168dbe48170bae26540b662b2ddfcd449211f9112318c8f",
+    "src/audio/ahle_ds/AudioResample.c": "874aea3b368060227655215349c40463c409fe97be0b6e9ebdd78c6ad4fcdfc8",
     "src/audio/ahle_ds/AudioHLE.h": "82e6544a76ee5d0e361f785773e5da8bd91070019a65367d89d6cb0defd8b3ee",
     "src/audio/ahle_ds/AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
     "scripts/verify_audio_processing_behavior.py": "157f87d7c64eed90a50ad9492786dcdeda64e6c065b74d9a92c6bd7d0985d1c7",
     "scripts/verify_gs.py": "9096c1ce5e759dc60f4fc7b84c97678b5946b7b15f6bfb56cd1fa3b9e730854c",
     "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
     "toolchains/vc7/bin/c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
-    "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0"
+    "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0",
+    "scripts/verify_audio_processing_operands.py": "51a7de759f3e17f61fd3b79cfe714cb5c1c2435cb71863fb498e14c368886a44"
   },
   "functions": [
     {
@@ -260,7 +261,7 @@
     "Relocation-target diagnostics for unmatched functions are position-based and may inspect unrelated original instruction bytes when code layout differs.",
     "Readable source file names and translation-unit boundaries are inferred; no original source provenance is claimed.",
     "Behavior probes execute original external callees and do not validate a linked rebuilt DLL.",
-    "The canonical resampling table currently has a const declaration although its original storage is writable .data; original declaration/section placement remains unresolved."
+    "The scalar resampling table is now declared mutable to match its observed original storage. The read-only scalar view generates the same instructions; the canonical table definition and placement are integrated separately."
   ],
   "source_ancestry": [
     {
@@ -281,5 +282,6 @@
         "Diagnostic logging and invalid-codebook handling differ from the archived UltraHLE source."
       ]
     }
-  ]
+  ],
+  "operand_evidence": "analysis/audio-processing-operands.json"
 }
