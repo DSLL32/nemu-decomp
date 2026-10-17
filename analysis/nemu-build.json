@@ -2050,7 +2050,23 @@
     "evidence": "/root/.ai-tmp/nemu-all-import-order.rpod99bh/report.json",
     "independent_replay_exact_api_to_iat_slots": 152,
     "limitation": "API identities occupy the original IAT addresses, but the import descriptor and hint/name-pool order is still different. This is not a claim that complete import bytes match. The target contains two alias contributions and27 C++ LTCG contributions not yet reproduced by the current application input units.",
-    "native_code_order_note": "Explicit unchanged CRT members satisfy every mapped function and non-COMDAT data contribution ordering constraint. Remaining absolute code addresses depend on application code lengths and alignment.",
-    "inference": "These are inferred ordinary linker-input ordering recipes, not evidence that the historical project used explicit CRT members or /ORDER."
+    "native_code_order_note": "The95 unchanged explicit CRT members and19 unchanged members selected from a deferred archive retain all187 mapped runtime functions in original order. Absolute code addresses still depend on application lengths, native alignment, and remaining original input-grouping differences.",
+    "inference": "These are inferred ordinary linker-input ordering recipes, not evidence that the historical project used explicit CRT members or /ORDER.",
+    "crt_input_partition": {
+      "explicit_objects": 95,
+      "deferred_archive_members": 19,
+      "first_deferred_object": "..\\build\\intel\\st_obj\\fpinit.obj",
+      "reason": "Compiler-generated integer/floating runtime dependencies are selected after LTCG. Eager extraction misplaced both the floating literal pool and fpinit initialized storage.",
+      "validation": "/root/.ai-tmp/nemu-crt-lazy.e7n3cj3l/canonical-report.json",
+      "unchanged_archive_member_bytes_verified": true,
+      "mapped_runtime_function_order": 187,
+      "function_order_inversions": 0,
+      "exact_api_to_iat_slots": 152,
+      "original_fltused_va": "0x479928",
+      "rebuilt_fltused_va": "0x479928",
+      "eager_fltused_va": "0x440b00",
+      "remaining_late_literal_displacement": -8,
+      "canonical_and_probe_all_section_bytes_equal": true
+    }
   }
 }

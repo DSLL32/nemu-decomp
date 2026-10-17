@@ -96,6 +96,8 @@ def generate(recipe, import_dir, output):
     output.mkdir(parents=True, exist_ok=True)
     objects, report = [], dict(crt=[], imports=[], member_bytes_unchanged=True)
     crt = recipe['crt']
+    deferred_names = set(crt.get('deferred_members', []))
+    deferred = []
     library = ROOT / crt['library']
     if hashlib.sha256(library.read_bytes()).hexdigest() != crt['library_sha256']:
         raise ValueError('CRT archive hash changed')
@@ -104,10 +106,23 @@ def generate(recipe, import_dir, output):
         name, data = contents[row['archive_offset']]
         if name != row['object'] or hashlib.sha256(data).hexdigest() != row['sha256']:
             raise ValueError('CRT member changed: ' + row['object'])
-        file = output / ('crt-%03d.obj' % index)
-        file.write_bytes(data)
+        if name in deferred_names:
+            deferred.append((name, data, defined_symbols(data)))
+            file = output / 'crt-late.lib'
+        else:
+            file = output / ('crt-%03d.obj' % index)
+            file.write_bytes(data)
+            objects.append(file)
+        report['crt'].append(dict(row, file=str(file), deferred=name in deferred_names))
+    if deferred_names != {name for name, _, _ in deferred}:
+        raise ValueError('Deferred CRT member is absent from the selected member list')
+    if deferred:
+        file = output / 'crt-late.lib'
+        file.write_bytes(archive_for(deferred))
+        actual = list(archive_members(file))
+        if [(name, data) for name, _, data in actual] != [(name, data) for name, data, _ in deferred]:
+            raise ValueError('Generated CRT archive changed member bytes')
         objects.append(file)
-        report['crt'].append(dict(row, file=str(file)))
     imports = {}
     for dll, source in recipe['imports']['libraries'].items():
         library = ROOT / source['path'] if 'path' in source else import_dir / source['generated']

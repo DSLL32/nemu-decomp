@@ -579,7 +579,29 @@
       }
     ],
     "constraint_count": 142,
-    "evidence": "analysis/nemu-library-addresses.json"
+    "evidence": "analysis/nemu-library-addresses.json",
+    "deferred_members": [
+      "..\\build\\intel\\st_obj\\fpinit.obj",
+      "..\\build\\intel\\st_obj\\ftol2.obj",
+      "build\\intel\\st_obj\\lldiv.obj",
+      "build\\intel\\st_obj\\lldvrm.obj",
+      "build\\intel\\st_obj\\llshr.obj",
+      "build\\intel\\st_obj\\ullshr.obj",
+      "build\\intel\\st_obj\\llshl.obj",
+      "..\\build\\intel\\st_obj\\cvt.obj",
+      "build\\intel\\st_obj\\fp8.obj",
+      "..\\build\\intel\\st_obj\\testfdiv.obj",
+      "..\\build\\intel\\st_obj\\intrncvt.obj",
+      "build\\intel\\st_obj\\_fptostr.obj",
+      "..\\build\\intel\\st_obj\\cfout.obj",
+      "..\\build\\intel\\st_obj\\ieee87.obj",
+      "..\\build\\intel\\st_obj\\mantold.obj",
+      "..\\build\\intel\\st_obj\\strgtold.obj",
+      "..\\build\\intel\\st_obj\\x10fout.obj",
+      "..\\build\\intel\\st_obj\\tenpow.obj",
+      "..\\build\\intel\\st_obj\\constpow.obj"
+    ],
+    "deferred_member_inference": "These 19 floating-point and compiler-generated integer runtime contributions are selected after LTCG code generation. Keeping their unchanged members in a normal archive reproduces the original late literal pool and fpinit initialized-data location; the preceding95 CRT contributions remain explicit ordering inputs."
   },
   "imports": {
     "libraries": {
