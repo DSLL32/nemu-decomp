@@ -48,8 +48,9 @@ void ABI3_SaveBuffer(AudioCommand *, AudioContext *);
 void ABI3_LoadADPCM(AudioCommand *, AudioContext *);
 
 
-int SpecialEnvelopeDetected;
-static char AudioErrorMessage[1024];
+/* Explicit zero state belongs to this unit's strong BSS contribution. */
+int SpecialEnvelopeDetected = 0;
+
 
 void ResampleAudioMMX(AudioCommand *command, AudioContext *context)
 {
@@ -731,11 +732,3 @@ void ABI2_EnvMixer(AudioCommand *command, AudioContext *context)
     }
 }
 
-void AudioWarning(const char *format, ...)
-{
-    va_list arguments;
-    va_start(arguments, format);
-    vsprintf(AudioErrorMessage, format, arguments);
-    va_end(arguments);
-    AudioError(AudioErrorMessage, 0);
-}

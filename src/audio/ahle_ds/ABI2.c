@@ -47,8 +47,23 @@ void ABI3_LoadBuffer(AudioCommand *, AudioContext *);
 void ABI3_SaveBuffer(AudioCommand *, AudioContext *);
 void ABI3_LoadADPCM(AudioCommand *, AudioContext *);
 
+/* The native filter state precedes the variadic diagnostic buffer.
+ * This places AudioWarning at the start of this inferred ABI unit. */
+int AudioFilterAddress = 0;
+int AudioFilterOutput = 0;
+int AudioFilterState = 0;
+int AudioFilterCount = 0;
+static char AudioErrorMessage[1024] = {0};
 
-int AudioFilterCount, AudioFilterAddress, AudioFilterOutput, AudioFilterState;
+void AudioWarning(const char *format, ...)
+{
+    va_list arguments;
+    va_start(arguments, format);
+    vsprintf(AudioErrorMessage, format, arguments);
+    va_end(arguments);
+    AudioError(AudioErrorMessage, 0);
+}
+
 
 void ABI2_NoOp(AudioCommand *command, AudioContext *context) {}
 

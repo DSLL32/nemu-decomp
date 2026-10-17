@@ -8,11 +8,11 @@
 #include <string.h>
 #pragma intrinsic(_byteswap_ulong)
 
-AudioCommand *CurrentCommand;
-AudioCommandHandler AudioCommandTable[32];
-BOOL HLEAudio;
-int AudioTaskSeen;
-int AudioBuffersAllocated;
+AudioCommand *CurrentCommand = 0;
+AudioCommandHandler AudioCommandTable[32] = {0};
+BOOL HLEAudio = 0;
+int AudioTaskSeen = 0;
+int AudioBuffersAllocated = 0;
 int AudioTaskRunning = 1;
 /* Retained diagnostic names and initialized state. Private identifiers are
  * inferred from the original initialized-data contribution. */

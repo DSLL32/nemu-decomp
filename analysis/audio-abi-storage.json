@@ -1,0 +1,126 @@
+{
+  "status": "partial_strong_storage_recovery",
+  "full_dll_byte_exact": false,
+  "artifact": "/root/.ai-tmp/nemu-audio-recovery/abi-storage-check/runs/zrvjdhi1",
+  "scope": "Known first-band strong BSS objects and source-unit boundary; unexplained zero-filled extents remain.",
+  "body_validation": {
+    "unique_complete_spans": 100,
+    "instruction_matches": 100,
+    "initialized_data_bytes": 15056,
+    "initialized_data_exact": true,
+    "report_sha256": "389fed08e7cb345335ed09e4a828c6421941b671970adcc6d086bd7c1aa44c2d"
+  },
+  "units": [
+    {
+      "unit": "ABI1",
+      "object_sha256": "bb41e8ac763bf9fd342f1616f41a05af4d1217c1a390c0e0f6e6af2aad7580e4",
+      "strong_bss_bytes": 4,
+      "alignment": 4,
+      "symbols": [
+        {
+          "name": "_SpecialEnvelopeDetected",
+          "original_va": "0x10040a00",
+          "candidate_contribution_offset": 0,
+          "original_offset_from_first_identified_symbol": 0,
+          "relative_offset_equal": true
+        }
+      ]
+    },
+    {
+      "unit": "ABI2",
+      "object_sha256": "666416704a5b9e4614f9b87b84cec4f8b1dc305f40129a701b7318781d4b2f55",
+      "strong_bss_bytes": 1040,
+      "alignment": 8,
+      "symbols": [
+        {
+          "name": "_AudioFilterAddress",
+          "original_va": "0x10040a10",
+          "candidate_contribution_offset": 0,
+          "original_offset_from_first_identified_symbol": 0,
+          "relative_offset_equal": true
+        },
+        {
+          "name": "_AudioFilterOutput",
+          "original_va": "0x10040a14",
+          "candidate_contribution_offset": 4,
+          "original_offset_from_first_identified_symbol": 4,
+          "relative_offset_equal": true
+        },
+        {
+          "name": "_AudioFilterState",
+          "original_va": "0x10040a18",
+          "candidate_contribution_offset": 8,
+          "original_offset_from_first_identified_symbol": 8,
+          "relative_offset_equal": true
+        },
+        {
+          "name": "_AudioFilterCount",
+          "original_va": "0x10040a1c",
+          "candidate_contribution_offset": 12,
+          "original_offset_from_first_identified_symbol": 12,
+          "relative_offset_equal": true
+        },
+        {
+          "name": "_AudioErrorMessage",
+          "original_va": "0x10040a20",
+          "candidate_contribution_offset": 16,
+          "original_offset_from_first_identified_symbol": 16,
+          "relative_offset_equal": true
+        }
+      ]
+    },
+    {
+      "unit": "AudioHLE",
+      "object_sha256": "d77d79dc6d857270e1a5932bb68dce731852335677c5a22a60049fe595ad8471",
+      "strong_bss_bytes": 148,
+      "alignment": 8,
+      "symbols": [
+        {
+          "name": "_CurrentCommand",
+          "original_va": "0x10040e30",
+          "candidate_contribution_offset": 0,
+          "original_offset_from_first_identified_symbol": 0,
+          "relative_offset_equal": true
+        },
+        {
+          "name": "_AudioCommandTable",
+          "original_va": "0x10040e38",
+          "candidate_contribution_offset": 8,
+          "original_offset_from_first_identified_symbol": 8,
+          "relative_offset_equal": true
+        },
+        {
+          "name": "_HLEAudio",
+          "original_va": "0x10040eb8",
+          "candidate_contribution_offset": 136,
+          "original_offset_from_first_identified_symbol": 136,
+          "relative_offset_equal": true
+        },
+        {
+          "name": "_AudioTaskSeen",
+          "original_va": "0x10040ec0",
+          "candidate_contribution_offset": 140,
+          "original_offset_from_first_identified_symbol": 144,
+          "relative_offset_equal": false
+        },
+        {
+          "name": "_AudioBuffersAllocated",
+          "original_va": "0x10040ec4",
+          "candidate_contribution_offset": 144,
+          "original_offset_from_first_identified_symbol": 148,
+          "relative_offset_equal": false
+        }
+      ]
+    }
+  ],
+  "inferences": [
+    "AudioWarning is placed at the start of ABI2 because its diagnostic buffer follows ABI2 filter state in the original strong storage order. Its complete48-byte body and all other first100 bodies remain unchanged.",
+    "Explicit zero definitions preserve externally visible state and place the known objects in strong storage; exact original declaration spelling is not uniquely identified.",
+    "AudioErrorMessage retains its provisional1024-byte capacity. No object has been introduced merely to occupy a zero-filled gap."
+  ],
+  "unresolved": [
+    "ABI1 contributes4 bytes, so the tested linker aligns ABI2 at10040a08, eight bytes before the first original filter field10040a10.",
+    "The original warning-buffer-to-HLE boundary has additional zero-filled bytes not yet explained by known objects.",
+    "Within HLE, AudioTaskSeen and AudioBuffersAllocated are four bytes earlier relative to the first known object than their original positions."
+  ]
+}
