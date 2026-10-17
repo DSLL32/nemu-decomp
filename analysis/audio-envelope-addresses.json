@@ -87,6 +87,38 @@
       "object": "AudioEnvelope.obj"
     },
     {
+      "name": "_MixAudioEnvelopeClamped",
+      "va": 268498304,
+      "size": 864,
+      "address_basis": "identified_symbol",
+      "address_evidence": "Decoded native function through terminal return and following alignment; semantic name inferred.",
+      "object": "AudioEnvelope.obj"
+    },
+    {
+      "name": "_MixAudioEnvelope",
+      "va": 268499168,
+      "size": 1072,
+      "address_basis": "identified_symbol",
+      "address_evidence": "Decoded native function through terminal return and following alignment; semantic name inferred.",
+      "object": "AudioEnvelope.obj"
+    },
+    {
+      "name": "_MixAudioEnvelopeLegacy",
+      "va": 268500240,
+      "size": 848,
+      "address_basis": "identified_symbol",
+      "address_evidence": "Decoded native function through terminal return and following alignment; semantic name inferred.",
+      "object": "AudioEnvelope.obj"
+    },
+    {
+      "name": "_MixAudioEnvelopeUnsigned",
+      "va": 268501088,
+      "size": 1328,
+      "address_basis": "identified_symbol",
+      "address_evidence": "Native unsigned envelope mixer decoded through all three loop exits and compiler alignment; semantic source name inferred.",
+      "object": "AudioEnvelope.obj"
+    },
+    {
       "name": "__real@47800000",
       "va": 268633544,
       "size": 4,
@@ -161,7 +193,8 @@
     }
   ],
   "notes": [
-    "The scalar, SIMD and command mixers share one inferred native C unit and one inline saturation helper.",
-    "SIMD function sizes exclude linker alignment; the original next-function alignment remains part of the complete DLL comparison."
+    "The scalar, SIMD, command and integer mixers share one inferred native C unit and one inline saturation helper.",
+    "SIMD function sizes exclude linker alignment; the original next-function alignment remains part of the complete DLL comparison.",
+    "The integer mixer ancestry, target-specific differences and original authorship notices are recorded in audio-envelope-ultrahle-provenance.json."
   ]
 }
