@@ -1963,8 +1963,8 @@
   },
   "build_script": "scripts/build_nemu.py",
   "integration_validation": {
-    "command": "python3 scripts/build_nemu.py --work /root/.ai-tmp/nemu-build-investigate.ULGEobKx --ordered-libraries --function-order /root/.ai-tmp/nemu-build-investigate.ULGEobKx/application.order --stage-storage",
-    "build_report": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/e1a1292540d8bae84e649df80d8dd5cc9509dc90864c01ee8b63b7a06c7e0f78/build.json",
+    "command": "python3 scripts/build_nemu.py --work /root/.ai-tmp/nemu-build-investigate.ULGEobKx --ordered-libraries --function-order src/nemu64/application.order --stage-storage",
+    "build_report": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/b3108bca0d8a60e0b615eee3136a399f2ecadd8a255a5179375ddc2d9c1ffdc9/build.json",
     "status": "All current real source units compile and link successfully; full executable bytes differ.",
     "application_units_compiled": 21,
     "application_units": [
@@ -1997,19 +1997,19 @@
     "resource_compilation": "passed",
     "link_unresolved_externals": 0,
     "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
-    "rebuilt_sha256": "e1a1292540d8bae84e649df80d8dd5cc9509dc90864c01ee8b63b7a06c7e0f78",
+    "rebuilt_sha256": "b3108bca0d8a60e0b615eee3136a399f2ecadd8a255a5179375ddc2d9c1ffdc9",
     "original_file_bytes": 4796416,
     "rebuilt_file_bytes": 4796416,
-    "differing_file_bytes": 185195,
+    "differing_file_bytes": 184851,
     "resource_payloads_equal": true,
     "resource_payload_count": 29,
     "full_executable_match_claimed": false,
-    "immutable_source_and_object_snapshot": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/e1a1292540d8bae84e649df80d8dd5cc9509dc90864c01ee8b63b7a06c7e0f78",
-    "relocation_diagnostic": "/root/.ai-tmp/nemu-complete-relocs.ko06ekj6",
+    "immutable_source_and_object_snapshot": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/b3108bca0d8a60e0b615eee3136a399f2ecadd8a255a5179375ddc2d9c1ffdc9",
+    "relocation_diagnostic": "/root/.ai-tmp/nemu-complete-relocs.kvcg2ypy",
     "relocation_diagnostic_preserves_all_existing_section_bytes": true,
     "note": "Raw whole-file comparison includes all code, data, resources, padding and metadata. No bytes are restored or patched. Diagnostic /FIXED:NO adds relocation records for independent operand comparison; it is not the intended original output.",
     "function_order": {
-      "source": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/application.order",
+      "source": "/root/nemu-decomp/src/nemu64/application.order",
       "copied_file": "function-order.txt",
       "sha256": "2c05598a5f08940e572fbf483a6e75cb4febf444926fc43b368f8192e2e256a4",
       "ignored_entries": []
@@ -2039,9 +2039,9 @@
       "position_invariance_evidence": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/storage-order-invariance.json"
     },
     "section_differing_bytes": {
-      ".text": 180383,
-      ".rdata": 3439,
-      ".data": 1249,
+      ".text": 180217,
+      ".rdata": 3263,
+      ".data": 1247,
       ".rsrc": 0
     },
     "readonly_input_grouping_evidence": {
@@ -2051,14 +2051,22 @@
       "unique_application_literals_checked": 499,
       "limitation": "Inferred coherent translation-unit grouping preserves reconstructed bodies; original filenames were not retained."
     },
-    "current_text_virtual_size": 190333,
+    "current_text_virtual_size": 190349,
     "original_text_virtual_size": 190477,
     "source_refinements_since_previous_snapshot": [
-      "Four frontend setting operands now identify ShowErrorMessages, independently validated against original data addresses.",
-      "RefreshRomBrowser retry/error source ordering preserves the full body and restores six literal addresses.",
-      "Closer CompareBrowserItems source now has original720-byte complete span but remains mismatched.",
-      "CPUHostException outer exception-code switch restores original diagnostic literal ordering; body matching remains incomplete."
-    ]
+      "Branch source-width and volatile-formal reconstruction now matches all144 CPU functions in the owner full-context check.",
+      "SaveFunctionSignatures natural EAX return convention and WritePhysicalWord source refinement are closer complete-span candidates; remaining differences are explicit.",
+      "WinMain close-ROM/load-ROM arm order changes literal discovery while preserving all reconstructed text/data bytes after identified literal relocation."
+    ],
+    "data_change_identity_audit": {
+      "evidence": "/root/.ai-tmp/nemu-data-refresh.cuq07m2x/report.json",
+      "earlier_q7_evidence": "/root/.ai-tmp/nemu-data-refresh.cuq07m2x/q7-report.json",
+      "changed_fields": 31,
+      "all_fields_are_real_highlow_relocations": true,
+      "all_targets_have_same_map_symbol_identity": true,
+      "residual_changed_bytes": 0,
+      "scope": "Changes between reconstructed fixtures only; this does not certify original initialized-data equality."
+    }
   },
   "native_library_ordering": {
     "recipe": "src/nemu64/imports/link-order.json",

@@ -1,0 +1,83 @@
+{
+  "purpose": "Search local staged SDK media for the three unresolved original import-member forms without manufacturing or patching any members.",
+  "work": "/root/.ai-tmp/nemu-sdk-inventory.p7n2fgha",
+  "outer_staged_files_listed": 13,
+  "nested_microsoft_cabinet_directories_read": 541,
+  "nested_installshield_directories_read": 3,
+  "cabinet_note": "Direct MSCF CFFILE directory parsing avoids multi-volume 7-Zip listing warnings; every cabinet directory was read. InstallShield directories were read with unshield.",
+  "native_library_search": "All extracted Microsoft COFF archives were searched for the exact three definitions; unrelated SNAGetSystemInfo imports were excluded.",
+  "vs2002_msi": {
+    "file": "vs_setup.msi",
+    "kernel32_file_rows": 2,
+    "vc7_path": "Vc7/lib/kernel32.lib",
+    "sdk_path": "Vc7/PlatformSDK/lib/Kernel32.Lib",
+    "embedded_sdk_cabinet": "_1162_zWin32_b.common.msm",
+    "embedded_sdk_file_key": "Kernel32_Lib.1D186BB7_0E01_4EF7_A17F_6F37CEEEE822",
+    "size": 182168,
+    "identical_payload_sha256": "96bacd10af0d93868e98a9d06ebe22b72f0b2be6b74dbb5abf2095caf3618c83"
+  },
+  "found_kernel_libraries": [
+    {
+      "media": "en_vs6_ent_cd1.iso",
+      "path": "VC98/LIB/KERNEL32.LIB",
+      "sha256": "cd4a546f71481319aeee455aa0fb51698a094f9d3e6d8339acf445489a263c68",
+      "member_format": "short import",
+      "hints": {
+        "GetSystemInfo": 347,
+        "VirtualQuery": 710,
+        "RtlUnwind": 559
+      }
+    },
+    {
+      "media": "VSPROD3.iso and vs_setup.msi embedded Platform SDK",
+      "sha256": "96bacd10af0d93868e98a9d06ebe22b72f0b2be6b74dbb5abf2095caf3618c83",
+      "member_format": "short import",
+      "hints": {
+        "GetSystemInfo": 424,
+        "VirtualQuery": 861,
+        "RtlUnwind": 689
+      }
+    }
+  ],
+  "other_media": "SP5/Processor Pack supplies no replacement kernel32.lib. VS6 support/NT Option Pack, VS2002 samples/prerequisites, MDAC and VB runtime payloads supply no additional native kernel32.lib. Code Advisor Wise installer was identified as VB6 tooling, not a native SDK; its compressed program payload was not recursively unpacked.",
+  "original_constraints": {
+    "GetSystemInfo": {
+      "hint": 424,
+      "iat_va": "0x4300bc",
+      "hint_name_va": "0x43eeec"
+    },
+    "VirtualQuery": {
+      "hint": 861,
+      "iat_va": "0x430160",
+      "hint_name_va": "0x43eefc"
+    },
+    "RtlUnwind": {
+      "hint": 689,
+      "iat_va": "0x43013c",
+      "hint_name_va": "0x43ef2c",
+      "thunk_va": "0x42dca0",
+      "thunk_alignment_observed": 16
+    }
+  },
+  "interpretation": "A historical ordinary import-member variant remains a hypothesis, not an identified dependency. Its hint values, member layout and Rich contribution counts must all fit. Current tracked short imports have matching hints but do not yet reproduce three IAT insertion positions or RtlUnwind thunk alignment.",
+  "existing_vc6_long_form_probe": {
+    "path": "/root/.ai-tmp/nemu-import-long.hd265hht/gs-vc6long.lib",
+    "command_option": "/LINK50COMPAT",
+    "compiler_id": "000420ff",
+    "thunk_text_characteristics": "60201020",
+    "thunk_alignment": 2,
+    "fits_original_rtl_alignment": false
+  },
+  "source_artifacts": [
+    "outer.json",
+    "cab-directories.json",
+    "nested-listings.json",
+    "nested-extraction.json",
+    "import-members.json",
+    "msi-files.json",
+    "DATA1.CAB.unshield.txt",
+    "_USER1.CAB.unshield.txt",
+    "_SYS1.CAB.unshield.txt"
+  ],
+  "program_or_library_bytes_modified": false
+}
