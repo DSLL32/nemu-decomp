@@ -16,7 +16,7 @@
     "src/audio/ahle_ds/AudioSSE.c": "37da4a9d22e3e1b8e33e5d381dac340ad2b38a59dacf7492f4aa6e5ad87c954f",
     "src/audio/ahle_ds/AudioADPCM.c": "cfbdae568921ae83e104173dff5b0697759cd70fa694a9cbc7eb61e8265db662",
     "src/audio/ahle_ds/AudioPoleFilter.c": "b65d389c08d2d48bb4e78bbfbfa39bfedcccb0e474410ccc13c9b8ce2a1c6f65",
-    "src/audio/ahle_ds/AudioResample.c": "874aea3b368060227655215349c40463c409fe97be0b6e9ebdd78c6ad4fcdfc8",
+    "src/audio/ahle_ds/AudioResample.c": "a4223d0cbb96cba3ca649b82ce433a5dd217440fcb494180f9af4a866de875f2",
     "src/audio/ahle_ds/AudioHLE.h": "82e6544a76ee5d0e361f785773e5da8bd91070019a65367d89d6cb0defd8b3ee",
     "src/audio/ahle_ds/AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
     "scripts/verify_audio_processing_behavior.py": "157f87d7c64eed90a50ad9492786dcdeda64e6c065b74d9a92c6bd7d0985d1c7",
@@ -26,7 +26,9 @@
     "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0",
     "scripts/verify_audio_processing_operands.py": "51a7de759f3e17f61fd3b79cfe714cb5c1c2435cb71863fb498e14c368886a44",
     "scripts/check_audio_polefilter.py": "2d3fa2aa7fb9915daa4476f478f9c717b7e17256699ca66b8526a5be6832b2cb",
-    "scripts/probe_audio_processing_groups.py": "b88890e79a828c9331a0020124d662b71d2817c956cc6cdf247443aaa6e63324"
+    "scripts/probe_audio_processing_groups.py": "b88890e79a828c9331a0020124d662b71d2817c956cc6cdf247443aaa6e63324",
+    "src/audio/ahle_ds/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
+    "src/audio/ahle_ds/AudioResampleTables.h": "5b95bd2db83cf7eea18b347cdf32c7a332073868cbcbd45a939f8de4537236f1"
   },
   "functions": [
     {
@@ -179,7 +181,7 @@
       "original_size": 656,
       "original_complete_extent_sha256": "4a38da79db200681ef6abb7dd39f33abd026a54fb4f35a20e56200f28dc2808b",
       "relocation_masked_equal": false,
-      "relocation_masked_differing_bytes": 508,
+      "relocation_masked_differing_bytes": 278,
       "candidate_size": 656
     },
     {
@@ -263,7 +265,7 @@
     "Relocation-target diagnostics for unmatched functions are position-based and may inspect unrelated original instruction bytes when code layout differs.",
     "Readable source file names and translation-unit boundaries are inferred; no original source provenance is claimed.",
     "Behavior probes execute original external callees and do not validate a linked rebuilt DLL.",
-    "The scalar resampling table is now declared mutable to match its observed original storage. The read-only scalar view generates the same instructions; the canonical table definition and placement are integrated separately."
+    "Scalar unit now defines all five writable coefficient arrays after its retained AMP window table. SIMD old definition removal is coordinated separately. Scalar body remains incomplete despite instruction-supported byte flags and explicit state loads."
   ],
   "source_ancestry": [
     {
@@ -287,5 +289,61 @@
   ],
   "operand_evidence": "analysis/audio-processing-operands.json",
   "pole_filter_instruction_audit": "analysis/audio-polefilter-instructions.json",
-  "translation_unit_probe": "analysis/audio-processing-groups.json"
+  "translation_unit_probe": "analysis/audio-processing-groups.json",
+  "scalar_source_refinements": {
+    "basis": "Matched MMX ResampleAudioMMX source skeleton plus original scalar operand widths and retained state-pointer increments. These source refinements preserve the complete656-byte extent and reduce masked position differences508 to278; they do not establish byte equality.",
+    "changes": [
+      "Use unsigned char command flags, matching original byte tests and the exact MMX implementation.",
+      "Spell four initial history reads as explicit assignments, reproducing the two retained pointer increments at original VAs0x10011a13 and0x10011a1a.",
+      "Load sample count before correcting input history, then preserve a signed short table index before scaling.",
+      "Define mutable coefficient data after transform.h in the inferred twelfth unit."
+    ]
+  },
+  "scalar_coefficient_data": [
+    {
+      "name": "AudioResampleKernel",
+      "original_va": "0x1003c8d0",
+      "object_offset": 2176,
+      "bytes": 512,
+      "sha256": "b614a26badbdd218794fb72b6b7fa8b74748d25355b60f8157df06126baf2ed2",
+      "writable": true,
+      "exact_bytes": true
+    },
+    {
+      "name": "AudioResampleTable",
+      "original_va": "0x1003cad0",
+      "object_offset": 2688,
+      "bytes": 512,
+      "sha256": "e606c84c6ade13524960a0a4e290b96cd89e0fb8e6224f25ca356c47bfb743df",
+      "writable": true,
+      "exact_bytes": true
+    },
+    {
+      "name": "AudioResampleShift1",
+      "original_va": "0x1003ccd0",
+      "object_offset": 3200,
+      "bytes": 512,
+      "sha256": "ec363666bab9ab5328b8737b2e3361554916fc1223b49e5e7563be0cf4b0f749",
+      "writable": true,
+      "exact_bytes": true
+    },
+    {
+      "name": "AudioResampleShift2",
+      "original_va": "0x1003ced0",
+      "object_offset": 3712,
+      "bytes": 512,
+      "sha256": "1223d95f43fba1cad7c540a4335d2b2b0656560ee9785d1a1c690b6aefb7f4b0",
+      "writable": true,
+      "exact_bytes": true
+    },
+    {
+      "name": "AudioResampleShift3",
+      "original_va": "0x1003d0d0",
+      "object_offset": 4224,
+      "bytes": 512,
+      "sha256": "21ff48ed1faad0e0e3c3d92b6c44e7b50aa7a5f1a4aa6f3b92f29f726ba72c30",
+      "writable": true,
+      "exact_bytes": true
+    }
+  ]
 }

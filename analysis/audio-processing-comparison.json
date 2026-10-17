@@ -1516,7 +1516,7 @@
     },
     {
       "object": "/root/.ai-tmp/audio-processing.bGaifE/AudioResample.obj",
-      "sha256": "e64c4c9a692ffc36090a0a062bbb0d50a1f606a3fc0c2e91d6b27d2b3ab24a84",
+      "sha256": "bc7c15a7d61f5cf3972c3c7d43b8cbf793a933ff74bfa9c5427b30a249d8e3ea",
       "original": "master/Plugin/audio.dll",
       "functions": [
         {
@@ -1526,24 +1526,26 @@
           "status": "compared",
           "original_va": 268507472,
           "raw_bytes_equal": false,
-          "raw_differing_bytes": 531,
+          "raw_differing_bytes": 302,
           "compared_bytes": 656,
           "original_size_verified": true,
           "original_bytes": 656,
           "size_equal": true,
           "relocations": [
             {
-              "offset": 47,
+              "offset": 41,
               "type": "DIR32",
               "symbol": "_RDRAM",
               "addend": 0,
-              "original_target_va": 855703551,
-              "original_target_symbols": [],
+              "original_target_va": 269925092,
+              "original_target_symbols": [
+                "_RDRAM"
+              ],
               "expected_target_va": 269925092,
               "resolution_basis": "observed_operand_inference",
               "target_address_evidence": "Inferred from decoded original function operands.",
               "status": "resolved",
-              "target_equal": false,
+              "target_equal": true,
               "target_identity_verified": false
             },
             {
@@ -1617,11 +1619,11 @@
               "target_identity_verified": false
             }
           ],
-          "relocation_target_mismatch_count": 6,
+          "relocation_target_mismatch_count": 5,
           "inferred_target_count": 6,
           "unresolved_target_count": 0,
           "relocation_masked_equal": false,
-          "relocation_masked_differing_bytes": 508,
+          "relocation_masked_differing_bytes": 278,
           "relocations_all_resolved": true,
           "relocation_values_consistent": false,
           "relocation_targets_verified": false,
@@ -1642,25 +1644,25 @@
             19,
             20,
             21,
-            22,
+            23,
             24,
+            25,
             26,
             27,
             28,
             29,
             30,
             31,
-            32,
-            33,
-            34,
-            35,
-            36,
             37,
-            38,
-            39,
             40,
-            41,
-            42
+            60,
+            83,
+            133,
+            176,
+            187,
+            194,
+            211,
+            232
           ]
         }
       ],
@@ -1668,7 +1670,7 @@
       "relocation_masked_matches": 0,
       "relocation_consistent_matches": 0,
       "relocation_checked_matches": 0,
-      "relocation_target_mismatches": 6,
+      "relocation_target_mismatches": 5,
       "inferred_targets": 6,
       "unresolved_targets": 0
     },
@@ -2559,7 +2561,7 @@
     "unique_function_bytes": 7536,
     "original_sizes_verified": true,
     "relocation_masked_matches": 21,
-    "relocation_target_mismatches": 8,
+    "relocation_target_mismatches": 7,
     "inferred_targets": 75,
     "unresolved_targets": 0
   }
