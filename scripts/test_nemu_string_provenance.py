@@ -84,13 +84,74 @@ class StringProofTests(unittest.TestCase):
         self.assertEqual(result['inferred_absolute_masks'], 0)
         self.assertEqual(result['relocations'][0]['resolution_bases'], ['complete_string_record_pointer'])
 
-    def test_direct_byte_and_word_loads_do_not_claim_string_use(self):
-        for prefix in [b'\xa0', b'\x66\xa1', b'\xa1']:
+    def test_scalar_loads_have_distinct_bounded_read_scope(self):
+        for prefix, width in [(b'\x66\xa1', 2), (b'\xa1', 4)]:
             with self.subTest(prefix=prefix):
                 self.fixture(prefix=prefix)
-                self.reject('direct data access')
+                proof = self.proof()
+                self.assertTrue(proof['verified'], proof)
+                self.assertEqual(proof['basis'], 'complete_record_scalar_read')
+                self.assertEqual(proof['read_width'], width)
+                self.assertEqual(proof['read_bytes'], self.payload[:width].hex())
+                self.assertEqual(proof['scalar_value_little_endian'], int.from_bytes(self.payload[:width], 'little'))
+                self.assertEqual(proof['original_access']['read_end'], 0x402010 + width)
+                self.assertEqual(proof['original_access']['access'], 'scalar_memory_read')
+                self.assertNotIn('pointer_width', proof['original_access'])
                 self.field['address_use'] = 'immediate_address'
                 self.reject('pointer materialization')
+
+    def test_scalar_whitelist_rejects_byte_loads_stores_and_read_modify_write(self):
+        for prefix in [b'\xa0', b'\xa3', b'\xff\x05', b'\x8c\x1d', b'\x8e\x1d', b'\x0f\xb7\x05']:
+            with self.subTest(prefix=prefix):
+                self.fixture(prefix=prefix)
+                self.reject('16/32-bit MOV register read')
+
+    def test_scalar_sources_must_be_absolute_and_unqualified(self):
+        for prefix in [b'\x8b\x80', b'\x64\xa1', b'\x8b\x04\x85']:
+            with self.subTest(prefix=prefix):
+                self.fixture(prefix=prefix)
+                self.reject('absolute displacement')
+
+    def test_scalar_read_must_fit_complete_encoded_record(self):
+        self.fixture(payload=b'x\0', prefix=b'\xa1')
+        self.reject('extends beyond')
+
+    def test_scalar_equal_read_prefix_does_not_excuse_different_record_tail(self):
+        self.fixture(prefix=b'\x66\xa1')
+        self.before.data[0x313] = ord('X')  # Read "op" unchanged; full record differs.
+        self.reject('bits disagree')
+
+    def test_scalar_record_must_be_complete_even_when_read_itself_fits(self):
+        self.fixture(prefix=b'\x66\xa1')
+        self.after.sections[1]['virtual_size'] = 0x22
+        self.reject('complete literal')
+
+    def test_scalar_duplicate_record_and_addend_remain_unresolved(self):
+        self.fixture(prefix=b'\xa1')
+        self.after.data[0x351:0x351 + len(self.payload)] = self.payload
+        self.reject('not unique')
+        self.fixture(prefix=b'\xa1')
+        self.field['candidate_target'] += 1
+        self.assertIsNone(self.proof())
+
+    def test_scalar_wrong_original_register_and_operand_location_fail_closed(self):
+        self.fixture(prefix=b'\x8b\x05')
+        self.before.data[0x201] = 0x0d  # ECX instead of EAX.
+        self.reject('instructions differ')
+        self.fixture(prefix=b'\xa1')
+        self.field['offset'] += 1
+        self.reject('recorded relocation target')
+
+    def test_scalar_comparer_keeps_proof_separate_without_new_masks(self):
+        self.fixture(prefix=b'\xa1')
+        function = dict(name='Function', va=0x401000, size=len(self.before_code))
+        result = compare.compare_bytes(function, self.after_code, len(self.after_code), 0x501000,
+                                       [self.field], self.before, self.original, self.symbols)
+        self.assertTrue(result['fully_verified_relocations'])
+        self.assertEqual(result['masked_bytes'], 4)
+        self.assertEqual(result['relocations'][0]['resolution_bases'], ['complete_record_scalar_read'])
+        self.assertIn('string_record_scalar_read_proof', result['relocations'][0])
+        self.assertNotIn('string_record_pointer_proof', result['relocations'][0])
 
     def test_arithmetic_immediate_is_not_pointer_materialization(self):
         self.fixture(prefix=b'\x05')  # ADD EAX, imm32.

@@ -34,8 +34,9 @@ Linked floating literals additionally require matching decoded scalar reads,
 complete compiler-declared width/bits, read-only storage, and unique contents;
 duplicate byte patterns remain unresolved even at unaligned incidental sites.
 Named narrow string-record pointers require independently decoded PUSH/MOV
-immediates and unique complete record contents; direct data loads and suffixes
-do not gain complete-string-use claims.
+immediates and unique complete record contents. Absolute 16/32-bit MOV register
+reads have a separate bounded scalar-read proof; neither proves C-string API use.
+Suffixes remain unresolved without independent bounds.
 No files are modified except explicitly requested JSON reports.
 """
 
@@ -695,7 +696,8 @@ def compare_bytes(function, candidate_data, candidate_size, candidate_va, fields
             # names. They cannot create a normalization field or replace
             # conflicting independent symbol evidence.
             for key, verifier in (('floating_literal_proof', prove_float_operand),
-                                  ('string_record_pointer_proof', prove_string_operand)):
+                                  ('string_record_scalar_read_proof' if field.get('address_use') == 'memory_access'
+                                   else 'string_record_pointer_proof', prove_string_operand)):
                 proof = verifier(field, function['va'], candidate_va, targets, candidate_symbols)
                 if proof is not None:
                     resolved[key] = proof

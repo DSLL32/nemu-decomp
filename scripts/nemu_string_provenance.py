@@ -1,4 +1,4 @@
-"""Prove complete named narrow-string contents at materialized pointer values.
+"""Prove complete named narrow-string contents for bounded address uses.
 
 MSVC ??_C@_0 records encode their complete byte length (including the final
 NUL), a checksum, and up to 32 escaped preview bytes. We validate the length
@@ -6,9 +6,11 @@ and complete preview; the checksum remains opaque. The independently bounded
 candidate record supplies the expected complete contents, including embedded
 NULs. Both images must contain those contents uniquely in read-only .rdata.
 
-This proves an address materializes a pointer to equal complete record contents.
-It does not establish a subsequent C-string API use, an original source spelling,
-or the boundaries of an original allocation. Direct loads, suffix/addend targets,
+Pointer materializations and scalar MOV reads have separate proof bases. Scalar
+reads are limited to absolute 16/32-bit MOV sources entirely within the unique
+complete record; they do not imply that the whole string is consumed. Neither
+proof establishes a subsequent C-string API use, an original source spelling, or
+the boundaries of an original allocation. Other loads, suffix/addend targets,
 aliases, and overlapping named records remain unresolved. No masks are created.
 """
 
@@ -27,6 +29,9 @@ from nemu_float_provenance import _read, _readonly_records
 STRING_NAME = re.compile(r'\?\?_C@_([01])([0-9]|[A-P]{1,8}@)([A-P]{1,8})@([^@]*)@\Z')
 ESCAPED_PUNCTUATION = b',/\\:. \n\t\'-'
 PROOF_BASIS = 'complete_string_record_pointer'
+SCALAR_READ_BASIS = 'complete_record_scalar_read'
+SCALAR_REGISTERS = {'ax', 'cx', 'dx', 'bx', 'sp', 'bp', 'si', 'di',
+                    'eax', 'ecx', 'edx', 'ebx', 'esp', 'ebp', 'esi', 'edi'}
 
 
 def _record_size(number):
@@ -96,8 +101,41 @@ def _decode_pointer(image, function_va, field, target):
                 access='record_pointer_materialization', pointer_width=4), bytes(shape)
 
 
+def _decode_scalar_read(image, function_va, field, target, record_size):
+    offset, size = field['instruction_offset'], field['instruction_size']
+    if offset < 0 or not 1 <= size <= 15:
+        raise ValueError('invalid scalar-read instruction extent')
+    code = _read(image, function_va + offset, size)
+    decoder = Cs(CS_ARCH_X86, CS_MODE_32)
+    decoder.detail = True
+    instructions = list(decoder.disasm(code, function_va + offset))
+    if len(instructions) != 1 or instructions[0].size != size:
+        raise ValueError('scalar-read extent is not one complete instruction')
+    instruction = instructions[0]
+    operands = instruction.operands
+    if (instruction.mnemonic != 'mov' or len(operands) != 2 or
+            operands[0].type != X86_OP_REG or operands[1].type != X86_OP_MEM or
+            instruction.reg_name(operands[0].reg) not in SCALAR_REGISTERS or
+            operands[0].size not in (2, 4) or operands[1].size != operands[0].size):
+        raise ValueError('instruction is not a supported 16/32-bit MOV register read')
+    source = operands[1]
+    if source.mem.base or source.mem.index or source.mem.segment:
+        raise ValueError('scalar-read address is not an unqualified absolute displacement')
+    if (instruction.disp_size != 4 or offset + instruction.disp_offset != field['offset'] or
+            (source.mem.disp & 0xffffffff) != target):
+        raise ValueError('decoded memory source does not identify the recorded relocation target')
+    if source.size > record_size:
+        raise ValueError('scalar read extends beyond the complete named string record')
+    shape = bytearray(code)
+    shape[instruction.disp_offset:instruction.disp_offset + 4] = bytes(4)
+    return dict(instruction_va=instruction.address, size=size, mnemonic='mov',
+                access='scalar_memory_read', read_width=source.size,
+                read_start=target, read_end=target + source.size,
+                destination_register=instruction.reg_name(operands[0].reg)), bytes(shape)
+
+
 def prove_string_operand(field, original_va, candidate_va, original_symbols, candidate_symbols):
-    """Return a complete named-string pointer proof/rejection, otherwise None."""
+    """Return a bounded named-string address-use proof/rejection, otherwise None."""
     if candidate_symbols is None:
         return None
     rows = candidate_symbols.addresses.get(field.get('candidate_target'), [])
@@ -116,8 +154,8 @@ def prove_string_operand(field, original_va, candidate_va, original_symbols, can
             raise ValueError('compiler string name has more than one linked location')
         if (field['kind'], field['width'], field['authority']) != ('DIR32', 4, 'PE_HIGHLOW'):
             raise ValueError('string lacks an existing PE HIGHLOW operand')
-        if field.get('address_use') != 'immediate_address' or candidate_va is None:
-            raise ValueError('direct data access does not establish complete-record pointer materialization')
+        if field.get('address_use') not in ('immediate_address', 'memory_access') or candidate_va is None:
+            raise ValueError('string operand lacks a supported decoded address-use context')
         record = string_record(name)
         start, size = field['candidate_target'], record['size']
         if any(row.get('size') not in (None, size) for row in named):
@@ -131,10 +169,15 @@ def prove_string_operand(field, original_va, candidate_va, original_symbols, can
                 if preceding_size and start < row['va'] + preceding_size:
                     raise ValueError('named string is an interior suffix of another complete record')
         original, candidate = original_symbols.image, candidate_symbols.image
-        before, before_shape = _decode_pointer(original, original_va, field, field['original_target'])
-        after, after_shape = _decode_pointer(candidate, candidate_va, field, start)
+        scalar = field['address_use'] == 'memory_access'
+        if scalar:
+            before, before_shape = _decode_scalar_read(original, original_va, field, field['original_target'], size)
+            after, after_shape = _decode_scalar_read(candidate, candidate_va, field, start, size)
+        else:
+            before, before_shape = _decode_pointer(original, original_va, field, field['original_target'])
+            after, after_shape = _decode_pointer(candidate, candidate_va, field, start)
         if before_shape != after_shape:
-            raise ValueError('original and rebuilt pointer instructions differ outside the address field')
+            raise ValueError('original and rebuilt record-access instructions differ outside the address field')
         payload = _read(candidate, start, size)
         if payload[-1:] != b'\0':
             raise ValueError('complete compiler string record lacks its terminal NUL')
@@ -142,12 +185,18 @@ def prove_string_operand(field, original_va, candidate_va, original_symbols, can
             raise ValueError('candidate string contents disagree with the compiler name preview')
         candidate_record = _readonly_records(candidate, start, payload)
         original_record = _readonly_records(original, field['original_target'], payload)
-        return dict(verified=True, basis=PROOF_BASIS, symbol=name, size=size,
+        proof = dict(verified=True, basis=SCALAR_READ_BASIS if scalar else PROOF_BASIS, symbol=name, size=size,
                     content_sha256=hashlib.sha256(payload).hexdigest(),
                     encoded_preview_size=len(record['preview']), name_checksum_verified=False,
                     original_access=before, candidate_access=after,
                     original_record=original_record, candidate_record=candidate_record,
                     identity_scope='Pointer to equal complete named-record contents, including terminal and embedded NULs; no consuming API, original source spelling, or original allocation boundary is asserted.',
                     uniqueness_scope='Every byte offset in file-backed .rdata, including unaligned incidental contents.')
+        if scalar:
+            width = before['read_width']
+            proof.update(read_width=width, read_bytes=payload[:width].hex(),
+                         scalar_value_little_endian=int.from_bytes(payload[:width], 'little'),
+                         identity_scope='Equal bounded scalar read at the start of a unique complete named record; no pointer escape, C-string consumption, original source spelling, or original allocation boundary is asserted.')
+        return proof
     except (AttributeError, KeyError, ValueError, struct.error, OverflowError) as error:
         return dict(verified=False, reason=str(error))
