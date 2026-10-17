@@ -3,31 +3,31 @@
   "purpose": "Classify remaining independent address proof gaps from one complete passing comparison per requested function. Does not change masks, target statuses, function coverage, or whole-file equality.",
   "comparison_report": {
     "path": "analysis/nemu-function-comparison.json",
-    "sha256": "085ee809c807cf4e3a23a8ed76cc5a1f8580f0fbd84f63c915503b87328e2d8a"
+    "sha256": "5860b9611aae4a5181479c60a5b4e8afab2ac65512b83383f9361c94b907f90b"
   },
   "coverage_report": {
     "path": "analysis/nemu-function-coverage.json",
-    "sha256": "b276166c444942747d132cc2a23586cc700d7f26edc5c8e23b22b50ad6c3b8ce"
+    "sha256": "e873f694684511fa4c702db554753eb2fad8d98e7174f72399ec2b70ab905a7a"
   },
   "extent_report": {
     "path": "analysis/nemu-candidate-extents.json",
-    "sha256": "f28938ff175229ec9d1ce8b41fa1d50fc8c0b7c56d124f34c110f47a14a232f7"
+    "sha256": "f464dffd11c14274560978980d2aea717844e7a94e34b0e0f48417dc0f56df25"
   },
   "generator": {
-    "path": "/root/.ai-tmp/nemu-matrix-final-archive.dfjloqn5/summarize.py",
-    "sha256": "6f6f21382536600aa0ec05cf75301af17906dc133402a400e8a499740d14399b"
+    "path": "/root/.ai-tmp/nemu-matrix-pif-import.f5d_jf6q/summarize.py",
+    "sha256": "0ad2cbbc3447a8506b45285d4060d929c7be40a7c4e1e83574853a49263153e1"
   },
   "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
-  "candidate_image": "/root/.ai-tmp/nemu-chronology-relocs.uca75yl0/nemu64.exe",
-  "candidate_image_sha256": "f5982979e06bb7336a4b271b0f53e8c29c98453287cfa993196bcab2c9280d64",
-  "candidate_map": "/root/.ai-tmp/nemu-chronology-relocs.uca75yl0/nemu64.map",
-  "candidate_map_sha256": "b1d94173137057605f66e6a761acfd58c2aa24920889bec8ca6184e5c563c439",
+  "candidate_image": "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah/nemu64.exe",
+  "candidate_image_sha256": "21c96e53c6f6e476a80b45ae8ff6118753110add09652586a2d4c718561fc6d0",
+  "candidate_map": "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah/nemu64.map",
+  "candidate_map_sha256": "b1197916970dfc9bf4ed4bc25c1bb97db41c55f3d073cda4fb173f70bcb945ad",
   "build_variant": {
     "mode": "chronological",
     "optional_mode": true,
-    "role": "Committed d6186be archive recipe with the inferred source-unit split and unchanged native object bodies in ordinary archives. This report describes chronological mode and does not assert that another library-input mode has the same bytes.",
-    "build_manifest": "/root/.ai-tmp/nemu-build.hngf789h/artifacts/516de1c174cd4d02d0031d14e6ab2d4111635c209a8abd4aa665aa009c15317b/build.json",
-    "build_manifest_sha256": "b7a961ca6629e0ce3773f69cbfc02576384dd675bcc061f439d7acb7009a8182",
+    "role": "Integrated PIF ab55811 source and exact import/IAT/Rich recipe d0ab963, with the inferred source-unit split and unchanged native object bodies in ordinary archives. This report describes chronological mode and does not assert that another library-input mode has the same bytes.",
+    "build_manifest": "/root/.ai-tmp/nemu-build.trb9kso2/artifacts/87403a525076dcbbd268f2c3016cf2164c9d6948f2dc51ccfe916c67b0845f28/build.json",
+    "build_manifest_sha256": "163cd9620cd70fc33e10a40f66d7cab9008a65bdcd01c6cc2b049b83aed30518",
     "application_units": [
       "RSP.cpp",
       "RSPReciprocal.cpp",
@@ -63,1147 +63,3083 @@
         "name": "__fsopen",
         "original_va": 4357122,
         "candidate_va": 4357122,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 42,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "49cfd1a71a3093dad7933865b8ac5d37c796cda89527a0d77e0e4fb2b3906739"
       },
       {
         "name": "_fopen",
         "original_va": 4357164,
         "candidate_va": 4357164,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 19,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "59a6d5aea187f6380b8ec6973a953cedebcdb91df180920bcf4ff3c5f3deba11"
       },
       {
         "name": "_fprintf",
         "original_va": 4357183,
         "candidate_va": 4357183,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 50,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "1b887b7b34463db0b50bed2701b7817b82533c0bc312457516ce50648b72aca1"
       },
       {
         "name": "_sprintf",
         "original_va": 4357233,
         "candidate_va": 4357233,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 88,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "11661714be0a8987a7d77791554bc8854c4a1f11344b7d832549dd43d67f244f"
       },
       {
         "name": "_vsprintf",
         "original_va": 4357321,
         "candidate_va": 4357321,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 87,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "9df3f45e0695457b4724e46a3ed9dac015bfb13a1375f3b5f2f6559371fdf8b0"
       },
       {
         "name": "_fread",
         "original_va": 4357408,
         "candidate_va": 4357408,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 233,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "98ec440ab0662e407027cf3819d5f39f8ab6c2dc2e2be87ac0275a5270d255ef"
       },
       {
         "name": "_fclose",
         "original_va": 4357641,
         "candidate_va": 4357641,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 86,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "61093854b0f77c41952137fa6a93ae597be673533bcca369591032d9bbda1089"
       },
       {
         "name": "_free",
         "original_va": 4357727,
         "candidate_va": 4357727,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 56,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "a57f58abaa6557d5e59eb9dda653641b76f1374d461346f89c3f95f1d18faa31"
       },
       {
         "name": "__heap_alloc",
         "original_va": 4357783,
         "candidate_va": 4357783,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 70,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "15a2cb91c67320d513fe8f2dd5bd3a6c732ca632b758ba98bce5fcb2c82f1f61"
       },
       {
         "name": "__nh_malloc",
         "original_va": 4357853,
         "candidate_va": 4357853,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 44,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "14ab92546a93d51d39da24d38bff673c7388cd1b8ba6cc1eb71d8c8a8a599930"
       },
       {
         "name": "_malloc",
         "original_va": 4357897,
         "candidate_va": 4357897,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 18,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "20e3098130f4bf9b109b1a89572eaa53cdc6ac86222a811bf33083949ed95d65"
       },
       {
         "name": "_fgetpos",
         "original_va": 4357915,
         "candidate_va": 4357915,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 34,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "ee45e6ff32f452875822b6ff1f6d6ed40e90f4da57a115b034ae0acc9903bb80"
       },
       {
         "name": "_fwrite",
         "original_va": 4357949,
         "candidate_va": 4357949,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 263,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "a9258e64ab669a7ca5dda85b3166be6f024a7f383ec846f331a7ab7847adf70d"
       },
       {
         "name": "_ftell",
         "original_va": 4358212,
         "candidate_va": 4358212,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 345,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "55fd74bc3a14a733fdaa82da1e1e0ccd6eceb0fd837a61cfdbdedd8d442bb7ba"
       },
       {
         "name": "_fseek",
         "original_va": 4358557,
         "candidate_va": 4358557,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 142,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "dfefa31859eae602d75647d6f2ada0b8e2a387ac0304041359619d1a4ed5a692"
       },
       {
         "name": "_strncpy",
         "original_va": 4358704,
         "candidate_va": 4358704,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 292,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "22006e25651e484a1c6be63bde03c539bb04291083659ef03adadd480f32d18e"
       },
       {
         "name": "_fgets",
         "original_va": 4358996,
         "candidate_va": 4358996,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 87,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "8f7494ef225070a798e832f05a5f40a621eb53b96a744260a826c62e5726d23f"
       },
       {
         "name": "_realloc",
         "original_va": 4359083,
         "candidate_va": 4359083,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 354,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "dc611ec195f8d537593e99d40afc9b0494f367648a81dd1018746f9084415759"
       },
       {
         "name": "_$$$00001",
         "original_va": 4359440,
         "candidate_va": 4359440,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 16,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "c5cd39a96627c4a5e99b94b8bc03100ce31732a9ea1d5b7a85b268451164068c"
       },
       {
         "name": "_strchr",
         "original_va": 4359456,
         "candidate_va": 4359456,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 190,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "832152b36fa9dcc0d0acbc02aaf1313b9465e54b60f70f26f95fd7d139ae088c"
       },
       {
         "name": "_atol",
         "original_va": 4359646,
         "candidate_va": 4359646,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 88,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "6fd546233bbfa5d81bf74bb8daf666db731df5014afbdc6f422b416664addb89"
       },
       {
         "name": "_atoi",
         "original_va": 4359734,
         "candidate_va": 4359734,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 5,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "4addbdb4c21599ee3c45d87c74f068512f5e4245a6af19e2272ebcc87ff4dbfa"
       },
       {
         "name": "_strtoxl",
         "original_va": 4359739,
         "candidate_va": 4359739,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 429,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "c87d7b405524e97e8b7e2fd0a1865a8e4ba5f9052c44a7992de2c90edd648522"
       },
       {
         "name": "_strtol",
         "original_va": 4360168,
         "candidate_va": 4360168,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 23,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "de74b753d775d18041efab145d21ea9912d35852349a7329793d366133e6f694"
       },
       {
         "name": "__flush",
         "original_va": 4360191,
         "candidate_va": 4360191,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 93,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "e71d64877d0939d9b41ce8ed272ab6f59a5b096d51d5f73e238c0ac1cae23cf5"
       },
       {
         "name": "_fflush",
         "original_va": 4360284,
         "candidate_va": 4360284,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 59,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "1c344374ff5f157797f9c4a656121ab80946ef60f6984398b48e907168a1e157"
       },
       {
         "name": "_flsall",
         "original_va": 4360343,
         "candidate_va": 4360343,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 109,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "48f24581d10375821aaaebb663405fff5612f2ffd934e4fb398c0d9726f396bb"
       },
       {
         "name": "__flushall",
         "original_va": 4360452,
         "candidate_va": 4360452,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 9,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "d0c724a4febc5d6e015dd5209449ade09fd11223fbd11c8611886ae1234d043a"
       },
       {
         "name": "__amsg_exit",
         "original_va": 4360461,
         "candidate_va": 4360461,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 37,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "8e379d8d1f71190fa77aa71d3cf7e5b081578af2f04c01e86c3a3607c0720f84"
       },
       {
         "name": "_WinMainCRTStartup",
         "original_va": 4360498,
         "candidate_va": 4360498,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 473,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "455447fc96c016b09f305757e16627b0dee4a75a493687d270c455d62e619c1c"
       },
       {
         "name": "_calloc",
         "original_va": 4360971,
         "candidate_va": 4360971,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 123,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "1a96385905452029a680101edad5217ba1e78faee2cf950348dceb58267849a0"
       },
       {
         "name": "__openfile",
         "original_va": 4361094,
         "candidate_va": 4361094,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 360,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "0f0be047245248fd23aa563558a8de7b9f4d8023ad9c2683c682b95e26b3fc78"
       },
       {
         "name": "___crtExitProcess",
         "original_va": 4361454,
         "candidate_va": 4361454,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 47,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "df272a9fbccb71b391cd6a8fdc57c9a7dd348dc9a478cad897311b7e103e9ada"
       },
       {
         "name": "__cinit",
         "original_va": 4361502,
         "candidate_va": 4361502,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 101,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "bed26a5d2642103229655a881810056fc9599f9b69f9569dc87b11ad85d2c212"
       },
       {
         "name": "_doexit",
         "original_va": 4361603,
         "candidate_va": 4361603,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 194,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "9450a97c3c0eb0e1363eefda2f4a9012f5cacc59a7f721bccdbc1263bdf92839"
       },
       {
         "name": "_exit",
         "original_va": 4361797,
         "candidate_va": 4361797,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 17,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "c565e4629da6a039b811387652da3ed3418dd00c79a1049e763704fd8421d35b"
       },
       {
         "name": "__exit",
         "original_va": 4361814,
         "candidate_va": 4361814,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 17,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "4d3583e524448fcf70fc16a81697c1e9c0bf0cf990553efe915f403c5424835a"
       },
       {
         "name": "__cexit",
         "original_va": 4361831,
         "candidate_va": 4361831,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 15,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "13d364536ddc61f805a51279db2f7b5a9259e53a80bc4e5b315e54007426ad0b"
       },
       {
         "name": "__c_exit",
         "original_va": 4361846,
         "candidate_va": 4361846,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 15,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "47c471467298e5761d93d6af62ede817712d2b58e186151c538576f69b765da5"
       },
       {
         "name": "__getstream",
         "original_va": 4361861,
         "candidate_va": 4361861,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 114,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "f4e0d6819e11e52824b3ddef1ed6a28bd8e3cca0b5a3a8003ca0df7c615da943"
       },
       {
         "name": "__stbuf",
         "original_va": 4361975,
         "candidate_va": 4361975,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 136,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "04da026f4976105ff844e161082033771d26910e923ac6bcbc965004e7789fab"
       },
       {
         "name": "__ftbuf",
         "original_va": 4362111,
         "candidate_va": 4362111,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 60,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "5159cf78291259477a9b4af81ee7e8e3de1bd7a07d096aa2fb2721f26383c7b9"
       },
       {
         "name": "_write_char",
         "original_va": 4362171,
         "candidate_va": 4362171,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 51,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "9dfa2d3bf2a340817f399a01067df48ac0c9720194c2ad8999df8836771eb165"
       },
       {
         "name": "_write_multi_char",
         "original_va": 4362222,
         "candidate_va": 4362222,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 36,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "f2a20142414876bfd7fb62ec898d3553b0cffeadbb8bb0599db761b2598e3612"
       },
       {
         "name": "_write_string",
         "original_va": 4362258,
         "candidate_va": 4362258,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 55,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "54de88fec339b868e346a42bfe568968f07dedafd0e3a984ea18ee99f2ea4109"
       },
       {
         "name": "__output",
         "original_va": 4362313,
         "candidate_va": 4362313,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 1941,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "c2e5f9461f62d622107e176b6cc2307388c5e63c13823d96f78d6aca11dd5ee7"
       },
       {
         "name": "__flsbuf",
         "original_va": 4364254,
         "candidate_va": 4364254,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 278,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "4fab9dee0db69c9327b7bb01720d05c5038d9bed101e4210af84e39bd5adacc3"
       },
       {
         "name": "__filbuf",
         "original_va": 4364532,
         "candidate_va": 4364532,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 222,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "d266aa903ed7391c90ed4203638fd6584cc00ce53308f0445090c97bb18bf5a2"
       },
       {
         "name": "__read",
         "original_va": 4364754,
         "candidate_va": 4364754,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 480,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "6e427f01df77a6fce162ba4fda29e8bdc4607888620886d6f11f25a08690f531"
       },
       {
         "name": "_memcpy",
         "original_va": 4365248,
         "candidate_va": 4365248,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 829,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "1d639fecce94bfae017aa8e7f76726a16bfcc72d7f430402199b02ea3bb9a687"
       },
       {
         "name": "__close",
         "original_va": 4366077,
         "candidate_va": 4366077,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 179,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "dc98367c0c1455421bf9239dbad7cd8dfbfc6a70f76327b94e981cd1795607ce"
       },
       {
         "name": "__freebuf",
         "original_va": 4366256,
         "candidate_va": 4366256,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 43,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "91488d14870b51595f592be9c6afb99ee540407ca0452ad34014ae622475122c"
       },
       {
         "name": "___heap_select",
         "original_va": 4366299,
         "candidate_va": 4366299,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 26,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "061963708693d3d28523653fb5e5daa646b74a39e8cf448214dcbdb8b5b1e517"
       },
       {
         "name": "__heap_init",
         "original_va": 4366325,
         "candidate_va": 4366325,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 81,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "4970e4a435f61cc96bcfa6c120a5b38fb263510b1c9d3db89ee8cf366f78f338"
       },
       {
         "name": "___sbh_heap_init",
         "original_va": 4366406,
         "candidate_va": 4366406,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 72,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "2d33dfa1238197c0406b9067d2bd1912f48a149f34b2a5a05eb0986d8489bfbf"
       },
       {
         "name": "___sbh_find_block",
         "original_va": 4366478,
         "candidate_va": 4366478,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 43,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "0d744f82ea88aa730deeed9dcdcd6390428931785502b742167f15a74f81b2ee"
       },
       {
         "name": "___sbh_free_block",
         "original_va": 4366521,
         "candidate_va": 4366521,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 792,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "1096b175ef4f029c9a2f2a924a92c68f8f37d5700129eab74333129e6c1b5324"
       },
       {
         "name": "___sbh_alloc_new_region",
         "original_va": 4367313,
         "candidate_va": 4367313,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 183,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "dd4f4b93ecd7f92a4876b741bf46eeb950c58d32aa1b7081e86f3603126c8820"
       },
       {
         "name": "___sbh_alloc_new_group",
         "original_va": 4367496,
         "candidate_va": 4367496,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 262,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "d8ade55dd1d48fec99318b556fc0178e882e8f4856e3dde783237a801996397a"
       },
       {
         "name": "___sbh_resize_block",
         "original_va": 4367758,
         "candidate_va": 4367758,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 735,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "f775a7b3560dc490c5406a28a64291fc24faba19709cf24b2512df3f52008e6b"
       },
       {
         "name": "___sbh_alloc_block",
         "original_va": 4368493,
         "candidate_va": 4368493,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 764,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "b7db713fff2fecc614621ff07420368e22bf934344cf18f3f6b2a5a4d7afcb28"
       },
       {
         "name": "__callnewh",
         "original_va": 4369257,
         "candidate_va": 4369257,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 27,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "e217144d8b5a21e1a6788c01bb9aaa6f3b0929e8a85523199e1a6f3c9e894fb2"
       },
       {
         "name": "__ftelli64",
         "original_va": 4369284,
         "candidate_va": 4369284,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 392,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "9ea370aee9cb014f414f7382d3fe1af29a209e7880afeb7f8bad64ed574be5fd"
       },
       {
         "name": "__write",
         "original_va": 4369676,
         "candidate_va": 4369676,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 436,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "2c78ebe7215597265ec1a4d14bf57bbb3523ff0e600e63b45921ce2d4059082a"
       },
       {
         "name": "__ioinit",
         "original_va": 4370112,
         "candidate_va": 4370112,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 427,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "70a65629bc2948bbc2d1ee26611d66d432cd83eff876aa60433e4bbee933d6ef"
       },
       {
         "name": "__lseek",
         "original_va": 4370539,
         "candidate_va": 4370539,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 140,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "f1809fd594647b4b76814d468317f2535c04aa99dd6349a88857705d3996c7cd"
       },
       {
         "name": "__ismbcspace",
         "original_va": 4370679,
         "candidate_va": 4370679,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 144,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "2c025f3dd71f1d272521fb8bd0600c375dfd2ff3c5287f4e9b9de399bbea8884"
       },
       {
         "name": "__allmul",
         "original_va": 4370832,
         "candidate_va": 4370832,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 52,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "3d0898d998acc8af3ea17032ff56fd1b963c685b072f669c52d4b8267f9d0a78"
       },
       {
         "name": "__isctype",
         "original_va": 4370884,
         "candidate_va": 4370884,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 126,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "790432a1dbd950495e04b0e27a4a6455b6939e1e5cbe643b9643fee7c98d61f3"
       },
       {
         "name": "__commit",
         "original_va": 4371010,
         "candidate_va": 4371010,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 87,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "cf58e642a5fac62eedb6b8c96eb327d5ecf728a43bbf4493222f7fa0b5550507"
       },
       {
         "name": "___initstdio",
         "original_va": 4371097,
         "candidate_va": 4371097,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 166,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "960dcafe677c5c22ce9c1a4c099393d53b4783790c6f4107d7ff6a734abb10d6"
       },
       {
         "name": "___endstdio",
         "original_va": 4371263,
         "candidate_va": 4371263,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 20,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "84515d46c8359183ef28a6b685e7e7095298f07bb58356783341ad77857c3fb0"
       },
       {
         "name": "__NMSG_WRITE",
         "original_va": 4371283,
         "candidate_va": 4371283,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 375,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "49ec7c16082e6ae7c0af3d3ac4f8e96951e1f234a59f9ab4fab069b7bede310a"
       },
       {
         "name": "__FF_MSGBANNER",
         "original_va": 4371658,
         "candidate_va": 4371658,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 57,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "c14d3a08eecd7b596bd274c5a9a41ecae6490c57e5047b0bb9fb24670361ab20"
       },
       {
         "name": "__XcptFilter",
         "original_va": 4371715,
         "candidate_va": 4371715,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 369,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "a57016d40aa7d62d330de24506e8a2d9408e8a1f8070db34ddec3a047389dbc0"
       },
       {
         "name": "__wincmdln",
         "original_va": 4372084,
         "candidate_va": 4372084,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 105,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "c38a6804b6347937e3d4643479582bd5cc17d3c0d3dfc70efa7b29a98ca89e55"
       },
       {
         "name": "__setenvp",
         "original_va": 4372189,
         "candidate_va": 4372189,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 199,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "6114da92373f92836bf98c6724333d094902e13f4ff3b76c7ea342d5e81a58f9"
       },
       {
         "name": "_parse_cmdline",
         "original_va": 4372388,
         "candidate_va": 4372388,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 364,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "3eef02cb71088c1644083ce9350c5f1592c41ddf8a7eb92dd371647de7e3aa56"
       },
       {
         "name": "__setargv",
         "original_va": 4372752,
         "candidate_va": 4372752,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 162,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "fb21fd3ac7f74317735bc2c442e00f2b2d2db6758e93b80cd46f6d76b1b50817"
       },
       {
         "name": "___crtGetEnvironmentStringsA",
         "original_va": 4372914,
         "candidate_va": 4372914,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 290,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "1d1edf344ec86f6d87592ed65b11232c4ba7815049cb629688cde9075b945bd7"
       },
       {
         "name": "__RTC_Initialize",
         "original_va": 4373204,
         "candidate_va": 4373204,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 68,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "94365195fd990ce3902d36679388564ab0a11efd66792357b4116cfb2437c395"
       },
       {
         "name": "__RTC_Terminate",
         "original_va": 4373272,
         "candidate_va": 4373272,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 68,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "f280b53960d24ef7e05838791fc0ca3baeb005575c3364583d2c47e01e464a19"
       },
       {
         "name": "__SEH_prolog",
         "original_va": 4373340,
         "candidate_va": 4373340,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 59,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "e9a12f992223d485a536e19d338d482dda92e03c8ad59816cd902be8dbe0d825"
       },
       {
         "name": "__SEH_epilog",
         "original_va": 4373399,
         "candidate_va": 4373399,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 17,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "6e914ba12848b264526c84faf2e95ada281f321bd5b8e492879c17af034c76e2"
       },
       {
         "name": "__chkstk",
         "original_va": 4373424,
         "candidate_va": 4373424,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 61,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "f36f56e85a3b8f0b9f0aaa3f1a49f9bda1143c728ff69d6c27517e4f359a69b8"
       },
       {
         "name": "_memset",
         "original_va": 4373488,
         "candidate_va": 4373488,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 96,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "c3010ed152f76e82a56de41e447b89eba25ae1fdcdfcf2ded2e14b231c21d7f1"
       },
       {
         "name": "__sopen",
         "original_va": 4373584,
         "candidate_va": 4373584,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 720,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "db52da4d3a13eddaefd40f48f2b1f233fc0ae654ef9142f15a02520b93240e76"
       },
       {
         "name": "__onexit",
         "original_va": 4374304,
         "candidate_va": 4374304,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 130,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "47d5fd35bdd017dfde054e8bfc7e72cc87e4198b0328b9e2d8ba365ffa6dc5d8"
       },
       {
         "name": "_atexit",
         "original_va": 4374434,
         "candidate_va": 4374434,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 18,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "8758b5f180d70ed03fcb7124f3970d139513901e47c04547bce0e0a00e18912b"
       },
       {
         "name": "___onexitinit",
         "original_va": 4374452,
         "candidate_va": 4374452,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 40,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "c08636d2cf671b9cd82dc918a22758149304a602ede4a815893b15f8f5a7b683"
       },
       {
         "name": "__isatty",
         "original_va": 4374492,
         "candidate_va": 4374492,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 39,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "ba6905cdb320639badce9f20eb1f8d583bc9945e8a4168c816bbfa53349dde8a"
       },
       {
         "name": "_strlen",
         "original_va": 4374544,
         "candidate_va": 4374544,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 139,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "5044fc769fb26ae1772d18e3e1ef5ffc16757c910207278cab8d90af3557a7f0"
       },
       {
         "name": "_wctomb",
         "original_va": 4374683,
         "candidate_va": 4374683,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 102,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "a8c74ca2ea2ccfc6a934120382a405c46be6a5265ad6568eabf4d1a1690abf64"
       },
       {
         "name": "_report_failure",
         "original_va": 4374785,
         "candidate_va": 4374785,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 48,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "5c9cec035bd585b8b799fb3995cb73567c17cf9550a2088fb6e82a8dd0d3a7c0"
       },
       {
         "name": "@__security_check_cookie@4",
         "original_va": 4374834,
         "candidate_va": 4374834,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 14,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "4c36e840b742d95c13a7783efabbc1c6bcf01a8eb3401d9af9b4cb77ddffa8c6"
       },
       {
         "name": "__aulldvrm",
         "original_va": 4374848,
         "candidate_va": 4374848,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 149,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "106b501e819fc91bbe63e9d1399d58966a0ad64e9db30078334ccdf21f01fdf8"
       },
       {
         "name": "__getbuf",
         "original_va": 4374997,
         "candidate_va": 4374997,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 68,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "dee2396f525230a75be01831c6f8f49874ba396182c9cdaabace7552528a0eae"
       },
       {
         "name": "__dosmaperr",
         "original_va": 4375065,
         "candidate_va": 4375065,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 95,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "1a9f288178985683c206d52c0df9f6d7124a7c1627564bec117a12fb83736ff7"
       },
       {
         "name": "__alloc_osfhnd",
         "original_va": 4375160,
         "candidate_va": 4375160,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 157,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "e1887d5a9a7343eeb282bc823f171fc6c08fff0c4930c31f2d307e7b7eec7842"
       },
       {
         "name": "__set_osfhnd",
         "original_va": 4375317,
         "candidate_va": 4375317,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 119,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "99d19bc135b5a1ba862969b5afd97e4700a213945270dd70405650855b884fdf"
       },
       {
         "name": "__free_osfhnd",
         "original_va": 4375436,
         "candidate_va": 4375436,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 122,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "b305fd2483c11afffa42d038a996132486e6726bb35acdc9ea720b97a67d0474"
       },
       {
         "name": "__get_osfhandle",
         "original_va": 4375558,
         "candidate_va": 4375558,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 60,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "2fb4ecac73543378178e67e3b2b9651b973280d89cdaf5a6a7bf20754f292f33"
       },
       {
         "name": "_memmove",
         "original_va": 4375632,
         "candidate_va": 4375632,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 829,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "ea3f053b5dcc39a2a0d26dbadaf34d590e7eba5b9e5ef7cd643e34ca59e4e8ad"
       },
       {
         "name": "__lseeki64",
         "original_va": 4376461,
         "candidate_va": 4376461,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 159,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "0cb2b09f2c5aab9f7197a6ff9b64bbe6c163210430c658c2079027ae99f24fcc"
       },
       {
         "name": "___crtGetStringTypeA",
         "original_va": 4376620,
         "candidate_va": 4376620,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 442,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "33b83b8adfb1e55c8eece171133d25b7ec487a6ce608635d29c386139c30f08e"
       },
       {
         "name": "_CPtoLCID",
         "original_va": 4377062,
         "candidate_va": 4377062,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 47,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "8a6891dce88e24d6f23d94d75ba045499a565609712a78fa5d879460b0150794"
       },
       {
         "name": "_setSBCS",
         "original_va": 4377109,
         "candidate_va": 4377109,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 41,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "b961511194d03955223263940e324ec26b19c3b4a035e062957a3674f3b29a84"
       },
       {
         "name": "_setSBUpLow",
         "original_va": 4377150,
         "candidate_va": 4377150,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 402,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "0d987395f2713b2fa9ca25f682c79a8933aa4742c30c9735602b0aca56ec9d5c"
       },
       {
         "name": "__setmbcp",
         "original_va": 4377552,
         "candidate_va": 4377552,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 492,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "7f2cec1c54a1bc07bf868bb563e4a745999b729611f8483e5b741e9c560ccedb"
       },
       {
         "name": "___initmbctable",
         "original_va": 4378044,
         "candidate_va": 4378044,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 30,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "3506e98921f315c20e81759f2227bb46a08c3dd3db93341435c0346a1ad9729f"
       },
       {
         "name": "__fcloseall",
         "original_va": 4378074,
         "candidate_va": 4378074,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 88,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "8d92b2f6a3707d3ec0f890aaa0601601e5461ae10572b5bafb26a7a62bda217a"
       },
       {
         "name": "___crtMessageBoxA",
         "original_va": 4378162,
         "candidate_va": 4378162,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 249,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "9732bdf32704170af40106e3148a73d3136cbe2347a2fd403724a244d2937e51"
       },
       {
         "name": "_strcpy",
         "original_va": 4378416,
         "candidate_va": 4378416,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 7,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "a485aa6d5eda4dfbd126c3d0fc231f25f4edfdfe999f74dd8ee8d90956a67b5b"
       },
       {
         "name": "_strcat",
         "original_va": 4378432,
         "candidate_va": 4378432,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 232,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "0bbe819bf652ab9399ea485cc6b62dd0d29ccda96747d5df8c5733cb91868bde"
       },
       {
         "name": "_x_ismbbtype",
         "original_va": 4378664,
         "candidate_va": 4378664,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 49,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "fefb1f37c30bce33d6e2c3099ac31276202d3c4b4d32e3dea99b8a14819acccd"
       },
       {
         "name": "__ismbblead",
         "original_va": 4378713,
         "candidate_va": 4378713,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 17,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "f9ff45d19bcec7bbd77baa50080e09585323b4ab3080770231670ba0debfee0c"
       },
       {
         "name": "__except_handler3",
         "original_va": 4378740,
         "candidate_va": 4378740,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 189,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "4983c94d6d20dd192af9a3959dd1df1324c330564bd8184d7040fa70cb85d171"
       },
       {
         "name": "__seh_longjmp_unwind@4",
         "original_va": 4378929,
         "candidate_va": 4378929,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 27,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "8760d15a201f708686ea15744239e4700faaaeb8058f6d0baa0d8345d4ba5267"
       },
       {
         "name": "__chsize",
         "original_va": 4378956,
         "candidate_va": 4378956,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 348,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "207d4cc1a5b64b711a1089b9e43d548443ac0093068ab67df8d16d3c2eb80be8"
       },
       {
         "name": "__msize",
         "original_va": 4379304,
         "candidate_va": 4379304,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 56,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "28e352f9d9b8de58f90e36467abe56d44624abe1c8748b225fad14dc76eaa9f4"
       },
       {
         "name": "__fptrap",
         "original_va": 4379360,
         "candidate_va": 4379360,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 9,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "d27b996846306e0d28661f524a56c6d4f7c0ebfc0a7f01e4f516fdf7e6f48f42"
       },
       {
         "name": "___security_init_cookie",
         "original_va": 4379369,
         "candidate_va": 4379369,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 86,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "7ea4b175689ea1d8d4620f48a1368a9ed81b3392d04b227b92370b5dd810252e"
       },
       {
         "name": "___security_error_handler",
         "original_va": 4379455,
         "candidate_va": 4379455,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 329,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "e6fa92ccb431e74f781b347484a25c39e958504da9fe7926c42b7839e35914c7"
       },
       {
         "name": "___ansicp",
         "original_va": 4379785,
         "candidate_va": 4379785,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 73,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "2d32b691916c7ee74b6aa85309961564a35f2cf9d3287cfcca4f9b9f5843a61e"
       },
       {
         "name": "___convertcp",
         "original_va": 4379858,
         "candidate_va": 4379858,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 463,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "976d4037db20ad1513f57fff3db7980753e5c0a5965935322f0506b0c556522d"
       },
       {
         "name": "__resetstkoflw",
         "original_va": 4380321,
         "candidate_va": 4380321,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 209,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "36be594723c62ff433ca5533ef53efee7fd3166fe6f8cdd251c87df295095d24"
       },
       {
         "name": "___crtLCMapStringA",
         "original_va": 4380530,
         "candidate_va": 4380530,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 956,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "b5b4334eec148588ac4a5ed5b33f7a200fe53bc39007e02033e67828bd8f552a"
       },
       {
         "name": "__global_unwind2",
         "original_va": 4381488,
         "candidate_va": 4381488,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 32,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "f3b66c56aa7fa343e84f4c91b939c96ded44c49f7c9072268aff5392e02aea99"
       },
       {
         "name": "__unwind_handler",
         "original_va": 4381520,
         "candidate_va": 4381520,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 34,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "acab246fa724e03d54a6f2365e1b7cad7356227fab8b38038b127f95e385873e"
       },
       {
         "name": "__local_unwind2",
         "original_va": 4381554,
         "candidate_va": 4381554,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 104,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "65da706d18e7910ae342baa870df116e92551ecc85a4d7e4388c7b753d22c6f5"
       },
       {
         "name": "__abnormal_termination",
         "original_va": 4381658,
         "candidate_va": 4381658,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 35,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "c303d8a5e6adc4feff52fef94f63be9ed22541d45d9a8b71f6d56edea0c0f869"
       },
       {
         "name": "__NLG_Notify1",
         "original_va": 4381693,
         "candidate_va": 4381693,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 9,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "46557776faf3c1947849669908045a45ac970936b414c63c67410523c322c937"
       },
       {
         "name": "__NLG_Notify",
         "original_va": 4381702,
         "candidate_va": 4381702,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 24,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "96aac76065d53fd559df0d757a5c5c4b1a53fef66628a6b4d9b2764cdefa429d"
       },
       {
         "name": "__setmode",
         "original_va": 4381726,
         "candidate_va": 4381726,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 119,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "b873b9af53e4d40df1983c97dad215e767346d5d0446fb5e35843d6d7dd717d5"
       },
       {
         "name": "_xtoa",
         "original_va": 4381862,
         "candidate_va": 4381862,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 62,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "6c2870317f3b9987a2fec53174a47898e4025c38b33633abe1b50a7c290e4cb0"
       },
       {
         "name": "__itoa",
         "original_va": 4381924,
         "candidate_va": 4381924,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 42,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "b72167cbb54be4f87b2e790295f390fe5cc759f291427dbb9009e96d922e9962"
       },
       {
         "name": "__stricmp",
         "original_va": 4381966,
         "candidate_va": 4381966,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 67,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "c03cde3abca547a5b3200249f8fef785ef25c2aad9b83bfd27cc3807182aa79b"
       },
       {
         "name": "_tolower",
         "original_va": 4382033,
         "candidate_va": 4382033,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 213,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "2e9297d61c57e02c7cde93354934c9ee690e0e1e4c54ecc12608b105a59ccba7"
       },
       {
         "name": "___ascii_stricmp",
         "original_va": 4382256,
         "candidate_va": 4382256,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 78,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "9208efe7b20ebf707490aa3334dabf576a42bfabcb93356dfd2505c20dd6d658"
       },
       {
         "name": "__fpclear",
         "original_va": 4382334,
         "candidate_va": 4382334,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 1,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "ae3f4619b0413d70d3004b9131c3752153074e45725be13b9a148978895e359e"
       },
       {
         "name": "__cfltcvt_init",
         "original_va": 4382335,
         "candidate_va": 4382335,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 56,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "743b262e6ffb071be0b55ed1571f7c4efb31e9fcd50ea1e27ed11db01daea415"
       },
       {
         "name": "__fpmath",
         "original_va": 4382391,
         "candidate_va": 4382391,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 23,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "0174d9fd03973ecabe1cb558c39a3b1874d5fc2bab5d691e899fe1d6979af4a0"
       },
       {
         "name": "__ftol2",
         "original_va": 4382416,
         "candidate_va": 4382416,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 117,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "5333b186c02836974c6f792303aeb2c00d856316b93ccbbe65f51def6ae661b4"
       },
       {
         "name": "__alldiv",
         "original_va": 4382544,
         "candidate_va": 4382544,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 170,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "8964dcf0d769cb61dd4354feac00491ae8c1b34eb9627a4c5ec2d4350243d395"
       },
       {
         "name": "__alldvrm",
         "original_va": 4382720,
         "candidate_va": 4382720,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 223,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "8944a6bd345f2b75cb86bd3483531448b9a5557c60a3f3ee7d025076739099b7"
       },
       {
         "name": "__allshr",
         "original_va": 4382944,
         "candidate_va": 4382944,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 33,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "f028a2bb21a2463601e9046f5105991b09f90af85bae56b363c014dafc609ea6"
       },
       {
         "name": "__aullshr",
         "original_va": 4382992,
         "candidate_va": 4382992,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 31,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "909b1a39b7337f2fa8d8626167f578bf92643cf163ee37f401893b5b813db166"
       },
       {
         "name": "__allshl",
         "original_va": 4383024,
         "candidate_va": 4383024,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 31,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "04614067463d9a7345e7de2955a0c9fb5906c602499fb5df7f220ae231db613b"
       },
       {
         "name": "__forcdecpt",
         "original_va": 4383055,
         "candidate_va": 4383055,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 88,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "f7864342cd3c3f0a653118cce691c6afbaf7acdcb3b4270671a5820e5685e43e"
       },
       {
         "name": "__cropzeros",
         "original_va": 4383143,
         "candidate_va": 4383143,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 75,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "5029413111abeb218902ba7de80f43da2417a8c3287f6f9982c579906c3dc405"
       },
       {
         "name": "__positive",
         "original_va": 4383218,
         "candidate_va": 4383218,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 26,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "a88b75bd78aa46ee921b53647b53a418a80efb5a5b04f3094a83342b0721e588"
       },
       {
         "name": "__fassign",
         "original_va": 4383244,
         "candidate_va": 4383244,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 62,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "bc55b4612359332d067ad81b1074d07fb60611272e76ed7ed760b11c63783632"
       },
       {
         "name": "__shift",
         "original_va": 4383306,
         "candidate_va": 4383306,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 29,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "3c694e21214fa17bb9b62cb5cf3dcafb39658c0f3f2ca18d81a9a01f95e972d3"
       },
       {
         "name": "__cftoe",
         "original_va": 4383335,
         "candidate_va": 4383335,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 243,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "68c7fb7bd4a80aa9124eb4493e0596337fe29aae76ef0a443158782726223c5e"
       },
       {
         "name": "__cftof",
         "original_va": 4383578,
         "candidate_va": 4383578,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 221,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "a5bc9912b02fcff5f93fa8b1b8d37bea8900da50f25588f2d143092a61948b83"
       },
       {
         "name": "__cftog",
         "original_va": 4383799,
         "candidate_va": 4383799,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 170,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "c57dd4f1abb8dbf2e1f0fa172cf9ab3ec6b5025d666879500a2251049077877d"
       },
       {
         "name": "__cfltcvt",
         "original_va": 4383969,
         "candidate_va": 4383969,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 81,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "61ffd99ef616ee4240fa4767fa9155efa2a24f952be0d620f2704a8d0baabdc8"
       },
       {
         "name": "__setdefaultprecision",
         "original_va": 4384050,
         "candidate_va": 4384050,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 18,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "5a5b7151e0b512eb5a389c0f8ed9246e9655f93c557cee929ba651442568ca80"
       },
       {
         "name": "__ms_p5_test_fdiv",
         "original_va": 4384068,
         "candidate_va": 4384068,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 64,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "e10a913a349e7186e247ef9d73f2070f7bee1f49dd61c33015a7fa10a2e58eaa"
       },
       {
         "name": "__ms_p5_mp_test_fdiv",
         "original_va": 4384132,
         "candidate_va": 4384132,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 41,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "db4e87c4a72a543086beae94119de49a50f585b96e58c3297024b749b2222e1e"
       },
       {
         "name": "__ZeroTail",
         "original_va": 4384173,
         "candidate_va": 4384173,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 50,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "dd5457b4ab5fd1e8a685e0475fc9b8a7feb67729fb2cfda8af5d4ddc2c60ac98"
       },
       {
         "name": "__IncMan",
         "original_va": 4384223,
         "candidate_va": 4384223,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 77,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "17dee50c75dbb328ceb93527f42b54c49e081ad3495e133ea468ead92788516d"
       },
       {
         "name": "__RoundMan",
         "original_va": 4384300,
         "candidate_va": 4384300,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 114,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "0e1474185fb2217226284984232b730f00d10ef243d203e88bd77ab1b789d21f"
       },
       {
         "name": "__CopyMan",
         "original_va": 4384414,
         "candidate_va": 4384414,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 27,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "5a528c5cd9161a40ee3adcf2610d926c9c800753337218f0661092d1d2929180"
       },
       {
         "name": "__IsZeroMan",
         "original_va": 4384441,
         "candidate_va": 4384441,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 25,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "59cf3ced292f29c3b5304c279ea31e518cfb389eb7894f4acda74d2b62f09f59"
       },
       {
         "name": "__ShrMan",
         "original_va": 4384466,
         "candidate_va": 4384466,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 123,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "bf887c4635d3952bebe9e15f1a5c4a1a93cd28080f38bf864c93d8daf24a7ff9"
       },
       {
         "name": "__ld12cvt",
         "original_va": 4384589,
         "candidate_va": 4384589,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 344,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "bf60735d421f2a63a07bd08de380d426fcfe5e29ab5f900d82c73ffea80d3f93"
       },
       {
         "name": "__ld12tod",
         "original_va": 4384933,
         "candidate_va": 4384933,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 22,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "df6e82f02334a7b7e4f4fb7bfb8fbef4d980ec2899400637949999e7ba1953e6"
       },
       {
         "name": "__ld12tof",
         "original_va": 4384955,
         "candidate_va": 4384955,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 22,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "c92ca4aa6a4950bdb1307b8a2c3d668f8ba6b1e85cf6a67148697622fc708b43"
       },
       {
         "name": "__atodbl",
         "original_va": 4384977,
         "candidate_va": 4384977,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 67,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "5c4913b6d93946c5a21a403d4c2f2d129f3822035a658a1f7f3fec41f1e6a2f3"
       },
       {
         "name": "__atoflt",
         "original_va": 4385044,
         "candidate_va": 4385044,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 67,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "d7e07a375173def11d5bca48331dd6f51fa68732a1fbae193af43d219898ba3b"
       },
       {
         "name": "__fptostr",
         "original_va": 4385111,
         "candidate_va": 4385111,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 119,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "a8ad2a4b2246d17432069c4fdeef8656ed93d41b6b21c1ababed6bacf8eca59a"
       },
       {
         "name": "___dtold",
         "original_va": 4385230,
         "candidate_va": 4385230,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 186,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "6473f9dfd544aab6a4aab656bc5cdcfc6ba28dbc80e2fc7946b55f48853ea792"
       },
       {
         "name": "__fltout",
         "original_va": 4385416,
         "candidate_va": 4385416,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 122,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "7ebf7e399f2fcbc9dd65f965f07a379c1d90008800c49f99340a3a70997ad7d2"
       },
       {
         "name": "__abstract_cw",
         "original_va": 4385538,
         "candidate_va": 4385538,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 146,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "413c69a62589cae71aa7dbee87c6037e0b62304cc1f1742060f60e56307263da"
       },
       {
         "name": "__hw_cw",
         "original_va": 4385684,
         "candidate_va": 4385684,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 142,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "d5cf3aabd4211da14dc75482d3a3353b8e90fe8dbd4f31c0085fe40e120178c5"
       },
       {
         "name": "__control87",
         "original_va": 4385826,
         "candidate_va": 4385826,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 50,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "afb6a904b023425afbf7511d4fa85aae65b7d9301bc666a37276ca58a7afba9a"
       },
       {
         "name": "__controlfp",
         "original_va": 4385876,
         "candidate_va": 4385876,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 22,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "1fc9575fd9bdfa04df9457e129a1225fc270978e4413f0aafc90a917a9d60e8f"
       },
       {
         "name": "___addl",
         "original_va": 4385898,
         "candidate_va": 4385898,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 33,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "9ad9cc8df8ebf35ebbe943dd8b812d655be7135aaacd923b81222838fc1c2ee2"
       },
       {
         "name": "___add_12",
         "original_va": 4385931,
         "candidate_va": 4385931,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 94,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "030db63175797538237224cc3e40c4f096609dad22b499b67e3bce650f5b8789"
       },
       {
         "name": "___shl_12",
         "original_va": 4386025,
         "candidate_va": 4386025,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 46,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "055c5c3f3720cff24d44a0bd7ab41f42689d7d25b857c5d38790d785029b022b"
       },
       {
         "name": "___shr_12",
         "original_va": 4386071,
         "candidate_va": 4386071,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 45,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "33227f4359910ea65e9a8785449bed97246dbc7d936f07e7fc281ff970c690fb"
       },
       {
         "name": "___mtold12",
         "original_va": 4386116,
         "candidate_va": 4386116,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 228,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "6707012da090b80eba38534a5ac68b2c1dcb263685976d6c67d5539f1d9c87d6"
       },
       {
         "name": "___strgtold12",
         "original_va": 4386344,
         "candidate_va": 4386344,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 1165,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "94ac0fd1c8e0d64c536bc2283cef05b623e752ed389185c5517fa258edb30f8a"
       },
       {
         "name": "_$I10_OUTPUT",
         "original_va": 4387509,
         "candidate_va": 4387509,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 660,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "d4bf72f819c0fb96d198f03d2ac53c45f976c67cdb6fea76d801233158fd501e"
       },
       {
         "name": "___ld12mul",
         "original_va": 4388169,
         "candidate_va": 4388169,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 568,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "21259e6e451b16ccd52caed61fec4928a3e19b0da51ffd726997a72bbbe99040"
       },
       {
         "name": "___multtenpow12",
         "original_va": 4388737,
         "candidate_va": 4388737,
-        "exact": true
+        "exact": true,
+        "compared_bytes": 140,
+        "raw_body_byte_exact": true,
+        "raw_body_sha256": "ce1b779a81577c08ee56cd899b1125e9cb6b0d7559a63a21f62a4a53c0443873"
       }
-    ]
+    ],
+    "native_raw_body_bytes": 31594,
+    "import_table_proof": {
+      "exact_rows": 152,
+      "names_hints_lookup_values_and_iat_slots_equal": true,
+      "rows": [
+        {
+          "dll": "COMCTL32.dll",
+          "name": "ImageList_AddMasked",
+          "hint": 35,
+          "lookup_va": 4448752,
+          "iat_va": 4390912,
+          "lookup_value": 255092,
+          "iat_value": 255092
+        },
+        {
+          "dll": "COMCTL32.dll",
+          "name": "ImageList_Create",
+          "hint": 38,
+          "lookup_va": 4448756,
+          "iat_va": 4390916,
+          "lookup_value": 255114,
+          "iat_value": 255114
+        },
+        {
+          "dll": "COMCTL32.dll",
+          "name": "ordinal:17",
+          "hint": null,
+          "lookup_va": 4448760,
+          "iat_va": 4390920,
+          "lookup_value": 2147483665,
+          "iat_value": 2147483665
+        },
+        {
+          "dll": "WINMM.dll",
+          "name": "timeGetTime",
+          "hint": 163,
+          "lookup_va": 4449332,
+          "iat_va": 4391492,
+          "lookup_value": 255148,
+          "iat_value": 255148
+        },
+        {
+          "dll": "kailleraclient.dll",
+          "name": "_kailleraShutdown@0",
+          "hint": 7,
+          "lookup_va": 4449368,
+          "iat_va": 4391528,
+          "lookup_value": 255274,
+          "iat_value": 255274
+        },
+        {
+          "dll": "kailleraclient.dll",
+          "name": "_kailleraEndGame@0",
+          "hint": 1,
+          "lookup_va": 4449372,
+          "iat_va": 4391532,
+          "lookup_value": 255202,
+          "iat_value": 255202
+        },
+        {
+          "dll": "kailleraclient.dll",
+          "name": "_kailleraModifyPlayValues@8",
+          "hint": 4,
+          "lookup_va": 4449376,
+          "iat_va": 4391536,
+          "lookup_value": 255172,
+          "iat_value": 255172
+        },
+        {
+          "dll": "kailleraclient.dll",
+          "name": "_kailleraInit@0",
+          "hint": 3,
+          "lookup_va": 4449380,
+          "iat_va": 4391540,
+          "lookup_value": 255224,
+          "iat_value": 255224
+        },
+        {
+          "dll": "kailleraclient.dll",
+          "name": "_kailleraSelectServerDialog@4",
+          "hint": 5,
+          "lookup_va": 4449384,
+          "iat_va": 4391544,
+          "lookup_value": 255242,
+          "iat_value": 255242
+        },
+        {
+          "dll": "kailleraclient.dll",
+          "name": "_kailleraSetInfos@4",
+          "hint": 6,
+          "lookup_va": 4449388,
+          "iat_va": 4391548,
+          "lookup_value": 255296,
+          "iat_value": 255296
+        },
+        {
+          "dll": "gs_dll.dll",
+          "name": "?GSInitialize@@YAXPAD00@Z",
+          "hint": 1,
+          "lookup_va": 4449352,
+          "iat_va": 4391512,
+          "lookup_value": 255338,
+          "iat_value": 255338
+        },
+        {
+          "dll": "gs_dll.dll",
+          "name": "?GSConfigure@@YAXXZ",
+          "hint": 0,
+          "lookup_va": 4449356,
+          "iat_va": 4391516,
+          "lookup_value": 255386,
+          "iat_value": 255386
+        },
+        {
+          "dll": "gs_dll.dll",
+          "name": "?GSUpdate@@YAXXZ",
+          "hint": 2,
+          "lookup_va": 4449360,
+          "iat_va": 4391520,
+          "lookup_value": 255366,
+          "iat_value": 255366
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetLocaleInfoA",
+          "hint": 349,
+          "lookup_va": 4448784,
+          "iat_va": 4390944,
+          "lookup_value": 257754,
+          "iat_value": 257754
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetSystemTimeAsFileTime",
+          "hint": 428,
+          "lookup_va": 4448788,
+          "iat_va": 4390948,
+          "lookup_value": 257728,
+          "iat_value": 257728
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetCurrentProcessId",
+          "hint": 304,
+          "lookup_va": 4448792,
+          "iat_va": 4390952,
+          "lookup_value": 257706,
+          "iat_value": 257706
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetCurrentThreadId",
+          "hint": 306,
+          "lookup_va": 4448796,
+          "iat_va": 4390956,
+          "lookup_value": 257684,
+          "iat_value": 257684
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetTickCount",
+          "hint": 446,
+          "lookup_va": 4448800,
+          "iat_va": 4390960,
+          "lookup_value": 257668,
+          "iat_value": 257668
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "HeapSize",
+          "hint": 507,
+          "lookup_va": 4448804,
+          "iat_va": 4390964,
+          "lookup_value": 257656,
+          "iat_value": 257656
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "SetEndOfFile",
+          "hint": 744,
+          "lookup_va": 4448808,
+          "iat_va": 4390968,
+          "lookup_value": 257640,
+          "iat_value": 257640
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetCPInfo",
+          "hint": 241,
+          "lookup_va": 4448812,
+          "iat_va": 4390972,
+          "lookup_value": 257628,
+          "iat_value": 257628
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetOEMCP",
+          "hint": 380,
+          "lookup_va": 4448816,
+          "iat_va": 4390976,
+          "lookup_value": 257616,
+          "iat_value": 257616
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "VirtualProtect",
+          "hint": 859,
+          "lookup_va": 4448820,
+          "iat_va": 4390980,
+          "lookup_value": 255420,
+          "iat_value": 255420
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "SuspendThread",
+          "hint": 811,
+          "lookup_va": 4448824,
+          "iat_va": 4390984,
+          "lookup_value": 255438,
+          "iat_value": 255438
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "QueryPerformanceCounter",
+          "hint": 638,
+          "lookup_va": 4448828,
+          "iat_va": 4390988,
+          "lookup_value": 255454,
+          "iat_value": 255454
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "Sleep",
+          "hint": 809,
+          "lookup_va": 4448832,
+          "iat_va": 4390992,
+          "lookup_value": 255480,
+          "iat_value": 255480
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "SetThreadPriority",
+          "hint": 792,
+          "lookup_va": 4448836,
+          "iat_va": 4390996,
+          "lookup_value": 255488,
+          "iat_value": 255488
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "QueryPerformanceFrequency",
+          "hint": 639,
+          "lookup_va": 4448840,
+          "iat_va": 4391000,
+          "lookup_value": 255508,
+          "iat_value": 255508
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "CloseHandle",
+          "hint": 44,
+          "lookup_va": 4448844,
+          "iat_va": 4391004,
+          "lookup_value": 255536,
+          "iat_value": 255536
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "CreateThread",
+          "hint": 101,
+          "lookup_va": 4448848,
+          "iat_va": 4391008,
+          "lookup_value": 255550,
+          "iat_value": 255550
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "FreeLibrary",
+          "hint": 229,
+          "lookup_va": 4448852,
+          "iat_va": 4391012,
+          "lookup_value": 255566,
+          "iat_value": 255566
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "FindFirstFileA",
+          "hint": 197,
+          "lookup_va": 4448856,
+          "iat_va": 4391016,
+          "lookup_value": 255580,
+          "iat_value": 255580
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetProcAddress",
+          "hint": 393,
+          "lookup_va": 4448860,
+          "iat_va": 4391020,
+          "lookup_value": 255598,
+          "iat_value": 255598
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "FindClose",
+          "hint": 193,
+          "lookup_va": 4448864,
+          "iat_va": 4391024,
+          "lookup_value": 255616,
+          "iat_value": 255616
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "LoadLibraryA",
+          "hint": 558,
+          "lookup_va": 4448868,
+          "iat_va": 4391028,
+          "lookup_value": 255628,
+          "iat_value": 255628
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "FindNextFileA",
+          "hint": 206,
+          "lookup_va": 4448872,
+          "iat_va": 4391032,
+          "lookup_value": 255644,
+          "iat_value": 255644
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "FindResourceA",
+          "hint": 212,
+          "lookup_va": 4448876,
+          "iat_va": 4391036,
+          "lookup_value": 255660,
+          "iat_value": 255660
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "lstrlenA",
+          "hint": 926,
+          "lookup_va": 4448880,
+          "iat_va": 4391040,
+          "lookup_value": 255676,
+          "iat_value": 255676
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "lstrcpynA",
+          "hint": 923,
+          "lookup_va": 4448884,
+          "iat_va": 4391044,
+          "lookup_value": 255688,
+          "iat_value": 255688
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "LoadResource",
+          "hint": 563,
+          "lookup_va": 4448888,
+          "iat_va": 4391048,
+          "lookup_value": 255700,
+          "iat_value": 255700
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetLogicalDrives",
+          "hint": 353,
+          "lookup_va": 4448892,
+          "iat_va": 4391052,
+          "lookup_value": 255716,
+          "iat_value": 255716
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "VirtualFree",
+          "hint": 856,
+          "lookup_va": 4448896,
+          "iat_va": 4391056,
+          "lookup_value": 255736,
+          "iat_value": 255736
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetDriveTypeA",
+          "hint": 317,
+          "lookup_va": 4448900,
+          "iat_va": 4391060,
+          "lookup_value": 255750,
+          "iat_value": 255750
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetVolumeInformationA",
+          "hint": 458,
+          "lookup_va": 4448904,
+          "iat_va": 4391064,
+          "lookup_value": 255766,
+          "iat_value": 255766
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "lstrcatA",
+          "hint": 911,
+          "lookup_va": 4448908,
+          "iat_va": 4391068,
+          "lookup_value": 255790,
+          "iat_value": 255790
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "SetCurrentDirectoryA",
+          "hint": 740,
+          "lookup_va": 4448912,
+          "iat_va": 4391072,
+          "lookup_value": 255802,
+          "iat_value": 255802
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetLastError",
+          "hint": 346,
+          "lookup_va": 4448916,
+          "iat_va": 4391076,
+          "lookup_value": 255826,
+          "iat_value": 255826
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "VirtualAlloc",
+          "hint": 853,
+          "lookup_va": 4448920,
+          "iat_va": 4391080,
+          "lookup_value": 255842,
+          "iat_value": 255842
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "MoveFileA",
+          "hint": 586,
+          "lookup_va": 4448924,
+          "iat_va": 4391084,
+          "lookup_value": 255858,
+          "iat_value": 255858
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "LockResource",
+          "hint": 577,
+          "lookup_va": 4448928,
+          "iat_va": 4391088,
+          "lookup_value": 255870,
+          "iat_value": 255870
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetPrivateProfileStructA",
+          "hint": 391,
+          "lookup_va": 4448932,
+          "iat_va": 4391092,
+          "lookup_value": 255886,
+          "iat_value": 255886
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetCurrentDirectoryA",
+          "hint": 301,
+          "lookup_va": 4448936,
+          "iat_va": 4391096,
+          "lookup_value": 255914,
+          "iat_value": 255914
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetSystemInfo",
+          "hint": 424,
+          "lookup_va": 4448940,
+          "iat_va": 4391100,
+          "lookup_value": 257772,
+          "iat_value": 257772
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "DeleteFileA",
+          "hint": 120,
+          "lookup_va": 4448944,
+          "iat_va": 4391104,
+          "lookup_value": 255954,
+          "iat_value": 255954
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetFileSize",
+          "hint": 333,
+          "lookup_va": 4448948,
+          "iat_va": 4391108,
+          "lookup_value": 255968,
+          "iat_value": 255968
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "OpenFile",
+          "hint": 602,
+          "lookup_va": 4448952,
+          "iat_va": 4391112,
+          "lookup_value": 255982,
+          "iat_value": 255982
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "WritePrivateProfileStructA",
+          "hint": 893,
+          "lookup_va": 4448956,
+          "iat_va": 4391116,
+          "lookup_value": 255994,
+          "iat_value": 255994
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "ReadFile",
+          "hint": 656,
+          "lookup_va": 4448960,
+          "iat_va": 4391120,
+          "lookup_value": 256024,
+          "iat_value": 256024
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetPrivateProfileStringA",
+          "hint": 389,
+          "lookup_va": 4448964,
+          "iat_va": 4391124,
+          "lookup_value": 256036,
+          "iat_value": 256036
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "WritePrivateProfileStringA",
+          "hint": 891,
+          "lookup_va": 4448968,
+          "iat_va": 4391128,
+          "lookup_value": 256064,
+          "iat_value": 256064
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "lstrcpyA",
+          "hint": 920,
+          "lookup_va": 4448972,
+          "iat_va": 4391132,
+          "lookup_value": 256094,
+          "iat_value": 256094
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetACP",
+          "hint": 235,
+          "lookup_va": 4448976,
+          "iat_va": 4391136,
+          "lookup_value": 257606,
+          "iat_value": 257606
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetStringTypeW",
+          "hint": 418,
+          "lookup_va": 4448980,
+          "iat_va": 4391140,
+          "lookup_value": 257588,
+          "iat_value": 257588
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "MultiByteToWideChar",
+          "hint": 593,
+          "lookup_va": 4448984,
+          "iat_va": 4391144,
+          "lookup_value": 257566,
+          "iat_value": 257566
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetStringTypeA",
+          "hint": 415,
+          "lookup_va": 4448988,
+          "iat_va": 4391148,
+          "lookup_value": 257548,
+          "iat_value": 257548
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "SetStdHandle",
+          "hint": 780,
+          "lookup_va": 4448992,
+          "iat_va": 4391152,
+          "lookup_value": 257532,
+          "iat_value": 257532
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "CreateFileA",
+          "hint": 74,
+          "lookup_va": 4448996,
+          "iat_va": 4391156,
+          "lookup_value": 257518,
+          "iat_value": 257518
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetEnvironmentStringsW",
+          "hint": 321,
+          "lookup_va": 4449000,
+          "iat_va": 4391160,
+          "lookup_value": 257492,
+          "iat_value": 257492
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "WideCharToMultiByte",
+          "hint": 873,
+          "lookup_va": 4449004,
+          "iat_va": 4391164,
+          "lookup_value": 257470,
+          "iat_value": 257470
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "FreeEnvironmentStringsW",
+          "hint": 228,
+          "lookup_va": 4449008,
+          "iat_va": 4391168,
+          "lookup_value": 257444,
+          "iat_value": 257444
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetEnvironmentStrings",
+          "hint": 319,
+          "lookup_va": 4449012,
+          "iat_va": 4391172,
+          "lookup_value": 257420,
+          "iat_value": 257420
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "FreeEnvironmentStringsA",
+          "hint": 227,
+          "lookup_va": 4449016,
+          "iat_va": 4391176,
+          "lookup_value": 257394,
+          "iat_value": 257394
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "UnhandledExceptionFilter",
+          "hint": 834,
+          "lookup_va": 4449020,
+          "iat_va": 4391180,
+          "lookup_value": 257366,
+          "iat_value": 257366
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetModuleFileNameA",
+          "hint": 357,
+          "lookup_va": 4449024,
+          "iat_va": 4391184,
+          "lookup_value": 257344,
+          "iat_value": 257344
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "FlushFileBuffers",
+          "hint": 219,
+          "lookup_va": 4449028,
+          "iat_va": 4391188,
+          "lookup_value": 257324,
+          "iat_value": 257324
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "SetFilePointer",
+          "hint": 753,
+          "lookup_va": 4449032,
+          "iat_va": 4391192,
+          "lookup_value": 257306,
+          "iat_value": 257306
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetFileType",
+          "hint": 336,
+          "lookup_va": 4449036,
+          "iat_va": 4391196,
+          "lookup_value": 257292,
+          "iat_value": 257292
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetStdHandle",
+          "hint": 414,
+          "lookup_va": 4449040,
+          "iat_va": 4391200,
+          "lookup_value": 257276,
+          "iat_value": 257276
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "SetHandleCount",
+          "hint": 762,
+          "lookup_va": 4449044,
+          "iat_va": 4391204,
+          "lookup_value": 257258,
+          "iat_value": 257258
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "WriteFile",
+          "hint": 886,
+          "lookup_va": 4449048,
+          "iat_va": 4391208,
+          "lookup_value": 257246,
+          "iat_value": 257246
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "HeapCreate",
+          "hint": 497,
+          "lookup_va": 4449052,
+          "iat_va": 4391212,
+          "lookup_value": 257232,
+          "iat_value": 257232
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "HeapDestroy",
+          "hint": 499,
+          "lookup_va": 4449056,
+          "iat_va": 4391216,
+          "lookup_value": 257218,
+          "iat_value": 257218
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetCurrentProcess",
+          "hint": 303,
+          "lookup_va": 4449060,
+          "iat_va": 4391220,
+          "lookup_value": 257198,
+          "iat_value": 257198
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "TerminateProcess",
+          "hint": 817,
+          "lookup_va": 4449064,
+          "iat_va": 4391224,
+          "lookup_value": 257178,
+          "iat_value": 257178
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "RtlUnwind",
+          "hint": 689,
+          "lookup_va": 4449068,
+          "iat_va": 4391228,
+          "lookup_value": 257836,
+          "iat_value": 257836
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "ExitProcess",
+          "hint": 171,
+          "lookup_va": 4449072,
+          "iat_va": 4391232,
+          "lookup_value": 257164,
+          "iat_value": 257164
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetVersionExA",
+          "hint": 456,
+          "lookup_va": 4449076,
+          "iat_va": 4391236,
+          "lookup_value": 257148,
+          "iat_value": 257148
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetCommandLineA",
+          "hint": 253,
+          "lookup_va": 4449080,
+          "iat_va": 4391240,
+          "lookup_value": 257130,
+          "iat_value": 257130
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetStartupInfoA",
+          "hint": 412,
+          "lookup_va": 4449084,
+          "iat_va": 4391244,
+          "lookup_value": 257112,
+          "iat_value": 257112
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "GetModuleHandleA",
+          "hint": 359,
+          "lookup_va": 4449088,
+          "iat_va": 4391248,
+          "lookup_value": 257092,
+          "iat_value": 257092
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "HeapReAlloc",
+          "hint": 505,
+          "lookup_va": 4449092,
+          "iat_va": 4391252,
+          "lookup_value": 257078,
+          "iat_value": 257078
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "HeapAlloc",
+          "hint": 495,
+          "lookup_va": 4449096,
+          "iat_va": 4391256,
+          "lookup_value": 257066,
+          "iat_value": 257066
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "HeapFree",
+          "hint": 501,
+          "lookup_va": 4449100,
+          "iat_va": 4391260,
+          "lookup_value": 257054,
+          "iat_value": 257054
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "VirtualQuery",
+          "hint": 861,
+          "lookup_va": 4449104,
+          "iat_va": 4391264,
+          "lookup_value": 257788,
+          "iat_value": 257788
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "LCMapStringA",
+          "hint": 544,
+          "lookup_va": 4449108,
+          "iat_va": 4391268,
+          "lookup_value": 257804,
+          "iat_value": 257804
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "LCMapStringW",
+          "hint": 545,
+          "lookup_va": 4449112,
+          "iat_va": 4391272,
+          "lookup_value": 257820,
+          "iat_value": 257820
+        },
+        {
+          "dll": "KERNEL32.dll",
+          "name": "ResumeThread",
+          "hint": 684,
+          "lookup_va": 4449116,
+          "iat_va": 4391276,
+          "lookup_value": 255938,
+          "iat_value": 255938
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "DestroyWindow",
+          "hint": 153,
+          "lookup_va": 4449144,
+          "iat_va": 4391304,
+          "lookup_value": 256796,
+          "iat_value": 256796
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "ClientToScreen",
+          "hint": 64,
+          "lookup_va": 4449148,
+          "iat_va": 4391308,
+          "lookup_value": 256812,
+          "iat_value": 256812
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "EndPaint",
+          "hint": 200,
+          "lookup_va": 4449152,
+          "iat_va": 4391312,
+          "lookup_value": 256830,
+          "iat_value": 256830
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "SetWindowTextA",
+          "hint": 646,
+          "lookup_va": 4449156,
+          "iat_va": 4391316,
+          "lookup_value": 256842,
+          "iat_value": 256842
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "GetMessageA",
+          "hint": 314,
+          "lookup_va": 4449160,
+          "iat_va": 4391320,
+          "lookup_value": 256782,
+          "iat_value": 256782
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "LoadIconA",
+          "hint": 443,
+          "lookup_va": 4449164,
+          "iat_va": 4391324,
+          "lookup_value": 256684,
+          "iat_value": 256684
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "FindWindowExA",
+          "hint": 228,
+          "lookup_va": 4449168,
+          "iat_va": 4391328,
+          "lookup_value": 256668,
+          "iat_value": 256668
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "GetClientRect",
+          "hint": 255,
+          "lookup_va": 4449172,
+          "iat_va": 4391332,
+          "lookup_value": 256652,
+          "iat_value": 256652
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "MessageBoxA",
+          "hint": 476,
+          "lookup_va": 4449176,
+          "iat_va": 4391336,
+          "lookup_value": 256120,
+          "iat_value": 256120
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "EnableMenuItem",
+          "hint": 194,
+          "lookup_va": 4449180,
+          "iat_va": 4391340,
+          "lookup_value": 256134,
+          "iat_value": 256134
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "GetMenu",
+          "hint": 300,
+          "lookup_va": 4449184,
+          "iat_va": 4391344,
+          "lookup_value": 256152,
+          "iat_value": 256152
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "GetWindowRect",
+          "hint": 372,
+          "lookup_va": 4449188,
+          "iat_va": 4391348,
+          "lookup_value": 256766,
+          "iat_value": 256766
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "InsertMenuItemA",
+          "hint": 398,
+          "lookup_va": 4449192,
+          "iat_va": 4391352,
+          "lookup_value": 256748,
+          "iat_value": 256748
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "RegisterClassExA",
+          "hint": 535,
+          "lookup_va": 4449196,
+          "iat_va": 4391356,
+          "lookup_value": 256728,
+          "iat_value": 256728
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "LoadStringA",
+          "hint": 456,
+          "lookup_va": 4449200,
+          "iat_va": 4391360,
+          "lookup_value": 256696,
+          "iat_value": 256696
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "PostQuitMessage",
+          "hint": 513,
+          "lookup_va": 4449204,
+          "iat_va": 4391364,
+          "lookup_value": 256710,
+          "iat_value": 256710
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "SetFocus",
+          "hint": 598,
+          "lookup_va": 4449208,
+          "iat_va": 4391368,
+          "lookup_value": 256640,
+          "iat_value": 256640
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "BeginPaint",
+          "hint": 13,
+          "lookup_va": 4449212,
+          "iat_va": 4391372,
+          "lookup_value": 256626,
+          "iat_value": 256626
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "GetDC",
+          "hint": 268,
+          "lookup_va": 4449216,
+          "iat_va": 4391376,
+          "lookup_value": 256618,
+          "iat_value": 256618
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "TranslateMessage",
+          "hint": 682,
+          "lookup_va": 4449220,
+          "iat_va": 4391380,
+          "lookup_value": 256598,
+          "iat_value": 256598
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "TrackPopupMenuEx",
+          "hint": 677,
+          "lookup_va": 4449224,
+          "iat_va": 4391384,
+          "lookup_value": 256578,
+          "iat_value": 256578
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "CheckMenuRadioItem",
+          "hint": 58,
+          "lookup_va": 4449228,
+          "iat_va": 4391388,
+          "lookup_value": 256556,
+          "iat_value": 256556
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "InvalidateRect",
+          "hint": 403,
+          "lookup_va": 4449232,
+          "iat_va": 4391392,
+          "lookup_value": 256538,
+          "iat_value": 256538
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "CreateWindowExA",
+          "hint": 96,
+          "lookup_va": 4449236,
+          "iat_va": 4391396,
+          "lookup_value": 256520,
+          "iat_value": 256520
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "TranslateAcceleratorA",
+          "hint": 679,
+          "lookup_va": 4449240,
+          "iat_va": 4391400,
+          "lookup_value": 256484,
+          "iat_value": 256484
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "EndDialog",
+          "hint": 198,
+          "lookup_va": 4449244,
+          "iat_va": 4391404,
+          "lookup_value": 256472,
+          "iat_value": 256472
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "DefWindowProcA",
+          "hint": 142,
+          "lookup_va": 4449248,
+          "iat_va": 4391408,
+          "lookup_value": 256454,
+          "iat_value": 256454
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "SetWindowPos",
+          "hint": 643,
+          "lookup_va": 4449252,
+          "iat_va": 4391412,
+          "lookup_value": 256438,
+          "iat_value": 256438
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "GetMenuItemInfoA",
+          "hint": 308,
+          "lookup_va": 4449256,
+          "iat_va": 4391416,
+          "lookup_value": 256418,
+          "iat_value": 256418
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "LoadAcceleratorsA",
+          "hint": 435,
+          "lookup_va": 4449260,
+          "iat_va": 4391420,
+          "lookup_value": 256398,
+          "iat_value": 256398
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "ShowWindow",
+          "hint": 658,
+          "lookup_va": 4449264,
+          "iat_va": 4391424,
+          "lookup_value": 256384,
+          "iat_value": 256384
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "CreatePopupMenu",
+          "hint": 94,
+          "lookup_va": 4449268,
+          "iat_va": 4391428,
+          "lookup_value": 256366,
+          "iat_value": 256366
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "DrawMenuBar",
+          "hint": 184,
+          "lookup_va": 4449272,
+          "iat_va": 4391432,
+          "lookup_value": 256352,
+          "iat_value": 256352
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "DispatchMessageA",
+          "hint": 161,
+          "lookup_va": 4449276,
+          "iat_va": 4391436,
+          "lookup_value": 256332,
+          "iat_value": 256332
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "LoadImageA",
+          "hint": 445,
+          "lookup_va": 4449280,
+          "iat_va": 4391440,
+          "lookup_value": 256318,
+          "iat_value": 256318
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "UpdateWindow",
+          "hint": 699,
+          "lookup_va": 4449284,
+          "iat_va": 4391444,
+          "lookup_value": 256302,
+          "iat_value": 256302
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "EnableWindow",
+          "hint": 196,
+          "lookup_va": 4449288,
+          "iat_va": 4391448,
+          "lookup_value": 256286,
+          "iat_value": 256286
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "AdjustWindowRect",
+          "hint": 1,
+          "lookup_va": 4449292,
+          "iat_va": 4391452,
+          "lookup_value": 256266,
+          "iat_value": 256266
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "DestroyMenu",
+          "hint": 151,
+          "lookup_va": 4449296,
+          "iat_va": 4391456,
+          "lookup_value": 256252,
+          "iat_value": 256252
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "LoadCursorA",
+          "hint": 439,
+          "lookup_va": 4449300,
+          "iat_va": 4391460,
+          "lookup_value": 256238,
+          "iat_value": 256238
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "DialogBoxParamA",
+          "hint": 158,
+          "lookup_va": 4449304,
+          "iat_va": 4391464,
+          "lookup_value": 256220,
+          "iat_value": 256220
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "CheckMenuItem",
+          "hint": 57,
+          "lookup_va": 4449308,
+          "iat_va": 4391468,
+          "lookup_value": 256204,
+          "iat_value": 256204
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "GetWindow",
+          "hint": 362,
+          "lookup_va": 4449312,
+          "iat_va": 4391472,
+          "lookup_value": 256192,
+          "iat_value": 256192
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "MoveWindow",
+          "hint": 489,
+          "lookup_va": 4449316,
+          "iat_va": 4391476,
+          "lookup_value": 256178,
+          "iat_value": 256178
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "SendMessageA",
+          "hint": 571,
+          "lookup_va": 4449320,
+          "iat_va": 4391480,
+          "lookup_value": 256162,
+          "iat_value": 256162
+        },
+        {
+          "dll": "USER32.dll",
+          "name": "ReleaseDC",
+          "hint": 554,
+          "lookup_va": 4449324,
+          "iat_va": 4391484,
+          "lookup_value": 256508,
+          "iat_value": 256508
+        },
+        {
+          "dll": "GDI32.dll",
+          "name": "SetPixelV",
+          "hint": 561,
+          "lookup_va": 4448768,
+          "iat_va": 4390928,
+          "lookup_value": 256884,
+          "iat_value": 256884
+        },
+        {
+          "dll": "GDI32.dll",
+          "name": "DeleteObject",
+          "hint": 143,
+          "lookup_va": 4448772,
+          "iat_va": 4390932,
+          "lookup_value": 256896,
+          "iat_value": 256896
+        },
+        {
+          "dll": "GDI32.dll",
+          "name": "GetPixel",
+          "hint": 412,
+          "lookup_va": 4448776,
+          "iat_va": 4390936,
+          "lookup_value": 256872,
+          "iat_value": 256872
+        },
+        {
+          "dll": "comdlg32.dll",
+          "name": "GetSaveFileNameA",
+          "hint": 11,
+          "lookup_va": 4449340,
+          "iat_va": 4391500,
+          "lookup_value": 256922,
+          "iat_value": 256922
+        },
+        {
+          "dll": "comdlg32.dll",
+          "name": "GetOpenFileNameA",
+          "hint": 9,
+          "lookup_va": 4449344,
+          "iat_va": 4391504,
+          "lookup_value": 256942,
+          "iat_value": 256942
+        },
+        {
+          "dll": "SHELL32.dll",
+          "name": "DragAcceptFiles",
+          "hint": 20,
+          "lookup_va": 4449124,
+          "iat_va": 4391284,
+          "lookup_value": 257010,
+          "iat_value": 257010
+        },
+        {
+          "dll": "SHELL32.dll",
+          "name": "ShellExecuteA",
+          "hint": 152,
+          "lookup_va": 4449128,
+          "iat_va": 4391288,
+          "lookup_value": 256994,
+          "iat_value": 256994
+        },
+        {
+          "dll": "SHELL32.dll",
+          "name": "DragQueryFileA",
+          "hint": 23,
+          "lookup_va": 4449132,
+          "iat_va": 4391292,
+          "lookup_value": 256976,
+          "iat_value": 256976
+        },
+        {
+          "dll": "SHELL32.dll",
+          "name": "DragFinish",
+          "hint": 21,
+          "lookup_va": 4449136,
+          "iat_va": 4391296,
+          "lookup_value": 257028,
+          "iat_value": 257028
+        }
+      ]
+    }
   },
   "provenance_validation": {
-    "manifest": "/root/.ai-tmp/nemu-chronology-relocs.uca75yl0/diagnostic.json",
-    "manifest_sha256": "09118ba57e7c8a7cd070a0feae68d478d0f920069cde6a37670e1846c5f4bef6",
+    "manifest": "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah/diagnostic.json",
+    "manifest_sha256": "88f7ee943f5de339d52438441a6fb2174d0a2ccaab40211c5a6cd185a747c82b",
     "manifest_image_hash_verified": true,
     "unforced_link_returncode": 0,
-    "fixed_parent": "/root/.ai-tmp/nemu-build.hngf789h/artifacts/516de1c174cd4d02d0031d14e6ab2d4111635c209a8abd4aa665aa009c15317b/nemu64.exe",
-    "fixed_parent_sha256": "516de1c174cd4d02d0031d14e6ab2d4111635c209a8abd4aa665aa009c15317b",
+    "fixed_parent": "/root/.ai-tmp/nemu-build.trb9kso2/artifacts/87403a525076dcbbd268f2c3016cf2164c9d6948f2dc51ccfe916c67b0845f28/nemu64.exe",
+    "fixed_parent_sha256": "87403a525076dcbbd268f2c3016cf2164c9d6948f2dc51ccfe916c67b0845f28",
     "existing_sections": [
       {
         "name": ".text",
         "layout_equal": true,
         "raw_bytes_equal": true,
         "raw_size": 192512,
-        "raw_sha256": "08c327502d6b090b3ac7b6c100e914b3004e41ef7e4f14f5091a4fe98c233dac"
+        "raw_sha256": "f39233c3adf7de73508325afa25a3adac3f4b17442c626c18ab5eb9d59a5cf12"
       },
       {
         "name": ".rdata",
         "layout_equal": true,
         "raw_bytes_equal": true,
         "raw_size": 61440,
-        "raw_sha256": "0be8256e2ad2b5486f803b231db71cb84cdc087c7767e4778a18e5d3e92eb59e"
+        "raw_sha256": "fe26fddc7fb57a4c74e2ee2bfaaa07e1bba5e4a5d86084b7da5ae97b7a380aa7"
       },
       {
         "name": ".data",
@@ -1268,7 +3204,7 @@
       },
       {
         "path": "analysis/nemu-pif.json",
-        "sha256": "2486bf42e184b7528a58a2ab0084a8915e5259f861de15ec8b0722283e187e15",
+        "sha256": "74bd3470b1295f3b83904c755b05965b2d3085014f70ae6d85e97a94172ee01c",
         "verified_copy": "analysis/nemu-pif.json"
       },
       {
@@ -1293,11 +3229,11 @@
       },
       {
         "path": "analysis/nemu-candidate-extents.json",
-        "sha256": "f28938ff175229ec9d1ce8b41fa1d50fc8c0b7c56d124f34c110f47a14a232f7",
+        "sha256": "f464dffd11c14274560978980d2aea717844e7a94e34b0e0f48417dc0f56df25",
         "verified_copy": "analysis/nemu-candidate-extents.json"
       }
     ],
-    "comparison_tool_sha256": "e7e8ff08485972c89bb8d43776bb35b00e6e99eebd3a4e9bde2311b41a9cb2cb",
+    "comparison_tool_sha256": "a79f010ca12fa4a77a60dbc4de7d5b82b247abbd56df2261d4f878bae9074551",
     "extent_tool_sha256": "3e4b5ea132e05fa40900c10e2263051dc2a65eab4ffbd393d14babf77227154e",
     "selector_tool_sha256": "d8ff5e0b63db8c55c5932380c58633f70d9942d7bf3ff883e08de6e826dbc941",
     "literal_verifiers": {
@@ -1307,31 +3243,35 @@
       },
       "string_literal_verifier": {
         "path": "scripts/nemu_string_provenance.py",
-        "sha256": "23994801e152a23ddf70cc9f5770d7023ef81fef41b063988c1d0a3af4c4b9d0"
+        "sha256": "d1f0d55c290c7bdf3d20adc7ff4be0ae5d1643bb771680f010bac2779cb3318f"
       }
     },
-    "previous_archive_artifact": "/root/.ai-tmp/nemu-build.674anu41/artifacts/6e717f534aedf201b339314a087d5f708933a1663f2da45cb690c3ebdbdf36ae/nemu64.exe",
-    "previous_archive_sha256": "6e717f534aedf201b339314a087d5f708933a1663f2da45cb690c3ebdbdf36ae",
+    "previous_archive_artifact": "/root/.ai-tmp/nemu-build.hngf789h/artifacts/516de1c174cd4d02d0031d14e6ab2d4111635c209a8abd4aa665aa009c15317b/nemu64.exe",
+    "previous_archive_sha256": "516de1c174cd4d02d0031d14e6ab2d4111635c209a8abd4aa665aa009c15317b",
     "previous_archive_sections": [
       {
         "name": ".text",
         "layout_equal": true,
-        "raw_bytes_equal": true
+        "raw_bytes_equal": false,
+        "differing_bytes": 1491
       },
       {
         "name": ".rdata",
         "layout_equal": true,
-        "raw_bytes_equal": true
+        "raw_bytes_equal": false,
+        "differing_bytes": 82
       },
       {
         "name": ".data",
         "layout_equal": true,
-        "raw_bytes_equal": true
+        "raw_bytes_equal": true,
+        "differing_bytes": 0
       },
       {
         "name": ".rsrc",
         "layout_equal": true,
-        "raw_bytes_equal": true
+        "raw_bytes_equal": true,
+        "differing_bytes": 0
       }
     ]
   },
@@ -1340,11 +3280,11 @@
       "/usr/bin/python3",
       "scripts/measure_nemu_extents.py",
       "--image",
-      "/root/.ai-tmp/nemu-chronology-relocs.uca75yl0/nemu64.exe",
+      "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah/nemu64.exe",
       "--map",
-      "/root/.ai-tmp/nemu-chronology-relocs.uca75yl0/nemu64.map",
+      "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah/nemu64.map",
       "--report",
-      "/root/.ai-tmp/nemu-matrix-final-archive.dfjloqn5/base-extents.json",
+      "/root/.ai-tmp/nemu-matrix-pif-import.f5d_jf6q/base-extents.json",
       "--metadata",
       "analysis/nemu-browser.json",
       "--metadata",
@@ -1374,9 +3314,9 @@
       "/usr/bin/python3",
       "scripts/complete_nemu_cpu_control_extents.py",
       "--image",
-      "/root/.ai-tmp/nemu-chronology-relocs.uca75yl0/nemu64.exe",
+      "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah/nemu64.exe",
       "--extents",
-      "/root/.ai-tmp/nemu-matrix-final-archive.dfjloqn5/base-extents.json",
+      "/root/.ai-tmp/nemu-matrix-pif-import.f5d_jf6q/base-extents.json",
       "--output",
       "analysis/nemu-candidate-extents.json"
     ],
@@ -1408,9 +3348,9 @@
       "--metadata",
       "analysis/nemu-rsp.json",
       "--image",
-      "/root/.ai-tmp/nemu-chronology-relocs.uca75yl0/nemu64.exe",
+      "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah/nemu64.exe",
       "--map",
-      "/root/.ai-tmp/nemu-chronology-relocs.uca75yl0/nemu64.map",
+      "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah/nemu64.map",
       "--symbols",
       "analysis/nemu-globals.json",
       "--symbols",
@@ -1427,18 +3367,18 @@
     [
       "python3",
       "scripts/verify_nemu.py",
-      "/root/.ai-tmp/nemu-build.hngf789h/artifacts/516de1c174cd4d02d0031d14e6ab2d4111635c209a8abd4aa665aa009c15317b/nemu64.exe",
+      "/root/.ai-tmp/nemu-build.trb9kso2/artifacts/87403a525076dcbbd268f2c3016cf2164c9d6948f2dc51ccfe916c67b0845f28/nemu64.exe",
       "--report",
-      "/root/.ai-tmp/nemu-matrix-final-archive.dfjloqn5/strict-fixed-comparison.json"
+      "/root/.ai-tmp/nemu-matrix-pif-import.f5d_jf6q/strict-fixed-comparison.json"
     ]
   ],
   "whole_file_verification": {
     "verifier": "scripts/verify_nemu.py",
     "verifier_sha256": "982bfdf534f596890b2637180c71def3c2173758840fb76c6f520d1708822e58",
-    "report": "/root/.ai-tmp/nemu-matrix-final-archive.dfjloqn5/strict-fixed-comparison.json",
-    "report_sha256": "bff4ad2e8670b5ca11e6cf3c50500fa0d9b9cec3c29c5893acb2d778b9ab16d7",
+    "report": "/root/.ai-tmp/nemu-matrix-pif-import.f5d_jf6q/strict-fixed-comparison.json",
+    "report_sha256": "a61f1152d94d10afb8cdb867286b27dbe9d9f7bac938fc7fa1abd31942a94cfe",
     "full_exe_byte_exact": false,
-    "differing_file_bytes": 17152,
+    "differing_file_bytes": 16722,
     "header_differing_offsets": [
       272,
       273,
@@ -1451,13 +3391,13 @@
         "name": ".text",
         "layout_equal": true,
         "raw_bytes_equal": false,
-        "differing_bytes": 16759
+        "differing_bytes": 16411
       },
       {
         "name": ".rdata",
         "layout_equal": true,
         "raw_bytes_equal": false,
-        "differing_bytes": 86
+        "differing_bytes": 4
       },
       {
         "name": ".data",
@@ -1479,11 +3419,11 @@
     "selected_passing_instances": 635,
     "excluded_unmatched_functions": 13,
     "fully_verified_relocation_instances": 184,
-    "unresolved_or_ambiguous_occurrences": 151,
-    "unresolved_occurrences": 123,
+    "unresolved_or_ambiguous_occurrences": 137,
+    "unresolved_occurrences": 109,
     "ambiguous_occurrences": 28,
     "matching_but_not_independently_verified_occurrences": 2313,
-    "total_not_independently_verified_occurrences": 2464
+    "total_not_independently_verified_occurrences": 2450
   },
   "categories": {
     "SEH_scope_table": {
@@ -1507,9 +3447,9 @@
       "distinct_target_pairs": 2
     },
     "named_string_literal": {
-      "occurrences": 74,
-      "functions": 21,
-      "distinct_target_pairs": 29
+      "occurrences": 60,
+      "functions": 19,
+      "distinct_target_pairs": 18
     },
     "native_CRT_alias": {
       "occurrences": 23,
@@ -1529,15 +3469,15 @@
   },
   "independently_proven_literal_contents": {
     "scope": "Existing PE HIGHLOW operands only, independently checked against original and rebuilt decoded instructions and uniquely bounded literal payloads. No extra bytes are normalized.",
-    "limitation": "Complete content equality does not recover original source spelling, source allocation boundary, or API argument meaning. Rejected duplicate payloads, direct data loads, suffixes, and ambiguous aliases retain their existing unresolved statuses.",
+    "limitation": "Complete content equality does not recover original source spelling, source allocation boundary, or API argument meaning. Accepted direct scalar reads have their own basis and do not imply pointer escape or a string consumer. Rejected duplicate payloads, unsupported data loads, suffixes, and ambiguous aliases retain their existing unresolved statuses.",
     "counts": {
       "string_record_pointer_proof": 361,
-      "floating_literal_proof": 11
+      "floating_literal_proof": 11,
+      "string_record_scalar_read_proof": 14
     },
     "remaining_named_literal_rejections": {
       "named_string_literal": {
-        "complete payload is not unique across all .rdata byte offsets": 51,
-        "direct data access does not establish complete-record pointer materialization": 23
+        "complete payload is not unique across all .rdata byte offsets": 60
       },
       "named_floating_constant": {
         "complete payload is not unique across all .rdata byte offsets": 7
@@ -2611,6 +4551,32 @@
         ]
       },
       {
+        "function": "LoadPlugins",
+        "comparison_index": 0,
+        "function_index": 534,
+        "operand_offset": 73,
+        "proof_kind": "string_record_scalar_read_proof",
+        "proof_basis": "complete_record_scalar_read",
+        "original_target": 4407872,
+        "candidate_target": 4407872,
+        "candidate_target_names": [
+          "??_C@_07OBHJIOBF@Plugin?2?$AA@"
+        ]
+      },
+      {
+        "function": "LoadPlugins",
+        "comparison_index": 0,
+        "function_index": 534,
+        "operand_offset": 126,
+        "proof_kind": "string_record_scalar_read_proof",
+        "proof_basis": "complete_record_scalar_read",
+        "original_target": 4407864,
+        "candidate_target": 4407864,
+        "candidate_target_names": [
+          "??_C@_05KKDKJPNC@?$CK?4dll?$AA@"
+        ]
+      },
+      {
         "function": "LoadRom",
         "comparison_index": 1,
         "function_index": 27,
@@ -3056,6 +5022,45 @@
         "function": "MainWindowProc",
         "comparison_index": 1,
         "function_index": 503,
+        "operand_offset": 710,
+        "proof_kind": "string_record_scalar_read_proof",
+        "proof_basis": "complete_record_scalar_read",
+        "original_target": 4402964,
+        "candidate_target": 4402964,
+        "candidate_target_names": [
+          "??_C@_02FEEPBPGD@A?3?$AA@"
+        ]
+      },
+      {
+        "function": "MainWindowProc",
+        "comparison_index": 1,
+        "function_index": 503,
+        "operand_offset": 955,
+        "proof_kind": "string_record_scalar_read_proof",
+        "proof_basis": "complete_record_scalar_read",
+        "original_target": 4402960,
+        "candidate_target": 4402960,
+        "candidate_target_names": [
+          "??_C@_02GFKOMOKH@?5?$CI?$AA@"
+        ]
+      },
+      {
+        "function": "MainWindowProc",
+        "comparison_index": 1,
+        "function_index": 503,
+        "operand_offset": 1737,
+        "proof_kind": "string_record_scalar_read_proof",
+        "proof_basis": "complete_record_scalar_read",
+        "original_target": 4402944,
+        "candidate_target": 4402944,
+        "candidate_target_names": [
+          "??_C@_08FMEJIGHO@Rom?5name?$AA@"
+        ]
+      },
+      {
+        "function": "MainWindowProc",
+        "comparison_index": 1,
+        "function_index": 503,
         "operand_offset": 1770,
         "proof_kind": "string_record_pointer_proof",
         "proof_basis": "complete_string_record_pointer",
@@ -3076,6 +5081,19 @@
         "candidate_target": 4407524,
         "candidate_target_names": [
           "??_C@_0O@PIILMNHI@Configuration?$AA@"
+        ]
+      },
+      {
+        "function": "MainWindowProc",
+        "comparison_index": 1,
+        "function_index": 503,
+        "operand_offset": 1840,
+        "proof_kind": "string_record_scalar_read_proof",
+        "proof_basis": "complete_record_scalar_read",
+        "original_target": 4402916,
+        "candidate_target": 4402916,
+        "candidate_target_names": [
+          "??_C@_08JCOIAMOP@Filename?$AA@"
         ]
       },
       {
@@ -3134,6 +5152,19 @@
         "function": "MainWindowProc",
         "comparison_index": 1,
         "function_index": 503,
+        "operand_offset": 1995,
+        "proof_kind": "string_record_scalar_read_proof",
+        "proof_basis": "complete_record_scalar_read",
+        "original_target": 4402868,
+        "candidate_target": 4402868,
+        "candidate_target_names": [
+          "??_C@_06DHPIOBCM@Rating?$AA@"
+        ]
+      },
+      {
+        "function": "MainWindowProc",
+        "comparison_index": 1,
+        "function_index": 503,
         "operand_offset": 2016,
         "proof_kind": "string_record_pointer_proof",
         "proof_basis": "complete_string_record_pointer",
@@ -3154,6 +5185,19 @@
         "candidate_target": 4407524,
         "candidate_target_names": [
           "??_C@_0O@PIILMNHI@Configuration?$AA@"
+        ]
+      },
+      {
+        "function": "MainWindowProc",
+        "comparison_index": 1,
+        "function_index": 503,
+        "operand_offset": 2073,
+        "proof_kind": "string_record_scalar_read_proof",
+        "proof_basis": "complete_record_scalar_read",
+        "original_target": 4402844,
+        "candidate_target": 4402844,
+        "candidate_target_names": [
+          "??_C@_07JABLCLAF@Comment?$AA@"
         ]
       },
       {
@@ -3186,6 +5230,19 @@
         "function": "MainWindowProc",
         "comparison_index": 1,
         "function_index": 503,
+        "operand_offset": 2150,
+        "proof_kind": "string_record_scalar_read_proof",
+        "proof_basis": "complete_record_scalar_read",
+        "original_target": 4402816,
+        "candidate_target": 4402816,
+        "candidate_target_names": [
+          "??_C@_0M@DDEOPGPA@INI?5Section?$AA@"
+        ]
+      },
+      {
+        "function": "MainWindowProc",
+        "comparison_index": 1,
+        "function_index": 503,
         "operand_offset": 2170,
         "proof_kind": "string_record_pointer_proof",
         "proof_basis": "complete_string_record_pointer",
@@ -3206,6 +5263,19 @@
         "candidate_target": 4407524,
         "candidate_target_names": [
           "??_C@_0O@PIILMNHI@Configuration?$AA@"
+        ]
+      },
+      {
+        "function": "MainWindowProc",
+        "comparison_index": 1,
+        "function_index": 503,
+        "operand_offset": 2224,
+        "proof_kind": "string_record_scalar_read_proof",
+        "proof_basis": "complete_record_scalar_read",
+        "original_target": 4402792,
+        "candidate_target": 4402792,
+        "candidate_target_names": [
+          "??_C@_04PDALNJHJ@CRC1?$AA@"
         ]
       },
       {
@@ -4629,6 +6699,19 @@
         "function": "RebuildFavouritesMenu",
         "comparison_index": 1,
         "function_index": 8,
+        "operand_offset": 153,
+        "proof_kind": "string_record_scalar_read_proof",
+        "proof_basis": "complete_record_scalar_read",
+        "original_target": 4407728,
+        "candidate_target": 4407728,
+        "candidate_target_names": [
+          "??_C@_07LEBAMMPD@fav?4dat?$AA@"
+        ]
+      },
+      {
+        "function": "RebuildFavouritesMenu",
+        "comparison_index": 1,
+        "function_index": 8,
         "operand_offset": 173,
         "proof_kind": "string_record_pointer_proof",
         "proof_basis": "complete_string_record_pointer",
@@ -5019,6 +7102,19 @@
         "function": "RemoveFavouritesDialogProc",
         "comparison_index": 1,
         "function_index": 11,
+        "operand_offset": 130,
+        "proof_kind": "string_record_scalar_read_proof",
+        "proof_basis": "complete_record_scalar_read",
+        "original_target": 4407728,
+        "candidate_target": 4407728,
+        "candidate_target_names": [
+          "??_C@_07LEBAMMPD@fav?4dat?$AA@"
+        ]
+      },
+      {
+        "function": "RemoveFavouritesDialogProc",
+        "comparison_index": 1,
+        "function_index": 11,
         "operand_offset": 147,
         "proof_kind": "string_record_pointer_proof",
         "proof_basis": "complete_string_record_pointer",
@@ -5052,6 +7148,19 @@
         "candidate_target": 4402680,
         "candidate_target_names": [
           "??_C@_07EKEMFJNL@LISTBOX?$AA@"
+        ]
+      },
+      {
+        "function": "RemoveFavouritesDialogProc",
+        "comparison_index": 1,
+        "function_index": 11,
+        "operand_offset": 522,
+        "proof_kind": "string_record_scalar_read_proof",
+        "proof_basis": "complete_record_scalar_read",
+        "original_target": 4407728,
+        "candidate_target": 4407728,
+        "candidate_target_names": [
+          "??_C@_07LEBAMMPD@fav?4dat?$AA@"
         ]
       },
       {
@@ -5903,6 +8012,19 @@
         "function": "ShowFavouritesMenu",
         "comparison_index": 0,
         "function_index": 9,
+        "operand_offset": 202,
+        "proof_kind": "string_record_scalar_read_proof",
+        "proof_basis": "complete_record_scalar_read",
+        "original_target": 4407728,
+        "candidate_target": 4407728,
+        "candidate_target_names": [
+          "??_C@_07LEBAMMPD@fav?4dat?$AA@"
+        ]
+      },
+      {
+        "function": "ShowFavouritesMenu",
+        "comparison_index": 0,
+        "function_index": 9,
         "operand_offset": 323,
         "proof_kind": "string_record_pointer_proof",
         "proof_basis": "complete_string_record_pointer",
@@ -6426,549 +8548,24 @@
     }
   ],
   "regression_comparison": {
-    "previous_report": "/root/.ai-tmp/nemu-matrix-final-archive.dfjloqn5/nemu-function-comparison.json",
-    "previous_report_sha256": "0fad36881e1b6d51bca03489d414a975be5377e81363e9c796517b9112dc171e",
-    "previous_image_sha256": "da945d9318b246a579a285ee29088771d4e6fc1a7c37d9a4121fe4a0d1a0b152",
+    "previous_report": "/root/.ai-tmp/nemu-matrix-pif-import.f5d_jf6q/nemu-function-comparison.json",
+    "previous_report_sha256": "085ee809c807cf4e3a23a8ed76cc5a1f8580f0fbd84f63c915503b87328e2d8a",
+    "previous_image_sha256": "f5982979e06bb7336a4b271b0f53e8c29c98453287cfa993196bcab2c9280d64",
     "lost_passing_functions": [],
     "newly_passing_functions": [],
     "changed_comparisons": [
-      {
-        "name": "LoadState",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 4,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 10,
-            "current": 6
-          }
-        }
-      },
       {
         "name": "ShowFavouritesMenu",
         "comparison_index": 0,
         "extent_mode": "explicit_extent_or_original_sized_prefix",
         "changes": {
           "unresolved_targets": {
-            "previous": 7,
-            "current": 5
+            "previous": 5,
+            "current": 4
           },
           "unverified_targets": {
-            "previous": 10,
-            "current": 8
-          }
-        }
-      },
-      {
-        "name": "SaveBrowserSettings",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 20,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 29,
-            "current": 9
-          }
-        }
-      },
-      {
-        "name": "LoadRom",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 6,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 16,
-            "current": 10
-          }
-        }
-      },
-      {
-        "name": "CPUHostException",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 4,
-            "current": 1
-          },
-          "unverified_targets": {
-            "previous": 25,
-            "current": 22
-          }
-        }
-      },
-      {
-        "name": "ReportCPUErrorFormat",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 1,
-            "current": 0
-          }
-        }
-      },
-      {
-        "name": "ReportMemoryError",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 2,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 0
-          }
-        }
-      },
-      {
-        "name": "ReportCPUError",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 1,
-            "current": 0
-          }
-        }
-      },
-      {
-        "name": "ReportInterpreterError",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 1,
-            "current": 0
-          }
-        }
-      },
-      {
-        "name": "ReportCompilerError",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 1,
-            "current": 0
-          }
-        }
-      },
-      {
-        "name": "UpdateAudioTiming",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 1,
-            "current": 0
-          }
-        }
-      },
-      {
-        "name": "RunCPU",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 20,
-            "current": 6
-          },
-          "unverified_targets": {
-            "previous": 75,
-            "current": 61
-          }
-        }
-      },
-      {
-        "name": "Op_Unknown",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "Op_LDL",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "Op_LDR",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "Op_SDL",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "Op_SDR",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "Op_BREAK",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "Op_TGE",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "Op_TGEU",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "Op_TLT",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "Op_TLTU",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "Op_TEQ",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "Op_TNE",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "Op_TGEI",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "Op_TGEIU",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "Op_TLTI",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "Op_TLTIU",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "Op_TEQI",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "Op_TNEI",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "ExecuteInterpreter",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
             "previous": 8,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 23,
-            "current": 15
-          }
-        }
-      },
-      {
-        "name": "ReportInvalidOpcode",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "GetFpuRegisterAddress",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "Recompile_CACHE",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 26,
-            "current": 25
-          }
-        }
-      },
-      {
-        "name": "AddInstructionTwoDestinations",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "MainWindowCommand",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 26,
-            "current": 8
-          },
-          "unverified_targets": {
-            "previous": 61,
-            "current": 43
+            "current": 7
           }
         }
       },
@@ -6978,177 +8575,42 @@
         "extent_mode": "explicit_extent_or_original_sized_prefix",
         "changes": {
           "unresolved_targets": {
-            "previous": 53,
-            "current": 26
+            "previous": 26,
+            "current": 18
           },
           "unverified_targets": {
-            "previous": 88,
-            "current": 61
+            "previous": 61,
+            "current": 53
           }
         }
       },
       {
-        "name": "ReadPhysicalWord",
+        "name": "ProcessPIF",
+        "comparison_index": 0,
+        "extent_mode": "explicit_extent_or_original_sized_prefix",
+        "changes": {
+          "rebuilt_size": {
+            "previous": 1904,
+            "current": 1896
+          },
+          "normalized_differing_bytes": {
+            "previous": 1017,
+            "current": 853
+          }
+        }
+      },
+      {
+        "name": "LoadPlugins",
         "comparison_index": 0,
         "extent_mode": "explicit_extent_or_original_sized_prefix",
         "changes": {
           "unresolved_targets": {
             "previous": 4,
-            "current": 3
-          },
-          "unverified_targets": {
-            "previous": 5,
-            "current": 4
-          }
-        }
-      },
-      {
-        "name": "LoadPlugin",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 52,
             "current": 2
-          },
-          "unverified_targets": {
-            "previous": 52,
-            "current": 2
-          }
-        }
-      },
-      {
-        "name": "CommitRDRAM",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 2,
-            "current": 1
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "DecommitRDRAM",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 2,
-            "current": 1
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "SelectGraphicsPlugin",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 3,
-            "current": 1
-          },
-          "unverified_targets": {
-            "previous": 4,
-            "current": 2
-          }
-        }
-      },
-      {
-        "name": "ReloadConfiguration",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 8,
-            "current": 2
-          },
-          "unverified_targets": {
-            "previous": 14,
-            "current": 8
-          }
-        }
-      },
-      {
-        "name": "RSP_MFC0",
-        "comparison_index": 0,
-        "extent_mode": "explicit_extent_or_original_sized_prefix",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 18,
-            "current": 17
-          }
-        }
-      },
-      {
-        "name": "WriteStateChunk",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 3,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 4,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "SaveState",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 2,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 42,
-            "current": 40
-          }
-        }
-      },
-      {
-        "name": "SaveMovieState",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 4,
-            "current": 0
           },
           "unverified_targets": {
             "previous": 6,
-            "current": 2
-          }
-        }
-      },
-      {
-        "name": "LoadState",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 4,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 10,
-            "current": 6
+            "current": 4
           }
         }
       },
@@ -7158,12 +8620,12 @@
         "extent_mode": "MAP_blocks_including_alignment",
         "changes": {
           "unresolved_targets": {
-            "previous": 5,
-            "current": 2
+            "previous": 2,
+            "current": 1
           },
           "unverified_targets": {
-            "previous": 5,
-            "current": 2
+            "previous": 2,
+            "current": 1
           }
         }
       },
@@ -7173,12 +8635,12 @@
         "extent_mode": "MAP_blocks_including_alignment",
         "changes": {
           "unresolved_targets": {
-            "previous": 7,
-            "current": 5
+            "previous": 5,
+            "current": 4
           },
           "unverified_targets": {
-            "previous": 10,
-            "current": 8
+            "previous": 8,
+            "current": 7
           }
         }
       },
@@ -7188,477 +8650,12 @@
         "extent_mode": "MAP_blocks_including_alignment",
         "changes": {
           "unresolved_targets": {
-            "previous": 10,
-            "current": 5
-          },
-          "unverified_targets": {
-            "previous": 10,
-            "current": 5
-          }
-        }
-      },
-      {
-        "name": "AboutDialogProc",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 4,
-            "current": 2
+            "previous": 5,
+            "current": 3
           },
           "unverified_targets": {
             "previous": 5,
             "current": 3
-          }
-        }
-      },
-      {
-        "name": "DisclaimerDialogProc",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 1,
-            "current": 0
-          }
-        }
-      },
-      {
-        "name": "InitializeIniPaths",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 6,
-            "current": 3
-          },
-          "unverified_targets": {
-            "previous": 6,
-            "current": 3
-          }
-        }
-      },
-      {
-        "name": "ReadRomInteger",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 4,
-            "current": 3
-          }
-        }
-      },
-      {
-        "name": "ReadRomString",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 4,
-            "current": 3
-          }
-        }
-      },
-      {
-        "name": "ReadRomConfiguration",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 24,
-            "current": 3
-          },
-          "unverified_targets": {
-            "previous": 42,
-            "current": 21
-          }
-        }
-      },
-      {
-        "name": "SaveBrowserSettings",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 20,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 29,
-            "current": 9
-          }
-        }
-      },
-      {
-        "name": "ReadZipRom",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 19,
-            "current": 9
-          },
-          "unverified_targets": {
-            "previous": 30,
-            "current": 20
-          }
-        }
-      },
-      {
-        "name": "ReadRomImage",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 17,
-            "current": 5
-          },
-          "unverified_targets": {
-            "previous": 34,
-            "current": 22
-          }
-        }
-      },
-      {
-        "name": "LoadRom",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 6,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 16,
-            "current": 10
-          }
-        }
-      },
-      {
-        "name": "RefreshRomBrowser",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 36,
-            "current": 17
-          },
-          "unverified_targets": {
-            "previous": 43,
-            "current": 24
-          }
-        }
-      },
-      {
-        "name": "ExecuteInterpreter",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 8,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 23,
-            "current": 15
-          }
-        }
-      },
-      {
-        "name": "ReportDynarecError3",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "ReportDynarecError2",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "WarnCrackedRom",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "UpdateFpuRegisterMode",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "WarnFpuModeInDelaySlot",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "WarnTlbWriteInDelaySlot",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "AddJumpTarget",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "AddInstruction",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "AddInstructionThreeSources",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "AddInstructionTwoDestinations",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "AddPendingAddress",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "AddJumpFixup",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "AddAddressMapping",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "CheckInlineFunction",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 7,
-            "current": 6
-          }
-        }
-      },
-      {
-        "name": "FinishInstruction",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 3,
-            "current": 2
-          }
-        }
-      },
-      {
-        "name": "SetEmulationMenus",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 2,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 0
-          }
-        }
-      },
-      {
-        "name": "WinMain",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 39,
-            "current": 16
-          },
-          "unverified_targets": {
-            "previous": 56,
-            "current": 33
-          }
-        }
-      },
-      {
-        "name": "CaptureStatePreview",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 2,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 4,
-            "current": 2
-          }
-        }
-      },
-      {
-        "name": "MainWindowCommand",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 26,
-            "current": 8
-          },
-          "unverified_targets": {
-            "previous": 61,
-            "current": 43
           }
         }
       },
@@ -7668,582 +8665,23 @@
         "extent_mode": "MAP_blocks_including_alignment",
         "changes": {
           "unresolved_targets": {
-            "previous": 53,
-            "current": 26
+            "previous": 26,
+            "current": 18
           },
           "unverified_targets": {
-            "previous": 88,
-            "current": 61
+            "previous": 61,
+            "current": 53
           }
         }
       },
       {
-        "name": "CopyByteSwapped",
+        "name": "ProcessPIF",
         "comparison_index": 1,
         "extent_mode": "MAP_blocks_including_alignment",
         "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "TLBWrite",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 2,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 4,
-            "current": 2
-          }
-        }
-      },
-      {
-        "name": "ReadPhysicalByte",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 4,
-            "current": 3
-          },
-          "unverified_targets": {
-            "previous": 5,
-            "current": 4
-          }
-        }
-      },
-      {
-        "name": "ReadPhysicalHalf",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 4,
-            "current": 3
-          },
-          "unverified_targets": {
-            "previous": 5,
-            "current": 4
-          }
-        }
-      },
-      {
-        "name": "ReadPhysicalWord",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 4,
-            "current": 3
-          },
-          "unverified_targets": {
-            "previous": 5,
-            "current": 4
-          }
-        }
-      },
-      {
-        "name": "WritePhysicalByte",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 4,
-            "current": 3
-          },
-          "unverified_targets": {
-            "previous": 7,
-            "current": 6
-          }
-        }
-      },
-      {
-        "name": "WritePhysicalHalf",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 4,
-            "current": 3
-          },
-          "unverified_targets": {
-            "previous": 7,
-            "current": 6
-          }
-        }
-      },
-      {
-        "name": "SaveCICInput",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 4,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 5,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "SaveEEPROM",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 2,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 0
-          }
-        }
-      },
-      {
-        "name": "SaveMemPack",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 2,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 0
-          }
-        }
-      },
-      {
-        "name": "RecordMovieInput",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 2,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 0
-          }
-        }
-      },
-      {
-        "name": "PlayMovieInput",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 2,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 0
-          }
-        }
-      },
-      {
-        "name": "SaveSRAM",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 2,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 0
-          }
-        }
-      },
-      {
-        "name": "RSP_InvalidOpcode",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "RSP_MFC0",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 18,
-            "current": 17
-          }
-        }
-      },
-      {
-        "name": "RSP_MTC0",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 2,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 18,
-            "current": 16
-          }
-        }
-      },
-      {
-        "name": "RSP_CFC2",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "RSP_CTC2",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "RSP_VADDB",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "RSP_VSUBB",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "RSP_VACCB",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "RSP_VSUCB",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "RSP_VSAD",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "RSP_VSAC",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "RSP_VSUM",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "RSP_VSAW",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "RSP_VEQ",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "RSP_VNE",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "RSP_VCH",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "RSP_VCR",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "RSP_VNOOP",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "RSP_VEXTT",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "RSP_VEXTQ",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "RSP_VEXTN",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "RSP_VINST",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "RSP_VINSQ",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "RSP_VINSN",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 1,
-            "current": 0
-          },
-          "unverified_targets": {
-            "previous": 2,
-            "current": 1
-          }
-        }
-      },
-      {
-        "name": "RSP_InitializeReciprocalTable",
-        "comparison_index": 1,
-        "extent_mode": "MAP_blocks_including_alignment",
-        "changes": {
-          "unresolved_targets": {
-            "previous": 14,
-            "current": 8
-          },
-          "unverified_targets": {
-            "previous": 14,
-            "current": 8
+          "normalized_differing_bytes": {
+            "previous": 1017,
+            "current": 845
           }
         }
       }
@@ -8336,14 +8774,14 @@
         "status": "instruction_mismatch",
         "comparisons": [
           {
-            "rebuilt_size": 1904,
-            "normalized_differing_bytes": 1017,
+            "rebuilt_size": 1896,
+            "normalized_differing_bytes": 853,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "rebuilt_extent_verified": true
           },
           {
             "rebuilt_size": 1904,
-            "normalized_differing_bytes": 1017,
+            "normalized_differing_bytes": 845,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "rebuilt_extent_verified": true
           }
@@ -8508,6 +8946,92 @@
             "rebuilt_extent_verified": true
           }
         ]
+      }
+    ],
+    "other_PIF_helpers_raw_exact": [
+      {
+        "name": "CIC6105Challenge",
+        "original_va": 4326432,
+        "compared_bytes": 384,
+        "raw_byte_exact": true
+      },
+      {
+        "name": "CICUseTable1",
+        "original_va": 4326304,
+        "compared_bytes": 128,
+        "raw_byte_exact": true
+      },
+      {
+        "name": "FindCICInput",
+        "original_va": 4326096,
+        "compared_bytes": 112,
+        "raw_byte_exact": true
+      },
+      {
+        "name": "InitializePIFCommandLengths",
+        "original_va": 4326912,
+        "compared_bytes": 128,
+        "raw_byte_exact": true
+      },
+      {
+        "name": "PIFDataCRC",
+        "original_va": 4326816,
+        "compared_bytes": 96,
+        "raw_byte_exact": true
+      },
+      {
+        "name": "PlayMovieInput",
+        "original_va": 4329472,
+        "compared_bytes": 224,
+        "raw_byte_exact": true
+      },
+      {
+        "name": "ReadSRAM",
+        "original_va": 4329952,
+        "compared_bytes": 48,
+        "raw_byte_exact": true
+      },
+      {
+        "name": "RecordMovieInput",
+        "original_va": 4329232,
+        "compared_bytes": 240,
+        "raw_byte_exact": true
+      },
+      {
+        "name": "SaveCICInput",
+        "original_va": 4326208,
+        "compared_bytes": 96,
+        "raw_byte_exact": true
+      },
+      {
+        "name": "SaveEEPROM",
+        "original_va": 4328944,
+        "compared_bytes": 144,
+        "raw_byte_exact": true
+      },
+      {
+        "name": "SaveMemPack",
+        "original_va": 4329088,
+        "compared_bytes": 144,
+        "raw_byte_exact": true
+      },
+      {
+        "name": "SaveSRAM",
+        "original_va": 4329760,
+        "compared_bytes": 144,
+        "raw_byte_exact": true
+      },
+      {
+        "name": "StopMovie",
+        "original_va": 4329696,
+        "compared_bytes": 64,
+        "raw_byte_exact": true
+      },
+      {
+        "name": "WriteSRAM",
+        "original_va": 4329904,
+        "compared_bytes": 48,
+        "raw_byte_exact": true
       }
     ]
   },
@@ -10191,8 +10715,8 @@
       "comparison_index": 0,
       "function_index": 534,
       "extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
-      "unresolved_targets": 4,
-      "unverified_targets": 6,
+      "unresolved_targets": 2,
+      "unverified_targets": 4,
       "fully_verified_relocations": false
     },
     {
@@ -10246,8 +10770,8 @@
       "comparison_index": 1,
       "function_index": 503,
       "extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
-      "unresolved_targets": 26,
-      "unverified_targets": 61,
+      "unresolved_targets": 18,
+      "unverified_targets": 53,
       "fully_verified_relocations": false
     },
     {
@@ -13029,8 +13553,8 @@
       "comparison_index": 1,
       "function_index": 8,
       "extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
-      "unresolved_targets": 2,
-      "unverified_targets": 2,
+      "unresolved_targets": 1,
+      "unverified_targets": 1,
       "fully_verified_relocations": false
     },
     {
@@ -14723,8 +15247,8 @@
       "comparison_index": 1,
       "function_index": 11,
       "extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
-      "unresolved_targets": 5,
-      "unverified_targets": 5,
+      "unresolved_targets": 3,
+      "unverified_targets": 3,
       "fully_verified_relocations": false
     },
     {
@@ -15053,8 +15577,8 @@
       "comparison_index": 0,
       "function_index": 9,
       "extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
-      "unresolved_targets": 5,
-      "unverified_targets": 8,
+      "unresolved_targets": 4,
+      "unverified_targets": 7,
       "fully_verified_relocations": false
     },
     {
@@ -15893,35 +16417,6 @@
       "comparison_index": 0,
       "function_index": 534,
       "field": {
-        "offset": 73,
-        "width": 4,
-        "kind": "DIR32",
-        "authority": "PE_HIGHLOW",
-        "candidate_target": 4407872,
-        "address_use": "memory_access",
-        "instruction_offset": 72,
-        "instruction_size": 5,
-        "instruction": "mov eax, dword ptr [0x434240]",
-        "original_target": 4407872,
-        "original_target_names": [],
-        "candidate_target_names": [
-          "??_C@_07OBHJIOBF@Plugin?2?$AA@"
-        ],
-        "status": "unresolved",
-        "identity_verified": false,
-        "string_record_pointer_proof": {
-          "verified": false,
-          "reason": "direct data access does not establish complete-record pointer materialization"
-        }
-      },
-      "category": "named_string_literal"
-    },
-    {
-      "function": "LoadPlugins",
-      "function_original_va": 4299408,
-      "comparison_index": 0,
-      "function_index": 534,
-      "field": {
         "offset": 79,
         "width": 4,
         "kind": "DIR32",
@@ -15944,35 +16439,6 @@
         "operand_addend": 4
       },
       "category": "string_literal_suffix"
-    },
-    {
-      "function": "LoadPlugins",
-      "function_original_va": 4299408,
-      "comparison_index": 0,
-      "function_index": 534,
-      "field": {
-        "offset": 126,
-        "width": 4,
-        "kind": "DIR32",
-        "authority": "PE_HIGHLOW",
-        "candidate_target": 4407864,
-        "address_use": "memory_access",
-        "instruction_offset": 124,
-        "instruction_size": 6,
-        "instruction": "mov edx, dword ptr [0x434238]",
-        "original_target": 4407864,
-        "original_target_names": [],
-        "candidate_target_names": [
-          "??_C@_05KKDKJPNC@?$CK?4dll?$AA@"
-        ],
-        "status": "unresolved",
-        "identity_verified": false,
-        "string_record_pointer_proof": {
-          "verified": false,
-          "reason": "direct data access does not establish complete-record pointer materialization"
-        }
-      },
-      "category": "named_string_literal"
     },
     {
       "function": "LoadPlugins",
@@ -16112,9 +16578,9 @@
         ],
         "status": "unresolved",
         "identity_verified": false,
-        "string_record_pointer_proof": {
+        "string_record_scalar_read_proof": {
           "verified": false,
-          "reason": "direct data access does not establish complete-record pointer materialization"
+          "reason": "complete payload is not unique across all .rdata byte offsets"
         }
       },
       "category": "named_string_literal"
@@ -16199,9 +16665,9 @@
         ],
         "status": "unresolved",
         "identity_verified": false,
-        "string_record_pointer_proof": {
+        "string_record_scalar_read_proof": {
           "verified": false,
-          "reason": "direct data access does not establish complete-record pointer materialization"
+          "reason": "complete payload is not unique across all .rdata byte offsets"
         }
       },
       "category": "named_string_literal"
@@ -16275,35 +16741,6 @@
       "comparison_index": 1,
       "function_index": 503,
       "field": {
-        "offset": 710,
-        "width": 4,
-        "kind": "DIR32",
-        "authority": "PE_HIGHLOW",
-        "candidate_target": 4402964,
-        "address_use": "memory_access",
-        "instruction_offset": 707,
-        "instruction_size": 7,
-        "instruction": "mov dx, word ptr [0x432f14]",
-        "original_target": 4402964,
-        "original_target_names": [],
-        "candidate_target_names": [
-          "??_C@_02FEEPBPGD@A?3?$AA@"
-        ],
-        "status": "unresolved",
-        "identity_verified": false,
-        "string_record_pointer_proof": {
-          "verified": false,
-          "reason": "direct data access does not establish complete-record pointer materialization"
-        }
-      },
-      "category": "named_string_literal"
-    },
-    {
-      "function": "MainWindowProc",
-      "function_original_va": 4313360,
-      "comparison_index": 1,
-      "function_index": 503,
-      "field": {
         "offset": 725,
         "width": 4,
         "kind": "DIR32",
@@ -16349,38 +16786,9 @@
         ],
         "status": "unresolved",
         "identity_verified": false,
-        "string_record_pointer_proof": {
+        "string_record_scalar_read_proof": {
           "verified": false,
-          "reason": "direct data access does not establish complete-record pointer materialization"
-        }
-      },
-      "category": "named_string_literal"
-    },
-    {
-      "function": "MainWindowProc",
-      "function_original_va": 4313360,
-      "comparison_index": 1,
-      "function_index": 503,
-      "field": {
-        "offset": 955,
-        "width": 4,
-        "kind": "DIR32",
-        "authority": "PE_HIGHLOW",
-        "candidate_target": 4402960,
-        "address_use": "memory_access",
-        "instruction_offset": 952,
-        "instruction_size": 7,
-        "instruction": "mov dx, word ptr [0x432f10]",
-        "original_target": 4402960,
-        "original_target_names": [],
-        "candidate_target_names": [
-          "??_C@_02GFKOMOKH@?5?$CI?$AA@"
-        ],
-        "status": "unresolved",
-        "identity_verified": false,
-        "string_record_pointer_proof": {
-          "verified": false,
-          "reason": "direct data access does not establish complete-record pointer materialization"
+          "reason": "complete payload is not unique across all .rdata byte offsets"
         }
       },
       "category": "named_string_literal"
@@ -16436,38 +16844,9 @@
         ],
         "status": "unresolved",
         "identity_verified": false,
-        "string_record_pointer_proof": {
+        "string_record_scalar_read_proof": {
           "verified": false,
-          "reason": "direct data access does not establish complete-record pointer materialization"
-        }
-      },
-      "category": "named_string_literal"
-    },
-    {
-      "function": "MainWindowProc",
-      "function_original_va": 4313360,
-      "comparison_index": 1,
-      "function_index": 503,
-      "field": {
-        "offset": 1737,
-        "width": 4,
-        "kind": "DIR32",
-        "authority": "PE_HIGHLOW",
-        "candidate_target": 4402944,
-        "address_use": "memory_access",
-        "instruction_offset": 1735,
-        "instruction_size": 6,
-        "instruction": "mov ecx, dword ptr [0x432f00]",
-        "original_target": 4402944,
-        "original_target_names": [],
-        "candidate_target_names": [
-          "??_C@_08FMEJIGHO@Rom?5name?$AA@"
-        ],
-        "status": "unresolved",
-        "identity_verified": false,
-        "string_record_pointer_proof": {
-          "verified": false,
-          "reason": "direct data access does not establish complete-record pointer materialization"
+          "reason": "complete payload is not unique across all .rdata byte offsets"
         }
       },
       "category": "named_string_literal"
@@ -16565,35 +16944,6 @@
       "comparison_index": 1,
       "function_index": 503,
       "field": {
-        "offset": 1840,
-        "width": 4,
-        "kind": "DIR32",
-        "authority": "PE_HIGHLOW",
-        "candidate_target": 4402916,
-        "address_use": "memory_access",
-        "instruction_offset": 1839,
-        "instruction_size": 5,
-        "instruction": "mov eax, dword ptr [0x432ee4]",
-        "original_target": 4402916,
-        "original_target_names": [],
-        "candidate_target_names": [
-          "??_C@_08JCOIAMOP@Filename?$AA@"
-        ],
-        "status": "unresolved",
-        "identity_verified": false,
-        "string_record_pointer_proof": {
-          "verified": false,
-          "reason": "direct data access does not establish complete-record pointer materialization"
-        }
-      },
-      "category": "named_string_literal"
-    },
-    {
-      "function": "MainWindowProc",
-      "function_original_va": 4313360,
-      "comparison_index": 1,
-      "function_index": 503,
-      "field": {
         "offset": 1846,
         "width": 4,
         "kind": "DIR32",
@@ -16639,9 +16989,9 @@
         ],
         "status": "unresolved",
         "identity_verified": false,
-        "string_record_pointer_proof": {
+        "string_record_scalar_read_proof": {
           "verified": false,
-          "reason": "direct data access does not establish complete-record pointer materialization"
+          "reason": "complete payload is not unique across all .rdata byte offsets"
         }
       },
       "category": "named_string_literal"
@@ -16710,35 +17060,6 @@
       "comparison_index": 1,
       "function_index": 503,
       "field": {
-        "offset": 1995,
-        "width": 4,
-        "kind": "DIR32",
-        "authority": "PE_HIGHLOW",
-        "candidate_target": 4402868,
-        "address_use": "memory_access",
-        "instruction_offset": 1994,
-        "instruction_size": 5,
-        "instruction": "mov eax, dword ptr [0x432eb4]",
-        "original_target": 4402868,
-        "original_target_names": [],
-        "candidate_target_names": [
-          "??_C@_06DHPIOBCM@Rating?$AA@"
-        ],
-        "status": "unresolved",
-        "identity_verified": false,
-        "string_record_pointer_proof": {
-          "verified": false,
-          "reason": "direct data access does not establish complete-record pointer materialization"
-        }
-      },
-      "category": "named_string_literal"
-    },
-    {
-      "function": "MainWindowProc",
-      "function_original_va": 4313360,
-      "comparison_index": 1,
-      "function_index": 503,
-      "field": {
         "offset": 2001,
         "width": 4,
         "kind": "DIR32",
@@ -16761,35 +17082,6 @@
         "operand_addend": 6
       },
       "category": "string_literal_suffix"
-    },
-    {
-      "function": "MainWindowProc",
-      "function_original_va": 4313360,
-      "comparison_index": 1,
-      "function_index": 503,
-      "field": {
-        "offset": 2073,
-        "width": 4,
-        "kind": "DIR32",
-        "authority": "PE_HIGHLOW",
-        "candidate_target": 4402844,
-        "address_use": "memory_access",
-        "instruction_offset": 2071,
-        "instruction_size": 6,
-        "instruction": "mov edx, dword ptr [0x432e9c]",
-        "original_target": 4402844,
-        "original_target_names": [],
-        "candidate_target_names": [
-          "??_C@_07JABLCLAF@Comment?$AA@"
-        ],
-        "status": "unresolved",
-        "identity_verified": false,
-        "string_record_pointer_proof": {
-          "verified": false,
-          "reason": "direct data access does not establish complete-record pointer materialization"
-        }
-      },
-      "category": "named_string_literal"
     },
     {
       "function": "MainWindowProc",
@@ -16855,35 +17147,6 @@
       "comparison_index": 1,
       "function_index": 503,
       "field": {
-        "offset": 2150,
-        "width": 4,
-        "kind": "DIR32",
-        "authority": "PE_HIGHLOW",
-        "candidate_target": 4402816,
-        "address_use": "memory_access",
-        "instruction_offset": 2149,
-        "instruction_size": 5,
-        "instruction": "mov eax, dword ptr [0x432e80]",
-        "original_target": 4402816,
-        "original_target_names": [],
-        "candidate_target_names": [
-          "??_C@_0M@DDEOPGPA@INI?5Section?$AA@"
-        ],
-        "status": "unresolved",
-        "identity_verified": false,
-        "string_record_pointer_proof": {
-          "verified": false,
-          "reason": "direct data access does not establish complete-record pointer materialization"
-        }
-      },
-      "category": "named_string_literal"
-    },
-    {
-      "function": "MainWindowProc",
-      "function_original_va": 4313360,
-      "comparison_index": 1,
-      "function_index": 503,
-      "field": {
         "offset": 2156,
         "width": 4,
         "kind": "DIR32",
@@ -16906,35 +17169,6 @@
         "operand_addend": 8
       },
       "category": "string_literal_suffix"
-    },
-    {
-      "function": "MainWindowProc",
-      "function_original_va": 4313360,
-      "comparison_index": 1,
-      "function_index": 503,
-      "field": {
-        "offset": 2224,
-        "width": 4,
-        "kind": "DIR32",
-        "authority": "PE_HIGHLOW",
-        "candidate_target": 4402792,
-        "address_use": "memory_access",
-        "instruction_offset": 2222,
-        "instruction_size": 6,
-        "instruction": "mov edx, dword ptr [0x432e68]",
-        "original_target": 4402792,
-        "original_target_names": [],
-        "candidate_target_names": [
-          "??_C@_04PDALNJHJ@CRC1?$AA@"
-        ],
-        "status": "unresolved",
-        "identity_verified": false,
-        "string_record_pointer_proof": {
-          "verified": false,
-          "reason": "direct data access does not establish complete-record pointer materialization"
-        }
-      },
-      "category": "named_string_literal"
     },
     {
       "function": "MainWindowProc",
@@ -16987,9 +17221,9 @@
         ],
         "status": "unresolved",
         "identity_verified": false,
-        "string_record_pointer_proof": {
+        "string_record_scalar_read_proof": {
           "verified": false,
-          "reason": "direct data access does not establish complete-record pointer materialization"
+          "reason": "complete payload is not unique across all .rdata byte offsets"
         }
       },
       "category": "named_string_literal"
@@ -18074,35 +18308,6 @@
       "comparison_index": 1,
       "function_index": 8,
       "field": {
-        "offset": 153,
-        "width": 4,
-        "kind": "DIR32",
-        "authority": "PE_HIGHLOW",
-        "candidate_target": 4407728,
-        "address_use": "memory_access",
-        "instruction_offset": 152,
-        "instruction_size": 5,
-        "instruction": "mov eax, dword ptr [0x4341b0]",
-        "original_target": 4407728,
-        "original_target_names": [],
-        "candidate_target_names": [
-          "??_C@_07LEBAMMPD@fav?4dat?$AA@"
-        ],
-        "status": "unresolved",
-        "identity_verified": false,
-        "string_record_pointer_proof": {
-          "verified": false,
-          "reason": "direct data access does not establish complete-record pointer materialization"
-        }
-      },
-      "category": "named_string_literal"
-    },
-    {
-      "function": "RebuildFavouritesMenu",
-      "function_original_va": 4302864,
-      "comparison_index": 1,
-      "function_index": 8,
-      "field": {
         "offset": 159,
         "width": 4,
         "kind": "DIR32",
@@ -18148,9 +18353,9 @@
         ],
         "status": "unresolved",
         "identity_verified": false,
-        "string_record_pointer_proof": {
+        "string_record_scalar_read_proof": {
           "verified": false,
-          "reason": "direct data access does not establish complete-record pointer materialization"
+          "reason": "complete payload is not unique across all .rdata byte offsets"
         }
       },
       "category": "named_string_literal"
@@ -18697,35 +18902,6 @@
       "comparison_index": 1,
       "function_index": 11,
       "field": {
-        "offset": 130,
-        "width": 4,
-        "kind": "DIR32",
-        "authority": "PE_HIGHLOW",
-        "candidate_target": 4407728,
-        "address_use": "memory_access",
-        "instruction_offset": 128,
-        "instruction_size": 6,
-        "instruction": "mov ecx, dword ptr [0x4341b0]",
-        "original_target": 4407728,
-        "original_target_names": [],
-        "candidate_target_names": [
-          "??_C@_07LEBAMMPD@fav?4dat?$AA@"
-        ],
-        "status": "unresolved",
-        "identity_verified": false,
-        "string_record_pointer_proof": {
-          "verified": false,
-          "reason": "direct data access does not establish complete-record pointer materialization"
-        }
-      },
-      "category": "named_string_literal"
-    },
-    {
-      "function": "RemoveFavouritesDialogProc",
-      "function_original_va": 4317328,
-      "comparison_index": 1,
-      "function_index": 11,
-      "field": {
         "offset": 136,
         "width": 4,
         "kind": "DIR32",
@@ -18774,35 +18950,6 @@
         "string_record_pointer_proof": {
           "verified": false,
           "reason": "complete payload is not unique across all .rdata byte offsets"
-        }
-      },
-      "category": "named_string_literal"
-    },
-    {
-      "function": "RemoveFavouritesDialogProc",
-      "function_original_va": 4317328,
-      "comparison_index": 1,
-      "function_index": 11,
-      "field": {
-        "offset": 522,
-        "width": 4,
-        "kind": "DIR32",
-        "authority": "PE_HIGHLOW",
-        "candidate_target": 4407728,
-        "address_use": "memory_access",
-        "instruction_offset": 520,
-        "instruction_size": 6,
-        "instruction": "mov ecx, dword ptr [0x4341b0]",
-        "original_target": 4407728,
-        "original_target_names": [],
-        "candidate_target_names": [
-          "??_C@_07LEBAMMPD@fav?4dat?$AA@"
-        ],
-        "status": "unresolved",
-        "identity_verified": false,
-        "string_record_pointer_proof": {
-          "verified": false,
-          "reason": "direct data access does not establish complete-record pointer materialization"
         }
       },
       "category": "named_string_literal"
@@ -19091,35 +19238,6 @@
       "comparison_index": 0,
       "function_index": 9,
       "field": {
-        "offset": 202,
-        "width": 4,
-        "kind": "DIR32",
-        "authority": "PE_HIGHLOW",
-        "candidate_target": 4407728,
-        "address_use": "memory_access",
-        "instruction_offset": 200,
-        "instruction_size": 6,
-        "instruction": "mov edx, dword ptr [0x4341b0]",
-        "original_target": 4407728,
-        "original_target_names": [],
-        "candidate_target_names": [
-          "??_C@_07LEBAMMPD@fav?4dat?$AA@"
-        ],
-        "status": "unresolved",
-        "identity_verified": false,
-        "string_record_pointer_proof": {
-          "verified": false,
-          "reason": "direct data access does not establish complete-record pointer materialization"
-        }
-      },
-      "category": "named_string_literal"
-    },
-    {
-      "function": "ShowFavouritesMenu",
-      "function_original_va": 4303392,
-      "comparison_index": 0,
-      "function_index": 9,
-      "field": {
         "offset": 207,
         "width": 4,
         "kind": "DIR32",
@@ -19380,9 +19498,9 @@
         ],
         "status": "unresolved",
         "identity_verified": false,
-        "string_record_pointer_proof": {
+        "string_record_scalar_read_proof": {
           "verified": false,
-          "reason": "direct data access does not establish complete-record pointer materialization"
+          "reason": "complete payload is not unique across all .rdata byte offsets"
         }
       },
       "category": "named_string_literal"
@@ -19467,9 +19585,9 @@
         ],
         "status": "unresolved",
         "identity_verified": false,
-        "string_record_pointer_proof": {
+        "string_record_scalar_read_proof": {
           "verified": false,
-          "reason": "direct data access does not establish complete-record pointer materialization"
+          "reason": "complete payload is not unique across all .rdata byte offsets"
         }
       },
       "category": "named_string_literal"

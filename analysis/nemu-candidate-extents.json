@@ -1,10 +1,10 @@
 {
-  "rebuilt_image": "/root/.ai-tmp/nemu-chronology-relocs.uca75yl0/nemu64.exe",
-  "rebuilt_image_sha256": "f5982979e06bb7336a4b271b0f53e8c29c98453287cfa993196bcab2c9280d64",
-  "rebuilt_map_sha256": "b1d94173137057605f66e6a761acfd58c2aa24920889bec8ca6184e5c563c439",
+  "rebuilt_image": "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah/nemu64.exe",
+  "rebuilt_image_sha256": "21c96e53c6f6e476a80b45ae8ff6118753110add09652586a2d4c718561fc6d0",
+  "rebuilt_map_sha256": "b1197916970dfc9bf4ed4bc25c1bb97db41c55f3d073cda4fb173f70bcb945ad",
   "measurement_script": "scripts/measure_nemu_extents.py",
   "measurement_script_sha256": "3e4b5ea132e05fa40900c10e2263051dc2a65eab4ffbd393d14babf77227154e",
-  "comparison_tool_sha256": "e7e8ff08485972c89bb8d43776bb35b00e6e99eebd3a4e9bde2311b41a9cb2cb",
+  "comparison_tool_sha256": "a79f010ca12fa4a77a60dbc4de7d5b82b247abbd56df2261d4f878bae9074551",
   "metadata": [
     {
       "path": "analysis/nemu-browser.json",
@@ -44,7 +44,7 @@
     },
     {
       "path": "analysis/nemu-pif.json",
-      "sha256": "2486bf42e184b7528a58a2ab0084a8915e5259f861de15ec8b0722283e187e15"
+      "sha256": "74bd3470b1295f3b83904c755b05965b2d3085014f70ae6d85e97a94172ee01c"
     },
     {
       "path": "analysis/nemu-plugins.json",
@@ -12664,16 +12664,25 @@
       "original_size": 1904,
       "rebuilt_va": 4327040,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
-      "rebuilt_size": 1904,
+      "rebuilt_size": 1896,
       "map_block_size": 1904,
       "tables": [
         {
-          "address": "0x420dd8",
+          "address": "0x420dd0",
           "entries": 6,
           "size": 24
         }
       ],
-      "trailing_padding": [],
+      "trailing_padding": [
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop"
+      ],
       "seh_scope_entries": [],
       "extent_verified": true,
       "errors": []
@@ -15598,7 +15607,7 @@
       "errors": []
     }
   ],
-  "selector_input_report_sha256": "753fb5003fd222e7af84d141bc0d3b547bb0a51de99b08f9084fa68efa7babc0",
+  "selector_input_report_sha256": "a8f2ae7713fc8e8c557602fd5258baee9656da8bc5e77f9a12c928a687cb875a",
   "selector_measurement_script": "scripts/complete_nemu_cpu_control_extents.py",
   "selector_measurement_script_sha256": "d8ff5e0b63db8c55c5932380c58633f70d9942d7bf3ff883e08de6e826dbc941"
 }
