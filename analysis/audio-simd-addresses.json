@@ -1,0 +1,66 @@
+{
+  "symbols": [
+    {
+      "name": "_MixAudioMMX",
+      "va": "0x10001250",
+      "size": 160
+    },
+    {
+      "name": "_MixAudioSSE",
+      "va": "0x100013a0",
+      "size": 160
+    },
+    {
+      "name": "_InterleaveAudioMMX",
+      "va": "0x10001560",
+      "size": 112
+    },
+    {
+      "name": "_InterleaveAudioSSE",
+      "va": "0x100015d0",
+      "size": 128
+    },
+    {
+      "name": "_MixAudioSign",
+      "va": "0x10001b70",
+      "size": 96
+    },
+    {
+      "name": "_ABI2_AddMixer",
+      "va": "0x10002040",
+      "size": 112
+    },
+    {
+      "name": "_ResampleAudioMMX",
+      "va": "0x10001000",
+      "size": 592
+    },
+    {
+      "name": "_RDRAM",
+      "va": "0x1016bae4",
+      "address_basis": "identified_symbol",
+      "address_evidence": "Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c."
+    },
+    {
+      "name": "_AudioResampleTable",
+      "va": "0x1003cad0",
+      "size": 512,
+      "address_basis": "identified_symbol",
+      "address_evidence": "Typed 64 by 4 signed-short resampling coefficients, complete 512-byte initializer equals target table."
+    },
+    {
+      "name": "_ABI2_EnvMixer",
+      "va": "0x10001cc0",
+      "size": 784
+    },
+    {
+      "name": "_ABI2_EnvMixerAlt",
+      "va": "0x100023e0",
+      "size": 784,
+      "address_basis": "identified_symbol",
+      "address_evidence": "Second native copy of the same MMX envelope handler, retained by a distinct command table."
+    }
+  ],
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "private_names": "Inferred from command semantics; function extents include original native compiler alignment."
+}
