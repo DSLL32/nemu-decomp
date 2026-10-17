@@ -3,7 +3,7 @@
   "scope": "Complete routine extents 0x10003c40 through 0x10006a60, including the configuration dialog and console, plus RT_DIALOG/101 and VERSION/1 payloads.",
   "status": "Partial native source reconstruction; integrated DLL equality is not established.",
   "source_structure": "DirectSound.c, AudioConfig.c and AudioLog.c filenames and unit separation are inferred. The original PDB path identifies ahle_ds, but does not establish these private filenames.",
-  "compiler": "Tracked VC7 13.00.9466, native /O2 /Ob1 /MT. These options reproduce 56 of 60 complete aligned bodies; remaining routines may require different source or compilation context.",
+  "compiler": "Tracked VC7 13.00.9466, native /O2 /Ob1 /MT. These options reproduce 57 of 60 complete aligned bodies; remaining routines may require different source or compilation context.",
   "unmatched": {
     "AudioError": {
       "va": "0x10003c40",
@@ -14,19 +14,6 @@
         "Using the parameter itself as the output message, using a separate message local, making the default MessageBox call directly, and parsing the HRESULT through va_list do not recover the original default path.",
         "A volatile text parameter with a nonvolatile local message copy produces an exact native body. This qualifier is not adopted because original-source evidence for a volatile stack argument is missing."
       ]
-    },
-    "AudioSampleLoop": {
-      "va": "0x10004140",
-      "original_size": 32,
-      "rebuilt_size": 16,
-      "finding": "The original performs a runtime empty sample-count loop with register index and bound. Default VC7 optimization removes the empty loop.",
-      "negative_hypotheses": [
-        "Signed or unsigned int index against bytes/2; direct bytes>>1 and separately extracted unsigned count; long index/unsigned long bound.",
-        "Returning the index or bound computes the result without preserving the observed loop.",
-        "Native C++ produces the same eliminated 16-byte aligned routine as C.",
-        "/Og- retains a frame-based 38-byte loop. Register index plus register extracted bound under /Og- produces 46 bytes, not the observed 32-byte register loop."
-      ],
-      "constraint": "No dummy work, empty assembly, or instruction padding was added to retain the loop."
     },
     "AllocateSoundBuffer": {
       "va": "0x10004380",
@@ -42,8 +29,8 @@
       "va": "0x10005010",
       "original_size": 1120,
       "rebuilt_size": 1120,
-      "current_differing_non_relocation_bytes": 440,
-      "finding": "Rebuilt stack allocation is 0x30 versus original 0x2c; pending-byte register allocation and floating-point expression scheduling differ.",
+      "current_differing_non_relocation_bytes": 421,
+      "finding": "Direct PendingBytes preparation references and a signed float sample-distance local recover original register use in the preparation block and the 0x2c stack frame. Remaining native differences involve cursor reads and integer/x87 scheduling.",
       "probes": [
         "LARGE_INTEGER versus __int64 counter/frequency declarations and /Zp4 do not resolve the frame difference.",
         "Two-DWORD counter structures accessed as signed 64-bit values do not alter the result.",
@@ -77,5 +64,20 @@
     "/root/.ai-tmp/audio-dsound.6t4_1qa3/submit-pending.c": "7807a5c02392ae2ef5240e4b0a3c82e495f742c18447ce498c0662b2e5eba894",
     "/root/.ai-tmp/audio-dsound.6t4_1qa3/submit-pending-volatile.c": "8511678ec28489707a5c71a55d51589988080b5bee8619e372604913a811bb3d",
     "/root/.ai-tmp/audio-dsound.6t4_1qa3/submit-order.c": "5b5057d81d8aee104d6752f216a6b566941a46ad750d405aba7541c2faccb440"
-  }
+  },
+  "recovered_inferences": {
+    "AudioSampleLoop": {
+      "va": "0x10004140",
+      "original_size": 32,
+      "complete_native_body_matches": true,
+      "source_inference": "Minimal short-sample load/writeback pass. Its compiler-eliminated expression is not uniquely recoverable.",
+      "negative_plain_loop_probes": [
+        "Signed or unsigned int index against bytes/2; direct bytes>>1 and separately extracted unsigned count; long index/unsigned long bound.",
+        "Returning the index or bound computes the result without preserving the observed loop.",
+        "Native C++ produces the same eliminated 16-byte aligned routine as C.",
+        "/Og- retains a frame-based 38-byte loop. Register index plus register extracted bound under /Og- produces 46 bytes, not the observed 32-byte register loop."
+      ]
+    }
+  },
+  "context_probe_report": "analysis/audio-dsound-context-probes.json"
 }

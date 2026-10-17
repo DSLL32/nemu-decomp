@@ -1,0 +1,691 @@
+{
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "scope": "Bounded source and native compiler-context probes for AllocateSoundBuffer and SubmitAudio. Complete target function extents compared; no full-DLL equality claimed.",
+  "base_flags": [
+    "/O2",
+    "/Ob1",
+    "/MT"
+  ],
+  "compiler_option_variants": [
+    "/G3",
+    "/G4",
+    "/G6",
+    "/Op",
+    "/Ow",
+    "/Oa"
+  ],
+  "tool_sha256": {
+    "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
+    "toolchains/vc7/bin/c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
+    "toolchains/vc7/bin/c1xx.dll": "30c3affd786752b4a037c4b4f035b7962d1fb5a335366e093bc73d0eb02e5558",
+    "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0"
+  },
+  "findings": [
+    "Combining DirectSound/configuration/log definitions in original address order, then adding real preceding HLE/legacy and SIMD/memory definitions, does not change either target body under native C or C++.",
+    "Direct PendingBytes references in both preparation calls give the original ESI byte-count / EDI pending-count allocation. The compiler preserves the pending value across the visible ReadAudioMemory implementation; the previous explicit local snapshot was unnecessary.",
+    "A separate signed float sample-distance value gives the original 0x2c SubmitAudio frame and observed floating-point operation tree. The routine still has register/scheduling differences and remains unmatched.",
+    "Separate inline reset/time helpers, initialization-order variants, ordinary clearing loops, and scalar memset variants do not recover AllocateSoundBuffer.",
+    "Default VC7 processor choice is /GB. Explicit /G6 does not change these bodies; /G3, /G4, /Op, /Ow and /Oa do not solve them.",
+    "No new volatile qualifier, barrier, padding or artificial retained work was adopted."
+  ],
+  "upstream_audit": {
+    "source": "/root/.ai-tmp/audio-envelope-ancestry.c5DMoPAf/ultrahle/src/SOUND.C",
+    "sha256": "877c68b139af332cf3698c7ac8275f9dd85ea77b73840a3f5f197b82bc2a07e3",
+    "finding": "Ordinary DirectSound cursor/lock code exists, but no matching buffer-allocation reset or sample conversion pass was found."
+  },
+  "probes": [
+    {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/address-order-cpp.obj",
+      "object_sha256": "60444941d467bdb96d5f9a9731b58d277a9dea2d0e6e4d2e7da37bce2c97ce6d",
+      "sources": {
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/address-order.cpp": "35099c4d0d8051d272afe0ca3d4af071d20065ea4ed48b684b2952a06a41434d"
+      },
+      "targets": [
+        {
+          "probe_name": "_AllocateSoundBuffer",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 440,
+          "relocation_masked_equal": false
+        }
+      ]
+    },
+    {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/address-order.obj",
+      "object_sha256": "82d14f5a04723a447674e0cd26152aa99b2f08286c14ae1d8f182d3d97e571df",
+      "sources": {
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/address-order.c": "ec6e1faebc9628ae9cfbc265b89e8c85161ad38d93ef6f08108a7c9946071c86",
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/address-order.cpp": "35099c4d0d8051d272afe0ca3d4af071d20065ea4ed48b684b2952a06a41434d"
+      },
+      "targets": [
+        {
+          "probe_name": "_AllocateSoundBuffer",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 440,
+          "relocation_masked_equal": false
+        }
+      ]
+    },
+    {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/allocation-clear-state.obj",
+      "object_sha256": "1ec2b76ff4f6efabb536136215a3d2f0d6d9b48b7ea951f43ade445309867a40",
+      "sources": {
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/allocation-clear-state.c": "5dec35440be18157b41ed6dc487b617bc17db4625e92db59b8c1b6553ec5b373"
+      },
+      "targets": [
+        {
+          "probe_name": "_AllocateSoundBuffer",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 440,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_AllocateSoundBuffer_0",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_AllocateSoundBuffer_1",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_AllocateSoundBuffer_2",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_AllocateSoundBuffer_3",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        }
+      ]
+    },
+    {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/allocation-helper.obj",
+      "object_sha256": "8a751722c36787bf45823d2013c974c561ce020a343543111bef9ee4756aa2fe",
+      "sources": {
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/allocation-helper.c": "8f0a9fae994e4f0014963659065c09299daa8a4f4dbdade15c4236622cd31ad1"
+      },
+      "targets": [
+        {
+          "probe_name": "_AllocateSoundBuffer",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 440,
+          "relocation_masked_equal": false
+        }
+      ]
+    },
+    {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/allocation-source.obj",
+      "object_sha256": "bcaeda4c8e29cd0d78c5a6b24406e385ae58a7a9943925c2bf5d088891ca7d1d",
+      "sources": {
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/allocation-source.c": "6f52054a8c91995f4b4fa77d0a803f63eb4d3f46b2f28dec9d1fd2fefa963bc5"
+      },
+      "targets": [
+        {
+          "probe_name": "_AllocateSoundBuffer",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 440,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_AllocateSoundBuffer_0",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_AllocateSoundBuffer_1",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_AllocateSoundBuffer_2",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_AllocateSoundBuffer_3",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_AllocateSoundBuffer_4",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_AllocateSoundBuffer_5",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_AllocateSoundBuffer_6",
+          "original_size": 96,
+          "rebuilt_size": 96,
+          "differing_non_relocation_bytes": 40,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_AllocateSoundBuffer_7",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_AllocateSoundBuffer_8",
+          "original_size": 96,
+          "rebuilt_size": 96,
+          "differing_non_relocation_bytes": 46,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_AllocateSoundBuffer_9",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 57,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_AllocateSoundBuffer_10",
+          "original_size": 96,
+          "rebuilt_size": 96,
+          "differing_non_relocation_bytes": 46,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_AllocateSoundBuffer_11",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 57,
+          "relocation_masked_equal": false
+        }
+      ]
+    },
+    {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/allocation-volatile-position.obj",
+      "object_sha256": "576fedbb8b10ba86b1ce39dacaa0401db6707d7758d2575d500de1f16af72d05",
+      "sources": {
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/allocation-volatile-position.c": "d020a01cbcde28d4af245ab0aedccf3700936db52b12ae57371c405671e16dbc"
+      },
+      "targets": [
+        {
+          "probe_name": "_AllocateSoundBuffer",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 440,
+          "relocation_masked_equal": false
+        }
+      ]
+    },
+    {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/append.obj",
+      "object_sha256": "a3f9c95d8741344b4b78d81db0958c64cdb4786d78a013fc329ee8124b9360f5",
+      "sources": {
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/append.c": "b247475d588af28ffd5a446dccfb6d936ba6bc047c194cae33e4c20b065ef37c"
+      },
+      "targets": [
+        {
+          "probe_name": "_AllocateSoundBuffer",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 440,
+          "relocation_masked_equal": false
+        }
+      ]
+    },
+    {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/control-cpp.obj",
+      "object_sha256": "5848004494d84773e11749d8ab65286add198232c6bb2a35e0d008b2bd6ad0e7",
+      "sources": {
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/control.cpp": "7f678db2ce468868b44c2f1ea414b17b11c7d0f9f3fb806d7f8161b2284f03ee"
+      },
+      "targets": [
+        {
+          "probe_name": "_AllocateSoundBuffer",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 440,
+          "relocation_masked_equal": false
+        }
+      ]
+    },
+    {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/control-g3.obj",
+      "object_sha256": "689bfc5f3094f7f37eb396c9f7d485de77cdd78f6f99d5db9ecb4006a8000265",
+      "sources": {
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/control.c": "d52554d19365e2226dd06323d06a67f7fc98574a179e62a53521941571f75cfa"
+      },
+      "targets": [
+        {
+          "probe_name": "_AllocateSoundBuffer",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 54,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 614,
+          "relocation_masked_equal": false
+        }
+      ]
+    },
+    {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/control-g4.obj",
+      "object_sha256": "9ae0ac778bc0acc8a54ed98bf6b8e51c248f4e6b211f73e374a2e8d1e3c87dec",
+      "sources": {
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/control.c": "d52554d19365e2226dd06323d06a67f7fc98574a179e62a53521941571f75cfa"
+      },
+      "targets": [
+        {
+          "probe_name": "_AllocateSoundBuffer",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 54,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 614,
+          "relocation_masked_equal": false
+        }
+      ]
+    },
+    {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/control-g6.obj",
+      "object_sha256": "da212696061b4532c1926756c9dada3b233576fac6ce8b47328630c4b2018e3e",
+      "sources": {
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/control.c": "d52554d19365e2226dd06323d06a67f7fc98574a179e62a53521941571f75cfa"
+      },
+      "targets": [
+        {
+          "probe_name": "_AllocateSoundBuffer",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 440,
+          "relocation_masked_equal": false
+        }
+      ]
+    },
+    {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/control-oa.obj",
+      "object_sha256": "4b12a76fd0204092277700b4d0ae847f3ff278803c9ebc9619a04f6f6a1c7b47",
+      "sources": {
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/control.c": "d52554d19365e2226dd06323d06a67f7fc98574a179e62a53521941571f75cfa"
+      },
+      "targets": [
+        {
+          "probe_name": "_AllocateSoundBuffer",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 446,
+          "relocation_masked_equal": false
+        }
+      ]
+    },
+    {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/control-op.obj",
+      "object_sha256": "3e78e50cdd0dd85a977bd852ffe9246ddf5c5589fde5af2f6d7354dd69ec1cb3",
+      "sources": {
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/control.c": "d52554d19365e2226dd06323d06a67f7fc98574a179e62a53521941571f75cfa"
+      },
+      "targets": [
+        {
+          "probe_name": "_AllocateSoundBuffer",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio",
+          "original_size": 1120,
+          "rebuilt_size": 1152,
+          "differing_non_relocation_bytes": 484,
+          "relocation_masked_equal": false
+        }
+      ]
+    },
+    {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/control-ow.obj",
+      "object_sha256": "49dde30f5a78342b5dc1425ff8adfce331daee117ce6adf9d71e3e86d7da7d20",
+      "sources": {
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/control.c": "d52554d19365e2226dd06323d06a67f7fc98574a179e62a53521941571f75cfa"
+      },
+      "targets": [
+        {
+          "probe_name": "_AllocateSoundBuffer",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 446,
+          "relocation_masked_equal": false
+        }
+      ]
+    },
+    {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/control.obj",
+      "object_sha256": "ec95690a2a0e693217cd65c409a18265754910438d8a340732af828ce64c5808",
+      "sources": {
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/control.c": "d52554d19365e2226dd06323d06a67f7fc98574a179e62a53521941571f75cfa",
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/control.cpp": "7f678db2ce468868b44c2f1ea414b17b11c7d0f9f3fb806d7f8161b2284f03ee"
+      },
+      "targets": [
+        {
+          "probe_name": "_AllocateSoundBuffer",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 440,
+          "relocation_masked_equal": false
+        }
+      ]
+    },
+    {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/cursor-types.obj",
+      "object_sha256": "563152d9433477c4157873ab2b45e652a41069af0c0f6aa2e04c88447001f840",
+      "sources": {
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/cursor-types.c": "e6111fa872c0c7d14ebcaa99527e595a8cea35cbdb4cf3f1231660c7854f1f3c"
+      },
+      "targets": [
+        {
+          "probe_name": "_AllocateSoundBuffer",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 440,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio_0",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 421,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio_1",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 421,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio_2",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 421,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio_3",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 421,
+          "relocation_masked_equal": false
+        }
+      ]
+    },
+    {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/hle-context-cpp.obj",
+      "object_sha256": "60a746464b89bb995dceae6e83fd755f87439699f4e55d7a0ba6ee82e52c5e24",
+      "sources": {
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/hle-context.cpp": "e87cdb08ee632ffde610ea573852aa4820524437e3d413e6d2b5e917aaa923eb"
+      },
+      "targets": [
+        {
+          "probe_name": "_AllocateSoundBuffer",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 440,
+          "relocation_masked_equal": false
+        }
+      ]
+    },
+    {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/pending-visibility.obj",
+      "object_sha256": "43661edab6a1c1e47b5df3f934523e203c89b0fb72a5545932bb9182b7954896",
+      "sources": {
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/pending-visibility.c": "1a5d9ae7204c66b6509b49cf636020dc471bb50b8b59de2b0ea54f2222439058"
+      },
+      "targets": [
+        {
+          "probe_name": "_AllocateSoundBuffer",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 440,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio_0",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 440,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio_1",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 427,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio_2",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 436,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio_3",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 421,
+          "relocation_masked_equal": false
+        }
+      ]
+    },
+    {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/simd-hle-context.obj",
+      "object_sha256": "be2f8f2cba17408c0a8d997d1a0992406079b071e5cc0213247d80e76be87606",
+      "sources": {
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/simd-hle-context.cpp": "d740b23f09b3090894ad57462e001fcfb80e1604984a2e1c8400ca39229d7853"
+      },
+      "targets": [
+        {
+          "probe_name": "_AllocateSoundBuffer",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 440,
+          "relocation_masked_equal": false
+        }
+      ]
+    },
+    {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/submit-time-double.obj",
+      "object_sha256": "f7c831f173f05d7fd3090758a628c077090f08fbf1bbde895193c9f94019fc5c",
+      "sources": {
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/submit-time-double.c": "5b5bd9d833355542cf23733e5a76c0a834659a5a6e266c0c1336473ba8be35ed"
+      },
+      "targets": [
+        {
+          "probe_name": "_AllocateSoundBuffer",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 427,
+          "relocation_masked_equal": false
+        }
+      ]
+    },
+    {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/submit-time-float.obj",
+      "object_sha256": "785db3d3d5834e1e26fda126a9aba7f3bfefac235cc3cdddd71da547f6d947b7",
+      "sources": {
+        "/root/.ai-tmp/audio-dsound.6t4_1qa3/context-probes/submit-time-float.c": "f6f177cffebd535ab82e96407b324d7984bd689b9a8face076ab07d841e72156"
+      },
+      "targets": [
+        {
+          "probe_name": "_AllocateSoundBuffer",
+          "original_size": 96,
+          "rebuilt_size": 80,
+          "differing_non_relocation_bytes": 50,
+          "relocation_masked_equal": false
+        },
+        {
+          "probe_name": "_SubmitAudio",
+          "original_size": 1120,
+          "rebuilt_size": 1120,
+          "differing_non_relocation_bytes": 427,
+          "relocation_masked_equal": false
+        }
+      ]
+    }
+  ]
+}

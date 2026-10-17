@@ -165,11 +165,17 @@ void UpdateAudioFrequency(void)
         if (CriticalSectionReady) LeaveCriticalSection(&SoundCriticalSection);
     }
 }
-/* 10004140–10004160. The observed routine really is an empty sample loop. */
+/* 10004140–10004160. Retained sample pass. The minimal load/writeback source
+   compiles to the observed empty loop; its compiler-eliminated sample
+   expression is not uniquely recoverable. */
 void AudioSampleLoop(void *data, unsigned int bytes)
 {
+    short *samples = (short *)data;
     int i;
-    for (i = 0; i < bytes / 2; ++i) {}
+    for (i = 0; i < bytes / 2; ++i) {
+        short sample = samples[i];
+        samples[i] = sample;
+    }
 }
 /* 10004160–100041c0. Original explicit assembly, including four-sample unroll. */
 void SwapSampleBytes(void *destination, const void *source, unsigned int bytes)
@@ -567,7 +573,7 @@ void SubmitAudio(BYTE *source, int bytes)
     void *first, *second;
     DWORD firstLength, secondLength;
     __int64 counter, frequency;
-    float now;
+    float now, samples;
     int distance, position;
     HRESULT result;
     if (ScrollLockDown && !GetAsyncKeyState(VK_SCROLL)) {
@@ -587,10 +593,9 @@ void SubmitAudio(BYTE *source, int bytes)
         } else ++DroppedBlocks;
         return;
     }
-    position = PendingBytes;
-    ReadAudioMemory((DWORD *)AudioBuffer + position / 4, source, bytes);
-    ConvertAudioSamples((short *)AudioBuffer + position / 2,
-                        (short *)AudioBuffer + position / 2, bytes);
+    ReadAudioMemory((DWORD *)AudioBuffer + PendingBytes / 4, source, bytes);
+    ConvertAudioSamples((short *)AudioBuffer + PendingBytes / 2,
+                        (short *)AudioBuffer + PendingBytes / 2, bytes);
     PendingBytes += bytes;
     if (PendingBytes < 0x1000) return;
     bytes = PendingBytes;
@@ -625,8 +630,8 @@ void SubmitAudio(BYTE *source, int bytes)
     position = WritePosition;
     LastBufferTime = now;
     LastWritePosition = WritePosition;
-    distance = (WritePosition - play) & (SoundBufferSize - 1);
-    BufferDuration = ((float)bytes * 0.25f / SampleRate) + ((float)distance * 0.25f / SampleRate);
+    samples = (float)(int)((WritePosition - play) & (SoundBufferSize - 1));
+    BufferDuration = ((float)bytes * 0.25f / SampleRate) + (samples * 0.25f / SampleRate);
     LastBlockLength = bytes;
     WritePosition += bytes;
     if (WritePosition >= SoundBufferSize) WritePosition -= SoundBufferSize;

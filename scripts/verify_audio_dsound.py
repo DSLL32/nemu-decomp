@@ -11,6 +11,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import shutil
 import struct
 import subprocess
 import tempfile
@@ -121,33 +122,41 @@ def main():
     scratch.mkdir(parents=True, exist_ok=True)
     if sha(ORIGINAL) != ORIGINAL_SHA256:
         raise ValueError('Original audio.dll SHA-256 does not match the audited input')
+    artifact = Path(tempfile.mkdtemp(prefix='run.', dir=scratch))
+    snapshot = artifact / 'source'
+    snapshot.mkdir()
+    source_files = [SOURCE / (unit + '.c') for unit in UNITS] + [SOURCE / 'DirectSound.h', SOURCE / 'Audio.rc']
+    for source in source_files:
+        shutil.copyfile(source, snapshot / source.name)
     env = dict(os.environ, WINEPREFIX=str(scratch / 'wine'), WINEARCH='win32', WINEDEBUG='-all')
     command = ['python3', str(ROOT / 'scripts/run_toolchain.py'), 'vc7']
+    commands = []
     for unit in UNITS:
-        subprocess.run([*command, 'cl', *FLAGS, '/Fo' + winpath(scratch / (unit + '.obj')),
-                        winpath(SOURCE / (unit + '.c'))], cwd=ROOT, env=env, check=True)
-    subprocess.run([*command, 'rc', '/l', '0x409', '/fo' + winpath(scratch / 'Audio.res'),
-                    winpath(SOURCE / 'Audio.rc')], cwd=ROOT, env=env, check=True)
+        commands.append([*command, 'cl', *FLAGS, '/Fo' + winpath(artifact / (unit + '.obj')),
+                         winpath(snapshot / (unit + '.c'))])
+        subprocess.run(commands[-1], cwd=ROOT, env=env, check=True)
+    commands.append([*command, 'rc', '/l', '0x409', '/fo' + winpath(artifact / 'Audio.res'),
+                     winpath(snapshot / 'Audio.rc')])
+    subprocess.run(commands[-1], cwd=ROOT, env=env, check=True)
     application = json.loads((ROOT / 'analysis/audio-dsound-addresses.json').read_text())
     library = json.loads((ROOT / 'analysis/audio-libraries.json').read_text())
     if library['original_sha256'] != ORIGINAL_SHA256:
         raise ValueError('Library attribution report belongs to another input')
-    combined = scratch / 'symbols.json'
+    combined = artifact / 'symbols.json'
     combined.write_text(json.dumps(dict(symbols=application['symbols'] + library['symbols'])))
-    objects = [compare_object(scratch / (unit + '.obj'), ORIGINAL, combined) for unit in UNITS]
+    objects = [compare_object(artifact / (unit + '.obj'), ORIGINAL, combined) for unit in UNITS]
     pe = PE32(ORIGINAL)
     symbols = TargetSymbols(pe, combined)
-    source_files = [SOURCE / (unit + '.c') for unit in UNITS] + [SOURCE / 'DirectSound.h', SOURCE / 'Audio.rc']
     report = dict(original=str(ORIGINAL.relative_to(ROOT)), original_sha256=ORIGINAL_SHA256,
                   status='partial_source_reconstruction_not_whole_dll_exact',
-                  compiler_flags=FLAGS, work=str(scratch),
-                  source_sha256={str(p.relative_to(ROOT)): sha(p) for p in source_files},
+                  compiler_flags=FLAGS, work=str(scratch), artifact=str(artifact), commands=commands,
+                  source_sha256={str(p.relative_to(ROOT)): sha(snapshot / p.name) for p in source_files},
                   tool_sha256={str(p.relative_to(ROOT)): sha(p) for p in [ROOT / 'toolchains/vc7/bin/cl.exe',
                                 ROOT / 'toolchains/vc7/bin/c1.dll', ROOT / 'toolchains/vc7/bin/c2.dll',
                                 ROOT / 'toolchains/vc7/bin/rc.exe']},
                   objects=objects, object_summary=summarize_objects(objects),
-                  data={unit: compare_data(scratch / (unit + '.obj'), pe, symbols) for unit in UNITS},
-                  resources=resources(scratch / 'Audio.res', pe.data),
+                  data={unit: compare_data(artifact / (unit + '.obj'), pe, symbols) for unit in UNITS},
+                  resources=resources(artifact / 'Audio.res', pe.data),
                   notes=['Private unit filenames and symbol names are inferred from complete disassembly.',
                          'Function extents include original switch tables and natural compiler alignment.',
                          'Source uses original explicit sample-byte-swapping assembly and a compiler byte-swap intrinsic; no opcode blobs or instruction patching.',
@@ -155,6 +164,7 @@ def main():
                          'Common/BSS dimensions without independent extent evidence remain inferred.'])
     output = args.report or scratch / 'comparison.json'
     output.write_text(json.dumps(report, indent=2) + '\n')
+    (artifact / 'comparison.json').write_text(json.dumps(report, indent=2) + '\n')
     print(f'Report: {output}')
     print(f"Complete aligned function-body matches: {sum(o['relocation_masked_matches'] for o in objects)}/{sum(len(o['functions']) for o in objects)}")
     print(f"Resource payloads exact: {all(r['payload_byte_exact'] for r in report['resources'])}")
