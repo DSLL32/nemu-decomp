@@ -340,6 +340,90 @@
     "Twenty-seven original C++ LTCG contributions remain unexplained; file regrouping does not manufacture this count.",
     "Invariance checks compare reconstructed builds, with every changed operand backed by a real PE relocation and complete readonly-object identity. They do not establish correctness of previously unmatched functions.",
     "Callback source identities remain separate even where the linker folds identical bodies.",
-    "The frontend and CACHE proofs use separate immutable snapshots; the subsequent complete integration build must verify their combined effect."
+    "The complete q7uf3wsx fixture integrates both source regroupings and confirms their combined readonly result. Later function-specific source refinements are separately versioned."
+  ],
+  "integrated_build": {
+    "fixture": "/root/.ai-tmp/nemu-complete-relocs.q7uf3wsx",
+    "parent_artifact": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/5d7b30487b460005452b71de72aa71304a8b49f900fbe2fd068e4d29f707e06f",
+    "sha256": "1d2f1ea7e77737551c1125adfdc9d3895232587a81a9a8149dc1815cf8dd9250",
+    "map_sha256": "ec2312a29e565b380386376aaffa10681fa345cddb84af5c1f4b5b3fcf98ab14",
+    "literal_report": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/q7-rdata.json",
+    "unique_literal_positions_exact": 484,
+    "unique_application_literal_positions_exact": 444,
+    "complete_boot_and_mempak_arrays_at_original_addresses": true,
+    "original_rdata_virtual_size": 61240,
+    "candidate_rdata_virtual_size": 61240,
+    "raw_rdata_different_bytes": 3711,
+    "raw_difference_partitions": [
+      {
+        "start": "0x430000",
+        "end": "0x430288",
+        "kind": "import address table",
+        "different_bytes": 265
+      },
+      {
+        "start": "0x430288",
+        "end": "0x431ea4",
+        "kind": "vendor and CRT readonly data, including relocated pointers",
+        "different_bytes": 58
+      },
+      {
+        "start": "0x431ea4",
+        "end": "0x43e01c",
+        "kind": "application literals and assets",
+        "different_bytes": 443
+      },
+      {
+        "start": "0x43e01c",
+        "end": "0x43e0a8",
+        "kind": "floating constants and compiler exception tables",
+        "different_bytes": 23
+      },
+      {
+        "start": "0x43e0a8",
+        "end": "0x43e118",
+        "kind": "late CRT constants",
+        "different_bytes": 0
+      },
+      {
+        "start": "0x43e118",
+        "end": "0x43ef38",
+        "kind": "runtime markers and import tables/names",
+        "different_bytes": 2922
+      }
+    ]
+  },
+  "rejected_followup_experiments": [
+    {
+      "name": "Move close-ROM switch case after open-ROM case",
+      "source_live": false,
+      "literal_positions_fixed": 0,
+      "residual_instruction_bytes": 1102,
+      "proof": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/case-order-invariance.json"
+    },
+    {
+      "name": "Recursive invalid-folder retry",
+      "source_live": false,
+      "literal_positions_fixed": 6,
+      "residual_instruction_bytes": 1529,
+      "proof": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/browser-recursion-invariance.json",
+      "followup": "Browser owner independently recovered a matching goto-based source form; its promotion is outside this experiment."
+    },
+    {
+      "name": "Separate timing-helper translation unit",
+      "source_live": false,
+      "literal_positions_fixed": 0,
+      "complete_code_and_data_invariant": true,
+      "generated_float_va": "0x43e044",
+      "proof": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/timing-invariance.json"
+    },
+    {
+      "name": "Explicit signed conversion and unsigned bias correction",
+      "source_live": false,
+      "literal_positions_fixed": 0,
+      "residual_instruction_bytes": 106,
+      "generated_float_va": "0x43e04c",
+      "proof": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/explicit-float-invariance.json"
+    }
   ]
 }
