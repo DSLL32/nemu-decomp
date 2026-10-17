@@ -85,5 +85,6 @@
     "DirectSound": "Genuine transform.h array at0x10038b18, followed by the original-order description/credits/settings definitions. The two unreferenced initialized ints544 and1 have deliberately unknown-purpose private names. Final four-byte inter-contribution alignment remains linker work.",
     "AudioLog": "Genuine transform.h array at0x100393c8; no following initialized application data.",
     "checked": "Complete native initialized contributions match all2220 DirectSound and2176 AudioLog bytes after resolving the two independently identified literal-pointer relocations for comparison. All named data offsets match. This is an attributed diagnostic, not proof of final linker placement or whole-DLL equality."
-  }
+  },
+  "storage_recovery": "See analysis/audio-dsound-storage.json. Native explicit zero initialization preserves57 matches and recovers the first seven strong-BSS offsets;48 bytes of later DS state and a four-byte DS/Log boundary interval remain unexplained. Five shared storage definitions were coordinated into DirectSound. No gap-filling objects were introduced."
 }

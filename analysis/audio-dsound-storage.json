@@ -1,0 +1,1633 @@
+{
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "scope": "DirectSound and AudioLog strong/common storage reconstruction; complete whole-DLL layout remains unmatched.",
+  "frozen_artifact": "/root/.ai-tmp/audio-dsound.6t4_1qa3/run.4pnjw77c",
+  "source_sha256": {
+    "src/audio/ahle_ds/DirectSound.c": "04db0271fe4fb71345e088917946672b2a7ae87b3971c66f33fb957aa05d325f",
+    "src/audio/ahle_ds/AudioLog.c": "84a6f797caaf244d44300550ed13225276bf1c45bf6fb3193be9047dc01226f0",
+    "src/audio/ahle_ds/DirectSound.h": "d16ad18d42c6d3081e7fc1f99caa62638965c0e6a971fab987b43f141679fb38",
+    "src/audio/ahle_ds/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
+    "src/audio/ahle_ds/Audio.rc": "b551863a11341c7440df2425b5620cda11c9eaef312179e8dd925fd05b12bf93"
+  },
+  "tool_sha256": {
+    "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
+    "toolchains/vc7/bin/c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
+    "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0",
+    "toolchains/vc7/bin/rc.exe": "b3720d509fd0de3bc642da5345eee59a7475ad28e64292f83206d40ed1c30ffd"
+  },
+  "canonical_choice": "Original-order explicit zero-initialized external definitions. Private static storage was tested and rejected after two previously exact DS bodies regressed.",
+  "cross_unit_ownership": {
+    "DirectSound": [
+      "RDRAM (tentative/common)",
+      "DumpMicrocode (strong zero)",
+      "Use3DNow (strong zero)",
+      "UseSSE (strong zero)",
+      "UseMMXExt (strong zero)"
+    ],
+    "coordination": "Audio integrator removed old Plugin/CPU definitions, retaining extern declarations."
+  },
+  "units": {
+    "DirectSound": {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/run.4pnjw77c/DirectSound.obj",
+      "object_sha256": "15861b6c5d1ca0c7321eb501e824b89ecf15115df4ffe20eb1797833868c7c81",
+      "strong_bss_bytes": 688328,
+      "anchor_va": "0x10040ed0",
+      "known_symbols": [
+        {
+          "name": "_AudioBuffer",
+          "offset": 0,
+          "original_va": "0x10040ed0",
+          "expected_offset": 0,
+          "relative_layout_equal": true
+        },
+        {
+          "name": "_AllocatedBuffer",
+          "offset": 524288,
+          "original_va": "0x100c0ed0",
+          "expected_offset": 524288,
+          "relative_layout_equal": true
+        },
+        {
+          "name": "_PALRates",
+          "offset": 524296,
+          "original_va": "0x100c0ed8",
+          "expected_offset": 524296,
+          "relative_layout_equal": true
+        },
+        {
+          "name": "_TimerID",
+          "offset": 589832,
+          "original_va": "0x100d0ed8",
+          "expected_offset": 589832,
+          "relative_layout_equal": true
+        },
+        {
+          "name": "_NotificationPosition",
+          "offset": 589836,
+          "original_va": "0x100d0edc",
+          "expected_offset": 589836,
+          "relative_layout_equal": true
+        },
+        {
+          "name": "_RegisterAudioBuffer",
+          "offset": 589840,
+          "original_va": "0x100d0ee0",
+          "expected_offset": 589840,
+          "relative_layout_equal": true
+        },
+        {
+          "name": "_NTSCRates",
+          "offset": 622608,
+          "original_va": "0x100d8ee0",
+          "expected_offset": 622608,
+          "relative_layout_equal": true
+        },
+        {
+          "name": "_CriticalSectionReady",
+          "offset": 688144,
+          "original_va": "0x100e8ee4",
+          "expected_offset": 688148,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_DebugMode",
+          "offset": 688148,
+          "original_va": "0x100e8ee8",
+          "expected_offset": 688152,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_DummyMode",
+          "offset": 688152,
+          "original_va": "0x100e8ef0",
+          "expected_offset": 688160,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_RecordHLE",
+          "offset": 688156,
+          "original_va": "0x100e8ef4",
+          "expected_offset": 688164,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_RecordAI",
+          "offset": 688160,
+          "original_va": "0x100e8ef8",
+          "expected_offset": 688168,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_DumpMicrocode",
+          "offset": 688164,
+          "original_va": "0x100e8efc",
+          "expected_offset": 688172,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_FilterHLE",
+          "offset": 688168,
+          "original_va": "0x100e8f00",
+          "expected_offset": 688176,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_StereoReversed",
+          "offset": 688172,
+          "original_va": "0x100e8f04",
+          "expected_offset": 688180,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_Prebuffer",
+          "offset": 688176,
+          "original_va": "0x100e8f08",
+          "expected_offset": 688184,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_HighQuality",
+          "offset": 688180,
+          "original_va": "0x100e8f0c",
+          "expected_offset": 688188,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_RecordABI",
+          "offset": 688184,
+          "original_va": "0x100e8f10",
+          "expected_offset": 688192,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_AIWritePending",
+          "offset": 688188,
+          "original_va": "0x100e8f14",
+          "expected_offset": 688196,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_Use3DNow",
+          "offset": 688192,
+          "original_va": "0x100e8f18",
+          "expected_offset": 688200,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_UseSSE",
+          "offset": 688196,
+          "original_va": "0x100e8f1c",
+          "expected_offset": 688204,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_UseMMXExt",
+          "offset": 688200,
+          "original_va": "0x100e8f20",
+          "expected_offset": 688208,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_DroppedBlocks",
+          "offset": 688204,
+          "original_va": "0x100e8f28",
+          "expected_offset": 688216,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_ClearCount",
+          "offset": 688208,
+          "original_va": "0x100e8f2c",
+          "expected_offset": 688220,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_TotalBytes",
+          "offset": 688212,
+          "original_va": "0x100e8f30",
+          "expected_offset": 688224,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_TotalBlocks",
+          "offset": 688216,
+          "original_va": "0x100e8f34",
+          "expected_offset": 688228,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_LegacyAudioState",
+          "offset": 688220,
+          "original_va": "0x100e8f40",
+          "expected_offset": 688240,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_CurrentAudio",
+          "offset": 688224,
+          "original_va": "0x100e8f44",
+          "expected_offset": 688244,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_QueueEnabled",
+          "offset": 688228,
+          "original_va": "0x100e8f48",
+          "expected_offset": 688248,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_AudioRunning",
+          "offset": 688232,
+          "original_va": "0x100e8f4c",
+          "expected_offset": 688252,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_AudioCount",
+          "offset": 688236,
+          "original_va": "0x100e8f50",
+          "expected_offset": 688256,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_QueueAllocated",
+          "offset": 688240,
+          "original_va": "0x100e8f54",
+          "expected_offset": 688260,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_RequestedLength",
+          "offset": 688244,
+          "original_va": "0x100e8f58",
+          "expected_offset": 688264,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_PlayPosition",
+          "offset": 688248,
+          "original_va": "0x100e8f5c",
+          "expected_offset": 688268,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_LastBlockLength",
+          "offset": 688252,
+          "original_va": "0x100e8f64",
+          "expected_offset": 688276,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_WritePosition",
+          "offset": 688256,
+          "original_va": "0x100e8f68",
+          "expected_offset": 688280,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_PreviousPosition",
+          "offset": 688260,
+          "original_va": "0x100e8f6c",
+          "expected_offset": 688284,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_PositionState",
+          "offset": 688264,
+          "original_va": "0x100e8f70",
+          "expected_offset": 688288,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_LastWritePosition",
+          "offset": 688268,
+          "original_va": "0x100e8f74",
+          "expected_offset": 688292,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_DirectSoundReady",
+          "offset": 688272,
+          "original_va": "0x100e8f78",
+          "expected_offset": 688296,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_CopiedLength",
+          "offset": 688276,
+          "original_va": "0x100e8f7c",
+          "expected_offset": 688300,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_RemainingLength",
+          "offset": 688280,
+          "original_va": "0x100e8f80",
+          "expected_offset": 688304,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_SubmittedLength",
+          "offset": 688284,
+          "original_va": "0x100e8f84",
+          "expected_offset": 688308,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_ReleasedPosition",
+          "offset": 688288,
+          "original_va": "0x100e8f8c",
+          "expected_offset": 688316,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_BufferUnderrun",
+          "offset": 688292,
+          "original_va": "0x100e8f9c",
+          "expected_offset": 688332,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_TimerIdleCount",
+          "offset": 688296,
+          "original_va": "0x100e8fa0",
+          "expected_offset": 688336,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_ResetPosition",
+          "offset": 688300,
+          "original_va": "0x100e8fa4",
+          "expected_offset": 688340,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_PendingBytes",
+          "offset": 688304,
+          "original_va": "0x100e8fa8",
+          "expected_offset": 688344,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_BufferDuration",
+          "offset": 688308,
+          "original_va": "0x100e8fac",
+          "expected_offset": 688348,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_ScrollLockDown",
+          "offset": 688312,
+          "original_va": "0x100e8fb0",
+          "expected_offset": 688352,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_ScrollLockReleased",
+          "offset": 688316,
+          "original_va": "0x100e8fb4",
+          "expected_offset": 688356,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_LastBufferTime",
+          "offset": 688320,
+          "original_va": "0x100e8fb8",
+          "expected_offset": 688360,
+          "relative_layout_equal": false
+        },
+        {
+          "name": "_TimerActive",
+          "offset": 688324,
+          "original_va": "0x100e8fc4",
+          "expected_offset": 688372,
+          "relative_layout_equal": false
+        }
+      ]
+    },
+    "AudioLog": {
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/run.4pnjw77c/AudioLog.obj",
+      "object_sha256": "15d82bfce2ed30c35981edbac0964826e33e3ba83cf880e253e168f4bd680420",
+      "strong_bss_bytes": 12,
+      "anchor_va": "0x100e8fcc",
+      "known_symbols": [
+        {
+          "name": "_LogHidden",
+          "offset": 0,
+          "original_va": "0x100e8fcc",
+          "expected_offset": 0,
+          "relative_layout_equal": true
+        },
+        {
+          "name": "_DriverInfoVisible",
+          "offset": 4,
+          "original_va": "0x100e8fd0",
+          "expected_offset": 4,
+          "relative_layout_equal": true
+        },
+        {
+          "name": "_DebugOutput",
+          "offset": 8,
+          "original_va": "0x100e8fd4",
+          "expected_offset": 8,
+          "relative_layout_equal": true
+        }
+      ]
+    }
+  },
+  "body_matches": 57,
+  "body_total": 60,
+  "unchanged_mismatches": [
+    "AudioError",
+    "AllocateSoundBuffer",
+    "SubmitAudio"
+  ],
+  "unresolved_strong_ranges": [
+    {
+      "start": "0x100e8ee0",
+      "bytes": 4
+    },
+    {
+      "start": "0x100e8eec",
+      "bytes": 4
+    },
+    {
+      "start": "0x100e8f24",
+      "bytes": 4
+    },
+    {
+      "start": "0x100e8f38",
+      "bytes": 8
+    },
+    {
+      "start": "0x100e8f60",
+      "bytes": 4
+    },
+    {
+      "start": "0x100e8f88",
+      "bytes": 4
+    },
+    {
+      "start": "0x100e8f90",
+      "bytes": 12
+    },
+    {
+      "start": "0x100e8fbc",
+      "bytes": 8
+    }
+  ],
+  "unresolved_strong_bytes": 48,
+  "boundary_limit": "An additional four-byte interval separates the last referenced DS state at100e8fc4 from LogHidden at100e8fcc; exact unit boundary ownership is not established.",
+  "extent_hypotheses": {
+    "AudioErrorText": {
+      "base": "0x10169560",
+      "next_referenced_object": "CPURegisters at0x1016b560",
+      "available_bytes": 8192,
+      "current_declaration": 256,
+      "all_HIGHLOW_references_in_interval": [
+        "0x10003e0f",
+        "0x10003e29"
+      ],
+      "interior_HIGHLOW_targets": [],
+      "status": "8192 is a natural boundary-constrained buffer-capacity inference, not uniquely proved by access width; frozen whole-layout test pending."
+    },
+    "AudioIniSection": {
+      "base": "0x1016c240",
+      "next_referenced_object": "SeenCommands[32] at0x1016c280 (last referenced element0x1016c2fc)",
+      "available_bytes": 64,
+      "current_declaration": 128,
+      "all_HIGHLOW_references_in_interval": [
+        "0x10004c5f",
+        "0x10004c95",
+        "0x10004cbf",
+        "0x10004ce9",
+        "0x10004d13",
+        "0x10004d3d",
+        "0x10004d67",
+        "0x10004d91",
+        "0x10005b97",
+        "0x10005bd4",
+        "0x10005c11",
+        "0x10005c4d",
+        "0x10005c96",
+        "0x10005cd3",
+        "0x10005d0f"
+      ],
+      "interior_HIGHLOW_targets": [],
+      "status": "Current128 overlaps independently identified SeenCommands. Natural64-byte capacity is inferred; exact original capacity below aligned allocation extent remains unproved."
+    }
+  },
+  "original_HIGHLOW_reference_audit": [
+    {
+      "va": "0x10040ed0",
+      "references": [
+        "0x1000433f",
+        "0x1000435d",
+        "0x100050a5",
+        "0x100050b0",
+        "0x100050b5",
+        "0x100050cf",
+        "0x10005109",
+        "0x1000511d",
+        "0x100053db",
+        "0x100053fb"
+      ]
+    },
+    {
+      "va": "0x100c0ed0",
+      "references": [
+        "0x100043a7",
+        "0x10004e7b"
+      ]
+    },
+    {
+      "va": "0x100c0ed8",
+      "references": [
+        "0x1000629b",
+        "0x100062a4"
+      ]
+    },
+    {
+      "va": "0x100c0edc",
+      "references": [
+        "0x100040a0",
+        "0x100040f2"
+      ]
+    },
+    {
+      "va": "0x100d0ed8",
+      "references": [
+        "0x10004dfc",
+        "0x1000616b"
+      ]
+    },
+    {
+      "va": "0x100d0edc",
+      "references": [
+        "0x100045fe",
+        "0x1000462a"
+      ]
+    },
+    {
+      "va": "0x100d0ee0",
+      "references": [
+        "0x100064e2",
+        "0x10006517"
+      ]
+    },
+    {
+      "va": "0x100d8ee0",
+      "references": [
+        "0x1000623e",
+        "0x10006247"
+      ]
+    },
+    {
+      "va": "0x100d8ee4",
+      "references": [
+        "0x10004091",
+        "0x100040d8"
+      ]
+    },
+    {
+      "va": "0x100e8ee4",
+      "references": [
+        "0x10003ec1",
+        "0x10003ed0",
+        "0x10003ef4",
+        "0x100040fd",
+        "0x10004123",
+        "0x10004e36",
+        "0x10004e43",
+        "0x1000534b",
+        "0x10005396",
+        "0x100053ba",
+        "0x1000540b",
+        "0x10005453"
+      ]
+    },
+    {
+      "va": "0x100e8ee8",
+      "references": [
+        "0x10002797",
+        "0x100027be",
+        "0x10004c6e",
+        "0x1000585b",
+        "0x10005d29",
+        "0x10005d3a"
+      ]
+    },
+    {
+      "va": "0x100e8ef0",
+      "references": [
+        "0x1000403b",
+        "0x10004071",
+        "0x10004cd6",
+        "0x10005840",
+        "0x10005bbc",
+        "0x10005bc4",
+        "0x100061be"
+      ]
+    },
+    {
+      "va": "0x100e8ef4",
+      "references": [
+        "0x10005771",
+        "0x10005871",
+        "0x10005a2c",
+        "0x10005a65",
+        "0x10005a9e"
+      ]
+    },
+    {
+      "va": "0x100e8ef8",
+      "references": [
+        "0x10005780",
+        "0x10005887",
+        "0x10005a3f",
+        "0x10005ab1",
+        "0x10005ae5",
+        "0x10005b70"
+      ]
+    },
+    {
+      "va": "0x100e8efc",
+      "references": [
+        "0x10002894",
+        "0x1000576a",
+        "0x1000589d",
+        "0x10005a52",
+        "0x10005af8",
+        "0x10005b2f",
+        "0x10013a53"
+      ]
+    },
+    {
+      "va": "0x100e8f00",
+      "references": [
+        "0x10001b22",
+        "0x100020c3",
+        "0x100058b3",
+        "0x10005a5f"
+      ]
+    },
+    {
+      "va": "0x100e8f04",
+      "references": [
+        "0x10001acd",
+        "0x100022a2",
+        "0x10003112",
+        "0x10004d2a",
+        "0x100058de",
+        "0x10005c36",
+        "0x10005c3d"
+      ]
+    },
+    {
+      "va": "0x100e8f08",
+      "references": [
+        "0x10004d54",
+        "0x1000508c",
+        "0x1000548a",
+        "0x100058f4",
+        "0x10005c68",
+        "0x10005c86"
+      ]
+    },
+    {
+      "va": "0x100e8f0c",
+      "references": [
+        "0x1000170f",
+        "0x10002de6",
+        "0x10004d7e",
+        "0x10005920",
+        "0x10005cbb",
+        "0x10005cc3"
+      ]
+    },
+    {
+      "va": "0x100e8f10",
+      "references": [
+        "0x10005764",
+        "0x10005b39"
+      ]
+    },
+    {
+      "va": "0x100e8f14",
+      "references": [
+        "0x10006403"
+      ]
+    },
+    {
+      "va": "0x100e8f18",
+      "references": [
+        "0x1000175d",
+        "0x10002e0f",
+        "0x10006c9c"
+      ]
+    },
+    {
+      "va": "0x100e8f1c",
+      "references": [
+        "0x10001779",
+        "0x10002e27",
+        "0x10006ca7"
+      ]
+    },
+    {
+      "va": "0x100e8f20",
+      "references": [
+        "0x10006ca2"
+      ]
+    },
+    {
+      "va": "0x100e8f28",
+      "references": [
+        "0x100050d9",
+        "0x100050e1",
+        "0x100061d8"
+      ]
+    },
+    {
+      "va": "0x100e8f2c",
+      "references": [
+        "0x100043fa",
+        "0x10004405",
+        "0x10004f06",
+        "0x10004f3b",
+        "0x100061dd"
+      ]
+    },
+    {
+      "va": "0x100e8f30",
+      "references": [
+        "0x100061e2",
+        "0x10006378",
+        "0x10006392"
+      ]
+    },
+    {
+      "va": "0x100e8f34",
+      "references": [
+        "0x10004ec6",
+        "0x10004ed0",
+        "0x100061e7",
+        "0x10006388",
+        "0x10006397"
+      ]
+    },
+    {
+      "va": "0x100e8f40",
+      "references": [
+        "0x100061d3"
+      ]
+    },
+    {
+      "va": "0x100e8f44",
+      "references": [
+        "0x1000431c",
+        "0x10004359",
+        "0x100043c1",
+        "0x10004e93",
+        "0x10005094",
+        "0x100050cb",
+        "0x100054e4",
+        "0x100055da",
+        "0x100055e4",
+        "0x1000560e",
+        "0x1000562c",
+        "0x10005674",
+        "0x1000567e",
+        "0x100056f7",
+        "0x1000570f",
+        "0x10005735",
+        "0x10005740"
+      ]
+    },
+    {
+      "va": "0x100e8f48",
+      "references": [
+        "0x100026f9",
+        "0x100029dc",
+        "0x10004ee1"
+      ]
+    },
+    {
+      "va": "0x100e8f4c",
+      "references": [
+        "0x10004661",
+        "0x100046c1",
+        "0x10004ded",
+        "0x10004e03",
+        "0x1000507a",
+        "0x100054ce",
+        "0x10005fbd",
+        "0x10006183",
+        "0x100061ee",
+        "0x10006307",
+        "0x100064c1",
+        "0x10006531"
+      ]
+    },
+    {
+      "va": "0x100e8f50",
+      "references": [
+        "0x100062d1"
+      ]
+    },
+    {
+      "va": "0x100e8f54",
+      "references": [
+        "0x10004261",
+        "0x100042b1",
+        "0x100042c1",
+        "0x100042ed"
+      ]
+    },
+    {
+      "va": "0x100e8f58",
+      "references": [
+        "0x10006312"
+      ]
+    },
+    {
+      "va": "0x100e8f5c",
+      "references": [
+        "0x100054df",
+        "0x100054ec",
+        "0x1000617d"
+      ]
+    },
+    {
+      "va": "0x100e8f64",
+      "references": [
+        "0x10004447",
+        "0x10004604",
+        "0x100051b4",
+        "0x100052fe",
+        "0x10006177"
+      ]
+    },
+    {
+      "va": "0x100e8f68",
+      "references": [
+        "0x1000517f",
+        "0x100051ba",
+        "0x1000525b",
+        "0x100052a6",
+        "0x100052ba",
+        "0x100052bf",
+        "0x100052cb",
+        "0x100052ea",
+        "0x10005304",
+        "0x10005315",
+        "0x1000533d",
+        "0x10005345",
+        "0x1000615a"
+      ]
+    },
+    {
+      "va": "0x100e8f6c",
+      "references": [
+        "0x10006160"
+      ]
+    },
+    {
+      "va": "0x100e8f70",
+      "references": [
+        "0x10006166"
+      ]
+    },
+    {
+      "va": "0x100e8f74",
+      "references": [
+        "0x100052d0",
+        "0x10006171"
+      ]
+    },
+    {
+      "va": "0x100e8f78",
+      "references": [
+        "0x10003f26"
+      ]
+    },
+    {
+      "va": "0x100e8f7c",
+      "references": [
+        "0x10004f0f",
+        "0x10004f2b"
+      ]
+    },
+    {
+      "va": "0x100e8f80",
+      "references": [
+        "0x1000637e"
+      ]
+    },
+    {
+      "va": "0x100e8f84",
+      "references": [
+        "0x1000636f"
+      ]
+    },
+    {
+      "va": "0x100e8f8c",
+      "references": [
+        "0x10004ef3"
+      ]
+    },
+    {
+      "va": "0x100e8f9c",
+      "references": [
+        "0x10004620",
+        "0x100051fa",
+        "0x1000520a",
+        "0x10005237",
+        "0x10005357"
+      ]
+    },
+    {
+      "va": "0x100e8fa0",
+      "references": [
+        "0x10005080",
+        "0x10005496",
+        "0x1000549c",
+        "0x100054a6"
+      ]
+    },
+    {
+      "va": "0x100e8fa4",
+      "references": [
+        "0x10005147",
+        "0x10005199",
+        "0x1000522f",
+        "0x10005462"
+      ]
+    },
+    {
+      "va": "0x100e8fa8",
+      "references": [
+        "0x100050f5",
+        "0x1000512a",
+        "0x10005139",
+        "0x10005151"
+      ]
+    },
+    {
+      "va": "0x100e8fac",
+      "references": [
+        "0x10005333"
+      ]
+    },
+    {
+      "va": "0x100e8fb0",
+      "references": [
+        "0x10005011",
+        "0x1000503a",
+        "0x1000505a"
+      ]
+    },
+    {
+      "va": "0x100e8fb4",
+      "references": [
+        "0x10005040",
+        "0x10005048",
+        "0x10005060"
+      ]
+    },
+    {
+      "va": "0x100e8fb8",
+      "references": [
+        "0x100052c5"
+      ]
+    },
+    {
+      "va": "0x100e8fc4",
+      "references": [
+        "0x10005471",
+        "0x10005477",
+        "0x1000547d",
+        "0x100054bd",
+        "0x100054c4",
+        "0x10005540",
+        "0x10005551",
+        "0x100056fd",
+        "0x10005715",
+        "0x1000574d",
+        "0x10005754"
+      ]
+    },
+    {
+      "va": "0x100e8fcc",
+      "references": [
+        "0x10006611",
+        "0x10006629",
+        "0x10006643",
+        "0x10006695"
+      ]
+    },
+    {
+      "va": "0x100e8fd0",
+      "references": [
+        "0x100046d1"
+      ]
+    },
+    {
+      "va": "0x100e8fd4",
+      "references": [
+        "0x1000675e",
+        "0x1000677c"
+      ]
+    },
+    {
+      "va": "0x10169510",
+      "references": [
+        "0x10004085",
+        "0x10004ea6",
+        "0x100061c4",
+        "0x100062d9",
+        "0x10006301",
+        "0x10006320",
+        "0x10006366",
+        "0x100063ca",
+        "0x100063e3",
+        "0x1000640d",
+        "0x10006432",
+        "0x10006477",
+        "0x10006487",
+        "0x100064f8",
+        "0x10006543",
+        "0x10006555",
+        "0x10006561",
+        "0x1000656d",
+        "0x10006579",
+        "0x10006592",
+        "0x1000659e",
+        "0x100065f4"
+      ]
+    },
+    {
+      "va": "0x10169520",
+      "references": [
+        "0x10006018",
+        "0x10006024",
+        "0x100060de",
+        "0x100060ea",
+        "0x100060f0"
+      ]
+    },
+    {
+      "va": "0x10169524",
+      "references": [
+        "0x1000602e",
+        "0x100060fa"
+      ]
+    },
+    {
+      "va": "0x10169528",
+      "references": [
+        "0x10006038",
+        "0x10006104"
+      ]
+    },
+    {
+      "va": "0x1016952c",
+      "references": [
+        "0x1000601e"
+      ]
+    },
+    {
+      "va": "0x10169530",
+      "references": [
+        "0x1000603e",
+        "0x1000610a"
+      ]
+    },
+    {
+      "va": "0x10169560",
+      "references": [
+        "0x10003e0f",
+        "0x10003e29"
+      ]
+    },
+    {
+      "va": "0x1016b560",
+      "references": [
+        "0x100061b8",
+        "0x100062c1",
+        "0x100064b0"
+      ]
+    },
+    {
+      "va": "0x1016b564",
+      "references": [
+        "0x10006142"
+      ]
+    },
+    {
+      "va": "0x1016b568",
+      "references": [
+        "0x100043ad",
+        "0x100054f2",
+        "0x1000551f",
+        "0x100055ea",
+        "0x10005627",
+        "0x1000568f"
+      ]
+    },
+    {
+      "va": "0x1016b580",
+      "references": [
+        "0x10004287",
+        "0x10004310",
+        "0x1000432a"
+      ]
+    },
+    {
+      "va": "0x1016ba30",
+      "references": [
+        "0x10004463",
+        "0x100044ac",
+        "0x100051d2",
+        "0x1000520f",
+        "0x10005272"
+      ]
+    },
+    {
+      "va": "0x1016ba40",
+      "references": [
+        "0x10004c4c",
+        "0x10004c5a",
+        "0x10004c7f",
+        "0x10004c90",
+        "0x10004ca7",
+        "0x10004cba",
+        "0x10004cd1",
+        "0x10004ce4",
+        "0x10004cfb",
+        "0x10004d0e",
+        "0x10004d25",
+        "0x10004d38",
+        "0x10004d4f",
+        "0x10004d62",
+        "0x10004d79",
+        "0x10004d8c",
+        "0x10005b80",
+        "0x10005b92",
+        "0x10005bb7",
+        "0x10005bcf",
+        "0x10005bf4",
+        "0x10005c0c",
+        "0x10005c31",
+        "0x10005c48",
+        "0x10005c7e",
+        "0x10005c91",
+        "0x10005cb6",
+        "0x10005cce",
+        "0x10005cf3",
+        "0x10005d0a"
+      ]
+    },
+    {
+      "va": "0x1016ba60",
+      "references": [
+        "0x10004363",
+        "0x100043b7",
+        "0x10004e99",
+        "0x100050c3",
+        "0x100055a0",
+        "0x100055ac",
+        "0x100055b9",
+        "0x100055d4",
+        "0x100055f9",
+        "0x10005604",
+        "0x1000563c",
+        "0x10005648",
+        "0x10005659",
+        "0x1000566e",
+        "0x100056ac",
+        "0x100056b8",
+        "0x100056c5",
+        "0x100056e2",
+        "0x100056ec",
+        "0x1000571f",
+        "0x1000572a",
+        "0x100064d5",
+        "0x100064f1",
+        "0x100064fe",
+        "0x10006504",
+        "0x10006511",
+        "0x10006525"
+      ]
+    },
+    {
+      "va": "0x1016ba64",
+      "references": [
+        "0x100026f1",
+        "0x10002717",
+        "0x10005a6c",
+        "0x10005a96"
+      ]
+    },
+    {
+      "va": "0x1016ba74",
+      "references": [
+        "0x10004e5d",
+        "0x10006013",
+        "0x1000605c",
+        "0x10006075",
+        "0x100060c3"
+      ]
+    },
+    {
+      "va": "0x1016ba78",
+      "references": [
+        "0x1000429f"
+      ]
+    },
+    {
+      "va": "0x1016ba7c",
+      "references": [
+        "0x100061b0",
+        "0x1000632c",
+        "0x1000649a",
+        "0x100064a4",
+        "0x100065ab"
+      ]
+    },
+    {
+      "va": "0x1016ba80",
+      "references": [
+        "0x10005aff",
+        "0x10005b27",
+        "0x10010aa1",
+        "0x10010ac8",
+        "0x10010ae9",
+        "0x10010b01"
+      ]
+    },
+    {
+      "va": "0x1016ba84",
+      "references": [
+        "0x100042ab"
+      ]
+    },
+    {
+      "va": "0x1016baa0",
+      "references": [
+        "0x100045cd",
+        "0x10004643"
+      ]
+    },
+    {
+      "va": "0x1016bae0",
+      "references": [
+        "0x1000439e",
+        "0x1000441d",
+        "0x100054fd",
+        "0x10005519",
+        "0x10005529",
+        "0x10005549",
+        "0x10005582",
+        "0x100055c6",
+        "0x100055ce",
+        "0x10005614",
+        "0x10005621",
+        "0x10005667",
+        "0x100056d2",
+        "0x100056d9",
+        "0x10005708",
+        "0x10005746"
+      ]
+    },
+    {
+      "va": "0x1016bae4",
+      "references": [
+        "0x1000102e",
+        "0x100011d9",
+        "0x10001352",
+        "0x1000147f",
+        "0x10001721",
+        "0x100023c0",
+        "0x10002763",
+        "0x10002870",
+        "0x100028c2",
+        "0x10002931",
+        "0x10002972",
+        "0x100031a0",
+        "0x10003577",
+        "0x10003701",
+        "0x10003884",
+        "0x1000389c",
+        "0x100038ad",
+        "0x100038c2",
+        "0x100038d4",
+        "0x100040b5",
+        "0x100061a7",
+        "0x100062e7",
+        "0x10006358",
+        "0x10006cd2",
+        "0x10006d39",
+        "0x10007b21",
+        "0x1000aef2",
+        "0x1000af96",
+        "0x1000afae",
+        "0x1000afc3",
+        "0x1000afd8",
+        "0x1000afed",
+        "0x1000b002",
+        "0x1000b017",
+        "0x1000b02c",
+        "0x1000b06f",
+        "0x1000b083",
+        "0x1000b098",
+        "0x1000b0ad",
+        "0x1000b0c2",
+        "0x1000b0d7",
+        "0x1000b0ec",
+        "0x1000b101",
+        "0x1000b2cc",
+        "0x1000bcef",
+        "0x1000be72",
+        "0x1000c867",
+        "0x1000c993",
+        "0x1000ccfa",
+        "0x1000cde3",
+        "0x1000d143",
+        "0x1000d223",
+        "0x1000d51a",
+        "0x1000d642",
+        "0x1000df63",
+        "0x1000e10c",
+        "0x1000ea5b",
+        "0x1000eb93",
+        "0x1000ee9e",
+        "0x10011058",
+        "0x1001190c",
+        "0x10011979",
+        "0x10011b60",
+        "0x10011be2",
+        "0x10012c2c",
+        "0x10012cc8",
+        "0x10012cea",
+        "0x100133c8",
+        "0x100139f7",
+        "0x10015ce2",
+        "0x10015d54"
+      ]
+    },
+    {
+      "va": "0x1016bae8",
+      "references": [
+        "0x10003f51",
+        "0x10003fd1",
+        "0x10004003",
+        "0x10004117",
+        "0x10004411",
+        "0x10004481",
+        "0x100044d1",
+        "0x100044e7",
+        "0x10004558",
+        "0x10004589",
+        "0x100045e5",
+        "0x1000466d",
+        "0x10004e16",
+        "0x10004e4e",
+        "0x10004f51",
+        "0x10004fd7",
+        "0x10005158",
+        "0x10005163",
+        "0x10005178",
+        "0x1000518a",
+        "0x1000519e",
+        "0x10005242",
+        "0x10005291",
+        "0x10005365",
+        "0x1000541d",
+        "0x100060d4",
+        "0x1000612d"
+      ]
+    },
+    {
+      "va": "0x1016baec",
+      "references": [
+        "0x100061ce",
+        "0x10006337",
+        "0x100065b6"
+      ]
+    },
+    {
+      "va": "0x1016baf0",
+      "references": [
+        "0x10004dc1",
+        "0x10005f76",
+        "0x10006a41"
+      ]
+    },
+    {
+      "va": "0x1016bafc",
+      "references": [
+        "0x10003c51",
+        "0x10003c99",
+        "0x10003cae",
+        "0x10003cc3",
+        "0x10003cd8",
+        "0x10003d06",
+        "0x10003d1b",
+        "0x10003d30",
+        "0x10003d45",
+        "0x10003d77",
+        "0x10003d8c",
+        "0x10003da1",
+        "0x10003db6",
+        "0x10003dcb",
+        "0x10003de0",
+        "0x10003df5",
+        "0x10003e1e",
+        "0x10005feb",
+        "0x1000619d"
+      ]
+    },
+    {
+      "va": "0x1016bb00",
+      "references": [
+        "0x10004281",
+        "0x100042cc",
+        "0x10004332"
+      ]
+    },
+    {
+      "va": "0x1016bfc0",
+      "references": [
+        "0x1000607a",
+        "0x10006081",
+        "0x1000610e"
+      ]
+    },
+    {
+      "va": "0x1016bfc2",
+      "references": [
+        "0x1000608a"
+      ]
+    },
+    {
+      "va": "0x1016bfc4",
+      "references": [
+        "0x10006068"
+      ]
+    },
+    {
+      "va": "0x1016bfc8",
+      "references": [
+        "0x10006070"
+      ]
+    },
+    {
+      "va": "0x1016bfcc",
+      "references": [
+        "0x1000609c"
+      ]
+    },
+    {
+      "va": "0x1016bfce",
+      "references": [
+        "0x10006093"
+      ]
+    },
+    {
+      "va": "0x1016bfd0",
+      "references": [
+        "0x100060a5"
+      ]
+    },
+    {
+      "va": "0x1016bfd8",
+      "references": [
+        "0x10005b40",
+        "0x10005b68"
+      ]
+    },
+    {
+      "va": "0x1016bfe0",
+      "references": [
+        "0x10005e43",
+        "0x10005e5b"
+      ]
+    },
+    {
+      "va": "0x1016c0e0",
+      "references": [
+        "0x10003eec",
+        "0x10003f0a",
+        "0x10003f1c",
+        "0x100046f2",
+        "0x10004e6c",
+        "0x1000600d",
+        "0x100060e5"
+      ]
+    },
+    {
+      "va": "0x1016c0e8",
+      "references": [
+        "0x1000407e",
+        "0x100040c3"
+      ]
+    },
+    {
+      "va": "0x1016c100",
+      "references": [
+        "0x10003eca",
+        "0x10003edf",
+        "0x10004106",
+        "0x1000412c",
+        "0x10004e3d",
+        "0x1000535e",
+        "0x100053a6",
+        "0x100053c7",
+        "0x10005412",
+        "0x1000545a"
+      ]
+    },
+    {
+      "va": "0x1016c11f",
+      "references": [
+        "0x10004c21"
+      ]
+    },
+    {
+      "va": "0x1016c120",
+      "references": [
+        "0x10004bfe",
+        "0x10004c0a",
+        "0x10004c15",
+        "0x10004c34",
+        "0x10004c40",
+        "0x10004c53",
+        "0x10004c86",
+        "0x10004cb3",
+        "0x10004cdd",
+        "0x10004d07",
+        "0x10004d31",
+        "0x10004d5b",
+        "0x10004d85",
+        "0x10005b8c",
+        "0x10005bc9",
+        "0x10005c06",
+        "0x10005c42",
+        "0x10005c8b",
+        "0x10005cc8",
+        "0x10005d04"
+      ]
+    },
+    {
+      "va": "0x1016c240",
+      "references": [
+        "0x10004c5f",
+        "0x10004c95",
+        "0x10004cbf",
+        "0x10004ce9",
+        "0x10004d13",
+        "0x10004d3d",
+        "0x10004d67",
+        "0x10004d91",
+        "0x10005b97",
+        "0x10005bd4",
+        "0x10005c11",
+        "0x10005c4d",
+        "0x10005c96",
+        "0x10005cd3",
+        "0x10005d0f"
+      ]
+    },
+    {
+      "va": "0x1016c280",
+      "references": [
+        "0x100027aa",
+        "0x10002a9e"
+      ]
+    },
+    {
+      "va": "0x1016c2fc",
+      "references": [
+        "0x100027ca"
+      ]
+    },
+    {
+      "va": "0x1016c300",
+      "references": [
+        "0x10002a1a",
+        "0x10002ac5",
+        "0x10004036",
+        "0x10004045"
+      ]
+    }
+  ],
+  "probe_report": "/root/.ai-tmp/audio-dsound-storage.b0ckf5ld/report.json",
+  "probe_report_sha256": "a19e23f1646a651e1c658249cea9790330c40304c93c5012ebc3597b8796e229",
+  "limits": [
+    "No unreferenced state objects or padding declarations were invented to close the48-byte shortfall.",
+    "Early strong BSS placement is independently constrained by surrounding original data, while the final linked base remains an integration check.",
+    "Common-zero bytes do not establish original capacity or unique symbol identity."
+  ]
+}

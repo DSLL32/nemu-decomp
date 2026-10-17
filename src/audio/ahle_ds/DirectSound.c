@@ -7,6 +7,7 @@
 #include <string.h>
 #pragma intrinsic(_byteswap_ulong)
 
+BYTE *RDRAM; /* 1016bae4; shared guest-memory pointer */
 HINSTANCE AudioInstance; /* 1016baf0 */
 HWND AudioWindow; /* 1016bafc */
 LPDIRECTSOUND DirectSound; /* 1016c0e0 */
@@ -15,9 +16,6 @@ LPDIRECTSOUNDBUFFER PrimaryBuffer; /* 1016ba74 */
 DSBUFFERDESC BufferDescription; /* 10169520 */
 WAVEFORMATEX WaveFormat; /* 1016bfc0 */
 CRITICAL_SECTION SoundCriticalSection; /* 1016c100 */
-int CriticalSectionReady; /* 100e8ee4 */
-int DebugMode, DummyMode, RecordHLE, RecordAI; /* 100e8ee8, 100e8ef0, 100e8ef4, 100e8ef8 */
-int FilterHLE, StereoReversed, Prebuffer, HighQuality, RecordABI; /* 100e8f00..10 */
 char *AudioDescription = "LaC's Nemu64 Audio DLL\nLittle Endian/MMX version 3.0"; /* 10039398 */
 char *AudioCredits = "Greets to TNSe and Jabo for SIMD help."; /* 1003939c */
 int RequestedBufferSize = 32768; /* 100393a0 */
@@ -32,51 +30,84 @@ int AudioInitialValue1 = 1; /* 100393c0 */
 int IsNTSC; /* 1016c0e8 */
 char AudioAboutText[256]; /* 1016bfe0 */
 char AudioErrorText[256]; /* 10169560 */
-int DirectSoundReady; /* 100e8f78 */
-int AudioRunning; /* 100e8f4c */
-int QueueAllocated; /* 100e8f54 */
 BYTE *QueuedBlocks[300]; /* 1016bb00 */
 int QueuedBlockReady[300]; /* 1016b580 */
 DWORD QueuedBlockLength[300]; /* 10169060 */
 unsigned short QueueRead, QueueWrite; /* 10169040,1016ba78 */
 int QueueCount, QueueBytes; /* 10169038,1016ba84 */
-BYTE AudioBuffer[0x80000]; /* 10040ed0 */
-BYTE *AllocatedBuffer; /* 100c0ed0 */
-DWORD PALRates[0x4000]; /* 100c0ed8 */
-DWORD NTSCRates[0x4000]; /* 100d8ee0 */
-BYTE RegisterAudioBuffer[0x8000]; /* 100d0ee0 */
-DWORD TimerID, NotificationPosition; /* 100d0ed8,100d0edc */
-volatile DWORD PlayPosition; /* 100e8f5c */
-int LastBlockLength;
-volatile int WritePosition, PreviousPosition, PositionState;
-int LastWritePosition; /* 100e8f64..74 */
 int BufferPosition; /* 1016bae0 */
 DWORD CurrentPlayPosition; /* 1016b568 */
 int BufferLimit; /* 1016ba30 */
-BYTE *CurrentAudio; /* 100e8f44 */
 volatile DWORD CurrentAudioLength; /* 1016ba60 */
-int ClearCount, DroppedBlocks, TotalBytes, TotalBlocks; /* 100e8f2c,28,30,34 */
-int QueueEnabled; /* 100e8f48 */
-DWORD ReleasedPosition, CopiedLength; /* 100e8f8c,7c */
-volatile int BufferUnderrun, TimerIdleCount;
-int ResetPosition, PendingBytes; /* 100e8f9c,a0,a4,a8 */
-float BufferDuration, LastBufferTime; /* 100e8fac,b8 */
-int ScrollLockDown, ScrollLockReleased;
-volatile int TimerActive; /* 100e8fb0,b4,c4 */
 HANDLE SoundEvents[16]; /* 1016baa0 */
 DWORD TimerUser; /* 1016b564 */
 struct AudioRegisters *AIRegisters; /* 10169510 */
 struct AudioMIRegisters *MIRegisters; /* 1016ba7c */
 struct AudioCPURegisters *CPURegisters; /* 1016b560 */
 DWORD *AudioEvents; /* 1016baec */
-DWORD AudioCount, RequestedLength, SubmittedLength, RemainingLength; /* 100e8f50,58,84,80 */
-int LegacyAudioState, AIWritePending; /* 100e8f40,14 */
 FILE *HLEWaveFile, *AIWaveFile, *HLELogFile, *ABIFile; /* 1016ba64,1016903c,1016ba80,1016bfd8 */
 extern DWORD AudioUCode; /* 1016c300 */
 extern void SelectAudioABI(void); /* 10002a40 */
 extern void DetectCPUFeatures(void);
 extern void FreeAudioHLE(void);
 extern void RaiseAudioInterrupt(void); /* 100137c0 */
+
+/* Original strong BSS, in address order. Explicit zero initialization keeps
+   external visibility. Later state has 48 unresolved bytes of original storage;
+   no declarations have been invented to fill those gaps. */
+BYTE AudioBuffer[0x80000] = {0}; /* 0x10040ed0 */
+BYTE *AllocatedBuffer = 0; /* 0x100c0ed0 */
+DWORD PALRates[0x4000] = {0}; /* 0x100c0ed8 */
+DWORD TimerID = 0; /* 0x100d0ed8 */
+DWORD NotificationPosition = 0; /* 0x100d0edc */
+BYTE RegisterAudioBuffer[0x8000] = {0}; /* 0x100d0ee0 */
+DWORD NTSCRates[0x4000] = {0}; /* 0x100d8ee0 */
+int CriticalSectionReady = 0; /* 0x100e8ee4 */
+int DebugMode = 0; /* 0x100e8ee8 */
+int DummyMode = 0; /* 0x100e8ef0 */
+int RecordHLE = 0; /* 0x100e8ef4 */
+int RecordAI = 0; /* 0x100e8ef8 */
+int DumpMicrocode = 0; /* 0x100e8efc */
+int FilterHLE = 0; /* 0x100e8f00 */
+int StereoReversed = 0; /* 0x100e8f04 */
+int Prebuffer = 0; /* 0x100e8f08 */
+int HighQuality = 0; /* 0x100e8f0c */
+int RecordABI = 0; /* 0x100e8f10 */
+int AIWritePending = 0; /* 0x100e8f14 */
+int Use3DNow = 0; /* 0x100e8f18 */
+int UseSSE = 0; /* 0x100e8f1c */
+int UseMMXExt = 0; /* 0x100e8f20 */
+int DroppedBlocks = 0; /* 0x100e8f28 */
+int ClearCount = 0; /* 0x100e8f2c */
+int TotalBytes = 0; /* 0x100e8f30 */
+int TotalBlocks = 0; /* 0x100e8f34 */
+int LegacyAudioState = 0; /* 0x100e8f40 */
+BYTE *CurrentAudio = 0; /* 0x100e8f44 */
+int QueueEnabled = 0; /* 0x100e8f48 */
+int AudioRunning = 0; /* 0x100e8f4c */
+DWORD AudioCount = 0; /* 0x100e8f50 */
+int QueueAllocated = 0; /* 0x100e8f54 */
+DWORD RequestedLength = 0; /* 0x100e8f58 */
+volatile DWORD PlayPosition = 0; /* 0x100e8f5c */
+int LastBlockLength = 0; /* 0x100e8f64 */
+volatile int WritePosition = 0; /* 0x100e8f68 */
+volatile int PreviousPosition = 0; /* 0x100e8f6c */
+volatile int PositionState = 0; /* 0x100e8f70 */
+int LastWritePosition = 0; /* 0x100e8f74 */
+int DirectSoundReady = 0; /* 0x100e8f78 */
+DWORD CopiedLength = 0; /* 0x100e8f7c */
+DWORD RemainingLength = 0; /* 0x100e8f80 */
+DWORD SubmittedLength = 0; /* 0x100e8f84 */
+DWORD ReleasedPosition = 0; /* 0x100e8f8c */
+volatile int BufferUnderrun = 0; /* 0x100e8f9c */
+volatile int TimerIdleCount = 0; /* 0x100e8fa0 */
+int ResetPosition = 0; /* 0x100e8fa4 */
+int PendingBytes = 0; /* 0x100e8fa8 */
+float BufferDuration = 0; /* 0x100e8fac */
+int ScrollLockDown = 0; /* 0x100e8fb0 */
+int ScrollLockReleased = 0; /* 0x100e8fb4 */
+float LastBufferTime = 0; /* 0x100e8fb8 */
+volatile int TimerActive = 0; /* 0x100e8fc4 */
 
 /* 10003c40–10003ec0, including switch tables and alignment. */
 void AudioError(const char *text, HRESULT result)

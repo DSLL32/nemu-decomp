@@ -7,9 +7,9 @@
 HINSTANCE LogInstance; /* 10169024 */
 HWND LogEdit;         /* 10169028 */
 HWND LogWindow;       /* 1016902c */
-int LogHidden;        /* 100e8fcc */
-int DriverInfoVisible; /* 100e8fd0 */
-FILE *DebugOutput;    /* 100e8fd4 */
+int LogHidden = 0;        /* 100e8fcc */
+int DriverInfoVisible = 0; /* 100e8fd0 */
+FILE *DebugOutput = 0;    /* 100e8fd4 */
 extern HINSTANCE AudioInstance;
 
 /* 10006610–1000664c */
