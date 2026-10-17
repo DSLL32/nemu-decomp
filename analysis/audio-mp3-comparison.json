@@ -15,8 +15,7 @@
     "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0"
   },
   "source_sha256": {
-    "src/audio/ahle_ds/Jpeg.c": "8754d6438e1f4a250e8dc6fc6b28d7926943ba183cd5972666521c82c936ba3d",
-    "src/audio/ahle_ds/transform.c": "b180da5ba72e8396d9764fe50f2cf50752968d74bb4a6bfbc20d9ea978e063e5",
+    "src/audio/ahle_ds/Jpeg.c": "8fd01bed1c7ab95225e8f17ba8c7077ab500959f57514b185e93cbddcafb27d1",
     "src/audio/ahle_ds/Mp3.c": "e7d2744be8afd509887397d990832fb10cefbfde25daeb4f54f6dadd78ee0745",
     "src/audio/ahle_ds/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f"
   },
@@ -24,7 +23,7 @@
   "objects": [
     {
       "object": "/root/.ai-tmp/audio-mp3-20261017/Jpeg.obj",
-      "sha256": "6bfd4c085263bbeba39e6de70e96a79fcb9bed0170db59df9d5a3accf346efbc",
+      "sha256": "438f711e0c90327d3307de36cbf642937c45faa9c9951f7669473b42e448d58e",
       "original": "/root/nemu-decomp/master/Plugin/audio.dll",
       "functions": [
         {
@@ -1329,24 +1328,10 @@
           "inferred_relocated_bytes_equal": true,
           "relocated_bytes_equal": false,
           "first_unmasked_differences": []
-        }
-      ],
-      "functions_compared": 9,
-      "relocation_masked_matches": 9,
-      "relocation_consistent_matches": 9,
-      "relocation_checked_matches": 2,
-      "relocation_target_mismatches": 0,
-      "inferred_targets": 59,
-      "unresolved_targets": 0
-    },
-    {
-      "object": "/root/.ai-tmp/audio-mp3-20261017/transform.obj",
-      "sha256": "f60d71ed853a59cfeecfc67838bcd32e8dd1b9ccffcc2ee90e4ec53dab98ad89",
-      "original": "/root/nemu-decomp/master/Plugin/audio.dll",
-      "functions": [
+        },
         {
           "name": "_poly",
-          "object": "transform.obj",
+          "object": "Jpeg.obj",
           "rebuilt_bytes": 6000,
           "status": "compared",
           "original_va": 268467328,
@@ -3836,17 +3821,17 @@
           "first_unmasked_differences": []
         }
       ],
-      "functions_compared": 1,
-      "relocation_masked_matches": 1,
-      "relocation_consistent_matches": 1,
-      "relocation_checked_matches": 0,
+      "functions_compared": 10,
+      "relocation_masked_matches": 10,
+      "relocation_consistent_matches": 10,
+      "relocation_checked_matches": 2,
       "relocation_target_mismatches": 0,
-      "inferred_targets": 68,
+      "inferred_targets": 127,
       "unresolved_targets": 0
     },
     {
       "object": "/root/.ai-tmp/audio-mp3-20261017/Mp3.obj",
-      "sha256": "4881ce5da0d406ba79b25859633ba49dadbf81a792fe3cd79754837d6c249b47",
+      "sha256": "0b9d96da7969e0395b6c5ef1d5a1a03c4924b8b33efea56a02b4a270b1d9c79d",
       "original": "/root/nemu-decomp/master/Plugin/audio.dll",
       "functions": [
         {
@@ -8552,7 +8537,7 @@
       "relocation_fields": 0
     },
     {
-      "unit": "transform",
+      "unit": "Jpeg",
       "symbol": "_t_dewindow",
       "va": "0x1003a4c8",
       "size": 2176,
@@ -8563,7 +8548,7 @@
       "relocation_fields": 0
     },
     {
-      "unit": "transform",
+      "unit": "Jpeg",
       "symbol": "_b1",
       "va": "0x10031090",
       "size": 124,
@@ -8574,7 +8559,7 @@
       "relocation_fields": 0
     },
     {
-      "unit": "transform",
+      "unit": "Jpeg",
       "symbol": "_nch",
       "va": "0x1003af48",
       "size": 4,
@@ -8585,6 +8570,20 @@
       "relocation_fields": 0
     }
   ],
+  "contiguous_initialized_layout": {
+    "unit": "Jpeg",
+    "original_va": "0x1003a4c8",
+    "size": 2692,
+    "symbol_offsets": {
+      "_t_dewindow": 0,
+      "_JpegZigZag": 2176,
+      "_JpegCosine": 2432,
+      "_nch": 2688
+    },
+    "symbol_offsets_match": true,
+    "entire_section_equal": true,
+    "section_sha256": "460e1cc2c084a2df3dc6c14a4d8c0c8540d7b5c6772a1184864b840a96cf19cf"
+  },
   "summary": {
     "functions": 21,
     "original_function_bytes": 16928,

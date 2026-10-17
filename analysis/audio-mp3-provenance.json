@@ -31,5 +31,16 @@
       "source": "src/audio/ahle_ds/Mp3.c",
       "report": "analysis/audio-mp3-main-comparison.json"
     }
+  ],
+  "unit_groups": [
+    {
+      "source": "src/audio/ahle_ds/Jpeg.c",
+      "start": "0x10006cb0",
+      "end": "0x100093f0",
+      "functions": 10,
+      "initialized_start": "0x1003a4c8",
+      "initialized_bytes": 2692,
+      "evidence": "A combined translation unit preserves every complete function and emits t_dewindow, JpegZigZag, JpegCosine and nch in one exact contiguous .data contribution at offsets 0, 0x880, 0x980 and 0xa80. AMP attribution is retained beside the poly implementation."
+    }
   ]
 }

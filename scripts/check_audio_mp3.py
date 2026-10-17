@@ -17,7 +17,7 @@ from pe_fingerprints import PE32
 from verify_gs import COFF, compare_object
 
 ROOT = Path(__file__).resolve().parents[1]
-UNITS = ('Jpeg', 'transform', 'Mp3')
+UNITS = ('Jpeg', 'Mp3')
 SOURCES = [ROOT / 'src/audio/ahle_ds' / (name + '.c') for name in UNITS]
 DATA = (
     ('Jpeg', '_JpegZigZag', 0x1003ad48, 256),
@@ -25,9 +25,9 @@ DATA = (
     ('Jpeg', '__real@4069000000000000', 0x10031110, 8),
     ('Jpeg', '__real@4000000000000000', 0x10031118, 8),
     ('Jpeg', '__real@3fc921fb54442d18', 0x10031120, 8),
-    ('transform', '_t_dewindow', 0x1003a4c8, 2176),
-    ('transform', '_b1', 0x10031090, 124),
-    ('transform', '_nch', 0x1003af48, 4),
+    ('Jpeg', '_t_dewindow', 0x1003a4c8, 2176),
+    ('Jpeg', '_b1', 0x10031090, 124),
+    ('Jpeg', '_nch', 0x1003af48, 4),
 )
 
 
@@ -70,6 +70,23 @@ def run(output):
                          relocation_fields=sum(symbol['value'] <= r['offset'] <
                                                symbol['value'] + size
                                                for r in section['relocations'])))
+    # This single initialized contribution establishes shared translation-unit
+    # ownership independently of any whole-DLL linker placement.
+    jpeg = objects['Jpeg']
+    layout = [('_t_dewindow', 0), ('_JpegZigZag', 0x880),
+              ('_JpegCosine', 0x980), ('_nch', 0xa80)]
+    symbols = [next(s for s in jpeg.symbols if s['name'] == name and s['section'] > 0)
+               for name, _ in layout]
+    section = jpeg.sections[symbols[0]['section'] - 1]
+    expected_offset = image.offset(0x3a4c8)
+    contiguous = dict(
+        unit='Jpeg', original_va='0x1003a4c8', size=0xa84,
+        symbol_offsets={symbol['name']: symbol['value'] for symbol in symbols},
+        symbol_offsets_match=all(symbol['section'] == symbols[0]['section'] and
+                                 symbol['value'] == offset
+                                 for symbol, (_, offset) in zip(symbols, layout)),
+        entire_section_equal=section['data'] == image.data[expected_offset:expected_offset + 0xa84],
+        section_sha256=hashlib.sha256(section['data']).hexdigest())
     functions = [f for r in reports for f in r['functions']]
     result = dict(
         status='partial_native_source_reconstruction',
@@ -81,6 +98,7 @@ def run(output):
         source_sha256={str(p.relative_to(ROOT)): digest(p)
                        for p in [*SOURCES, ROOT / 'src/audio/ahle_ds/transform.h']},
         address_map_sha256=digest(address_map), objects=reports, initialized_data=data,
+        contiguous_initialized_layout=contiguous,
         summary=dict(functions=len(functions),
                      original_function_bytes=sum(f.get('original_bytes', 0) for f in functions),
                      matching_complete_extents=sum(f.get('relocation_masked_equal', False)
