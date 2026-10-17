@@ -1,0 +1,7177 @@
+{
+  "image": "master/nemu64.exe",
+  "source_names": "inferred from behavior",
+  "status": "source reconstructed; standalone VC7 compile passes; integrated byte-exact validation pending",
+  "compiler": "Microsoft C/C++ 13.00.9466 /O2 /ML /GL /Ob1",
+  "functions": [
+    {
+      "name": "RaisePendingInterrupt",
+      "address": "0x00409E00",
+      "end": "0x00409E80",
+      "source": "src/nemu64/CPU.cpp",
+      "size": 113,
+      "original_body_sha256": "645b8c71f75dba54788d23f95d9786b21f94c32d30816e8a33df67299f70a85a"
+    },
+    {
+      "address": "0x00409E80",
+      "name": "Op_Unknown",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x00409E90",
+      "size": 12,
+      "original_body_sha256": "1737798843eb83a66dbb1dd01fd91af6fb41d024442873e6417805e6b5397118"
+    },
+    {
+      "name": "ExecuteDelaySlot",
+      "address": "0x00409E90",
+      "end": "0x00409EF0",
+      "source": "src/nemu64/CPU.cpp",
+      "size": 95,
+      "original_body_sha256": "2aa2a15fffbe724f60f640312c130d4665d3960cdb07b5ebc5a171c4b05326b6"
+    },
+    {
+      "name": "Branch",
+      "address": "0x00409EF0",
+      "end": "0x0040A010",
+      "source": "src/nemu64/CPU.cpp",
+      "size": 280,
+      "original_body_sha256": "a0b369ee658ed5de567d47a0996b7b071b706c4a07fd9b5e786de3558c4f7fda"
+    },
+    {
+      "address": "0x0040A010",
+      "name": "Op_SPECIAL",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A030",
+      "size": 17,
+      "original_body_sha256": "86c6a56247c5fd7bd0cb3a2bcbb21b880d4ed9d4237b3f2b174e67f280012fba"
+    },
+    {
+      "address": "0x0040A030",
+      "name": "Op_REGIMM",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A050",
+      "size": 17,
+      "original_body_sha256": "41ebb5b77e6742a5896d165d393957524872af5410eecee720d6f037341ea5e3"
+    },
+    {
+      "address": "0x0040A050",
+      "name": "Op_J",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A090",
+      "size": 58,
+      "original_body_sha256": "95488320f72e694fa12e1fdc5e3f73c06745238a9740571d961da59dc09cd49e"
+    },
+    {
+      "address": "0x0040A090",
+      "name": "Op_JAL",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A0E0",
+      "size": 65,
+      "original_body_sha256": "9c9a3e65d75dd423d8d531229073df2de10daf365d26f623973d46793790cb18"
+    },
+    {
+      "address": "0x0040A0E0",
+      "name": "Op_BEQ",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A180",
+      "size": 157,
+      "original_body_sha256": "cc3e322316a6f6b0ccdd37eaf91ef4978a0c7b21f28e62bbb0194f45286f2ac3"
+    },
+    {
+      "address": "0x0040A180",
+      "name": "Op_BNE",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A1E0",
+      "size": 95,
+      "original_body_sha256": "052449e9a2707419dcc18f763d32518e8f336ad2883dc2102da89650edb6a9a1"
+    },
+    {
+      "address": "0x0040A1E0",
+      "name": "Op_BLEZ",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A1F0",
+      "size": 15,
+      "original_body_sha256": "43d29a29f9576e00aae5dfe4e6cb837a56fb55232dafb5f7f998bc19a975aa81"
+    },
+    {
+      "address": "0x0040A1F0",
+      "name": "Op_BGTZ",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A200",
+      "size": 15,
+      "original_body_sha256": "d5c865b75554ea729337b343eeae9f586e80760430c13bc86a5eff3c12ca07e9"
+    },
+    {
+      "address": "0x0040A200",
+      "name": "Op_ADDI",
+      "notes": "ADDI and ADDIU share this entry; no overflow trap.",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A240",
+      "size": 50,
+      "original_body_sha256": "516f4fed3350b909528676466636ec979c9609f55343579863b472eacb413ef9"
+    },
+    {
+      "address": "0x0040A240",
+      "name": "Op_SLTI",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A290",
+      "size": 78,
+      "original_body_sha256": "f86e0138254c9c9f1d910c02034e43a848f97ab333378715d937bdebc98c1964"
+    },
+    {
+      "address": "0x0040A290",
+      "name": "Op_SLTIU",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A2E0",
+      "size": 78,
+      "original_body_sha256": "34f5a67fd13a131f2e0361b786c541ca56e21770a360a4887ea01310896c5d9c"
+    },
+    {
+      "address": "0x0040A2E0",
+      "name": "Op_ANDI",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A320",
+      "size": 61,
+      "original_body_sha256": "f610f8ddf753f37390969bb97ac44d53da9c8f6614019714883913f95380269a"
+    },
+    {
+      "address": "0x0040A320",
+      "name": "Op_ORI",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A360",
+      "size": 61,
+      "original_body_sha256": "9ef28a9fc6acfed3f4cda205b6f896aca6d984a724d0cf8d70f25687368129fb"
+    },
+    {
+      "address": "0x0040A360",
+      "name": "Op_XORI",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A3A0",
+      "size": 61,
+      "original_body_sha256": "dac2f8940212f7e74251304cfd0adb22fefecfcdf4b56aeade185b8f9e0e3877"
+    },
+    {
+      "address": "0x0040A3A0",
+      "name": "Op_LUI",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A3D0",
+      "size": 35,
+      "original_body_sha256": "6a14906f3f979e82772cf3af5b6e23c426e899557e6324d10057c9233681a19c"
+    },
+    {
+      "address": "0x0040A3D0",
+      "name": "Op_COP0",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A3F0",
+      "size": 18,
+      "original_body_sha256": "b1525ac2c49ef1441dedae267d9abda2612bd739a99cfbdb42211646954b6dc0"
+    },
+    {
+      "address": "0x0040A3F0",
+      "name": "Op_COP1",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A410",
+      "size": 18,
+      "original_body_sha256": "e5f67296a404d2a076cc5d033ee7f992783fe39e08433fbe9cb00e9b177029ef"
+    },
+    {
+      "address": "0x0040A410",
+      "name": "Op_BEQL",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A470",
+      "size": 89,
+      "original_body_sha256": "c3658f39f20e5f37c53417e6714006fd41957831d8e2d0c88bb88bded9317448"
+    },
+    {
+      "address": "0x0040A470",
+      "name": "Op_BNEL",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A4E0",
+      "size": 103,
+      "original_body_sha256": "884135026e54e1f25f4f9c172f1ed16ea556ef8bf4eb2e5d4325ecb0d22b278c"
+    },
+    {
+      "address": "0x0040A4E0",
+      "name": "Op_BLEZL",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A4F0",
+      "size": 15,
+      "original_body_sha256": "fd2d53ee2eefe9015db5f699cd3911b9f32b2eba122e20afed89c68cc73f7768"
+    },
+    {
+      "address": "0x0040A4F0",
+      "name": "Op_BGTZL",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A500",
+      "size": 15,
+      "original_body_sha256": "c2ea31e289f46806faf0a36d1190e9e8dc16a693cfa213800dca400eef10bc7e"
+    },
+    {
+      "address": "0x0040A500",
+      "name": "Op_DADDI",
+      "notes": "DADDI and DADDIU share this entry; no overflow trap.",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A540",
+      "size": 61,
+      "original_body_sha256": "b75da1c2139a71d409cff33d21b460dc53c30b0a7f17f73a697eda1acdd4fdb4"
+    },
+    {
+      "address": "0x0040A540",
+      "name": "Op_LDL",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A550",
+      "size": 12,
+      "original_body_sha256": "95ddb328b5f6b9e21993a14ab6e547bfcf1893e9f30e32009be7d90272c12031"
+    },
+    {
+      "address": "0x0040A550",
+      "name": "Op_LDR",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A560",
+      "size": 12,
+      "original_body_sha256": "8d3039615bed090632955bb505262608bc90b45d90ac110526bf6c8bc52f3b04"
+    },
+    {
+      "address": "0x0040A560",
+      "name": "Op_LB",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A5C0",
+      "size": 90,
+      "original_body_sha256": "3b0c7291ed0ab76e5ffba474294dc020bd0ed7574b47e02443c8e5934faa4cf6"
+    },
+    {
+      "address": "0x0040A5C0",
+      "name": "Op_LH",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A620",
+      "size": 90,
+      "original_body_sha256": "3d89fa14d27c0ce392ffa4ff715253287284f48b78bb67418b872086c52d4ce3"
+    },
+    {
+      "address": "0x0040A620",
+      "name": "Op_LWL",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A6B0",
+      "size": 129,
+      "original_body_sha256": "875a5dc3044487971dcc712d7afdbde312f29cc1042c4807d2578dc26516a996"
+    },
+    {
+      "address": "0x0040A6B0",
+      "name": "Op_LW",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A710",
+      "size": 87,
+      "original_body_sha256": "3586e82746e4d487aabea540ff54e98782553b4a1b1c598a0028f0225066f29e"
+    },
+    {
+      "address": "0x0040A710",
+      "name": "Op_LBU",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A770",
+      "size": 90,
+      "original_body_sha256": "a47752f8955e8b23545fa31674ba2f343be190523b8d9f210c28cd22d0ad19f2"
+    },
+    {
+      "address": "0x0040A770",
+      "name": "Op_LHU",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A7D0",
+      "size": 90,
+      "original_body_sha256": "91fff0833387d194105cd905f90cbc2bee6fff2e750f38434d5671436322d0bf"
+    },
+    {
+      "address": "0x0040A7D0",
+      "name": "Op_LWR",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A860",
+      "size": 130,
+      "original_body_sha256": "98b48c578adeef90d9491472653caea4ac4634b82281cb8a0018b4983bca75c3"
+    },
+    {
+      "address": "0x0040A860",
+      "name": "Op_LWU",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A8C0",
+      "size": 90,
+      "original_body_sha256": "b4c438d352f1606431ad4cb8b424ba36ec9446bf6375e1e9bd81f67b0ba926f5"
+    },
+    {
+      "address": "0x0040A8C0",
+      "name": "Op_SB",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A920",
+      "size": 84,
+      "original_body_sha256": "fabed631739c6c3fa40e59165fd8833eaf6b3bcb997fb706e3e4e3f35cc91da2"
+    },
+    {
+      "address": "0x0040A920",
+      "name": "Op_SH",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040A980",
+      "size": 85,
+      "original_body_sha256": "4812cfad64537f496e60c697cf357fd965b6c00f5a8b1aefb124a312814c7506"
+    },
+    {
+      "address": "0x0040A980",
+      "name": "Op_SWL",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040AA00",
+      "size": 128,
+      "original_body_sha256": "1983cec2dda7aa04ceb5dc0deedde71010092be8ba1452bd0fd02336470fea68"
+    },
+    {
+      "address": "0x0040AA00",
+      "name": "Op_SW",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040AA60",
+      "size": 82,
+      "original_body_sha256": "864892fd2285bb3ef7b0eb670105340eda2457234190c9b6d2d917fcc8c6e73f"
+    },
+    {
+      "address": "0x0040AA60",
+      "name": "Op_SDL",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040AA70",
+      "size": 12,
+      "original_body_sha256": "00ae38228a4ad19214259fed3b58af27cd9788c99aef97043fb3949ad63c0c3a"
+    },
+    {
+      "address": "0x0040AA70",
+      "name": "Op_SDR",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040AA80",
+      "size": 12,
+      "original_body_sha256": "7e0f1bc65fa44b67f0f82f7a8dc764874c66b7eb3e8e71083872deedd895d162"
+    },
+    {
+      "address": "0x0040AA80",
+      "name": "Op_SWR",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040AB10",
+      "size": 131,
+      "original_body_sha256": "541bec66fcec001398a8c54d15425a9b424fd59a78ffa73af98fee7ca86e3715"
+    },
+    {
+      "address": "0x0040AB10",
+      "name": "Op_LWC1",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040AB70",
+      "size": 81,
+      "original_body_sha256": "4d41d272cbf81b48505ed13b3dc5a54b8e4f7dff006337bb8bc04867873b8479"
+    },
+    {
+      "address": "0x0040AB70",
+      "name": "Op_LDC1",
+      "notes": "Original evaluates translation twice, then reads low word before high word.",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040AC10",
+      "size": 146,
+      "original_body_sha256": "45f639395bf7af9d42538ce28a611824d1d7622e9babf6c9f1e833c69981ed6d"
+    },
+    {
+      "address": "0x0040AC10",
+      "name": "Op_LD",
+      "notes": "Original evaluates translation twice, then reads low word before high word.",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040ACA0",
+      "size": 143,
+      "original_body_sha256": "c354b0845ed368b7cc6f0faa3a64fd9a3623474dd74a3d125fc5d6a8f93719b9"
+    },
+    {
+      "address": "0x0040ACA0",
+      "name": "Op_SWC1",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040AD00",
+      "size": 82,
+      "original_body_sha256": "8b800f5b8db6646fc0c1f443cc72e6c13d0982ae48e197d011b5e2acf4897375"
+    },
+    {
+      "address": "0x0040AD00",
+      "name": "Op_SDC1",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040AD70",
+      "size": 100,
+      "original_body_sha256": "51205e36615f6336fee9a40b8a6c27ef5c7126944e9a8fd1ffa4e0acfb007f77"
+    },
+    {
+      "address": "0x0040AD70",
+      "name": "Op_SD",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040ADE0",
+      "size": 108,
+      "original_body_sha256": "464be444f9b26c427a517a6a352c16be1ad62de78021e42732a251a888b9ecb7"
+    },
+    {
+      "address": "0x0040ADE0",
+      "name": "Op_SLL",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040AE20",
+      "size": 57,
+      "original_body_sha256": "0674b799469eff71e1c00ad42a57e98e0b15088932e6f2ea52e32ece54a6a83c"
+    },
+    {
+      "address": "0x0040AE20",
+      "name": "Op_SRL",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040AE60",
+      "size": 57,
+      "original_body_sha256": "c54a9ad140b6f3506e9ee5389276587b59ac7e5e6a38cf0ceb4579e2f4c4d789"
+    },
+    {
+      "address": "0x0040AE60",
+      "name": "Op_SRA",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040AEA0",
+      "size": 57,
+      "original_body_sha256": "67c39781fdbfae2574301c4c49a5e96029bcdb21eea3290ae741b37b85dbbbc4"
+    },
+    {
+      "address": "0x0040AEA0",
+      "name": "Op_SLLV",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040AEE0",
+      "size": 64,
+      "original_body_sha256": "f05c7a33ceaf32f7cfa9db571d98e38370b253a0d6a9d1311be4febdd96cd560"
+    },
+    {
+      "address": "0x0040AEE0",
+      "name": "Op_SRLV",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040AF20",
+      "size": 64,
+      "original_body_sha256": "3d6e30d8abda24547c4abbefe02b0c91abd79e2d6dab8b1d8e28abe2f644dcb0"
+    },
+    {
+      "address": "0x0040AF20",
+      "name": "Op_SRAV",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040AF60",
+      "size": 64,
+      "original_body_sha256": "053eac22f7861d5156fe8b87725dbff03911933a7c76a9bd9365927c760036d8"
+    },
+    {
+      "address": "0x0040AF60",
+      "name": "Op_JR",
+      "notes": "The register target is read after executing the delay slot.",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040AFA0",
+      "size": 50,
+      "original_body_sha256": "9024b2f0cb9ecda3ef88af5351c87f34e2d4728d6a80346ed0806546b8b517e0"
+    },
+    {
+      "address": "0x0040AFA0",
+      "name": "Op_JALR",
+      "notes": "Link and target accesses both occur after executing the delay slot.",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040AFF0",
+      "size": 71,
+      "original_body_sha256": "959a90b123ed391e96f0096443ceecdcd56d0ba44d7b2b05920e1f160ba0ef3a"
+    },
+    {
+      "address": "0x0040AFF0",
+      "name": "Op_SYSCALL",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B010",
+      "size": 21,
+      "original_body_sha256": "9ce87aeed1d7d38fa3873c15bf6516e811e8969cd95cbc303300595d482df463"
+    },
+    {
+      "address": "0x0040B010",
+      "name": "Op_BREAK",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B020",
+      "size": 12,
+      "original_body_sha256": "da6a8ad395e937d2586a2839750a30440bc57cdefc72ed1768edb30b1e14a8fe"
+    },
+    {
+      "address": "0x0040B020",
+      "name": "Op_MFHI",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B050",
+      "size": 38,
+      "original_body_sha256": "35c6afa9b64036f5a566bbdb0a164ae78b20404f8b9d8dda1103619da3a3bd18"
+    },
+    {
+      "address": "0x0040B050",
+      "name": "Op_MTHI",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B080",
+      "size": 38,
+      "original_body_sha256": "50d5a9df3635fd2a0bc5620f4cdd41601a1edff7069cdf0b1416b3d3c99be258"
+    },
+    {
+      "address": "0x0040B080",
+      "name": "Op_MFLO",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B0B0",
+      "size": 38,
+      "original_body_sha256": "42259d25eaf4cb71efdb77a36781309ff12da4f71508706afbcc61f4f23b7d47"
+    },
+    {
+      "address": "0x0040B0B0",
+      "name": "Op_MTLO",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B0E0",
+      "size": 38,
+      "original_body_sha256": "12c37ab92dda50e75c95dd807b700167922c80240b6c8caf130b8ee055a67a7d"
+    },
+    {
+      "address": "0x0040B0E0",
+      "name": "Op_DSLLV",
+      "notes": "Both DSLLV and DSRLV dispatch here. The original shifts left for both.",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B130",
+      "size": 76,
+      "original_body_sha256": "43c87fc7aeabd83101671f6bf9e415e7dc226de3066d7385eaf7bc3ac074de58"
+    },
+    {
+      "address": "0x0040B130",
+      "name": "Op_DSRAV",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B180",
+      "size": 76,
+      "original_body_sha256": "41693eeff5438babe5ef37f7bc325508fa36b2e372b95706a314ed7daf6e916d"
+    },
+    {
+      "address": "0x0040B180",
+      "name": "Op_MULT",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B1D0",
+      "size": 70,
+      "original_body_sha256": "1ea48701c3fb15074ffbf026a47e5a79e139adeb97e75c12c6be183b4ccb7d46"
+    },
+    {
+      "address": "0x0040B1D0",
+      "name": "Op_MULTU",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B220",
+      "size": 65,
+      "original_body_sha256": "fdca4fe91c44b397694550ad5677b56080ddb03ebeae25d41e8b59ecdb45a1d3"
+    },
+    {
+      "address": "0x0040B220",
+      "name": "Op_DIV",
+      "notes": "No signed-overflow guard around the host division.",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B270",
+      "size": 72,
+      "original_body_sha256": "76efbfd082efc3f33aaf6f5c460d8f72a4fb0b42d4a647ff0b1323c3efeabdae"
+    },
+    {
+      "address": "0x0040B270",
+      "name": "Op_DIVU",
+      "notes": "Both results are zero-extended, unlike the signed DIV handler.",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B2C0",
+      "size": 76,
+      "original_body_sha256": "490fc3a6e65727fc5317db4837547cc63f09e4f15428789daca221c68b8ac708"
+    },
+    {
+      "address": "0x0040B2C0",
+      "name": "Op_DMULT",
+      "notes": "DMULT and DMULTU share this incomplete 64-bit product handler.",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B320",
+      "size": 83,
+      "original_body_sha256": "6b7c15eeb61b11f8573dac85296192592a930580276a4ad72ca3ea393bc0f3b3"
+    },
+    {
+      "address": "0x0040B320",
+      "name": "Op_DDIV",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B380",
+      "size": 91,
+      "original_body_sha256": "05dcc1a97f949ed799b7a0d67a3f8d23371747e9d5a994d7ed4c3634e15d8a4b"
+    },
+    {
+      "address": "0x0040B380",
+      "name": "Op_DDIVU",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B3E0",
+      "size": 91,
+      "original_body_sha256": "0dda380159783917fcba8b50f4dd0220b6c97941ac61dd402cea4f580248b0aa"
+    },
+    {
+      "address": "0x0040B3E0",
+      "name": "Op_ADD",
+      "notes": "ADD and ADDU share this entry.",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B420",
+      "size": 64,
+      "original_body_sha256": "198347d77c88175e43fb454f3f850d9f11cd2fa47829db1cf0371ede1905b5ad"
+    },
+    {
+      "address": "0x0040B420",
+      "name": "Op_SUB",
+      "notes": "SUB and SUBU share this entry.",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B460",
+      "size": 61,
+      "original_body_sha256": "4a4a73fa93c548c67ba9b3244c412737d47f1a070af52a62bff5e2f04623a97a"
+    },
+    {
+      "address": "0x0040B460",
+      "name": "Op_AND",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B4C0",
+      "size": 81,
+      "original_body_sha256": "c8d17747e2c141de3255f287e0ca50902e5e4699ce25b9d9d69beeccf9f03d96"
+    },
+    {
+      "address": "0x0040B4C0",
+      "name": "Op_OR",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B520",
+      "size": 81,
+      "original_body_sha256": "4886062fd32f885f695e1e83e57b2db280db202b44b66a31ad605ad063b19826"
+    },
+    {
+      "address": "0x0040B520",
+      "name": "Op_XOR",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B580",
+      "size": 81,
+      "original_body_sha256": "f569db13a93c362b589a14590d5d4a42af58ffc26ba6ef9f40cde1678056b1f5"
+    },
+    {
+      "address": "0x0040B580",
+      "name": "Op_NOR",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B5E0",
+      "size": 83,
+      "original_body_sha256": "24573105af6571a76118e6152dcfb79641cd0fe25afa7226931b2fd33f5784f4"
+    },
+    {
+      "address": "0x0040B5E0",
+      "name": "Op_SLT",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B640",
+      "size": 93,
+      "original_body_sha256": "8f0b3b4a2a1e803aac1814c3ed91790eb776cdaa6353d5b26bfc2b7b56429c13"
+    },
+    {
+      "address": "0x0040B640",
+      "name": "Op_SLTU",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B6A0",
+      "size": 93,
+      "original_body_sha256": "0c7518e1ea614b8fe0c6957d5aa457c2e9ef17a6e40ed75c8e72397e9bb62fd7"
+    },
+    {
+      "address": "0x0040B6A0",
+      "name": "Op_DADD",
+      "notes": "DADD and DADDU share this entry.",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B6F0",
+      "size": 79,
+      "original_body_sha256": "a72a421c38042fe6ff808c43481b906dcc92003951065aa91a58c283a3e5383e"
+    },
+    {
+      "address": "0x0040B6F0",
+      "name": "Op_DSUB",
+      "notes": "DSUB and DSUBU share this entry.",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B740",
+      "size": 75,
+      "original_body_sha256": "0a4d4e6b9b5d76b5b3cc7e6f8d44c7aaf6944234b37921051ac857dbb7dfa306"
+    },
+    {
+      "address": "0x0040B740",
+      "name": "Op_TGE",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B750",
+      "size": 12,
+      "original_body_sha256": "0f2c3c1c1171e35af5b28797ea12e3e8c250992e89625556f4af5bfe213b2af7"
+    },
+    {
+      "address": "0x0040B750",
+      "name": "Op_TGEU",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B760",
+      "size": 12,
+      "original_body_sha256": "8694ac7e7ecb6e3c3b01396e9670e52ee3d5346adb9141cc1469040798a075a7"
+    },
+    {
+      "address": "0x0040B760",
+      "name": "Op_TLT",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B770",
+      "size": 12,
+      "original_body_sha256": "8e6fff046ef2366031a2011581ca130eddbd4dec2c72c3c0f7a750e9dea00c99"
+    },
+    {
+      "address": "0x0040B770",
+      "name": "Op_TLTU",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B780",
+      "size": 12,
+      "original_body_sha256": "84f09650a13338ee8db42edf1ffdcd9867192cf99935e10e72bb415126754b8b"
+    },
+    {
+      "address": "0x0040B780",
+      "name": "Op_TEQ",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B790",
+      "size": 12,
+      "original_body_sha256": "4fa859de8d4bf56a72ac9fe88a6fdccc9490032a5be4380fa2d4531079b3313b"
+    },
+    {
+      "address": "0x0040B790",
+      "name": "Op_TNE",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B7A0",
+      "size": 12,
+      "original_body_sha256": "2c424e35b581628af7214f7ae3b95a488f0a7e59ea9e5ab0f65073347b59170d"
+    },
+    {
+      "address": "0x0040B7A0",
+      "name": "Op_DSLL",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B7F0",
+      "size": 67,
+      "original_body_sha256": "6c415bca617ddeed36676f6267916cb454aa9e08f7dd60751a08515cc4066685"
+    },
+    {
+      "address": "0x0040B7F0",
+      "name": "Op_DSRL",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B840",
+      "size": 67,
+      "original_body_sha256": "92e890a248fba48ad7394bf9775172e12923ff7c76a9a8cc9f1a46a3039bd22a"
+    },
+    {
+      "address": "0x0040B840",
+      "name": "Op_DSRA",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B890",
+      "size": 67,
+      "original_body_sha256": "5de6edabb90298a3e9985436bc43beadfaf608645906a26d9f202fff4bbf9081"
+    },
+    {
+      "address": "0x0040B890",
+      "name": "Op_DSLL32",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B8E0",
+      "size": 70,
+      "original_body_sha256": "e0fb8f33635a77c21120403e9d45b439c0eca4810461f1cb39ecebc9d5adce03"
+    },
+    {
+      "address": "0x0040B8E0",
+      "name": "Op_DSRL32",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B930",
+      "size": 70,
+      "original_body_sha256": "91d8fc175069f843dc278fef536bb41788e8f81310367e6cd0b8d6aa82a6f0e1"
+    },
+    {
+      "address": "0x0040B930",
+      "name": "Op_DSRA32",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B980",
+      "size": 70,
+      "original_body_sha256": "25dd9f65bca0344f8f52bef685eb97f55db6ceb3031aaa1057e8db6a5365fca3"
+    },
+    {
+      "address": "0x0040B980",
+      "name": "Op_BLTZ",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B990",
+      "size": 15,
+      "original_body_sha256": "2658c8ea1473bd7fe57b644e25409d8bf0b9f9c95271506940cbd54f28685aa2"
+    },
+    {
+      "address": "0x0040B990",
+      "name": "Op_BGEZ",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B9A0",
+      "size": 15,
+      "original_body_sha256": "3bdd472b749f954532cf4e8decdb3ca38b392e4f483c76cdab712aff10d95199"
+    },
+    {
+      "address": "0x0040B9A0",
+      "name": "Op_BLTZL",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B9B0",
+      "size": 15,
+      "original_body_sha256": "4da5f7f6bd9329d2c2b020944d5fd4ea6e0c498081b302f3a1c2da6df1a34d34"
+    },
+    {
+      "address": "0x0040B9B0",
+      "name": "Op_BGEZL",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B9C0",
+      "size": 15,
+      "original_body_sha256": "37a43985fd52f826415fb46898df750b720769b6561d33dce439f2b1ea54c4d2"
+    },
+    {
+      "address": "0x0040B9C0",
+      "name": "Op_TGEI",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B9D0",
+      "size": 12,
+      "original_body_sha256": "e84c78c91c29fc3578e500c670d309941d397daa042269355bfeaf5e4632bae6"
+    },
+    {
+      "address": "0x0040B9D0",
+      "name": "Op_TGEIU",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B9E0",
+      "size": 12,
+      "original_body_sha256": "a74393ec2adabb54d398c7cc75e7f60c1a816c229e64f2f32d5d0752469fb5f4"
+    },
+    {
+      "address": "0x0040B9E0",
+      "name": "Op_TLTI",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040B9F0",
+      "size": 12,
+      "original_body_sha256": "cdae5fa1de855b42c883c776ba26bc5168f8f7e6035a065bab86f6edf2f2d441"
+    },
+    {
+      "address": "0x0040B9F0",
+      "name": "Op_TLTIU",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040BA00",
+      "size": 12,
+      "original_body_sha256": "011b0cc85e1f9f82bb6a19d62816b0ea94701aeed80672daaf549c27db369168"
+    },
+    {
+      "address": "0x0040BA00",
+      "name": "Op_TEQI",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040BA10",
+      "size": 12,
+      "original_body_sha256": "2ab7a3455aafccbb6fb251026923794382e8cdbe36e4862ac7832c16656cf02a"
+    },
+    {
+      "address": "0x0040BA10",
+      "name": "Op_TNEI",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040BA20",
+      "size": 12,
+      "original_body_sha256": "bfd5d0c4197c2a21a0d3fc96e7d77d1c2f845e99e18078082b541e63e81bcfd2"
+    },
+    {
+      "address": "0x0040BA20",
+      "name": "Op_BLTZAL",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040BA30",
+      "size": 15,
+      "original_body_sha256": "034c8704afc6bb8c58c49d46542a520c134a342b46f65e4c6309ebce92895be9"
+    },
+    {
+      "address": "0x0040BA30",
+      "name": "Op_BGEZAL",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040BA40",
+      "size": 15,
+      "original_body_sha256": "d27991b6019c872f924abcb91c61fb23f9de9fd0d107d8c1431e3f477752dc64"
+    },
+    {
+      "address": "0x0040BA40",
+      "name": "Op_BLTZALL",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040BA50",
+      "size": 15,
+      "original_body_sha256": "14c2dd8e2b50c3d65fd6559479f5af0df20189cfb5a596f87a2beb2c8c79203f"
+    },
+    {
+      "address": "0x0040BA50",
+      "name": "Op_BGEZALL",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040BA60",
+      "size": 15,
+      "original_body_sha256": "84c85df15973a0ec6f78d9a3b6d8ddd3e03a9b91fbc6def41f691384afab7d5c"
+    },
+    {
+      "address": "0x0040BA60",
+      "name": "Op_MFC0",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040BBD0",
+      "size": 368,
+      "original_body_sha256": "f2e49cc8ba7753726487415cd10463a24a33bfa80e5388af18090bf1a5510cbf"
+    },
+    {
+      "address": "0x0040BBD0",
+      "name": "Op_MTC0",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040BEF0",
+      "size": 792,
+      "original_body_sha256": "2691aae8b39585b7bd29258ccdf5435ba7902a4d5ae43ba8954685d14130f4bc"
+    },
+    {
+      "address": "0x0040BEF0",
+      "name": "Op_COP0Function",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040BF10",
+      "size": 17,
+      "original_body_sha256": "880d73fde78a236f2e002f620b12ae82782ba304f7e9c06e738952059fdad305"
+    },
+    {
+      "address": "0x0040BF10",
+      "name": "Op_TLBR",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040BF20",
+      "size": 5,
+      "original_body_sha256": "58ea42dcea412df49e4650a1f8b7c6c61300a886281bf8b87d35483b80d1f56b"
+    },
+    {
+      "address": "0x0040BF20",
+      "name": "Op_TLBWI",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040BF30",
+      "size": 12,
+      "original_body_sha256": "4bb3fc8351c225bd10d15eecfb5fa80e2b7faaff557e476396037a234d5bad1d"
+    },
+    {
+      "address": "0x0040BF30",
+      "name": "Op_TLBWR",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040BF60",
+      "size": 40,
+      "original_body_sha256": "03fe4bb9ee6c0e7d0c9d4359301179ddc1d8771fc889d3c19c2a19b561484bec"
+    },
+    {
+      "address": "0x0040BF60",
+      "name": "Op_TLBP",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040BF70",
+      "size": 5,
+      "original_body_sha256": "3d4582c73d5221801af89edfe9c513dd1cfd4f04cbc5d5cf052570145481256f"
+    },
+    {
+      "address": "0x0040BF70",
+      "name": "Op_ERET",
+      "notes": "",
+      "source": "src/nemu64/CPU.cpp",
+      "end": "0x0040BFB0",
+      "size": 60,
+      "original_body_sha256": "3ade1052bf61e2c34305467dbf284e4d2b02f5087a03496aef6af46e58564d71"
+    },
+    {
+      "name": "Op_MFC1",
+      "address": "0x0040BFB0",
+      "original_size": 43,
+      "candidate_size": 43,
+      "relocation_masked_match": true,
+      "padded_size": 48,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 43,
+      "original_body_sha256": "3646c29174a50421e59097e1aa2e1874afa8d6b029d0c7ca739b0ced6862a8b5"
+    },
+    {
+      "name": "Op_DMFC1",
+      "address": "0x0040BFE0",
+      "original_size": 51,
+      "candidate_size": 51,
+      "relocation_masked_match": true,
+      "padded_size": 64,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 51,
+      "original_body_sha256": "7890e5cd46f4af8c74bd86baf23208e4f6eaadef51c7488d6d9d8937c1607f68"
+    },
+    {
+      "name": "Op_CFC1",
+      "address": "0x0040C020",
+      "original_size": 78,
+      "candidate_size": 78,
+      "relocation_masked_match": true,
+      "padded_size": 80,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 78,
+      "original_body_sha256": "b96ceec67caf5126ec2483ca9e71287723aaa165b7793424ece90f7bee3cc276"
+    },
+    {
+      "name": "Op_MTC1",
+      "address": "0x0040C070",
+      "original_size": 37,
+      "candidate_size": 37,
+      "relocation_masked_match": true,
+      "padded_size": 48,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 37,
+      "original_body_sha256": "86caaa1cd5d3d93b5cf2901cf513de03f5406bacc2f0aff4b65d50d5819ee8cd"
+    },
+    {
+      "name": "Op_DMTC1",
+      "address": "0x0040C0A0",
+      "original_size": 53,
+      "candidate_size": 53,
+      "relocation_masked_match": true,
+      "padded_size": 64,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 53,
+      "original_body_sha256": "97fb3c08bcb1a155aa4b65ddf406074706a3ee9f4fa5e690dc2d2337fb3aa587"
+    },
+    {
+      "name": "Op_CTC1",
+      "address": "0x0040C0E0",
+      "original_size": 39,
+      "candidate_size": 39,
+      "relocation_masked_match": true,
+      "padded_size": 48,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 39,
+      "original_body_sha256": "3c42c1358085e2bba2df85f4139230bb307ab07b9b555770355fb263ec6d9ab0"
+    },
+    {
+      "name": "Op_BC1",
+      "address": "0x0040C110",
+      "original_size": 97,
+      "candidate_size": 97,
+      "relocation_masked_match": true,
+      "padded_size": 112,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 97,
+      "original_body_sha256": "6a0e9cba102ce26f50c50521bfe4b31662a669c1dc7056a0790098d9775053c0"
+    },
+    {
+      "name": "Op_COP1Function",
+      "address": "0x0040C180",
+      "original_size": 17,
+      "candidate_size": 17,
+      "relocation_masked_match": true,
+      "padded_size": 32,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 17,
+      "original_body_sha256": "ccd638237988aec9a7e5f954133f5bde843e2f22f36c068286c3c434f787cb48"
+    },
+    {
+      "name": "Op_FADD",
+      "address": "0x0040C1A0",
+      "original_size": 121,
+      "candidate_size": 121,
+      "relocation_masked_match": true,
+      "padded_size": 128,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 121,
+      "original_body_sha256": "612f17687a797a8adabb519574451bdab8f488beb989d534cbcf0a8beacd28ec"
+    },
+    {
+      "name": "Op_FSUB",
+      "address": "0x0040C220",
+      "original_size": 121,
+      "candidate_size": 121,
+      "relocation_masked_match": true,
+      "padded_size": 128,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 121,
+      "original_body_sha256": "68c8cf0bbd7ab67e61c4973e82f335f2cf817e9bf6d032c2a034fe7829825fa1"
+    },
+    {
+      "name": "Op_FMUL",
+      "address": "0x0040C2A0",
+      "original_size": 121,
+      "candidate_size": 121,
+      "relocation_masked_match": true,
+      "padded_size": 128,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 121,
+      "original_body_sha256": "74c6eb4b68c1c1baaf99baaabc38ddd4a5220ec00f5c8beb2f062e74d603646a"
+    },
+    {
+      "name": "Op_FDIV",
+      "address": "0x0040C320",
+      "original_size": 121,
+      "candidate_size": 121,
+      "relocation_masked_match": true,
+      "padded_size": 128,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 121,
+      "original_body_sha256": "f9bf3675c8c01400e27dd97ccc912206a86f865d5742bfe90ee1874dc76113fd"
+    },
+    {
+      "name": "Op_FSQRT",
+      "address": "0x0040C3A0",
+      "original_size": 87,
+      "candidate_size": 87,
+      "relocation_masked_match": true,
+      "padded_size": 96,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 87,
+      "original_body_sha256": "7ffe9b8833705acb4f73b20c2b51685143b157171e624da5cd8a7bc3f70225e7"
+    },
+    {
+      "name": "Op_FABS",
+      "address": "0x0040C400",
+      "original_size": 87,
+      "candidate_size": 87,
+      "relocation_masked_match": true,
+      "padded_size": 96,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 87,
+      "original_body_sha256": "5118fb98aa0a326ab193f033054e58f41f8827c5e7fbd665f3f12bd394c159ab"
+    },
+    {
+      "name": "Op_FMOV",
+      "address": "0x0040C460",
+      "original_size": 97,
+      "candidate_size": 97,
+      "relocation_masked_match": true,
+      "padded_size": 112,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 97,
+      "original_body_sha256": "7aa6f44cae6dd4d5102119cebd4b391af0e0b6b412191208b8d21b6d156e5756"
+    },
+    {
+      "name": "Op_FNEG",
+      "address": "0x0040C4D0",
+      "original_size": 87,
+      "candidate_size": 87,
+      "relocation_masked_match": true,
+      "padded_size": 96,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 87,
+      "original_body_sha256": "e4c03c0649c752856e5e3e75aa45422ceac151faf2d85cb1de0c4717ca86b16c"
+    },
+    {
+      "name": "Op_ROUND_L",
+      "address": "0x0040C530",
+      "original_size": 91,
+      "candidate_size": 91,
+      "relocation_masked_match": true,
+      "padded_size": 96,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 91,
+      "original_body_sha256": "42afcc43a59b937b67b3c8d3fc5758f39380bdfdce3180452f0c6833b38138ae"
+    },
+    {
+      "name": "Op_ROUND_W",
+      "address": "0x0040C590",
+      "original_size": 95,
+      "candidate_size": 95,
+      "relocation_masked_match": true,
+      "padded_size": 96,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 95,
+      "original_body_sha256": "743a68e57d8c866c0147f044a9e832170362566e063bef19206b1a83d535bcae"
+    },
+    {
+      "name": "Op_CVT_S",
+      "address": "0x0040C5F0",
+      "original_size": 117,
+      "candidate_size": 117,
+      "relocation_masked_match": true,
+      "padded_size": 128,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 117,
+      "original_body_sha256": "c54dbb839a489656a92db6ae72fe76e833d68e648416248310644e8a1071fdf0"
+    },
+    {
+      "name": "Op_CVT_D",
+      "address": "0x0040C670",
+      "original_size": 121,
+      "candidate_size": 121,
+      "relocation_masked_match": true,
+      "padded_size": 128,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 121,
+      "original_body_sha256": "37b76d83d50852da9acccd69d0a18459380b4d94e62737d98744fb7d14c90595"
+    },
+    {
+      "name": "Op_CVT_W",
+      "address": "0x0040C6F0",
+      "original_size": 132,
+      "candidate_size": 132,
+      "relocation_masked_match": true,
+      "padded_size": 144,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 132,
+      "original_body_sha256": "7fd1b2b907a0ffea650cdf8cd85b7e998bc1ea59e5ec42e1e3de0f6850f7deb9"
+    },
+    {
+      "name": "Op_CVT_L",
+      "address": "0x0040C780",
+      "original_size": 139,
+      "candidate_size": 139,
+      "relocation_masked_match": true,
+      "padded_size": 144,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 139,
+      "original_body_sha256": "55118182693adc36154195dc826f181ee3e3a0adf865b25ea74a7bbe820ce74d"
+    },
+    {
+      "name": "Op_C_EQ",
+      "address": "0x0040C810",
+      "original_size": 123,
+      "candidate_size": 123,
+      "relocation_masked_match": true,
+      "padded_size": 128,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 123,
+      "original_body_sha256": "a0c047de0632e08930d66980eef844e6dc71511245416dc0ffae862cc7a168f2"
+    },
+    {
+      "name": "Op_C_LT",
+      "address": "0x0040C890",
+      "original_size": 123,
+      "candidate_size": 123,
+      "relocation_masked_match": true,
+      "padded_size": 128,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 123,
+      "original_body_sha256": "2f9c9e617ea01bbfbb43c4540a8c6c1fea4600b109660c1afded4e880687fa04"
+    },
+    {
+      "name": "Op_C_F",
+      "address": "0x0040C910",
+      "original_size": 11,
+      "candidate_size": 11,
+      "relocation_masked_match": true,
+      "padded_size": 16,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 11,
+      "original_body_sha256": "fb7a1f63001543009968a303cfd780ff3c77e786adb2b27b9662e6ee06f22ab1"
+    },
+    {
+      "name": "Op_C_LE",
+      "address": "0x0040C920",
+      "original_size": 123,
+      "candidate_size": 123,
+      "relocation_masked_match": true,
+      "padded_size": 128,
+      "source": "src/nemu64/CPU.cpp",
+      "size": 123,
+      "original_body_sha256": "9e3df669c022165d68992fcd7f8daab5157d8da4a8484cd185144d3e79bfd303"
+    },
+    {
+      "name": "ExecuteInterpreter",
+      "address": "0x0040C9A0",
+      "end": "0x0040D550",
+      "source": "src/nemu64/CPU.cpp",
+      "size": 2992,
+      "original_body_sha256": "52ecd0798eee188a21849c6b5d7ed7b9540becd7ce1173a89fe54fe7ee5f1b51"
+    },
+    {
+      "name": "ReportInvalidOpcode",
+      "address": "0x0040D550",
+      "end": "0x0040D590",
+      "source": "src/nemu64/CPU.cpp",
+      "size": 50,
+      "original_body_sha256": "11296d210cbb8c53ce8f08ff1420f0ec58069a798eaa490d56cac889e009c2a1"
+    }
+  ],
+  "globals": [
+    {
+      "name": "CPU_GPR",
+      "address": "0x03E64EB0",
+      "type": "CpuS64[32]",
+      "size": 256,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_COP0",
+      "address": "0x0406F048",
+      "type": "CpuU32[32]",
+      "size": 128,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_PC",
+      "address": "0x03E69374",
+      "type": "CpuS32",
+      "size": 4,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_Instruction",
+      "address": "0x03E5AE08",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_HI",
+      "address": "0x03E64E78",
+      "type": "CpuS64",
+      "size": 8,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_LO",
+      "address": "0x03E696E8",
+      "type": "CpuS64",
+      "size": 8,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_FPR",
+      "address": "0x03E69488",
+      "type": "CPUFloatingRegisters",
+      "size": 128,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_FPR64",
+      "address": "0x0406F0D0",
+      "type": "CpuS64[32]",
+      "size": 256,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_FCR31",
+      "address": "0x03E64E74",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_ActionFlags",
+      "address": "0x03E69368",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_Running",
+      "address": "0x03E5AE0C",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_Thread",
+      "address": "0x03E6935C",
+      "type": "HANDLE",
+      "size": 4,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_LastPC",
+      "address": "0x02F73484",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_Random",
+      "address": "0x03E651F4",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_ComparePending",
+      "address": "0x03E69520",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_FRMode",
+      "address": "0x03E62E14",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_ExceptionPC",
+      "address": "0x03E5ADE4",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_AudioEnabled",
+      "address": "0x03E64FB0",
+      "type": "int",
+      "size": 4,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_AudioCyclesRemaining",
+      "address": "0x03E64FC0",
+      "type": "int",
+      "size": 4,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_VideoCyclesRemaining",
+      "address": "0x03E69530",
+      "type": "int",
+      "size": 4,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_VideoPeriod",
+      "address": "0x03E651F8",
+      "type": "int",
+      "size": 4,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_RSPCycles",
+      "address": "0x03E69660",
+      "type": "int",
+      "size": 4,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_Use32BitMemoryAccess",
+      "address": "0x0097AE64",
+      "type": "int",
+      "size": 4,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_TLBEnabled",
+      "address": "0x03E69364",
+      "type": "int",
+      "size": 4,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_InterpreterMode",
+      "address": "0x03E69528",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_CompareReset",
+      "address": "0x03E6950C",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_Cop1UnusableDelay",
+      "address": "0x03E6955C",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_FpuExceptionDelay",
+      "address": "0x03E5AE04",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "CPU_TLBExceptionDelay",
+      "address": "0x0406F0C8",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "VICount",
+      "address": "0x03E69348",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "RSPBreakpointCount",
+      "address": "0x01240E5C",
+      "type": "CpuU32",
+      "size": 4,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    },
+    {
+      "name": "RSPBreakpoints",
+      "address": "0x02E4BB58",
+      "type": "CpuU32[100]",
+      "size": 400,
+      "source": "src/nemu64/CPU.cpp",
+      "initializer": "zero (BSS)"
+    }
+  ],
+  "dispatch_tables": [
+    {
+      "family": "cpu_interpreter",
+      "kind": "primary",
+      "va": 4685216,
+      "count": 64,
+      "dispatch_instruction_addresses": [
+        4234956
+      ],
+      "target_kind": "handler_entry_candidate",
+      "entries": [
+        {
+          "index": 0,
+          "mnemonic": "SPECIAL",
+          "target": 4235280
+        },
+        {
+          "index": 1,
+          "mnemonic": "REGIMM",
+          "target": 4235312
+        },
+        {
+          "index": 2,
+          "mnemonic": "J",
+          "target": 4235344
+        },
+        {
+          "index": 3,
+          "mnemonic": "JAL",
+          "target": 4235408
+        },
+        {
+          "index": 4,
+          "mnemonic": "BEQ",
+          "target": 4235488
+        },
+        {
+          "index": 5,
+          "mnemonic": "BNE",
+          "target": 4235648
+        },
+        {
+          "index": 6,
+          "mnemonic": "BLEZ",
+          "target": 4235744
+        },
+        {
+          "index": 7,
+          "mnemonic": "BGTZ",
+          "target": 4235760
+        },
+        {
+          "index": 8,
+          "mnemonic": "ADDI",
+          "target": 4235776
+        },
+        {
+          "index": 9,
+          "mnemonic": "ADDIU",
+          "target": 4235776
+        },
+        {
+          "index": 10,
+          "mnemonic": "SLTI",
+          "target": 4235840
+        },
+        {
+          "index": 11,
+          "mnemonic": "SLTIU",
+          "target": 4235920
+        },
+        {
+          "index": 12,
+          "mnemonic": "ANDI",
+          "target": 4236000
+        },
+        {
+          "index": 13,
+          "mnemonic": "ORI",
+          "target": 4236064
+        },
+        {
+          "index": 14,
+          "mnemonic": "XORI",
+          "target": 4236128
+        },
+        {
+          "index": 15,
+          "mnemonic": "LUI",
+          "target": 4236192
+        },
+        {
+          "index": 16,
+          "mnemonic": "COP0",
+          "target": 4236240
+        },
+        {
+          "index": 17,
+          "mnemonic": "COP1",
+          "target": 4236272
+        },
+        {
+          "index": 18,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 19,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 20,
+          "mnemonic": "BEQL",
+          "target": 4236304
+        },
+        {
+          "index": 21,
+          "mnemonic": "BNEL",
+          "target": 4236400
+        },
+        {
+          "index": 22,
+          "mnemonic": "BLEZL",
+          "target": 4236512
+        },
+        {
+          "index": 23,
+          "mnemonic": "BGTZL",
+          "target": 4236528
+        },
+        {
+          "index": 24,
+          "mnemonic": "DADDI",
+          "target": 4236544
+        },
+        {
+          "index": 25,
+          "mnemonic": "DADDIU",
+          "target": 4236544
+        },
+        {
+          "index": 26,
+          "mnemonic": "LDL",
+          "target": 4236608
+        },
+        {
+          "index": 27,
+          "mnemonic": "LDR",
+          "target": 4236624
+        },
+        {
+          "index": 28,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 29,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 30,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 31,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 32,
+          "mnemonic": "LB",
+          "target": 4236640
+        },
+        {
+          "index": 33,
+          "mnemonic": "LH",
+          "target": 4236736
+        },
+        {
+          "index": 34,
+          "mnemonic": "LWL",
+          "target": 4236832
+        },
+        {
+          "index": 35,
+          "mnemonic": "LW",
+          "target": 4236976
+        },
+        {
+          "index": 36,
+          "mnemonic": "LBU",
+          "target": 4237072
+        },
+        {
+          "index": 37,
+          "mnemonic": "LHU",
+          "target": 4237168
+        },
+        {
+          "index": 38,
+          "mnemonic": "LWR",
+          "target": 4237264
+        },
+        {
+          "index": 39,
+          "mnemonic": "LWU",
+          "target": 4237408
+        },
+        {
+          "index": 40,
+          "mnemonic": "SB",
+          "target": 4237504
+        },
+        {
+          "index": 41,
+          "mnemonic": "SH",
+          "target": 4237600
+        },
+        {
+          "index": 42,
+          "mnemonic": "SWL",
+          "target": 4237696
+        },
+        {
+          "index": 43,
+          "mnemonic": "SW",
+          "target": 4237824
+        },
+        {
+          "index": 44,
+          "mnemonic": "SDL",
+          "target": 4237920
+        },
+        {
+          "index": 45,
+          "mnemonic": "SDR",
+          "target": 4237936
+        },
+        {
+          "index": 46,
+          "mnemonic": "SWR",
+          "target": 4237952
+        },
+        {
+          "index": 47,
+          "mnemonic": "CACHE",
+          "target": 4325104
+        },
+        {
+          "index": 48,
+          "mnemonic": "LL",
+          "target": 4325104
+        },
+        {
+          "index": 49,
+          "mnemonic": "LWC1",
+          "target": 4238096
+        },
+        {
+          "index": 50,
+          "mnemonic": "LWC2",
+          "target": 4234880
+        },
+        {
+          "index": 51,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 52,
+          "mnemonic": "LLD",
+          "target": 4325104
+        },
+        {
+          "index": 53,
+          "mnemonic": "LDC1",
+          "target": 4238192
+        },
+        {
+          "index": 54,
+          "mnemonic": "LDC2",
+          "target": 4234880
+        },
+        {
+          "index": 55,
+          "mnemonic": "LD",
+          "target": 4238352
+        },
+        {
+          "index": 56,
+          "mnemonic": "SC",
+          "target": 4325104
+        },
+        {
+          "index": 57,
+          "mnemonic": "SWC1",
+          "target": 4238496
+        },
+        {
+          "index": 58,
+          "mnemonic": "SWC2",
+          "target": 4234880
+        },
+        {
+          "index": 59,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 60,
+          "mnemonic": "SCD",
+          "target": 4325104
+        },
+        {
+          "index": 61,
+          "mnemonic": "SDC1",
+          "target": 4238592
+        },
+        {
+          "index": 62,
+          "mnemonic": "SDC2",
+          "target": 4234880
+        },
+        {
+          "index": 63,
+          "mnemonic": "SD",
+          "target": 4238704
+        }
+      ],
+      "byte_size": 256
+    },
+    {
+      "family": "cpu_interpreter",
+      "kind": "special",
+      "va": 4685472,
+      "count": 64,
+      "dispatch_instruction_addresses": [
+        4235290
+      ],
+      "target_kind": "handler_entry_candidate",
+      "entries": [
+        {
+          "index": 0,
+          "mnemonic": "SLL",
+          "target": 4238816
+        },
+        {
+          "index": 1,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 2,
+          "mnemonic": "SRL",
+          "target": 4238880
+        },
+        {
+          "index": 3,
+          "mnemonic": "SRA",
+          "target": 4238944
+        },
+        {
+          "index": 4,
+          "mnemonic": "SLLV",
+          "target": 4239008
+        },
+        {
+          "index": 5,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 6,
+          "mnemonic": "SRLV",
+          "target": 4239072
+        },
+        {
+          "index": 7,
+          "mnemonic": "SRAV",
+          "target": 4239136
+        },
+        {
+          "index": 8,
+          "mnemonic": "JR",
+          "target": 4239200
+        },
+        {
+          "index": 9,
+          "mnemonic": "JALR",
+          "target": 4239264
+        },
+        {
+          "index": 10,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 11,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 12,
+          "mnemonic": "SYSCALL",
+          "target": 4239344
+        },
+        {
+          "index": 13,
+          "mnemonic": "BREAK",
+          "target": 4239376
+        },
+        {
+          "index": 14,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 15,
+          "mnemonic": "SYNC",
+          "target": 4325104
+        },
+        {
+          "index": 16,
+          "mnemonic": "MFHI",
+          "target": 4239392
+        },
+        {
+          "index": 17,
+          "mnemonic": "MTHI",
+          "target": 4239440
+        },
+        {
+          "index": 18,
+          "mnemonic": "MFLO",
+          "target": 4239488
+        },
+        {
+          "index": 19,
+          "mnemonic": "MTLO",
+          "target": 4239536
+        },
+        {
+          "index": 20,
+          "mnemonic": "DSLLV",
+          "target": 4239584
+        },
+        {
+          "index": 21,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 22,
+          "mnemonic": "DSRLV",
+          "target": 4239584
+        },
+        {
+          "index": 23,
+          "mnemonic": "DSRAV",
+          "target": 4239664
+        },
+        {
+          "index": 24,
+          "mnemonic": "MULT",
+          "target": 4239744
+        },
+        {
+          "index": 25,
+          "mnemonic": "MULTU",
+          "target": 4239824
+        },
+        {
+          "index": 26,
+          "mnemonic": "DIV",
+          "target": 4239904
+        },
+        {
+          "index": 27,
+          "mnemonic": "DIVU",
+          "target": 4239984
+        },
+        {
+          "index": 28,
+          "mnemonic": "DMULT",
+          "target": 4240064
+        },
+        {
+          "index": 29,
+          "mnemonic": "DMULTU",
+          "target": 4240064
+        },
+        {
+          "index": 30,
+          "mnemonic": "DDIV",
+          "target": 4240160
+        },
+        {
+          "index": 31,
+          "mnemonic": "DDIVU",
+          "target": 4240256
+        },
+        {
+          "index": 32,
+          "mnemonic": "ADD",
+          "target": 4240352
+        },
+        {
+          "index": 33,
+          "mnemonic": "ADDU",
+          "target": 4240352
+        },
+        {
+          "index": 34,
+          "mnemonic": "SUB",
+          "target": 4240416
+        },
+        {
+          "index": 35,
+          "mnemonic": "SUBU",
+          "target": 4240416
+        },
+        {
+          "index": 36,
+          "mnemonic": "AND",
+          "target": 4240480
+        },
+        {
+          "index": 37,
+          "mnemonic": "OR",
+          "target": 4240576
+        },
+        {
+          "index": 38,
+          "mnemonic": "XOR",
+          "target": 4240672
+        },
+        {
+          "index": 39,
+          "mnemonic": "NOR",
+          "target": 4240768
+        },
+        {
+          "index": 40,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 41,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 42,
+          "mnemonic": "SLT",
+          "target": 4240864
+        },
+        {
+          "index": 43,
+          "mnemonic": "SLTU",
+          "target": 4240960
+        },
+        {
+          "index": 44,
+          "mnemonic": "DADD",
+          "target": 4241056
+        },
+        {
+          "index": 45,
+          "mnemonic": "DADDU",
+          "target": 4241056
+        },
+        {
+          "index": 46,
+          "mnemonic": "DSUB",
+          "target": 4241136
+        },
+        {
+          "index": 47,
+          "mnemonic": "DSUBU",
+          "target": 4241136
+        },
+        {
+          "index": 48,
+          "mnemonic": "TGE",
+          "target": 4241216
+        },
+        {
+          "index": 49,
+          "mnemonic": "TGEU",
+          "target": 4241232
+        },
+        {
+          "index": 50,
+          "mnemonic": "TLT",
+          "target": 4241248
+        },
+        {
+          "index": 51,
+          "mnemonic": "TLTU",
+          "target": 4241264
+        },
+        {
+          "index": 52,
+          "mnemonic": "TEQ",
+          "target": 4241280
+        },
+        {
+          "index": 53,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 54,
+          "mnemonic": "TNE",
+          "target": 4241296
+        },
+        {
+          "index": 55,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 56,
+          "mnemonic": "DSLL",
+          "target": 4241312
+        },
+        {
+          "index": 57,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 58,
+          "mnemonic": "DSRL",
+          "target": 4241392
+        },
+        {
+          "index": 59,
+          "mnemonic": "DSRA",
+          "target": 4241472
+        },
+        {
+          "index": 60,
+          "mnemonic": "DSLL32",
+          "target": 4241552
+        },
+        {
+          "index": 61,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 62,
+          "mnemonic": "DSRL32",
+          "target": 4241632
+        },
+        {
+          "index": 63,
+          "mnemonic": "DSRA32",
+          "target": 4241712
+        }
+      ],
+      "byte_size": 256
+    },
+    {
+      "family": "cpu_interpreter",
+      "kind": "regimm",
+      "va": 4685728,
+      "count": 32,
+      "dispatch_instruction_addresses": [
+        4235322
+      ],
+      "target_kind": "handler_entry_candidate",
+      "entries": [
+        {
+          "index": 0,
+          "mnemonic": "BLTZ",
+          "target": 4241792
+        },
+        {
+          "index": 1,
+          "mnemonic": "BGEZ",
+          "target": 4241808
+        },
+        {
+          "index": 2,
+          "mnemonic": "BLTZL",
+          "target": 4241824
+        },
+        {
+          "index": 3,
+          "mnemonic": "BGEZL",
+          "target": 4241840
+        },
+        {
+          "index": 4,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 5,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 6,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 7,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 8,
+          "mnemonic": "TGEI",
+          "target": 4241856
+        },
+        {
+          "index": 9,
+          "mnemonic": "TGEIU",
+          "target": 4241872
+        },
+        {
+          "index": 10,
+          "mnemonic": "TLTI",
+          "target": 4241888
+        },
+        {
+          "index": 11,
+          "mnemonic": "TLTIU",
+          "target": 4241904
+        },
+        {
+          "index": 12,
+          "mnemonic": "TEQI",
+          "target": 4241920
+        },
+        {
+          "index": 13,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 14,
+          "mnemonic": "TNEI",
+          "target": 4241936
+        },
+        {
+          "index": 15,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 16,
+          "mnemonic": "BLTZAL",
+          "target": 4241952
+        },
+        {
+          "index": 17,
+          "mnemonic": "BGEZAL",
+          "target": 4241968
+        },
+        {
+          "index": 18,
+          "mnemonic": "BLTZALL",
+          "target": 4241984
+        },
+        {
+          "index": 19,
+          "mnemonic": "BGEZALL",
+          "target": 4242000
+        },
+        {
+          "index": 20,
+          "mnemonic": "reserved",
+          "target": 4234880
+        },
+        {
+          "index": 21,
+          "mnemonic": "reserved",
+          "target": 4234880
+        },
+        {
+          "index": 22,
+          "mnemonic": "reserved",
+          "target": 4234880
+        },
+        {
+          "index": 23,
+          "mnemonic": "reserved",
+          "target": 4234880
+        },
+        {
+          "index": 24,
+          "mnemonic": "reserved",
+          "target": 4234880
+        },
+        {
+          "index": 25,
+          "mnemonic": "reserved",
+          "target": 4234880
+        },
+        {
+          "index": 26,
+          "mnemonic": "reserved",
+          "target": 4234880
+        },
+        {
+          "index": 27,
+          "mnemonic": "reserved",
+          "target": 4234880
+        },
+        {
+          "index": 28,
+          "mnemonic": "reserved",
+          "target": 4234880
+        },
+        {
+          "index": 29,
+          "mnemonic": "reserved",
+          "target": 4234880
+        },
+        {
+          "index": 30,
+          "mnemonic": "reserved",
+          "target": 4234880
+        },
+        {
+          "index": 31,
+          "mnemonic": "reserved",
+          "target": 4234880
+        }
+      ],
+      "byte_size": 128
+    },
+    {
+      "family": "cpu_interpreter",
+      "kind": "cop0",
+      "va": 4685856,
+      "count": 32,
+      "dispatch_instruction_addresses": [
+        4236251
+      ],
+      "target_kind": "handler_entry_candidate",
+      "entries": [
+        {
+          "index": 0,
+          "mnemonic": "MFC0",
+          "target": 4242016
+        },
+        {
+          "index": 1,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 2,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 3,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 4,
+          "mnemonic": "MTC0",
+          "target": 4242384
+        },
+        {
+          "index": 5,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 6,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 7,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 8,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 9,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 10,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 11,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 12,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 13,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 14,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 15,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 16,
+          "mnemonic": "TLB",
+          "target": 4243184
+        },
+        {
+          "index": 17,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 18,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 19,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 20,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 21,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 22,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 23,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 24,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 25,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 26,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 27,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 28,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 29,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 30,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 31,
+          "mnemonic": "unused",
+          "target": 4234880
+        }
+      ],
+      "byte_size": 128
+    },
+    {
+      "family": "cpu_interpreter",
+      "kind": "tlb",
+      "va": 4685984,
+      "count": 64,
+      "dispatch_instruction_addresses": [
+        4243194
+      ],
+      "target_kind": "handler_entry_candidate",
+      "entries": [
+        {
+          "index": 0,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 1,
+          "mnemonic": "TLBR",
+          "target": 4243216
+        },
+        {
+          "index": 2,
+          "mnemonic": "TLBWI",
+          "target": 4243232
+        },
+        {
+          "index": 3,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 4,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 5,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 6,
+          "mnemonic": "TLBWR",
+          "target": 4243248
+        },
+        {
+          "index": 7,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 8,
+          "mnemonic": "TLBP",
+          "target": 4243296
+        },
+        {
+          "index": 9,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 10,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 11,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 12,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 13,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 14,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 15,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 16,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 17,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 18,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 19,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 20,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 21,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 22,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 23,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 24,
+          "mnemonic": "ERET",
+          "target": 4243312
+        },
+        {
+          "index": 25,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 26,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 27,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 28,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 29,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 30,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 31,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 32,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 33,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 34,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 35,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 36,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 37,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 38,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 39,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 40,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 41,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 42,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 43,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 44,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 45,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 46,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 47,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 48,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 49,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 50,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 51,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 52,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 53,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 54,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 55,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 56,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 57,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 58,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 59,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 60,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 61,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 62,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 63,
+          "mnemonic": "unused",
+          "target": 4234880
+        }
+      ],
+      "byte_size": 256
+    },
+    {
+      "family": "cpu_interpreter",
+      "kind": "cop1",
+      "va": 4686240,
+      "count": 32,
+      "dispatch_instruction_addresses": [
+        4236283
+      ],
+      "target_kind": "handler_entry_candidate",
+      "entries": [
+        {
+          "index": 0,
+          "mnemonic": "MFC1",
+          "target": 4243376
+        },
+        {
+          "index": 1,
+          "mnemonic": "DMFC1",
+          "target": 4243424
+        },
+        {
+          "index": 2,
+          "mnemonic": "CFC1",
+          "target": 4243488
+        },
+        {
+          "index": 3,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 4,
+          "mnemonic": "MTC1",
+          "target": 4243568
+        },
+        {
+          "index": 5,
+          "mnemonic": "DMTC1",
+          "target": 4243616
+        },
+        {
+          "index": 6,
+          "mnemonic": "CTC1",
+          "target": 4243680
+        },
+        {
+          "index": 7,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 8,
+          "mnemonic": "BC",
+          "target": 4243728
+        },
+        {
+          "index": 9,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 10,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 11,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 12,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 13,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 14,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 15,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 16,
+          "mnemonic": "S",
+          "target": 4243840
+        },
+        {
+          "index": 17,
+          "mnemonic": "D",
+          "target": 4243840
+        },
+        {
+          "index": 18,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 19,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 20,
+          "mnemonic": "W",
+          "target": 4243840
+        },
+        {
+          "index": 21,
+          "mnemonic": "L",
+          "target": 4243840
+        },
+        {
+          "index": 22,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 23,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 24,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 25,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 26,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 27,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 28,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 29,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 30,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 31,
+          "mnemonic": "unused",
+          "target": 4234880
+        }
+      ],
+      "byte_size": 128
+    },
+    {
+      "family": "cpu_interpreter",
+      "kind": "cop1_function",
+      "va": 4686368,
+      "count": 64,
+      "dispatch_instruction_addresses": [
+        4243850
+      ],
+      "target_kind": "handler_entry_candidate",
+      "entries": [
+        {
+          "index": 0,
+          "mnemonic": "ADD",
+          "target": 4243872
+        },
+        {
+          "index": 1,
+          "mnemonic": "SUB",
+          "target": 4244000
+        },
+        {
+          "index": 2,
+          "mnemonic": "MUL",
+          "target": 4244128
+        },
+        {
+          "index": 3,
+          "mnemonic": "DIV",
+          "target": 4244256
+        },
+        {
+          "index": 4,
+          "mnemonic": "SQRT",
+          "target": 4244384
+        },
+        {
+          "index": 5,
+          "mnemonic": "ABS",
+          "target": 4244480
+        },
+        {
+          "index": 6,
+          "mnemonic": "MOV",
+          "target": 4244576
+        },
+        {
+          "index": 7,
+          "mnemonic": "NEG",
+          "target": 4244688
+        },
+        {
+          "index": 8,
+          "mnemonic": "ROUND.L",
+          "target": 4244784
+        },
+        {
+          "index": 9,
+          "mnemonic": "TRUNC.L",
+          "target": 4244784
+        },
+        {
+          "index": 10,
+          "mnemonic": "CEIL.L",
+          "target": 4244784
+        },
+        {
+          "index": 11,
+          "mnemonic": "FLOOR.L",
+          "target": 4244784
+        },
+        {
+          "index": 12,
+          "mnemonic": "ROUND.W",
+          "target": 4244880
+        },
+        {
+          "index": 13,
+          "mnemonic": "TRUNC.W",
+          "target": 4244880
+        },
+        {
+          "index": 14,
+          "mnemonic": "CEIL.W",
+          "target": 4244880
+        },
+        {
+          "index": 15,
+          "mnemonic": "FLOOR.W",
+          "target": 4244880
+        },
+        {
+          "index": 16,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 17,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 18,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 19,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 20,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 21,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 22,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 23,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 24,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 25,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 26,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 27,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 28,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 29,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 30,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 31,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 32,
+          "mnemonic": "CVT.S",
+          "target": 4244976
+        },
+        {
+          "index": 33,
+          "mnemonic": "CVT.D",
+          "target": 4245104
+        },
+        {
+          "index": 34,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 35,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 36,
+          "mnemonic": "CVT.W",
+          "target": 4245232
+        },
+        {
+          "index": 37,
+          "mnemonic": "CVT.L",
+          "target": 4245376
+        },
+        {
+          "index": 38,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 39,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 40,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 41,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 42,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 43,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 44,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 45,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 46,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 47,
+          "mnemonic": "unused",
+          "target": 4234880
+        },
+        {
+          "index": 48,
+          "mnemonic": "C.F",
+          "target": 4245776
+        },
+        {
+          "index": 49,
+          "mnemonic": "C.UN",
+          "target": 4245776
+        },
+        {
+          "index": 50,
+          "mnemonic": "C.EQ",
+          "target": 4245520
+        },
+        {
+          "index": 51,
+          "mnemonic": "C.UEQ",
+          "target": 4245520
+        },
+        {
+          "index": 52,
+          "mnemonic": "C.OLT",
+          "target": 4245648
+        },
+        {
+          "index": 53,
+          "mnemonic": "C.ULT",
+          "target": 4245648
+        },
+        {
+          "index": 54,
+          "mnemonic": "C.OLE",
+          "target": 4245792
+        },
+        {
+          "index": 55,
+          "mnemonic": "C.ULE",
+          "target": 4245792
+        },
+        {
+          "index": 56,
+          "mnemonic": "C.SF",
+          "target": 4245776
+        },
+        {
+          "index": 57,
+          "mnemonic": "C.NGLE",
+          "target": 4245776
+        },
+        {
+          "index": 58,
+          "mnemonic": "C.SEQ",
+          "target": 4245520
+        },
+        {
+          "index": 59,
+          "mnemonic": "C.NGL",
+          "target": 4245520
+        },
+        {
+          "index": 60,
+          "mnemonic": "C.LT",
+          "target": 4245648
+        },
+        {
+          "index": 61,
+          "mnemonic": "C.NGE",
+          "target": 4245648
+        },
+        {
+          "index": 62,
+          "mnemonic": "C.LE",
+          "target": 4245792
+        },
+        {
+          "index": 63,
+          "mnemonic": "C.NGT",
+          "target": 4245792
+        }
+      ],
+      "byte_size": 256
+    }
+  ],
+  "validation": {
+    "integer": {
+      "CPUIntegerPlain.obj": [
+        {
+          "name": "Op_Unknown",
+          "address": "00409E80",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_SPECIAL",
+          "address": "0040A010",
+          "originalSize": 17,
+          "candidateSize": 17,
+          "match": true
+        },
+        {
+          "name": "Op_REGIMM",
+          "address": "0040A030",
+          "originalSize": 17,
+          "candidateSize": 17,
+          "match": true
+        },
+        {
+          "name": "Op_J",
+          "address": "0040A050",
+          "originalSize": 58,
+          "candidateSize": 58,
+          "match": true
+        },
+        {
+          "name": "Op_JAL",
+          "address": "0040A090",
+          "originalSize": 65,
+          "candidateSize": 65,
+          "match": true
+        },
+        {
+          "name": "Op_BEQ",
+          "address": "0040A0E0",
+          "originalSize": 157,
+          "candidateSize": 157,
+          "match": true
+        },
+        {
+          "name": "Op_BNE",
+          "address": "0040A180",
+          "originalSize": 95,
+          "candidateSize": 95,
+          "match": true
+        },
+        {
+          "name": "Op_BLEZ",
+          "address": "0040A1E0",
+          "originalSize": 15,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_BGTZ",
+          "address": "0040A1F0",
+          "originalSize": 15,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_ADDI",
+          "address": "0040A200",
+          "originalSize": 50,
+          "candidateSize": 50,
+          "match": true
+        },
+        {
+          "name": "Op_SLTI",
+          "address": "0040A240",
+          "originalSize": 78,
+          "candidateSize": 78,
+          "match": true
+        },
+        {
+          "name": "Op_SLTIU",
+          "address": "0040A290",
+          "originalSize": 78,
+          "candidateSize": 78,
+          "match": true
+        },
+        {
+          "name": "Op_ANDI",
+          "address": "0040A2E0",
+          "originalSize": 61,
+          "candidateSize": 61,
+          "match": true
+        },
+        {
+          "name": "Op_ORI",
+          "address": "0040A320",
+          "originalSize": 61,
+          "candidateSize": 61,
+          "match": true
+        },
+        {
+          "name": "Op_XORI",
+          "address": "0040A360",
+          "originalSize": 61,
+          "candidateSize": 61,
+          "match": true
+        },
+        {
+          "name": "Op_LUI",
+          "address": "0040A3A0",
+          "originalSize": 35,
+          "candidateSize": 35,
+          "match": true
+        },
+        {
+          "name": "Op_COP0",
+          "address": "0040A3D0",
+          "originalSize": 18,
+          "candidateSize": 18,
+          "match": true
+        },
+        {
+          "name": "Op_COP1",
+          "address": "0040A3F0",
+          "originalSize": 18,
+          "candidateSize": 18,
+          "match": true
+        },
+        {
+          "name": "Op_BEQL",
+          "address": "0040A410",
+          "originalSize": 89,
+          "candidateSize": 89,
+          "match": true
+        },
+        {
+          "name": "Op_BNEL",
+          "address": "0040A470",
+          "originalSize": 103,
+          "candidateSize": 103,
+          "match": true
+        },
+        {
+          "name": "Op_BLEZL",
+          "address": "0040A4E0",
+          "originalSize": 15,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_BGTZL",
+          "address": "0040A4F0",
+          "originalSize": 15,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_DADDI",
+          "address": "0040A500",
+          "originalSize": 61,
+          "candidateSize": 61,
+          "match": true
+        },
+        {
+          "name": "Op_LDL",
+          "address": "0040A540",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_LDR",
+          "address": "0040A550",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_LB",
+          "address": "0040A560",
+          "originalSize": 90,
+          "candidateSize": 90,
+          "match": false
+        },
+        {
+          "name": "Op_LH",
+          "address": "0040A5C0",
+          "originalSize": 90,
+          "candidateSize": 90,
+          "match": false
+        },
+        {
+          "name": "Op_LWL",
+          "address": "0040A620",
+          "originalSize": 129,
+          "candidateSize": 129,
+          "match": false
+        },
+        {
+          "name": "Op_LW",
+          "address": "0040A6B0",
+          "originalSize": 87,
+          "candidateSize": 87,
+          "match": false
+        },
+        {
+          "name": "Op_LBU",
+          "address": "0040A710",
+          "originalSize": 90,
+          "candidateSize": 90,
+          "match": false
+        },
+        {
+          "name": "Op_LHU",
+          "address": "0040A770",
+          "originalSize": 90,
+          "candidateSize": 90,
+          "match": false
+        },
+        {
+          "name": "Op_LWR",
+          "address": "0040A7D0",
+          "originalSize": 130,
+          "candidateSize": 129,
+          "match": false
+        },
+        {
+          "name": "Op_LWU",
+          "address": "0040A860",
+          "originalSize": 90,
+          "candidateSize": 90,
+          "match": false
+        },
+        {
+          "name": "Op_SB",
+          "address": "0040A8C0",
+          "originalSize": 84,
+          "candidateSize": 84,
+          "match": false
+        },
+        {
+          "name": "Op_SH",
+          "address": "0040A920",
+          "originalSize": 85,
+          "candidateSize": 85,
+          "match": false
+        },
+        {
+          "name": "Op_SWL",
+          "address": "0040A980",
+          "originalSize": 128,
+          "candidateSize": 127,
+          "match": false
+        },
+        {
+          "name": "Op_SW",
+          "address": "0040AA00",
+          "originalSize": 82,
+          "candidateSize": 82,
+          "match": false
+        },
+        {
+          "name": "Op_SDL",
+          "address": "0040AA60",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_SDR",
+          "address": "0040AA70",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_SWR",
+          "address": "0040AA80",
+          "originalSize": 131,
+          "candidateSize": 130,
+          "match": false
+        },
+        {
+          "name": "Op_LWC1",
+          "address": "0040AB10",
+          "originalSize": 81,
+          "candidateSize": 81,
+          "match": false
+        },
+        {
+          "name": "Op_LDC1",
+          "address": "0040AB70",
+          "originalSize": 146,
+          "candidateSize": 145,
+          "match": false
+        },
+        {
+          "name": "Op_LD",
+          "address": "0040AC10",
+          "originalSize": 143,
+          "candidateSize": 142,
+          "match": false
+        },
+        {
+          "name": "Op_SWC1",
+          "address": "0040ACA0",
+          "originalSize": 82,
+          "candidateSize": 82,
+          "match": false
+        },
+        {
+          "name": "Op_SDC1",
+          "address": "0040AD00",
+          "originalSize": 100,
+          "candidateSize": 94,
+          "match": false
+        },
+        {
+          "name": "Op_SD",
+          "address": "0040AD70",
+          "originalSize": 108,
+          "candidateSize": 90,
+          "match": false
+        },
+        {
+          "name": "Op_SLL",
+          "address": "0040ADE0",
+          "originalSize": 57,
+          "candidateSize": 57,
+          "match": true
+        },
+        {
+          "name": "Op_SRL",
+          "address": "0040AE20",
+          "originalSize": 57,
+          "candidateSize": 57,
+          "match": true
+        },
+        {
+          "name": "Op_SRA",
+          "address": "0040AE60",
+          "originalSize": 57,
+          "candidateSize": 57,
+          "match": true
+        },
+        {
+          "name": "Op_SLLV",
+          "address": "0040AEA0",
+          "originalSize": 64,
+          "candidateSize": 64,
+          "match": true
+        },
+        {
+          "name": "Op_SRLV",
+          "address": "0040AEE0",
+          "originalSize": 64,
+          "candidateSize": 64,
+          "match": true
+        },
+        {
+          "name": "Op_SRAV",
+          "address": "0040AF20",
+          "originalSize": 64,
+          "candidateSize": 64,
+          "match": true
+        },
+        {
+          "name": "Op_JR",
+          "address": "0040AF60",
+          "originalSize": 50,
+          "candidateSize": 50,
+          "match": true
+        },
+        {
+          "name": "Op_JALR",
+          "address": "0040AFA0",
+          "originalSize": 71,
+          "candidateSize": 71,
+          "match": true
+        },
+        {
+          "name": "Op_SYSCALL",
+          "address": "0040AFF0",
+          "originalSize": 21,
+          "candidateSize": 21,
+          "match": true
+        },
+        {
+          "name": "Op_BREAK",
+          "address": "0040B010",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_MFHI",
+          "address": "0040B020",
+          "originalSize": 38,
+          "candidateSize": 38,
+          "match": true
+        },
+        {
+          "name": "Op_MTHI",
+          "address": "0040B050",
+          "originalSize": 38,
+          "candidateSize": 38,
+          "match": true
+        },
+        {
+          "name": "Op_MFLO",
+          "address": "0040B080",
+          "originalSize": 38,
+          "candidateSize": 38,
+          "match": true
+        },
+        {
+          "name": "Op_MTLO",
+          "address": "0040B0B0",
+          "originalSize": 38,
+          "candidateSize": 38,
+          "match": true
+        },
+        {
+          "name": "Op_DSLLV",
+          "address": "0040B0E0",
+          "originalSize": 76,
+          "candidateSize": 76,
+          "match": true
+        },
+        {
+          "name": "Op_DSRAV",
+          "address": "0040B130",
+          "originalSize": 76,
+          "candidateSize": 76,
+          "match": true
+        },
+        {
+          "name": "Op_MULT",
+          "address": "0040B180",
+          "originalSize": 70,
+          "candidateSize": 70,
+          "match": true
+        },
+        {
+          "name": "Op_MULTU",
+          "address": "0040B1D0",
+          "originalSize": 65,
+          "candidateSize": 65,
+          "match": true
+        },
+        {
+          "name": "Op_DIV",
+          "address": "0040B220",
+          "originalSize": 72,
+          "candidateSize": 72,
+          "match": true
+        },
+        {
+          "name": "Op_DIVU",
+          "address": "0040B270",
+          "originalSize": 76,
+          "candidateSize": 76,
+          "match": true
+        },
+        {
+          "name": "Op_DMULT",
+          "address": "0040B2C0",
+          "originalSize": 83,
+          "candidateSize": 83,
+          "match": true
+        },
+        {
+          "name": "Op_DDIV",
+          "address": "0040B320",
+          "originalSize": 91,
+          "candidateSize": 91,
+          "match": true
+        },
+        {
+          "name": "Op_DDIVU",
+          "address": "0040B380",
+          "originalSize": 91,
+          "candidateSize": 91,
+          "match": true
+        },
+        {
+          "name": "Op_ADD",
+          "address": "0040B3E0",
+          "originalSize": 64,
+          "candidateSize": 64,
+          "match": true
+        },
+        {
+          "name": "Op_SUB",
+          "address": "0040B420",
+          "originalSize": 61,
+          "candidateSize": 61,
+          "match": true
+        },
+        {
+          "name": "Op_AND",
+          "address": "0040B460",
+          "originalSize": 81,
+          "candidateSize": 81,
+          "match": true
+        },
+        {
+          "name": "Op_OR",
+          "address": "0040B4C0",
+          "originalSize": 81,
+          "candidateSize": 81,
+          "match": true
+        },
+        {
+          "name": "Op_XOR",
+          "address": "0040B520",
+          "originalSize": 81,
+          "candidateSize": 81,
+          "match": true
+        },
+        {
+          "name": "Op_NOR",
+          "address": "0040B580",
+          "originalSize": 83,
+          "candidateSize": 83,
+          "match": true
+        },
+        {
+          "name": "Op_SLT",
+          "address": "0040B5E0",
+          "originalSize": 93,
+          "candidateSize": 93,
+          "match": true
+        },
+        {
+          "name": "Op_SLTU",
+          "address": "0040B640",
+          "originalSize": 93,
+          "candidateSize": 93,
+          "match": true
+        },
+        {
+          "name": "Op_DADD",
+          "address": "0040B6A0",
+          "originalSize": 79,
+          "candidateSize": 79,
+          "match": true
+        },
+        {
+          "name": "Op_DSUB",
+          "address": "0040B6F0",
+          "originalSize": 75,
+          "candidateSize": 75,
+          "match": true
+        },
+        {
+          "name": "Op_TGE",
+          "address": "0040B740",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_TGEU",
+          "address": "0040B750",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_TLT",
+          "address": "0040B760",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_TLTU",
+          "address": "0040B770",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_TEQ",
+          "address": "0040B780",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_TNE",
+          "address": "0040B790",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_DSLL",
+          "address": "0040B7A0",
+          "originalSize": 67,
+          "candidateSize": 67,
+          "match": true
+        },
+        {
+          "name": "Op_DSRL",
+          "address": "0040B7F0",
+          "originalSize": 67,
+          "candidateSize": 67,
+          "match": true
+        },
+        {
+          "name": "Op_DSRA",
+          "address": "0040B840",
+          "originalSize": 67,
+          "candidateSize": 67,
+          "match": true
+        },
+        {
+          "name": "Op_DSLL32",
+          "address": "0040B890",
+          "originalSize": 70,
+          "candidateSize": 70,
+          "match": true
+        },
+        {
+          "name": "Op_DSRL32",
+          "address": "0040B8E0",
+          "originalSize": 70,
+          "candidateSize": 70,
+          "match": true
+        },
+        {
+          "name": "Op_DSRA32",
+          "address": "0040B930",
+          "originalSize": 70,
+          "candidateSize": 70,
+          "match": true
+        },
+        {
+          "name": "Op_BLTZ",
+          "address": "0040B980",
+          "originalSize": 15,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_BGEZ",
+          "address": "0040B990",
+          "originalSize": 15,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_BLTZL",
+          "address": "0040B9A0",
+          "originalSize": 15,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_BGEZL",
+          "address": "0040B9B0",
+          "originalSize": 15,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_TGEI",
+          "address": "0040B9C0",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_TGEIU",
+          "address": "0040B9D0",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_TLTI",
+          "address": "0040B9E0",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_TLTIU",
+          "address": "0040B9F0",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_TEQI",
+          "address": "0040BA00",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_TNEI",
+          "address": "0040BA10",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_BLTZAL",
+          "address": "0040BA20",
+          "originalSize": 15,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_BGEZAL",
+          "address": "0040BA30",
+          "originalSize": 15,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_BLTZALL",
+          "address": "0040BA40",
+          "originalSize": 15,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_BGEZALL",
+          "address": "0040BA50",
+          "originalSize": 15,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_MFC0",
+          "address": "0040BA60",
+          "originalSize": 368,
+          "candidateSize": 368,
+          "match": true
+        },
+        {
+          "name": "Op_MTC0",
+          "address": "0040BBD0",
+          "originalSize": 792,
+          "candidateSize": 792,
+          "match": true
+        },
+        {
+          "name": "Op_COP0Function",
+          "address": "0040BEF0",
+          "originalSize": 17,
+          "candidateSize": 17,
+          "match": true
+        },
+        {
+          "name": "Op_TLBR",
+          "address": "0040BF10",
+          "originalSize": 5,
+          "candidateSize": 5,
+          "match": true
+        },
+        {
+          "name": "Op_TLBWI",
+          "address": "0040BF20",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_TLBWR",
+          "address": "0040BF30",
+          "originalSize": 40,
+          "candidateSize": 40,
+          "match": true
+        },
+        {
+          "name": "Op_TLBP",
+          "address": "0040BF60",
+          "originalSize": 5,
+          "candidateSize": 5,
+          "match": true
+        },
+        {
+          "name": "Op_ERET",
+          "address": "0040BF70",
+          "originalSize": 60,
+          "candidateSize": 60,
+          "match": true
+        }
+      ],
+      "CPUIntegerBitfield.obj": [
+        {
+          "name": "Op_Unknown",
+          "address": "00409E80",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_SPECIAL",
+          "address": "0040A010",
+          "originalSize": 17,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_REGIMM",
+          "address": "0040A030",
+          "originalSize": 17,
+          "candidateSize": 17,
+          "match": true
+        },
+        {
+          "name": "Op_J",
+          "address": "0040A050",
+          "originalSize": 58,
+          "candidateSize": 58,
+          "match": true
+        },
+        {
+          "name": "Op_JAL",
+          "address": "0040A090",
+          "originalSize": 65,
+          "candidateSize": 65,
+          "match": true
+        },
+        {
+          "name": "Op_BEQ",
+          "address": "0040A0E0",
+          "originalSize": 157,
+          "candidateSize": 157,
+          "match": true
+        },
+        {
+          "name": "Op_BNE",
+          "address": "0040A180",
+          "originalSize": 95,
+          "candidateSize": 81,
+          "match": false
+        },
+        {
+          "name": "Op_BLEZ",
+          "address": "0040A1E0",
+          "originalSize": 15,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_BGTZ",
+          "address": "0040A1F0",
+          "originalSize": 15,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_ADDI",
+          "address": "0040A200",
+          "originalSize": 50,
+          "candidateSize": 50,
+          "match": true
+        },
+        {
+          "name": "Op_SLTI",
+          "address": "0040A240",
+          "originalSize": 78,
+          "candidateSize": 78,
+          "match": true
+        },
+        {
+          "name": "Op_SLTIU",
+          "address": "0040A290",
+          "originalSize": 78,
+          "candidateSize": 78,
+          "match": true
+        },
+        {
+          "name": "Op_ANDI",
+          "address": "0040A2E0",
+          "originalSize": 61,
+          "candidateSize": 61,
+          "match": true
+        },
+        {
+          "name": "Op_ORI",
+          "address": "0040A320",
+          "originalSize": 61,
+          "candidateSize": 61,
+          "match": true
+        },
+        {
+          "name": "Op_XORI",
+          "address": "0040A360",
+          "originalSize": 61,
+          "candidateSize": 61,
+          "match": true
+        },
+        {
+          "name": "Op_LUI",
+          "address": "0040A3A0",
+          "originalSize": 35,
+          "candidateSize": 35,
+          "match": true
+        },
+        {
+          "name": "Op_COP0",
+          "address": "0040A3D0",
+          "originalSize": 18,
+          "candidateSize": 18,
+          "match": true
+        },
+        {
+          "name": "Op_COP1",
+          "address": "0040A3F0",
+          "originalSize": 18,
+          "candidateSize": 18,
+          "match": true
+        },
+        {
+          "name": "Op_BEQL",
+          "address": "0040A410",
+          "originalSize": 89,
+          "candidateSize": 89,
+          "match": true
+        },
+        {
+          "name": "Op_BNEL",
+          "address": "0040A470",
+          "originalSize": 103,
+          "candidateSize": 89,
+          "match": false
+        },
+        {
+          "name": "Op_BLEZL",
+          "address": "0040A4E0",
+          "originalSize": 15,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_BGTZL",
+          "address": "0040A4F0",
+          "originalSize": 15,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_DADDI",
+          "address": "0040A500",
+          "originalSize": 61,
+          "candidateSize": 61,
+          "match": true
+        },
+        {
+          "name": "Op_LDL",
+          "address": "0040A540",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_LDR",
+          "address": "0040A550",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_LB",
+          "address": "0040A560",
+          "originalSize": 90,
+          "candidateSize": 90,
+          "match": false
+        },
+        {
+          "name": "Op_LH",
+          "address": "0040A5C0",
+          "originalSize": 90,
+          "candidateSize": 90,
+          "match": false
+        },
+        {
+          "name": "Op_LWL",
+          "address": "0040A620",
+          "originalSize": 129,
+          "candidateSize": 129,
+          "match": false
+        },
+        {
+          "name": "Op_LW",
+          "address": "0040A6B0",
+          "originalSize": 87,
+          "candidateSize": 87,
+          "match": false
+        },
+        {
+          "name": "Op_LBU",
+          "address": "0040A710",
+          "originalSize": 90,
+          "candidateSize": 90,
+          "match": false
+        },
+        {
+          "name": "Op_LHU",
+          "address": "0040A770",
+          "originalSize": 90,
+          "candidateSize": 90,
+          "match": false
+        },
+        {
+          "name": "Op_LWR",
+          "address": "0040A7D0",
+          "originalSize": 130,
+          "candidateSize": 129,
+          "match": false
+        },
+        {
+          "name": "Op_LWU",
+          "address": "0040A860",
+          "originalSize": 90,
+          "candidateSize": 90,
+          "match": false
+        },
+        {
+          "name": "Op_SB",
+          "address": "0040A8C0",
+          "originalSize": 84,
+          "candidateSize": 84,
+          "match": false
+        },
+        {
+          "name": "Op_SH",
+          "address": "0040A920",
+          "originalSize": 85,
+          "candidateSize": 85,
+          "match": false
+        },
+        {
+          "name": "Op_SWL",
+          "address": "0040A980",
+          "originalSize": 128,
+          "candidateSize": 127,
+          "match": false
+        },
+        {
+          "name": "Op_SW",
+          "address": "0040AA00",
+          "originalSize": 82,
+          "candidateSize": 82,
+          "match": false
+        },
+        {
+          "name": "Op_SDL",
+          "address": "0040AA60",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_SDR",
+          "address": "0040AA70",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_SWR",
+          "address": "0040AA80",
+          "originalSize": 131,
+          "candidateSize": 130,
+          "match": false
+        },
+        {
+          "name": "Op_LWC1",
+          "address": "0040AB10",
+          "originalSize": 81,
+          "candidateSize": 81,
+          "match": false
+        },
+        {
+          "name": "Op_LDC1",
+          "address": "0040AB70",
+          "originalSize": 146,
+          "candidateSize": 145,
+          "match": false
+        },
+        {
+          "name": "Op_LD",
+          "address": "0040AC10",
+          "originalSize": 143,
+          "candidateSize": 142,
+          "match": false
+        },
+        {
+          "name": "Op_SWC1",
+          "address": "0040ACA0",
+          "originalSize": 82,
+          "candidateSize": 82,
+          "match": false
+        },
+        {
+          "name": "Op_SDC1",
+          "address": "0040AD00",
+          "originalSize": 100,
+          "candidateSize": 94,
+          "match": false
+        },
+        {
+          "name": "Op_SD",
+          "address": "0040AD70",
+          "originalSize": 108,
+          "candidateSize": 90,
+          "match": false
+        },
+        {
+          "name": "Op_SLL",
+          "address": "0040ADE0",
+          "originalSize": 57,
+          "candidateSize": 57,
+          "match": true
+        },
+        {
+          "name": "Op_SRL",
+          "address": "0040AE20",
+          "originalSize": 57,
+          "candidateSize": 57,
+          "match": true
+        },
+        {
+          "name": "Op_SRA",
+          "address": "0040AE60",
+          "originalSize": 57,
+          "candidateSize": 57,
+          "match": true
+        },
+        {
+          "name": "Op_SLLV",
+          "address": "0040AEA0",
+          "originalSize": 64,
+          "candidateSize": 64,
+          "match": true
+        },
+        {
+          "name": "Op_SRLV",
+          "address": "0040AEE0",
+          "originalSize": 64,
+          "candidateSize": 64,
+          "match": true
+        },
+        {
+          "name": "Op_SRAV",
+          "address": "0040AF20",
+          "originalSize": 64,
+          "candidateSize": 64,
+          "match": true
+        },
+        {
+          "name": "Op_JR",
+          "address": "0040AF60",
+          "originalSize": 50,
+          "candidateSize": 50,
+          "match": true
+        },
+        {
+          "name": "Op_JALR",
+          "address": "0040AFA0",
+          "originalSize": 71,
+          "candidateSize": 71,
+          "match": true
+        },
+        {
+          "name": "Op_SYSCALL",
+          "address": "0040AFF0",
+          "originalSize": 21,
+          "candidateSize": 21,
+          "match": true
+        },
+        {
+          "name": "Op_BREAK",
+          "address": "0040B010",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_MFHI",
+          "address": "0040B020",
+          "originalSize": 38,
+          "candidateSize": 38,
+          "match": true
+        },
+        {
+          "name": "Op_MTHI",
+          "address": "0040B050",
+          "originalSize": 38,
+          "candidateSize": 38,
+          "match": true
+        },
+        {
+          "name": "Op_MFLO",
+          "address": "0040B080",
+          "originalSize": 38,
+          "candidateSize": 38,
+          "match": true
+        },
+        {
+          "name": "Op_MTLO",
+          "address": "0040B0B0",
+          "originalSize": 38,
+          "candidateSize": 38,
+          "match": true
+        },
+        {
+          "name": "Op_DSLLV",
+          "address": "0040B0E0",
+          "originalSize": 76,
+          "candidateSize": 76,
+          "match": true
+        },
+        {
+          "name": "Op_DSRAV",
+          "address": "0040B130",
+          "originalSize": 76,
+          "candidateSize": 76,
+          "match": true
+        },
+        {
+          "name": "Op_MULT",
+          "address": "0040B180",
+          "originalSize": 70,
+          "candidateSize": 65,
+          "match": false
+        },
+        {
+          "name": "Op_MULTU",
+          "address": "0040B1D0",
+          "originalSize": 65,
+          "candidateSize": 65,
+          "match": true
+        },
+        {
+          "name": "Op_DIV",
+          "address": "0040B220",
+          "originalSize": 72,
+          "candidateSize": 72,
+          "match": true
+        },
+        {
+          "name": "Op_DIVU",
+          "address": "0040B270",
+          "originalSize": 76,
+          "candidateSize": 76,
+          "match": true
+        },
+        {
+          "name": "Op_DMULT",
+          "address": "0040B2C0",
+          "originalSize": 83,
+          "candidateSize": 83,
+          "match": true
+        },
+        {
+          "name": "Op_DDIV",
+          "address": "0040B320",
+          "originalSize": 91,
+          "candidateSize": 91,
+          "match": true
+        },
+        {
+          "name": "Op_DDIVU",
+          "address": "0040B380",
+          "originalSize": 91,
+          "candidateSize": 91,
+          "match": true
+        },
+        {
+          "name": "Op_ADD",
+          "address": "0040B3E0",
+          "originalSize": 64,
+          "candidateSize": 64,
+          "match": true
+        },
+        {
+          "name": "Op_SUB",
+          "address": "0040B420",
+          "originalSize": 61,
+          "candidateSize": 61,
+          "match": true
+        },
+        {
+          "name": "Op_AND",
+          "address": "0040B460",
+          "originalSize": 81,
+          "candidateSize": 81,
+          "match": true
+        },
+        {
+          "name": "Op_OR",
+          "address": "0040B4C0",
+          "originalSize": 81,
+          "candidateSize": 81,
+          "match": true
+        },
+        {
+          "name": "Op_XOR",
+          "address": "0040B520",
+          "originalSize": 81,
+          "candidateSize": 81,
+          "match": true
+        },
+        {
+          "name": "Op_NOR",
+          "address": "0040B580",
+          "originalSize": 83,
+          "candidateSize": 83,
+          "match": true
+        },
+        {
+          "name": "Op_SLT",
+          "address": "0040B5E0",
+          "originalSize": 93,
+          "candidateSize": 93,
+          "match": true
+        },
+        {
+          "name": "Op_SLTU",
+          "address": "0040B640",
+          "originalSize": 93,
+          "candidateSize": 93,
+          "match": true
+        },
+        {
+          "name": "Op_DADD",
+          "address": "0040B6A0",
+          "originalSize": 79,
+          "candidateSize": 79,
+          "match": true
+        },
+        {
+          "name": "Op_DSUB",
+          "address": "0040B6F0",
+          "originalSize": 75,
+          "candidateSize": 75,
+          "match": true
+        },
+        {
+          "name": "Op_TGE",
+          "address": "0040B740",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_TGEU",
+          "address": "0040B750",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_TLT",
+          "address": "0040B760",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_TLTU",
+          "address": "0040B770",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_TEQ",
+          "address": "0040B780",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_TNE",
+          "address": "0040B790",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_DSLL",
+          "address": "0040B7A0",
+          "originalSize": 67,
+          "candidateSize": 67,
+          "match": true
+        },
+        {
+          "name": "Op_DSRL",
+          "address": "0040B7F0",
+          "originalSize": 67,
+          "candidateSize": 67,
+          "match": true
+        },
+        {
+          "name": "Op_DSRA",
+          "address": "0040B840",
+          "originalSize": 67,
+          "candidateSize": 67,
+          "match": true
+        },
+        {
+          "name": "Op_DSLL32",
+          "address": "0040B890",
+          "originalSize": 70,
+          "candidateSize": 70,
+          "match": true
+        },
+        {
+          "name": "Op_DSRL32",
+          "address": "0040B8E0",
+          "originalSize": 70,
+          "candidateSize": 70,
+          "match": true
+        },
+        {
+          "name": "Op_DSRA32",
+          "address": "0040B930",
+          "originalSize": 70,
+          "candidateSize": 70,
+          "match": true
+        },
+        {
+          "name": "Op_BLTZ",
+          "address": "0040B980",
+          "originalSize": 15,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_BGEZ",
+          "address": "0040B990",
+          "originalSize": 15,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_BLTZL",
+          "address": "0040B9A0",
+          "originalSize": 15,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_BGEZL",
+          "address": "0040B9B0",
+          "originalSize": 15,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_TGEI",
+          "address": "0040B9C0",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_TGEIU",
+          "address": "0040B9D0",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_TLTI",
+          "address": "0040B9E0",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_TLTIU",
+          "address": "0040B9F0",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_TEQI",
+          "address": "0040BA00",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_TNEI",
+          "address": "0040BA10",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_BLTZAL",
+          "address": "0040BA20",
+          "originalSize": 15,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_BGEZAL",
+          "address": "0040BA30",
+          "originalSize": 15,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_BLTZALL",
+          "address": "0040BA40",
+          "originalSize": 15,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_BGEZALL",
+          "address": "0040BA50",
+          "originalSize": 15,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_MFC0",
+          "address": "0040BA60",
+          "originalSize": 368,
+          "candidateSize": 368,
+          "match": true
+        },
+        {
+          "name": "Op_MTC0",
+          "address": "0040BBD0",
+          "originalSize": 792,
+          "candidateSize": 792,
+          "match": true
+        },
+        {
+          "name": "Op_COP0Function",
+          "address": "0040BEF0",
+          "originalSize": 17,
+          "candidateSize": 15,
+          "match": false
+        },
+        {
+          "name": "Op_TLBR",
+          "address": "0040BF10",
+          "originalSize": 5,
+          "candidateSize": 5,
+          "match": true
+        },
+        {
+          "name": "Op_TLBWI",
+          "address": "0040BF20",
+          "originalSize": 12,
+          "candidateSize": 12,
+          "match": true
+        },
+        {
+          "name": "Op_TLBWR",
+          "address": "0040BF30",
+          "originalSize": 40,
+          "candidateSize": 40,
+          "match": true
+        },
+        {
+          "name": "Op_TLBP",
+          "address": "0040BF60",
+          "originalSize": 5,
+          "candidateSize": 5,
+          "match": true
+        },
+        {
+          "name": "Op_ERET",
+          "address": "0040BF70",
+          "originalSize": 60,
+          "candidateSize": 60,
+          "match": true
+        }
+      ]
+    },
+    "floating_point": [
+      {
+        "name": "Op_MFC1",
+        "address": "0040BFB0",
+        "original_size": 43,
+        "candidate_size": 43,
+        "relocation_masked_match": true
+      },
+      {
+        "name": "Op_DMFC1",
+        "address": "0040BFE0",
+        "original_size": 51,
+        "candidate_size": 51,
+        "relocation_masked_match": true
+      },
+      {
+        "name": "Op_CFC1",
+        "address": "0040C020",
+        "original_size": 78,
+        "candidate_size": 78,
+        "relocation_masked_match": true
+      },
+      {
+        "name": "Op_MTC1",
+        "address": "0040C070",
+        "original_size": 37,
+        "candidate_size": 37,
+        "relocation_masked_match": true
+      },
+      {
+        "name": "Op_DMTC1",
+        "address": "0040C0A0",
+        "original_size": 53,
+        "candidate_size": 53,
+        "relocation_masked_match": true
+      },
+      {
+        "name": "Op_CTC1",
+        "address": "0040C0E0",
+        "original_size": 39,
+        "candidate_size": 39,
+        "relocation_masked_match": true
+      },
+      {
+        "name": "Op_BC1",
+        "address": "0040C110",
+        "original_size": 97,
+        "candidate_size": 97,
+        "relocation_masked_match": true
+      },
+      {
+        "name": "Op_COP1Function",
+        "address": "0040C180",
+        "original_size": 17,
+        "candidate_size": 17,
+        "relocation_masked_match": true
+      },
+      {
+        "name": "Op_FADD",
+        "address": "0040C1A0",
+        "original_size": 121,
+        "candidate_size": 121,
+        "relocation_masked_match": true
+      },
+      {
+        "name": "Op_FSUB",
+        "address": "0040C220",
+        "original_size": 121,
+        "candidate_size": 121,
+        "relocation_masked_match": true
+      },
+      {
+        "name": "Op_FMUL",
+        "address": "0040C2A0",
+        "original_size": 121,
+        "candidate_size": 121,
+        "relocation_masked_match": true
+      },
+      {
+        "name": "Op_FDIV",
+        "address": "0040C320",
+        "original_size": 121,
+        "candidate_size": 121,
+        "relocation_masked_match": true
+      },
+      {
+        "name": "Op_FSQRT",
+        "address": "0040C3A0",
+        "original_size": 87,
+        "candidate_size": 87,
+        "relocation_masked_match": true
+      },
+      {
+        "name": "Op_FABS",
+        "address": "0040C400",
+        "original_size": 87,
+        "candidate_size": 87,
+        "relocation_masked_match": true
+      },
+      {
+        "name": "Op_FMOV",
+        "address": "0040C460",
+        "original_size": 97,
+        "candidate_size": 97,
+        "relocation_masked_match": true
+      },
+      {
+        "name": "Op_FNEG",
+        "address": "0040C4D0",
+        "original_size": 87,
+        "candidate_size": 87,
+        "relocation_masked_match": true
+      },
+      {
+        "name": "Op_ROUND_L",
+        "address": "0040C530",
+        "original_size": 91,
+        "candidate_size": 91,
+        "relocation_masked_match": true
+      },
+      {
+        "name": "Op_ROUND_W",
+        "address": "0040C590",
+        "original_size": 95,
+        "candidate_size": 95,
+        "relocation_masked_match": true
+      },
+      {
+        "name": "Op_CVT_S",
+        "address": "0040C5F0",
+        "original_size": 117,
+        "candidate_size": 117,
+        "relocation_masked_match": true
+      },
+      {
+        "name": "Op_CVT_D",
+        "address": "0040C670",
+        "original_size": 121,
+        "candidate_size": 121,
+        "relocation_masked_match": true
+      },
+      {
+        "name": "Op_CVT_W",
+        "address": "0040C6F0",
+        "original_size": 132,
+        "candidate_size": 132,
+        "relocation_masked_match": true
+      },
+      {
+        "name": "Op_CVT_L",
+        "address": "0040C780",
+        "original_size": 139,
+        "candidate_size": 139,
+        "relocation_masked_match": true
+      },
+      {
+        "name": "Op_C_EQ",
+        "address": "0040C810",
+        "original_size": 123,
+        "candidate_size": 123,
+        "relocation_masked_match": true
+      },
+      {
+        "name": "Op_C_LT",
+        "address": "0040C890",
+        "original_size": 123,
+        "candidate_size": 123,
+        "relocation_masked_match": true
+      },
+      {
+        "name": "Op_C_F",
+        "address": "0040C910",
+        "original_size": 11,
+        "candidate_size": 11,
+        "relocation_masked_match": true
+      },
+      {
+        "name": "Op_C_LE",
+        "address": "0040C920",
+        "original_size": 123,
+        "candidate_size": 123,
+        "relocation_masked_match": true
+      }
+    ],
+    "limits": "Per-function diagnostics mask relocatable addresses and exclude alignment padding. They do not prove final addresses, external callee identity, image layout, or complete binary equality. Full LTCG integration remains necessary.",
+    "helpers": [
+      {
+        "name": "RaisePendingInterrupt",
+        "original_size": 113,
+        "candidate_size": 121,
+        "match": false
+      },
+      {
+        "name": "ExecuteDelaySlot",
+        "original_size": 95,
+        "candidate_size": 95,
+        "match": true
+      },
+      {
+        "name": "Branch",
+        "original_size": 280,
+        "candidate_size": 292,
+        "match": false
+      },
+      {
+        "name": "ExecuteInterpreter",
+        "original_size": 2992,
+        "candidate_size": 2992,
+        "match": false
+      },
+      {
+        "name": "ReportInvalidOpcode",
+        "original_size": 50,
+        "candidate_size": 50,
+        "match": true
+      }
+    ],
+    "integer_ltcg": [
+      {
+        "name": "Op_Unknown",
+        "address": "00409E80",
+        "candidateAddress": "00401180",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "ExecuteDelaySlot",
+        "address": "00409E90",
+        "candidateAddress": "00401000",
+        "originalSize": 95,
+        "candidateSize": 95,
+        "match": true
+      },
+      {
+        "name": "Branch",
+        "address": "00409EF0",
+        "candidateAddress": "00401060",
+        "originalSize": 280,
+        "candidateSize": 276,
+        "match": false
+      },
+      {
+        "name": "Op_SPECIAL",
+        "address": "0040A010",
+        "candidateAddress": "00401190",
+        "originalSize": 17,
+        "candidateSize": 17,
+        "match": true
+      },
+      {
+        "name": "Op_REGIMM",
+        "address": "0040A030",
+        "candidateAddress": "004011B0",
+        "originalSize": 17,
+        "candidateSize": 17,
+        "match": true
+      },
+      {
+        "name": "Op_J",
+        "address": "0040A050",
+        "candidateAddress": "004011D0",
+        "originalSize": 58,
+        "candidateSize": 58,
+        "match": true
+      },
+      {
+        "name": "Op_JAL",
+        "address": "0040A090",
+        "candidateAddress": "00401210",
+        "originalSize": 65,
+        "candidateSize": 65,
+        "match": true
+      },
+      {
+        "name": "Op_BEQ",
+        "address": "0040A0E0",
+        "candidateAddress": "00401260",
+        "originalSize": 157,
+        "candidateSize": 157,
+        "match": true
+      },
+      {
+        "name": "Op_BNE",
+        "address": "0040A180",
+        "candidateAddress": "00401300",
+        "originalSize": 95,
+        "candidateSize": 95,
+        "match": true
+      },
+      {
+        "name": "Op_BLEZ",
+        "address": "0040A1E0",
+        "candidateAddress": "00401360",
+        "originalSize": 15,
+        "candidateSize": 15,
+        "match": true
+      },
+      {
+        "name": "Op_BGTZ",
+        "address": "0040A1F0",
+        "candidateAddress": "00401370",
+        "originalSize": 15,
+        "candidateSize": 15,
+        "match": true
+      },
+      {
+        "name": "Op_ADDI",
+        "address": "0040A200",
+        "candidateAddress": "00401380",
+        "originalSize": 50,
+        "candidateSize": 50,
+        "match": true
+      },
+      {
+        "name": "Op_SLTI",
+        "address": "0040A240",
+        "candidateAddress": "004013C0",
+        "originalSize": 78,
+        "candidateSize": 78,
+        "match": true
+      },
+      {
+        "name": "Op_SLTIU",
+        "address": "0040A290",
+        "candidateAddress": "00401410",
+        "originalSize": 78,
+        "candidateSize": 78,
+        "match": true
+      },
+      {
+        "name": "Op_ANDI",
+        "address": "0040A2E0",
+        "candidateAddress": "00401460",
+        "originalSize": 61,
+        "candidateSize": 61,
+        "match": true
+      },
+      {
+        "name": "Op_ORI",
+        "address": "0040A320",
+        "candidateAddress": "004014A0",
+        "originalSize": 61,
+        "candidateSize": 61,
+        "match": true
+      },
+      {
+        "name": "Op_XORI",
+        "address": "0040A360",
+        "candidateAddress": "004014E0",
+        "originalSize": 61,
+        "candidateSize": 61,
+        "match": true
+      },
+      {
+        "name": "Op_LUI",
+        "address": "0040A3A0",
+        "candidateAddress": "00401520",
+        "originalSize": 35,
+        "candidateSize": 35,
+        "match": true
+      },
+      {
+        "name": "Op_COP0",
+        "address": "0040A3D0",
+        "candidateAddress": "00401550",
+        "originalSize": 18,
+        "candidateSize": 18,
+        "match": true
+      },
+      {
+        "name": "Op_COP1",
+        "address": "0040A3F0",
+        "candidateAddress": "00401570",
+        "originalSize": 18,
+        "candidateSize": 18,
+        "match": true
+      },
+      {
+        "name": "Op_BEQL",
+        "address": "0040A410",
+        "candidateAddress": "00401590",
+        "originalSize": 89,
+        "candidateSize": 89,
+        "match": true
+      },
+      {
+        "name": "Op_BNEL",
+        "address": "0040A470",
+        "candidateAddress": "004015F0",
+        "originalSize": 103,
+        "candidateSize": 103,
+        "match": true
+      },
+      {
+        "name": "Op_BLEZL",
+        "address": "0040A4E0",
+        "candidateAddress": "00401660",
+        "originalSize": 15,
+        "candidateSize": 15,
+        "match": true
+      },
+      {
+        "name": "Op_BGTZL",
+        "address": "0040A4F0",
+        "candidateAddress": "00401670",
+        "originalSize": 15,
+        "candidateSize": 15,
+        "match": true
+      },
+      {
+        "name": "Op_DADDI",
+        "address": "0040A500",
+        "candidateAddress": "00401680",
+        "originalSize": 61,
+        "candidateSize": 61,
+        "match": true
+      },
+      {
+        "name": "Op_LDL",
+        "address": "0040A540",
+        "candidateAddress": "004016C0",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_LDR",
+        "address": "0040A550",
+        "candidateAddress": "004016D0",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_LB",
+        "address": "0040A560",
+        "candidateAddress": "004016E0",
+        "originalSize": 90,
+        "candidateSize": 90,
+        "match": false
+      },
+      {
+        "name": "Op_LH",
+        "address": "0040A5C0",
+        "candidateAddress": "00401740",
+        "originalSize": 90,
+        "candidateSize": 90,
+        "match": false
+      },
+      {
+        "name": "Op_LWL",
+        "address": "0040A620",
+        "candidateAddress": "004017A0",
+        "originalSize": 129,
+        "candidateSize": 129,
+        "match": false
+      },
+      {
+        "name": "Op_LW",
+        "address": "0040A6B0",
+        "candidateAddress": "00401830",
+        "originalSize": 87,
+        "candidateSize": 87,
+        "match": false
+      },
+      {
+        "name": "Op_LBU",
+        "address": "0040A710",
+        "candidateAddress": "00401890",
+        "originalSize": 90,
+        "candidateSize": 90,
+        "match": false
+      },
+      {
+        "name": "Op_LHU",
+        "address": "0040A770",
+        "candidateAddress": "004018F0",
+        "originalSize": 90,
+        "candidateSize": 90,
+        "match": false
+      },
+      {
+        "name": "Op_LWR",
+        "address": "0040A7D0",
+        "candidateAddress": "00401950",
+        "originalSize": 130,
+        "candidateSize": 129,
+        "match": false
+      },
+      {
+        "name": "Op_LWU",
+        "address": "0040A860",
+        "candidateAddress": "004019E0",
+        "originalSize": 90,
+        "candidateSize": 90,
+        "match": false
+      },
+      {
+        "name": "Op_SB",
+        "address": "0040A8C0",
+        "candidateAddress": "00401A40",
+        "originalSize": 84,
+        "candidateSize": 84,
+        "match": false
+      },
+      {
+        "name": "Op_SH",
+        "address": "0040A920",
+        "candidateAddress": "00401AA0",
+        "originalSize": 85,
+        "candidateSize": 85,
+        "match": false
+      },
+      {
+        "name": "Op_SWL",
+        "address": "0040A980",
+        "candidateAddress": "00401B00",
+        "originalSize": 128,
+        "candidateSize": 127,
+        "match": false
+      },
+      {
+        "name": "Op_SW",
+        "address": "0040AA00",
+        "candidateAddress": "00401B80",
+        "originalSize": 82,
+        "candidateSize": 82,
+        "match": false
+      },
+      {
+        "name": "Op_SDL",
+        "address": "0040AA60",
+        "candidateAddress": "00401BE0",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_SDR",
+        "address": "0040AA70",
+        "candidateAddress": "00401BF0",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_SWR",
+        "address": "0040AA80",
+        "candidateAddress": "00401C00",
+        "originalSize": 131,
+        "candidateSize": 130,
+        "match": false
+      },
+      {
+        "name": "Op_LWC1",
+        "address": "0040AB10",
+        "candidateAddress": "00401C90",
+        "originalSize": 81,
+        "candidateSize": 81,
+        "match": false
+      },
+      {
+        "name": "Op_LDC1",
+        "address": "0040AB70",
+        "candidateAddress": "00401CF0",
+        "originalSize": 146,
+        "candidateSize": 145,
+        "match": false
+      },
+      {
+        "name": "Op_LD",
+        "address": "0040AC10",
+        "candidateAddress": "00401D90",
+        "originalSize": 143,
+        "candidateSize": 142,
+        "match": false
+      },
+      {
+        "name": "Op_SWC1",
+        "address": "0040ACA0",
+        "candidateAddress": "00401E20",
+        "originalSize": 82,
+        "candidateSize": 82,
+        "match": false
+      },
+      {
+        "name": "Op_SDC1",
+        "address": "0040AD00",
+        "candidateAddress": "00401E80",
+        "originalSize": 100,
+        "candidateSize": 94,
+        "match": false
+      },
+      {
+        "name": "Op_SD",
+        "address": "0040AD70",
+        "candidateAddress": "00401EE0",
+        "originalSize": 108,
+        "candidateSize": 90,
+        "match": false
+      },
+      {
+        "name": "Op_SLL",
+        "address": "0040ADE0",
+        "candidateAddress": "00401F40",
+        "originalSize": 57,
+        "candidateSize": 57,
+        "match": true
+      },
+      {
+        "name": "Op_SRL",
+        "address": "0040AE20",
+        "candidateAddress": "00401F80",
+        "originalSize": 57,
+        "candidateSize": 57,
+        "match": true
+      },
+      {
+        "name": "Op_SRA",
+        "address": "0040AE60",
+        "candidateAddress": "00401FC0",
+        "originalSize": 57,
+        "candidateSize": 57,
+        "match": true
+      },
+      {
+        "name": "Op_SLLV",
+        "address": "0040AEA0",
+        "candidateAddress": "00402000",
+        "originalSize": 64,
+        "candidateSize": 64,
+        "match": true
+      },
+      {
+        "name": "Op_SRLV",
+        "address": "0040AEE0",
+        "candidateAddress": "00402040",
+        "originalSize": 64,
+        "candidateSize": 64,
+        "match": true
+      },
+      {
+        "name": "Op_SRAV",
+        "address": "0040AF20",
+        "candidateAddress": "00402080",
+        "originalSize": 64,
+        "candidateSize": 64,
+        "match": true
+      },
+      {
+        "name": "Op_JR",
+        "address": "0040AF60",
+        "candidateAddress": "004020C0",
+        "originalSize": 50,
+        "candidateSize": 50,
+        "match": true
+      },
+      {
+        "name": "Op_JALR",
+        "address": "0040AFA0",
+        "candidateAddress": "00402100",
+        "originalSize": 71,
+        "candidateSize": 71,
+        "match": true
+      },
+      {
+        "name": "Op_SYSCALL",
+        "address": "0040AFF0",
+        "candidateAddress": "00402150",
+        "originalSize": 21,
+        "candidateSize": 21,
+        "match": true
+      },
+      {
+        "name": "Op_BREAK",
+        "address": "0040B010",
+        "candidateAddress": "00402170",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_MFHI",
+        "address": "0040B020",
+        "candidateAddress": "00402180",
+        "originalSize": 38,
+        "candidateSize": 38,
+        "match": true
+      },
+      {
+        "name": "Op_MTHI",
+        "address": "0040B050",
+        "candidateAddress": "004021B0",
+        "originalSize": 38,
+        "candidateSize": 38,
+        "match": true
+      },
+      {
+        "name": "Op_MFLO",
+        "address": "0040B080",
+        "candidateAddress": "004021E0",
+        "originalSize": 38,
+        "candidateSize": 38,
+        "match": true
+      },
+      {
+        "name": "Op_MTLO",
+        "address": "0040B0B0",
+        "candidateAddress": "00402210",
+        "originalSize": 38,
+        "candidateSize": 38,
+        "match": true
+      },
+      {
+        "name": "Op_DSLLV",
+        "address": "0040B0E0",
+        "candidateAddress": "00402240",
+        "originalSize": 76,
+        "candidateSize": 76,
+        "match": true
+      },
+      {
+        "name": "Op_DSRAV",
+        "address": "0040B130",
+        "candidateAddress": "00402290",
+        "originalSize": 76,
+        "candidateSize": 76,
+        "match": true
+      },
+      {
+        "name": "Op_MULT",
+        "address": "0040B180",
+        "candidateAddress": "004022E0",
+        "originalSize": 70,
+        "candidateSize": 70,
+        "match": true
+      },
+      {
+        "name": "Op_MULTU",
+        "address": "0040B1D0",
+        "candidateAddress": "00402330",
+        "originalSize": 65,
+        "candidateSize": 65,
+        "match": true
+      },
+      {
+        "name": "Op_DIV",
+        "address": "0040B220",
+        "candidateAddress": "00402380",
+        "originalSize": 72,
+        "candidateSize": 72,
+        "match": true
+      },
+      {
+        "name": "Op_DIVU",
+        "address": "0040B270",
+        "candidateAddress": "004023D0",
+        "originalSize": 76,
+        "candidateSize": 76,
+        "match": true
+      },
+      {
+        "name": "Op_DMULT",
+        "address": "0040B2C0",
+        "candidateAddress": "00402420",
+        "originalSize": 83,
+        "candidateSize": 83,
+        "match": true
+      },
+      {
+        "name": "Op_DDIV",
+        "address": "0040B320",
+        "candidateAddress": "00402480",
+        "originalSize": 91,
+        "candidateSize": 91,
+        "match": true
+      },
+      {
+        "name": "Op_DDIVU",
+        "address": "0040B380",
+        "candidateAddress": "004024E0",
+        "originalSize": 91,
+        "candidateSize": 91,
+        "match": true
+      },
+      {
+        "name": "Op_ADD",
+        "address": "0040B3E0",
+        "candidateAddress": "00402540",
+        "originalSize": 64,
+        "candidateSize": 64,
+        "match": true
+      },
+      {
+        "name": "Op_SUB",
+        "address": "0040B420",
+        "candidateAddress": "00402580",
+        "originalSize": 61,
+        "candidateSize": 61,
+        "match": true
+      },
+      {
+        "name": "Op_AND",
+        "address": "0040B460",
+        "candidateAddress": "004025C0",
+        "originalSize": 81,
+        "candidateSize": 81,
+        "match": true
+      },
+      {
+        "name": "Op_OR",
+        "address": "0040B4C0",
+        "candidateAddress": "00402620",
+        "originalSize": 81,
+        "candidateSize": 81,
+        "match": true
+      },
+      {
+        "name": "Op_XOR",
+        "address": "0040B520",
+        "candidateAddress": "00402680",
+        "originalSize": 81,
+        "candidateSize": 81,
+        "match": true
+      },
+      {
+        "name": "Op_NOR",
+        "address": "0040B580",
+        "candidateAddress": "004026E0",
+        "originalSize": 83,
+        "candidateSize": 83,
+        "match": true
+      },
+      {
+        "name": "Op_SLT",
+        "address": "0040B5E0",
+        "candidateAddress": "00402740",
+        "originalSize": 93,
+        "candidateSize": 93,
+        "match": true
+      },
+      {
+        "name": "Op_SLTU",
+        "address": "0040B640",
+        "candidateAddress": "004027A0",
+        "originalSize": 93,
+        "candidateSize": 93,
+        "match": true
+      },
+      {
+        "name": "Op_DADD",
+        "address": "0040B6A0",
+        "candidateAddress": "00402800",
+        "originalSize": 79,
+        "candidateSize": 79,
+        "match": true
+      },
+      {
+        "name": "Op_DSUB",
+        "address": "0040B6F0",
+        "candidateAddress": "00402850",
+        "originalSize": 75,
+        "candidateSize": 75,
+        "match": true
+      },
+      {
+        "name": "Op_TGE",
+        "address": "0040B740",
+        "candidateAddress": "004028A0",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_TGEU",
+        "address": "0040B750",
+        "candidateAddress": "004028B0",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_TLT",
+        "address": "0040B760",
+        "candidateAddress": "004028C0",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_TLTU",
+        "address": "0040B770",
+        "candidateAddress": "004028D0",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_TEQ",
+        "address": "0040B780",
+        "candidateAddress": "004028E0",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_TNE",
+        "address": "0040B790",
+        "candidateAddress": "004028F0",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_DSLL",
+        "address": "0040B7A0",
+        "candidateAddress": "00402900",
+        "originalSize": 67,
+        "candidateSize": 67,
+        "match": true
+      },
+      {
+        "name": "Op_DSRL",
+        "address": "0040B7F0",
+        "candidateAddress": "00402950",
+        "originalSize": 67,
+        "candidateSize": 67,
+        "match": true
+      },
+      {
+        "name": "Op_DSRA",
+        "address": "0040B840",
+        "candidateAddress": "004029A0",
+        "originalSize": 67,
+        "candidateSize": 67,
+        "match": true
+      },
+      {
+        "name": "Op_DSLL32",
+        "address": "0040B890",
+        "candidateAddress": "004029F0",
+        "originalSize": 70,
+        "candidateSize": 70,
+        "match": true
+      },
+      {
+        "name": "Op_DSRL32",
+        "address": "0040B8E0",
+        "candidateAddress": "00402A40",
+        "originalSize": 70,
+        "candidateSize": 70,
+        "match": true
+      },
+      {
+        "name": "Op_DSRA32",
+        "address": "0040B930",
+        "candidateAddress": "00402A90",
+        "originalSize": 70,
+        "candidateSize": 70,
+        "match": true
+      },
+      {
+        "name": "Op_BLTZ",
+        "address": "0040B980",
+        "candidateAddress": "00402AE0",
+        "originalSize": 15,
+        "candidateSize": 15,
+        "match": true
+      },
+      {
+        "name": "Op_BGEZ",
+        "address": "0040B990",
+        "candidateAddress": "00402AF0",
+        "originalSize": 15,
+        "candidateSize": 15,
+        "match": true
+      },
+      {
+        "name": "Op_BLTZL",
+        "address": "0040B9A0",
+        "candidateAddress": "00402B00",
+        "originalSize": 15,
+        "candidateSize": 15,
+        "match": true
+      },
+      {
+        "name": "Op_BGEZL",
+        "address": "0040B9B0",
+        "candidateAddress": "00402B10",
+        "originalSize": 15,
+        "candidateSize": 15,
+        "match": true
+      },
+      {
+        "name": "Op_TGEI",
+        "address": "0040B9C0",
+        "candidateAddress": "00402B20",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_TGEIU",
+        "address": "0040B9D0",
+        "candidateAddress": "00402B30",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_TLTI",
+        "address": "0040B9E0",
+        "candidateAddress": "00402B40",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_TLTIU",
+        "address": "0040B9F0",
+        "candidateAddress": "00402B50",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_TEQI",
+        "address": "0040BA00",
+        "candidateAddress": "00402B60",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_TNEI",
+        "address": "0040BA10",
+        "candidateAddress": "00402B70",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_BLTZAL",
+        "address": "0040BA20",
+        "candidateAddress": "00402B80",
+        "originalSize": 15,
+        "candidateSize": 15,
+        "match": true
+      },
+      {
+        "name": "Op_BGEZAL",
+        "address": "0040BA30",
+        "candidateAddress": "00402B90",
+        "originalSize": 15,
+        "candidateSize": 15,
+        "match": true
+      },
+      {
+        "name": "Op_BLTZALL",
+        "address": "0040BA40",
+        "candidateAddress": "00402BA0",
+        "originalSize": 15,
+        "candidateSize": 15,
+        "match": true
+      },
+      {
+        "name": "Op_BGEZALL",
+        "address": "0040BA50",
+        "candidateAddress": "00402BB0",
+        "originalSize": 15,
+        "candidateSize": 15,
+        "match": true
+      },
+      {
+        "name": "Op_MFC0",
+        "address": "0040BA60",
+        "candidateAddress": "00402BC0",
+        "originalSize": 368,
+        "candidateSize": 368,
+        "match": true
+      },
+      {
+        "name": "Op_MTC0",
+        "address": "0040BBD0",
+        "candidateAddress": "00402D30",
+        "originalSize": 792,
+        "candidateSize": 792,
+        "match": true
+      },
+      {
+        "name": "Op_COP0Function",
+        "address": "0040BEF0",
+        "candidateAddress": "00403050",
+        "originalSize": 17,
+        "candidateSize": 17,
+        "match": true
+      },
+      {
+        "name": "Op_TLBR",
+        "address": "0040BF10",
+        "candidateAddress": "00403070",
+        "originalSize": 5,
+        "candidateSize": 5,
+        "match": true
+      },
+      {
+        "name": "Op_TLBWI",
+        "address": "0040BF20",
+        "candidateAddress": "00403080",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_TLBWR",
+        "address": "0040BF30",
+        "candidateAddress": "00403090",
+        "originalSize": 40,
+        "candidateSize": 40,
+        "match": true
+      },
+      {
+        "name": "Op_TLBP",
+        "address": "0040BF60",
+        "candidateAddress": "004030C0",
+        "originalSize": 5,
+        "candidateSize": 5,
+        "match": true
+      },
+      {
+        "name": "Op_ERET",
+        "address": "0040BF70",
+        "candidateAddress": "004030D0",
+        "originalSize": 60,
+        "candidateSize": 60,
+        "match": true
+      }
+    ],
+    "interrupt_helper_ltcg": {
+      "name": "RaisePendingInterrupt",
+      "original_address": "0x00409E00",
+      "original_size": 113,
+      "candidate_size": 113,
+      "address_normalized_match": true,
+      "compiler": "VC7 /O2 /ML /GL /Ob1 + LTCG",
+      "caller_context": "RunCPU with #pragma optimize(\"\", off), preserving original out-of-line calls",
+      "probe": "/root/.ai-tmp/nemu-cpu-resume/Raise.cpp",
+      "limitations": "Absolute linker addresses are normalized; final EXE byte equality remains pending."
+    },
+    "integer_ltcg_final": [
+      {
+        "name": "Op_Unknown",
+        "address": "00409E80",
+        "candidateAddress": "00401180",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "ExecuteDelaySlot",
+        "address": "00409E90",
+        "candidateAddress": "00401000",
+        "originalSize": 95,
+        "candidateSize": 95,
+        "match": true
+      },
+      {
+        "name": "Branch",
+        "address": "00409EF0",
+        "candidateAddress": "00401060",
+        "originalSize": 280,
+        "candidateSize": 276,
+        "match": false
+      },
+      {
+        "name": "Op_SPECIAL",
+        "address": "0040A010",
+        "candidateAddress": "00401190",
+        "originalSize": 17,
+        "candidateSize": 17,
+        "match": true
+      },
+      {
+        "name": "Op_REGIMM",
+        "address": "0040A030",
+        "candidateAddress": "004011B0",
+        "originalSize": 17,
+        "candidateSize": 17,
+        "match": true
+      },
+      {
+        "name": "Op_J",
+        "address": "0040A050",
+        "candidateAddress": "004011D0",
+        "originalSize": 58,
+        "candidateSize": 58,
+        "match": true
+      },
+      {
+        "name": "Op_JAL",
+        "address": "0040A090",
+        "candidateAddress": "00401210",
+        "originalSize": 65,
+        "candidateSize": 65,
+        "match": true
+      },
+      {
+        "name": "Op_BEQ",
+        "address": "0040A0E0",
+        "candidateAddress": "00401260",
+        "originalSize": 157,
+        "candidateSize": 157,
+        "match": true
+      },
+      {
+        "name": "Op_BNE",
+        "address": "0040A180",
+        "candidateAddress": "00401300",
+        "originalSize": 95,
+        "candidateSize": 95,
+        "match": true
+      },
+      {
+        "name": "Op_BLEZ",
+        "address": "0040A1E0",
+        "candidateAddress": "00401360",
+        "originalSize": 15,
+        "candidateSize": 15,
+        "match": true
+      },
+      {
+        "name": "Op_BGTZ",
+        "address": "0040A1F0",
+        "candidateAddress": "00401370",
+        "originalSize": 15,
+        "candidateSize": 15,
+        "match": true
+      },
+      {
+        "name": "Op_ADDI",
+        "address": "0040A200",
+        "candidateAddress": "00401380",
+        "originalSize": 50,
+        "candidateSize": 50,
+        "match": true
+      },
+      {
+        "name": "Op_SLTI",
+        "address": "0040A240",
+        "candidateAddress": "004013C0",
+        "originalSize": 78,
+        "candidateSize": 78,
+        "match": true
+      },
+      {
+        "name": "Op_SLTIU",
+        "address": "0040A290",
+        "candidateAddress": "00401410",
+        "originalSize": 78,
+        "candidateSize": 78,
+        "match": true
+      },
+      {
+        "name": "Op_ANDI",
+        "address": "0040A2E0",
+        "candidateAddress": "00401460",
+        "originalSize": 61,
+        "candidateSize": 61,
+        "match": true
+      },
+      {
+        "name": "Op_ORI",
+        "address": "0040A320",
+        "candidateAddress": "004014A0",
+        "originalSize": 61,
+        "candidateSize": 61,
+        "match": true
+      },
+      {
+        "name": "Op_XORI",
+        "address": "0040A360",
+        "candidateAddress": "004014E0",
+        "originalSize": 61,
+        "candidateSize": 61,
+        "match": true
+      },
+      {
+        "name": "Op_LUI",
+        "address": "0040A3A0",
+        "candidateAddress": "00401520",
+        "originalSize": 35,
+        "candidateSize": 35,
+        "match": true
+      },
+      {
+        "name": "Op_COP0",
+        "address": "0040A3D0",
+        "candidateAddress": "00401550",
+        "originalSize": 18,
+        "candidateSize": 18,
+        "match": true
+      },
+      {
+        "name": "Op_COP1",
+        "address": "0040A3F0",
+        "candidateAddress": "00401570",
+        "originalSize": 18,
+        "candidateSize": 18,
+        "match": true
+      },
+      {
+        "name": "Op_BEQL",
+        "address": "0040A410",
+        "candidateAddress": "00401590",
+        "originalSize": 89,
+        "candidateSize": 89,
+        "match": true
+      },
+      {
+        "name": "Op_BNEL",
+        "address": "0040A470",
+        "candidateAddress": "004015F0",
+        "originalSize": 103,
+        "candidateSize": 103,
+        "match": true
+      },
+      {
+        "name": "Op_BLEZL",
+        "address": "0040A4E0",
+        "candidateAddress": "00401660",
+        "originalSize": 15,
+        "candidateSize": 15,
+        "match": true
+      },
+      {
+        "name": "Op_BGTZL",
+        "address": "0040A4F0",
+        "candidateAddress": "00401670",
+        "originalSize": 15,
+        "candidateSize": 15,
+        "match": true
+      },
+      {
+        "name": "Op_DADDI",
+        "address": "0040A500",
+        "candidateAddress": "00401680",
+        "originalSize": 61,
+        "candidateSize": 61,
+        "match": true
+      },
+      {
+        "name": "Op_LDL",
+        "address": "0040A540",
+        "candidateAddress": "004016C0",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_LDR",
+        "address": "0040A550",
+        "candidateAddress": "004016D0",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_LB",
+        "address": "0040A560",
+        "candidateAddress": "004016E0",
+        "originalSize": 90,
+        "candidateSize": 90,
+        "match": true
+      },
+      {
+        "name": "Op_LH",
+        "address": "0040A5C0",
+        "candidateAddress": "00401740",
+        "originalSize": 90,
+        "candidateSize": 90,
+        "match": true
+      },
+      {
+        "name": "Op_LWL",
+        "address": "0040A620",
+        "candidateAddress": "004017A0",
+        "originalSize": 129,
+        "candidateSize": 129,
+        "match": true
+      },
+      {
+        "name": "Op_LW",
+        "address": "0040A6B0",
+        "candidateAddress": "00401830",
+        "originalSize": 87,
+        "candidateSize": 87,
+        "match": true
+      },
+      {
+        "name": "Op_LBU",
+        "address": "0040A710",
+        "candidateAddress": "00401890",
+        "originalSize": 90,
+        "candidateSize": 90,
+        "match": true
+      },
+      {
+        "name": "Op_LHU",
+        "address": "0040A770",
+        "candidateAddress": "004018F0",
+        "originalSize": 90,
+        "candidateSize": 90,
+        "match": true
+      },
+      {
+        "name": "Op_LWR",
+        "address": "0040A7D0",
+        "candidateAddress": "00401950",
+        "originalSize": 130,
+        "candidateSize": 130,
+        "match": true
+      },
+      {
+        "name": "Op_LWU",
+        "address": "0040A860",
+        "candidateAddress": "004019E0",
+        "originalSize": 90,
+        "candidateSize": 90,
+        "match": true
+      },
+      {
+        "name": "Op_SB",
+        "address": "0040A8C0",
+        "candidateAddress": "00401A40",
+        "originalSize": 84,
+        "candidateSize": 84,
+        "match": true
+      },
+      {
+        "name": "Op_SH",
+        "address": "0040A920",
+        "candidateAddress": "00401AA0",
+        "originalSize": 85,
+        "candidateSize": 85,
+        "match": true
+      },
+      {
+        "name": "Op_SWL",
+        "address": "0040A980",
+        "candidateAddress": "00401B00",
+        "originalSize": 128,
+        "candidateSize": 128,
+        "match": true
+      },
+      {
+        "name": "Op_SW",
+        "address": "0040AA00",
+        "candidateAddress": "00401B80",
+        "originalSize": 82,
+        "candidateSize": 82,
+        "match": true
+      },
+      {
+        "name": "Op_SDL",
+        "address": "0040AA60",
+        "candidateAddress": "00401BE0",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_SDR",
+        "address": "0040AA70",
+        "candidateAddress": "00401BF0",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_SWR",
+        "address": "0040AA80",
+        "candidateAddress": "00401C00",
+        "originalSize": 131,
+        "candidateSize": 131,
+        "match": true
+      },
+      {
+        "name": "Op_LWC1",
+        "address": "0040AB10",
+        "candidateAddress": "00401C90",
+        "originalSize": 81,
+        "candidateSize": 81,
+        "match": true
+      },
+      {
+        "name": "Op_LDC1",
+        "address": "0040AB70",
+        "candidateAddress": "00401CF0",
+        "originalSize": 146,
+        "candidateSize": 146,
+        "match": true
+      },
+      {
+        "name": "Op_LD",
+        "address": "0040AC10",
+        "candidateAddress": "00401D90",
+        "originalSize": 143,
+        "candidateSize": 143,
+        "match": true
+      },
+      {
+        "name": "Op_SWC1",
+        "address": "0040ACA0",
+        "candidateAddress": "00401E20",
+        "originalSize": 82,
+        "candidateSize": 82,
+        "match": true
+      },
+      {
+        "name": "Op_SDC1",
+        "address": "0040AD00",
+        "candidateAddress": "00401E80",
+        "originalSize": 100,
+        "candidateSize": 100,
+        "match": true
+      },
+      {
+        "name": "Op_SD",
+        "address": "0040AD70",
+        "candidateAddress": "00401EF0",
+        "originalSize": 108,
+        "candidateSize": 108,
+        "match": true
+      },
+      {
+        "name": "Op_SLL",
+        "address": "0040ADE0",
+        "candidateAddress": "00401F60",
+        "originalSize": 57,
+        "candidateSize": 57,
+        "match": true
+      },
+      {
+        "name": "Op_SRL",
+        "address": "0040AE20",
+        "candidateAddress": "00401FA0",
+        "originalSize": 57,
+        "candidateSize": 57,
+        "match": true
+      },
+      {
+        "name": "Op_SRA",
+        "address": "0040AE60",
+        "candidateAddress": "00401FE0",
+        "originalSize": 57,
+        "candidateSize": 57,
+        "match": true
+      },
+      {
+        "name": "Op_SLLV",
+        "address": "0040AEA0",
+        "candidateAddress": "00402020",
+        "originalSize": 64,
+        "candidateSize": 64,
+        "match": true
+      },
+      {
+        "name": "Op_SRLV",
+        "address": "0040AEE0",
+        "candidateAddress": "00402060",
+        "originalSize": 64,
+        "candidateSize": 64,
+        "match": true
+      },
+      {
+        "name": "Op_SRAV",
+        "address": "0040AF20",
+        "candidateAddress": "004020A0",
+        "originalSize": 64,
+        "candidateSize": 64,
+        "match": true
+      },
+      {
+        "name": "Op_JR",
+        "address": "0040AF60",
+        "candidateAddress": "004020E0",
+        "originalSize": 50,
+        "candidateSize": 50,
+        "match": true
+      },
+      {
+        "name": "Op_JALR",
+        "address": "0040AFA0",
+        "candidateAddress": "00402120",
+        "originalSize": 71,
+        "candidateSize": 71,
+        "match": true
+      },
+      {
+        "name": "Op_SYSCALL",
+        "address": "0040AFF0",
+        "candidateAddress": "00402170",
+        "originalSize": 21,
+        "candidateSize": 21,
+        "match": true
+      },
+      {
+        "name": "Op_BREAK",
+        "address": "0040B010",
+        "candidateAddress": "00402190",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_MFHI",
+        "address": "0040B020",
+        "candidateAddress": "004021A0",
+        "originalSize": 38,
+        "candidateSize": 38,
+        "match": true
+      },
+      {
+        "name": "Op_MTHI",
+        "address": "0040B050",
+        "candidateAddress": "004021D0",
+        "originalSize": 38,
+        "candidateSize": 38,
+        "match": true
+      },
+      {
+        "name": "Op_MFLO",
+        "address": "0040B080",
+        "candidateAddress": "00402200",
+        "originalSize": 38,
+        "candidateSize": 38,
+        "match": true
+      },
+      {
+        "name": "Op_MTLO",
+        "address": "0040B0B0",
+        "candidateAddress": "00402230",
+        "originalSize": 38,
+        "candidateSize": 38,
+        "match": true
+      },
+      {
+        "name": "Op_DSLLV",
+        "address": "0040B0E0",
+        "candidateAddress": "00402260",
+        "originalSize": 76,
+        "candidateSize": 76,
+        "match": true
+      },
+      {
+        "name": "Op_DSRAV",
+        "address": "0040B130",
+        "candidateAddress": "004022B0",
+        "originalSize": 76,
+        "candidateSize": 76,
+        "match": true
+      },
+      {
+        "name": "Op_MULT",
+        "address": "0040B180",
+        "candidateAddress": "00402300",
+        "originalSize": 70,
+        "candidateSize": 70,
+        "match": true
+      },
+      {
+        "name": "Op_MULTU",
+        "address": "0040B1D0",
+        "candidateAddress": "00402350",
+        "originalSize": 65,
+        "candidateSize": 65,
+        "match": true
+      },
+      {
+        "name": "Op_DIV",
+        "address": "0040B220",
+        "candidateAddress": "004023A0",
+        "originalSize": 72,
+        "candidateSize": 72,
+        "match": true
+      },
+      {
+        "name": "Op_DIVU",
+        "address": "0040B270",
+        "candidateAddress": "004023F0",
+        "originalSize": 76,
+        "candidateSize": 76,
+        "match": true
+      },
+      {
+        "name": "Op_DMULT",
+        "address": "0040B2C0",
+        "candidateAddress": "00402440",
+        "originalSize": 83,
+        "candidateSize": 83,
+        "match": true
+      },
+      {
+        "name": "Op_DDIV",
+        "address": "0040B320",
+        "candidateAddress": "004024A0",
+        "originalSize": 91,
+        "candidateSize": 91,
+        "match": true
+      },
+      {
+        "name": "Op_DDIVU",
+        "address": "0040B380",
+        "candidateAddress": "00402500",
+        "originalSize": 91,
+        "candidateSize": 91,
+        "match": true
+      },
+      {
+        "name": "Op_ADD",
+        "address": "0040B3E0",
+        "candidateAddress": "00402560",
+        "originalSize": 64,
+        "candidateSize": 64,
+        "match": true
+      },
+      {
+        "name": "Op_SUB",
+        "address": "0040B420",
+        "candidateAddress": "004025A0",
+        "originalSize": 61,
+        "candidateSize": 61,
+        "match": true
+      },
+      {
+        "name": "Op_AND",
+        "address": "0040B460",
+        "candidateAddress": "004025E0",
+        "originalSize": 81,
+        "candidateSize": 81,
+        "match": true
+      },
+      {
+        "name": "Op_OR",
+        "address": "0040B4C0",
+        "candidateAddress": "00402640",
+        "originalSize": 81,
+        "candidateSize": 81,
+        "match": true
+      },
+      {
+        "name": "Op_XOR",
+        "address": "0040B520",
+        "candidateAddress": "004026A0",
+        "originalSize": 81,
+        "candidateSize": 81,
+        "match": true
+      },
+      {
+        "name": "Op_NOR",
+        "address": "0040B580",
+        "candidateAddress": "00402700",
+        "originalSize": 83,
+        "candidateSize": 83,
+        "match": true
+      },
+      {
+        "name": "Op_SLT",
+        "address": "0040B5E0",
+        "candidateAddress": "00402760",
+        "originalSize": 93,
+        "candidateSize": 93,
+        "match": true
+      },
+      {
+        "name": "Op_SLTU",
+        "address": "0040B640",
+        "candidateAddress": "004027C0",
+        "originalSize": 93,
+        "candidateSize": 93,
+        "match": true
+      },
+      {
+        "name": "Op_DADD",
+        "address": "0040B6A0",
+        "candidateAddress": "00402820",
+        "originalSize": 79,
+        "candidateSize": 79,
+        "match": true
+      },
+      {
+        "name": "Op_DSUB",
+        "address": "0040B6F0",
+        "candidateAddress": "00402870",
+        "originalSize": 75,
+        "candidateSize": 75,
+        "match": true
+      },
+      {
+        "name": "Op_TGE",
+        "address": "0040B740",
+        "candidateAddress": "004028C0",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_TGEU",
+        "address": "0040B750",
+        "candidateAddress": "004028D0",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_TLT",
+        "address": "0040B760",
+        "candidateAddress": "004028E0",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_TLTU",
+        "address": "0040B770",
+        "candidateAddress": "004028F0",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_TEQ",
+        "address": "0040B780",
+        "candidateAddress": "00402900",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_TNE",
+        "address": "0040B790",
+        "candidateAddress": "00402910",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_DSLL",
+        "address": "0040B7A0",
+        "candidateAddress": "00402920",
+        "originalSize": 67,
+        "candidateSize": 67,
+        "match": true
+      },
+      {
+        "name": "Op_DSRL",
+        "address": "0040B7F0",
+        "candidateAddress": "00402970",
+        "originalSize": 67,
+        "candidateSize": 67,
+        "match": true
+      },
+      {
+        "name": "Op_DSRA",
+        "address": "0040B840",
+        "candidateAddress": "004029C0",
+        "originalSize": 67,
+        "candidateSize": 67,
+        "match": true
+      },
+      {
+        "name": "Op_DSLL32",
+        "address": "0040B890",
+        "candidateAddress": "00402A10",
+        "originalSize": 70,
+        "candidateSize": 70,
+        "match": true
+      },
+      {
+        "name": "Op_DSRL32",
+        "address": "0040B8E0",
+        "candidateAddress": "00402A60",
+        "originalSize": 70,
+        "candidateSize": 70,
+        "match": true
+      },
+      {
+        "name": "Op_DSRA32",
+        "address": "0040B930",
+        "candidateAddress": "00402AB0",
+        "originalSize": 70,
+        "candidateSize": 70,
+        "match": true
+      },
+      {
+        "name": "Op_BLTZ",
+        "address": "0040B980",
+        "candidateAddress": "00402B00",
+        "originalSize": 15,
+        "candidateSize": 15,
+        "match": true
+      },
+      {
+        "name": "Op_BGEZ",
+        "address": "0040B990",
+        "candidateAddress": "00402B10",
+        "originalSize": 15,
+        "candidateSize": 15,
+        "match": true
+      },
+      {
+        "name": "Op_BLTZL",
+        "address": "0040B9A0",
+        "candidateAddress": "00402B20",
+        "originalSize": 15,
+        "candidateSize": 15,
+        "match": true
+      },
+      {
+        "name": "Op_BGEZL",
+        "address": "0040B9B0",
+        "candidateAddress": "00402B30",
+        "originalSize": 15,
+        "candidateSize": 15,
+        "match": true
+      },
+      {
+        "name": "Op_TGEI",
+        "address": "0040B9C0",
+        "candidateAddress": "00402B40",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_TGEIU",
+        "address": "0040B9D0",
+        "candidateAddress": "00402B50",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_TLTI",
+        "address": "0040B9E0",
+        "candidateAddress": "00402B60",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_TLTIU",
+        "address": "0040B9F0",
+        "candidateAddress": "00402B70",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_TEQI",
+        "address": "0040BA00",
+        "candidateAddress": "00402B80",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_TNEI",
+        "address": "0040BA10",
+        "candidateAddress": "00402B90",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_BLTZAL",
+        "address": "0040BA20",
+        "candidateAddress": "00402BA0",
+        "originalSize": 15,
+        "candidateSize": 15,
+        "match": true
+      },
+      {
+        "name": "Op_BGEZAL",
+        "address": "0040BA30",
+        "candidateAddress": "00402BB0",
+        "originalSize": 15,
+        "candidateSize": 15,
+        "match": true
+      },
+      {
+        "name": "Op_BLTZALL",
+        "address": "0040BA40",
+        "candidateAddress": "00402BC0",
+        "originalSize": 15,
+        "candidateSize": 15,
+        "match": true
+      },
+      {
+        "name": "Op_BGEZALL",
+        "address": "0040BA50",
+        "candidateAddress": "00402BD0",
+        "originalSize": 15,
+        "candidateSize": 15,
+        "match": true
+      },
+      {
+        "name": "Op_MFC0",
+        "address": "0040BA60",
+        "candidateAddress": "00402BE0",
+        "originalSize": 368,
+        "candidateSize": 368,
+        "match": true
+      },
+      {
+        "name": "Op_MTC0",
+        "address": "0040BBD0",
+        "candidateAddress": "00402D50",
+        "originalSize": 792,
+        "candidateSize": 792,
+        "match": true
+      },
+      {
+        "name": "Op_COP0Function",
+        "address": "0040BEF0",
+        "candidateAddress": "00403070",
+        "originalSize": 17,
+        "candidateSize": 17,
+        "match": true
+      },
+      {
+        "name": "Op_TLBR",
+        "address": "0040BF10",
+        "candidateAddress": "00403090",
+        "originalSize": 5,
+        "candidateSize": 5,
+        "match": true
+      },
+      {
+        "name": "Op_TLBWI",
+        "address": "0040BF20",
+        "candidateAddress": "004030A0",
+        "originalSize": 12,
+        "candidateSize": 12,
+        "match": true
+      },
+      {
+        "name": "Op_TLBWR",
+        "address": "0040BF30",
+        "candidateAddress": "004030B0",
+        "originalSize": 40,
+        "candidateSize": 40,
+        "match": true
+      },
+      {
+        "name": "Op_TLBP",
+        "address": "0040BF60",
+        "candidateAddress": "004030E0",
+        "originalSize": 5,
+        "candidateSize": 5,
+        "match": true
+      },
+      {
+        "name": "Op_ERET",
+        "address": "0040BF70",
+        "candidateAddress": "004030F0",
+        "originalSize": 60,
+        "candidateSize": 60,
+        "match": true
+      }
+    ],
+    "full_linked_20261017": {
+      "image": "/root/.ai-tmp/nemu-complete-relocs.6r3eywlv/nemu64.exe",
+      "image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "source_sha256": "5170f649611be9ad74a6464f08e1cfca504a3ce2ad5c5f3f277be3e97fb41a23",
+      "extents": "analysis/nemu-cpu-extents.json",
+      "report": "/root/.ai-tmp/nemu-cpu-resume/full-current-cpu-6r3eywlv.json",
+      "complete_body_known_target_matches": 143,
+      "matched_original_bytes": 12924,
+      "function_count": 144,
+      "target_mismatches": 0,
+      "remaining": [
+        {
+          "name": "Branch",
+          "original_bytes": 280,
+          "rebuilt_bytes": 276,
+          "difference": "Candidate caches the low condition byte in CL; original reloads the stack byte for its default case."
+        }
+      ],
+      "limitations": "Complete unforced full-application link; relocation-normalized diagnostic, not image equality. Unknown and unverified application target identities remain."
+    },
+    "interpreter_full_linked_20261017": {
+      "image": "/root/.ai-tmp/nemu-interpreter-full.3z_vh6x1/Localcespf.exe",
+      "image_sha256": "4108d2509821591414da03177f0fac3e702b53271314b79bcc7bc6c58f76eb22",
+      "source_sha256": "5170f649611be9ad74a6464f08e1cfca504a3ce2ad5c5f3f277be3e97fb41a23",
+      "report": "/root/.ai-tmp/nemu-interpreter-full.3z_vh6x1/Localcespf-full-report.json",
+      "extents": "/root/.ai-tmp/nemu-interpreter-full.3z_vh6x1/Localcespf-extents.json",
+      "body_bytes": 2992,
+      "normalized_differing_bytes": 0,
+      "target_mismatches": 0,
+      "limitations": "Complete unforced full-application link with frozen pkq2porw source/object context; normalization checks known targets but does not prove all target identities or whole executable equality."
+    },
+    "branch_source_trials_20261017": {
+      "audit": "/root/.ai-tmp/nemu-branch-round2.mm6fp3am/HANDOFF.txt",
+      "trial_count": 124,
+      "variants_preserving_twelve_callers": 83,
+      "branch_matches": 0,
+      "scope": "Natural types, casts, control flow, narrow aliases, enum and inline expression variants; no volatile or fabricated assembler barriers.",
+      "followup": {
+        "audit": "/root/.ai-tmp/nemu-branch-paramorder.GyLDPuaw/HANDOFF.txt",
+        "trial_count": 38,
+        "parameter_orders": 12,
+        "case_orders": 24,
+        "explicit_noinline_variants": 2,
+        "branch_matches": 0,
+        "result": "Every case-order variant preserves all twelve callers but retains the 276-byte Branch body. Explicit noinline does not alter code generation. No source change was promoted."
+      }
+    }
+  },
+  "original_extent_validation": {
+    "definition": "Contiguous byte extent from entry through the highest reachable instruction end or the end of a referenced inline switch table; includes intervening gaps. Subsequent alignment padding is decoded separately and excluded.",
+    "verified_function_count": 144,
+    "original_image_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+    "evidence": "analysis/nemu-cpu-original-extents.json"
+  }
+}
