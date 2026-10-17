@@ -395,11 +395,13 @@
   },
   "rejected_followup_experiments": [
     {
-      "name": "Move close-ROM switch case after open-ROM case",
+      "name": "Invalid initial close-ROM case move (discarded)",
       "source_live": false,
       "literal_positions_fixed": 0,
       "residual_instruction_bytes": 1102,
-      "proof": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/case-order-invariance.json"
+      "proof": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/case-order-invariance.json",
+      "valid_reordering_experiment": false,
+      "reason": "The scratch extractor inserted the close-ROM arm between the two load-ROM labels, changing the target of case0x8026. Its code differences cannot reject a correct whole-arm reorder. No source was promoted."
     },
     {
       "name": "Recursive invalid-folder retry",
@@ -482,5 +484,86 @@
     "generated_float_original_va": "0x43e01c",
     "generated_float_candidate_va": "0x43e04c"
   },
-  "translation_unit_evidence": "analysis/nemu-translation-units.json"
+  "translation_unit_evidence": "analysis/nemu-translation-units.json",
+  "main_command_literal_refinement": {
+    "method": "Move the complete ID_CLOSE_ROM switch arm after the complete shared0x8026/ID_LOAD_ROM arm. Preserve both load labels and all case bodies.",
+    "source": "src/nemu64/WinMain.cpp",
+    "before_sha256": "39923e6272ba57fc7b3302765eba8c3b1e1d2d57021de51356aeb28270d64681",
+    "after_sha256": "ea37bc07285c522fdf60a0f93de0c99307fbb05c7667dd95476e61a7af442683",
+    "commands": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/case-order-corrected-commands.json",
+    "proof": {
+      "scope": "Reconstructed-build layout invariance; no original-image equality claim.",
+      "baseline": "/root/.ai-tmp/nemu-complete-relocs.ko06ekj6/nemu64.exe",
+      "candidate": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/case-order-corrected/cases.exe",
+      "baseline_sha256": "4f611be1796bf4fd8930fa7c179973b3b310684948bd334d2795d5456c361247",
+      "candidate_sha256": "b86c6a0034e52d76b5a8bc79698d16b41a8d61126b1b1af79ab5d622d2455874",
+      "fixed_code_and_data_publics": 1381,
+      "readonly_anchors": [
+        {
+          "name": "??_C@_0EM@KHBGAJLM@Rom?5and?5Zip?5files?$AA?$CK?4zip?$DL?$CK?4?$DP64?$DL?$CK?4@",
+          "baseline_va": "0x4330b8",
+          "candidate_va": "0x4330c8",
+          "size": 76,
+          "sha256": "08c1b91a5c2e3af088805456b7e9323a820af9e354030f80f83d3ad0440ddd38",
+          "basis": "compiler_named_literal"
+        },
+        {
+          "name": "??_C@_0M@PICIMBAM@Open?5rom?4?4?4?$AA@",
+          "baseline_va": "0x433104",
+          "candidate_va": "0x433114",
+          "size": 12,
+          "sha256": "c04c8cbb4ab46167b47d16a0acc5af39a8f5854a69e7bdad47151f3ba31d7be8",
+          "basis": "compiler_named_literal"
+        },
+        {
+          "name": "??_C@_0P@JANIMIII@Closing?5rom?4?4?4?$AA@",
+          "baseline_va": "0x433110",
+          "candidate_va": "0x4330b4",
+          "size": 15,
+          "sha256": "1bb4ad2fe1b1b569bc9db22eb05ff5108ceaf8e713be90f1bf8740b03dbb2474",
+          "basis": "compiler_named_literal"
+        }
+      ],
+      "moved_publics_not_used_for_normalization": [],
+      "sections": [
+        {
+          "name": ".text",
+          "compared_raw_bytes": 192512,
+          "relocated_readonly_references": [
+            {
+              "rva": "0x1c216",
+              "baseline_target": "0x433110",
+              "candidate_target": "0x4330b4"
+            },
+            {
+              "rva": "0x1c81e",
+              "baseline_target": "0x433104",
+              "candidate_target": "0x433114"
+            },
+            {
+              "rva": "0x1c826",
+              "baseline_target": "0x4330b8",
+              "candidate_target": "0x4330c8"
+            }
+          ],
+          "residual_different_bytes": 0,
+          "first_difference_rvas": []
+        },
+        {
+          "name": ".data",
+          "compared_raw_bytes": 241664,
+          "relocated_readonly_references": [],
+          "residual_different_bytes": 0,
+          "first_difference_rvas": []
+        }
+      ],
+      "passed": true
+    },
+    "literal_report": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/case-order-corrected-rdata.json",
+    "unique_literals_at_original_addresses": 496,
+    "application_literals_at_original_addresses": 456,
+    "remaining_unique_literal_placements": 3,
+    "remaining": "The signature-export cod\\ pair and two WritePhysicalWord DMA diagnostics remain owner-local source refinements; the generated unsigned-conversion float remains late.",
+    "source_live": true
+  }
 }

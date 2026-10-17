@@ -752,11 +752,6 @@ LRESULT MainWindowCommand(HWND window, UINT message, WPARAM wParam, LPARAM lPara
     case ID_CONFIGURE_AUDIO_PLUGIN:
         AIConfigure(window);
         break;
-    case ID_CLOSE_ROM:
-        CPU_ActionFlags = (CPU_ActionFlags & ~0x10000) | 0x400000;
-        ResumeThread(CPU_Thread);
-        SetStatusText(0, "Closing rom...");
-        break;
     case ID_CONFIGURE_INPUT_PLUGIN:
         CIConfigure(window);
         break;
@@ -868,6 +863,11 @@ LRESULT MainWindowCommand(HWND window, UINT message, WPARAM wParam, LPARAM lPara
         file.lpstrFile = SelectedRomFilename;
         if (GetOpenFileNameA(&file))
             StartCPUThread();
+        break;
+    case ID_CLOSE_ROM:
+        CPU_ActionFlags = (CPU_ActionFlags & ~0x10000) | 0x400000;
+        ResumeThread(CPU_Thread);
+        SetStatusText(0, "Closing rom...");
         break;
     case ID_2: CPU_CycleShift = 1; break;
     case ID_4: CPU_CycleShift = 2; break;
