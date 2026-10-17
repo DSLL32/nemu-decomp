@@ -1,4 +1,7 @@
-/* Integer envelope mixers. Names and source grouping are inferred. */
+/* Integer envelope mixers. Nemu source grouping and private function names are
+ * inferred. MixAudioEnvelope and MixAudioEnvelopeLegacy retain the source
+ * structure of UltraHLE's archived SLIST.C envmix_mario/envmix_zelda routines;
+ * globals are adapted to the context argument observed in the Nemu binary. */
 #include "AudioHLE.h"
 
 void MixAudioEnvelopeClamped(int input, int output, int aux0, int aux1,
@@ -75,155 +78,259 @@ void MixAudioEnvelopeClamped(int input, int output, int aux0, int aux1,
     context->rateRight = limitRight;
 }
 
-void MixAudioEnvelope(int input, int output, int aux0, int aux1,
-                      int aux2, int count, AudioContext *context)
+void MixAudioEnvelope(int src,int dst1,int dst2,int eff1,int eff2,int cnt,AudioContext *context)
 {
-    int wetLeft;
-    int wetRight;
-    int left;
-    int right;
-    int rampLeft;
-    int rampRight;
-    int limitLeft;
-    int limitRight;
-    int i, j;
-    count >>= 1;
-    input >>= 1;
-    output >>= 1;
-    aux0 >>= 1;
-    aux1 >>= 1;
-    aux2 >>= 1;
-    wetLeft = context->volumeLeft << 1;
-    wetRight = context->volumeRight << 1;
-    left = context->targetLeft << 1;
-    right = context->targetRight << 1;
-    rampLeft = context->rampLeft << 1;
-    rampRight = context->rampRight << 1;
-    limitLeft = context->rateLeft << 1;
-    limitRight = context->rateRight << 1;
-    if (rampLeft == 0xffff) { left = limitLeft; rampLeft = 0; }
-    if (rampRight == 0xffff) { right = limitRight; rampRight = 0; }
-    if (wetLeft == 0 && wetRight == 0) {
-        if (left == 0 && rampLeft == 0 && right == 0) return;
-        if (rampLeft == 0 && rampRight == 0) {
-            for (i = 0; i < count; ++i) {
-                int sample = context->buffer[input + i];
-                int l = (sample * left) >> 16;
-                int r = (sample * right) >> 16;
-                context->buffer[output + i] += l;
-                context->buffer[aux0 + i] += r;
-            }
-        } else goto ramped;
-    } else if (rampLeft == 0 && rampRight == 0) {
-        for (i = 0; i < count; ++i) {
-            int sample = context->buffer[input + i];
-            int l = (sample * left) >> 16;
-            int r = (sample * right) >> 16;
-            context->buffer[output + i] += l;
-            context->buffer[aux0 + i] += r;
-            context->buffer[aux1 + i] += (l * wetLeft) >> 16;
-            context->buffer[aux2 + i] += (r * wetRight) >> 16;
+    int i,j,jn;
+    int lteff,rteff;
+    int ltmul,ltadd,lttar;
+    int rtmul,rtadd,rttar;
+    int lt,rt;
+    cnt>>=1;
+    src>>=1;
+    dst1>>=1;
+    dst2>>=1;
+    eff1>>=1;
+    eff2>>=1;
+
+    lteff=context->volumeLeft<<1;
+    rteff=context->volumeRight<<1;
+    ltmul=context->targetLeft<<1;
+    rtmul=context->targetRight<<1;
+    ltadd=context->rampLeft<<1;
+    rtadd=context->rampRight<<1;
+    lttar=context->rateLeft<<1;
+    rttar=context->rateRight<<1;
+
+    if(ltadd==65535 && ltadd>0)
+    {
+        ltmul=lttar;
+        ltadd=0;
+    }
+    if(rtadd==65535 && rtadd>0)
+    {
+        rtmul=rttar;
+        rtadd=0;
+    }
+
+    if(!lteff && !rteff && !ltmul && !ltadd && !rtmul && !rtmul)
+    {
+        // no need to mix, volumes zero
+        return;
+    }
+
+
+    if(!lteff && !rteff && !ltadd && !rtadd)
+    {
+        // no effect mix
+        for(j=0;j<cnt;j++)
+        {
+            lt=rt=context->buffer[src+j];
+            lt=(lt*ltmul)>>16;
+            rt=(rt*rtmul)>>16;
+            context->buffer[dst1+j]+=lt;
+            context->buffer[dst2+j]+=rt;
         }
-    } else {
-    ramped:
-        for (i = 0; i < count; i += 8) {
-            for (j = i; j < i + 8; ++j) {
-                int sample = context->buffer[input + j];
-                int l = (sample * left) >> 16;
-                int r = (sample * right) >> 16;
-                context->buffer[output + j] += l;
-                context->buffer[aux0 + j] += r;
-                context->buffer[aux1 + j] += (l * wetLeft) >> 16;
-                context->buffer[aux2 + j] += (r * wetRight) >> 16;
+    }
+    else if(!ltadd && !rtadd)
+    {
+        // no volume change
+        for(j=0;j<cnt;j++)
+        {
+            lt=rt=context->buffer[src+j];
+            lt=(lt*ltmul)>>16;
+            rt=(rt*rtmul)>>16;
+            context->buffer[dst1+j]+=lt;
+            context->buffer[dst2+j]+=rt;
+            lt=(lt*lteff)>>16;
+            rt=(rt*rteff)>>16;
+            context->buffer[eff1+j]+=lt;
+            context->buffer[eff2+j]+=rt;
+        }
+    }
+    else
+    {
+        // full mix (no target)
+        for(i=0;i<cnt;i+=8)
+        {
+            jn=i+8;
+            for(j=i;j<jn;j++)
+            {
+                lt=rt=context->buffer[src+j];
+                lt=(lt*ltmul)>>16;
+                rt=(rt*rtmul)>>16;
+                context->buffer[dst1+j]+=lt;
+                context->buffer[dst2+j]+=rt;
+                lt=(lt*lteff)>>16;
+                rt=(rt*rteff)>>16;
+                context->buffer[eff1+j]+=lt;
+                context->buffer[eff2+j]+=rt;
             }
-            left += rampLeft;
-            if (rampLeft > 0) {
-                if (left > limitLeft) { left = limitLeft; rampLeft = 0; }
-            } else {
-                if (left < limitLeft) { left = limitLeft; rampLeft = 0; }
+            ltmul+=ltadd;
+            if(ltadd>0)
+            {
+                if(ltmul>lttar)
+                {
+                    ltmul=lttar;
+                    ltadd=0;
+                }
             }
-            right += rampRight;
-            if (rampRight > 0) {
-                if (right > limitRight) { right = limitRight; rampRight = 0; }
-            } else {
-                if (right < limitRight) { right = limitRight; rampRight = 0; }
+            else
+            {
+                if(ltmul<lttar)
+                {
+                    ltmul=lttar;
+                    ltadd=0;
+                }
+            }
+            rtmul+=rtadd;
+            if(rtadd>0)
+            {
+                if(rtmul>rttar)
+                {
+                    rtmul=rttar;
+                    rtadd=0;
+                }
+            }
+            else
+            {
+                if(rtmul<rttar)
+                {
+                    rtmul=rttar;
+                    rtadd=0;
+                }
             }
         }
     }
-    context->volumeLeft = wetLeft >> 1;
-    context->volumeRight = wetRight >> 1;
-    context->rampLeft = rampLeft >> 1;
-    context->rampRight = rampRight >> 1;
-    context->targetLeft = left >> 1;
-    context->targetRight = right >> 1;
-    context->rateLeft = limitLeft >> 1;
-    context->rateRight = limitRight >> 1;
+
+    context->volumeLeft=lteff>>1;
+    context->volumeRight=rteff>>1;
+    context->rampLeft=ltadd>>1;
+    context->rampRight=rtadd>>1;
+    context->targetLeft=ltmul>>1;
+    context->targetRight=rtmul>>1;
+    context->rateLeft=lttar>>1;
+    context->rateRight=rttar>>1;
 }
 
-void MixAudioEnvelopeLegacy(int input, int output, int aux0, int aux1,
-                            int aux2, int count, AudioContext *context)
+void MixAudioEnvelopeLegacy(int src,int dst1,int dst2,int eff1,int eff2,int cnt,AudioContext *context)
 {
-    int wetLeft;
-    int wetRight;
-    int left;
-    int right;
-    int rampLeft;
-    int rampRight;
-    int i, j;
-    count >>= 1;
-    input >>= 1;
-    output >>= 1;
-    aux0 >>= 1;
-    aux1 >>= 1;
-    aux2 >>= 1;
-    wetLeft = context->volumeLeft;
-    wetRight = context->volumeRight;
-    left = context->targetLeft;
-    right = context->targetRight;
-    rampLeft = context->rampLeft;
-    rampRight = context->rampRight;
-    if (wetLeft == 0 && wetRight == 0) {
-        if (left == 0 && rampLeft == 0 && right == 0) return;
-        if (rampLeft == 0 && rampRight == 0) {
-            for (i = 0; i < count; ++i) {
-                int sample = context->buffer[input + i];
-                int l = (sample * left) >> 16;
-                int r = (sample * right) >> 16;
-                int outRight = context->buffer[aux0 + i] + r;
-                context->buffer[output + i] += l;
-                context->buffer[aux0 + i] = outRight;
-            }
-        } else goto ramped;
-    } else if (rampLeft == 0 && rampRight == 0) {
-        for (i = 0; i < count; ++i) {
-            int sample = context->buffer[input + i];
-            int l = (sample * left) >> 16;
-            int r = (sample * right) >> 16;
-            int outRight = context->buffer[aux0 + i] + r;
-            context->buffer[output + i] += l;
-            context->buffer[aux0 + i] = outRight;
-            context->buffer[aux1 + i] += (l * wetLeft) >> 16;
-            context->buffer[aux2 + i] += (r * wetRight) >> 16;
+    int i,j,jn,lx,rx;
+    int lteff,rteff;
+    int ltmul,ltadd;
+    int rtmul,rtadd;
+    int lt,rt;
+    cnt>>=1;
+    src>>=1;
+    dst1>>=1;
+    dst2>>=1;
+    eff1>>=1;
+    eff2>>=1;
+
+    lteff=context->volumeLeft;
+    rteff=context->volumeRight;
+    ltmul=context->targetLeft;
+    rtmul=context->targetRight;
+    ltadd=context->rampLeft;
+    rtadd=context->rampRight;
+
+    if(!lteff && !rteff && !ltmul && !ltadd && !rtmul && !rtmul)
+    {
+        // no need to mix, volumes zero
+        return;
+    }
+
+
+    if(!lteff && !rteff && !ltadd && !rtadd)
+    {
+        // no effect mix
+        for(j=0;j<cnt;j++)
+        {
+            lt=rt=context->buffer[src+j];
+            lt=(lt*ltmul)>>16;
+            rt=(rt*rtmul)>>16;
+            lx=lt+context->buffer[dst1+j];
+            rx=rt+context->buffer[dst2+j];
+            /*
+            if(lx<-32767) lx=-32767;
+            if(lx> 32767) lx= 32767;
+            if(rx<-32767) rx=-32767;
+            if(rx> 32767) rx= 32767;
+            */
+            context->buffer[dst1+j]=lx;
+            context->buffer[dst2+j]=rx;
         }
-    } else {
-    ramped:
-        for (i = 0; i < count; i += 8) {
-            for (j = i; j < i + 8; ++j) {
-                int sample = context->buffer[input + j];
-                int l = (sample * left) >> 16;
-                int r = (sample * right) >> 16;
-                int outRight = context->buffer[aux0 + j] + r;
-                context->buffer[output + j] += l;
-                context->buffer[aux0 + j] = outRight;
-                context->buffer[aux1 + j] += (l * wetLeft) >> 16;
-                context->buffer[aux2 + j] += (r * wetRight) >> 16;
+    }
+    else if(!ltadd && !rtadd)
+    {
+        // no volume change
+        for(j=0;j<cnt;j++)
+        {
+            lt=rt=context->buffer[src+j];
+            lt=(lt*ltmul)>>16;
+            rt=(rt*rtmul)>>16;
+            lx=lt+context->buffer[dst1+j];
+            rx=rt+context->buffer[dst2+j];
+            /*
+            if(lx<-32767) lx=-32767;
+            if(lx> 32767) lx= 32767;
+            if(rx<-32767) rx=-32767;
+            if(rx> 32767) rx= 32767;
+            */
+            context->buffer[dst1+j]=lx;
+            context->buffer[dst2+j]=rx;
+            lt=(lt*lteff)>>16;
+            rt=(rt*rteff)>>16;
+            context->buffer[eff1+j]+=lt;
+            context->buffer[eff2+j]+=rt;
+        }
+    }
+    else
+    {
+        for(i=0;i<cnt;i+=8)
+        {
+            jn=i+8;
+            for(j=i;j<jn;j++)
+            {
+                lt=rt=context->buffer[src+j];
+                lt=(lt*ltmul)>>16;
+                rt=(rt*rtmul)>>16;
+                lx=lt+context->buffer[dst1+j];
+                rx=rt+context->buffer[dst2+j];
+                /*
+                if(lx<-32767) lx=-32767;
+                if(lx> 32767) lx= 32767;
+                if(rx<-32767) rx=-32767;
+                if(rx> 32767) rx= 32767;
+                */
+                context->buffer[dst1+j]=lx;
+                context->buffer[dst2+j]=rx;
+                lt=(lt*lteff)>>16;
+                rt=(rt*rteff)>>16;
+                context->buffer[eff1+j]+=lt;
+                context->buffer[eff2+j]+=rt;
             }
-            left += rampLeft;
-            right += rampRight;
-            if (left > 0xffff) { left = 0xffff; rampLeft = 0; }
-            else if (left < 0) { left = 0; rampLeft = 0; }
-            if (right > 0xffff) { right = 0xffff; rampRight = 0; }
-            else if (right < 0) { right = 0; rampRight = 0; }
+            ltmul+=ltadd;
+            rtmul+=rtadd;
+            if(ltmul>65535)
+            {
+                ltmul=65535;
+                ltadd=0;
+            }
+            else if(ltmul<0)
+            {
+                ltmul=0;
+                ltadd=0;
+            }
+            if(rtmul>65535)
+            {
+                rtmul=65535;
+                rtadd=0;
+            }
+            else if(rtmul<0)
+            {
+                rtmul=0;
+                rtadd=0;
+            }
         }
     }
 }
