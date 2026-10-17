@@ -15,7 +15,7 @@
     "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0"
   },
   "source_sha256": {
-    "src/audio/ahle_ds/Jpeg.c": "8fd01bed1c7ab95225e8f17ba8c7077ab500959f57514b185e93cbddcafb27d1",
+    "src/audio/ahle_ds/Jpeg.c": "c13557f7c296ff040d0da7f8b771e81d08ac4bbefde36889017e6a756e8c6047",
     "src/audio/ahle_ds/Mp3.c": "12f0353ca435f6cc55277d59b074c93e7b39252de1ee6e7efa2e28507c6903c2",
     "src/audio/ahle_ds/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f"
   },
@@ -23,7 +23,7 @@
   "objects": [
     {
       "object": "/root/.ai-tmp/audio-mp3-20261017/Jpeg.obj",
-      "sha256": "32108bf1d4c57f9270b40c9ba70b25dbae913fd53d36a04b23795a26cd962dc7",
+      "sha256": "5b770fece329b769d57422db76243827d4bda9dea5eda10281dd4640b7ab41e4",
       "original": "/root/nemu-decomp/master/Plugin/audio.dll",
       "functions": [
         {
@@ -3831,7 +3831,7 @@
     },
     {
       "object": "/root/.ai-tmp/audio-mp3-20261017/Mp3.obj",
-      "sha256": "37752b7076149a87e75c6847ac261321fceebc7bb5b33e9eb16571618205e3e1",
+      "sha256": "ea90560f0e224a1030a8d99de25fe7e01c8715b3d1f1ce4077b0c093c4b6db25",
       "original": "/root/nemu-decomp/master/Plugin/audio.dll",
       "functions": [
         {
@@ -8594,6 +8594,83 @@
     "symbol_offsets_match": true,
     "entire_section_equal": true,
     "section_sha256": "460e1cc2c084a2df3dc6c14a4d8c0c8540d7b5c6772a1184864b840a96cf19cf"
+  },
+  "private_uninitialized_layout": {
+    "unit": "Jpeg",
+    "original_va": "0x100e8fd8",
+    "original_size": 11800,
+    "rebuilt_size": 11800,
+    "size_equal": true,
+    "private_symbols": [
+      {
+        "symbol": "_JpegBlock",
+        "rebuilt_offset": 9984,
+        "original_offset": 0,
+        "equal": false
+      },
+      {
+        "symbol": "_JpegOutput",
+        "rebuilt_offset": 4352,
+        "original_offset": 1536,
+        "equal": false
+      },
+      {
+        "symbol": "_JpegQuantizationCb",
+        "rebuilt_offset": 0,
+        "original_offset": 2560,
+        "equal": false
+      },
+      {
+        "symbol": "_JpegPixels",
+        "rebuilt_offset": 256,
+        "original_offset": 2816,
+        "equal": false
+      },
+      {
+        "symbol": "_JpegQuantizationCr",
+        "rebuilt_offset": 9728,
+        "original_offset": 6912,
+        "equal": false
+      },
+      {
+        "symbol": "?u@?1??poly@@9@9",
+        "rebuilt_offset": 5376,
+        "original_offset": 7168,
+        "equal": false
+      },
+      {
+        "symbol": "_JpegQuantizationY",
+        "rebuilt_offset": 11520,
+        "original_offset": 11520,
+        "equal": true
+      },
+      {
+        "symbol": "?initialized@?1??JpegInverseDCT@@9@9",
+        "rebuilt_offset": 11776,
+        "original_offset": 11776,
+        "equal": true
+      },
+      {
+        "symbol": "?initialized@?1??JpegInverseDCTAlternate@@9@9",
+        "rebuilt_offset": 11780,
+        "original_offset": 11780,
+        "equal": true
+      },
+      {
+        "symbol": "?u_start@?1??poly@@9@9",
+        "rebuilt_offset": 11784,
+        "original_offset": 11784,
+        "equal": true
+      },
+      {
+        "symbol": "?u_div@?1??poly@@9@9",
+        "rebuilt_offset": 11792,
+        "original_offset": 11792,
+        "equal": true
+      }
+    ],
+    "symbol_offsets_match": false,
+    "notes": "Private ownership and extent are supported; original private names and array order remain unresolved."
   },
   "summary": {
     "functions": 21,

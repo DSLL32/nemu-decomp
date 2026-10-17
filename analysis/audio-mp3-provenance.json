@@ -12,6 +12,11 @@
       "upstream_url": "https://sources.debian.org/data/non-free/a/amp/0.7.6-1/transform.h",
       "sha256": "fd3d1442c03e314c3368af8aff64eaa2fb290fc7992fa8d58bb5283ffca6995d",
       "evidence": "All31 float constants and17x32 dewindow table retained; initialized spans checked separately."
+    },
+    {
+      "upstream_url": "https://github.com/Azimer/Apollo/blob/94e90849cb5db6a22ce93e01baf309127c7e25b8/jpgdct.cpp",
+      "sha256": "29b2d222f3fca0fe83b447d8387764df1587bed07bb2e00cb07900aa4750cf3a",
+      "evidence": "This early JPEG implementation has identical zigzag and initial cosine tables, private in/rgb/out/q1/q2/q3 arrays of matching extents, and explicitly zero-initialized local initdone. Its cosine initializer and surrounding emulator interface differ, so it is evidence for storage ownership rather than a replacement implementation."
     }
   ],
   "notes": [
@@ -40,7 +45,10 @@
       "functions": 10,
       "initialized_start": "0x1003a4c8",
       "initialized_bytes": 2692,
-      "evidence": "A combined translation unit preserves every complete function and emits t_dewindow, JpegZigZag, JpegCosine and nch in one exact contiguous .data contribution at offsets 0, 0x880, 0x980 and 0xa80. AMP attribution is retained beside the poly implementation."
+      "evidence": "A combined translation unit preserves every complete function and emits t_dewindow, JpegZigZag, JpegCosine and nch in one exact contiguous .data contribution at offsets 0, 0x880, 0x980 and 0xa80. AMP attribution is retained beside the poly implementation.",
+      "uninitialized_start": "0x100e8fd8",
+      "uninitialized_bytes": 11800,
+      "uninitialized_evidence": "Private file-scope arrays plus explicitly zero-initialized local flags preserve all ten complete bodies and emit the exact 0x2e18-byte strong BSS extent. Flag and poly-index offsets match; inferred private array names still produce a different internal order. C++ controls split local statics into separate COMDAT sections and make res strong, unlike the target."
     },
     {
       "source": "src/audio/ahle_ds/Mp3.c",

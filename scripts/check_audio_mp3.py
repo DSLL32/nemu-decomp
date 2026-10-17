@@ -88,6 +88,29 @@ def run(output):
                                  for symbol, (_, offset) in zip(symbols, layout)),
         entire_section_equal=section['data'] == image.data[expected_offset:expected_offset + 0xa84],
         section_sha256=hashlib.sha256(section['data']).hexdigest())
+    # Original operands independently identify these offsets. Private C storage
+    # explains the shared contribution; inferred names still affect its order.
+    bss_layout = [('_JpegBlock', 0), ('_JpegOutput', 0x600),
+                  ('_JpegQuantizationCb', 0xa00), ('_JpegPixels', 0xb00),
+                  ('_JpegQuantizationCr', 0x1b00), ('?u@?1??poly@@9@9', 0x1c00),
+                  ('_JpegQuantizationY', 0x2d00),
+                  ('?initialized@?1??JpegInverseDCT@@9@9', 0x2e00),
+                  ('?initialized@?1??JpegInverseDCTAlternate@@9@9', 0x2e04),
+                  ('?u_start@?1??poly@@9@9', 0x2e08),
+                  ('?u_div@?1??poly@@9@9', 0x2e10)]
+    bss_symbols = [next(s for s in jpeg.symbols if s['name'] == name and s['section'] > 0)
+                   for name, _ in bss_layout]
+    bss = jpeg.sections[bss_symbols[0]['section'] - 1]
+    storage = dict(
+        unit='Jpeg', original_va='0x100e8fd8', original_size=0x2e18,
+        rebuilt_size=bss['size'], size_equal=bss['size'] == 0x2e18,
+        private_symbols=[dict(symbol=s['name'], rebuilt_offset=s['value'],
+                              original_offset=offset,
+                              equal=s['section'] == bss['index'] and s['value'] == offset)
+                         for s, (_, offset) in zip(bss_symbols, bss_layout)],
+        symbol_offsets_match=all(s['section'] == bss['index'] and s['value'] == offset
+                                 for s, (_, offset) in zip(bss_symbols, bss_layout)),
+        notes='Private ownership and extent are supported; original private names and array order remain unresolved.')
     functions = [f for r in reports for f in r['functions']]
     result = dict(
         status='partial_native_source_reconstruction',
@@ -100,6 +123,7 @@ def run(output):
                        for p in [*SOURCES, ROOT / 'src/audio/ahle_ds/transform.h']},
         address_map_sha256=digest(address_map), objects=reports, initialized_data=data,
         contiguous_initialized_layout=contiguous,
+        private_uninitialized_layout=storage,
         summary=dict(functions=len(functions),
                      original_function_bytes=sum(f.get('original_bytes', 0) for f in functions),
                      matching_complete_extents=sum(f.get('relocation_masked_equal', False)

@@ -30,12 +30,12 @@ int JpegCosine[64] = {
     3, -8, 13, -15, 15, -13, 8, -3
 };
 
-int JpegBlock[384];
-int JpegOutput[256];
-int JpegQuantizationCb[64];
-int JpegPixels[16][16][4];
-int JpegQuantizationCr[64];
-int JpegQuantizationY[64];
+static int JpegBlock[384];
+static int JpegOutput[256];
+static int JpegQuantizationCb[64];
+static int JpegPixels[16][16][4];
+static int JpegQuantizationCr[64];
+static int JpegQuantizationY[64];
 
 void JpegReadBlock(int *destination, unsigned int address, int bytes)
 {
@@ -83,7 +83,7 @@ void JpegCopyBlock(int *destination, int *source, int count)
 
 void JpegInverseDCT(int *destination, int *source, int *quantization, int luminance)
 {
-    static int initialized;
+    static int initialized = 0;
     int block[64], sums[8];
     int i, j, k;
     if (!initialized) {
@@ -119,7 +119,7 @@ void JpegInverseDCT(int *destination, int *source, int *quantization, int lumina
 
 void JpegInverseDCTAlternate(int *destination, int *source, int *quantization, int luminance)
 {
-    static int initialized;
+    static int initialized = 0;
     int block[64], sums[8];
     int i, j, k;
     if (!initialized) {
