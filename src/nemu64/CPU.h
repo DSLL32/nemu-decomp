@@ -82,7 +82,7 @@ extern CPUOpcodeHandler CPU_Cop1Dispatch[32];
 extern CPUOpcodeHandler CPU_Cop1FunctionDispatch[64];
 
 void ExecuteDelaySlot();
-void Branch(bool link, CpuU32 condition, bool likely);
+void Branch(bool link, volatile CpuU32 condition, bool likely);
 void ExecuteInterpreter();
 void __stdcall ReportInvalidOpcode(CpuU32 address, CpuU32 opcode);
 void RaisePendingInterrupt(CpuU32 source, CpuU32 interrupt);

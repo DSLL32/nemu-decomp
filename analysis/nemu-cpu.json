@@ -1,7 +1,7 @@
 {
   "image": "master/nemu64.exe",
   "source_names": "inferred from behavior",
-  "status": "source reconstructed; standalone VC7 compile passes; integrated byte-exact validation pending",
+  "status": "144 complete CPU function bodies match normalized instructions and known targets in a full linked build; whole-image byte equality and remaining target identities are not established",
   "compiler": "Microsoft C/C++ 13.00.9466 /O2 /ML /GL /Ob1",
   "functions": [
     {
@@ -7121,24 +7121,21 @@
       }
     ],
     "full_linked_20261017": {
-      "image": "/root/.ai-tmp/nemu-complete-relocs.6r3eywlv/nemu64.exe",
-      "image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
-      "source_sha256": "5170f649611be9ad74a6464f08e1cfca504a3ce2ad5c5f3f277be3e97fb41a23",
+      "image": "/root/.ai-tmp/nemu-branch-full.sh0fw6pg/nemu64.exe",
+      "image_sha256": "d3d13b3058c9f0748b38b8b1fd07f15fa1da4cf6722a19892d01e911568028c9",
+      "source_sha256": "2f1477f964f807c0c459656089d80a26e86c525b58a4696e2def2471b511e0d6",
+      "compiled_source_sha256": "d31a225f59ac9786e0c0ce43868eea4daeba819fbf4e9cd08e9c43a3ca7ed1f4",
+      "header_sha256": "b73d3d10d6f69b7b00c8664168b1abbe83edac8c128540023ae09b3814b933b6",
       "extents": "analysis/nemu-cpu-extents.json",
-      "report": "/root/.ai-tmp/nemu-cpu-resume/full-current-cpu-6r3eywlv.json",
-      "complete_body_known_target_matches": 143,
-      "matched_original_bytes": 12924,
+      "report": "/root/.ai-tmp/nemu-branch-full.sh0fw6pg/cpu-comparison.json",
+      "complete_body_known_target_matches": 144,
+      "matched_original_bytes": 13204,
       "function_count": 144,
       "target_mismatches": 0,
-      "remaining": [
-        {
-          "name": "Branch",
-          "original_bytes": 280,
-          "rebuilt_bytes": 276,
-          "difference": "Candidate caches the low condition byte in CL; original reloads the stack byte for its default case."
-        }
-      ],
-      "limitations": "Complete unforced full-application link; relocation-normalized diagnostic, not image equality. Unknown and unverified application target identities remain."
+      "unresolved_targets": 27,
+      "unverified_targets": 135,
+      "remaining": [],
+      "limitations": "Complete unforced full-application CPU-only relink in frozen ko06ekj6 context; relocation-normalized diagnostic, not image equality. Unknown and unverified application target identities remain. Compiled source retains the fixture build transformation that centralizes global definitions; promoted source additionally documents the inferred qualifier."
     },
     "interpreter_full_linked_20261017": {
       "image": "/root/.ai-tmp/nemu-interpreter-full.3z_vh6x1/Localcespf.exe",
@@ -7166,6 +7163,41 @@
         "branch_matches": 0,
         "result": "Every case-order variant preserves all twelve callers but retains the 276-byte Branch body. Explicit noinline does not alter code generation. No source change was promoted."
       }
+    },
+    "full_linked_before_branch_20261017": {
+      "image": "/root/.ai-tmp/nemu-complete-relocs.6r3eywlv/nemu64.exe",
+      "image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "source_sha256": "5170f649611be9ad74a6464f08e1cfca504a3ce2ad5c5f3f277be3e97fb41a23",
+      "report": "/root/.ai-tmp/nemu-cpu-resume/full-current-cpu-6r3eywlv.json",
+      "complete_body_known_target_matches": 143,
+      "matched_original_bytes": 12924,
+      "function_count": 144,
+      "target_mismatches": 0,
+      "remaining": [
+        {
+          "name": "Branch",
+          "original_bytes": 280,
+          "rebuilt_bytes": 276,
+          "difference": "Candidate caches the low condition byte in CL; original reloads the stack byte for its default case."
+        }
+      ],
+      "limitations": "Complete unforced full-application link; relocation-normalized diagnostic, not image equality. Unknown and unverified application target identities remain."
+    },
+    "branch_qualifier_validation_20261017": {
+      "original_address": "0x00409EF0",
+      "body_bytes": 280,
+      "compiled_original_width_ambiguity": [
+        "volatile CpuU32",
+        "volatile CpuU8"
+      ],
+      "promoted_form": "volatile CpuU32 condition; separate nonvolatile CpuU8 taken",
+      "inference": "The two original stack-byte reads at 0x00409F0B and 0x00409FCD support the inferred qualifier. Original spelling and formal width are not uniquely recovered, and no asynchronous observer rationale is claimed. The existing UInt32 type is retained.",
+      "semantics": "The input is read-only. Cases14/12/13/15 evaluate signed64 <=/< />=/ >0 into the separate result; the default preserves its low byte. Delay-slot, PC and likely behavior are unchanged.",
+      "isolated_audit": "/root/.ai-tmp/nemu-branch-volatileformal.D74F86jf/HANDOFF.txt",
+      "full_context_operand_audit": "/root/.ai-tmp/nemu-branch-full.sh0fw6pg/operand-target-audit.json",
+      "absolute_memory_and_call_operands_verified": 21,
+      "caller_count_verified": 12,
+      "scope": "Only Branch definition and matching header declaration changed. No embedded code or post-link patching."
     }
   },
   "original_extent_validation": {

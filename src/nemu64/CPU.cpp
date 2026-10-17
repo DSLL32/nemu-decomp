@@ -58,17 +58,21 @@ void ExecuteDelaySlot()
 }
 
 // Original 00409EF0. Wrapper ABI verified with VC7 LTCG.
-void Branch(bool link, CpuU32 condition, bool likely)
+// The qualifier is inferred from separate stack reads at 00409F0B and
+// 00409FCD; the original parameter spelling and width are not recovered.
+void Branch(bool link, volatile CpuU32 condition, bool likely)
 {
     if (link)
         CPU_GPR[31] = (CpuS64)CPU_PC + 8;
+    CpuU8 taken;
     switch ((CpuU8)condition) {
-    case 14: condition = CPU_GPR[(CPU_Instruction >> 21) & 31] <= 0; break;
-    case 12: condition = CPU_GPR[(CPU_Instruction >> 21) & 31] < 0; break;
-    case 13: condition = CPU_GPR[(CPU_Instruction >> 21) & 31] >= 0; break;
-    case 15: condition = CPU_GPR[(CPU_Instruction >> 21) & 31] > 0; break;
+    case 14: taken = CPU_GPR[(CPU_Instruction >> 21) & 31] <= 0; break;
+    case 12: taken = CPU_GPR[(CPU_Instruction >> 21) & 31] < 0; break;
+    case 13: taken = CPU_GPR[(CPU_Instruction >> 21) & 31] >= 0; break;
+    case 15: taken = CPU_GPR[(CPU_Instruction >> 21) & 31] > 0; break;
+    default: taken = (CpuU8)condition; break;
     }
-    if ((CpuU8)condition) {
+    if (taken) {
         ExecuteDelaySlot();
         CPU_PC += (CpuS16)CPU_Instruction * 4;
     } else if (likely)
