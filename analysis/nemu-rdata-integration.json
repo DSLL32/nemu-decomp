@@ -401,7 +401,7 @@
       "residual_instruction_bytes": 1102,
       "proof": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/case-order-invariance.json",
       "valid_reordering_experiment": false,
-      "reason": "The scratch extractor inserted the close-ROM arm between the two load-ROM labels, changing the target of case0x8026. Its code differences cannot reject a correct whole-arm reorder. No source was promoted."
+      "reason": "The scratch extractor inserted the close-ROM arm between the two load-ROM labels, changing the target of case 0x8026. Its code differences cannot reject a correct whole-arm reorder. No source was promoted."
     },
     {
       "name": "Recursive invalid-folder retry",
@@ -426,6 +426,21 @@
       "residual_instruction_bytes": 106,
       "generated_float_va": "0x43e04c",
       "proof": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/explicit-float-invariance.json"
+    },
+    {
+      "name": "Named local main-command string constants",
+      "source_live": false,
+      "variants": [
+        "const local pointers in filter/title/status order",
+        "const local pointers in reverse order",
+        "static const local pointers"
+      ],
+      "commands": [
+        "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/main-literals-named-commands.json",
+        "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/main-literals-reverse-commands.json",
+        "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/main-literals-static-commands.json"
+      ],
+      "result": "No literal improvement. Forward declaration order gives492/499 unique positions and preserves normalized code/data; reversed declaration order gives305/499 and changes6 code bytes. The corrected whole-case move is both smaller and exact."
     }
   ],
   "subsequent_integrated_build": {
@@ -486,7 +501,7 @@
   },
   "translation_unit_evidence": "analysis/nemu-translation-units.json",
   "main_command_literal_refinement": {
-    "method": "Move the complete ID_CLOSE_ROM switch arm after the complete shared0x8026/ID_LOAD_ROM arm. Preserve both load labels and all case bodies.",
+    "method": "Move the complete ID_CLOSE_ROM switch arm after the complete shared 0x8026/ID_LOAD_ROM arm. Preserve both load labels and all case bodies.",
     "source": "src/nemu64/WinMain.cpp",
     "before_sha256": "39923e6272ba57fc7b3302765eba8c3b1e1d2d57021de51356aeb28270d64681",
     "after_sha256": "ea37bc07285c522fdf60a0f93de0c99307fbb05c7667dd95476e61a7af442683",
@@ -565,5 +580,33 @@
     "remaining_unique_literal_placements": 3,
     "remaining": "The signature-export cod\\ pair and two WritePhysicalWord DMA diagnostics remain owner-local source refinements; the generated unsigned-conversion float remains late.",
     "source_live": true
-  }
+  },
+  "stock_float_order_controls": [
+    {
+      "order_file_entry": "__real@4f800000",
+      "accepted": false,
+      "warning": "LNK4037: '___real@4f800000' does not exist; ignored",
+      "note": "VC7 LINK adds the C leading underscore to this order-file name. This ignored form leaves every native section byte identical.",
+      "commands": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/order-float-command.json",
+      "log": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/order-float-link.log",
+      "output": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/order-float/ordered.exe",
+      "sha256": "1ee126de4b38b16488d10cde4eb762a708556adafae3eccdbb98bb4319c3a06b"
+    },
+    {
+      "order_file_entry": "_real@4f800000",
+      "map_symbol": "__real@4f800000",
+      "accepted": true,
+      "ignored_symbol_warning": false,
+      "result_va": "0x430288",
+      "original_va": "0x43e01c",
+      "result": "Places the genuine compiler constant before fixed native readonly contributions. It cannot place only this constant between existing application literals and the other floating constants.",
+      "commands": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/order-float-c-name-command.json",
+      "log": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/order-float-c-name-link.log",
+      "output": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/order-float/ordered-c-name.exe",
+      "sha256": "6f5cd1ed34c21d772b9f2cd9d21e32c15f85aa53ec7ae05a5eeff33b6772e33d",
+      "literal_report": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/order-float-c-name-rdata.json",
+      "unique_literal_positions_exact": 1,
+      "promoted": false
+    }
+  ]
 }
