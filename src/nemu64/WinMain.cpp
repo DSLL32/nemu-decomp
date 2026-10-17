@@ -849,12 +849,12 @@ LRESULT MainWindowCommand(HWND window, UINT message, WPARAM wParam, LPARAM lPara
             SelectedGraphicsPlugin->DllAbout(MainWindow);
         break;
     case ID_SHOW_ERRORS:
-        ShowErrors = !ShowErrors;
-        if (ShowErrors)
+        ShowErrorMessages = !ShowErrorMessages;
+        if (ShowErrorMessages)
             CheckMenuItem(GetMenu(MainWindow), ID_SHOW_ERRORS, MF_CHECKED);
         else
             CheckMenuItem(GetMenu(MainWindow), ID_SHOW_ERRORS, MF_UNCHECKED);
-        WriteIniInteger("Configuration", "ShowErrors", ShowErrors, ConfigurationIniPath);
+        WriteIniInteger("Configuration", "ShowErrors", ShowErrorMessages, ConfigurationIniPath);
         break;
     case 0x8026:
     case ID_LOAD_ROM:
@@ -1201,7 +1201,7 @@ LRESULT CALLBACK MainWindowProc(HWND window, UINT message, WPARAM wParam, LPARAM
             if (GetPrivateProfileStructA("Configuration", "ColumnOrder", columnOrder,
                 sizeof(columnOrder), ConfigurationIniPath))
                 SendMessageA(BrowserWindow, LVM_SETCOLUMNORDERARRAY, 7, (LPARAM)columnOrder);
-            if (ShowErrors)
+            if (ShowErrorMessages)
                 CheckMenuItem(GetMenu(MainWindow), ID_SHOW_ERRORS, MF_CHECKED);
             else
                 CheckMenuItem(GetMenu(MainWindow), ID_SHOW_ERRORS, MF_UNCHECKED);
