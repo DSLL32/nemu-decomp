@@ -133,7 +133,7 @@ def run(output):
         for seed in (1, 7, 0x1234):
             for phase in range(0, 32, 2):
                 cases.append(behavior(image, addresses, obj, seed, phase))
-    sources = [SOURCE, Path(__file__).resolve()]
+    sources = [SOURCE, ROOT / 'src/audio/ahle_ds/transform.h', Path(__file__).resolve()]
     return dict(status='unmatched_native_source_candidate',
         original='master/Plugin/audio.dll', original_sha256=digest(ORIGINAL),
         compiler_flags=flags, build_directory=str(output),

@@ -3,6 +3,7 @@
  * still a source candidate; analysis/audio-mp3-main-comparison.json records its
  * complete-byte differences and finite x86 behavior diagnostics.
  */
+#include "transform.h"
 #include <stdlib.h>
 
 extern void ReadAudioMemory(void *buffer, const void *source, unsigned int bytes);

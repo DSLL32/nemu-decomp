@@ -16,14 +16,14 @@
   },
   "source_sha256": {
     "src/audio/ahle_ds/Jpeg.c": "8fd01bed1c7ab95225e8f17ba8c7077ab500959f57514b185e93cbddcafb27d1",
-    "src/audio/ahle_ds/Mp3.c": "e7d2744be8afd509887397d990832fb10cefbfde25daeb4f54f6dadd78ee0745",
+    "src/audio/ahle_ds/Mp3.c": "12f0353ca435f6cc55277d59b074c93e7b39252de1ee6e7efa2e28507c6903c2",
     "src/audio/ahle_ds/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f"
   },
   "address_map_sha256": "8c5b6f817b7f7287ed0c6c5e716dd5173ea1c0b62cc240929d8470597dc1b2af",
   "objects": [
     {
       "object": "/root/.ai-tmp/audio-mp3-20261017/Jpeg.obj",
-      "sha256": "438f711e0c90327d3307de36cbf642937c45faa9c9951f7669473b42e448d58e",
+      "sha256": "32108bf1d4c57f9270b40c9ba70b25dbae913fd53d36a04b23795a26cd962dc7",
       "original": "/root/nemu-decomp/master/Plugin/audio.dll",
       "functions": [
         {
@@ -3831,7 +3831,7 @@
     },
     {
       "object": "/root/.ai-tmp/audio-mp3-20261017/Mp3.obj",
-      "sha256": "0b9d96da7969e0395b6c5ef1d5a1a03c4924b8b33efea56a02b4a270b1d9c79d",
+      "sha256": "37752b7076149a87e75c6847ac261321fceebc7bb5b33e9eb16571618205e3e1",
       "original": "/root/nemu-decomp/master/Plugin/audio.dll",
       "functions": [
         {
@@ -8568,6 +8568,17 @@
       "original_sha256": "67abdd721024f0ff4e0b3f4c2fc13bc5bad42d0b7851d456d88d203d15aaa450",
       "unique_raw_occurrence": false,
       "relocation_fields": 0
+    },
+    {
+      "unit": "Mp3",
+      "symbol": "_t_dewindow",
+      "va": "0x1003af50",
+      "size": 2176,
+      "equal": true,
+      "rebuilt_sha256": "52c695ac3a77f57ebb82e12d2474f02ce47ab544ef0dc05d6ecdfc6d5e4ff100",
+      "original_sha256": "52c695ac3a77f57ebb82e12d2474f02ce47ab544ef0dc05d6ecdfc6d5e4ff100",
+      "unique_raw_occurrence": false,
+      "relocation_fields": 0
     }
   ],
   "contiguous_initialized_layout": {
@@ -8590,7 +8601,7 @@
     "matching_complete_extents": 20,
     "matching_complete_extent_bytes": 11824,
     "matching_extents_with_consistent_symbolic_relocations": 20,
-    "initialized_data_bytes": 2840,
+    "initialized_data_bytes": 5016,
     "initialized_data_equal": true
   },
   "missing": [],

@@ -28,6 +28,7 @@ DATA = (
     ('Jpeg', '_t_dewindow', 0x1003a4c8, 2176),
     ('Jpeg', '_b1', 0x10031090, 124),
     ('Jpeg', '_nch', 0x1003af48, 4),
+    ('Mp3', '_t_dewindow', 0x1003af50, 2176),
 )
 
 
