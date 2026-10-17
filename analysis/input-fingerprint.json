@@ -1,0 +1,1370 @@
+{
+  "target": {
+    "path": "master/Plugin/Input.dll",
+    "sha256": "2c0fb513c6c34115ef070c9f33767f7cf15d28de4becbd74bd90fe515e496298",
+    "bytes": 634880
+  },
+  "selected_runtime": "Delphi 6 General Update 2, without later standalone RTL update",
+  "candidate_compiler": "toolchains/d6u2/bin/dcc32-personal.exe",
+  "candidate_version": "6.0.6.240",
+  "compiler_limit": "Precompiled RTL/VCL matches identify the runtime library configuration; they do not independently prove the exact compiler executable used for application source.",
+  "edition": {
+    "resource": "RT_RCDATA/DVCLAL/0",
+    "bytes_hex": "23785d23b6a5f31943f3400226d111c7",
+    "matches": [
+      "master/Plugin/dialogs.dll",
+      "master/Plugin/debugger.dll"
+    ],
+    "interpretation": "Same Personal-edition compiler resource reproduced by the completed dialogs/debugger builds."
+  },
+  "method": "scripts/compare_delphi_rtl.py: map-bounded blocks of 32..2048 bytes with at least 24 fixed bytes, unique in the reference. PE HIGHLOW relocations and external rel32 operands are masked; internal branches and ordinary constants are retained. Direct call/jump endpoints are checked where both endpoints are mapped. Three TControl VMT slots independently anchor the comparisons.",
+  "candidates": [
+    {
+      "configuration": "rtm",
+      "reference": {
+        "path": "/root/.ai-tmp/nemu-d6-check._u5f1cf2/rtm/probe/probe.dll",
+        "sha256": "2f9c85d04ae9061eff2ade4897eab177b0d2c9d92cad29fcb55c70eda0c31352"
+      },
+      "map": {
+        "path": "/root/.ai-tmp/nemu-d6-check._u5f1cf2/rtm/probe/probe.map",
+        "sha256": "eaf23c78461105040111697908ba4345ef23a9ba5208c8cb904f47c23c542e00"
+      },
+      "template_count": 1192,
+      "counts": {
+        "unique": 1163,
+        "absent": 23,
+        "ambiguous": 6
+      },
+      "unique_match_bytes": 129900,
+      "absent_names": [
+        [
+          "@StartLib"
+        ],
+        [
+          "@LStrCatN"
+        ],
+        [
+          "@ValInt64"
+        ],
+        [
+          "TThreadLocalCounter.Create"
+        ],
+        [
+          "TThreadLocalCounter.Destroy"
+        ],
+        [
+          "TThreadLocalCounter.Open"
+        ],
+        [
+          "TThreadLocalCounter.Close"
+        ],
+        [
+          "TThreadLocalCounter.Delete"
+        ],
+        [
+          "TThreadLocalCounter.Reattach"
+        ],
+        [
+          "TThreadLocalCounter.Recycle"
+        ],
+        [
+          "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+        ],
+        [
+          "TCustomVariantType.Destroy"
+        ],
+        [
+          "TReader.ReadPropValue"
+        ],
+        [
+          "TBasicActionLink.Execute"
+        ],
+        [
+          "THelpManager.Destroy"
+        ],
+        [
+          "TCustomAction.Execute"
+        ],
+        [
+          "TScrollingWinControl.CreateWnd"
+        ],
+        [
+          "TCustomForm.WndProc"
+        ],
+        [
+          "TApplication.ActivateHint"
+        ],
+        [
+          "TCustomImageList.CreateImageList"
+        ],
+        [
+          "TCustomImageList.ReadD3Stream"
+        ],
+        [
+          "TMenuItem.MergeWith"
+        ],
+        [
+          "TControl.WndProc"
+        ]
+      ],
+      "link_validation": {
+        "checked_direct_edges": 2376,
+        "unresolved_direct_edges": 2582,
+        "conflicts": [
+          {
+            "caller": [
+              "@InitLib"
+            ],
+            "callee": [
+              "@StartLib"
+            ],
+            "target_rva": 16788,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.Create"
+            ],
+            "callee": [
+              "TThreadLocalCounter.Create"
+            ],
+            "target_rva": 13964,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.Destroy"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.EndWrite"
+            ],
+            "callee": [
+              "TThreadLocalCounter.Open"
+            ],
+            "target_rva": 49064,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.EndWrite"
+            ],
+            "callee": [
+              "TThreadLocalCounter.Delete"
+            ],
+            "target_rva": 49192,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.EndWrite"
+            ],
+            "callee": [
+              "TThreadLocalCounter.Close"
+            ],
+            "target_rva": 49184,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginRead"
+            ],
+            "callee": [
+              "TThreadLocalCounter.Open"
+            ],
+            "target_rva": 49064,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginRead"
+            ],
+            "callee": [
+              "TThreadLocalCounter.Close"
+            ],
+            "target_rva": 49184,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.EndRead"
+            ],
+            "callee": [
+              "TThreadLocalCounter.Open"
+            ],
+            "target_rva": 49064,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.EndRead"
+            ],
+            "callee": [
+              "TThreadLocalCounter.Delete"
+            ],
+            "target_rva": 49192,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.EndRead"
+            ],
+            "callee": [
+              "TThreadLocalCounter.Close"
+            ],
+            "target_rva": 49184,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TReader.ReadRootComponent"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomForm.Create"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomForm.BeforeDestruction"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomForm.Destroy"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TApplication.HintMouseMessage"
+            ],
+            "callee": [
+              "TApplication.ActivateHint"
+            ],
+            "target_rva": 416348,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TApplication.HintTimerExpired"
+            ],
+            "callee": [
+              "TApplication.ActivateHint"
+            ],
+            "target_rva": 416348,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomImageList.ReadData"
+            ],
+            "callee": [
+              "TCustomImageList.ReadD3Stream"
+            ],
+            "target_rva": 339568,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMenuItem.Destroy"
+            ],
+            "callee": [
+              "TMenuItem.MergeWith"
+            ],
+            "target_rva": 347844,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMenuItem.Notification"
+            ],
+            "callee": [
+              "TMenuItem.MergeWith"
+            ],
+            "target_rva": 347844,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TWinControl.WndProc"
+            ],
+            "callee": [
+              "TControl.WndProc"
+            ],
+            "target_rva": 286712,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TWinControl.WndProc"
+            ],
+            "callee": [
+              "TControl.WndProc"
+            ],
+            "target_rva": 286712,
+            "expected_rvas": []
+          }
+        ],
+        "tcontrol_vmt_anchors": [
+          {
+            "name": "TControl.Destroy",
+            "vmt_slot": -4,
+            "reference_rva": 268120,
+            "target_rva": 278352,
+            "length": 180,
+            "matches": true
+          },
+          {
+            "name": "TControl.SetParent",
+            "vmt_slot": 104,
+            "reference_rva": 271428,
+            "target_rva": 281676,
+            "length": 76,
+            "matches": true
+          },
+          {
+            "name": "TControl.WndProc",
+            "vmt_slot": 116,
+            "reference_rva": 276452,
+            "target_rva": 286712,
+            "length": 408,
+            "matches": false
+          }
+        ]
+      },
+      "lstrcatn_variant": {
+        "reference_instruction": "mov edi, eax",
+        "compared_bytes": 132,
+        "fixed_bytes": 116,
+        "candidates": [
+          {
+            "rva": 18472,
+            "va": 4212776,
+            "file_offset": 15400,
+            "instruction_va": 4212797,
+            "instruction": "mov edi, ecx",
+            "fixed_byte_differences": [
+              {
+                "offset": 22,
+                "reference": "c7",
+                "target": "cf"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "configuration": "u1",
+      "reference": {
+        "path": "/root/.ai-tmp/nemu-d6-check._u5f1cf2/u1/probe/probe.dll",
+        "sha256": "baa41d42f98eb317a744cbe068ee2efdb602462a5d819f4339f97bd7b885f3b5"
+      },
+      "map": {
+        "path": "/root/.ai-tmp/nemu-d6-check._u5f1cf2/u1/probe/probe.map",
+        "sha256": "7414f1f3b7a900c1fc80f70eea261afe4e72487223e7bc5ea72c86caea9e7c1b"
+      },
+      "template_count": 1194,
+      "counts": {
+        "unique": 1167,
+        "absent": 21,
+        "ambiguous": 6
+      },
+      "unique_match_bytes": 130796,
+      "absent_names": [
+        [
+          "@StartLib"
+        ],
+        [
+          "@ValInt64"
+        ],
+        [
+          "TThreadLocalCounter.Create"
+        ],
+        [
+          "TThreadLocalCounter.Destroy"
+        ],
+        [
+          "TThreadLocalCounter.Open"
+        ],
+        [
+          "TThreadLocalCounter.Close"
+        ],
+        [
+          "TThreadLocalCounter.Delete"
+        ],
+        [
+          "TThreadLocalCounter.Reattach"
+        ],
+        [
+          "TThreadLocalCounter.Recycle"
+        ],
+        [
+          "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+        ],
+        [
+          "TCustomVariantType.Destroy"
+        ],
+        [
+          "TBasicActionLink.Execute"
+        ],
+        [
+          "THelpManager.Destroy"
+        ],
+        [
+          "TCustomAction.Execute"
+        ],
+        [
+          "TScrollingWinControl.CreateWnd"
+        ],
+        [
+          "TCustomForm.WndProc"
+        ],
+        [
+          "TApplication.ActivateHint"
+        ],
+        [
+          "TCustomImageList.CreateImageList"
+        ],
+        [
+          "TCustomImageList.ReadD3Stream"
+        ],
+        [
+          "TMenuItem.MergeWith"
+        ],
+        [
+          "TControl.WndProc"
+        ]
+      ],
+      "link_validation": {
+        "checked_direct_edges": 2396,
+        "unresolved_direct_edges": 2597,
+        "conflicts": [
+          {
+            "caller": [
+              "@InitLib"
+            ],
+            "callee": [
+              "@StartLib"
+            ],
+            "target_rva": 16788,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.Create"
+            ],
+            "callee": [
+              "TThreadLocalCounter.Create"
+            ],
+            "target_rva": 13964,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.Destroy"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.EndWrite"
+            ],
+            "callee": [
+              "TThreadLocalCounter.Open"
+            ],
+            "target_rva": 49064,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.EndWrite"
+            ],
+            "callee": [
+              "TThreadLocalCounter.Delete"
+            ],
+            "target_rva": 49192,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.EndWrite"
+            ],
+            "callee": [
+              "TThreadLocalCounter.Close"
+            ],
+            "target_rva": 49184,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginRead"
+            ],
+            "callee": [
+              "TThreadLocalCounter.Open"
+            ],
+            "target_rva": 49064,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginRead"
+            ],
+            "callee": [
+              "TThreadLocalCounter.Close"
+            ],
+            "target_rva": 49184,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.EndRead"
+            ],
+            "callee": [
+              "TThreadLocalCounter.Open"
+            ],
+            "target_rva": 49064,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.EndRead"
+            ],
+            "callee": [
+              "TThreadLocalCounter.Delete"
+            ],
+            "target_rva": 49192,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.EndRead"
+            ],
+            "callee": [
+              "TThreadLocalCounter.Close"
+            ],
+            "target_rva": 49184,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TReader.ReadRootComponent"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomForm.Create"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomForm.BeforeDestruction"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomForm.Destroy"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TApplication.HintMouseMessage"
+            ],
+            "callee": [
+              "TApplication.ActivateHint"
+            ],
+            "target_rva": 416348,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TApplication.HintTimerExpired"
+            ],
+            "callee": [
+              "TApplication.ActivateHint"
+            ],
+            "target_rva": 416348,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomImageList.ReadData"
+            ],
+            "callee": [
+              "TCustomImageList.ReadD3Stream"
+            ],
+            "target_rva": 339568,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMenuItem.Destroy"
+            ],
+            "callee": [
+              "TMenuItem.MergeWith"
+            ],
+            "target_rva": 347844,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TMenuItem.Notification"
+            ],
+            "callee": [
+              "TMenuItem.MergeWith"
+            ],
+            "target_rva": 347844,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TWinControl.WndProc"
+            ],
+            "callee": [
+              "TControl.WndProc"
+            ],
+            "target_rva": 286712,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TWinControl.WndProc"
+            ],
+            "callee": [
+              "TControl.WndProc"
+            ],
+            "target_rva": 286712,
+            "expected_rvas": []
+          }
+        ],
+        "tcontrol_vmt_anchors": [
+          {
+            "name": "TControl.Destroy",
+            "vmt_slot": -4,
+            "reference_rva": 279888,
+            "target_rva": 278352,
+            "length": 180,
+            "matches": true
+          },
+          {
+            "name": "TControl.SetParent",
+            "vmt_slot": 104,
+            "reference_rva": 283196,
+            "target_rva": 281676,
+            "length": 76,
+            "matches": true
+          },
+          {
+            "name": "TControl.WndProc",
+            "vmt_slot": 116,
+            "reference_rva": 288220,
+            "target_rva": 286712,
+            "length": 408,
+            "matches": false
+          }
+        ]
+      },
+      "lstrcatn_variant": {
+        "reference_instruction": "mov edi, ecx",
+        "compared_bytes": 132,
+        "fixed_bytes": 116,
+        "candidates": [
+          {
+            "rva": 18472,
+            "va": 4212776,
+            "file_offset": 15400,
+            "instruction_va": 4212797,
+            "instruction": "mov edi, ecx",
+            "fixed_byte_differences": []
+          }
+        ]
+      }
+    },
+    {
+      "configuration": "u2",
+      "reference": {
+        "path": "/root/.ai-tmp/nemu-d6-check._u5f1cf2/u2/probe/probe.dll",
+        "sha256": "e559e3eb73167eb86ebbdf002b0d0e49716db34317c0f26092921f6a19cbfa61"
+      },
+      "map": {
+        "path": "/root/.ai-tmp/nemu-d6-check._u5f1cf2/u2/probe/probe.map",
+        "sha256": "9d5181a29e99318c79bf6b554d1a22bb24551e07d0bf578519c3c60a1f6dfcbe"
+      },
+      "template_count": 1192,
+      "counts": {
+        "unique": 1186,
+        "ambiguous": 6
+      },
+      "unique_match_bytes": 134404,
+      "absent_names": [],
+      "link_validation": {
+        "checked_direct_edges": 2442,
+        "unresolved_direct_edges": 2666,
+        "conflicts": [],
+        "tcontrol_vmt_anchors": [
+          {
+            "name": "TControl.Destroy",
+            "vmt_slot": -4,
+            "reference_rva": 289824,
+            "target_rva": 278352,
+            "length": 180,
+            "matches": true
+          },
+          {
+            "name": "TControl.SetParent",
+            "vmt_slot": 104,
+            "reference_rva": 293132,
+            "target_rva": 281676,
+            "length": 76,
+            "matches": true
+          },
+          {
+            "name": "TControl.WndProc",
+            "vmt_slot": 116,
+            "reference_rva": 298156,
+            "target_rva": 286712,
+            "length": 404,
+            "matches": true
+          }
+        ]
+      },
+      "lstrcatn_variant": {
+        "reference_instruction": "mov edi, ecx",
+        "compared_bytes": 132,
+        "fixed_bytes": 116,
+        "candidates": [
+          {
+            "rva": 18472,
+            "va": 4212776,
+            "file_offset": 15400,
+            "instruction_va": 4212797,
+            "instruction": "mov edi, ecx",
+            "fixed_byte_differences": []
+          }
+        ]
+      }
+    },
+    {
+      "configuration": "u2r1",
+      "reference": {
+        "path": "/root/.ai-tmp/nemu-d6-check._u5f1cf2/u2r1/probe/probe.dll",
+        "sha256": "7af78b9eab3579ecc50a16ef065c443631a194252646f12b76b07ad0a97fb995"
+      },
+      "map": {
+        "path": "/root/.ai-tmp/nemu-d6-check._u5f1cf2/u2r1/probe/probe.map",
+        "sha256": "aa33f06257fe9759d9b69c2f8cf597101828e39a99262319029230ffb80a3522"
+      },
+      "template_count": 1195,
+      "counts": {
+        "unique": 1185,
+        "absent": 4,
+        "ambiguous": 6
+      },
+      "unique_match_bytes": 135316,
+      "absent_names": [
+        [
+          "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+        ],
+        [
+          "TMultiReadExclusiveWriteSynchronizer.EndWrite"
+        ],
+        [
+          "TMultiReadExclusiveWriteSynchronizer.BeginRead"
+        ],
+        [
+          "TMultiReadExclusiveWriteSynchronizer.EndRead"
+        ]
+      ],
+      "link_validation": {
+        "checked_direct_edges": 2460,
+        "unresolved_direct_edges": 2703,
+        "conflicts": [
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.Destroy"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomVariantType.Destroy"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomVariantType.Destroy"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.EndWrite"
+            ],
+            "target_rva": 49792,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TReader.ReadRootComponent"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TReader.ReadRootComponent"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.EndWrite"
+            ],
+            "target_rva": 49792,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomForm.Create"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomForm.Create"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.EndWrite"
+            ],
+            "target_rva": 49792,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomForm.BeforeDestruction"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomForm.Destroy"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomForm.Destroy"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.EndWrite"
+            ],
+            "target_rva": 49792,
+            "expected_rvas": []
+          }
+        ],
+        "tcontrol_vmt_anchors": [
+          {
+            "name": "TControl.Destroy",
+            "vmt_slot": -4,
+            "reference_rva": 289512,
+            "target_rva": 278352,
+            "length": 180,
+            "matches": true
+          },
+          {
+            "name": "TControl.SetParent",
+            "vmt_slot": 104,
+            "reference_rva": 292820,
+            "target_rva": 281676,
+            "length": 76,
+            "matches": true
+          },
+          {
+            "name": "TControl.WndProc",
+            "vmt_slot": 116,
+            "reference_rva": 297844,
+            "target_rva": 286712,
+            "length": 404,
+            "matches": true
+          }
+        ]
+      },
+      "lstrcatn_variant": {
+        "reference_instruction": "mov edi, ecx",
+        "compared_bytes": 132,
+        "fixed_bytes": 116,
+        "candidates": [
+          {
+            "rva": 18472,
+            "va": 4212776,
+            "file_offset": 15400,
+            "instruction_va": 4212797,
+            "instruction": "mov edi, ecx",
+            "fixed_byte_differences": []
+          }
+        ]
+      }
+    },
+    {
+      "configuration": "u2r2",
+      "reference": {
+        "path": "/root/.ai-tmp/nemu-d6-check._u5f1cf2/u2r2/probe/probe.dll",
+        "sha256": "495b661097b371442c0f278d13486a4eff46281b1b7f3f3ad0fe730787b1f05e"
+      },
+      "map": {
+        "path": "/root/.ai-tmp/nemu-d6-check._u5f1cf2/u2r2/probe/probe.map",
+        "sha256": "eae95bc82a5933ecf4799ad8fd9b8e95bd5e89292a01310043dac3ad229ba12b"
+      },
+      "template_count": 1193,
+      "counts": {
+        "unique": 1183,
+        "absent": 4,
+        "ambiguous": 6
+      },
+      "unique_match_bytes": 134804,
+      "absent_names": [
+        [
+          "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+        ],
+        [
+          "TMultiReadExclusiveWriteSynchronizer.EndWrite"
+        ],
+        [
+          "TMultiReadExclusiveWriteSynchronizer.BeginRead"
+        ],
+        [
+          "TMultiReadExclusiveWriteSynchronizer.EndRead"
+        ]
+      ],
+      "link_validation": {
+        "checked_direct_edges": 2447,
+        "unresolved_direct_edges": 2695,
+        "conflicts": [
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.Destroy"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomVariantType.Destroy"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomVariantType.Destroy"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.EndWrite"
+            ],
+            "target_rva": 49792,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TReader.ReadRootComponent"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TReader.ReadRootComponent"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.EndWrite"
+            ],
+            "target_rva": 49792,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomForm.Create"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomForm.Create"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.EndWrite"
+            ],
+            "target_rva": 49792,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomForm.BeforeDestruction"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomForm.Destroy"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomForm.Destroy"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.EndWrite"
+            ],
+            "target_rva": 49792,
+            "expected_rvas": []
+          }
+        ],
+        "tcontrol_vmt_anchors": [
+          {
+            "name": "TControl.Destroy",
+            "vmt_slot": -4,
+            "reference_rva": 299240,
+            "target_rva": 278352,
+            "length": 180,
+            "matches": true
+          },
+          {
+            "name": "TControl.SetParent",
+            "vmt_slot": 104,
+            "reference_rva": 302548,
+            "target_rva": 281676,
+            "length": 76,
+            "matches": true
+          },
+          {
+            "name": "TControl.WndProc",
+            "vmt_slot": 116,
+            "reference_rva": 307572,
+            "target_rva": 286712,
+            "length": 404,
+            "matches": true
+          }
+        ]
+      },
+      "lstrcatn_variant": {
+        "reference_instruction": "mov edi, ecx",
+        "compared_bytes": 132,
+        "fixed_bytes": 116,
+        "candidates": [
+          {
+            "rva": 18472,
+            "va": 4212776,
+            "file_offset": 15400,
+            "instruction_va": 4212797,
+            "instruction": "mov edi, ecx",
+            "fixed_byte_differences": []
+          }
+        ]
+      }
+    },
+    {
+      "configuration": "u2r3",
+      "reference": {
+        "path": "/root/.ai-tmp/nemu-d6-check._u5f1cf2/u2r3/probe/probe.dll",
+        "sha256": "67e95a92bcb22606a3353642e3ae0b1ee7f866ba5156e60190a8d3bdfa4afc80"
+      },
+      "map": {
+        "path": "/root/.ai-tmp/nemu-d6-check._u5f1cf2/u2r3/probe/probe.map",
+        "sha256": "8ec2403340a60b7bc22bbbdb5cc2e6bd79fb51525c4097da52a64b147c17c85d"
+      },
+      "template_count": 1192,
+      "counts": {
+        "unique": 1181,
+        "absent": 5,
+        "ambiguous": 6
+      },
+      "unique_match_bytes": 133712,
+      "absent_names": [
+        [
+          "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+        ],
+        [
+          "TMultiReadExclusiveWriteSynchronizer.EndWrite"
+        ],
+        [
+          "TMultiReadExclusiveWriteSynchronizer.BeginRead"
+        ],
+        [
+          "TMultiReadExclusiveWriteSynchronizer.EndRead"
+        ],
+        [
+          "TReader.ReadRootComponent"
+        ]
+      ],
+      "link_validation": {
+        "checked_direct_edges": 2421,
+        "unresolved_direct_edges": 2676,
+        "conflicts": [
+          {
+            "caller": [
+              "TMultiReadExclusiveWriteSynchronizer.Destroy"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomVariantType.Destroy"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomVariantType.Destroy"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.EndWrite"
+            ],
+            "target_rva": 49792,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TStream.ReadComponent"
+            ],
+            "callee": [
+              "TReader.ReadRootComponent"
+            ],
+            "target_rva": 123528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomForm.Create"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomForm.Create"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.EndWrite"
+            ],
+            "target_rva": 49792,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomForm.BeforeDestruction"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomForm.Destroy"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.BeginWrite"
+            ],
+            "target_rva": 49528,
+            "expected_rvas": []
+          },
+          {
+            "caller": [
+              "TCustomForm.Destroy"
+            ],
+            "callee": [
+              "TMultiReadExclusiveWriteSynchronizer.EndWrite"
+            ],
+            "target_rva": 49792,
+            "expected_rvas": []
+          }
+        ],
+        "tcontrol_vmt_anchors": [
+          {
+            "name": "TControl.Destroy",
+            "vmt_slot": -4,
+            "reference_rva": 299268,
+            "target_rva": 278352,
+            "length": 180,
+            "matches": true
+          },
+          {
+            "name": "TControl.SetParent",
+            "vmt_slot": 104,
+            "reference_rva": 302576,
+            "target_rva": 281676,
+            "length": 76,
+            "matches": true
+          },
+          {
+            "name": "TControl.WndProc",
+            "vmt_slot": 116,
+            "reference_rva": 307600,
+            "target_rva": 286712,
+            "length": 404,
+            "matches": true
+          }
+        ]
+      },
+      "lstrcatn_variant": {
+        "reference_instruction": "mov edi, ecx",
+        "compared_bytes": 132,
+        "fixed_bytes": 116,
+        "candidates": [
+          {
+            "rva": 18472,
+            "va": 4212776,
+            "file_offset": 15400,
+            "instruction_va": 4212797,
+            "instruction": "mov edi, ecx",
+            "fixed_byte_differences": []
+          }
+        ]
+      }
+    }
+  ],
+  "forms": [
+    {
+      "source": "src/input/UnitSelectInputDevices.dfm",
+      "text_sha256": "ca22a834867a23ca77196c9ce05cb4db26716c4d7b909412c9641cabb865c6bb",
+      "binary_sha256": "8db9a5f1b9370bc718607f1c1e98f80705cfac8e49e7b58212fbec41bce6d3a0",
+      "binary_bytes": 3096,
+      "binary_roundtrip_exact": true
+    },
+    {
+      "source": "src/input/UnitSensitivity.dfm",
+      "text_sha256": "b5f05ca7b7128d5aa8f251d944ceb79a52083ee6d95653142e63e54bb6979c64",
+      "binary_sha256": "3db25b60ed91a0895fc25885318d600322b18cfe30f85ffd8f335dc20f189734",
+      "binary_bytes": 3031,
+      "binary_roundtrip_exact": true
+    },
+    {
+      "source": "src/input/UnitSettings.dfm",
+      "text_sha256": "9005fc6ff3436d51100a37baf471681d3b19b65a47698b675fa6a37bf4b7b4e2",
+      "binary_sha256": "4794522eee9915630174b054f8e4366e5546a11da549e70239c860b069ba78b5",
+      "binary_bytes": 7526,
+      "binary_roundtrip_exact": true
+    },
+    {
+      "source": "src/input/UnitWaitKey.dfm",
+      "text_sha256": "f6f7663f604fd55f973034fe525934b4df6ed03dfd443044083ede87c4b34829",
+      "binary_sha256": "14726d08eae9547f5c9940ea54b14a6317ea771923fd7a6f954e5b757a9ba5c6",
+      "binary_bytes": 766,
+      "binary_roundtrip_exact": true
+    }
+  ],
+  "form_conversion": {
+    "tool": "scripts/delphi_dfm.dpr",
+    "compiler": "toolchains/d6u2/bin/dcc32-personal.exe",
+    "method": "ObjectBinaryToText followed by ObjectTextToBinary; every resulting TPF0 stream compared byte-for-byte against its original resource."
+  },
+  "resource_directory_time": {
+    "local_dos_time": "2002-07-26T23:26:24",
+    "field_count": 54,
+    "distinct_values": 1
+  },
+  "candidate_compiler_sha256": "0a41eb4d0d730109ab826bfd89a2052314ada7429ed127b1e0067c3aa174dbb6"
+}
