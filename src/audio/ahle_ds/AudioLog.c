@@ -1,4 +1,5 @@
 /* Reconstructed logging unit; original filename is not retained in audio.dll. */
+#include "transform.h"
 #include <windows.h>
 #include <stdio.h>
 #include <stdarg.h>

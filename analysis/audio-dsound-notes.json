@@ -2,7 +2,7 @@
   "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
   "scope": "Complete routine extents 0x10003c40 through 0x10006a60, including the configuration dialog and console, plus RT_DIALOG/101 and VERSION/1 payloads.",
   "status": "Partial native source reconstruction; integrated DLL equality is not established.",
-  "source_structure": "DirectSound.c, AudioConfig.c and AudioLog.c filenames and unit separation are inferred. The original PDB path identifies ahle_ds, but does not establish these private filenames.",
+  "source_structure": "Private filenames remain inferred. Independent original initialized-data order, fourteen AMP dewindow copies, and Rich compiler counts constrain DirectSound/configuration to one native C unit (0x10003c40..0x10006610), followed by the separate AudioLog C unit. Configuration functions are placed between AudioTimer and StartAudio in original function order.",
   "compiler": "Tracked VC7 13.00.9466, native /O2 /Ob1 /MT. These options reproduce 57 of 60 complete aligned bodies; remaining routines may require different source or compilation context.",
   "unmatched": {
     "AudioError": {
@@ -79,5 +79,11 @@
       ]
     }
   },
-  "context_probe_report": "analysis/audio-dsound-context-probes.json"
+  "context_probe_report": "analysis/audio-dsound-context-probes.json",
+  "initialized_data": {
+    "evidence": "analysis/audio-data-boundaries.json",
+    "DirectSound": "Genuine transform.h array at0x10038b18, followed by the original-order description/credits/settings definitions. The two unreferenced initialized ints544 and1 have deliberately unknown-purpose private names. Final four-byte inter-contribution alignment remains linker work.",
+    "AudioLog": "Genuine transform.h array at0x100393c8; no following initialized application data.",
+    "checked": "Both complete2176-byte source-compiled tables and all nine scalar initialized globals match original bytes. Description/credits pointer values remain subject to integrated link relocation."
+  }
 }

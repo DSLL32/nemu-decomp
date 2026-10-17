@@ -23,7 +23,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'src/audio/ahle_ds'
 ORIGINAL = ROOT / 'master/Plugin/audio.dll'
 ORIGINAL_SHA256 = 'f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808'
-UNITS = ('DirectSound', 'AudioConfig', 'AudioLog')
+UNITS = ('DirectSound', 'AudioLog')
 FLAGS = ['/nologo', '/O2', '/Ob1', '/MT', '/c']
 
 
@@ -52,7 +52,7 @@ def compare_data(path, pe, symbols):
     obj = COFF(path)
     rows = []
     for symbol in obj.symbols:
-        if symbol['type'] == 0x20 or symbol['storage_class'] != 2:
+        if symbol['type'] == 0x20 or symbol['storage_class'] not in (2, 3):
             continue
         targets = symbols.candidates(symbol['name'], path.name)
         if len(targets) != 1:
@@ -65,9 +65,12 @@ def compare_data(path, pe, symbols):
         elif symbol['section'] > 0:
             section = obj.sections[symbol['section'] - 1]
             following = [s['value'] for s in obj.symbols if s['section'] == symbol['section']
-                         and s['storage_class'] == 2 and s['value'] > symbol['value']]
+                         and s['storage_class'] in (2, 3) and s['value'] > symbol['value']]
             end = min(following + [section['size']])
             size = end - symbol['value']
+            if target.get('size'):
+                size = target['size']
+                end = symbol['value'] + size
             data = section['data'][symbol['value']:end]
             if any(symbol['value'] <= r['offset'] < end for r in section['relocations']):
                 rows.append(dict(name=symbol['name'], va=target['va'], size=size,
@@ -125,7 +128,7 @@ def main():
     artifact = Path(tempfile.mkdtemp(prefix='run.', dir=scratch))
     snapshot = artifact / 'source'
     snapshot.mkdir()
-    source_files = [SOURCE / (unit + '.c') for unit in UNITS] + [SOURCE / 'DirectSound.h', SOURCE / 'Audio.rc']
+    source_files = [SOURCE / (unit + '.c') for unit in UNITS] + [SOURCE / 'DirectSound.h', SOURCE / 'transform.h', SOURCE / 'Audio.rc']
     for source in source_files:
         shutil.copyfile(source, snapshot / source.name)
     env = dict(os.environ, WINEPREFIX=str(scratch / 'wine'), WINEARCH='win32', WINEDEBUG='-all')
@@ -157,7 +160,7 @@ def main():
                   objects=objects, object_summary=summarize_objects(objects),
                   data={unit: compare_data(artifact / (unit + '.obj'), pe, symbols) for unit in UNITS},
                   resources=resources(artifact / 'Audio.res', pe.data),
-                  notes=['Private unit filenames and symbol names are inferred from complete disassembly.',
+                  notes=['Private filenames remain inferred; DirectSound/config grouping and the separate log unit are constrained by original initialized-data contributions and native compiler counts.',
                          'Function extents include original switch tables and natural compiler alignment.',
                          'Source uses original explicit sample-byte-swapping assembly and a compiler byte-swap intrinsic; no opcode blobs or instruction patching.',
                          'No whole-DLL build or byte equality is asserted by these contribution diagnostics.',
