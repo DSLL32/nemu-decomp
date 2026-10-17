@@ -1323,13 +1323,15 @@ void RSP_VECTOR()
 void RSP_VADD()
 {
     PC += 4;
+    CpuU32 vd = Instruction.sa;
     CpuU32 vs = Instruction.rd;
     CpuU32 vt = Instruction.rt;
-    CpuU32 vd = Instruction.sa;
-    CpuU32 element = Instruction.rs & 15;
-    for (int i = 0; i < 8; i++)
+    for (CpuU32 i = 0; i < 8; i++)
     {
-        CpuS32 result = (CpuS16)RSPVectors[vs][i] + (CpuS16)RSPVectors[vt][VectorElement(i)] + ((RSPFlags[0] & (1 << i)) ? 1 : 0);
+        CpuU32 offset = RSPElementIndexMask[(Instruction.Value >> 22) & 7] & ((Instruction.Value >> 21) & 15);
+        CpuU32 lane = RSPElementLaneMask[(Instruction.Value >> 22) & 7];
+
+        CpuS32 result = (CpuS16)RSPVectors[vs][i] + (CpuS16)RSPVectors[vt][(lane & i) + offset] + ((RSPFlags[0] & (1 << i)) ? 1 : 0);
         AccumulatorLow(i) = (CpuU16)result;
         if (result > 32767) result = 32767;
         else if (result < -32768) result = -32768;
@@ -1342,13 +1344,15 @@ void RSP_VADD()
 void RSP_VSUB()
 {
     PC += 4;
+    CpuU32 vd = Instruction.sa;
     CpuU32 vs = Instruction.rd;
     CpuU32 vt = Instruction.rt;
-    CpuU32 vd = Instruction.sa;
-    CpuU32 element = Instruction.rs & 15;
-    for (int i = 0; i < 8; i++)
+    for (CpuU32 i = 0; i < 8; i++)
     {
-        CpuS32 result = (CpuS16)RSPVectors[vs][i] - (CpuS16)RSPVectors[vt][VectorElement(i)] - ((RSPFlags[0] & (1 << i)) ? 1 : 0);
+        CpuU32 offset = RSPElementIndexMask[(Instruction.Value >> 22) & 7] & ((Instruction.Value >> 21) & 15);
+        CpuU32 lane = RSPElementLaneMask[(Instruction.Value >> 22) & 7];
+
+        CpuS32 result = (CpuS16)RSPVectors[vs][i] - (CpuS16)RSPVectors[vt][(lane & i) + offset] - ((RSPFlags[0] & (1 << i)) ? 1 : 0);
         AccumulatorLow(i) = (CpuU16)result;
         if (result > 32767) result = 32767;
         else if (result < -32768) result = -32768;
@@ -1361,13 +1365,15 @@ void RSP_VSUB()
 void RSP_VSUT()
 {
     PC += 4;
+    CpuU32 vd = Instruction.sa;
     CpuU32 vs = Instruction.rd;
     CpuU32 vt = Instruction.rt;
-    CpuU32 vd = Instruction.sa;
-    CpuU32 element = Instruction.rs & 15;
-    for (int i = 0; i < 8; i++)
+    for (CpuU32 i = 0; i < 8; i++)
     {
-        CpuS32 result = (CpuS16)RSPVectors[vt][VectorElement(i)] - (CpuS16)RSPVectors[vs][i] - ((RSPFlags[0] & (1 << i)) ? 1 : 0);
+        CpuU32 offset = RSPElementIndexMask[(Instruction.Value >> 22) & 7] & ((Instruction.Value >> 21) & 15);
+        CpuU32 lane = RSPElementLaneMask[(Instruction.Value >> 22) & 7];
+
+        CpuS32 result = (CpuS16)RSPVectors[vt][(lane & i) + offset] - (CpuS16)RSPVectors[vs][i] - ((RSPFlags[0] & (1 << i)) ? 1 : 0);
         AccumulatorLow(i) = (CpuU16)result;
         if (result > 32767) result = 32767;
         else if (result < -32768) result = -32768;
