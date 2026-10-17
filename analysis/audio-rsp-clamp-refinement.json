@@ -124,5 +124,18 @@
     "All three modified functions remain unmatched because of 25 bytes in their first 41-byte entry sequences. The five exact suffixes do not count as complete function matches.",
     "Equivalent three-arm changes to accumulating multiply variants remain scratch experiments because their instruction allocation still diverges.",
     "No new operations, barriers, padding or copied machine instructions were introduced."
+  ],
+  "subsequent_bounded_controls": [
+    {
+      "report": "/root/.ai-tmp/audio-rsp-options.y2pha7vk/report.json",
+      "sha256": "d1df7b4336b7aa33b9f70ec9a88bf1ecda8fb5f2ebf7db360fd282f474fc92a5",
+      "source_commit": "584e569",
+      "conclusion": "Whole-TU /Oa and /Ow each regress two exact functions; /Ob2 regresses four. No option gains a complete match or changes the five shared multiply entry residuals. All are accepted without option warnings; none is promoted."
+    },
+    {
+      "report": "/root/.ai-tmp/audio-rsp-signed-clamp.3br9fbl5/accumulate-result/summary.json",
+      "sha256": "1b6f7345637fb010b6dc3800cdca6d7751792e315c0eb91de95848a3c1775d42",
+      "conclusion": "Reusing an explicit product/result temporary in VMADM produces the same unresolved allocation as the three-arm clamp diagnostic. Not promoted."
+    }
   ]
 }
