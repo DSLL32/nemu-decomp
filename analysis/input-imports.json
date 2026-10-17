@@ -1,0 +1,4037 @@
+{
+  "original_file": "master/Plugin/Input.dll",
+  "original_sha256": "2c0fb513c6c34115ef070c9f33767f7cf15d28de4becbd74bd90fe515e496298",
+  "scope": "Imported-data alias layout and constraints on inferred Pascal global identifiers. This report does not rename source or claim complete DLL equality.",
+  "table": {
+    "start_va": "0x004878a8",
+    "end_va_exclusive": "0x00487d34",
+    "count": 291,
+    "all_slots_have_HIGHLOW_relocations": true,
+    "resource_string_entries": 229,
+    "global_entries": 62,
+    "application_global_entries": 17,
+    "boundary_evidence": "The mapped UnitDIStuff initialized-data contribution ends at DATA+0x18A8. The following 291 relocated DWORDs fill the original DATA virtual size through DATA+0x1D34."
+  },
+  "hash": {
+    "formula": "sum(character_weights[c] for c in identifier.upper()) modulo 256",
+    "character_weights": {
+      "A": 71,
+      "B": 65,
+      "C": 53,
+      "D": 111,
+      "E": 230,
+      "F": 14,
+      "G": 18,
+      "H": 94,
+      "I": 65,
+      "J": 242,
+      "K": 130,
+      "L": 46,
+      "M": 64,
+      "N": 94,
+      "O": 207,
+      "P": 104,
+      "Q": 45,
+      "R": 252,
+      "S": 154,
+      "T": 49,
+      "U": 88,
+      "V": 79,
+      "W": 234,
+      "X": 80,
+      "Y": 60,
+      "Z": 23,
+      "_": 234,
+      "3": 122,
+      "2": 208,
+      "0": 23,
+      "1": 198,
+      "6": 146,
+      "4": 58
+    },
+    "prior_evidence": "analysis/debugger-imports.json",
+    "verified_oracle_names": 16625,
+    "collision_order": "Within-bucket order depends on linker reference discovery. A minimal compiled probe reversed statement references and reversed the resulting imported-symbol pair, independently of variable declaration order."
+  },
+  "method": [
+    "Read the original resource records and resolve their resource-string text from RT_STRING resources.",
+    "Associate fixed library resource identifiers with their declarations in the installed Delphi 6 sources; use the previously compiled hash oracle and monotone table order to disambiguate duplicate texts.",
+    "Match 1,902 unique normalized code spans from a frozen full reconstruction, and use corresponding actual HIGHLOW relocation sites to identify 98 imported-data slots. No conflicting identity votes were observed.",
+    "Infer remaining unchanged RTL storage identities from consistent offsets inside their unit contributions; do not extrapolate the MultiMon contribution because the first snapshot showed two different shifts.",
+    "Use known application-global storage locations supplied by the reconstructed routines and constrain each name between the surrounding fixed library hashes. These are intervals, except where both boundaries force a single bucket.",
+    "Select conventional identifiers that describe the recovered role and satisfy those constraints. Test final within-bucket ordering in a real integrated link; matching hashes alone are not sufficient."
+  ],
+  "reference_snapshot": {
+    "dll": "/root/.ai-tmp/input-import-hash.xZctGP/Input-reference.dll",
+    "dll_sha256": "ae068f5d67befb94d830d5704dc1ae93f194b6c896ed5347d22523204c3c64b0",
+    "map": "/root/.ai-tmp/input-import-hash.xZctGP/Input-reference.map",
+    "map_sha256": "4a9856364671f50b307d18fc08111aae5c89bd2f8fd4da8476f9ef3a7eaf2b55",
+    "scratch_scripts": [
+      "/root/.ai-tmp/input-import-hash.xZctGP/inspect.py",
+      "/root/.ai-tmp/input-import-hash.xZctGP/resources.py",
+      "/root/.ai-tmp/input-import-hash.xZctGP/map_globals.py",
+      "/root/.ai-tmp/input-import-hash.xZctGP/refine.py",
+      "/root/.ai-tmp/input-import-hash.xZctGP/names.py",
+      "/root/.ai-tmp/input-import-hash.xZctGP/report.py"
+    ]
+  },
+  "application_globals": [
+    {
+      "unit": "UnitDIStuff",
+      "current_name": "ActiveDeviceCount",
+      "role": "Number of devices successfully opened for polling.",
+      "original_import_slot_va": "0x4878a8",
+      "original_storage_va": "0x48acb0",
+      "allowed_hash_buckets": [
+        0
+      ],
+      "current_name_hash": 14,
+      "current_name_fits": false,
+      "proposed_name": "OpenDevicesCount",
+      "proposed_name_hash": 0,
+      "other_compatible_names": [],
+      "preceding_fixed_anchor": null,
+      "following_fixed_anchor": {
+        "identity": "resource:Apr",
+        "original_slot_va": "0x4878ac",
+        "hash_buckets": [
+          0
+        ]
+      },
+      "spelling_status": "inferred; hash and role do not uniquely establish the original identifier"
+    },
+    {
+      "unit": "UnitDIStuff",
+      "current_name": "ActiveDevices",
+      "role": "Array of opened device interfaces, polling state, names, and force-feedback state.",
+      "original_import_slot_va": "0x487908",
+      "original_storage_va": "0x48acb4",
+      "allowed_hash_buckets": [
+        20,
+        21,
+        22
+      ],
+      "current_name_hash": 189,
+      "current_name_fits": false,
+      "proposed_name": "OpenDevices",
+      "proposed_name_hash": 21,
+      "other_compatible_names": [],
+      "preceding_fixed_anchor": {
+        "identity": "resource:Sunday",
+        "original_slot_va": "0x487904",
+        "hash_buckets": [
+          20
+        ]
+      },
+      "following_fixed_anchor": {
+        "identity": "resource:Failed to set object at index %d",
+        "original_slot_va": "0x48790c",
+        "hash_buckets": [
+          22
+        ]
+      },
+      "spelling_status": "inferred; hash and role do not uniquely establish the original identifier"
+    },
+    {
+      "unit": "UnitDIStuff",
+      "current_name": "Configuring",
+      "role": "Boolean that suppresses input updates while the configuration UI is active.",
+      "original_import_slot_va": "0x487950",
+      "original_storage_va": "0x487654",
+      "allowed_hash_buckets": [
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49
+      ],
+      "current_name_hash": 200,
+      "current_name_fits": false,
+      "proposed_name": "InSettingsMode",
+      "proposed_name_hash": 48,
+      "other_compatible_names": [
+        {
+          "name": "CurrentlyConfiguring",
+          "hash_bucket": 44
+        },
+        {
+          "name": "IsSettingUp",
+          "hash_bucket": 46
+        },
+        {
+          "name": "ConfigurationWindowOpen",
+          "hash_bucket": 41
+        }
+      ],
+      "preceding_fixed_anchor": {
+        "identity": "resource:Error creating window class",
+        "original_slot_va": "0x48794c",
+        "hash_buckets": [
+          41
+        ]
+      },
+      "following_fixed_anchor": {
+        "identity": "resource:GroupIndex cannot be less than a previous menu item's GroupIndex",
+        "original_slot_va": "0x487954",
+        "hash_buckets": [
+          49
+        ]
+      },
+      "spelling_status": "inferred; hash and role do not uniquely establish the original identifier"
+    },
+    {
+      "unit": "UnitSettings",
+      "current_name": "ControllerData",
+      "role": "Pointer to four controller records supplied by the emulator.",
+      "original_import_slot_va": "0x487970",
+      "original_storage_va": "0x49690c",
+      "allowed_hash_buckets": [
+        52,
+        53,
+        54
+      ],
+      "current_name_hash": 202,
+      "current_name_fits": false,
+      "proposed_name": "Controllers",
+      "proposed_name_hash": 54,
+      "other_compatible_names": [],
+      "preceding_fixed_anchor": {
+        "identity": "resource:Unable to Replace Image",
+        "original_slot_va": "0x48796c",
+        "hash_buckets": [
+          52
+        ]
+      },
+      "following_fixed_anchor": {
+        "identity": "global:System.ExceptionClass",
+        "original_slot_va": "0x487974",
+        "hash_buckets": [
+          54
+        ]
+      },
+      "spelling_status": "inferred; hash and role do not uniquely establish the original identifier"
+    },
+    {
+      "unit": "UnitSelectInputDevices",
+      "current_name": "FormSelectInputDevices",
+      "role": "Existing form instance or DirectInput global; its name already satisfies the surrounding library anchors.",
+      "original_import_slot_va": "0x487988",
+      "original_storage_va": "0x496660",
+      "allowed_hash_buckets": [
+        60,
+        61
+      ],
+      "current_name_hash": 61,
+      "current_name_fits": true,
+      "proposed_name": "FormSelectInputDevices",
+      "proposed_name_hash": 61,
+      "other_compatible_names": [],
+      "preceding_fixed_anchor": {
+        "identity": "resource:Out of memory",
+        "original_slot_va": "0x487984",
+        "hash_buckets": [
+          60
+        ]
+      },
+      "following_fixed_anchor": {
+        "identity": "global:Classes.AddDataModule",
+        "original_slot_va": "0x48798c",
+        "hash_buckets": [
+          61
+        ]
+      },
+      "spelling_status": "inferred; hash and role do not uniquely establish the original identifier"
+    },
+    {
+      "unit": "UnitDIStuff",
+      "current_name": "KeyDefs",
+      "role": "Keyboard scan-code/name lookup table.",
+      "original_import_slot_va": "0x487998",
+      "original_storage_va": "0x487658",
+      "allowed_hash_buckets": [
+        61,
+        62
+      ],
+      "current_name_hash": 161,
+      "current_name_fits": false,
+      "proposed_name": "Keys",
+      "proposed_name_hash": 62,
+      "other_compatible_names": [],
+      "preceding_fixed_anchor": {
+        "identity": "resource:Invalid numeric input",
+        "original_slot_va": "0x487994",
+        "hash_buckets": [
+          61
+        ]
+      },
+      "following_fixed_anchor": {
+        "identity": "global:Classes.RemoveDataModule",
+        "original_slot_va": "0x48799c",
+        "hash_buckets": [
+          62
+        ]
+      },
+      "spelling_status": "inferred; hash and role do not uniquely establish the original identifier"
+    },
+    {
+      "unit": "UnitSensitivity",
+      "current_name": "FormSensitivity",
+      "role": "Existing form instance or DirectInput global; its name already satisfies the surrounding library anchors.",
+      "original_import_slot_va": "0x4879ac",
+      "original_storage_va": "0x4968f4",
+      "allowed_hash_buckets": [
+        63,
+        64,
+        65
+      ],
+      "current_name_hash": 65,
+      "current_name_fits": true,
+      "proposed_name": "FormSensitivity",
+      "proposed_name_hash": 65,
+      "other_compatible_names": [],
+      "preceding_fixed_anchor": {
+        "identity": "resource:Abstract Error",
+        "original_slot_va": "0x4879a8",
+        "hash_buckets": [
+          63
+        ]
+      },
+      "following_fixed_anchor": {
+        "identity": "resource:Menu '%s' is already being used by another form",
+        "original_slot_va": "0x4879b0",
+        "hash_buckets": [
+          65
+        ]
+      },
+      "spelling_status": "inferred; hash and role do not uniquely establish the original identifier"
+    },
+    {
+      "unit": "UnitSettings",
+      "current_name": "FormSettings",
+      "role": "Existing form instance or DirectInput global; its name already satisfies the surrounding library anchors.",
+      "original_import_slot_va": "0x4879c8",
+      "original_storage_va": "0x496904",
+      "allowed_hash_buckets": [
+        69,
+        70
+      ],
+      "current_name_hash": 70,
+      "current_name_fits": true,
+      "proposed_name": "FormSettings",
+      "proposed_name_hash": 70,
+      "other_compatible_names": [],
+      "preceding_fixed_anchor": {
+        "identity": "resource:Invalid image size",
+        "original_slot_va": "0x4879c4",
+        "hash_buckets": [
+          69
+        ]
+      },
+      "following_fixed_anchor": {
+        "identity": "resource:Abort",
+        "original_slot_va": "0x4879cc",
+        "hash_buckets": [
+          70
+        ]
+      },
+      "spelling_status": "inferred; hash and role do not uniquely establish the original identifier"
+    },
+    {
+      "unit": "UnitDIStuff",
+      "current_name": "DIDevices",
+      "role": "Existing form instance or DirectInput global; its name already satisfies the surrounding library anchors.",
+      "original_import_slot_va": "0x4879e4",
+      "original_storage_va": "0x48a710",
+      "allowed_hash_buckets": [
+        73,
+        74
+      ],
+      "current_name_hash": 74,
+      "current_name_fits": true,
+      "proposed_name": "DIDevices",
+      "proposed_name_hash": 74,
+      "other_compatible_names": [],
+      "preceding_fixed_anchor": {
+        "identity": "global:System.Output",
+        "original_slot_va": "0x4879e0",
+        "hash_buckets": [
+          73
+        ]
+      },
+      "following_fixed_anchor": {
+        "identity": "resource:Tab",
+        "original_slot_va": "0x4879e8",
+        "hash_buckets": [
+          74
+        ]
+      },
+      "spelling_status": "inferred; hash and role do not uniquely establish the original identifier"
+    },
+    {
+      "unit": "UnitDIStuff",
+      "current_name": "DIResult",
+      "role": "HRESULT from DirectInput creation.",
+      "original_import_slot_va": "0x487a48",
+      "original_storage_va": "0x48a700",
+      "allowed_hash_buckets": [
+        88,
+        89,
+        90,
+        91
+      ],
+      "current_name_hash": 227,
+      "current_name_fits": false,
+      "proposed_name": "DIError",
+      "proposed_name_hash": 89,
+      "other_compatible_names": [],
+      "preceding_fixed_anchor": {
+        "identity": "resource:Stack overflow",
+        "original_slot_va": "0x487a44",
+        "hash_buckets": [
+          88
+        ]
+      },
+      "following_fixed_anchor": {
+        "identity": "resource:Control-C hit",
+        "original_slot_va": "0x487a4c",
+        "hash_buckets": [
+          91
+        ]
+      },
+      "spelling_status": "inferred; hash and role do not uniquely establish the original identifier"
+    },
+    {
+      "unit": "UnitDIStuff",
+      "current_name": "DIWindow",
+      "role": "Existing form instance or DirectInput global; its name already satisfies the surrounding library anchors.",
+      "original_import_slot_va": "0x487a64",
+      "original_storage_va": "0x48a708",
+      "allowed_hash_buckets": [
+        95,
+        96,
+        97,
+        98
+      ],
+      "current_name_hash": 97,
+      "current_name_fits": true,
+      "proposed_name": "DIWindow",
+      "proposed_name_hash": 97,
+      "other_compatible_names": [],
+      "preceding_fixed_anchor": {
+        "identity": "resource:Integer overflow",
+        "original_slot_va": "0x487a60",
+        "hash_buckets": [
+          95
+        ]
+      },
+      "following_fixed_anchor": {
+        "identity": "resource:&No",
+        "original_slot_va": "0x487a68",
+        "hash_buckets": [
+          98
+        ]
+      },
+      "spelling_status": "inferred; hash and role do not uniquely establish the original identifier"
+    },
+    {
+      "unit": "UnitDIStuff",
+      "current_name": "HasAdaptoid",
+      "role": "An opened Adaptoid device permits the Adaptoid autoconfiguration action.",
+      "original_import_slot_va": "0x487a7c",
+      "original_storage_va": "0x48a70d",
+      "allowed_hash_buckets": [
+        99,
+        100,
+        101
+      ],
+      "current_name_hash": 84,
+      "current_name_fits": false,
+      "proposed_name": "AdaptoidEnabled",
+      "proposed_name_hash": 100,
+      "other_compatible_names": [],
+      "preceding_fixed_anchor": {
+        "identity": "resource:Error creating variant array",
+        "original_slot_va": "0x487a78",
+        "hash_buckets": [
+          99
+        ]
+      },
+      "following_fixed_anchor": {
+        "identity": "resource:&All",
+        "original_slot_va": "0x487a80",
+        "hash_buckets": [
+          101
+        ]
+      },
+      "spelling_status": "inferred; hash and role do not uniquely establish the original identifier"
+    },
+    {
+      "unit": "UnitDIStuff",
+      "current_name": "HasKeyboard",
+      "role": "An opened keyboard device permits the keyboard autoconfiguration action.",
+      "original_import_slot_va": "0x487bcc",
+      "original_storage_va": "0x48a70c",
+      "allowed_hash_buckets": [
+        179,
+        180,
+        181,
+        182
+      ],
+      "current_name_hash": 165,
+      "current_name_fits": false,
+      "proposed_name": "KeyboardEnabled",
+      "proposed_name_hash": 181,
+      "other_compatible_names": [],
+      "preceding_fixed_anchor": {
+        "identity": "resource:Property is read-only",
+        "original_slot_va": "0x487bc8",
+        "hash_buckets": [
+          179
+        ]
+      },
+      "following_fixed_anchor": {
+        "identity": "global:SysUtils.Win32MinorVersion",
+        "original_slot_va": "0x487bd0",
+        "hash_buckets": [
+          182
+        ]
+      },
+      "spelling_status": "inferred; hash and role do not uniquely establish the original identifier"
+    },
+    {
+      "unit": "UnitWaitKey",
+      "current_name": "FormWait",
+      "role": "Existing form instance or DirectInput global; its name already satisfies the surrounding library anchors.",
+      "original_import_slot_va": "0x487bf0",
+      "original_storage_va": "0x4968fc",
+      "allowed_hash_buckets": [
+        186,
+        187,
+        188,
+        189
+      ],
+      "current_name_hash": 188,
+      "current_name_fits": true,
+      "proposed_name": "FormWait",
+      "proposed_name_hash": 188,
+      "other_compatible_names": [],
+      "preceding_fixed_anchor": {
+        "identity": "resource:Tue",
+        "original_slot_va": "0x487bec",
+        "hash_buckets": [
+          186
+        ]
+      },
+      "following_fixed_anchor": {
+        "identity": "resource:Variant array index out of bounds",
+        "original_slot_va": "0x487bf4",
+        "hash_buckets": [
+          189
+        ]
+      },
+      "spelling_status": "inferred; hash and role do not uniquely establish the original identifier"
+    },
+    {
+      "unit": "UnitDIStuff",
+      "current_name": "TurboState",
+      "role": "Six per-button Boolean gates; turbo buttons alternate these gates and ordinary pressed buttons set them true.",
+      "original_import_slot_va": "0x487c04",
+      "original_storage_va": "0x496654",
+      "allowed_hash_buckets": [
+        193,
+        194
+      ],
+      "current_name_hash": 190,
+      "current_name_fits": false,
+      "proposed_name": "Buttons",
+      "proposed_name_hash": 194,
+      "other_compatible_names": [
+        {
+          "name": "TurboOn",
+          "hash_bucket": 194
+        }
+      ],
+      "preceding_fixed_anchor": {
+        "identity": "resource:Invalid variant operation ($%.8x)",
+        "original_slot_va": "0x487c00",
+        "hash_buckets": [
+          193
+        ]
+      },
+      "following_fixed_anchor": {
+        "identity": "resource:Access violation at address %p in module '%s'. %s of address %p",
+        "original_slot_va": "0x487c08",
+        "hash_buckets": [
+          194
+        ]
+      },
+      "spelling_status": "inferred; hash and role do not uniquely establish the original identifier"
+    },
+    {
+      "unit": "UnitSettings",
+      "current_name": "InputSettings",
+      "role": "Persistent sensitivity values and four controller mappings.",
+      "original_import_slot_va": "0x487c1c",
+      "original_storage_va": "0x496910",
+      "allowed_hash_buckets": [
+        200,
+        201
+      ],
+      "current_name_hash": 189,
+      "current_name_fits": false,
+      "proposed_name": "ControllerSettings",
+      "proposed_name_hash": 201,
+      "other_compatible_names": [],
+      "preceding_fixed_anchor": {
+        "identity": "resource:Failed to set tab \"%s\" at index %d",
+        "original_slot_va": "0x487c18",
+        "hash_buckets": [
+          200
+        ]
+      },
+      "following_fixed_anchor": {
+        "identity": "global:System.HeapAllocFlags",
+        "original_slot_va": "0x487c20",
+        "hash_buckets": [
+          201
+        ]
+      },
+      "spelling_status": "inferred; hash and role do not uniquely establish the original identifier"
+    },
+    {
+      "unit": "UnitDIStuff",
+      "current_name": "DIDeviceCount",
+      "role": "Number of enumerated available devices.",
+      "original_import_slot_va": "0x487cc8",
+      "original_storage_va": "0x48a704",
+      "allowed_hash_buckets": [
+        232,
+        233,
+        234,
+        235,
+        236
+      ],
+      "current_name_hash": 155,
+      "current_name_fits": false,
+      "proposed_name": "DeviceCount",
+      "proposed_name_hash": 235,
+      "other_compatible_names": [],
+      "preceding_fixed_anchor": {
+        "identity": "resource:Enter",
+        "original_slot_va": "0x487cc4",
+        "hash_buckets": [
+          232
+        ]
+      },
+      "following_fixed_anchor": {
+        "identity": "resource:Jan",
+        "original_slot_va": "0x487ccc",
+        "hash_buckets": [
+          236
+        ]
+      },
+      "spelling_status": "inferred; hash and role do not uniquely establish the original identifier"
+    }
+  ],
+  "dinput_identifier": {
+    "original_import_slot_va": "0x00487aac",
+    "original_storage_va": "0x00486e34",
+    "identity": "IID for the ANSI IDirectInputDevice2 interface",
+    "earlier_inferred_name": "IID_IDirectInputDevice2A",
+    "earlier_hash": 187,
+    "compatible_name": "IID_IDirectInputDevice2",
+    "compatible_hash": 116,
+    "evidence": "The 16 GUID bytes identify the interface. The original alias occurs in the 113..116 hash interval. The conventional unsuffixed declaration, already adopted in the header reconstruction, hashes to 116."
+  },
+  "proposed_application_names_have_monotone_hash_order": true,
+  "full_dll_byte_exact": false,
+  "limitations": [
+    "Names inferred from behavior and layout are not recovered original spellings.",
+    "Application hash intervals can contain multiple values, and collisions can require a particular link reference order.",
+    "The reference snapshot preceded final unit-order and MultiMon repairs; it is evidence for identities, not a completed binary."
+  ],
+  "original_table": [
+    {
+      "index": 0,
+      "original_import_slot_va": "0x4878a8",
+      "original_storage_va": "0x48acb0",
+      "identity": "global:UnitDIStuff.ActiveDeviceCount",
+      "hash_buckets": [
+        0
+      ],
+      "proposed_name": "OpenDevicesCount",
+      "proposed_hash_bucket": 0
+    },
+    {
+      "index": 1,
+      "original_import_slot_va": "0x4878ac",
+      "original_storage_va": "0x4077cc",
+      "identity": "resource:Apr",
+      "hash_buckets": [
+        0
+      ],
+      "resource_identifiers": [
+        "SShortMonthNameApr"
+      ]
+    },
+    {
+      "index": 2,
+      "original_import_slot_va": "0x4878b0",
+      "original_storage_va": "0x4076e4",
+      "identity": "resource:Variant method calls not supported",
+      "hash_buckets": [
+        0
+      ],
+      "resource_identifiers": [
+        "SDispatchError"
+      ]
+    },
+    {
+      "index": 3,
+      "original_import_slot_va": "0x4878b4",
+      "original_storage_va": "0x407734",
+      "identity": "resource:Could not convert variant of type (%s) into type (%s)",
+      "hash_buckets": [
+        2
+      ],
+      "resource_identifiers": [
+        "SVarTypeCouldNotConvert"
+      ]
+    },
+    {
+      "index": 4,
+      "original_import_slot_va": "0x4878b8",
+      "original_storage_va": "0x407634",
+      "identity": "resource:Too many open files",
+      "hash_buckets": [
+        2
+      ],
+      "resource_identifiers": [
+        "STooManyOpenFiles"
+      ]
+    },
+    {
+      "index": 5,
+      "original_import_slot_va": "0x4878bc",
+      "original_storage_va": "0x40781c",
+      "identity": "resource:February",
+      "hash_buckets": [
+        3
+      ],
+      "resource_identifiers": [
+        "SLongMonthNameFeb"
+      ]
+    },
+    {
+      "index": 6,
+      "original_import_slot_va": "0x4878c0",
+      "original_storage_va": "0x40785c",
+      "identity": "resource:October",
+      "hash_buckets": [
+        3
+      ],
+      "resource_identifiers": [
+        "SLongMonthNameOct"
+      ]
+    },
+    {
+      "index": 7,
+      "original_import_slot_va": "0x4878c4",
+      "original_storage_va": "0x4078c4",
+      "identity": "resource:Wednesday",
+      "hash_buckets": [
+        3
+      ],
+      "resource_identifiers": [
+        "SLongDayNameWed"
+      ]
+    },
+    {
+      "index": 8,
+      "original_import_slot_va": "0x4878c8",
+      "original_storage_va": "0x4232cc",
+      "identity": "resource:N&o to All",
+      "hash_buckets": [
+        5
+      ],
+      "resource_identifiers": [
+        "SMsgDlgNoToAll"
+      ]
+    },
+    {
+      "index": 9,
+      "original_import_slot_va": "0x4878cc",
+      "original_storage_va": "0x488034",
+      "identity": "global:System.IsLibrary",
+      "hash_buckets": [
+        6
+      ]
+    },
+    {
+      "index": 10,
+      "original_import_slot_va": "0x4878d0",
+      "original_storage_va": "0x4077ec",
+      "identity": "resource:Aug",
+      "hash_buckets": [
+        6
+      ],
+      "resource_identifiers": [
+        "SShortMonthNameAug"
+      ]
+    },
+    {
+      "index": 11,
+      "original_import_slot_va": "0x4878d4",
+      "original_storage_va": "0x423354",
+      "identity": "resource:Shift+",
+      "hash_buckets": [
+        9
+      ],
+      "resource_identifiers": [
+        "SmkcShift"
+      ]
+    },
+    {
+      "index": 12,
+      "original_import_slot_va": "0x4878d8",
+      "original_storage_va": "0x423374",
+      "identity": "resource:Clipboard does not support Icons",
+      "hash_buckets": [
+        11
+      ],
+      "resource_identifiers": [
+        "SIconToClipboard"
+      ]
+    },
+    {
+      "index": 13,
+      "original_import_slot_va": "0x4878dc",
+      "original_storage_va": "0x487244",
+      "identity": "global:DInput.c_dfDIJoystick",
+      "hash_buckets": [
+        12
+      ]
+    },
+    {
+      "index": 14,
+      "original_import_slot_va": "0x4878e0",
+      "original_storage_va": "0x423224",
+      "identity": "resource:&Retry",
+      "hash_buckets": [
+        13
+      ],
+      "resource_identifiers": [
+        "SRetryButton"
+      ]
+    },
+    {
+      "index": 15,
+      "original_import_slot_va": "0x4878e4",
+      "original_storage_va": "0x488028",
+      "identity": "global:System.AbstractErrorProc",
+      "hash_buckets": [
+        13
+      ]
+    },
+    {
+      "index": 16,
+      "original_import_slot_va": "0x4878e8",
+      "original_storage_va": "0x40776c",
+      "identity": "resource:External exception %x",
+      "hash_buckets": [
+        14
+      ],
+      "resource_identifiers": [
+        "SExternalException"
+      ]
+    },
+    {
+      "index": 17,
+      "original_import_slot_va": "0x4878ec",
+      "original_storage_va": "0x4232a4",
+      "identity": "resource:&Help",
+      "hash_buckets": [
+        15
+      ],
+      "resource_identifiers": [
+        "SMsgDlgHelp"
+      ]
+    },
+    {
+      "index": 18,
+      "original_import_slot_va": "0x4878f0",
+      "original_storage_va": "0x4078d4",
+      "identity": "resource:Friday",
+      "hash_buckets": [
+        15
+      ],
+      "resource_identifiers": [
+        "SLongDayNameFri"
+      ]
+    },
+    {
+      "index": 19,
+      "original_import_slot_va": "0x4878f4",
+      "original_storage_va": "0x488008",
+      "identity": "global:System.ErrorProc",
+      "hash_buckets": [
+        17
+      ]
+    },
+    {
+      "index": 20,
+      "original_import_slot_va": "0x4878f8",
+      "original_storage_va": "0x4231ec",
+      "identity": "resource:OK",
+      "hash_buckets": [
+        19
+      ],
+      "resource_identifiers": [
+        "SOKButton"
+      ]
+    },
+    {
+      "index": 21,
+      "original_import_slot_va": "0x4878fc",
+      "original_storage_va": "0x488afc",
+      "identity": "global:FlatSB.FlatSB_GetScrollInfo",
+      "hash_buckets": [
+        20
+      ]
+    },
+    {
+      "index": 22,
+      "original_import_slot_va": "0x487900",
+      "original_storage_va": "0x42334c",
+      "identity": "resource:Del",
+      "hash_buckets": [
+        20
+      ],
+      "resource_identifiers": [
+        "SmkcDel"
+      ]
+    },
+    {
+      "index": 23,
+      "original_import_slot_va": "0x487904",
+      "original_storage_va": "0x4078ac",
+      "identity": "resource:Sunday",
+      "hash_buckets": [
+        20
+      ],
+      "resource_identifiers": [
+        "SLongDayNameSun"
+      ]
+    },
+    {
+      "index": 24,
+      "original_import_slot_va": "0x487908",
+      "original_storage_va": "0x48acb4",
+      "identity": "global:UnitDIStuff.ActiveDevices",
+      "hash_buckets": [
+        20,
+        21,
+        22
+      ],
+      "proposed_name": "OpenDevices",
+      "proposed_hash_bucket": 21
+    },
+    {
+      "index": 25,
+      "original_import_slot_va": "0x48790c",
+      "original_storage_va": "0x467c2c",
+      "identity": "resource:Failed to set object at index %d",
+      "hash_buckets": [
+        22
+      ],
+      "resource_identifiers": [
+        "sTabFailSetObject"
+      ]
+    },
+    {
+      "index": 26,
+      "original_import_slot_va": "0x487910",
+      "original_storage_va": "0x4230fc",
+      "identity": "resource:Tab position incompatible with current tab style",
+      "hash_buckets": [
+        23
+      ],
+      "resource_identifiers": [
+        "SInvalidTabPosition"
+      ]
+    },
+    {
+      "index": 27,
+      "original_import_slot_va": "0x487914",
+      "original_storage_va": "0x42333c",
+      "identity": "resource:Down",
+      "hash_buckets": [
+        23
+      ],
+      "resource_identifiers": [
+        "SmkcDown"
+      ]
+    },
+    {
+      "index": 28,
+      "original_import_slot_va": "0x487918",
+      "original_storage_va": "0x4077d4",
+      "identity": "resource:May",
+      "hash_buckets": [
+        24
+      ],
+      "resource_identifiers": [
+        "SShortMonthNameMay"
+      ]
+    },
+    {
+      "index": 29,
+      "original_import_slot_va": "0x48791c",
+      "original_storage_va": "0x423194",
+      "identity": "resource:Cannot hide an MDI Child Form",
+      "hash_buckets": [
+        25
+      ],
+      "resource_identifiers": [
+        "SMDIChildNotVisible"
+      ]
+    },
+    {
+      "index": 30,
+      "original_import_slot_va": "0x487920",
+      "original_storage_va": "0x42339c",
+      "identity": "resource: - Dock zone not found",
+      "hash_buckets": [
+        25
+      ],
+      "resource_identifiers": [
+        "SDockZoneNotFound"
+      ]
+    },
+    {
+      "index": 31,
+      "original_import_slot_va": "0x487924",
+      "original_storage_va": "0x42335c",
+      "identity": "resource:Ctrl+",
+      "hash_buckets": [
+        33
+      ],
+      "resource_identifiers": [
+        "SmkcCtrl"
+      ]
+    },
+    {
+      "index": 32,
+      "original_import_slot_va": "0x487928",
+      "original_storage_va": "0x407764",
+      "identity": "resource:Unexpected variant error",
+      "hash_buckets": [
+        33
+      ],
+      "resource_identifiers": [
+        "SVarUnexpected"
+      ]
+    },
+    {
+      "index": 33,
+      "original_import_slot_va": "0x48792c",
+      "original_storage_va": "0x407744",
+      "identity": "resource:Variant overflow",
+      "hash_buckets": [
+        33
+      ],
+      "resource_identifiers": [
+        "SVarOverflow"
+      ]
+    },
+    {
+      "index": 34,
+      "original_import_slot_va": "0x487930",
+      "original_storage_va": "0x42327c",
+      "identity": "resource:Confirm",
+      "hash_buckets": [
+        34
+      ],
+      "resource_identifiers": [
+        "SMsgDlgConfirm"
+      ]
+    },
+    {
+      "index": 35,
+      "original_import_slot_va": "0x487934",
+      "original_storage_va": "0x423134",
+      "identity": "resource:Out of system resources",
+      "hash_buckets": [
+        35
+      ],
+      "resource_identifiers": [
+        "SOutOfResources"
+      ]
+    },
+    {
+      "index": 36,
+      "original_import_slot_va": "0x487938",
+      "original_storage_va": "0x42321c",
+      "identity": "resource:&Ignore",
+      "hash_buckets": [
+        36
+      ],
+      "resource_identifiers": [
+        "SIgnoreButton"
+      ]
+    },
+    {
+      "index": 37,
+      "original_import_slot_va": "0x48793c",
+      "original_storage_va": "0x42325c",
+      "identity": "resource:Bitmaps",
+      "hash_buckets": [
+        37
+      ],
+      "resource_identifiers": [
+        "SVBitmaps"
+      ]
+    },
+    {
+      "index": 38,
+      "original_import_slot_va": "0x487940",
+      "original_storage_va": "0x423254",
+      "identity": "resource:Icons",
+      "hash_buckets": [
+        38
+      ],
+      "resource_identifiers": [
+        "SVIcons"
+      ]
+    },
+    {
+      "index": 39,
+      "original_import_slot_va": "0x487944",
+      "original_storage_va": "0x42324c",
+      "identity": "resource:Enhanced Metafiles",
+      "hash_buckets": [
+        38
+      ],
+      "resource_identifiers": [
+        "SVEnhMetafiles"
+      ]
+    },
+    {
+      "index": 40,
+      "original_import_slot_va": "0x487948",
+      "original_storage_va": "0x40764c",
+      "identity": "resource:Disk full",
+      "hash_buckets": [
+        40
+      ],
+      "resource_identifiers": [
+        "SDiskFull"
+      ]
+    },
+    {
+      "index": 41,
+      "original_import_slot_va": "0x48794c",
+      "original_storage_va": "0x42317c",
+      "identity": "resource:Error creating window class",
+      "hash_buckets": [
+        41
+      ],
+      "resource_identifiers": [
+        "SWindowClass"
+      ]
+    },
+    {
+      "index": 42,
+      "original_import_slot_va": "0x487950",
+      "original_storage_va": "0x487654",
+      "identity": "global:UnitDIStuff.Configuring",
+      "hash_buckets": [
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47,
+        48,
+        49
+      ],
+      "proposed_name": "InSettingsMode",
+      "proposed_hash_bucket": 48
+    },
+    {
+      "index": 43,
+      "original_import_slot_va": "0x487954",
+      "original_storage_va": "0x4231d4",
+      "identity": "resource:GroupIndex cannot be less than a previous menu item's GroupIndex",
+      "hash_buckets": [
+        49
+      ],
+      "resource_identifiers": [
+        "SGroupIndexTooLow"
+      ]
+    },
+    {
+      "index": 44,
+      "original_import_slot_va": "0x487958",
+      "original_storage_va": "0x4155f0",
+      "identity": "resource:Property %s does not exist",
+      "hash_buckets": [
+        49
+      ],
+      "resource_identifiers": [
+        "SUnknownProperty"
+      ]
+    },
+    {
+      "index": 45,
+      "original_import_slot_va": "0x48795c",
+      "original_storage_va": "0x4078b4",
+      "identity": "resource:Monday",
+      "hash_buckets": [
+        49
+      ],
+      "resource_identifiers": [
+        "SLongDayNameMon"
+      ]
+    },
+    {
+      "index": 46,
+      "original_import_slot_va": "0x487960",
+      "original_storage_va": "0x407894",
+      "identity": "resource:Thu",
+      "hash_buckets": [
+        50
+      ],
+      "resource_identifiers": [
+        "SShortDayNameThu"
+      ]
+    },
+    {
+      "index": 47,
+      "original_import_slot_va": "0x487964",
+      "original_storage_va": "0x486f54",
+      "identity": "global:DInput.c_dfDIMouse",
+      "hash_buckets": [
+        51
+      ]
+    },
+    {
+      "index": 48,
+      "original_import_slot_va": "0x487968",
+      "original_storage_va": "0x4078bc",
+      "identity": "resource:Tuesday",
+      "hash_buckets": [
+        51
+      ],
+      "resource_identifiers": [
+        "SLongDayNameTue"
+      ]
+    },
+    {
+      "index": 49,
+      "original_import_slot_va": "0x48796c",
+      "original_storage_va": "0x423154",
+      "identity": "resource:Unable to Replace Image",
+      "hash_buckets": [
+        52
+      ],
+      "resource_identifiers": [
+        "SReplaceImage"
+      ]
+    },
+    {
+      "index": 50,
+      "original_import_slot_va": "0x487970",
+      "original_storage_va": "0x49690c",
+      "identity": "global:UnitSettings.ControllerData",
+      "hash_buckets": [
+        52,
+        53,
+        54
+      ],
+      "proposed_name": "Controllers",
+      "proposed_hash_bucket": 54
+    },
+    {
+      "index": 51,
+      "original_import_slot_va": "0x487974",
+      "original_storage_va": "0x48801c",
+      "identity": "global:System.ExceptionClass",
+      "hash_buckets": [
+        54
+      ]
+    },
+    {
+      "index": 52,
+      "original_import_slot_va": "0x487978",
+      "original_storage_va": "0x423364",
+      "identity": "resource:Alt+",
+      "hash_buckets": [
+        55
+      ],
+      "resource_identifiers": [
+        "SmkcAlt"
+      ]
+    },
+    {
+      "index": 53,
+      "original_import_slot_va": "0x48797c",
+      "original_storage_va": "0x40761c",
+      "identity": "resource:I/O error %d",
+      "hash_buckets": [
+        58
+      ],
+      "resource_identifiers": [
+        "SInOutError"
+      ]
+    },
+    {
+      "index": 54,
+      "original_import_slot_va": "0x487980",
+      "original_storage_va": "0x4076cc",
+      "identity": "resource:Application Error",
+      "hash_buckets": [
+        59
+      ],
+      "resource_identifiers": [
+        "SExceptTitle"
+      ]
+    },
+    {
+      "index": 55,
+      "original_import_slot_va": "0x487984",
+      "original_storage_va": "0x407614",
+      "identity": "resource:Out of memory",
+      "hash_buckets": [
+        60
+      ],
+      "resource_identifiers": [
+        "SOutOfMemory"
+      ]
+    },
+    {
+      "index": 56,
+      "original_import_slot_va": "0x487988",
+      "original_storage_va": "0x496660",
+      "identity": "global:UnitSelectInputDevices.FormSelectInputDevices",
+      "hash_buckets": [
+        60,
+        61
+      ],
+      "proposed_name": "FormSelectInputDevices",
+      "proposed_hash_bucket": 61
+    },
+    {
+      "index": 57,
+      "original_import_slot_va": "0x48798c",
+      "original_storage_va": "0x4865a0",
+      "identity": "global:Classes.AddDataModule",
+      "hash_buckets": [
+        61
+      ]
+    },
+    {
+      "index": 58,
+      "original_import_slot_va": "0x487990",
+      "original_storage_va": "0x4077f4",
+      "identity": "resource:Sep",
+      "hash_buckets": [
+        61
+      ],
+      "resource_identifiers": [
+        "SShortMonthNameSep"
+      ]
+    },
+    {
+      "index": 59,
+      "original_import_slot_va": "0x487994",
+      "original_storage_va": "0x407654",
+      "identity": "resource:Invalid numeric input",
+      "hash_buckets": [
+        61
+      ],
+      "resource_identifiers": [
+        "SInvalidInput"
+      ]
+    },
+    {
+      "index": 60,
+      "original_import_slot_va": "0x487998",
+      "original_storage_va": "0x487658",
+      "identity": "global:UnitDIStuff.KeyDefs",
+      "hash_buckets": [
+        61,
+        62
+      ],
+      "proposed_name": "Keys",
+      "proposed_hash_bucket": 62
+    },
+    {
+      "index": 61,
+      "original_import_slot_va": "0x48799c",
+      "original_storage_va": "0x4865a8",
+      "identity": "global:Classes.RemoveDataModule",
+      "hash_buckets": [
+        62
+      ]
+    },
+    {
+      "index": 62,
+      "original_import_slot_va": "0x4879a0",
+      "original_storage_va": "0x4076d4",
+      "identity": "resource:Format '%s' invalid or incompatible with argument",
+      "hash_buckets": [
+        62
+      ],
+      "resource_identifiers": [
+        "SInvalidFormat"
+      ]
+    },
+    {
+      "index": 63,
+      "original_import_slot_va": "0x4879a4",
+      "original_storage_va": "0x40774c",
+      "identity": "resource:Invalid argument",
+      "hash_buckets": [
+        63
+      ],
+      "resource_identifiers": [
+        "SVarInvalid"
+      ]
+    },
+    {
+      "index": 64,
+      "original_import_slot_va": "0x4879a8",
+      "original_storage_va": "0x407794",
+      "identity": "resource:Abstract Error",
+      "hash_buckets": [
+        63
+      ],
+      "resource_identifiers": [
+        "SAbstractError"
+      ]
+    },
+    {
+      "index": 65,
+      "original_import_slot_va": "0x4879ac",
+      "original_storage_va": "0x4968f4",
+      "identity": "global:UnitSensitivity.FormSensitivity",
+      "hash_buckets": [
+        63,
+        64,
+        65
+      ],
+      "proposed_name": "FormSensitivity",
+      "proposed_hash_bucket": 65
+    },
+    {
+      "index": 66,
+      "original_import_slot_va": "0x4879b0",
+      "original_storage_va": "0x423384",
+      "identity": "resource:Menu '%s' is already being used by another form",
+      "hash_buckets": [
+        65
+      ],
+      "resource_identifiers": [
+        "SDuplicateMenus"
+      ]
+    },
+    {
+      "index": 67,
+      "original_import_slot_va": "0x4879b4",
+      "original_storage_va": "0x42336c",
+      "identity": "resource:Unable to insert a line",
+      "hash_buckets": [
+        66
+      ],
+      "resource_identifiers": [
+        "SInsertLineError"
+      ]
+    },
+    {
+      "index": 68,
+      "original_import_slot_va": "0x4879b8",
+      "original_storage_va": "0x415540",
+      "identity": "resource:String list does not allow duplicates",
+      "hash_buckets": [
+        67
+      ],
+      "resource_identifiers": [
+        "SDuplicateString"
+      ]
+    },
+    {
+      "index": 69,
+      "original_import_slot_va": "0x4879bc",
+      "original_storage_va": "0x423314",
+      "identity": "resource:End",
+      "hash_buckets": [
+        68
+      ],
+      "resource_identifiers": [
+        "SmkcEnd"
+      ]
+    },
+    {
+      "index": 70,
+      "original_import_slot_va": "0x4879c0",
+      "original_storage_va": "0x423124",
+      "identity": "resource:Cannot change the size of an icon",
+      "hash_buckets": [
+        69
+      ],
+      "resource_identifiers": [
+        "SChangeIconSize"
+      ]
+    },
+    {
+      "index": 71,
+      "original_import_slot_va": "0x4879c4",
+      "original_storage_va": "0x423144",
+      "identity": "resource:Invalid image size",
+      "hash_buckets": [
+        69
+      ],
+      "resource_identifiers": [
+        "SInvalidImageSize"
+      ]
+    },
+    {
+      "index": 72,
+      "original_import_slot_va": "0x4879c8",
+      "original_storage_va": "0x496904",
+      "identity": "global:UnitSettings.FormSettings",
+      "hash_buckets": [
+        69,
+        70
+      ],
+      "proposed_name": "FormSettings",
+      "proposed_hash_bucket": 70
+    },
+    {
+      "index": 73,
+      "original_import_slot_va": "0x4879cc",
+      "original_storage_va": "0x42322c",
+      "identity": "resource:Abort",
+      "hash_buckets": [
+        70
+      ],
+      "resource_identifiers": [
+        "SAbortButton"
+      ]
+    },
+    {
+      "index": 74,
+      "original_import_slot_va": "0x4879d0",
+      "original_storage_va": "0x4232ec",
+      "identity": "resource:Esc",
+      "hash_buckets": [
+        70
+      ],
+      "resource_identifiers": [
+        "SmkcEsc"
+      ]
+    },
+    {
+      "index": 75,
+      "original_import_slot_va": "0x4879d4",
+      "original_storage_va": "0x407844",
+      "identity": "resource:July",
+      "hash_buckets": [
+        70
+      ],
+      "resource_identifiers": [
+        "SLongMonthNameJul"
+      ]
+    },
+    {
+      "index": 76,
+      "original_import_slot_va": "0x4879d8",
+      "original_storage_va": "0x42315c",
+      "identity": "resource:Invalid ImageList Index",
+      "hash_buckets": [
+        71
+      ],
+      "resource_identifiers": [
+        "SImageIndexError"
+      ]
+    },
+    {
+      "index": 77,
+      "original_import_slot_va": "0x4879dc",
+      "original_storage_va": "0x4233bc",
+      "identity": "resource:Listbox (%s) style must be virtual in order to set Count",
+      "hash_buckets": [
+        72
+      ],
+      "resource_identifiers": [
+        "SListBoxMustBeVirtual"
+      ]
+    },
+    {
+      "index": 78,
+      "original_import_slot_va": "0x4879e0",
+      "original_storage_va": "0x488214",
+      "identity": "global:System.Output",
+      "hash_buckets": [
+        73
+      ]
+    },
+    {
+      "index": 79,
+      "original_import_slot_va": "0x4879e4",
+      "original_storage_va": "0x48a710",
+      "identity": "global:UnitDIStuff.DIDevices",
+      "hash_buckets": [
+        73,
+        74
+      ],
+      "proposed_name": "DIDevices",
+      "proposed_hash_bucket": 74
+    },
+    {
+      "index": 80,
+      "original_import_slot_va": "0x4879e8",
+      "original_storage_va": "0x4232e4",
+      "identity": "resource:Tab",
+      "hash_buckets": [
+        74
+      ],
+      "resource_identifiers": [
+        "SmkcTab"
+      ]
+    },
+    {
+      "index": 81,
+      "original_import_slot_va": "0x4879ec",
+      "original_storage_va": "0x407864",
+      "identity": "resource:November",
+      "hash_buckets": [
+        74
+      ],
+      "resource_identifiers": [
+        "SLongMonthNameNov"
+      ]
+    },
+    {
+      "index": 82,
+      "original_import_slot_va": "0x4879f0",
+      "original_storage_va": "0x40772c",
+      "identity": "resource:Variant is not an array",
+      "hash_buckets": [
+        76
+      ],
+      "resource_identifiers": [
+        "SVarNotArray"
+      ]
+    },
+    {
+      "index": 83,
+      "original_import_slot_va": "0x4879f4",
+      "original_storage_va": "0x42310c",
+      "identity": "resource:Bitmap image is not valid",
+      "hash_buckets": [
+        79
+      ],
+      "resource_identifiers": [
+        "SInvalidBitmap"
+      ]
+    },
+    {
+      "index": 84,
+      "original_import_slot_va": "0x4879f8",
+      "original_storage_va": "0x488ac0",
+      "identity": "global:MultiMon.GetMonitorInfo",
+      "hash_buckets": [
+        79
+      ]
+    },
+    {
+      "index": 85,
+      "original_import_slot_va": "0x4879fc",
+      "original_storage_va": "0x48800c",
+      "identity": "global:System.ExceptClsProc",
+      "hash_buckets": [
+        79
+      ]
+    },
+    {
+      "index": 86,
+      "original_import_slot_va": "0x487a00",
+      "original_storage_va": "0x48802c",
+      "identity": "global:System.MainInstance",
+      "hash_buckets": [
+        80
+      ]
+    },
+    {
+      "index": 87,
+      "original_import_slot_va": "0x487a04",
+      "original_storage_va": "0x423114",
+      "identity": "resource:Icon image is not valid",
+      "hash_buckets": [
+        80
+      ],
+      "resource_identifiers": [
+        "SInvalidIcon"
+      ]
+    },
+    {
+      "index": 88,
+      "original_import_slot_va": "0x487a08",
+      "original_storage_va": "0x4860c0",
+      "identity": "global:SysUtils.Win32MajorVersion",
+      "hash_buckets": [
+        80
+      ]
+    },
+    {
+      "index": 89,
+      "original_import_slot_va": "0x487a0c",
+      "original_storage_va": "0x4154f8",
+      "identity": "resource:Ancestor for '%s' not found",
+      "hash_buckets": [
+        80
+      ],
+      "resource_identifiers": [
+        "SAncestorNotFound"
+      ]
+    },
+    {
+      "index": 90,
+      "original_import_slot_va": "0x487a10",
+      "original_storage_va": "0x42332c",
+      "identity": "resource:Up",
+      "hash_buckets": [
+        81
+      ],
+      "resource_identifiers": [
+        "SmkcUp"
+      ]
+    },
+    {
+      "index": 91,
+      "original_import_slot_va": "0x487a14",
+      "original_storage_va": "0x407824",
+      "identity": "resource:March",
+      "hash_buckets": [
+        81
+      ],
+      "resource_identifiers": [
+        "SLongMonthNameMar"
+      ]
+    },
+    {
+      "index": 92,
+      "original_import_slot_va": "0x487a18",
+      "original_storage_va": "0x4231ac",
+      "identity": "resource:%s property out of range",
+      "hash_buckets": [
+        82
+      ],
+      "resource_identifiers": [
+        "SPropertyOutOfRange"
+      ]
+    },
+    {
+      "index": 93,
+      "original_import_slot_va": "0x487a1c",
+      "original_storage_va": "0x488004",
+      "identity": "global:System.ExceptProc",
+      "hash_buckets": [
+        82
+      ]
+    },
+    {
+      "index": 94,
+      "original_import_slot_va": "0x487a20",
+      "original_storage_va": "0x488aa8",
+      "identity": "global:MultiMon.GetSystemMetrics",
+      "hash_buckets": [
+        83
+      ]
+    },
+    {
+      "index": 95,
+      "original_import_slot_va": "0x487a24",
+      "original_storage_va": "0x488010",
+      "identity": "global:System.ExceptObjProc",
+      "hash_buckets": [
+        84
+      ]
+    },
+    {
+      "index": 96,
+      "original_import_slot_va": "0x487a28",
+      "original_storage_va": "0x4232dc",
+      "identity": "resource:BkSp",
+      "hash_buckets": [
+        86
+      ],
+      "resource_identifiers": [
+        "SmkcBkSp"
+      ]
+    },
+    {
+      "index": 97,
+      "original_import_slot_va": "0x487a2c",
+      "original_storage_va": "0x423394",
+      "identity": "resource:Error removing control from dock tree",
+      "hash_buckets": [
+        87
+      ],
+      "resource_identifiers": [
+        "SDockTreeRemoveError"
+      ]
+    },
+    {
+      "index": 98,
+      "original_import_slot_va": "0x487a30",
+      "original_storage_va": "0x42313c",
+      "identity": "resource:Canvas does not allow drawing",
+      "hash_buckets": [
+        87
+      ],
+      "resource_identifiers": [
+        "SNoCanvasHandle"
+      ]
+    },
+    {
+      "index": 99,
+      "original_import_slot_va": "0x487a34",
+      "original_storage_va": "0x48659c",
+      "identity": "global:TypInfo.DotSep",
+      "hash_buckets": [
+        87
+      ]
+    },
+    {
+      "index": 100,
+      "original_import_slot_va": "0x487a38",
+      "original_storage_va": "0x4075ec",
+      "identity": "resource:'%s' is not a valid integer value",
+      "hash_buckets": [
+        87
+      ],
+      "resource_identifiers": [
+        "SInvalidInteger"
+      ]
+    },
+    {
+      "index": 101,
+      "original_import_slot_va": "0x487a3c",
+      "original_storage_va": "0x42329c",
+      "identity": "resource:Cancel",
+      "hash_buckets": [
+        88
+      ],
+      "resource_identifiers": [
+        "SMsgDlgCancel"
+      ]
+    },
+    {
+      "index": 102,
+      "original_import_slot_va": "0x487a40",
+      "original_storage_va": "0x40786c",
+      "identity": "resource:December",
+      "hash_buckets": [
+        88
+      ],
+      "resource_identifiers": [
+        "SLongMonthNameDec"
+      ]
+    },
+    {
+      "index": 103,
+      "original_import_slot_va": "0x487a44",
+      "original_storage_va": "0x4076ac",
+      "identity": "resource:Stack overflow",
+      "hash_buckets": [
+        88
+      ],
+      "resource_identifiers": [
+        "SStackOverflow"
+      ]
+    },
+    {
+      "index": 104,
+      "original_import_slot_va": "0x487a48",
+      "original_storage_va": "0x48a700",
+      "identity": "global:UnitDIStuff.DIResult",
+      "hash_buckets": [
+        88,
+        89,
+        90,
+        91
+      ],
+      "proposed_name": "DIError",
+      "proposed_hash_bucket": 89
+    },
+    {
+      "index": 105,
+      "original_import_slot_va": "0x487a4c",
+      "original_storage_va": "0x4076b4",
+      "identity": "resource:Control-C hit",
+      "hash_buckets": [
+        91
+      ],
+      "resource_identifiers": [
+        "SControlC"
+      ]
+    },
+    {
+      "index": 106,
+      "original_import_slot_va": "0x487a50",
+      "original_storage_va": "0x415580",
+      "identity": "resource:Invalid data type for '%s'",
+      "hash_buckets": [
+        92
+      ],
+      "resource_identifiers": [
+        "SInvalidRegType"
+      ]
+    },
+    {
+      "index": 107,
+      "original_import_slot_va": "0x487a54",
+      "original_storage_va": "0x42316c",
+      "identity": "resource:Failed to write ImageList data to stream",
+      "hash_buckets": [
+        92
+      ],
+      "resource_identifiers": [
+        "SImageWriteFail"
+      ]
+    },
+    {
+      "index": 108,
+      "original_import_slot_va": "0x487a58",
+      "original_storage_va": "0x4078a4",
+      "identity": "resource:Sat",
+      "hash_buckets": [
+        93
+      ],
+      "resource_identifiers": [
+        "SShortDayNameSat"
+      ]
+    },
+    {
+      "index": 109,
+      "original_import_slot_va": "0x487a5c",
+      "original_storage_va": "0x407624",
+      "identity": "resource:File not found",
+      "hash_buckets": [
+        93
+      ],
+      "resource_identifiers": [
+        "SFileNotFound"
+      ]
+    },
+    {
+      "index": 110,
+      "original_import_slot_va": "0x487a60",
+      "original_storage_va": "0x40766c",
+      "identity": "resource:Integer overflow",
+      "hash_buckets": [
+        95
+      ],
+      "resource_identifiers": [
+        "SIntOverflow"
+      ]
+    },
+    {
+      "index": 111,
+      "original_import_slot_va": "0x487a64",
+      "original_storage_va": "0x48a708",
+      "identity": "global:UnitDIStuff.DIWindow",
+      "hash_buckets": [
+        95,
+        96,
+        97,
+        98
+      ],
+      "proposed_name": "DIWindow",
+      "proposed_hash_bucket": 97
+    },
+    {
+      "index": 112,
+      "original_import_slot_va": "0x487a68",
+      "original_storage_va": "0x42328c",
+      "identity": "resource:&No",
+      "hash_buckets": [
+        98
+      ],
+      "resource_identifiers": [
+        "SMsgDlgNo"
+      ]
+    },
+    {
+      "index": 113,
+      "original_import_slot_va": "0x487a6c",
+      "original_storage_va": "0x4076dc",
+      "identity": "resource:No argument for format '%s'",
+      "hash_buckets": [
+        98
+      ],
+      "resource_identifiers": [
+        "SArgumentMissing"
+      ]
+    },
+    {
+      "index": 114,
+      "original_import_slot_va": "0x487a70",
+      "original_storage_va": "0x4231b4",
+      "identity": "resource:Menu index out of range",
+      "hash_buckets": [
+        99
+      ],
+      "resource_identifiers": [
+        "SMenuIndexError"
+      ]
+    },
+    {
+      "index": 115,
+      "original_import_slot_va": "0x487a74",
+      "original_storage_va": "0x415530",
+      "identity": "resource:List does not allow duplicates ($0%x)",
+      "hash_buckets": [
+        99
+      ],
+      "resource_identifiers": [
+        "SDuplicateItem"
+      ]
+    },
+    {
+      "index": 116,
+      "original_import_slot_va": "0x487a78",
+      "original_storage_va": "0x4076fc",
+      "identity": "resource:Error creating variant array",
+      "hash_buckets": [
+        99
+      ],
+      "resource_identifiers": [
+        "SVarArrayCreate"
+      ]
+    },
+    {
+      "index": 117,
+      "original_import_slot_va": "0x487a7c",
+      "original_storage_va": "0x48a70d",
+      "identity": "global:UnitDIStuff.HasAdaptoid",
+      "hash_buckets": [
+        99,
+        100,
+        101
+      ],
+      "proposed_name": "AdaptoidEnabled",
+      "proposed_hash_bucket": 100
+    },
+    {
+      "index": 118,
+      "original_import_slot_va": "0x487a80",
+      "original_storage_va": "0x423234",
+      "identity": "resource:&All",
+      "hash_buckets": [
+        101
+      ],
+      "resource_identifiers": [
+        "SAllButton"
+      ]
+    },
+    {
+      "index": 119,
+      "original_import_slot_va": "0x487a84",
+      "original_storage_va": "0x407814",
+      "identity": "resource:January",
+      "hash_buckets": [
+        101
+      ],
+      "resource_identifiers": [
+        "SLongMonthNameJan"
+      ]
+    },
+    {
+      "index": 120,
+      "original_import_slot_va": "0x487a88",
+      "original_storage_va": "0x4155e0",
+      "identity": "resource:Operation not allowed on sorted list",
+      "hash_buckets": [
+        104
+      ],
+      "resource_identifiers": [
+        "SSortedListError"
+      ]
+    },
+    {
+      "index": 121,
+      "original_import_slot_va": "0x487a8c",
+      "original_storage_va": "0x415590",
+      "identity": "resource:List count out of bounds (%d)",
+      "hash_buckets": [
+        104
+      ],
+      "resource_identifiers": [
+        "SListCountError"
+      ]
+    },
+    {
+      "index": 122,
+      "original_import_slot_va": "0x487a90",
+      "original_storage_va": "0x40777c",
+      "identity": "resource:Interface not supported",
+      "hash_buckets": [
+        104
+      ],
+      "resource_identifiers": [
+        "SIntfCastError"
+      ]
+    },
+    {
+      "index": 123,
+      "original_import_slot_va": "0x487a94",
+      "original_storage_va": "0x488b00",
+      "identity": "global:FlatSB.FlatSB_GetScrollPos",
+      "hash_buckets": [
+        105
+      ]
+    },
+    {
+      "index": 124,
+      "original_import_slot_va": "0x487a98",
+      "original_storage_va": "0x415558",
+      "identity": "resource:Invalid stream format",
+      "hash_buckets": [
+        109
+      ],
+      "resource_identifiers": [
+        "SInvalidImage"
+      ]
+    },
+    {
+      "index": 125,
+      "original_import_slot_va": "0x487a9c",
+      "original_storage_va": "0x488b7c",
+      "identity": "global:Controls.NewStyleControls",
+      "hash_buckets": [
+        111
+      ]
+    },
+    {
+      "index": 126,
+      "original_import_slot_va": "0x487aa0",
+      "original_storage_va": "0x423334",
+      "identity": "resource:Right",
+      "hash_buckets": [
+        111
+      ],
+      "resource_identifiers": [
+        "SmkcRight"
+      ]
+    },
+    {
+      "index": 127,
+      "original_import_slot_va": "0x487aa4",
+      "original_storage_va": "0x415500",
+      "identity": "resource:Cannot assign a %s to a %s",
+      "hash_buckets": [
+        111
+      ],
+      "resource_identifiers": [
+        "SAssignError"
+      ]
+    },
+    {
+      "index": 128,
+      "original_import_slot_va": "0x487aa8",
+      "original_storage_va": "0x423264",
+      "identity": "resource:Warning",
+      "hash_buckets": [
+        113
+      ],
+      "resource_identifiers": [
+        "SMsgDlgWarning"
+      ]
+    },
+    {
+      "index": 129,
+      "original_import_slot_va": "0x487aac",
+      "original_storage_va": "0x486e34",
+      "identity": "global:DInput.IID_IDirectInputDevice2",
+      "hash_buckets": [
+        116
+      ]
+    },
+    {
+      "index": 130,
+      "original_import_slot_va": "0x487ab0",
+      "original_storage_va": "0x423214",
+      "identity": "resource:&Close",
+      "hash_buckets": [
+        116
+      ],
+      "resource_identifiers": [
+        "SCloseButton"
+      ]
+    },
+    {
+      "index": 131,
+      "original_import_slot_va": "0x487ab4",
+      "original_storage_va": "0x488aac",
+      "identity": "global:MultiMon.MonitorFromWindow",
+      "hash_buckets": [
+        116
+      ]
+    },
+    {
+      "index": 132,
+      "original_import_slot_va": "0x487ab8",
+      "original_storage_va": "0x4155d0",
+      "identity": "resource:Resource %s not found",
+      "hash_buckets": [
+        118
+      ],
+      "resource_identifiers": [
+        "SResNotFound"
+      ]
+    },
+    {
+      "index": 133,
+      "original_import_slot_va": "0x487abc",
+      "original_storage_va": "0x42338c",
+      "identity": "resource:Docked control must have a name",
+      "hash_buckets": [
+        118
+      ],
+      "resource_identifiers": [
+        "SDockedCtlNeedsName"
+      ]
+    },
+    {
+      "index": 134,
+      "original_import_slot_va": "0x487ac0",
+      "original_storage_va": "0x4231a4",
+      "identity": "resource:Cannot make a visible window modal",
+      "hash_buckets": [
+        118
+      ],
+      "resource_identifiers": [
+        "SCannotShowModal"
+      ]
+    },
+    {
+      "index": 135,
+      "original_import_slot_va": "0x487ac4",
+      "original_storage_va": "0x40783c",
+      "identity": "resource:June",
+      "hash_buckets": [
+        118
+      ],
+      "resource_identifiers": [
+        "SLongMonthNameJun"
+      ]
+    },
+    {
+      "index": 136,
+      "original_import_slot_va": "0x487ac8",
+      "original_storage_va": "0x40771c",
+      "identity": "resource:Invalid variant operation",
+      "hash_buckets": [
+        118
+      ],
+      "resource_identifiers": [
+        "SInvalidVarOp"
+      ]
+    },
+    {
+      "index": 137,
+      "original_import_slot_va": "0x487acc",
+      "original_storage_va": "0x407604",
+      "identity": "resource:Invalid argument to time encode",
+      "hash_buckets": [
+        120
+      ],
+      "resource_identifiers": [
+        "STimeEncodeError"
+      ]
+    },
+    {
+      "index": 138,
+      "original_import_slot_va": "0x487ad0",
+      "original_storage_va": "0x415560",
+      "identity": "resource:''%s'' is not a valid component name",
+      "hash_buckets": [
+        120
+      ],
+      "resource_identifiers": [
+        "SInvalidName"
+      ]
+    },
+    {
+      "index": 139,
+      "original_import_slot_va": "0x487ad4",
+      "original_storage_va": "0x40782c",
+      "identity": "resource:April",
+      "hash_buckets": [
+        121
+      ],
+      "resource_identifiers": [
+        "SLongMonthNameApr"
+      ]
+    },
+    {
+      "index": 140,
+      "original_import_slot_va": "0x487ad8",
+      "original_storage_va": "0x415510",
+      "identity": "resource:Can't write to a read-only resource stream",
+      "hash_buckets": [
+        122
+      ],
+      "resource_identifiers": [
+        "SCantWriteResourceStreamError"
+      ]
+    },
+    {
+      "index": 141,
+      "original_import_slot_va": "0x487adc",
+      "original_storage_va": "0x4231fc",
+      "identity": "resource:&Yes",
+      "hash_buckets": [
+        126
+      ],
+      "resource_identifiers": [
+        "SYesButton"
+      ]
+    },
+    {
+      "index": 142,
+      "original_import_slot_va": "0x487ae0",
+      "original_storage_va": "0x4865b0",
+      "identity": "global:Classes.ApplicationHandleException",
+      "hash_buckets": [
+        127
+      ]
+    },
+    {
+      "index": 143,
+      "original_import_slot_va": "0x487ae4",
+      "original_storage_va": "0x40784c",
+      "identity": "resource:August",
+      "hash_buckets": [
+        127
+      ],
+      "resource_identifiers": [
+        "SLongMonthNameAug"
+      ]
+    },
+    {
+      "index": 144,
+      "original_import_slot_va": "0x487ae8",
+      "original_storage_va": "0x4232b4",
+      "identity": "resource:&Retry",
+      "hash_buckets": [
+        128
+      ],
+      "resource_identifiers": [
+        "SMsgDlgRetry"
+      ]
+    },
+    {
+      "index": 145,
+      "original_import_slot_va": "0x487aec",
+      "original_storage_va": "0x423104",
+      "identity": "resource:Tab style incompatible with current tab position",
+      "hash_buckets": [
+        129
+      ],
+      "resource_identifiers": [
+        "SInvalidTabStyle"
+      ]
+    },
+    {
+      "index": 146,
+      "original_import_slot_va": "0x487af0",
+      "original_storage_va": "0x4155f8",
+      "identity": "resource:Stream write error",
+      "hash_buckets": [
+        129
+      ],
+      "resource_identifiers": [
+        "SWriteError"
+      ]
+    },
+    {
+      "index": 147,
+      "original_import_slot_va": "0x487af4",
+      "original_storage_va": "0x467c14",
+      "identity": "resource:Failed to retrieve tab at index %d",
+      "hash_buckets": [
+        130
+      ],
+      "resource_identifiers": [
+        "sTabFailRetrieve"
+      ]
+    },
+    {
+      "index": 148,
+      "original_import_slot_va": "0x487af8",
+      "original_storage_va": "0x488ac4",
+      "identity": "global:MultiMon.EnumDisplayMonitors",
+      "hash_buckets": [
+        131
+      ]
+    },
+    {
+      "index": 149,
+      "original_import_slot_va": "0x487afc",
+      "original_storage_va": "0x423244",
+      "identity": "resource:Metafiles",
+      "hash_buckets": [
+        132
+      ],
+      "resource_identifiers": [
+        "SVMetafiles"
+      ]
+    },
+    {
+      "index": 150,
+      "original_import_slot_va": "0x487b00",
+      "original_storage_va": "0x4155c8",
+      "identity": "resource:Failed to set data for '%s'",
+      "hash_buckets": [
+        134
+      ],
+      "resource_identifiers": [
+        "SRegSetDataFailed"
+      ]
+    },
+    {
+      "index": 151,
+      "original_import_slot_va": "0x487b04",
+      "original_storage_va": "0x423294",
+      "identity": "resource:OK",
+      "hash_buckets": [
+        134
+      ],
+      "resource_identifiers": [
+        "SMsgDlgOK"
+      ]
+    },
+    {
+      "index": 152,
+      "original_import_slot_va": "0x487b08",
+      "original_storage_va": "0x407714",
+      "identity": "resource:Invalid variant type conversion",
+      "hash_buckets": [
+        134
+      ],
+      "resource_identifiers": [
+        "SInvalidVarCast"
+      ]
+    },
+    {
+      "index": 153,
+      "original_import_slot_va": "0x487b0c",
+      "original_storage_va": "0x4077bc",
+      "identity": "resource:Feb",
+      "hash_buckets": [
+        138
+      ],
+      "resource_identifiers": [
+        "SShortMonthNameFeb"
+      ]
+    },
+    {
+      "index": 154,
+      "original_import_slot_va": "0x487b10",
+      "original_storage_va": "0x4077fc",
+      "identity": "resource:Oct",
+      "hash_buckets": [
+        138
+      ],
+      "resource_identifiers": [
+        "SShortMonthNameOct"
+      ]
+    },
+    {
+      "index": 155,
+      "original_import_slot_va": "0x487b14",
+      "original_storage_va": "0x40788c",
+      "identity": "resource:Wed",
+      "hash_buckets": [
+        138
+      ],
+      "resource_identifiers": [
+        "SShortDayNameWed"
+      ]
+    },
+    {
+      "index": 156,
+      "original_import_slot_va": "0x487b18",
+      "original_storage_va": "0x415588",
+      "identity": "resource:List capacity out of bounds (%d)",
+      "hash_buckets": [
+        139
+      ],
+      "resource_identifiers": [
+        "SListCapacityError"
+      ]
+    },
+    {
+      "index": 157,
+      "original_import_slot_va": "0x487b1c",
+      "original_storage_va": "0x407644",
+      "identity": "resource:Read beyond end of file",
+      "hash_buckets": [
+        141
+      ],
+      "resource_identifiers": [
+        "SEndOfFile"
+      ]
+    },
+    {
+      "index": 158,
+      "original_import_slot_va": "0x487b20",
+      "original_storage_va": "0x467c1c",
+      "identity": "resource:Failed to get object at index %d",
+      "hash_buckets": [
+        142
+      ],
+      "resource_identifiers": [
+        "sTabFailGetObject"
+      ]
+    },
+    {
+      "index": 159,
+      "original_import_slot_va": "0x487b24",
+      "original_storage_va": "0x467c44",
+      "identity": "resource:Unable to insert an item",
+      "hash_buckets": [
+        143
+      ],
+      "resource_identifiers": [
+        "sInsertError"
+      ]
+    },
+    {
+      "index": 160,
+      "original_import_slot_va": "0x487b28",
+      "original_storage_va": "0x407684",
+      "identity": "resource:Floating point overflow",
+      "hash_buckets": [
+        143
+      ],
+      "resource_identifiers": [
+        "SOverflow"
+      ]
+    },
+    {
+      "index": 161,
+      "original_import_slot_va": "0x487b2c",
+      "original_storage_va": "0x40775c",
+      "identity": "resource:Operation not supported",
+      "hash_buckets": [
+        145
+      ],
+      "resource_identifiers": [
+        "SVarNotImplemented"
+      ]
+    },
+    {
+      "index": 162,
+      "original_import_slot_va": "0x487b30",
+      "original_storage_va": "0x407834",
+      "identity": "resource:May",
+      "hash_buckets": [
+        145
+      ],
+      "resource_identifiers": [
+        "SLongMonthNameMay"
+      ]
+    },
+    {
+      "index": 163,
+      "original_import_slot_va": "0x487b34",
+      "original_storage_va": "0x4232d4",
+      "identity": "resource:Yes to &All",
+      "hash_buckets": [
+        148
+      ],
+      "resource_identifiers": [
+        "SMsgDlgYesToAll"
+      ]
+    },
+    {
+      "index": 164,
+      "original_import_slot_va": "0x487b38",
+      "original_storage_va": "0x4075fc",
+      "identity": "resource:'%g' is not a valid date and time",
+      "hash_buckets": [
+        149
+      ],
+      "resource_identifiers": [
+        "SInvalidDateTimeFloat"
+      ]
+    },
+    {
+      "index": 165,
+      "original_import_slot_va": "0x487b3c",
+      "original_storage_va": "0x415538",
+      "identity": "resource:A component named %s already exists",
+      "hash_buckets": [
+        150
+      ],
+      "resource_identifiers": [
+        "SDuplicateName"
+      ]
+    },
+    {
+      "index": 166,
+      "original_import_slot_va": "0x487b40",
+      "original_storage_va": "0x407694",
+      "identity": "resource:Invalid pointer operation",
+      "hash_buckets": [
+        150
+      ],
+      "resource_identifiers": [
+        "SInvalidPointer"
+      ]
+    },
+    {
+      "index": 167,
+      "original_import_slot_va": "0x487b44",
+      "original_storage_va": "0x40789c",
+      "identity": "resource:Fri",
+      "hash_buckets": [
+        150
+      ],
+      "resource_identifiers": [
+        "SShortDayNameFri"
+      ]
+    },
+    {
+      "index": 168,
+      "original_import_slot_va": "0x487b48",
+      "original_storage_va": "0x40768c",
+      "identity": "resource:Floating point underflow",
+      "hash_buckets": [
+        150
+      ],
+      "resource_identifiers": [
+        "SUnderflow"
+      ]
+    },
+    {
+      "index": 169,
+      "original_import_slot_va": "0x487b4c",
+      "original_storage_va": "0x467c0c",
+      "identity": "resource:Failed to delete tab at index %d",
+      "hash_buckets": [
+        151
+      ],
+      "resource_identifiers": [
+        "sTabFailDelete"
+      ]
+    },
+    {
+      "index": 170,
+      "original_import_slot_va": "0x487b50",
+      "original_storage_va": "0x415568",
+      "identity": "resource:Invalid property value",
+      "hash_buckets": [
+        151
+      ],
+      "resource_identifiers": [
+        "SInvalidProperty"
+      ]
+    },
+    {
+      "index": 171,
+      "original_import_slot_va": "0x487b54",
+      "original_storage_va": "0x4232bc",
+      "identity": "resource:&Ignore",
+      "hash_buckets": [
+        151
+      ],
+      "resource_identifiers": [
+        "SMsgDlgIgnore"
+      ]
+    },
+    {
+      "index": 172,
+      "original_import_slot_va": "0x487b58",
+      "original_storage_va": "0x423174",
+      "identity": "resource:Error creating window device context",
+      "hash_buckets": [
+        152
+      ],
+      "resource_identifiers": [
+        "SWindowDCError"
+      ]
+    },
+    {
+      "index": 173,
+      "original_import_slot_va": "0x487b5c",
+      "original_storage_va": "0x415578",
+      "identity": "resource:Invalid property value",
+      "hash_buckets": [
+        153
+      ],
+      "resource_identifiers": [
+        "SInvalidPropertyValue"
+      ]
+    },
+    {
+      "index": 174,
+      "original_import_slot_va": "0x487b60",
+      "original_storage_va": "0x407874",
+      "identity": "resource:Sun",
+      "hash_buckets": [
+        155
+      ],
+      "resource_identifiers": [
+        "SShortDayNameSun"
+      ]
+    },
+    {
+      "index": 175,
+      "original_import_slot_va": "0x487b64",
+      "original_storage_va": "0x42320c",
+      "identity": "resource:&Help",
+      "hash_buckets": [
+        156
+      ],
+      "resource_identifiers": [
+        "SHelpButton"
+      ]
+    },
+    {
+      "index": 176,
+      "original_import_slot_va": "0x487b68",
+      "original_storage_va": "0x488b08",
+      "identity": "global:FlatSB.FlatSB_SetScrollInfo",
+      "hash_buckets": [
+        156
+      ]
+    },
+    {
+      "index": 177,
+      "original_import_slot_va": "0x487b6c",
+      "original_storage_va": "0x488020",
+      "identity": "global:System.AssertErrorProc",
+      "hash_buckets": [
+        159
+      ]
+    },
+    {
+      "index": 178,
+      "original_import_slot_va": "0x487b70",
+      "original_storage_va": "0x407784",
+      "identity": "resource:Exception in safecall method",
+      "hash_buckets": [
+        159
+      ],
+      "resource_identifiers": [
+        "SSafecallException"
+      ]
+    },
+    {
+      "index": 179,
+      "original_import_slot_va": "0x487b74",
+      "original_storage_va": "0x40773c",
+      "identity": "resource:Overflow while converting variant of type (%s) into type (%s)",
+      "hash_buckets": [
+        160
+      ],
+      "resource_identifiers": [
+        "SVarTypeConvertOverflow"
+      ]
+    },
+    {
+      "index": 180,
+      "original_import_slot_va": "0x487b78",
+      "original_storage_va": "0x415518",
+      "identity": "resource:CheckSynchronize called from thread $%x, which is NOT the main thread",
+      "hash_buckets": [
+        161
+      ],
+      "resource_identifiers": [
+        "SCheckSynchronizeError"
+      ]
+    },
+    {
+      "index": 181,
+      "original_import_slot_va": "0x487b7c",
+      "original_storage_va": "0x488c10",
+      "identity": "global:Forms.Application",
+      "hash_buckets": [
+        161
+      ]
+    },
+    {
+      "index": 182,
+      "original_import_slot_va": "0x487b80",
+      "original_storage_va": "0x467c04",
+      "identity": "resource:Failed to clear tab control",
+      "hash_buckets": [
+        163
+      ],
+      "resource_identifiers": [
+        "sTabFailClear"
+      ]
+    },
+    {
+      "index": 183,
+      "original_import_slot_va": "0x487b84",
+      "original_storage_va": "0x4076f4",
+      "identity": "resource:Write",
+      "hash_buckets": [
+        163
+      ],
+      "resource_identifiers": [
+        "SWriteAccess"
+      ]
+    },
+    {
+      "index": 184,
+      "original_import_slot_va": "0x487b88",
+      "original_storage_va": "0x467c4c",
+      "identity": "resource:Invalid owner",
+      "hash_buckets": [
+        166
+      ],
+      "resource_identifiers": [
+        "sInvalidOwner"
+      ]
+    },
+    {
+      "index": 185,
+      "original_import_slot_va": "0x487b8c",
+      "original_storage_va": "0x42312c",
+      "identity": "resource:Unsupported clipboard format",
+      "hash_buckets": [
+        166
+      ],
+      "resource_identifiers": [
+        "SUnknownClipboardFormat"
+      ]
+    },
+    {
+      "index": 186,
+      "original_import_slot_va": "0x487b90",
+      "original_storage_va": "0x42314c",
+      "identity": "resource:Invalid ImageList",
+      "hash_buckets": [
+        167
+      ],
+      "resource_identifiers": [
+        "SInvalidImageList"
+      ]
+    },
+    {
+      "index": 187,
+      "original_import_slot_va": "0x487b94",
+      "original_storage_va": "0x415528",
+      "identity": "resource:A class named %s already exists",
+      "hash_buckets": [
+        169
+      ],
+      "resource_identifiers": [
+        "SDuplicateClass"
+      ]
+    },
+    {
+      "index": 188,
+      "original_import_slot_va": "0x487b98",
+      "original_storage_va": "0x4865b8",
+      "identity": "global:Classes.ApplicationShowException",
+      "hash_buckets": [
+        170
+      ]
+    },
+    {
+      "index": 189,
+      "original_import_slot_va": "0x487b9c",
+      "original_storage_va": "0x4078cc",
+      "identity": "resource:Thursday",
+      "hash_buckets": [
+        171
+      ],
+      "resource_identifiers": [
+        "SLongDayNameThu"
+      ]
+    },
+    {
+      "index": 190,
+      "original_import_slot_va": "0x487ba0",
+      "original_storage_va": "0x4077a4",
+      "identity": "resource:System Error.  Code: %d.\r\n%s",
+      "hash_buckets": [
+        172
+      ],
+      "resource_identifiers": [
+        "SOSError"
+      ]
+    },
+    {
+      "index": 191,
+      "original_import_slot_va": "0x487ba4",
+      "original_storage_va": "0x40760c",
+      "identity": "resource:Invalid argument to date encode",
+      "hash_buckets": [
+        173
+      ],
+      "resource_identifiers": [
+        "SDateEncodeError"
+      ]
+    },
+    {
+      "index": 192,
+      "original_import_slot_va": "0x487ba8",
+      "original_storage_va": "0x486318",
+      "identity": "global:VarUtils.CVarTypeToElementInfo",
+      "hash_buckets": [
+        173
+      ]
+    },
+    {
+      "index": 193,
+      "original_import_slot_va": "0x487bac",
+      "original_storage_va": "0x42311c",
+      "identity": "resource:Metafile is not valid",
+      "hash_buckets": [
+        174
+      ],
+      "resource_identifiers": [
+        "SInvalidMetafile"
+      ]
+    },
+    {
+      "index": 194,
+      "original_import_slot_va": "0x487bb0",
+      "original_storage_va": "0x40763c",
+      "identity": "resource:File access denied",
+      "hash_buckets": [
+        174
+      ],
+      "resource_identifiers": [
+        "SAccessDenied"
+      ]
+    },
+    {
+      "index": 195,
+      "original_import_slot_va": "0x487bb4",
+      "original_storage_va": "0x42323c",
+      "identity": "resource:Cannot drag a form",
+      "hash_buckets": [
+        175
+      ],
+      "resource_identifiers": [
+        "SCannotDragForm"
+      ]
+    },
+    {
+      "index": 196,
+      "original_import_slot_va": "0x487bb8",
+      "original_storage_va": "0x407774",
+      "identity": "resource:Assertion failed",
+      "hash_buckets": [
+        175
+      ],
+      "resource_identifiers": [
+        "SAssertionFailed"
+      ]
+    },
+    {
+      "index": 197,
+      "original_import_slot_va": "0x487bbc",
+      "original_storage_va": "0x486f6c",
+      "identity": "global:DInput.c_dfDIKeyboard",
+      "hash_buckets": [
+        178
+      ]
+    },
+    {
+      "index": 198,
+      "original_import_slot_va": "0x487bc0",
+      "original_storage_va": "0x42318c",
+      "identity": "resource:Control '%s' has no parent window",
+      "hash_buckets": [
+        179
+      ],
+      "resource_identifiers": [
+        "SParentRequired"
+      ]
+    },
+    {
+      "index": 199,
+      "original_import_slot_va": "0x487bc4",
+      "original_storage_va": "0x4231e4",
+      "identity": "resource:A control cannot have itself as its parent",
+      "hash_buckets": [
+        179
+      ],
+      "resource_identifiers": [
+        "SControlParentSetToSelf"
+      ]
+    },
+    {
+      "index": 200,
+      "original_import_slot_va": "0x487bc8",
+      "original_storage_va": "0x4155b8",
+      "identity": "resource:Property is read-only",
+      "hash_buckets": [
+        179
+      ],
+      "resource_identifiers": [
+        "SReadOnlyProperty"
+      ]
+    },
+    {
+      "index": 201,
+      "original_import_slot_va": "0x487bcc",
+      "original_storage_va": "0x48a70c",
+      "identity": "global:UnitDIStuff.HasKeyboard",
+      "hash_buckets": [
+        179,
+        180,
+        181,
+        182
+      ],
+      "proposed_name": "KeyboardEnabled",
+      "proposed_hash_bucket": 181
+    },
+    {
+      "index": 202,
+      "original_import_slot_va": "0x487bd0",
+      "original_storage_va": "0x4860c4",
+      "identity": "global:SysUtils.Win32MinorVersion",
+      "hash_buckets": [
+        182
+      ]
+    },
+    {
+      "index": 203,
+      "original_import_slot_va": "0x487bd4",
+      "original_storage_va": "0x423164",
+      "identity": "resource:Failed to read ImageList data from stream",
+      "hash_buckets": [
+        182
+      ],
+      "resource_identifiers": [
+        "SImageReadFail"
+      ]
+    },
+    {
+      "index": 204,
+      "original_import_slot_va": "0x487bd8",
+      "original_storage_va": "0x407854",
+      "identity": "resource:September",
+      "hash_buckets": [
+        182
+      ],
+      "resource_identifiers": [
+        "SLongMonthNameSep"
+      ]
+    },
+    {
+      "index": 205,
+      "original_import_slot_va": "0x487bdc",
+      "original_storage_va": "0x40787c",
+      "identity": "resource:Mon",
+      "hash_buckets": [
+        184
+      ],
+      "resource_identifiers": [
+        "SShortDayNameMon"
+      ]
+    },
+    {
+      "index": 206,
+      "original_import_slot_va": "0x487be0",
+      "original_storage_va": "0x4232ac",
+      "identity": "resource:&Abort",
+      "hash_buckets": [
+        185
+      ],
+      "resource_identifiers": [
+        "SMsgDlgAbort"
+      ]
+    },
+    {
+      "index": 207,
+      "original_import_slot_va": "0x487be4",
+      "original_storage_va": "0x4233a4",
+      "identity": "resource: - Dock zone has no control",
+      "hash_buckets": [
+        185
+      ],
+      "resource_identifiers": [
+        "SDockZoneHasNoCtl"
+      ]
+    },
+    {
+      "index": 208,
+      "original_import_slot_va": "0x487be8",
+      "original_storage_va": "0x488044",
+      "identity": "global:System.IsConsole",
+      "hash_buckets": [
+        186
+      ]
+    },
+    {
+      "index": 209,
+      "original_import_slot_va": "0x487bec",
+      "original_storage_va": "0x407884",
+      "identity": "resource:Tue",
+      "hash_buckets": [
+        186
+      ],
+      "resource_identifiers": [
+        "SShortDayNameTue"
+      ]
+    },
+    {
+      "index": 210,
+      "original_import_slot_va": "0x487bf0",
+      "original_storage_va": "0x4968fc",
+      "identity": "global:UnitWaitKey.FormWait",
+      "hash_buckets": [
+        186,
+        187,
+        188,
+        189
+      ],
+      "proposed_name": "FormWait",
+      "proposed_hash_bucket": 188
+    },
+    {
+      "index": 211,
+      "original_import_slot_va": "0x487bf4",
+      "original_storage_va": "0x407704",
+      "identity": "resource:Variant array index out of bounds",
+      "hash_buckets": [
+        189
+      ],
+      "resource_identifiers": [
+        "SVarArrayBounds"
+      ]
+    },
+    {
+      "index": 212,
+      "original_import_slot_va": "0x487bf8",
+      "original_storage_va": "0x4233b4",
+      "identity": "resource:Error setting %s.Count",
+      "hash_buckets": [
+        193
+      ],
+      "resource_identifiers": [
+        "SErrorSettingCount"
+      ]
+    },
+    {
+      "index": 213,
+      "original_import_slot_va": "0x487bfc",
+      "original_storage_va": "0x415598",
+      "identity": "resource:List index out of bounds (%d)",
+      "hash_buckets": [
+        193
+      ],
+      "resource_identifiers": [
+        "SListIndexError"
+      ]
+    },
+    {
+      "index": 214,
+      "original_import_slot_va": "0x487c00",
+      "original_storage_va": "0x407724",
+      "identity": "resource:Invalid variant operation ($%.8x)",
+      "hash_buckets": [
+        193
+      ],
+      "resource_identifiers": [
+        "SInvalidVarOpWithHResult"
+      ]
+    },
+    {
+      "index": 215,
+      "original_import_slot_va": "0x487c04",
+      "original_storage_va": "0x496654",
+      "identity": "global:UnitDIStuff.TurboState",
+      "hash_buckets": [
+        193,
+        194
+      ],
+      "proposed_name": "Buttons",
+      "proposed_hash_bucket": 194
+    },
+    {
+      "index": 216,
+      "original_import_slot_va": "0x487c08",
+      "original_storage_va": "0x40779c",
+      "identity": "resource:Access violation at address %p in module '%s'. %s of address %p",
+      "hash_buckets": [
+        194
+      ],
+      "resource_identifiers": [
+        "SModuleAccessViolation"
+      ]
+    },
+    {
+      "index": 217,
+      "original_import_slot_va": "0x487c0c",
+      "original_storage_va": "0x4233ac",
+      "identity": "resource:Multiselect mode must be on for this feature",
+      "hash_buckets": [
+        197
+      ],
+      "resource_identifiers": [
+        "SMultiSelectRequired"
+      ]
+    },
+    {
+      "index": 218,
+      "original_import_slot_va": "0x487c10",
+      "original_storage_va": "0x415548",
+      "identity": "resource:Cannot create file %s",
+      "hash_buckets": [
+        198
+      ],
+      "resource_identifiers": [
+        "SFCreateError"
+      ]
+    },
+    {
+      "index": 219,
+      "original_import_slot_va": "0x487c14",
+      "original_storage_va": "0x467c34",
+      "identity": "resource:MultiLine must be True when TabPosition is tpLeft or tpRight",
+      "hash_buckets": [
+        200
+      ],
+      "resource_identifiers": [
+        "sTabMustBeMultiLine"
+      ]
+    },
+    {
+      "index": 220,
+      "original_import_slot_va": "0x487c18",
+      "original_storage_va": "0x467c24",
+      "identity": "resource:Failed to set tab \"%s\" at index %d",
+      "hash_buckets": [
+        200
+      ],
+      "resource_identifiers": [
+        "sTabFailSet"
+      ]
+    },
+    {
+      "index": 221,
+      "original_import_slot_va": "0x487c1c",
+      "original_storage_va": "0x496910",
+      "identity": "global:UnitSettings.InputSettings",
+      "hash_buckets": [
+        200,
+        201
+      ],
+      "proposed_name": "ControllerSettings",
+      "proposed_hash_bucket": 201
+    },
+    {
+      "index": 222,
+      "original_import_slot_va": "0x487c20",
+      "original_storage_va": "0x486010",
+      "identity": "global:System.HeapAllocFlags",
+      "hash_buckets": [
+        201
+      ]
+    },
+    {
+      "index": 223,
+      "original_import_slot_va": "0x487c24",
+      "original_storage_va": "0x423344",
+      "identity": "resource:Ins",
+      "hash_buckets": [
+        202
+      ],
+      "resource_identifiers": [
+        "SmkcIns"
+      ]
+    },
+    {
+      "index": 224,
+      "original_import_slot_va": "0x487c28",
+      "original_storage_va": "0x423304",
+      "identity": "resource:PgUp",
+      "hash_buckets": [
+        203
+      ],
+      "resource_identifiers": [
+        "SmkcPgUp"
+      ]
+    },
+    {
+      "index": 225,
+      "original_import_slot_va": "0x487c2c",
+      "original_storage_va": "0x415550",
+      "identity": "resource:Cannot open file %s",
+      "hash_buckets": [
+        204
+      ],
+      "resource_identifiers": [
+        "SFOpenError"
+      ]
+    },
+    {
+      "index": 226,
+      "original_import_slot_va": "0x487c30",
+      "original_storage_va": "0x4077e4",
+      "identity": "resource:Jul",
+      "hash_buckets": [
+        205
+      ],
+      "resource_identifiers": [
+        "SShortMonthNameJul"
+      ]
+    },
+    {
+      "index": 227,
+      "original_import_slot_va": "0x487c34",
+      "original_storage_va": "0x467c5c",
+      "identity": "resource:This control requires version 4.70 or greater of COMCTL32.DLL",
+      "hash_buckets": [
+        207
+      ],
+      "resource_identifiers": [
+        "sInvalidComCtl32"
+      ]
+    },
+    {
+      "index": 228,
+      "original_import_slot_va": "0x487c38",
+      "original_storage_va": "0x4231dc",
+      "identity": "resource:Cannot create form. No MDI forms are currently active",
+      "hash_buckets": [
+        208
+      ],
+      "resource_identifiers": [
+        "SNoMDIForm"
+      ]
+    },
+    {
+      "index": 229,
+      "original_import_slot_va": "0x487c3c",
+      "original_storage_va": "0x40778c",
+      "identity": "resource:%s (%s, line %d)",
+      "hash_buckets": [
+        209
+      ],
+      "resource_identifiers": [
+        "SAssertError"
+      ]
+    },
+    {
+      "index": 230,
+      "original_import_slot_va": "0x487c40",
+      "original_storage_va": "0x407804",
+      "identity": "resource:Nov",
+      "hash_buckets": [
+        209
+      ],
+      "resource_identifiers": [
+        "SShortMonthNameNov"
+      ]
+    },
+    {
+      "index": 231,
+      "original_import_slot_va": "0x487c44",
+      "original_storage_va": "0x423274",
+      "identity": "resource:Information",
+      "hash_buckets": [
+        211
+      ],
+      "resource_identifiers": [
+        "SMsgDlgInformation"
+      ]
+    },
+    {
+      "index": 232,
+      "original_import_slot_va": "0x487c48",
+      "original_storage_va": "0x415508",
+      "identity": "resource:Bits index out of range",
+      "hash_buckets": [
+        212
+      ],
+      "resource_identifiers": [
+        "SBitsIndexError"
+      ]
+    },
+    {
+      "index": 233,
+      "original_import_slot_va": "0x487c4c",
+      "original_storage_va": "0x415570",
+      "identity": "resource:Invalid property path",
+      "hash_buckets": [
+        213
+      ],
+      "resource_identifiers": [
+        "SInvalidPropertyPath"
+      ]
+    },
+    {
+      "index": 234,
+      "original_import_slot_va": "0x487c50",
+      "original_storage_va": "0x4231c4",
+      "identity": "resource:Sub-menu is not in menu",
+      "hash_buckets": [
+        214
+      ],
+      "resource_identifiers": [
+        "SMenuNotFound"
+      ]
+    },
+    {
+      "index": 235,
+      "original_import_slot_va": "0x487c54",
+      "original_storage_va": "0x423184",
+      "identity": "resource:Cannot focus a disabled or invisible window",
+      "hash_buckets": [
+        214
+      ],
+      "resource_identifiers": [
+        "SCannotFocus"
+      ]
+    },
+    {
+      "index": 236,
+      "original_import_slot_va": "0x487c58",
+      "original_storage_va": "0x4078dc",
+      "identity": "resource:Saturday",
+      "hash_buckets": [
+        214
+      ],
+      "resource_identifiers": [
+        "SLongDayNameSat"
+      ]
+    },
+    {
+      "index": 237,
+      "original_import_slot_va": "0x487c5c",
+      "original_storage_va": "0x4232c4",
+      "identity": "resource:&All",
+      "hash_buckets": [
+        216
+      ],
+      "resource_identifiers": [
+        "SMsgDlgAll"
+      ]
+    },
+    {
+      "index": 238,
+      "original_import_slot_va": "0x487c60",
+      "original_storage_va": "0x42330c",
+      "identity": "resource:PgDn",
+      "hash_buckets": [
+        216
+      ],
+      "resource_identifiers": [
+        "SmkcPgDn"
+      ]
+    },
+    {
+      "index": 239,
+      "original_import_slot_va": "0x487c64",
+      "original_storage_va": "0x415520",
+      "identity": "resource:Class %s not found",
+      "hash_buckets": [
+        216
+      ],
+      "resource_identifiers": [
+        "SClassNotFound"
+      ]
+    },
+    {
+      "index": 240,
+      "original_import_slot_va": "0x487c68",
+      "original_storage_va": "0x4077c4",
+      "identity": "resource:Mar",
+      "hash_buckets": [
+        216
+      ],
+      "resource_identifiers": [
+        "SShortMonthNameMar"
+      ]
+    },
+    {
+      "index": 241,
+      "original_import_slot_va": "0x487c6c",
+      "original_storage_va": "0x4076a4",
+      "identity": "resource:Access violation at address %p. %s of address %p",
+      "hash_buckets": [
+        216
+      ],
+      "resource_identifiers": [
+        "SAccessViolation"
+      ]
+    },
+    {
+      "index": 242,
+      "original_import_slot_va": "0x487c70",
+      "original_storage_va": "0x4155b0",
+      "identity": "resource:Stream read error",
+      "hash_buckets": [
+        219
+      ],
+      "resource_identifiers": [
+        "SReadError"
+      ]
+    },
+    {
+      "index": 243,
+      "original_import_slot_va": "0x487c74",
+      "original_storage_va": "0x40762c",
+      "identity": "resource:Invalid filename",
+      "hash_buckets": [
+        219
+      ],
+      "resource_identifiers": [
+        "SInvalidFilename"
+      ]
+    },
+    {
+      "index": 244,
+      "original_import_slot_va": "0x487c78",
+      "original_storage_va": "0x4076bc",
+      "identity": "resource:Privileged instruction",
+      "hash_buckets": [
+        219
+      ],
+      "resource_identifiers": [
+        "SPrivilege"
+      ]
+    },
+    {
+      "index": 245,
+      "original_import_slot_va": "0x487c7c",
+      "original_storage_va": "0x4155a8",
+      "identity": "resource:Error reading %s%s%s: %s",
+      "hash_buckets": [
+        220
+      ],
+      "resource_identifiers": [
+        "SPropertyException"
+      ]
+    },
+    {
+      "index": 246,
+      "original_import_slot_va": "0x487c80",
+      "original_storage_va": "0x407664",
+      "identity": "resource:Range check error",
+      "hash_buckets": [
+        220
+      ],
+      "resource_identifiers": [
+        "SRangeError"
+      ]
+    },
+    {
+      "index": 247,
+      "original_import_slot_va": "0x487c84",
+      "original_storage_va": "0x42326c",
+      "identity": "resource:Error",
+      "hash_buckets": [
+        222
+      ],
+      "resource_identifiers": [
+        "SMsgDlgError"
+      ]
+    },
+    {
+      "index": 248,
+      "original_import_slot_va": "0x487c88",
+      "original_storage_va": "0x407754",
+      "identity": "resource:Invalid variant type",
+      "hash_buckets": [
+        222
+      ],
+      "resource_identifiers": [
+        "SVarBadType"
+      ]
+    },
+    {
+      "index": 249,
+      "original_import_slot_va": "0x487c8c",
+      "original_storage_va": "0x40765c",
+      "identity": "resource:Division by zero",
+      "hash_buckets": [
+        222
+      ],
+      "resource_identifiers": [
+        "SDivByZero"
+      ]
+    },
+    {
+      "index": 250,
+      "original_import_slot_va": "0x487c90",
+      "original_storage_va": "0x40780c",
+      "identity": "resource:Dec",
+      "hash_buckets": [
+        223
+      ],
+      "resource_identifiers": [
+        "SShortMonthNameDec"
+      ]
+    },
+    {
+      "index": 251,
+      "original_import_slot_va": "0x487c94",
+      "original_storage_va": "0x486144",
+      "identity": "global:SysUtils.HexDisplayPrefix",
+      "hash_buckets": [
+        224
+      ]
+    },
+    {
+      "index": 252,
+      "original_import_slot_va": "0x487c98",
+      "original_storage_va": "0x4155e8",
+      "identity": "resource:%s not in a class registration group",
+      "hash_buckets": [
+        228
+      ],
+      "resource_identifiers": [
+        "SUnknownGroup"
+      ]
+    },
+    {
+      "index": 253,
+      "original_import_slot_va": "0x487c9c",
+      "original_storage_va": "0x42331c",
+      "identity": "resource:Home",
+      "hash_buckets": [
+        228
+      ],
+      "resource_identifiers": [
+        "SmkcHome"
+      ]
+    },
+    {
+      "index": 254,
+      "original_import_slot_va": "0x487ca0",
+      "original_storage_va": "0x423324",
+      "identity": "resource:Left",
+      "hash_buckets": [
+        228
+      ],
+      "resource_identifiers": [
+        "SmkcLeft"
+      ]
+    },
+    {
+      "index": 255,
+      "original_import_slot_va": "0x487ca4",
+      "original_storage_va": "0x4077ac",
+      "identity": "resource:A call to an OS function failed",
+      "hash_buckets": [
+        228
+      ],
+      "resource_identifiers": [
+        "SUnkOSError"
+      ]
+    },
+    {
+      "index": 256,
+      "original_import_slot_va": "0x487ca8",
+      "original_storage_va": "0x4155a0",
+      "identity": "resource:Out of memory while expanding memory stream",
+      "hash_buckets": [
+        228
+      ],
+      "resource_identifiers": [
+        "SMemoryStreamError"
+      ]
+    },
+    {
+      "index": 257,
+      "original_import_slot_va": "0x487cac",
+      "original_storage_va": "0x407674",
+      "identity": "resource:Invalid floating point operation",
+      "hash_buckets": [
+        228
+      ],
+      "resource_identifiers": [
+        "SInvalidOp"
+      ]
+    },
+    {
+      "index": 258,
+      "original_import_slot_va": "0x487cb0",
+      "original_storage_va": "0x4231f4",
+      "identity": "resource:Cancel",
+      "hash_buckets": [
+        229
+      ],
+      "resource_identifiers": [
+        "SCancelButton"
+      ]
+    },
+    {
+      "index": 259,
+      "original_import_slot_va": "0x487cb4",
+      "original_storage_va": "0x4865c0",
+      "identity": "global:Classes.WakeMainThread",
+      "hash_buckets": [
+        230
+      ]
+    },
+    {
+      "index": 260,
+      "original_import_slot_va": "0x487cb8",
+      "original_storage_va": "0x488b78",
+      "identity": "global:Controls.Mouse",
+      "hash_buckets": [
+        231
+      ]
+    },
+    {
+      "index": 261,
+      "original_import_slot_va": "0x487cbc",
+      "original_storage_va": "0x4155d8",
+      "identity": "resource:%s.Seek not implemented",
+      "hash_buckets": [
+        231
+      ],
+      "resource_identifiers": [
+        "SSeekNotImplemented"
+      ]
+    },
+    {
+      "index": 262,
+      "original_import_slot_va": "0x487cc0",
+      "original_storage_va": "0x4075f4",
+      "identity": "resource:'%s' is not a valid currency value",
+      "hash_buckets": [
+        231
+      ],
+      "resource_identifiers": [
+        "SInvalidCurrency"
+      ]
+    },
+    {
+      "index": 263,
+      "original_import_slot_va": "0x487cc4",
+      "original_storage_va": "0x4232f4",
+      "identity": "resource:Enter",
+      "hash_buckets": [
+        232
+      ],
+      "resource_identifiers": [
+        "SmkcEnter"
+      ]
+    },
+    {
+      "index": 264,
+      "original_import_slot_va": "0x487cc8",
+      "original_storage_va": "0x48a704",
+      "identity": "global:UnitDIStuff.DIDeviceCount",
+      "hash_buckets": [
+        232,
+        233,
+        234,
+        235,
+        236
+      ],
+      "proposed_name": "DeviceCount",
+      "proposed_hash_bucket": 235
+    },
+    {
+      "index": 265,
+      "original_import_slot_va": "0x487ccc",
+      "original_storage_va": "0x4077b4",
+      "identity": "resource:Jan",
+      "hash_buckets": [
+        236
+      ],
+      "resource_identifiers": [
+        "SShortMonthNameJan"
+      ]
+    },
+    {
+      "index": 266,
+      "original_import_slot_va": "0x487cd0",
+      "original_storage_va": "0x467c54",
+      "identity": "resource:%s is already associated with %s",
+      "hash_buckets": [
+        238
+      ],
+      "resource_identifiers": [
+        "sUDAssociated"
+      ]
+    },
+    {
+      "index": 267,
+      "original_import_slot_va": "0x487cd4",
+      "original_storage_va": "0x423204",
+      "identity": "resource:&No",
+      "hash_buckets": [
+        239
+      ],
+      "resource_identifiers": [
+        "SNoButton"
+      ]
+    },
+    {
+      "index": 268,
+      "original_import_slot_va": "0x487cd8",
+      "original_storage_va": "0x467c3c",
+      "identity": "resource:Invalid index",
+      "hash_buckets": [
+        241
+      ],
+      "resource_identifiers": [
+        "sInvalidIndex"
+      ]
+    },
+    {
+      "index": 269,
+      "original_import_slot_va": "0x487cdc",
+      "original_storage_va": "0x423284",
+      "identity": "resource:&Yes",
+      "hash_buckets": [
+        241
+      ],
+      "resource_identifiers": [
+        "SMsgDlgYes"
+      ]
+    },
+    {
+      "index": 270,
+      "original_import_slot_va": "0x487ce0",
+      "original_storage_va": "0x488b04",
+      "identity": "global:FlatSB.FlatSB_SetScrollPos",
+      "hash_buckets": [
+        241
+      ]
+    },
+    {
+      "index": 271,
+      "original_import_slot_va": "0x487ce4",
+      "original_storage_va": "0x4076c4",
+      "identity": "resource:Exception %s in module %s at %p.\r\n%s%s\r\n",
+      "hash_buckets": [
+        242
+      ],
+      "resource_identifiers": [
+        "SException"
+      ]
+    },
+    {
+      "index": 272,
+      "original_import_slot_va": "0x487ce8",
+      "original_storage_va": "0x4889e4",
+      "identity": "global:Classes.GlobalNameSpace",
+      "hash_buckets": [
+        244
+      ]
+    },
+    {
+      "index": 273,
+      "original_import_slot_va": "0x487cec",
+      "original_storage_va": "0x40769c",
+      "identity": "resource:Invalid class typecast",
+      "hash_buckets": [
+        244
+      ],
+      "resource_identifiers": [
+        "SInvalidCast"
+      ]
+    },
+    {
+      "index": 274,
+      "original_import_slot_va": "0x487cf0",
+      "original_storage_va": "0x4231cc",
+      "identity": "resource:Not enough timers available",
+      "hash_buckets": [
+        245
+      ],
+      "resource_identifiers": [
+        "SNoTimers"
+      ]
+    },
+    {
+      "index": 275,
+      "original_import_slot_va": "0x487cf4",
+      "original_storage_va": "0x488c14",
+      "identity": "global:Forms.Screen",
+      "hash_buckets": [
+        245
+      ]
+    },
+    {
+      "index": 276,
+      "original_import_slot_va": "0x487cf8",
+      "original_storage_va": "0x4232fc",
+      "identity": "resource:Space",
+      "hash_buckets": [
+        245
+      ],
+      "resource_identifiers": [
+        "SmkcSpace"
+      ]
+    },
+    {
+      "index": 277,
+      "original_import_slot_va": "0x487cfc",
+      "original_storage_va": "0x40770c",
+      "identity": "resource:Variant array is locked",
+      "hash_buckets": [
+        247
+      ],
+      "resource_identifiers": [
+        "SVarArrayLocked"
+      ]
+    },
+    {
+      "index": 278,
+      "original_import_slot_va": "0x487d00",
+      "original_storage_va": "0x40767c",
+      "identity": "resource:Floating point division by zero",
+      "hash_buckets": [
+        247
+      ],
+      "resource_identifiers": [
+        "SZeroDivide"
+      ]
+    },
+    {
+      "index": 279,
+      "original_import_slot_va": "0x487d04",
+      "original_storage_va": "0x486124",
+      "identity": "global:SysUtils.LeadBytes",
+      "hash_buckets": [
+        248
+      ]
+    },
+    {
+      "index": 280,
+      "original_import_slot_va": "0x487d08",
+      "original_storage_va": "0x42319c",
+      "identity": "resource:Cannot change Visible in OnShow or OnHide",
+      "hash_buckets": [
+        249
+      ],
+      "resource_identifiers": [
+        "SVisibleChanged"
+      ]
+    },
+    {
+      "index": 281,
+      "original_import_slot_va": "0x487d0c",
+      "original_storage_va": "0x4231bc",
+      "identity": "resource:Menu inserted twice",
+      "hash_buckets": [
+        249
+      ],
+      "resource_identifiers": [
+        "SMenuReinserted"
+      ]
+    },
+    {
+      "index": 282,
+      "original_import_slot_va": "0x487d10",
+      "original_storage_va": "0x4860bc",
+      "identity": "global:SysUtils.Win32Platform",
+      "hash_buckets": [
+        250
+      ]
+    },
+    {
+      "index": 283,
+      "original_import_slot_va": "0x487d14",
+      "original_storage_va": "0x42337c",
+      "identity": "resource:Default",
+      "hash_buckets": [
+        251
+      ],
+      "resource_identifiers": [
+        "SDefault"
+      ]
+    },
+    {
+      "index": 284,
+      "original_import_slot_va": "0x487d18",
+      "original_storage_va": "0x486ed4",
+      "identity": "global:DInput.GUID_ConstantForce",
+      "hash_buckets": [
+        251
+      ]
+    },
+    {
+      "index": 285,
+      "original_import_slot_va": "0x487d1c",
+      "original_storage_va": "0x48a67c",
+      "identity": "global:DInput.DirectInputCreate",
+      "hash_buckets": [
+        253
+      ]
+    },
+    {
+      "index": 286,
+      "original_import_slot_va": "0x487d20",
+      "original_storage_va": "0x488030",
+      "identity": "global:System.MainThreadID",
+      "hash_buckets": [
+        253
+      ]
+    },
+    {
+      "index": 287,
+      "original_import_slot_va": "0x487d24",
+      "original_storage_va": "0x4887ec",
+      "identity": "global:SysUtils.SysLocale",
+      "hash_buckets": [
+        253
+      ]
+    },
+    {
+      "index": 288,
+      "original_import_slot_va": "0x487d28",
+      "original_storage_va": "0x4076ec",
+      "identity": "resource:Read",
+      "hash_buckets": [
+        253
+      ],
+      "resource_identifiers": [
+        "SReadAccess"
+      ]
+    },
+    {
+      "index": 289,
+      "original_import_slot_va": "0x487d2c",
+      "original_storage_va": "0x4077dc",
+      "identity": "resource:Jun",
+      "hash_buckets": [
+        253
+      ],
+      "resource_identifiers": [
+        "SShortMonthNameJun"
+      ]
+    },
+    {
+      "index": 290,
+      "original_import_slot_va": "0x487d30",
+      "original_storage_va": "0x4155c0",
+      "identity": "resource:Failed to get data for '%s'",
+      "hash_buckets": [
+        254
+      ],
+      "resource_identifiers": [
+        "SRegGetDataFailed"
+      ]
+    }
+  ]
+}
