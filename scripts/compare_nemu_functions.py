@@ -30,6 +30,9 @@ evidence. They apply only to that image and an existing PE HIGHLOW operand;
 the actual linked operand must equal the unique linked symbol plus addend.
 Adjacent diagnostic.json manifests flag forced unresolved links automatically;
 invalid header/out-of-image operands cannot support matching coverage.
+Linked floating literals additionally require matching decoded scalar reads,
+complete compiler-declared width/bits, read-only storage, and unique contents;
+duplicate byte patterns remain unresolved even at unaligned incidental sites.
 No files are modified except explicitly requested JSON reports.
 """
 
@@ -47,6 +50,7 @@ from capstone.x86 import X86_OP_IMM, X86_OP_MEM
 
 from pe_fingerprints import PE32
 from verify_gs import COFF, differences
+from nemu_float_provenance import prove_float_operand
 
 ROOT = Path(__file__).resolve().parents[1]
 ORIGINAL = ROOT / 'master/nemu64.exe'
@@ -682,6 +686,16 @@ def compare_bytes(function, candidate_data, candidate_size, candidate_va, fields
                 candidate_va <= field['candidate_target'] < candidate_va + candidate_size):
             field['local_offset'] = field['candidate_target'] - candidate_va
         resolved = resolve_field(field, function, targets, candidate_symbols)
+        if resolved['status'] == 'unresolved':
+            # This establishes a concrete complete floating value, not an
+            # original source name. It cannot create a normalization field or
+            # replace conflicting independent symbol evidence.
+            proof = prove_float_operand(field, function['va'], candidate_va, targets, candidate_symbols)
+            if proof is not None:
+                resolved['floating_literal_proof'] = proof
+                if proof['verified']:
+                    resolved.update(status='matching', identity_verified=True,
+                                    resolution_bases=[proof['basis']])
         relocations.append(resolved)
         if field['kind'] == 'REL' and field.get('local_offset') is not None:
             # COFF can record a self-call/local-label relocation. Materialize
@@ -1071,6 +1085,8 @@ def main():
                                           args.infer_map_addresses, args.fixture_manifest, True))
     result = dict(diagnostic_only=True, original=str(args.original), original_sha256=digest(original.data),
                   tool_sha256=digest(Path(__file__).read_bytes()), command_line=sys.argv,
+                  floating_literal_verifier=dict(path='scripts/nemu_float_provenance.py',
+                      sha256=digest(Path(__file__).with_name('nemu_float_provenance.py').read_bytes())),
                   metadata=[dict(path=str(p), sha256=input_hashes[str(p)]) for p in args.metadata],
                   symbol_metadata=[dict(path=str(p), sha256=input_hashes[str(p)]) for p in args.symbols],
                   extent_metadata=[dict(path=str(p), sha256=input_hashes[str(p)]) for p in args.extents],
