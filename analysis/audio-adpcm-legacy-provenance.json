@@ -1,0 +1,860 @@
+{
+  "status": "incomplete; not a byte-exact reconstruction",
+  "entry": "_DecodeAudioADPCMLegacy",
+  "original_va": "0x10012C60",
+  "original_end": "0x100133F0",
+  "original_extent": 1936,
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "source_sha256": "cb2e07cf774d8d9887883cd7fc67a98dc08a5b576e0d70a3405786bb281ada52",
+  "artifact": "/root/.ai-tmp/audio-adpcm-legacy/artifacts/cb2e07cf774d8d9887883cd7fc67a98dc08a5b576e0d70a3405786bb281ada52",
+  "artifact_comparison_sha256": "84284b28a4805c1f0416db191d9db46121319c1093c326ca5f2d795bc2ae63da",
+  "source_snapshot": {
+    "src/audio/ahle_ds/AudioADPCMLegacy.c": "cb2e07cf774d8d9887883cd7fc67a98dc08a5b576e0d70a3405786bb281ada52",
+    "src/audio/ahle_ds/AudioADPCMLegacy.h": "8509a1760c9dcc9b45334d103d4f09b656502bda0b8d35d039d75d7a75720f32",
+    "src/audio/ahle_ds/AudioHLE.h": "82e6544a76ee5d0e361f785773e5da8bd91070019a65367d89d6cb0defd8b3ee",
+    "src/audio/ahle_ds/AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
+    "src/audio/ahle_ds/AudioADPCM-LICENSE.txt": "9f8db578ada6153af1024a206324a03b9703abbec0e96b6ee3da72ff6eee335e",
+    "analysis/audio-adpcm-legacy-addresses.json": "d0063241bba197bc1006989a371bd5da6ee1febafea91b8b5d895e24bdca750b",
+    "scripts/verify_audio.py": "44d65d751129d51d5296a68f81735be23f068c7e0d3b8694d5074333dcc0d490",
+    "scripts/verify_gs.py": "9096c1ce5e759dc60f4fc7b84c97678b5946b7b15f6bfb56cd1fa3b9e730854c",
+    "scripts/pe_fingerprints.py": "e83e1698ecfc7b8ca06ba0919578cbd225885745a96f601891bffff831d995dd",
+    "scripts/run_toolchain.py": "489681186d7cde23f42d0a6f154f3e9723b060fa769a1ce2d0f31e656074ea9e"
+  },
+  "compiler": {
+    "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
+    "toolchains/vc7/bin/c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
+    "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0"
+  },
+  "compile_flags": [
+    "/nologo",
+    "/c",
+    "/O2",
+    "/Ob1",
+    "/MT",
+    "/W3"
+  ],
+  "wine_prefix": "/root/.ai-tmp/audio-adpcm-legacy/wine",
+  "result": {
+    "rebuilt_extent": 1936,
+    "differing_bytes_after_relocation_mask": 1336,
+    "frame_target": "0x98",
+    "frame_candidate": "0x90",
+    "complete_body_exact": false,
+    "relocation_positions_do_not_align": true
+  },
+  "upstream_reference": {
+    "url": "https://github.com/emukidid/Wii64/blob/508e73ec83d5a355eefc782f947e365c7c0fbefc/rsp_hle/ucode1.cpp",
+    "commit": "508e73ec83d5a355eefc782f947e365c7c0fbefc",
+    "file_sha256": "caeaecc24e08fa3d1ecffee769012bea81f004a65953ab3d0dbdbb90833682e8",
+    "license": "GPL-2.0; repository LICENCE.TXT is preserved alongside this source",
+    "license_sha256": "9f8db578ada6153af1024a206324a03b9703abbec0e96b6ee3da72ff6eee335e",
+    "relation": "ADPCM scalar formulation used as a reference and adapted. Identity with the historical Nemu64 source is inferred, not established."
+  },
+  "semantics_retained": [
+    "Full unmasked command address for history read/write.",
+    "Signed 16-bit count is shifted right by one and decremented by 32 for each decoded 16-sample packet.",
+    "Input byte loads use twice the index ((context->input >> 1) + inPtr) XOR 3, because the backing buffer is short*.",
+    "Codebook starts at context->buffer + 0x800; signed coefficients use 16 samples per predictor.",
+    "Scale starts at unsigned 0xFFFF8000; saturation covers -32768 through 32767."
+  ],
+  "independent_symbolic_audit": {
+    "script": "/root/.ai-tmp/legacy-audit-symbolic/check.py",
+    "script_sha256": "f68dce683796d5fca3a2034889a7d3e783b3297fa3b003475d93acf985d87da7",
+    "scope": "Both 8-sample prediction blocks in target and candidate: all 32 target/candidate polynomials equal the expected convolution. This is not a whole-function behavioral equivalence proof."
+  },
+  "bounded_probes": [
+    {
+      "name": "aggregate-first-c",
+      "source_sha256": "2c6c07e07af97733a94437345eb7821539a03843036afc661cdfc416ddcb6885",
+      "object_sha256": "0084d43ed19a0362a8ff7d27c5f0f8bf906a22422d93a0e85ba25ec876ec8683",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/aggregate-first-c/comparison.json",
+      "comparison_sha256": "009b41883a4a5f5acd6ac8bc6dde18ca5a2cf51eb97ebb4f738dc11b1947b888",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1328
+    },
+    {
+      "name": "base",
+      "source_sha256": "cfc5df1a201ee4d3ded7c2fa30f94ce9210e7ec037b90f3363d17986a2241a48",
+      "object_sha256": "1f7507698b6d85ead883426cdbe95f31a89093e5e376ef71d9c1214c8bf5faa9",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/base/comparison.json",
+      "comparison_sha256": "aa3dff5f76b8e7f946455f0d367aec6284b6cc3acf716e6422c7a660d679914b",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "blocks-distinct-arrays",
+      "source_sha256": "5e3fdfc5534572d50dfcd3ca1292931144e9e28b01ca593e5a4a2d534859a151",
+      "object_sha256": "fb98ba2ca7879363b990167710f69655a77699ce262afe43e2cffcc4cfb17534",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/blocks-distinct-arrays/comparison.json",
+      "comparison_sha256": "cd5d8d8c8227c135015b9921b7c481669ad9d04b155970ee0817d54352dd8855",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1532
+    },
+    {
+      "name": "blocks-separate-loop-arrays",
+      "source_sha256": "9a4eeb2412b9157f992c8738ba7f22c3db7674656bc38f83a584f0fe0798cd1e",
+      "object_sha256": "057c52768eadf936429475b68f244fc1894ea22c55ccc817e562b1b67237395a",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/blocks-separate-loop-arrays/comparison.json",
+      "comparison_sha256": "535197f2bf6d243b5f2405df04ccb9d8ce8f3ef0c6cbf49876ea507a8845d3d1",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1532
+    },
+    {
+      "name": "blocks-separate-scopes",
+      "source_sha256": "9a4eeb2412b9157f992c8738ba7f22c3db7674656bc38f83a584f0fe0798cd1e",
+      "object_sha256": "dce68a8a0357a6e3c639ea43b0c07e3f1e3e6bd0a37a49fb76c1bb1784b6b86a",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/blocks-separate-scopes/comparison.json",
+      "comparison_sha256": "0fd0890c32f60f8595f163adb82e1c8f1caae11859f1c981c9545105a936ba50",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1532
+    },
+    {
+      "name": "c-direct-count",
+      "source_sha256": "7f98259548963a0e6aee56c4779c33bd0b92c62297f68754b422024e5e0d6d56",
+      "object_sha256": "08b358979e83a1bf5668fb3802b69f6aa074d634a01b1fd7209427af15ee0877",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/c-direct-count/comparison.json",
+      "comparison_sha256": "df0ab4c7f4a4273be9dccbaa7113d8226a2ce07b2eca487b663c04cea1905856",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "clamp-counter-WORD-distinct",
+      "source_sha256": "4b61ef06a0b6a8573c5242460760051bfea9f6b8f75bb7e92480d3906b697bd6",
+      "object_sha256": "b965bb9847b3811a1cb86aec0eebe6c68fe2964e2684911f2399150e05d455ec",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/clamp-counter-WORD-distinct/comparison.json",
+      "comparison_sha256": "a05991b5739fbc5cdadc9d2bcb50ed8b70d52abd05174b2f8302d36cc9f66288",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "clamp-counter-WORD-shared",
+      "source_sha256": "3a1be7b4ff89aacc8a604ceefff7e4b9f5dbab5c8be84a911bbda2df93172692",
+      "object_sha256": "7a23118fde301d3bdc8a6e8bfbe6f52f8ecb51d61705694a98a007a93e159ebb",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/clamp-counter-WORD-shared/comparison.json",
+      "comparison_sha256": "bd475b4d86fb6828e7adde8edc87a972dded7fd0ea028352ad37b5c7f57eda6e",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "clamp-counter-int-distinct",
+      "source_sha256": "37423157c14a5f22ccb0c531d62c1411ce19cfd44bb23eafc4169d8533a93d98",
+      "object_sha256": "9c834c088ce3cf2fa4e812ee199f2f4c7d750492af50f27b8d0a07c7aa134c06",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/clamp-counter-int-distinct/comparison.json",
+      "comparison_sha256": "7601e130615f8af43338fb3b72d13c3af839f48a413640062ac9a927dc563ab5",
+      "rebuilt_bytes": 1920,
+      "relocation_masked_differing_bytes": 1436
+    },
+    {
+      "name": "clamp-counter-int-shared",
+      "source_sha256": "7ef003d98080df0da40a4aab45b0d0ab21ac8a6592bc4e8635a12d66f969ce4a",
+      "object_sha256": "9bc14abb91d5640213af6433c3f47e36885e35f95073c6dd3534123adbc66ff6",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/clamp-counter-int-shared/comparison.json",
+      "comparison_sha256": "14b7f502854bcf65c4a85cf1db18d7fbaa3af697093e3c9b4a8aa6454f4bcbdf",
+      "rebuilt_bytes": 1920,
+      "relocation_masked_differing_bytes": 1436
+    },
+    {
+      "name": "clamp-counter-unsigned-int-distinct",
+      "source_sha256": "553d5d4fcc1a9b292fb5971d4e3f0f75eadfe8278b125ace1513e5159b06250b",
+      "object_sha256": "0fd9fc4a6d0a1efed9d48e3f31bdf9ee2d96423926835e625bcf1b6b318f9e1e",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/clamp-counter-unsigned-int-distinct/comparison.json",
+      "comparison_sha256": "328465adacb1dadc409eb88ba17804356340749ded6f83e8876391a02b417750",
+      "rebuilt_bytes": 1904,
+      "relocation_masked_differing_bytes": 1640
+    },
+    {
+      "name": "clamp-counter-unsigned-int-shared",
+      "source_sha256": "a1cfb53d5d85b012ae55ec3e1e108924ec75d590e749544af32b562845f5e3c0",
+      "object_sha256": "4bac76b6c7017818971d25e4fd28c0c9922e1f5c628ed29ca2a0b5daa6df530b",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/clamp-counter-unsigned-int-shared/comparison.json",
+      "comparison_sha256": "667df9fbd5461080e6e0e35f50bca0a2a4f4a6871e8c45587a739e734ad4499b",
+      "rebuilt_bytes": 1904,
+      "relocation_masked_differing_bytes": 1640
+    },
+    {
+      "name": "distinct-nibble-counters",
+      "source_sha256": "ec48659cf5b4722a175555d6a2eadf24a8c4775d753a9924717ecd16ff11d91a",
+      "object_sha256": "ca396d5064b62bc44274495c9def200b97d88f9b57080f3056ab9bf00949f8ee",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/distinct-nibble-counters/comparison.json",
+      "comparison_sha256": "7115659b0912cea8d2c93b10b81de735dd8fc0962f7fbda0649b88b81fae6b4d",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1330
+    },
+    {
+      "name": "expression-both",
+      "source_sha256": "0c300e608098700c50a9101df094e7d70ba54c7d4324eaac6b95f5a8de1cb18e",
+      "object_sha256": "accaee220ea362ea097a2293075dbe171e455f6962bedb0321e47c039ee88a63",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/expression-both/comparison.json",
+      "comparison_sha256": "c83cef77886b0f1ca84f21e02d5f190ad241b3c554a0f148e58b561addb0772c",
+      "rebuilt_bytes": 1952,
+      "relocation_masked_differing_bytes": 1608
+    },
+    {
+      "name": "expression-first",
+      "source_sha256": "2da80b1fa36b91687510ed4409c6547b501b777f66d03e0cb464e1a59e57bb20",
+      "object_sha256": "635de4e566f4c2dcfb07bc9517a9b0471fe28de1a5398a243a78f42bcb788309",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/expression-first/comparison.json",
+      "comparison_sha256": "44a959bd22a6cc4b2221c715ddac1d231e19197342df6202be41c1ad39a61e03",
+      "rebuilt_bytes": 1952,
+      "relocation_masked_differing_bytes": 1589
+    },
+    {
+      "name": "expression-second",
+      "source_sha256": "789d1014e1016995ed18b0d2ed908f0e29afa0d8b1a7291802546341b9f2d2e0",
+      "object_sha256": "23bb900efed6b8de6ec6fcd4fd7f1a4414318b664d74220b222bdf15947a736f",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/expression-second/comparison.json",
+      "comparison_sha256": "91b4c71b5bd1a5769a6af3a6d8e5a517ce79c1d82a44c454c9a2ee3d986f4d1a",
+      "rebuilt_bytes": 1952,
+      "relocation_masked_differing_bytes": 1589
+    },
+    {
+      "name": "first-three",
+      "source_sha256": "e45f546515eedf5c591a90d98b267b4735d346d7b3f2c4c3a937cd134579c667",
+      "object_sha256": "8505b78fc7bd1639dc04a2c5e4fd7d8a25268b735bc2200fd3e2dfafaf786490",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/first-three/comparison.json",
+      "comparison_sha256": "bd01c752c72467c97c7392e7dbf2faa5b5ef2d99d319779c02976ffa20bcfe58",
+      "rebuilt_bytes": 1920,
+      "relocation_masked_differing_bytes": 1310
+    },
+    {
+      "name": "first-two",
+      "source_sha256": "85fd5f07eb7696decaa7ac1a1f2e623ce93351677f5b5cd0c3d1d67364fc5aa7",
+      "object_sha256": "fe1f7c3a88452ea1e35c993f14e27c88a793114b2b8cce131b4283d6cad0a9de",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/first-two/comparison.json",
+      "comparison_sha256": "6cabebacc93f26b34586602e8335600cd403f5ee29c09b2d609d34f20d8e6254",
+      "rebuilt_bytes": 1920,
+      "relocation_masked_differing_bytes": 1310
+    },
+    {
+      "name": "flags-G5",
+      "source_sha256": "cfc5df1a201ee4d3ded7c2fa30f94ce9210e7ec037b90f3363d17986a2241a48",
+      "object_sha256": "4c7f61ee3e3b4cff4b25a53759c644ac952e5fbb111cfba6148b047e68f27de7",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/flags-G5/comparison.json",
+      "comparison_sha256": "5981409a0dd0f58bd81afb1b7959caf87a43f094a7ac9892cb988a207c7a069e",
+      "rebuilt_bytes": 1952,
+      "relocation_masked_differing_bytes": 1802
+    },
+    {
+      "name": "flags-G6",
+      "source_sha256": "cfc5df1a201ee4d3ded7c2fa30f94ce9210e7ec037b90f3363d17986a2241a48",
+      "object_sha256": "23a752f117194abf74dabbfab369c721e801cab3d8e6a7db7a518e64a9d9c9ee",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/flags-G6/comparison.json",
+      "comparison_sha256": "590ecba36c12341bea79ff3ca226e81a67b2da800c0f140ff9e1219d9aa3af77",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "flags-G7",
+      "source_sha256": "cfc5df1a201ee4d3ded7c2fa30f94ce9210e7ec037b90f3363d17986a2241a48",
+      "object_sha256": "5ec2d44985d03e6a4da4cf3bcc39da3fad16325dfe0802bc5c0bdde909b2e86c",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/flags-G7/comparison.json",
+      "comparison_sha256": "b32b17ba2c742915ffc6dcb4e7c06d1410cd963021eee51fac107743bf998dc5",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "flags-GF",
+      "source_sha256": "cfc5df1a201ee4d3ded7c2fa30f94ce9210e7ec037b90f3363d17986a2241a48",
+      "object_sha256": "5312e31fa027745c6a5345b41d5a59e8040eee8798a6ef731f43d376c36de622",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/flags-GF/comparison.json",
+      "comparison_sha256": "c9e227a37ebd9d4509c5505afa6faac0ace0a40e080ee4f7e5a8bf5cb464afda",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "flags-GS",
+      "source_sha256": "cfc5df1a201ee4d3ded7c2fa30f94ce9210e7ec037b90f3363d17986a2241a48",
+      "object_sha256": "815c681d6570fe410436a71edd492dc83b7586479e1c4c71932bc76240fa7440",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/flags-GS/comparison.json",
+      "comparison_sha256": "8db83064ee0a239386dac1dcfc8aa846a6ca5ce541f0ed65269eb05f24ce727c",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "flags-Gf",
+      "source_sha256": "cfc5df1a201ee4d3ded7c2fa30f94ce9210e7ec037b90f3363d17986a2241a48",
+      "object_sha256": "6733f15937eee4847dae26af30d33af54448898eab2f1256cb67fea9065c001c",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/flags-Gf/comparison.json",
+      "comparison_sha256": "17f4bfb483aec06e2d5e7b3e346707114875e8ff18a69b0210b5a8e1cc37f122",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "flags-Gm",
+      "source_sha256": "cfc5df1a201ee4d3ded7c2fa30f94ce9210e7ec037b90f3363d17986a2241a48",
+      "object_sha256": "08fb7b19321e261e23fd150d8b27db80dca29908b5400068a981685a791e1f05",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/flags-Gm/comparison.json",
+      "comparison_sha256": "ad3aee9868a26e7093d661680350f12b3cefa5b8a70fc826da7a6e1465232ee5",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "flags-Gr",
+      "source_sha256": "cfc5df1a201ee4d3ded7c2fa30f94ce9210e7ec037b90f3363d17986a2241a48",
+      "object_sha256": "abbd5002043af282b4c10a553cad85da0fbd131defa435cefc96b9e6625a6235",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/flags-Gr/comparison.json",
+      "comparison_sha256": "2ad7e5024e5f4102f220f00eea48a33489e9d9d5f3ab01532ec84798783f717c",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": null
+    },
+    {
+      "name": "flags-Gy",
+      "source_sha256": "cfc5df1a201ee4d3ded7c2fa30f94ce9210e7ec037b90f3363d17986a2241a48",
+      "object_sha256": "9e4c58e692ab97ad7190665fbbab3de48df0591e57ee88dc7907d1760be7adbe",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/flags-Gy/comparison.json",
+      "comparison_sha256": "b51f4d40e5ef9e884520fd2391c34658b041db2a07a526fb3d40e8e882f3757b",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "flags-Oa",
+      "source_sha256": "cfc5df1a201ee4d3ded7c2fa30f94ce9210e7ec037b90f3363d17986a2241a48",
+      "object_sha256": "7bc9f9ccccbeab95c266ff078eba004249d39472f1efa89b3d14912066192721",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/flags-Oa/comparison.json",
+      "comparison_sha256": "0135c9941c8475ca173c176e30e40ebe350c116cd45f26aed62ecdf13b692d27",
+      "rebuilt_bytes": 1968,
+      "relocation_masked_differing_bytes": 1856
+    },
+    {
+      "name": "flags-Ob2",
+      "source_sha256": "cfc5df1a201ee4d3ded7c2fa30f94ce9210e7ec037b90f3363d17986a2241a48",
+      "object_sha256": "4fc2384bcacc9bb382f6e5ba23338dd47303b51c61838fb000497d0cb388d7b5",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/flags-Ob2/comparison.json",
+      "comparison_sha256": "e252b6c20ce74666889a81a17f16d85cc9e25a05b5502a304bea8a9757b5c318",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "flags-Og",
+      "source_sha256": "cfc5df1a201ee4d3ded7c2fa30f94ce9210e7ec037b90f3363d17986a2241a48",
+      "object_sha256": "7b5aa48d91c565892962f6d681fafef4a9949ec03bd6322ec0582198f5cce9b9",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/flags-Og/comparison.json",
+      "comparison_sha256": "2f993ff26c86f01407cd1cfda2572feeb069590522362733c6a8c64a7ba1673a",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "flags-Ogminus",
+      "source_sha256": "cfc5df1a201ee4d3ded7c2fa30f94ce9210e7ec037b90f3363d17986a2241a48",
+      "object_sha256": "82143a31803f9a11cbd9f7374fceb9a5e6a67a9719934f48bcef98f8334154bb",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/flags-Ogminus/comparison.json",
+      "comparison_sha256": "23d560e222623bed2ff827ee2a7b6f249f3242481ed3cd73e53d1ae8b12fad93",
+      "rebuilt_bytes": 3397,
+      "relocation_masked_differing_bytes": 3331
+    },
+    {
+      "name": "flags-Op",
+      "source_sha256": "cfc5df1a201ee4d3ded7c2fa30f94ce9210e7ec037b90f3363d17986a2241a48",
+      "object_sha256": "47ee2bd12aba4e8e9e1c4a8fb35cb52bdf972f132449abee5ce7bdbec025e291",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/flags-Op/comparison.json",
+      "comparison_sha256": "0761da37262a765fd0d7a863ebd47596f5cc26a1403306023b41c46c3404321d",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "flags-Ow",
+      "source_sha256": "cfc5df1a201ee4d3ded7c2fa30f94ce9210e7ec037b90f3363d17986a2241a48",
+      "object_sha256": "a667d99cb7b8b75edf6b41b706605c30bcb2cf7a4017eb9ff354f9c9e2aea2f1",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/flags-Ow/comparison.json",
+      "comparison_sha256": "37ec26ef656a0ea2947db9fea0edc95775a7c0cf6e9c1a3cce6b6c5aa31842f6",
+      "rebuilt_bytes": 1968,
+      "relocation_masked_differing_bytes": 1856
+    },
+    {
+      "name": "flags-Oyminus",
+      "source_sha256": "cfc5df1a201ee4d3ded7c2fa30f94ce9210e7ec037b90f3363d17986a2241a48",
+      "object_sha256": "f2d8c9894098b6f45ff0425c46252f04f60a0ea03deeb09b0490286acd51c67b",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/flags-Oyminus/comparison.json",
+      "comparison_sha256": "c5deda8381528a2962d507e130d558a3c3bd164a70a3a1162b39dc7fb4f3c532",
+      "rebuilt_bytes": 1712,
+      "relocation_masked_differing_bytes": 1882
+    },
+    {
+      "name": "flags-Z7",
+      "source_sha256": "cfc5df1a201ee4d3ded7c2fa30f94ce9210e7ec037b90f3363d17986a2241a48",
+      "object_sha256": "89ea16afaa980c015cd406a7d779da36bba3c99a6d1831bebc6be270b7a09bd7",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/flags-Z7/comparison.json",
+      "comparison_sha256": "05b149726b25884275cb8d16e52ef33eb977409340a0d2727ade3e665639c4f8",
+      "rebuilt_bytes": 1923,
+      "relocation_masked_differing_bytes": 1339
+    },
+    {
+      "name": "flags-Zd",
+      "source_sha256": "cfc5df1a201ee4d3ded7c2fa30f94ce9210e7ec037b90f3363d17986a2241a48",
+      "object_sha256": "7484f12e8361f92b359b2a333e18648b3c0479377fef39a61c5ab31b0dc26061",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/flags-Zd/comparison.json",
+      "comparison_sha256": "f5b4cab10dc76b884ff4dafedb902a50d1adfbca76e90595afc28bbc168aa673",
+      "rebuilt_bytes": 1923,
+      "relocation_masked_differing_bytes": 1339
+    },
+    {
+      "name": "flags-Zi",
+      "source_sha256": "cfc5df1a201ee4d3ded7c2fa30f94ce9210e7ec037b90f3363d17986a2241a48",
+      "object_sha256": "2f77827a34f7d20589488a4ba0d79cdb8d0cb2ece6816ab735206763a1d9d887",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/flags-Zi/comparison.json",
+      "comparison_sha256": "1d9ab0b722ac1eea4da0379e2e080edd682df704cb403b78717d29a233e5c6cf",
+      "rebuilt_bytes": 1923,
+      "relocation_masked_differing_bytes": 1339
+    },
+    {
+      "name": "history-and-residual",
+      "source_sha256": "2e22279d56de0740aaf71ef6b8e7d10afb327c4e24e224c96e4e291b0061b794",
+      "object_sha256": "dad5b2c8e964f17c5fad3cdc43a3868854a478572bd80085fd7c6d7ee10421ef",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/history-and-residual/comparison.json",
+      "comparison_sha256": "12091689a4452cc05432d8391aaa6e10226c2f7501c64249876748590105a151",
+      "rebuilt_bytes": 1920,
+      "relocation_masked_differing_bytes": 1310
+    },
+    {
+      "name": "input-short-castbyteFalse",
+      "source_sha256": "785002179b5567788de7edd536b38708fbfd09b1a8dfecd4da9dbbc54641616c",
+      "object_sha256": "abd332ed60801c3b870d5e4a6d788c919cc94f00f52da1cf17188f619435b8d7",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/input-short-castbyteFalse/comparison.json",
+      "comparison_sha256": "3d1248df98c344bbab597afb1aca02557c3995dfa9f239ccb80ecbbadd6e5294",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "input-short-castbyteTrue",
+      "source_sha256": "3e34b7c751dbcf3f7da2b4ab87a817401d58559727fc290f1c63b6fbf97636cc",
+      "object_sha256": "012518af1f05f3c2c964a013b8274ab9821f67c40de1fb28d3809d187b9e5349",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/input-short-castbyteTrue/comparison.json",
+      "comparison_sha256": "c62f8d9ffde6710e711f906e30d1ad74b61f52135563ff9dd981dca9ac93fe13",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "input-short-castwordFalse",
+      "source_sha256": "67abb7051a8eb8d502d659aefb3cd73d913e1f0594d45a2fd4be05c7521e23b4",
+      "object_sha256": "707cf624b7851b929a54992881971ba33ad2157c3fa8efcff071362adf557df0",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/input-short-castwordFalse/comparison.json",
+      "comparison_sha256": "6ce5920ab7d0f8d8528bd90b2b6d4609223ef26a11dee51213165632c1c9b1f0",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "input-short-castwordTrue",
+      "source_sha256": "3bc15f2fdcc3c5a1a9e5d90b6d48161a53cf6e1fcd081527398ce80b6d0e34ff",
+      "object_sha256": "00fd5b2d9ee4fdaccc9e6ab270fbd1666e7b5955417af1492667b5ffc8504fb6",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/input-short-castwordTrue/comparison.json",
+      "comparison_sha256": "a963c61d71d8b32e0dd67f7151ca9ea991ae009058cb07056579c38880c41fc1",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "input-shortFalse",
+      "source_sha256": "ee74ee189d6187e444420acca94e1b007963518532b1f5886e6d41f29cde17ec",
+      "object_sha256": "fb090fcc2da23a5b8463dcc7d0c4cc93ccbbbe49c17485df92955ac006afb781",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/input-shortFalse/comparison.json",
+      "comparison_sha256": "f170c7d539b704c868983835abb08988d087183281e3a9c62aa6cb7afbb9252b",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "input-shortTrue",
+      "source_sha256": "4db35e3265864bdb8c1be56e58905f510d05bedeef593adb0d0be6a3e316da12",
+      "object_sha256": "5a91aae952b08269ba88c8a052c18c3552f6c1f6aaf95fab70d67c65892cb334",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/input-shortTrue/comparison.json",
+      "comparison_sha256": "d13467db668681fd880bc943efc12ac7a992616c96e4d467a71583fb00786d2f",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "input-unsigned-shortFalse",
+      "source_sha256": "121a56ea1b3e9d55c428e8dbf732feb054f6b891991c40db14e4d6d4fca39456",
+      "object_sha256": "71be6f427041bc1e59673fca3b99526629eb4915889b98a5acd4cc37da88b49d",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/input-unsigned-shortFalse/comparison.json",
+      "comparison_sha256": "a4ac27d0dc9c991d94f4ec62257d6724a739ee23ccd74a6834a06295c61b6482",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "input-unsigned-shortTrue",
+      "source_sha256": "cf098727c85f2e0f6b9a1507665cc0671d1f0d98e8ba2d555a65671ab6b3e9f9",
+      "object_sha256": "8a8ff108241d1ec2b16906b38f3db72ebdbc78f56c8e31fe9df8e704b84684a5",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/input-unsigned-shortTrue/comparison.json",
+      "comparison_sha256": "79f191017bf9dc2477e615ccd5386a19c6f5d0ae47fef1a0e33cc611177743da",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "last-two",
+      "source_sha256": "47cf3b9e813bcde47097733dfa97614a261ba4ff3a7a45826cc0e1f1b6593135",
+      "object_sha256": "f0b673a62c9f2dfeeeade6b2e482a1db2334d305bc4f5f412e8e88a6148a809e",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/last-two/comparison.json",
+      "comparison_sha256": "4b5e10caeebcc2b4a7d275f4d07d15140aa1ba2cad545c7f4e4e4b3d8b83a799",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "loops-both-WORD",
+      "source_sha256": "7fcbbfb6d5c7daf3883771272e1097b22665762ad016c1e11c7f3ed6a2de348b",
+      "object_sha256": "9021d69174f39102cb798c7261c1023b4a97335755b7e4d8016cc46477c0a69f",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/loops-both-WORD/comparison.json",
+      "comparison_sha256": "540bee3936eff7842a16dc8e65f26b7c24d8977138c671ee5a14beb6ced1828f",
+      "rebuilt_bytes": 1152,
+      "relocation_masked_differing_bytes": 1860
+    },
+    {
+      "name": "loops-both-int",
+      "source_sha256": "96e9e1d1c77fccffd1ac0e6c2000e8f00f1973b7773c748512ef91f2c93878dc",
+      "object_sha256": "a8904a2348ac0bb6a3a50c67367e1b6b4994f3dbb3ac6232322e0e83a47a799d",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/loops-both-int/comparison.json",
+      "comparison_sha256": "79366567b0e1faaeb56f1611c6d69e1261a037980eccf221cc6330ec96a20219",
+      "rebuilt_bytes": 1536,
+      "relocation_masked_differing_bytes": 1853
+    },
+    {
+      "name": "loops-first-WORD",
+      "source_sha256": "a2667d3277b487634327f3bfdb650a2821f747429735d5bc0b2a7f1e52181ce7",
+      "object_sha256": "2d3975c05ad0f129c6981a107f4acb14bf391caf7d7a12dda7aaab7630b81e01",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/loops-first-WORD/comparison.json",
+      "comparison_sha256": "b0915bb5588f040549a31f38e95dcaf13e827f5f717802372cc0db6ffadde021",
+      "rebuilt_bytes": 1520,
+      "relocation_masked_differing_bytes": 1859
+    },
+    {
+      "name": "loops-first-int",
+      "source_sha256": "c890a89e12c2f1ac963e00d062a5af6507d574973fded455286c92f89b4d5c30",
+      "object_sha256": "a978793df3e67e92c7619434c66243826072d769604a412d757495e6fe6b6b9e",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/loops-first-int/comparison.json",
+      "comparison_sha256": "3864d8fbbc20c7a2525bce3a92fbe39bc6c4bbabaf90a025c880795c19486322",
+      "rebuilt_bytes": 1760,
+      "relocation_masked_differing_bytes": 1862
+    },
+    {
+      "name": "loops-second-WORD",
+      "source_sha256": "03ba5035b03fabc7449b497b0020d048c6111681c0cb2df19a0623c44abf4647",
+      "object_sha256": "339beff097a1f1a4ddb2adbb1c01511a43a47b2f16df8928e8e283cae1df2a6a",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/loops-second-WORD/comparison.json",
+      "comparison_sha256": "9fc65cd11bf424e51d975fedef296b3b223d086b6c5f5d5b472be498e4503c01",
+      "rebuilt_bytes": 1552,
+      "relocation_masked_differing_bytes": 1862
+    },
+    {
+      "name": "loops-second-int",
+      "source_sha256": "8124421cf7ce4d0213a477d0772d93ae0d0be26730c62aebd83d5a2a4aa6d8d1",
+      "object_sha256": "56f9136acd61e482b3fc5a03e0fd4100d3b5ac6ffcc4523db7727fe0c1203b11",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/loops-second-int/comparison.json",
+      "comparison_sha256": "a76692cc610e32ab1687a05ee77131eff0433af462668f3708fef924485180cb",
+      "rebuilt_bytes": 1712,
+      "relocation_masked_differing_bytes": 1848
+    },
+    {
+      "name": "nibble-all-locals",
+      "source_sha256": "4ba2746a517c4a15eb0f99337ead0ff4954e3c3ff3681a43f89e5f0f7f001711",
+      "object_sha256": "c0098ebd6d8d0a52106e886ba4e726e70943ff91b049518fce15d9d730447b5d",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/nibble-all-locals/comparison.json",
+      "comparison_sha256": "e3c16be7a13dc08c032dcbd00d45c8224e649337caf998f4c273f2e7e37f87cb",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1518
+    },
+    {
+      "name": "nibble-counter-local",
+      "source_sha256": "89ecafb93b5251c3c4760a6ced4318c3c06eaca72ef7e9a99a9b7a1f4a071f76",
+      "object_sha256": "6fa79b01e6dc5e488f31958957a6cea4c05f51ca1eeb1cd435a9ff1b495e0ce6",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/nibble-counter-local/comparison.json",
+      "comparison_sha256": "3f5234a4beff42839df319a7023bd64d4f4f7fef8d69328627ddeeaffec2c177",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1330
+    },
+    {
+      "name": "nibble-icode-local",
+      "source_sha256": "bacf4278a6a61a87081ab22a795acbb87a72f121523523a2e85423dd4de2ff4f",
+      "object_sha256": "2a439dd5722a463b650cdcf62ac9a1228a6092f373fdb639fd40702c80b075f9",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/nibble-icode-local/comparison.json",
+      "comparison_sha256": "eedce5978444d92f0e2d8f76f5b00b35c6f35bba1a7f76eec92f5ccae5c14bce",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1515
+    },
+    {
+      "name": "nibble-icode-separate",
+      "source_sha256": "f5ce957a9c48c4dc3152598d7689b0670a9c9beb2aebeb778780349a79fa2e25",
+      "object_sha256": "2dcf96b9bcd9c7af10c08301930c0fad71db5a313d5866724a2234d56cc7977e",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/nibble-icode-separate/comparison.json",
+      "comparison_sha256": "38aba7fcbf5cb491b25f836ae6975dda23dbd8f22cbb57058c64c9a32c8c2690",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1515
+    },
+    {
+      "name": "nibble-scope-loop",
+      "source_sha256": "dbfc89a712f4123afb45e726d0840ccf729b7f18cb644ee0b794901e9032992c",
+      "object_sha256": "b209100a6698322d9b73c99ad42f139af1e0d1cc9f5d64e115cd5e5de66a50fd",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/nibble-scope-loop/comparison.json",
+      "comparison_sha256": "c6cd1cc32064394c1ed3baefe5af0183cd54bb47b00584bb05840b868938a416",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "observed-addition-order",
+      "source_sha256": "c5ff399c0b9904097f12cece1f780ad5a4ba05f51e421bdb8108467713f2bad7",
+      "object_sha256": "f5c9b60270c0d806f543996352ed66bd5f5edf64da95f825280eed4f35d70222",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/observed-addition-order/comparison.json",
+      "comparison_sha256": "bde6acfe6d971ada167f9fa37201bfe3de7c98aa20128bc3da8674b96870bf74",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "prediction",
+      "source_sha256": "7ac2c2ec7f1708a4ae6f8e8e01cff4e7f224dcebd6afcf47b216b199dcb5a902",
+      "object_sha256": "148b156f54a9dee9f4d8c211d36bd5ac58b43cd50babd094107685bcd7f95398",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/prediction/comparison.json",
+      "comparison_sha256": "7dfe2fcfed9f723d7deb0e062d2c151a7c1717ab019ab0ea479d2effd0489c8e",
+      "rebuilt_bytes": 1952,
+      "relocation_masked_differing_bytes": 1608
+    },
+    {
+      "name": "separate-history",
+      "source_sha256": "437ac573105b1e28946b99b4a8b2af9ee4642e3060a4b7e723f65de9ee40c314",
+      "object_sha256": "b6e5468b03a867029675bdb44c19f99e72e448568cd69f53ab023c31a53364b9",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/separate-history/comparison.json",
+      "comparison_sha256": "46d0164fe07d09fb76606265a36817e2eb84574724c158dc372d7c693536b285",
+      "rebuilt_bytes": 1952,
+      "relocation_masked_differing_bytes": 1608
+    },
+    {
+      "name": "shift-both",
+      "source_sha256": "c4fcd48cf29286dc4964412896e6d174566bb96345472ff9b1009d0e92f04e82",
+      "object_sha256": "84dd599a29c98dd81b7f77a42a1c75c25b754ce8152acfdb4e8346cf4ce4ba67",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/shift-both/comparison.json",
+      "comparison_sha256": "091fa17d317a26b7ce55dab1a6bbb0fb5660843511146a3866b22d6c1f781df6",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "shift-first",
+      "source_sha256": "2036e9d659a7c03813b85f001149eeb012c65b09179dd19c2dbd678740096492",
+      "object_sha256": "041a0f69d118067d5b28a0feb00e15e2f659dec0eaf6b000fa2e9c9c79112712",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/shift-first/comparison.json",
+      "comparison_sha256": "d211cddf4a75236a1c4dfb785044a11af5af766d1cdf70541580395bb46e347e",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "shift-second",
+      "source_sha256": "fbb9b575af8a10254805fc0df5571e47fb2386a429bc1ee2dbcf6e6e546b2229",
+      "object_sha256": "0f49d2bec18a888edef7a1afa121ebbd025157ff7ea13117061f4e13227b0795",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/shift-second/comparison.json",
+      "comparison_sha256": "9ec35280c4a7f485ce637050f53011b42ef01072d0ab11e5f9fa55a29576e59f",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "single-0-both",
+      "source_sha256": "33851bdbfbe6b2c7338f50ca93188c66e49f26f38b98b007c5cda8fd51bad503",
+      "object_sha256": "a1477a6836ad77876ab1867e87a145132e2398b645cd2d92fdcebec05763538f",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/single-0-both/comparison.json",
+      "comparison_sha256": "6f725a3d6077458dad5268de5c7ee3a8a2af7f6651b8a333ce503841f6d151f5",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "single-0-first",
+      "source_sha256": "bd1969ce96b5438fd2c434e333c9a1a0e6e2dd9345a1c80daa007f158eb54c59",
+      "object_sha256": "fba6a39b2041a71ff94aa2d287b6ef4d0b4d6ec9b2eb57ce975c4990cc3dfe71",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/single-0-first/comparison.json",
+      "comparison_sha256": "6264a21a4aee01a18ece06d66777dc133446b0ebfb0a84a25f95700a75bf9884",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "single-0-second",
+      "source_sha256": "a746f3a4c0c43599bf25d83270c041817fec881a22f423b57200ee47de69f5ed",
+      "object_sha256": "c8d065cad03df6ec34a4670286a13abe0a830b76eda381c9208abe62d1420fd7",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/single-0-second/comparison.json",
+      "comparison_sha256": "8969c72e3005f1031eaf96e1f862c1cdcdac6cf3e0a9518e2c2fc78c653b6c96",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "single-1-both",
+      "source_sha256": "fcd4d7c30549e934646f98c0b65c27244622f5ad9ee787d8317c17f1007a5716",
+      "object_sha256": "808f0550b63c77b43acffc2a532ab39d5ae03bffd5e9bbe0a031fbcfbb115b1b",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/single-1-both/comparison.json",
+      "comparison_sha256": "f69816007f8cb56f2b8d8d4bfbc672d8a3db91f97927560ba776ea172a810fb2",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "single-1-first",
+      "source_sha256": "a58aee40b417a3d6126e5ca0b4dddbb545781d384f9e332a80db7fa7dad28a7f",
+      "object_sha256": "b8decde4862e56bc43772673f2456fd9489125fae35d49ba7007c529b2adf55d",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/single-1-first/comparison.json",
+      "comparison_sha256": "b1fac389fdb329e04a00db09f715562b779f4dba5595651fac8206a8ae03af9f",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "single-1-second",
+      "source_sha256": "39a39688691c30983be881c6e0973e05307eb7e92bf9f32e67b58c39104a0dad",
+      "object_sha256": "3f6d65b26513e731727e6d9d0e2ccabbee72d6e5d34b9bb0aa0e282e9f00b857",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/single-1-second/comparison.json",
+      "comparison_sha256": "5d5d91fdc28fe0976920d080a051cab68dd073ca5ea4d05b7b0efdcc6abdffa2",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "single-2-both",
+      "source_sha256": "55ffaa5e27cf6299f1b694f9b887eb8957cfe3107ba19a50330ee0f650886177",
+      "object_sha256": "5a5a8cd366cbb6f4c2e26be6109ae9c1e5c686d607fbea55317761bb88e80659",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/single-2-both/comparison.json",
+      "comparison_sha256": "2aae696434ae01c4b80fdc388bcda2e563bbb6bd7dbe335371bf6a9c68f6d117",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "single-2-first",
+      "source_sha256": "8e6c021e36f2dee3fcb2862413d5de0e2754206eeb05dccc56a54bbc6069c1b5",
+      "object_sha256": "e38db0f0b47716f624bef9e881d7cc0de097a54ea3639a813cc21d2efed03e15",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/single-2-first/comparison.json",
+      "comparison_sha256": "ba216339a10748a620ab2f94666e32835d53c19f4986204bcd29fba47933e8aa",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "single-2-second",
+      "source_sha256": "d12c169c59925af19e4177f761342190d50d548db3c738fc7b7d6a27f4d30dbb",
+      "object_sha256": "86ae3bcc2d6ea9071d5e973e8866ca4367999703502735850ceb0f954f342a41",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/single-2-second/comparison.json",
+      "comparison_sha256": "b5b327477917f6e8308f9f040ddfce56ce99cf8dd2900dd06c57180dcfe5a54c",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "single-3-both",
+      "source_sha256": "639a091d840c4f713b1073adae6617b3c7b11bd198835cafe353ad18fb45bf4a",
+      "object_sha256": "26410ea127306be1b0d6ad5c5d03e4e6cbf3ecb1fdbec02f66ea5450b289a95f",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/single-3-both/comparison.json",
+      "comparison_sha256": "2b57358633cffcf83629683bcf4a28359ebbf359788d77970900472d2504ed85",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "single-3-first",
+      "source_sha256": "07106422b8bfe084dd84a51ef4f6c9ac879ecde49ccf1271244c1877ab91b22e",
+      "object_sha256": "3cf49cc8ac849b78e2ea4ba216ce7180f00d87952d37d7d69c809bc2676a481d",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/single-3-first/comparison.json",
+      "comparison_sha256": "78d9591cb938ea581f1de2f3786b36f8ce03006e607db37985b6f9edf920734c",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "single-3-second",
+      "source_sha256": "d06f907a1b33aa3dadb8a7024d94c94b4bac6b8d26f5ffb9cf504028f170918a",
+      "object_sha256": "2a8056d501de1410d84b324014dcdcee45e53434034a8c19d78e092d8b0ed23b",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/single-3-second/comparison.json",
+      "comparison_sha256": "3d5fedbd10061621c0e7d53ba39d86bf2d53d2d4aac58ea5b1884218b3e518bb",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "single-4-both",
+      "source_sha256": "ad634a296aedb99531c27a57186bb01b69956fe93c66f96e3a3234e149c37eb6",
+      "object_sha256": "93e2fea5f4188166ed0a3844f8b19d88d71689b7cb57782c65e1ea7c079b58f1",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/single-4-both/comparison.json",
+      "comparison_sha256": "409e4be75653d80bb53d1cbd08df40b8ecda2abe00a59d924b1be3c696a1096f",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "single-4-first",
+      "source_sha256": "2aa02e1fa66089d1674e6ca23f2e985a8dfb78bd49ea4dd71d45689b54cb6208",
+      "object_sha256": "9e0f7233806d236533156e789777acf809fa9225489bc4a7ba3dd5d45643965f",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/single-4-first/comparison.json",
+      "comparison_sha256": "5399d5227cb46779b6023a31456ead3e6137fdc59059bf893c5566a7af8af74a",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "single-4-second",
+      "source_sha256": "dc7f845b94e37a0e57c96e7d0979d8ab3c1ffb6e1b71e61be7f071422f3d22bf",
+      "object_sha256": "1e9ecd578e9acda22a461e5249dc9a217e466d94a643d9105c0658075f4ce4e7",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/single-4-second/comparison.json",
+      "comparison_sha256": "78fb428d21dbf77089a62b84d4bfeeaa97787518609474f1be0708e4a39688b4",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "single-5-both",
+      "source_sha256": "4ebe3527f8752876f9dc526addad89c8f1370d933c3982701382b853a63b9b40",
+      "object_sha256": "c3f80b88cb4487381c56c63341f5011d0b4d9731aaf269db416107afa9576156",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/single-5-both/comparison.json",
+      "comparison_sha256": "343a11f136a8cf1dd07b0d0504b46c53492a5e44ed211a636f882bc50ce68da5",
+      "rebuilt_bytes": 1920,
+      "relocation_masked_differing_bytes": 1310
+    },
+    {
+      "name": "single-5-first",
+      "source_sha256": "74d403ddb7eeb92c3d933ed191b442d14c037888a27f03c88a7579bbf2c4b281",
+      "object_sha256": "d640613edcb70f13eb32dd7473727990e797da2a5233ab45e186fafbfe367653",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/single-5-first/comparison.json",
+      "comparison_sha256": "e7891f4f4e8ef9d015f5eed455d959a8ec3becd38a9b77973ab3a5c594af30ff",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "single-5-second",
+      "source_sha256": "c9962520eb6a934a6d444e641b93a14f3493fe54dfc0a4192dc55ca31e7060c7",
+      "object_sha256": "e1760beb4174a1962af017f57ac18648a5f6ad3c07894928c11b267966c6aaaa",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/single-5-second/comparison.json",
+      "comparison_sha256": "17219a13931cf0e526a0cd591a1bc6e8c820b21806c31dfb6dc056916df1f5f5",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "single-6-both",
+      "source_sha256": "c4b7e2da0d53c62298e3f8551c1763b0e6b36dd8e2f8ebe4c044e3bc631764fb",
+      "object_sha256": "9f7e85c1a48a3df9cbeaefab79e647f152273eba7cc623c6a6a8c03b6de7ff39",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/single-6-both/comparison.json",
+      "comparison_sha256": "790882c6227d9a4925585dc55b92b72c90368b6f9e764b4d1ab3cec2e305f507",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1521
+    },
+    {
+      "name": "single-6-first",
+      "source_sha256": "da8f010d6e3cc8c774df93646e27978ccf238a4068e920051ce5f86298a2a9a0",
+      "object_sha256": "77a333dfd96a9d67acefd28468575cefee01a04ae3d0667119c267c2c618f53f",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/single-6-first/comparison.json",
+      "comparison_sha256": "f0da94f7d176f3a0598deb5fe54d7b123f00ca909777ba82c861b20e78bf21b2",
+      "rebuilt_bytes": 1920,
+      "relocation_masked_differing_bytes": 1334
+    },
+    {
+      "name": "single-6-second",
+      "source_sha256": "1975f3b6696213464e6c101125875dc610a31c9ffccd4676c516a223ab9b9efe",
+      "object_sha256": "bb3fc7992ce950eed722bb44e85b3a08f154159bc57d49c20397c346c51a6fdf",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/single-6-second/comparison.json",
+      "comparison_sha256": "cb05f8cc0cc6b73e6dc5c5f50c2555ac1447887f5805b7820c770db1c54daeab",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "single-7-both",
+      "source_sha256": "4ac927f2aed82c1afcde5a2adf630b583ba61333f85b02824df2e243b8b1c330",
+      "object_sha256": "40e891ac9fe2b97bd23f769f18a3c79c72baf3885959710d8b03fa52cc3b0645",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/single-7-both/comparison.json",
+      "comparison_sha256": "137a654ade8a40d2f1908d2a1a2f01fcb2308111cd9840f78bf9a36a00d73bd8",
+      "rebuilt_bytes": 1920,
+      "relocation_masked_differing_bytes": 1310
+    },
+    {
+      "name": "single-7-first",
+      "source_sha256": "cd7aac62ea51ca1c5f168b389dd6afccc0a6e19a547bf0b12ed4719d18bfdcc6",
+      "object_sha256": "14f219ca21a67e8b8b39156bb3a481d06ba1d81ec6f4f4067bf6bac7f2ec9de7",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/single-7-first/comparison.json",
+      "comparison_sha256": "1e8ddf0da01c11651c18379b9dad1bf47f55025a64bbe2c1feabf29543044ef8",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    },
+    {
+      "name": "single-7-second",
+      "source_sha256": "eb80b356e266b81c45e9678b1b19694800939f9f4ad884a32ac769b0f55bfe9f",
+      "object_sha256": "d0ae853a119ff52e516775ab6d60123dad8e0f553728a982bc35d93bc6cf272d",
+      "comparison": "/root/.ai-tmp/audio-adpcm-legacy/single-7-second/comparison.json",
+      "comparison_sha256": "addc3e35f4d451074c09d8b8aa07cadd2678cfca32725b7c87885b493bd749d5",
+      "rebuilt_bytes": 1936,
+      "relocation_masked_differing_bytes": 1336
+    }
+  ],
+  "additional_audit": "/root/.ai-tmp/audio-adpcm-declarations.vi6c95h0/types-products-results.json"
+}
