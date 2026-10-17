@@ -31,7 +31,7 @@ def main():
     tree = artifact / 'build-tree'
     if not tree.is_dir():
         tree = Path(build['project'])
-    for source in build['source_files']:
+    for source in build.get('compiler_source_files', build['source_files']):
         data = (tree / source['path']).read_bytes()
         if hashlib.sha256(data).hexdigest() != source['sha256']:
             raise ValueError(f'Build source snapshot changed: {source["path"]}')

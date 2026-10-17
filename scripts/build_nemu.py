@@ -29,9 +29,11 @@ SOURCE = ROOT / 'src/nemu64'
 # Inferred application ordering. Include every additional real source unit
 # after these; this list is not a claim that the original filenames survived.
 APPLICATION_ORDER = [
-    'CPU.cpp', 'CpuControl.cpp', 'Memory.cpp', 'ByteSwap.c', 'Dynarec.cpp', 'FrontendIni.cpp', 'Rom.cpp',
-    'State.cpp', 'WinMain.cpp', 'RomBrowser.cpp', 'Plugins.cpp', 'RSP.cpp',
-    'PIF.cpp', 'Globals.cpp', 'Data.cpp',
+    'RSP.cpp', 'Dynarec.cpp', 'CPU.cpp', 'DynarecOpcodes.cpp',
+    'DynarecMemoryOps.cpp', 'DynarecFPU.cpp', 'CpuControl.cpp', 'Memory.cpp',
+    'Plugins.cpp', 'State.cpp', 'RomBrowser.cpp', 'WinMain.cpp',
+    'FrontendIni.cpp', 'Rom.cpp', 'RuntimeSignatures.cpp', 'PIF.cpp',
+    'Globals.cpp', 'LegacyData.cpp', 'ByteSwap.c',
 ]
 
 # These 14 VC6 RTM contributions are identified in the original code. gzio.c
@@ -58,6 +60,7 @@ RECIPE_FILES = [
     'build_nemu.py', 'build_nemu_imports.py', 'run_toolchain.py',
     'verify_nemu.py', 'verify_gs.py', 'pe_fingerprints.py',
     'build_nemu_link_inputs.py', 'map_nemu_libraries.py', 'inspect_gs_symbols.py',
+    'stage_nemu_storage.py', 'nemu_storage_source.py', 'map_nemu_globals.py',
 ]
 
 
@@ -69,6 +72,8 @@ def main():
                         help='VC7 /ORDER file for reconstructed application functions')
     parser.add_argument('--ordered-libraries', action='store_true',
                         help='use the inferred unchanged CRT/import-member input order')
+    parser.add_argument('--stage-storage', action='store_true',
+                        help='stage typed initialized and zero storage in observed address order')
     parser.add_argument('--report', type=Path, help='also write the build/comparison report here')
     args = parser.parse_args()
     parent = Path.home() / '.ai-tmp'
@@ -126,21 +131,51 @@ def main():
                 copied_file='function-order.txt', sha256=hashlib.sha256(function_order).hexdigest())
         # Preserve source bytes, including the Windows-1252 resource script.
         # Build from this snapshot; no generated files are written into src/.
-        application = []
+        source_inputs = {}
         for source in sorted(SOURCE.rglob('*')):
             if not source.is_file() or '__pycache__' in source.parts:
                 continue
             relative = source.relative_to(SOURCE)
-            destination = project / relative
-            destination.parent.mkdir(parents=True, exist_ok=True)
             data = source.read_bytes()
-            destination.write_bytes(data)
+            source_inputs[relative] = data
             report['source_files'].append(dict(path=str(relative),
                 sha256=hashlib.sha256(data).hexdigest()))
-            if relative.parts[0] not in ('vendor', 'imports', 'res') and source.suffix in ('.cpp', '.c'):
+        compiler_inputs = source_inputs
+        storage_inputs = {}
+        if args.stage_storage:
+            stage_root = Path(tempfile.mkdtemp(prefix='storage.', dir=scratch))
+            stage_source = stage_root / 'original-source'
+            for relative, data in source_inputs.items():
+                destination = stage_source / relative
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                destination.write_bytes(data)
+            for name in ['nemu-globals.json', 'nemu-storage-layout.json']:
+                data = (ROOT / 'analysis' / name).read_bytes()
+                storage_inputs[name] = data
+                (stage_root / name).write_bytes(data)
+            staged = stage_root / 'staged-source'
+            run('stage-storage', [sys.executable, str(ROOT / 'scripts/stage_nemu_storage.py'),
+                '--source', str(stage_source), '--output', str(staged),
+                '--inventory', str(stage_root / 'nemu-globals.json'),
+                '--layout', str(stage_root / 'nemu-storage-layout.json')])
+            report['storage_staging'] = json.loads((staged / 'storage-stage.json').read_text())
+            compiler_inputs = {path.relative_to(staged): path.read_bytes()
+                               for path in sorted(staged.rglob('*'))
+                               if path.is_file() and '__pycache__' not in path.parts}
+        report['compiler_source_files'] = []
+        application = []
+        for relative, data in compiler_inputs.items():
+            destination = project / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(data)
+            report['compiler_source_files'].append(dict(path=str(relative),
+                sha256=hashlib.sha256(data).hexdigest()))
+            if relative.parts[0] not in ('vendor', 'imports', 'res') and relative.suffix in ('.cpp', '.c'):
                 application.append(relative)
         rank = {name: i for i, name in enumerate(APPLICATION_ORDER)}
-        application.sort(key=lambda path: (rank.get(path.as_posix(), len(rank)), path.as_posix()))
+        storage_rank = {'NemuZeroStorage.cpp': 1, 'NemuInitializedStorage.cpp': 2}
+        application.sort(key=lambda path: (storage_rank.get(path.as_posix(), 0),
+            rank.get(path.as_posix(), len(rank)), path.as_posix()))
         report['application_units'] = [str(path) for path in application]
         report['application_flags'] = APPLICATION_FLAGS
         report['native_c_flags'] = NATIVE_C_FLAGS
@@ -231,14 +266,22 @@ def main():
         # checkpoints after the shared sources have changed.
         snapshot = artifact / 'source-snapshot'
         records = []
-        for row in report['source_files']:
+        for row in report['compiler_source_files']:
             data = (project / row['path']).read_bytes()
             if hashlib.sha256(data).hexdigest() != row['sha256']:
                 raise RuntimeError('Build source changed during compilation: ' + row['path'])
+        for row in report['source_files']:
+            data = source_inputs[Path(row['path'])]
             destination = snapshot / 'src/nemu64' / row['path']
             destination.parent.mkdir(parents=True, exist_ok=True)
             destination.write_bytes(data)
             records.append(dict(path=str(destination.relative_to(snapshot)), sha256=row['sha256']))
+        for name, data in storage_inputs.items():
+            destination = snapshot / 'analysis' / name
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            destination.write_bytes(data)
+            records.append(dict(path=str(destination.relative_to(snapshot)),
+                                sha256=hashlib.sha256(data).hexdigest()))
         for name, data in recipe.items():
             destination = snapshot / 'scripts' / name
             destination.parent.mkdir(parents=True, exist_ok=True)
@@ -260,6 +303,8 @@ def main():
         (artifact / 'snapshot-manifest.json').write_text(json.dumps(dict(
             parent_artifact=str(artifact), source_file_hashes_verified=True,
             source_files_from_build_report=len(report['source_files']),
+            source_snapshot_kind='original_reconstruction_inputs',
+            compiled_input_tree='build-tree',
             scripts_captured_before_build=RECIPE_FILES, files=records), indent=2) + '\n')
         write_report()
         shutil.copyfile(scratch / 'build.json', artifact / 'build.json')
