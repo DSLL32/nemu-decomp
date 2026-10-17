@@ -136,49 +136,71 @@ void LegacyLoadBuffer(AudioCommand *command, AudioContext *context)
 
 void LegacyResample(AudioCommand *command, AudioContext *context)
 {
-    int output = context->output >> 1;
-    unsigned int count = context->count >> 1;
+    int output = context->output;
+    int count = context->count;
     unsigned int address = command->words[1];
-    int pitch = (command->words[0] & 0xffff) << 1;
-    int input = (context->input - 16) >> 1;
-    unsigned int i;
-    int state[5];
-    int position = 0;
+    int pitch = command->words[0] & 0xffff;
+    int input = context->input;
+    int position, a, b, sample;
+    int loadedstate[8];
+    int savedstate[8];
+    input -= 16;
+    pitch <<= 1;
+    count >>= 1;
+    output >>= 1;
+    input >>= 1;
     if (command->bytes[2] & 1) {
+        position = 0;
         context->buffer[input + 0] = 0;
         context->buffer[input + 1] = 0;
         context->buffer[input + 2] = 0;
         context->buffer[input + 3] = 0;
-        position = 0;
     } else {
-        for (i = 0; i < 5; ++i)
-            state[i] = *(int *)(RDRAM + ((address + i * 4) & 0xffffff));
-        for (i = 0; i < 4; ++i) {
-            context->buffer[input + i * 2] = state[i] >> 16;
-            context->buffer[input + i * 2 + 1] = state[i];
-        }
-        position = state[4] & 0xffff;
+        loadedstate[0] = *(int *)(RDRAM + ((address + 0) & 0xffffff));
+        loadedstate[1] = *(int *)(RDRAM + ((address + 4) & 0xffffff));
+        loadedstate[2] = *(int *)(RDRAM + ((address + 8) & 0xffffff));
+        loadedstate[3] = *(int *)(RDRAM + ((address + 12) & 0xffffff));
+        loadedstate[4] = *(int *)(RDRAM + ((address + 16) & 0xffffff));
+        context->buffer[input + 0] = loadedstate[0] >> 16;
+        context->buffer[input + 1] = loadedstate[0];
+        context->buffer[input + 2] = loadedstate[1] >> 16;
+        context->buffer[input + 3] = loadedstate[1];
+        context->buffer[input + 4] = loadedstate[2] >> 16;
+        context->buffer[input + 5] = loadedstate[2];
+        context->buffer[input + 6] = loadedstate[3] >> 16;
+        context->buffer[input + 7] = loadedstate[3];
+        position = loadedstate[4];
     }
     count += 16;
-    for (i = 0; i < count; ++i) {
-        int offset = input + (position >> 16);
-        int first = (unsigned short)context->buffer[offset];
-        int second = context->buffer[offset + 1];
-        int sample = first + (((second - (short)first) * (position & 0xffff)) >> 16);
+    position &= 0xffff;
+    while (count--) {
+        a = position >> 16;
+        b = position & 0xffff;
+        sample = context->buffer[input + a + 1] - context->buffer[input + a];
+        sample = ((sample * b) >> 16) + context->buffer[input + a];
         context->buffer[output++] = sample;
         position += pitch;
     }
     position -= pitch * 16;
     input += position >> 16;
-    state[0] = (context->buffer[input + 0] << 16) | (unsigned short)context->buffer[input + 1];
-    state[1] = (context->buffer[input + 2] << 16) | (unsigned short)context->buffer[input + 3];
-    state[2] = (context->buffer[input + 4] << 16) | (unsigned short)context->buffer[input + 5];
-    state[3] = (context->buffer[input + 6] << 16) | (unsigned short)context->buffer[input + 7];
-    *(int *)(RDRAM + ((address + 0) & 0xffffff)) = state[0];
-    *(int *)(RDRAM + ((address + 4) & 0xffffff)) = state[1];
-    *(int *)(RDRAM + ((address + 8) & 0xffffff)) = state[2];
-    *(int *)(RDRAM + ((address + 12) & 0xffffff)) = state[3];
-    *(int *)(RDRAM + ((address + 16) & 0xffffff)) = position;
+    a = context->buffer[input + 0] << 16;
+    a |= context->buffer[input + 1] & 0xffff;
+    savedstate[0] = a;
+    a = context->buffer[input + 2] << 16;
+    a |= context->buffer[input + 3] & 0xffff;
+    savedstate[1] = a;
+    a = context->buffer[input + 4] << 16;
+    a |= context->buffer[input + 5] & 0xffff;
+    savedstate[2] = a;
+    a = context->buffer[input + 6] << 16;
+    a |= context->buffer[input + 7] & 0xffff;
+    savedstate[3] = a;
+    savedstate[4] = position;
+    *(int *)(RDRAM + ((address + 0) & 0xffffff)) = savedstate[0];
+    *(int *)(RDRAM + ((address + 4) & 0xffffff)) = savedstate[1];
+    *(int *)(RDRAM + ((address + 8) & 0xffffff)) = savedstate[2];
+    *(int *)(RDRAM + ((address + 12) & 0xffffff)) = savedstate[3];
+    *(int *)(RDRAM + ((address + 16) & 0xffffff)) = savedstate[4];
 }
 
 void LegacySaveBuffer(AudioCommand *command, AudioContext *context)
@@ -271,12 +293,15 @@ void LegacyMix(AudioCommand *command, AudioContext *context)
 
 void LegacyInterleave(AudioCommand *command, AudioContext *context)
 {
-    int left = command->halfwords[3] >> 1;
-    int right = ((int)command->words[1] >> 1) & 0x7fff;
+    unsigned int left = command->halfwords[3];
+    int right = command->words[1] & 0xffff;
     int output = context->output;
-    int count = context->count >> 1;
+    int count = context->count;
     int i;
+    count >>= 1;
     count = (count + 7) & ~7;
+    left >>= 1;
+    right >>= 1;
     output >>= 1;
     for (i = 0; i < count; ++i) {
         int sample = context->buffer[left + i];
