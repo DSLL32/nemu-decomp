@@ -1,4 +1,5 @@
 /* Audio task dispatch and ABI selection. Original private names inferred. */
+#include "transform.h"
 #include "AudioHLE.h"
 #include "AudioCommands.h"
 #include "AudioProcessing.h"
@@ -13,6 +14,28 @@ BOOL HLEAudio;
 int AudioTaskSeen;
 int AudioBuffersAllocated;
 int AudioTaskRunning = 1;
+/* Retained diagnostic names and initialized state. Private identifiers are
+ * inferred from the original initialized-data contribution. */
+const char *AudioCommandNames[16] = {
+    "A_SPNOOP",
+    "A_ADPCM",
+    "A_CLEARBUFF",
+    "A_ENVMIXER",
+    "A_LOADBUFF",
+    "A_RESAMPLE",
+    "A_SAVEBUFF",
+    "A_SEGMENT",
+    "A_SETBUFF",
+    "A_SETVOL",
+    "A_DMEMMOVE",
+    "A_LOADADPCM",
+    "A_MIXER",
+    "A_INTERLEAVE",
+    "A_POLEF",
+    "A_SETLOOP",
+};
+int AudioInitialState = 1; /* Retained unreferenced four-byte value at 10036a08. */
+
 int SeenCommands[32];
 DWORD AudioUCode;
 AudioContext AudioState;

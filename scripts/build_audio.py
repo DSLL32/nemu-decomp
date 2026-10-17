@@ -16,7 +16,7 @@ import subprocess
 import sys
 import tempfile
 
-from verify_audio import compare_objects, ORIGINAL
+from verify_audio import compare_objects, load_symbols, ORIGINAL
 from verify_gs import compare_dll
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -42,17 +42,24 @@ def main():
     scratch=args.work.resolve() if args.work else Path(tempfile.mkdtemp(prefix='nemu-audio-build.',dir=parent))
     if not scratch.is_relative_to(parent.resolve()) or scratch==parent.resolve():
         parser.error('--work must be a folder below ~/.ai-tmp')
-    work=scratch/'build'; work.mkdir(parents=True,exist_ok=True)
     snapshot=scratch/'runs'/next(tempfile._get_candidate_names())
     snapshot.mkdir(parents=True)
     staged=snapshot/'source'; shutil.copytree(SOURCE,staged)
-    for path in staged.rglob('*'):
-        if path.is_file():
-            dest=work/path.relative_to(staged); dest.parent.mkdir(parents=True,exist_ok=True); shutil.copyfile(path,dest)
+    work=snapshot/'build'; shutil.copytree(staged,work)
+    symbols=snapshot/'symbols'; symbols.mkdir()
+    for path in [*sorted((ROOT/'analysis').glob('audio*addresses.json')), ROOT/'analysis/audio-libraries.json']:
+        if path.is_file(): shutil.copyfile(path,symbols/path.name)
+    records=load_symbols(symbols)
+    toolchain_manifest={str(p.relative_to(ROOT)):sha(p)
+        for p in sorted((ROOT/'toolchains/vc7').rglob('*')) if p.is_file()}
+    manifest=snapshot/'toolchain-sha256.json'
+    manifest.write_text(json.dumps(toolchain_manifest,indent=2)+'\n')
     env=dict(os.environ,WINEPREFIX=str(scratch/'wine'),WINEARCH='win32',WINEDEBUG='-all')
     report=dict(original=str(ORIGINAL),original_sha256=sha(ORIGINAL),full_dll_byte_exact=False,
                 diagnostic_only=args.objects_only or bool(args.unit),work=str(work),wine_prefix=env['WINEPREFIX'],
                 source_sha256={str(p.relative_to(staged)):sha(p) for p in staged.rglob('*') if p.is_file()},
+                symbol_sha256={p.name:sha(p) for p in sorted(symbols.iterdir())},
+                toolchain_manifest=dict(path=str(manifest),sha256=sha(manifest),files=len(toolchain_manifest)),
                 tool_sha256={str(p.relative_to(ROOT)):sha(p) for p in [ROOT/'toolchains/vc7/bin/cl.exe',
                     ROOT/'toolchains/vc7/bin/c1.dll',ROOT/'toolchains/vc7/bin/c1xx.dll',ROOT/'toolchains/vc7/bin/c2.dll',
                     ROOT/'toolchains/vc7/bin/link.exe',ROOT/'toolchains/vc7/lib/libcmt.lib',
@@ -80,7 +87,7 @@ def main():
             if source.suffix=='.asm': tool('compile-'+source.stem,'ml','/nologo','/c','/coff','/Fo'+str(output),str(relative))
             else: tool('compile-'+source.stem,'cl',*FLAGS,'/Fo'+str(output),str(relative))
             objects.append(work/output)
-        report['objects']=compare_objects(objects)
+        report['objects']=compare_objects(objects,records)
         if report['diagnostic_only']:
             result=0 if all(f.get('relocation_masked_equal',False) and not f.get('relocation_target_mismatch_count',0)
                 for obj in report['objects'] for f in obj['functions']) else 1
@@ -103,7 +110,12 @@ def main():
         print(str(error),file=sys.stderr)
     finally:
         report['result_code']=result
-        shutil.copytree(work,snapshot/'build')
+        report['toolchain_changed_during_build']=[name for name,digest in toolchain_manifest.items()
+            if sha(ROOT/name)!=digest]
+        if report['toolchain_changed_during_build']:
+            result=1
+            report['result_code']=result
+            report['full_dll_byte_exact']=False
         data=json.dumps(report,indent=2)+'\n'
         (snapshot/'comparison.json').write_text(data)
         if args.report: args.report.write_text(data)

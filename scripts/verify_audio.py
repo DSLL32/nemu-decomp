@@ -16,20 +16,21 @@ ROOT = Path(__file__).resolve().parents[1]
 ORIGINAL = ROOT / 'master/Plugin/audio.dll'
 
 
-def load_symbols():
+def load_symbols(directory=None):
+    directory = Path(directory) if directory is not None else ROOT / 'analysis'
     result = []
-    for path in sorted((ROOT / 'analysis').glob('audio*addresses.json')):
+    for path in sorted(directory.glob('audio*addresses.json')):
         document = json.loads(path.read_text())
         result.extend(document if isinstance(document, list) else document.get('symbols', []))
-    library = ROOT / 'analysis/audio-libraries.json'
+    library = directory / 'audio-libraries.json'
     if library.exists():
         result.extend(json.loads(library.read_text())['symbols'])
     return result
 
 
-def compare_objects(paths):
+def compare_objects(paths, records=None):
     target = PE32(ORIGINAL)
-    records = load_symbols()
+    records = load_symbols() if records is None else records
     results = []
     for path in paths:
         obj = COFF(path)

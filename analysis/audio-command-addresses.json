@@ -477,6 +477,20 @@
       "va": 268700188,
       "address_basis": "identified_symbol",
       "address_evidence": "Both producer and consumer native accesses identify state and dispatch semantics"
+    },
+    {
+      "name": "_AudioWarning",
+      "va": 268443600,
+      "size": 48,
+      "address_basis": "identified_symbol",
+      "address_evidence": "Original retained variadic function independently disassembled at 0x10001fd0 through return and NOP alignment; calls CRT vsprintf and AudioError."
+    },
+    {
+      "name": "_AudioErrorMessage",
+      "va": 268700192,
+      "size": 1024,
+      "address_basis": "identified_symbol",
+      "address_evidence": "Formatting destination and AudioError argument of the retained variadic diagnostic routine; 1024-byte extent inferred from following independently identified storage."
     }
   ]
 }

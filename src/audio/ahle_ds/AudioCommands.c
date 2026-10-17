@@ -1,6 +1,11 @@
 /* ABI command families. Names and source-unit boundaries are inferred. */
 #include "AudioHLE.h"
 #include <string.h>
+#include <stdarg.h>
+#include <stdio.h>
+
+void AudioError(const char *, HRESULT);
+static char AudioErrorMessage[1024];
 
 extern int HighQuality, StereoReversed, FilterHLE;
 int SpecialEnvelopeDetected;
@@ -217,6 +222,16 @@ void ABI1_SetLoop(AudioCommand *command, AudioContext *context)
     context->loopAddress = command->words[1];
 }
 
+/* Retained variadic diagnostic entry; private name inferred. */
+void AudioWarning(const char *format, ...)
+{
+    va_list arguments;
+    va_start(arguments, format);
+    vsprintf(AudioErrorMessage, format, arguments);
+    va_end(arguments);
+    AudioError(AudioErrorMessage, 0);
+}
+
 void ABI2_NoOp(AudioCommand *command, AudioContext *context) {}
 void ABI2_Unknown(AudioCommand *command, AudioContext *context) {}
 void ABI2_ADPCM(AudioCommand *command, AudioContext *context) { ABI1_ADPCM(command, context); }
@@ -327,12 +342,9 @@ void ABI3_NoOp(AudioCommand *command, AudioContext *context) {}
 void ABI3_ADPCM(AudioCommand *command, AudioContext *context)
 {
     int second = command->words[1], first = command->words[0];
-    int input = (second >> 12) & 0xf;
-    int output = second & 0xfff;
-    int count = (second >> 16) & 0xfff;
     int flags = (second >> 28) & 0xf;
-    context->input = input; context->output = output; context->count = count;
-    DecodeAudioADPCM(first & 0xffffff, input, output, count, flags, context);
+    context->input = (second >> 12) & 0xf; context->output = second & 0xfff; context->count = (second >> 16) & 0xfff;
+    DecodeAudioADPCM(first & 0xffffff, context->input, context->output, context->count, flags, context);
 }
 void ABI3_ClearBuffer(AudioCommand *command, AudioContext *context) { ABI1_ClearBuffer(command, context); }
 void ABI3_EnvMixer(AudioCommand *command, AudioContext *context)
@@ -367,9 +379,8 @@ void ABI3_Resample(AudioCommand *command, AudioContext *context)
     int flags = (second >> 30) & 3;
     int speed = (second >> 14) & 0xffff;
     unsigned int state = command->words[0] & 0xffffff;
-    int input = (second >> 2) & 0xfff;
-    context->input = input;
-    context->inputResample = (short)input;
+    context->input = (second >> 2) & 0xfff;
+    context->inputResample = (short)context->input;
     context->count = 0x170;
     context->output = (second & 3) ? 0x170 : 0;
     context->outputResample = (short)context->output;

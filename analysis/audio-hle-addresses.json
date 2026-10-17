@@ -153,6 +153,20 @@
       "address_basis": "identified_symbol",
       "address_evidence": "Original direct-call target and task/dispatch state accesses corroborate this inferred function name.",
       "size_evidence": "Original entry through terminal control flow and NOP alignment to the independently identified following function entry."
+    },
+    {
+      "name": "_AudioCommandNames",
+      "va": 268659144,
+      "size": 64,
+      "address_basis": "identified_symbol",
+      "address_evidence": "Sixteen original PE HIGHLOW pointers independently map to the complete standard audio command-name strings; see audio-data-boundaries.json."
+    },
+    {
+      "name": "_AudioInitialState",
+      "va": 268659208,
+      "size": 4,
+      "address_basis": "identified_symbol",
+      "address_evidence": "Retained initialized integer1 following the command-name array, with no code references; private name and purpose unknown."
     }
   ]
 }
