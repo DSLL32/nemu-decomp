@@ -1,0 +1,32 @@
+{
+  "original": "master/Plugin/audio.dll",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "status": "inferred_original_source_remnant",
+  "evidence": [
+    {
+      "start": "0x10010e50",
+      "end_exclusive": "0x10010e60",
+      "bytes": "89751c8d7405e48975108b751c8b7d10",
+      "interpretation": "Materialize source and destination pointer locals, then reload them into ESI and EDI for inline assembly. The following C loop does not consume prepared EDI."
+    },
+    {
+      "start": "0x100134e4",
+      "end_exclusive": "0x100134f4",
+      "bytes": "8975f88d7405d08975f08b75f88b7df0",
+      "interpretation": "Materialize source and destination pointer locals, then reload them into ESI and EDI for inline assembly. The following C loop does not consume prepared EDI."
+    },
+    {
+      "start": "0x10013626",
+      "end_exclusive": "0x10013636",
+      "bytes": "8975ec8d7405d08975fc8b75ec8b7dfc",
+      "interpretation": "Materialize source and destination pointer locals, then reload them into ESI and EDI for inline assembly. The following C loop does not consume prepared EDI."
+    }
+  ],
+  "source": "src/audio/ahle_ds/AudioADPCM.c",
+  "source_inference": [
+    "Standalone decoder0x10010E10 and both inlined decoder instances at0x10013460 contain the same preparation pattern.",
+    "Two stack-local pointer stores are immediately followed by ESI/EDI loads despite the following C loop not using EDI. The pattern is consistent with explicit inline assembly retained before a C fallback copy.",
+    "This reconstructs observed redundant instructions; no padding, arbitrary barriers, or additional dummy work is introduced.",
+    "No original source file or upstream source provenance is claimed. Complete byte matching of the surrounding functions is still unresolved."
+  ]
+}

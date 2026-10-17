@@ -1,0 +1,961 @@
+{
+  "status": "behavioral_diagnostic_only",
+  "original": "master/Plugin/audio.dll",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "objects": [
+    {
+      "name": "AudioProcessing",
+      "sha256": "22646d0effcdd7a8e5b957850128f0b00e6197521aa93e20019e80af4df410b8"
+    },
+    {
+      "name": "AudioADPCM",
+      "sha256": "29b85c755efeb86e54e0a456523417ea714fc11a17601c3d579d2f505536cbb8"
+    },
+    {
+      "name": "AudioPoleFilter",
+      "sha256": "82f5c1ba7d47f5470d12b94320ba926999f24ad1e746125456069907d3157941"
+    },
+    {
+      "name": "AudioResample",
+      "sha256": "438cabeb1b45853fbf07f0c8eb157985afb0e15dd9c0bd492e20ec89bcb03047"
+    }
+  ],
+  "sources": [
+    {
+      "path": "src/audio/ahle_ds/AudioProcessing.c",
+      "sha256": "26048b09ade8fc8a50d4dff4befa8d9b588795989aa330ff2f49fa71bd420e58"
+    },
+    {
+      "path": "src/audio/ahle_ds/AudioADPCM.c",
+      "sha256": "4e7091117175eb84738e348702565a27b1e16f7ad383ab7036331d14d9a72525"
+    },
+    {
+      "path": "src/audio/ahle_ds/AudioPoleFilter.c",
+      "sha256": "b65d389c08d2d48bb4e78bbfbfa39bfedcccb0e474410ccc13c9b8ce2a1c6f65"
+    },
+    {
+      "path": "src/audio/ahle_ds/AudioResample.c",
+      "sha256": "7c2cc74e3d65c5890168dbe48170bae26540b662b2ddfcd449211f9112318c8f"
+    },
+    {
+      "path": "src/audio/ahle_ds/AudioProcessing.h",
+      "sha256": "661ae00c480be2d2a2341214fe95e52c21630af602bae4ef4d3dbd7516c8962c"
+    },
+    {
+      "path": "src/audio/ahle_ds/AudioHLE.h",
+      "sha256": "82e6544a76ee5d0e361f785773e5da8bd91070019a65367d89d6cb0defd8b3ee"
+    }
+  ],
+  "cases": 129,
+  "matching": 129,
+  "limitations": [
+    "Finite synthetic vectors do not prove equivalence for every input.",
+    "External callees execute the original mapped bodies.",
+    "This does not establish byte equality or a complete DLL rebuild."
+  ],
+  "results": [
+    {
+      "function": "ReadAudioSamples",
+      "case": "random samples",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "LoadAudioEnvelope",
+      "case": "random samples",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "SaveAudioEnvelope",
+      "case": "random samples",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResetAudioEnvelope",
+      "case": "random samples",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ScaleAudioBuffer",
+      "case": "random samples",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "FilterAudioBlock",
+      "case": "random samples",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCMBlock",
+      "case": "2-bit block, offset 0x200",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCMBlock",
+      "case": "2-bit block, offset 0x201",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCMBlock",
+      "case": "4-bit block, offset 0x200",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCMBlock",
+      "case": "4-bit block, offset 0x201",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCMUnsigned",
+      "case": "unsigned predictor",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCM",
+      "case": "flags 0",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCM",
+      "case": "flags 1",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCM",
+      "case": "flags 2",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCM",
+      "case": "flags 3",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCM",
+      "case": "flags 4",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCM",
+      "case": "flags 5",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCM",
+      "case": "flags 6",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCM",
+      "case": "flags 7",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 0, bytes 0",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 0, bytes 2",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 0, bytes 32",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 0, bytes 96",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 1, bytes 0",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 1, bytes 2",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 1, bytes 32",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 1, bytes 96",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 2, bytes 0",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 2, bytes 2",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 2, bytes 32",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 2, bytes 96",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 3, bytes 0",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 3, bytes 2",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 3, bytes 32",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 3, bytes 96",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "PoleFilterAudioCommand",
+      "case": "flags 0, gain 0x0",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "PoleFilterAudioCommand",
+      "case": "flags 0, gain 0x1800",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "PoleFilterAudioCommand",
+      "case": "flags 0, gain 0x8000",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "PoleFilterAudioCommand",
+      "case": "flags 0, gain 0xffff",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "PoleFilterAudioCommand",
+      "case": "flags 1, gain 0x0",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "PoleFilterAudioCommand",
+      "case": "flags 1, gain 0x1800",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "PoleFilterAudioCommand",
+      "case": "flags 1, gain 0x8000",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "PoleFilterAudioCommand",
+      "case": "flags 1, gain 0xffff",
+      "seed": 1,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ReadAudioSamples",
+      "case": "random samples",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "LoadAudioEnvelope",
+      "case": "random samples",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "SaveAudioEnvelope",
+      "case": "random samples",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResetAudioEnvelope",
+      "case": "random samples",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ScaleAudioBuffer",
+      "case": "random samples",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "FilterAudioBlock",
+      "case": "random samples",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCMBlock",
+      "case": "2-bit block, offset 0x200",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCMBlock",
+      "case": "2-bit block, offset 0x201",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCMBlock",
+      "case": "4-bit block, offset 0x200",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCMBlock",
+      "case": "4-bit block, offset 0x201",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCMUnsigned",
+      "case": "unsigned predictor",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCM",
+      "case": "flags 0",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCM",
+      "case": "flags 1",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCM",
+      "case": "flags 2",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCM",
+      "case": "flags 3",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCM",
+      "case": "flags 4",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCM",
+      "case": "flags 5",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCM",
+      "case": "flags 6",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCM",
+      "case": "flags 7",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 0, bytes 0",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 0, bytes 2",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 0, bytes 32",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 0, bytes 96",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 1, bytes 0",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 1, bytes 2",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 1, bytes 32",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 1, bytes 96",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 2, bytes 0",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 2, bytes 2",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 2, bytes 32",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 2, bytes 96",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 3, bytes 0",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 3, bytes 2",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 3, bytes 32",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 3, bytes 96",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "PoleFilterAudioCommand",
+      "case": "flags 0, gain 0x0",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "PoleFilterAudioCommand",
+      "case": "flags 0, gain 0x1800",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "PoleFilterAudioCommand",
+      "case": "flags 0, gain 0x8000",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "PoleFilterAudioCommand",
+      "case": "flags 0, gain 0xffff",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "PoleFilterAudioCommand",
+      "case": "flags 1, gain 0x0",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "PoleFilterAudioCommand",
+      "case": "flags 1, gain 0x1800",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "PoleFilterAudioCommand",
+      "case": "flags 1, gain 0x8000",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "PoleFilterAudioCommand",
+      "case": "flags 1, gain 0xffff",
+      "seed": 7,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ReadAudioSamples",
+      "case": "random samples",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "LoadAudioEnvelope",
+      "case": "random samples",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "SaveAudioEnvelope",
+      "case": "random samples",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResetAudioEnvelope",
+      "case": "random samples",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ScaleAudioBuffer",
+      "case": "random samples",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "FilterAudioBlock",
+      "case": "random samples",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCMBlock",
+      "case": "2-bit block, offset 0x200",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCMBlock",
+      "case": "2-bit block, offset 0x201",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCMBlock",
+      "case": "4-bit block, offset 0x200",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCMBlock",
+      "case": "4-bit block, offset 0x201",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCMUnsigned",
+      "case": "unsigned predictor",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCM",
+      "case": "flags 0",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCM",
+      "case": "flags 1",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCM",
+      "case": "flags 2",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCM",
+      "case": "flags 3",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCM",
+      "case": "flags 4",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCM",
+      "case": "flags 5",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCM",
+      "case": "flags 6",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "DecodeAudioADPCM",
+      "case": "flags 7",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 0, bytes 0",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 0, bytes 2",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 0, bytes 32",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 0, bytes 96",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 1, bytes 0",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 1, bytes 2",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 1, bytes 32",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 1, bytes 96",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 2, bytes 0",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 2, bytes 2",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 2, bytes 32",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 2, bytes 96",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 3, bytes 0",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 3, bytes 2",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 3, bytes 32",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "ResampleAudioScalar",
+      "case": "flags 3, bytes 96",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "PoleFilterAudioCommand",
+      "case": "flags 0, gain 0x0",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "PoleFilterAudioCommand",
+      "case": "flags 0, gain 0x1800",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "PoleFilterAudioCommand",
+      "case": "flags 0, gain 0x8000",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "PoleFilterAudioCommand",
+      "case": "flags 0, gain 0xffff",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "PoleFilterAudioCommand",
+      "case": "flags 1, gain 0x0",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "PoleFilterAudioCommand",
+      "case": "flags 1, gain 0x1800",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "PoleFilterAudioCommand",
+      "case": "flags 1, gain 0x8000",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    },
+    {
+      "function": "PoleFilterAudioCommand",
+      "case": "flags 1, gain 0xffff",
+      "seed": 4660,
+      "status": "matching_outputs",
+      "differences": []
+    }
+  ]
+}

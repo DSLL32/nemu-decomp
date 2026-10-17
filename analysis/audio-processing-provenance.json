@@ -1,0 +1,265 @@
+{
+  "original": "master/Plugin/audio.dll",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "status": "incomplete_source_reconstruction",
+  "compiler": "Microsoft Visual C++ 7.0 13.00.9466 C front end",
+  "flags": [
+    "/O2",
+    "/Ob1",
+    "/MT",
+    "/c"
+  ],
+  "hashes": {
+    "src/audio/ahle_ds/AudioProcessing.c": "26048b09ade8fc8a50d4dff4befa8d9b588795989aa330ff2f49fa71bd420e58",
+    "src/audio/ahle_ds/AudioProcessing.h": "661ae00c480be2d2a2341214fe95e52c21630af602bae4ef4d3dbd7516c8962c",
+    "src/audio/ahle_ds/AudioProfile.c": "cec145766acd789e0b31b003942d6bc5ba63463876dc037ed966e6c0a1e28639",
+    "src/audio/ahle_ds/AudioSSE.c": "37da4a9d22e3e1b8e33e5d381dac340ad2b38a59dacf7492f4aa6e5ad87c954f",
+    "src/audio/ahle_ds/AudioADPCM.c": "4e7091117175eb84738e348702565a27b1e16f7ad383ab7036331d14d9a72525",
+    "src/audio/ahle_ds/AudioPoleFilter.c": "b65d389c08d2d48bb4e78bbfbfa39bfedcccb0e474410ccc13c9b8ce2a1c6f65",
+    "src/audio/ahle_ds/AudioResample.c": "7c2cc74e3d65c5890168dbe48170bae26540b662b2ddfcd449211f9112318c8f",
+    "src/audio/ahle_ds/AudioHLE.h": "82e6544a76ee5d0e361f785773e5da8bd91070019a65367d89d6cb0defd8b3ee",
+    "src/audio/ahle_ds/AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
+    "scripts/verify_audio_processing_behavior.py": "157f87d7c64eed90a50ad9492786dcdeda64e6c065b74d9a92c6bd7d0985d1c7",
+    "scripts/verify_gs.py": "9096c1ce5e759dc60f4fc7b84c97678b5946b7b15f6bfb56cd1fa3b9e730854c",
+    "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
+    "toolchains/vc7/bin/c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
+    "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0"
+  },
+  "functions": [
+    {
+      "name": "_ReadAudioSamples",
+      "original_va": "0x1000aed0",
+      "original_size": 80,
+      "original_complete_extent_sha256": "7908098c959d6012f8740fbac288ba826e8730e2d1218ebade3f5156e702f4d8",
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "candidate_size": 80
+    },
+    {
+      "name": "_InitializeAudioSqrt",
+      "original_va": "0x1000af20",
+      "original_size": 112,
+      "original_complete_extent_sha256": "55ef15bd0264bad0bd4cdc26f1b8dea1e5d97744780e24a9d332baa7e6d55c3b",
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "candidate_size": 112
+    },
+    {
+      "name": "_LoadAudioEnvelope",
+      "original_va": "0x1000af90",
+      "original_size": 208,
+      "original_complete_extent_sha256": "3a7eda773fbfa7f50897ed2f8f14cab86074250accc8b344a2c1e1773fc1ced4",
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "candidate_size": 208
+    },
+    {
+      "name": "_SaveAudioEnvelope",
+      "original_va": "0x1000b060",
+      "original_size": 208,
+      "original_complete_extent_sha256": "4f35b2b282924dbf045cb2307e7bfd12dcc496b2952dc073881d69296ab46d3b",
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "candidate_size": 208
+    },
+    {
+      "name": "_ResetAudioEnvelope",
+      "original_va": "0x1000b130",
+      "original_size": 48,
+      "original_complete_extent_sha256": "97232f67fe42bd7a6841f2127b83e16c3f9f16c543776b927734771e40639570",
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "candidate_size": 48
+    },
+    {
+      "name": "_ScaleAudioBuffer",
+      "original_va": "0x10010590",
+      "original_size": 96,
+      "original_complete_extent_sha256": "ceb8d554acf538386b3cc767d6ce773e757612964965a76828b8a1cebb3ea861",
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "candidate_size": 96
+    },
+    {
+      "name": "_ScaleAudioBufferCommand",
+      "original_va": "0x100105f0",
+      "original_size": 112,
+      "original_complete_extent_sha256": "d8c748ea9af5060e37aefa581bb04f0666bf2fbe9900b88a94ca446d5c7a8512",
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "candidate_size": 112
+    },
+    {
+      "name": "_FilterAudioBlock",
+      "original_va": "0x10010660",
+      "original_size": 432,
+      "original_complete_extent_sha256": "792fba82a06ee6796f1cc14889ded6e8f5c503e33d6226b83f735ad9d0f9911d",
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "candidate_size": 432
+    },
+    {
+      "name": "_LoadAudioHistory",
+      "original_va": "0x100133f0",
+      "original_size": 96,
+      "original_complete_extent_sha256": "f795b93b46151ab3e52a797e82f047322c25a4cd16e0809223c15d349a5f2a48",
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "candidate_size": 96
+    },
+    {
+      "name": "_SaveAudioHistory",
+      "original_va": "0x10013450",
+      "original_size": 16,
+      "original_complete_extent_sha256": "40565df9320d8d2ee39ca50e20e8a7656396207be542dd50684e83c61296b56b",
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "candidate_size": 16
+    },
+    {
+      "name": "_FilterAudioBuffer",
+      "original_va": "0x10010810",
+      "original_size": 192,
+      "original_complete_extent_sha256": "f4939afbd4f32cc5c9535fbb81c1ff4539288944d6659d6dc19316006104b9e0",
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "candidate_size": 192
+    },
+    {
+      "name": "_DumpAudioCommand",
+      "original_va": "0x10010aa0",
+      "original_size": 128,
+      "original_complete_extent_sha256": "d91479ede5e9ca753b652d2d251195b66c6aee424e8a45b85e11d0a5cf919939",
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "candidate_size": 128
+    },
+    {
+      "name": "_DecodeAudioADPCMUnsigned",
+      "original_va": "0x10010b20",
+      "original_size": 752,
+      "original_complete_extent_sha256": "deef987fe01aef81d078db22dbf3fd541b8e87531803f4669d5855e559a9c5df",
+      "relocation_masked_equal": false,
+      "relocation_masked_differing_bytes": 617,
+      "candidate_size": 688
+    },
+    {
+      "name": "_DecodeAudioADPCMBlock",
+      "original_va": "0x10010e10",
+      "original_size": 560,
+      "original_complete_extent_sha256": "6afc332ed9ba60594dc969497fa427173a17cbdce1be56c258672c8cde8df921",
+      "relocation_masked_equal": false,
+      "relocation_masked_differing_bytes": 558,
+      "candidate_size": 576
+    },
+    {
+      "name": "_DecodeAudioADPCM",
+      "original_va": "0x10013460",
+      "original_size": 864,
+      "original_complete_extent_sha256": "a5af2255f3b01f843b1f280fbdb71749d796245cefa304175d8839889597855c",
+      "relocation_masked_equal": false,
+      "relocation_masked_differing_bytes": 499,
+      "candidate_size": 864
+    },
+    {
+      "name": "_PoleFilterAudioCommand",
+      "original_va": "0x10011040",
+      "original_size": 2320,
+      "original_complete_extent_sha256": "1ec859b5bae203b49adc5adf9712a952e313a0bc84a86d2dc7e040752a5aef69",
+      "relocation_masked_equal": false,
+      "relocation_masked_differing_bytes": 7,
+      "candidate_size": 2320
+    },
+    {
+      "name": "_ResampleAudioScalar",
+      "original_va": "0x10011950",
+      "original_size": 656,
+      "original_complete_extent_sha256": "4a38da79db200681ef6abb7dd39f33abd026a54fb4f35a20e56200f28dc2808b",
+      "relocation_masked_equal": false,
+      "relocation_masked_differing_bytes": 508,
+      "candidate_size": 656
+    },
+    {
+      "name": "_ResetAudioProfile",
+      "original_va": "0x100108d0",
+      "original_size": 32,
+      "original_complete_extent_sha256": "8f67ae0d1f24744bef1d46b729ec19ad511b54fd0b7aa5d84adfc2c05b9f0ec7",
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "candidate_size": 32
+    },
+    {
+      "name": "_AverageAudioProfile",
+      "original_va": "0x100108f0",
+      "original_size": 64,
+      "original_complete_extent_sha256": "b98514fcd2136431b15351b071c54c65d0f35cc91a60b7895d607f01a5e43b1c",
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "candidate_size": 64
+    },
+    {
+      "name": "_AdjustAudioProfileMaximum",
+      "original_va": "0x10010930",
+      "original_size": 64,
+      "original_complete_extent_sha256": "f4ac0ae421d0eb779a5217ed5b141b7ac12fcf7d8bac0fc55f454fb7d32482ec",
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "candidate_size": 64
+    },
+    {
+      "name": "_StartAudioProfile",
+      "original_va": "0x10010970",
+      "original_size": 80,
+      "original_complete_extent_sha256": "935adb91a7837d658bbf6f9d053358ab7f0212ebad0c51a2f6a53586e7d51d25",
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "candidate_size": 80
+    },
+    {
+      "name": "_StopAudioProfile",
+      "original_va": "0x100109c0",
+      "original_size": 224,
+      "original_complete_extent_sha256": "db6ffa8ec1d826c1bf89a664f9519d03a20abf12453c0e5f593c803d7ef3e913",
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "candidate_size": 224
+    },
+    {
+      "name": "_AudioCPUHasSSE",
+      "original_va": "0x1000b160",
+      "original_size": 48,
+      "original_complete_extent_sha256": "3ba7435beb27b13c528870bb755ff63f7e73873e8c831b10ce146c96cb7d2431",
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "candidate_size": 48
+    },
+    {
+      "name": "_AudioOSHasSSE",
+      "original_va": "0x1000b190",
+      "original_size": 112,
+      "original_complete_extent_sha256": "362d52dbfed8b6274e59b321ec1f67e0c69ba3afeb888dbf9fdb15cc082cc20e",
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "candidate_size": 112
+    },
+    {
+      "name": "_AudioClampECX",
+      "original_va": "0x1000b200",
+      "original_size": 32,
+      "original_complete_extent_sha256": "f5237e98743121264990b660939e7d1207dfdeac2a8a607bb9c4e447631a2408",
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "candidate_size": 32
+    }
+  ],
+  "limitations": [
+    "Twenty complete function extents, including compiler alignment, match only after recorded COFF relocation fields are masked. This is not whole-DLL byte equality.",
+    "Data addresses marked observed_operand_inference have not been independently proved from original debug symbols.",
+    "Five candidate functions remain unmatched: the unsigned and signed scalar ADPCM kernels, main ADPCM dispatcher, pole filter, and scalar resampler.",
+    "The pole filter differs in seven SIB bytes that exchange equivalent base and index registers; these remain genuine byte differences.",
+    "Relocation-target diagnostics for unmatched functions are position-based and may inspect unrelated original instruction bytes when code layout differs.",
+    "Readable source file names and translation-unit boundaries are inferred; no original source provenance is claimed.",
+    "Behavior probes execute original external callees and do not validate a linked rebuilt DLL.",
+    "The canonical resampling table currently has a const declaration although its original storage is writable .data; original declaration/section placement remains unresolved."
+  ]
+}
