@@ -1,5 +1,5 @@
 {
-  "status": "15 reconstructed functions; 14 complete instruction shapes match, and ProcessPIF now has the original 1904-byte extent; parser instructions and final executable layout remain in progress",
+  "status": "15 reconstructed functions; 14 complete function spans are raw-byte equal in the pinned complete-link fixture. ProcessPIF has the original 1904-byte extent with recovered shared continuations but remains unmatched at 845 normalized differing bytes.",
   "source": "src/nemu64/PIF.cpp",
   "globals": [
     {
@@ -288,76 +288,84 @@
       "va": "0x4202d0",
       "size": 112,
       "linked_validation": {
-        "rebuilt_va": "0x420210",
         "rebuilt_size": 112,
         "candidate_map_span": 112,
-        "size_equal": true,
-        "raw_bytes_equal": false,
+        "raw_bytes_equal": true,
         "full_function_shape_match": true,
         "normalized_differing_bytes": 0,
         "target_mismatches": 0,
         "invalid_link_operands": 0,
         "unresolved_targets": 0,
-        "unverified_targets": 0
+        "unverified_targets": 0,
+        "rebuilt_va": "0x4202d0",
+        "size_equal": true
       },
-      "source": "src/nemu64/CIC.cpp"
+      "source": "src/nemu64/CIC.cpp",
+      "rebuilt_size": 112,
+      "rebuilt_image_sha256": "154a6f02b10c661a9818b027aa3ce78a02dde0ec40f2b48a38f25a73da95c90d"
     },
     {
       "name": "SaveCICInput",
       "va": "0x420340",
       "size": 96,
       "linked_validation": {
-        "rebuilt_va": "0x420280",
         "rebuilt_size": 96,
         "candidate_map_span": 96,
-        "size_equal": true,
-        "raw_bytes_equal": false,
+        "raw_bytes_equal": true,
         "full_function_shape_match": true,
         "normalized_differing_bytes": 0,
         "target_mismatches": 0,
         "invalid_link_operands": 0,
-        "unresolved_targets": 4,
-        "unverified_targets": 5
+        "unresolved_targets": 0,
+        "unverified_targets": 1,
+        "rebuilt_va": "0x420340",
+        "size_equal": true
       },
-      "source": "src/nemu64/CIC.cpp"
+      "source": "src/nemu64/CIC.cpp",
+      "rebuilt_size": 96,
+      "rebuilt_image_sha256": "154a6f02b10c661a9818b027aa3ce78a02dde0ec40f2b48a38f25a73da95c90d"
     },
     {
       "name": "CICUseTable1",
       "va": "0x4203a0",
       "size": 128,
       "linked_validation": {
-        "rebuilt_va": "0x4202e0",
         "rebuilt_size": 128,
         "candidate_map_span": 128,
-        "size_equal": true,
-        "raw_bytes_equal": false,
+        "raw_bytes_equal": true,
         "full_function_shape_match": true,
         "normalized_differing_bytes": 0,
         "target_mismatches": 0,
         "invalid_link_operands": 0,
         "unresolved_targets": 0,
-        "unverified_targets": 2
+        "unverified_targets": 0,
+        "rebuilt_va": "0x4203a0",
+        "size_equal": true
       },
-      "source": "src/nemu64/CIC.cpp"
+      "source": "src/nemu64/CIC.cpp",
+      "rebuilt_size": 128,
+      "rebuilt_image_sha256": "154a6f02b10c661a9818b027aa3ce78a02dde0ec40f2b48a38f25a73da95c90d"
     },
     {
       "name": "CIC6105Challenge",
       "va": "0x420420",
       "size": 384,
       "linked_validation": {
-        "rebuilt_va": "0x420360",
         "rebuilt_size": 384,
         "candidate_map_span": 384,
-        "size_equal": true,
-        "raw_bytes_equal": false,
+        "raw_bytes_equal": true,
         "full_function_shape_match": true,
         "normalized_differing_bytes": 0,
         "target_mismatches": 0,
         "invalid_link_operands": 0,
         "unresolved_targets": 0,
-        "unverified_targets": 6
+        "unverified_targets": 2,
+        "rebuilt_va": "0x420420",
+        "size_equal": true
       },
-      "source": "src/nemu64/CIC.cpp"
+      "source": "src/nemu64/CIC.cpp",
+      "rebuilt_size": 384,
+      "rebuilt_image_sha256": "154a6f02b10c661a9818b027aa3ce78a02dde0ec40f2b48a38f25a73da95c90d"
     },
     {
       "name": "PIFDataCRC",
@@ -372,19 +380,21 @@
       },
       "size": 96,
       "linked_validation": {
-        "rebuilt_va": "0x4204e0",
         "rebuilt_size": 96,
         "candidate_map_span": 96,
-        "size_equal": true,
         "raw_bytes_equal": true,
         "full_function_shape_match": true,
         "normalized_differing_bytes": 0,
         "target_mismatches": 0,
         "invalid_link_operands": 0,
         "unresolved_targets": 0,
-        "unverified_targets": 0
+        "unverified_targets": 0,
+        "rebuilt_va": "0x4205a0",
+        "size_equal": true
       },
-      "source": "src/nemu64/PIF.cpp"
+      "source": "src/nemu64/PIF.cpp",
+      "rebuilt_size": 96,
+      "rebuilt_image_sha256": "154a6f02b10c661a9818b027aa3ce78a02dde0ec40f2b48a38f25a73da95c90d"
     },
     {
       "name": "InitializePIFCommandLengths",
@@ -399,76 +409,84 @@
       },
       "size": 128,
       "linked_validation": {
-        "rebuilt_va": "0x420540",
         "rebuilt_size": 128,
         "candidate_map_span": 128,
-        "size_equal": true,
-        "raw_bytes_equal": false,
+        "raw_bytes_equal": true,
         "full_function_shape_match": true,
         "normalized_differing_bytes": 0,
         "target_mismatches": 0,
         "invalid_link_operands": 0,
-        "unresolved_targets": 13,
-        "unverified_targets": 14
+        "unresolved_targets": 0,
+        "unverified_targets": 0,
+        "rebuilt_va": "0x420600",
+        "size_equal": true
       },
-      "source": "src/nemu64/PIF.cpp"
+      "source": "src/nemu64/PIF.cpp",
+      "rebuilt_size": 128,
+      "rebuilt_image_sha256": "154a6f02b10c661a9818b027aa3ce78a02dde0ec40f2b48a38f25a73da95c90d"
     },
     {
       "name": "ProcessPIF",
       "va": "0x420680",
       "size": 1904,
       "linked_validation": {
-        "rebuilt_va": "0x4205c0",
         "rebuilt_size": 1904,
         "candidate_map_span": 1904,
-        "size_equal": true,
         "raw_bytes_equal": false,
         "full_function_shape_match": false,
-        "normalized_differing_bytes": 1017,
+        "normalized_differing_bytes": 845,
         "target_mismatches": 0,
         "invalid_link_operands": 0,
         "unresolved_targets": 0,
-        "unverified_targets": 0
+        "unverified_targets": 0,
+        "rebuilt_va": "0x420680",
+        "size_equal": true
       },
-      "source": "src/nemu64/PIF.cpp"
+      "source": "src/nemu64/PIF.cpp",
+      "rebuilt_size": 1904,
+      "rebuilt_image_sha256": "154a6f02b10c661a9818b027aa3ce78a02dde0ec40f2b48a38f25a73da95c90d"
     },
     {
       "name": "SaveEEPROM",
       "va": "0x420df0",
       "size": 144,
       "linked_validation": {
-        "rebuilt_va": "0x420d30",
         "rebuilt_size": 144,
         "candidate_map_span": 144,
-        "size_equal": true,
-        "raw_bytes_equal": false,
+        "raw_bytes_equal": true,
         "full_function_shape_match": true,
         "normalized_differing_bytes": 0,
         "target_mismatches": 0,
         "invalid_link_operands": 0,
-        "unresolved_targets": 2,
-        "unverified_targets": 7
+        "unresolved_targets": 0,
+        "unverified_targets": 0,
+        "rebuilt_va": "0x420df0",
+        "size_equal": true
       },
-      "source": "src/nemu64/SaveDevices.cpp"
+      "source": "src/nemu64/SaveDevices.cpp",
+      "rebuilt_size": 144,
+      "rebuilt_image_sha256": "154a6f02b10c661a9818b027aa3ce78a02dde0ec40f2b48a38f25a73da95c90d"
     },
     {
       "name": "SaveMemPack",
       "va": "0x420e80",
       "size": 144,
       "linked_validation": {
-        "rebuilt_va": "0x420dc0",
         "rebuilt_size": 144,
         "candidate_map_span": 144,
-        "size_equal": true,
-        "raw_bytes_equal": false,
+        "raw_bytes_equal": true,
         "full_function_shape_match": true,
         "normalized_differing_bytes": 0,
         "target_mismatches": 0,
         "invalid_link_operands": 0,
-        "unresolved_targets": 2,
-        "unverified_targets": 7
+        "unresolved_targets": 0,
+        "unverified_targets": 0,
+        "rebuilt_va": "0x420e80",
+        "size_equal": true
       },
-      "source": "src/nemu64/SaveDevices.cpp"
+      "source": "src/nemu64/SaveDevices.cpp",
+      "rebuilt_size": 144,
+      "rebuilt_image_sha256": "154a6f02b10c661a9818b027aa3ce78a02dde0ec40f2b48a38f25a73da95c90d"
     },
     {
       "name": "RecordMovieInput",
@@ -483,19 +501,21 @@
       },
       "size": 240,
       "linked_validation": {
-        "rebuilt_va": "0x420e50",
         "rebuilt_size": 240,
         "candidate_map_span": 240,
-        "size_equal": true,
-        "raw_bytes_equal": false,
+        "raw_bytes_equal": true,
         "full_function_shape_match": true,
         "normalized_differing_bytes": 0,
         "target_mismatches": 0,
         "invalid_link_operands": 0,
-        "unresolved_targets": 5,
-        "unverified_targets": 24
+        "unresolved_targets": 0,
+        "unverified_targets": 0,
+        "rebuilt_va": "0x420f10",
+        "size_equal": true
       },
-      "source": "src/nemu64/SaveDevices.cpp"
+      "source": "src/nemu64/SaveDevices.cpp",
+      "rebuilt_size": 240,
+      "rebuilt_image_sha256": "154a6f02b10c661a9818b027aa3ce78a02dde0ec40f2b48a38f25a73da95c90d"
     },
     {
       "name": "PlayMovieInput",
@@ -510,19 +530,21 @@
       },
       "size": 224,
       "linked_validation": {
-        "rebuilt_va": "0x420f40",
         "rebuilt_size": 224,
         "candidate_map_span": 224,
-        "size_equal": true,
-        "raw_bytes_equal": false,
+        "raw_bytes_equal": true,
         "full_function_shape_match": true,
         "normalized_differing_bytes": 0,
         "target_mismatches": 0,
         "invalid_link_operands": 0,
-        "unresolved_targets": 5,
-        "unverified_targets": 20
+        "unresolved_targets": 0,
+        "unverified_targets": 0,
+        "rebuilt_va": "0x421000",
+        "size_equal": true
       },
-      "source": "src/nemu64/SaveDevices.cpp"
+      "source": "src/nemu64/SaveDevices.cpp",
+      "rebuilt_size": 224,
+      "rebuilt_image_sha256": "154a6f02b10c661a9818b027aa3ce78a02dde0ec40f2b48a38f25a73da95c90d"
     },
     {
       "name": "StopMovie",
@@ -537,76 +559,84 @@
       },
       "size": 64,
       "linked_validation": {
-        "rebuilt_va": "0x421020",
         "rebuilt_size": 64,
         "candidate_map_span": 64,
-        "size_equal": true,
-        "raw_bytes_equal": false,
+        "raw_bytes_equal": true,
         "full_function_shape_match": true,
         "normalized_differing_bytes": 0,
         "target_mismatches": 0,
         "invalid_link_operands": 0,
         "unresolved_targets": 0,
-        "unverified_targets": 7
+        "unverified_targets": 0,
+        "rebuilt_va": "0x4210e0",
+        "size_equal": true
       },
-      "source": "src/nemu64/SaveDevices.cpp"
+      "source": "src/nemu64/SaveDevices.cpp",
+      "rebuilt_size": 64,
+      "rebuilt_image_sha256": "154a6f02b10c661a9818b027aa3ce78a02dde0ec40f2b48a38f25a73da95c90d"
     },
     {
       "name": "SaveSRAM",
       "va": "0x421120",
       "size": 144,
       "linked_validation": {
-        "rebuilt_va": "0x421060",
         "rebuilt_size": 144,
         "candidate_map_span": 144,
-        "size_equal": true,
-        "raw_bytes_equal": false,
+        "raw_bytes_equal": true,
         "full_function_shape_match": true,
         "normalized_differing_bytes": 0,
         "target_mismatches": 0,
         "invalid_link_operands": 0,
-        "unresolved_targets": 2,
-        "unverified_targets": 7
+        "unresolved_targets": 0,
+        "unverified_targets": 0,
+        "rebuilt_va": "0x421120",
+        "size_equal": true
       },
-      "source": "src/nemu64/SaveDevices.cpp"
+      "source": "src/nemu64/SaveDevices.cpp",
+      "rebuilt_size": 144,
+      "rebuilt_image_sha256": "154a6f02b10c661a9818b027aa3ce78a02dde0ec40f2b48a38f25a73da95c90d"
     },
     {
       "name": "WriteSRAM",
       "va": "0x4211b0",
       "size": 48,
       "linked_validation": {
-        "rebuilt_va": "0x4210f0",
         "rebuilt_size": 48,
         "candidate_map_span": 48,
-        "size_equal": true,
-        "raw_bytes_equal": false,
+        "raw_bytes_equal": true,
         "full_function_shape_match": true,
         "normalized_differing_bytes": 0,
         "target_mismatches": 0,
         "invalid_link_operands": 0,
-        "unresolved_targets": 0,
-        "unverified_targets": 4
+        "unresolved_targets": 1,
+        "unverified_targets": 2,
+        "rebuilt_va": "0x4211b0",
+        "size_equal": true
       },
-      "source": "src/nemu64/SaveDevices.cpp"
+      "source": "src/nemu64/SaveDevices.cpp",
+      "rebuilt_size": 48,
+      "rebuilt_image_sha256": "154a6f02b10c661a9818b027aa3ce78a02dde0ec40f2b48a38f25a73da95c90d"
     },
     {
       "name": "ReadSRAM",
       "va": "0x4211e0",
       "size": 48,
       "linked_validation": {
-        "rebuilt_va": "0x421120",
         "rebuilt_size": 48,
         "candidate_map_span": 48,
-        "size_equal": true,
-        "raw_bytes_equal": false,
+        "raw_bytes_equal": true,
         "full_function_shape_match": true,
         "normalized_differing_bytes": 0,
         "target_mismatches": 0,
         "invalid_link_operands": 0,
-        "unresolved_targets": 0,
-        "unverified_targets": 3
+        "unresolved_targets": 1,
+        "unverified_targets": 1,
+        "rebuilt_va": "0x4211e0",
+        "size_equal": true
       },
-      "source": "src/nemu64/SaveDevices.cpp"
+      "source": "src/nemu64/SaveDevices.cpp",
+      "rebuilt_size": 48,
+      "rebuilt_image_sha256": "154a6f02b10c661a9818b027aa3ce78a02dde0ec40f2b48a38f25a73da95c90d"
     }
   ],
   "notes": [
@@ -620,21 +650,44 @@
   "linked_validation": {
     "compiler": "VC7 13.00.9466",
     "flags": "/O2 /Ob1 /ML /GL /DWIN32 /DNDEBUG",
-    "source_sha256": "5d2a65ef2509f119a3029c018315c50a52ef1e9103cf9d479090fac62e9f1223",
-    "candidate_image_sha256": "6478b6453bf5d9095abed35db9abda5dca2be83a225cbac30f55ea9259b677bf",
-    "candidate_map_sha256": "39f9cfbd3bb1e752ed49fff4af45303c1c31f5d0513ed41b1be7101a004ca999",
-    "image_kind": "real complete link with /FIXED:NO; never /FORCE",
+    "source_sha256": "ce07503f880707e727e47003142c5489b0900d3dd05bb552eb2662829b904276",
+    "candidate_image_sha256": "154a6f02b10c661a9818b027aa3ce78a02dde0ec40f2b48a38f25a73da95c90d",
+    "candidate_map_sha256": "4c2a91b4e0bef231a42982e21251a96baa801a27d00eafa58729863407bd2a1e",
+    "image_kind": "Real complete archive-grouped /GL link with /FIXED:NO; never /FORCE",
     "matching_complete_function_extents": 14,
     "matching_original_bytes": 2000,
-    "normalization": "Only PE HIGHLOW fixups and decoded relative call operands; internal branches, local offsets, and alignment bytes remain exact",
-    "limitation": "Instruction-shape evidence, not byte-exact module completion. Some original data/string identities are unverified; final image layout and ProcessPIF still differ.",
+    "normalization": "Raw equality independently holds for all 14 other spans. ProcessPIF comparison abstracts only actual PE/relative operand sites; internal branches, instructions and alignment remain strict.",
+    "limitation": "ProcessPIF and the complete image remain unmatched; metadata records the exact tested image and source, not a later build.",
     "historical_fixture": {
       "image": "/root/.ai-tmp/nemu-pif-full.7m3lqg9b/natural.exe",
       "map": "/root/.ai-tmp/nemu-pif-full.7m3lqg9b/natural.map",
       "comparison": "/root/.ai-tmp/nemu-pif-full.7m3lqg9b/natural-sized.json",
       "scope": "Historical instruction-shape proof for the recorded source hash; not a claim about the latest executable layout."
     },
-    "source_sha256_scope": "Historical combined PIF.cpp input for this recorded probe, before unchanged CIC and save-device/movie routines moved to CIC.cpp and SaveDevices.cpp."
+    "source_sha256_scope": "Current split PIF.cpp compiler input; CIC.cpp and SaveDevices.cpp remain unchanged in the frozen complete-link project.",
+    "raw_equal_function_extents": 14,
+    "current_fixture": {
+      "image": "/root/.ai-tmp/nemu-pif-structure.u7c0dxpw/promoted/nemu64.exe",
+      "map": "/root/.ai-tmp/nemu-pif-structure.u7c0dxpw/promoted/nemu64.map",
+      "compiler_input": "/root/.ai-tmp/nemu-pif-structure.u7c0dxpw/promoted.cpp",
+      "comparison": "/root/.ai-tmp/nemu-pif-structure.u7c0dxpw/promoted/comparison.json",
+      "comparison_sha256": "72e11968c397ad75b671744fa1daa489126f608866ad8159f931485a1df24325",
+      "project": "/root/.ai-tmp/nemu-pif-structure.u7c0dxpw/project",
+      "source_units": [
+        {
+          "path": "PIF.cpp",
+          "sha256": "ce07503f880707e727e47003142c5489b0900d3dd05bb552eb2662829b904276"
+        },
+        {
+          "path": "CIC.cpp",
+          "sha256": "f5571582d25177b13a49f024a98eaca72a58703460edcd019ff77cb019c45095"
+        },
+        {
+          "path": "SaveDevices.cpp",
+          "sha256": "2dfa457a028ecfc526fd5594b24ed7e27e69af87acfced65366ebe431d5409da"
+        }
+      ]
+    }
   },
   "original_file": "master/nemu64.exe",
   "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
@@ -654,5 +707,58 @@
     "src/nemu64/PIF.cpp",
     "src/nemu64/SaveDevices.cpp"
   ],
-  "source_reference_scope": "source_units and per-function source fields describe the current definitions. A top-level source is the primary unit. Recorded proof source paths and hashes continue to identify their historical compiler inputs; they are not reassigned by this source-organization update."
+  "source_reference_scope": "source_units and per-function source fields describe the current definitions. A top-level source is the primary unit. Recorded proof source paths and hashes continue to identify their historical compiler inputs; they are not reassigned by this source-organization update.",
+  "process_pif_reconstruction": {
+    "status": "improved_inferred_control_flow_still_unmatched",
+    "original_va": "0x00420680",
+    "original_span": 1904,
+    "rebuilt_span": 1904,
+    "previous_normalized_differing_bytes": 1017,
+    "normalized_differing_bytes": 845,
+    "source_sha256": "ce07503f880707e727e47003142c5489b0900d3dd05bb552eb2662829b904276",
+    "shared_continuations": [
+      {
+        "original_branch": "0x00420836",
+        "original_destination": "0x00420B23",
+        "source_label": "invalidCommand",
+        "meaning": "Oversized transmit lengths and command3 invalid channels share the same receive-status error block."
+      },
+      {
+        "original_branches": [
+          "0x004208B8",
+          "0x004208C4"
+        ],
+        "original_destination": "0x004209CE",
+        "source_label": "copyResponse",
+        "meaning": "Controller status shares the controller-read response copy; EEPROM status retains its separate copy."
+      }
+    ],
+    "semantic_review": [
+      "invalidCommand is reached after position/tx/rx initialization. It writes the same status byte then breaks out of the switch. The old valid=0 assignment has no later observable use before the next packet reinitializes valid.",
+      "copyResponse bypasses controller-input/movie callbacks when entered from controller status, as the original shared branch does. The copy uses initialized response bytes, position and rx.",
+      "Early channel exits for commands2/3 preserve the same error write and skip the same operation body. No case-local initialized object is entered through either label."
+    ],
+    "source_ambiguity": "The shared original basic blocks support these labels and guards; the label names and exact C++ spelling are inferred rather than uniquely recovered.",
+    "remaining_differences": [
+      "The first remaining address-calculation difference is at function+0x193: original computes position\u2212tx before adding the array base; candidate begins with the array base.",
+      "Command0 uses different channel/status registers and a separate EEPROMSize load; its block is 208 bytes/51 instructions versus 207 bytes/50 instructions original.",
+      "Controller-button byte extraction and additional local branches/register allocation remain different."
+    ],
+    "validation": {
+      "full_function_comparison": "/root/.ai-tmp/nemu-pif-structure.u7c0dxpw/promoted/comparison.json",
+      "full_function_comparison_sha256": "72e11968c397ad75b671744fa1daa489126f608866ad8159f931485a1df24325",
+      "other14_function_spans_raw_equal": true,
+      "behavior_report": "/root/.ai-tmp/nemu-pif-structure.u7c0dxpw/promoted/behavior.json",
+      "behavior_report_sha256": "acb7dba05194bcc5e26b1664077ebf7753cdf81a4385b7f4e3a35064f7035ded",
+      "valid_cases": 2332,
+      "valid_matches": 2332,
+      "completed_malformed_comparisons": 253,
+      "malformed_cases_rejected_by_both": 59,
+      "malformed_rejections_are_not_matching_evidence": true
+    },
+    "rejected_hypotheses": [
+      "Correctly generated reference-returning status/index helpers and a mapped two-byte packet-header view produce exactly the same 1904 ProcessPIF bytes as the shared-tail candidate.",
+      "A consistently volatile rx local grows the function to 1920 bytes and worsens normalized differences to 1140; rejected without source promotion."
+    ]
+  }
 }

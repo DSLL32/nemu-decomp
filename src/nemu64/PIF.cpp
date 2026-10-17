@@ -86,10 +86,9 @@ void ProcessPIF()
             PIFRam[position - tx - 1] |= 0x40;
             rx = PIFCommandLengths[PIFCommand[0]].Rx;
         }
-        if (tx > PIFCommandLengths[PIFCommand[0]].Tx) {
-            PIFRam[position - tx - 1] |= 0x40;
-            valid = 0;
-        }
+        // The original shares this error block with command 3. Label names
+        // and the corresponding C++ spelling are inferred.
+        if (tx > PIFCommandLengths[PIFCommand[0]].Tx) goto invalidCommand;
         if (valid) {
             switch (PIFCommand[0]) {
             case 0:
@@ -100,7 +99,8 @@ void ProcessPIF()
                         PIFResponse[1] = 0;
                         PIFResponse[2] = (!NetPlayActive &&
                             (Controllers[channel].MemPak || Controllers[channel].RumblePak)) ? 1 : 2;
-                        memcpy(PIFRam + position, PIFResponse, rx);
+                        // Controller status shares the command-1 copy tail.
+                        goto copyResponse;
                     } else PIFRam[position - 2] |= 0x80;
                 } else if (channel < 6) {
                     if (EEPROMEnabled) {
@@ -125,12 +125,17 @@ void ProcessPIF()
                         PIFResponse[3] = Controllers[channel].Buttons;
                         if (MovieRecord) RecordMovieInput();
                         else if (MoviePlay) PlayMovieInput();
+                    copyResponse:
                         memcpy(PIFRam + position, PIFResponse, rx);
                     } else if (rx > 0) PIFRam[position - 2] |= 0x80;
                 } else PIFRam[position - tx - 1] |= 0x40;
                 break;
             case 2:
-                if (channel < 4) {
+                if (channel >= 4) {
+                    PIFRam[position - tx - 1] |= 0x40;
+                    break;
+                }
+                {
                     if ((!NetPlayActive && Controllers[channel].Present) ||
                         (NetPlayActive && channel < NetPlayPlayerCount)) {
                         int address = ((PIFCommand[1] << 8) | PIFCommand[2]) >> 5 & 0xffff;
@@ -151,10 +156,15 @@ void ProcessPIF()
                             PIFRam[position + rx - 1] = PIFDataCRC(PackBlock);
                         else PIFRam[position + rx - 1] = ~PIFDataCRC(PackBlock);
                     } else PIFRam[position - tx - 1] |= 0x80;
-                } else PIFRam[position - tx - 1] |= 0x40;
+                }
                 break;
             case 3:
-                if (channel < 4) {
+                if (channel >= 4) {
+                invalidCommand:
+                    PIFRam[position - tx - 1] |= 0x40;
+                    break;
+                }
+                {
                     if ((!NetPlayActive && Controllers[channel].Present) ||
                         (NetPlayActive && channel < NetPlayPlayerCount)) {
                         int address = ((PIFCommand[1] << 8) | PIFCommand[2]) >> 5 & 0xffff;
@@ -179,7 +189,7 @@ void ProcessPIF()
                             PIFRam[position + rx - 1] = PIFDataCRC(PackBlock);
                         } else PIFRam[position + rx - 1] = ~PIFDataCRC(PackBlock);
                     } else PIFRam[position - tx - 1] |= 0x80;
-                } else PIFRam[position - tx - 1] |= 0x40;
+                }
                 break;
             case 4:
                 if (channel == 4 || channel == 5) {
