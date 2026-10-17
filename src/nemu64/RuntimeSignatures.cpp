@@ -56,21 +56,27 @@ unsigned HashSignatureInstruction(unsigned hash, unsigned signature,
 
 void SaveFunctionSignatures(unsigned *candidate)
 {
-    char filename[260];
+    // Adjacent FILE, length and filename slots suggest this local aggregate;
+    // its original type and name are unknown.
+    struct {
+        FILE *file;
+        int length;
+        char filename[260];
+    } output;
     char status[256];
     unsigned *lastMatch = 0;
     if (candidate < (unsigned *)RDRAM)
         candidate = (unsigned *)RDRAM;
     unsigned *start = candidate;
-    strcpy(filename, ApplicationDirectory);
-    if (filename[strlen(filename) - 1] != '\\')
-        strcat(filename, "\\cod\\");
+    strcpy(output.filename, ApplicationDirectory);
+    if (output.filename[strlen(output.filename) - 1] != '\\')
+        strcat(output.filename, "\\cod\\");
     else
-        strcat(filename, "cod\\");
-    strcat(filename, CurrentRom.FileName);
-    ReplaceExtension(filename, ".cod");
-    FILE *file = fopen(filename, "wb");
-    if (!file)
+        strcat(output.filename, "cod\\");
+    strcat(output.filename, CurrentRom.FileName);
+    ReplaceExtension(output.filename, ".cod");
+    output.file = fopen(output.filename, "wb");
+    if (!output.file)
         return;
     unsigned hash = 0;
     unsigned signature = 0;
@@ -85,22 +91,23 @@ void SaveFunctionSignatures(unsigned *candidate)
                         break;
                 } while (!*candidate);
             }
-            int length = RuntimeSignatures[signature].length;
-            if (length > 256)
-                length = 256;
-            if ((unsigned char *)candidate + length < (unsigned char *)(start + 0x40000)) {
+            output.length = RuntimeSignatures[signature].length;
+            if (output.length > 256)
+                output.length = 256;
+            if ((unsigned char *)candidate + output.length < (unsigned char *)(start + 0x40000)) {
                 unsigned *functionStart = candidate;
                 if ((*candidate >> 16) != RuntimeSignatures[signature].firstWord) hash = 0;
                 else {
-                    for (int offset = 0; offset < length; offset += 4)
+                    for (int offset = 0; offset < output.length; offset += 4)
                         hash = HashSignatureInstruction(hash, signature, offset, candidate++);
                 }
                 if (hash == RuntimeSignatures[signature].hash) {
-                    fprintf(file, "0x%X,%s\r\n", (unsigned)functionStart - (unsigned)RDRAM - 0x80000000,
+                    fprintf(output.file, "0x%X,%s\r\n", (unsigned)functionStart - (unsigned)RDRAM - 0x80000000,
                         RuntimeSignatures[signature].name);
-                    fflush(file);
-                    if (!lastMatch) lastMatch = start;
-                    else lastMatch = candidate;
+                    fflush(output.file);
+                    unsigned *previousMatch = lastMatch;
+                    lastMatch = start;
+                    if (previousMatch) lastMatch = candidate;
                     candidate = start;
                     unsigned address = ((unsigned)functionStart - (unsigned)RDRAM) | 0x80000000;
                     RuntimeReplacements[signature].function = RuntimeSignatures[signature].replacement;
@@ -127,9 +134,10 @@ void SaveFunctionSignatures(unsigned *candidate)
         }
     }
 finished:
-    fclose(file);
+    fclose(output.file);
     SetStatusText(0, "Nemulating...");
 }
+
 
 void ResetRuntimeReplacements()
 {
