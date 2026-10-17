@@ -1,13 +1,225 @@
 {
-  "scope": "Successful current-source diagnostic DLL link; explicitly not complete byte reconstruction.",
-  "artifact": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/rbtcws_9",
-  "frozen_full_report_sha256": "98adb41fbf7720b390ea56c366d73306c5891acad2c226f43a84e1f3db6ff07e",
   "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
-  "rebuilt_sha256": "7d7f1cfa5770e0697a524c258dd2918004007ccde87dee7b98f3759eb1cde826",
+  "rebuilt_sha256": "c7cf949352cc8971e5f739cbde96819fe7e201fe9dde4eeff66cd7adc6ca0862",
   "original_bytes": 290816,
   "rebuilt_bytes": 290816,
-  "differing_file_bytes": 208697,
+  "differing_file_bytes": 191477,
   "full_dll_byte_exact": false,
+  "sections": [
+    {
+      "name": ".text",
+      "original": {
+        "name": ".text",
+        "virtual_size": 191344,
+        "rva": 4096,
+        "raw_size": 192512,
+        "offset": 4096
+      },
+      "rebuilt": {
+        "name": ".text",
+        "virtual_size": 191088,
+        "rva": 4096,
+        "raw_size": 192512,
+        "offset": 4096
+      },
+      "raw_bytes_equal": false,
+      "differing_bytes": 172228
+    },
+    {
+      "name": ".rdata",
+      "original": {
+        "name": ".rdata",
+        "virtual_size": 17059,
+        "rva": 196608,
+        "raw_size": 20480,
+        "offset": 196608
+      },
+      "rebuilt": {
+        "name": ".rdata",
+        "virtual_size": 17043,
+        "rva": 196608,
+        "raw_size": 20480,
+        "offset": 196608
+      },
+      "raw_bytes_equal": false,
+      "differing_bytes": 9463
+    },
+    {
+      "name": ".data",
+      "original": {
+        "name": ".data",
+        "virtual_size": 1279948,
+        "rva": 217088,
+        "raw_size": 49152,
+        "offset": 217088
+      },
+      "rebuilt": {
+        "name": ".data",
+        "virtual_size": 1271628,
+        "rva": 217088,
+        "raw_size": 49152,
+        "offset": 217088
+      },
+      "raw_bytes_equal": false,
+      "differing_bytes": 791
+    },
+    {
+      "name": ".rsrc",
+      "original": {
+        "name": ".rsrc",
+        "virtual_size": 3312,
+        "rva": 1499136,
+        "raw_size": 4096,
+        "offset": 266240
+      },
+      "rebuilt": {
+        "name": ".rsrc",
+        "virtual_size": 3312,
+        "rva": 1490944,
+        "raw_size": 4096,
+        "offset": 266240
+      },
+      "raw_bytes_equal": false,
+      "differing_bytes": 2
+    },
+    {
+      "name": ".reloc",
+      "original": {
+        "name": ".reloc",
+        "virtual_size": 16772,
+        "rva": 1503232,
+        "raw_size": 20480,
+        "offset": 270336
+      },
+      "rebuilt": {
+        "name": ".reloc",
+        "virtual_size": 16738,
+        "rva": 1495040,
+        "raw_size": 20480,
+        "offset": 270336
+      },
+      "raw_bytes_equal": false,
+      "differing_bytes": 8978
+    }
+  ],
+  "scope": "Frozen native14-unit audio diagnostic build with historical link identity. Whole-file comparison remains a failure.",
+  "artifact": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/2dzf0j0i",
+  "frozen_full_report_sha256": "7a93252b3dacaffaacec6708191814b944383b16ca30368158a333eec1a78bf1",
+  "source_manifest": {
+    "RSPMicrocode.inc": "12bae4d1c37884c7d5efbf13402d326bf46fafd0ee6064feff3fe0fdd8d2ee0c",
+    "RSPData.inc": "f7a6f57795b41b7203b63302205c50de7bbd459971f9d2974d9d12b1c74bbd4d",
+    "DirectSound.h": "d16ad18d42c6d3081e7fc1f99caa62638965c0e6a971fab987b43f141679fb38",
+    "AudioHLE.c": "a449a37eb2f9fc12b2c7f2a2c5b5e3a3f51a08adeaf241ef0e5d174b8825941a",
+    "audio.def": "f34ad9fa1d564c407483eabd05363f0c95a4cf69a81f6c4ffcb0dd95ddcb4b34",
+    "AudioLegacy.c": "d81dde338f0005166893a0825c2c86f82c7956ce75a7cae552c354ca4e78dc41",
+    "AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
+    "AudioLog.c": "84a6f797caaf244d44300550ed13225276bf1c45bf6fb3193be9047dc01226f0",
+    "AudioADPCMLegacy.h": "8509a1760c9dcc9b45334d103d4f09b656502bda0b8d35d039d75d7a75720f32",
+    "Audio.rc": "b551863a11341c7440df2425b5620cda11c9eaef312179e8dd925fd05b12bf93",
+    "Mp3.c": "d4c863a7066601ce785fdba72a29ba53399e36aa582494d4ece24f5441a12ff0",
+    "AudioADPCMBlock.h": "f506d6ea97b83fcaaa78dc9ff7300bebe37aa36b9f1a01277247ee41767b4c1b",
+    "AudioResample.c": "de605ba58f179efe567ffd40740c65c2cc90647a3e980cb0115cd9c14ef42907",
+    "AMP-LICENSE.txt": "133f385d28039b18f9900e1cd933119ccae0462b495999a2750dea9fb8430640",
+    "AudioCommands.h": "35cae30632b3a466adc0dea680c808b80995cf311b0024d25331224e7368e5f3",
+    "AudioEnvelope.h": "8acbac16a6bc16a06782b48dea25af4e49b99c5a845f866ffe41098ec14517b7",
+    "AudioProcessing.h": "77bbd94523444df697a169cea26375cc673879493761452cc92add2857284c7b",
+    "RSPKernel.inc": "7a218993560c457a5149266e391a28fcdb0a1df5a812209c9a9b7111238eb961",
+    "AudioPlugin.c": "6fed63db83aa3a950d0ce3a2e5e9df4769674aed1b145ab3e0332c5e2c44e260",
+    "CPUFeatures.c": "b27644d8cc3b9044125194ed7e6d03ebccfd9c705fd62b653b08667c054a3f0f",
+    "transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
+    "ABI2.c": "1794fd9b3db1991241d2d948f2ef332aff3257178bd4b11e90fdd29afa6442df",
+    "AudioHLE.h": "98475c4c2e034a7e1b16a94662078f731afcca5529140bf0d30c7e6901bdd441",
+    "AudioLegacy.h": "8f5810c3d8ae923119c733c304064310630cca3201c4b472047267d1417bee98",
+    "AudioResampleTables.h": "5b95bd2db83cf7eea18b347cdf32c7a332073868cbcbd45a939f8de4537236f1",
+    "Jpeg.c": "c13557f7c296ff040d0da7f8b771e81d08ac4bbefde36889017e6a756e8c6047",
+    "DirectSound.c": "33b9d09733353eb21f6a3536981892e5ba93e488a405e37a81745938aa89c8af",
+    "ABI3.c": "28ff355e6019318aa5b61ef3930dfc6b416451cddf382404992c8883eb61c9af",
+    "RSP.h": "9489748e5025a27cdcbcf9853751b72d0c6c73658ddb4d62893d3f40f297b7ab",
+    "RSP.cpp": "e2ebc258be25fca598896c4bc9639e24c61c859aaf34bab5682d034df2fd3a43",
+    "AudioProcessing.c": "09857cdf239396af5433ddd6f418691a6c180c9aaf0c003277472889f2a7ac52",
+    "AudioADPCM-LICENSE.txt": "9f8db578ada6153af1024a206324a03b9703abbec0e96b6ee3da72ff6eee335e",
+    "ABI1.c": "f672bac9d9d813a5bc89ce97ce88d697b61361e90b40a3087d4a8bcd369a6327",
+    "AudioSIMD.h": "627d71fd2a53dcc36e099c214824e397454c8b78d80be503f29f08c91a18bf63"
+  },
+  "toolchain_manifest": {
+    "path": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/2dzf0j0i/toolchain-sha256.json",
+    "sha256": "074a8a0899d15f4dcd40d134cb560c57ceba76e9a3100e8fd6fb41f85ebf062d",
+    "files": 3712
+  },
+  "native_units": [
+    {
+      "name": "ABI1.obj",
+      "matched": 29,
+      "total": 29
+    },
+    {
+      "name": "ABI2.obj",
+      "matched": 24,
+      "total": 24
+    },
+    {
+      "name": "AudioHLE.obj",
+      "matched": 11,
+      "total": 11
+    },
+    {
+      "name": "ABI3.obj",
+      "matched": 19,
+      "total": 19
+    },
+    {
+      "name": "AudioLegacy.obj",
+      "matched": 18,
+      "total": 18
+    },
+    {
+      "name": "DirectSound.obj",
+      "matched": 46,
+      "total": 49
+    },
+    {
+      "name": "AudioLog.obj",
+      "matched": 11,
+      "total": 11
+    },
+    {
+      "name": "CPUFeatures.obj",
+      "matched": 2,
+      "total": 2
+    },
+    {
+      "name": "Jpeg.obj",
+      "matched": 10,
+      "total": 10
+    },
+    {
+      "name": "Mp3.obj",
+      "matched": 10,
+      "total": 11
+    },
+    {
+      "name": "AudioProcessing.obj",
+      "matched": 33,
+      "total": 35
+    },
+    {
+      "name": "AudioResample.obj",
+      "matched": 4,
+      "total": 6
+    },
+    {
+      "name": "AudioPlugin.obj",
+      "matched": 13,
+      "total": 13
+    },
+    {
+      "name": "RSP.obj",
+      "matched": 148,
+      "total": 180
+    }
+  ],
+  "unique_native_spans": 417,
+  "instruction_matches": 377,
   "native_first_band": [
     {
       "name": "_ResampleAudioMMX",
@@ -616,10 +828,195 @@
     "linked_va": 268440864,
     "mechanism": "Identical global inline ANY COMDAT definitions, selected naturally in original object order; no force option."
   },
+  "rich_records_exact": true,
+  "rich": [
+    {
+      "comp_id": "002723ca",
+      "product_id": 39,
+      "build": 9162,
+      "count": 1
+    },
+    {
+      "comp_id": "004024fa",
+      "product_id": 64,
+      "build": 9466,
+      "count": 30
+    },
+    {
+      "comp_id": "001923fa",
+      "product_id": 25,
+      "build": 9210,
+      "count": 8
+    },
+    {
+      "comp_id": "00131f62",
+      "product_id": 19,
+      "build": 8034,
+      "count": 3
+    },
+    {
+      "comp_id": "00010000",
+      "product_id": 1,
+      "build": 0,
+      "count": 117
+    },
+    {
+      "comp_id": "001c24fa",
+      "product_id": 28,
+      "build": 9466,
+      "count": 131
+    },
+    {
+      "comp_id": "001d24fa",
+      "product_id": 29,
+      "build": 9466,
+      "count": 3
+    },
+    {
+      "comp_id": "003f24fa",
+      "product_id": 63,
+      "build": 9466,
+      "count": 1
+    },
+    {
+      "comp_id": "004524fa",
+      "product_id": 69,
+      "build": 9466,
+      "count": 1
+    },
+    {
+      "comp_id": "003d24fa",
+      "product_id": 61,
+      "build": 9466,
+      "count": 1
+    }
+  ],
+  "historical_link_identity": {
+    "seed": {
+      "scope": "Historical PDB identity restored in toolchain-generated metadata; no executable edits.",
+      "original_sha256": "db5c55e27efb3b4ee5d1a6d2fbac691fc4ea1e210f4694bb74f75dac4a6cec76",
+      "seeded_sha256": "8c8e7bb7d187b655c6164540a7e2f268c005e361557e68c89d759efaa75a7e4b",
+      "size": 551936,
+      "guid": "53a2b525-689f-4912-82cd-8a849f0d4dcb",
+      "prior_age": 7,
+      "expected_link_age": 8,
+      "fields": [
+        {
+          "name": "Info.Age",
+          "stream": 1,
+          "stream_offset": 8,
+          "file_offsets": [
+            540680,
+            540681,
+            540682,
+            540683
+          ],
+          "before": "01000000",
+          "after": "07000000"
+        },
+        {
+          "name": "Info.Guid",
+          "stream": 1,
+          "stream_offset": 12,
+          "file_offsets": [
+            540684,
+            540685,
+            540686,
+            540687,
+            540688,
+            540689,
+            540690,
+            540691,
+            540692,
+            540693,
+            540694,
+            540695,
+            540696,
+            540697,
+            540698,
+            540699
+          ],
+          "before": "b8a0b421e8ff2b4ebde4b159b5b0cdbe",
+          "after": "25b5a2539f68124982cd8a849f0d4dcb"
+        },
+        {
+          "name": "DBI.Age",
+          "stream": 3,
+          "stream_offset": 8,
+          "file_offsets": [
+            394248,
+            394249,
+            394250,
+            394251
+          ],
+          "before": "01000000",
+          "after": "07000000"
+        }
+      ],
+      "changed_file_offsets": [
+        394248,
+        540680,
+        540684,
+        540685,
+        540686,
+        540687,
+        540688,
+        540689,
+        540690,
+        540691,
+        540692,
+        540693,
+        540694,
+        540695,
+        540696,
+        540697,
+        540698,
+        540699
+      ]
+    },
+    "clock_environment": {
+      "LD_PRELOAD": "/usr/$LIB/faketime/libfaketime.so.1",
+      "FAKETIME_TIMESTAMP_FILE": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/2dzf0j0i/link-clock.txt",
+      "FAKETIME_NO_CACHE": "1",
+      "FAKETIME_DONT_FAKE_MONOTONIC": "1",
+      "FAKETIME_DISABLE_SHM": "1",
+      "NO_FAKE_STAT": "1",
+      "TZ": "UTC"
+    },
+    "warmup_clock": "+0",
+    "final_clock": "2003-03-23 04:56:26",
+    "initial_dll_sha256": "5566b6db6a8d5d8051795e8f37478521086b742661b21845224ff374a1ac9f56",
+    "initial_pdb_sha256": "db5c55e27efb3b4ee5d1a6d2fbac691fc4ea1e210f4694bb74f75dac4a6cec76",
+    "seeded_pdb_sha256": "8c8e7bb7d187b655c6164540a7e2f268c005e361557e68c89d759efaa75a7e4b",
+    "faketime_libraries": {
+      "/usr/lib/x86_64-linux-gnu/faketime/libfaketime.so.1": "f38066cb0a4a0bb6a8955c7cb48704ae3aec1b28a8e1ad45ba3db3429050cc40",
+      "/usr/lib/i386-linux-gnu/faketime/libfaketime.so.1": "d3e307d70ca6845d4a85d254be9943ec3ae256f7977ca3d316f7675912dd5016"
+    },
+    "final_pdb_sha256": "abb20d81d0d5c7afd949080d32e506dae92bd70f76444263398415e8f37ba98d",
+    "emitted_metadata": {
+      "coff_timestamp": 1048395386,
+      "debug_timestamp": 1048395386,
+      "codeview": "5253445325b5a2539f68124982cd8a849f0d4dcb08000000653a5c6e656d755c617564696f686c655c61686c655f64735c61686c655f64735f5f5f57696e33325f52656c656173655f6e656d75385c617564696f2e70646200"
+    },
+    "expected_metadata": {
+      "coff_timestamp": 1048395386,
+      "debug_timestamp": 1048395386,
+      "codeview": "5253445325b5a2539f68124982cd8a849f0d4dcb08000000653a5c6e656d755c617564696f686c655c61686c655f64735c61686c655f64735f5f5f57696e33325f52656c656173655f6e656d75385c617564696f2e70646200"
+    },
+    "metadata_exact": true
+  },
+  "initialized_data": {
+    "raw_bytes": 49152,
+    "original_highlow_sites": 519,
+    "rebuilt_highlow_sites": 519,
+    "highlow_sites_exact": true,
+    "bytes_equal_outside_actual_highlow_fields": true,
+    "limitation": "This independent data-layout diagnostic does not prove relocated pointer values. Strict whole-file equality remains false."
+  },
   "remaining_work": [
-    "Complete remaining native function bodies, including MP3, processing, DirectSound and RSP.",
-    "Consolidate processing groups11/12 and reproduce remaining source/compiler/data layout.",
-    "Recover full global/common storage, import/export/resource/relocation layout and link metadata.",
-    "Run a fresh final strict byte comparison after all source and build work."
+    "Complete40 unmatched unique native bodies across DirectSound, MP3, processing and RSP.",
+    "Recover unresolved strong/common BSS extents, original identifiers/order, and remaining16-byte readonly-data contribution difference.",
+    "Preserve independently identified relocation targets while completing absolute code/data layout.",
+    "Run fresh clean complete-byte acceptance after all source and build recovery."
   ]
 }
