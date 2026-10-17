@@ -1,0 +1,1540 @@
+{
+  "original": "master/nemu64.exe",
+  "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+  "status": "Read-only ordering experiments; no shared application source edited",
+  "baseline_artifact": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/40d7adc8b7fad7723db386860c73f6deadff097dd50266848a3e80ccd0998d70",
+  "summary_report": "analysis/nemu-rdata-order.json",
+  "controlled_literal_order": {
+    "source": "extern \"C\" const char *A() { return \"alpha literal\"; }\nextern \"C\" const char *B() { return \"bravo literal\"; }\nextern \"C\" const char *C() { return \"charlie literal\"; }\n",
+    "compile_flags": [
+      "/O2",
+      "/Ob1",
+      "/ML",
+      "/GF"
+    ],
+    "native_and_ltcg_tested": true,
+    "comparison": [
+      {
+        "name": "native-base",
+        "log": "LINK : warning LNK4235: /LTCG specified but no code generation required; remove /LTCG from the link command line to improve linker performance\n",
+        "map": " native-base\n\n Timestamp is 6ad36199 (Sat Oct 17 11:52:57 2026)\n\n Preferred load address is 10000000\n\n Start         Length     Name                   Class\n 0001:00000000 00000030H .text                   CODE\n 0002:00000000 00000030H .rdata                  DATA\n 0002:00000030 00000000H .edata                  DATA\n\n  Address         Publics by Value              Rva+Base     Lib:Object\n\n 0001:00000000       _A                         10001000 f   native.obj\n 0001:00000010       _B                         10001010 f   native.obj\n 0001:00000020       _C                         10001020 f   native.obj\n 0002:00000000       ??_C@_0O@MADGHGCF@alpha?5literal?$AA@ 10002000     native.obj\n 0002:00000010       ??_C@_0O@IHECIHHJ@bravo?5literal?$AA@ 10002010     native.obj\n 0002:00000020       ??_C@_0BA@OPJOIBAL@charlie?5literal?$AA@ 10002020     native.obj\n\n entry point at        0000:00000000\n\n Static symbols\n\n"
+      },
+      {
+        "name": "native-literal",
+        "log": "LINK : warning LNK4235: /LTCG specified but no code generation required; remove /LTCG from the link command line to improve linker performance\n",
+        "map": " native-literal\n\n Timestamp is 6ad361a0 (Sat Oct 17 11:53:04 2026)\n\n Preferred load address is 10000000\n\n Start         Length     Name                   Class\n 0001:00000000 00000030H .text                   CODE\n 0002:00000000 0000002eH .rdata                  DATA\n 0002:0000002e 00000000H .edata                  DATA\n\n  Address         Publics by Value              Rva+Base     Lib:Object\n\n 0001:00000000       _A                         10001000 f   native.obj\n 0001:00000010       _B                         10001010 f   native.obj\n 0001:00000020       _C                         10001020 f   native.obj\n 0002:00000000       ??_C@_0BA@OPJOIBAL@charlie?5literal?$AA@ 10002000     native.obj\n 0002:00000010       ??_C@_0O@IHECIHHJ@bravo?5literal?$AA@ 10002010     native.obj\n 0002:00000020       ??_C@_0O@MADGHGCF@alpha?5literal?$AA@ 10002020     native.obj\n\n entry point at        0000:00000000\n\n Static symbols\n\n"
+      },
+      {
+        "name": "ltcg-base",
+        "log": "Generating code\nFinished generating code\n",
+        "map": " ltcg-base\n\n Timestamp is 6ad361a6 (Sat Oct 17 11:53:10 2026)\n\n Preferred load address is 10000000\n\n Start         Length     Name                   Class\n 0001:00000000 00000030H .text                   CODE\n 0002:00000000 0000002eH .rdata                  DATA\n 0002:0000002e 00000000H .edata                  DATA\n\n  Address         Publics by Value              Rva+Base     Lib:Object\n\n 0001:00000000       _A                         10001000 f   ltcg.obj\n 0001:00000010       _B                         10001010 f   ltcg.obj\n 0001:00000020       _C                         10001020 f   ltcg.obj\n 0002:00000000       ??_C@_0BA@OPJOIBAL@charlie?5literal?$AA@ 10002000     ltcg.obj\n 0002:00000010       ??_C@_0O@IHECIHHJ@bravo?5literal?$AA@ 10002010     ltcg.obj\n 0002:00000020       ??_C@_0O@MADGHGCF@alpha?5literal?$AA@ 10002020     ltcg.obj\n\n entry point at        0000:00000000\n\n Static symbols\n\n"
+      },
+      {
+        "name": "ltcg-literal",
+        "log": "Generating code\nFinished generating code\n",
+        "map": " ltcg-literal\n\n Timestamp is 6ad361ad (Sat Oct 17 11:53:17 2026)\n\n Preferred load address is 10000000\n\n Start         Length     Name                   Class\n 0001:00000000 00000030H .text                   CODE\n 0002:00000000 00000030H .rdata                  DATA\n 0002:00000030 00000000H .edata                  DATA\n\n  Address         Publics by Value              Rva+Base     Lib:Object\n\n 0001:00000000       _A                         10001000 f   ltcg.obj\n 0001:00000010       _B                         10001010 f   ltcg.obj\n 0001:00000020       _C                         10001020 f   ltcg.obj\n 0002:00000000       ??_C@_0O@MADGHGCF@alpha?5literal?$AA@ 10002000     ltcg.obj\n 0002:00000010       ??_C@_0O@IHECIHHJ@bravo?5literal?$AA@ 10002010     ltcg.obj\n 0002:00000020       ??_C@_0BA@OPJOIBAL@charlie?5literal?$AA@ 10002020     ltcg.obj\n\n entry point at        0000:00000000\n\n Static symbols\n\n"
+      }
+    ],
+    "conclusion": "Stock VC7 /ORDER reorders string COMDATs in both native and LTCG inputs. The full-build variant moves ordered data before fixed vendor/CRT tables, so directly listing application literals does not reproduce the original layout."
+  },
+  "natural_source_partition": {
+    "changes": [
+      "Extracted runtime signature tables and their coherent hash/save/reset/lookup helpers from Dynarec.cpp into a scratch RuntimeSignatures.cpp.",
+      "Placed boot/mempak const array declarations after CPUHostException, preserving their bytes and original relative table order.",
+      "Reordered application input objects while retaining the existing648-function /ORDER file."
+    ],
+    "commands": {
+      "commands": [
+        [
+          "python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/ML",
+          "/GL",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/DWINVER=0x0500",
+          "/D_WIN32_WINNT=0x0400",
+          "/Ivendor/zlib-1.1.3",
+          "/Foobj/app/Dynarec.obj",
+          "Dynarec.cpp"
+        ],
+        [
+          "python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/ML",
+          "/GL",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/DWINVER=0x0500",
+          "/D_WIN32_WINNT=0x0400",
+          "/Ivendor/zlib-1.1.3",
+          "/Foobj/app/RuntimeSignatures.obj",
+          "RuntimeSignatures.cpp"
+        ],
+        [
+          "python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/ML",
+          "/GL",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/DWINVER=0x0500",
+          "/D_WIN32_WINNT=0x0400",
+          "/Ivendor/zlib-1.1.3",
+          "/Foobj/app/CpuControl.obj",
+          "CpuControl.cpp"
+        ],
+        [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "link",
+          "/nologo",
+          "/LTCG",
+          "/SUBSYSTEM:WINDOWS",
+          "/OPT:WIN98",
+          "/INCREMENTAL:NO",
+          "/MACHINE:I386",
+          "/BASE:0x400000",
+          "/FIXED",
+          "/OUT:natural.exe",
+          "obj/app/RSP.obj",
+          "obj/app/Dynarec.obj",
+          "obj/app/CPU.obj",
+          "obj/app/DynarecOpcodes.obj",
+          "obj/app/DynarecMemoryOps.obj",
+          "obj/app/DynarecFPU.obj",
+          "obj/app/CpuControl.obj",
+          "obj/app/Memory.obj",
+          "obj/app/Plugins.obj",
+          "obj/app/State.obj",
+          "obj/app/RomBrowser.obj",
+          "obj/app/WinMain.obj",
+          "obj/app/FrontendIni.obj",
+          "obj/app/Rom.obj",
+          "obj/app/RuntimeSignatures.obj",
+          "obj/app/PIF.obj",
+          "obj/app/Globals.obj",
+          "obj/app/LegacyData.obj",
+          "obj/app/ByteSwap.obj",
+          "obj/zlib/uncompr.obj",
+          "obj/zlib/compress.obj",
+          "obj/zlib/unzip.obj",
+          "obj/zlib/inflate.obj",
+          "obj/zlib/deflate.obj",
+          "obj/zlib/crc32.obj",
+          "obj/zlib/infblock.obj",
+          "obj/zlib/adler32.obj",
+          "obj/zlib/zutil.obj",
+          "obj/zlib/trees.obj",
+          "obj/zlib/infcodes.obj",
+          "obj/zlib/inftrees.obj",
+          "obj/zlib/infutil.obj",
+          "obj/zlib/inffast.obj",
+          "obj/nemu64.res",
+          "comctl32.lib",
+          "winmm.lib",
+          "imports/kailleraclient.lib",
+          "imports/gs_dll.lib",
+          "kernel32.lib",
+          "user32.lib",
+          "gdi32.lib",
+          "comdlg32.lib",
+          "shell32.lib",
+          "/MAP:natural.map",
+          "/ORDER:@function-order.txt"
+        ]
+      ],
+      "cwd": "/root/.ai-tmp/nemu-rdata-order.wdcnikef/natural",
+      "returncode": 0
+    },
+    "script_sha256": "120a55b30694c75dd0e03a46a3d5e3b7cd20f95dd95a69cd99b5c13732fdd4c3",
+    "script": "/root/.ai-tmp/nemu-rdata-order.wdcnikef/natural.py",
+    "outcome": "PIF five literals and176 runtime signature literals obtain exact original positions; most lower-core literal groups and the complete boot/mempak arrays remain uniformly8 bytes early. Frontend grouping and some internal source ordering remain unresolved."
+  },
+  "rsp_source_order": {
+    "script": "/root/.ai-tmp/nemu-rdata-order.wdcnikef/sort_rsp.py",
+    "script_sha256": "1e2c7fd92226130510c33b56357ec9268d0775729702ba01c7bfcd068eca5c23",
+    "ordering": [
+      {
+        "name": "RSP_CheckMemoryBreakpoint",
+        "va": 4198400
+      },
+      {
+        "name": "RSP_CheckMemoryBreakpointRange",
+        "va": 4198496
+      },
+      {
+        "name": "RSP_ReadByte",
+        "va": 4198608
+      },
+      {
+        "name": "RSP_WriteByte",
+        "va": 4198656
+      },
+      {
+        "name": "RSP_VectorMultiply",
+        "va": 4198720
+      },
+      {
+        "name": "RSP_LoadVector",
+        "va": 4200032
+      },
+      {
+        "name": "RSP_StoreVector",
+        "va": 4201824
+      },
+      {
+        "name": "RSP_InvalidOpcode",
+        "va": 4204208
+      },
+      {
+        "name": "RSP_SPECIAL",
+        "va": 4204256
+      },
+      {
+        "name": "RSP_REGIMM",
+        "va": 4204288
+      },
+      {
+        "name": "RSP_J",
+        "va": 4204320
+      },
+      {
+        "name": "RSP_JAL",
+        "va": 4204368
+      },
+      {
+        "name": "RSP_BEQ",
+        "va": 4204416
+      },
+      {
+        "name": "RSP_BNE",
+        "va": 4204496
+      },
+      {
+        "name": "RSP_BLEZ",
+        "va": 4204576
+      },
+      {
+        "name": "RSP_BGTZ",
+        "va": 4204640
+      },
+      {
+        "name": "RSP_ADDI",
+        "va": 4204704
+      },
+      {
+        "name": "RSP_SLTI",
+        "va": 4204752
+      },
+      {
+        "name": "RSP_SLTIU",
+        "va": 4204816
+      },
+      {
+        "name": "RSP_ANDI",
+        "va": 4204880
+      },
+      {
+        "name": "RSP_ORI",
+        "va": 4204944
+      },
+      {
+        "name": "RSP_XORI",
+        "va": 4205008
+      },
+      {
+        "name": "RSP_LUI",
+        "va": 4205072
+      },
+      {
+        "name": "RSP_COP0",
+        "va": 4205120
+      },
+      {
+        "name": "RSP_COP2",
+        "va": 4205152
+      },
+      {
+        "name": "RSP_LB",
+        "va": 4205184
+      },
+      {
+        "name": "RSP_LH",
+        "va": 4205296
+      },
+      {
+        "name": "RSP_LW",
+        "va": 4205424
+      },
+      {
+        "name": "RSP_LBU",
+        "va": 4205568
+      },
+      {
+        "name": "RSP_LHU",
+        "va": 4205680
+      },
+      {
+        "name": "RSP_SB",
+        "va": 4205792
+      },
+      {
+        "name": "RSP_SH",
+        "va": 4205904
+      },
+      {
+        "name": "RSP_SW",
+        "va": 4206032
+      },
+      {
+        "name": "RSP_LWC2",
+        "va": 4206176
+      },
+      {
+        "name": "RSP_SWC2",
+        "va": 4206240
+      },
+      {
+        "name": "RSP_SLL",
+        "va": 4206304
+      },
+      {
+        "name": "RSP_SRL",
+        "va": 4206368
+      },
+      {
+        "name": "RSP_SRA",
+        "va": 4206432
+      },
+      {
+        "name": "RSP_SLLV",
+        "va": 4206496
+      },
+      {
+        "name": "RSP_SRLV",
+        "va": 4206576
+      },
+      {
+        "name": "RSP_SRAV",
+        "va": 4206656
+      },
+      {
+        "name": "RSP_JR",
+        "va": 4206736
+      },
+      {
+        "name": "RSP_JALR",
+        "va": 4206784
+      },
+      {
+        "name": "RSP_BREAK",
+        "va": 4206848
+      },
+      {
+        "name": "RSP_ADD",
+        "va": 4206896
+      },
+      {
+        "name": "RSP_SUB",
+        "va": 4206976
+      },
+      {
+        "name": "RSP_AND",
+        "va": 4207056
+      },
+      {
+        "name": "RSP_OR",
+        "va": 4207136
+      },
+      {
+        "name": "RSP_XOR",
+        "va": 4207216
+      },
+      {
+        "name": "RSP_NOR",
+        "va": 4207296
+      },
+      {
+        "name": "RSP_SLT",
+        "va": 4207376
+      },
+      {
+        "name": "RSP_SLTU",
+        "va": 4207456
+      },
+      {
+        "name": "RSP_BLTZ",
+        "va": 4207536
+      },
+      {
+        "name": "RSP_BGEZ",
+        "va": 4207600
+      },
+      {
+        "name": "RSP_BLTZAL",
+        "va": 4207664
+      },
+      {
+        "name": "RSP_BGEZAL",
+        "va": 4207744
+      },
+      {
+        "name": "RSP_MFC0",
+        "va": 4207824
+      },
+      {
+        "name": "RSP_MTC0",
+        "va": 4208256
+      },
+      {
+        "name": "RSP_MFC2",
+        "va": 4208880
+      },
+      {
+        "name": "RSP_CFC2",
+        "va": 4208976
+      },
+      {
+        "name": "RSP_MTC2",
+        "va": 4209136
+      },
+      {
+        "name": "RSP_CTC2",
+        "va": 4209232
+      },
+      {
+        "name": "RSP_VECTOR",
+        "va": 4209344
+      },
+      {
+        "name": "RSP_VADD",
+        "va": 4209376
+      },
+      {
+        "name": "RSP_VSUB",
+        "va": 4210016
+      },
+      {
+        "name": "RSP_VSUT",
+        "va": 4210656
+      },
+      {
+        "name": "RSP_VABS",
+        "va": 4211296
+      },
+      {
+        "name": "RSP_VADDC",
+        "va": 4211824
+      },
+      {
+        "name": "RSP_VSUBC",
+        "va": 4212256
+      },
+      {
+        "name": "RSP_VADDB",
+        "va": 4212736
+      },
+      {
+        "name": "RSP_VSUBB",
+        "va": 4212768
+      },
+      {
+        "name": "RSP_VACCB",
+        "va": 4212800
+      },
+      {
+        "name": "RSP_VSUCB",
+        "va": 4212832
+      },
+      {
+        "name": "RSP_VSAD",
+        "va": 4212864
+      },
+      {
+        "name": "RSP_VSAC",
+        "va": 4212896
+      },
+      {
+        "name": "RSP_VSUM",
+        "va": 4212928
+      },
+      {
+        "name": "RSP_VSAW",
+        "va": 4212960
+      },
+      {
+        "name": "RSP_VLT",
+        "va": 4213568
+      },
+      {
+        "name": "RSP_VEQ",
+        "va": 4214560
+      },
+      {
+        "name": "RSP_VNE",
+        "va": 4214592
+      },
+      {
+        "name": "RSP_VGE",
+        "va": 4214624
+      },
+      {
+        "name": "RSP_VCL",
+        "va": 4215616
+      },
+      {
+        "name": "RSP_VCH",
+        "va": 4217088
+      },
+      {
+        "name": "RSP_VCR",
+        "va": 4217120
+      },
+      {
+        "name": "RSP_VMRG",
+        "va": 4217152
+      },
+      {
+        "name": "RSP_VAND",
+        "va": 4217392
+      },
+      {
+        "name": "RSP_VNAND",
+        "va": 4217808
+      },
+      {
+        "name": "RSP_VOR",
+        "va": 4218240
+      },
+      {
+        "name": "RSP_VNOR",
+        "va": 4218656
+      },
+      {
+        "name": "RSP_VXOR",
+        "va": 4219088
+      },
+      {
+        "name": "RSP_VNXOR",
+        "va": 4219504
+      },
+      {
+        "name": "RSP_VNOOP",
+        "va": 4219936
+      },
+      {
+        "name": "RSP_VEXTT",
+        "va": 4219968
+      },
+      {
+        "name": "RSP_VEXTQ",
+        "va": 4220000
+      },
+      {
+        "name": "RSP_VEXTN",
+        "va": 4220032
+      },
+      {
+        "name": "RSP_VINST",
+        "va": 4220064
+      },
+      {
+        "name": "RSP_VINSQ",
+        "va": 4220096
+      },
+      {
+        "name": "RSP_VINSN",
+        "va": 4220128
+      },
+      {
+        "name": "RSP_ReciprocalInstruction",
+        "va": 4220160
+      },
+      {
+        "name": "RSP_Reciprocal",
+        "va": 4220960
+      },
+      {
+        "name": "RSP_InitializeReciprocalTable",
+        "va": 4221184
+      }
+    ],
+    "validation": [
+      {
+        "name": "RSP_CheckMemoryBreakpoint",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_CheckMemoryBreakpointRange",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_ReadByte",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_WriteByte",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_VectorMultiply",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x4012aa",
+            "old": "push 0x43dde4",
+            "new": "push 0x43e004",
+            "literal_operand_only": true
+          },
+          {
+            "at": "0x4014f0",
+            "old": "push 0x43dde4",
+            "new": "push 0x43e004",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_LoadVector",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_StoreVector",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x4020cc",
+            "old": "push 0x43de1c",
+            "new": "push 0x43dffc",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_InvalidOpcode",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x402466",
+            "old": "push 0x43dff4",
+            "new": "push 0x43dfdc",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_SPECIAL",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_REGIMM",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_J",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_JAL",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_BEQ",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_BNE",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_BLEZ",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_BGTZ",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_ADDI",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_SLTI",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_SLTIU",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_ANDI",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_ORI",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_XORI",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_LUI",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_COP0",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_COP2",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_LB",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_LH",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_LW",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_LBU",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_LHU",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_SB",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_SH",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_SW",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_LWC2",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_SWC2",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_SLL",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_SRL",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_SRA",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_SLLV",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_SRLV",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_SRAV",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_JR",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_JALR",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_BREAK",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_ADD",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_SUB",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_AND",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_OR",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_XOR",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_NOR",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_SLT",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_SLTU",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_BLTZ",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_BGEZ",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_BLTZAL",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_BGEZAL",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_MFC0",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x4033df",
+            "old": "push 0x43dfc4",
+            "new": "push 0x43dfac",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_MTC0",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x403470",
+            "old": "push 0x43df80",
+            "new": "push 0x43df68",
+            "literal_operand_only": true
+          },
+          {
+            "at": "0x403642",
+            "old": "push 0x43df54",
+            "new": "push 0x43df3c",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_MFC2",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_CFC2",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x403788",
+            "old": "push 0x43df30",
+            "new": "push 0x43df18",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_MTC2",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_CTC2",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x40385e",
+            "old": "push 0x43df0c",
+            "new": "push 0x43def4",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_VECTOR",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_VADD",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_VSUB",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_VSUT",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_VABS",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_VADDC",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_VSUBC",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_VADDB",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x404629",
+            "old": "push 0x43df00",
+            "new": "push 0x43dee8",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_VSUBB",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x404649",
+            "old": "push 0x43def4",
+            "new": "push 0x43dedc",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_VACCB",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x404669",
+            "old": "push 0x43dee8",
+            "new": "push 0x43ded0",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_VSUCB",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x404689",
+            "old": "push 0x43dedc",
+            "new": "push 0x43dec4",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_VSAD",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x4046a9",
+            "old": "push 0x43ded0",
+            "new": "push 0x43deb8",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_VSAC",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x4046c9",
+            "old": "push 0x43dec4",
+            "new": "push 0x43deac",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_VSUM",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x4046e9",
+            "old": "push 0x43deb8",
+            "new": "push 0x43dea0",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_VSAW",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x404951",
+            "old": "push 0x43de24",
+            "new": "push 0x43de80",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_VLT",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_VEQ",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x404d39",
+            "old": "push 0x43deb0",
+            "new": "push 0x43de78",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_VNE",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x404d59",
+            "old": "push 0x43dea8",
+            "new": "push 0x43de70",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_VGE",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_VCL",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_VCH",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x4056d9",
+            "old": "push 0x43dea0",
+            "new": "push 0x43de68",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_VCR",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x4056f9",
+            "old": "push 0x43de98",
+            "new": "push 0x43de60",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_VMRG",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_VAND",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_VNAND",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_VOR",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_VNOR",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_VXOR",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_VNXOR",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_VNOOP",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x4061f9",
+            "old": "push 0x43de8c",
+            "new": "push 0x43de54",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_VEXTT",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x406219",
+            "old": "push 0x43de80",
+            "new": "push 0x43de48",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_VEXTQ",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x406239",
+            "old": "push 0x43de74",
+            "new": "push 0x43de3c",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_VEXTN",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x406259",
+            "old": "push 0x43de68",
+            "new": "push 0x43de30",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_VINST",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x406279",
+            "old": "push 0x43de5c",
+            "new": "push 0x43de24",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_VINSQ",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x406299",
+            "old": "push 0x43de50",
+            "new": "push 0x43de18",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_VINSN",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x4062b9",
+            "old": "push 0x43de44",
+            "new": "push 0x43de0c",
+            "literal_operand_only": true
+          }
+        ]
+      },
+      {
+        "name": "RSP_ReciprocalInstruction",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_Reciprocal",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "raw_equal",
+        "differences": []
+      },
+      {
+        "name": "RSP_InitializeReciprocalTable",
+        "start_equal": true,
+        "size_equal": true,
+        "status": "only_verified_literal_operand_changes",
+        "differences": [
+          {
+            "at": "0x406693",
+            "old": "push 0x43de18",
+            "new": "push 0x43de08",
+            "literal_operand_only": true
+          },
+          {
+            "at": "0x406698",
+            "old": "push 0x43de0c",
+            "new": "push 0x43ddfc",
+            "literal_operand_only": true
+          },
+          {
+            "at": "0x4066a4",
+            "old": "push 0x43de08",
+            "new": "push 0x43ddf8",
+            "literal_operand_only": true
+          },
+          {
+            "at": "0x4066bf",
+            "old": "push 0x43ddf4",
+            "new": "push 0x43dde4",
+            "literal_operand_only": true
+          },
+          {
+            "at": "0x4066d6",
+            "old": "push 0x43de08",
+            "new": "push 0x43ddf8",
+            "literal_operand_only": true
+          }
+        ]
+      }
+    ],
+    "outcome": "All30 RSP literal relative positions match after sorting101 definitions by established original function address. Seventy-four functions retain raw bytes and alignment;27 change only verified literal-address immediate operands; all101 retain their starts and extents."
+  },
+  "constant_order": {
+    "observation": "After natural ordering, ten of eleven tracked application floating literals share the8-byte displacement; __real@4f800000 remains last in its pool instead of first. Their values are exact. Shared literal ownership and later SEH tables remain ordering constraints, not evidence for filler objects."
+  },
+  "translation_units": {
+    "original_cpp_ltcg_count": 27,
+    "baseline_cpp_ltcg_count": 17,
+    "scratch_cpp_ltcg_count": 18,
+    "interpretation": "The runtime-table split is a coherent inferred partition. Neither this count nor candidate literal ownership establishes original filenames or the remaining missing partitions."
+  },
+  "limitations": [
+    "No binary patches, copied native code blobs, fabricated padding, forced unresolved links or source-sized equality claims are used.",
+    "Source declaration ordering is inferred from compilation experiments; physical function order alone does not prove original source order.",
+    "Shared string pooling can move a literal to a different current object without implying any original file boundary.",
+    "The scratch variant is a complete successful link, not an exact reconstruction of the executable.",
+    "The baseline source snapshot predates ongoing body refinements; source changes should be applied structurally rather than copying stale files."
+  ]
+}
