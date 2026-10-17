@@ -1,0 +1,494 @@
+{
+  "rebuilt_image": "/root/.ai-tmp/nemu-complete-relocs.isffxrc_/nemu64.exe",
+  "rebuilt_image_sha256": "3ed9d1983501f2fa5113a0055f0827d9f78cd30bd40b05ca4fdaa12f30ad2edc",
+  "rebuilt_map_sha256": "020745b1a9ebb77a6f34a003c05b2a9c878e4cd77d379fc630a3a1aef1bf23d8",
+  "measurement_script": "scripts/measure_nemu_extents.py",
+  "measurement_script_sha256": "3e4b5ea132e05fa40900c10e2263051dc2a65eab4ffbd393d14babf77227154e",
+  "comparison_tool_sha256": "68a389f46698cbaea256019bf4d03f2546027d0a6475ec80207690c3894b6b5b",
+  "metadata": [
+    {
+      "path": "analysis/nemu-cpu-control.json",
+      "sha256": "1db4961d2616d2032bb0c26113e485b665b024570771f341cfdc62a48b0ba681"
+    }
+  ],
+  "functions": [
+    {
+      "name": "ContextRegister",
+      "symbol": "?ContextRegister@@YAPAIPAU_CONTEXT@@E@Z",
+      "original_va": 4277280,
+      "original_size": 100,
+      "rebuilt_va": 4277184,
+      "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
+      "rebuilt_size": 100,
+      "map_block_size": 112,
+      "tables": [
+        {
+          "address": "0x414404",
+          "entries": 8,
+          "size": 32
+        }
+      ],
+      "trailing_padding": [
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop"
+      ],
+      "seh_scope_entries": [],
+      "extent_verified": true,
+      "errors": []
+    },
+    {
+      "name": "CPUHostException",
+      "symbol": "?CPUHostException@@YAJPAU_EXCEPTION_POINTERS@@@Z",
+      "original_va": 4277392,
+      "original_size": 1802,
+      "rebuilt_va": 4277296,
+      "measurement": "CFG and PE-relocated DWORD tables plus independently bounded byte selectors; both selector/dispatch references and every target have HIGHLOW fixups. Selected targets are decoded instruction starts. Trailing NOP alignment is excluded.",
+      "rebuilt_size": 1802,
+      "map_block_size": 1808,
+      "tables": [
+        {
+          "address": "0x414a2c",
+          "entries": 13,
+          "size": 52
+        },
+        {
+          "address": "0x414a44",
+          "entries": 7,
+          "size": 28
+        },
+        {
+          "address": "0x414b1c",
+          "entries": 5,
+          "size": 20
+        }
+      ],
+      "trailing_padding": [
+        {
+          "address": "0x414b3a",
+          "bytes": "909090909090",
+          "size": 6
+        }
+      ],
+      "seh_scope_entries": [],
+      "extent_verified": true,
+      "errors": [],
+      "byte_selectors": [
+        {
+          "bounds_cmp_va": "0x4147c3",
+          "instruction_va": "0x4147cf",
+          "dispatch_va": "0x4147d6",
+          "table_va": "0x414a60",
+          "max_index": 184,
+          "size": 185,
+          "end_exclusive": "0x414b19",
+          "dispatch_table_va": "0x414a44",
+          "dispatch_entries": 7,
+          "targets_are_instruction_starts": true
+        },
+        {
+          "bounds_cmp_va": "0x41488c",
+          "instruction_va": "0x414891",
+          "dispatch_va": "0x414898",
+          "table_va": "0x414b30",
+          "max_index": 9,
+          "size": 10,
+          "end_exclusive": "0x414b3a",
+          "dispatch_table_va": "0x414b1c",
+          "dispatch_entries": 5,
+          "targets_are_instruction_starts": true
+        }
+      ]
+    },
+    {
+      "name": "MultiplyUnsigned64",
+      "symbol": "?MultiplyUnsigned64@@YGXIIII@Z",
+      "original_va": 4279200,
+      "original_size": 121,
+      "rebuilt_va": 4279104,
+      "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
+      "rebuilt_size": 121,
+      "map_block_size": 128,
+      "tables": [],
+      "trailing_padding": [
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop"
+      ],
+      "seh_scope_entries": [],
+      "extent_verified": true,
+      "errors": []
+    },
+    {
+      "name": "MultiplySigned64",
+      "symbol": "?MultiplySigned64@@YGX_J0@Z",
+      "original_va": 4279328,
+      "original_size": 201,
+      "rebuilt_va": 4279232,
+      "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
+      "rebuilt_size": 201,
+      "map_block_size": 208,
+      "tables": [],
+      "trailing_padding": [
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop"
+      ],
+      "seh_scope_entries": [],
+      "extent_verified": true,
+      "errors": []
+    },
+    {
+      "name": "DivideUnsigned64",
+      "symbol": "?DivideUnsigned64@@YGX_K0@Z",
+      "original_va": 4279536,
+      "original_size": 94,
+      "rebuilt_va": 4279440,
+      "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
+      "rebuilt_size": 94,
+      "map_block_size": 96,
+      "tables": [],
+      "trailing_padding": [
+        "nop",
+        "nop"
+      ],
+      "seh_scope_entries": [],
+      "extent_verified": true,
+      "errors": []
+    },
+    {
+      "name": "DivideSigned64",
+      "symbol": "?DivideSigned64@@YGX_J0@Z",
+      "original_va": 4279632,
+      "original_size": 94,
+      "rebuilt_va": 4279536,
+      "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
+      "rebuilt_size": 94,
+      "map_block_size": 96,
+      "tables": [],
+      "trailing_padding": [
+        "nop",
+        "nop"
+      ],
+      "seh_scope_entries": [],
+      "extent_verified": true,
+      "errors": []
+    },
+    {
+      "name": "ReportCPUErrorFormat",
+      "symbol": "?ReportCPUErrorFormat@@YAXPBDZZ",
+      "original_va": 4279728,
+      "original_size": 116,
+      "rebuilt_va": 4279632,
+      "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
+      "rebuilt_size": 116,
+      "map_block_size": 128,
+      "tables": [],
+      "trailing_padding": [
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop"
+      ],
+      "seh_scope_entries": [],
+      "extent_verified": true,
+      "errors": []
+    },
+    {
+      "name": "ReportMemoryError",
+      "symbol": "?ReportMemoryError@@YAXPBDI@Z",
+      "original_va": 4279856,
+      "original_size": 119,
+      "rebuilt_va": 4279760,
+      "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
+      "rebuilt_size": 119,
+      "map_block_size": 128,
+      "tables": [],
+      "trailing_padding": [
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop"
+      ],
+      "seh_scope_entries": [],
+      "extent_verified": true,
+      "errors": []
+    },
+    {
+      "name": "ReportCPUError",
+      "symbol": "?ReportCPUError@@YAXPBD@Z",
+      "original_va": 4279984,
+      "original_size": 78,
+      "rebuilt_va": 4279888,
+      "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
+      "rebuilt_size": 78,
+      "map_block_size": 80,
+      "tables": [],
+      "trailing_padding": [
+        "nop",
+        "nop"
+      ],
+      "seh_scope_entries": [],
+      "extent_verified": true,
+      "errors": []
+    },
+    {
+      "name": "ReportInterpreterError",
+      "symbol": "?ReportInterpreterError@@YAXPBD@Z",
+      "original_va": 4280064,
+      "original_size": 78,
+      "rebuilt_va": 4279968,
+      "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
+      "rebuilt_size": 78,
+      "map_block_size": 80,
+      "tables": [],
+      "trailing_padding": [
+        "nop",
+        "nop"
+      ],
+      "seh_scope_entries": [],
+      "extent_verified": true,
+      "errors": []
+    },
+    {
+      "name": "ReportCompilerError",
+      "symbol": "?ReportCompilerError@@YAXPBD@Z",
+      "original_va": 4280144,
+      "original_size": 78,
+      "rebuilt_va": 4280048,
+      "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
+      "rebuilt_size": 78,
+      "map_block_size": 80,
+      "tables": [],
+      "trailing_padding": [
+        "nop",
+        "nop"
+      ],
+      "seh_scope_entries": [],
+      "extent_verified": true,
+      "errors": []
+    },
+    {
+      "name": "SetFpuRounding",
+      "symbol": "?SetFpuRounding@@YGXI@Z",
+      "original_va": 4280224,
+      "original_size": 133,
+      "rebuilt_va": 4280128,
+      "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
+      "rebuilt_size": 133,
+      "map_block_size": 144,
+      "tables": [],
+      "trailing_padding": [
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop"
+      ],
+      "seh_scope_entries": [],
+      "extent_verified": true,
+      "errors": []
+    },
+    {
+      "name": "ResetRecompiler",
+      "symbol": "?ResetRecompiler@@YAXXZ",
+      "original_va": 4280368,
+      "original_size": 225,
+      "rebuilt_va": 4280272,
+      "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
+      "rebuilt_size": 225,
+      "map_block_size": 240,
+      "tables": [],
+      "trailing_padding": [
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop"
+      ],
+      "seh_scope_entries": [],
+      "extent_verified": true,
+      "errors": []
+    },
+    {
+      "name": "ResetCPU",
+      "symbol": "?ResetCPU@@YAXXZ",
+      "original_va": 4280608,
+      "original_size": 1610,
+      "rebuilt_va": 4280512,
+      "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
+      "rebuilt_size": 1611,
+      "map_block_size": 1616,
+      "tables": [],
+      "trailing_padding": [
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop"
+      ],
+      "seh_scope_entries": [],
+      "extent_verified": true,
+      "errors": []
+    },
+    {
+      "name": "InitializeCPU",
+      "symbol": "?InitializeCPU@@YAXXZ",
+      "original_va": 4282224,
+      "original_size": 94,
+      "rebuilt_va": 4282128,
+      "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
+      "rebuilt_size": 94,
+      "map_block_size": 96,
+      "tables": [],
+      "trailing_padding": [
+        "nop",
+        "nop"
+      ],
+      "seh_scope_entries": [],
+      "extent_verified": true,
+      "errors": []
+    },
+    {
+      "name": "UpdateAudioTiming",
+      "symbol": "?UpdateAudioTiming@@YAXXZ",
+      "original_va": 4282320,
+      "original_size": 102,
+      "rebuilt_va": 4282224,
+      "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
+      "rebuilt_size": 102,
+      "map_block_size": 112,
+      "tables": [],
+      "trailing_padding": [
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop",
+        "nop"
+      ],
+      "seh_scope_entries": [],
+      "extent_verified": true,
+      "errors": []
+    },
+    {
+      "name": "RunCPU",
+      "symbol": "?RunCPU@@YAXXZ",
+      "original_va": 4282432,
+      "original_size": 4503,
+      "rebuilt_va": 4282336,
+      "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
+      "rebuilt_size": 4503,
+      "map_block_size": 4512,
+      "tables": [
+        {
+          "address": "0x416963",
+          "entries": 5,
+          "size": 20
+        }
+      ],
+      "trailing_padding": [
+        "int3",
+        "int3",
+        "int3",
+        "int3",
+        "int3",
+        "int3",
+        "int3",
+        "int3",
+        "int3"
+      ],
+      "seh_scope_entries": [
+        {
+          "table_va": 4448400,
+          "entry_index": 0,
+          "enclosing_level": -1,
+          "filter_va": 4282806,
+          "handler_va": 4282819,
+          "evidence": "relocated_scope_table_referenced_by_validated___except_handler3_prolog"
+        },
+        {
+          "table_va": 4448400,
+          "entry_index": 1,
+          "enclosing_level": -1,
+          "filter_va": 4286714,
+          "handler_va": 4286720,
+          "evidence": "relocated_scope_table_referenced_by_validated___except_handler3_prolog"
+        }
+      ],
+      "extent_verified": true,
+      "errors": []
+    },
+    {
+      "name": "StartCPUThread",
+      "symbol": "?StartCPUThread@@YAXXZ",
+      "original_va": 4286944,
+      "original_size": 30,
+      "rebuilt_va": 4286848,
+      "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
+      "rebuilt_size": 30,
+      "map_block_size": 32,
+      "tables": [],
+      "trailing_padding": [
+        "nop",
+        "nop"
+      ],
+      "seh_scope_entries": [],
+      "extent_verified": true,
+      "errors": []
+    }
+  ],
+  "selector_input_report_sha256": "337f78bbdd4a7b5fe617226c09916b91ac22a431e4534e3c527a9d0647fc0354",
+  "selector_measurement_script": "scripts/complete_nemu_cpu_control_extents.py",
+  "selector_measurement_script_sha256": "d8ff5e0b63db8c55c5932380c58633f70d9942d7bf3ff883e08de6e826dbc941"
+}

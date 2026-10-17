@@ -15,6 +15,7 @@
 #include <stdarg.h>
 #include <mmsystem.h>
 #include <string.h>
+#include <stddef.h>
 
 
 extern "C" __declspec(dllimport) int __stdcall kailleraModifyPlayValues(void *, int);
@@ -50,18 +51,42 @@ CpuU32 RecompilerStepMode;
 // Alternate cartridge mapping used by the original word readers and compiler.
 enum { ROMAlternateBase = 0x13FCB4D0 };
 
+// Layout-compatible access view inferred from the original address reloads.
+// The qualifier applies to the address slot, not to the instruction bytes.
+// Original type names and qualifier spelling are unknown; SDK types stay intact.
+struct HostExceptionRecord {
+    DWORD ExceptionCode;
+    DWORD ExceptionFlags;
+    EXCEPTION_RECORD *ExceptionRecord;
+    void * volatile ExceptionAddress;
+    DWORD NumberParameters;
+    ULONG_PTR ExceptionInformation[EXCEPTION_MAXIMUM_PARAMETERS];
+};
+struct HostExceptionPointers {
+    HostExceptionRecord *ExceptionRecord;
+    CONTEXT *ContextRecord;
+};
+typedef char CheckHostRecordSize[(sizeof(HostExceptionRecord) == sizeof(EXCEPTION_RECORD)) ? 1 : -1];
+typedef char CheckHostAddressOffset[(offsetof(HostExceptionRecord, ExceptionAddress) == offsetof(EXCEPTION_RECORD, ExceptionAddress)) ? 1 : -1];
+typedef char CheckHostInfoOffset[(offsetof(HostExceptionRecord, ExceptionInformation) == offsetof(EXCEPTION_RECORD, ExceptionInformation)) ? 1 : -1];
+typedef char CheckHostPointersSize[(sizeof(HostExceptionPointers) == sizeof(EXCEPTION_POINTERS)) ? 1 : -1];
+typedef char CheckHostContextOffset[(offsetof(HostExceptionPointers, ContextRecord) == offsetof(EXCEPTION_POINTERS, ContextRecord)) ? 1 : -1];
+
 // 00414490. Names are inferred; the exception-context accesses are recovered.
-LONG CPUHostException(EXCEPTION_POINTERS *exception)
+LONG CPUHostException(EXCEPTION_POINTERS *exceptionInfo)
 {
+    HostExceptionPointers *exception = (HostExceptionPointers *)exceptionInfo;
     char opcodeMessage[100];
     switch (exception->ExceptionRecord->ExceptionCode) {
     case EXCEPTION_ACCESS_VIOLATION: {
         CpuU32 index = Dynarec_ConversionCount - 1;
-        while (index < Dynarec_ConversionCount) {
-            if ((BYTE *)exception->ExceptionRecord->ExceptionAddress >=
-                Dynarec_MainCode + Dynarec_AddressMap[index].offset)
-                break;
-            --index;
+        if (index < Dynarec_ConversionCount) {
+            BYTE *faultPC = (BYTE *)exception->ExceptionRecord->ExceptionAddress;
+            do {
+                if (faultPC >= Dynarec_MainCode + Dynarec_AddressMap[index].offset)
+                    break;
+                --index;
+            } while (index < Dynarec_ConversionCount);
         }
         int disposition;
         // The original failure path reads an uninitialized local disposition.
@@ -131,9 +156,11 @@ LONG CPUHostException(EXCEPTION_POINTERS *exception)
 
             switch (((BYTE *)exception->ExceptionRecord->ExceptionAddress)[0]) {
             case 0x88: {
+                CpuU32 writeAddress = address;
                 CpuU32 value = *ContextRegister(exception->ContextRecord,
                     (((BYTE *)exception->ExceptionRecord->ExceptionAddress)[1] >> 3) & 7);
-                WritePhysicalByte(hostByteOrder ? address ^ 3 : address, value);
+                if (hostByteOrder) writeAddress ^= 3;
+                WritePhysicalByte(writeAddress, value);
                 exception->ContextRecord->Eip += 6;
                 break;
             }
