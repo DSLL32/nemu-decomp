@@ -12,8 +12,9 @@ python3 scripts/build_input.py
 
 The build directory and its Wine prefix are created under `~/.ai-tmp`. The
 script prints the resulting DLL, detailed MAP, and comparison report. Exit zero
-requires equality of the complete original and rebuilt files. A previous build
-can be checked independently with:
+requires equality of the complete original and rebuilt files. Each build saves
+an immutable source/build snapshot with source, compiler, and linked-library
+unit hashes. A previous build can be checked independently with:
 
 ```sh
 python3 scripts/verify_input.py /path/to/Input.dll --map /path/to/Input.map
@@ -41,11 +42,11 @@ retained as `input.unstamped.dll`.
 The four textual DFMs were recovered from the original resources and round-trip
 to the original binary streams. Published component names, field offsets, event
 names, unit names, and exports are preserved by the DLL. Private helper names,
-local names, other type names, global identifiers, and the flat application
-folder structure are inferred. The global identifiers also reproduce Delphi's
-imported-data hash ordering; that constraint does not establish their original
-spelling. Lost comments, unused declarations, and unlinked code are not uniquely
-recoverable.
+local names, other type names, global identifiers, unit dependency clauses,
+and the flat application folder structure are inferred. The global identifiers
+also reproduce Delphi's imported-data hash ordering; that constraint does not
+establish their original spelling. Lost comments, unused declarations, and
+unlinked code are not uniquely recoverable.
 
 Observed behavior is preserved, including fixed-length conversion of all 40
 button-name characters, the device-selection form's repeated registry-key

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compare a input rebuild with the complete original DLL, without masking.
+"""Compare an input rebuild with the complete original DLL, without masking.
 
 Per-routine address-masked diagnostics help locate source differences while
 addresses are still moving. Only complete-file equality is success.

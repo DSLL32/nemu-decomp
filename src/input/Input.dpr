@@ -79,20 +79,20 @@ begin
       if Button^.Device = -1 then Continue;
       if Button^.Turbo then TurboOn[ButtonIndex] := not TurboOn[ButtonIndex]
       else TurboOn[ButtonIndex] := True;
-case DIDevices[OpenDevices[Button^.Device].DeviceIndex].DeviceType and $FF of
-  3: if (OpenDevices[Button^.Device].KeyboardState[Button^.Button] and $80 <> 0) and TurboOn[ButtonIndex] then
-    Controllers^[I].Buttons := Controllers^[I].Buttons or Mask
-  else
-    Controllers^[I].Buttons := Controllers^[I].Buttons and not Mask;
-  4: if (OpenDevices[Button^.Device].JoyState.rgbButtons[Button^.Button - 1] and $80 <> 0) and TurboOn[ButtonIndex] then
-    Controllers^[I].Buttons := Controllers^[I].Buttons or Mask
-  else
-    Controllers^[I].Buttons := Controllers^[I].Buttons and not Mask;
-  2: if (OpenDevices[Button^.Device].MouseState.rgbButtons[Button^.Button - 1] and $80 <> 0) and TurboOn[ButtonIndex] then
-    Controllers^[I].Buttons := Controllers^[I].Buttons or Mask
-  else
-    Controllers^[I].Buttons := Controllers^[I].Buttons and not Mask;
-end;
+      case DIDevices[OpenDevices[Button^.Device].DeviceIndex].DeviceType and $FF of
+        3: if (OpenDevices[Button^.Device].KeyboardState[Button^.Button] and $80 <> 0) and TurboOn[ButtonIndex] then
+          Controllers^[I].Buttons := Controllers^[I].Buttons or Mask
+        else
+          Controllers^[I].Buttons := Controllers^[I].Buttons and not Mask;
+        4: if (OpenDevices[Button^.Device].JoyState.rgbButtons[Button^.Button - 1] and $80 <> 0) and TurboOn[ButtonIndex] then
+          Controllers^[I].Buttons := Controllers^[I].Buttons or Mask
+        else
+          Controllers^[I].Buttons := Controllers^[I].Buttons and not Mask;
+        2: if (OpenDevices[Button^.Device].MouseState.rgbButtons[Button^.Button - 1] and $80 <> 0) and TurboOn[ButtonIndex] then
+          Controllers^[I].Buttons := Controllers^[I].Buttons or Mask
+        else
+          Controllers^[I].Buttons := Controllers^[I].Buttons and not Mask;
+      end;
     end;
 end;
 
@@ -146,70 +146,70 @@ begin
         Pressed := False;
         Speed := ControllerSettings.DefaultSensitivity;
         if Speed1^.Device <> -1 then
-case DIDevices[OpenDevices[Speed1^.Device].DeviceIndex].DeviceType and $FF of
-  3: if (OpenDevices[Speed1^.Device].KeyboardState[Speed1^.Button] and $80 <> 0) then
-    Speed := ControllerSettings.Modifier1Sensitivity;
-  4: if (OpenDevices[Speed1^.Device].JoyState.rgbButtons[Speed1^.Button - 1] and $80 <> 0) then
-    Speed := ControllerSettings.Modifier1Sensitivity;
-  2: if (OpenDevices[Speed1^.Device].MouseState.rgbButtons[Speed1^.Button - 1] and $80 <> 0) then
-    Speed := ControllerSettings.Modifier1Sensitivity;
-end;
+          case DIDevices[OpenDevices[Speed1^.Device].DeviceIndex].DeviceType and $FF of
+            3: if (OpenDevices[Speed1^.Device].KeyboardState[Speed1^.Button] and $80 <> 0) then
+              Speed := ControllerSettings.Modifier1Sensitivity;
+            4: if (OpenDevices[Speed1^.Device].JoyState.rgbButtons[Speed1^.Button - 1] and $80 <> 0) then
+              Speed := ControllerSettings.Modifier1Sensitivity;
+            2: if (OpenDevices[Speed1^.Device].MouseState.rgbButtons[Speed1^.Button - 1] and $80 <> 0) then
+              Speed := ControllerSettings.Modifier1Sensitivity;
+          end;
         if Speed2^.Device <> -1 then
-case DIDevices[OpenDevices[Speed2^.Device].DeviceIndex].DeviceType and $FF of
-  3: if (OpenDevices[Speed2^.Device].KeyboardState[Speed2^.Button] and $80 <> 0) then
-    Speed := ControllerSettings.Modifier2Sensitivity;
-  4: if (OpenDevices[Speed2^.Device].JoyState.rgbButtons[Speed2^.Button - 1] and $80 <> 0) then
-    Speed := ControllerSettings.Modifier2Sensitivity;
-  2: if (OpenDevices[Speed2^.Device].MouseState.rgbButtons[Speed2^.Button - 1] and $80 <> 0) then
-    Speed := ControllerSettings.Modifier2Sensitivity;
-end;
+          case DIDevices[OpenDevices[Speed2^.Device].DeviceIndex].DeviceType and $FF of
+            3: if (OpenDevices[Speed2^.Device].KeyboardState[Speed2^.Button] and $80 <> 0) then
+              Speed := ControllerSettings.Modifier2Sensitivity;
+            4: if (OpenDevices[Speed2^.Device].JoyState.rgbButtons[Speed2^.Button - 1] and $80 <> 0) then
+              Speed := ControllerSettings.Modifier2Sensitivity;
+            2: if (OpenDevices[Speed2^.Device].MouseState.rgbButtons[Speed2^.Button - 1] and $80 <> 0) then
+              Speed := ControllerSettings.Modifier2Sensitivity;
+          end;
         if Speed3^.Device <> -1 then
-case DIDevices[OpenDevices[Speed3^.Device].DeviceIndex].DeviceType and $FF of
-  3: if (OpenDevices[Speed3^.Device].KeyboardState[Speed3^.Button] and $80 <> 0) then
-    Speed := ControllerSettings.Modifier3Sensitivity;
-  4: if (OpenDevices[Speed3^.Device].JoyState.rgbButtons[Speed3^.Button - 1] and $80 <> 0) then
-    Speed := ControllerSettings.Modifier3Sensitivity;
-  2: if (OpenDevices[Speed3^.Device].MouseState.rgbButtons[Speed3^.Button - 1] and $80 <> 0) then
-    Speed := ControllerSettings.Modifier3Sensitivity;
-end;
+          case DIDevices[OpenDevices[Speed3^.Device].DeviceIndex].DeviceType and $FF of
+            3: if (OpenDevices[Speed3^.Device].KeyboardState[Speed3^.Button] and $80 <> 0) then
+              Speed := ControllerSettings.Modifier3Sensitivity;
+            4: if (OpenDevices[Speed3^.Device].JoyState.rgbButtons[Speed3^.Button - 1] and $80 <> 0) then
+              Speed := ControllerSettings.Modifier3Sensitivity;
+            2: if (OpenDevices[Speed3^.Device].MouseState.rgbButtons[Speed3^.Button - 1] and $80 <> 0) then
+              Speed := ControllerSettings.Modifier3Sensitivity;
+          end;
         if Invert then Delta := -20 * Speed div 100
         else Delta := 20 * Speed div 100;
         if Axis^.Negative.Device <> -1 then
-case DIDevices[OpenDevices[Axis^.Negative.Device].DeviceIndex].DeviceType and $FF of
-  3: if (OpenDevices[Axis^.Negative.Device].KeyboardState[Axis^.Negative.Button] and $80 <> 0) then
-    begin
-      Dec(Value, Delta);
-      Pressed := True;
-    end;
-  4: if (OpenDevices[Axis^.Negative.Device].JoyState.rgbButtons[Axis^.Negative.Button - 1] and $80 <> 0) then
-    begin
-      Dec(Value, Delta);
-      Pressed := True;
-    end;
-  2: if (OpenDevices[Axis^.Negative.Device].MouseState.rgbButtons[Axis^.Negative.Button - 1] and $80 <> 0) then
-    begin
-      Dec(Value, Delta);
-      Pressed := True;
-    end;
-end;
+          case DIDevices[OpenDevices[Axis^.Negative.Device].DeviceIndex].DeviceType and $FF of
+            3: if (OpenDevices[Axis^.Negative.Device].KeyboardState[Axis^.Negative.Button] and $80 <> 0) then
+              begin
+                Dec(Value, Delta);
+                Pressed := True;
+              end;
+            4: if (OpenDevices[Axis^.Negative.Device].JoyState.rgbButtons[Axis^.Negative.Button - 1] and $80 <> 0) then
+              begin
+                Dec(Value, Delta);
+                Pressed := True;
+              end;
+            2: if (OpenDevices[Axis^.Negative.Device].MouseState.rgbButtons[Axis^.Negative.Button - 1] and $80 <> 0) then
+              begin
+                Dec(Value, Delta);
+                Pressed := True;
+              end;
+          end;
         if Axis^.Positive.Device <> -1 then
-case DIDevices[OpenDevices[Axis^.Positive.Device].DeviceIndex].DeviceType and $FF of
-  3: if (OpenDevices[Axis^.Positive.Device].KeyboardState[Axis^.Positive.Button] and $80 <> 0) then
-    begin
-      Inc(Value, Delta);
-      Pressed := True;
-    end;
-  4: if (OpenDevices[Axis^.Positive.Device].JoyState.rgbButtons[Axis^.Positive.Button - 1] and $80 <> 0) then
-    begin
-      Inc(Value, Delta);
-      Pressed := True;
-    end;
-  2: if (OpenDevices[Axis^.Positive.Device].MouseState.rgbButtons[Axis^.Positive.Button - 1] and $80 <> 0) then
-    begin
-      Inc(Value, Delta);
-      Pressed := True;
-    end;
-end;
+          case DIDevices[OpenDevices[Axis^.Positive.Device].DeviceIndex].DeviceType and $FF of
+            3: if (OpenDevices[Axis^.Positive.Device].KeyboardState[Axis^.Positive.Button] and $80 <> 0) then
+              begin
+                Inc(Value, Delta);
+                Pressed := True;
+              end;
+            4: if (OpenDevices[Axis^.Positive.Device].JoyState.rgbButtons[Axis^.Positive.Button - 1] and $80 <> 0) then
+              begin
+                Inc(Value, Delta);
+                Pressed := True;
+              end;
+            2: if (OpenDevices[Axis^.Positive.Device].MouseState.rgbButtons[Axis^.Positive.Button - 1] and $80 <> 0) then
+              begin
+                Inc(Value, Delta);
+                Pressed := True;
+              end;
+          end;
         if not Pressed then
           if Abs(Value) < 20 * Speed div 100 then Value := 0
           else if Value > 0 then Dec(Value, 20 * Speed div 100)
@@ -251,19 +251,19 @@ begin
       begin
         Value := 0;
         if Axis^.Negative.Device <> -1 then
-case DIDevices[OpenDevices[Axis^.Negative.Device].DeviceIndex].DeviceType and $FF of
-  3: if (OpenDevices[Axis^.Negative.Device].KeyboardState[Axis^.Negative.Button] and $80 <> 0) then
-    Value := -126;
-  4: if (OpenDevices[Axis^.Negative.Device].JoyState.rgbButtons[Axis^.Negative.Button - 1] and $80 <> 0) then
-    Value := -126;
-end;
+          case DIDevices[OpenDevices[Axis^.Negative.Device].DeviceIndex].DeviceType and $FF of
+            3: if (OpenDevices[Axis^.Negative.Device].KeyboardState[Axis^.Negative.Button] and $80 <> 0) then
+              Value := -126;
+            4: if (OpenDevices[Axis^.Negative.Device].JoyState.rgbButtons[Axis^.Negative.Button - 1] and $80 <> 0) then
+              Value := -126;
+          end;
         if Axis^.Positive.Device <> -1 then
-case DIDevices[OpenDevices[Axis^.Positive.Device].DeviceIndex].DeviceType and $FF of
-  3: if (OpenDevices[Axis^.Positive.Device].KeyboardState[Axis^.Positive.Button] and $80 <> 0) then
-    Value := 126;
-  4: if (OpenDevices[Axis^.Positive.Device].JoyState.rgbButtons[Axis^.Positive.Button - 1] and $80 <> 0) then
-    Value := 126;
-end;
+          case DIDevices[OpenDevices[Axis^.Positive.Device].DeviceIndex].DeviceType and $FF of
+            3: if (OpenDevices[Axis^.Positive.Device].KeyboardState[Axis^.Positive.Button] and $80 <> 0) then
+              Value := 126;
+            4: if (OpenDevices[Axis^.Positive.Device].JoyState.rgbButtons[Axis^.Positive.Button - 1] and $80 <> 0) then
+              Value := 126;
+          end;
       end;
       if Value = 0 then
         Controllers^[I].Buttons := Controllers^[I].Buttons and not (NegativeMask or PositiveMask)
