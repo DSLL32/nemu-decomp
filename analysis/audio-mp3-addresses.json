@@ -619,6 +619,43 @@
       "va": "0x10031120",
       "size": 8,
       "address_evidence": "Inferred from full-function operands; source value and initialized bytes compared separately."
+    },
+    {
+      "name": "_Mp3DCT",
+      "va": "0x10009ae0",
+      "size": 5104,
+      "address_basis": "identified_symbol",
+      "address_evidence": "Original PE named export and complete disassembly to return and compiler alignment.",
+      "reconstruction_status": "unmatched_native_source_candidate"
+    },
+    {
+      "name": "__chkstk",
+      "va": 268573920,
+      "size": 61,
+      "library": "toolchains/vc7/lib/libc.lib",
+      "object": "build\\intel\\st_obj\\chkstk.obj",
+      "archive_offset": 1488546,
+      "sha256": "9ad1aefb574f013c45b2b525cd072a1243528f6f7db1b273213b6c3bad72f6dd",
+      "comp_id": 4203770,
+      "comparison_only": false,
+      "address_basis": "independent_library_mapping",
+      "discovery": "unique_body_scan",
+      "validated_relocations": [],
+      "unresolved_relocations": [],
+      "member_alternatives": [
+        {
+          "library": "toolchains/vc7/lib/libc.lib",
+          "object": "build\\intel\\st_obj\\chkstk.obj",
+          "archive_offset": 1488546,
+          "comp_id": 4203770
+        },
+        {
+          "library": "toolchains/vc7/lib/libcmt.lib",
+          "object": "build\\intel\\mt_obj\\chkstk.obj",
+          "archive_offset": 1592156,
+          "comp_id": 4203770
+        }
+      ]
     }
   ],
   "extent_policy": "Sizes cover each original function and all following compiler alignment up to the next identified function."

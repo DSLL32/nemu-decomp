@@ -17,14 +17,18 @@
   "notes": [
     "JPEG and fixed-point MP3 sources are reconstructed directly from target dataflow. Filenames and proprietary internal names inferred.",
     "AziAudio ABI3mp3.cpp and mupen64plus-rsp-hle/src/mp3.c were inspected only to interpret the N64 synthesis stages; no modern replacement decoder is used.",
-    "No original x86 blobs, byte patches, dummy computation or synthetic padding are used. Compiler alignment belongs to complete measured function extents."
+    "No original x86 blobs, byte patches, dummy computation or synthetic padding are used. Compiler alignment belongs to complete measured function extents.",
+    "The integer primitives, butterfly and Mp3DCT share one inferred Mp3.c unit: VC7 uses callee information to hoist invariant calls out of the synthesis loop."
   ],
-  "unreconstructed": [
+  "unreconstructed": [],
+  "unmatched": [
     {
       "start": "0x10009ae0",
       "end": "0x1000aed0",
       "name": "Mp3DCT",
-      "status": "not_yet_reconstructed"
+      "status": "native_source_candidate_not_byte_exact",
+      "source": "src/audio/ahle_ds/Mp3.c",
+      "report": "analysis/audio-mp3-main-comparison.json"
     }
   ]
 }

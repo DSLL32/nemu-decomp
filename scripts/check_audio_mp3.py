@@ -2,7 +2,7 @@
 """Build and measure the native JPEG/MP3 reconstruction without modifying a PE.
 
 This is a component diagnostic. A matching object contribution does not establish
-whole-DLL identity; missing Mp3DCT and unresolved storage identities remain explicit.
+whole-DLL identity; unmatched Mp3DCT and unresolved storage identities remain explicit.
 """
 import argparse
 import hashlib
@@ -17,7 +17,7 @@ from pe_fingerprints import PE32
 from verify_gs import COFF, compare_object
 
 ROOT = Path(__file__).resolve().parents[1]
-UNITS = ('Jpeg', 'transform', 'Mp3Primitives', 'Mp3Butterfly')
+UNITS = ('Jpeg', 'transform', 'Mp3')
 SOURCES = [ROOT / 'src/audio/ahle_ds' / (name + '.c') for name in UNITS]
 DATA = (
     ('Jpeg', '_JpegZigZag', 0x1003ad48, 256),
@@ -92,7 +92,8 @@ def run(output):
                          f.get('inferred_relocated_bytes_equal', False) for f in functions),
                      initialized_data_bytes=sum(r['size'] for r in data),
                      initialized_data_equal=all(r['equal'] for r in data)),
-        missing=[dict(name='Mp3DCT', start='0x10009ae0', end='0x1000aed0', bytes=5104)],
+        missing=[],
+        unmatched=[f['name'] for f in functions if not f.get('relocation_masked_equal')],
         whole_dll_byte_exact=False,
         notes=[
             'Code comparisons cover complete function extents, including stock compiler alignment.',
@@ -116,6 +117,8 @@ def main():
     else:
         output = args.output_dir.resolve()
         output.mkdir(parents=True, exist_ok=True)
+    if not output.is_relative_to((Path.home() / '.ai-tmp').resolve()) or output == (Path.home() / '.ai-tmp').resolve():
+        parser.error('--output-dir must be a folder below ~/.ai-tmp')
     result = run(output)
     args.report.write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps(result['summary'], indent=2))
