@@ -30,9 +30,9 @@
     "--metadata",
     "analysis/nemu-rsp.json",
     "--image",
-    "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah/nemu64.exe",
+    "/root/.ai-tmp/nemu-complete-relocs.jzocsk89/nemu64.exe",
     "--map",
-    "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah/nemu64.map",
+    "/root/.ai-tmp/nemu-complete-relocs.jzocsk89/nemu64.map",
     "--symbols",
     "analysis/nemu-globals.json",
     "--symbols",
@@ -117,7 +117,7 @@
   "extent_metadata": [
     {
       "path": "analysis/nemu-candidate-extents.json",
-      "sha256": "f464dffd11c14274560978980d2aea717844e7a94e34b0e0f48417dc0f56df25"
+      "sha256": "6dfe78036b8d071a5d4f850272a5213cdf792ed5e7730c82706f34a440534975"
     }
   ],
   "library_map": "/root/nemu-decomp/analysis/nemu-library-addresses.json",
@@ -125,43 +125,39 @@
   "comparisons": [
     {
       "kind": "linked_PE",
-      "path": "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah/nemu64.exe",
-      "sha256": "21c96e53c6f6e476a80b45ae8ff6118753110add09652586a2d4c718561fc6d0",
-      "map": "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah/nemu64.map",
-      "map_sha256": "b1197916970dfc9bf4ed4bc25c1bb97db41c55f3d073cda4fb173f70bcb945ad",
+      "path": "/root/.ai-tmp/nemu-complete-relocs.jzocsk89/nemu64.exe",
+      "sha256": "f4841cdbdb5bf9e546812eb2af534eb58ef5fb8ee6c9d43c34f3f552de7f567f",
+      "map": "/root/.ai-tmp/nemu-complete-relocs.jzocsk89/nemu64.map",
+      "map_sha256": "50b0ab8e6ad63027dfd408032a03c4badd64a604fe28fe2da99dcc3fd6b112f6",
       "pe_highlow_relocations": 10159,
       "fixture_manifest": {
-        "path": "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah/diagnostic.json",
-        "sha256": "88f7ee943f5de339d52438441a6fb2174d0a2ccaab40211c5a6cd185a747c82b",
-        "status": "complete_link_existing_sections_unchanged",
+        "path": "/root/.ai-tmp/nemu-complete-relocs.jzocsk89/diagnostic.json",
+        "sha256": "0cda297735b97d0f82902f2787854d9907887d13331a1d3c6fe239dbd19ff31f",
+        "status": "verified",
         "forced_unresolved_link": false,
         "image_hash_verified": true,
         "invalid_symbols": [],
-        "parent_artifact": "/root/.ai-tmp/nemu-build.trb9kso2/artifacts/87403a525076dcbbd268f2c3016cf2164c9d6948f2dc51ccfe916c67b0845f28",
+        "parent_artifact": "/root/.ai-tmp/nemu-build.kf09k5wb/artifacts/cafc8da82df6c9379ffa85d2d11d62257b7c3cff7b0fbbcba403f1ed099a4c20",
         "existing_sections": [
           {
             "name": ".text",
             "layout_equal": true,
-            "raw_bytes_equal": true,
-            "differing_bytes": 0
+            "raw_bytes_equal": true
           },
           {
             "name": ".rdata",
             "layout_equal": true,
-            "raw_bytes_equal": true,
-            "differing_bytes": 0
+            "raw_bytes_equal": true
           },
           {
             "name": ".data",
             "layout_equal": true,
-            "raw_bytes_equal": true,
-            "differing_bytes": 0
+            "raw_bytes_equal": true
           },
           {
             "name": ".rsrc",
             "layout_equal": true,
-            "raw_bytes_equal": true,
-            "differing_bytes": 0
+            "raw_bytes_equal": true
           }
         ],
         "provenance_chain": null
@@ -302824,43 +302820,39 @@
     },
     {
       "kind": "linked_PE",
-      "path": "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah/nemu64.exe",
-      "sha256": "21c96e53c6f6e476a80b45ae8ff6118753110add09652586a2d4c718561fc6d0",
-      "map": "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah/nemu64.map",
-      "map_sha256": "b1197916970dfc9bf4ed4bc25c1bb97db41c55f3d073cda4fb173f70bcb945ad",
+      "path": "/root/.ai-tmp/nemu-complete-relocs.jzocsk89/nemu64.exe",
+      "sha256": "f4841cdbdb5bf9e546812eb2af534eb58ef5fb8ee6c9d43c34f3f552de7f567f",
+      "map": "/root/.ai-tmp/nemu-complete-relocs.jzocsk89/nemu64.map",
+      "map_sha256": "50b0ab8e6ad63027dfd408032a03c4badd64a604fe28fe2da99dcc3fd6b112f6",
       "pe_highlow_relocations": 10159,
       "fixture_manifest": {
-        "path": "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah/diagnostic.json",
-        "sha256": "88f7ee943f5de339d52438441a6fb2174d0a2ccaab40211c5a6cd185a747c82b",
-        "status": "complete_link_existing_sections_unchanged",
+        "path": "/root/.ai-tmp/nemu-complete-relocs.jzocsk89/diagnostic.json",
+        "sha256": "0cda297735b97d0f82902f2787854d9907887d13331a1d3c6fe239dbd19ff31f",
+        "status": "verified",
         "forced_unresolved_link": false,
         "image_hash_verified": true,
         "invalid_symbols": [],
-        "parent_artifact": "/root/.ai-tmp/nemu-build.trb9kso2/artifacts/87403a525076dcbbd268f2c3016cf2164c9d6948f2dc51ccfe916c67b0845f28",
+        "parent_artifact": "/root/.ai-tmp/nemu-build.kf09k5wb/artifacts/cafc8da82df6c9379ffa85d2d11d62257b7c3cff7b0fbbcba403f1ed099a4c20",
         "existing_sections": [
           {
             "name": ".text",
             "layout_equal": true,
-            "raw_bytes_equal": true,
-            "differing_bytes": 0
+            "raw_bytes_equal": true
           },
           {
             "name": ".rdata",
             "layout_equal": true,
-            "raw_bytes_equal": true,
-            "differing_bytes": 0
+            "raw_bytes_equal": true
           },
           {
             "name": ".data",
             "layout_equal": true,
-            "raw_bytes_equal": true,
-            "differing_bytes": 0
+            "raw_bytes_equal": true
           },
           {
             "name": ".rsrc",
             "layout_equal": true,
-            "raw_bytes_equal": true,
-            "differing_bytes": 0
+            "raw_bytes_equal": true
           }
         ],
         "provenance_chain": null
