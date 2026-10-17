@@ -33,6 +33,9 @@ invalid header/out-of-image operands cannot support matching coverage.
 Linked floating literals additionally require matching decoded scalar reads,
 complete compiler-declared width/bits, read-only storage, and unique contents;
 duplicate byte patterns remain unresolved even at unaligned incidental sites.
+Named narrow string-record pointers require independently decoded PUSH/MOV
+immediates and unique complete record contents; direct data loads and suffixes
+do not gain complete-string-use claims.
 No files are modified except explicitly requested JSON reports.
 """
 
@@ -51,6 +54,7 @@ from capstone.x86 import X86_OP_IMM, X86_OP_MEM
 from pe_fingerprints import PE32
 from verify_gs import COFF, differences
 from nemu_float_provenance import prove_float_operand
+from nemu_string_provenance import prove_string_operand
 
 ROOT = Path(__file__).resolve().parents[1]
 ORIGINAL = ROOT / 'master/nemu64.exe'
@@ -687,15 +691,18 @@ def compare_bytes(function, candidate_data, candidate_size, candidate_va, fields
             field['local_offset'] = field['candidate_target'] - candidate_va
         resolved = resolve_field(field, function, targets, candidate_symbols)
         if resolved['status'] == 'unresolved':
-            # This establishes a concrete complete floating value, not an
-            # original source name. It cannot create a normalization field or
-            # replace conflicting independent symbol evidence.
-            proof = prove_float_operand(field, function['va'], candidate_va, targets, candidate_symbols)
-            if proof is not None:
-                resolved['floating_literal_proof'] = proof
-                if proof['verified']:
-                    resolved.update(status='matching', identity_verified=True,
-                                    resolution_bases=[proof['basis']])
+            # These establish concrete complete contents, not original source
+            # names. They cannot create a normalization field or replace
+            # conflicting independent symbol evidence.
+            for key, verifier in (('floating_literal_proof', prove_float_operand),
+                                  ('string_record_pointer_proof', prove_string_operand)):
+                proof = verifier(field, function['va'], candidate_va, targets, candidate_symbols)
+                if proof is not None:
+                    resolved[key] = proof
+                    if proof['verified']:
+                        resolved.update(status='matching', identity_verified=True,
+                                        resolution_bases=[proof['basis']])
+                    break
         relocations.append(resolved)
         if field['kind'] == 'REL' and field.get('local_offset') is not None:
             # COFF can record a self-call/local-label relocation. Materialize
@@ -1087,6 +1094,8 @@ def main():
                   tool_sha256=digest(Path(__file__).read_bytes()), command_line=sys.argv,
                   floating_literal_verifier=dict(path='scripts/nemu_float_provenance.py',
                       sha256=digest(Path(__file__).with_name('nemu_float_provenance.py').read_bytes())),
+                  string_literal_verifier=dict(path='scripts/nemu_string_provenance.py',
+                      sha256=digest(Path(__file__).with_name('nemu_string_provenance.py').read_bytes())),
                   metadata=[dict(path=str(p), sha256=input_hashes[str(p)]) for p in args.metadata],
                   symbol_metadata=[dict(path=str(p), sha256=input_hashes[str(p)]) for p in args.symbols],
                   extent_metadata=[dict(path=str(p), sha256=input_hashes[str(p)]) for p in args.extents],
