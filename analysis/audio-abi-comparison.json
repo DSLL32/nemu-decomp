@@ -1,0 +1,190 @@
+{
+  "scope": "Complete native contributions and initialized data of five inferred C units; not DLL acceptance.",
+  "full_dll_byte_exact": false,
+  "diagnostic_passed": true,
+  "artifact": "/root/.ai-tmp/nemu-audio-recovery/abi-check/runs/4k01zvd0",
+  "build_report_sha256": "170c348707350de420c563c7b7ffedd311b4a0d82a2327915a07f5ee1ce99edc",
+  "checker_sha256": "357cdac38c8a97af88144fcd655fa30297ae8778c3ed488c01da8eb8ad8a363e",
+  "command": [
+    "/usr/bin/python3",
+    "/root/nemu-decomp/scripts/build_audio.py",
+    "--work",
+    "/root/.ai-tmp/nemu-audio-recovery/abi-check",
+    "--objects-only",
+    "--report",
+    "/root/.ai-tmp/nemu-audio-recovery/abi-check/build-comparison.json",
+    "--unit",
+    "ABI1",
+    "--unit",
+    "ABI2",
+    "--unit",
+    "AudioHLE",
+    "--unit",
+    "ABI3",
+    "--unit",
+    "AudioLegacy"
+  ],
+  "unique_function_count": 100,
+  "native_bytes": 11328,
+  "duplicate_inline_definitions": {
+    "_ClearAudioBuffer": 2
+  },
+  "instruction_matches": 100,
+  "independently_verified_matches": 88,
+  "data": [
+    {
+      "unit": "ABI1",
+      "original_va": 268652608,
+      "expected_bytes": 2176,
+      "rebuilt_bytes": 2176,
+      "byte_exact": true,
+      "sha256": "52c695ac3a77f57ebb82e12d2474f02ce47ab544ef0dc05d6ecdfc6d5e4ff100",
+      "relocations": []
+    },
+    {
+      "unit": "ABI2",
+      "original_va": 268654784,
+      "expected_bytes": 2176,
+      "rebuilt_bytes": 2176,
+      "byte_exact": true,
+      "sha256": "52c695ac3a77f57ebb82e12d2474f02ce47ab544ef0dc05d6ecdfc6d5e4ff100",
+      "relocations": []
+    },
+    {
+      "unit": "AudioHLE",
+      "original_va": 268656960,
+      "expected_bytes": 2252,
+      "rebuilt_bytes": 2252,
+      "byte_exact": true,
+      "sha256": "71bce60d52f584be7a48ceb7ce12ea72ac0fe15b7444d2966e6389a045bb8e68",
+      "relocations": [
+        {
+          "offset": 2184,
+          "symbol": "??_C@_08KHGDNPEI@A_SPNOOP?$AA@",
+          "target": 268633116,
+          "basis": "unique complete source literal"
+        },
+        {
+          "offset": 2188,
+          "symbol": "??_C@_07DPAGFBII@A_ADPCM?$AA@",
+          "target": 268633108,
+          "basis": "unique complete source literal"
+        },
+        {
+          "offset": 2192,
+          "symbol": "??_C@_0M@EHBCFBKN@A_CLEARBUFF?$AA@",
+          "target": 268633096,
+          "basis": "unique complete source literal"
+        },
+        {
+          "offset": 2196,
+          "symbol": "??_C@_0L@DFPGGLNJ@A_ENVMIXER?$AA@",
+          "target": 268633084,
+          "basis": "unique complete source literal"
+        },
+        {
+          "offset": 2200,
+          "symbol": "??_C@_0L@HJNLKOFE@A_LOADBUFF?$AA@",
+          "target": 268633072,
+          "basis": "unique complete source literal"
+        },
+        {
+          "offset": 2204,
+          "symbol": "??_C@_0L@LPKBIGNN@A_RESAMPLE?$AA@",
+          "target": 268633060,
+          "basis": "unique complete source literal"
+        },
+        {
+          "offset": 2208,
+          "symbol": "??_C@_0L@HGANEACD@A_SAVEBUFF?$AA@",
+          "target": 268633048,
+          "basis": "unique complete source literal"
+        },
+        {
+          "offset": 2212,
+          "symbol": "??_C@_09LHFLONPC@A_SEGMENT?$AA@",
+          "target": 268633036,
+          "basis": "unique complete source literal"
+        },
+        {
+          "offset": 2216,
+          "symbol": "??_C@_09JGLHHMOC@A_SETBUFF?$AA@",
+          "target": 268633024,
+          "basis": "unique complete source literal"
+        },
+        {
+          "offset": 2220,
+          "symbol": "??_C@_08BFEOIGAL@A_SETVOL?$AA@",
+          "target": 268633012,
+          "basis": "unique complete source literal"
+        },
+        {
+          "offset": 2224,
+          "symbol": "??_C@_0L@NJJJKOHD@A_DMEMMOVE?$AA@",
+          "target": 268633000,
+          "basis": "unique complete source literal"
+        },
+        {
+          "offset": 2228,
+          "symbol": "??_C@_0M@IBAFHJDP@A_LOADADPCM?$AA@",
+          "target": 268632988,
+          "basis": "unique complete source literal"
+        },
+        {
+          "offset": 2232,
+          "symbol": "??_C@_07LMDHAPIB@A_MIXER?$AA@",
+          "target": 268632980,
+          "basis": "unique complete source literal"
+        },
+        {
+          "offset": 2236,
+          "symbol": "??_C@_0N@CHJOMLAO@A_INTERLEAVE?$AA@",
+          "target": 268632964,
+          "basis": "unique complete source literal"
+        },
+        {
+          "offset": 2240,
+          "symbol": "??_C@_07HNOKPMPJ@A_POLEF?$AA@",
+          "target": 268632956,
+          "basis": "unique complete source literal"
+        },
+        {
+          "offset": 2244,
+          "symbol": "??_C@_09FGKPLCA@A_SETLOOP?$AA@",
+          "target": 268632944,
+          "basis": "unique complete source literal"
+        }
+      ]
+    },
+    {
+      "unit": "ABI3",
+      "original_va": 268659216,
+      "expected_bytes": 6276,
+      "rebuilt_bytes": 6276,
+      "byte_exact": true,
+      "sha256": "260cac34410a1325d0af824066487f7f3ffd54c6dc9a01e6d88bb0b6808f3d25",
+      "relocations": [
+        {
+          "offset": 6272,
+          "symbol": "_ABI3AudioMicrocode",
+          "target": 268661392,
+          "basis": "independent symbol identity"
+        }
+      ]
+    },
+    {
+      "unit": "AudioLegacy",
+      "original_va": 268665496,
+      "expected_bytes": 2176,
+      "rebuilt_bytes": 2176,
+      "byte_exact": true,
+      "sha256": "52c695ac3a77f57ebb82e12d2474f02ce47ab544ef0dc05d6ecdfc6d5e4ff100",
+      "relocations": []
+    }
+  ],
+  "limitations": [
+    "Private filenames, names and shared inline header placement are inferred.",
+    "ClearAudioBuffer emits identical ANY COMDAT definitions in ABI1 and Legacy; the complete DLL link must select ABI1.",
+    "Twelve function contributions retain explicitly inferred global identities in the scoped symbol map."
+  ]
+}

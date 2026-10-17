@@ -3,6 +3,7 @@
  * Native code, vendor literals, feature masks, and both SEH filters identify
  * this source independently. The enclosing Nemu unit filename is inferred.
  */
+#include "transform.h"
 #include <excpt.h>
 
 #define FEATURE_CPUID          0x00000001

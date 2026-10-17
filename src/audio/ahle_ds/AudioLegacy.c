@@ -1,3 +1,4 @@
+#include "transform.h"
 /* Older audio ABI handlers retained in the original DLL. Private names and
  * this source filename are inferred; command layouts follow their consumers. */
 #include "AudioLegacy.h"
@@ -11,6 +12,15 @@ extern void ClearAudioBuffer(int, int, AudioContext *);
 extern void DecodeAudioADPCM(unsigned int, int, int, int, int, AudioContext *);
 extern void ChangeAudioABI(int);
 extern void RecordHLEBuffer(const void *, int);
+
+/* Shared inline helper visibility is inferred from the native wrapper.
+ * The same inline definition is selected from ABI1 by the linker. */
+__inline void ClearAudioBuffer(int destination, int byteCount, AudioContext *context)
+{
+    if (destination >= 0x1000 || destination + byteCount > 0x1000)
+        return;
+    memset(context->buffer + (destination >> 1), 0, byteCount);
+}
 
 void LegacyEnvelopeMixer(AudioCommand *command, AudioContext *context)
 {

@@ -1,72 +1,55 @@
-/* Native MMX/SSE audio command helpers. Private names are inferred. */
+#include "transform.h"
 #include "AudioSIMD.h"
+#include "AudioCommands.h"
+/* ABI command families. Names and source-unit boundaries are inferred. */
+#include "AudioHLE.h"
+#include <string.h>
+#include <stdarg.h>
+#include <stdio.h>
 
-const short AudioResampleTable[64][4] = {
-    {   3129,  26285,   3398,    -33 },
-    {   2873,  26262,   3679,    -40 },
-    {   2628,  26217,   3971,    -48 },
-    {   2394,  26150,   4276,    -56 },
-    {   2173,  26061,   4592,    -65 },
-    {   1963,  25950,   4920,    -74 },
-    {   1764,  25817,   5260,    -84 },
-    {   1576,  25663,   5611,    -95 },
-    {   1399,  25487,   5974,   -106 },
-    {   1233,  25291,   6347,   -118 },
-    {   1077,  25075,   6732,   -130 },
-    {    932,  24838,   7127,   -143 },
-    {    796,  24583,   7532,   -156 },
-    {    671,  24309,   7947,   -170 },
-    {    554,  24016,   8371,   -184 },
-    {    446,  23706,   8804,   -198 },
-    {    347,  23379,   9246,   -212 },
-    {    257,  23036,   9696,   -226 },
-    {    174,  22678,  10153,   -240 },
-    {     99,  22304,  10618,   -254 },
-    {     31,  21917,  11088,   -268 },
-    {    -30,  21517,  11564,   -280 },
-    {    -84,  21104,  12045,   -293 },
-    {   -132,  20679,  12531,   -304 },
-    {   -173,  20244,  13020,   -314 },
-    {   -210,  19799,  13512,   -323 },
-    {   -241,  19345,  14006,   -330 },
-    {   -267,  18882,  14501,   -336 },
-    {   -289,  18413,  14997,   -340 },
-    {   -306,  17937,  15493,   -341 },
-    {   -320,  17456,  15988,   -340 },
-    {   -330,  16970,  16480,   -337 },
-    {   -337,  16480,  16970,   -330 },
-    {   -340,  15988,  17456,   -320 },
-    {   -341,  15493,  17937,   -306 },
-    {   -340,  14997,  18413,   -289 },
-    {   -336,  14501,  18882,   -267 },
-    {   -330,  14006,  19345,   -241 },
-    {   -323,  13512,  19799,   -210 },
-    {   -314,  13020,  20244,   -173 },
-    {   -304,  12531,  20679,   -132 },
-    {   -293,  12045,  21104,    -84 },
-    {   -280,  11564,  21517,    -30 },
-    {   -268,  11088,  21917,     31 },
-    {   -254,  10618,  22304,     99 },
-    {   -240,  10153,  22678,    174 },
-    {   -226,   9696,  23036,    257 },
-    {   -212,   9246,  23379,    347 },
-    {   -198,   8804,  23706,    446 },
-    {   -184,   8371,  24016,    554 },
-    {   -170,   7947,  24309,    671 },
-    {   -156,   7532,  24583,    796 },
-    {   -143,   7127,  24838,    932 },
-    {   -130,   6732,  25075,   1077 },
-    {   -118,   6347,  25291,   1233 },
-    {   -106,   5974,  25487,   1399 },
-    {    -95,   5611,  25663,   1576 },
-    {    -84,   5260,  25817,   1764 },
-    {    -74,   4920,  25950,   1963 },
-    {    -65,   4592,  26061,   2173 },
-    {    -56,   4276,  26150,   2394 },
-    {    -48,   3971,  26217,   2628 },
-    {    -40,   3679,  26262,   2873 },
-    {    -33,   3398,  26285,   3129 },
-};
+void AudioError(const char *, HRESULT);
+
+
+extern int HighQuality, StereoReversed, FilterHLE;
+extern int SpecialEnvelopeDetected;
+extern int AudioFilterCount, AudioFilterAddress, AudioFilterOutput, AudioFilterState;
+void LoadAudioBuffer(unsigned int, unsigned int, int, AudioContext *);
+void SaveAudioBuffer(unsigned int, unsigned int, int, AudioContext *);
+void MoveAudioBuffer(int, int, int, AudioContext *);
+void ClearAudioBuffer(int, int, AudioContext *);
+void DuplicateAudioBuffer(int, int, int, AudioContext *);
+void ExtractAudioChannel(int, int, int, AudioContext *);
+void DecodeAudioADPCM(unsigned int, int, int, int, int, AudioContext *);
+void ResampleAudioMMX(AudioCommand *, AudioContext *);
+void MixAudioMMX(int, int, int, int, AudioContext *);
+void InterleaveAudioMMX(int, int, int, int, AudioContext *);
+void ABI2_AddMixer(AudioCommand *, AudioContext *);
+void EnvMixerSSE(AudioCommand *, AudioContext *);
+void EnvMixer3DNow(AudioCommand *, AudioContext *);
+void EnvMixerScalar(AudioCommand *, AudioContext *);
+void EnvMixerSpecial(AudioCommand *, AudioContext *);
+void EnvMixerABI3Scalar(AudioCommand *, AudioContext *);
+void EnvMixerABI3_3DNow(AudioCommand *, AudioContext *);
+void EnvMixerABI3SSE(AudioCommand *, AudioContext *);
+void MixAudioEnvelope(int, int, int, int, int, int, AudioContext *);
+void LoadAudioEnvelope(unsigned int, AudioContext *);
+void SaveAudioEnvelope(unsigned int, AudioContext *);
+void ResetAudioEnvelope(AudioContext *);
+void PoleFilterAudioCommand(AudioCommand *, AudioContext *);
+void ScaleAudioBufferCommand(AudioCommand *, AudioContext *);
+void FilterAudioBuffer(int, int, unsigned int, unsigned int, int, AudioContext *);
+void ChangeAudioABI(int);
+void RecordHLEBuffer(const void *, int);
+void RSP_PrepareAudioMicrocode(AudioCommand *, AudioContext *);
+void RSP_RunAudioMicrocode(AudioCommand *, AudioContext *);
+
+void ABI3_LoadBuffer(AudioCommand *, AudioContext *);
+void ABI3_SaveBuffer(AudioCommand *, AudioContext *);
+void ABI3_LoadADPCM(AudioCommand *, AudioContext *);
+
+
+int SpecialEnvelopeDetected;
+static char AudioErrorMessage[1024];
 
 void ResampleAudioMMX(AudioCommand *command, AudioContext *context)
 {
@@ -199,6 +182,26 @@ void MixAudioMMX(int input, int output, int gain, int sampleCount,
     }
 }
 
+void LoadAudioBuffer(unsigned int destination, unsigned int address,
+                     int byteCount, AudioContext *context)
+{
+    int i, sample;
+    byteCount = (byteCount + 3) & ~3;
+    if ((destination & 1) || (address & 3) || (byteCount & 1)) {
+        AudioError("\n**alignment error in load\n", 0);
+        return;
+    }
+    if (destination + byteCount > 0x1100)
+        AudioError("\n**buffer overrun in abi loadmem() function\n", 0);
+    destination >>= 1;
+    for (i = 0; i < byteCount; i += 4) {
+        sample = *(int *)(RDRAM + (address & 0xffffff));
+        address += 4;
+        context->buffer[destination++] = (short)(sample >> 16);
+        context->buffer[destination++] = (short)sample;
+    }
+}
+
 void MixAudioSSE(int input, int output, int gain, int sampleCount,
                  AudioContext *context)
 {
@@ -233,6 +236,38 @@ void MixAudioSSE(int input, int output, int gain, int sampleCount,
         jnz mix_loop
         emms
     }
+}
+
+void SaveAudioBuffer(unsigned int source, unsigned int address,
+                     int byteCount, AudioContext *context)
+{
+    int i, sample;
+    byteCount = (byteCount + 3) & ~3;
+    if ((source & 1) || (address & 3) || (byteCount & 1)) {
+        AudioError("\n**alignment error in store\n", 0);
+        return;
+    }
+    source >>= 1;
+    for (i = 0; i < byteCount; i += 4) {
+        sample = context->buffer[source++] << 16;
+        sample |= context->buffer[source++] & 65535;
+        *(int *)(RDRAM + ((i + address) & 0xffffff)) = sample;
+    }
+}
+
+void MoveAudioBuffer(int destination, int source, int byteCount, AudioContext *context)
+{
+    if (source >= 0x1000 || destination >= 0x1000 ||
+        source + byteCount > 0x1000 || destination + byteCount > 0x1000)
+        return;
+    memcpy(context->buffer + (destination >> 1), context->buffer + (source >> 1), byteCount);
+}
+
+__inline void ClearAudioBuffer(int destination, int byteCount, AudioContext *context)
+{
+    if (destination >= 0x1000 || destination + byteCount > 0x1000)
+        return;
+    memset(context->buffer + (destination >> 1), 0, byteCount);
 }
 
 void InterleaveAudioMMX(int output, int left, int right, int sampleCount,
@@ -295,7 +330,184 @@ void InterleaveAudioSSE(int output, int left, int right, int sampleCount,
     }
 }
 
-__inline void MixAudioSign(int input, int output, int sampleCount,
+void ABI1_NoOp(AudioCommand *command, AudioContext *context) {}
+
+void ABI1_ADPCM(AudioCommand *command, AudioContext *context)
+{
+    DecodeAudioADPCM(command->words[1], context->input, context->output,
+                    context->count, command->bytes[2], context);
+}
+
+void ABI1_ClearBuffer(AudioCommand *command, AudioContext *context)
+{
+    ClearAudioBuffer(command->words[0] & 0xffff, command->words[1] & 0xffff, context);
+}
+
+void ABI1_EnvMixer(AudioCommand *command, AudioContext *context)
+{
+    int flags = command->bytes[2];
+    int input = context->input;
+    int count = context->count;
+    int output = context->output;
+    int aux0 = context->aux0;
+    int aux1 = context->aux1;
+    int aux2 = context->aux2;
+    unsigned int state;
+    if (HighQuality) {
+        if (*(unsigned int *)(RDRAM + AudioTask.ucode_data + 0x14) == 0x11ec1ba0) {
+            if (!SpecialEnvelopeDetected)
+                SpecialEnvelopeDetected = 1;
+            EnvMixerSpecial(command, context);
+        } else if (Use3DNow) {
+            EnvMixer3DNow(command, context);
+        } else if (UseSSE) {
+            EnvMixerSSE(command, context);
+        } else {
+            EnvMixerScalar(command, context);
+        }
+        return;
+    }
+    state = command->words[1];
+    if (!(flags & 1)) LoadAudioEnvelope(state, context);
+    MixAudioEnvelope(input, output, aux0, aux1, aux2, count, context);
+    SaveAudioEnvelope(state, context);
+    ResetAudioEnvelope(context);
+}
+
+void ABI1_LoadBuffer(AudioCommand *command, AudioContext *context)
+{
+    LoadAudioBuffer(context->input, command->words[1] + context->segment, context->count, context);
+}
+
+void ABI1_Resample(AudioCommand *command, AudioContext *context)
+{
+    ResampleAudioMMX(command, context);
+}
+
+void ABI1_SaveBuffer(AudioCommand *command, AudioContext *context)
+{
+    SaveAudioBuffer(context->output, command->words[1] + context->segment, context->count, context);
+}
+
+void ABI1_Segment(AudioCommand *command, AudioContext *context) {}
+
+void ABI1_SetBuffer(AudioCommand *command, AudioContext *context)
+{
+    int flags = command->bytes[2];
+    if (flags & 8) {
+        context->auxResample0 = command->halfwords[0];
+        context->auxResample1 = command->halfwords[3];
+        context->auxResample2 = command->halfwords[2];
+    } else {
+        context->inputResample = command->halfwords[0];
+        context->outputResample = command->halfwords[3];
+        context->count = command->words[1] & 0xffff;
+    }
+    if (flags & 8) {
+        context->aux0 = command->words[0] & 0xffff;
+        context->aux1 = command->words[1] >> 16;
+        context->aux2 = command->words[1] & 0xffff;
+    } else {
+        context->input = command->words[0] & 0xffff;
+        context->output = command->words[1] >> 16;
+        context->count = command->words[1] & 0xffff;
+    }
+}
+
+void ABI1_SetVolume(AudioCommand *command, AudioContext *context)
+{
+    int flags = command->bytes[2];
+    int volume = command->words[0] & 0xffff;
+    int fraction = command->words[1] & 0xffff;
+    int rate = command->halfwords[3];
+    if (flags & 8) {
+        context->dry = (short)volume;
+        context->wet = (short)fraction;
+    } else if (flags & 4) {
+        if (flags & 2) context->volumeLeft16 = (short)volume;
+        else context->volumeRight16 = (short)volume;
+    } else if (flags & 2) {
+        context->targetLeft16 = (short)volume;
+        context->rateLeft16 = command->words[1];
+    } else {
+        context->targetRight16 = (short)volume;
+        context->rateRight16 = command->words[1];
+    }
+    switch (flags) {
+    case 8: context->volumeLeft = fraction; context->volumeRight = fraction; break;
+    case 6: context->targetLeft = volume; break;
+    case 4: context->targetRight = volume; break;
+    case 2:
+        context->rateLeft = volume;
+        if (rate) context->rampLeft = fraction & 0xffff;
+        else context->rampLeft = (short)fraction;
+        if (context->rampLeft > 65535) context->rampLeft = 65535;
+        if (context->rampLeft < -65535) context->rampLeft = -65535;
+        break;
+    case 0:
+        context->rateRight = volume;
+        if (rate) context->rampRight = fraction & 0xffff;
+        else context->rampRight = (short)fraction;
+        if (context->rampRight > 65535) context->rampRight = 65535;
+        if (context->rampRight < -65535) context->rampRight = -65535;
+        break;
+    }
+}
+
+void ABI1_DMEMMove(AudioCommand *command, AudioContext *context)
+{
+    MoveAudioBuffer(command->halfwords[3], command->words[0] & 0xffff,
+                    command->words[1] & 0xffff, context);
+}
+
+void ABI1_LoadADPCM(AudioCommand *command, AudioContext *context)
+{
+    LoadAudioBuffer(0x1000, command->words[1] + context->segment,
+                    command->words[0] & 0xfff, context);
+}
+
+void ABI1_Mixer(AudioCommand *command, AudioContext *context)
+{
+    int input = command->halfwords[3];
+    int count = context->count;
+    short gain = (short)command->words[0];
+    int output = command->words[1] & 0xffff;
+    if (!count) { ChangeAudioABI(2); return; }
+    MixAudioMMX(input >> 1, output >> 1, gain, count >> 1, context);
+}
+
+void ABI1_Interleave(AudioCommand *command, AudioContext *context)
+{
+    unsigned int left = command->halfwords[3];
+    int right = command->words[1] & 0xffff;
+    int count = context->count;
+    int output = context->output;
+    count >>= 1;
+    count = (count + 7) & ~7;
+    left >>= 1;
+    right >>= 1;
+    output >>= 1;
+    if (StereoReversed) { int temp = left; left = right; right = temp; }
+    InterleaveAudioMMX(output, left, right, count, context);
+    RecordHLEBuffer(context->buffer + output, count << 2);
+}
+
+void ABI1_PoleFilter(AudioCommand *command, AudioContext *context)
+{
+    int i, output, count;
+    if (FilterHLE != 1) {
+        output = context->outputResample >> 1;
+        count = context->count >> 1;
+        for (i = 0; i < count; i++) context->buffer[output + i] = 0;
+    } else PoleFilterAudioCommand(command, context);
+}
+
+void ABI1_SetLoop(AudioCommand *command, AudioContext *context)
+{
+    context->loopAddress = command->words[1];
+}
+
+void MixAudioSign(int input, int output, int sampleCount,
                           AudioContext *context)
 {
     short *destination, *source;
@@ -320,16 +532,32 @@ __inline void MixAudioSign(int input, int output, int sampleCount,
     }
 }
 
-void ABI2_AddMixer(AudioCommand *command, AudioContext *context)
+void DuplicateAudioBuffer(int destination, int source, int byteCount, AudioContext *context)
 {
-    unsigned int w0 = command->words[0], w1 = command->words[1];
-    int count = ((w0 >> 16) & 0xff) * 16;
-    int input = w1 >> 16;
-    int output = w1 & 0xffff;
-    MixAudioSign(input >> 1, output >> 1, count >> 1, context);
+    int i, j;
+    destination >>= 1;
+    source >>= 1;
+    byteCount >>= 1;
+    for (i = 0; i < byteCount; i += 64) {
+        for (j = 0; j < 64; j++)
+            context->buffer[destination + j] = context->buffer[source + j];
+        destination += 64;
+    }
 }
 
-/* The two ABI dispatch tables retain separate copies of this command handler. */
+void ExtractAudioChannel(int destination, int source, int byteCount, AudioContext *context)
+{
+    int i;
+    destination >>= 1;
+    source >>= 1;
+    byteCount >>= 1;
+    for (i = 0; i < byteCount; i++) {
+        context->buffer[destination] = context->buffer[source];
+        source += 2;
+        destination++;
+    }
+}
+
 void ABI2_EnvMixer(AudioCommand *command, AudioContext *context)
 {
     unsigned int w0 = command->words[0], w1 = command->words[1];
@@ -503,176 +731,11 @@ void ABI2_EnvMixer(AudioCommand *command, AudioContext *context)
     }
 }
 
-/* Separate native copy selected by the alternate command table. */
-void ABI2_EnvMixerAlt(AudioCommand *command, AudioContext *context)
+void AudioWarning(const char *format, ...)
 {
-    unsigned int w0 = command->words[0], w1 = command->words[1];
-    short leftGain = context->envelope70;
-    short rightGain = context->envelope72;
-    short wetGain = context->envelope68;
-    short wetDelta = context->envelope6a;
-    short leftDelta = context->envelope6c;
-    short rightDelta = context->envelope6e;
-    int input = (w0 >> 12) & 0xff0;
-    int count = (w0 >> 8) & 0xff;
-    short invert[4];
-    int left, right, wetLeft, wetRight;
-    short leftVolume[4], rightVolume[4], wetVolume[4];
-    short wetStep[4], leftStep[4], rightStep[4];
-    short leftMask[4], rightMask[4], wetLeftMask[4], wetRightMask[4];
-    short *source, *destinationLeft, *destinationRight, *destinationWetLeft, *destinationWetRight;
-    invert[0] = -((w0 >> 1) & 1);
-    invert[1] = -(w0 & 1);
-    invert[2] = -((w0 >> 1) & 4);
-    invert[3] = -((w0 >> 1) & 2);
-    left = (w1 >> 20) & 0xff0;
-    right = (w1 >> 12) & 0xff0;
-    if (w0 & 0x10) {
-        wetRight = (w1 >> 4) & 0xff0;
-        wetLeft = (w1 & 0xff) << 4;
-    } else {
-        wetLeft = (w1 >> 4) & 0xff0;
-        wetRight = (w1 & 0xff) << 4;
-    }
-    leftVolume[0] = leftGain;
-    leftVolume[1] = leftGain;
-    leftVolume[2] = leftGain;
-    leftVolume[3] = leftGain;
-    rightVolume[0] = rightGain;
-    rightVolume[1] = rightGain;
-    rightVolume[2] = rightGain;
-    rightVolume[3] = rightGain;
-    wetVolume[0] = wetGain;
-    wetVolume[1] = wetGain;
-    wetVolume[2] = wetGain;
-    wetVolume[3] = wetGain;
-    wetStep[0] = wetDelta;
-    wetStep[1] = 0;
-    wetStep[2] = wetDelta;
-    wetStep[3] = 0;
-    leftStep[0] = leftDelta;
-    leftStep[1] = 0;
-    leftStep[2] = leftDelta;
-    leftStep[3] = 0;
-    rightStep[0] = rightDelta;
-    rightStep[1] = 0;
-    rightStep[2] = rightDelta;
-    rightStep[3] = 0;
-    leftMask[0] = invert[0];
-    leftMask[1] = invert[0];
-    leftMask[2] = invert[0];
-    leftMask[3] = invert[0];
-    rightMask[0] = invert[1];
-    rightMask[1] = invert[1];
-    rightMask[2] = invert[1];
-    rightMask[3] = invert[1];
-    wetLeftMask[0] = invert[2];
-    wetLeftMask[1] = invert[2];
-    wetLeftMask[2] = invert[2];
-    wetLeftMask[3] = invert[2];
-    wetRightMask[0] = invert[3];
-    wetRightMask[1] = invert[3];
-    wetRightMask[2] = invert[3];
-    wetRightMask[3] = invert[3];
-    source = context->buffer + (input >> 1);
-    destinationLeft = context->buffer + (left >> 1);
-    destinationRight = context->buffer + (right >> 1);
-    destinationWetLeft = context->buffer + (wetLeft >> 1);
-    destinationWetRight = context->buffer + (wetRight >> 1);
-    count /= 8;
-    __asm {
-        mov      ecx, count
-        mov      esi, source
-        mov      edi, destinationLeft
-        mov      eax, destinationRight
-        mov      ebx, destinationWetLeft
-        mov      edx, destinationWetRight
-        movq     mm2, leftVolume
-        movq     mm3, rightVolume
-        movq     mm5, wetVolume
-        psrlw    mm2, 1
-        psrlw    mm3, 1
-        psrlw    mm5, 1
-    envelope_loop:
-        movq     mm1, [esi]
-        movq     mm4, mm1
-        pmulhw   mm1, mm2
-        pmulhw   mm4, mm3
-        psllw    mm1, 1
-        psllw    mm4, 1
-        pxor     mm1, leftMask
-        pxor     mm4, rightMask
-        movq     mm0, mm1
-        movq     mm7, mm4
-        paddsw   mm0, [edi]
-        paddsw   mm7, [eax]
-        movq     [edi], mm0
-        movq     [eax], mm7
-        pmulhw   mm1, mm5
-        pmulhw   mm4, mm5
-        psllw    mm1, 1
-        psllw    mm4, 1
-        pxor     mm1, wetLeftMask
-        pxor     mm4, wetRightMask
-        paddsw   mm1, [ebx]
-        movq     [ebx], mm1
-        paddsw   mm4, [edx]
-        movq     [edx], mm4
-        movq     mm1, [esi + 8]
-        movq     mm4, mm1
-        pmulhw   mm1, mm2
-        pmulhw   mm4, mm3
-        psllw    mm1, 1
-        psllw    mm4, 1
-        pxor     mm1, leftMask
-        pxor     mm4, rightMask
-        movq     mm0, mm1
-        movq     mm7, mm4
-        paddsw   mm0, [edi + 8]
-        paddsw   mm7, [eax + 8]
-        movq     [edi + 8], mm0
-        movq     [eax + 8], mm7
-        pmulhw   mm1, mm5
-        pmulhw   mm4, mm5
-        psllw    mm1, 1
-        psllw    mm4, 1
-        pxor     mm1, wetLeftMask
-        pxor     mm4, wetRightMask
-        paddsw   mm1, [ebx + 8]
-        movq     [ebx + 8], mm1
-        paddsw   mm4, [edx + 8]
-        movq     [edx + 8], mm4
-        add      esi, 0x10
-        add      edi, 0x10
-        add      eax, 0x10
-        add      ebx, 0x10
-        add      edx, 0x10
-        movq     mm2, leftVolume
-        movq     mm3, rightVolume
-        movq     mm5, wetVolume
-        paddd    mm2, leftStep
-        paddd    mm3, rightStep
-        paddd    mm5, wetStep
-        pslld    mm2, 0x10
-        pslld    mm3, 0x10
-        pslld    mm5, 0x10
-        movq     mm0, mm2
-        movq     mm1, mm3
-        movq     mm7, mm5
-        psrld    mm2, 0x10
-        psrld    mm3, 0x10
-        psrld    mm5, 0x10
-        movq     leftVolume, mm2
-        movq     rightVolume, mm3
-        movq     wetVolume, mm5
-        por      mm2, mm0
-        por      mm3, mm1
-        por      mm5, mm7
-        psrlw    mm2, 1
-        psrlw    mm3, 1
-        psrlw    mm5, 1
-        dec      ecx
-        jne      envelope_loop
-        emms
-    }
+    va_list arguments;
+    va_start(arguments, format);
+    vsprintf(AudioErrorMessage, format, arguments);
+    va_end(arguments);
+    AudioError(AudioErrorMessage, 0);
 }

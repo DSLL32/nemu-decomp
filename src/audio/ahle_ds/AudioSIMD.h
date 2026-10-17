@@ -3,7 +3,7 @@
 
 #include "AudioHLE.h"
 
-extern const short AudioResampleTable[64][4];
+extern short AudioResampleTable[64][4];
 
 void ResampleAudioMMX(AudioCommand *command, AudioContext *context);
 void MixAudioMMX(int input, int output, int gain, int sampleCount,

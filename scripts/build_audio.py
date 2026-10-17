@@ -22,9 +22,11 @@ from verify_gs import compare_dll
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT/'src/audio/ahle_ds'
 FLAGS = ['/nologo','/c','/O2','/Ob1','/MT','/W3','/DWIN32','/DNDEBUG','/D_WINDOWS','/D_USRDLL']
-ORDER = ['AudioSIMD','AudioMemory','AudioCommands','AudioHLE','AudioLegacy',
-         'DirectSound','AudioLog','CPUFeatures','AudioJPEG','AudioMP3',
-         'AudioProcessing','AudioSSE','AudioProfile','AudioPlugin','RSP','RSPReciprocal']
+ORDER = ['ABI1','ABI2','AudioHLE','ABI3','AudioLegacy',
+         'DirectSound','AudioLog','CPUFeatures','Jpeg','Mp3',
+         'AudioProcessing','AudioSSE','AudioEnvelope','AudioProfile','AudioADPCM',
+         'AudioPoleFilter','AudioResample','AudioADPCMWide','AudioADPCMLegacy',
+         'AudioPlugin','RSP']
 
 
 def sha(path):

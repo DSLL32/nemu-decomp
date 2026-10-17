@@ -4,32 +4,32 @@
   "source_snapshot": [
     {
       "path": "src/audio/ahle_ds/AudioPlugin.h",
-      "snapshot": "/root/.ai-tmp/audio-legacy-check.dtidq2c2/source/AudioPlugin.h",
+      "snapshot": "/root/.ai-tmp/audio-legacy-check.hrlrec_b/source/AudioPlugin.h",
       "sha256": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e"
     },
     {
       "path": "src/audio/ahle_ds/AudioHLE.h",
-      "snapshot": "/root/.ai-tmp/audio-legacy-check.dtidq2c2/source/AudioHLE.h",
-      "sha256": "82e6544a76ee5d0e361f785773e5da8bd91070019a65367d89d6cb0defd8b3ee"
+      "snapshot": "/root/.ai-tmp/audio-legacy-check.hrlrec_b/source/AudioHLE.h",
+      "sha256": "98475c4c2e034a7e1b16a94662078f731afcca5529140bf0d30c7e6901bdd441"
     },
     {
       "path": "src/audio/ahle_ds/AudioLegacy.h",
-      "snapshot": "/root/.ai-tmp/audio-legacy-check.dtidq2c2/source/AudioLegacy.h",
+      "snapshot": "/root/.ai-tmp/audio-legacy-check.hrlrec_b/source/AudioLegacy.h",
       "sha256": "8f5810c3d8ae923119c733c304064310630cca3201c4b472047267d1417bee98"
     },
     {
       "path": "src/audio/ahle_ds/AudioLegacy.c",
-      "snapshot": "/root/.ai-tmp/audio-legacy-check.dtidq2c2/source/AudioLegacy.c",
-      "sha256": "1ddcd7a35070cd1da47e12dc0ebb14196655640ac461ca539433db8189fec558"
+      "snapshot": "/root/.ai-tmp/audio-legacy-check.hrlrec_b/source/AudioLegacy.c",
+      "sha256": "d81dde338f0005166893a0825c2c86f82c7956ce75a7cae552c354ca4e78dc41"
     },
     {
-      "path": "src/audio/ahle_ds/AudioMemory.c",
-      "snapshot": "/root/.ai-tmp/audio-legacy-check.dtidq2c2/source/AudioMemory.c",
-      "sha256": "8072921479b73b5f7d845313d5e660fdb7ac8813b507d624e8493b72599be236"
+      "path": "src/audio/ahle_ds/transform.h",
+      "snapshot": "/root/.ai-tmp/audio-legacy-check.hrlrec_b/source/transform.h",
+      "sha256": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f"
     }
   ],
   "metadata_sha256": "1bd4dbe2c84328c3e4a70879e25e8b07dd98e5e6490ff5540f3ae8426977ccd0",
-  "generated_unit_sha256": "ec63d9f9cab813ad4b41ee88fc47d1a8c1aec30aaef2eecdf23504b663a70ca5",
+  "generated_unit_sha256": "4d5708be47a0cb15875163b16c3dc6cd1325b05e9202b1436ef6767c9393336b",
   "command": [
     "/usr/bin/python3",
     "/root/nemu-decomp/scripts/run_toolchain.py",
@@ -38,19 +38,19 @@
     "/nologo",
     "/c",
     "/O2",
-    "/Ob2",
+    "/Ob1",
     "/MT",
-    "/FoZ:\\root\\.ai-tmp\\audio-legacy-check.dtidq2c2\\LegacyUnit.obj",
-    "Z:\\root\\.ai-tmp\\audio-legacy-check.dtidq2c2\\source\\LegacyUnit.c"
+    "/FoZ:\\root\\.ai-tmp\\audio-legacy-check.hrlrec_b\\LegacyUnit.obj",
+    "Z:\\root\\.ai-tmp\\audio-legacy-check.hrlrec_b\\source\\LegacyUnit.c"
   ],
-  "wine_prefix": "/root/.ai-tmp/audio-legacy-check.dtidq2c2/wine",
+  "wine_prefix": "/root/.ai-tmp/audio-legacy-check.hrlrec_b/wine",
   "compiler_inputs": {
     "cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
     "c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
     "c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0"
   },
   "helper_inputs": {
-    "check_audio_legacy.py": "d6bec6f6a62ab6a524a97ab26f7bd53960ce2192897ca3fb138d44657c75424c",
+    "check_audio_legacy.py": "e7e4757cc43b1c6550f02b410d38609be67a288ea4821d745306d7ff07366dea",
     "run_toolchain.py": "489681186d7cde23f42d0a6f154f3e9723b060fa769a1ce2d0f31e656074ea9e",
     "verify_gs.py": "9096c1ce5e759dc60f4fc7b84c97678b5946b7b15f6bfb56cd1fa3b9e730854c",
     "pe_fingerprints.py": "e83e1698ecfc7b8ca06ba0919578cbd225885745a96f601891bffff831d995dd"
@@ -59,8 +59,8 @@
   "total_functions": 17,
   "all_functions_exact": true,
   "comparison": {
-    "object": "/root/.ai-tmp/audio-legacy-check.dtidq2c2/LegacyUnit.obj",
-    "sha256": "cecb85d0dc0b3b34c1c72ef7b171c2b1029011493c3c494856d90701459cd3f7",
+    "object": "/root/.ai-tmp/audio-legacy-check.hrlrec_b/LegacyUnit.obj",
+    "sha256": "f052a8969a565566475da64932d3e39eab2d1126a100f7931439a22a3cc23051",
     "original": "/root/nemu-decomp/master/Plugin/audio.dll",
     "functions": [
       {
@@ -1395,81 +1395,5 @@
     "relocation_target_mismatches": 0,
     "inferred_targets": 0,
     "unresolved_targets": 0
-  },
-  "source_ancestry": {
-    "provenance_report": "analysis/audio-envelope-ultrahle-provenance.json",
-    "source_url": "https://github.com/EmulatorArchive/ultrahle/blob/435b252a51c2e3671a8614e63b3ba75e3dd80b69/src/SLIST.C",
-    "copyright": "Copyright (C) 1998 Epsilon & RealityMan",
-    "functions": {
-      "LegacyResample": {
-        "ancestor": "resample",
-        "evidence": [
-          "Separate loadedstate[8] and savedstate[8] arrays explain original 40-byte frame.",
-          "Five explicit 32-bit state reads precede eight short buffer stores.",
-          "Count-down loop and common low16 position mask reproduce exact instructions.",
-          "Nemu command/context inputs and masked RDRAM word access replace upstream globals and memory helpers."
-        ],
-        "native_result": "592/592 complete aligned bytes exact with all relocation targets independently identified"
-      },
-      "LegacyInterleave": {
-        "ancestor": "interleave structural family",
-        "notes": "analysis/audio-interleave-notes.json",
-        "native_result": "192/192 complete aligned bytes exact with RecordHLEBuffer call target identified"
-      }
-    }
-  },
-  "bounded_source_probes": [
-    {
-      "path": "/root/.ai-tmp/audio-legacy.yG1JoStO/orders/report.json",
-      "sha256": "d884b37a50e34be3cb1bde4fa4ed8200d134c4a6509a8843b3f1bea46050484a"
-    },
-    {
-      "path": "/root/.ai-tmp/audio-legacy.yG1JoStO/interleave/report.json",
-      "sha256": "f7cd0d8276e9355cbb60707c6af4366742e336a5073dfd6086c618f22f161166"
-    },
-    {
-      "path": "/root/.ai-tmp/audio-legacy.yG1JoStO/interleave-setup/report.json",
-      "sha256": "d41c1e3297aa0855d1f9760c0be7b8f9e00115ae54abd5f8224d0c842946ff30"
-    },
-    {
-      "path": "/root/.ai-tmp/audio-legacy.yG1JoStO/interleave-slots/report.json",
-      "sha256": "a05e05abd498c71ca57b18cc07a27753053dbcce73a6746b86b5fd5733aa2f1e"
-    },
-    {
-      "path": "/root/.ai-tmp/audio-legacy.yG1JoStO/envelope-orders/report.json",
-      "sha256": "3459d77af163d37dd83526266d04be605ec79d7df2d42207c65527a8c2af3de2"
-    },
-    {
-      "path": "/root/.ai-tmp/audio-legacy.yG1JoStO/resample-union/report.json",
-      "sha256": "64f53094a20ac8e2a29cc1bd0b4ded1fc898af57ebdffe368668ba552dd957f2"
-    },
-    {
-      "path": "/root/.ai-tmp/audio-legacy.yG1JoStO/resample-state32.json",
-      "sha256": "714bf81ce268cef4755650bf101f98f5d1fb64a8f19150e7042cb971b8adb98a"
-    },
-    {
-      "path": "/root/.ai-tmp/audio-legacy.yG1JoStO/resample-pointer.json",
-      "sha256": "515e0f78006924d136a1fb2d67ec81a90fdf8c434f6902db70b62ef926393ff2"
-    },
-    {
-      "path": "/root/.ai-tmp/audio-legacy.yG1JoStO/resample-pointer32.json",
-      "sha256": "d2a5c51be08e4c78af1b39008f9ae90e2001af5348654a3a55f36715052d918b"
-    },
-    {
-      "path": "/root/.ai-tmp/audio-legacy.yG1JoStO/interleave-cpp.json",
-      "sha256": "f6f1d5a90f2aa8034263f325ec44648881a7a5f89fd163174249d192fd19f61e"
-    },
-    {
-      "path": "/root/.ai-tmp/audio-legacy.yG1JoStO/staged-volume.json",
-      "sha256": "d7846977c33b6e4b22a235cc2c21c416d11af303c9389c05ff86e7dce2c81187"
-    }
-  ],
-  "reconstruction_notes": [
-    "All private names and the AudioLegacy.c/.h filenames are inferred. The project directory ahle_ds survives in the original debug path.",
-    "All seventeen complete native contributions match, including alignment and all relocated call/constant targets. Whole-DLL equality still requires integration.",
-    "LegacyClearBuffer requires source visibility of the ordinary ClearAudioBuffer helper. This fixture uses a common translation unit and /Ob2; integration is testing the full original-address source band under /Ob1.",
-    "LegacyEnvelopeMixer initialization order and float conversion staging recover the original register allocation and complete body. Independent proof and source-shape limits: analysis/audio-legacy-envelope-recovery.json.",
-    "LegacyInterleave converts byte-address locals after count conversion and rounding. See analysis/audio-interleave-notes.json.",
-    "LegacyResample adapts the historically evidenced UltraHLE resample structure. Separate eight-word state arrays reproduce the observed stack frame without invented storage."
-  ]
+  }
 }

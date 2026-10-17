@@ -2,8 +2,8 @@
 """Compile and diagnose the reconstructed older audio ABI handlers.
 
 This is a complete native function comparison, not whole-DLL acceptance.
-The common translation unit models visibility of the ordinary memory helpers;
-the original source-file partition remains inferred.
+The source includes the inline clear helper visible to the original wrapper;
+the original source filename and header partition remain inferred.
 """
 import argparse
 import hashlib
@@ -44,7 +44,7 @@ def main():
     source.mkdir(exist_ok=True)
     records = []
     for name in ('AudioPlugin.h', 'AudioHLE.h', 'AudioLegacy.h',
-                 'AudioLegacy.c', 'AudioMemory.c'):
+                 'AudioLegacy.c', 'transform.h'):
         original = ROOT / 'src/audio/ahle_ds' / name
         destination = source / name
         shutil.copyfile(original, destination)
@@ -53,10 +53,10 @@ def main():
     metadata = work / 'addresses.json'
     shutil.copyfile(ROOT / 'analysis/audio-legacy-addresses.json', metadata)
     unit = source / 'LegacyUnit.c'
-    unit.write_text('#include "AudioMemory.c"\n#include "AudioLegacy.c"\n')
+    unit.write_text('#include "AudioLegacy.c"\n')
     output = work / 'LegacyUnit.obj'
     command = [sys.executable, str(ROOT / 'scripts/run_toolchain.py'),
-               'vc7', 'cl', '/nologo', '/c', '/O2', '/Ob2', '/MT',
+               'vc7', 'cl', '/nologo', '/c', '/O2', '/Ob1', '/MT',
                '/Fo' + win(output), win(unit)]
     environment = os.environ.copy()
     environment.update(WINEPREFIX=str(work / 'wine'), WINEARCH='win32', WINEDEBUG='-all')
