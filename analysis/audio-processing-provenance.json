@@ -10,25 +10,24 @@
     "/c"
   ],
   "hashes": {
-    "src/audio/ahle_ds/AudioProcessing.c": "26048b09ade8fc8a50d4dff4befa8d9b588795989aa330ff2f49fa71bd420e58",
+    "src/audio/ahle_ds/AudioProcessing.c": "1a3051babf5d13db13e41a5906c7452f6c579b79b33fe35998ec953c9f7a5c2f",
     "src/audio/ahle_ds/AudioProcessing.h": "661ae00c480be2d2a2341214fe95e52c21630af602bae4ef4d3dbd7516c8962c",
-    "src/audio/ahle_ds/AudioProfile.c": "cec145766acd789e0b31b003942d6bc5ba63463876dc037ed966e6c0a1e28639",
-    "src/audio/ahle_ds/AudioSSE.c": "37da4a9d22e3e1b8e33e5d381dac340ad2b38a59dacf7492f4aa6e5ad87c954f",
-    "src/audio/ahle_ds/AudioADPCM.c": "cfbdae568921ae83e104173dff5b0697759cd70fa694a9cbc7eb61e8265db662",
-    "src/audio/ahle_ds/AudioPoleFilter.c": "b65d389c08d2d48bb4e78bbfbfa39bfedcccb0e474410ccc13c9b8ce2a1c6f65",
-    "src/audio/ahle_ds/AudioResample.c": "a4223d0cbb96cba3ca649b82ce433a5dd217440fcb494180f9af4a866de875f2",
-    "src/audio/ahle_ds/AudioHLE.h": "82e6544a76ee5d0e361f785773e5da8bd91070019a65367d89d6cb0defd8b3ee",
+    "src/audio/ahle_ds/AudioResample.c": "e96482b7dbdd06bf10adfbd399b6ef0949a2a7f96c7739706b2738ea36b07145",
+    "src/audio/ahle_ds/AudioHLE.h": "98475c4c2e034a7e1b16a94662078f731afcca5529140bf0d30c7e6901bdd441",
     "src/audio/ahle_ds/AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
-    "scripts/verify_audio_processing_behavior.py": "157f87d7c64eed90a50ad9492786dcdeda64e6c065b74d9a92c6bd7d0985d1c7",
+    "scripts/verify_audio_processing_behavior.py": "5a0e436b44d7481b562de5319c9646e22a476cf0522d10ed206847e386869ab5",
     "scripts/verify_gs.py": "9096c1ce5e759dc60f4fc7b84c97678b5946b7b15f6bfb56cd1fa3b9e730854c",
     "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
     "toolchains/vc7/bin/c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
     "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0",
-    "scripts/verify_audio_processing_operands.py": "51a7de759f3e17f61fd3b79cfe714cb5c1c2435cb71863fb498e14c368886a44",
+    "scripts/verify_audio_processing_operands.py": "e610aa94bb0bae370e7c54813e57c5969f173e0b689175fcb1c0303afc14cc21",
     "scripts/check_audio_polefilter.py": "2d3fa2aa7fb9915daa4476f478f9c717b7e17256699ca66b8526a5be6832b2cb",
-    "scripts/probe_audio_processing_groups.py": "b88890e79a828c9331a0020124d662b71d2817c956cc6cdf247443aaa6e63324",
+    "scripts/probe_audio_processing_groups.py": "b92cbd2372aba89ecec83d809b95f7087cf209cfd6dd233c282289ee20ab0329",
     "src/audio/ahle_ds/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
-    "src/audio/ahle_ds/AudioResampleTables.h": "5b95bd2db83cf7eea18b347cdf32c7a332073868cbcbd45a939f8de4537236f1"
+    "src/audio/ahle_ds/AudioResampleTables.h": "5b95bd2db83cf7eea18b347cdf32c7a332073868cbcbd45a939f8de4537236f1",
+    "src/audio/ahle_ds/AudioADPCMBlock.h": "f506d6ea97b83fcaaa78dc9ff7300bebe37aa36b9f1a01277247ee41767b4c1b",
+    "src/audio/ahle_ds/AudioEnvelope.h": "8acbac16a6bc16a06782b48dea25af4e49b99c5a845f866ffe41098ec14517b7",
+    "src/audio/ahle_ds/AudioADPCMLegacy.h": "8509a1760c9dcc9b45334d103d4f09b656502bda0b8d35d039d75d7a75720f32"
   },
   "functions": [
     {
@@ -163,7 +162,7 @@
       "original_size": 864,
       "original_complete_extent_sha256": "a5af2255f3b01f843b1f280fbdb71749d796245cefa304175d8839889597855c",
       "relocation_masked_equal": false,
-      "relocation_masked_differing_bytes": 622,
+      "relocation_masked_differing_bytes": 620,
       "candidate_size": 864
     },
     {
@@ -258,14 +257,15 @@
     }
   ],
   "limitations": [
-    "Twenty-one complete function extents, including compiler alignment, match after recorded COFF relocation fields are masked. The signed ADPCM block has no relocations and matches all 560 original bytes directly. This is not whole-DLL byte equality.",
+    "The original processing scope retains twenty-one complete matching function extents, including compiler alignment. The signed ADPCM block has no relocations and matches all 560 original bytes directly. Across the two consolidated units, 36 of 41 routine bodies match outside recorded relocations. This is not whole-DLL byte equality.",
     "Data addresses marked observed_operand_inference have not been independently proved from original debug symbols.",
-    "Four candidate functions remain unmatched: the unsigned scalar ADPCM kernel, main ADPCM dispatcher, pole filter, and scalar resampler.",
+    "Four processing-scope functions remain unmatched: unsigned scalar ADPCM, main ADPCM dispatcher, pole filter and scalar resampler. The consolidated unit also retains the independently tracked incomplete legacy ADPCM routine.",
     "The pole filter differs in seven SIB bytes that exchange equivalent base and index registers; these remain genuine byte differences.",
     "Relocation-target diagnostics for unmatched functions are position-based and may inspect unrelated original instruction bytes when code layout differs.",
     "Readable source file names and translation-unit boundaries are inferred; no original source provenance is claimed.",
     "Behavior probes execute original external callees and do not validate a linked rebuilt DLL.",
-    "Scalar unit now defines all five writable coefficient arrays after its retained AMP window table. SIMD old definition removal is coordinated separately. Scalar body remains incomplete despite instruction-supported byte flags and explicit state loads."
+    "The scalar unit owns all five writable coefficient arrays after its retained AMP window table; the former SIMD definition has been removed. Scalar code remains incomplete despite instruction-supported byte flags and explicit state loads.",
+    "The two envelope SSE/3DNow bodies end before their following native INT3 alignment gaps. Those gaps are linker contributions, absent from their COFF function sections, and await final linked-image validation."
   ],
   "source_ancestry": [
     {
@@ -289,7 +289,11 @@
   ],
   "operand_evidence": "analysis/audio-processing-operands.json",
   "pole_filter_instruction_audit": "analysis/audio-polefilter-instructions.json",
-  "translation_unit_probe": "analysis/audio-processing-groups.json",
+  "translation_unit_probe": {
+    "historical_report": "analysis/audio-processing-groups.json",
+    "historical_revision": "2027a7c",
+    "current_report": "analysis/audio-processing-organization.json"
+  },
   "scalar_source_refinements": {
     "basis": "Matched MMX ResampleAudioMMX source skeleton plus original scalar operand widths and retained state-pointer increments. These source refinements preserve the complete656-byte extent and reduce masked position differences508 to278; they do not establish byte equality.",
     "changes": [
@@ -345,5 +349,28 @@
       "writable": true,
       "exact_bytes": true
     }
-  ]
+  ],
+  "historical_source_hashes": {
+    "src/audio/ahle_ds/AudioProfile.c": "cec145766acd789e0b31b003942d6bc5ba63463876dc037ed966e6c0a1e28639",
+    "src/audio/ahle_ds/AudioSSE.c": "37da4a9d22e3e1b8e33e5d381dac340ad2b38a59dacf7492f4aa6e5ad87c954f",
+    "src/audio/ahle_ds/AudioADPCM.c": "cfbdae568921ae83e104173dff5b0697759cd70fa694a9cbc7eb61e8265db662",
+    "src/audio/ahle_ds/AudioPoleFilter.c": "b65d389c08d2d48bb4e78bbfbfa39bfedcccb0e474410ccc13c9b8ce2a1c6f65"
+  },
+  "historical_source_revision": "f2cdfca",
+  "native_source_organization": {
+    "unit11": "AudioProcessing.c",
+    "unit12": "AudioResample.c",
+    "shared_decoder": "AudioADPCMBlock.h",
+    "basis": "Original code order plus independently inferred 13 C/1 C++ application-unit count and the retained eleventh/twelfth AMP table contributions.",
+    "decoder_ownership": "One ordinary external signed decoder in unit11; genuine C/inline-assembly macro source expands at both dispatcher call sites in unit12. Original macro boundary and identifiers remain inferred.",
+    "failed_alternative": "Ordinary NODUPLICATES helper plus later inline ANY definition fails LNK2005; no forced duplicate linker option is used.",
+    "standalone_helper_bytes": 560,
+    "standalone_helper_raw_exact": true,
+    "dispatcher_bytes": 864,
+    "dispatcher_masked_differences": 620,
+    "combined_initialized_data_bytes": 6912,
+    "combined_initialized_data_exact": true,
+    "behavior_cases": 129,
+    "behavior_matching": 129
+  }
 }

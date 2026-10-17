@@ -19,6 +19,7 @@ from unicorn.x86_const import UC_X86_REG_ESP, UC_X86_REG_EIP
 
 from pe_fingerprints import PE32
 from verify_gs import COFF
+from verify_audio import load_symbols
 
 ROOT = Path(__file__).resolve().parents[1]
 RDRAM = 0x30000000
@@ -44,8 +45,10 @@ class Fixture:
     def __init__(self, object_directory):
         self.objects = Path(object_directory)
         self.original = PE32(ROOT / 'master/Plugin/audio.dll')
-        document = json.loads((ROOT / 'analysis/audio-processing-addresses.json').read_text())
-        self.addresses = {r['name']: number(r['va']) for r in document['symbols']}
+        self.addresses = {r['name']: number(r['va']) for r in load_symbols()}
+        self.object_names = ('AudioProcessing', 'AudioResample')
+        self.owners = {f['name']: name for name in self.object_names
+                       for f in COFF(self.objects / (name + '.obj')).functions()}
         library = json.loads((ROOT / 'analysis/audio-libraries.json').read_text())
         if library['original_sha256'] != sha256(self.original.path):
             raise ValueError('Library mappings do not describe the current original DLL')
@@ -117,7 +120,7 @@ class Fixture:
 
     def compare(self, object_name, name, arguments, seed, label, writes=()):
         original, original_symbols = self.machine()
-        candidate, candidate_symbols = self.machine(object_name)
+        candidate, candidate_symbols = self.machine(self.owners['_' + name])
         self.prepare(original, original_symbols, seed)
         self.prepare(candidate, candidate_symbols, seed)
         for address, data in writes:
@@ -154,7 +157,7 @@ def main():
     args = parser.parse_args()
     fixture = Fixture(args.objects)
     results = []
-    objects = ('AudioProcessing', 'AudioADPCM', 'AudioPoleFilter', 'AudioResample')
+    objects = fixture.object_names
     for seed in (1, 7, 0x1234):
         for name, arguments in [
             ('ReadAudioSamples', [OUTPUT, 0x1000, 64]),
@@ -188,7 +191,9 @@ def main():
                 results.append(fixture.compare('AudioPoleFilter', 'PoleFilterAudioCommand',
                     [COMMAND, CONTEXT], seed, f'flags {flags}, gain {gain:#x}', writes))
     sources = [ROOT / 'src/audio/ahle_ds' / (name + '.c') for name in objects]
-    sources += [ROOT / 'src/audio/ahle_ds/AudioProcessing.h', ROOT / 'src/audio/ahle_ds/AudioHLE.h']
+    sources += [ROOT / 'src/audio/ahle_ds' / name for name in
+                ('AudioProcessing.h', 'AudioHLE.h', 'AudioADPCMBlock.h',
+                 'AudioResampleTables.h', 'transform.h')]
     report = dict(status='behavioral_diagnostic_only',
         original='master/Plugin/audio.dll', original_sha256=sha256(fixture.original.path),
         objects=[dict(name=name, sha256=sha256(args.objects / (name + '.obj'))) for name in objects],

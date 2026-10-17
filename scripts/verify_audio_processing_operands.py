@@ -57,7 +57,8 @@ def main():
     def record(name, va, basis, evidence, **details):
         rows.append(dict(name=name, va=va, address_basis=basis, **details))
         symbols.append(dict(name=name, va=va, address_basis=basis,
-                            address_evidence=evidence))
+                            address_evidence=evidence,
+                            **({'object': 'AudioProcessing.obj'} if name.startswith('$T') else {})))
 
     for name in ('_fprintf', '__aulldiv', '__alldiv', '__allmul', '__except_handler3'):
         matches = [r for r in libraries['symbols'] if r['name'] == name]
@@ -71,10 +72,11 @@ def main():
                library=row['library'], member=row['object'],
                member_sha256=row['sha256'], size=row['size'])
 
-    for object_name in ('AudioProcessing.obj', 'AudioSSE.obj'):
+    for purpose in ('literals', 'seh'):
+        object_name = 'AudioProcessing.obj'
         coff = COFF(args.objects / object_name)
         assert digest(coff.data) == compiled[object_name]['sha256']
-        if object_name == 'AudioProcessing.obj':
+        if purpose == 'literals':
             function = next(r for r in compiled[object_name]['functions']
                             if r['name'] == '_DumpAudioCommand')
             assert function['relocation_masked_equal'] and function['size_equal']
