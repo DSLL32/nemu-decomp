@@ -1,0 +1,331 @@
+{
+  "status": "Causal diagnostic complete; original float position is still unmatched. No application source, build recipe, executable bytes, or metadata were changed.",
+  "original": {
+    "path": "master/nemu64.exe",
+    "sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a"
+  },
+  "candidate": {
+    "path": "/root/.ai-tmp/nemu-build.trb9kso2/artifacts/87403a525076dcbbd268f2c3016cf2164c9d6948f2dc51ccfe916c67b0845f28/nemu64.exe",
+    "sha256": "87403a525076dcbbd268f2c3016cf2164c9d6948f2dc51ccfe916c67b0845f28",
+    "build": "/root/.ai-tmp/nemu-build.trb9kso2/build.json",
+    "build_sha256": "163cd9620cd70fc33e10a40f66d7cab9008a65bdcd01c6cc2b049b83aed30518"
+  },
+  "tools": {
+    "toolchains/vc7/bin/c2.dll": {
+      "sha256": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0"
+    },
+    "toolchains/vc7/bin/link.exe": {
+      "sha256": "1560d85164dfb763dd13f90f33ff9c6f1cd80f2afada03eed8d0a314593581f1"
+    }
+  },
+  "question": {
+    "symbol": "__real@4f800000",
+    "value": "2^32 as IEEE-754 single precision",
+    "original_va": "0x43e01c",
+    "candidate_va": "0x43e04c",
+    "original_live_operand_vas": [
+      "0x40cbbd",
+      "0x41405d",
+      "0x41841c"
+    ]
+  },
+  "reproduction": {
+    "script": "scripts/inspect_nemu_float_emission.py",
+    "command": [
+      "python3",
+      "scripts/inspect_nemu_float_emission.py",
+      "--build",
+      "/root/.ai-tmp/nemu-build.trb9kso2/build.json",
+      "--output",
+      "/root/.ai-tmp/nemu-float-trace-NEW"
+    ],
+    "requires": "Existing immutable build tree and its Wine prefix, Wine debugger, and GDB with Python. Output directory must be new. The script checks tool hashes and every resulting program section.",
+    "verified_output": "/root/.ai-tmp/nemu-float-trace-replay.20261017",
+    "optimizer_function_visits": 653,
+    "real_creations": 12,
+    "readonly_sections": 495,
+    "linker_rdata_contributions": 569,
+    "all_program_section_layouts_and_bytes_preserved": true,
+    "script_sha256": "565a85dd596ce820181862e5d741f0c522386b5fb1323803ddf88df0bd489e59"
+  },
+  "entrypoints": {
+    "link_c2_LoadLibrary_return": "0x00474cf9; EAX is C2 load base",
+    "c2_preferred_base": "0x10700000",
+    "c2_function_processing": "0x107bb399",
+    "c2_real_name_creation": "0x107a32f5; ESI points to formatted symbol name",
+    "c2_real_symbol_registered": "0x107a3317; ESI points to symbol, symbol + 0x28 is its ID",
+    "c2_current_function": "0x1086f5bc; pointer + 4 points to decorated name",
+    "c2_current_translation_unit": "0x10870cfc; pointer + 4 points to source name",
+    "c2_section_append": "0x1074cb2d; EBP is new section index, EBX its record, EDI its descriptor",
+    "c2_section_table": "0x1086ca20; iterator 107b17ce enumerates ascending section indexes",
+    "c2_section_provider_vtable": "0x10859d48; object - 8 points to underlying section record",
+    "link_provider_reader": "0x0047f6a0; return from contribution creation at 0x0047f7c8",
+    "link_contribution_flags_write": "0x0041dcd1, immediately after 0x0041dcce stores flags",
+    "link_pre_layout_observation": "0x00457369; Rich writer before contribution RVAs are assigned",
+    "link_post_layout_observation": "MSVCR70!fclose; captured completed contribution RVAs",
+    "qualification": "C2 addresses are rebased from its observed load address; LINK addresses require the pinned binary at its preferred base."
+  },
+  "real_creation_order": [
+    {
+      "function": "?WriteStateChunk@@YAXPAU_iobuf@@IPBXI_N@Z",
+      "module": "State.cpp",
+      "name": "__real@3f847ae147ae147b",
+      "optimizer_index": 39
+    },
+    {
+      "function": "?WriteStateChunk@@YAXPAU_iobuf@@IPBXI_N@Z",
+      "module": "State.cpp",
+      "name": "__real@3fe0000000000000",
+      "optimizer_index": 39
+    },
+    {
+      "function": "?WriteStateChunk@@YAXPAU_iobuf@@IPBXI_N@Z",
+      "module": "State.cpp",
+      "name": "__real@41f0000000000000",
+      "optimizer_index": 39
+    },
+    {
+      "function": "?UpdateAudioTiming@@YAXXZ",
+      "module": "CpuControl.cpp",
+      "name": "__real@3f7ae148",
+      "optimizer_index": 52
+    },
+    {
+      "function": "?RSP_InitializeReciprocalTable@@YAXXZ",
+      "module": "RSPReciprocal.cpp",
+      "name": "__real@44000000",
+      "optimizer_index": 186
+    },
+    {
+      "function": "?RSP_InitializeReciprocalTable@@YAXXZ",
+      "module": "RSPReciprocal.cpp",
+      "name": "__real@48000000",
+      "optimizer_index": 186
+    },
+    {
+      "function": "?RSP_InitializeReciprocalTable@@YAXXZ",
+      "module": "RSPReciprocal.cpp",
+      "name": "__real@40000000",
+      "optimizer_index": 186
+    },
+    {
+      "function": "?WritePhysicalWord@@YGXII@Z",
+      "module": "Memory.cpp",
+      "name": "__real@3a83126f",
+      "optimizer_index": 477
+    },
+    {
+      "function": "?WritePhysicalWord@@YGXII@Z",
+      "module": "Memory.cpp",
+      "name": "__real@41400000",
+      "optimizer_index": 477
+    },
+    {
+      "function": "?WritePhysicalWord@@YGXII@Z",
+      "module": "Memory.cpp",
+      "name": "__real@4f800000",
+      "optimizer_index": 477
+    },
+    {
+      "function": "?ExecuteInterpreter@@YAXXZ",
+      "module": "CPUExecution.cpp",
+      "name": "__real@41f80000",
+      "optimizer_index": 613
+    },
+    {
+      "function": "?RunCPU@@YAXXZ",
+      "module": "CpuControl.cpp",
+      "name": "__real@447a0000",
+      "optimizer_index": 647
+    }
+  ],
+  "linked_application_real_order": [
+    {
+      "name": "__real@3fe0000000000000",
+      "va": "0x43e020",
+      "owner": "State.obj"
+    },
+    {
+      "name": "__real@3f847ae147ae147b",
+      "va": "0x43e028",
+      "owner": "State.obj"
+    },
+    {
+      "name": "__real@41f0000000000000",
+      "va": "0x43e030",
+      "owner": "State.obj"
+    },
+    {
+      "name": "__real@3f7ae148",
+      "va": "0x43e038",
+      "owner": "CpuControl.obj"
+    },
+    {
+      "name": "__real@48000000",
+      "va": "0x43e03c",
+      "owner": "RSPReciprocal.obj"
+    },
+    {
+      "name": "__real@44000000",
+      "va": "0x43e040",
+      "owner": "RSPReciprocal.obj"
+    },
+    {
+      "name": "__real@41400000",
+      "va": "0x43e044",
+      "owner": "Memory.obj"
+    },
+    {
+      "name": "__real@3a83126f",
+      "va": "0x43e048",
+      "owner": "Memory.obj"
+    },
+    {
+      "name": "__real@4f800000",
+      "va": "0x43e04c",
+      "owner": "Memory.obj"
+    },
+    {
+      "name": "__real@41f80000",
+      "va": "0x43e084",
+      "owner": "CPUExecution.obj"
+    },
+    {
+      "name": "__real@447a0000",
+      "va": "0x43e088",
+      "owner": "CpuControl.obj"
+    }
+  ],
+  "readonly_section_append_indexes_by_active_function": {
+    "WriteStateChunk": [
+      590,
+      591,
+      592
+    ],
+    "UpdateAudioTiming": [
+      619
+    ],
+    "RSP_InitializeReciprocalTable": [
+      887,
+      888
+    ],
+    "WritePhysicalWord": [
+      1471,
+      1472,
+      1473,
+      1474
+    ],
+    "ExecuteInterpreter": [
+      1746
+    ],
+    "RunCPU": [
+      1814,
+      1815
+    ]
+  },
+  "provider_chain": {
+    "symbol": "__real@4f800000",
+    "first_creation_function": "WritePhysicalWord",
+    "first_creation_module": "Memory.cpp",
+    "optimizer_index": 477,
+    "emitting_function": "WritePhysicalWord",
+    "emitting_module": "Memory.cpp",
+    "c2_section_index": 1473,
+    "contribution_size": 4,
+    "proof": "Independent LINK contribution write-watch and provider-object trace bind this four-byte contribution to C2 section 1473. Active-function observation alone is not used to establish symbol identity.",
+    "later_live_users": [
+      {
+        "function": "FinishInstruction",
+        "optimizer_index": 508
+      },
+      {
+        "function": "ExecuteInterpreter",
+        "optimizer_index": 613
+      }
+    ]
+  },
+  "chronology_conclusions": [
+    "C2 creates the shared 2^32f symbol while optimizing WritePhysicalWord, then appends its readonly section while emitting that same function. Later conversion users reuse it.",
+    "Symbol creation order is not final constant order within a function: WriteStateChunk creates 0.01 before 0.5 but emits 0.5 before 0.01. Both phases were observed separately.",
+    "LINK reads C2-generated sections by their assigned index. All 569 recorded .rdata contribution links and owner pointers remain unchanged between pre-layout and post-layout observations; eight contributions are discarded and surviving RVAs have no ordering inversions.",
+    "The original float location occupies four of the six candidate alignment bytes after the 14-byte RSP_VmultExec literal at 43e00c. Placing the actual contribution there would preserve the following doubles, but the observed compiler does not emit it there.",
+    "The valid shared inline-helper probe emits the constant from the helper itself, selected in Dynarec.cpp, at C2 section 879. LINK discards the unused helper function while retaining its reused constant. This explains 43e03c without an independent linker float sort; it does not match 43e01c."
+  ],
+  "negative_controls": [
+    {
+      "experiment": "All 27 existing application GL objects in one ordinary archive",
+      "result": "Float 43e048; previously correct strings and section bytes move. Rejected.",
+      "path": "/root/.ai-tmp/nemu-app-archive.oc8ijzfh/report.json"
+    },
+    {
+      "experiment": "Single-member ordinary archives for Memory, CPUExecution, or Dynarec",
+      "result": "Float 43e044,43e04c,43e044 respectively; each changes thousands of readonly bytes. Uses the already split CPUExecution unit. Rejected.",
+      "path": "/root/.ai-tmp/nemu-app-archive.oc8ijzfh/single-report.json"
+    },
+    {
+      "experiment": "Meaningful ExecuteInterpreter to RunInterpreter identifier rename",
+      "result": "All four program sections identical; float remains43e04c. No naming-order effect demonstrated.",
+      "path": "/root/.ai-tmp/nemu-app-archive.oc8ijzfh/rename-report.json"
+    },
+    {
+      "experiment": "Shared inline conversion helper in CPU.h, used by all three actual conversions",
+      "result": "Float 43e03c; helper emits its own constant then is discarded. All 27-unit compilation gives the same placement. Still unmatched.",
+      "path": "/root/.ai-tmp/nemu-inline-conversion-allunits.xo_4c3xx/report.json"
+    },
+    {
+      "experiment": "Inline declaration in callers, definition only in later host WinMain unit",
+      "result": "LNK2001 for UnsignedToFloat; no valid executable and no supported organization inference. No retention workaround attempted.",
+      "path": "/root/.ai-tmp/nemu-c2-host-helper.cv24m04o/link.log"
+    },
+    {
+      "experiment": "Move unchanged CPUExecution.obj directly after State.obj",
+      "result": "All float addresses unchanged. Six correct interpreter literals displaced ; 26,324 .text, 4,939 .rdata, 16 .data bytes change. Imports, Rich, resources unchanged. Rejected.",
+      "path": "/root/.ai-tmp/nemu-cpu-execution-order.rl5y231w/report.json"
+    }
+  ],
+  "limits": [
+    "The current creation/emission cause is established; the original source arrangement is not uniquely recovered.",
+    "C2 initially sorts function records using the scalar at symbol + 0x6c, parsed from frontend IL, then performs dependency traversal. The scalar meaning and original call graph are not established.",
+    "No allocator tie, qsort, or late linker constant sorting mechanism was demonstrated. The unsuccessful name read-watch attempt supplies no causal evidence.",
+    "Application names and translation-unit partitioning remain inferred. Remaining source/control-flow mismatches may still alter compiler traversal naturally.",
+    "This diagnostic does not authorize forced symbol retention, dummy functions/references, padding, or byte restoration."
+  ],
+  "evidence": {
+    "/root/.ai-tmp/nemu-float-trace-replay.20261017/report.json": {
+      "sha256": "0dc6f4bc3bc58bacaa142a053f9ac1376d68743292b29c2b90ab4afd78a1e6cd"
+    },
+    "/root/.ai-tmp/nemu-float-trace-replay.20261017/trace.json": {
+      "sha256": "9ace39f5e24cba8be0a53b2f58f4423f67fc9406c67b5454e6f9a7b24716062c"
+    },
+    "/root/.ai-tmp/nemu-float-trace-replay.20261017/trace.gdb": {
+      "sha256": "c1da45b2525bd863baa0cac9e71c1a418728ffe5c0912769a7feb538cce4cb49"
+    },
+    "/root/.ai-tmp/nemu-c2-float.20261017/emission/provider.json": {
+      "sha256": "d142728ceb90f90448f13bfbc66615f6d6b3b6d9ad6d5b9fcc3e63c7917a51a8"
+    },
+    "/root/.ai-tmp/nemu-c2-float.20261017/emission/provider.gdb": {
+      "sha256": "580eb2256dcc7ab3cecc76e101aefb7d836783ca775575471adab664f53b9bd7"
+    },
+    "/root/.ai-tmp/nemu-c2-float.20261017/emission/writes.json": {
+      "sha256": "c3b7d393a643c79ef2d7e6250da4cee11b4d3d616852e7f495b8b21959d0103a"
+    },
+    "/root/.ai-tmp/nemu-c2-float.20261017/emission/contribution-write.gdb": {
+      "sha256": "3157d5c72e7302ec68c354b91f7fa0cbee97c9f25970beff259b3993048b15d2"
+    },
+    "/root/.ai-tmp/nemu-c2-float.20261017/inline-emission/section-emission.json": {
+      "sha256": "b56e244df61988e647405cdcf1e191e8fca5f516640e0d6345827421411afbc6"
+    },
+    "/root/.ai-tmp/nemu-app-archive.oc8ijzfh/float-layout-report.json": {
+      "sha256": "35f636d4b06c9e309d37e254a2996c027cf31f17371ce56d8031986c32c6e552"
+    },
+    "/root/.ai-tmp/nemu-app-archive.oc8ijzfh/contributions.json": {
+      "sha256": "c0d8aebdc43d0a612489fcb028ad2e148f75cad558f173b62a3bd2e3ed00ea20"
+    },
+    "/root/.ai-tmp/nemu-app-archive.oc8ijzfh/final-contributions.json": {
+      "sha256": "ad54b8d1472f69b1bab3db83686e21615110dc24ede7b9a3caf5df4a94eb1a0d"
+    },
+    "/root/.ai-tmp/nemu-cpu-execution-order.rl5y231w/report.json": {
+      "sha256": "2cc94b5fe2762fa23cf322a1abca30c935bf9e10fb2dec5d73b514be1f9d2f78"
+    }
+  }
+}
