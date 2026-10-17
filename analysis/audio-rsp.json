@@ -19,7 +19,7 @@
     "native_language_control": "analysis/audio-rsp-language-control.json"
   },
   "source_sha256": {
-    "RSP.cpp": "eef44ede85359413535ace9c62b22d775280c42cd7b2c7b065d85dcf9cd6b17c",
+    "RSP.cpp": "fa61f9951774a96a1735483240b17944cc2ec2f5db25399560e4591963efac67",
     "RSPKernel.inc": "7a218993560c457a5149266e391a28fcdb0a1df5a812209c9a9b7111238eb961",
     "RSPData.inc": "f7a6f57795b41b7203b63302205c50de7bbd459971f9d2974d9d12b1c74bbd4d",
     "RSP.h": "9489748e5025a27cdcbcf9853751b72d0c6c73658ddb4d62893d3f40f297b7ab",
@@ -38,7 +38,8 @@
       "The instruction word, comparison bytes and flags form an inferred control-state aggregate at the observed native offsets. The vector bank remains separate.",
       "C-linkage opcode helpers take RSPInstructionWord unions by value. The original caller MOV-immediate/PUSH-register sequence distinguishes this from a scalar unsigned argument.",
       "All 180 materialized native function hashes are unchanged from the earlier separate-unit reconstruction. The retained header table is restored before the guest program.",
-      "The earlier C/C++ frontend comparison is historical evidence from its recorded source snapshot, not a whole-unit language control on this final organization."
+      "The earlier C/C++ frontend comparison is historical evidence from its recorded source snapshot, not a whole-unit language control on this final organization.",
+      "Signed lane indices recover the observed four-lane countdown loops in all twelve retained multiply functions. The code remains unmatched; two complete suffixes now match after their first 41 bytes."
     ],
     "invariance_evidence": "analysis/audio-rsp-organization.json",
     "language_control": "analysis/audio-rsp-language-control.json",
@@ -49,7 +50,8 @@
       "behavior_cases": 512,
       "behavior_failures": 0,
       "other_core_functions_unchanged": 175
-    }
+    },
+    "retained_multiply_refinement": "analysis/audio-rsp-multiply-refinement.json"
   },
   "coverage": {
     "start": "0x10013b10",
@@ -69,9 +71,9 @@
     "zero_initialized_object_bytes": 17152,
     "unresolved_relocations": 0,
     "method": "Ordinary COFF DIR32 and REL32 relocations materialized using separately identified original targets. Every byte of each recorded span is compared; no masks or executable patches.",
-    "artifact": "/root/.ai-tmp/nemu-audio-rsp.3f9d460s/published-comparison.json",
-    "artifact_sha256": "abde98075c396d341f1f64797fbf921ca8bb45d454a70dd926783b9c44bb19d2",
-    "source_snapshot": "/root/.ai-tmp/nemu-audio-rsp.3f9d460s/runs/uteww_op"
+    "artifact": "/root/.ai-tmp/nemu-audio-rsp.3f9d460s/runs/7rvk63lk/rsp-strict.json",
+    "artifact_sha256": "86be58a8cd695e329b782cf0471c01f4488d15712eb1dcc2d28596f52a657c6f",
+    "source_snapshot": "/root/.ai-tmp/nemu-audio-rsp.3f9d460s/runs/7rvk63lk"
   },
   "functions": [
     {
@@ -1247,9 +1249,9 @@
       "original_size": 928,
       "candidate_size": 928,
       "exact": false,
-      "differing_bytes": 832,
+      "differing_bytes": 25,
       "original_sha256": "4eca8a3bc579df2e2918a10778e696a43e393c7eaa8be564748f353b4c7606ef",
-      "candidate_materialized_sha256": "5de7fc8a0f41e72e9e96a89e9846bad17890b1203d898cc00d9259d3f720c695"
+      "candidate_materialized_sha256": "f936f94479b9e2a75745e47db345b6bdd0c36dc8bd380faa2b61451e738d7782"
     },
     {
       "name": "RSP_VMULU",
@@ -1258,9 +1260,9 @@
       "original_size": 1024,
       "candidate_size": 1008,
       "exact": false,
-      "differing_bytes": 975,
+      "differing_bytes": 815,
       "original_sha256": "b15c03914b5d10b99f983e9b367425c27f105e328632df5a439afe2a9c14d590",
-      "candidate_materialized_sha256": "5a597474483190862850babf1d64d379fd109b3f6b4babf76b124d65b666e02e"
+      "candidate_materialized_sha256": "576262ab625b982bd24c70ade90e9c3d23a63a89e1b863da9c30282dd513113a"
     },
     {
       "name": "RSP_VRNDP",
@@ -1291,20 +1293,20 @@
       "original_size": 736,
       "candidate_size": 736,
       "exact": false,
-      "differing_bytes": 669,
+      "differing_bytes": 25,
       "original_sha256": "8611c3202c89381a9e5e154a5dd5dbb6410e6be724348b24d436ef68da266f4f",
-      "candidate_materialized_sha256": "bd3d6c357ba52976da83ee8d66449c310596c9a4b305b9bb69d8b500cd92d5e1"
+      "candidate_materialized_sha256": "011e76beba9fcfee18b91e3b0d583740b763e7a4c9a766ee7e304013b57bcc9d"
     },
     {
       "name": "RSP_VMUDM",
       "symbol": "_RSP_VMUDM",
       "va": 268530784,
       "original_size": 960,
-      "candidate_size": 944,
+      "candidate_size": 960,
       "exact": false,
-      "differing_bytes": 861,
+      "differing_bytes": 718,
       "original_sha256": "325d0f0968fb00ee99c7886117903cda4fcb0e153a5edd72a718400e52f3dce6",
-      "candidate_materialized_sha256": "b10f4444e76e3a0972093208b87fffd1c2c97cee7dfb30a68d8bcc3c77b18678"
+      "candidate_materialized_sha256": "fabee3e5f25c2352e0ae7785c5f46c67c12307415947bd10ffd6c8346a3e565b"
     },
     {
       "name": "RSP_VMUDN",
@@ -1313,31 +1315,31 @@
       "original_size": 896,
       "candidate_size": 896,
       "exact": false,
-      "differing_bytes": 781,
+      "differing_bytes": 623,
       "original_sha256": "bc7362adfdb380e636fb4e009ca35c266167f53de8131615785e134bf9f0ad7f",
-      "candidate_materialized_sha256": "51b97b88798c1a100e887d64c54c2f8c8c51e6d9f2068d7c3c7ea6742fbc19b0"
+      "candidate_materialized_sha256": "ab6457676a287b512b6b31d293281a976385f2cfbf5de966c2cb3db7cc6f081c"
     },
     {
       "name": "RSP_VMUDH",
       "symbol": "_RSP_VMUDH",
       "va": 268532640,
       "original_size": 960,
-      "candidate_size": 928,
+      "candidate_size": 944,
       "exact": false,
-      "differing_bytes": 856,
+      "differing_bytes": 735,
       "original_sha256": "6e0631ad884c5cecb63f55cacc2d4ef10e6b3191594dee0be35d79bf97f0a5da",
-      "candidate_materialized_sha256": "517d35e5ba4fb3f849d8c6e6cdd0f977f3b6e92b0d0842752a1b91f0b24a6470"
+      "candidate_materialized_sha256": "8479c075efb21408a73f2fdf222acd9711ba18fd8e6ddcc24b579724746da6e5"
     },
     {
       "name": "RSP_VMACF",
       "symbol": "_RSP_VMACF",
       "va": 268533600,
       "original_size": 1232,
-      "candidate_size": 1200,
+      "candidate_size": 1216,
       "exact": false,
-      "differing_bytes": 1172,
+      "differing_bytes": 1192,
       "original_sha256": "d65325ab1f39e5becc039db186c1e6c8ebb5de5c2d26c2bd5b8ab3b29ec43a21",
-      "candidate_materialized_sha256": "59f4be7a49d005c7c25c4374121892410e032a9ef924f1ddae95c82b1ee98539"
+      "candidate_materialized_sha256": "7dabec21e53f11dd1f182505b335b44105238dd661fd531bcca3a19da4dbd549"
     },
     {
       "name": "RSP_VMACU",
@@ -1346,9 +1348,9 @@
       "original_size": 1152,
       "candidate_size": 1120,
       "exact": false,
-      "differing_bytes": 1115,
+      "differing_bytes": 1109,
       "original_sha256": "ab9f9511621c8ead96e9c29443d5ebb96dc16870d0938ca94fa899bb08a312af",
-      "candidate_materialized_sha256": "3a6c1a1700bb4963269d88fe6253e444168e22b891be122ae974ac833ee635e7"
+      "candidate_materialized_sha256": "78ce8945ea63afee3fea030bf4224643dbcf05c383a3fe9ab62f09abe27e90e6"
     },
     {
       "name": "RSP_VRNDN",
@@ -1379,20 +1381,20 @@
       "original_size": 1120,
       "candidate_size": 1104,
       "exact": false,
-      "differing_bytes": 1067,
+      "differing_bytes": 843,
       "original_sha256": "11a179d4171bb5205d422a9d652e64eed4e182af0c49641b625e36682f414741",
-      "candidate_materialized_sha256": "f3ec37485224cf67fb0fe11f4d4187475dbe20ebe940632dd979abf5f9f25bbd"
+      "candidate_materialized_sha256": "ab96a90e9289fb4d6a06faa06d1f84549a125520e7057b110e0ead463b3fe3e9"
     },
     {
       "name": "RSP_VMADM",
       "symbol": "_RSP_VMADM",
       "va": 268537136,
       "original_size": 1152,
-      "candidate_size": 1104,
+      "candidate_size": 1120,
       "exact": false,
-      "differing_bytes": 1107,
+      "differing_bytes": 1095,
       "original_sha256": "8c0b66af250b118c99c6cd68f07304ea1574ef4c1c94dc20d9a9d3bf53165ec0",
-      "candidate_materialized_sha256": "c848a886ed1621266cb44543babb2f91f16e34a64253f5247f6cbc6850ad9fe4"
+      "candidate_materialized_sha256": "c7a4858e701d427f97502cba06ffc8f508b4c8a4e65ea508e3d489429a5cf0eb"
     },
     {
       "name": "RSP_VMADN",
@@ -1401,9 +1403,9 @@
       "original_size": 1104,
       "candidate_size": 1088,
       "exact": false,
-      "differing_bytes": 1047,
+      "differing_bytes": 831,
       "original_sha256": "e655876970a6779b36ae28352d3a1ed3ad54b8063f2470c420f23a363386acff",
-      "candidate_materialized_sha256": "b2908553e3c34804e0b4624b03be92c61e25c28eeef857cdb28fc6c8f331b012"
+      "candidate_materialized_sha256": "2630c36a0209ba0fa1a8df052a11e114e468783d52242fb15df224039db283a7"
     },
     {
       "name": "RSP_VMADH",
@@ -1412,9 +1414,9 @@
       "original_size": 1216,
       "candidate_size": 1168,
       "exact": false,
-      "differing_bytes": 1178,
+      "differing_bytes": 1174,
       "original_sha256": "6febef408b0a1630d8f34592f1c2bb651aeb2744225726efb369044ee1e03fbe",
-      "candidate_materialized_sha256": "489f75fe44d9dc1558270d2dc93e7da33dea4253079b0e1e2b3c8574c861bb96"
+      "candidate_materialized_sha256": "d729b0fb19b9a1eecb583be8f414254dd2a2992163f00e9188443f962786c0ef"
     },
     {
       "name": "RSP_VADD",
@@ -2348,7 +2350,7 @@
     }
   ],
   "behavior": {
-    "total_cases": 140160,
+    "total_cases": 146304,
     "failures": 0,
     "scope": "Differential execution of original native Audio code and reconstructed candidate code. This supplements instruction comparison and does not establish byte identity for unmatched functions.",
     "reports": [
@@ -2392,7 +2394,10 @@
         "area": "retained_memory_and_multiply",
         "cases": 4992,
         "path": "/root/.ai-tmp/nemu-audio-retained.w9p72uvd/differential.json",
-        "sha256": "6a678e39835eb179c2c77bb18380f62e2aca3b069955965398f5af8eab72825e"
+        "sha256": "6a678e39835eb179c2c77bb18380f62e2aca3b069955965398f5af8eab72825e",
+        "historical_superseded_cases": 1536,
+        "current_unchanged_function_cases": 3456,
+        "note": "The earlier 128 cases for each of twelve changed multiply functions are superseded by 512 fresh cases each in retained_multiply_signed_indices."
       },
       {
         "area": "vsut_vsubc_vcl",
@@ -2405,9 +2410,17 @@
         "cases": 4096,
         "path": "/root/.ai-tmp/nemu-audio-legacy.a2nhc3xq/semantics-report.json",
         "sha256": "419b1f10b3db08f5c2415c981cfc2b669ee8090e5800b7a1422beb10d9ed774b"
+      },
+      {
+        "area": "retained_multiply_signed_indices",
+        "cases": 6144,
+        "path": "/root/.ai-tmp/nemu-audio-rsp-multiply.9wwzhw2p/legacy-behavior.json",
+        "sha256": "1795baf925dc3ef1d475afc08f4618056cc2d51adced8e12ef072947e68512b4"
       }
     ],
-    "organization_change": "No new behavior run is claimed for the unit merge: all 180 materialized native function hashes and previously read data values are preserved, as recorded in audio-rsp-organization.json."
+    "organization_change": "The unit-organization checkpoint preserves all 180 earlier native hashes. The later signed-index refinement changes twelve unmatched functions and has 6144 new differential cases; all 168 other function hashes and 29 data hashes are unchanged.",
+    "current_code_cases": 144768,
+    "historical_superseded_cases": 1536
   },
   "shared_nemu_evidence": "analysis/audio-rsp-cross-image.json",
   "limitations": [

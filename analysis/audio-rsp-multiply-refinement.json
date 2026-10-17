@@ -1,0 +1,1756 @@
+{
+  "original": "master/Plugin/audio.dll",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "status": "source_type_refinement_with_remaining_instruction_differences",
+  "full_dll_byte_exact": false,
+  "source_change": "Use int instead of CpuU32 for the lane index in the twelve retained multiply instructions. Every loop still visits lanes 0 through 7 in the same order.",
+  "rationale": "Every original loop uses a separate countdown after four-lane unrolling. The prior unsigned indices compile to index comparisons; signed indices recover the original countdown branches in all twelve functions and the original frame sizes in ten.",
+  "source_sha256": "fa61f9951774a96a1735483240b17944cc2ec2f5db25399560e4591963efac67",
+  "compiler_flags": [
+    "/O2",
+    "/Ob1",
+    "/MT"
+  ],
+  "compiler_snapshot": "/root/.ai-tmp/nemu-audio-rsp.3f9d460s/runs/7rvk63lk",
+  "baseline_report": {
+    "path": "/root/.ai-tmp/nemu-audio-rsp.3f9d460s/before-signed-loops-report.json",
+    "sha256": "4968cc52a3cb4ba77521f70906b4ef23e80a60bec12e9c99c2a23e7dafa38061"
+  },
+  "comparison": {
+    "path": "/root/.ai-tmp/nemu-audio-rsp.3f9d460s/runs/7rvk63lk/rsp-strict.json",
+    "sha256": "86be58a8cd695e329b782cf0471c01f4488d15712eb1dcc2d28596f52a657c6f",
+    "functions_compared": 180,
+    "functions_exact": 148,
+    "unchanged_previously_exact_functions": 148,
+    "unresolved": 0,
+    "unchanged_other_function_hashes": 168,
+    "typed_objects_exact": 29,
+    "unchanged_data_hashes": 29
+  },
+  "functions": [
+    {
+      "name": "RSP_VMULF",
+      "original_size": 928,
+      "previous_size": 928,
+      "candidate_size": 928,
+      "previous_differing_bytes": 832,
+      "candidate_differing_bytes": 25,
+      "exact": false,
+      "candidate_materialized_sha256": "f936f94479b9e2a75745e47db345b6bdd0c36dc8bd380faa2b61451e738d7782"
+    },
+    {
+      "name": "RSP_VMULU",
+      "original_size": 1024,
+      "previous_size": 1008,
+      "candidate_size": 1008,
+      "previous_differing_bytes": 975,
+      "candidate_differing_bytes": 815,
+      "exact": false,
+      "candidate_materialized_sha256": "576262ab625b982bd24c70ade90e9c3d23a63a89e1b863da9c30282dd513113a"
+    },
+    {
+      "name": "RSP_VMUDL",
+      "original_size": 736,
+      "previous_size": 736,
+      "candidate_size": 736,
+      "previous_differing_bytes": 669,
+      "candidate_differing_bytes": 25,
+      "exact": false,
+      "candidate_materialized_sha256": "011e76beba9fcfee18b91e3b0d583740b763e7a4c9a766ee7e304013b57bcc9d"
+    },
+    {
+      "name": "RSP_VMUDM",
+      "original_size": 960,
+      "previous_size": 944,
+      "candidate_size": 960,
+      "previous_differing_bytes": 861,
+      "candidate_differing_bytes": 718,
+      "exact": false,
+      "candidate_materialized_sha256": "fabee3e5f25c2352e0ae7785c5f46c67c12307415947bd10ffd6c8346a3e565b"
+    },
+    {
+      "name": "RSP_VMUDN",
+      "original_size": 896,
+      "previous_size": 896,
+      "candidate_size": 896,
+      "previous_differing_bytes": 781,
+      "candidate_differing_bytes": 623,
+      "exact": false,
+      "candidate_materialized_sha256": "ab6457676a287b512b6b31d293281a976385f2cfbf5de966c2cb3db7cc6f081c"
+    },
+    {
+      "name": "RSP_VMUDH",
+      "original_size": 960,
+      "previous_size": 928,
+      "candidate_size": 944,
+      "previous_differing_bytes": 856,
+      "candidate_differing_bytes": 735,
+      "exact": false,
+      "candidate_materialized_sha256": "8479c075efb21408a73f2fdf222acd9711ba18fd8e6ddcc24b579724746da6e5"
+    },
+    {
+      "name": "RSP_VMACF",
+      "original_size": 1232,
+      "previous_size": 1200,
+      "candidate_size": 1216,
+      "previous_differing_bytes": 1172,
+      "candidate_differing_bytes": 1192,
+      "exact": false,
+      "candidate_materialized_sha256": "7dabec21e53f11dd1f182505b335b44105238dd661fd531bcca3a19da4dbd549"
+    },
+    {
+      "name": "RSP_VMACU",
+      "original_size": 1152,
+      "previous_size": 1120,
+      "candidate_size": 1120,
+      "previous_differing_bytes": 1115,
+      "candidate_differing_bytes": 1109,
+      "exact": false,
+      "candidate_materialized_sha256": "78ce8945ea63afee3fea030bf4224643dbcf05c383a3fe9ab62f09abe27e90e6"
+    },
+    {
+      "name": "RSP_VMADL",
+      "original_size": 1120,
+      "previous_size": 1104,
+      "candidate_size": 1104,
+      "previous_differing_bytes": 1067,
+      "candidate_differing_bytes": 843,
+      "exact": false,
+      "candidate_materialized_sha256": "ab96a90e9289fb4d6a06faa06d1f84549a125520e7057b110e0ead463b3fe3e9"
+    },
+    {
+      "name": "RSP_VMADM",
+      "original_size": 1152,
+      "previous_size": 1104,
+      "candidate_size": 1120,
+      "previous_differing_bytes": 1107,
+      "candidate_differing_bytes": 1095,
+      "exact": false,
+      "candidate_materialized_sha256": "c7a4858e701d427f97502cba06ffc8f508b4c8a4e65ea508e3d489429a5cf0eb"
+    },
+    {
+      "name": "RSP_VMADN",
+      "original_size": 1104,
+      "previous_size": 1088,
+      "candidate_size": 1088,
+      "previous_differing_bytes": 1047,
+      "candidate_differing_bytes": 831,
+      "exact": false,
+      "candidate_materialized_sha256": "2630c36a0209ba0fa1a8df052a11e114e468783d52242fb15df224039db283a7"
+    },
+    {
+      "name": "RSP_VMADH",
+      "original_size": 1216,
+      "previous_size": 1168,
+      "candidate_size": 1168,
+      "previous_differing_bytes": 1178,
+      "candidate_differing_bytes": 1174,
+      "exact": false,
+      "candidate_materialized_sha256": "d729b0fb19b9a1eecb583be8f414254dd2a2992163f00e9188443f962786c0ef"
+    }
+  ],
+  "loop_control_evidence": [
+    {
+      "name": "RSP_VMULF",
+      "original_va": "0x100169c0",
+      "original": {
+        "size": 928,
+        "frame": "esp, 0x10",
+        "last_backedge": "jne",
+        "loop_tail": [
+          "add ecx, 8",
+          "sar edx, 0x1f",
+          "add ebp, 4",
+          "add esi, 0x20",
+          "dec eax",
+          "mov dword ptr [esp + 0x10], ecx",
+          "mov dword ptr [esp + 0x1c], eax",
+          "jne 0x10016a26"
+        ]
+      },
+      "baseline": {
+        "size": 928,
+        "frame": "esp, 0xc",
+        "last_backedge": "jb",
+        "loop_tail": [
+          "add ecx, 8",
+          "add eax, 8",
+          "lea edx, [ebp - 2]",
+          "add esi, 0x20",
+          "cmp edx, 8",
+          "mov dword ptr [esp + 0x10], ecx",
+          "mov dword ptr [esp + 0x14], eax",
+          "jb 0x10016a22"
+        ]
+      },
+      "signed": {
+        "size": 928,
+        "frame": "esp, 0x10",
+        "last_backedge": "jne",
+        "loop_tail": [
+          "add ecx, 8",
+          "sar edx, 0x1f",
+          "add ebp, 4",
+          "add esi, 0x20",
+          "dec eax",
+          "mov dword ptr [esp + 0x10], ecx",
+          "mov dword ptr [esp + 0x1c], eax",
+          "jne 0x10016a26"
+        ]
+      }
+    },
+    {
+      "name": "RSP_VMULU",
+      "original_va": "0x10016d60",
+      "original": {
+        "size": 1024,
+        "frame": "esp, 0x18",
+        "last_backedge": "jne",
+        "loop_tail": [
+          "mov eax, dword ptr [esp + 0x1c]",
+          "add ecx, 8",
+          "add ebp, 4",
+          "add esi, 0x20",
+          "dec eax",
+          "mov dword ptr [esp + 0x14], ecx",
+          "mov dword ptr [esp + 0x1c], eax",
+          "jne 0x10016dc6"
+        ]
+      },
+      "baseline": {
+        "size": 1008,
+        "frame": "esp, 0x14",
+        "last_backedge": "jb",
+        "loop_tail": [
+          "add edx, 8",
+          "add ecx, 8",
+          "lea eax, [ebp - 2]",
+          "add esi, 0x20",
+          "cmp eax, 8",
+          "mov dword ptr [esp + 0x10], edx",
+          "mov dword ptr [esp + 0x14], ecx",
+          "jb 0x10016dc4"
+        ]
+      },
+      "signed": {
+        "size": 1008,
+        "frame": "esp, 0x18",
+        "last_backedge": "jne",
+        "loop_tail": [
+          "mov eax, dword ptr [esp + 0x1c]",
+          "add ecx, 8",
+          "add ebp, 4",
+          "add esi, 0x20",
+          "dec eax",
+          "mov dword ptr [esp + 0x14], ecx",
+          "mov dword ptr [esp + 0x1c], eax",
+          "jne 0x10016dc8"
+        ]
+      }
+    },
+    {
+      "name": "RSP_VMUDL",
+      "original_va": "0x10017180",
+      "original": {
+        "size": 736,
+        "frame": "esp, 0xc",
+        "last_backedge": "jne",
+        "loop_tail": [
+          "add ecx, 8",
+          "add ebp, 8",
+          "add ebx, 4",
+          "add esi, 0x20",
+          "dec eax",
+          "mov dword ptr [esp + 0x10], ecx",
+          "mov dword ptr [esp + 0x18], eax",
+          "jne 0x100171e4"
+        ]
+      },
+      "baseline": {
+        "size": 736,
+        "frame": "esp, 8",
+        "last_backedge": "jb",
+        "loop_tail": [
+          "mov word ptr [ecx + 4], ax",
+          "add ecx, 8",
+          "lea eax, [ebx - 2]",
+          "add ebp, 8",
+          "add esi, 0x20",
+          "cmp eax, 8",
+          "mov dword ptr [esp + 0x10], ecx",
+          "jb 0x100171e0"
+        ]
+      },
+      "signed": {
+        "size": 736,
+        "frame": "esp, 0xc",
+        "last_backedge": "jne",
+        "loop_tail": [
+          "add ecx, 8",
+          "add ebp, 8",
+          "add ebx, 4",
+          "add esi, 0x20",
+          "dec eax",
+          "mov dword ptr [esp + 0x10], ecx",
+          "mov dword ptr [esp + 0x18], eax",
+          "jne 0x100171e4"
+        ]
+      }
+    },
+    {
+      "name": "RSP_VMUDM",
+      "original_va": "0x10017460",
+      "original": {
+        "size": 960,
+        "frame": "esp, 0x18",
+        "last_backedge": "jne",
+        "loop_tail": [
+          "mov eax, dword ptr [esp + 0x1c]",
+          "add ecx, 8",
+          "add ebp, 4",
+          "add esi, 0x20",
+          "dec eax",
+          "mov dword ptr [esp + 0x10], ecx",
+          "mov dword ptr [esp + 0x1c], eax",
+          "jne 0x100174c6"
+        ]
+      },
+      "baseline": {
+        "size": 944,
+        "frame": "esp, 0x14",
+        "last_backedge": "jb",
+        "loop_tail": [
+          "add ecx, 8",
+          "add eax, 8",
+          "lea edx, [ebp - 2]",
+          "add esi, 0x20",
+          "cmp edx, 8",
+          "mov dword ptr [esp + 0x10], ecx",
+          "mov dword ptr [esp + 0x14], eax",
+          "jb 0x100174c2"
+        ]
+      },
+      "signed": {
+        "size": 960,
+        "frame": "esp, 0x18",
+        "last_backedge": "jne",
+        "loop_tail": [
+          "mov eax, dword ptr [esp + 0x1c]",
+          "add ecx, 8",
+          "add ebp, 4",
+          "add esi, 0x20",
+          "dec eax",
+          "mov dword ptr [esp + 0x10], ecx",
+          "mov dword ptr [esp + 0x1c], eax",
+          "jne 0x100174c6"
+        ]
+      }
+    },
+    {
+      "name": "RSP_VMUDN",
+      "original_va": "0x10017820",
+      "original": {
+        "size": 896,
+        "frame": "esp, 0x14",
+        "last_backedge": "jne",
+        "loop_tail": [
+          "add ecx, 8",
+          "add ebp, 8",
+          "add ebx, 4",
+          "add esi, 0x20",
+          "dec eax",
+          "mov dword ptr [esp + 0x10], ecx",
+          "mov dword ptr [esp + 0x18], eax",
+          "jne 0x10017884"
+        ]
+      },
+      "baseline": {
+        "size": 896,
+        "frame": "esp, 0x10",
+        "last_backedge": "jb",
+        "loop_tail": [
+          "mov word ptr [ecx + 4], ax",
+          "add ecx, 8",
+          "lea edx, [ebx - 2]",
+          "add ebp, 8",
+          "add esi, 0x20",
+          "cmp edx, 8",
+          "mov dword ptr [esp + 0x10], ecx",
+          "jb 0x10017880"
+        ]
+      },
+      "signed": {
+        "size": 896,
+        "frame": "esp, 0x14",
+        "last_backedge": "jne",
+        "loop_tail": [
+          "add ecx, 8",
+          "add ebp, 8",
+          "add ebx, 4",
+          "add esi, 0x20",
+          "dec eax",
+          "mov dword ptr [esp + 0x10], ecx",
+          "mov dword ptr [esp + 0x18], eax",
+          "jne 0x10017884"
+        ]
+      }
+    },
+    {
+      "name": "RSP_VMUDH",
+      "original_va": "0x10017ba0",
+      "original": {
+        "size": 960,
+        "frame": "esp, 0x18",
+        "last_backedge": "jne",
+        "loop_tail": [
+          "mov eax, dword ptr [esp + 0x1c]",
+          "add ecx, 8",
+          "add ebp, 4",
+          "add esi, 0x20",
+          "dec eax",
+          "mov dword ptr [esp + 0x10], ecx",
+          "mov dword ptr [esp + 0x1c], eax",
+          "jne 0x10017c06"
+        ]
+      },
+      "baseline": {
+        "size": 928,
+        "frame": "esp, 0x14",
+        "last_backedge": "jb",
+        "loop_tail": [
+          "add ecx, 8",
+          "add eax, 8",
+          "lea edx, [ebp - 2]",
+          "add esi, 0x20",
+          "cmp edx, 8",
+          "mov dword ptr [esp + 0x10], ecx",
+          "mov dword ptr [esp + 0x14], eax",
+          "jb 0x10017c02"
+        ]
+      },
+      "signed": {
+        "size": 944,
+        "frame": "esp, 0x18",
+        "last_backedge": "jne",
+        "loop_tail": [
+          "mov eax, dword ptr [esp + 0x1c]",
+          "add ecx, 8",
+          "add ebp, 4",
+          "add esi, 0x20",
+          "dec eax",
+          "mov dword ptr [esp + 0x10], ecx",
+          "mov dword ptr [esp + 0x1c], eax",
+          "jne 0x10017c06"
+        ]
+      }
+    },
+    {
+      "name": "RSP_VMACF",
+      "original_va": "0x10017f60",
+      "original": {
+        "size": 1232,
+        "frame": "esp, 0x20",
+        "last_backedge": "jne",
+        "loop_tail": [
+          "add edx, 4",
+          "add esi, 0x20",
+          "dec eax",
+          "mov dword ptr [esp + 0x14], ebx",
+          "mov dword ptr [esp + 0x18], ecx",
+          "mov dword ptr [esp + 0x10], edx",
+          "mov dword ptr [esp + 0x24], eax",
+          "jne 0x10017fd2"
+        ]
+      },
+      "baseline": {
+        "size": 1200,
+        "frame": "esp, 0x1c",
+        "last_backedge": "jb",
+        "loop_tail": [
+          "add ebp, 8",
+          "add ecx, 8",
+          "add eax, -2",
+          "add esi, 0x20",
+          "cmp eax, 8",
+          "mov dword ptr [esp + 0x14], ebp",
+          "mov dword ptr [esp + 0x18], ecx",
+          "jb 0x10017fc8"
+        ]
+      },
+      "signed": {
+        "size": 1216,
+        "frame": "esp, 0x20",
+        "last_backedge": "jne",
+        "loop_tail": [
+          "add edx, 4",
+          "add esi, 0x20",
+          "dec eax",
+          "mov dword ptr [esp + 0x14], ebx",
+          "mov dword ptr [esp + 0x18], ecx",
+          "mov dword ptr [esp + 0x10], edx",
+          "mov dword ptr [esp + 0x24], eax",
+          "jne 0x10017fcc"
+        ]
+      }
+    },
+    {
+      "name": "RSP_VMACU",
+      "original_va": "0x10018430",
+      "original": {
+        "size": 1152,
+        "frame": "esp, 0x20",
+        "last_backedge": "jne",
+        "loop_tail": [
+          "add edx, 4",
+          "add esi, 0x20",
+          "dec eax",
+          "mov dword ptr [esp + 0x14], ebx",
+          "mov dword ptr [esp + 0x18], ecx",
+          "mov dword ptr [esp + 0x10], edx",
+          "mov dword ptr [esp + 0x20], eax",
+          "jne 0x100184a2"
+        ]
+      },
+      "baseline": {
+        "size": 1120,
+        "frame": "esp, 0x1c",
+        "last_backedge": "jb",
+        "loop_tail": [
+          "add ebp, 8",
+          "add ecx, 8",
+          "add eax, -2",
+          "add esi, 0x20",
+          "cmp eax, 8",
+          "mov dword ptr [esp + 0x14], ebp",
+          "mov dword ptr [esp + 0x18], ecx",
+          "jb 0x10018498"
+        ]
+      },
+      "signed": {
+        "size": 1120,
+        "frame": "esp, 0x20",
+        "last_backedge": "jne",
+        "loop_tail": [
+          "add edx, 4",
+          "add esi, 0x20",
+          "dec eax",
+          "mov dword ptr [esp + 0x14], ebx",
+          "mov dword ptr [esp + 0x18], ecx",
+          "mov dword ptr [esp + 0x10], edx",
+          "mov dword ptr [esp + 0x24], eax",
+          "jne 0x1001849c"
+        ]
+      }
+    },
+    {
+      "name": "RSP_VMADL",
+      "original_va": "0x100188d0",
+      "original": {
+        "size": 1120,
+        "frame": "esp, 0x1c",
+        "last_backedge": "jne",
+        "loop_tail": [
+          "add edx, 8",
+          "add eax, 4",
+          "add esi, 0x20",
+          "dec ecx",
+          "mov dword ptr [esp + 0x14], edx",
+          "mov dword ptr [esp + 0x10], eax",
+          "mov dword ptr [esp + 0x20], ecx",
+          "jne 0x10018940"
+        ]
+      },
+      "baseline": {
+        "size": 1104,
+        "frame": "esp, 0x18",
+        "last_backedge": "jb",
+        "loop_tail": [
+          "mov dword ptr [esp + 0x18], ecx",
+          "add eax, 8",
+          "lea ecx, [edx - 2]",
+          "add esi, 0x20",
+          "cmp ecx, 8",
+          "mov dword ptr [esp + 0x14], eax",
+          "mov dword ptr [esp + 0x10], edx",
+          "jb 0x10018938"
+        ]
+      },
+      "signed": {
+        "size": 1104,
+        "frame": "esp, 0x1c",
+        "last_backedge": "jne",
+        "loop_tail": [
+          "add ecx, 8",
+          "add edx, 4",
+          "add esi, 0x20",
+          "dec eax",
+          "mov dword ptr [esp + 0x18], ecx",
+          "mov dword ptr [esp + 0x10], edx",
+          "mov dword ptr [esp + 0x20], eax",
+          "jne 0x10018940"
+        ]
+      }
+    },
+    {
+      "name": "RSP_VMADM",
+      "original_va": "0x10018d30",
+      "original": {
+        "size": 1152,
+        "frame": "esp, 0x1c",
+        "last_backedge": "jne",
+        "loop_tail": [
+          "add edx, 8",
+          "add eax, 4",
+          "add esi, 0x20",
+          "dec ecx",
+          "mov dword ptr [esp + 0x14], edx",
+          "mov dword ptr [esp + 0x10], eax",
+          "mov dword ptr [esp + 0x20], ecx",
+          "jne 0x10018da0"
+        ]
+      },
+      "baseline": {
+        "size": 1104,
+        "frame": "esp, 0x1c",
+        "last_backedge": "jb",
+        "loop_tail": [
+          "add eax, 4",
+          "add edx, 8",
+          "lea ecx, [eax - 2]",
+          "add esi, 0x20",
+          "cmp ecx, 8",
+          "mov dword ptr [esp + 0x14], edx",
+          "mov dword ptr [esp + 0x10], eax",
+          "jb 0x10018d9e"
+        ]
+      },
+      "signed": {
+        "size": 1120,
+        "frame": "esp, 0x20",
+        "last_backedge": "jne",
+        "loop_tail": [
+          "add ebp, 8",
+          "add edx, 4",
+          "add esi, 0x20",
+          "dec eax",
+          "mov dword ptr [esp + 0x14], ebp",
+          "mov dword ptr [esp + 0x10], edx",
+          "mov dword ptr [esp + 0x20], eax",
+          "jne 0x10018da2"
+        ]
+      }
+    },
+    {
+      "name": "RSP_VMADN",
+      "original_va": "0x100191b0",
+      "original": {
+        "size": 1104,
+        "frame": "esp, 0x1c",
+        "last_backedge": "jne",
+        "loop_tail": [
+          "add edx, 8",
+          "add eax, 4",
+          "add esi, 0x20",
+          "dec ecx",
+          "mov dword ptr [esp + 0x14], edx",
+          "mov dword ptr [esp + 0x10], eax",
+          "mov dword ptr [esp + 0x20], ecx",
+          "jne 0x10019220"
+        ]
+      },
+      "baseline": {
+        "size": 1088,
+        "frame": "esp, 0x18",
+        "last_backedge": "jb",
+        "loop_tail": [
+          "mov word ptr [ecx + 4], ax",
+          "add ecx, 8",
+          "lea eax, [edx - 2]",
+          "add esi, 0x20",
+          "cmp eax, 8",
+          "mov dword ptr [esp + 0x18], ecx",
+          "mov dword ptr [esp + 0x10], edx",
+          "jb 0x10019218"
+        ]
+      },
+      "signed": {
+        "size": 1088,
+        "frame": "esp, 0x1c",
+        "last_backedge": "jne",
+        "loop_tail": [
+          "add ecx, 8",
+          "add edx, 4",
+          "add esi, 0x20",
+          "dec eax",
+          "mov dword ptr [esp + 0x18], ecx",
+          "mov dword ptr [esp + 0x10], edx",
+          "mov dword ptr [esp + 0x20], eax",
+          "jne 0x10019220"
+        ]
+      }
+    },
+    {
+      "name": "RSP_VMADH",
+      "original_va": "0x10019600",
+      "original": {
+        "size": 1216,
+        "frame": "esp, 0x24",
+        "last_backedge": "jne",
+        "loop_tail": [
+          "add edx, 8",
+          "add eax, 4",
+          "add esi, 0x20",
+          "dec ecx",
+          "mov dword ptr [esp + 0x14], edx",
+          "mov dword ptr [esp + 0x10], eax",
+          "mov dword ptr [esp + 0x20], ecx",
+          "jne 0x10019673"
+        ]
+      },
+      "baseline": {
+        "size": 1168,
+        "frame": "esp, 0x1c",
+        "last_backedge": "jb",
+        "loop_tail": [
+          "add eax, 4",
+          "add edx, 8",
+          "lea ecx, [eax - 2]",
+          "add esi, 0x20",
+          "cmp ecx, 8",
+          "mov dword ptr [esp + 0x14], edx",
+          "mov dword ptr [esp + 0x10], eax",
+          "jb 0x10019668"
+        ]
+      },
+      "signed": {
+        "size": 1168,
+        "frame": "esp, 0x20",
+        "last_backedge": "jne",
+        "loop_tail": [
+          "add edx, 8",
+          "add eax, 4",
+          "add esi, 0x20",
+          "dec ecx",
+          "mov dword ptr [esp + 0x14], edx",
+          "mov dword ptr [esp + 0x10], eax",
+          "mov dword ptr [esp + 0x24], ecx",
+          "jne 0x1001966c"
+        ]
+      }
+    }
+  ],
+  "complete_suffix_matches": [
+    {
+      "name": "RSP_VMULF",
+      "original_va": "0x100169c0",
+      "span": 928,
+      "prefix_bytes": 41,
+      "prefix_differing_bytes": 25,
+      "suffix_offset": 41,
+      "suffix_size": 887,
+      "suffix_sha256": "b5b2551f8f522b0a4f80f0501a984291ac9de454ce36db79a7011f3f3c793454",
+      "remaining": "The original stages the opcode in ECX and saves ESI/EDI later; the candidate loads EDI directly and saves those registers earlier."
+    },
+    {
+      "name": "RSP_VMUDL",
+      "original_va": "0x10017180",
+      "span": 736,
+      "prefix_bytes": 41,
+      "prefix_differing_bytes": 25,
+      "suffix_offset": 41,
+      "suffix_size": 695,
+      "suffix_sha256": "6c23f302ca1b8c9625558ac3bb4bde10d8a1b28c04f849637302d11bc113184e",
+      "remaining": "The original stages the opcode in ECX and saves ESI/EDI later; the candidate loads EDI directly and saves those registers earlier."
+    }
+  ],
+  "behavior": {
+    "path": "/root/.ai-tmp/nemu-audio-rsp-multiply.9wwzhw2p/legacy-behavior.json",
+    "sha256": "1795baf925dc3ef1d475afc08f4618056cc2d51adced8e12ef072947e68512b4",
+    "cases": 6144,
+    "failures": 0,
+    "script": "/root/.ai-tmp/nemu-audio-rsp-multiply.9wwzhw2p/legacy-proof.py",
+    "script_sha256": "127cb6424c6c163ce1622256310e96b876e706ee4062fa559f60a98988b4b951",
+    "method": "Original and compiled x86 functions executed in independent Unicorn memory images. Compared all 17408 bytes of RSP state, stack balance and preserved registers. No executable files modified."
+  },
+  "bounded_controls": [
+    {
+      "path": "/root/.ai-tmp/nemu-audio-rsp-multiply.9wwzhw2p/decode-registers/summary.json",
+      "sha256": "354a6f32f26ff58b0d26910fa14f6c0beb52dd82978b52e5813246835cb97907",
+      "summary": {
+        "variant": "decode-registers",
+        "command": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/FoRSP.obj",
+          "RSP.cpp"
+        ],
+        "source_sha256": "abaeea0ca276a3d48d0d3875ca3255ea86cdffb225457edaa73a8bb90c562cf2",
+        "functions": 180,
+        "exact": 148,
+        "data_exact": 29,
+        "unresolved": 0,
+        "changed": [
+          {
+            "name": "RSP_VectorMultiplyExec",
+            "exact": false,
+            "size": 1312,
+            "differences": 1259,
+            "previously_exact": false
+          }
+        ]
+      }
+    },
+    {
+      "path": "/root/.ai-tmp/nemu-audio-rsp-multiply.9wwzhw2p/decode-vs/summary.json",
+      "sha256": "7eb5d9db9ed96d05dead89d0e67289ba766efe31ca2adce0cd658e5b785b75ac",
+      "summary": {
+        "variant": "decode-vs",
+        "command": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/FoRSP.obj",
+          "RSP.cpp"
+        ],
+        "source_sha256": "6d3bb23c2e014611b1ef8bf5be55c4d67b4e655c2a0d08f386bec17188c04ecd",
+        "functions": 180,
+        "exact": 148,
+        "data_exact": 29,
+        "unresolved": 0,
+        "changed": [
+          {
+            "name": "RSP_VectorMultiplyExec",
+            "exact": false,
+            "size": 1328,
+            "differences": 1220,
+            "previously_exact": false
+          }
+        ]
+      }
+    },
+    {
+      "path": "/root/.ai-tmp/nemu-audio-rsp-multiply.9wwzhw2p/enum-mode/summary.json",
+      "sha256": "5ef978d374029a5a5f7d2e039468a6ab0555b254bc51e40df1a692ed1136fffc",
+      "summary": {
+        "variant": "enum-mode",
+        "command": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/FoRSP.obj",
+          "RSP.cpp"
+        ],
+        "source_sha256": "6d99533e5c91cc9288f92f68b699508c4206aac7dc82127f965d16fd2db2004d",
+        "functions": 180,
+        "exact": 148,
+        "data_exact": 29,
+        "unresolved": 0,
+        "changed": []
+      }
+    },
+    {
+      "path": "/root/.ai-tmp/nemu-audio-rsp-multiply.9wwzhw2p/legacy-cached-opcode/summary.json",
+      "sha256": "bd7229082d6c0ac1c7a98b7378972f86e012334cc7952ade9b814a08d827180c",
+      "summary": {
+        "variant": "legacy-cached-opcode",
+        "command": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/FoRSP.obj",
+          "RSP.cpp"
+        ],
+        "source_sha256": "16949d2efb7130195cbffbb82a39beb9383548bfec9ce36f3e2c32053e0effa2",
+        "functions": 180,
+        "exact": 148,
+        "data_exact": 29,
+        "unresolved": 0,
+        "changed": [
+          {
+            "name": "RSP_VMULF",
+            "exact": false,
+            "size": 928,
+            "differences": 892,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMULU",
+            "exact": false,
+            "size": 1040,
+            "differences": 984,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDL",
+            "exact": false,
+            "size": 736,
+            "differences": 684,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDM",
+            "exact": false,
+            "size": 976,
+            "differences": 935,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDN",
+            "exact": false,
+            "size": 896,
+            "differences": 815,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDH",
+            "exact": false,
+            "size": 960,
+            "differences": 896,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMACF",
+            "exact": false,
+            "size": 1216,
+            "differences": 1144,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMACU",
+            "exact": false,
+            "size": 1136,
+            "differences": 1076,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADL",
+            "exact": false,
+            "size": 1104,
+            "differences": 1059,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADM",
+            "exact": false,
+            "size": 1120,
+            "differences": 960,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADN",
+            "exact": false,
+            "size": 1088,
+            "differences": 1044,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADH",
+            "exact": false,
+            "size": 1184,
+            "differences": 1172,
+            "previously_exact": false
+          }
+        ]
+      }
+    },
+    {
+      "path": "/root/.ai-tmp/nemu-audio-rsp-multiply.9wwzhw2p/legacy-direct-mask/summary.json",
+      "sha256": "5d13cd81ecde445ac8a8f83d280101210b8a0a158dfbe062a2307a82d83cfafe",
+      "summary": {
+        "variant": "legacy-direct-mask",
+        "command": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/FoRSP.obj",
+          "RSP.cpp"
+        ],
+        "source_sha256": "e41acf38f82dcdbc08c0b9ddc318df3880fb5eb1c52260776b13b2be56abb1b0",
+        "functions": 180,
+        "exact": 148,
+        "data_exact": 29,
+        "unresolved": 0,
+        "changed": [
+          {
+            "name": "RSP_VMULF",
+            "exact": false,
+            "size": 928,
+            "differences": 25,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMULU",
+            "exact": false,
+            "size": 1008,
+            "differences": 815,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDL",
+            "exact": false,
+            "size": 736,
+            "differences": 25,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDM",
+            "exact": false,
+            "size": 960,
+            "differences": 718,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDN",
+            "exact": false,
+            "size": 896,
+            "differences": 623,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDH",
+            "exact": false,
+            "size": 944,
+            "differences": 735,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMACF",
+            "exact": false,
+            "size": 1216,
+            "differences": 1192,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMACU",
+            "exact": false,
+            "size": 1120,
+            "differences": 1109,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADL",
+            "exact": false,
+            "size": 1104,
+            "differences": 843,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADM",
+            "exact": false,
+            "size": 1120,
+            "differences": 1095,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADN",
+            "exact": false,
+            "size": 1088,
+            "differences": 831,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADH",
+            "exact": false,
+            "size": 1168,
+            "differences": 1174,
+            "previously_exact": false
+          }
+        ]
+      }
+    },
+    {
+      "path": "/root/.ai-tmp/nemu-audio-rsp-multiply.9wwzhw2p/legacy-element-byte/summary.json",
+      "sha256": "090d9b05c85a209f1e62a118c137845708e37b71f243cce570f440a1a3427593",
+      "summary": {
+        "variant": "legacy-element-byte",
+        "command": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/FoRSP.obj",
+          "RSP.cpp"
+        ],
+        "source_sha256": "30cbaa22e4473fe509d8e6ab73359ee522e1d9ec7c43b6f5c6641c66807a93ff",
+        "functions": 180,
+        "exact": 148,
+        "data_exact": 29,
+        "unresolved": 0,
+        "changed": [
+          {
+            "name": "RSP_VMULF",
+            "exact": false,
+            "size": 976,
+            "differences": 945,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMULU",
+            "exact": false,
+            "size": 1056,
+            "differences": 1020,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDL",
+            "exact": false,
+            "size": 768,
+            "differences": 748,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDM",
+            "exact": false,
+            "size": 992,
+            "differences": 967,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDN",
+            "exact": false,
+            "size": 944,
+            "differences": 912,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDH",
+            "exact": false,
+            "size": 992,
+            "differences": 967,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMACF",
+            "exact": false,
+            "size": 1232,
+            "differences": 1111,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMACU",
+            "exact": false,
+            "size": 1168,
+            "differences": 1128,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADL",
+            "exact": false,
+            "size": 1136,
+            "differences": 1076,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADM",
+            "exact": false,
+            "size": 1152,
+            "differences": 1098,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADN",
+            "exact": false,
+            "size": 1120,
+            "differences": 1064,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADH",
+            "exact": false,
+            "size": 1232,
+            "differences": 1196,
+            "previously_exact": false
+          }
+        ]
+      }
+    },
+    {
+      "path": "/root/.ai-tmp/nemu-audio-rsp-multiply.9wwzhw2p/legacy-element-int/summary.json",
+      "sha256": "ac52f1563b33bb8ada3eb268c9c5193943204fb15d1a8a3ba69d5611300a5e49",
+      "summary": {
+        "variant": "legacy-element-int",
+        "command": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/FoRSP.obj",
+          "RSP.cpp"
+        ],
+        "source_sha256": "9e04e4c4e5a5a581f667d1e66c10f321bfeedbc3b0c80e379293ffb981da7ce6",
+        "functions": 180,
+        "exact": 148,
+        "data_exact": 29,
+        "unresolved": 0,
+        "changed": [
+          {
+            "name": "RSP_VMULF",
+            "exact": false,
+            "size": 928,
+            "differences": 25,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMULU",
+            "exact": false,
+            "size": 1008,
+            "differences": 815,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDL",
+            "exact": false,
+            "size": 736,
+            "differences": 25,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDM",
+            "exact": false,
+            "size": 960,
+            "differences": 718,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDN",
+            "exact": false,
+            "size": 896,
+            "differences": 623,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDH",
+            "exact": false,
+            "size": 944,
+            "differences": 735,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMACF",
+            "exact": false,
+            "size": 1216,
+            "differences": 1192,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMACU",
+            "exact": false,
+            "size": 1120,
+            "differences": 1109,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADL",
+            "exact": false,
+            "size": 1104,
+            "differences": 843,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADM",
+            "exact": false,
+            "size": 1120,
+            "differences": 1095,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADN",
+            "exact": false,
+            "size": 1088,
+            "differences": 831,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADH",
+            "exact": false,
+            "size": 1168,
+            "differences": 1174,
+            "previously_exact": false
+          }
+        ]
+      }
+    },
+    {
+      "path": "/root/.ai-tmp/nemu-audio-rsp-multiply.9wwzhw2p/legacy-separate-declarations/summary.json",
+      "sha256": "a7a4ed66659679d2db971ab23e9bb407ac89f150bdee767055f5a2dd1fbd2482",
+      "summary": {
+        "variant": "legacy-separate-declarations",
+        "command": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/FoRSP.obj",
+          "RSP.cpp"
+        ],
+        "source_sha256": "012a69b7149270a703ede81353b7e09fec87111304e2f0030c14dfff6b34346a",
+        "functions": 180,
+        "exact": 148,
+        "data_exact": 29,
+        "unresolved": 0,
+        "changed": [
+          {
+            "name": "RSP_VMULF",
+            "exact": false,
+            "size": 928,
+            "differences": 25,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMULU",
+            "exact": false,
+            "size": 1008,
+            "differences": 815,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDL",
+            "exact": false,
+            "size": 736,
+            "differences": 25,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDM",
+            "exact": false,
+            "size": 960,
+            "differences": 718,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDN",
+            "exact": false,
+            "size": 896,
+            "differences": 623,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDH",
+            "exact": false,
+            "size": 944,
+            "differences": 735,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMACF",
+            "exact": false,
+            "size": 1216,
+            "differences": 1192,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMACU",
+            "exact": false,
+            "size": 1120,
+            "differences": 1109,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADL",
+            "exact": false,
+            "size": 1104,
+            "differences": 843,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADM",
+            "exact": false,
+            "size": 1120,
+            "differences": 1095,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADN",
+            "exact": false,
+            "size": 1088,
+            "differences": 831,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADH",
+            "exact": false,
+            "size": 1168,
+            "differences": 1174,
+            "previously_exact": false
+          }
+        ]
+      }
+    },
+    {
+      "path": "/root/.ai-tmp/nemu-audio-rsp-multiply.9wwzhw2p/legacy-signed-loop/summary.json",
+      "sha256": "7b45f6fa457d3dc2e965b3797b9a1d2a289afb1371757d140cb801242b1bb1ce",
+      "summary": {
+        "variant": "legacy-signed-loop",
+        "command": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/FoRSP.obj",
+          "RSP.cpp"
+        ],
+        "source_sha256": "fa61f9951774a96a1735483240b17944cc2ec2f5db25399560e4591963efac67",
+        "functions": 180,
+        "exact": 148,
+        "data_exact": 29,
+        "unresolved": 0,
+        "changed": [
+          {
+            "name": "RSP_VMULF",
+            "exact": false,
+            "size": 928,
+            "differences": 25,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMULU",
+            "exact": false,
+            "size": 1008,
+            "differences": 815,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDL",
+            "exact": false,
+            "size": 736,
+            "differences": 25,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDM",
+            "exact": false,
+            "size": 960,
+            "differences": 718,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDN",
+            "exact": false,
+            "size": 896,
+            "differences": 623,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDH",
+            "exact": false,
+            "size": 944,
+            "differences": 735,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMACF",
+            "exact": false,
+            "size": 1216,
+            "differences": 1192,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMACU",
+            "exact": false,
+            "size": 1120,
+            "differences": 1109,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADL",
+            "exact": false,
+            "size": 1104,
+            "differences": 843,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADM",
+            "exact": false,
+            "size": 1120,
+            "differences": 1095,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADN",
+            "exact": false,
+            "size": 1088,
+            "differences": 831,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADH",
+            "exact": false,
+            "size": 1168,
+            "differences": 1174,
+            "previously_exact": false
+          }
+        ]
+      }
+    },
+    {
+      "path": "/root/.ai-tmp/nemu-audio-rsp-multiply.9wwzhw2p/legacy-unsigned-clamp-branch/summary.json",
+      "sha256": "70d5a85e1a44412c76ee24ed3fb866bdb705e7a38892eec701c7e0029f274226",
+      "summary": {
+        "variant": "legacy-unsigned-clamp-branch",
+        "command": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/FoRSP.obj",
+          "RSP.cpp"
+        ],
+        "source_sha256": "73155e85e376a9a1a6eca5d146ae1118bce30082a3f505743b800a3325b88024",
+        "functions": 180,
+        "exact": 148,
+        "data_exact": 29,
+        "unresolved": 0,
+        "changed": [
+          {
+            "name": "RSP_VMULF",
+            "exact": false,
+            "size": 928,
+            "differences": 25,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMULU",
+            "exact": false,
+            "size": 1024,
+            "differences": 979,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDL",
+            "exact": false,
+            "size": 736,
+            "differences": 25,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDM",
+            "exact": false,
+            "size": 960,
+            "differences": 718,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDN",
+            "exact": false,
+            "size": 896,
+            "differences": 623,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDH",
+            "exact": false,
+            "size": 944,
+            "differences": 735,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMACF",
+            "exact": false,
+            "size": 1216,
+            "differences": 1192,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMACU",
+            "exact": false,
+            "size": 1136,
+            "differences": 1127,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADL",
+            "exact": false,
+            "size": 1104,
+            "differences": 843,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADM",
+            "exact": false,
+            "size": 1120,
+            "differences": 1095,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADN",
+            "exact": false,
+            "size": 1088,
+            "differences": 831,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADH",
+            "exact": false,
+            "size": 1168,
+            "differences": 1174,
+            "previously_exact": false
+          }
+        ]
+      }
+    },
+    {
+      "path": "/root/.ai-tmp/nemu-audio-rsp-multiply.9wwzhw2p/signed-mode/summary.json",
+      "sha256": "7e4cc63e226951905f4cabfd7f4894fe5cb9bcf07141b02f32ce8b051c8f114b",
+      "summary": {
+        "variant": "signed-mode",
+        "command": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/FoRSP.obj",
+          "RSP.cpp"
+        ],
+        "source_sha256": "5958ba114441b56f96a18eccaad99ffaf5f878f0e6503036389ae4d4dbef8363",
+        "functions": 180,
+        "exact": 148,
+        "data_exact": 29,
+        "unresolved": 0,
+        "changed": []
+      }
+    }
+  ],
+  "related_negative_audits": [
+    {
+      "path": "/root/.ai-tmp/nemu-audio-vector-promotion.dSWNngLR/report.json",
+      "sha256": "f2a9dc1f61aca77c8ad0c3bb4e796e078b44bd98e73b847a8140ffc64a783f98"
+    },
+    {
+      "path": "/root/.ai-tmp/nemu-audio-vch-vcr-width.73xoyzi0/audit.json",
+      "sha256": "011c620ba4ff43b7448cb81e9533f7da18118d42b826a3779ac27d75580a001e"
+    },
+    {
+      "path": "/root/.ai-tmp/nemu-audio-two.aISn83oK/summary.json",
+      "sha256": "5a6c8a69b4d06c59484b246e36e5696c29b6aa3bc6069c11ba443c03aea8ad7a"
+    },
+    {
+      "path": "/root/.ai-tmp/nemu-audio-whole-helper.f66p_7fe/report.json",
+      "sha256": "ae97f5730153248b544f869e83f8c3514763d962a79d151e92f2df8e29b6b4c5"
+    },
+    {
+      "path": "/root/.ai-tmp/nemu-audio-mul-prefix.7an5knwa/audit.json",
+      "sha256": "6d70c6b7bfe4929c311e24d979e07eed1894b049c329ae1f996f44a984f18abc"
+    }
+  ],
+  "limits": [
+    "All twelve functions remain instruction-unmatched. Smaller positional byte differences are not counted as complete matches.",
+    "The two exact suffixes do not establish original entry scheduling. No extra operations, padding or barriers were introduced.",
+    "Other tested type, decoding and helper forms remain scratch diagnostics and were not promoted."
+  ]
+}
