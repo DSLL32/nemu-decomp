@@ -50,6 +50,9 @@ The compiled zlib and native `ByteSwap` members are also supplied through
 ordinary archives. This grouping selects the original empty callback
 implementation at `0x41FEF0`. Archive names and the native helper's historical
 library membership are inferred; every compiled member body is preserved.
+Separating the CRT members through `setmode`, the two aliases, `RtlUnwind`, and
+the remaining early CRT members into ordinary archives also reproduces the
+complete original Rich header without changing any program-section bytes.
 
 This remains an alternative under investigation: **115 of 152 IAT slots
 match**, compared with 152 in the canonical recipe. Four imports have the
@@ -71,8 +74,8 @@ their corresponding historical librarians.
 The staged build contains 27 C++ translation units: 25 tracked source files
 and two generated storage units. Seven inferred function-family splits preserve
 every byte of all four program sections against the same-source 20-unit
-control. The chronological build matches every original Rich compiler
-ID/count pair and its checksum; the first two records remain in reversed order.
+control. The chronological build matches the complete original Rich header,
+including every compiler ID/count pair, their order, and the checksum.
 The splits and reproducible evidence are documented in
 `analysis/nemu-translation-units.json` and `analysis/nemu-rich-order.json`.
 

@@ -8,11 +8,11 @@
     "The two unchanged weak-alias members follow setmode, so their empty text sections naturally produce the observed alignment before RtlUnwind.",
     "Import wrappers follow original hint/name and DLL-name positions; ordinal-only InitCommonControls has no hint/name record and is selected first.",
     "This compatible recipe is not a uniquely recovered original link command.",
-    "Ordinary archives for the freshly compiled zlib and native ByteSwap members reproduce the original relative Rich grouping and select the original empty application ICF representative at0x41fef0. Archive names and original native-helper membership remain inferred."
+    "Ordinary archives for the freshly compiled zlib and native ByteSwap members reproduce the original relative Rich grouping and select the original empty application ICF representative at0x41fef0. Archive names and original native-helper membership remain inferred.",
+    "Separate ordinary archives for the first91 CRT members, two aliases, RtlUnwind import and remaining4 CRT members reproduce the original Rich record order while preserving all program sections. Library names and boundaries are a compatible inference, not uniquely recovered history."
   ],
   "limitations": [
-    "Only 115 of 152 IAT slots currently match. GetOEMCP, GetSystemInfo, VirtualQuery and RtlUnwind have incorrect insertion positions; the remaining 148 imports have the original relative order.",
-    "All original Rich comp-id/count pairs and XOR key match after the supported source partitions, but the first C++ and alias records remain in reversed order."
+    "Only 115 of 152 IAT slots currently match. GetOEMCP, GetSystemInfo, VirtualQuery and RtlUnwind have incorrect insertion positions; the remaining 148 imports have the original relative order."
   ],
   "crt_roots": [
     {
@@ -1483,6 +1483,28 @@
           "object": "obj/app/ByteSwap.obj"
         }
       ]
+    }
+  ],
+  "native_archive_partition": [
+    {
+      "archive": "crt-early.lib",
+      "selection": "crt_before_aliases",
+      "member_count": 91
+    },
+    {
+      "archive": "crt-aliases.lib",
+      "selection": "aliases",
+      "member_count": 2
+    },
+    {
+      "archive": "crt-unwind.lib",
+      "selection": "unwind",
+      "member_count": 1
+    },
+    {
+      "archive": "crt-tail.lib",
+      "selection": "crt_after_unwind",
+      "member_count": 4
     }
   ]
 }

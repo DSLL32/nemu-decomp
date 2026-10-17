@@ -152,10 +152,32 @@ def chronological_inputs(recipe, chronology, output, imports, report, compiled_p
     import_member = imports[embedded_key][0][-1]
     if embedded['root'] not in import_member[2]:
         raise ValueError('Embedded import root is not defined by its member')
-    members[position:position] = alias_members + [import_member]
     roots[position:position] = chronology['alias_roots'] + [embedded['root']]
-    archive = output / 'crt-chronological.lib'
-    write_archive(archive, members)
+    # Library boundaries matter to LINK's Rich traversal even when the
+    # selected object order and all program-section bytes stay identical.
+    # Keep the empty aliases immediately before the unwind thunk, while
+    # recording them in a separate ordinary library after the first CRT part.
+    selections = dict(crt_before_aliases=members[:position], aliases=alias_members,
+                      unwind=[import_member], crt_after_unwind=members[position:])
+    partitions = chronology['native_archive_partition']
+    if (len(partitions) != len(selections)
+            or {row['selection'] for row in partitions} != set(selections)):
+        raise ValueError('Native archive partition must cover each selected group once')
+    native_archives, native_records, import_archive = [], [], None
+    for row in partitions:
+        selected_members = selections[row['selection']]
+        if len(selected_members) != row['member_count']:
+            raise ValueError('Native archive partition member count changed')
+        if Path(row['archive']).name != row['archive']:
+            raise ValueError('Native archive name must be a basename')
+        file = output / row['archive']
+        write_archive(file, selected_members)
+        native_archives.append(file)
+        native_records.append(dict(row, file=str(file), members=[
+            dict(object=name, sha256=hashlib.sha256(data).hexdigest())
+            for name, data, symbols in selected_members], member_bytes_unchanged=True))
+        if row['selection'] == 'unwind':
+            import_archive = file
 
     expected = {(row['dll'], row['name']) for row in recipe['imports']['input_order']}
     timeline = chronology['input_order']
@@ -193,7 +215,7 @@ def chronological_inputs(recipe, chronology, output, imports, report, compiled_p
             key = row['dll'], row['name']
             original, provenance = imports[key]
             if key == embedded_key:
-                file = archive
+                file = import_archive
             else:
                 file = output / ('chronology-%03d.lib' % index)
                 write_archive(file, [original[-1]])
@@ -218,10 +240,11 @@ def chronological_inputs(recipe, chronology, output, imports, report, compiled_p
         raise ValueError('Compiled archive placement must select exactly one chronology entry')
     if sorted(descriptor_roots) != sorted(chronology['descriptor_roots']):
         raise ValueError('Import descriptor roots changed')
-    objects.extend([archive, output / 'crt-late.lib'])
+    objects.extend(native_archives + [output / 'crt-late.lib'])
     report['chronology'] = dict(crt_roots=roots, alias_targets=aliases,
         descriptor_roots=chronology['descriptor_roots'], limitations=chronology['limitations'],
-        combined_archive=str(archive), selected_member_count=len(members),
+        native_archives=native_records,
+        selected_member_count=sum(len(group) for group in selections.values()),
         note='Only archive indexes, headers and response files are generated. Member bodies are unchanged.')
     return objects, ['/INCLUDE:' + name for name in compiled_roots + roots + import_roots
                      + chronology['descriptor_roots']]

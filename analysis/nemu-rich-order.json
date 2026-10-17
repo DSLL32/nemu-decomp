@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "Supported ordinary archive organization; the first C++/alias Rich pair still differs.",
+  "status": "Supported ordinary archive organization reproduces the original complete Rich header; the complete executable still differs.",
   "original": "master/nemu64.exe",
   "linker": "toolchains/vc7/bin/link.exe",
   "linker_sha256": "1560d85164dfb763dd13f90f33ff9c6f1cd80f2afada03eed8d0a314593581f1",
@@ -205,93 +205,15 @@
       }
     ]
   },
-  "probe_rich": {
-    "offset": 128,
-    "xor_key": "0421da8b",
-    "checksum_valid": true,
-    "records": [
-      {
-        "comp_id": "001d24fa",
-        "product_id": 29,
-        "build": 9466,
-        "count": 2
-      },
-      {
-        "comp_id": "002723ca",
-        "product_id": 39,
-        "build": 9162,
-        "count": 2
-      },
-      {
-        "comp_id": "004024fa",
-        "product_id": 64,
-        "build": 9466,
-        "count": 20
-      },
-      {
-        "comp_id": "001c24fa",
-        "product_id": 28,
-        "build": 9466,
-        "count": 93
-      },
-      {
-        "comp_id": "000420ff",
-        "product_id": 4,
-        "build": 8447,
-        "count": 2
-      },
-      {
-        "comp_id": "000a1fe8",
-        "product_id": 10,
-        "build": 8168,
-        "count": 14
-      },
-      {
-        "comp_id": "00041fe8",
-        "product_id": 4,
-        "build": 8168,
-        "count": 2
-      },
-      {
-        "comp_id": "001923fa",
-        "product_id": 25,
-        "build": 9210,
-        "count": 15
-      },
-      {
-        "comp_id": "00010000",
-        "product_id": 1,
-        "build": 0,
-        "count": 153
-      },
-      {
-        "comp_id": "002c24fa",
-        "product_id": 44,
-        "build": 9466,
-        "count": 27
-      },
-      {
-        "comp_id": "004524fa",
-        "product_id": 69,
-        "build": 9466,
-        "count": 1
-      },
-      {
-        "comp_id": "003d24fa",
-        "product_id": 61,
-        "build": 9466,
-        "count": 1
-      }
-    ]
-  },
   "same_comp_id_count_pairs": true,
   "same_xor_key": true,
-  "record_order_equal": false,
+  "record_order_equal": true,
   "ordinary_archive_inference": [
     "Freshly compiled zlib objects belong to one ordinary archive after Kaillera metadata and before GS metadata.",
     "The native ByteSwap object belongs to an ordinary archive after GS metadata. Original archive names and membership are inferred.",
     "The same selected historical CRT and alias members stay in the already verified chronology recipe.",
-    "This ordering agrees with original Rich traversal and also selects the independently identified empty application return at0x41fef0."
+    "This ordering agrees with original Rich traversal and also selects the independently identified empty application return at0x41fef0.",
+    "Split the early native input into four ordinary archives: first91 CRT members through setmode, two unchanged aliases, unchanged RtlUnwind short import, and remaining4 CRT members. The late19 CRT archive remains separate. This preserves object selection order and all program-section bytes while correcting Rich traversal order."
   ],
   "scratch_probe": {
     "directory": "/root/.ai-tmp/nemu-rich-order.iz9gcqni",
@@ -1754,16 +1676,16 @@
   },
   "limits": [
     "No Rich record, header field, object body or instruction byte is edited. Archive indexes and response files are generated normally.",
-    "The original C++/alias order remains unresolved; the variant that fixes it but breaks native layout is rejected.",
-    "Full executable equality remains the completion criterion."
+    "Full executable equality remains the completion criterion.",
+    "Archive names, boundaries and root organization are compatible inferred linker inputs; the original command and project library names have not survived."
   ],
   "fresh_tracked_recipe_build": {
-    "artifact": "/root/.ai-tmp/nemu-build.674anu41/artifacts/6e717f534aedf201b339314a087d5f708933a1663f2da45cb690c3ebdbdf36ae",
-    "sha256": "6e717f534aedf201b339314a087d5f708933a1663f2da45cb690c3ebdbdf36ae",
+    "artifact": "/root/.ai-tmp/nemu-build.hngf789h/artifacts/516de1c174cd4d02d0031d14e6ab2d4111635c209a8abd4aa665aa009c15317b",
+    "sha256": "516de1c174cd4d02d0031d14e6ab2d4111635c209a8abd4aa665aa009c15317b",
     "compiled_archives": [
       {
         "archive": "zlib-native.lib",
-        "file": "/root/.ai-tmp/nemu-build.674anu41/src/nemu64/obj/link-inputs/zlib-native.lib",
+        "file": "/root/.ai-tmp/nemu-build.hngf789h/src/nemu64/obj/link-inputs/zlib-native.lib",
         "after": {
           "kind": "descriptor",
           "dll": "kailleraclient.dll"
@@ -1772,79 +1694,79 @@
           {
             "object": "obj/zlib/uncompr.obj",
             "root": "_uncompress",
-            "sha256": "59999ae7b447c5d04ed711b83076c4647b007650d8caa0fce09ab5d6d79c1bff"
+            "sha256": "7626870785db9631deda2974c7d99ffa12b9728724605d83c3e62603494b4155"
           },
           {
             "object": "obj/zlib/compress.obj",
             "root": "_compress2",
-            "sha256": "60ed0007bc3b59f4fd6c9223682aa2d516283af358b71b8e267535b741bc4357"
+            "sha256": "9b49a7fe2e8985eda79384929f43e148721e76a4bc03f1088486a71a5e2ed9ea"
           },
           {
             "object": "obj/zlib/unzip.obj",
             "root": "_unzOpen",
-            "sha256": "8fa86120f904c7cd7cec192bbe68b1a741462a219884c51b14dac52f2f41e8c8"
+            "sha256": "fc8659b2f663b2a1f9e7ffbae0b28aee6208ce3192a7f0d9a837926b7733883f"
           },
           {
             "object": "obj/zlib/inflate.obj",
             "root": "_inflateReset",
-            "sha256": "30709aab2c9eee7a481a38997b9df7d608627f19b26232f904e40ea4598b9b87"
+            "sha256": "6201d197af5e275744177bb9153909ec3f89289270b222e4e58a94d0bd10b8da"
           },
           {
             "object": "obj/zlib/deflate.obj",
             "root": "_deflateInit_",
-            "sha256": "ac62e0b0430fbb0ea6c5e8f47774e6dfc380244734850e186b949041f7796873"
+            "sha256": "d8767f316dcfb4c3e9268516b26bb54f9d706b01508d1aa887a66d057cc11171"
           },
           {
             "object": "obj/zlib/crc32.obj",
             "root": "_crc32",
-            "sha256": "62c22ccd009bf48c9f827fcdc5e7273ad8c7cfde82e3872debcad8ca4b108ea7"
+            "sha256": "d7c243782a5857b9c20438b4b70a498581f97690aee49f8f71739ed711877ad5"
           },
           {
             "object": "obj/zlib/infblock.obj",
             "root": "_inflate_blocks_reset",
-            "sha256": "3eec733feba836fdc81221b6942a6b7cdbe0995a1f60aa9d34d3bd1dda1dfae0"
+            "sha256": "d4b55b36f69fca6d121f03ffb78c6b90e5439815b9010e68212e01764ad594dc"
           },
           {
             "object": "obj/zlib/adler32.obj",
             "root": "_adler32",
-            "sha256": "f287746f57f10e0f9789260e4aa659bf381942c16a8b721b9fefdddb9f0fef2e"
+            "sha256": "b555dc3bfc26620360dd6820b103476ded5d6e22ed406c2f951916cd886a36b6"
           },
           {
             "object": "obj/zlib/zutil.obj",
             "root": "_zcalloc",
-            "sha256": "ce07fc4f4ae388ad0f3295c459a46c90947a2416d6888feeace9e2d9ec204de1"
+            "sha256": "d44be0eb2f297f7c4280b704fd9c2e581a90e2c2df3ff761c218968a39ebb40b"
           },
           {
             "object": "obj/zlib/trees.obj",
             "root": "__tr_init",
-            "sha256": "cdf87f6164897fd84529ed3f6dc1eb9775bf6f601028104b4bc4f0dca3e2b6ac"
+            "sha256": "92c4e8c81e888cf4f60083652f90c1118764f8a0731730ec34cab7ab1eb1050a"
           },
           {
             "object": "obj/zlib/infcodes.obj",
             "root": "_inflate_codes_new",
-            "sha256": "72ffbd435462aa16aa7b2934bf82aadcf5244015db4384f8e7acf211dd941d08"
+            "sha256": "e04110344c7a29bc4bd2805243e0f1f37dd1f927c516831dff3bef66c4d4066c"
           },
           {
             "object": "obj/zlib/inftrees.obj",
             "root": "_inflate_trees_bits",
-            "sha256": "c3f5cac2b7f9340365bc71abe30abbcc16b35d99246c8b4124e14174183f36f9"
+            "sha256": "885ebb1e894655c45cd3cfa424ac3697201045b3fe6d38a235cad023def546bd"
           },
           {
             "object": "obj/zlib/infutil.obj",
             "root": "_inflate_flush",
-            "sha256": "caead48f35a0a624e564816a7bdee468e706b74c874acdeb6ac231ca70a6c5dd"
+            "sha256": "36b4e8c4860ead93911fa209e05541695e60cf0f20c0ff9c2ce4fe251cf5d4ae"
           },
           {
             "object": "obj/zlib/inffast.obj",
             "root": "_inflate_fast",
-            "sha256": "e214df4600f09ce24512ddc2e96e9fc09e001b4cbe1fee7af90db99d4be3972f"
+            "sha256": "0e0aa6a5904db959adca7c810215783097a1e67708aee7a53537cfca99b833d7"
           }
         ],
         "member_bytes_unchanged": true
       },
       {
         "archive": "byteswap-native.lib",
-        "file": "/root/.ai-tmp/nemu-build.674anu41/src/nemu64/obj/link-inputs/byteswap-native.lib",
+        "file": "/root/.ai-tmp/nemu-build.hngf789h/src/nemu64/obj/link-inputs/byteswap-native.lib",
         "after": {
           "kind": "descriptor",
           "dll": "gs_dll.dll"
@@ -1852,7 +1774,437 @@
         "members": [
           {
             "object": "obj/app/ByteSwap.obj",
-            "sha256": "ec6487d13cb8359599a7f802b1b4c8d1e4ff95104fca8a6d31ee61a76982ff87"
+            "sha256": "891291bb83a74b5e21852af59f1852e7f762822f76c97f37a798137a5aac9bd2"
+          }
+        ],
+        "member_bytes_unchanged": true
+      }
+    ],
+    "native_archives": [
+      {
+        "archive": "crt-early.lib",
+        "selection": "crt_before_aliases",
+        "member_count": 91,
+        "file": "/root/.ai-tmp/nemu-build.hngf789h/src/nemu64/obj/link-inputs/crt-early.lib",
+        "members": [
+          {
+            "object": "build\\intel\\st_obj\\fopen.obj",
+            "sha256": "3be8962f922c130f0328b551ac5042d64ed71b369fba0c2206614060cdcc7745"
+          },
+          {
+            "object": "build\\intel\\st_obj\\fprintf.obj",
+            "sha256": "6aa4c0b62c72e5013dccd3d352e4f3148e78df40e3b09f36cdad30c466f5db3e"
+          },
+          {
+            "object": "build\\intel\\st_obj\\sprintf.obj",
+            "sha256": "2b0775ecc298444736db59bf07db7266bf97f7f79fbe04f81b8751efc0d2bfb4"
+          },
+          {
+            "object": "build\\intel\\st_obj\\vsprintf.obj",
+            "sha256": "663d6d0232d2942d5ef2c431f4ea448a1f20bd8fc2e71bdc6cc393e1b92bb4d0"
+          },
+          {
+            "object": "build\\intel\\st_obj\\fread.obj",
+            "sha256": "747f7af08a8f899b7fca68514728bdf6eeb378542850f09a151cf8de5ee13f45"
+          },
+          {
+            "object": "build\\intel\\st_obj\\fclose.obj",
+            "sha256": "c2f46788a48e6f50250f2f03f5843179cf5ac3a8426e1a091e8866cb82b41422"
+          },
+          {
+            "object": "build\\intel\\st_obj\\free.obj",
+            "sha256": "f2c5d61bf88bdf01f7d8acc2843cc809f4131c7fb55d067da16c19f922b5d4a8"
+          },
+          {
+            "object": "build\\intel\\st_obj\\malloc.obj",
+            "sha256": "40b489a38dc60ddfcddfedd97532bcb22613ac94dbff4d13f53140045c298d5a"
+          },
+          {
+            "object": "build\\intel\\st_obj\\fgetpos.obj",
+            "sha256": "e3bd6b452b37514430d58ad90377fa914c316b0827d4473aa9e01bf9ebc6a46c"
+          },
+          {
+            "object": "build\\intel\\st_obj\\fwrite.obj",
+            "sha256": "1e3aa945e98b475c655b618525c588c4f873543e7e4d619580c594805b224b33"
+          },
+          {
+            "object": "build\\intel\\st_obj\\ftell.obj",
+            "sha256": "1eb5ff014938f85688bb2f3f31e6fcb7cd4092e9371bf934f8523f0edbd896e4"
+          },
+          {
+            "object": "build\\intel\\st_obj\\fseek.obj",
+            "sha256": "7ab61dc1cd3628eef2e55377d97e9c427c4c1ed785da5ecc99effaa9d5e0a633"
+          },
+          {
+            "object": "build\\intel\\st_obj\\strncpy.obj",
+            "sha256": "3e34262e78d1d5a1056cdd0812936f6f13d6d1d843a92cd4c2e0aa3015655338"
+          },
+          {
+            "object": "build\\intel\\st_obj\\fgets.obj",
+            "sha256": "622ca2a582e7b8d5a49be04ddc1f7bfdf0678cf724533901cefc3a1c01fae6bb"
+          },
+          {
+            "object": "build\\intel\\st_obj\\realloc.obj",
+            "sha256": "2dc200649fc4f5d5bb7d9e084c434062c1a4cd6989d56ae2a53fb4b381ff7ae0"
+          },
+          {
+            "object": "build\\intel\\st_obj\\strchr.obj",
+            "sha256": "3469fbf5b0f54c82a0fb92b35bed2dff3361a3a4261056b29793343a47fa6e9c"
+          },
+          {
+            "object": "build\\intel\\st_obj\\atox.obj",
+            "sha256": "bd06f0a0fbe86a18aa0bef26ae7ad0f72188765bc4da669c1da6c26c0568213f"
+          },
+          {
+            "object": "build\\intel\\st_obj\\strtol.obj",
+            "sha256": "9d867ff03d65197f6d64e47fe0ed8b723eb4e6e96bca3e052f7bcc8d800284e3"
+          },
+          {
+            "object": "build\\intel\\st_obj\\fflush.obj",
+            "sha256": "f16f9e2f558157a72060c5ac993452e9e88845cf51cca76080b71c027b4b2305"
+          },
+          {
+            "object": "build\\intel\\st_obj\\wincrt0.obj",
+            "sha256": "405a1ee37dbc8751d00d9952496af1d50e7380a6c1dc608e7809d6ef312ff419"
+          },
+          {
+            "object": "build\\intel\\st_obj\\calloc.obj",
+            "sha256": "718a3ec50b28e146be89e186069eea2bb505e5b403a9cb858b5a5fd67e31f703"
+          },
+          {
+            "object": "build\\intel\\st_obj\\_open.obj",
+            "sha256": "42f942dfe3bcb64c17e2934ed306e45d61e0d1c3717a0909b2437f5e83169bef"
+          },
+          {
+            "object": "build\\intel\\st_obj\\crt0dat.obj",
+            "sha256": "00d30cfa94f596713d1aedb293aa7a4d45a38d44852e917a4196b1102cc3d146"
+          },
+          {
+            "object": "build\\intel\\st_obj\\stream.obj",
+            "sha256": "c5201604f770920bb655dd31cd1038043f9da5256881f2d4a083ec303a2d4223"
+          },
+          {
+            "object": "build\\intel\\st_obj\\_sftbuf.obj",
+            "sha256": "2a628675aad770031ecdcf49cb05f24ac4b06326e36ef5ff9b6a918cf856660b"
+          },
+          {
+            "object": "build\\intel\\st_obj\\output.obj",
+            "sha256": "dacd77ec165e4c4da4b120e422591f5e6d1aef833ebbec8fbb1d6e720c153fe4"
+          },
+          {
+            "object": "build\\intel\\st_obj\\_flsbuf.obj",
+            "sha256": "679d5b56c8d199a058b6370df095b87e03e44fbfa9ccb26cebc99e3919286985"
+          },
+          {
+            "object": "build\\intel\\st_obj\\_filbuf.obj",
+            "sha256": "b709610ee7deaa82eb022c7d1675cb71216d913d81a65603088fb8d6ae7c3794"
+          },
+          {
+            "object": "build\\intel\\st_obj\\read.obj",
+            "sha256": "7d71be950b3d0b7f119e54e5bc39e82c693d6144888a9b411d1ccee1fee432c4"
+          },
+          {
+            "object": "build\\intel\\st_obj\\memcpy.obj",
+            "sha256": "86c9212df1c8b7e433cfca824404cb5038c0b8b177a635249d7f65631acb7d62"
+          },
+          {
+            "object": "build\\intel\\st_obj\\close.obj",
+            "sha256": "2af8ff71e840c8a062e451a87c3bf6ac3160e4c8c5846e3dd887c4a75e534b8b"
+          },
+          {
+            "object": "build\\intel\\st_obj\\_freebuf.obj",
+            "sha256": "38386b57e772254790ebe73876cd58ee442050c51dd2243aab1f77fdfc820fb3"
+          },
+          {
+            "object": "build\\intel\\st_obj\\heapinit.obj",
+            "sha256": "f8eaa56d99b70cca23557e3b5f8648125c7c15143cef351e0bf62917d4293c65"
+          },
+          {
+            "object": "build\\intel\\st_obj\\sbheap.obj",
+            "sha256": "e83c1b62b5ce69905fc03a062123aa1de07389be801691eb77234b575ead7752"
+          },
+          {
+            "object": "build\\intel\\st_obj\\handler.obj",
+            "sha256": "d7b0fcb52d34fe5914d0d8fb6d2cd0e488226d5ced150e4e250165b82f93fbe0"
+          },
+          {
+            "object": "build\\intel\\st_obj\\ftelli64.obj",
+            "sha256": "cabce498446db24cfc09b2aeac7e01c778b01ee545dc4e005ae020ea0f39bef2"
+          },
+          {
+            "object": "build\\intel\\st_obj\\write.obj",
+            "sha256": "3598e39d3587a6e898dc8b110f63f6f900098321741971483b1e9686128638cc"
+          },
+          {
+            "object": "build\\intel\\st_obj\\ioinit.obj",
+            "sha256": "0b497efdf03ed9ac3d1c685b511bc0ad85374b092064bb29dd5eb1860ab89e3d"
+          },
+          {
+            "object": "build\\intel\\st_obj\\lseek.obj",
+            "sha256": "315bf240e2558fbd096db990f8094c10d5031750b6f76f1dfd67a3f22027f057"
+          },
+          {
+            "object": "build\\intel\\st_obj\\ismbspc.obj",
+            "sha256": "54f686c8173622b6473df878e8e9f8ecbfbb89a7db90ced5a1708dc858fefd55"
+          },
+          {
+            "object": "build\\intel\\st_obj\\llmul.obj",
+            "sha256": "d87161f3e157ad5d9f7dd28141db7949ccbdcc946d398c7254f35372062bed27"
+          },
+          {
+            "object": "build\\intel\\st_obj\\isctype.obj",
+            "sha256": "6ece9212efb28b2353beda32ec93a43de3e976ba039c37cd8d6deca113f4e310"
+          },
+          {
+            "object": "build\\intel\\st_obj\\commit.obj",
+            "sha256": "9e985e192380da20106c88daac837bf1102cc62e23b68725ef688a457d44501c"
+          },
+          {
+            "object": "build\\intel\\st_obj\\ctype.obj",
+            "sha256": "a3e2fe9b3a23e8a17a26b14ade5dc9cd5078e602f2a6a86e4d069df252c408fe"
+          },
+          {
+            "object": "build\\intel\\st_obj\\crt0init.obj",
+            "sha256": "f86ae03a51d8151602e42ce90d9d111e5ced516355ce457505779f0d5a9d9d08"
+          },
+          {
+            "object": "build\\intel\\st_obj\\nlsdata1.obj",
+            "sha256": "9b9bc112a98aecb252748c4e91c823502f36ad943bb6f8c38b66895b9fb8f2df"
+          },
+          {
+            "object": "build\\intel\\st_obj\\_newmode.obj",
+            "sha256": "c6de0d6f07c03d0d7ce26cd8cea71233855612f50a0e0cbc93cde34210ac472c"
+          },
+          {
+            "object": "build\\intel\\st_obj\\_file.obj",
+            "sha256": "ad36f4b4cab769a491875ac8117d120ea15977abd2632eabe4d7a1a8fd654668"
+          },
+          {
+            "object": "build\\intel\\st_obj\\crt0msg.obj",
+            "sha256": "22b3a38575f32ade32a6bebad8d863a0f8c972541aedc83b4d06d37fe809c4ec"
+          },
+          {
+            "object": "build\\intel\\st_obj\\winxfltr.obj",
+            "sha256": "c973f9d9f1f121bb41c59e111eb4f7b32020ca67255d5395f2bae17dfc147c60"
+          },
+          {
+            "object": "build\\intel\\st_obj\\wincmdln.obj",
+            "sha256": "ec7c397ccb5cd3a208cd2d59ad4ce112ba0507b76203f72e990ed5d1ec04ce45"
+          },
+          {
+            "object": "build\\intel\\st_obj\\stdenvp.obj",
+            "sha256": "f850e2a5bbcf0db3ad1eaa243e29c96969c68ef4774e46d33d6b8b7cf3702ca0"
+          },
+          {
+            "object": "build\\intel\\st_obj\\stdargv.obj",
+            "sha256": "cac1078d1c92226a18f920cd7747bfb1ed4315e6635d829cd67e52049010756c"
+          },
+          {
+            "object": "build\\intel\\st_obj\\a_env.obj",
+            "sha256": "ba9063742ebc2a8747a333c44347d66bf2045b98861e4e163ca9abd29c322260"
+          },
+          {
+            "object": "..\\build\\intel\\st_obj\\initsect.obj",
+            "sha256": "bead501ea4013678b0b43503cc3cf987641622eedf78a08688a5ec9b498298dd"
+          },
+          {
+            "object": "build\\intel\\st_obj\\sehprolg.obj",
+            "sha256": "35da11ac8743b96b1a2897dcb99250b0f2c7406b53ccd11747e06a5b8b23b7bd"
+          },
+          {
+            "object": "build\\intel\\st_obj\\chkstk.obj",
+            "sha256": "9ad1aefb574f013c45b2b525cd072a1243528f6f7db1b273213b6c3bad72f6dd"
+          },
+          {
+            "object": "build\\intel\\st_obj\\memset.obj",
+            "sha256": "083685df143a545ef49d988fe8c2e3e5513d997a567015be405b02425eeda9ce"
+          },
+          {
+            "object": "build\\intel\\st_obj\\open.obj",
+            "sha256": "4b6850961a600f47635f2c70072e1423b09655bba209938b5abcf49fa3648d23"
+          },
+          {
+            "object": "build\\intel\\st_obj\\onexit.obj",
+            "sha256": "687393d0d7ff7153b5852c7c01e898b889d7e4bf86944e8af5bc03ad72216838"
+          },
+          {
+            "object": "build\\intel\\st_obj\\isatty.obj",
+            "sha256": "5f3d83c97e28e7103ee6807bd051d60a72c0255d8b85926f6ce6f82e057910bd"
+          },
+          {
+            "object": "build\\intel\\st_obj\\strlen.obj",
+            "sha256": "753bbe3a508904898174924782db3c273a54b2cb539517f8e65105f8430d1ba2"
+          },
+          {
+            "object": "build\\intel\\st_obj\\wctomb.obj",
+            "sha256": "224b9bb1c93780d16c12a7942107fda1a9c42724a1c3d1dfa0a019cd7942b56d"
+          },
+          {
+            "object": "build\\intel\\st_obj\\cmiscdat.obj",
+            "sha256": "176a25055d452087dcc336e5fa8b1d0bfeef38926f977ca39386b61532c21fb5"
+          },
+          {
+            "object": "build\\intel\\st_obj\\seccook.obj",
+            "sha256": "01a867ada979f80f0aade739cb5849cfc3c431a45b8d6097fdc4d9ea8fb5143a"
+          },
+          {
+            "object": "build\\intel\\st_obj\\ulldvrm.obj",
+            "sha256": "5785360b7027a17e5c73917f24535ab4068009aba3569e3bcf978ed221e5c682"
+          },
+          {
+            "object": "build\\intel\\st_obj\\_getbuf.obj",
+            "sha256": "de330c42a3b1ad9e044c26f81c7be5550eea059c137bc6ac287b152450c9648a"
+          },
+          {
+            "object": "build\\intel\\st_obj\\dosmap.obj",
+            "sha256": "4a82a21a5ead996fe5f09a4a3775c5aa09ffee4623ebc87327919e937209713f"
+          },
+          {
+            "object": "build\\intel\\st_obj\\osfinfo.obj",
+            "sha256": "30e84401142063abbe8ff8c96291bd7f4328e5b38d5efe95ef0a7e1993acfc2c"
+          },
+          {
+            "object": "build\\intel\\st_obj\\memmove.obj",
+            "sha256": "ba844c05a4fbeac4e5cbb9ac4ba40cdfa4bd4f01535606a8b7ae7d862193fde7"
+          },
+          {
+            "object": "build\\intel\\st_obj\\lseeki64.obj",
+            "sha256": "85f9c043f989ce3ae75b1e39af4185d43cdf9c7045abaf0da11c701ab772f732"
+          },
+          {
+            "object": "build\\intel\\st_obj\\ncommode.obj",
+            "sha256": "093d8b93cb70cb9f8a82af263b1a2aa15f0b8b2159763955424bb74b6e73c96f"
+          },
+          {
+            "object": "build\\intel\\st_obj\\a_str.obj",
+            "sha256": "5639b12fd6ef54b1a6b281c0998245ea889a1684dabeda89d72e72c0c4f58514"
+          },
+          {
+            "object": "build\\intel\\st_obj\\mbctype.obj",
+            "sha256": "bc367736b0ba5f0b488b1377a7f13b60567b4fe1c03905528c28c351f83094fe"
+          },
+          {
+            "object": "build\\intel\\st_obj\\closeall.obj",
+            "sha256": "40d86b4aa979e57736570585b2e208449824d67abeeb7ee1454e449647005ef6"
+          },
+          {
+            "object": "build\\intel\\st_obj\\nlsdata2.obj",
+            "sha256": "442484a118f425db205dd25f0ac8a3a93188ac4de7d368da98c5af03c4396fd0"
+          },
+          {
+            "object": "build\\intel\\st_obj\\crtmbox.obj",
+            "sha256": "a9014effff694befc16a15168dcc01c7b467d0a8db53b03b81d81c26c62e2239"
+          },
+          {
+            "object": "build\\intel\\st_obj\\strcat.obj",
+            "sha256": "4198ed5b6acbd0f0a23d5d1d3740a1b5081835b9f6600a40b72fb2a76585ab92"
+          },
+          {
+            "object": "build\\intel\\st_obj\\ismbbyte.obj",
+            "sha256": "c006d8d59715f14cfb9ac41170154b98d4c074014913e1eefdd0400c9f011e20"
+          },
+          {
+            "object": "build\\intel\\st_obj\\exsup3.obj",
+            "sha256": "9e537ac202d9c1c96a94101ddd97d81108fb7704489a6a6096e6a1753edee374"
+          },
+          {
+            "object": "build\\intel\\st_obj\\chsize.obj",
+            "sha256": "06489b1b8567d89243422ff28fae37feb638683082a454b7e1a85c7262eab913"
+          },
+          {
+            "object": "build\\intel\\st_obj\\msize.obj",
+            "sha256": "ec2a8f9d4a22c290bd116d7e9ede38c8ef7fae4b699f3209aacf0ce9b22abccc"
+          },
+          {
+            "object": "build\\intel\\st_obj\\crt0fp.obj",
+            "sha256": "697ce10f4b7874aeee76823bf488457fd5b2b25c5922c79de5c3d41779f8d464"
+          },
+          {
+            "object": "build\\intel\\st_obj\\seccinit.obj",
+            "sha256": "c2b6c5e10a95ee6f425821996de597c79d2561ac5006204c71300de1a3f61e62"
+          },
+          {
+            "object": "build\\intel\\st_obj\\txtmode.obj",
+            "sha256": "9b2f02844c90cae7c27b541409e272edcb58a7ddc57b01ec9a2ebf9c95c0a10e"
+          },
+          {
+            "object": "build\\intel\\st_obj\\secfail.obj",
+            "sha256": "3f000cc8b825bd290796bbb3953ccafe9126ecb5c5f7ba1a05bbc9009c5c2825"
+          },
+          {
+            "object": "build\\intel\\st_obj\\convrtcp.obj",
+            "sha256": "2215793ebe6e7cacf2480c141e4a87b60b716da4a604f8c125cba47be7338a97"
+          },
+          {
+            "object": "build\\intel\\st_obj\\resetstk.obj",
+            "sha256": "3986a40f9b1b805e12b5b6c98b2d58595c75ec627ee6b932f10b39a394abb488"
+          },
+          {
+            "object": "build\\intel\\st_obj\\a_map.obj",
+            "sha256": "04bdaeef123d6a29e1f9a4c454b69581c6efd2ceeb86b98cbbe6a423c50ad884"
+          },
+          {
+            "object": "build\\intel\\st_obj\\exsup.obj",
+            "sha256": "a08400a39c363f3752c520d893822e510e78771964171407b0c0c728424a3236"
+          },
+          {
+            "object": "build\\intel\\st_obj\\setmode.obj",
+            "sha256": "e314b16987808039cf02f56e0b9c0cdf3cd8227ec7d8a6530e9ffa1181f64a29"
+          }
+        ],
+        "member_bytes_unchanged": true
+      },
+      {
+        "archive": "crt-aliases.lib",
+        "selection": "aliases",
+        "member_count": 2,
+        "file": "/root/.ai-tmp/nemu-build.hngf789h/src/nemu64/obj/link-inputs/crt-aliases.lib",
+        "members": [
+          {
+            "object": "build\\intel\\st_obj\\oldnames\\stricmp.obj",
+            "sha256": "abfb4e0d4da4d2c6b5522a23093bd10f4d871a1c2364c2572154a32ae48aefcd"
+          },
+          {
+            "object": "build\\intel\\st_obj\\oldnames\\itoa.obj",
+            "sha256": "09ed16ef1706c489d115d8b58d9f3330f020b41468a03464c615458cc0f86f84"
+          }
+        ],
+        "member_bytes_unchanged": true
+      },
+      {
+        "archive": "crt-unwind.lib",
+        "selection": "unwind",
+        "member_count": 1,
+        "file": "/root/.ai-tmp/nemu-build.hngf789h/src/nemu64/obj/link-inputs/crt-unwind.lib",
+        "members": [
+          {
+            "object": "KERNEL32.dll",
+            "sha256": "5e36f49c555b23e350e0bae32daef8337e7750490b2f0d0123a71c463cd0662b"
+          }
+        ],
+        "member_bytes_unchanged": true
+      },
+      {
+        "archive": "crt-tail.lib",
+        "selection": "crt_after_unwind",
+        "member_count": 4,
+        "file": "/root/.ai-tmp/nemu-build.hngf789h/src/nemu64/obj/link-inputs/crt-tail.lib",
+        "members": [
+          {
+            "object": "build\\intel\\st_obj\\xtoa.obj",
+            "sha256": "d5caa3190f1fb9b6eef359b730a05cadb1520f532ee2be8c44902df39c391ddd"
+          },
+          {
+            "object": "build\\intel\\st_obj\\stricmp.obj",
+            "sha256": "e24738f80a84dbe73cba2d00645e107a6a32904284c90acfe25960c80c55c695"
+          },
+          {
+            "object": "build\\intel\\st_obj\\tolower.obj",
+            "sha256": "4fa19182a65defe951c12bfcb6c4a6db14083e85ef192b3518cb1b438b187e04"
+          },
+          {
+            "object": "build\\intel\\st_obj\\_stricmp.obj",
+            "sha256": "459f322874bbad2a22269d4318ca1124f9d5422272109f174a47ee3542f2ffc5"
           }
         ],
         "member_bytes_unchanged": true
@@ -1860,13 +2212,13 @@
     ],
     "comparison": {
       "original": "/root/nemu-decomp/master/nemu64.exe",
-      "rebuilt": "/root/.ai-tmp/nemu-build.674anu41/output/nemu64.exe",
+      "rebuilt": "/root/.ai-tmp/nemu-build.hngf789h/output/nemu64.exe",
       "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
-      "rebuilt_sha256": "6e717f534aedf201b339314a087d5f708933a1663f2da45cb690c3ebdbdf36ae",
+      "rebuilt_sha256": "516de1c174cd4d02d0031d14e6ab2d4111635c209a8abd4aa665aa009c15317b",
       "original_bytes": 4796416,
       "rebuilt_bytes": 4796416,
       "full_exe_byte_exact": false,
-      "differing_file_bytes": 17158,
+      "differing_file_bytes": 17152,
       "sections": [
         {
           "name": ".text",
@@ -2273,7 +2625,7 @@
       "resource_count_equal": true
     },
     "layout": {
-      "executable_sha256": "6e717f534aedf201b339314a087d5f708933a1663f2da45cb690c3ebdbdf36ae",
+      "executable_sha256": "516de1c174cd4d02d0031d14e6ab2d4111635c209a8abd4aa665aa009c15317b",
       "native_functions": {
         "expected": 187,
         "present": 187,
@@ -2382,8 +2734,8 @@
           "003d24fa": 1
         },
         "rebuilt": {
-          "001d24fa": 2,
           "002723ca": 2,
+          "001d24fa": 2,
           "004024fa": 20,
           "001c24fa": 93,
           "000420ff": 2,
@@ -2400,15 +2752,52 @@
     "all_four_program_sections_equal_reviewed_probe": true,
     "command": "python3 scripts/build_nemu.py --chronological-libraries --stage-storage --function-order src/nemu64/application.order",
     "full_file_equal": false,
-    "relocation_fixture": "/root/.ai-tmp/nemu-chronology-relocs.5e_shkse",
-    "relocation_fixture_all_parent_program_sections_unchanged": true,
+    "whole_section_invariance": {
+      "artifact": "/root/.ai-tmp/nemu-build.hngf789h/artifacts/516de1c174cd4d02d0031d14e6ab2d4111635c209a8abd4aa665aa009c15317b",
+      "previous_artifact": "/root/.ai-tmp/nemu-build.674anu41/artifacts/6e717f534aedf201b339314a087d5f708933a1663f2da45cb690c3ebdbdf36ae",
+      "sections": [
+        {
+          "name": ".text",
+          "layout_equal": true,
+          "raw_bytes_equal": true
+        },
+        {
+          "name": ".rdata",
+          "layout_equal": true,
+          "raw_bytes_equal": true
+        },
+        {
+          "name": ".data",
+          "layout_equal": true,
+          "raw_bytes_equal": true
+        },
+        {
+          "name": ".rsrc",
+          "layout_equal": true,
+          "raw_bytes_equal": true
+        }
+      ],
+      "original_rich_header_bytes_equal": true,
+      "header_difference_offsets": [
+        272,
+        273,
+        274,
+        275
+      ],
+      "classification": "Only the four COFF timestamp bytes differ before the first section."
+    },
     "header_difference_classification": {
-      "total_differing_header_bytes": 10,
-      "reversed_first_two_rich_records_bytes": 6,
       "coff_timestamp_bytes": 4,
-      "other_header_differences": 0,
-      "restoration_or_patching_performed": false
-    }
+      "other_header_bytes": 0,
+      "original_rich_header_bytes_equal": true
+    },
+    "relocation_fixture": {
+      "mode": "chronological",
+      "path": "/root/.ai-tmp/nemu-chronology-relocs.uca75yl0",
+      "sha256": "f5982979e06bb7336a4b271b0f53e8c29c98453287cfa993196bcab2c9280d64",
+      "parent_artifact": "/root/.ai-tmp/nemu-build.hngf789h/artifacts/516de1c174cd4d02d0031d14e6ab2d4111635c209a8abd4aa665aa009c15317b"
+    },
+    "relocation_fixture_all_parent_program_sections_unchanged": true
   },
   "canonical_generator_control": {
     "compared_files": 250,
@@ -2438,6 +2827,710 @@
     "new_nonempty_aliases": 0,
     "measured_extents_and_host_selector_proof_pass": true,
     "remaining_unresolved_selected_operands": 512,
-    "qualification": "Address-normalized diagnostic, not complete executable equality. The operand-count reduction from523 to512 comes from an independently committed float proof, not archive grouping."
+    "qualification": "Address-normalized diagnostic, not complete executable equality. The operand-count reduction from523 to512 comes from an independently committed float proof, not archive grouping.",
+    "applies_to_current_build": "Every byte and layout of all four program sections is unchanged from the independently reviewed artifact; see fresh_tracked_recipe_build.whole_section_invariance."
+  },
+  "pre_partition_probe_rich": {
+    "offset": 128,
+    "xor_key": "0421da8b",
+    "checksum_valid": true,
+    "records": [
+      {
+        "comp_id": "001d24fa",
+        "product_id": 29,
+        "build": 9466,
+        "count": 2
+      },
+      {
+        "comp_id": "002723ca",
+        "product_id": 39,
+        "build": 9162,
+        "count": 2
+      },
+      {
+        "comp_id": "004024fa",
+        "product_id": 64,
+        "build": 9466,
+        "count": 20
+      },
+      {
+        "comp_id": "001c24fa",
+        "product_id": 28,
+        "build": 9466,
+        "count": 93
+      },
+      {
+        "comp_id": "000420ff",
+        "product_id": 4,
+        "build": 8447,
+        "count": 2
+      },
+      {
+        "comp_id": "000a1fe8",
+        "product_id": 10,
+        "build": 8168,
+        "count": 14
+      },
+      {
+        "comp_id": "00041fe8",
+        "product_id": 4,
+        "build": 8168,
+        "count": 2
+      },
+      {
+        "comp_id": "001923fa",
+        "product_id": 25,
+        "build": 9210,
+        "count": 15
+      },
+      {
+        "comp_id": "00010000",
+        "product_id": 1,
+        "build": 0,
+        "count": 153
+      },
+      {
+        "comp_id": "002c24fa",
+        "product_id": 44,
+        "build": 9466,
+        "count": 27
+      },
+      {
+        "comp_id": "004524fa",
+        "product_id": 69,
+        "build": 9466,
+        "count": 1
+      },
+      {
+        "comp_id": "003d24fa",
+        "product_id": 61,
+        "build": 9466,
+        "count": 1
+      }
+    ]
+  },
+  "probe_rich": {
+    "offset": 128,
+    "xor_key": "0421da8b",
+    "checksum_valid": true,
+    "records": [
+      {
+        "comp_id": "002723ca",
+        "product_id": 39,
+        "build": 9162,
+        "count": 2
+      },
+      {
+        "comp_id": "001d24fa",
+        "product_id": 29,
+        "build": 9466,
+        "count": 2
+      },
+      {
+        "comp_id": "004024fa",
+        "product_id": 64,
+        "build": 9466,
+        "count": 20
+      },
+      {
+        "comp_id": "001c24fa",
+        "product_id": 28,
+        "build": 9466,
+        "count": 93
+      },
+      {
+        "comp_id": "000420ff",
+        "product_id": 4,
+        "build": 8447,
+        "count": 2
+      },
+      {
+        "comp_id": "000a1fe8",
+        "product_id": 10,
+        "build": 8168,
+        "count": 14
+      },
+      {
+        "comp_id": "00041fe8",
+        "product_id": 4,
+        "build": 8168,
+        "count": 2
+      },
+      {
+        "comp_id": "001923fa",
+        "product_id": 25,
+        "build": 9210,
+        "count": 15
+      },
+      {
+        "comp_id": "00010000",
+        "product_id": 1,
+        "build": 0,
+        "count": 153
+      },
+      {
+        "comp_id": "002c24fa",
+        "product_id": 44,
+        "build": 9466,
+        "count": 27
+      },
+      {
+        "comp_id": "004524fa",
+        "product_id": 69,
+        "build": 9466,
+        "count": 1
+      },
+      {
+        "comp_id": "003d24fa",
+        "product_id": 61,
+        "build": 9466,
+        "count": 1
+      }
+    ]
+  },
+  "native_partition_probes": [
+    {
+      "label": "separate-after95",
+      "returncode": 0,
+      "archive_sequence": [
+        "crt95",
+        "aliases-only",
+        "rtl-only"
+      ],
+      "rich": {
+        "offset": 128,
+        "xor_key": "0421da8b",
+        "checksum_valid": true,
+        "records": [
+          {
+            "comp_id": "002723ca",
+            "product_id": 39,
+            "build": 9162,
+            "count": 2
+          },
+          {
+            "comp_id": "001d24fa",
+            "product_id": 29,
+            "build": 9466,
+            "count": 2
+          },
+          {
+            "comp_id": "004024fa",
+            "product_id": 64,
+            "build": 9466,
+            "count": 20
+          },
+          {
+            "comp_id": "001c24fa",
+            "product_id": 28,
+            "build": 9466,
+            "count": 93
+          },
+          {
+            "comp_id": "000420ff",
+            "product_id": 4,
+            "build": 8447,
+            "count": 2
+          },
+          {
+            "comp_id": "000a1fe8",
+            "product_id": 10,
+            "build": 8168,
+            "count": 14
+          },
+          {
+            "comp_id": "00041fe8",
+            "product_id": 4,
+            "build": 8168,
+            "count": 2
+          },
+          {
+            "comp_id": "001923fa",
+            "product_id": 25,
+            "build": 9210,
+            "count": 15
+          },
+          {
+            "comp_id": "00010000",
+            "product_id": 1,
+            "build": 0,
+            "count": 153
+          },
+          {
+            "comp_id": "002c24fa",
+            "product_id": 44,
+            "build": 9466,
+            "count": 27
+          },
+          {
+            "comp_id": "004524fa",
+            "product_id": 69,
+            "build": 9466,
+            "count": 1
+          },
+          {
+            "comp_id": "003d24fa",
+            "product_id": 61,
+            "build": 9466,
+            "count": 1
+          }
+        ]
+      },
+      "rich_record_bytes_equal_original": true,
+      "program_sections": {
+        ".text": {
+          "layout_equal": false,
+          "raw_bytes_equal": false,
+          "differing_bytes": 6802
+        },
+        ".rdata": {
+          "layout_equal": true,
+          "raw_bytes_equal": true,
+          "differing_bytes": 0
+        },
+        ".data": {
+          "layout_equal": true,
+          "raw_bytes_equal": false,
+          "differing_bytes": 3
+        },
+        ".rsrc": {
+          "layout_equal": true,
+          "raw_bytes_equal": true,
+          "differing_bytes": 0
+        }
+      },
+      "layout": {
+        "executable_sha256": "62529dd7eb140de869823a462f4815076684976a28084e5e1a2004b813ab61f9",
+        "native_functions": {
+          "expected": 187,
+          "present": 187,
+          "missing_or_ambiguous": [],
+          "address_delta_counts": {
+            "-17": 4,
+            "-16": 45,
+            "-8": 4,
+            "0": 134
+          },
+          "uniform_displacement": false,
+          "order_inversions": 0,
+          "qualification": "Placement only; independent library-body evidence is in the inventory."
+        },
+        "observed_native_storage": {
+          "observations": 72,
+          "map_symbols": 54,
+          "exact": 54,
+          "mismatches": [],
+          "unavailable": [
+            "_FloatFormat",
+            "?_pgmname@?1??_setargv@@9@9",
+            "?f_use@?1??__crtGetEnvironmentStringsA@@9@9",
+            "?f_use@?1??__crtGetStringTypeA@@9@9",
+            "_fSystemSet",
+            "?pfnMessageBoxA@?1??__crtMessageBoxA@@9@9",
+            "?pfnGetActiveWindow@?1??__crtMessageBoxA@@9@9",
+            "?pfnGetLastActivePopup@?1??__crtMessageBoxA@@9@9",
+            "?pfnGetProcessWindowStation@?1??__crtMessageBoxA@@9@9",
+            "?pfnGetUserObjectInformationA@?1??__crtMessageBoxA@@9@9",
+            "_user_handler",
+            "?f_use@?1??__crtLCMapStringA@@9@9",
+            "_g_pflt",
+            "_g_fmt",
+            "_g_magnitude",
+            "_g_round_expansion",
+            "_fos",
+            "_ret"
+          ],
+          "qualification": "Library-operand observations, not independently proved original identities; includes initialized storage and BSS."
+        },
+        "imports": {
+          "expected_count": 152,
+          "actual_count": 152,
+          "identity_sets_equal": true,
+          "exact_iat_slots": 115,
+          "names_and_slots_equal": false,
+          "relative_order_excluding_recorded_insertions_equal": true,
+          "relative_order_count": 148,
+          "excluded_insertion_positions": [
+            {
+              "dll": "kernel32.dll",
+              "name": "GetOEMCP"
+            },
+            {
+              "dll": "kernel32.dll",
+              "name": "GetSystemInfo"
+            },
+            {
+              "dll": "kernel32.dll",
+              "name": "VirtualQuery"
+            },
+            {
+              "dll": "kernel32.dll",
+              "name": "RtlUnwind"
+            }
+          ],
+          "ranges": [
+            {
+              "name": "import_descriptors_and_lookup_arrays",
+              "rva_start": 254232,
+              "rva_end": 255092,
+              "bytes": 860,
+              "equal": false,
+              "differing_bytes": 41
+            },
+            {
+              "name": "complete_hint_and_dll_name_pool",
+              "rva_start": 255092,
+              "rva_end": 257848,
+              "bytes": 2756,
+              "equal": true,
+              "differing_bytes": 0
+            }
+          ]
+        },
+        "alias_alignment": {
+          "original_start": 4381845,
+          "original_end": 4381856,
+          "rebuilt_start": 4381845,
+          "rebuilt_end": 4382320,
+          "bytes_equal": false,
+          "original_bytes": 11,
+          "rebuilt_bytes": null
+        },
+        "rich_counts": {
+          "original": {
+            "002723ca": 2,
+            "001d24fa": 2,
+            "004024fa": 20,
+            "001c24fa": 93,
+            "000420ff": 2,
+            "000a1fe8": 14,
+            "00041fe8": 2,
+            "001923fa": 15,
+            "00010000": 153,
+            "002c24fa": 27,
+            "004524fa": 1,
+            "003d24fa": 1
+          },
+          "rebuilt": {
+            "002723ca": 2,
+            "001d24fa": 2,
+            "004024fa": 20,
+            "001c24fa": 93,
+            "000420ff": 2,
+            "000a1fe8": 14,
+            "00041fe8": 2,
+            "001923fa": 15,
+            "00010000": 153,
+            "002c24fa": 27,
+            "004524fa": 1,
+            "003d24fa": 1
+          }
+        }
+      },
+      "comparison_summary": {
+        "differing_file_bytes": 23952,
+        "sections": [
+          {
+            "name": ".text",
+            "layout_equal": false,
+            "raw_bytes_equal": false,
+            "differing_bytes": 23554
+          },
+          {
+            "name": ".rdata",
+            "layout_equal": true,
+            "raw_bytes_equal": false,
+            "differing_bytes": 86
+          },
+          {
+            "name": ".data",
+            "layout_equal": true,
+            "raw_bytes_equal": false,
+            "differing_bytes": 306
+          },
+          {
+            "name": ".rsrc",
+            "layout_equal": true,
+            "raw_bytes_equal": true,
+            "differing_bytes": 0
+          }
+        ]
+      },
+      "accepted": false
+    },
+    {
+      "label": "separate-after91",
+      "returncode": 0,
+      "archive_sequence": [
+        "crt91",
+        "aliases-only",
+        "rtl-only",
+        "crt-tail4"
+      ],
+      "rich": {
+        "offset": 128,
+        "xor_key": "0421da8b",
+        "checksum_valid": true,
+        "records": [
+          {
+            "comp_id": "002723ca",
+            "product_id": 39,
+            "build": 9162,
+            "count": 2
+          },
+          {
+            "comp_id": "001d24fa",
+            "product_id": 29,
+            "build": 9466,
+            "count": 2
+          },
+          {
+            "comp_id": "004024fa",
+            "product_id": 64,
+            "build": 9466,
+            "count": 20
+          },
+          {
+            "comp_id": "001c24fa",
+            "product_id": 28,
+            "build": 9466,
+            "count": 93
+          },
+          {
+            "comp_id": "000420ff",
+            "product_id": 4,
+            "build": 8447,
+            "count": 2
+          },
+          {
+            "comp_id": "000a1fe8",
+            "product_id": 10,
+            "build": 8168,
+            "count": 14
+          },
+          {
+            "comp_id": "00041fe8",
+            "product_id": 4,
+            "build": 8168,
+            "count": 2
+          },
+          {
+            "comp_id": "001923fa",
+            "product_id": 25,
+            "build": 9210,
+            "count": 15
+          },
+          {
+            "comp_id": "00010000",
+            "product_id": 1,
+            "build": 0,
+            "count": 153
+          },
+          {
+            "comp_id": "002c24fa",
+            "product_id": 44,
+            "build": 9466,
+            "count": 27
+          },
+          {
+            "comp_id": "004524fa",
+            "product_id": 69,
+            "build": 9466,
+            "count": 1
+          },
+          {
+            "comp_id": "003d24fa",
+            "product_id": 61,
+            "build": 9466,
+            "count": 1
+          }
+        ]
+      },
+      "rich_record_bytes_equal_original": true,
+      "program_sections": {
+        ".text": {
+          "layout_equal": true,
+          "raw_bytes_equal": true,
+          "differing_bytes": 0
+        },
+        ".rdata": {
+          "layout_equal": true,
+          "raw_bytes_equal": true,
+          "differing_bytes": 0
+        },
+        ".data": {
+          "layout_equal": true,
+          "raw_bytes_equal": true,
+          "differing_bytes": 0
+        },
+        ".rsrc": {
+          "layout_equal": true,
+          "raw_bytes_equal": true,
+          "differing_bytes": 0
+        }
+      },
+      "layout": {
+        "executable_sha256": "7113ddcd40a01972a13fd2668bcd076f78800e07377bd4c194f628f909759dd6",
+        "native_functions": {
+          "expected": 187,
+          "present": 187,
+          "missing_or_ambiguous": [],
+          "address_delta_counts": {
+            "0": 187
+          },
+          "uniform_displacement": true,
+          "order_inversions": 0,
+          "qualification": "Placement only; independent library-body evidence is in the inventory."
+        },
+        "observed_native_storage": {
+          "observations": 72,
+          "map_symbols": 54,
+          "exact": 54,
+          "mismatches": [],
+          "unavailable": [
+            "_FloatFormat",
+            "?_pgmname@?1??_setargv@@9@9",
+            "?f_use@?1??__crtGetEnvironmentStringsA@@9@9",
+            "?f_use@?1??__crtGetStringTypeA@@9@9",
+            "_fSystemSet",
+            "?pfnMessageBoxA@?1??__crtMessageBoxA@@9@9",
+            "?pfnGetActiveWindow@?1??__crtMessageBoxA@@9@9",
+            "?pfnGetLastActivePopup@?1??__crtMessageBoxA@@9@9",
+            "?pfnGetProcessWindowStation@?1??__crtMessageBoxA@@9@9",
+            "?pfnGetUserObjectInformationA@?1??__crtMessageBoxA@@9@9",
+            "_user_handler",
+            "?f_use@?1??__crtLCMapStringA@@9@9",
+            "_g_pflt",
+            "_g_fmt",
+            "_g_magnitude",
+            "_g_round_expansion",
+            "_fos",
+            "_ret"
+          ],
+          "qualification": "Library-operand observations, not independently proved original identities; includes initialized storage and BSS."
+        },
+        "imports": {
+          "expected_count": 152,
+          "actual_count": 152,
+          "identity_sets_equal": true,
+          "exact_iat_slots": 115,
+          "names_and_slots_equal": false,
+          "relative_order_excluding_recorded_insertions_equal": true,
+          "relative_order_count": 148,
+          "excluded_insertion_positions": [
+            {
+              "dll": "kernel32.dll",
+              "name": "GetOEMCP"
+            },
+            {
+              "dll": "kernel32.dll",
+              "name": "GetSystemInfo"
+            },
+            {
+              "dll": "kernel32.dll",
+              "name": "VirtualQuery"
+            },
+            {
+              "dll": "kernel32.dll",
+              "name": "RtlUnwind"
+            }
+          ],
+          "ranges": [
+            {
+              "name": "import_descriptors_and_lookup_arrays",
+              "rva_start": 254232,
+              "rva_end": 255092,
+              "bytes": 860,
+              "equal": false,
+              "differing_bytes": 41
+            },
+            {
+              "name": "complete_hint_and_dll_name_pool",
+              "rva_start": 255092,
+              "rva_end": 257848,
+              "bytes": 2756,
+              "equal": true,
+              "differing_bytes": 0
+            }
+          ]
+        },
+        "alias_alignment": {
+          "original_start": 4381845,
+          "original_end": 4381856,
+          "rebuilt_start": 4381845,
+          "rebuilt_end": 4381856,
+          "bytes_equal": true,
+          "original_bytes": 11,
+          "rebuilt_bytes": 11
+        },
+        "rich_counts": {
+          "original": {
+            "002723ca": 2,
+            "001d24fa": 2,
+            "004024fa": 20,
+            "001c24fa": 93,
+            "000420ff": 2,
+            "000a1fe8": 14,
+            "00041fe8": 2,
+            "001923fa": 15,
+            "00010000": 153,
+            "002c24fa": 27,
+            "004524fa": 1,
+            "003d24fa": 1
+          },
+          "rebuilt": {
+            "002723ca": 2,
+            "001d24fa": 2,
+            "004024fa": 20,
+            "001c24fa": 93,
+            "000420ff": 2,
+            "000a1fe8": 14,
+            "00041fe8": 2,
+            "001923fa": 15,
+            "00010000": 153,
+            "002c24fa": 27,
+            "004524fa": 1,
+            "003d24fa": 1
+          }
+        }
+      },
+      "comparison_summary": {
+        "differing_file_bytes": 17152,
+        "sections": [
+          {
+            "name": ".text",
+            "layout_equal": true,
+            "raw_bytes_equal": false,
+            "differing_bytes": 16759
+          },
+          {
+            "name": ".rdata",
+            "layout_equal": true,
+            "raw_bytes_equal": false,
+            "differing_bytes": 86
+          },
+          {
+            "name": ".data",
+            "layout_equal": true,
+            "raw_bytes_equal": false,
+            "differing_bytes": 303
+          },
+          {
+            "name": ".rsrc",
+            "layout_equal": true,
+            "raw_bytes_equal": true,
+            "differing_bytes": 0
+          }
+        ]
+      },
+      "accepted": true
+    }
+  ],
+  "native_partition_probes_evidence": "/root/.ai-tmp/nemu-rich-order.iz9gcqni/separate-alias-rtl-report.json",
+  "pre_partition_build": {
+    "artifact": "/root/.ai-tmp/nemu-build.674anu41/artifacts/6e717f534aedf201b339314a087d5f708933a1663f2da45cb690c3ebdbdf36ae",
+    "sha256": "6e717f534aedf201b339314a087d5f708933a1663f2da45cb690c3ebdbdf36ae",
+    "differing_file_bytes": 17158,
+    "remaining_rich_difference": "Six bytes from the reversed first two records; superseded by the separate native archive partition."
   }
 }
