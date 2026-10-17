@@ -21,7 +21,7 @@
     "native_language_control": "analysis/audio-rsp-language-control.json"
   },
   "source_sha256": {
-    "RSP.cpp": "c5941b6ed2474e4675a6ab6e7d1c4f88e6fa24805b6b0cd8d8db18b1eacefb9f",
+    "RSP.cpp": "c7af8470ebe01038716dde99f7c76c79116aa2078a46588f759e927ef19fc380",
     "RSPKernel.c": "b24b8421e4e773593eb4d7b7b215881d951d34f57a126127b1ac3ddc60048b45",
     "RSPData.c": "e7cf0681168a22da03eecf8e1a257d6d915a33db217642b4145b927d8784fa86",
     "RSP.h": "96a4a727fa71a84aaf5313d11b4da970e04f781dcfe5820ebf6a6e493161a1c5",
@@ -33,9 +33,18 @@
       "Kernel definitions stay separate from helper definitions: combining them lets native optimization remove code from the large kernel; separate compilation reproduces all 9504 kernel bytes.",
       "C-linkage opcode helpers take RSPInstructionWord unions by value. The original caller MOV-immediate/PUSH-register sequence distinguishes this from a scalar unsigned argument.",
       "Converting the kernel/data inputs to C and exposing a shared C interface preserves every one of the 180 materialized function hashes and all 30 data hashes.",
-      "Storage is grouped separately for auditability; no original RSPData filename is claimed."
+      "Storage is grouped separately for auditability; no original RSPData filename is claimed.",
+      "Retained LQV/SQV use a guarded do-loop with a byte offset computed inside the guard; this recovers both complete 112-byte spans and preserves all 175 other core function hashes."
     ],
-    "invariance_evidence": "/root/.ai-tmp/nemu-audio-rsp.3f9d460s/c-interface/invariance.json"
+    "invariance_evidence": "/root/.ai-tmp/nemu-audio-rsp.3f9d460s/c-interface/invariance.json",
+    "quad_vector_refinement": {
+      "comparison": "/root/.ai-tmp/nemu-audio-rsp-index.x9z_b0hr/guarded-flat.json",
+      "comparison_sha256": "fcc53f9e20f4661c2f945f3a656fc525b533a22d6dd97c6a87ba76542fa8ff8d",
+      "behavior": "/root/.ai-tmp/nemu-audio-rsp-index.x9z_b0hr/differential.json",
+      "behavior_cases": 512,
+      "behavior_failures": 0,
+      "other_core_functions_unchanged": 175
+    }
   },
   "coverage": {
     "start": "0x10013b10",
@@ -46,9 +55,9 @@
     "basis": "Complete native disassembly and terminal returns/tail calls, including retained entries absent from dispatch tables. Compiler-generated switch tables and NOP alignment remain in each compared extent."
   },
   "comparison": {
-    "functions_exact": 146,
+    "functions_exact": 148,
     "functions_compared": 180,
-    "matching_function_bytes": 25472,
+    "matching_function_bytes": 25696,
     "typed_objects_exact": 30,
     "typed_objects_compared": 30,
     "initialized_data_bytes": 5576,
@@ -56,8 +65,8 @@
     "unresolved_relocations": 0,
     "method": "Ordinary COFF DIR32 and REL32 relocations materialized using separately identified original targets. Every byte of each recorded span is compared; no masks or executable patches.",
     "artifact": "/root/.ai-tmp/nemu-audio-rsp.3f9d460s/published-comparison.json",
-    "artifact_sha256": "949830573dbd6f520ccc8ac5d42435a08189f6320a08c9f4211df57bff4e65fb",
-    "source_snapshot": "/root/.ai-tmp/nemu-audio-rsp.3f9d460s/runs/7fhhnq2f"
+    "artifact_sha256": "1eb22c400d917d9c3f56b2550c00591b949d65c2509d7b77f6cd30a7b62f9440",
+    "source_snapshot": "/root/.ai-tmp/nemu-audio-rsp.3f9d460s/runs/0374mhty"
   },
   "functions": [
     {
@@ -1023,10 +1032,10 @@
       "va": 268526688,
       "original_size": 112,
       "candidate_size": 112,
-      "exact": false,
-      "differing_bytes": 84,
+      "exact": true,
+      "differing_bytes": 0,
       "original_sha256": "6aebc066ddc2e0577940484ea1b1a180a7145e064a106f3b9e58a7b7f94341ef",
-      "candidate_materialized_sha256": "2c1c02460e6d6f4fb25aeecb21a35f9438479ef82a0ca548794df96bff28a66b"
+      "candidate_materialized_sha256": "6aebc066ddc2e0577940484ea1b1a180a7145e064a106f3b9e58a7b7f94341ef"
     },
     {
       "name": "RSP_LRV",
@@ -1144,10 +1153,10 @@
       "va": 268527840,
       "original_size": 112,
       "candidate_size": 112,
-      "exact": false,
-      "differing_bytes": 61,
+      "exact": true,
+      "differing_bytes": 0,
       "original_sha256": "5aca604e63467a0e972634f122c91ab607e47550452bf848ebbfaa45cc46177f",
-      "candidate_materialized_sha256": "444538a500d6cef3daeb227fda06e34a69860c42fba6a2270870190ab89aa132"
+      "candidate_materialized_sha256": "5aca604e63467a0e972634f122c91ab607e47550452bf848ebbfaa45cc46177f"
     },
     {
       "name": "RSP_SRV",
@@ -2344,10 +2353,16 @@
     }
   ],
   "behavior": {
-    "total_cases": 139648,
+    "total_cases": 140160,
     "failures": 0,
     "scope": "Differential execution of original native Audio code and reconstructed candidate code. This supplements instruction comparison and does not establish byte identity for unmatched functions.",
     "reports": [
+      {
+        "area": "retained_quad_vector_memory_refinement",
+        "cases": 512,
+        "path": "/root/.ai-tmp/nemu-audio-rsp-index.x9z_b0hr/differential.json",
+        "sha256": "3bdd87afcf2ac79d633774a5f0bca942902ce4c51119b7037da2c03408ca6c77"
+      },
       {
         "area": "scalar_dma_and_mixer",
         "cases": 512,
@@ -2400,7 +2415,7 @@
   },
   "shared_nemu_evidence": "analysis/audio-rsp-cross-image.json",
   "limitations": [
-    "34 native functions remain instruction-unmatched; reconstructed source coverage is not complete DLL identity.",
+    "32 native functions remain instruction-unmatched; reconstructed source coverage is not complete DLL identity.",
     "Function/data placement, PE metadata, imports, resources and libraries require the integrator's complete-image comparison.",
     "Inferred private names and unused-entry purposes are identified as such. No unknown memory gaps are filled with opaque objects."
   ],

@@ -983,10 +983,16 @@ void RSP_LQV()
 {
     PC += 4;
     CpuU32 address = (RSPRegisters[Instruction.rs] + (Instruction.Value & 127) * 16) & 0xFFF;
-    CpuU32 vt = Instruction.rt;
     CpuU32 end = address | 15;
-    for (CpuU32 i = 0; address <= end; i++, address++)
-        ((CpuU8 (*)[16])RSPVectors)[vt][i ^ 1] = SPMemory[address];
+    if (address <= end) {
+        CpuU32 vectorOffset = Instruction.rt * 16;
+        CpuU32 i = 0;
+        do {
+            ((CpuU8 *)RSPVectors)[vectorOffset + (i ^ 1)] = SPMemory[address];
+            address++;
+            i++;
+        } while (address <= end);
+    }
 }
 
 // Original audio.dll: 0x100164D0.
@@ -1101,10 +1107,16 @@ void RSP_SQV()
 {
     PC += 4;
     CpuU32 address = (RSPRegisters[Instruction.rs] + (Instruction.Value & 127) * 16) & 0xFFF;
-    CpuU32 vt = Instruction.rt;
     CpuU32 end = address | 15;
-    for (CpuU32 i = 0; address <= end; i++, address++)
-        SPMemory[address] = ((CpuU8 (*)[16])RSPVectors)[vt][i ^ 1];
+    if (address <= end) {
+        CpuU32 vectorOffset = Instruction.rt * 16;
+        CpuU32 i = 0;
+        do {
+            SPMemory[address] = ((CpuU8 *)RSPVectors)[vectorOffset + (i ^ 1)];
+            address++;
+            i++;
+        } while (address <= end);
+    }
 }
 
 // Original audio.dll: 0x10016950.
