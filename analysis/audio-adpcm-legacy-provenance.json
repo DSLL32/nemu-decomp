@@ -60,7 +60,11 @@
   "independent_symbolic_audit": {
     "script": "/root/.ai-tmp/legacy-audit-symbolic/check.py",
     "script_sha256": "f68dce683796d5fca3a2034889a7d3e783b3297fa3b003475d93acf985d87da7",
-    "scope": "Both 8-sample prediction blocks in target and candidate: all 32 target/candidate polynomials equal the expected convolution. This is not a whole-function behavioral equivalence proof."
+    "scope": "Both 8-sample prediction blocks in target and candidate: all 32 target/candidate polynomials equal the expected convolution. This is not a whole-function behavioral equivalence proof.",
+    "frozen_artifact": "/root/.ai-tmp/audio-adpcm-legacy/replay.b1mlzom4/symbolic-proof",
+    "frozen_replay_script": "/root/.ai-tmp/audio-adpcm-legacy/replay.b1mlzom4/symbolic-proof/replay-proof.py",
+    "frozen_replay_script_sha256": "030c39e48c806ab3f2b34a3548287c518208683e0d7c31fa62f403e7408dc925",
+    "frozen_replay_exit_code": 0
   },
   "bounded_probes": [
     {
@@ -856,5 +860,22 @@
       "relocation_masked_differing_bytes": 1336
     }
   ],
-  "additional_audit": "/root/.ai-tmp/audio-adpcm-declarations.vi6c95h0/types-products-results.json"
+  "additional_audit": "/root/.ai-tmp/audio-adpcm-declarations.vi6c95h0/types-products-results.json",
+  "independent_replay": {
+    "artifact": "/root/.ai-tmp/audio-adpcm-legacy/replay.b1mlzom4",
+    "manifest_sha256": "b5bcdf54aaeaf9588ff987689bc06d99c5ae7b3026314fdaca0c163794b0c327",
+    "comparison_sha256": "20405e3c9a101abc8b4d0e7044a9ce435eff1b0aafd9b997d8474ac8ffa755f1",
+    "source_body_identical_to_checkpoint": true
+  },
+  "additional_negative_probes": {
+    "frontend_function_names": "/root/.ai-tmp/audio-adpcm-legacy/probe-names.py",
+    "source_input_pointer_views": "/root/.ai-tmp/audio-adpcm-legacy/probe-input.py",
+    "separate_nibble_locals": "/root/.ai-tmp/audio-adpcm-legacy/probe-nibble-locals.py",
+    "inline_helper_reports": [
+      "/root/.ai-tmp/legacy-audit-symbolic/prediction-inline/comparison.json",
+      "/root/.ai-tmp/legacy-audit-symbolic/prediction-forceinline/comparison.json",
+      "/root/.ai-tmp/legacy-audit-symbolic/withclamp-inline/comparison.json",
+      "/root/.ai-tmp/legacy-audit-symbolic/withclamp-forceinline/comparison.json"
+    ]
+  }
 }
