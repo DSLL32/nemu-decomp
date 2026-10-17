@@ -11,7 +11,8 @@ The original executable is 4,796,416 bytes, with SHA-256
 Build from the repository root:
 
 ```sh
-python3 scripts/build_nemu.py
+python3 scripts/build_nemu.py --ordered-libraries --stage-storage \
+  --function-order src/nemu64/application.order
 ```
 
 The builder creates a source snapshot, generated CIC tables, output files,
@@ -19,6 +20,15 @@ logs, and a Wine prefix under `~/.ai-tmp`. It preserves raw linker output and
 compares every byte with the original. Its exit status remains nonzero while
 that comparison fails, even when compilation and linking succeed. Use
 `--work ~/.ai-tmp/<directory>` to reuse a build directory and its Wine prefix.
+
+The checked-in order file places the 648 application symbols in their observed
+original order using the stock linker. The other two options use the recovered
+CRT/import-member order and stage typed storage definitions at the inferred
+original boundaries. These are the settings used by the latest complete-build
+comparisons. The unmodified source snapshot and actual staged compiler inputs
+are saved separately. Regenerate the order file with
+`scripts/order_nemu_functions.py CANDIDATE.map --output application.order` when
+a source change alters symbol decoration.
 
 The application uses Visual C++ 7.0, compiler 13.00.9466, with the static
 single-thread runtime and whole-program optimization. `ByteSwap.c` is a native
