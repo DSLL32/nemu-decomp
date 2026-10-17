@@ -14,7 +14,7 @@
     "src/audio/ahle_ds/AudioProcessing.h": "661ae00c480be2d2a2341214fe95e52c21630af602bae4ef4d3dbd7516c8962c",
     "src/audio/ahle_ds/AudioProfile.c": "cec145766acd789e0b31b003942d6bc5ba63463876dc037ed966e6c0a1e28639",
     "src/audio/ahle_ds/AudioSSE.c": "37da4a9d22e3e1b8e33e5d381dac340ad2b38a59dacf7492f4aa6e5ad87c954f",
-    "src/audio/ahle_ds/AudioADPCM.c": "4e7091117175eb84738e348702565a27b1e16f7ad383ab7036331d14d9a72525",
+    "src/audio/ahle_ds/AudioADPCM.c": "cfbdae568921ae83e104173dff5b0697759cd70fa694a9cbc7eb61e8265db662",
     "src/audio/ahle_ds/AudioPoleFilter.c": "b65d389c08d2d48bb4e78bbfbfa39bfedcccb0e474410ccc13c9b8ce2a1c6f65",
     "src/audio/ahle_ds/AudioResample.c": "7c2cc74e3d65c5890168dbe48170bae26540b662b2ddfcd449211f9112318c8f",
     "src/audio/ahle_ds/AudioHLE.h": "82e6544a76ee5d0e361f785773e5da8bd91070019a65367d89d6cb0defd8b3ee",
@@ -148,9 +148,9 @@
       "original_va": "0x10010e10",
       "original_size": 560,
       "original_complete_extent_sha256": "6afc332ed9ba60594dc969497fa427173a17cbdce1be56c258672c8cde8df921",
-      "relocation_masked_equal": false,
-      "relocation_masked_differing_bytes": 558,
-      "candidate_size": 576
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "candidate_size": 560
     },
     {
       "name": "_DecodeAudioADPCM",
@@ -158,7 +158,7 @@
       "original_size": 864,
       "original_complete_extent_sha256": "a5af2255f3b01f843b1f280fbdb71749d796245cefa304175d8839889597855c",
       "relocation_masked_equal": false,
-      "relocation_masked_differing_bytes": 499,
+      "relocation_masked_differing_bytes": 622,
       "candidate_size": 864
     },
     {
@@ -253,13 +253,33 @@
     }
   ],
   "limitations": [
-    "Twenty complete function extents, including compiler alignment, match only after recorded COFF relocation fields are masked. This is not whole-DLL byte equality.",
+    "Twenty-one complete function extents, including compiler alignment, match after recorded COFF relocation fields are masked. The signed ADPCM block has no relocations and matches all 560 original bytes directly. This is not whole-DLL byte equality.",
     "Data addresses marked observed_operand_inference have not been independently proved from original debug symbols.",
-    "Five candidate functions remain unmatched: the unsigned and signed scalar ADPCM kernels, main ADPCM dispatcher, pole filter, and scalar resampler.",
+    "Four candidate functions remain unmatched: the unsigned scalar ADPCM kernel, main ADPCM dispatcher, pole filter, and scalar resampler.",
     "The pole filter differs in seven SIB bytes that exchange equivalent base and index registers; these remain genuine byte differences.",
     "Relocation-target diagnostics for unmatched functions are position-based and may inspect unrelated original instruction bytes when code layout differs.",
     "Readable source file names and translation-unit boundaries are inferred; no original source provenance is claimed.",
     "Behavior probes execute original external callees and do not validate a linked rebuilt DLL.",
     "The canonical resampling table currently has a const declaration although its original storage is writable .data; original declaration/section placement remains unresolved."
+  ],
+  "source_ancestry": [
+    {
+      "url": "https://github.com/EmulatorArchive/ultrahle/blob/435b252a51c2e3671a8614e63b3ba75e3dd80b69/src/SLIST.C",
+      "sha256": "4ca967ed6c8ed18a33c1adafdbf9c3fa6d1c48670ddf9942ddbda2c06a970a51",
+      "functions": [
+        "adpcm_block",
+        "adpcm",
+        "filter_block",
+        "filter",
+        "loadsamplestate",
+        "savesamplestate"
+      ],
+      "assessment": "Shared source skeleton corroborated by matching packet-copy, two-bit decode, three-loop FIR, and sample-state structure. This archived source is not claimed to be the original Nemu translation unit.",
+      "target_specific_changes": [
+        "Explicit AudioContext parameter replaces global state.",
+        "Signed ADPCM keeps full predictor scale and adds observed assembly copy preparation and four-bit assembly kernel.",
+        "Diagnostic logging and invalid-codebook handling differ from the archived UltraHLE source."
+      ]
+    }
   ]
 }

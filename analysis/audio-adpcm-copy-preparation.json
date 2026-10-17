@@ -1,7 +1,7 @@
 {
   "original": "master/Plugin/audio.dll",
   "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
-  "status": "inferred_original_source_remnant",
+  "status": "inferred_original_preparation_with_complete_standalone_body_match",
   "evidence": [
     {
       "start": "0x10010e50",
@@ -27,6 +27,14 @@
     "Standalone decoder0x10010E10 and both inlined decoder instances at0x10013460 contain the same preparation pattern.",
     "Two stack-local pointer stores are immediately followed by ESI/EDI loads despite the following C loop not using EDI. The pattern is consistent with explicit inline assembly retained before a C fallback copy.",
     "This reconstructs observed redundant instructions; no padding, arbitrary barriers, or additional dummy work is introduced.",
-    "No original source file or upstream source provenance is claimed. Complete byte matching of the surrounding functions is still unresolved."
-  ]
+    "The indexed copy loop and two-bit branch share the UltraHLE SLIST.C skeleton; the target-specific assembly preparation is independently corroborated by all 560 bytes of the standalone decoder."
+  ],
+  "validation": {
+    "standalone_function": "0x10010e10",
+    "complete_bytes": 560,
+    "raw_bytes_equal": true,
+    "coff_relocations": 0,
+    "main_inlined_expansions": "Both flag paths pass original-versus-candidate behavior probes; the main function still differs in register and local allocation.",
+    "behavior_report": "analysis/audio-processing-behavior.json"
+  }
 }

@@ -1,4 +1,7 @@
-/* Scalar ADPCM kernels. The original source filename is unknown. */
+/* Scalar ADPCM kernels. The original source filename is unknown.
+ * The signed decoder shares its indexed packet-copy and two-bit decoding
+ * skeleton with UltraHLE src/SLIST.C; target-specific assembly and arithmetic
+ * are recovered from audio.dll. See audio-processing-provenance.json. */
 #include "AudioProcessing.h"
 #include <string.h>
 
@@ -60,14 +63,14 @@ __forceinline void DecodeAudioADPCMBlock(short *output, short *history, int offs
     int bytes = bitsPerSample == 4 ? 9 : 5;
     int i = 0;
     int index = offset >> 1;
-    short *input;
     unsigned char *destination;
     short *encoded;
     short coefficient1, coefficient2, previous1, previous2;
     int shift;
     int packed;
+    int header;
+    int sampleIndex;
     int bookIndex;
-    unsigned char *samples;
     if (offset & 1) {
         data[i++] = ((unsigned char *)context->buffer)[index * 2];
         ++index;
@@ -81,29 +84,32 @@ __forceinline void DecodeAudioADPCMBlock(short *output, short *history, int offs
         mov esi, encoded
         mov edi, destination
     }
-    input = &context->buffer[index];
     while (i < bytes) {
-        int pair = *input++;
+        int pair = context->buffer[index++];
         data[i++] = pair >> 8;
         data[i++] = pair;
     }
-    shift = (data[0] >> 4) + 11;
-    bookIndex = (data[0] & 15) << 4;
+    header = data[0];
+    shift = (header >> 4) + 11;
+    bookIndex = (header & 15) << 4;
     coefficient1 = book[bookIndex];
     coefficient2 = book[bookIndex + 8];
     previous1 = history[14];
     previous2 = history[15];
     if (bitsPerSample == 4) {
-        short *decoded = output;
+        short *decoded;
         int pairs;
-        samples = data + 1;
+        destination = data + 1;
+        decoded = output;
         /* The original four-bit kernel uses integer assembly. Each signed
          * nibble is scaled, predicted from the two preceding samples, then
          * clipped before it becomes the next predictor input. */
         __asm {
-            mov esi, samples
+            mov esi, destination
             mov edi, decoded
-            mov pairs, 8
+        }
+        pairs = 8;
+        __asm {
         next_pair:
             movzx eax, byte ptr [esi]
             shl eax, 24
@@ -166,10 +172,10 @@ __forceinline void DecodeAudioADPCMBlock(short *output, short *history, int offs
             jnz next_pair
         }
     } else if (bitsPerSample == 2) {
-        samples = data + 1;
+        sampleIndex = 1;
         for (i = 0; i < 16; ++i) {
             int sample;
-            if (!(i & 3)) packed = *samples++ << 24;
+            if (!(i & 3)) packed = data[sampleIndex++] << 24;
             else packed <<= 2;
             sample = (previous1 * coefficient1 + previous2 * coefficient2 +
                       ((packed >> 30) << shift)) >> 11;
