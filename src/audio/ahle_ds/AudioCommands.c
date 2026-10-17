@@ -107,8 +107,8 @@ void ABI1_Segment(AudioCommand *command, AudioContext *context) {}
 
 void ABI1_SetBuffer(AudioCommand *command, AudioContext *context)
 {
-    int auxiliary = command->bytes[2] & 8;
-    if (auxiliary) {
+    int flags = command->bytes[2];
+    if (flags & 8) {
         context->auxResample0 = command->halfwords[0];
         context->auxResample1 = command->halfwords[3];
         context->auxResample2 = command->halfwords[2];
@@ -117,7 +117,7 @@ void ABI1_SetBuffer(AudioCommand *command, AudioContext *context)
         context->outputResample = command->halfwords[3];
         context->count = command->words[1] & 0xffff;
     }
-    if (auxiliary) {
+    if (flags & 8) {
         context->aux0 = command->words[0] & 0xffff;
         context->aux1 = command->words[1] >> 16;
         context->aux2 = command->words[1] & 0xffff;
@@ -330,8 +330,8 @@ void ABI2_EnvSetup1(AudioCommand *command, AudioContext *context)
 {
     unsigned int first = command->words[0], second = command->words[1];
     unsigned int volume = (first >> 8) & 0xff00;
-    context->envelope6a = (short)first;
     context->envelope68 = (short)volume;
+    context->envelope6a = (short)first;
     context->envelope6c = (short)(second >> 16);
     context->envelope6e = (short)second;
     if (*(unsigned int *)(RDRAM + AudioTask.ucode_data + 0x34) == 0x1c281b38)
@@ -352,7 +352,7 @@ void ABI3_EnvMixer(AudioCommand *command, AudioContext *context)
     unsigned int state = command->words[1] & 0xffffff;
     int flags = (command->words[0] >> 16) & 0xff;
     if (HighQuality) {
-        if (command->bytes[2] & 1) context->volumeRight16 = command->halfwords[0];
+        if (command->halfwords[1] & 1) context->volumeRight16 = command->halfwords[0];
         if (Use3DNow) EnvMixerABI3_3DNow(command, context);
         else if (UseSSE) EnvMixerABI3SSE(command, context);
         else EnvMixerABI3Scalar(command, context);

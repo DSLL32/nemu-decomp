@@ -167,9 +167,9 @@ void SelectAudioABI(void)
     }
     memset(AudioState.buffer, 0, 0x3100);
     InitializeAudioSqrt();
+    AudioTaskCount = 0;
     memset(SeenCommands, 0, sizeof(SeenCommands));
     for (i = 0; i < 32; i++) AudioCommandTable[i] = (AudioCommandHandler)ResetAudioABI;
-    AudioTaskCount = 0;
     ResetAudioProfile();
     if (AudioUCode == 2) {
         AudioCommandTable[0] = ABI3_NoOp;

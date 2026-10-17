@@ -31,7 +31,8 @@ typedef struct AudioContext {
     short targetLeft16, targetRight16;     /* 58..5a */
     int rateLeft16, rateRight16;           /* 5c..60 */
     short dry, wet;                        /* 64..66 */
-    short envelope68, envelope6a;          /* 68..6a */
+    unsigned short envelope68;           /* 68: auxiliary envelope gain */
+    short envelope6a;                    /* 6a: auxiliary envelope increment */
     short envelope6c, envelope6e;          /* 6c..6e */
     short envelope70, envelope72;          /* 70..72 */
     unsigned int mp3Address, mp3State;     /* 74..78 */
