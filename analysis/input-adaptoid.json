@@ -1,0 +1,1014 @@
+{
+  "source": "src/input/UnitAdaptoid.pas",
+  "source_sha256": "4afa7edb7c3c63ce9044d493177637d1d999db84cbc08c1c74ecba629fdc1f17",
+  "original_dll_sha256": "2c0fb513c6c34115ef070c9f33767f7cf15d28de4becbd74bd90fe515e496298",
+  "probe_dll": "/root/.ai-tmp/input-adaptoid.Z1FZo8/probe.dll",
+  "probe_sha256": "c72dc55aa66859c032703c5ede54552da7f8582b3c4a42d7958dbb9abd088ec4",
+  "compiler": "toolchains/d6u2/bin/dcc32-personal.exe",
+  "command": "WINEPREFIX=/root/.ai-tmp/input-adaptoid.Z1FZo8/wine WINEARCH=win32 WINEDEBUG=-all python3 /root/nemu-decomp/scripts/run_toolchain.py d6u2 dcc32-personal -Q -B -GD probe.dpr",
+  "unit_original_va": 4713572,
+  "unit_probe_va": 4226316,
+  "unit_code_bytes": 1908,
+  "unit_bss_bytes": 652,
+  "code_equal_after_identity_based_address_translation": true,
+  "all_relocation_positions_equal": true,
+  "full_dll_byte_exact": false,
+  "limitation": "This is an isolated source compilation. Final linked addresses must match before the complete DLL can be byte exact.",
+  "functions": [
+    {
+      "name": "InitAdaptoid",
+      "original_va": 4713572,
+      "bytes": 1812
+    },
+    {
+      "name": "FreeAdaptoid",
+      "original_va": 4715400,
+      "bytes": 21
+    }
+  ],
+  "globals": [
+    {
+      "name": "AdaptoidHandle",
+      "original_va": 4810344,
+      "probe_va": 4237388,
+      "bytes": 4
+    },
+    {
+      "name": "AdaptoidCount",
+      "original_va": 4810348,
+      "probe_va": 4237392,
+      "bytes": 4
+    },
+    {
+      "name": "AdaptoidCommand",
+      "original_va": 4810352,
+      "probe_va": 4237396,
+      "bytes": 64
+    },
+    {
+      "name": "AdaptoidResponse",
+      "original_va": 4810416,
+      "probe_va": 4237460,
+      "bytes": 64
+    },
+    {
+      "name": "AdaptoidRumbleOn1",
+      "original_va": 4810480,
+      "probe_va": 4237524,
+      "bytes": 64
+    },
+    {
+      "name": "AdaptoidRumbleOff1",
+      "original_va": 4810544,
+      "probe_va": 4237588,
+      "bytes": 64
+    },
+    {
+      "name": "AdaptoidRumbleOn2",
+      "original_va": 4810608,
+      "probe_va": 4237652,
+      "bytes": 64
+    },
+    {
+      "name": "AdaptoidRumbleOff2",
+      "original_va": 4810672,
+      "probe_va": 4237716,
+      "bytes": 64
+    },
+    {
+      "name": "AdaptoidRumbleOn3",
+      "original_va": 4810736,
+      "probe_va": 4237780,
+      "bytes": 64
+    },
+    {
+      "name": "AdaptoidRumbleOff3",
+      "original_va": 4810800,
+      "probe_va": 4237844,
+      "bytes": 64
+    },
+    {
+      "name": "AdaptoidRumbleOn4",
+      "original_va": 4810864,
+      "probe_va": 4237908,
+      "bytes": 64
+    },
+    {
+      "name": "AdaptoidRumbleOff4",
+      "original_va": 4810928,
+      "probe_va": 4237972,
+      "bytes": 64
+    },
+    {
+      "name": "UnitAdaptoid initialization counter",
+      "original_va": 4810992,
+      "probe_va": 4238036,
+      "bytes": 4
+    }
+  ],
+  "references": [
+    {
+      "offset": 5,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidCommand",
+      "original_target": 4810352,
+      "rebuilt_target": 4237396
+    },
+    {
+      "offset": 10,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn1",
+      "original_target": 4810480,
+      "rebuilt_target": 4237524
+    },
+    {
+      "offset": 15,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff1",
+      "original_target": 4810544,
+      "rebuilt_target": 4237588
+    },
+    {
+      "offset": 20,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn2",
+      "original_target": 4810608,
+      "rebuilt_target": 4237652
+    },
+    {
+      "offset": 27,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidCount",
+      "original_target": 4810348,
+      "rebuilt_target": 4237392
+    },
+    {
+      "offset": 47,
+      "kind": "HIGHLOW",
+      "identity": "UnitAdaptoid code/string",
+      "original_target": 4715384,
+      "rebuilt_target": 4228128
+    },
+    {
+      "offset": 57,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidHandle",
+      "original_target": 4810344,
+      "rebuilt_target": 4237388
+    },
+    {
+      "offset": 63,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidHandle",
+      "original_target": 4810344,
+      "rebuilt_target": 4237388
+    },
+    {
+      "offset": 78,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidCount",
+      "original_target": 4810348,
+      "rebuilt_target": 4237392
+    },
+    {
+      "offset": 88,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidHandle",
+      "original_target": 4810344,
+      "rebuilt_target": 4237388
+    },
+    {
+      "offset": 99,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidCount",
+      "original_target": 4810348,
+      "rebuilt_target": 4237392
+    },
+    {
+      "offset": 217,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidHandle",
+      "original_target": 4810344,
+      "rebuilt_target": 4237388
+    },
+    {
+      "offset": 227,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidResponse",
+      "original_target": 4810416,
+      "rebuilt_target": 4237460
+    },
+    {
+      "offset": 237,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidHandle",
+      "original_target": 4810344,
+      "rebuilt_target": 4237388
+    },
+    {
+      "offset": 355,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidHandle",
+      "original_target": 4810344,
+      "rebuilt_target": 4237388
+    },
+    {
+      "offset": 365,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidResponse",
+      "original_target": 4810416,
+      "rebuilt_target": 4237460
+    },
+    {
+      "offset": 375,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidHandle",
+      "original_target": 4810344,
+      "rebuilt_target": 4237388
+    },
+    {
+      "offset": 386,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidCount",
+      "original_target": 4810348,
+      "rebuilt_target": 4237392
+    },
+    {
+      "offset": 506,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidHandle",
+      "original_target": 4810344,
+      "rebuilt_target": 4237388
+    },
+    {
+      "offset": 516,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidResponse",
+      "original_target": 4810416,
+      "rebuilt_target": 4237460
+    },
+    {
+      "offset": 526,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidHandle",
+      "original_target": 4810344,
+      "rebuilt_target": 4237388
+    },
+    {
+      "offset": 537,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidCount",
+      "original_target": 4810348,
+      "rebuilt_target": 4237392
+    },
+    {
+      "offset": 659,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidHandle",
+      "original_target": 4810344,
+      "rebuilt_target": 4237388
+    },
+    {
+      "offset": 669,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidResponse",
+      "original_target": 4810416,
+      "rebuilt_target": 4237460
+    },
+    {
+      "offset": 679,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidHandle",
+      "original_target": 4810344,
+      "rebuilt_target": 4237388
+    },
+    {
+      "offset": 690,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidCount",
+      "original_target": 4810348,
+      "rebuilt_target": 4237392
+    },
+    {
+      "offset": 812,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidHandle",
+      "original_target": 4810344,
+      "rebuilt_target": 4237388
+    },
+    {
+      "offset": 822,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidResponse",
+      "original_target": 4810416,
+      "rebuilt_target": 4237460
+    },
+    {
+      "offset": 832,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidHandle",
+      "original_target": 4810344,
+      "rebuilt_target": 4237388
+    },
+    {
+      "offset": 1133,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff2",
+      "original_target": 4810672,
+      "rebuilt_target": 4237716
+    },
+    {
+      "offset": 1143,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff2",
+      "original_target": 4810676,
+      "rebuilt_target": 4237720
+    },
+    {
+      "offset": 1154,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff2",
+      "original_target": 4810680,
+      "rebuilt_target": 4237724
+    },
+    {
+      "offset": 1161,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff2",
+      "original_target": 4810684,
+      "rebuilt_target": 4237728
+    },
+    {
+      "offset": 1168,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff2",
+      "original_target": 4810688,
+      "rebuilt_target": 4237732
+    },
+    {
+      "offset": 1175,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff2",
+      "original_target": 4810692,
+      "rebuilt_target": 4237736
+    },
+    {
+      "offset": 1182,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff2",
+      "original_target": 4810696,
+      "rebuilt_target": 4237740
+    },
+    {
+      "offset": 1189,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff2",
+      "original_target": 4810700,
+      "rebuilt_target": 4237744
+    },
+    {
+      "offset": 1196,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff2",
+      "original_target": 4810704,
+      "rebuilt_target": 4237748
+    },
+    {
+      "offset": 1202,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff2",
+      "original_target": 4810708,
+      "rebuilt_target": 4237752
+    },
+    {
+      "offset": 1213,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff2",
+      "original_target": 4810712,
+      "rebuilt_target": 4237756
+    },
+    {
+      "offset": 1220,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff2",
+      "original_target": 4810716,
+      "rebuilt_target": 4237760
+    },
+    {
+      "offset": 1227,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff2",
+      "original_target": 4810720,
+      "rebuilt_target": 4237764
+    },
+    {
+      "offset": 1234,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff2",
+      "original_target": 4810724,
+      "rebuilt_target": 4237768
+    },
+    {
+      "offset": 1241,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff2",
+      "original_target": 4810728,
+      "rebuilt_target": 4237772
+    },
+    {
+      "offset": 1247,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff2",
+      "original_target": 4810732,
+      "rebuilt_target": 4237776
+    },
+    {
+      "offset": 1257,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn3",
+      "original_target": 4810736,
+      "rebuilt_target": 4237780
+    },
+    {
+      "offset": 1267,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn3",
+      "original_target": 4810740,
+      "rebuilt_target": 4237784
+    },
+    {
+      "offset": 1277,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn3",
+      "original_target": 4810744,
+      "rebuilt_target": 4237788
+    },
+    {
+      "offset": 1287,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn3",
+      "original_target": 4810748,
+      "rebuilt_target": 4237792
+    },
+    {
+      "offset": 1297,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn3",
+      "original_target": 4810752,
+      "rebuilt_target": 4237796
+    },
+    {
+      "offset": 1307,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn3",
+      "original_target": 4810756,
+      "rebuilt_target": 4237800
+    },
+    {
+      "offset": 1317,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn3",
+      "original_target": 4810760,
+      "rebuilt_target": 4237804
+    },
+    {
+      "offset": 1327,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn3",
+      "original_target": 4810764,
+      "rebuilt_target": 4237808
+    },
+    {
+      "offset": 1337,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn3",
+      "original_target": 4810768,
+      "rebuilt_target": 4237812
+    },
+    {
+      "offset": 1347,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn3",
+      "original_target": 4810772,
+      "rebuilt_target": 4237816
+    },
+    {
+      "offset": 1357,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn3",
+      "original_target": 4810776,
+      "rebuilt_target": 4237820
+    },
+    {
+      "offset": 1368,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn3",
+      "original_target": 4810780,
+      "rebuilt_target": 4237824
+    },
+    {
+      "offset": 1375,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn3",
+      "original_target": 4810784,
+      "rebuilt_target": 4237828
+    },
+    {
+      "offset": 1382,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn3",
+      "original_target": 4810788,
+      "rebuilt_target": 4237832
+    },
+    {
+      "offset": 1389,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn3",
+      "original_target": 4810792,
+      "rebuilt_target": 4237836
+    },
+    {
+      "offset": 1395,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn3",
+      "original_target": 4810796,
+      "rebuilt_target": 4237840
+    },
+    {
+      "offset": 1405,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff3",
+      "original_target": 4810800,
+      "rebuilt_target": 4237844
+    },
+    {
+      "offset": 1415,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff3",
+      "original_target": 4810804,
+      "rebuilt_target": 4237848
+    },
+    {
+      "offset": 1426,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff3",
+      "original_target": 4810808,
+      "rebuilt_target": 4237852
+    },
+    {
+      "offset": 1433,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff3",
+      "original_target": 4810812,
+      "rebuilt_target": 4237856
+    },
+    {
+      "offset": 1440,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff3",
+      "original_target": 4810816,
+      "rebuilt_target": 4237860
+    },
+    {
+      "offset": 1447,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff3",
+      "original_target": 4810820,
+      "rebuilt_target": 4237864
+    },
+    {
+      "offset": 1454,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff3",
+      "original_target": 4810824,
+      "rebuilt_target": 4237868
+    },
+    {
+      "offset": 1461,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff3",
+      "original_target": 4810828,
+      "rebuilt_target": 4237872
+    },
+    {
+      "offset": 1468,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff3",
+      "original_target": 4810832,
+      "rebuilt_target": 4237876
+    },
+    {
+      "offset": 1474,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff3",
+      "original_target": 4810836,
+      "rebuilt_target": 4237880
+    },
+    {
+      "offset": 1484,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff3",
+      "original_target": 4810840,
+      "rebuilt_target": 4237884
+    },
+    {
+      "offset": 1495,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff3",
+      "original_target": 4810844,
+      "rebuilt_target": 4237888
+    },
+    {
+      "offset": 1502,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff3",
+      "original_target": 4810848,
+      "rebuilt_target": 4237892
+    },
+    {
+      "offset": 1509,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff3",
+      "original_target": 4810852,
+      "rebuilt_target": 4237896
+    },
+    {
+      "offset": 1516,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff3",
+      "original_target": 4810856,
+      "rebuilt_target": 4237900
+    },
+    {
+      "offset": 1522,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff3",
+      "original_target": 4810860,
+      "rebuilt_target": 4237904
+    },
+    {
+      "offset": 1532,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn4",
+      "original_target": 4810864,
+      "rebuilt_target": 4237908
+    },
+    {
+      "offset": 1542,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn4",
+      "original_target": 4810868,
+      "rebuilt_target": 4237912
+    },
+    {
+      "offset": 1552,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn4",
+      "original_target": 4810872,
+      "rebuilt_target": 4237916
+    },
+    {
+      "offset": 1562,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn4",
+      "original_target": 4810876,
+      "rebuilt_target": 4237920
+    },
+    {
+      "offset": 1572,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn4",
+      "original_target": 4810880,
+      "rebuilt_target": 4237924
+    },
+    {
+      "offset": 1582,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn4",
+      "original_target": 4810884,
+      "rebuilt_target": 4237928
+    },
+    {
+      "offset": 1592,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn4",
+      "original_target": 4810888,
+      "rebuilt_target": 4237932
+    },
+    {
+      "offset": 1602,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn4",
+      "original_target": 4810892,
+      "rebuilt_target": 4237936
+    },
+    {
+      "offset": 1612,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn4",
+      "original_target": 4810896,
+      "rebuilt_target": 4237940
+    },
+    {
+      "offset": 1622,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn4",
+      "original_target": 4810900,
+      "rebuilt_target": 4237944
+    },
+    {
+      "offset": 1632,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn4",
+      "original_target": 4810904,
+      "rebuilt_target": 4237948
+    },
+    {
+      "offset": 1643,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn4",
+      "original_target": 4810908,
+      "rebuilt_target": 4237952
+    },
+    {
+      "offset": 1650,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn4",
+      "original_target": 4810912,
+      "rebuilt_target": 4237956
+    },
+    {
+      "offset": 1657,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn4",
+      "original_target": 4810916,
+      "rebuilt_target": 4237960
+    },
+    {
+      "offset": 1664,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn4",
+      "original_target": 4810920,
+      "rebuilt_target": 4237964
+    },
+    {
+      "offset": 1670,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOn4",
+      "original_target": 4810924,
+      "rebuilt_target": 4237968
+    },
+    {
+      "offset": 1680,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff4",
+      "original_target": 4810928,
+      "rebuilt_target": 4237972
+    },
+    {
+      "offset": 1690,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff4",
+      "original_target": 4810932,
+      "rebuilt_target": 4237976
+    },
+    {
+      "offset": 1701,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff4",
+      "original_target": 4810936,
+      "rebuilt_target": 4237980
+    },
+    {
+      "offset": 1708,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff4",
+      "original_target": 4810940,
+      "rebuilt_target": 4237984
+    },
+    {
+      "offset": 1715,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff4",
+      "original_target": 4810944,
+      "rebuilt_target": 4237988
+    },
+    {
+      "offset": 1722,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff4",
+      "original_target": 4810948,
+      "rebuilt_target": 4237992
+    },
+    {
+      "offset": 1729,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff4",
+      "original_target": 4810952,
+      "rebuilt_target": 4237996
+    },
+    {
+      "offset": 1736,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff4",
+      "original_target": 4810956,
+      "rebuilt_target": 4238000
+    },
+    {
+      "offset": 1743,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff4",
+      "original_target": 4810960,
+      "rebuilt_target": 4238004
+    },
+    {
+      "offset": 1749,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff4",
+      "original_target": 4810964,
+      "rebuilt_target": 4238008
+    },
+    {
+      "offset": 1759,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff4",
+      "original_target": 4810968,
+      "rebuilt_target": 4238012
+    },
+    {
+      "offset": 1770,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff4",
+      "original_target": 4810972,
+      "rebuilt_target": 4238016
+    },
+    {
+      "offset": 1777,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff4",
+      "original_target": 4810976,
+      "rebuilt_target": 4238020
+    },
+    {
+      "offset": 1784,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff4",
+      "original_target": 4810980,
+      "rebuilt_target": 4238024
+    },
+    {
+      "offset": 1791,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff4",
+      "original_target": 4810984,
+      "rebuilt_target": 4238028
+    },
+    {
+      "offset": 1797,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidRumbleOff4",
+      "original_target": 4810988,
+      "rebuilt_target": 4238032
+    },
+    {
+      "offset": 1830,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidHandle",
+      "original_target": 4810344,
+      "rebuilt_target": 4237388
+    },
+    {
+      "offset": 1838,
+      "kind": "HIGHLOW",
+      "identity": "AdaptoidHandle",
+      "original_target": 4810344,
+      "rebuilt_target": 4237388
+    },
+    {
+      "offset": 1859,
+      "kind": "HIGHLOW",
+      "identity": "UnitAdaptoid code/string",
+      "original_target": 4715461,
+      "rebuilt_target": 4228205
+    },
+    {
+      "offset": 1871,
+      "kind": "HIGHLOW",
+      "identity": "UnitAdaptoid initialization counter",
+      "original_target": 4810992,
+      "rebuilt_target": 4238036
+    },
+    {
+      "offset": 1884,
+      "kind": "HIGHLOW",
+      "identity": "UnitAdaptoid code/string",
+      "original_target": 4715468,
+      "rebuilt_target": 4228212
+    },
+    {
+      "offset": 1902,
+      "kind": "HIGHLOW",
+      "identity": "UnitAdaptoid initialization counter",
+      "original_target": 4810992,
+      "rebuilt_target": 4238036
+    },
+    {
+      "offset": 52,
+      "kind": "rel32",
+      "identity": "Windows.CreateFile",
+      "original_target": 4221628,
+      "rebuilt_target": 4212196
+    },
+    {
+      "offset": 93,
+      "kind": "rel32",
+      "identity": "SysUtils.FileRead",
+      "original_target": 4229584,
+      "rebuilt_target": 4215732
+    },
+    {
+      "offset": 222,
+      "kind": "rel32",
+      "identity": "SysUtils.FileWrite",
+      "original_target": 4229628,
+      "rebuilt_target": 4215776
+    },
+    {
+      "offset": 242,
+      "kind": "rel32",
+      "identity": "SysUtils.FileRead",
+      "original_target": 4229584,
+      "rebuilt_target": 4215732
+    },
+    {
+      "offset": 360,
+      "kind": "rel32",
+      "identity": "SysUtils.FileWrite",
+      "original_target": 4229628,
+      "rebuilt_target": 4215776
+    },
+    {
+      "offset": 380,
+      "kind": "rel32",
+      "identity": "SysUtils.FileRead",
+      "original_target": 4229584,
+      "rebuilt_target": 4215732
+    },
+    {
+      "offset": 511,
+      "kind": "rel32",
+      "identity": "SysUtils.FileWrite",
+      "original_target": 4229628,
+      "rebuilt_target": 4215776
+    },
+    {
+      "offset": 531,
+      "kind": "rel32",
+      "identity": "SysUtils.FileRead",
+      "original_target": 4229584,
+      "rebuilt_target": 4215732
+    },
+    {
+      "offset": 664,
+      "kind": "rel32",
+      "identity": "SysUtils.FileWrite",
+      "original_target": 4229628,
+      "rebuilt_target": 4215776
+    },
+    {
+      "offset": 684,
+      "kind": "rel32",
+      "identity": "SysUtils.FileRead",
+      "original_target": 4229584,
+      "rebuilt_target": 4215732
+    },
+    {
+      "offset": 817,
+      "kind": "rel32",
+      "identity": "SysUtils.FileWrite",
+      "original_target": 4229628,
+      "rebuilt_target": 4215776
+    },
+    {
+      "offset": 837,
+      "kind": "rel32",
+      "identity": "SysUtils.FileRead",
+      "original_target": 4229584,
+      "rebuilt_target": 4215732
+    },
+    {
+      "offset": 1844,
+      "kind": "rel32",
+      "identity": "Windows.CloseHandle",
+      "original_target": 4221604,
+      "rebuilt_target": 4212188
+    },
+    {
+      "offset": 1890,
+      "kind": "rel32",
+      "identity": "System.@HandleFinally",
+      "original_target": 4210256,
+      "rebuilt_target": 4206588
+    }
+  ]
+}
