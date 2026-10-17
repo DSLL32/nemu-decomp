@@ -140,7 +140,7 @@ class Comparison:
         data = []
         for symbol in obj.symbols:
             row = self.app.get(symbol['name'])
-            if (not row or row.get('source') != 'RSPData.c'
+            if (not row or row.get('kind') != 'data'
                     or symbol['section'] <= 0 or symbol['type'] == 0x20):
                 continue
             section = obj.sections[symbol['section'] - 1]

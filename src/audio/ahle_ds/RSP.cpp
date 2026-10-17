@@ -2,6 +2,7 @@
 // The original source filename is inferred from the native program grouping.
 // See analysis/audio-rsp.json for exact and incomplete body evidence.
 #include "RSP.h"
+#include "transform.h"
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
@@ -2357,3 +2358,8 @@ void RSP_LoadVector() { RSPPC += 4; RSP_LoadVectorExec(*(RSPInstructionWord *)&C
 
 // Original audio.dll: 0x1001E900.
 void RSP_LoadVectorOpcode(RSPInstructionWord opcode) { RSP_LoadVectorExec(*(RSPInstructionWord *)&CPU_Instruction); }
+
+#include "RSPKernel.inc"
+extern "C" {
+#include "RSPData.inc"
+}

@@ -1,4 +1,4 @@
-// Audio guest-program translation. Original file grouping is inferred.
+// Audio guest-program translation, included by RSP.cpp. Fragment name inferred.
 #include "RSP.h"
 
 // Original audio.dll: 0x1001E910.

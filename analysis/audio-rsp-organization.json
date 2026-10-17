@@ -1,0 +1,498 @@
+{
+  "original": "master/Plugin/audio.dll",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "status": "inferred_single_translation_unit_with_preserved_native_bodies",
+  "full_dll_byte_exact": false,
+  "translation_unit": "src/audio/ahle_ds/RSP.cpp",
+  "included_fragments": [
+    "RSPKernel.inc",
+    "RSPData.inc",
+    "RSPMicrocode.inc",
+    "transform.h"
+  ],
+  "evidence": [
+    "The original contains fourteen equal retained AMP header tables. The last precedes the RSP guest program and dispatch tables.",
+    "The independently mapped runtime member count leaves thirteen application C contributions and one application C++ contribution in the Rich header. This supports one RSP C++ unit; private filenames and source grouping remain inferred.",
+    "Native references establish instruction/comparison/flag addresses at offsets 0, 4 and 12. A naturally aligned control aggregate preserves all existing function bodies when helpers, guest-program translation and storage share one unit.",
+    "The vector bank remains a separate object. Grouping vectors into the same aggregate changes previously exact functions and was rejected."
+  ],
+  "independent_data_boundary_report": {
+    "path": "analysis/audio-data-boundaries.json",
+    "sha256": "83fafbeb5f71e2f2559dd56d7096dcae5fc0606bc9afa373c3e031b3faa4389e"
+  },
+  "control_state": {
+    "symbol": "_RSPControl",
+    "original_va": "0x1012be00",
+    "size": 20,
+    "natural_alignment": 4,
+    "fields": [
+      {
+        "name": "RSPFlags",
+        "parent": "RSPControl",
+        "parent_symbol": "_RSPControl",
+        "offset": 12,
+        "va": 269663756,
+        "size": 6
+      },
+      {
+        "name": "RSPCompareNotEqual",
+        "parent": "RSPControl",
+        "parent_symbol": "_RSPControl",
+        "offset": 4,
+        "va": 269663748,
+        "size": 8
+      },
+      {
+        "name": "CPU_Instruction",
+        "parent": "RSPControl",
+        "parent_symbol": "_RSPControl",
+        "offset": 0,
+        "va": 269663744,
+        "size": 4
+      }
+    ],
+    "compiler_tail_padding": {
+      "offset": 18,
+      "bytes": 2
+    },
+    "explicit_padding_members": false,
+    "offsets_and_size_checked_by_compiler": true,
+    "following_vector_bank": {
+      "symbol": "_RSPVectors",
+      "original_va": "0x1012be18",
+      "coff_distance": 24
+    }
+  },
+  "retained_header_table": {
+    "original_va": "0x1003db70",
+    "bytes": 2176,
+    "table_sha256": "52c695ac3a77f57ebb82e12d2474f02ce47ab544ef0dc05d6ecdfc6d5e4ff100",
+    "source": "src/audio/ahle_ds/transform.h",
+    "following_guest_program_va": "0x1003e3f0",
+    "coff_distance": 2176
+  },
+  "invariance": {
+    "baseline_report": "/root/.ai-tmp/nemu-audio-rsp.3f9d460s/pre-unity-report.json",
+    "baseline_report_sha256": "326f94990661d244e116e4ace0642bca3f60c7e9d274e9b4dd8d674d48a9e6c1",
+    "candidate_report": "/root/.ai-tmp/nemu-audio-rsp.3f9d460s/published-comparison.json",
+    "candidate_report_sha256": "abde98075c396d341f1f64797fbf921ca8bb45d454a70dd926783b9c44bb19d2",
+    "compiler_snapshot": "/root/.ai-tmp/nemu-audio-rsp.3f9d460s/runs/uteww_op",
+    "object_sha256": "49f3474ab746947a53b934e0a9c456d05d7479b0dd3afca54329f84bb6cb157e",
+    "functions_compared": 180,
+    "unchanged_function_hashes": 180,
+    "changed_functions": [],
+    "original_exact_functions": 148,
+    "original_matching_function_bytes": 25696,
+    "unchanged_independent_data_hashes": 27,
+    "regrouped_original_objects": [
+      "CPU_Instruction",
+      "RSPCompareNotEqual",
+      "RSPFlags"
+    ],
+    "typed_objects_exact": 29,
+    "unresolved_relocations": 0,
+    "transform_stage": {
+      "original_va": "0x1001e910",
+      "exact_bytes": 1280
+    },
+    "main_kernel": {
+      "original_va": "0x1001ee10",
+      "exact_bytes": 8192,
+      "transform_stage_rel32_operand_offsets": [
+        1166,
+        3856
+      ]
+    },
+    "existing_behavior_cases": 140160,
+    "behavior_evidence_transfer": "All materialized native function bytes and every previously read data value are unchanged. Existing differential execution evidence therefore applies; no new behavior run is claimed."
+  },
+  "compiler_diagnostic": {
+    "status": "reproduced_miscompilation_with_separate_scalar_globals",
+    "note": "Diagnostic reduction explains why an apparently harmless single-unit merge lost two observable calls. It is evidence about the compiler, not reconstructed application source.",
+    "source": "unsigned instruction, standalone;\nvoid leaf_scalar() { standalone++; }\nvoid stage_scalar() { leaf_scalar(); instruction = 2; }\nvoid caller_scalar() { stage_scalar(); instruction = 0; }\n",
+    "flags": [
+      "/O2",
+      "/Ob1",
+      "/MT"
+    ],
+    "observed": "caller_scalar stores zero to instruction and omits the observable standalone increment.",
+    "separately_compiled_observer": {
+      "expected_exit_code": 0,
+      "actual_exit_code": 1
+    },
+    "evidence": [
+      {
+        "path": "/root/.ai-tmp/nemu-audio-kernel-unity.55iyvjgy/minimal.cpp",
+        "sha256": "4ff81c52377749d42c71eca82721465c473350167fbe592d798808459c32d2a8"
+      },
+      {
+        "path": "/root/.ai-tmp/nemu-audio-kernel-unity.55iyvjgy/minimal.asm",
+        "sha256": "8155a64cba7d09b463dc4297fe29ad22f5ba759f52efec9727bf56f28976dc39"
+      },
+      {
+        "path": "/root/.ai-tmp/nemu-audio-kernel-unity.55iyvjgy/observer.cpp",
+        "sha256": "9bc6da94ef90a09a018fab89bd21ea5e60401ccf2dff5332d1d8e673d282c0a4"
+      },
+      {
+        "path": "/root/.ai-tmp/nemu-audio-kernel-unity.55iyvjgy/minimal-runtime.json",
+        "sha256": "fb72e4a59af4ae00598696fa30f2561b57ae111bb292f2e1a2bffa6438874189"
+      }
+    ]
+  },
+  "rejected_controls": [
+    {
+      "variant": "common.json",
+      "functions_exact": 147,
+      "changed_functions": [
+        "RSP_ExecuteAudioMicrocode"
+      ],
+      "report": "/root/.ai-tmp/nemu-audio-rsp-unity.7aj0c7_o/common.json",
+      "report_sha256": "69e4e7940a59b68df87aee729d371de5bd3bd613e38507dd2c7848a23e65132e"
+    },
+    {
+      "variant": "union/common.json",
+      "functions_exact": 147,
+      "changed_functions": [
+        "RSP_ExecuteAudioMicrocode"
+      ],
+      "report": "/root/.ai-tmp/nemu-audio-rsp-unity.7aj0c7_o/union/common.json",
+      "report_sha256": "33f1ac4414a6b22e9a29194829586cfd6be239f333a2e1e6c52ac40c957a0f51"
+    },
+    {
+      "variant": "kernel-first.json",
+      "functions_exact": 147,
+      "changed_functions": [
+        "RSP_ExecuteAudioMicrocode"
+      ],
+      "report": "/root/.ai-tmp/nemu-audio-rsp-unity.7aj0c7_o/kernel-first.json",
+      "report_sha256": "12934f4035c881dd76bf51f67fda510aca9f5687819062ef9079c74769c40f9e"
+    },
+    {
+      "variant": "code-only.json",
+      "functions_exact": 147,
+      "changed_functions": [
+        "RSP_ExecuteAudioMicrocode"
+      ],
+      "report": "/root/.ai-tmp/nemu-audio-rsp-unity.7aj0c7_o/code-only.json",
+      "report_sha256": "0b7b4fc09259da203d6f66023bc8094d5e698bf8cecfa8a5357c646ef82de0da"
+    },
+    {
+      "variant": "cpp-linkage/comparison.json",
+      "functions_exact": 147,
+      "changed_functions": [
+        "RSP_ExecuteAudioMicrocode"
+      ],
+      "report": "/root/.ai-tmp/nemu-audio-rsp-unity.7aj0c7_o/cpp-linkage/comparison.json",
+      "report_sha256": "5056420b2a0e0ac445a98c468a12ee54063c0e9a0c0e8eab7d5304ecf78e42a3"
+    },
+    {
+      "variant": "exceptions.json",
+      "functions_exact": 147,
+      "changed_functions": [
+        "RSP_ExecuteAudioMicrocode"
+      ],
+      "report": "/root/.ai-tmp/nemu-audio-rsp-unity.7aj0c7_o/exceptions.json",
+      "report_sha256": "dd93000eefadeb818b21789a1ea8da149fcd661a0ad7dbdd6b665ad39ee22eb9"
+    },
+    {
+      "variant": "cpp-linkage/exceptions.json",
+      "functions_exact": 147,
+      "changed_functions": [
+        "RSP_ExecuteAudioMicrocode"
+      ],
+      "report": "/root/.ai-tmp/nemu-audio-rsp-unity.7aj0c7_o/cpp-linkage/exceptions.json",
+      "report_sha256": "ae9e66d47b4c15aa61acd357f04267f1bd84e80ee64e8dc45e83f95aa5b71bb3"
+    },
+    {
+      "variant": "inline-stage.json",
+      "functions_exact": 147,
+      "changed_functions": [
+        "RSP_ExecuteAudioMicrocode"
+      ],
+      "report": "/root/.ai-tmp/nemu-audio-rsp-unity.7aj0c7_o/inline-stage.json",
+      "report_sha256": "1d5c542151b1a19548210410ede61ad3936322b452eb672143f59d7b5df8b05a"
+    },
+    {
+      "variant": "unpackaged.json",
+      "functions_exact": 147,
+      "changed_functions": [
+        "RSP_ExecuteAudioMicrocode"
+      ],
+      "report": "/root/.ai-tmp/nemu-audio-rsp-unity.7aj0c7_o/unpackaged.json",
+      "report_sha256": "df1bb72786e6bea768d537ef758d9823d709a4f2e20cd40b3e12e5c25f16d9b2"
+    },
+    {
+      "variant": "c/comparison.json",
+      "functions_exact": 147,
+      "changed_functions": [
+        "RSP_VCL",
+        "RSP_VCH",
+        "RSP_VCR",
+        "RSP_ExecuteAudioMicrocode"
+      ],
+      "report": "/root/.ai-tmp/nemu-audio-rsp-unity.7aj0c7_o/c/comparison.json",
+      "report_sha256": "b34b2f2c3594c692989ffdb3a549494b6088cbc39e878bb2877654096726c1f9"
+    },
+    {
+      "variant": "assignment/comparison.json",
+      "functions_exact": 147,
+      "changed_functions": [
+        "RSP_ExecuteAudioMicrocode"
+      ],
+      "report": "/root/.ai-tmp/nemu-audio-rsp-unity.7aj0c7_o/assignment/comparison.json",
+      "report_sha256": "b83493715147d89ef7c45c06db51024bc7128eab1232ebfd4997d04a56f61eb9"
+    },
+    {
+      "variant": "stage-g-off.json",
+      "functions_exact": 147,
+      "changed_functions": [
+        "RSP_AudioTransformStage"
+      ],
+      "report": "/root/.ai-tmp/nemu-audio-rsp-unity.7aj0c7_o/stage-g-off.json",
+      "report_sha256": "1d7a5afd339abbb88052e73817397ddec7b07191d28f4b0fd7f6c72866c135cc"
+    },
+    {
+      "variant": "stage-auto-off.json",
+      "functions_exact": 147,
+      "changed_functions": [
+        "RSP_ExecuteAudioMicrocode"
+      ],
+      "report": "/root/.ai-tmp/nemu-audio-rsp-unity.7aj0c7_o/stage-auto-off.json",
+      "report_sha256": "0126d11a9dd5df11e7408778446490a04acf44c263842555d8858ba9967e5217"
+    },
+    {
+      "variant": "ob-zero.json",
+      "functions_exact": 147,
+      "changed_functions": [
+        "RSP_StoreVectorExec",
+        "RSP_LoadVectorExec",
+        "RSP_ExecuteAudioMicrocode"
+      ],
+      "report": "/root/.ai-tmp/nemu-audio-rsp-unity.7aj0c7_o/ob-zero.json",
+      "report_sha256": "4f48ce63f31f04d74592036ddfe9816bf0fc184ee42c15ce25d02c67aab1b218"
+    },
+    {
+      "variant": "og-off.json",
+      "functions_exact": 0,
+      "changed_functions": [
+        "RSP_ReciprocalInstruction",
+        "RSP_VectorMultiplyExec",
+        "RSP_VectorMultiply",
+        "RSP_VectorMultiplyOpcode",
+        "RSP_SelectElement",
+        "RSP_ReportError",
+        "RSP_StoreVectorExec",
+        "RSP_StoreVector",
+        "RSP_StoreVectorOpcode",
+        "RSP_InvalidOpcode",
+        "RSP_SPECIAL",
+        "RSP_REGIMM",
+        "RSP_J",
+        "RSP_JAL",
+        "RSP_BEQ",
+        "RSP_BNE",
+        "RSP_BLEZ",
+        "RSP_BGTZ",
+        "RSP_ADDI",
+        "RSP_ADDIOpcode",
+        "RSP_ADDIU",
+        "RSP_SLTI",
+        "RSP_SLTIU",
+        "RSP_ANDI",
+        "RSP_ANDIOpcode",
+        "RSP_ORI",
+        "RSP_XORI",
+        "RSP_LUI",
+        "RSP_COP0",
+        "RSP_COP2",
+        "RSP_LB",
+        "RSP_LH",
+        "RSP_LW",
+        "RSP_LWOpcode",
+        "RSP_LBU",
+        "RSP_LHU",
+        "RSP_SB",
+        "RSP_SH",
+        "RSP_SW",
+        "RSP_SWOpcode",
+        "RSP_LWC2",
+        "RSP_SWC2",
+        "RSP_SLL",
+        "RSP_SLLOpcode",
+        "RSP_SRL",
+        "RSP_SRLOpcode",
+        "RSP_SRA",
+        "RSP_SLLV",
+        "RSP_SRLV",
+        "RSP_SRAV",
+        "RSP_ClampSample",
+        "RSP_MixAudio",
+        "RSP_JR",
+        "RSP_JALR",
+        "RSP_BREAK",
+        "RSP_ADD",
+        "RSP_ADDOpcode",
+        "RSP_ADDU",
+        "RSP_SUB",
+        "RSP_SUBOpcode",
+        "RSP_SUBU",
+        "RSP_AND",
+        "RSP_OR",
+        "RSP_OROpcode",
+        "RSP_XOR",
+        "RSP_NOR",
+        "RSP_SLT",
+        "RSP_SLTU",
+        "RSP_BLTZ",
+        "RSP_BGEZ",
+        "RSP_BLTZAL",
+        "RSP_BGEZAL",
+        "RSP_ReadCOP0",
+        "RSP_MFC0",
+        "RSP_MTC0",
+        "RSP_WriteCOP0",
+        "RSP_MFC2",
+        "RSP_CFC2",
+        "RSP_MTC2",
+        "RSP_CTC2",
+        "RSP_VECTOR",
+        "RSP_LBV",
+        "RSP_LSV",
+        "RSP_LLV",
+        "RSP_LDV",
+        "RSP_LQV",
+        "RSP_LRV",
+        "RSP_LPV",
+        "RSP_LUV",
+        "RSP_LHV",
+        "RSP_LFV",
+        "RSP_LTV",
+        "RSP_SBV",
+        "RSP_SSV",
+        "RSP_SLV",
+        "RSP_SDV",
+        "RSP_SQV",
+        "RSP_SRV",
+        "RSP_SPV",
+        "RSP_SUV",
+        "RSP_SHV",
+        "RSP_SFV",
+        "RSP_SWV",
+        "RSP_STV",
+        "RSP_VMULF",
+        "RSP_VMULU",
+        "RSP_VRNDP",
+        "RSP_VMULQ",
+        "RSP_VMUDL",
+        "RSP_VMUDM",
+        "RSP_VMUDN",
+        "RSP_VMUDH",
+        "RSP_VMACF",
+        "RSP_VMACU",
+        "RSP_VRNDN",
+        "RSP_VMACQ",
+        "RSP_VMADL",
+        "RSP_VMADM",
+        "RSP_VMADN",
+        "RSP_VMADH",
+        "RSP_VADD",
+        "RSP_VADDExec",
+        "RSP_VSUB",
+        "RSP_VSUBExec",
+        "RSP_VSUT",
+        "RSP_VABS",
+        "RSP_VADDC",
+        "RSP_VSUBC",
+        "RSP_VADDB",
+        "RSP_VSUBB",
+        "RSP_VACCB",
+        "RSP_VSUCB",
+        "RSP_VSAD",
+        "RSP_VSAC",
+        "RSP_VSUM",
+        "RSP_VSAW",
+        "RSP_VLT",
+        "RSP_VEQ",
+        "RSP_VNE",
+        "RSP_LegacyVGE",
+        "RSP_VGE",
+        "RSP_VCL",
+        "RSP_VCH",
+        "RSP_VCR",
+        "RSP_VMRG",
+        "RSP_VAND",
+        "RSP_VNAND",
+        "RSP_VOR",
+        "RSP_VNOR",
+        "RSP_VXOR",
+        "RSP_VXOROpcode",
+        "RSP_VNXOR",
+        "RSP_LegacyVRCP",
+        "RSP_LegacyVRCPL",
+        "RSP_LegacyVRCPH",
+        "RSP_LegacyVMOV",
+        "RSP_LegacyVRSQ",
+        "RSP_LegacyVRSQL",
+        "RSP_LegacyVRSQH",
+        "RSP_VNOOP",
+        "RSP_VEXTT",
+        "RSP_VEXTQ",
+        "RSP_VEXTN",
+        "RSP_VINST",
+        "RSP_VINSQ",
+        "RSP_VINSN",
+        "RSP_PrepareAudioMicrocode",
+        "RSP_InterpretAudioMicrocode",
+        "RSP_AudioMicrocodeNoOp",
+        "RSP_AudioDMARead",
+        "RSP_AudioDMAWrite",
+        "RSP_UnusedEntry1001E0F0",
+        "RSP_LoadVectorExec",
+        "RSP_LoadVector",
+        "RSP_LoadVectorOpcode",
+        "RSP_AudioTransformStage",
+        "RSP_ExecuteAudioMicrocode",
+        "RSP_RunAudioMicrocode"
+      ],
+      "report": "/root/.ai-tmp/nemu-audio-rsp-unity.7aj0c7_o/og-off.json",
+      "report_sha256": "79dac7f0e5e226a4559667eed71ec188f4224f5128a3c3468ef26b7976d687eb"
+    },
+    {
+      "variant": "omit-RSP_VADDExec.json",
+      "functions_exact": 148,
+      "changed_functions": [],
+      "report": "/root/.ai-tmp/nemu-audio-rsp-unity.7aj0c7_o/omit-RSP_VADDExec.json",
+      "report_sha256": "213930a9e0a4dd82da0b8db04e89c381ef4346b3371732c607dc08e3917fb1c1"
+    },
+    {
+      "variant": "omit-RSP_VSUBExec.json",
+      "functions_exact": 148,
+      "changed_functions": [],
+      "report": "/root/.ai-tmp/nemu-audio-rsp-unity.7aj0c7_o/omit-RSP_VSUBExec.json",
+      "report_sha256": "6bf9287361f7942d82a6ea8062a2814e7835d278fb94bbace9fc7f19e1231766"
+    },
+    {
+      "variant": "omit-RSP_LoadVectorOpcode.json",
+      "functions_exact": 147,
+      "changed_functions": [],
+      "report": "/root/.ai-tmp/nemu-audio-rsp-unity.7aj0c7_o/omit-RSP_LoadVectorOpcode.json",
+      "report_sha256": "9500f1a810c565603cc5c889ccd8e9e072e21e0c2fb450242e181d551df364a0"
+    },
+    {
+      "variant": "omit-RSP_VectorMultiplyOpcode.json",
+      "functions_exact": 147,
+      "changed_functions": [],
+      "report": "/root/.ai-tmp/nemu-audio-rsp-unity.7aj0c7_o/omit-RSP_VectorMultiplyOpcode.json",
+      "report_sha256": "6c27a3f7b7518293d3ea99e9647094353228901b516a110e48731e480b108c73"
+    }
+  ],
+  "larger_aggregate": {
+    "report": "/root/.ai-tmp/nemu-audio-kernel-unity.55iyvjgy/aggregate-comparison.json",
+    "conclusion": "Including the vector bank restores the kernel call but changes 25 other functions; not promoted."
+  },
+  "limits": [
+    "The precise original structure name and declaration are inferred, not recovered debug symbols.",
+    "Matching typed objects does not establish final whole-DLL global placement.",
+    "Thirty-two native RSP functions remain unmatched; this change repairs source organization without claiming additional body matches."
+  ]
+}

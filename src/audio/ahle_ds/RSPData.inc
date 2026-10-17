@@ -1,13 +1,9 @@
 // RSP storage recovered from native references and initialized data.
-// Object names and original file grouping are inferred; no gap objects added.
+// Included by RSP.cpp; private names and this fragment filename are inferred.
 #include "RSP.h"
 
-// Original 0x1012BE00.
-CpuU32 CPU_Instruction = 0;
-// Original 0x1012BE04.
-CpuU8 RSPCompareNotEqual[8] = {0};
-// Original 0x1012BE0C.
-CpuU16 RSPFlags[3] = {0};
+// Original 0x1012BE00: instruction at +0, comparison bytes at +4, flags at +12.
+RSPControlState RSPControl = {0};
 // Original 0x1012BE18.
 CpuU16 RSPVectors[32][8] = {0};
 // Original 0x1012C018.

@@ -12,31 +12,36 @@
       "/MT"
     ],
     "languages": {
-      "RSP.cpp": "C++",
-      "RSPKernel.c": "C",
-      "RSPData.c": "C"
+      "RSP.cpp": "C++"
     },
-    "language_evidence": "Original Rich header records three native C++ contributions, including two independently identified C++ CRT members. One application C++ contribution is therefore compatible with this grouping, but its original filename is not proven.",
+    "language_evidence": "Fourteen retained AMP header tables plus independently matched runtime contribution counts support thirteen application C units and one application C++ unit. RSP helpers, guest-program translation and typed storage compile together in the inferred C++ unit.",
     "no_ltcg_evidence": "Original Rich header has no C++ LTCG contribution identifier. Native compilation reproduces the recorded complete spans.",
     "native_language_control": "analysis/audio-rsp-language-control.json"
   },
   "source_sha256": {
-    "RSP.cpp": "c7af8470ebe01038716dde99f7c76c79116aa2078a46588f759e927ef19fc380",
-    "RSPKernel.c": "b24b8421e4e773593eb4d7b7b215881d951d34f57a126127b1ac3ddc60048b45",
-    "RSPData.c": "e7cf0681168a22da03eecf8e1a257d6d915a33db217642b4145b927d8784fa86",
-    "RSP.h": "96a4a727fa71a84aaf5313d11b4da970e04f781dcfe5820ebf6a6e493161a1c5",
-    "RSPMicrocode.inc": "12bae4d1c37884c7d5efbf13402d326bf46fafd0ee6064feff3fe0fdd8d2ee0c"
+    "RSP.cpp": "eef44ede85359413535ace9c62b22d775280c42cd7b2c7b065d85dcf9cd6b17c",
+    "RSPKernel.inc": "7a218993560c457a5149266e391a28fcdb0a1df5a812209c9a9b7111238eb961",
+    "RSPData.inc": "f7a6f57795b41b7203b63302205c50de7bbd459971f9d2974d9d12b1c74bbd4d",
+    "RSP.h": "9489748e5025a27cdcbcf9853751b72d0c6c73658ddb4d62893d3f40f297b7ab",
+    "RSPMicrocode.inc": "12bae4d1c37884c7d5efbf13402d326bf46fafd0ee6064feff3fe0fdd8d2ee0c",
+    "transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f"
   },
   "source_organization": {
     "status": "inferred",
-    "notes": [
-      "Kernel definitions stay separate from helper definitions: combining them lets native optimization remove code from the large kernel; separate compilation reproduces all 9504 kernel bytes.",
-      "C-linkage opcode helpers take RSPInstructionWord unions by value. The original caller MOV-immediate/PUSH-register sequence distinguishes this from a scalar unsigned argument.",
-      "Converting the kernel/data inputs to C and exposing a shared C interface preserves every one of the 180 materialized function hashes and all 30 data hashes.",
-      "Storage is grouped separately for auditability; no original RSPData filename is claimed.",
-      "Retained LQV/SQV use a guarded do-loop with a byte offset computed inside the guard; this recovers both complete 112-byte spans and preserves all 175 other core function hashes."
+    "translation_unit": "RSP.cpp",
+    "included_fragments": [
+      "RSPKernel.inc",
+      "RSPData.inc"
     ],
-    "invariance_evidence": "/root/.ai-tmp/nemu-audio-rsp.3f9d460s/c-interface/invariance.json",
+    "notes": [
+      "One native C++ translation unit contains the interpreter, guest-program translation and storage. Fragment filenames are for readability and are not claimed as original filenames.",
+      "The instruction word, comparison bytes and flags form an inferred control-state aggregate at the observed native offsets. The vector bank remains separate.",
+      "C-linkage opcode helpers take RSPInstructionWord unions by value. The original caller MOV-immediate/PUSH-register sequence distinguishes this from a scalar unsigned argument.",
+      "All 180 materialized native function hashes are unchanged from the earlier separate-unit reconstruction. The retained header table is restored before the guest program.",
+      "The earlier C/C++ frontend comparison is historical evidence from its recorded source snapshot, not a whole-unit language control on this final organization."
+    ],
+    "invariance_evidence": "analysis/audio-rsp-organization.json",
+    "language_control": "analysis/audio-rsp-language-control.json",
     "quad_vector_refinement": {
       "comparison": "/root/.ai-tmp/nemu-audio-rsp-index.x9z_b0hr/guarded-flat.json",
       "comparison_sha256": "fcc53f9e20f4661c2f945f3a656fc525b533a22d6dd97c6a87ba76542fa8ff8d",
@@ -58,15 +63,15 @@
     "functions_exact": 148,
     "functions_compared": 180,
     "matching_function_bytes": 25696,
-    "typed_objects_exact": 30,
-    "typed_objects_compared": 30,
-    "initialized_data_bytes": 5576,
-    "zero_initialized_object_bytes": 17150,
+    "typed_objects_exact": 29,
+    "typed_objects_compared": 29,
+    "initialized_data_bytes": 7752,
+    "zero_initialized_object_bytes": 17152,
     "unresolved_relocations": 0,
     "method": "Ordinary COFF DIR32 and REL32 relocations materialized using separately identified original targets. Every byte of each recorded span is compared; no masks or executable patches.",
     "artifact": "/root/.ai-tmp/nemu-audio-rsp.3f9d460s/published-comparison.json",
-    "artifact_sha256": "1eb22c400d917d9c3f56b2550c00591b949d65c2509d7b77f6cd30a7b62f9440",
-    "source_snapshot": "/root/.ai-tmp/nemu-audio-rsp.3f9d460s/runs/0374mhty"
+    "artifact_sha256": "abde98075c396d341f1f64797fbf921ca8bb45d454a70dd926783b9c44bb19d2",
+    "source_snapshot": "/root/.ai-tmp/nemu-audio-rsp.3f9d460s/runs/uteww_op"
   },
   "functions": [
     {
@@ -2052,6 +2057,16 @@
   ],
   "data": [
     {
+      "name": "RSP_DewindowTable",
+      "symbol": "_t_dewindow",
+      "va": 268688240,
+      "original_size": 2176,
+      "exact": true,
+      "zero_initialized": false,
+      "original_sha256": "52c695ac3a77f57ebb82e12d2474f02ce47ab544ef0dc05d6ecdfc6d5e4ff100",
+      "candidate_materialized_sha256": "52c695ac3a77f57ebb82e12d2474f02ce47ab544ef0dc05d6ecdfc6d5e4ff100"
+    },
+    {
       "name": "RSP_AudioMicrocode",
       "symbol": "_RSP_AudioMicrocode",
       "va": 268690416,
@@ -2182,34 +2197,14 @@
       "candidate_materialized_sha256": "43e7058cf6ef84d83477a961ee9d11dc4435312c2d513f9800ba39c8c97fefb5"
     },
     {
-      "name": "CPU_Instruction",
-      "symbol": "_CPU_Instruction",
+      "name": "RSPControl",
+      "symbol": "_RSPControl",
       "va": 269663744,
-      "original_size": 4,
+      "original_size": 20,
       "exact": true,
       "zero_initialized": true,
-      "original_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
-      "candidate_materialized_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
-    },
-    {
-      "name": "RSPCompareNotEqual",
-      "symbol": "_RSPCompareNotEqual",
-      "va": 269663748,
-      "original_size": 8,
-      "exact": true,
-      "zero_initialized": true,
-      "original_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
-      "candidate_materialized_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
-    },
-    {
-      "name": "RSPFlags",
-      "symbol": "_RSPFlags",
-      "va": 269663756,
-      "original_size": 6,
-      "exact": true,
-      "zero_initialized": true,
-      "original_sha256": "b0f66adc83641586656866813fd9dd0b8ebb63796075661ba45d1aa8089e1d44",
-      "candidate_materialized_sha256": "b0f66adc83641586656866813fd9dd0b8ebb63796075661ba45d1aa8089e1d44"
+      "original_sha256": "de47c9b27eb8d300dbb5f2c353e632c393262cf06340c4fa7f1b40c4cbd36f90",
+      "candidate_materialized_sha256": "de47c9b27eb8d300dbb5f2c353e632c393262cf06340c4fa7f1b40c4cbd36f90"
     },
     {
       "name": "RSPVectors",
@@ -2411,7 +2406,8 @@
         "path": "/root/.ai-tmp/nemu-audio-legacy.a2nhc3xq/semantics-report.json",
         "sha256": "419b1f10b3db08f5c2415c981cfc2b669ee8090e5800b7a1422beb10d9ed774b"
       }
-    ]
+    ],
+    "organization_change": "No new behavior run is claimed for the unit merge: all 180 materialized native function hashes and previously read data values are preserved, as recorded in audio-rsp-organization.json."
   },
   "shared_nemu_evidence": "analysis/audio-rsp-cross-image.json",
   "limitations": [
@@ -2420,7 +2416,7 @@
     "Inferred private names and unused-entry purposes are identified as such. No unknown memory gaps are filled with opaque objects."
   ],
   "reproduction": [
-    "python3 scripts/build_audio.py --work <scratch-under-~/.ai-tmp> --objects-only --unit RSP --unit RSPKernel --unit RSPData",
-    "python3 scripts/check_audio_rsp.py --object <scratch>/build/RSP.obj --object <scratch>/build/RSPKernel.obj --object <scratch>/build/RSPData.obj --report <scratch>/rsp-comparison.json"
+    "python3 scripts/build_audio.py --work <scratch-under-~/.ai-tmp> --objects-only --unit RSP --report <scratch>/build.json",
+    "python3 scripts/check_audio_rsp.py --object <build.json:work>/RSP.obj --report <scratch>/rsp-comparison.json"
   ]
 }

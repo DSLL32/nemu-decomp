@@ -1,6 +1,7 @@
 // RSP state and helper interface recovered from audio.dll. Names are inferred.
 #ifndef NEMU_AUDIO_RSP_H
 #define NEMU_AUDIO_RSP_H
+#include <stddef.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -23,12 +24,28 @@ typedef union RSPAccumulatorView {
  struct { CpuS64 Value:48; } Full;
  struct { CpuS64 Low:16, Value:32; } Middle;
 } RSPAccumulatorView;
-extern CpuU32 CPU_Instruction, RSPPC, RSPSavedPC, RSPDelayPC, RSPMemoryAddress;
+extern CpuU32 RSPPC, RSPSavedPC, RSPDelayPC, RSPMemoryAddress;
 extern CpuU32 RSPMemAddressReg, RSPDramAddressReg, RSPReadLengthReg, RSPWriteLengthReg;
 extern CpuU32 RSPRegisters[32];
-extern CpuU16 RSPVectors[32][8], RSPFlags[3];
+// Inferred control-state object: native accesses establish fields at 0/4/12.
+// Keeping these related fields together preserves the original native compiler's
+// treatment of calls through the guest-program helpers.
+typedef struct RSPControlState {
+    CpuU32 InstructionWord;
+    CpuU8 CompareNotEqual[8];
+    CpuU16 Flags[3];
+} RSPControlState;
+typedef char RSPControlSizeCheck[sizeof(RSPControlState) == 20 ? 1 : -1];
+typedef char RSPControlInstructionOffset[offsetof(RSPControlState, InstructionWord) == 0 ? 1 : -1];
+typedef char RSPControlCompareOffset[offsetof(RSPControlState, CompareNotEqual) == 4 ? 1 : -1];
+typedef char RSPControlFlagsOffset[offsetof(RSPControlState, Flags) == 12 ? 1 : -1];
+extern RSPControlState RSPControl;
+extern CpuU16 RSPVectors[32][8];
+#define CPU_Instruction RSPControl.InstructionWord
+#define RSPCompareNotEqual RSPControl.CompareNotEqual
+#define RSPFlags RSPControl.Flags
 extern CpuS64 RSPAccumulator[8];
-extern CpuU8 SPMemory[0x4000], RSPCompareCarry[8], RSPCompareNotEqual[8];
+extern CpuU8 SPMemory[0x4000], RSPCompareCarry[8];
 extern int RSPFastMode;
 extern CpuU32 RSPElementLaneMask[8], RSPElementIndexMask[8];
 extern unsigned *RSPDMEM;
