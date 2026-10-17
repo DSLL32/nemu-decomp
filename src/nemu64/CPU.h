@@ -98,6 +98,6 @@ void InitializeCPU();
 void RunCPU();
 void StartCPUThread();
 LONG CPUHostException(EXCEPTION_POINTERS *exception);
-CpuU32 *ContextRegister(CONTEXT *context, CpuU32 index);
+CpuU32 *ContextRegister(CONTEXT *context, CpuU8 index);
 
 #endif

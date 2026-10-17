@@ -87,6 +87,12 @@ void Branch(bool link, CpuU32 condition, bool likely)
 #define RD ((CPU_Instruction >> 11) & 31)
 #define SA ((CPU_Instruction >> 6) & 31)
 
+// Recovered virtual-address translation macro. Its address argument is
+// repeated before translation, matching the original expansion and compiler code.
+#define CPU_PHYSICAL_ADDRESS(address) \
+    ((((address) & 0xC0000000) == 0x80000000) ? \
+        ((address) & 0x1FFFFFFF) : TranslateTLB((address), false))
+
 // 00409E80
 void Op_Unknown()
 {
@@ -280,79 +286,51 @@ void Op_LDR()
 // 0040A560
 void Op_LB()
 {
-    CpuU32 address = (CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction;
-    if ((address & 0xC0000000) == 0x80000000)
-        address &= 0x1FFFFFFF;
-    else
-        address = TranslateTLB(address, false);
+    CpuU32 address = CPU_PHYSICAL_ADDRESS(((CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction));
     CPU_GPR[RT] = (CpuS8)ReadPhysicalByte(address);
 }
 
 // 0040A5C0
 void Op_LH()
 {
-    CpuU32 address = (CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction;
-    if ((address & 0xC0000000) == 0x80000000)
-        address &= 0x1FFFFFFF;
-    else
-        address = TranslateTLB(address, false);
+    CpuU32 address = CPU_PHYSICAL_ADDRESS(((CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction));
     CPU_GPR[RT] = (CpuS16)ReadPhysicalHalf(address);
 }
 
 // 0040A620
 void Op_LWL()
 {
-    CpuU32 address = (CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction;
-    if ((address & 0xC0000000) == 0x80000000)
-        address &= 0x1FFFFFFF;
-    else
-        address = TranslateTLB(address, false);
+    CpuU32 address = CPU_PHYSICAL_ADDRESS(((CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction));
     CpuU32 word = ReadPhysicalWord(address & ~3U);
     CpuU32 shift = (address & 3) * 8;
-    CPU_GPR[RT] = (CpuS32)(((CpuU32)CPU_GPR[RT] & (0x00FFFFFFU >> (24 - shift))) | (word << shift));
+    CPU_GPR[RT] = (CpuS32)(((CpuU32)CPU_GPR[RT] & (0x00FFFFFF >> (24 - shift))) | (word << shift));
 }
 
 // 0040A6B0
 void Op_LW()
 {
-    CpuU32 address = (CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction;
-    if ((address & 0xC0000000) == 0x80000000)
-        address &= 0x1FFFFFFF;
-    else
-        address = TranslateTLB(address, false);
+    CpuU32 address = CPU_PHYSICAL_ADDRESS(((CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction));
     CPU_GPR[RT] = (CpuS32)ReadPhysicalWord(address);
 }
 
 // 0040A710
 void Op_LBU()
 {
-    CpuU32 address = (CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction;
-    if ((address & 0xC0000000) == 0x80000000)
-        address &= 0x1FFFFFFF;
-    else
-        address = TranslateTLB(address, false);
+    CpuU32 address = CPU_PHYSICAL_ADDRESS(((CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction));
     CPU_GPR[RT] = (CpuU8)ReadPhysicalByte(address);
 }
 
 // 0040A770
 void Op_LHU()
 {
-    CpuU32 address = (CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction;
-    if ((address & 0xC0000000) == 0x80000000)
-        address &= 0x1FFFFFFF;
-    else
-        address = TranslateTLB(address, false);
+    CpuU32 address = CPU_PHYSICAL_ADDRESS(((CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction));
     CPU_GPR[RT] = (CpuU16)ReadPhysicalHalf(address);
 }
 
 // 0040A7D0
 void Op_LWR()
 {
-    CpuU32 address = (CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction;
-    if ((address & 0xC0000000) == 0x80000000)
-        address &= 0x1FFFFFFF;
-    else
-        address = TranslateTLB(address, false);
+    CpuU32 address = CPU_PHYSICAL_ADDRESS(((CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction));
     CpuU32 word = ReadPhysicalWord(address & ~3U);
     CpuU32 shift = (address & 3) * 8;
     CPU_GPR[RT] = (CpuS32)((word >> (24 - shift)) | ((CpuU32)CPU_GPR[RT] & (0xFFFFFF00U << shift)));
@@ -361,44 +339,28 @@ void Op_LWR()
 // 0040A860
 void Op_LWU()
 {
-    CpuU32 address = (CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction;
-    if ((address & 0xC0000000) == 0x80000000)
-        address &= 0x1FFFFFFF;
-    else
-        address = TranslateTLB(address, false);
+    CpuU32 address = CPU_PHYSICAL_ADDRESS(((CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction));
     CPU_GPR[RT] = (CpuU32)ReadPhysicalWord(address);
 }
 
 // 0040A8C0
 void Op_SB()
 {
-    CpuU32 address = (CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction;
-    if ((address & 0xC0000000) == 0x80000000)
-        address &= 0x1FFFFFFF;
-    else
-        address = TranslateTLB(address, false);
+    CpuU32 address = CPU_PHYSICAL_ADDRESS(((CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction));
     WritePhysicalByte(address, (CpuU8)CPU_GPR[RT]);
 }
 
 // 0040A920
 void Op_SH()
 {
-    CpuU32 address = (CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction;
-    if ((address & 0xC0000000) == 0x80000000)
-        address &= 0x1FFFFFFF;
-    else
-        address = TranslateTLB(address, false);
+    CpuU32 address = CPU_PHYSICAL_ADDRESS(((CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction));
     WritePhysicalHalf(address, (CpuU16)CPU_GPR[RT]);
 }
 
 // 0040A980
 void Op_SWL()
 {
-    CpuU32 address = (CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction;
-    if ((address & 0xC0000000) == 0x80000000)
-        address &= 0x1FFFFFFF;
-    else
-        address = TranslateTLB(address, false);
+    CpuU32 address = CPU_PHYSICAL_ADDRESS(((CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction));
     CpuU32 aligned = address & ~3U;
     CpuU32 oldWord = ReadPhysicalWord(aligned);
     CpuU32 shift = (address & 3) * 8;
@@ -408,11 +370,7 @@ void Op_SWL()
 // 0040AA00
 void Op_SW()
 {
-    CpuU32 address = (CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction;
-    if ((address & 0xC0000000) == 0x80000000)
-        address &= 0x1FFFFFFF;
-    else
-        address = TranslateTLB(address, false);
+    CpuU32 address = CPU_PHYSICAL_ADDRESS(((CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction));
     WritePhysicalWord(address, (CpuU32)CPU_GPR[RT]);
 }
 
@@ -431,25 +389,17 @@ void Op_SDR()
 // 0040AA80
 void Op_SWR()
 {
-    CpuU32 address = (CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction;
-    if ((address & 0xC0000000) == 0x80000000)
-        address &= 0x1FFFFFFF;
-    else
-        address = TranslateTLB(address, false);
+    CpuU32 address = CPU_PHYSICAL_ADDRESS(((CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction));
     CpuU32 aligned = address & ~3U;
     CpuU32 oldWord = ReadPhysicalWord(aligned);
     CpuU32 shift = (address & 3) * 8;
-    WritePhysicalWord(aligned, ((CpuU32)CPU_GPR[RT] << (24 - shift)) | (oldWord & (0x00FFFFFFU >> shift)));
+    WritePhysicalWord(aligned, ((CpuU32)CPU_GPR[RT] << (24 - shift)) | (oldWord & (0x00FFFFFF >> shift)));
 }
 
 // 0040AB10
 void Op_LWC1()
 {
-    CpuU32 address = (CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction;
-    if ((address & 0xC0000000) == 0x80000000)
-        address &= 0x1FFFFFFF;
-    else
-        address = TranslateTLB(address, false);
+    CpuU32 address = CPU_PHYSICAL_ADDRESS(((CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction));
     CPU_FPR.words[RT] = ReadPhysicalWord(address);
 }
 
@@ -457,71 +407,41 @@ void Op_LWC1()
 void Op_LDC1()
 {
     CpuU32 address = (CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction;
-    CpuU32 lowAddress = address;
-    if ((lowAddress & 0xC0000000) == 0x80000000)
-        lowAddress &= 0x1FFFFFFF;
-    else
-        lowAddress = TranslateTLB(lowAddress, false);
-    CpuU32 highAddress = address;
-    if ((highAddress & 0xC0000000) == 0x80000000)
-        highAddress &= 0x1FFFFFFF;
-    else
-        highAddress = TranslateTLB(highAddress, false);
-    CpuU32 low = ReadPhysicalWord(lowAddress + 4);
-    CpuU32 high = ReadPhysicalWord(highAddress);
-    CPU_FPR.longs[RT >> 1] = ((CpuU64)high << 32) | low;
+    CpuU32 lowAddress = CPU_PHYSICAL_ADDRESS(((CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction));
+    CpuU32 highAddress = CPU_PHYSICAL_ADDRESS(address);
+    CPU_FPR.longs[RT >> 1] = ((CpuU64)ReadPhysicalWord(highAddress) << 32) |
+        ReadPhysicalWord(lowAddress + 4);
 }
 
 // 0040AC10; Original evaluates translation twice, then reads low word before high word.
 void Op_LD()
 {
     CpuU32 address = (CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction;
-    CpuU32 lowAddress = address;
-    if ((lowAddress & 0xC0000000) == 0x80000000)
-        lowAddress &= 0x1FFFFFFF;
-    else
-        lowAddress = TranslateTLB(lowAddress, false);
-    CpuU32 highAddress = address;
-    if ((highAddress & 0xC0000000) == 0x80000000)
-        highAddress &= 0x1FFFFFFF;
-    else
-        highAddress = TranslateTLB(highAddress, false);
-    CpuU32 low = ReadPhysicalWord(lowAddress + 4);
-    CpuU32 high = ReadPhysicalWord(highAddress);
-    CPU_GPR[RT] = ((CpuU64)high << 32) | low;
+    CpuU32 lowAddress = CPU_PHYSICAL_ADDRESS(((CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction));
+    CpuU32 highAddress = CPU_PHYSICAL_ADDRESS(address);
+    CPU_GPR[RT] = ((CpuU64)ReadPhysicalWord(highAddress) << 32) |
+        ReadPhysicalWord(lowAddress + 4);
 }
 
 // 0040ACA0
 void Op_SWC1()
 {
-    CpuU32 address = (CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction;
-    if ((address & 0xC0000000) == 0x80000000)
-        address &= 0x1FFFFFFF;
-    else
-        address = TranslateTLB(address, false);
+    CpuU32 address = CPU_PHYSICAL_ADDRESS(((CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction));
     WritePhysicalWord(address, CPU_FPR.words[RT]);
 }
 
 // 0040AD00
 void Op_SDC1()
 {
-    CpuU32 address = (CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction;
-    if ((address & 0xC0000000) == 0x80000000)
-        address &= 0x1FFFFFFF;
-    else
-        address = TranslateTLB(address, false);
+    CpuU32 address = CPU_PHYSICAL_ADDRESS(((CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction));
     WritePhysicalDoubleWord(address, CPU_FPR.words[RT & 0x1E], CPU_FPR.words[(RT & 0x1E) | 1]);
 }
 
 // 0040AD70
 void Op_SD()
 {
-    CpuU32 address = (CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction;
-    if ((address & 0xC0000000) == 0x80000000)
-        address &= 0x1FFFFFFF;
-    else
-        address = TranslateTLB(address, false);
-    WritePhysicalDoubleWord(address, (CpuU32)CPU_GPR[RT], (CpuU32)(CPU_GPR[RT] >> 32));
+    CpuU32 address = CPU_PHYSICAL_ADDRESS(((CpuU32)CPU_GPR[RS] + (CpuS16)CPU_Instruction));
+    WritePhysicalDoubleWord(address, (CpuU32)CPU_GPR[RT], (CpuU32)((CpuU64)CPU_GPR[RT] >> 32));
 }
 
 // 0040ADE0
@@ -1082,6 +1002,7 @@ void Op_ERET()
 #undef RT
 #undef RD
 #undef SA
+#undef CPU_PHYSICAL_ADDRESS
 
 // Reconstructed interpreter COP1 handlers. Names are inferred.
 // Original code: 0040BFB0..0040C9A0. Relocation-masked comparison is tracked separately.
@@ -1956,7 +1877,7 @@ void ExecuteInterpreter()
         } else {
             CPU_CompareReset = 0;
         }
-        if (CPU_ComparePending && CPU_COP0[CP0_Compare] <= CPU_COP0[CP0_Count]) {
+        if (CPU_ComparePending && CPU_COP0[CP0_Count] >= CPU_COP0[CP0_Compare]) {
             CPU_ActionFlags |= 0x40;
             CPU_ComparePending = 0;
         }
@@ -1972,9 +1893,9 @@ void ExecuteInterpreter()
                 (CPU_COP0[CP0_Status] & 1) && !(CPU_COP0[CP0_Status] & 6)) {
                 CPU_COP0[CP0_Cause] = (CPU_COP0[CP0_Cause] & 0x7FFF7F83) | 0x8000;
                 CPU_COP0[CP0_Status] |= 2;
-                CPU_ActionFlags &= ~0x40;
                 CPU_COP0[CP0_EPC] = CPU_PC;
                 CPU_PC = 0x80000180;
+                CPU_ActionFlags &= ~0x40;
             }
             if (CPU_ActionFlags & 0x10000) {
                 NotifyTools(2, 0);
@@ -1984,23 +1905,24 @@ void ExecuteInterpreter()
                 (CPU_COP0[CP0_Status] & 1)) {
                 CPU_COP0[CP0_Cause] = (CPU_COP0[CP0_Cause] & 0x7FFFEF83) | 0x1000;
                 CPU_COP0[CP0_Status] |= 2;
-                CPU_ActionFlags &= ~0x08000000;
                 CPU_COP0[CP0_EPC] = CPU_PC;
                 CPU_PC = 0x80000180;
+                CPU_ActionFlags &= ~0x08000000;
             }
             if (CPU_ActionFlags & 0x02000000) {
-                if (CPU_COP0[CP0_Status] & 2)
-                    ReportCPUError("Doing cop1 unusable exception while exception is already being executed. Dunno if this will work");
-                else
+                if (!(CPU_COP0[CP0_Status] & 2))
                     CPU_COP0[CP0_EPC] = CPU_PC;
+                else
+                    ReportCPUError("Doing cop1 unusable exception while exception is already being executed. Dunno if this will work");
                 if (CPU_Cop1UnusableDelay)
                     CPU_COP0[CP0_Cause] |= 0x80000000;
                 else
                     CPU_COP0[CP0_Cause] &= 0x7FFFFFFF;
+                CPU_COP0[CP0_Cause] = (CPU_COP0[CP0_Cause] & 0xFFFFFF83) | 0x2C;
                 CPU_COP0[CP0_Status] |= 2;
-                CPU_COP0[CP0_Cause] = (CPU_COP0[CP0_Cause] & 0xDFFFFFAF) | 0x1000002C;
-                CPU_ActionFlags &= ~0x02000000;
+                CPU_COP0[CP0_Cause] = (CPU_COP0[CP0_Cause] & 0xCFFFFFFF) | 0x10000000;
                 CPU_PC = 0x80000180;
+                CPU_ActionFlags &= ~0x02000000;
             }
             if (CPU_ActionFlags & 0x80000) {
                 ReportCPUError("COP1 Exception trap taken");
@@ -2014,14 +1936,14 @@ void ExecuteInterpreter()
                     CPU_COP0[CP0_Cause] &= 0x7FFFFFFF;
                 CPU_COP0[CP0_Cause] = (CPU_COP0[CP0_Cause] & 0xFFFFFFBF) | 0x3C;
                 CPU_COP0[CP0_Status] |= 2;
-                CPU_ActionFlags &= ~0x80000;
                 CPU_PC = 0x80000180;
+                CPU_ActionFlags &= ~0x80000;
             }
             if (CPU_ActionFlags & 0x40000) {
-                if (CPU_COP0[CP0_Status] & 2)
-                    ReportCPUError("Doing tlb exception while exception is already being executed. Dunno if this will work");
-                else
+                if (!(CPU_COP0[CP0_Status] & 2))
                     CPU_COP0[CP0_EPC] = CPU_PC;
+                else
+                    ReportCPUError("Doing tlb exception while exception is already being executed. Dunno if this will work");
                 if (CPU_TLBExceptionDelay) {
                     CPU_COP0[CP0_Cause] |= 0x80000000;
                     CPU_TLBExceptionDelay = 0;
@@ -2031,11 +1953,17 @@ void ExecuteInterpreter()
                 CPU_COP0[CP0_Cause] &= 0xFFFFFF83;
                 switch (TranslationError) {
                 case 1:
-                    CPU_COP0[CP0_Cause] |= TLBWriteAccess ? 0xC : 8;
-                    CPU_PC = (CPU_COP0[CP0_Status] & 2) ? 0x80000180 : 0x80000000;
+                    if (TLBWriteAccess)
+                        CPU_COP0[CP0_Cause] |= 0xC;
+                    else
+                        CPU_COP0[CP0_Cause] |= 8;
+                    CPU_PC = ((CpuU8)CPU_COP0[CP0_Status] & 2) ? 0x80000180 : 0x80000000;
                     break;
                 case 2: case 3:
-                    CPU_COP0[CP0_Cause] |= TLBWriteAccess ? 0xC : 8;
+                    if (TLBWriteAccess)
+                        CPU_COP0[CP0_Cause] |= 0xC;
+                    else
+                        CPU_COP0[CP0_Cause] |= 8;
                     CPU_PC = 0x80000180;
                     break;
                 case 4: case 5:
@@ -2052,19 +1980,15 @@ void ExecuteInterpreter()
                 CPU_ActionFlags &= ~0x40000;
             }
             if (CPU_ActionFlags & 0x01000000) {
-                CPU_COP0[CP0_Status] |= 2;
                 CPU_COP0[CP0_Cause] = (CPU_COP0[CP0_Cause] & 0x7FFFFF83) | 0x20;
-                CPU_ActionFlags &= ~0x01000000;
                 CPU_COP0[CP0_EPC] = CPU_ExceptionPC;
+                CPU_COP0[CP0_Status] |= 2;
                 CPU_PC = 0x80000180;
+                CPU_ActionFlags &= ~0x01000000;
             }
-            CpuU32 savedInstruction = CPU_Instruction;
             if (CPU_ActionFlags & 0x4000) {
-                if (CPU_RSPCycles < 3001) {
-                    if (lastRSPCount)
-                        CPU_RSPCycles += CPU_COP0[CP0_Count] - lastRSPCount;
-                    lastRSPCount = CPU_COP0[CP0_Count];
-                } else {
+                CpuU32 savedInstruction = CPU_Instruction;
+                if (CPU_RSPCycles > 3000) {
                     CPU_RSPCycles = 0;
                     do {
                         for (CpuU32 i = 0; i < RSPBreakpointCount; ++i)
@@ -2097,15 +2021,19 @@ void ExecuteInterpreter()
                             if (!breakpoint) {
                                 CPU_Instruction = ReadPhysicalWord((SPReg.PC & 0xFFF) + 0x04001000);
                                 RSP_MainDispatch[CPU_Instruction >> 26]();
-                                --CPU_RSPCycles;
-                                RSPDelayPC = 0;
                                 SPReg.PC = oldRSPPC;
+                                RSPDelayPC = 0;
+                                --CPU_RSPCycles;
                             }
                         }
                     } while (CPU_RSPCycles > -3000 && (CPU_ActionFlags & 0x4000));
+                } else {
+                    if (lastRSPCount)
+                        CPU_RSPCycles += CPU_COP0[CP0_Count] - lastRSPCount;
+                    lastRSPCount = CPU_COP0[CP0_Count];
                 }
+                CPU_Instruction = savedInstruction;
             }
-            CPU_Instruction = savedInstruction;
             if (CPU_ActionFlags & 0x200000)
                 SuspendThread(CPU_Thread);
             if (CPU_ActionFlags & 0x1000) {
@@ -2140,8 +2068,8 @@ void ExecuteInterpreter()
             ++CPU_COP0[CP0_Count];
             --CPU_VideoCyclesRemaining;
             --CPU_AudioCyclesRemaining;
-            CPU_PC += 4;
             CPU_GPR[0] = 0;
+            CPU_PC += 4;
         }
 instructionComplete:
         if (CPU_ActionFlags & 0x400000) {

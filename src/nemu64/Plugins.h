@@ -213,6 +213,7 @@ extern char SelectedRomFilename[256];
 
 void NotifyTools(unsigned int mask, unsigned int reason);
 int __stdcall NetplayStartGame(char *game, int player, int playerCount);
+void __stdcall NetplayChatReceived(char *nick, char *text);
 void __stdcall NetplayClientDropped(char *nick, int player);
 void CheckGraphicsInterrupts();
 

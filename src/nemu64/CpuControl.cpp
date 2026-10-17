@@ -19,8 +19,8 @@
 
 extern "C" __declspec(dllimport) int __stdcall kailleraModifyPlayValues(void *, int);
 extern "C" __declspec(dllimport) void __stdcall kailleraEndGame();
-__declspec(dllimport) void GSInitialize(char *rom, char *rdram, char *iniPath);
-__declspec(dllimport) void GSUpdate();
+void GSInitialize(char *rom, char *rdram, char *iniPath);
+void GSUpdate();
 
 WORD CPU_HostFpuControl;
 CpuU32 CPU_CycleShift;
@@ -48,7 +48,7 @@ CpuU32 ViMeasureCount;
 CpuU32 ViMeasureTime;
 CpuU32 RecompilerStepMode;
 // Alternate cartridge mapping used by the original word readers and compiler.
-static const CpuU32 ROMAlternateBase = 0x13FCB4D0;
+enum { ROMAlternateBase = 0x13FCB4D0 };
 
 static const BYTE BootRspImem[0x1000] = {
 #include "res/BootRspImem.inc"
@@ -83,48 +83,43 @@ LONG CPUHostException(EXCEPTION_POINTERS *exception)
                 exception->ExceptionRecord->ExceptionAddress);
         MessageBox(MainWindow, message, "Error", MB_ICONERROR);
         CPU_ActionFlags |= 0x00400000;
-        if (disposition == EXCEPTION_EXECUTE_HANDLER)
-            CPU_GPR[29] = exception->ContextRecord->Edi;
-        return disposition;
+        goto finishException;
     }
 
     CpuU32 oldPC = CPU_PC;
+    CPU_PC += Dynarec_AddressMap[index].physical -
+        (((CPU_PC & 0xC0000000) == 0x80000000) ? CPU_PC & 0x1FFFFFFF : TranslateTLB(CPU_PC, FALSE));
     CpuU32 physicalPC = ((CPU_PC & 0xC0000000) == 0x80000000) ?
-        CPU_PC & 0x1FFFFFFF : TranslateTLB(CPU_PC, FALSE);
-    CPU_PC += Dynarec_AddressMap[index].physical - physicalPC;
-    physicalPC = ((CPU_PC & 0xC0000000) == 0x80000000) ?
         CPU_PC & 0x1FFFFFFF : TranslateTLB(CPU_PC, FALSE);
     CpuU32 address;
     bool hostByteOrder;
     if (TLBEnabled && !TLBRamMapped) {
-        address = exception->ContextRecord->Ebx;
-        address = ((address & 0xC0000000) == 0x80000000) ?
-            address & 0x1FFFFFFF : TranslateTLB(address, FALSE);
+        address = ((exception->ContextRecord->Ebx & 0xC0000000) == 0x80000000) ?
+            exception->ContextRecord->Ebx & 0x1FFFFFFF : TranslateTLB(exception->ContextRecord->Ebx, FALSE);
         hostByteOrder = false;
     } else {
         address = exception->ExceptionRecord->ExceptionInformation[1] - (CpuU32)RDRAM;
         hostByteOrder = true;
     }
-    CpuU32 hostOffset = exception->ExceptionRecord->ExceptionInformation[1] - (CpuU32)RDRAM;
     if (address >= RDRAMSize ||
-        (TLBEnabled && !TLBRamMapped && hostOffset >= RDRAMSize)) {
+        (TLBEnabled && !TLBRamMapped && (exception->ExceptionRecord->ExceptionInformation[1] - (CpuU32)RDRAM) >= RDRAMSize)) {
         switch (Dynarec_Mode) {
         case 0: case 3: case 4: case 5:
             if (physicalPC < RDRAMSize)
                 memset(&Dynarec_BlockCode[(physicalPC >> 2) & 0x3FFFFC00], 0, 0x1000);
             break;
         case 1: case 2:
-            for (CpuU32 i = 0; i < CPUBreakpointCount; ++i) {
-                if ((CPUBreakpoints[i].Address & 0xFFFFF000) ==
+            for (index = 0; index < CPUBreakpointCount; ++index) {
+                if ((CPUBreakpoints[index].Address & 0xFFFFF000) ==
                     (physicalPC & 0xFFFFF000)) {
-                    if (ReadPhysicalWord(CPUBreakpoints[i].Address) ==
-                        (CPUBreakpoints[i].CodeOffset | 0xEC000000))
-                        WritePhysicalWord(CPUBreakpoints[i].Address,
-                                  CPUBreakpoints[i].Instruction);
-                    if (i + 1 <= CPUBreakpointCount - 1) {
-                        if (i < CPUBreakpointCount)
-                            memcpy(&CPUBreakpoints[i], &CPUBreakpoints[i + 1],
-                                   (CPUBreakpointCount - i) * sizeof(DebugBreakpoint));
+                    if (ReadPhysicalWord(CPUBreakpoints[index].Address) ==
+                        (CPUBreakpoints[index].CodeOffset | 0xEC000000))
+                        WritePhysicalWord(CPUBreakpoints[index].Address,
+                                  CPUBreakpoints[index].Instruction);
+                    if (index + 1 <= CPUBreakpointCount - 1) {
+                        if (index < CPUBreakpointCount)
+                            memcpy(&CPUBreakpoints[index], &CPUBreakpoints[index + 1],
+                                   ((CPUBreakpointCount - index) * 3) << 2);
                         --CPUBreakpointCount;
                     }
                 }
@@ -135,69 +130,71 @@ LONG CPUHostException(EXCEPTION_POINTERS *exception)
     if (address == 0x00800001) {
         CPU_ActionFlags |= 0x00040000;
         FaultingInstructions[physicalPC >> 2] = 1;
-        CPU_GPR[29] = exception->ContextRecord->Edi;
-        return EXCEPTION_EXECUTE_HANDLER;
+        disposition = EXCEPTION_EXECUTE_HANDLER;
+        goto finishException;
     }
     disposition = EXCEPTION_CONTINUE_EXECUTION;
     DWORD oldProtection;
     if (address < RDRAMSize &&
-        (!TLBEnabled || TLBRamMapped || hostOffset < RDRAMSize)) {
+        (!TLBEnabled || TLBRamMapped || (exception->ExceptionRecord->ExceptionInformation[1] - (CpuU32)RDRAM) < RDRAMSize)) {
         memset(&Dynarec_BlockCode[(address >> 2) & 0x3FFFFC00], 0, 0x1000);
         VirtualProtect(RDRAM + (address & 0xFFFFF000), 0x1000, PAGE_READWRITE, &oldProtection);
     } else {
         FaultingInstructions[physicalPC >> 2] = 1;
     }
 
-    BYTE *code = (BYTE *)exception->ExceptionRecord->ExceptionAddress;
-    CONTEXT *context = exception->ContextRecord;
-    switch (code[0]) {
-    case 0x88:
-        WritePhysicalByte(address ^ (hostByteOrder ? 3 : 0),
-                  (BYTE)*ContextRegister(context, (code[1] >> 3) & 7));
-        context->Eip += 6;
+    switch (((BYTE *)exception->ExceptionRecord->ExceptionAddress)[0]) {
+    case 0x88: {
+        CpuU32 value = *ContextRegister(exception->ContextRecord,
+            (((BYTE *)exception->ExceptionRecord->ExceptionAddress)[1] >> 3) & 7);
+        WritePhysicalByte(hostByteOrder ? address ^ 3 : address, value);
+        exception->ContextRecord->Eip += 6;
         break;
-    case 0x66:
-        WritePhysicalHalf(address ^ (hostByteOrder ? 2 : 0),
-                      (WORD)*ContextRegister(context, (code[2] >> 3) & 7));
-        context->Eip += 7;
+    }
+    case 0x66: {
+        CpuU32 value = *ContextRegister(exception->ContextRecord,
+            (((BYTE *)exception->ExceptionRecord->ExceptionAddress)[2] >> 3) & 7);
+        WritePhysicalHalf(hostByteOrder ? address ^ 2 : address, value);
+        exception->ContextRecord->Eip += 7;
         break;
+    }
     case 0x89:
-        WritePhysicalWord(address, *ContextRegister(context, (code[1] >> 3) & 7));
-        context->Eip += 6;
+        WritePhysicalWord(address, *ContextRegister(exception->ContextRecord, (((BYTE *)exception->ExceptionRecord->ExceptionAddress)[1] >> 3) & 7));
+        exception->ContextRecord->Eip += 6;
         break;
     case 0xC7:
-        WritePhysicalWord(address, *(CpuU32 *)(code + 6));
-        context->Eip += 10;
+        WritePhysicalWord(address, *(CpuU32 *)((BYTE *)exception->ExceptionRecord->ExceptionAddress + 6));
+        exception->ContextRecord->Eip += 10;
         break;
     case 0x0F: {
         CpuU32 value; // Unsupported secondary opcodes retain the original uninitialized value.
-        switch (code[1]) {
-        case 0xB6: value = ReadPhysicalByte(address ^ (hostByteOrder ? 3 : 0)); break;
-        case 0xB7: value = ReadPhysicalHalf(address ^ (hostByteOrder ? 2 : 0)); break;
-        case 0xBE: value = (signed char)ReadPhysicalByte(address ^ (hostByteOrder ? 3 : 0)); break;
-        case 0xBF: value = (short)ReadPhysicalHalf(address ^ (hostByteOrder ? 2 : 0)); break;
+        switch (((BYTE *)exception->ExceptionRecord->ExceptionAddress)[1]) {
+        case 0xB6: value = ReadPhysicalByte((hostByteOrder ? address ^ 3 : address)); break;
+        case 0xB7: value = ReadPhysicalHalf((hostByteOrder ? address ^ 2 : address)); break;
+        case 0xBE: value = (signed char)ReadPhysicalByte((hostByteOrder ? address ^ 3 : address)); break;
+        case 0xBF: value = (short)ReadPhysicalHalf((hostByteOrder ? address ^ 2 : address)); break;
         }
-        *ContextRegister(context, (code[2] >> 3) & 7) = value;
-        context->Eip += 7;
+        *ContextRegister(exception->ContextRecord, (((BYTE *)exception->ExceptionRecord->ExceptionAddress)[2] >> 3) & 7) = value;
+        exception->ContextRecord->Eip += 7;
         break;
     }
     case 0x8B:
-        *ContextRegister(context, (code[1] >> 3) & 7) = ReadPhysicalWord(address);
-        context->Eip += 6;
+        *ContextRegister(exception->ContextRecord, (((BYTE *)exception->ExceptionRecord->ExceptionAddress)[1] >> 3) & 7) = ReadPhysicalWord(address);
+        exception->ContextRecord->Eip += 6;
         break;
     default:
-        sprintf(opcodeMessage, "Unhandled mov(sx/zx) caused exception: %X", code[0]);
+        sprintf(opcodeMessage, "Unhandled mov(sx/zx) caused exception: %X", ((BYTE *)exception->ExceptionRecord->ExceptionAddress)[0]);
         ReportCPUError(opcodeMessage);
         disposition = EXCEPTION_EXECUTE_HANDLER;
         break;
     }
     if ((address >= RDRAMSize ||
-        (TLBEnabled && !TLBRamMapped && hostOffset >= RDRAMSize)) &&
+        (TLBEnabled && !TLBRamMapped && (exception->ExceptionRecord->ExceptionInformation[1] - (CpuU32)RDRAM) >= RDRAMSize)) &&
         disposition == EXCEPTION_CONTINUE_EXECUTION) {
         CPU_COP0[9] -= 10000;
         CPU_VideoCyclesRemaining += 10000;
         CPU_AudioCyclesRemaining += 10000;
-        context->Esi -= 10000;
+        exception->ContextRecord->Esi -= 10000;
     }
     if (MemoryBreakHit) {
         CPU_ActionFlags |= 0x10000;
@@ -206,8 +203,9 @@ LONG CPUHostException(EXCEPTION_POINTERS *exception)
     }
     if (disposition == EXCEPTION_CONTINUE_EXECUTION)
         CPU_PC = oldPC;
-    else if (disposition == EXCEPTION_EXECUTE_HANDLER)
-        CPU_GPR[29] = context->Edi;
+finishException:
+    if (disposition == EXCEPTION_EXECUTE_HANDLER)
+        CPU_GPR[29] = exception->ContextRecord->Edi;
     return disposition;
 }
 
@@ -418,10 +416,14 @@ void ResetRecompiler(void)
 // 004157D0
 void UpdateAudioTiming(void)
 {
-    CpuU32 rate = VideoNTSC == 0 ? 49656530 : 48681812;
+    CpuU32 rate;
+    if (VideoNTSC)
+        rate = 48681812;
+    else
+        rate = 49656530;
     CPU_AudioEnabled = 1;
-    CPU_AudioCyclesRemaining = (int)((int)(((CpuS64)(AIReg.Dacrate + 1) *
-        (AIReg.Length >> 2) * 46875000) / rate) * 0.98f);
+    CPU_AudioCyclesRemaining = (int)((int)(((AIReg.Length >> 2) *
+        (CpuS64)(AIReg.Dacrate + 1) * 46875000) / rate) * 0.98f);
 }
 // 004169E0
 void StartCPUThread(void)
@@ -430,13 +432,13 @@ void StartCPUThread(void)
 }
 
 // 00414420. Index 4 (ESP) is deliberately unsupported.
-CpuU32 *ContextRegister(CONTEXT *context, CpuU32 index)
+CpuU32 *ContextRegister(CONTEXT *context, CpuU8 index)
 {
-    switch ((BYTE)index) {
+    switch (index) {
     case 0: return (CpuU32 *)&context->Eax;
+    case 3: return (CpuU32 *)&context->Ebx;
     case 1: return (CpuU32 *)&context->Ecx;
     case 2: return (CpuU32 *)&context->Edx;
-    case 3: return (CpuU32 *)&context->Ebx;
     case 5: return (CpuU32 *)&context->Ebp;
     case 6: return (CpuU32 *)&context->Esi;
     case 7: return (CpuU32 *)&context->Edi;
@@ -464,30 +466,25 @@ void ResetCPU(void)
     AllowRomWrites = 0;
     FILE *file = 0;
     if (VideoNTSC == 0) {
-        if (strlen(PIFNTSCFilename) == 0)
+        if (strlen(PIFPALFilename) == 0)
             goto initializeRegisters;
-        file = fopen(PIFNTSCFilename, "r");
-    }
-    if (VideoNTSC == 1 && strlen(PIFPALFilename) != 0)
         file = fopen(PIFPALFilename, "r");
+    }
+    if (VideoNTSC == 1 && strlen(PIFNTSCFilename) != 0)
+        file = fopen(PIFNTSCFilename, "r");
     if (file) {
         fread(PIFRom, 0x7C0, 1, file);
         fclose(file);
         CPU_PC = 0xBFC00000;
     }
 initializeRegisters:
+    TLBEnabled = CPU_TLBEnabled;
+    CPU_LO = 0;
+    CPU_HI = 0;
+    CPU_GPR[0] = 0;
+    CPU_GPR[1] = 0;
     CPU_GPR[2] = (CpuS64)(int)0xD1731BE9;
     CPU_GPR[3] = (CpuS64)(int)0xD1731BE9;
-    CPU_GPR[12] = (CpuS64)(int)0xD1330BC3;
-    CPU_GPR[13] = (CpuS64)(int)0xD1330BC3;
-    CPU_GPR[20] = (CpuS32)VideoNTSC;
-    TLBEnabled = CPU_TLBEnabled;
-    CPU_LO = CPU_HI = 0;
-    CPU_GPR[0] = 0;
-    CPU_GPR[21] = (int)(ForcePIFSuccess != 0);
-    CPU_GPR[22] = (CpuS32)BootCicSeed;
-    CPU_GPR[23] = (CpuS32)BootVersion;
-    CPU_GPR[1] = 0;
     CPU_GPR[4] = 0x1BE9;
     CPU_GPR[5] = (CpuS64)(int)0xF45231E5;
     CPU_GPR[6] = (CpuS64)(int)0xA4001F0C;
@@ -496,12 +493,23 @@ initializeRegisters:
     CPU_GPR[9] = 0;
     CPU_GPR[10] = 0x40;
     CPU_GPR[11] = (CpuS64)(int)0xA4000040;
+    CPU_GPR[12] = (CpuS64)(int)0xD1330BC3;
+    CPU_GPR[13] = (CpuS64)(int)0xD1330BC3;
     CPU_GPR[14] = 0x25613A26;
     CPU_GPR[15] = 0x2EA04317;
-    CPU_GPR[16] = CPU_GPR[17] = CPU_GPR[18] = CPU_GPR[19] = 0;
+    CPU_GPR[16] = 0;
+    CPU_GPR[17] = 0;
+    CPU_GPR[18] = 0;
+    CPU_GPR[19] = 0;
+    CPU_GPR[20] = (CpuS32)VideoNTSC;
+    CPU_GPR[21] = (int)(ForcePIFSuccess != 0);
+    CPU_GPR[22] = (CpuS32)BootCicSeed;
+    CPU_GPR[23] = (CpuS32)BootVersion;
     CPU_GPR[24] = 0;
     CPU_GPR[25] = (CpuS64)(int)0xD73F2993;
-    CPU_GPR[26] = CPU_GPR[27] = CPU_GPR[28] = 0;
+    CPU_GPR[26] = 0;
+    CPU_GPR[27] = 0;
+    CPU_GPR[28] = 0;
     CPU_GPR[29] = (CpuS64)(int)0xA4001FF0;
     CPU_GPR[30] = 0;
     CPU_GPR[31] = (CpuS64)(int)0xA4001554;
@@ -513,12 +521,12 @@ initializeRegisters:
     memset(RSPAccumulator, 0, sizeof(RSPAccumulator));
     memset(&RIReg, 0, sizeof(RIReg));
     memset(&SPReg, 0, sizeof(SPReg));
-    MIReg.Mode = MIReg.InterruptMask = 0;
+    memset(&MIReg, 0, 2 * sizeof(CpuU32));
     memset(&AIReg, 0, sizeof(AIReg));
     memset(&PIReg, 0, sizeof(PIReg));
     memset(&VIReg, 0, sizeof(VIReg));
     memset(&RDRAMReg, 0, sizeof(RDRAMReg));
-    *(CpuU32 *)RSPFlags = 0;
+    memset(RSPFlags, 0, sizeof(RSPFlags));
     CPU_COP0[12] = 0x34000000;
     CPU_FRMode = 1;
     CPU_FpuModeChanges = 0;
@@ -528,9 +536,8 @@ initializeRegisters:
     CPU_COP0[4] = 0;
     CPU_Random = 0;
     CPU_TLBExceptionDelay = 0;
-    RSPFlags[2] = 0;
     RSPDelayPC = 0;
-    MIReg.Interrupt = 0;
+    memset(&MIReg.Interrupt, 0, sizeof(MIReg.Interrupt));
     SIAddress = 0;
     memset(&DPCReg, 0, sizeof(DPCReg));
     CPU_AudioEnabled = 0;
@@ -542,7 +549,7 @@ initializeRegisters:
     SPReg.Status = 0x41;
     DPCReg.Status = 0x88;
     CPU_CompareReset = 1;
-    CPU_VideoPeriod = CPU_VideoCyclesRemaining = 6250000;
+    CPU_VideoCyclesRemaining = CPU_VideoPeriod = 6250000;
     VICurrentLine = 0;
     MemoryBreakHit = 0;
     AudioTimingFlag = 0;
@@ -627,57 +634,46 @@ void RunCPU(void)
         ExecuteInterpreter();
     else {
         LastRspCpuCount = 0;
-        for (;;) {
-            bool translated = (CPU_PC & 0xC0000000) != 0x80000000;
-            CpuU32 physical = !translated ?
-                CPU_PC & 0x1FFFFFFF : TranslateTLB(CPU_PC, FALSE);
-            if (translated && physical == 0x00800001) {
-                CPU_ActionFlags |= 0x40000;
-            } else {
-                CpuU32 offset;
-                bool compile = false;
-                if (Dynarec_Mode == 1 || Dynarec_Mode == 2) {
-                    if (physical < RDRAMSize)
-                        offset = *(CpuU32 *)(RDRAM + physical);
-                    else if (physical >= 0x10000000 && physical < 0x1FBFFFFF && ROMCacheEnabled == 1) {
-                        if (physical >= 0x14000000)
-                            physical -= ROMAlternateBase;
-                        // This unusual address-of-global lookup is present in the target.
-                        offset = *(CpuU32 *)((BYTE *)&ROMCache + physical);
-                        compile = offset == 0;
-                        goto haveOffset;
-                    } else
-                        offset = ReadPhysicalWord(physical);
-                    if ((offset >> 26) == 0x3B)
-                        offset &= 0x03FFFFFF;
-                    else
-                        compile = true;
-                } else {
-                    if (physical < RDRAMSize)
-                        offset = *(CpuU32 *)((BYTE *)Dynarec_BlockCode + physical);
-                    else if (physical >= 0x10000000 && physical < 0x1FBFFFFF && ROMCacheEnabled == 1) {
-                        if (physical >= 0x14000000)
-                            physical -= ROMAlternateBase;
-                        offset = *(CpuU32 *)((BYTE *)&ROMCache + physical);
-                    } else
-                        offset = 0;
-                    compile = offset == 0;
-                }
-haveOffset:
-                if (compile) {
-                    NotifyTools(0x40, 1);
-                    __try {
-                        __asm fwait
-                        CompileBlock();
-                        __asm fwait
-                    }
-                    __except (EXCEPTION_EXECUTE_HANDLER) { ResetRecompiler(); CompileBlock(); }
-                    NotifyTools(0x40, 0);
-                } else
-                    Dynarec_EntryPoint = Dynarec_MainCode + offset;
+        do {
+            // The original block dispatcher shares EAX with its cold lookup labels.
+            __asm {
+                mov eax, CPU_PC
+                mov edx, eax
+                and edx, 0c0000000h
+                cmp edx, 080000000h
+                jne translateBlockAddress
+                and eax, 01fffffffh
+blockAddressReady:
+                mov edx, Dynarec_Mode
+                cmp edx, 1
+                je findPatchedBlock
+                cmp edx, 2
+                je findPatchedBlock
+                cmp eax, RDRAMSize
+                jae findCartridgeBlock
+                mov eax, dword ptr Dynarec_BlockCode[eax]
+checkBlockOffset:
+                cmp eax, 0
+                jne blockOffsetReady
+                jmp compileBlock
+findPatchedBlock:
+                cmp eax, RDRAMSize
+                jae findCartridgeInstruction
+                add eax, RDRAM
+                mov eax, dword ptr [eax]
+checkPatchedInstruction:
+                mov edx, eax
+                shr edx, 26
+                cmp edx, 03bh
+                jne compileBlock
+                and eax, 03ffffffh
+blockOffsetReady:
+                lea eax, Dynarec_MainCode[eax]
+                mov Dynarec_EntryPoint, eax
+            }
+executeBlock:
                 __try {
                     __asm {
-                        fwait
                         mov eax, Dynarec_EntryPoint
                         push ebx
                         push esi
@@ -697,10 +693,8 @@ haveOffset:
                         pop ebp
                         pop esi
                         pop ebx
-                        fwait
                     }
                 } __except (CPUHostException(GetExceptionInformation())) { }
-            }
 processEvents:
             if (CPU_COP0[9] < 20000 && !CPU_CompareReset) {
                 CPU_ComparePending = 1;
@@ -730,6 +724,7 @@ processEvents:
                 NotifyTools(0x10, 1);
                 if (SelectedGraphicsPlugin->UpdateScreen)
                     SelectedGraphicsPlugin->UpdateScreen();
+                DWORD now;
                 if (NetPlayActive) {
                     CIGetJoyData();
                     CpuU32 values[4] = {Controllers[0].Buttons, 0, 0, 0};
@@ -742,10 +737,10 @@ processEvents:
                 NotifyTools(0x10, 0);
                 ++VICount;
                 if (++ViMeasureCount >= 31) {
-                    DWORD now = timeGetTime();
+                    now = timeGetTime();
                     if (now != ViMeasureTime && ViMeasureTime) {
-                        char text[124];
-                        sprintf(text, "VI/s: %3.2f", 31.0 / ((CpuU64)(now - ViMeasureTime) / 1000.0));
+                        char text[100];
+                        sprintf(text, "VI/s: %3.2f", 31.0f / ((now - ViMeasureTime) / 1000.0f));
                         if (!FullScreen)
                             SetStatusText(1, text);
                     }
@@ -757,8 +752,7 @@ processEvents:
                 CPU_ActionFlags |= 0x40;
                 CPU_ComparePending = 0;
             }
-            if (!CPU_ActionFlags)
-                continue;
+            if (CPU_ActionFlags) {
             if (CPU_ActionFlags & 1)
                 GSUpdate();
             RaisePendingInterrupt(1, 8);
@@ -819,11 +813,14 @@ processEvents:
                 CPU_COP0[13] &= 0xFFFFFF83;
                 switch (TranslationError) {
                 case 1:
-                    CPU_COP0[13] |= TLBWriteAccess ? 0xC : 8;
-                    CPU_PC = (CPU_COP0[12] & 2) ? 0x80000180 : 0x80000000;
+                    if (TLBWriteAccess) CPU_COP0[13] |= 0xC;
+                    else CPU_COP0[13] |= 8;
+                    if (CPU_COP0[12] & 2) CPU_PC = 0x80000180;
+                    else CPU_PC = 0x80000000;
                     break;
                 case 2: case 3:
-                    CPU_COP0[13] |= TLBWriteAccess ? 0xC : 8;
+                    if (TLBWriteAccess) CPU_COP0[13] |= 0xC;
+                    else CPU_COP0[13] |= 8;
                     CPU_PC = 0x80000180;
                     break;
                 case 4: case 5:
@@ -867,12 +864,13 @@ processEvents:
                             if (RSPDelayPC) {
                                 RspSavedPC = SPReg.PC;
                                 SPReg.PC = RSPDelayPC;
-                                bool interrupted = false;
+                                CpuU32 i;
+                                int interrupted = 0;
                                 if (!(CPU_ActionFlags & 0x20000)) {
-                                    for (CpuU32 i = 0; i < RSPBreakpointCount; ++i)
+                                    for (i = 0; i < RSPBreakpointCount; ++i)
                                         if (RSPBreakpoints[i] == (SPReg.PC & 0xFFF)) {
                                             CPU_ActionFlags |= 0x20000;
-                                            interrupted = true;
+                                            interrupted = 1;
                                             RSPDelayPC = 0;
                                             SPReg.PC -= 4;
                                         }
@@ -898,9 +896,8 @@ processEvents:
                 NotifyTools(2, 0);
                 SuspendThread(CPU_Thread);
                 CPU_LastPC = CPU_PC;
-                CpuU32 physical = ((CPU_LastPC & 0xC0000000) == 0x80000000) ?
-                    CPU_LastPC & 0x1FFFFFFF : TranslateTLB(CPU_LastPC, FALSE);
-                CPU_Instruction = ReadPhysicalWord(physical);
+                CPU_Instruction = ReadPhysicalWord(((CPU_LastPC & 0xC0000000) == 0x80000000) ?
+                    CPU_LastPC & 0x1FFFFFFF : TranslateTLB(CPU_LastPC, FALSE));
                 CpuU32 savedCodePosition = Dynarec_MainCodeUsed;
                 Dynarec_BranchPending = 1;
                 RecompilerStepMode = 1;
@@ -916,14 +913,14 @@ processEvents:
                 Dynarec_BranchPending = 0;
                 RecompilerStepMode = 0;
                 CPU_PC += 4;
-                BYTE *singleInstruction = Dynarec_MainCode + savedCodePosition;
+                savedCodePosition += (CpuU32)Dynarec_MainCode;
                 __asm {
                     push ebx
                     push esi
                     push ebp
                     mov esi, 10000
                     mov edi, dword ptr CPU_GPR[232]
-                    call singleInstruction
+                    call savedCodePosition
                     mov dword ptr CPU_GPR[232], edi
                     sub esi, 10000
                     sub dword ptr CPU_COP0[36], esi
@@ -937,8 +934,8 @@ processEvents:
             }
             if ((CPU_ActionFlags & 0x200000) && !ActivePause)
                 SuspendThread(CPU_Thread);
-            if (CPU_ActionFlags & 0x1000) { CPU_ActionFlags &= ~0x1000; LoadState(false); }
-            if (CPU_ActionFlags & 0x2000) { CPU_ActionFlags &= ~0x2000; SaveState(); }
+            if (CPU_ActionFlags & 0x1000) { CPU_ActionFlags &= ~0x1000; SaveState(); }
+            if (CPU_ActionFlags & 0x2000) { CPU_ActionFlags &= ~0x2000; LoadState(false); }
             if (CPU_ActionFlags & 0x04000000) {
                 CPU_ActionFlags &= ~0x04000000;
                 if (SelectedGraphicsPlugin->CloseDLL) SelectedGraphicsPlugin->CloseDLL();
@@ -952,7 +949,8 @@ processEvents:
                 CPU_ActionFlags &= ~0x400000;
                 break;
             }
-        }
+            }
+        } while (1);
     }
     AIFree();
     if (SelectedGraphicsPlugin->RomClosed) SelectedGraphicsPlugin->RomClosed();
@@ -981,6 +979,63 @@ processEvents:
         NetPlayActive = 0;
     }
     return;
+
+    __asm {
+findCartridgeBlock:
+        cmp eax, 010000000h
+        jb noCachedBlock
+        cmp eax, 01fbfffffh
+        jae noCachedBlock
+        cmp ROMCacheEnabled, 1
+        jne noCachedBlock
+        cmp eax, 014000000h
+        jb cachedBlockAddressReady
+        add eax, -ROMAlternateBase
+cachedBlockAddressReady:
+        mov eax, dword ptr ROMCache[eax]
+        jmp checkBlockOffset
+noCachedBlock:
+        mov eax, 0
+        jmp checkBlockOffset
+findCartridgeInstruction:
+        cmp eax, 010000000h
+        jb readBlockInstruction
+        cmp eax, 01fbfffffh
+        jae readBlockInstruction
+        cmp ROMCacheEnabled, 1
+        jne readBlockInstruction
+        cmp eax, 014000000h
+        jb cachedInstructionAddressReady
+        add eax, -ROMAlternateBase
+cachedInstructionAddressReady:
+        mov eax, dword ptr ROMCache[eax]
+        jmp checkBlockOffset
+readBlockInstruction:
+        push eax
+        call ReadPhysicalWord
+        jmp checkPatchedInstruction
+    }
+compileBlock:
+    NotifyTools(0x40, 1);
+    __try {
+        CompileBlock();
+        } __except (EXCEPTION_EXECUTE_HANDLER) {
+        ResetRecompiler();
+        CompileBlock();
+    }
+    NotifyTools(0x40, 0);
+    goto executeBlock;
+
+    __asm {
+translateBlockAddress:
+        push 0
+        push eax
+        call TranslateTLB
+        cmp eax, 0800001h
+        jne blockAddressReady
+    }
+    CPU_ActionFlags |= 0x40000;
+    goto processEvents;
 }
 
 #pragma optimize("", on)

@@ -44,24 +44,26 @@ typedef char InstructionSizeIs64[sizeof(RecompiledInstruction) == 64 ? 1 : -1];
 
 void AddJumpTarget(unsigned label)
 {
-    RecompiledInstruction &instruction = Dynarec_Instructions[Dynarec_InstructionCount];
-    instruction.size = 1;
-    instruction.opcode = 0;
-    instruction.destination = -1;
-    instruction.destination2 = -1;
-    instruction.source = -1;
-    instruction.source2 = -1;
-    instruction.source3 = -1;
-    instruction.address = 0;
-    instruction.immediate = 0;
-    instruction.condition = -1;
-    instruction.mode = -1;
-    instruction.target = -1;
-    instruction.longJump = 1;
-    instruction.label = label;
-    instruction.guestPC = Dynarec_DelaySlot ? CPU_LastPC - 4 : CPU_LastPC;
-    instruction.readsFlags = 0;
-    instruction.writesFlags = 0;
+    Dynarec_Instructions[Dynarec_InstructionCount].size = 1;
+    Dynarec_Instructions[Dynarec_InstructionCount].opcode = 0;
+    Dynarec_Instructions[Dynarec_InstructionCount].destination = -1;
+    Dynarec_Instructions[Dynarec_InstructionCount].destination2 = -1;
+    Dynarec_Instructions[Dynarec_InstructionCount].source = -1;
+    Dynarec_Instructions[Dynarec_InstructionCount].source2 = -1;
+    Dynarec_Instructions[Dynarec_InstructionCount].source3 = -1;
+    Dynarec_Instructions[Dynarec_InstructionCount].address = 0;
+    Dynarec_Instructions[Dynarec_InstructionCount].immediate = 0;
+    Dynarec_Instructions[Dynarec_InstructionCount].condition = -1;
+    Dynarec_Instructions[Dynarec_InstructionCount].mode = -1;
+    Dynarec_Instructions[Dynarec_InstructionCount].target = -1;
+    Dynarec_Instructions[Dynarec_InstructionCount].longJump = 1;
+    Dynarec_Instructions[Dynarec_InstructionCount].label = label;
+    if (Dynarec_DelaySlot)
+        Dynarec_Instructions[Dynarec_InstructionCount].guestPC = CPU_LastPC - 4;
+    else
+        Dynarec_Instructions[Dynarec_InstructionCount].guestPC = CPU_LastPC;
+    Dynarec_Instructions[Dynarec_InstructionCount].readsFlags = 0;
+    Dynarec_Instructions[Dynarec_InstructionCount].writesFlags = 0;
     if (++Dynarec_InstructionCount == 50000)
         ReportCPUError("Error 0 in AddJumpTarget");
 }
@@ -70,24 +72,26 @@ void AddInstruction(unsigned char size, unsigned opcode, int destination,
     int source, int source2, unsigned address, unsigned immediate, int mode,
     int condition, int target, unsigned char readsFlags, unsigned char writesFlags)
 {
-    RecompiledInstruction &instruction = Dynarec_Instructions[Dynarec_InstructionCount];
-    instruction.size = size;
-    instruction.opcode = opcode;
-    instruction.destination = destination;
-    instruction.destination2 = -1;
-    instruction.source = source;
-    instruction.source2 = source2;
-    instruction.source3 = -1;
-    instruction.address = address;
-    instruction.immediate = immediate;
-    instruction.condition = condition;
-    instruction.mode = mode;
-    instruction.target = target;
-    instruction.longJump = 1;
-    instruction.label = -1;
-    instruction.guestPC = Dynarec_DelaySlot ? CPU_LastPC - 4 : CPU_LastPC;
-    instruction.readsFlags = readsFlags;
-    instruction.writesFlags = writesFlags;
+    Dynarec_Instructions[Dynarec_InstructionCount].size = size;
+    Dynarec_Instructions[Dynarec_InstructionCount].opcode = opcode;
+    Dynarec_Instructions[Dynarec_InstructionCount].destination = destination;
+    Dynarec_Instructions[Dynarec_InstructionCount].destination2 = -1;
+    Dynarec_Instructions[Dynarec_InstructionCount].source = source;
+    Dynarec_Instructions[Dynarec_InstructionCount].source2 = source2;
+    Dynarec_Instructions[Dynarec_InstructionCount].source3 = -1;
+    Dynarec_Instructions[Dynarec_InstructionCount].address = address;
+    Dynarec_Instructions[Dynarec_InstructionCount].immediate = immediate;
+    Dynarec_Instructions[Dynarec_InstructionCount].condition = condition;
+    Dynarec_Instructions[Dynarec_InstructionCount].mode = mode;
+    Dynarec_Instructions[Dynarec_InstructionCount].target = target;
+    Dynarec_Instructions[Dynarec_InstructionCount].longJump = 1;
+    Dynarec_Instructions[Dynarec_InstructionCount].label = -1;
+    if (Dynarec_DelaySlot)
+        Dynarec_Instructions[Dynarec_InstructionCount].guestPC = CPU_LastPC - 4;
+    else
+        Dynarec_Instructions[Dynarec_InstructionCount].guestPC = CPU_LastPC;
+    Dynarec_Instructions[Dynarec_InstructionCount].readsFlags = readsFlags;
+    Dynarec_Instructions[Dynarec_InstructionCount].writesFlags = writesFlags;
     if (++Dynarec_InstructionCount == 50000)
         ReportCPUError("Error 0 in AddJumpTarget");
 }
@@ -97,24 +101,26 @@ void AddInstructionThreeSources(unsigned char size, unsigned opcode,
     unsigned immediate, int mode, int condition, int target,
     unsigned char readsFlags, unsigned char writesFlags)
 {
-    RecompiledInstruction &instruction = Dynarec_Instructions[Dynarec_InstructionCount];
-    instruction.size = size;
-    instruction.opcode = opcode;
-    instruction.destination = destination;
-    instruction.destination2 = -1;
-    instruction.source = source;
-    instruction.source2 = source2;
-    instruction.source3 = source3;
-    instruction.address = address;
-    instruction.immediate = immediate;
-    instruction.condition = condition;
-    instruction.mode = mode;
-    instruction.target = opcode;
-    instruction.longJump = 1;
-    instruction.label = -1;
-    instruction.guestPC = Dynarec_DelaySlot ? CPU_LastPC - 4 : CPU_LastPC;
-    instruction.readsFlags = readsFlags;
-    instruction.writesFlags = writesFlags;
+    Dynarec_Instructions[Dynarec_InstructionCount].size = size;
+    Dynarec_Instructions[Dynarec_InstructionCount].opcode = opcode;
+    Dynarec_Instructions[Dynarec_InstructionCount].destination = destination;
+    Dynarec_Instructions[Dynarec_InstructionCount].destination2 = -1;
+    Dynarec_Instructions[Dynarec_InstructionCount].source = source;
+    Dynarec_Instructions[Dynarec_InstructionCount].source2 = source2;
+    Dynarec_Instructions[Dynarec_InstructionCount].source3 = source3;
+    Dynarec_Instructions[Dynarec_InstructionCount].address = address;
+    Dynarec_Instructions[Dynarec_InstructionCount].immediate = immediate;
+    Dynarec_Instructions[Dynarec_InstructionCount].condition = condition;
+    Dynarec_Instructions[Dynarec_InstructionCount].mode = mode;
+    Dynarec_Instructions[Dynarec_InstructionCount].target = opcode;
+    Dynarec_Instructions[Dynarec_InstructionCount].longJump = 1;
+    Dynarec_Instructions[Dynarec_InstructionCount].label = -1;
+    if (Dynarec_DelaySlot)
+        Dynarec_Instructions[Dynarec_InstructionCount].guestPC = CPU_LastPC - 4;
+    else
+        Dynarec_Instructions[Dynarec_InstructionCount].guestPC = CPU_LastPC;
+    Dynarec_Instructions[Dynarec_InstructionCount].readsFlags = readsFlags;
+    Dynarec_Instructions[Dynarec_InstructionCount].writesFlags = writesFlags;
     if (++Dynarec_InstructionCount == 50000)
         ReportCPUError("Error 0 in AddJumpTarget");
 }
@@ -124,24 +130,26 @@ void AddInstructionTwoDestinations(unsigned char size, unsigned opcode,
     unsigned address, unsigned immediate, int mode, int condition, int target,
     unsigned char readsFlags, unsigned char writesFlags)
 {
-    RecompiledInstruction &instruction = Dynarec_Instructions[Dynarec_InstructionCount];
-    instruction.size = size;
-    instruction.opcode = opcode;
-    instruction.destination = destination;
-    instruction.destination2 = destination2;
-    instruction.source = source;
-    instruction.source2 = source2;
-    instruction.source3 = source3;
-    instruction.address = address;
-    instruction.immediate = immediate;
-    instruction.condition = condition;
-    instruction.mode = mode;
-    instruction.target = opcode;
-    instruction.longJump = 1;
-    instruction.label = -1;
-    instruction.guestPC = Dynarec_DelaySlot ? CPU_LastPC - 4 : CPU_LastPC;
-    instruction.readsFlags = readsFlags;
-    instruction.writesFlags = writesFlags;
+    Dynarec_Instructions[Dynarec_InstructionCount].size = size;
+    Dynarec_Instructions[Dynarec_InstructionCount].opcode = opcode;
+    Dynarec_Instructions[Dynarec_InstructionCount].destination = destination;
+    Dynarec_Instructions[Dynarec_InstructionCount].destination2 = destination2;
+    Dynarec_Instructions[Dynarec_InstructionCount].source = source;
+    Dynarec_Instructions[Dynarec_InstructionCount].source2 = source2;
+    Dynarec_Instructions[Dynarec_InstructionCount].source3 = source3;
+    Dynarec_Instructions[Dynarec_InstructionCount].address = address;
+    Dynarec_Instructions[Dynarec_InstructionCount].immediate = immediate;
+    Dynarec_Instructions[Dynarec_InstructionCount].condition = condition;
+    Dynarec_Instructions[Dynarec_InstructionCount].mode = mode;
+    Dynarec_Instructions[Dynarec_InstructionCount].target = opcode;
+    Dynarec_Instructions[Dynarec_InstructionCount].longJump = 1;
+    Dynarec_Instructions[Dynarec_InstructionCount].label = -1;
+    if (Dynarec_DelaySlot)
+        Dynarec_Instructions[Dynarec_InstructionCount].guestPC = CPU_LastPC - 4;
+    else
+        Dynarec_Instructions[Dynarec_InstructionCount].guestPC = CPU_LastPC;
+    Dynarec_Instructions[Dynarec_InstructionCount].readsFlags = readsFlags;
+    Dynarec_Instructions[Dynarec_InstructionCount].writesFlags = writesFlags;
     if (++Dynarec_InstructionCount == 50000)
         ReportCPUError("Error 0 in AddJumpTarget");
 }
@@ -188,7 +196,7 @@ unsigned EmitJump()
     return Dynarec_LabelCount;
 }
 
-void EmitAdc(unsigned char size, unsigned char destination, unsigned char source)
+void EmitAdc(unsigned char size, unsigned char source, unsigned char destination)
 {
     AddInstruction(size, 1, destination, destination, source, 0, 0, -1, -1, -1, 1, 1);
 }
@@ -198,7 +206,7 @@ void EmitAdcImmediate(unsigned char size, unsigned char destination, unsigned va
     AddInstruction(size, 2, destination, destination, -1, 0, value, -1, -1, -1, 1, 1);
 }
 
-void EmitAdd(unsigned char size, unsigned char destination, unsigned char source)
+void EmitAdd(unsigned char size, unsigned char source, unsigned char destination)
 {
     AddInstruction(size, 3, destination, source, destination, 0, 0, -1, -1, -1, 0, 1);
 }
@@ -213,7 +221,7 @@ void EmitAndImmediate(unsigned char size, unsigned char destination, unsigned va
     AddInstruction(size, 9, destination, destination, -1, 0, value, -1, -1, -1, 0, 1);
 }
 
-void EmitAnd(unsigned char size, unsigned char destination, unsigned char source)
+void EmitAnd(unsigned char size, unsigned char source, unsigned char destination)
 {
     AddInstruction(size, 10, destination, source, destination, 0, 0, -1, -1, -1, 0, 1);
 }
@@ -223,7 +231,7 @@ void EmitSignExtend(unsigned char destination, unsigned char source)
     AddInstruction(1, 12, destination, source, -1, 0, 0, -1, -1, -1, 0, 1);
 }
 
-void EmitCompare(unsigned char size, unsigned char left, unsigned char right)
+void EmitCompare(unsigned char size, unsigned char right, unsigned char left)
 {
     AddInstruction(size, 13, -1, right, left, 0, 0, -1, -1, -1, 0, 1);
 }
@@ -263,7 +271,7 @@ void EmitJumpGuest(unsigned address)
     AddInstruction(1, 65, -1, -1, -1, address, 0, -1, -1, -1, 0, 0);
 }
 
-void EmitMove(unsigned char size, unsigned char destination, unsigned char source)
+void EmitMove(unsigned char size, unsigned char source, unsigned char destination)
 {
     AddInstruction(size, 26, destination, source, -1, 0, 0, -1, -1, -1, 0, 0);
 }
@@ -338,7 +346,7 @@ void EmitOrMemory(unsigned char size, unsigned char mode, unsigned address, unsi
     AddInstruction(size, 39, -1, -1, -1, address, value, mode, -1, -1, 0, 1);
 }
 
-void EmitOr(unsigned char size, unsigned char destination, unsigned char source)
+void EmitOr(unsigned char size, unsigned char source, unsigned char destination)
 {
     AddInstruction(size, 40, destination, source, destination, 0, 0, -1, -1, -1, 0, 1);
 }
@@ -378,7 +386,7 @@ void EmitArithmeticShiftRightCL(unsigned char size, unsigned char destination)
     AddInstruction(size, 46, destination, destination, 1, 0, 0, -1, -1, -1, 0, 1);
 }
 
-void EmitSbb(unsigned char size, unsigned char destination, unsigned char source)
+void EmitSbb(unsigned char size, unsigned char source, unsigned char destination)
 {
     AddInstruction(size, 47, destination, destination, source, 0, 0, -1, -1, -1, 1, 1);
 }
@@ -403,12 +411,12 @@ void EmitShiftLeft(unsigned char size, unsigned char destination, unsigned char 
     AddInstruction(size, 50, destination, destination, -1, 0, count, -1, -1, -1, 1, 1);
 }
 
-void EmitDoubleShiftLeftCL(unsigned char destination, unsigned char source)
+void EmitDoubleShiftLeftCL(unsigned char source, unsigned char destination)
 {
     AddInstructionThreeSources(1, 52, destination, source, destination, 1, 0, 0, -1, -1, -1, 0, 1);
 }
 
-void EmitDoubleShiftLeft(unsigned char destination, unsigned char source, unsigned char count)
+void EmitDoubleShiftLeft(unsigned char source, unsigned char destination, unsigned char count)
 {
     AddInstruction(1, 53, destination, source, destination, 0, count, -1, -1, -1, 0, 1);
 }
@@ -423,17 +431,17 @@ void EmitShiftRight(unsigned char size, unsigned char destination, unsigned char
     AddInstruction(size, 54, destination, destination, -1, 0, count, -1, -1, -1, 1, 1);
 }
 
-void EmitDoubleShiftRightCL(unsigned char destination, unsigned char source)
+void EmitDoubleShiftRightCL(unsigned char source, unsigned char destination)
 {
     AddInstructionThreeSources(1, 56, destination, source, destination, 1, 0, 0, -1, -1, -1, 0, 1);
 }
 
-void EmitDoubleShiftRight(unsigned char destination, unsigned char source, unsigned char count)
+void EmitDoubleShiftRight(unsigned char source, unsigned char destination, unsigned char count)
 {
     AddInstruction(1, 57, destination, source, destination, 0, count, -1, -1, -1, 0, 1);
 }
 
-void EmitSubtract(unsigned char size, unsigned char destination, unsigned char source)
+void EmitSubtract(unsigned char size, unsigned char source, unsigned char destination)
 {
     AddInstruction(size, 58, destination, destination, source, 0, 0, -1, -1, -1, 0, 1);
 }
@@ -453,7 +461,7 @@ void EmitXorAccumulator(unsigned char size, unsigned value)
     AddInstruction(size, 61, 0, 0, -1, 0, value, -1, -1, -1, 0, 1);
 }
 
-void EmitXor(unsigned char size, unsigned char destination, unsigned char source)
+void EmitXor(unsigned char size, unsigned char source, unsigned char destination)
 {
     AddInstruction(size, 62, destination, source, destination, 0, 0, -1, -1, -1, 0, 1);
 }
@@ -606,7 +614,7 @@ void AddAddressMapping(unsigned physical, unsigned offset)
     }
 }
 
-bool IsOpcodeBreakpoint(unsigned instruction)
+unsigned IsOpcodeBreakpoint(unsigned instruction)
 {
     for (unsigned i = 0; i < OpcodeBreakpointCount; ++i)
         if ((instruction & OpcodeBreakpoints[i].Mask) ==
@@ -647,249 +655,285 @@ static inline void EmitDword(unsigned value)
 void AssembleInstructions(unsigned char fast)
 {
     unsigned savedConversions = Dynarec_ConversionCount;
-    unsigned char *base = fast ? Dynarec_FastCode : Dynarec_MainCode;
-    unsigned char *start = base + (fast ? Dynarec_FastCodeUsed : Dynarec_MainCodeUsed);
+    unsigned char *base;
+    unsigned char *start;
+    if (fast) {
+        base = Dynarec_FastCode;
+        start = Dynarec_FastCode + Dynarec_FastCodeUsed;
+    } else {
+        base = Dynarec_MainCode;
+        start = Dynarec_MainCode + Dynarec_MainCodeUsed;
+    }
     bool retry;
     unsigned index;
+    Dynarec_CodePointer = start;
     do {
         index = 0;
         retry = false;
         unsigned lastPC = unsigned(-1);
-        Dynarec_CodePointer = start;
-        Dynarec_ConversionCount = savedConversions;
         for (; index < Dynarec_InstructionCount; ++index) {
             if (retry)
                 break;
-            RecompiledInstruction &instruction = Dynarec_Instructions[index];
-            instruction.code = Dynarec_CodePointer;
-            switch (instruction.opcode) {
+            Dynarec_Instructions[index].code = Dynarec_CodePointer;
+            switch (Dynarec_Instructions[index].opcode) {
             case 0: {
-                RecompiledInstruction &jump = Dynarec_Instructions[
-                    Dynarec_LabelInstructions[instruction.label]];
-                int displacement = Dynarec_CodePointer - jump.code - 2;
-                if (jump.opcode == 21) {
-                    if (!jump.longJump) {
-                        if (displacement < 128 && displacement > -129) {
-                            jump.code[0] = (unsigned char)(0x70 | jump.condition);
-                            jump.code[1] = (unsigned char)displacement;
-                        } else {
-                            jump.longJump = 1;
-                            retry = true;
-                        }
+                unsigned char *resume = Dynarec_CodePointer;
+                Dynarec_CodePointer = Dynarec_Instructions[Dynarec_LabelInstructions[Dynarec_Instructions[index].label]].code;
+                int displacement = resume - Dynarec_CodePointer - 2;
+                if (Dynarec_Instructions[Dynarec_LabelInstructions[Dynarec_Instructions[index].label]].opcode == 21) {
+                    if (Dynarec_Instructions[Dynarec_LabelInstructions[Dynarec_Instructions[index].label]].longJump) {
+                        EmitByte(0x0f);
+                        EmitByte(0x80 | Dynarec_Instructions[Dynarec_LabelInstructions[Dynarec_Instructions[index].label]].condition);
+                        EmitDword(displacement - 4);
                     } else {
-                        jump.code[0] = 0x0f;
-                        jump.code[1] = (unsigned char)(0x80 | jump.condition);
-                        *(unsigned *)(jump.code + 2) = Dynarec_CodePointer - jump.code - 6;
+                        if (displacement > 127 || displacement < -128)
+                            goto widenJump;
+                        EmitByte(0x70 | Dynarec_Instructions[Dynarec_LabelInstructions[Dynarec_Instructions[index].label]].condition);
+                        EmitByte(displacement);
                     }
-                } else if (!jump.longJump) {
-                    if (displacement > 127 || displacement < -128) {
-                        jump.longJump = 1;
-                        retry = true;
-                    } else {
-                        jump.code[0] = 0xeb;
-                        jump.code[1] = (unsigned char)displacement;
-                    }
+                } else if (Dynarec_Instructions[Dynarec_LabelInstructions[Dynarec_Instructions[index].label]].longJump) {
+                    EmitByte(0xe9);
+                    EmitDword(displacement - 3);
                 } else {
-                    jump.code[0] = 0xe9;
-                    *(unsigned *)(jump.code + 1) = Dynarec_CodePointer - jump.code - 5;
+                    if (displacement > 127 || displacement < -128)
+                        goto widenJump;
+                    EmitByte(0xeb);
+                    EmitByte(displacement);
                 }
+                Dynarec_CodePointer = resume;
+                break;
+widenJump:
+                Dynarec_Instructions[Dynarec_LabelInstructions[Dynarec_Instructions[index].label]].longJump = 1;
+                retry = true;
+                Dynarec_CodePointer = resume;
                 break;
             }
             case 1:
-                EmitByte(0x10 | instruction.size);
-                EmitByte(0xc0 | (instruction.source2 << 3) | instruction.destination);
+                EmitByte(0x10 | Dynarec_Instructions[index].size);
+                EmitByte(0xc0 | (Dynarec_Instructions[index].source2 << 3) | Dynarec_Instructions[index].destination);
+                break;
+            case 63:
+                EmitByte(0x14 | Dynarec_Instructions[index].size);
+                EmitDword(Dynarec_Instructions[index].immediate);
                 break;
             case 2:
-                EmitByte(0x80 | instruction.size);
-                EmitByte(0xd0 | instruction.destination);
-                EmitDword(instruction.immediate);
+                EmitByte(0x80 | Dynarec_Instructions[index].size);
+                EmitByte(0xd0 | Dynarec_Instructions[index].destination);
+                EmitDword(Dynarec_Instructions[index].immediate);
                 break;
             case 3:
-                EmitByte(instruction.size);
-                EmitByte(0xc0 | (instruction.source << 3) | instruction.destination);
+                EmitByte(Dynarec_Instructions[index].size);
+                EmitByte(0xc0 | (Dynarec_Instructions[index].source << 3) | Dynarec_Instructions[index].destination);
                 break;
             case 4:
-                EmitByte(0x04 | instruction.size);
-                EmitDword(instruction.immediate);
+                EmitByte(0x04 | Dynarec_Instructions[index].size);
+                EmitDword(Dynarec_Instructions[index].immediate);
                 break;
             case 5:
-                EmitByte(0x80 | instruction.size);
-                EmitByte(0xc0 | instruction.destination);
-                if (!instruction.size) EmitByte(instruction.immediate);
-                else EmitDword(instruction.immediate);
+                EmitByte(0x80 | Dynarec_Instructions[index].size);
+                EmitByte(0xc0 | Dynarec_Instructions[index].destination);
+                if (!Dynarec_Instructions[index].size) EmitByte(Dynarec_Instructions[index].immediate);
+                else EmitDword(Dynarec_Instructions[index].immediate);
                 break;
             case 6:
-                EmitByte(0x80 | instruction.size);
-                EmitByte(instruction.mode);
-                EmitDword(instruction.address);
-                if (!instruction.size) EmitByte(instruction.immediate);
-                else EmitDword(instruction.immediate);
+                EmitByte(0x80 | Dynarec_Instructions[index].size);
+                EmitByte(Dynarec_Instructions[index].mode);
+                EmitDword(Dynarec_Instructions[index].address);
+                if (!Dynarec_Instructions[index].size) EmitByte(Dynarec_Instructions[index].immediate);
+                else EmitDword(Dynarec_Instructions[index].immediate);
                 break;
             case 7:
-                EmitByte(0x24 | instruction.size);
-                EmitDword(instruction.immediate);
+                EmitByte(0x24 | Dynarec_Instructions[index].size);
+                EmitDword(Dynarec_Instructions[index].immediate);
                 break;
             case 8:
-                EmitByte(0x80 | instruction.size);
-                EmitByte(0x20 | instruction.mode);
-                EmitDword(instruction.address);
-                EmitDword(instruction.immediate);
+                EmitByte(0x80 | Dynarec_Instructions[index].size);
+                EmitByte(0x20 | Dynarec_Instructions[index].mode);
+                EmitDword(Dynarec_Instructions[index].address);
+                EmitDword(Dynarec_Instructions[index].immediate);
                 break;
             case 9:
-                EmitByte(0x80 | instruction.size);
-                EmitByte(0xe0 | instruction.destination);
-                EmitDword(instruction.immediate);
+                EmitByte(0x80 | Dynarec_Instructions[index].size);
+                EmitByte(0xe0 | Dynarec_Instructions[index].destination);
+                EmitDword(Dynarec_Instructions[index].immediate);
                 break;
             case 10:
-                EmitByte(0x20 | instruction.size);
-                EmitByte(0xc0 | (instruction.source << 3) | instruction.destination);
+                EmitByte(0x20 | Dynarec_Instructions[index].size);
+                EmitByte(0xc0 | (Dynarec_Instructions[index].source << 3) | Dynarec_Instructions[index].destination);
                 break;
             case 11:
                 EmitByte(0x0f);
-                EmitByte(0xc8 | instruction.destination);
+                EmitByte(0xc8 | Dynarec_Instructions[index].destination);
                 break;
             case 12:
-                if (instruction.source != instruction.destination) {
+                if (Dynarec_Instructions[index].source != Dynarec_Instructions[index].destination) {
                     EmitByte(0x89);
-                    EmitByte(0xc0 | (instruction.source << 3) | instruction.destination);
+                    EmitByte(0xc0 | (Dynarec_Instructions[index].source << 3) | Dynarec_Instructions[index].destination);
                 }
                 EmitByte(0xc1);
-                EmitByte(0xf8 | instruction.destination);
+                EmitByte(0xf8 | Dynarec_Instructions[index].destination);
                 EmitByte(31);
                 break;
-            case 13:
-                EmitByte(0x38 | instruction.size);
-                EmitByte(0xc0 | (instruction.source << 3) | instruction.source2);
-                break;
-            case 14:
+            case 64:
+                EmitByte(0x99);
                 break;
             case 15:
-                EmitByte(0x3c | instruction.size);
-                if (!instruction.size) EmitByte(instruction.immediate);
-                else EmitDword(instruction.immediate);
+                EmitByte(0x3c | Dynarec_Instructions[index].size);
+                if (!Dynarec_Instructions[index].size) EmitByte(Dynarec_Instructions[index].immediate);
+                else EmitDword(Dynarec_Instructions[index].immediate);
+                break;
+            case 13:
+                EmitByte(0x38 | Dynarec_Instructions[index].size);
+                EmitByte(0xc0 | (Dynarec_Instructions[index].source << 3) | Dynarec_Instructions[index].source2);
                 break;
             case 16:
-                EmitByte(0x80 | instruction.size);
-                EmitByte(0xf8 | instruction.source);
-                if (!instruction.size) EmitByte(instruction.immediate);
-                else EmitDword(instruction.immediate);
+                EmitByte(0x80 | Dynarec_Instructions[index].size);
+                EmitByte(0xf8 | Dynarec_Instructions[index].source);
+                if (!Dynarec_Instructions[index].size) EmitByte(Dynarec_Instructions[index].immediate);
+                else EmitDword(Dynarec_Instructions[index].immediate);
                 break;
             case 17:
                 EmitByte(0xe8);
-                EmitDword(instruction.address - (unsigned)Dynarec_CodePointer - 4);
+                EmitDword(Dynarec_Instructions[index].address - (unsigned)Dynarec_CodePointer - 4);
                 break;
             case 18:
-                EmitByte(0xf6 | instruction.size);
-                EmitByte(0xf0 | instruction.source);
+                EmitByte(0xf6 | Dynarec_Instructions[index].size);
+                EmitByte(0xf0 | Dynarec_Instructions[index].source);
                 break;
             case 19:
-                EmitByte(0xf6 | instruction.size);
-                EmitByte(0xf8 | instruction.source);
+                EmitByte(0xf6 | Dynarec_Instructions[index].size);
+                EmitByte(0xf8 | Dynarec_Instructions[index].source);
                 break;
             case 20:
-                EmitByte(0xf6 | instruction.size);
-                EmitByte(0xe8 | instruction.source);
+                EmitByte(0xf6 | Dynarec_Instructions[index].size);
+                EmitByte(0xe8 | Dynarec_Instructions[index].source);
                 break;
             case 21:
-                SetLabelInstruction(instruction.target, index);
+                SetLabelInstruction(Dynarec_Instructions[index].target, index);
                 EmitByte(0);
                 EmitByte(0);
-                if (instruction.longJump) EmitDword(0);
+                if (Dynarec_Instructions[index].longJump) EmitDword(0);
                 break;
             case 22:
                 EmitByte(0x0f);
-                EmitByte(0x80 | instruction.condition);
-                EmitDword((unsigned)base + instruction.address - (unsigned)Dynarec_CodePointer - 4);
+                EmitByte(0x80 | Dynarec_Instructions[index].condition);
+                EmitDword((unsigned)base + Dynarec_Instructions[index].address - (unsigned)Dynarec_CodePointer - 4);
                 break;
             case 23:
-                SetLabelInstruction(instruction.target, index);
+                SetLabelInstruction(Dynarec_Instructions[index].target, index);
                 EmitByte(0);
-                if (instruction.longJump) EmitDword(0);
+                if (Dynarec_Instructions[index].longJump) EmitDword(0);
                 else EmitByte(0);
                 break;
             case 24:
                 EmitByte(0xe9);
-                EmitDword((unsigned)base + instruction.address - (unsigned)Dynarec_CodePointer - 4);
+                EmitDword((unsigned)base + Dynarec_Instructions[index].address - (unsigned)Dynarec_CodePointer - 4);
+                break;
+            case 65:
+                AddJumpFixup(Dynarec_CodePointer - base, Dynarec_Instructions[index].address);
+                EmitByte(0);
+                EmitDword(0);
                 break;
             case 25:
                 EmitByte(0xff);
-                EmitByte(0xe0 | instruction.source);
+                EmitByte(0xe0 | Dynarec_Instructions[index].source);
                 break;
             case 26:
-                EmitByte(0x88 | instruction.size);
-                EmitByte(0xc0 | (instruction.source << 3) | instruction.destination);
+                EmitByte(0x88 | Dynarec_Instructions[index].size);
+                EmitByte(0xc0 | (Dynarec_Instructions[index].source << 3) | Dynarec_Instructions[index].destination);
                 break;
             case 27:
-                EmitByte(0x8a | instruction.size);
-                EmitByte((instruction.destination << 3) | instruction.mode);
-                EmitDword(instruction.address);
+                EmitByte(0x8a | Dynarec_Instructions[index].size);
+                EmitByte((Dynarec_Instructions[index].destination << 3) | Dynarec_Instructions[index].mode);
+                EmitDword(Dynarec_Instructions[index].address);
                 break;
             case 28:
-                EmitByte(0x88 | instruction.size);
-                EmitByte((instruction.source << 3) | instruction.mode);
-                EmitDword(instruction.address);
+                EmitByte(0x88 | Dynarec_Instructions[index].size);
+                EmitByte((Dynarec_Instructions[index].source << 3) | Dynarec_Instructions[index].mode);
+                EmitDword(Dynarec_Instructions[index].address);
                 break;
             case 29:
                 EmitByte(0x66);
                 EmitByte(0x89);
-                EmitByte((instruction.source << 3) | instruction.mode);
-                EmitDword(instruction.address);
+                EmitByte((Dynarec_Instructions[index].source << 3) | Dynarec_Instructions[index].mode);
+                EmitDword(Dynarec_Instructions[index].address);
                 break;
             case 30:
-                EmitByte(((instruction.size | 0xf6) << 3) | instruction.destination);
-                EmitDword(instruction.immediate);
+                EmitByte(((Dynarec_Instructions[index].size | 0xf6) << 3) | Dynarec_Instructions[index].destination);
+                EmitDword(Dynarec_Instructions[index].immediate);
                 break;
             case 31:
-                EmitByte(0xc6 | instruction.size);
-                EmitByte(instruction.mode);
-                EmitDword(instruction.address);
-                if (!instruction.size) EmitByte(instruction.immediate);
-                else EmitDword(instruction.immediate);
+                EmitByte(0xc6 | Dynarec_Instructions[index].size);
+                EmitByte(Dynarec_Instructions[index].mode);
+                EmitDword(Dynarec_Instructions[index].address);
+                if (Dynarec_Instructions[index].size) EmitDword(Dynarec_Instructions[index].immediate);
+                else EmitByte(Dynarec_Instructions[index].immediate);
+                break;
+            case 66:
+                EmitByte(0x0f);
+                EmitByte(0xbe | Dynarec_Instructions[index].size);
+                EmitByte((Dynarec_Instructions[index].destination << 3) | Dynarec_Instructions[index].mode);
+                EmitDword(Dynarec_Instructions[index].address);
                 break;
             case 32:
                 EmitByte(0x0f);
-                EmitByte(0xbe | instruction.size);
-                EmitByte(0xc0 | (instruction.destination << 3) | instruction.source);
+                EmitByte(0xbe | Dynarec_Instructions[index].size);
+                EmitByte(0xc0 | (Dynarec_Instructions[index].destination << 3) | Dynarec_Instructions[index].source);
+                break;
+            case 67:
+                EmitByte(0x0f);
+                EmitByte(0xb6 | Dynarec_Instructions[index].size);
+                EmitByte((Dynarec_Instructions[index].destination << 3) | Dynarec_Instructions[index].mode);
+                EmitDword(Dynarec_Instructions[index].address);
                 break;
             case 33:
                 EmitByte(0x0f);
-                EmitByte(0xb6 | instruction.size);
-                EmitByte(0xc0 | (instruction.destination << 3) | instruction.source);
+                EmitByte(0xb6 | Dynarec_Instructions[index].size);
+                EmitByte(0xc0 | (Dynarec_Instructions[index].destination << 3) | Dynarec_Instructions[index].source);
                 break;
             case 34:
-                EmitByte(0xf6 | instruction.size);
-                EmitByte(0xe0 | instruction.source);
+                EmitByte(0xf6 | Dynarec_Instructions[index].size);
+                EmitByte(0xe0 | Dynarec_Instructions[index].source);
                 break;
             case 35:
-                EmitByte(0xf6 | instruction.size);
-                EmitByte(0xd8 | instruction.destination);
+                EmitByte(0xf6 | Dynarec_Instructions[index].size);
+                EmitByte(0xd8 | Dynarec_Instructions[index].destination);
                 break;
             case 36:
                 EmitByte(0x90);
                 break;
             case 37:
-                EmitByte(0xf6 | instruction.size);
-                EmitByte(0xd0 | instruction.destination);
+                EmitByte(0xf6 | Dynarec_Instructions[index].size);
+                EmitByte(0xd0 | Dynarec_Instructions[index].destination);
                 break;
             case 38:
-                EmitByte(0x0c | instruction.size);
-                EmitDword(instruction.immediate);
+                EmitByte(0x0c | Dynarec_Instructions[index].size);
+                EmitDword(Dynarec_Instructions[index].immediate);
+                break;
+            case 68:
+                EmitByte(0x80 | Dynarec_Instructions[index].size);
+                EmitByte(0xc8 | Dynarec_Instructions[index].destination);
+                EmitDword(Dynarec_Instructions[index].immediate);
                 break;
             case 39:
-                EmitByte(0x80 | instruction.size);
-                EmitByte(0x08 | instruction.mode);
-                EmitDword(instruction.address);
-                EmitDword(instruction.immediate);
+                EmitByte(0x80 | Dynarec_Instructions[index].size);
+                EmitByte(0x08 | Dynarec_Instructions[index].mode);
+                EmitDword(Dynarec_Instructions[index].address);
+                EmitDword(Dynarec_Instructions[index].immediate);
                 break;
             case 40:
-                EmitByte(0x08 | instruction.size);
-                EmitByte(0xc0 | (instruction.source << 3) | instruction.destination);
+                EmitByte(0x08 | Dynarec_Instructions[index].size);
+                EmitByte(0xc0 | (Dynarec_Instructions[index].source << 3) | Dynarec_Instructions[index].destination);
                 break;
             case 41:
-                EmitByte(0x58 | instruction.destination);
+                EmitByte(0x58 | Dynarec_Instructions[index].destination);
                 break;
             case 42:
-                EmitByte(0x50 | instruction.source);
+                EmitByte(0x50 | Dynarec_Instructions[index].source);
+                break;
+            case 69:
+                EmitByte(0x0f);
+                EmitByte(0x31);
                 break;
             case 43:
                 EmitByte(0xc3);
@@ -897,134 +941,109 @@ void AssembleInstructions(unsigned char fast)
             case 44:
                 EmitByte(0x9e);
                 break;
-            case 45:
-                EmitByte(0xc0 | instruction.size);
-                EmitByte(0xf8 | instruction.destination);
-                EmitByte(instruction.immediate);
-                break;
             case 46:
-                EmitByte(0xd2 | instruction.size);
-                EmitByte(0xf8 | instruction.destination);
+                EmitByte(0xd2 | Dynarec_Instructions[index].size);
+                EmitByte(0xf8 | Dynarec_Instructions[index].destination);
+                break;
+            case 45:
+                EmitByte(0xc0 | Dynarec_Instructions[index].size);
+                EmitByte(0xf8 | Dynarec_Instructions[index].destination);
+                EmitByte(Dynarec_Instructions[index].immediate);
                 break;
             case 47:
-                EmitByte(0x18 | instruction.size);
-                EmitByte(0xc0 | (instruction.source2 << 3) | instruction.destination);
+                EmitByte(0x18 | Dynarec_Instructions[index].size);
+                EmitByte(0xc0 | (Dynarec_Instructions[index].source2 << 3) | Dynarec_Instructions[index].destination);
                 break;
             case 48:
                 EmitByte(0x0f);
-                EmitByte(0x90 | instruction.condition);
-                EmitByte(instruction.mode);
-                EmitDword(instruction.address);
+                EmitByte(0x90 | Dynarec_Instructions[index].condition);
+                EmitByte(Dynarec_Instructions[index].mode);
+                EmitDword(Dynarec_Instructions[index].address);
                 break;
             case 49:
                 EmitByte(0x0f);
-                EmitByte(0x90 | instruction.condition);
-                EmitByte(0xc0 | instruction.destination);
-                break;
-            case 50:
-                EmitByte(0xc0 | instruction.size);
-                EmitByte(0xe0 | instruction.destination);
-                EmitByte(instruction.immediate);
+                EmitByte(0x90 | Dynarec_Instructions[index].condition);
+                EmitByte(0xc0 | Dynarec_Instructions[index].destination);
                 break;
             case 51:
-                EmitByte(0xd2 | instruction.size);
-                EmitByte(0xe0 | instruction.destination);
+                EmitByte(0xd2 | Dynarec_Instructions[index].size);
+                EmitByte(0xe0 | Dynarec_Instructions[index].destination);
+                break;
+            case 50:
+                EmitByte(0xc0 | Dynarec_Instructions[index].size);
+                EmitByte(0xe0 | Dynarec_Instructions[index].destination);
+                EmitByte(Dynarec_Instructions[index].immediate);
                 break;
             case 52:
                 EmitByte(0x0f);
                 EmitByte(0xa5);
-                EmitByte(0xc0 | (instruction.source << 3) | instruction.destination);
+                EmitByte(0xc0 | (Dynarec_Instructions[index].source << 3) | Dynarec_Instructions[index].destination);
                 break;
             case 53:
                 EmitByte(0x0f);
                 EmitByte(0xa4);
-                EmitByte(0xc0 | (instruction.source << 3) | instruction.destination);
-                EmitByte(instruction.immediate);
-                break;
-            case 54:
-                EmitByte(0xc0 | instruction.size);
-                EmitByte(0xe8 | instruction.destination);
-                EmitByte(instruction.immediate);
+                EmitByte(0xc0 | (Dynarec_Instructions[index].source << 3) | Dynarec_Instructions[index].destination);
+                EmitByte(Dynarec_Instructions[index].immediate);
                 break;
             case 55:
-                EmitByte(0xd2 | instruction.size);
-                EmitByte(0xe8 | instruction.destination);
+                EmitByte(0xd2 | Dynarec_Instructions[index].size);
+                EmitByte(0xe8 | Dynarec_Instructions[index].destination);
+                break;
+            case 54:
+                EmitByte(0xc0 | Dynarec_Instructions[index].size);
+                EmitByte(0xe8 | Dynarec_Instructions[index].destination);
+                EmitByte(Dynarec_Instructions[index].immediate);
                 break;
             case 56:
                 EmitByte(0x0f);
                 EmitByte(0xad);
-                EmitByte(0xc0 | (instruction.source << 3) | instruction.destination);
+                EmitByte(0xc0 | (Dynarec_Instructions[index].source << 3) | Dynarec_Instructions[index].destination);
                 break;
             case 57:
                 EmitByte(0x0f);
                 EmitByte(0xac);
-                EmitByte(0xc0 | (instruction.source << 3) | instruction.destination);
-                EmitByte(instruction.immediate);
+                EmitByte(0xc0 | (Dynarec_Instructions[index].source << 3) | Dynarec_Instructions[index].destination);
+                EmitByte(Dynarec_Instructions[index].immediate);
                 break;
             case 58:
-                EmitByte(0x28 | instruction.size);
-                EmitByte(0xc0 | (instruction.source2 << 3) | instruction.destination);
+                EmitByte(0x28 | Dynarec_Instructions[index].size);
+                EmitByte(0xc0 | (Dynarec_Instructions[index].source2 << 3) | Dynarec_Instructions[index].destination);
                 break;
             case 59:
-                EmitByte(0x86 | instruction.size);
-                EmitByte(0xc0 | (instruction.source << 3) | instruction.source2);
+                EmitByte(0x86 | Dynarec_Instructions[index].size);
+                EmitByte(0xc0 | (Dynarec_Instructions[index].source << 3) | Dynarec_Instructions[index].source2);
                 break;
             case 60:
-                EmitByte(0xf6 | instruction.size);
-                EmitByte(instruction.mode);
-                EmitDword(instruction.address);
-                EmitDword(instruction.immediate);
+                EmitByte(0xf6 | Dynarec_Instructions[index].size);
+                EmitByte(Dynarec_Instructions[index].mode);
+                EmitDword(Dynarec_Instructions[index].address);
+                EmitDword(Dynarec_Instructions[index].immediate);
                 break;
             case 61:
-                EmitByte(0x34 | instruction.size);
-                EmitDword(instruction.immediate);
+                EmitByte(0x34 | Dynarec_Instructions[index].size);
+                EmitDword(Dynarec_Instructions[index].immediate);
                 break;
             case 62:
-                EmitByte(0x30 | instruction.size);
-                EmitByte(0xc0 | (instruction.source << 3) | instruction.destination);
+                EmitByte(0x30 | Dynarec_Instructions[index].size);
+                EmitByte(0xc0 | (Dynarec_Instructions[index].source << 3) | Dynarec_Instructions[index].destination);
                 break;
-            case 63:
-                EmitByte(0x14 | instruction.size);
-                EmitDword(instruction.immediate);
-                break;
-            case 64:
-                EmitByte(0x99);
-                break;
-            case 65:
-                AddJumpFixup(Dynarec_CodePointer - base, instruction.address);
-                EmitByte(0);
-                EmitDword(0);
-                break;
-            case 66:
-                EmitByte(0x0f);
-                EmitByte(0xbe | instruction.size);
-                EmitByte((instruction.destination << 3) | instruction.mode);
-                EmitDword(instruction.address);
-                break;
-            case 67:
-                EmitByte(0x0f);
-                EmitByte(0xb6 | instruction.size);
-                EmitByte((instruction.destination << 3) | instruction.mode);
-                EmitDword(instruction.address);
-                break;
-            case 68:
-                EmitByte(0x80 | instruction.size);
-                EmitByte(0xc8 | instruction.destination);
-                EmitDword(instruction.immediate);
-                break;
-            case 69:
-                EmitByte(0x0f);
-                EmitByte(0x31);
+            case 1000:
+                EmitByte(0xd9);
+                EmitByte(0xe1);
                 break;
             case 1001:
                 EmitByte(0xd8);
                 EmitByte(0x5);
-                EmitDword(instruction.address);
+                EmitDword(Dynarec_Instructions[index].address);
                 break;
             case 1002:
                 EmitByte(0xdc);
                 EmitByte(0x5);
-                EmitDword(instruction.address);
+                EmitDword(Dynarec_Instructions[index].address);
+                break;
+            case 1030:
+                EmitByte(0xd8);
+                EmitByte(0xc0 | Dynarec_Instructions[index].immediate);
                 break;
             case 1003:
                 EmitByte(0xd9);
@@ -1037,67 +1056,88 @@ void AssembleInstructions(unsigned char fast)
             case 1005:
                 EmitByte(0xd8);
                 EmitByte(0x1d);
-                EmitDword(instruction.address);
+                EmitDword(Dynarec_Instructions[index].address);
                 break;
             case 1006:
                 EmitByte(0xdc);
                 EmitByte(0x1d);
-                EmitDword(instruction.address);
+                EmitDword(Dynarec_Instructions[index].address);
+                break;
+            case 1035:
+                EmitByte(0xd9);
+                EmitByte(0xf6);
                 break;
             case 1007:
                 EmitByte(0xd8);
                 EmitByte(0x35);
-                EmitDword(instruction.address);
+                EmitDword(Dynarec_Instructions[index].address);
                 break;
             case 1008:
                 EmitByte(0xdc);
                 EmitByte(0x35);
-                EmitDword(instruction.address);
+                EmitDword(Dynarec_Instructions[index].address);
+                break;
+            case 1031:
+                EmitByte(0xd8);
+                EmitByte(0xf0 | Dynarec_Instructions[index].immediate);
+                break;
+            case 1032:
+                EmitByte(0xdd);
+                EmitByte(0xc0 | Dynarec_Instructions[index].immediate);
                 break;
             case 1009:
                 EmitByte(0xdb);
                 EmitByte(0x5);
-                EmitDword(instruction.address);
+                EmitDword(Dynarec_Instructions[index].address);
                 break;
             case 1010:
                 EmitByte(0xdf);
                 EmitByte(0x2d);
-                EmitDword(instruction.address);
+                EmitDword(Dynarec_Instructions[index].address);
                 break;
             case 1011:
                 EmitByte(0xdb);
                 EmitByte(0x1d);
-                EmitDword(instruction.address);
+                EmitDword(Dynarec_Instructions[index].address);
                 break;
             case 1012:
                 EmitByte(0xdf);
                 EmitByte(0x3d);
-                EmitDword(instruction.address);
+                EmitDword(Dynarec_Instructions[index].address);
+                break;
+            case 1036:
+                EmitByte(0xdb);
+                EmitByte(0x10 | Dynarec_Instructions[index].mode);
+                EmitDword(Dynarec_Instructions[index].address);
                 break;
             case 1013:
                 EmitByte(0xd9);
-                EmitByte(instruction.mode);
-                EmitDword(instruction.address);
+                EmitByte(Dynarec_Instructions[index].mode);
+                EmitDword(Dynarec_Instructions[index].address);
                 break;
             case 1014:
                 EmitByte(0xdd);
-                EmitByte(instruction.mode);
-                EmitDword(instruction.address);
+                EmitByte(Dynarec_Instructions[index].mode);
+                EmitDword(Dynarec_Instructions[index].address);
                 break;
             case 1015:
                 EmitByte(0xd9);
                 EmitByte(0x2d);
-                EmitDword(instruction.address);
+                EmitDword(Dynarec_Instructions[index].address);
                 break;
             case 1016:
                 EmitByte(0xd8);
                 EmitByte(0xd);
-                EmitDword(instruction.address);
+                EmitDword(Dynarec_Instructions[index].address);
                 break;
             case 1017:
                 EmitByte(0xdc);
                 EmitByte(0xd);
-                EmitDword(instruction.address);
+                EmitDword(Dynarec_Instructions[index].address);
+                break;
+            case 1033:
+                EmitByte(0xd8);
+                EmitByte(0xc8 | Dynarec_Instructions[index].immediate);
                 break;
             case 1018:
                 EmitByte(0xd9);
@@ -1110,27 +1150,27 @@ void AssembleInstructions(unsigned char fast)
             case 1020:
                 EmitByte(0xd9);
                 EmitByte(0x3d);
-                EmitDword(instruction.address);
+                EmitDword(Dynarec_Instructions[index].address);
                 break;
             case 1021:
                 EmitByte(0xd9);
-                EmitByte(0x10 | instruction.mode);
-                EmitDword(instruction.address);
+                EmitByte(0x10 | Dynarec_Instructions[index].mode);
+                EmitDword(Dynarec_Instructions[index].address);
                 break;
             case 1022:
                 EmitByte(0xdd);
-                EmitByte(0x10 | instruction.mode);
-                EmitDword(instruction.address);
+                EmitByte(0x10 | Dynarec_Instructions[index].mode);
+                EmitDword(Dynarec_Instructions[index].address);
                 break;
             case 1023:
                 EmitByte(0xd9);
-                EmitByte(0x18 | instruction.mode);
-                EmitDword(instruction.address);
+                EmitByte(0x18 | Dynarec_Instructions[index].mode);
+                EmitDword(Dynarec_Instructions[index].address);
                 break;
             case 1024:
                 EmitByte(0xdd);
-                EmitByte(0x18 | instruction.mode);
-                EmitDword(instruction.address);
+                EmitByte(0x18 | Dynarec_Instructions[index].mode);
+                EmitDword(Dynarec_Instructions[index].address);
                 break;
             case 1025:
                 EmitByte(0xdf);
@@ -1139,63 +1179,36 @@ void AssembleInstructions(unsigned char fast)
             case 1026:
                 EmitByte(0xd8);
                 EmitByte(0x25);
-                EmitDword(instruction.address);
+                EmitDword(Dynarec_Instructions[index].address);
                 break;
             case 1027:
                 EmitByte(0xdc);
                 EmitByte(0x25);
-                EmitDword(instruction.address);
+                EmitDword(Dynarec_Instructions[index].address);
+                break;
+            case 1034:
+                EmitByte(0xd8);
+                EmitByte(0xe0 | Dynarec_Instructions[index].immediate);
                 break;
             case 1028:
                 EmitByte(0x9b);
                 break;
             case 1029:
                 EmitByte(0xd9);
-                EmitByte(0xc8 | instruction.immediate);
+                EmitByte(0xc8 | Dynarec_Instructions[index].immediate);
                 break;
-            case 1030:
-                EmitByte(0xd8);
-                EmitByte(0xc0 | instruction.immediate);
-                break;
-            case 1031:
-                EmitByte(0xd8);
-                EmitByte(0xf0 | instruction.immediate);
-                break;
-            case 1032:
-                EmitByte(0xdd);
-                EmitByte(0xc0 | instruction.immediate);
-                break;
-            case 1033:
-                EmitByte(0xd8);
-                EmitByte(0xc8 | instruction.immediate);
-                break;
-            case 1034:
-                EmitByte(0xd8);
-                EmitByte(0xe0 | instruction.immediate);
-                break;
-            case 1035:
-                EmitByte(0xd9);
-                EmitByte(0xf6);
-                break;
-            case 1036:
-                EmitByte(0xdb);
-                EmitByte(0x10 | instruction.mode);
-                EmitDword(instruction.address);
+            case 14:
                 break;
             default:
-                if (instruction.opcode == 1000) {
-                    EmitByte(0xd9);
-                    EmitByte(0xe1);
-                }
                 break;
             }
-            if (Dynarec_RecordAddresses && lastPC != instruction.guestPC) {
-                unsigned physical = (instruction.guestPC & 0xc0000000) == 0x80000000
-                    ? instruction.guestPC & 0x1fffffff
-                    : TranslateTLB(instruction.guestPC, 0);
+            if (Dynarec_RecordAddresses && lastPC != Dynarec_Instructions[index].guestPC) {
+                unsigned physical = (Dynarec_Instructions[index].guestPC & 0xc0000000) == 0x80000000
+                    ? Dynarec_Instructions[index].guestPC & 0x1fffffff
+                    : TranslateTLB(Dynarec_Instructions[index].guestPC, 0);
                 AddAddressMapping(physical, Dynarec_CodePointer - base);
             }
-            lastPC = instruction.guestPC;
+            lastPC = Dynarec_Instructions[index].guestPC;
         }
         if (retry) {
             Dynarec_CodePointer = start;
@@ -1367,12 +1380,12 @@ void EndBlockTiming(unsigned *low, unsigned *high, unsigned *total)
     EmitReadTimestamp();
     EmitLoad(1, X86_ECX, 5, (unsigned)low);
     EmitLoad(1, X86_EBX, 5, (unsigned)high);
-    EmitSubtract(1, X86_EAX, X86_ECX);
-    EmitSbb(1, X86_EDX, X86_EBX);
-    EmitDoubleShiftRight(X86_EAX, X86_EDX, 10);
+    EmitSubtract(1, X86_ECX, X86_EAX);
+    EmitSbb(1, X86_EBX, X86_EDX);
+    EmitDoubleShiftRight(X86_EDX, X86_EAX, 10);
     EmitShiftRight(1, X86_EDX, 10);
     EmitLoad(1, X86_ECX, 5, (unsigned)total);
-    EmitAdd(1, X86_EAX, X86_ECX);
+    EmitAdd(1, X86_ECX, X86_EAX);
     EmitStore(1, X86_EAX, 5, (unsigned)total);
     EmitPop(X86_EBX);
     EmitPop(X86_ECX);
@@ -1380,25 +1393,25 @@ void EndBlockTiming(unsigned *low, unsigned *high, unsigned *total)
     EmitPop(X86_EAX);
 }
 
-void LoadGPRWord(unsigned reg, unsigned char high, unsigned char destination)
+void LoadGPRWord(unsigned reg, unsigned char high, unsigned destination)
 {
     unsigned offset = high ? 4 : 0;
     if (!reg)
         EmitMoveImmediate(1, destination, 0);
     else if (reg == 29 && !high)
-        EmitMove(1, destination, X86_EDI);
+        EmitMove(1, X86_EDI, destination);
     else
         EmitLoad(1, destination, 5, (unsigned)&CPU_GPR[reg] + offset);
     if (RegisterStatsEnabled)
         EmitAddMemory(1, 1, 5, (unsigned)&RegisterStats[reg], 1);
 }
 
-void StoreGPRWord(unsigned reg, unsigned char high, unsigned char source)
+void StoreGPRWord(unsigned reg, unsigned char high, unsigned source)
 {
     unsigned offset = high ? 4 : 0;
     if (reg) {
         if (reg == 29 && !high)
-            EmitMove(1, X86_EDI, source);
+            EmitMove(1, source, X86_EDI);
         else
             EmitStore(1, source, 5, (unsigned)&CPU_GPR[reg] + offset);
     }
@@ -1438,15 +1451,16 @@ void StoreGPRSigned32(unsigned reg)
     StoreGPRWord(reg, 1, X86_EAX);
 }
 
-void StoreGPRSigned32From(unsigned reg, unsigned char source)
+void StoreGPRSigned32From(unsigned reg, unsigned source)
 {
     StoreGPRWord(reg, 0, source);
     EmitSignExtend(source, source);
     StoreGPRWord(reg, 1, source);
 }
 
-void StoreGPR64(unsigned char reg)
+void StoreGPR64(unsigned reg)
 {
+    reg = (unsigned char)reg;
     StoreGPRWord(reg, 0, X86_EAX);
     StoreGPRWord(reg, 1, X86_EDX);
 }
@@ -1474,7 +1488,7 @@ void EmitWatchCheck(unsigned flags, unsigned char doubleword)
     if (!MemoryBreakpointCount || Dynarec_BranchPending)
         return;
     EmitPush(X86_EBX);
-    EmitMove(1, X86_EBX, X86_EAX);
+    EmitMove(1, X86_EAX, X86_EBX);
     EmitAndImmediate(1, X86_EBX, 0xfffffffc);
     for (unsigned i = 0; i < MemoryBreakpointCount; ++i) {
         if (MemoryBreakpoints[i].Access & flags) {
@@ -1507,42 +1521,45 @@ void EmitWatchCheck(unsigned flags, unsigned char doubleword)
     EmitPop(X86_EBX);
 }
 
-bool RequiresMemoryCheck()
+unsigned RequiresMemoryCheck()
 {
-    unsigned pc = CPU_LastPC;
-    if (CPU_DisableExceptions)
-        return true;
-    if (Dynarec_BranchPending)
-        return true;
-    unsigned physical = (pc & 0xc0000000) == 0x80000000
-        ? pc & 0x1fffffff : TranslateTLB(pc, 0);
-    if (physical >= RDRAMSize)
-        return true;
-    if (Dynarec_DelaySlot)
-        pc -= 4;
-    physical = (pc & 0xc0000000) == 0x80000000
-        ? pc & 0x1fffffff : TranslateTLB(pc, 0);
-    return FaultingInstructions[physical >> 2] != 0;
+    if (!CPU_DisableExceptions && !Dynarec_BranchPending) {
+        unsigned pc = CPU_LastPC;
+        unsigned physical = (pc & 0xc0000000) == 0x80000000
+            ? pc & 0x1fffffff : TranslateTLB(pc, 0);
+        if (physical < RDRAMSize) {
+            if (Dynarec_DelaySlot) {
+                unsigned previous = pc - 4;
+                physical = (previous & 0xc0000000) == 0x80000000
+                    ? previous & 0x1fffffff : TranslateTLB(previous, 0);
+            } else {
+                physical = (pc & 0xc0000000) == 0x80000000
+                    ? pc & 0x1fffffff : TranslateTLB(pc, 0);
+            }
+            if (!FaultingInstructions[physical >> 2])
+                return 0;
+        }
+    }
+    return 1;
 }
 
 unsigned CheckInlineFunction(unsigned address)
 {
-    unsigned savedInstruction = CPU_Instruction;
     if (!Dynarec_Inlining)
         return unsigned(-1);
     unsigned pc = address;
+    unsigned savedInstruction = CPU_Instruction;
     unsigned physical = (address & 0xc0000000) == 0x80000000
         ? address & 0x1fffffff : TranslateTLB(address, 0);
     if ((physical & 0xfffff000) != Dynarec_PageAddress || Dynarec_BranchPending)
         return unsigned(-1);
-    unsigned count = 0;
     unsigned result = unsigned(-1);
+    unsigned count = 0;
     do {
         physical = (pc & 0xc0000000) == 0x80000000
             ? pc & 0x1fffffff : TranslateTLB(pc, 0);
         if ((physical & 0xfffff000) != Dynarec_PageAddress) {
-            CPU_Instruction = savedInstruction;
-            return unsigned(-1);
+            break;
         }
         ++count;
         physical = (pc & 0xc0000000) == 0x80000000
@@ -1561,35 +1578,29 @@ unsigned CheckInlineFunction(unsigned address)
                 }
             }
         }
-        unsigned opcode = CPU_Instruction >> 26;
-        unsigned function = CPU_Instruction & 63;
-        if (!opcode && function == 8 && (CPU_Instruction & 0x03e00000) == 0x03e00000) {
+        if (!(CPU_Instruction >> 26) && ((unsigned char)CPU_Instruction & 63) == 8 && (CPU_Instruction & 0x03e00000) == 0x03e00000) {
             if (address < pc)
                 result = (pc - address) >> 2;
-            CPU_Instruction = savedInstruction;
-            return result;
+            break;
         }
-        if (opcode == 4 || opcode == 5 || opcode == 20 || opcode == 21 ||
-            opcode == 6 || opcode == 7 || opcode == 22 || opcode == 23 ||
-            opcode == 1 || opcode == 2 || opcode == 3 ||
-            (!opcode && (function == 8 || function == 9)) ||
-            (opcode == 16 && (CPU_Instruction & 0x03e00000) == 0x02000000 && function == 24)) {
-            CPU_Instruction = savedInstruction;
-            return unsigned(-1);
+        if ((CPU_Instruction >> 26) == 4 || (CPU_Instruction >> 26) == 5 || (CPU_Instruction >> 26) == 20 || (CPU_Instruction >> 26) == 21 ||
+            (CPU_Instruction >> 26) == 6 || (CPU_Instruction >> 26) == 7 || (CPU_Instruction >> 26) == 22 || (CPU_Instruction >> 26) == 23 ||
+            (CPU_Instruction >> 26) == 1 || (CPU_Instruction >> 26) == 2 || (CPU_Instruction >> 26) == 3 ||
+            (!(CPU_Instruction >> 26) && (((unsigned char)CPU_Instruction & 63) == 8 || ((unsigned char)CPU_Instruction & 63) == 9)) ||
+            ((CPU_Instruction >> 26) == 16 && (CPU_Instruction & 0x03e00000) == 0x02000000 && ((unsigned char)CPU_Instruction & 63) == 24)) {
+            break;
         }
         pc += 4;
-        if (count > 9) {
-            CPU_Instruction = savedInstruction;
-            return unsigned(-1);
-        }
-    } while (true);
+    } while (count < 10);
+    CPU_Instruction = savedInstruction;
+    return result;
 }
 
 void EmitTranslateAddress(unsigned char writing)
 {
     unsigned done;
     if (TLBEnabled && (TLBRamMapped || RequiresMemoryCheck())) {
-        EmitMove(1, X86_ECX, X86_EAX);
+        EmitMove(1, X86_EAX, X86_ECX);
         EmitAndImmediate(1, X86_ECX, 0xc0000000);
         EmitCompareImmediate(1, X86_ECX, 0x80000000);
         unsigned direct = EmitConditionalJump(4);
@@ -1645,9 +1656,12 @@ void EmitProgramCounter()
 
 void EmitLinkRegister(unsigned char reg)
 {
-    EmitStoreImmediate(1, 5, (unsigned)&CPU_GPR[reg], CPU_LastPC + 8);
-    EmitStoreImmediate(1, 5, (unsigned)&CPU_GPR[reg] + 4,
-        (int)(CPU_LastPC + 8) < 0 ? unsigned(-1) : 0);
+    unsigned offset = (unsigned char)reg * sizeof(CPU_GPR[0]);
+    EmitStoreImmediate(1, 5, (unsigned)CPU_GPR + offset, CPU_LastPC + 8);
+    if ((CPU_LastPC + 8) & 0x80000000)
+        EmitStoreImmediate(1, 5, (unsigned)CPU_GPR + offset + 4, unsigned(-1));
+    else
+        EmitStoreImmediate(1, 5, (unsigned)CPU_GPR + offset + 4, 0);
 }
 
 void StoreMultiplyResult()
@@ -1665,13 +1679,13 @@ void FinishInstruction()
     if (BlockStatsEnabled && Dynarec_PageAddress < RDRAMSize)
         EndBlockTiming(&Dynarec_ProfileStartLow, &Dynarec_ProfileStartHigh,
             &BlockCycleCounts[Dynarec_BlockStart >> 2]);
-    int cycles = (int)-(double)Dynarec_BlockInstructionCount;
+    int cycles = (int)-(float)Dynarec_BlockInstructionCount;
     if (!cycles)
         cycles = -1;
     EmitAddImmediate(X86_ESI, cycles);
 }
 
-static void TrackWord()
+void TrackWord()
 {
     if (!Dynarec_TrackingLoaded) {
         EmitLoad(1, X86_ECX, 5, (unsigned)&UndoPosition);
@@ -1688,7 +1702,7 @@ static void TrackWord()
     EmitLabel(skip);
 }
 
-static void TrackDoubleWord()
+void TrackDoubleWord()
 {
     if (!Dynarec_TrackingLoaded) {
         EmitLoad(1, X86_ECX, 5, (unsigned)&UndoPosition);
@@ -1708,13 +1722,13 @@ static void TrackDoubleWord()
     EmitLabel(skip);
 }
 
-static void TrackGPR(unsigned char reg)
+void TrackGPR(unsigned reg)
 {
-    LoadGPR64(reg);
+    LoadGPR64((unsigned char)reg);
     TrackDoubleWord();
 }
 
-static void TrackFPR(unsigned reg)
+void TrackFPR(unsigned reg)
 {
     if (Dynarec_DynamicFpuMode) {
         EmitLoad(1, X86_EBX, 5, (unsigned)&CPU_FRMode);
@@ -1738,20 +1752,20 @@ static void TrackFPR(unsigned reg)
     TrackDoubleWord();
 }
 
-static void TrackRegister64(const CpuS64 *reg)
+void TrackRegister64(const CpuS64 *reg)
 {
     EmitLoad(1, X86_EAX, 5, (unsigned)reg);
     EmitLoad(1, X86_EDX, 5, (unsigned)reg + 4);
     TrackDoubleWord();
 }
 
-static void TrackRegister32(const unsigned *reg)
+void TrackRegister32(const unsigned *reg)
 {
     EmitLoad(1, X86_EAX, 5, (unsigned)reg);
     TrackWord();
 }
 
-static void TrackMemory()
+void TrackMemory()
 {
     LoadGPRLow((CPU_Instruction >> 21) & 31);
     EmitAddImmediate(X86_EAX, (short)CPU_Instruction);
@@ -1764,7 +1778,7 @@ static void TrackMemory()
     TrackDoubleWord();
 }
 
-static void TrackProgramCounter()
+void TrackProgramCounter()
 {
     EmitMoveImmediate(1, X86_EAX, CPU_LastPC);
     TrackWord();
@@ -1892,11 +1906,11 @@ void TrackInstructionChanges()
 void RecompileEqualityBranch(unsigned char likely, unsigned char equal)
 {
     LoadGPRPairLow((CPU_Instruction >> 21) & 31, (CPU_Instruction >> 16) & 31);
-    EmitCompare(1, X86_ECX, X86_EAX);
+    EmitCompare(1, X86_EAX, X86_ECX);
     unsigned lowDifferent = EmitConditionalJump(5);
     LoadGPRWord((CPU_Instruction >> 21) & 31, 1, X86_EAX);
     LoadGPRWord((CPU_Instruction >> 16) & 31, 1, X86_ECX);
-    EmitCompare(1, X86_ECX, X86_EAX);
+    EmitCompare(1, X86_EAX, X86_ECX);
     unsigned highDifferent = EmitConditionalJump(5);
     if (equal) {
         RecompileDelaySlot();
@@ -2018,8 +2032,8 @@ void CompileInstructions()
 {
     Dynarec_FpuChecked = 0;
     do {
-        unsigned instruction = ReadPhysicalWord(Dynarec_PhysicalPC);
-        CPU_Instruction = instruction;
+        CPU_Instruction = ReadPhysicalWord(Dynarec_PhysicalPC);
+        unsigned instruction = CPU_Instruction;
         for (unsigned i = 0; i < ToolCount; ++i)
             if ((ToolCatalog[i].Flags & 0x100) && ToolCatalog[i].Invoke)
                 ToolCatalog[i].Invoke(0x100, instruction);

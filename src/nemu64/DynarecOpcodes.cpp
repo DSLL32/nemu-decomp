@@ -15,6 +15,7 @@
 #define RT ((CPU_Instruction >> 16) & 31)
 #define RD ((CPU_Instruction >> 11) & 31)
 #define SA ((CPU_Instruction >> 6) & 31)
+#define FUNCT ((unsigned char)CPU_Instruction & 63)
 #define SIMM ((short)CPU_Instruction)
 #define UIMM ((unsigned short)CPU_Instruction)
 #define ADDRESS(object) ((unsigned)&(object))
@@ -55,21 +56,21 @@ void Recompile_Breakpoint()
         if (CPUBreakpoints[i].Address == physical) {
             CPU_Instruction = CPUBreakpoints[i].Instruction;
             if ((CPU_Instruction & 0xfc000000) == 0xec000000)
-                EmitCall((unsigned)ReportDynarecError3);
+                EmitCall((unsigned)ReportDynarecError2);
             if (OpcodeStatsEnabled)
                 EmitAddMemory(1, 0, 5, ADDRESS(OpcodeStats[CPU_Instruction >> 26]), 1);
             Dynarec_MainDispatch[CPU_Instruction >> 26]();
             return;
         }
     }
-    EmitCall((unsigned)ReportDynarecError2);
+    EmitCall((unsigned)ReportDynarecError3);
 }
 
 void Recompile_SPECIAL()
 {
     if (OpcodeStatsEnabled)
-        EmitAddMemory(1, 0, 5, ADDRESS(OpcodeStats[0x40 + (CPU_Instruction & 63)]), 1);
-    Dynarec_SpecialDispatch[CPU_Instruction & 63]();
+        EmitAddMemory(1, 0, 5, ADDRESS(OpcodeStats[0x40 + FUNCT]), 1);
+    Dynarec_SpecialDispatch[FUNCT]();
 }
 
 void Recompile_REGIMM()
@@ -156,7 +157,10 @@ void Recompile_ADDIU()
 void Recompile_SLTI()
 {
     LoadGPRWord(RS, 1, X86_EAX);
-    EmitCompareImmediate(1, X86_EAX, SIMM < 0 ? -1 : 0);
+    if (CPU_Instruction & 0x8000)
+        EmitCompareImmediate(1, X86_EAX, -1);
+    else
+        EmitCompareImmediate(1, X86_EAX, 0);
     EmitSet(12, X86_EAX);
     unsigned different = EmitConditionalJump(5);
     LoadGPRWord(RS, 0, X86_EAX);
@@ -170,7 +174,10 @@ void Recompile_SLTI()
 void Recompile_SLTIU()
 {
     LoadGPRWord(RS, 1, X86_EAX);
-    EmitCompareImmediate(1, X86_EAX, SIMM < 0 ? -1 : 0);
+    if (CPU_Instruction & 0x8000)
+        EmitCompareImmediate(1, X86_EAX, -1);
+    else
+        EmitCompareImmediate(1, X86_EAX, 0);
     EmitSet(2, X86_EAX);
     unsigned different = EmitConditionalJump(5);
     LoadGPRWord(RS, 0, X86_EAX);
@@ -208,7 +215,10 @@ void Recompile_LUI()
         EmitMoveImmediate(1, X86_EDI, CPU_Instruction << 16);
     else
         EmitStoreImmediate(1, 5, ADDRESS(CPU_GPR[RT]), CPU_Instruction << 16);
-    EmitStoreImmediate(1, 5, ADDRESS(CPU_GPR[RT]) + 4, SIMM < 0 ? -1 : 0);
+    if (CPU_Instruction & 0x8000)
+        EmitStoreImmediate(1, 5, ADDRESS(CPU_GPR[RT]) + 4, -1);
+    else
+        EmitStoreImmediate(1, 5, ADDRESS(CPU_GPR[RT]) + 4, 0);
 }
 
 void Recompile_COP0()
@@ -234,7 +244,10 @@ void Recompile_DADDI()
 {
     LoadGPR64(RS);
     EmitAddImmediate(X86_EAX, SIMM);
-    EmitAdcImmediate(1, X86_EDX, SIMM < 0 ? -1 : 0);
+    if (CPU_Instruction & 0x8000)
+        EmitAdcImmediate(1, X86_EDX, -1);
+    else
+        EmitAdcImmediate(1, X86_EDX, 0);
     StoreGPR64(RT);
 }
 
@@ -359,11 +372,11 @@ void Recompile_DSLLV()
     EmitAndImmediate(1, X86_ECX, 63);
     EmitCompareImmediate(1, X86_ECX, 32);
     unsigned wide = EmitConditionalJump(3);
-    EmitDoubleShiftLeftCL(X86_EDX, X86_EAX);
+    EmitDoubleShiftLeftCL(X86_EAX, X86_EDX);
     EmitShiftLeftCL(1, X86_EAX);
     unsigned done = EmitJump();
     EmitLabel(wide);
-    EmitMove(1, X86_EDX, X86_EAX);
+    EmitMove(1, X86_EAX, X86_EDX);
     EmitMoveImmediate(1, X86_EAX, 0);
     EmitAndImmediate(1, X86_ECX, 31);
     EmitShiftLeftCL(1, X86_EDX);
@@ -378,11 +391,11 @@ void Recompile_DSRLV()
     EmitAndImmediate(1, X86_ECX, 63);
     EmitCompareImmediate(1, X86_ECX, 32);
     unsigned wide = EmitConditionalJump(3);
-    EmitDoubleShiftRightCL(X86_EAX, X86_EDX);
+    EmitDoubleShiftRightCL(X86_EDX, X86_EAX);
     EmitShiftRightCL(1, X86_EDX);
     unsigned done = EmitJump();
     EmitLabel(wide);
-    EmitMove(1, X86_EAX, X86_EDX);
+    EmitMove(1, X86_EDX, X86_EAX);
     EmitMoveImmediate(1, X86_EDX, 0);
     EmitAndImmediate(1, X86_ECX, 31);
     EmitShiftRightCL(1, X86_EAX);
@@ -397,11 +410,11 @@ void Recompile_DSRAV()
     EmitAndImmediate(1, X86_ECX, 63);
     EmitCompareImmediate(1, X86_ECX, 32);
     unsigned wide = EmitConditionalJump(3);
-    EmitDoubleShiftRightCL(X86_EAX, X86_EDX);
+    EmitDoubleShiftRightCL(X86_EDX, X86_EAX);
     EmitArithmeticShiftRightCL(1, X86_EDX);
     unsigned done = EmitJump();
     EmitLabel(wide);
-    EmitMove(1, X86_EAX, X86_EDX);
+    EmitMove(1, X86_EDX, X86_EAX);
     EmitArithmeticShiftRight(1, X86_EDX, 31);
     EmitAndImmediate(1, X86_ECX, 31);
     EmitArithmeticShiftRightCL(1, X86_EAX);
@@ -426,7 +439,7 @@ void Recompile_MULTU()
 void Recompile_DIV()
 {
     LoadGPRPairLow(RS, RT);
-    EmitMove(1, X86_EDX, X86_EAX);
+    EmitMove(1, X86_EAX, X86_EDX);
     EmitArithmeticShiftRight(1, X86_EDX, 31);
     EmitCompareImmediate(1, X86_ECX, 0);
     unsigned zero = EmitConditionalJump(4);
@@ -502,47 +515,47 @@ void Recompile_DDIVU()
 void Recompile_ADD()
 {
     LoadGPRPairLow(RS, RT);
-    EmitAdd(1, X86_EAX, X86_ECX);
+    EmitAdd(1, X86_ECX, X86_EAX);
     StoreGPRSigned32(RD);
 }
 
 void Recompile_SUB()
 {
     LoadGPRPairLow(RS, RT);
-    EmitSubtract(1, X86_EAX, X86_ECX);
+    EmitSubtract(1, X86_ECX, X86_EAX);
     StoreGPRSigned32(RD);
 }
 
 void Recompile_AND()
 {
     LoadTwoGPR64(RS, RT);
-    EmitAnd(1, X86_EAX, X86_ECX);
-    EmitAnd(1, X86_EDX, X86_EBX);
+    EmitAnd(1, X86_ECX, X86_EAX);
+    EmitAnd(1, X86_EBX, X86_EDX);
     StoreGPR64(RD);
 }
 
 void Recompile_OR()
 {
     LoadTwoGPR64(RS, RT);
-    EmitOr(1, X86_EAX, X86_ECX);
-    EmitOr(1, X86_EDX, X86_EBX);
+    EmitOr(1, X86_ECX, X86_EAX);
+    EmitOr(1, X86_EBX, X86_EDX);
     StoreGPR64(RD);
 }
 
 void Recompile_XOR()
 {
     LoadTwoGPR64(RS, RT);
-    EmitXor(1, X86_EAX, X86_ECX);
-    EmitXor(1, X86_EDX, X86_EBX);
+    EmitXor(1, X86_ECX, X86_EAX);
+    EmitXor(1, X86_EBX, X86_EDX);
     StoreGPR64(RD);
 }
 
 void Recompile_NOR()
 {
     LoadTwoGPR64(RS, RT);
-    EmitOr(1, X86_EAX, X86_ECX);
+    EmitOr(1, X86_ECX, X86_EAX);
     EmitNot(1, X86_EAX);
-    EmitOr(1, X86_EDX, X86_EBX);
+    EmitOr(1, X86_EBX, X86_EDX);
     EmitNot(1, X86_EDX);
     StoreGPR64(RD);
 }
@@ -551,11 +564,11 @@ void Recompile_SLT()
 {
     LoadGPRWord(RS, 1, X86_EDX);
     LoadGPRWord(RT, 1, X86_EBX);
-    EmitCompare(1, X86_EDX, X86_EBX);
+    EmitCompare(1, X86_EBX, X86_EDX);
     EmitSet(12, X86_EAX);
     unsigned different = EmitConditionalJump(5);
     LoadGPRPairLow(RS, RT);
-    EmitCompare(1, X86_EAX, X86_ECX);
+    EmitCompare(1, X86_ECX, X86_EAX);
     EmitSet(2, X86_EAX);
     EmitLabel(different);
     EmitMoveUnsigned(0, X86_EAX, X86_EAX);
@@ -566,11 +579,11 @@ void Recompile_SLTU()
 {
     LoadGPRWord(RS, 1, X86_EDX);
     LoadGPRWord(RT, 1, X86_EBX);
-    EmitCompare(1, X86_EDX, X86_EBX);
+    EmitCompare(1, X86_EBX, X86_EDX);
     EmitSet(2, X86_EAX);
     unsigned different = EmitConditionalJump(5);
     LoadGPRPairLow(RS, RT);
-    EmitCompare(1, X86_EAX, X86_ECX);
+    EmitCompare(1, X86_ECX, X86_EAX);
     EmitSet(2, X86_EAX);
     EmitLabel(different);
     EmitMoveUnsigned(0, X86_EAX, X86_EAX);
@@ -580,16 +593,16 @@ void Recompile_SLTU()
 void Recompile_DADD()
 {
     LoadTwoGPR64(RS, RT);
-    EmitAdd(1, X86_EAX, X86_ECX);
-    EmitAdc(1, X86_EDX, X86_EBX);
+    EmitAdd(1, X86_ECX, X86_EAX);
+    EmitAdc(1, X86_EBX, X86_EDX);
     StoreGPR64(RD);
 }
 
 void Recompile_DSUB()
 {
     LoadTwoGPR64(RS, RT);
-    EmitSubtract(1, X86_EAX, X86_ECX);
-    EmitSbb(1, X86_EDX, X86_EBX);
+    EmitSubtract(1, X86_ECX, X86_EAX);
+    EmitSbb(1, X86_EBX, X86_EDX);
     StoreGPR64(RD);
 }
 
@@ -609,7 +622,7 @@ void Recompile_TEQ()
 void Recompile_DSLL()
 {
     LoadGPR64(RT);
-    EmitDoubleShiftLeft(X86_EDX, X86_EAX, SA);
+    EmitDoubleShiftLeft(X86_EAX, X86_EDX, SA);
     EmitShiftLeft(1, X86_EAX, SA);
     StoreGPR64(RD);
 }
@@ -617,7 +630,7 @@ void Recompile_DSLL()
 void Recompile_DSRL()
 {
     LoadGPR64(RT);
-    EmitDoubleShiftRight(X86_EAX, X86_EDX, SA);
+    EmitDoubleShiftRight(X86_EDX, X86_EAX, SA);
     EmitShiftRight(1, X86_EDX, SA);
     StoreGPR64(RD);
 }
@@ -625,7 +638,7 @@ void Recompile_DSRL()
 void Recompile_DSRA()
 {
     LoadGPR64(RT);
-    EmitDoubleShiftRight(X86_EAX, X86_EDX, SA);
+    EmitDoubleShiftRight(X86_EDX, X86_EAX, SA);
     EmitArithmeticShiftRight(1, X86_EDX, SA);
     StoreGPR64(RD);
 }
@@ -690,7 +703,7 @@ void Recompile_MFC0()
     case CP0_Count:
         EmitLoad(1, X86_EAX, 5, ADDRESS(CPU_COP0[CP0_Count]));
         EmitAddImmediate(X86_EAX, 10000);
-        EmitSubtract(1, X86_EAX, X86_ESI);
+        EmitSubtract(1, X86_ESI, X86_EAX);
         StoreGPRSigned32(RT);
         return;
     case CP0_EntryHi:  EmitLoad(1, X86_EAX, 5, ADDRESS(CPU_COP0[CP0_EntryHi])); break;
@@ -763,14 +776,14 @@ void Recompile_MTC0()
         EmitStore(1, X86_EAX, 5, ADDRESS(CPU_COP0[CP0_Count]));
         EmitMoveImmediate(1, X86_ESI, 10000);
         EmitLoad(1, X86_EDX, 5, ADDRESS(CPU_COP0[CP0_Compare]));
-        EmitCompare(1, X86_EAX, X86_EDX);
+        EmitCompare(1, X86_EDX, X86_EAX);
         EmitSetMemory(2, 5, ADDRESS(CPU_ComparePending));
         return;
     case CP0_EntryHi: EmitStore(1, X86_EAX, 5, ADDRESS(CPU_COP0[CP0_EntryHi])); return;
     case CP0_Compare:
         EmitStore(1, X86_EAX, 5, ADDRESS(CPU_COP0[CP0_Compare]));
         EmitLoad(1, X86_EDX, 5, ADDRESS(CPU_COP0[CP0_Count]));
-        EmitCompare(1, X86_EDX, X86_EAX);
+        EmitCompare(1, X86_EAX, X86_EDX);
         EmitSetMemory(2, 5, ADDRESS(CPU_ComparePending));
         EmitAndMemory(1, 5, ADDRESS(CPU_COP0[CP0_Cause]), 0xffff7fff);
         return;
@@ -810,7 +823,7 @@ void Recompile_TLB()
 {
     if (OpcodeStatsEnabled)
         EmitAddMemory(1, 0, 5, ADDRESS(OpcodeStats[0xe0 + RS]), 1);
-    Dynarec_Cop0FunctionDispatch[CPU_Instruction & 63]();
+    Dynarec_Cop0FunctionDispatch[FUNCT]();
 }
 
 void Recompile_TLBR() { EmitCall((unsigned)TLBRead); }

@@ -124,11 +124,12 @@ bool LoadState(bool previewOnly)
     FILE* file = fopen(StateFileName, "rb");
     if (!file)
         return false;
-    fpos_t fileLength, position = 0;
+    fpos_t fileLength, position;
     fseek(file, 0, SEEK_END);
     fgetpos(file, &fileLength);
     fseek(file, 0, SEEK_SET);
-    void* movieData = NULL;
+    position = 0;
+    void* movieData;
     FILE* movieFile;
     while (position < fileLength) {
         unsigned type;
@@ -145,12 +146,12 @@ bool LoadState(bool previewOnly)
         } else {
             switch (type) {
             case 1:
+                data = RDRAM;
                 if (RDRAMSize != length) {
                     DecommitRDRAM();
                     RDRAMSize = length;
                     CommitRDRAM();
                 }
-                data = RDRAM;
                 break;
             case 2: data = SPMemory; break;
             case 3: data = PIFRam; break;
@@ -175,11 +176,11 @@ bool LoadState(bool previewOnly)
             case 36: data = &VIReg; break;
             case 37: data = &PIReg; break;
             case 38: data = &DPCReg; break;
-            case 39: case 60: data = Controllers; break;
             case 50: data = &CPU_HostFpuControl; break;
             case 51: data = &CPU_ActionFlags; break;
             case 52: data = &CPU_Random; break;
             case 53: data = &CPU_VideoCyclesRemaining; break;
+            case 39: case 60: data = Controllers; break;
             case 70: data = &FlashStatus; break;
             case 71: data = &FlashCommand; break;
             case 72: data = &FlashRamAddress; break;
@@ -195,43 +196,48 @@ bool LoadState(bool previewOnly)
                 movieFile = fopen("$$$temp.tmp", "wb");
                 fseek(movieFile, 0, SEEK_SET);
                 movieData = malloc(length);
-                MoviePlay = 1;
                 data = movieData;
+                MoviePlay = 1;
                 break;
             }
         }
-        if (!data) {
-            fseek(file, packedLength ? packedLength : length, SEEK_CUR);
-        } else if (!packedLength) {
-            fread(data, length, 1, file);
-        } else {
-            void* packed = malloc(packedLength);
-            fread(packed, packedLength, 1, file);
-            uncompress((unsigned char*)data, &length, (const unsigned char*)packed, packedLength);
-            free(packed);
-            if (data == movieData) {
-                fwrite(movieData, 1, length, movieFile);
-                fclose(movieFile);
-                free(movieData);
+        if (data) {
+            if (!packedLength) {
+                fread(data, length, 1, file);
+            } else {
+                void* packed = malloc(packedLength);
+                fread(packed, packedLength, 1, file);
+                uncompress((unsigned char*)data, &length, (const unsigned char*)packed, packedLength);
+                free(packed);
+                if (data == movieData) {
+                    fwrite(movieData, 1, length, movieFile);
+                    fclose(movieFile);
+                    free(movieData);
+                }
             }
+        } else if (!packedLength) {
+            fseek(file, length, SEEK_CUR);
+        } else {
+            fseek(file, packedLength, SEEK_CUR);
         }
         fgetpos(file, &position);
     }
     fclose(file);
-    if (previewOnly)
-        return foundPreview;
-    CPU_ActionFlags &= ~0x00400000;
-    if (EEPROMUsed || MemPackUsed || SRAMUsed) {
-        FlushStateSaves();
-        DisableSaveWrites = 0;
+    if (!previewOnly) {
+        CPU_ActionFlags &= ~0x00400000;
+        if (EEPROMUsed || MemPackUsed || SRAMUsed) {
+            FlushStateSaves();
+            DisableSaveWrites = 0;
+        }
+        CPU_FRMode = (CPU_COP0[CP0_Status] >> 26) & 1;
+        CPU_AudioEnabled = 1;
+        CPU_AudioCyclesRemaining = 0;
+        CPU_FpuModeChanges = 0;
+        Dynarec_DynamicFpuMode = 0;
+        SetStatusText(0, "State loaded");
+        return true;
     }
-    CPU_FRMode = (CPU_COP0[CP0_Status] >> 26) & 1;
-    CPU_AudioEnabled = 1;
-    CPU_AudioCyclesRemaining = 0;
-    CPU_FpuModeChanges = 0;
-    Dynarec_DynamicFpuMode = 0;
-    SetStatusText(0, "State loaded");
-    return true;
+    return foundPreview;
 }
 
 void FlushStateSaves()

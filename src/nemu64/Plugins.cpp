@@ -264,6 +264,12 @@ void NotifyTools(unsigned int mask, unsigned int reason)
             ToolCatalog[i].Invoke(mask, reason);
 }
 
+// Separate callback identities are inferred from the two immediate addresses
+// stored by the original caller. Their identical bodies can be folded by ICF.
+void __stdcall NetplayChatReceived(char *, char *)
+{
+}
+
 void __stdcall NetplayClientDropped(char *, int)
 {
 }

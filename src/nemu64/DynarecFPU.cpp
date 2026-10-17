@@ -71,17 +71,17 @@ void Recompile_DMFC1()
     NEXT_FPU_MODE();
     if (Dynarec_DynamicFpuMode || !CPU_FRMode) {
         EmitLoad(1, X86_EAX, 5, (unsigned)&CPU_FPR.words[FS & 30]);
-        EmitLoad(1, X86_EDX, 5, (unsigned)&CPU_FPR.words[(FS & 30) | 1]);
+        EmitLoad(1, X86_EDX, 5, (unsigned)&CPU_FPR.words[((unsigned char)FS & 30) | 1]);
     }
     END_FPU_MODE();
-    StoreGPR64((unsigned char)FT);
+    StoreGPR64(FT);
 }
 
 // 004113D0.
 void Recompile_CFC1()
 {
     CheckFPUEnabled();
-    switch (FS) {
+    switch ((unsigned char)FS) {
     case 0:
         EmitMoveImmediate(1, X86_EAX, 0x0a00);
         break;
@@ -121,7 +121,7 @@ void Recompile_DMTC1()
     NEXT_FPU_MODE();
     if (Dynarec_DynamicFpuMode || !CPU_FRMode) {
         EmitStore(1, X86_EAX, 5, (unsigned)&CPU_FPR.words[FS & 30]);
-        EmitStore(1, X86_EDX, 5, (unsigned)&CPU_FPR.words[(FS & 30) | 1]);
+        EmitStore(1, X86_EDX, 5, (unsigned)&CPU_FPR.words[((unsigned char)FS & 30) | 1]);
     }
     END_FPU_MODE();
 }
@@ -131,7 +131,7 @@ void Recompile_CTC1()
 {
     CheckFPUEnabled();
     LoadGPRLow(FT);
-    if (FS == 31) {
+    if ((unsigned char)FS == 31) {
         EmitStore(1, X86_EAX, 5, (unsigned)&CPU_FCR31);
         EmitPush(X86_EAX);
         EmitCall((unsigned)SetFpuRounding);
@@ -142,7 +142,8 @@ void Recompile_CTC1()
 void Recompile_COP1_BC()
 {
     CheckFPUEnabled();
-    unsigned operation = FT;
+    // The original reads the opcode field as an unaligned DWORD at byte 2.
+    unsigned operation = *(unsigned *)((unsigned char *)&CPU_Instruction + 2) & 31;
     unsigned char likely = operation == 2 || operation == 3;
     unsigned char condition = operation == 0 || operation == 2 ? 5 : 4;
     EmitTestMemory(1, 5, (unsigned)&CPU_FCR31, 0x00800000);
@@ -162,8 +163,8 @@ void Recompile_COP1_S()
 {
     CheckFPUEnabled();
     if (OpcodeStatsEnabled)
-        EmitAddMemory(1, 0, 5, (unsigned)&OpcodeStats[0x120 + (CPU_Instruction & 63)], 1);
-    Dynarec_Cop1FunctionDispatch[CPU_Instruction & 63]();
+        EmitAddMemory(1, 0, 5, (unsigned)&OpcodeStats[0x120 + ((unsigned char)CPU_Instruction & 63)], 1);
+    Dynarec_Cop1FunctionDispatch[(unsigned char)CPU_Instruction & 63]();
 }
 
 // 00411790.
@@ -171,8 +172,8 @@ void Recompile_COP1_D()
 {
     CheckFPUEnabled();
     if (OpcodeStatsEnabled)
-        EmitAddMemory(1, 0, 5, (unsigned)&OpcodeStats[0x160 + (CPU_Instruction & 63)], 1);
-    Dynarec_Cop1FunctionDispatch[CPU_Instruction & 63]();
+        EmitAddMemory(1, 0, 5, (unsigned)&OpcodeStats[0x160 + ((unsigned char)CPU_Instruction & 63)], 1);
+    Dynarec_Cop1FunctionDispatch[(unsigned char)CPU_Instruction & 63]();
 }
 
 // 004117E0.
@@ -180,8 +181,8 @@ void Recompile_COP1_W()
 {
     CheckFPUEnabled();
     if (OpcodeStatsEnabled)
-        EmitAddMemory(1, 0, 5, (unsigned)&OpcodeStats[0x1a0 + (CPU_Instruction & 63)], 1);
-    Dynarec_Cop1FunctionDispatch[CPU_Instruction & 63]();
+        EmitAddMemory(1, 0, 5, (unsigned)&OpcodeStats[0x1a0 + ((unsigned char)CPU_Instruction & 63)], 1);
+    Dynarec_Cop1FunctionDispatch[(unsigned char)CPU_Instruction & 63]();
 }
 
 // 00411830.
@@ -189,8 +190,8 @@ void Recompile_COP1_L()
 {
     CheckFPUEnabled();
     if (OpcodeStatsEnabled)
-        EmitAddMemory(1, 0, 5, (unsigned)&OpcodeStats[0x1e0 + (CPU_Instruction & 63)], 1);
-    Dynarec_Cop1FunctionDispatch[CPU_Instruction & 63]();
+        EmitAddMemory(1, 0, 5, (unsigned)&OpcodeStats[0x1e0 + ((unsigned char)CPU_Instruction & 63)], 1);
+    Dynarec_Cop1FunctionDispatch[(unsigned char)CPU_Instruction & 63]();
 }
 
 // 00411880.
@@ -821,13 +822,17 @@ unsigned GetFpuRegisterAddress(unsigned reg, unsigned format, unsigned char full
 {
     if (fullMode) {
         switch (format) {
-        case 16: case 17: case 20: case 21:
-            return (unsigned)&CPU_FPR64[reg];
+        case 16: return (unsigned)&CPU_FPR64[reg];
+        case 17: return (unsigned)&CPU_FPR64[reg];
+        case 20: return (unsigned)&CPU_FPR64[reg];
+        case 21: return (unsigned)&CPU_FPR64[reg];
         }
     } else {
         switch (format) {
-        case 17: case 21: reg &= ~1U;
-        case 16: case 20: return (unsigned)&CPU_FPR.words[reg];
+        case 16: return (unsigned)&CPU_FPR.words[reg];
+        case 17: return (unsigned)&CPU_FPR.words[reg & ~1U];
+        case 20: return (unsigned)&CPU_FPR.words[reg];
+        case 21: return (unsigned)&CPU_FPR.words[reg & ~1U];
         }
     }
     ReportCompilerError("GetCOP1Reg: Error 0");
@@ -844,15 +849,15 @@ void FpuRoundingControl(unsigned format, unsigned mode)
         else if (format == 17) address = (unsigned)&CPU_FpuControlExtended;
         else if (format == 20 || format == 21) address = (unsigned)&CPU_FpuControlDouble;
         break;
-    case 2:
-        if (format == 16) address = (unsigned)&FpuTruncateSingle;
-        else if (format == 17) address = (unsigned)&FpuTruncateDouble;
-        else if (format == 20 || format == 21) address = (unsigned)&FpuTruncateInteger;
-        break;
     case 3:
         if (format == 16) address = (unsigned)&FpuNearestSingle;
         else if (format == 17) address = (unsigned)&FpuNearestDouble;
         else if (format == 20 || format == 21) address = (unsigned)&FpuNearestInteger;
+        break;
+    case 2:
+        if (format == 16) address = (unsigned)&FpuTruncateSingle;
+        else if (format == 17) address = (unsigned)&FpuTruncateDouble;
+        else if (format == 20 || format == 21) address = (unsigned)&FpuTruncateInteger;
         break;
     case 4:
         if (format == 16) address = (unsigned)&FpuFloorSingle;

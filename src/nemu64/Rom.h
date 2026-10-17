@@ -10,9 +10,9 @@ extern unsigned BootCicSeed;
 extern unsigned VideoNTSC;
 extern unsigned BootVersion;
 
-bool ReadZipRom(const char* filename, unsigned maximumBytes, bool showProgress);
+bool ReadZipRom(const char* filename, bool showProgress, unsigned maximumBytes);
 void FreeRomImage();
-bool ReadRomImage(HWND parent, const char* filename, unsigned maximumBytes, bool showProgress);
+bool ReadRomImage(HWND parent, const char* filename, bool showProgress, unsigned maximumBytes);
 bool LoadRom(HWND parent, const char* filename);
 
 #endif

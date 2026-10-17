@@ -37,7 +37,7 @@ void DrawStatePreview(HWND dialog);
 void CaptureStatePreview();
 void AddToolbarButton(TBBUTTON* buttons, int* count, BYTE style, int bitmap,
                       BYTE state, int command);
-LRESULT MainWindowCommand(HWND window, UINT message, WPARAM wParam, LPARAM lParam);
+LRESULT MainWindowCommand(HWND window, UINT message, WPARAM wParam, LPARAM lParam, int unused);
 LRESULT CALLBACK MainWindowProc(HWND window, UINT message, WPARAM wParam, LPARAM lParam);
 UINT CALLBACK StatePreviewHook(HWND dialog, UINT message, WPARAM wParam, LPARAM lParam);
 

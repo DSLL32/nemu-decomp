@@ -54,12 +54,12 @@ static __forceinline unsigned SwapWord(unsigned value)
     }
     return result;
 }
-static __forceinline unsigned short SwapHalf(unsigned value)
+static __forceinline unsigned short SwapHalf(unsigned short value)
 {
     unsigned short result;
     __asm {
         mov ax, word ptr value
-        xchg ah, al
+        xchg al, ah
         mov result, ax
     }
     return result;

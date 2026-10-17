@@ -298,7 +298,7 @@ void RefreshRomBrowser()
     LVITEMA item;
     HANDLE search;
     WIN32_FIND_DATAA data;
-    char text[100], title[100];
+    char text[100], status[100], title[100];
     do {
         sprintf(title, "Nemu64 - Exploring %s", RomDirectory);
         SetWindowTextA(MainWindow, title);
@@ -337,12 +337,12 @@ void RefreshRomBrowser()
                     !_stricmp(data.cFileName + strlen(data.cFileName) - 4, ".n64") ||
                     !_stricmp(data.cFileName + strlen(data.cFileName) - 4, ".zip")) && data.nFileSizeLow > 1024) {
             item.iImage = 6;
-            sprintf(text, "Getting info for %s...", data.cFileName);
-            SetStatusText(0, text);
+            sprintf(status, "Getting info for %s...", data.cFileName);
+            SetStatusText(0, status);
             UpdateWindow(MainWindow);
             strcpy(text, RomDirectory);
             strcat(text, data.cFileName);
-            if (ReadRomImage(NULL, text, 0x40, false)) {
+            if (ReadRomImage(NULL, text, false, 0x40)) {
                 ReadRomString("FriendlyName", CurrentRom.InternalName, CurrentRom.DisplayName);
                 strcpy(text, CurrentRom.DisplayName);
                 item.iItem = ListView_InsertItem(BrowserWindow, &item);
@@ -351,22 +351,23 @@ void RefreshRomBrowser()
                 item.iSubItem = 1;
                 ListView_SetItem(BrowserWindow, &item);
                 if (!_stricmp(data.cFileName + strlen(data.cFileName) - 4, ".zip")) {
-                    if (!CurrentRom.FileSize)
-                        sprintf(text, "0 MBIT");
-                    else
+                    if (CurrentRom.FileSize)
                         sprintf(text, "%u MBIT (Ratio %u%%)", CurrentRom.FileSize >> 17,
                                 (CurrentRom.FileSize - CurrentRom.CompressedSize) * 100 / CurrentRom.FileSize);
+                    else
+                        sprintf(text, "0 MBIT");
                 } else
                     sprintf(text, "%u MBIT", data.nFileSizeLow >> 17);
                 item.iSubItem = 2;
                 ListView_SetItem(BrowserWindow, &item);
                 ReadRomString("Comment", "(none)", text);
-                char* divider = strchr(text, '|');
-                if (divider) {
-                    divider[-1] = '\0';
+                int position = (int)strchr(text, '|');
+                if (position) {
+                    position -= (int)text;
+                    text[position - 1] = '\0';
                     item.iSubItem = 3;
                     ListView_SetItem(BrowserWindow, &item);
-                    item.pszText = divider + 2;
+                    item.pszText = text + position + 2;
                 }
                 item.iSubItem = 4;
                 ListView_SetItem(BrowserWindow, &item);

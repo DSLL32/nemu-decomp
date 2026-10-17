@@ -44,7 +44,7 @@ bool FrontendInitialized;
 // program. The declarations here describe their C++ parameters; /GL and LTCG
 // decide that private convention when the complete program is linked.
 extern int WindowHeight(HWND window);
-__declspec(dllimport) void GSConfigure();
+void GSConfigure();
 
 void ResizeMainWindow(unsigned int width, int height)
 {
@@ -202,9 +202,22 @@ UINT CALLBACK StatePreviewHook(HWND dialog, UINT message, WPARAM wParam, LPARAM 
 
 LRESULT CALLBACK MainWindowProc(HWND window, UINT message, WPARAM wParam, LPARAM lParam)
 {
+    HWND notificationWindow;
+    NMHDR* notification;
+    NMLISTVIEW* list;
+    NMTOOLBARA* toolbar;
+    int count;
+    LVCOLUMNA column;
+    LVITEMA item;
+    struct { DWORD maximumNameLength; DWORD fileSystemFlags; } volumeInformation;
+    char columnName[100];
+    LVITEMA selected;
+    MENUITEMINFOA menuItem;
+    int columnOrder[7];
+    TBBUTTON buttons[20];
     char text[500];
-    char filename[256];
     PAINTSTRUCT paint;
+    char menuText[256], filename[256], drivePath[256], volumeName[256], fileSystemName[256];
     switch (message)
     {
     case WM_DESTROY:
@@ -231,11 +244,14 @@ LRESULT CALLBACK MainWindowProc(HWND window, UINT message, WPARAM wParam, LPARAM
         PostQuitMessage(0);
         return 0;
     case WM_MOVE:
-        MainWindowX = LOWORD(lParam);
-        MainWindowY = HIWORD(lParam) + 27;
-        if (SelectedGraphicsPlugin->MoveScreen)
-            SelectedGraphicsPlugin->MoveScreen(MainWindowX, MainWindowY);
-        return 0;
+        {
+            PluginDescriptor* graphics = SelectedGraphicsPlugin;
+            MainWindowX = LOWORD(lParam);
+            MainWindowY = HIWORD(lParam) + 27;
+            if (graphics->MoveScreen)
+                graphics->MoveScreen(MainWindowX, MainWindowY);
+            return 0;
+        }
     case WM_SIZE:
         {
             int toolbarHeight = WindowHeight(ToolbarWindow);
@@ -263,13 +279,10 @@ LRESULT CALLBACK MainWindowProc(HWND window, UINT message, WPARAM wParam, LPARAM
                 0, 0, 100, 100, MainWindow, NULL, ApplicationInstance, NULL);
             BrowserImageList = ImageList_Create(16, 16, ILC_COLOR24 | ILC_MASK, 15, 1);
             HBITMAP bitmap = (HBITMAP)LoadImageA(ApplicationInstance, MAKEINTRESOURCEA(IDB_BITMAP143),
-                IMAGE_BITMAP, 0, 0, LR_LOADTRANSPARENT);
+                IMAGE_BITMAP, 0, 0, LR_COLOR);
             ImageList_AddMasked(BrowserImageList, bitmap, RGB(255, 0, 255));
             DeleteObject(bitmap);
             DriveMenu = CreatePopupMenu();
-            MENUITEMINFOA menuItem;
-            char menuText[256], drivePath[256], volumeName[256], fileSystemName[256];
-            DWORD maximumNameLength, fileSystemFlags;
             menuItem.cbSize = sizeof(menuItem);
             menuItem.fMask = MIIM_TYPE | MIIM_ID;
             menuItem.fType = MFT_STRING;
@@ -286,7 +299,7 @@ LRESULT CALLBACK MainWindowProc(HWND window, UINT message, WPARAM wParam, LPARAM
                     UINT type = GetDriveTypeA(drivePath);
                     if (type >= DRIVE_FIXED && type <= DRIVE_CDROM &&
                         GetVolumeInformationA(drivePath, volumeName, 256, NULL,
-                            &maximumNameLength, &fileSystemFlags, fileSystemName, 256))
+                            &volumeInformation.maximumNameLength, &volumeInformation.fileSystemFlags, fileSystemName, 256))
                     {
                         strcpy(menuText, volumeName);
                         strcat(menuText, " (");
@@ -298,9 +311,8 @@ LRESULT CALLBACK MainWindowProc(HWND window, UINT message, WPARAM wParam, LPARAM
                 }
             FavouritesMenu = NULL;
             SendMessageA(ToolbarWindow, TB_SETIMAGELIST, 0, (LPARAM)BrowserImageList);
-            TBBUTTON buttons[20];
             memset(buttons, 0, sizeof(buttons));
-            int count = 0;
+            count = 0;
             AddToolbarButton(buttons, &count, TBSTYLE_BUTTON, 4, TBSTATE_ENABLED, ID_DIRECTORY_UP);
             AddToolbarButton(buttons, &count, TBSTYLE_DROPDOWN, 1, TBSTATE_ENABLED, 0x801e);
             AddToolbarButton(buttons, &count, TBSTYLE_DROPDOWN, 7, TBSTATE_ENABLED, 0x801f);
@@ -323,8 +335,6 @@ LRESULT CALLBACK MainWindowProc(HWND window, UINT message, WPARAM wParam, LPARAM
             SendMessageA(BrowserWindow, LVM_SETEXTENDEDLISTVIEWSTYLE, 0x30, 0x30);
             SendMessageA(BrowserWindow, LVM_SETIMAGELIST, LVSIL_SMALL, (LPARAM)BrowserImageList);
             SendMessageA(BrowserWindow, LVM_SETIMAGELIST, LVSIL_NORMAL, (LPARAM)BrowserImageList);
-            LVCOLUMNA column;
-            char columnName[100];
             column.mask = LVCF_TEXT | LVCF_WIDTH;
             column.pszText = columnName;
             strcpy(columnName, "Rom name");
@@ -348,11 +358,13 @@ LRESULT CALLBACK MainWindowProc(HWND window, UINT message, WPARAM wParam, LPARAM
             strcpy(columnName, "CRC1");
             column.cx = ReadIniInteger("Configuration", "Column6Width", 0, ConfigurationIniPath);
             SendMessageA(BrowserWindow, LVM_INSERTCOLUMNA, 6, (LPARAM)&column);
-            int columnOrder[7];
             if (GetPrivateProfileStructA("Configuration", "ColumnOrder", columnOrder,
                 sizeof(columnOrder), ConfigurationIniPath))
                 SendMessageA(BrowserWindow, LVM_SETCOLUMNORDERARRAY, 7, (LPARAM)columnOrder);
-            CheckMenuItem(GetMenu(MainWindow), ID_SHOW_ERRORS, ShowErrors ? MF_CHECKED : MF_UNCHECKED);
+            if (ShowErrors)
+                CheckMenuItem(GetMenu(MainWindow), ID_SHOW_ERRORS, MF_CHECKED);
+            else
+                CheckMenuItem(GetMenu(MainWindow), ID_SHOW_ERRORS, MF_UNCHECKED);
             EnableMenuItem(GetMenu(MainWindow), ID_USE_VIRTUAL_SAVE_FILES, MF_GRAYED);
             DragAcceptFiles(MainWindow, TRUE);
             return 1;
@@ -366,14 +378,15 @@ LRESULT CALLBACK MainWindowProc(HWND window, UINT message, WPARAM wParam, LPARAM
             return 0;
         }
     case WM_COMMAND:
-        return MainWindowCommand(window, message, wParam, lParam);
+        return MainWindowCommand(window, message, wParam, lParam, 0);
     case WM_NOTIFY:
         {
-            NMHDR* notification = (NMHDR*)lParam;
-            if (notification->hwndFrom == BrowserWindow)
+            notification = (NMHDR*)lParam;
+            notificationWindow = notification->hwndFrom;
+            if (notificationWindow == BrowserWindow)
             {
-                NMLISTVIEW* list = (NMLISTVIEW*)notification;
-                switch (notification->code)
+                list = (NMLISTVIEW*)notification;
+                switch ((int)notification->code)
                 {
                 case LVN_COLUMNCLICK:
                     {
@@ -385,7 +398,6 @@ LRESULT CALLBACK MainWindowProc(HWND window, UINT message, WPARAM wParam, LPARAM
                     }
                 case LVN_ITEMCHANGED:
                     {
-                        LVITEMA item;
                         item.iSubItem = 5;
                         item.cchTextMax = 100;
                         item.pszText = CurrentRom.InternalName;
@@ -400,12 +412,25 @@ LRESULT CALLBACK MainWindowProc(HWND window, UINT message, WPARAM wParam, LPARAM
                 case NM_DBLCLK:
                     if (list->iItem != -1)
                     {
-                        LVITEMA selected, item;
-                        selected.iItem = SendMessageA(BrowserWindow, LVM_GETHOTITEM, 0, 0);
+                        selected.iItem = SendMessageA(BrowserWindow, LVM_GETSELECTIONMARK, 0, 0);
                         selected.iSubItem = 0;
                         selected.mask = LVIF_IMAGE;
                         SendMessageA(BrowserWindow, LVM_GETITEMA, 0, (LPARAM)&selected);
-                        if (selected.iImage != 6)
+                        if (selected.iImage == 6)
+                        {
+                            if (!CPU_Running)
+                            {
+                                item.pszText = text;
+                                item.iSubItem = 1;
+                                item.cchTextMax = 256;
+                                SendMessageA(BrowserWindow, LVM_GETITEMTEXTA, selected.iItem, (LPARAM)&item);
+                                SetCurrentDirectoryA(RomDirectory);
+                                strcpy(SelectedRomFilename, RomDirectory);
+                                strcat(SelectedRomFilename, text);
+                                StartCPUThread();
+                            }
+                        }
+                        else
                         {
                             item.pszText = text;
                             item.iSubItem = 0;
@@ -415,44 +440,37 @@ LRESULT CALLBACK MainWindowProc(HWND window, UINT message, WPARAM wParam, LPARAM
                             strcat(RomDirectory, "\\");
                             RefreshRomBrowser();
                         }
-                        else if (!CPU_Running)
-                        {
-                            item.pszText = text;
-                            item.iSubItem = 1;
-                            item.cchTextMax = 256;
-                            SendMessageA(BrowserWindow, LVM_GETITEMTEXTA, selected.iItem, (LPARAM)&item);
-                            SetCurrentDirectoryA(RomDirectory);
-                            strcpy(SelectedRomFilename, RomDirectory);
-                            strcat(SelectedRomFilename, text);
-                            StartCPUThread();
-                        }
                     }
                     return 0;
                 }
             }
-            else if (notification->hwndFrom == ToolbarWindow)
+            else if (notificationWindow == ToolbarWindow)
             {
-                NMTOOLBARA* toolbar = (NMTOOLBARA*)notification;
-                if (notification->code == TBN_DROPDOWN)
+                toolbar = (NMTOOLBARA*)notification;
+                if (notification->code != TBN_DROPDOWN)
                 {
-                    if (toolbar->iItem == 0x801e) ShowDriveMenu();
-                    else if (toolbar->iItem == 0x801f) ShowFavouritesMenu();
-                }
-                else if (notification->code == NM_RCLICK && toolbar->iItem == ID_ABOUT)
-                {
-                    unsigned int position = EasterTextPosition;
-                    unsigned int previous;
-                    do
+                    if (notification->code == NM_RCLICK && toolbar->iItem == ID_ABOUT)
                     {
-                        previous = position;
-                        position++;
-                        if ((unsigned int)EasterTextLength <= position) break;
-                    } while (EasterText[previous + 1] != '\n');
-                    strncpy(text, EasterText + EasterTextPosition, position - EasterTextPosition);
-                    text[position - EasterTextPosition] = 0;
-                    EasterTextPosition = previous + 2;
-                    if ((unsigned int)EasterTextLength < EasterTextPosition) EasterTextPosition = 0;
-                    SetStatusText(0, text);
+                        unsigned int position = EasterTextPosition;
+                        do
+                        {
+                            position++;
+                            if (position >= (unsigned int)EasterTextLength) break;
+                        } while (EasterText[position] != '\n');
+                        strncpy(text, EasterText + EasterTextPosition, position - EasterTextPosition);
+                        text[position - EasterTextPosition] = 0;
+                        EasterTextPosition = position + 1;
+                        if (EasterTextPosition > (unsigned int)EasterTextLength) EasterTextPosition = 0;
+                        SetStatusText(0, text);
+                    }
+                }
+                else
+                {
+                    switch (toolbar->iItem)
+                    {
+                    case 0x801e: ShowDriveMenu(); break;
+                    case 0x801f: ShowFavouritesMenu(); break;
+                    }
                 }
             }
             return 0;
@@ -461,16 +479,7 @@ LRESULT CALLBACK MainWindowProc(HWND window, UINT message, WPARAM wParam, LPARAM
         {
             DragQueryFileA((HDROP)wParam, 0, filename, 256);
             DragFinish((HDROP)wParam);
-            if (!CPU_Running)
-            {
-                sprintf(text, "Load rom file %s?", filename);
-                if (MessageBoxA(MainWindow, text, "Load rom file", MB_YESNO | MB_ICONQUESTION) == IDYES)
-                {
-                    strcpy(SelectedRomFilename, filename);
-                    StartCPUThread();
-                }
-            }
-            else
+            if (CPU_Running)
             {
                 sprintf(text, "Load savestate file %s?", filename);
                 if (MessageBoxA(MainWindow, text, "Load state file", MB_YESNO | MB_ICONQUESTION) == IDYES)
@@ -478,6 +487,15 @@ LRESULT CALLBACK MainWindowProc(HWND window, UINT message, WPARAM wParam, LPARAM
                     strcpy(StateFileName, filename);
                     SetStatusText(0, "Loading state...");
                     CPU_ActionFlags |= 0x2000;
+                }
+            }
+            else
+            {
+                sprintf(text, "Load rom file %s?", filename);
+                if (MessageBoxA(MainWindow, text, "Load rom file", MB_YESNO | MB_ICONQUESTION) == IDYES)
+                {
+                    strcpy(SelectedRomFilename, filename);
+                    StartCPUThread();
                 }
             }
             return 0;
@@ -621,45 +639,92 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previousInstance, LPSTR command
     return message.wParam;
 }
 
-LRESULT MainWindowCommand(HWND window, UINT message, WPARAM wParam, LPARAM lParam)
+LRESULT MainWindowCommand(HWND window, UINT message, WPARAM wParam, LPARAM lParam, int unused)
 {
+    int toolResult = 1;
+    OPENFILENAMEA file;
+    KailleraInfos infos;
+    LVITEMA item;
+    char name[512];
+    unsigned int capacity;
+    char* games;
+    int position;
+    int index;
     int command = LOWORD(wParam);
     if (command > 65000)
     {
-        ToolCatalog[(int)(command - 65001) / 30].Invoke(1, (int)(command - 65001) % 30);
-        return 1;
+        ToolCatalog[(int)(command - 65001) / 30].Invoke(toolResult, (int)(command - 65001) % 30);
     }
-    OPENFILENAMEA file;
-    switch (command)
+    else switch (command)
     {
+    case ID_START_NETPLAY:
+        {
+            infos.AppName = "Nemu64 0.8";
+            capacity = 8192;
+            games = (char*)malloc(capacity);
+            games[0] = 0;
+            games[1] = 0;
+            position = 0;
+            for (index = 0; index < ListView_GetItemCount(BrowserWindow); ++index)
+            {
+                item.mask = LVIF_TEXT | LVIF_IMAGE;
+                item.iItem = index;
+                item.iSubItem = 0;
+                item.pszText = name;
+                item.cchTextMax = 511;
+                SendMessageA(BrowserWindow, LVM_GETITEMA, 0, (LPARAM)&item);
+                if (item.iImage == 6)
+                {
+                    while (position + strlen(name) + 4 > capacity)
+                    {
+                        capacity *= 2;
+                        games = (char*)realloc(games, capacity);
+                    }
+                    strcpy(games + position, name);
+                    char* next = games + position;
+                    unsigned int length = strlen(next) + 1;
+                    next[length] = 0;
+                    position += length;
+                }
+            }
+            infos.GameList = games;
+            infos.GameCallback = NetplayStartGame;
+            infos.ChatReceivedCallback = NetplayChatReceived;
+            infos.ClientDroppedCallback = NetplayClientDropped;
+            infos.MoreInfosCallback = NetplayMessage;
+            kailleraSetInfos(&infos);
+            kailleraSelectServerDialog(NULL);
+            free(games);
+        }
+        break;
     case ID_ABOUT:
         DialogBoxParamA(ApplicationInstance, MAKEINTRESOURCEA(IDD_ABOUT), window, AboutDialogProc, 0);
-        return 1;
+        break;
     case ID_EXIT:
         DestroyWindow(MainWindow);
-        return 1;
+        break;
     case ID_CONFIGURE_VIDEO_PLUGIN:
         if (SelectedGraphicsPlugin->DllConfig)
             SelectedGraphicsPlugin->DllConfig(MainWindow);
-        return 1;
+        break;
     case ID_CONFIGURE_AUDIO_PLUGIN:
         AIConfigure(window);
-        return 1;
+        break;
     case ID_CLOSE_ROM:
         CPU_ActionFlags = (CPU_ActionFlags & ~0x10000) | 0x400000;
         ResumeThread(CPU_Thread);
         SetStatusText(0, "Closing rom...");
-        return 1;
+        break;
     case ID_CONFIGURE_INPUT_PLUGIN:
         CIConfigure(window);
-        return 1;
+        break;
     case ID_CHEAT_DP_INT:
         CPU_ActionFlags |= 0x20;
-        return 1;
+        break;
     case ID_SETTINGS:
         {
             if (!NemuSettings)
-                return 1;
+                break;
             NemuSettings(PluginCount, PluginCatalog);
             PluginDescriptor* previous = SelectedGraphicsPlugin;
             if (CPU_Running)
@@ -667,62 +732,30 @@ LRESULT MainWindowCommand(HWND window, UINT message, WPARAM wParam, LPARAM lPara
             ReloadConfiguration();
             if (previous != SelectedGraphicsPlugin)
             {
-                if (!CPU_Running)
+                if (CPU_Running)
+                {
+                    PendingGraphicsPlugin = SelectedGraphicsPlugin;
+                    SelectedGraphicsPlugin = previous;
+                    CPU_ActionFlags |= 0x4000000;
+                }
+                else
                 {
                     if (previous->CloseDLL)
                         previous->CloseDLL();
                     InitializeGraphicsPlugin();
                 }
-                else
-                {
-                    PendingGraphicsPlugin = SelectedGraphicsPlugin;
-                    CPU_ActionFlags |= 0x4000000;
-                    SelectedGraphicsPlugin = previous;
-                }
             }
             if (CPU_Running)
                 ResumeThread(CPU_Thread);
         }
-        return 1;
+        break;
     case ID_RESET_DYNREC:
         CPU_ActionFlags |= 0x400;
-        return 1;
-    case ID_320X240: ResizeMainWindow(320, 240); return 1;
-    case ID_400X300: ResizeMainWindow(400, 300); return 1;
-    case ID_640X480: ResizeMainWindow(640, 480); return 1;
-    case ID_800X600: ResizeMainWindow(800, 600); return 1;
-    case ID_1024X768: ResizeMainWindow(1024, 768); return 1;
-    case ID_1152X864: ResizeMainWindow(1152, 864); return 1;
-    case ID_1280X960: ResizeMainWindow(1280, 960); return 1;
-    case ID_1600X1200: ResizeMainWindow(1600, 1200); return 1;
-    case 0x801e:
-        ShowDriveMenu();
-        return 1;
-    case 0x801f:
-        ShowFavouritesMenu();
-        return 1;
-    case ID_RESET:
-        CPU_ActionFlags |= 0x800;
-        return 1;
-    case ID_FULL_SCREEN:
-        FullScreen = !FullScreen;
-        if (SelectedGraphicsPlugin->ChangeWindow)
-            SelectedGraphicsPlugin->ChangeWindow();
-        return 1;
-    case ID_PAUSE:
-        if (!(CPU_ActionFlags & 0x200000))
-        {
-            CPU_ActionFlags |= 0x200000;
-            ActivePause = 0;
-            SendMessageA(ToolbarWindow, TB_SETSTATE, ID_PAUSE, TBSTATE_ENABLED | TBSTATE_CHECKED);
-        }
-        else
-        {
-            CPU_ActionFlags &= ~0x200000;
-            ResumeThread(CPU_Thread);
-            SendMessageA(ToolbarWindow, TB_SETSTATE, ID_PAUSE, TBSTATE_ENABLED);
-        }
-        return 1;
+        break;
+    case ID_320X240: ResizeMainWindow(320, 240); break;
+    case ID_400X300: ResizeMainWindow(400, 300); break;
+    case ID_640X480: ResizeMainWindow(640, 480); break;
+    case ID_800X600: ResizeMainWindow(800, 600); break;
     case ID_DIRECTORY_UP:
         if (strlen(RomDirectory) != 3)
         {
@@ -732,28 +765,173 @@ LRESULT MainWindowCommand(HWND window, UINT message, WPARAM wParam, LPARAM lPara
             RomDirectory[i + 1] = 0;
             RefreshRomBrowser();
         }
-        return 1;
+        break;
+    case ID_RESET:
+        CPU_ActionFlags |= 0x800;
+        break;
+    case ID_PAUSE:
+        if (CPU_ActionFlags & 0x200000)
+        {
+            CPU_ActionFlags &= ~0x200000;
+            ResumeThread(CPU_Thread);
+            SendMessageA(ToolbarWindow, TB_SETSTATE, ID_PAUSE, TBSTATE_ENABLED);
+        }
+        else
+        {
+            ActivePause = 0;
+            CPU_ActionFlags |= 0x200000;
+            SendMessageA(ToolbarWindow, TB_SETSTATE, ID_PAUSE, TBSTATE_ENABLED | TBSTATE_CHECKED);
+        }
+        break;
+    case ID_1024X768: ResizeMainWindow(1024, 768); break;
+    case ID_1152X864: ResizeMainWindow(1152, 864); break;
+    case ID_1280X960: ResizeMainWindow(1280, 960); break;
+    case ID_1600X1200: ResizeMainWindow(1600, 1200); break;
+    case 0x801f:
+        ShowFavouritesMenu();
+        break;
+    case 0x801e:
+        ShowDriveMenu();
+        break;
+    case ID_FULL_SCREEN:
+        FullScreen = !FullScreen;
+        if (SelectedGraphicsPlugin->ChangeWindow)
+            SelectedGraphicsPlugin->ChangeWindow();
+        break;
+    case ID_1: CPU_CycleShift = 0; break;
+    case ID_GAMESHARK_CHEATS:
+        GSConfigure();
+        break;
+    case ID_ABOUT_VIDEO_PLUGIN:
+        if (SelectedGraphicsPlugin->DllAbout)
+            SelectedGraphicsPlugin->DllAbout(MainWindow);
+        break;
+    case ID_SHOW_ERRORS:
+        ShowErrors = !ShowErrors;
+        if (ShowErrors)
+            CheckMenuItem(GetMenu(MainWindow), ID_SHOW_ERRORS, MF_CHECKED);
+        else
+            CheckMenuItem(GetMenu(MainWindow), ID_SHOW_ERRORS, MF_UNCHECKED);
+        WriteIniInteger("Configuration", "ShowErrors", ShowErrors, ConfigurationIniPath);
+        break;
     case 0x8026:
     case ID_LOAD_ROM:
-        memset(&file, 0, sizeof(file));
         SelectedRomFilename[0] = 0;
+        memset(&file, 0, sizeof(file));
         file.lStructSize = sizeof(file);
+        file.hwndOwner = window;
         file.nMaxFile = 256;
         file.lpstrTitle = "Open rom...";
         file.lpstrFilter = "Rom and Zip files\0*.zip;*.?64;*.rom;*.usa;*.pal;*.eur;*.bin\0All files\0*.*\0\0";
         file.lpstrFile = SelectedRomFilename;
-        file.hwndOwner = window;
         if (GetOpenFileNameA(&file))
             StartCPUThread();
-        return 1;
-    case ID_1: CPU_CycleShift = 0; return 1;
-    case ID_2: CPU_CycleShift = 1; return 1;
-    case ID_4: CPU_CycleShift = 2; return 1;
-    case ID_8: CPU_CycleShift = 3; return 1;
-    case ID_LOAD_STATE:
-        memset(&file, 0, sizeof(file));
+        break;
+    case ID_2: CPU_CycleShift = 1; break;
+    case ID_4: CPU_CycleShift = 2; break;
+    case ID_8: CPU_CycleShift = 3; break;
+    case ID_DISABLE_EXCEPTION:
+        CPU_DisableExceptions = !CPU_DisableExceptions;
+        CheckMenuItem(GetMenu(MainWindow), ID_DISABLE_EXCEPTION, CPU_DisableExceptions == 1 ? MF_CHECKED : MF_UNCHECKED);
+        break;
+    case ID_DISABLE_VIDEO_HLE_1:
+        CPU_DisableVideoHLE = !CPU_DisableVideoHLE;
+        CheckMenuItem(GetMenu(MainWindow), ID_DISABLE_VIDEO_HLE_1, CPU_DisableVideoHLE == 1 ? MF_CHECKED : MF_UNCHECKED);
+        break;
+    case ID_FORCE_CFB:
+        CPU_ForceCFB = !CPU_ForceCFB;
+        CheckMenuItem(GetMenu(MainWindow), ID_FORCE_CFB, CPU_ForceCFB == 1 ? MF_CHECKED : MF_UNCHECKED);
+        break;
+    case ID_DISABLE_AUDIO_HLE_2:
+        CPU_DisableAudioHLE = !CPU_DisableAudioHLE;
+        CheckMenuItem(GetMenu(MainWindow), ID_DISABLE_AUDIO_HLE_2, CPU_DisableAudioHLE == 1 ? MF_CHECKED : MF_UNCHECKED);
+        break;
+    case ID_SAVE_STATE:
         StateFileName[0] = 0;
+        memset(&file, 0, sizeof(file));
         file.lStructSize = sizeof(file);
+        file.hwndOwner = window;
+        file.nMaxFile = 256;
+        file.lpstrTitle = "Save state...";
+        file.lpstrFilter = "Nemu save state (*.nss)\0*.nss\0All files\0*.*\0\0";
+        file.lpstrFile = StateFileName;
+        file.lpstrDefExt = "nss";
+        file.lpstrInitialDir = SaveStateDirectory;
+        if (GetSaveFileNameA(&file))
+            CaptureStatePreview();
+        break;
+    case ID_NEMU_MOVIE_START_RECORD:
+        StateFileName[0] = 0;
+        memset(&file, 0, sizeof(file));
+        file.lStructSize = sizeof(file);
+        file.hwndOwner = window;
+        file.nMaxFile = 256;
+        file.lpstrTitle = "Select movie file...";
+        file.lpstrFilter = "Nemu movie file (*.nmf)\0*.nmf\0All files\0*.*\0\0";
+        file.lpstrFile = StateFileName;
+        file.lpstrDefExt = "nmf";
+        file.lpstrInitialDir = SaveStateDirectory;
+        if (GetSaveFileNameA(&file))
+        {
+            CaptureStatePreview();
+            MovieRecord = 1;
+            EnableMenuItem(GetMenu(MainWindow), ID_NEMU_MOVIE_START_RECORD, MF_GRAYED);
+            EnableMenuItem(GetMenu(MainWindow), ID_NEMU_MOVIE_STOP_RECORD, MF_ENABLED);
+        }
+        break;
+    case ID_NEMU_MOVIE_STOP_RECORD:
+        if (MovieRecord == 1)
+        {
+            StopMovie();
+            MovieRecord = 0;
+            SaveMovieState();
+            EnableMenuItem(GetMenu(MainWindow), ID_NEMU_MOVIE_START_RECORD, MF_ENABLED);
+            EnableMenuItem(GetMenu(MainWindow), ID_NEMU_MOVIE_STOP_RECORD, MF_GRAYED);
+        }
+        break;
+    case ID_NEMU_MOVIE_PLAY_START:
+        StateFileName[0] = 0;
+        memset(&file, 0, sizeof(file));
+        file.lStructSize = sizeof(file);
+        file.hwndOwner = window;
+        file.nMaxFile = 256;
+        file.lpstrTitle = "Select movie file...";
+        file.lpstrFilter = "Nemu movie file (*.nmf)\0*.nmf\0All files\0*.*\0\0";
+        file.lpstrFile = StateFileName;
+        file.lpstrDefExt = "nmf";
+        file.Flags = OFN_EXPLORER | OFN_ENABLESIZING | OFN_ENABLEHOOK | OFN_ENABLETEMPLATE;
+        file.lpfnHook = StatePreviewHook;
+        file.hInstance = ApplicationInstance;
+        file.lpTemplateName = MAKEINTRESOURCEA(IDD_ROM_PREVIEW);
+        file.lpstrInitialDir = SaveStateDirectory;
+        if (GetOpenFileNameA(&file))
+        {
+            SetStatusText(0, "Loading movie...");
+            CPU_ActionFlags |= 0x2000;
+            EnableMenuItem(GetMenu(MainWindow), ID_NEMU_MOVIE_START_RECORD, MF_GRAYED);
+            EnableMenuItem(GetMenu(MainWindow), ID_NEMU_MOVIE_PLAY_START, MF_GRAYED);
+            EnableMenuItem(GetMenu(MainWindow), ID_NEMU_MOVIE_PLAY_STOP, MF_ENABLED);
+        }
+        break;
+    case ID_NEMU_MOVIE_PLAY_STOP:
+        MoviePlay = 0;
+        StopMovie();
+        EnableMenuItem(GetMenu(MainWindow), ID_NEMU_MOVIE_START_RECORD, MF_ENABLED);
+        EnableMenuItem(GetMenu(MainWindow), ID_NEMU_MOVIE_PLAY_START, MF_ENABLED);
+        EnableMenuItem(GetMenu(MainWindow), ID_NEMU_MOVIE_PLAY_STOP, MF_GRAYED);
+        break;
+    case ID_QUICK_SAVESTATE:
+        strcpy(StateFileName, SaveStateDirectory);
+        strcat(StateFileName, "_");
+        strcat(StateFileName, CurrentRom.FileName);
+        ReplaceExtension(StateFileName, ".nss");
+        CaptureStatePreview();
+        break;
+    case ID_LOAD_STATE:
+        StateFileName[0] = 0;
+        memset(&file, 0, sizeof(file));
+        file.lStructSize = sizeof(file);
+        file.hwndOwner = window;
         file.nMaxFile = 256;
         file.lpstrTitle = "Load state...";
         file.lpstrFilter = "Nemu save state (*.nss)\0*.nss\0All files\0*.*\0\0";
@@ -764,90 +942,12 @@ LRESULT MainWindowCommand(HWND window, UINT message, WPARAM wParam, LPARAM lPara
         file.hInstance = ApplicationInstance;
         file.lpTemplateName = MAKEINTRESOURCEA(IDD_ROM_PREVIEW);
         file.lpstrInitialDir = SaveStateDirectory;
-        file.hwndOwner = window;
         if (GetOpenFileNameA(&file))
         {
             SetStatusText(0, "Loading state...");
             CPU_ActionFlags |= 0x2000;
         }
-        return 1;
-    case ID_SAVE_STATE:
-        memset(&file, 0, sizeof(file));
-        StateFileName[0] = 0;
-        file.lStructSize = sizeof(file);
-        file.nMaxFile = 256;
-        file.lpstrTitle = "Save state...";
-        file.lpstrFilter = "Nemu save state (*.nss)\0*.nss\0All files\0*.*\0\0";
-        file.lpstrFile = StateFileName;
-        file.lpstrDefExt = "nss";
-        file.lpstrInitialDir = SaveStateDirectory;
-        file.hwndOwner = window;
-        if (GetSaveFileNameA(&file))
-            CaptureStatePreview();
-        return 1;
-    case ID_START_NETPLAY:
-        {
-            KailleraInfos infos;
-            infos.AppName = "Nemu64 0.8";
-            char* games = (char*)malloc(8192);
-            games[0] = 0;
-            games[1] = 0;
-            int position = 0;
-            unsigned int capacity = 8192;
-            for (int index = 0; index < ListView_GetItemCount(BrowserWindow); ++index)
-            {
-                LVITEMA item;
-                char name[512];
-                item.mask = LVIF_TEXT | LVIF_IMAGE;
-                item.iItem = index;
-                item.iSubItem = 0;
-                item.pszText = name;
-                item.cchTextMax = 511;
-                SendMessageA(BrowserWindow, LVM_GETITEMA, 0, (LPARAM)&item);
-                if (item.iImage == 6)
-                {
-                    while (capacity < position + strlen(name) + 4)
-                    {
-                        capacity *= 2;
-                        games = (char*)realloc(games, capacity);
-                    }
-                    strcpy(games + position, name);
-                    games[position + strlen(games + position) + 1] = 0;
-                    position += strlen(games + position) + 1;
-                }
-            }
-            infos.GameList = games;
-            infos.GameCallback = NetplayStartGame;
-            infos.ChatReceivedCallback = (void (__stdcall *)(char*, char*))NetplayClientDropped;
-            infos.ClientDroppedCallback = NetplayClientDropped;
-            infos.MoreInfosCallback = NetplayMessage;
-            kailleraSetInfos(&infos);
-            kailleraSelectServerDialog(NULL);
-            free(games);
-        }
-        return 1;
-    case ID_ABOUT_VIDEO_PLUGIN:
-        if (SelectedGraphicsPlugin->DllAbout)
-            SelectedGraphicsPlugin->DllAbout(MainWindow);
-        return 1;
-    case ID_SHOW_ERRORS:
-        ShowErrors = !ShowErrors;
-        CheckMenuItem(GetMenu(MainWindow), ID_SHOW_ERRORS, ShowErrors ? MF_CHECKED : MF_UNCHECKED);
-        WriteIniInteger("Configuration", "ShowErrors", ShowErrors, ConfigurationIniPath);
-        return 1;
-    case ID_USE_VIRTUAL_SAVE_FILES:
-        if (MessageBoxA(MainWindow,
-            "This will overwrite your own save files and replace them by the ones in memory. Proceed?",
-            "Replace save files", MB_YESNO | MB_ICONQUESTION) == IDYES)
-            FlushStateSaves();
-        return 1;
-    case ID_QUICK_SAVESTATE:
-        strcpy(StateFileName, SaveStateDirectory);
-        strcat(StateFileName, "_");
-        strcat(StateFileName, CurrentRom.FileName);
-        ReplaceExtension(StateFileName, ".nss");
-        CaptureStatePreview();
-        return 1;
+        break;
     case ID_QUICK_LOADSTATE:
         strcpy(StateFileName, SaveStateDirectory);
         strcat(StateFileName, "_");
@@ -855,105 +955,33 @@ LRESULT MainWindowCommand(HWND window, UINT message, WPARAM wParam, LPARAM lPara
         ReplaceExtension(StateFileName, ".nss");
         SetStatusText(0, "Loading state...");
         CPU_ActionFlags |= 0x2000;
-        return 1;
-    case ID_DISABLE_EXCEPTION:
-        CPU_DisableExceptions = !CPU_DisableExceptions;
-        CheckMenuItem(GetMenu(MainWindow), ID_DISABLE_EXCEPTION, CPU_DisableExceptions ? MF_CHECKED : MF_UNCHECKED);
-        return 1;
-    case ID_TEST_PRE_MNI:
-        CPU_ActionFlags |= 0x8000000;
-        EnablePIFSuccess();
-        return 1;
-    case ID_DISABLE_VIDEO_HLE_1:
-        CPU_DisableVideoHLE = !CPU_DisableVideoHLE;
-        CheckMenuItem(GetMenu(MainWindow), ID_DISABLE_VIDEO_HLE_1, CPU_DisableVideoHLE ? MF_CHECKED : MF_UNCHECKED);
-        return 1;
-    case ID_DISABLE_AUDIO_HLE_2:
-        CPU_DisableAudioHLE = !CPU_DisableAudioHLE;
-        CheckMenuItem(GetMenu(MainWindow), ID_DISABLE_AUDIO_HLE_2, CPU_DisableAudioHLE ? MF_CHECKED : MF_UNCHECKED);
-        return 1;
-    case ID_FORCE_CFB:
-        CPU_ForceCFB = !CPU_ForceCFB;
-        CheckMenuItem(GetMenu(MainWindow), ID_FORCE_CFB, CPU_ForceCFB ? MF_CHECKED : MF_UNCHECKED);
-        return 1;
+        break;
+    case ID_USE_VIRTUAL_SAVE_FILES:
+        if (MessageBoxA(MainWindow,
+            "This will overwrite your own save files and replace them by the ones in memory. Proceed?",
+            "Replace save files", MB_YESNO | MB_ICONQUESTION) == IDYES)
+            FlushStateSaves();
+        break;
     case ID_ACTIVE_PAUSE:
-        if (!(CPU_ActionFlags & 0x200000))
-        {
-            ActivePause = 1;
-            CPU_ActionFlags |= 0x200000;
-            SendMessageA(ToolbarWindow, TB_SETSTATE, ID_PAUSE, TBSTATE_ENABLED | TBSTATE_CHECKED);
-        }
-        else
+        if (CPU_ActionFlags & 0x200000)
         {
             CPU_ActionFlags &= ~0x200000;
             ResumeThread(CPU_Thread);
             SendMessageA(ToolbarWindow, TB_SETSTATE, ID_PAUSE, TBSTATE_ENABLED);
         }
-        return 1;
-    case ID_GAMESHARK_CHEATS:
-        GSConfigure();
-        return 1;
-    case ID_NEMU_MOVIE_START_RECORD:
-        memset(&file, 0, sizeof(file));
-        StateFileName[0] = 0;
-        file.lStructSize = sizeof(file);
-        file.nMaxFile = 256;
-        file.lpstrTitle = "Select movie file...";
-        file.lpstrFilter = "Nemu movie file (*.nmf)\0*.nmf\0All files\0*.*\0\0";
-        file.lpstrFile = StateFileName;
-        file.lpstrDefExt = "nmf";
-        file.lpstrInitialDir = SaveStateDirectory;
-        file.hwndOwner = window;
-        if (GetSaveFileNameA(&file))
+        else
         {
-            CaptureStatePreview();
-            MovieRecord = 1;
-            EnableMenuItem(GetMenu(MainWindow), ID_NEMU_MOVIE_START_RECORD, MF_GRAYED);
-            EnableMenuItem(GetMenu(MainWindow), ID_NEMU_MOVIE_STOP_RECORD, MF_ENABLED);
+            ActivePause = 1;
+            CPU_ActionFlags |= 0x200000;
+            SendMessageA(ToolbarWindow, TB_SETSTATE, ID_PAUSE, TBSTATE_ENABLED | TBSTATE_CHECKED);
         }
-        return 1;
-    case ID_NEMU_MOVIE_STOP_RECORD:
-        if (MovieRecord == 1)
-        {
-            StopMovie();
-            MovieRecord = 0;
-            SaveMovieState();
-            EnableMenuItem(GetMenu(MainWindow), ID_NEMU_MOVIE_START_RECORD, MF_ENABLED);
-            EnableMenuItem(GetMenu(MainWindow), ID_NEMU_MOVIE_STOP_RECORD, MF_GRAYED);
-        }
-        return 1;
-    case ID_NEMU_MOVIE_PLAY_START:
-        memset(&file, 0, sizeof(file));
-        StateFileName[0] = 0;
-        file.lStructSize = sizeof(file);
-        file.nMaxFile = 256;
-        file.lpstrTitle = "Select movie file...";
-        file.lpstrFilter = "Nemu movie file (*.nmf)\0*.nmf\0All files\0*.*\0\0";
-        file.lpstrFile = StateFileName;
-        file.lpstrDefExt = "nmf";
-        file.Flags = OFN_EXPLORER | OFN_ENABLESIZING | OFN_ENABLEHOOK | OFN_ENABLETEMPLATE;
-        file.lpfnHook = StatePreviewHook;
-        file.hInstance = ApplicationInstance;
-        file.lpTemplateName = MAKEINTRESOURCEA(IDD_ROM_PREVIEW);
-        file.lpstrInitialDir = SaveStateDirectory;
-        file.hwndOwner = window;
-        if (GetOpenFileNameA(&file))
-        {
-            SetStatusText(0, "Loading movie...");
-            CPU_ActionFlags |= 0x2000;
-            EnableMenuItem(GetMenu(MainWindow), ID_NEMU_MOVIE_START_RECORD, MF_GRAYED);
-            EnableMenuItem(GetMenu(MainWindow), ID_NEMU_MOVIE_PLAY_START, MF_GRAYED);
-            EnableMenuItem(GetMenu(MainWindow), ID_NEMU_MOVIE_PLAY_STOP, MF_ENABLED);
-        }
-        return 1;
-    case ID_NEMU_MOVIE_PLAY_STOP:
-        MoviePlay = 0;
-        StopMovie();
-        EnableMenuItem(GetMenu(MainWindow), ID_NEMU_MOVIE_START_RECORD, MF_ENABLED);
-        EnableMenuItem(GetMenu(MainWindow), ID_NEMU_MOVIE_PLAY_START, MF_ENABLED);
-        EnableMenuItem(GetMenu(MainWindow), ID_NEMU_MOVIE_PLAY_STOP, MF_GRAYED);
-        return 1;
+        break;
+    case ID_TEST_PRE_MNI:
+        CPU_ActionFlags |= 0x8000000;
+        EnablePIFSuccess();
+        break;
     default:
         return DefWindowProcA(window, message, wParam, lParam);
     }
+    return toolResult;
 }

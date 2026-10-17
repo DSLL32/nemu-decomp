@@ -930,7 +930,7 @@ void RSP_VADD()
     CpuU32 element = Instruction.rs & 15;
     for (int i = 0; i < 8; i++)
     {
-        CpuS32 result = (CpuS16)RSPVectors[vs][i] + (CpuS16)RSPVectors[vt][VectorElement(i)] + ((RSPFlags[0] & (1 << i)) != 0);
+        CpuS32 result = (CpuS16)RSPVectors[vs][i] + (CpuS16)RSPVectors[vt][VectorElement(i)] + ((RSPFlags[0] & (1 << i)) ? 1 : 0);
         AccumulatorLow(i) = (CpuU16)result;
         if (result > 32767) result = 32767;
         else if (result < -32768) result = -32768;
@@ -949,7 +949,7 @@ void RSP_VSUB()
     CpuU32 element = Instruction.rs & 15;
     for (int i = 0; i < 8; i++)
     {
-        CpuS32 result = (CpuS16)RSPVectors[vs][i] - (CpuS16)RSPVectors[vt][VectorElement(i)] - ((RSPFlags[0] & (1 << i)) != 0);
+        CpuS32 result = (CpuS16)RSPVectors[vs][i] - (CpuS16)RSPVectors[vt][VectorElement(i)] - ((RSPFlags[0] & (1 << i)) ? 1 : 0);
         AccumulatorLow(i) = (CpuU16)result;
         if (result > 32767) result = 32767;
         else if (result < -32768) result = -32768;
@@ -968,7 +968,7 @@ void RSP_VSUT()
     CpuU32 element = Instruction.rs & 15;
     for (int i = 0; i < 8; i++)
     {
-        CpuS32 result = (CpuS16)RSPVectors[vt][VectorElement(i)] - (CpuS16)RSPVectors[vs][i] - ((RSPFlags[0] & (1 << i)) != 0);
+        CpuS32 result = (CpuS16)RSPVectors[vt][VectorElement(i)] - (CpuS16)RSPVectors[vs][i] - ((RSPFlags[0] & (1 << i)) ? 1 : 0);
         AccumulatorLow(i) = (CpuU16)result;
         if (result > 32767) result = 32767;
         else if (result < -32768) result = -32768;
@@ -981,14 +981,16 @@ void RSP_VSUT()
 void RSP_VABS()
 {
     PC += 4;
+    CpuU32 vd = Instruction.sa;
     CpuU32 vs = Instruction.rd;
     CpuU32 vt = Instruction.rt;
-    CpuU32 vd = Instruction.sa;
-    CpuU32 element = Instruction.rs & 15;
-    for (int i = 0; i < 8; i++)
+    for (CpuU32 i = 0; i < 8; i++)
     {
+    CpuU32 offset = RSPElementIndexMask[(Instruction.Value >> 22) & 7] & ((Instruction.Value >> 21) & 15);
+    CpuU32 lane = RSPElementLaneMask[(Instruction.Value >> 22) & 7];
+
         CpuS16 source = (CpuS16)RSPVectors[vs][i];
-        CpuS16 value = (CpuS16)RSPVectors[vt][VectorElement(i)];
+        CpuS16 value = (CpuS16)RSPVectors[vt][(lane & i) + offset];
         CpuS32 result;
         if (source < 0) result = -value;
         else if (source == 0) result = 0;
@@ -1014,7 +1016,7 @@ void RSP_VADDC()
         CpuU32 result = (CpuU32)RSPVectors[vs][i] + RSPVectors[vt][VectorElement(i)];
         AccumulatorLow(i) = (CpuU16)result;
         RSPVectors[vd][i] = (CpuU16)result;
-        RSPFlags[0] |= (result > 0xffff) << i;
+        RSPFlags[0] |= (CpuU16)(result > 0xffff ? 1 : 0) << i;
     }
 }
 
@@ -1046,52 +1048,46 @@ void RSP_VSAW()
     PC += 4;
     CpuU32 vd = Instruction.sa;
     CpuU32 element = Instruction.rs & 7;
-    switch (element)
-    {
-    case 0:
+    if (element == 0) {
         for (int i = 0; i < 8; i++) RSPVectors[vd][i] = AccumulatorHigh(i);
-        break;
-    case 1:
+    } else if (element == 1) {
         for (int j = 0; j < 8; j++) RSPVectors[vd][j] = AccumulatorMiddle(j);
-        break;
-    case 2:
+    } else if (element == 2) {
         for (int k = 0; k < 8; k++) RSPVectors[vd][k] = AccumulatorLow(k);
-        break;
-    default: ReportCPUError("RSP_VSAW error: invalid element");
-    }
+    } else ReportCPUError("RSP_VSAW error: invalid element");
 }
 
 // Original function 00404B40.
 void RSP_VLT()
 {
     PC += 4;
-    for (int j = 0; j < 8; j++)
-    {
-        RSPCompareCarry[j] = (RSPFlags[0] >> j) & 1;
-        RSPCompareNotEqual[j] = ~(RSPFlags[0] >> (j + 8)) & 1;
-    }
+    CpuU32 vd = Instruction.sa;
     CpuU32 vs = Instruction.rd;
     CpuU32 vt = Instruction.rt;
-    CpuU32 vd = Instruction.sa;
-    CpuU32 element = Instruction.rs & 15;
-    RSPFlags[1] = 0;
-    for (int i = 0; i < 8; i++)
+    for (CpuU32 j = 0; j < 8; j++)
     {
+        RSPCompareCarry[j] = (RSPFlags[0] >> j) & 1;
+        RSPCompareNotEqual[j] = (~RSPFlags[0] >> (j + 8)) & 1;
+    }
+    RSPFlags[1] = 0;
+    for (CpuU32 i = 0; i < 8; i++)
+    {
+        CpuU32 offset = RSPElementIndexMask[(Instruction.Value >> 22) & 7] & ((Instruction.Value >> 21) & 15);
+        CpuU32 lane = RSPElementLaneMask[(Instruction.Value >> 22) & 7];
         CpuS16 left = (CpuS16)RSPVectors[vs][i];
-        CpuS16 right = (CpuS16)RSPVectors[vt][VectorElement(i)];
-        CpuS16 result;
+        CpuS16 right = (CpuS16)RSPVectors[vt][(lane & i) + offset];
         if ((left < right) || (left == right && RSPCompareCarry[i] && !RSPCompareNotEqual[i]))
         {
             RSPFlags[1] |= 1 << i;
-            result = left;
+            AccumulatorLow(i) = left;
+            RSPVectors[vd][i] = left;
         }
         else
         {
             RSPFlags[1] &= ~(1 << i);
-            result = right;
+            AccumulatorLow(i) = right;
+            RSPVectors[vd][i] = right;
         }
-        RSPVectors[vd][i] = (CpuU16)result;
-        AccumulatorLow(i) = (CpuU16)result;
         RSPFlags[0] &= ~(0x101 << i);
     }
 }
@@ -1100,33 +1096,33 @@ void RSP_VLT()
 void RSP_VGE()
 {
     PC += 4;
-    for (int j = 0; j < 8; j++)
-    {
-        RSPCompareCarry[j] = (RSPFlags[0] >> j) & 1;
-        RSPCompareNotEqual[j] = ~(RSPFlags[0] >> (j + 8)) & 1;
-    }
+    CpuU32 vd = Instruction.sa;
     CpuU32 vs = Instruction.rd;
     CpuU32 vt = Instruction.rt;
-    CpuU32 vd = Instruction.sa;
-    CpuU32 element = Instruction.rs & 15;
-    RSPFlags[1] = 0;
-    for (int i = 0; i < 8; i++)
+    for (CpuU32 j = 0; j < 8; j++)
     {
+        RSPCompareCarry[j] = (RSPFlags[0] >> j) & 1;
+        RSPCompareNotEqual[j] = (~RSPFlags[0] >> (j + 8)) & 1;
+    }
+    RSPFlags[1] = 0;
+    for (CpuU32 i = 0; i < 8; i++)
+    {
+        CpuU32 offset = RSPElementIndexMask[(Instruction.Value >> 22) & 7] & ((Instruction.Value >> 21) & 15);
+        CpuU32 lane = RSPElementLaneMask[(Instruction.Value >> 22) & 7];
         CpuS16 left = (CpuS16)RSPVectors[vs][i];
-        CpuS16 right = (CpuS16)RSPVectors[vt][VectorElement(i)];
-        CpuS16 result;
+        CpuS16 right = (CpuS16)RSPVectors[vt][(lane & i) + offset];
         if ((left > right) || (left == right && (RSPCompareNotEqual[i] || !RSPCompareCarry[i])))
         {
             RSPFlags[1] |= 1 << i;
-            result = left;
+            AccumulatorLow(i) = left;
+            RSPVectors[vd][i] = left;
         }
         else
         {
             RSPFlags[1] &= ~(1 << i);
-            result = right;
+            AccumulatorLow(i) = right;
+            RSPVectors[vd][i] = right;
         }
-        RSPVectors[vd][i] = (CpuU16)result;
-        AccumulatorLow(i) = (CpuU16)result;
         RSPFlags[0] &= ~(0x101 << i);
     }
 }
@@ -1173,15 +1169,16 @@ void RSP_VCL()
 void RSP_VMRG()
 {
     PC += 4;
+    CpuU32 vd = Instruction.sa;
     CpuU32 vs = Instruction.rd;
     CpuU32 vt = Instruction.rt;
-    CpuU32 vd = Instruction.sa;
-    CpuU32 element = Instruction.rs & 15;
     RSPFlags[0] = 0;
     for (CpuU32 i = 0; i < 8; i++)
     {
+        CpuU32 offset = RSPElementIndexMask[(Instruction.Value >> 22) & 7] & ((Instruction.Value >> 21) & 15);
+        CpuU32 lane = RSPElementLaneMask[(Instruction.Value >> 22) & 7];
         CpuU16 left = RSPVectors[vs][i];
-        CpuU16 right = RSPVectors[vt][VectorElement(i)];
+        CpuU16 right = RSPVectors[vt][(lane & i) + offset];
         if (RSPFlags[1] & (1 << i)) {
             RSPVectors[vd][i] = left;
             AccumulatorLow(i) = left;
@@ -1196,13 +1193,14 @@ void RSP_VMRG()
 void RSP_VAND()
 {
     PC += 4;
+    CpuU32 vd = Instruction.sa;
     CpuU32 vs = Instruction.rd;
     CpuU32 vt = Instruction.rt;
-    CpuU32 vd = Instruction.sa;
-    CpuU32 element = Instruction.rs & 15;
+    CpuU32 offset = RSPElementIndexMask[(Instruction.Value >> 22) & 7] & ((Instruction.Value >> 21) & 15);
+    CpuU32 lane = RSPElementLaneMask[(Instruction.Value >> 22) & 7];
     for (int i = 0; i < 8; i++)
     {
-        CpuS32 result = RSPVectors[vs][i] & RSPVectors[vt][VectorElement(i)];
+        CpuS32 result = RSPVectors[vs][i] & RSPVectors[vt][(lane & i) + offset];
         AccumulatorLow(i) = result;
         RSPVectors[vd][i] = result;
     }
@@ -1212,13 +1210,14 @@ void RSP_VAND()
 void RSP_VNAND()
 {
     PC += 4;
+    CpuU32 vd = Instruction.sa;
     CpuU32 vs = Instruction.rd;
     CpuU32 vt = Instruction.rt;
-    CpuU32 vd = Instruction.sa;
-    CpuU32 element = Instruction.rs & 15;
+    CpuU32 offset = RSPElementIndexMask[(Instruction.Value >> 22) & 7] & ((Instruction.Value >> 21) & 15);
+    CpuU32 lane = RSPElementLaneMask[(Instruction.Value >> 22) & 7];
     for (int i = 0; i < 8; i++)
     {
-        CpuS32 result = ~(RSPVectors[vs][i] & RSPVectors[vt][VectorElement(i)]);
+        CpuS32 result = ~(RSPVectors[vs][i] & RSPVectors[vt][(lane & i) + offset]);
         AccumulatorLow(i) = result;
         RSPVectors[vd][i] = result;
     }
@@ -1228,13 +1227,14 @@ void RSP_VNAND()
 void RSP_VOR()
 {
     PC += 4;
+    CpuU32 vd = Instruction.sa;
     CpuU32 vs = Instruction.rd;
     CpuU32 vt = Instruction.rt;
-    CpuU32 vd = Instruction.sa;
-    CpuU32 element = Instruction.rs & 15;
+    CpuU32 offset = RSPElementIndexMask[(Instruction.Value >> 22) & 7] & ((Instruction.Value >> 21) & 15);
+    CpuU32 lane = RSPElementLaneMask[(Instruction.Value >> 22) & 7];
     for (int i = 0; i < 8; i++)
     {
-        CpuS32 result = RSPVectors[vs][i] | RSPVectors[vt][VectorElement(i)];
+        CpuS32 result = RSPVectors[vs][i] | RSPVectors[vt][(lane & i) + offset];
         AccumulatorLow(i) = result;
         RSPVectors[vd][i] = result;
     }
@@ -1244,13 +1244,14 @@ void RSP_VOR()
 void RSP_VNOR()
 {
     PC += 4;
+    CpuU32 vd = Instruction.sa;
     CpuU32 vs = Instruction.rd;
     CpuU32 vt = Instruction.rt;
-    CpuU32 vd = Instruction.sa;
-    CpuU32 element = Instruction.rs & 15;
+    CpuU32 offset = RSPElementIndexMask[(Instruction.Value >> 22) & 7] & ((Instruction.Value >> 21) & 15);
+    CpuU32 lane = RSPElementLaneMask[(Instruction.Value >> 22) & 7];
     for (int i = 0; i < 8; i++)
     {
-        CpuS32 result = ~(RSPVectors[vs][i] | RSPVectors[vt][VectorElement(i)]);
+        CpuS32 result = ~(RSPVectors[vs][i] | RSPVectors[vt][(lane & i) + offset]);
         AccumulatorLow(i) = result;
         RSPVectors[vd][i] = result;
     }
@@ -1260,13 +1261,14 @@ void RSP_VNOR()
 void RSP_VXOR()
 {
     PC += 4;
+    CpuU32 vd = Instruction.sa;
     CpuU32 vs = Instruction.rd;
     CpuU32 vt = Instruction.rt;
-    CpuU32 vd = Instruction.sa;
-    CpuU32 element = Instruction.rs & 15;
+    CpuU32 offset = RSPElementIndexMask[(Instruction.Value >> 22) & 7] & ((Instruction.Value >> 21) & 15);
+    CpuU32 lane = RSPElementLaneMask[(Instruction.Value >> 22) & 7];
     for (int i = 0; i < 8; i++)
     {
-        CpuS32 result = RSPVectors[vs][i] ^ RSPVectors[vt][VectorElement(i)];
+        CpuS32 result = RSPVectors[vs][i] ^ RSPVectors[vt][(lane & i) + offset];
         AccumulatorLow(i) = result;
         RSPVectors[vd][i] = result;
     }
@@ -1276,13 +1278,14 @@ void RSP_VXOR()
 void RSP_VNXOR()
 {
     PC += 4;
+    CpuU32 vd = Instruction.sa;
     CpuU32 vs = Instruction.rd;
     CpuU32 vt = Instruction.rt;
-    CpuU32 vd = Instruction.sa;
-    CpuU32 element = Instruction.rs & 15;
+    CpuU32 offset = RSPElementIndexMask[(Instruction.Value >> 22) & 7] & ((Instruction.Value >> 21) & 15);
+    CpuU32 lane = RSPElementLaneMask[(Instruction.Value >> 22) & 7];
     for (int i = 0; i < 8; i++)
     {
-        CpuS32 result = ~(RSPVectors[vs][i] ^ RSPVectors[vt][VectorElement(i)]);
+        CpuS32 result = ~(RSPVectors[vs][i] ^ RSPVectors[vt][(lane & i) + offset]);
         AccumulatorLow(i) = result;
         RSPVectors[vd][i] = result;
     }
@@ -1293,44 +1296,50 @@ void RSP_LoadVector()
 {
     PC += 4;
     CpuU32 kind = Instruction.rd, vt = Instruction.rt;
-    CpuU32 element = (Instruction.Value >> 7) & 15;
-    CpuU32 address;
+    CpuS32 element = (Instruction.Value >> 7) & 15;
+    CpuS32 address;
     CpuU32 group;
     if (kind == 11) group = vt & 24;
     CpuS32 offset = (CpuS32)(Instruction.Value << 25) >> 25;
-    CpuU8 *bytes = (CpuU8 *)RSPVectors[vt];
     int i;
     switch (kind) {
     case 0:
         address = RSPRegisters[Instruction.rs] + offset * 1;
-        for (i = 0; i < 1; i++)
-            bytes[(element + i) ^ 1] = RSP_ReadByte(address + i);
+        ((CpuU8 (*)[16])RSPVectors)[vt][(element + 0) ^ 1] = RSP_ReadByte(address + 0);
         break;
     case 1:
         address = RSPRegisters[Instruction.rs] + offset * 2;
-        for (i = 0; i < 2; i++)
-            bytes[(element + i) ^ 1] = RSP_ReadByte(address + i);
+        ((CpuU8 (*)[16])RSPVectors)[vt][(element + 0) ^ 1] = RSP_ReadByte(address + 0);
+        ((CpuU8 (*)[16])RSPVectors)[vt][(element + 1) ^ 1] = RSP_ReadByte(address + 1);
         break;
     case 2:
         address = RSPRegisters[Instruction.rs] + offset * 4;
-        for (i = 0; i < 4; i++)
-            bytes[(element + i) ^ 1] = RSP_ReadByte(address + i);
+        ((CpuU8 (*)[16])RSPVectors)[vt][(element + 0) ^ 1] = RSP_ReadByte(address + 0);
+        ((CpuU8 (*)[16])RSPVectors)[vt][(element + 1) ^ 1] = RSP_ReadByte(address + 1);
+        ((CpuU8 (*)[16])RSPVectors)[vt][(element + 2) ^ 1] = RSP_ReadByte(address + 2);
+        ((CpuU8 (*)[16])RSPVectors)[vt][(element + 3) ^ 1] = RSP_ReadByte(address + 3);
         break;
     case 3:
         address = RSPRegisters[Instruction.rs] + offset * 8;
-        for (i = 0; i < 8; i++)
-            bytes[(element + i) ^ 1] = RSP_ReadByte(address + i);
+        ((CpuU8 (*)[16])RSPVectors)[vt][(element + 0) ^ 1] = RSP_ReadByte(address + 0);
+        ((CpuU8 (*)[16])RSPVectors)[vt][(element + 1) ^ 1] = RSP_ReadByte(address + 1);
+        ((CpuU8 (*)[16])RSPVectors)[vt][(element + 2) ^ 1] = RSP_ReadByte(address + 2);
+        ((CpuU8 (*)[16])RSPVectors)[vt][(element + 3) ^ 1] = RSP_ReadByte(address + 3);
+        ((CpuU8 (*)[16])RSPVectors)[vt][(element + 4) ^ 1] = RSP_ReadByte(address + 4);
+        ((CpuU8 (*)[16])RSPVectors)[vt][(element + 5) ^ 1] = RSP_ReadByte(address + 5);
+        ((CpuU8 (*)[16])RSPVectors)[vt][(element + 6) ^ 1] = RSP_ReadByte(address + 6);
+        ((CpuU8 (*)[16])RSPVectors)[vt][(element + 7) ^ 1] = RSP_ReadByte(address + 7);
         break;
     case 4:
         address = RSPRegisters[Instruction.rs] + offset * 16;
         for (i = 0; !i || ((address + i) & 15); i++)
-            bytes[(element + i) ^ 1] = RSP_ReadByte(address + i);
+            ((CpuU8 (*)[16])RSPVectors)[vt][(element + i) ^ 1] = RSP_ReadByte(address + i);
         break;
     case 5:
         address = RSPRegisters[Instruction.rs] + offset * 16;
         for (i = 15; ((address + i) & 15) != 15; i--)
             if ((int)(element + i) < 16)
-                bytes[(element + i) ^ 1] = RSP_ReadByte(address + i - 16);
+                ((CpuU8 (*)[16])RSPVectors)[vt][(element + i) ^ 1] = RSP_ReadByte(address + i - 16);
         break;
     case 6:
         address = RSPRegisters[Instruction.rs] + offset * 8;
@@ -1345,19 +1354,19 @@ void RSP_LoadVector()
     case 8:
         address = RSPRegisters[Instruction.rs] + offset * 16;
         for (i = 0; i < 8; i++)
-            RSPVectors[vt][i] = RSP_ReadByte((address & ~7) + (((address & 7) + i * 2) & 15)) << 7;
+            RSPVectors[vt][i] = RSP_ReadByte((address - ((CpuU8)address & 7)) + ((((CpuU8)address & 7) + i * 2) & 15)) << 7;
         break;
     case 9:
         address = RSPRegisters[Instruction.rs] + offset * 16;
         for (i = 0; i < 4; i++)
-            RSPVectors[vt][(element >> 1) + i] = RSP_ReadByte((address & ~7) + (((address & 7) + i * 4) & 15)) << 7;
+            RSPVectors[vt][(element >> 1) + i] = RSP_ReadByte((address - ((CpuU8)address & 7)) + ((((CpuU8)address & 7) + i * 4) & 15)) << 7;
         break;
     case 11:
         {
             CpuU16 transpose[8];
             address = RSPRegisters[Instruction.rs] + offset * 16;
-            int first = ((address >> 3) & 1) << 2;
             address &= ~7;
+            int first = ((address >> 3) & 1) << 2;
             for (i = 0; i < 8; i++) {
                 ((CpuU8 *)transpose)[((first + i) % 8) * 2 + 1] = RSP_ReadByte(address + i * 2);
                 ((CpuU8 *)transpose)[((first + i) % 8) * 2] = RSP_ReadByte(address + i * 2 + 1);
@@ -1377,43 +1386,49 @@ void RSP_StoreVector()
 {
     PC += 4;
     CpuU32 kind = Instruction.rd, vt = Instruction.rt;
-    CpuU32 element = (Instruction.Value >> 7) & 15;
-    CpuU32 address;
+    CpuS32 element = (Instruction.Value >> 7) & 15;
+    CpuS32 address;
     CpuU32 group;
     if (kind == 11) group = vt & 24;
     CpuS32 offset = (CpuS32)(Instruction.Value << 25) >> 25;
-    CpuU8 *bytes = (CpuU8 *)RSPVectors[vt];
     int i;
-    if (kind < 12) switch (kind) {
+    switch (kind) {
     case 0:
         address = RSPRegisters[Instruction.rs] + offset * 1;
-        for (i = 0; i < 1; i++)
-            RSP_WriteByte(address + i, bytes[(element + i) ^ 1]);
+        RSP_WriteByte(address + 0, ((CpuU8 (*)[16])RSPVectors)[vt][(element + 0) ^ 1]);
         break;
     case 1:
         address = RSPRegisters[Instruction.rs] + offset * 2;
-        for (i = 0; i < 2; i++)
-            RSP_WriteByte(address + i, bytes[(element + i) ^ 1]);
+        RSP_WriteByte(address + 0, ((CpuU8 (*)[16])RSPVectors)[vt][(element + 0) ^ 1]);
+        RSP_WriteByte(address + 1, ((CpuU8 (*)[16])RSPVectors)[vt][(element + 1) ^ 1]);
         break;
     case 2:
         address = RSPRegisters[Instruction.rs] + offset * 4;
-        for (i = 0; i < 4; i++)
-            RSP_WriteByte(address + i, bytes[(element + i) ^ 1]);
+        RSP_WriteByte(address + 0, ((CpuU8 (*)[16])RSPVectors)[vt][(element + 0) ^ 1]);
+        RSP_WriteByte(address + 1, ((CpuU8 (*)[16])RSPVectors)[vt][(element + 1) ^ 1]);
+        RSP_WriteByte(address + 2, ((CpuU8 (*)[16])RSPVectors)[vt][(element + 2) ^ 1]);
+        RSP_WriteByte(address + 3, ((CpuU8 (*)[16])RSPVectors)[vt][(element + 3) ^ 1]);
         break;
     case 3:
         address = RSPRegisters[Instruction.rs] + offset * 8;
-        for (i = 0; i < 8; i++)
-            RSP_WriteByte(address + i, bytes[(element + i) ^ 1]);
+        RSP_WriteByte(address + 0, ((CpuU8 (*)[16])RSPVectors)[vt][(element + 0) ^ 1]);
+        RSP_WriteByte(address + 1, ((CpuU8 (*)[16])RSPVectors)[vt][(element + 1) ^ 1]);
+        RSP_WriteByte(address + 2, ((CpuU8 (*)[16])RSPVectors)[vt][(element + 2) ^ 1]);
+        RSP_WriteByte(address + 3, ((CpuU8 (*)[16])RSPVectors)[vt][(element + 3) ^ 1]);
+        RSP_WriteByte(address + 4, ((CpuU8 (*)[16])RSPVectors)[vt][(element + 4) ^ 1]);
+        RSP_WriteByte(address + 5, ((CpuU8 (*)[16])RSPVectors)[vt][(element + 5) ^ 1]);
+        RSP_WriteByte(address + 6, ((CpuU8 (*)[16])RSPVectors)[vt][(element + 6) ^ 1]);
+        RSP_WriteByte(address + 7, ((CpuU8 (*)[16])RSPVectors)[vt][(element + 7) ^ 1]);
         break;
     case 4:
         address = RSPRegisters[Instruction.rs] + offset * 16;
         for (i = 0; !i || ((address + i) & 15); i++)
-            RSP_WriteByte(address + i, bytes[(element + i) ^ 1]);
+            RSP_WriteByte(address + i, ((CpuU8 (*)[16])RSPVectors)[vt][(element + i) ^ 1]);
         break;
     case 5:
         address = RSPRegisters[Instruction.rs] + offset * 16;
         for (i = 15; ((address + i) & 15) != 15; i--)
-            RSP_WriteByte(address + i - 16, bytes[(element + i) ^ 1]);
+            RSP_WriteByte(address + i - 16, ((CpuU8 (*)[16])RSPVectors)[vt][(element + i) ^ 1]);
         break;
     case 6:
         address = RSPRegisters[Instruction.rs] + offset * 8;
@@ -1428,14 +1443,15 @@ void RSP_StoreVector()
     case 8:
         address = RSPRegisters[Instruction.rs] + offset * 16;
         for (i = 0; i < 8; i++)
-            RSP_WriteByte((address & ~7) + (((address & 7) + i * 2) & 15), RSPVectors[vt][i] >> 7);
+            RSP_WriteByte((address - ((CpuU8)address & 7)) + ((((CpuU8)address & 7) + i * 2) & 15), RSPVectors[vt][i] >> 7);
         break;
     case 9:
         address = RSPRegisters[Instruction.rs] + offset * 16;
         for (i = 0; i < 4; i++)
-            RSP_WriteByte((address & ~7) + (((address & 7) + i * 4) & 15), RSPVectors[vt][(element >> 1) + i] >> 7);
+            RSP_WriteByte((address - ((CpuU8)address & 7)) + ((((CpuU8)address & 7) + i * 4) & 15), RSPVectors[vt][(element >> 1) + i] >> 7);
         break;
-    default:
+    case 10:
+    case 11:
         {
             CpuU8 transpose[16];
             if (kind == 10) ReportCPUError("RSP_swv");
@@ -1610,25 +1626,27 @@ CpuU32 RSP_Reciprocal(CpuS32 value, CpuU32 squareRoot, CpuU32 singlePrecision)
 {
     CpuU32 magnitude = value;
     if (singlePrecision) {
-        if (value < 0) magnitude = -value;
+        if (value < 0) magnitude = -magnitude;
     } else if (value < 0) {
-        if (value < -32768) magnitude = ~value;
-        else magnitude = -value;
+        if (value >= -32768) magnitude = -value;
+        else magnitude = ~value;
     }
-    bool found = false;
+    int found = 0;
     int shift = 0, leading = 0;
-    for (int i = 31; i >= 0; i--) {
+    for (int i = 31; i > -1; i--) {
         if ((magnitude & (1 << i)) && !found) {
-            found = true;
             shift = leading;
+            found = 1;
         }
         leading++;
     }
     if (!magnitude) shift = singlePrecision ? 16 : 0;
-    CpuU32 index = ((CpuS32)(magnitude << shift) >> 22) & 0x1ff;
+    CpuS32 index = ((CpuS32)(magnitude << shift) >> 22) & 0x1ff;
     if (squareRoot) index = (index & 0x1fe) | (shift % 2) | 0x200;
-    CpuU32 result = (CpuS32)((RSPReciprocalTable[index] | 0x10000) << 14) >>
-        (squareRoot ? ((~shift >> 1) & 15) : (~shift & 31));
+    CpuU32 result = RSPReciprocalTable[index];
+    if (squareRoot) shift = (~shift >> 1) & 15;
+    else shift = ~shift & 31;
+    result = (CpuS32)((result | 0x10000) << 14) >> shift;
     if (value < 0) result = ~result;
     if (!value) return 0x7fffffff;
     if (value == -32768) result = 0xffff0000;
@@ -1639,9 +1657,11 @@ CpuU32 RSP_Reciprocal(CpuS32 value, CpuU32 squareRoot, CpuU32 singlePrecision)
 void RSP_ReciprocalInstruction()
 {
     PC += 4;
-    CpuU32 vt = Instruction.rt, element = Instruction.rs & 15;
-    CpuU32 vd = Instruction.sa, destinationElement = Instruction.rd & 7;
+    CpuU32 vt = Instruction.rt;
     CpuU32 kind = Instruction.Value & 7;
+    CpuU32 vd = Instruction.sa;
+    CpuU32 destinationElement = Instruction.rd & 7;
+    CpuU32 element = Instruction.rs & 15;
     if (!RSPReciprocalInitialized) {
         RSPReciprocalInitialized = true;
         RSP_InitializeReciprocalTable();
@@ -1654,16 +1674,24 @@ void RSP_ReciprocalInstruction()
         RSPReciprocalInput = (CpuS16)input;
         RSPReciprocalResult = RSP_Reciprocal(RSPReciprocalInput, kind == 4, 1);
         RSPReciprocalHighPending = 0;
-        result = RSPReciprocalResult;
-        break;
+        RSPVectors[vd][destinationElement] = RSPReciprocalResult;
+        goto copyAccumulator;
     case 1:
     case 5:
-        if (!RSPReciprocalHighPending) RSPReciprocalInput = (CpuS16)input;
-        else RSPReciprocalInput |= input;
-        RSPReciprocalResult = RSP_Reciprocal(RSPReciprocalInput, kind == 5, !RSPReciprocalHighPending);
+    {
+        CpuU32 singlePrecision;
+        if (RSPReciprocalHighPending) {
+            RSPReciprocalInput |= input;
+            singlePrecision = 0;
+        } else {
+            RSPReciprocalInput = (CpuS16)input;
+            singlePrecision = 1;
+        }
+        RSPReciprocalResult = RSP_Reciprocal(RSPReciprocalInput, kind == 5, singlePrecision);
         RSPReciprocalHighPending = 0;
-        result = RSPReciprocalResult;
-        break;
+        RSPVectors[vd][destinationElement] = RSPReciprocalResult;
+        goto copyAccumulator;
+    }
     case 2:
     case 6:
         RSPReciprocalInput = (CpuS16)input << 16;
@@ -1680,9 +1708,10 @@ void RSP_ReciprocalInstruction()
     RSPVectors[vd][destinationElement] = result;
 copyAccumulator:
     for (int i = 0; i < 8; i++) {
-        AccumulatorLow(i) = RSPVectors[vt][VectorElement(i)];
-        if (kind == 3 && destinationElement == i)
-            RSPVectors[vd][destinationElement] = AccumulatorLow(i);
+        CpuU16 value = RSPVectors[vt][VectorElement(i)];
+        AccumulatorLow(i) = value;
+        if (kind == 3 && ((CpuU8)destinationElement & 7) == i)
+            RSPVectors[vd][destinationElement] = value;
     }
 }
 
@@ -1696,15 +1725,15 @@ void RSP_InitializeReciprocalTable()
     }
     RSPReciprocalTable = RSPComputedReciprocalROM;
     RSPComputedReciprocalROM[0] = 0x1ffff;
-    int i;
+    int i, denominator;
     for (i = 1; i < 512; i++)
-        RSPComputedReciprocalROM[i] = (int)(512.0 / (512 + i) * 131072.0);
+        RSPComputedReciprocalROM[i] = (int)(512.0f / (512 + i) * 131072.0f);
     RSPComputedReciprocalROM[513] = 0x1ffff;
-    for (i = 2; i < 512; i += 2)
-        RSPComputedReciprocalROM[513 + i] = (int)(sqrt(512.0 / (512 + i)) * 131072.0);
-    RSPComputedReciprocalROM[512] = (int)(sqrt(0.5) * 131072.0);
-    for (i = 2; i < 512; i += 2)
-        RSPComputedReciprocalROM[512 + i] = (int)(sqrt(512.0 / ((512 + i) * 2.0)) * 131072.0);
+    for (i = 1, denominator = 514; i < 256; i++, denominator += 2)
+        RSPComputedReciprocalROM[513 + i * 2] = (int)((float)sqrt(512.0f / denominator) * 131072.0f);
+    RSPComputedReciprocalROM[512] = (int)((float)sqrt(0.5) * 131072.0f);
+    for (i = 1, denominator = 514; i < 256; i++, denominator += 2)
+        RSPComputedReciprocalROM[512 + i * 2] = (int)((float)sqrt(512.0f / (denominator * 2.0f)) * 131072.0f);
     FILE *file = fopen("Test.txt", "wb");
     fprintf(file, "\n\n");
     for (i = 0; i < 1024; i++)
@@ -1716,35 +1745,44 @@ void RSP_InitializeReciprocalTable()
 void RSP_VectorMultiply()
 {
     PC += 4;
-    CpuU32 vs = Instruction.rd, vt = Instruction.rt, vd = Instruction.sa;
-    CpuU8 accumulate = (Instruction.Value >> 3) & 1;
     CpuU32 kind = Instruction.Value & 7;
+    CpuU8 accumulate = (Instruction.Value >> 3) & 1;
+    CpuU32 vd = Instruction.sa;
+    CpuU32 vs = Instruction.rd;
+    CpuU32 vt = Instruction.rt;
     CpuU8 roundAccumulate = 0;
-    int unsignedMultiply = 0;
-    int productShift = 0, accumulatorShift = 0, rounding = 0;
+    int unsignedMultiply;
+    int productShift, accumulatorShift, rounding;
+    CpuU16 resultMask;
+    CpuS64 result;
     CpuU64 clampMin = 0xffffffffffff8000;
     CpuU64 clampMax = 0x0000000000007fff;
     CpuS64 clampMask = ~(((CpuU64)1 << 31) - 1);
-    CpuU16 resultMask = 0xffff;
-    CpuS64 result;
+    unsignedMultiply = 0;
+    accumulatorShift = 0;
+    productShift = 0;
+    rounding = 0;
+    resultMask = 0xffff;
     switch (kind) {
     case 0:
-        accumulatorShift = 16; productShift = 1;
         rounding = accumulate ? 0 : 32768;
+        accumulatorShift = 16; productShift = 1;
         break;
     case 1:
-        unsignedMultiply = 1; accumulatorShift = 16; productShift = 1;
-        clampMin = 0; clampMax = 0xffffffffffffffff;
+        unsignedMultiply = 1;
         rounding = accumulate ? 0 : 32768;
+        accumulatorShift = 16; productShift = 1;
+        clampMin = 0; clampMax = 0xffffffffffffffff;
         break;
     case 2:
-        accumulatorShift = 16; productShift = (Instruction.rd & 1) << 4;
+        accumulatorShift = 16; productShift = ((CpuU8)Instruction.rd & 1) << 4;
         roundAccumulate = 1;
         break;
     case 3:
+        rounding = accumulate ? 0 : 0x1f0000;
         accumulatorShift = 17; productShift = 16;
         clampMask = ~(((CpuU64)1 << 32) - 1);
-        resultMask = 0xfff0; rounding = accumulate ? 0 : 0x1f0000;
+        resultMask = 0xfff0;
         break;
     case 4:
         productShift = -16; clampMin = 0; clampMax = 0xffff;
@@ -1780,7 +1818,7 @@ void RSP_VectorMultiply()
             break;
         case 3:
             if (accumulate) {
-                CpuS64 quantized = AccumulatorMiddleValue(i) >> 6;
+                CpuS32 quantized = AccumulatorMiddleValue(i) >> 6;
                 CpuS64 roundBit = (AccumulatorMiddleValue(i) >> 5) & 1;
                 if (quantized < 0 && roundBit == 0) result = 32;
                 else if (quantized > 0 && roundBit == 0) result = -32;

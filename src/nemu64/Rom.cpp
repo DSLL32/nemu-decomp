@@ -21,7 +21,7 @@ unsigned VideoNTSC;
 unsigned BootVersion;
 
 
-bool ReadZipRom(const char* filename, unsigned maximumBytes, bool showProgress)
+bool ReadZipRom(const char* filename, bool showProgress, unsigned maximumBytes)
 {
     char name[256], status[100], loading[100];
     unz_file_info info;
@@ -30,48 +30,46 @@ bool ReadZipRom(const char* filename, unsigned maximumBytes, bool showProgress)
     if (file) {
         if (unzGoToFirstFile(file) == UNZ_OK) {
             do {
-                if (unzGetCurrentFileInfo(file, &info, name, 256, NULL, 0, NULL, 0) != UNZ_OK)
-                    continue;
-                if (_stricmp(name + strlen(name) - 4, ".bin") &&
-                    _stricmp(name + strlen(name) - 4, ".rom") &&
-                    _stricmp(name + strlen(name) - 4, ".pal") &&
-                    _stricmp(name + strlen(name) - 4, ".usa") &&
-                    _stricmp(name + strlen(name) - 4, ".eur") &&
-                    _stricmp(name + strlen(name) - 4, ".v64") &&
-                    _stricmp(name + strlen(name) - 4, ".z64") &&
-                    _stricmp(name + strlen(name) - 4, ".n64"))
-                    continue;
-                CurrentRom.FileSize = info.uncompressed_size;
-                CurrentRom.CompressedSize = info.compressed_size;
-                ROMSize = info.uncompressed_size;
-                if (maximumBytes && maximumBytes < ROMSize)
-                    ROMSize = maximumBytes;
-                if (showProgress) {
-                    sprintf(status, "Allocating %i mb of memory", (ROMSize + 0x80000) >> 20);
-                    SetStatusText(0, status);
-                }
-                ROMImage = (unsigned char*)malloc(ROMSize);
-                if (unzOpenCurrentFile(file) != UNZ_OK)
-                    continue;
-                unsigned done = 0;
-                if (showProgress) {
-                    sprintf(loading, "Unzipping and loading %s...", name);
-                    SetStatusText(0, loading);
-                }
-                result = true;
-                do {
-                    unsigned count = done + 0x100000 < ROMSize ? 0x100000 : ROMSize - done;
-                    unsigned read = unzReadCurrentFile(file, ROMImage + done, count);
-                    if (read < count)
-                        result = false;
-                    done += read;
+                if (unzGetCurrentFileInfo(file, &info, name, 256, NULL, 0, NULL, 0) == UNZ_OK &&
+                   (!_stricmp(name + strlen(name) - 4, ".bin") ||
+                    !_stricmp(name + strlen(name) - 4, ".rom") ||
+                    !_stricmp(name + strlen(name) - 4, ".pal") ||
+                    !_stricmp(name + strlen(name) - 4, ".usa") ||
+                    !_stricmp(name + strlen(name) - 4, ".eur") ||
+                    !_stricmp(name + strlen(name) - 4, ".v64") ||
+                    !_stricmp(name + strlen(name) - 4, ".z64") ||
+                    !_stricmp(name + strlen(name) - 4, ".n64"))) {
+                    CurrentRom.FileSize = info.uncompressed_size;
+                    CurrentRom.CompressedSize = info.compressed_size;
+                    ROMSize = maximumBytes && maximumBytes < info.uncompressed_size ? maximumBytes : info.uncompressed_size;
                     if (showProgress) {
-                        sprintf(status, "%d%%", (done >> 2) * 100 / (ROMSize >> 2));
-                        SetStatusText(1, status);
+                        sprintf(status, "Allocating %i mb of memory", (ROMSize + 0x80000) >> 20);
+                        SetStatusText(0, status);
                     }
-                } while (done < ROMSize);
-                unzCloseCurrentFile(file);
-                break;
+                    ROMImage = (unsigned char*)malloc(ROMSize);
+                    if (unzOpenCurrentFile(file) == UNZ_OK) {
+                        unsigned done = 0;
+                        if (showProgress) {
+                            sprintf(loading, "Unzipping and loading %s...", name);
+                            SetStatusText(0, loading);
+                        }
+                        result = true;
+                        do {
+                            unsigned count = done + 0x100000 < ROMSize ? 0x100000 : ROMSize - done;
+                            unsigned read = unzReadCurrentFile(file, ROMImage + done, count);
+                            if (read < count)
+                                result = false;
+                            done += read;
+                            if (showProgress) {
+                                sprintf(status, "%d%%", (done >> 2) * 100 / (ROMSize >> 2));
+                                SetStatusText(1, status);
+                            }
+                        } while (done < ROMSize);
+                        unzCloseCurrentFile(file);
+                        break;
+                    }
+                    result = false;
+                }
             } while (unzGoToNextFile(file) == UNZ_OK);
         }
         unzClose(file);
@@ -92,12 +90,14 @@ void FreeRomImage()
     CPU_Running = 0;
 }
 
-bool ReadRomImage(HWND parent, const char* filename, unsigned maximumBytes, bool showProgress)
+bool ReadRomImage(HWND parent, const char* filename, bool showProgress, unsigned maximumBytes)
 {
-    char status[100], loading[100];
     OFSTRUCT openInfo;
+    char status[100];
+    DWORD read;
+    unsigned* wordAddress;
     if (!_stricmp(filename + strlen(filename) - 4, ".zip")) {
-        if (!ReadZipRom(filename, maximumBytes, showProgress))
+        if (!ReadZipRom(filename, showProgress, maximumBytes))
             return false;
     } else {
         HANDLE file = (HANDLE)OpenFile(filename, &openInfo, OF_SHARE_DENY_WRITE);
@@ -108,9 +108,7 @@ bool ReadRomImage(HWND parent, const char* filename, unsigned maximumBytes, bool
         }
         CurrentRom.FileSize = GetFileSize(file, NULL);
         CurrentRom.CompressedSize = 0;
-        ROMSize = CurrentRom.FileSize;
-        if (maximumBytes && maximumBytes < ROMSize)
-            ROMSize = maximumBytes;
+        ROMSize = maximumBytes && maximumBytes < CurrentRom.FileSize ? maximumBytes : CurrentRom.FileSize;
         if (showProgress) {
             sprintf(status, "Allocating %i mb of memory", (ROMSize + 0x80000) >> 20);
             SetStatusText(0, status);
@@ -118,13 +116,15 @@ bool ReadRomImage(HWND parent, const char* filename, unsigned maximumBytes, bool
         ROMImage = (unsigned char*)malloc(ROMSize);
         unsigned done = 0;
         if (showProgress) {
+            char loading[100];
             sprintf(loading, "Loading %s...", filename);
             SetStatusText(0, loading);
         }
         do {
-            DWORD count = done + 0x100000 < ROMSize ? 0x100000 : ROMSize - done;
-            DWORD read;
-            ReadFile(file, ROMImage + done, count, &read, NULL);
+            if (done + 0x100000 < ROMSize)
+                ReadFile(file, ROMImage + done, 0x100000, &read, NULL);
+            else
+                ReadFile(file, ROMImage + done, ROMSize - done, &read, NULL);
             done += read;
             if (showProgress) {
                 sprintf(status, "%d%%", (done >> 2) * 100 / (ROMSize >> 2));
@@ -162,10 +162,13 @@ bool ReadRomImage(HWND parent, const char* filename, unsigned maximumBytes, bool
         break;
     case 0x40123780: case 0x41123780:
         for (offset = 0; offset < ROMSize; offset += 4) {
-            unsigned* word = (unsigned*)(ROMImage + offset);
-            unsigned value = *word;
-            *word = (value >> 24) | ((value & 0xff0000) >> 8) |
-                    ((value & 0xff00) << 8) | (value << 24);
+            wordAddress = (unsigned*)(ROMImage + offset);
+            __asm {
+                mov edx, wordAddress
+                mov eax, [edx]
+                bswap eax
+                mov [edx], eax
+            }
             if (!(offset & 0xffff) && showProgress) {
                 sprintf(status, "%d%%", (offset >> 2) * 100 / (ROMSize >> 2));
                 SetStatusText(1, status);
@@ -185,11 +188,16 @@ bool ReadRomImage(HWND parent, const char* filename, unsigned maximumBytes, bool
         SetStatusText(1, "");
     }
     int position = strlen(filename);
-    while (filename[position] != '\\')
-        --position;
+    bool separatorFound = false;
+    do {
+        if (filename[position] == '\\')
+            separatorFound = true;
+        else
+            --position;
+    } while (!separatorFound);
     strcpy(CurrentRom.FileName, filename + position + 1);
     strcpy(CurrentRom.FullPath, filename);
-    CopyByteSwapped(CurrentRom.InternalName, ROMImage + 0x20, 0x20);
+    CopyAndSwapWords(CurrentRom.InternalName, ROMImage + 0x20, 0x20);
     for (position = 25; CurrentRom.InternalName[position] == ' ' || CurrentRom.InternalName[position] == '\0'; --position)
         CurrentRom.InternalName[position] = '\0';
     if (!strlen(CurrentRom.InternalName)) {
@@ -207,13 +215,16 @@ bool LoadRom(HWND parent, const char* filename)
     char title[100];
     FreeRomImage();
     CPU_Running = 1;
-    if (!ReadRomImage(parent, filename, 0, true))
+    if (!ReadRomImage(parent, filename, true, 0))
         return false;
     ReadRomConfiguration();
     RomEntryPoint = ReadPhysicalWord(0x10000008);
+    unsigned index = 0x40;
     unsigned checksum = 0;
-    for (unsigned index = 0x40; index < 0x1000; ++index)
+    do {
         checksum += ROMImage[index] * (index ^ 3);
+        ++index;
+    } while (index < 0x1000);
     switch (checksum) {
     case 0x18ed367a: case 0x18decfbd:
         BootCicSeed = 0x3f;
@@ -233,6 +244,7 @@ bool LoadRom(HWND parent, const char* filename)
         MessageBoxA(parent, "Unknown bootcode. Chances that this game works aren't high", "Unknown bootcode", MB_ICONWARNING);
     }
     switch (ROMImage[0x3d]) {
+    case 'A': case 'E': case 'J': VideoNTSC = 1; break;
     case 'D': case 'P': case 'U': VideoNTSC = 0; break;
     default: VideoNTSC = 1;
     }
