@@ -1,0 +1,75 @@
+{
+  "scope": "Complete typed initialized data contributions; no executable instruction bytes and no whole-DLL claim.",
+  "compiler": "VC7 13.00.9466 C /O2 /Ob1 /MT",
+  "source": "src/audio/ahle_ds/AudioResampleTables.h",
+  "source_sha256": "5b95bd2db83cf7eea18b347cdf32c7a332073868cbcbd45a939f8de4537236f1",
+  "object": "/root/.ai-tmp/audio-data-boundaries/frozen/table-unit.obj",
+  "object_sha256": "f203f2283652c6cb6c8a490fb8b9992773eb83ca374506bd0c6a4fa3e73c961b",
+  "source_only_coefficient_bytes": 2560,
+  "combined_with_common_header_bytes": 4736,
+  "combined_data_section_exact": true,
+  "rows": [
+    {
+      "name": "_t_dewindow",
+      "va": "0x1003c050",
+      "bytes": 2176,
+      "section": ".data",
+      "object_offset": 0,
+      "sha256": "52c695ac3a77f57ebb82e12d2474f02ce47ab544ef0dc05d6ecdfc6d5e4ff100",
+      "bytes_equal": true
+    },
+    {
+      "name": "_AudioResampleKernel",
+      "va": "0x1003c8d0",
+      "bytes": 512,
+      "section": ".data",
+      "object_offset": 2176,
+      "sha256": "b614a26badbdd218794fb72b6b7fa8b74748d25355b60f8157df06126baf2ed2",
+      "bytes_equal": true
+    },
+    {
+      "name": "_AudioResampleTable",
+      "va": "0x1003cad0",
+      "bytes": 512,
+      "section": ".data",
+      "object_offset": 2688,
+      "sha256": "e606c84c6ade13524960a0a4e290b96cd89e0fb8e6224f25ca356c47bfb743df",
+      "bytes_equal": true
+    },
+    {
+      "name": "_AudioResampleShift1",
+      "va": "0x1003ccd0",
+      "bytes": 512,
+      "section": ".data",
+      "object_offset": 3200,
+      "sha256": "ec363666bab9ab5328b8737b2e3361554916fc1223b49e5e7563be0cf4b0f749",
+      "bytes_equal": true
+    },
+    {
+      "name": "_AudioResampleShift2",
+      "va": "0x1003ced0",
+      "bytes": 512,
+      "section": ".data",
+      "object_offset": 3712,
+      "sha256": "1223d95f43fba1cad7c540a4335d2b2b0656560ee9785d1a1c690b6aefb7f4b0",
+      "bytes_equal": true
+    },
+    {
+      "name": "_AudioResampleShift3",
+      "va": "0x1003d0d0",
+      "bytes": 512,
+      "section": ".data",
+      "object_offset": 4224,
+      "sha256": "21ff48ed1faad0e0e3c3d92b6c44e7b50aa7a5f1a4aa6f3b92f29f726ba72c30",
+      "bytes_equal": true
+    }
+  ],
+  "notes": [
+    "The original retained and shifted coefficient table names are inferred.",
+    "Used interleaved table retains the reconstructed public name AudioResampleTable; unused arrays are private static short arrays.",
+    "All arrays are writable initialized data.",
+    "The unused shifted values include historical generator input beyond its LUT; typed source retains those initialized values. The generator itself is not claimed recovered.",
+    "Compilation reads only source headers, not the target DLL. Original bytes are read only by this independent comparison."
+  ],
+  "boundary_audit": "analysis/audio-data-boundaries.json"
+}
