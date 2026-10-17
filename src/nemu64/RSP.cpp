@@ -1595,38 +1595,43 @@ void RSP_VGE()
 void RSP_VCL()
 {
     PC += 4;
+    CpuU32 vd = Instruction.sa;
     CpuU32 vs = Instruction.rd;
     CpuU32 vt = Instruction.rt;
-    CpuU32 vd = Instruction.sa;
-    CpuU32 element = Instruction.rs & 15;
-    for (int i = 0; i < 8; i++)
+    for (CpuU32 i = 0; i < 8; i++)
     {
-        CpuU32 left = RSPVectors[vs][i];
-        CpuU32 right = RSPVectors[vt][VectorElement(i)];
-        CpuU32 low = (RSPFlags[1] >> i) & 1;
-        CpuU32 high = (RSPFlags[1] >> (i + 8)) & 1;
-        CpuU32 equal = ~(RSPFlags[0] >> (i + 8)) & 1;
-        CpuU32 extension = (RSPFlags[2] >> i) & 1;
-        CpuU16 result;
-        if (!((RSPFlags[0] >> i) & 1))
+        CpuU32 low = (RSPFlags[1] >> (CpuU16)i) & 1;
+        CpuU32 high = (RSPFlags[1] >> (CpuU16)(i + 8)) & 1;
+        CpuU32 equal = ~(RSPFlags[0] >> (CpuU16)(i + 8)) & 1;
+        CpuU32 extension = (RSPFlags[2] >> (CpuU16)i) & 1;
+        CpuU32 offset = RSPElementIndexMask[(Instruction.Value >> 22) & 7] & ((Instruction.Value >> 21) & 15);
+        CpuU32 lane = RSPElementLaneMask[(Instruction.Value >> 22) & 7];
+        CpuU16 left = RSPVectors[vs][i];
+        CpuU16 right = RSPVectors[vt][(lane & i) + offset];
+        CpuS32 result;
+        if ((RSPFlags[0] >> (CpuU16)i) & 1)
         {
-            if (equal) high = (CpuS32)(left - right) >= 0;
-            result = (CpuU16)(high ? right : left);
+            CpuS32 sum = left + right;
+            CpuS32 carry = sum > 0xFFFF;
+            if (equal)
+            {
+                CpuS32 zero = (sum & 0xFFFF) == 0;
+                low = ((!extension & !carry & zero) |
+                       (extension & (!carry | zero)));
+            }
+            result = low ? -right : left;
         }
         else
         {
-            CpuU32 sum = left + right;
-            if (equal)
-                low = ((!extension && sum < 0x10000 && !(sum & 0xffff)) |
-                      (extension & (sum < 0x10000 || !(sum & 0xffff))));
-            result = (CpuU16)(low ? -right : left);
+            if (equal) high = (left - right) >= 0;
+            result = high ? right : left;
         }
-        RSPVectors[vd][i] = result;
         AccumulatorLow(i) = result;
+        RSPVectors[vd][i] = result;
         RSPFlags[1] = (RSPFlags[1] & ~(0x101 << i)) | (low << i) | (high << (i + 8));
     }
-    RSPFlags[0] = 0;
     RSPFlags[2] = 0;
+    RSPFlags[0] = 0;
 }
 
 // Original function 00405900.

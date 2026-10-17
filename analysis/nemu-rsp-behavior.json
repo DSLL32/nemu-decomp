@@ -2,10 +2,10 @@
   "status": "passed",
   "evidence_type": "actual_PE_behavioral_differential_only_not_byte_equality",
   "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
-  "rebuilt_sha256": "2e63c785446addc66d243760a203769da98d35278c7831bcd857ff040a8d811b",
-  "rebuilt_map_sha256": "048e1caa82ca6e91bb1be6ca6a47499c9a741e2e98f49f0e76bdcb9cda0baced",
+  "rebuilt_sha256": "c0e5c60c43b029f71973a2d44e589e13e817b08a915948b03d4e355c6f0a455c",
+  "rebuilt_map_sha256": "5b8569e2b47a5ad0751dc9a1e20992adb746d0ae04a1928f4a3526f35fbbce56",
   "script_sha256": "bfc979e83b1f4262a9c8f0246b1be77726b72a5016c5f7f7ec44fd6a95d736f3",
-  "metadata_sha256": "225f62c23831616405bd7cdad8475fde83af51d17299bc502c6190ea6f3bd086",
+  "metadata_sha256": "8f72c5c41f1ff995c7e365af92299f819510b838a52a1d37e5d3b9ef92c21875",
   "seed": 5395280,
   "random_cases_per_opcode": 128,
   "selected_functions": null,
@@ -68,5 +68,11 @@
   "harness_rejection_checks": [
     "Calling original/rebuilt RSP_VADDB is rejected at ReportCPUError instead of executing a diagnostic stub.",
     "An original vector load beyond the complete vector-register array is rejected by the emulated write-range guard."
-  ]
+  ],
+  "candidate_source_sha256": "3f87bf4332b737751f9a4b967a604338084d9fbe02650484751ff96abd37d4a8",
+  "candidate_image_path": "/root/.ai-tmp/nemu-rsp-vcl-promotion.k8dcd48g/candidate.dll",
+  "candidate_map_path": "/root/.ai-tmp/nemu-rsp-vcl-promotion.k8dcd48g/candidate.map",
+  "compiler_input_path": "/root/.ai-tmp/nemu-rsp-vcl-promotion.k8dcd48g/candidate.cpp",
+  "behavior_input_metadata_path": "/root/.ai-tmp/nemu-rsp-vcl-promotion.k8dcd48g/behavior-input-metadata.json",
+  "vcl_reconstruction": "Unsigned lane/flag-index types, promoted halfword operands and explicit carry/zero expressions; same 1472-byte original span and 562-byte matching prefix, still 712 normalized byte differences."
 }
