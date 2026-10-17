@@ -33,6 +33,16 @@ def inspect(executable, map_file, inventory, chronology, original=ROOT / 'master
     present = sorted((row for row in functions if row['name'] in symbols), key=lambda row: row['va'])
     inversions = sum(symbols[a['name']] > symbols[b['name']]
                      for a, b in zip(present, present[1:]))
+    body_checks = []
+    for row in present:
+        size = row['size']
+        original_offset = target.offset(row['va'] - target.base)
+        rebuilt_offset = candidate.offset(symbols[row['name']] - candidate.base)
+        original_body = target.data[original_offset:original_offset + size]
+        rebuilt_body = candidate.data[rebuilt_offset:rebuilt_offset + size]
+        body_checks.append(dict(name=row['name'], bytes=size,
+            raw_bytes_equal=original_body == rebuilt_body,
+            differing_bytes=sum(a != b for a, b in zip(original_body, rebuilt_body))))
     observed = [row for row in inventory['observed_data_symbols'] if row['va'] >= 0x479950]
     available = [row for row in observed if row['name'] in symbols]
     storage_mismatches = [dict(name=row['name'], original_va=row['va'], rebuilt_va=symbols[row['name']])
@@ -74,6 +84,11 @@ def inspect(executable, map_file, inventory, chronology, original=ROOT / 'master
             missing_or_ambiguous=missing, address_delta_counts=dict(sorted(deltas.items())),
             uniform_displacement=not missing and len(deltas) == 1, order_inversions=inversions,
             qualification='Placement only; independent library-body evidence is in the inventory.'),
+        native_recorded_bodies=dict(expected=len(functions), checked=len(body_checks),
+            raw_byte_exact=sum(row['raw_bytes_equal'] for row in body_checks),
+            recorded_bytes=sum(row['bytes'] for row in body_checks),
+            mismatches=[row for row in body_checks if not row['raw_bytes_equal']],
+            qualification='Raw comparison of independently inventoried body extents; no relocation normalization or inferred trailing padding.'),
         observed_native_storage=dict(observations=len(observed), map_symbols=len(available),
             exact=len(available) - len(storage_mismatches), mismatches=storage_mismatches,
             unavailable=[row['name'] for row in observed if row['name'] not in symbols],

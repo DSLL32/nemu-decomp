@@ -2910,5 +2910,242 @@
         "complete_order_equal": false
       }
     ]
+  },
+  "native_body_raw_comparison": {
+    "inspector": "scripts/inspect_nemu_link_layout.py",
+    "before_corrected_import_layout": {
+      "expected": 187,
+      "checked": 187,
+      "raw_byte_exact": 161,
+      "recorded_bytes": 31594,
+      "mismatches": [
+        {
+          "name": "_doexit",
+          "bytes": 194,
+          "raw_bytes_equal": false,
+          "differing_bytes": 2
+        },
+        {
+          "name": "__heap_init",
+          "bytes": 81,
+          "raw_bytes_equal": false,
+          "differing_bytes": 2
+        },
+        {
+          "name": "__write",
+          "bytes": 436,
+          "raw_bytes_equal": false,
+          "differing_bytes": 2
+        },
+        {
+          "name": "__ioinit",
+          "bytes": 427,
+          "raw_bytes_equal": false,
+          "differing_bytes": 4
+        },
+        {
+          "name": "__lseek",
+          "bytes": 140,
+          "raw_bytes_equal": false,
+          "differing_bytes": 1
+        },
+        {
+          "name": "__commit",
+          "bytes": 87,
+          "raw_bytes_equal": false,
+          "differing_bytes": 1
+        },
+        {
+          "name": "__NMSG_WRITE",
+          "bytes": 375,
+          "raw_bytes_equal": false,
+          "differing_bytes": 3
+        },
+        {
+          "name": "__XcptFilter",
+          "bytes": 369,
+          "raw_bytes_equal": false,
+          "differing_bytes": 1
+        },
+        {
+          "name": "__setargv",
+          "bytes": 162,
+          "raw_bytes_equal": false,
+          "differing_bytes": 1
+        },
+        {
+          "name": "___crtGetEnvironmentStringsA",
+          "bytes": 290,
+          "raw_bytes_equal": false,
+          "differing_bytes": 6
+        },
+        {
+          "name": "__sopen",
+          "bytes": 720,
+          "raw_bytes_equal": false,
+          "differing_bytes": 2
+        },
+        {
+          "name": "_wctomb",
+          "bytes": 102,
+          "raw_bytes_equal": false,
+          "differing_bytes": 2
+        },
+        {
+          "name": "__set_osfhnd",
+          "bytes": 119,
+          "raw_bytes_equal": false,
+          "differing_bytes": 1
+        },
+        {
+          "name": "__free_osfhnd",
+          "bytes": 122,
+          "raw_bytes_equal": false,
+          "differing_bytes": 1
+        },
+        {
+          "name": "__lseeki64",
+          "bytes": 159,
+          "raw_bytes_equal": false,
+          "differing_bytes": 1
+        },
+        {
+          "name": "___crtGetStringTypeA",
+          "bytes": 442,
+          "raw_bytes_equal": false,
+          "differing_bytes": 5
+        },
+        {
+          "name": "_setSBUpLow",
+          "bytes": 402,
+          "raw_bytes_equal": false,
+          "differing_bytes": 1
+        },
+        {
+          "name": "__setmbcp",
+          "bytes": 492,
+          "raw_bytes_equal": false,
+          "differing_bytes": 3
+        },
+        {
+          "name": "__chsize",
+          "bytes": 348,
+          "raw_bytes_equal": false,
+          "differing_bytes": 1
+        },
+        {
+          "name": "__msize",
+          "bytes": 56,
+          "raw_bytes_equal": false,
+          "differing_bytes": 1
+        },
+        {
+          "name": "___security_init_cookie",
+          "bytes": 86,
+          "raw_bytes_equal": false,
+          "differing_bytes": 4
+        },
+        {
+          "name": "___security_error_handler",
+          "bytes": 329,
+          "raw_bytes_equal": false,
+          "differing_bytes": 1
+        },
+        {
+          "name": "___ansicp",
+          "bytes": 73,
+          "raw_bytes_equal": false,
+          "differing_bytes": 1
+        },
+        {
+          "name": "___convertcp",
+          "bytes": 463,
+          "raw_bytes_equal": false,
+          "differing_bytes": 9
+        },
+        {
+          "name": "__resetstkoflw",
+          "bytes": 209,
+          "raw_bytes_equal": false,
+          "differing_bytes": 5
+        },
+        {
+          "name": "___crtLCMapStringA",
+          "bytes": 956,
+          "raw_bytes_equal": false,
+          "differing_bytes": 11
+        }
+      ],
+      "qualification": "Raw comparison of independently inventoried body extents; no relocation normalization or inferred trailing padding."
+    },
+    "after_corrected_import_layout": {
+      "expected": 187,
+      "checked": 187,
+      "raw_byte_exact": 187,
+      "recorded_bytes": 31594,
+      "mismatches": []
+    },
+    "scope": "Independent inventory body spans at linked MAP addresses; raw bytes, no relocation normalization."
+  },
+  "latest_integrated_build": {
+    "artifact": "/root/.ai-tmp/nemu-build.trb9kso2/artifacts/87403a525076dcbbd268f2c3016cf2164c9d6948f2dc51ccfe916c67b0845f28",
+    "sha256": "87403a525076dcbbd268f2c3016cf2164c9d6948f2dc51ccfe916c67b0845f28",
+    "source_commit": "ab55811",
+    "pif_source_sha256": "ce07503f880707e727e47003142c5489b0900d3dd05bb552eb2662829b904276",
+    "source_snapshot": "/root/.ai-tmp/nemu-build.trb9kso2/artifacts/87403a525076dcbbd268f2c3016cf2164c9d6948f2dc51ccfe916c67b0845f28/source-snapshot",
+    "compiler_inputs": "/root/.ai-tmp/nemu-build.trb9kso2/artifacts/87403a525076dcbbd268f2c3016cf2164c9d6948f2dc51ccfe916c67b0845f28/build-tree",
+    "snapshot_manifest": "/root/.ai-tmp/nemu-build.trb9kso2/artifacts/87403a525076dcbbd268f2c3016cf2164c9d6948f2dc51ccfe916c67b0845f28/snapshot-manifest.json",
+    "relocation_fixture": {
+      "mode": "chronological",
+      "path": "/root/.ai-tmp/nemu-chronology-relocs.i9nxnxah",
+      "sha256": "21c96e53c6f6e476a80b45ae8ff6118753110add09652586a2d4c718561fc6d0",
+      "parent_artifact": "/root/.ai-tmp/nemu-build.trb9kso2/artifacts/87403a525076dcbbd268f2c3016cf2164c9d6948f2dc51ccfe916c67b0845f28"
+    },
+    "relocation_fixture_existing_sections_identical": true,
+    "differing_file_bytes": 16722,
+    "section_differing_bytes": {
+      ".text": 16411,
+      ".rdata": 4,
+      ".data": 303,
+      ".rsrc": 0
+    },
+    "native_recorded_bodies": {
+      "expected": 187,
+      "checked": 187,
+      "raw_byte_exact": 187,
+      "recorded_bytes": 31594,
+      "mismatches": [],
+      "qualification": "Raw comparison of independently inventoried body extents; no relocation normalization or inferred trailing padding."
+    },
+    "all152_iat_slots_exact": true,
+    "complete_rich_header_exact": true,
+    "program_section_changes_from_controlled_import_build": [
+      {
+        "section": ".text",
+        "changed_bytes": 1418,
+        "first_va": "0x42072c",
+        "last_va": "0x420def"
+      },
+      {
+        "section": ".rdata",
+        "changed_bytes": 0,
+        "first_va": null,
+        "last_va": null
+      },
+      {
+        "section": ".data",
+        "changed_bytes": 0,
+        "first_va": null,
+        "last_va": null
+      },
+      {
+        "section": ".rsrc",
+        "changed_bytes": 0,
+        "first_va": null,
+        "last_va": null
+      }
+    ],
+    "all_program_changes_confined_to_original_ProcessPIF_extent": true,
+    "central_matrix": "Requested separately; no new passing-function count claimed here."
   }
 }
