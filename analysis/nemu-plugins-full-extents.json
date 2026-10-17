@@ -1,0 +1,344 @@
+{
+  "candidate_image": "/root/.ai-tmp/nemu-complete-relocs.24aj9eq0/nemu64.exe",
+  "candidate_image_sha256": "6d03778d7a8de045762cca4560e43d4739826f740bf2190cbe307ed67a8cf985",
+  "map": "/root/.ai-tmp/nemu-complete-relocs.24aj9eq0/nemu64.map",
+  "map_sha256": "0bf7fbdf26c39f69f7fcd5b84fa1acca0e41a5879882719987ac7744a00ff707",
+  "method": "Decode CFG from each MAP entry independently of original function lengths. Follow direct in-block branch successors and fallthrough; stop at RET or tail jump outside the current MAP block. Extent is maximum reached instruction end minus entry, including all interior gaps. Inspect trailing MAP bytes as linker alignment. These 14 functions have no indirect jump tables.",
+  "functions": {
+    "LoadPlugin": {
+      "va": "0x4196a0",
+      "length": 999,
+      "symbol": "?LoadPlugin@@YA_NPAD@Z",
+      "rebuilt_va": "0x413580",
+      "rebuilt_size": 999,
+      "rebuilt_image_sha256": "6d03778d7a8de045762cca4560e43d4739826f740bf2190cbe307ed67a8cf985",
+      "rebuilt_extent_basis": "independent decoded CFG contiguous span with MAP successor alignment inspection",
+      "rebuilt_end": "0x413967",
+      "map_successor": "0x413970",
+      "reached_instruction_bytes": 999,
+      "interior_gaps": [],
+      "exits": [
+        [
+          "0x413929",
+          "ret"
+        ],
+        [
+          "0x413966",
+          "ret"
+        ]
+      ],
+      "trailing_alignment": "909090909090909090",
+      "source": "src/nemu64/Plugins.cpp"
+    },
+    "LoadPlugins": {
+      "va": "0x419a90",
+      "length": 236,
+      "symbol": "?LoadPlugins@@YA_NXZ",
+      "rebuilt_va": "0x413970",
+      "rebuilt_size": 236,
+      "rebuilt_image_sha256": "6d03778d7a8de045762cca4560e43d4739826f740bf2190cbe307ed67a8cf985",
+      "rebuilt_extent_basis": "independent decoded CFG contiguous span with MAP successor alignment inspection",
+      "rebuilt_end": "0x413a5c",
+      "map_successor": "0x413a60",
+      "reached_instruction_bytes": 229,
+      "interior_gaps": [
+        [
+          "0x413989",
+          "0x413990"
+        ]
+      ],
+      "exits": [
+        [
+          "0x413a50",
+          "ret"
+        ],
+        [
+          "0x413a5b",
+          "ret"
+        ]
+      ],
+      "trailing_alignment": "90909090",
+      "source": "src/nemu64/Plugins.cpp"
+    },
+    "UnloadPlugins": {
+      "va": "0x419b80",
+      "length": 65,
+      "symbol": "?UnloadPlugins@@YAXXZ",
+      "rebuilt_va": "0x413a60",
+      "rebuilt_size": 65,
+      "rebuilt_image_sha256": "6d03778d7a8de045762cca4560e43d4739826f740bf2190cbe307ed67a8cf985",
+      "rebuilt_extent_basis": "independent decoded CFG contiguous span with MAP successor alignment inspection",
+      "rebuilt_end": "0x413aa1",
+      "map_successor": "0x413ab0",
+      "reached_instruction_bytes": 62,
+      "interior_gaps": [
+        [
+          "0x413a7d",
+          "0x413a80"
+        ]
+      ],
+      "exits": [
+        [
+          "0x413aa0",
+          "ret"
+        ]
+      ],
+      "trailing_alignment": "909090909090909090909090909090",
+      "source": "src/nemu64/Plugins.cpp"
+    },
+    "FreeTools": {
+      "va": "0x41b100",
+      "length": 45,
+      "symbol": "?FreeTools@@YAXXZ",
+      "rebuilt_va": "0x413ab0",
+      "rebuilt_size": 45,
+      "rebuilt_image_sha256": "6d03778d7a8de045762cca4560e43d4739826f740bf2190cbe307ed67a8cf985",
+      "rebuilt_extent_basis": "independent decoded CFG contiguous span with MAP successor alignment inspection",
+      "rebuilt_end": "0x413add",
+      "map_successor": "0x413ae0",
+      "reached_instruction_bytes": 45,
+      "interior_gaps": [],
+      "exits": [
+        [
+          "0x413adc",
+          "ret"
+        ]
+      ],
+      "trailing_alignment": "909090",
+      "source": "src/nemu64/WinMain.cpp"
+    },
+    "InitializeTools": {
+      "va": "0x41acf0",
+      "length": 1029,
+      "symbol": "?InitializeTools@@YAXXZ",
+      "rebuilt_va": "0x413ae0",
+      "rebuilt_size": 1029,
+      "rebuilt_image_sha256": "6d03778d7a8de045762cca4560e43d4739826f740bf2190cbe307ed67a8cf985",
+      "rebuilt_extent_basis": "independent decoded CFG contiguous span with MAP successor alignment inspection",
+      "rebuilt_end": "0x413ee5",
+      "map_successor": "0x413ef0",
+      "reached_instruction_bytes": 1029,
+      "interior_gaps": [],
+      "exits": [
+        [
+          "0x413ee4",
+          "ret"
+        ]
+      ],
+      "trailing_alignment": "9090909090909090909090",
+      "source": "src/nemu64/WinMain.cpp"
+    },
+    "NotifyTools": {
+      "va": "0x408330",
+      "length": 64,
+      "symbol": "?NotifyTools@@YAXII@Z",
+      "rebuilt_va": "0x413ef0",
+      "rebuilt_size": 64,
+      "rebuilt_image_sha256": "6d03778d7a8de045762cca4560e43d4739826f740bf2190cbe307ed67a8cf985",
+      "rebuilt_extent_basis": "independent decoded CFG contiguous span with MAP successor alignment inspection",
+      "rebuilt_end": "0x413f30",
+      "map_successor": "0x413f30",
+      "reached_instruction_bytes": 64,
+      "interior_gaps": [],
+      "exits": [
+        [
+          "0x413f2f",
+          "ret"
+        ]
+      ],
+      "trailing_alignment": "",
+      "source": "src/nemu64/Plugins.cpp"
+    },
+    "NetplayClientDropped": {
+      "va": "0x41a6e0",
+      "length": 3,
+      "symbol": "?NetplayClientDropped@@YGXPADH@Z",
+      "rebuilt_va": "0x413f30",
+      "rebuilt_size": 3,
+      "rebuilt_image_sha256": "6d03778d7a8de045762cca4560e43d4739826f740bf2190cbe307ed67a8cf985",
+      "rebuilt_extent_basis": "independent decoded CFG contiguous span with MAP successor alignment inspection",
+      "rebuilt_end": "0x413f33",
+      "map_successor": "0x413f40",
+      "reached_instruction_bytes": 3,
+      "interior_gaps": [],
+      "exits": [
+        [
+          "0x413f30",
+          "ret 8"
+        ]
+      ],
+      "trailing_alignment": "90909090909090909090909090",
+      "source": "src/nemu64/WinMain.cpp"
+    },
+    "NetplayStartGame": {
+      "va": "0x41a710",
+      "length": 252,
+      "symbol": "?NetplayStartGame@@YGHPADHH@Z",
+      "rebuilt_va": "0x413f40",
+      "rebuilt_size": 252,
+      "rebuilt_image_sha256": "6d03778d7a8de045762cca4560e43d4739826f740bf2190cbe307ed67a8cf985",
+      "rebuilt_extent_basis": "independent decoded CFG contiguous span with MAP successor alignment inspection",
+      "rebuilt_end": "0x41403c",
+      "map_successor": "0x414040",
+      "reached_instruction_bytes": 242,
+      "interior_gaps": [
+        [
+          "0x413fc6",
+          "0x413fd0"
+        ]
+      ],
+      "exits": [
+        [
+          "0x414039",
+          "ret 0xc"
+        ]
+      ],
+      "trailing_alignment": "90909090",
+      "source": "src/nemu64/WinMain.cpp"
+    },
+    "CheckGraphicsInterrupts": {
+      "va": "0x41fef0",
+      "length": 1,
+      "symbol": "?CheckGraphicsInterrupts@@YAXXZ",
+      "rebuilt_va": "0x414040",
+      "rebuilt_size": 1,
+      "rebuilt_image_sha256": "6d03778d7a8de045762cca4560e43d4739826f740bf2190cbe307ed67a8cf985",
+      "rebuilt_extent_basis": "independent decoded CFG contiguous span with MAP successor alignment inspection",
+      "rebuilt_end": "0x414041",
+      "map_successor": "0x414050",
+      "reached_instruction_bytes": 1,
+      "interior_gaps": [],
+      "exits": [
+        [
+          "0x414040",
+          "ret"
+        ]
+      ],
+      "trailing_alignment": "909090909090909090909090909090",
+      "source": "src/nemu64/Plugins.cpp"
+    },
+    "CommitRDRAM": {
+      "va": "0x0041b2c0",
+      "length": 56,
+      "symbol": "?CommitRDRAM@@YAXXZ",
+      "rebuilt_va": "0x414050",
+      "rebuilt_size": 56,
+      "rebuilt_image_sha256": "6d03778d7a8de045762cca4560e43d4739826f740bf2190cbe307ed67a8cf985",
+      "rebuilt_extent_basis": "independent decoded CFG contiguous span with MAP successor alignment inspection",
+      "rebuilt_end": "0x414088",
+      "map_successor": "0x414090",
+      "reached_instruction_bytes": 56,
+      "interior_gaps": [],
+      "exits": [
+        [
+          "0x414087",
+          "ret"
+        ]
+      ],
+      "trailing_alignment": "9090909090909090",
+      "source": "src/nemu64/WinMain.cpp"
+    },
+    "DecommitRDRAM": {
+      "va": "0x0041b300",
+      "length": 54,
+      "symbol": "?DecommitRDRAM@@YAXXZ",
+      "rebuilt_va": "0x414090",
+      "rebuilt_size": 54,
+      "rebuilt_image_sha256": "6d03778d7a8de045762cca4560e43d4739826f740bf2190cbe307ed67a8cf985",
+      "rebuilt_extent_basis": "independent decoded CFG contiguous span with MAP successor alignment inspection",
+      "rebuilt_end": "0x4140c6",
+      "map_successor": "0x4140d0",
+      "reached_instruction_bytes": 54,
+      "interior_gaps": [],
+      "exits": [
+        [
+          "0x4140c5",
+          "ret"
+        ]
+      ],
+      "trailing_alignment": "90909090909090909090",
+      "source": "src/nemu64/WinMain.cpp"
+    },
+    "SelectGraphicsPlugin": {
+      "va": "0x0041b5a0",
+      "length": 279,
+      "symbol": "?SelectGraphicsPlugin@@YA_NXZ",
+      "rebuilt_va": "0x4140d0",
+      "rebuilt_size": 279,
+      "rebuilt_image_sha256": "6d03778d7a8de045762cca4560e43d4739826f740bf2190cbe307ed67a8cf985",
+      "rebuilt_extent_basis": "independent decoded CFG contiguous span with MAP successor alignment inspection",
+      "rebuilt_end": "0x4141e7",
+      "map_successor": "0x4141f0",
+      "reached_instruction_bytes": 279,
+      "interior_gaps": [],
+      "exits": [
+        [
+          "0x4140f1",
+          "ret"
+        ],
+        [
+          "0x4141cb",
+          "ret"
+        ],
+        [
+          "0x4141e6",
+          "ret"
+        ]
+      ],
+      "trailing_alignment": "909090909090909090",
+      "source": "src/nemu64/WinMain.cpp"
+    },
+    "ReloadConfiguration": {
+      "va": "0x0041b6c0",
+      "length": 184,
+      "symbol": "?ReloadConfiguration@@YAXXZ",
+      "rebuilt_va": "0x4141f0",
+      "rebuilt_size": 184,
+      "rebuilt_image_sha256": "6d03778d7a8de045762cca4560e43d4739826f740bf2190cbe307ed67a8cf985",
+      "rebuilt_extent_basis": "independent decoded CFG contiguous span with MAP successor alignment inspection",
+      "rebuilt_end": "0x4142a8",
+      "map_successor": "0x4142b0",
+      "reached_instruction_bytes": 184,
+      "interior_gaps": [],
+      "exits": [
+        [
+          "0x4142a3",
+          "jmp 0x4140d0"
+        ]
+      ],
+      "trailing_alignment": "9090909090909090",
+      "source": "src/nemu64/WinMain.cpp"
+    },
+    "InitializeGraphicsPlugin": {
+      "va": "0x0041b780",
+      "length": 421,
+      "symbol": "?InitializeGraphicsPlugin@@YAXXZ",
+      "rebuilt_va": "0x4142b0",
+      "rebuilt_size": 421,
+      "rebuilt_image_sha256": "6d03778d7a8de045762cca4560e43d4739826f740bf2190cbe307ed67a8cf985",
+      "rebuilt_extent_basis": "independent decoded CFG contiguous span with MAP successor alignment inspection",
+      "rebuilt_end": "0x414455",
+      "map_successor": "0x414460",
+      "reached_instruction_bytes": 421,
+      "interior_gaps": [],
+      "exits": [
+        [
+          "0x414454",
+          "ret"
+        ]
+      ],
+      "trailing_alignment": "9090909090909090909090",
+      "source": "src/nemu64/WinMain.cpp"
+    }
+  },
+  "scope": "Historical complete-image extent evidence only; current source locations are audited separately and do not retarget these addresses or hashes.",
+  "current_source_assignment_basis": "analysis/nemu-plugins.json metadata_audit; function VA identities agree across both inventories.",
+  "audit": {
+    "image_and_map_hashes_rechecked": true,
+    "original_va_and_current_source_crosschecked": true,
+    "independent_extent_remeasurement": "scripts/measure_nemu_extents.py",
+    "independent_extent_remeasurement_report": "/root/.ai-tmp/nemu-plugin-metadata-audit.5scmrxs3/historical-remeasured-extents.json",
+    "all_14_extents_agree": true,
+    "scope": "The remeasurement applies only to candidate_image_sha256 above; no current image equality claim."
+  }
+}

@@ -1,0 +1,1161 @@
+{
+  "input": "master/nemu64.exe",
+  "sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+  "source_files": [
+    "src/nemu64/Plugins.cpp",
+    "src/nemu64/Plugins.h",
+    "src/nemu64/WinMain.cpp"
+  ],
+  "naming": "All internal source names are inferred from behavior; export spellings are preserved. Fixed target addresses appear only in analysis, not executable source accesses.",
+  "compiler": "VC7 /O2 /Ob1 /ML /GL; link /LTCG; WINVER=0x0500,_WIN32_WINNT=0x0400",
+  "functions": {
+    "LoadPlugin": {
+      "va": "0x4196a0",
+      "length": 999,
+      "status": "normalized bytes match; internal LTCG function",
+      "rebuilt_size": 999,
+      "rebuilt_image_sha256": "20a40159ece6c9e6420a3494c78e898b834b005bc37d0d3388835f43fffdbc0f",
+      "source": "src/nemu64/Plugins.cpp"
+    },
+    "LoadPlugins": {
+      "va": "0x419a90",
+      "length": 236,
+      "status": "normalized bytes match",
+      "rebuilt_size": 236,
+      "rebuilt_image_sha256": "20a40159ece6c9e6420a3494c78e898b834b005bc37d0d3388835f43fffdbc0f",
+      "source": "src/nemu64/Plugins.cpp"
+    },
+    "UnloadPlugins": {
+      "va": "0x419b80",
+      "length": 65,
+      "status": "normalized bytes match",
+      "rebuilt_size": 65,
+      "rebuilt_image_sha256": "20a40159ece6c9e6420a3494c78e898b834b005bc37d0d3388835f43fffdbc0f",
+      "source": "src/nemu64/Plugins.cpp"
+    },
+    "FreeTools": {
+      "va": "0x41b100",
+      "length": 45,
+      "status": "normalized bytes match",
+      "rebuilt_size": 45,
+      "rebuilt_image_sha256": "20a40159ece6c9e6420a3494c78e898b834b005bc37d0d3388835f43fffdbc0f",
+      "source": "src/nemu64/WinMain.cpp"
+    },
+    "InitializeTools": {
+      "va": "0x41acf0",
+      "length": 1029,
+      "status": "normalized bytes match",
+      "rebuilt_size": 1029,
+      "rebuilt_image_sha256": "20a40159ece6c9e6420a3494c78e898b834b005bc37d0d3388835f43fffdbc0f",
+      "source": "src/nemu64/WinMain.cpp"
+    },
+    "NotifyTools": {
+      "va": "0x408330",
+      "length": 64,
+      "status": "normalized bytes match; LTCG automatically passes mask in EBX",
+      "rebuilt_size": 64,
+      "rebuilt_image_sha256": "20a40159ece6c9e6420a3494c78e898b834b005bc37d0d3388835f43fffdbc0f",
+      "source": "src/nemu64/Plugins.cpp"
+    },
+    "NetplayClientDropped": {
+      "va": "0x41a6e0",
+      "length": 3,
+      "status": "normalized bytes match",
+      "rebuilt_size": 3,
+      "rebuilt_image_sha256": "20a40159ece6c9e6420a3494c78e898b834b005bc37d0d3388835f43fffdbc0f",
+      "source_aliases": [
+        {
+          "name": "NetplayChatReceived",
+          "signature": "void __stdcall (char *nick, char *text)",
+          "original_va": "0x41a6e0",
+          "evidence": "Original Kaillera callback setup stores two immediate addresses to the same RET 8 body. Separate empty source identities permit linker ICF while avoiding compiler address common-subexpression elimination.",
+          "validation": "Historical full /GL caller verification: distinct ChatReceived/ClientDropped symbols restore the two original immediate stores and fold to the same linked address. Later complete MainWindowCommand comparisons pass; current relocated image evidence is maintained in analysis/nemu-frontend.json.",
+          "source": "src/nemu64/Plugins.cpp"
+        }
+      ],
+      "source": "src/nemu64/WinMain.cpp"
+    },
+    "NetplayStartGame": {
+      "va": "0x41a710",
+      "length": 252,
+      "status": "normalized bytes match",
+      "rebuilt_size": 252,
+      "rebuilt_image_sha256": "20a40159ece6c9e6420a3494c78e898b834b005bc37d0d3388835f43fffdbc0f",
+      "source": "src/nemu64/WinMain.cpp"
+    },
+    "CheckGraphicsInterrupts": {
+      "va": "0x41fef0",
+      "length": 1,
+      "status": "normalized bytes match; empty function folds with other empty routines",
+      "rebuilt_size": 1,
+      "rebuilt_image_sha256": "20a40159ece6c9e6420a3494c78e898b834b005bc37d0d3388835f43fffdbc0f",
+      "source": "src/nemu64/Plugins.cpp"
+    },
+    "CommitRDRAM": {
+      "va": "0x0041b2c0",
+      "length": 56,
+      "status": "normalized bytes match in child compiler probe",
+      "rebuilt_size": 56,
+      "rebuilt_image_sha256": "20a40159ece6c9e6420a3494c78e898b834b005bc37d0d3388835f43fffdbc0f",
+      "source": "src/nemu64/WinMain.cpp"
+    },
+    "DecommitRDRAM": {
+      "va": "0x0041b300",
+      "length": 54,
+      "status": "normalized bytes match in child compiler probe",
+      "rebuilt_size": 54,
+      "rebuilt_image_sha256": "20a40159ece6c9e6420a3494c78e898b834b005bc37d0d3388835f43fffdbc0f",
+      "source": "src/nemu64/WinMain.cpp"
+    },
+    "SelectGraphicsPlugin": {
+      "va": "0x0041b5a0",
+      "length": 279,
+      "status": "normalized bytes match in child compiler probe",
+      "rebuilt_size": 279,
+      "rebuilt_image_sha256": "20a40159ece6c9e6420a3494c78e898b834b005bc37d0d3388835f43fffdbc0f",
+      "source": "src/nemu64/WinMain.cpp"
+    },
+    "ReloadConfiguration": {
+      "va": "0x0041b6c0",
+      "length": 184,
+      "status": "normalized bytes match in child compiler probe",
+      "rebuilt_size": 184,
+      "rebuilt_image_sha256": "20a40159ece6c9e6420a3494c78e898b834b005bc37d0d3388835f43fffdbc0f",
+      "source": "src/nemu64/WinMain.cpp"
+    },
+    "InitializeGraphicsPlugin": {
+      "va": "0x0041b780",
+      "length": 421,
+      "status": "normalized bytes match in child compiler probe",
+      "rebuilt_size": 421,
+      "rebuilt_image_sha256": "20a40159ece6c9e6420a3494c78e898b834b005bc37d0d3388835f43fffdbc0f",
+      "source": "src/nemu64/WinMain.cpp"
+    }
+  },
+  "globals": {
+    "ToolCatalog": {
+      "va": "0x406f330",
+      "type": "ToolDescriptor[40]",
+      "owner": "Plugins",
+      "extent": 40800,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "ToolCount": {
+      "va": "0x44cc534",
+      "type": "unsigned int",
+      "owner": "Plugins",
+      "extent": 4,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "PluginCatalog": {
+      "va": "0x4079428",
+      "type": "PluginDescriptor[40]",
+      "owner": "Plugins",
+      "extent": 19040,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "PluginCount": {
+      "va": "0x44cc538",
+      "type": "unsigned int",
+      "owner": "Plugins",
+      "extent": 4,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "PluginModules": {
+      "va": "0x4079298",
+      "type": "HMODULE[30]",
+      "owner": "Plugins",
+      "extent": 120,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "PluginModuleCount": {
+      "va": "0x44cc530",
+      "type": "unsigned int",
+      "owner": "Plugins",
+      "extent": 4,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "PluginDirectory": {
+      "va": "0x4079320",
+      "type": "char[260]",
+      "owner": "Plugins",
+      "extent": 260,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "SelectedGraphicsPlugin": {
+      "va": "0x406f320",
+      "type": "PluginDescriptor *",
+      "owner": "Plugins",
+      "extent": 4,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "PendingGraphicsPlugin": {
+      "va": "0x406f31c",
+      "type": "PluginDescriptor *",
+      "owner": "Plugins",
+      "extent": 4,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "GraphicsCombiner": {
+      "va": "0x406f324",
+      "type": "void *",
+      "owner": "Plugins",
+      "extent": 4,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "NetPlayActive": {
+      "va": "0x3e69360",
+      "type": "unsigned int",
+      "owner": "Plugins",
+      "extent": 4,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "NetPlayPlayer": {
+      "va": "0x3e6a018",
+      "type": "int",
+      "owner": "Plugins",
+      "extent": 4,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "NetPlayPlayerCount": {
+      "va": "0x406f308",
+      "type": "int",
+      "owner": "Plugins",
+      "extent": 4,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "SaveStateDirectory": {
+      "va": "0x448b7d0",
+      "type": "char[260]",
+      "owner": "Plugins",
+      "extent": 260,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "RomHeader": {
+      "va": "0x3e69f88",
+      "type": "unsigned char[64]",
+      "owner": "Plugins",
+      "extent": 64,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "GraphicsInterruptRegister": {
+      "va": "0x4089ddc",
+      "type": "unsigned int",
+      "owner": "Plugins",
+      "extent": 4,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "ShowErrorMessages": {
+      "va": "0x406b044",
+      "type": "int",
+      "owner": "Plugins",
+      "extent": 4,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "RegisterStatsEnabled": {
+      "va": "0x2e4c4e8",
+      "type": "unsigned int",
+      "owner": "Globals",
+      "extent": 4,
+      "source_definition": "src/nemu64/Globals.cpp"
+    },
+    "OpcodeStatsEnabled": {
+      "va": "0x1240e6c",
+      "type": "unsigned int",
+      "owner": "Globals",
+      "extent": 4,
+      "source_definition": "src/nemu64/Globals.cpp"
+    },
+    "RegisterStats": {
+      "va": "0x1240e70",
+      "type": "unsigned int[32]",
+      "owner": "Globals",
+      "extent": 128,
+      "source_definition": "src/nemu64/Globals.cpp"
+    },
+    "OpcodeStats": {
+      "va": "0x97ae68",
+      "type": "unsigned int[0x220]",
+      "owner": "Globals",
+      "extent": 2176,
+      "source_definition": "src/nemu64/Globals.cpp"
+    },
+    "OpcodeBreakpoints": {
+      "va": "0x2e4bce8",
+      "type": "DebugOpcodeBreakpoint[256]",
+      "owner": "Globals",
+      "extent": 2048,
+      "source_definition": "src/nemu64/Globals.cpp"
+    },
+    "OpcodeBreakpointCount": {
+      "va": "0x1240e64",
+      "type": "unsigned int",
+      "owner": "Globals",
+      "extent": 4,
+      "source_definition": "src/nemu64/Globals.cpp"
+    },
+    "CPUBreakpoints": {
+      "va": "0x2e4c4f0",
+      "type": "DebugBreakpoint[100000]",
+      "owner": "Globals",
+      "extent": 1200000,
+      "source_definition": "src/nemu64/Globals.cpp"
+    },
+    "CPUBreakpointCount": {
+      "va": "0x123fe50",
+      "type": "unsigned int",
+      "owner": "Globals",
+      "extent": 4,
+      "source_definition": "src/nemu64/Globals.cpp"
+    },
+    "UndoEnabled": {
+      "va": "0x87ae51",
+      "type": "bool",
+      "owner": "Globals",
+      "extent": 1,
+      "source_definition": "src/nemu64/Globals.cpp"
+    },
+    "UndoData": {
+      "va": "0x47ae38",
+      "type": "unsigned char[0x400000]",
+      "owner": "Globals",
+      "extent": 4194304,
+      "source_definition": "src/nemu64/Globals.cpp"
+    },
+    "UndoPosition": {
+      "va": "0x87ae4c",
+      "type": "unsigned int",
+      "owner": "Globals",
+      "extent": 4,
+      "source_definition": "src/nemu64/Globals.cpp"
+    },
+    "BlockExecutionCounts": {
+      "va": "0x3343d90",
+      "type": "unsigned int[0x200000]",
+      "owner": "Globals",
+      "extent": 8388608,
+      "source_definition": "src/nemu64/Globals.cpp"
+    },
+    "BlockCycleCounts": {
+      "va": "0xa3fe50",
+      "type": "unsigned int[0x200000]",
+      "owner": "Globals",
+      "extent": 8388608,
+      "source_definition": "src/nemu64/Globals.cpp"
+    },
+    "BlockStatsEnabled": {
+      "va": "0x2f71474",
+      "type": "unsigned int",
+      "owner": "Globals",
+      "extent": 4,
+      "source_definition": "src/nemu64/Globals.cpp"
+    },
+    "RDPHistory": {
+      "va": "0x3e62e18",
+      "type": "unsigned int[2048]",
+      "owner": "Memory",
+      "extent": 8192,
+      "source_definition": "src/nemu64/Memory.cpp"
+    },
+    "RDPHistoryPosition": {
+      "va": "0x3e69350",
+      "type": "unsigned int",
+      "owner": "Memory",
+      "extent": 4,
+      "source_definition": "src/nemu64/Memory.cpp"
+    },
+    "CIInit": {
+      "va": "0x407931c",
+      "type": "cdecl function pointer; see Plugins.h",
+      "owner": "Plugins",
+      "extent": 4,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "CIFree": {
+      "va": "0x407de88",
+      "type": "cdecl function pointer; see Plugins.h",
+      "owner": "Plugins",
+      "extent": 4,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "CIGetJoyData": {
+      "va": "0x4079314",
+      "type": "cdecl function pointer; see Plugins.h",
+      "owner": "Plugins",
+      "extent": 4,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "CIRumble": {
+      "va": "0x406f32c",
+      "type": "cdecl function pointer; see Plugins.h",
+      "owner": "Plugins",
+      "extent": 4,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "CIConfigure": {
+      "va": "0x407de8c",
+      "type": "cdecl function pointer; see Plugins.h",
+      "owner": "Plugins",
+      "extent": 4,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "AIInit": {
+      "va": "0x4079424",
+      "type": "cdecl function pointer; see Plugins.h",
+      "owner": "Plugins",
+      "extent": 4,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "AIFree": {
+      "va": "0x407de98",
+      "type": "cdecl function pointer; see Plugins.h",
+      "owner": "Plugins",
+      "extent": 4,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "AISetReg": {
+      "va": "0x406f328",
+      "type": "cdecl function pointer; see Plugins.h",
+      "owner": "Plugins",
+      "extent": 4,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "AIGetReg": {
+      "va": "0x4079318",
+      "type": "cdecl function pointer; see Plugins.h",
+      "owner": "Plugins",
+      "extent": 4,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "AIConfigure": {
+      "va": "0x407de94",
+      "type": "cdecl function pointer; see Plugins.h",
+      "owner": "Plugins",
+      "extent": 4,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "AUDList": {
+      "va": "0x4079290",
+      "type": "cdecl function pointer; see Plugins.h",
+      "owner": "Plugins",
+      "extent": 4,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "AISetUCodeID": {
+      "va": "0x4079310",
+      "type": "cdecl function pointer; see Plugins.h",
+      "owner": "Plugins",
+      "extent": 4,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "NemuSettings": {
+      "va": "0x4079294",
+      "type": "cdecl function pointer; see Plugins.h",
+      "owner": "Plugins",
+      "extent": 4,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "DCTList": {
+      "va": "0x407de90",
+      "type": "cdecl function pointer; see Plugins.h",
+      "owner": "Plugins",
+      "extent": 4,
+      "source_definition": "src/nemu64/Plugins.cpp"
+    },
+    "VICount": {
+      "va": "0x3e69348",
+      "type": "unsigned int",
+      "owner": "CPU",
+      "extent": 4,
+      "source_definition": "src/nemu64/CPU.cpp"
+    },
+    "RSPBreakpoints": {
+      "va": "0x2e4bb58",
+      "type": "unsigned int[100]",
+      "owner": "CPU",
+      "extent": 400,
+      "source_definition": "src/nemu64/CPU.cpp"
+    },
+    "RSPBreakpointCount": {
+      "va": "0x1240e5c",
+      "type": "unsigned int",
+      "owner": "CPU",
+      "extent": 4,
+      "source_definition": "src/nemu64/CPU.cpp"
+    },
+    "Controllers": {
+      "va": "0x448c324",
+      "type": "ControllerState[4]",
+      "owner": "Globals",
+      "extent": 32,
+      "source_definition": "src/nemu64/Globals.cpp"
+    },
+    "SelectedRomFilename": {
+      "va": "0x3e69560",
+      "type": "char[256]",
+      "owner": "CpuControl",
+      "extent": 256,
+      "source_definition": "src/nemu64/CpuControl.cpp"
+    },
+    "MainWindow": {
+      "va": "0x406f30c",
+      "type": "HWND",
+      "owner": "WinMain",
+      "extent": 4,
+      "source_definition": "src/nemu64/WinMain.cpp"
+    },
+    "ApplicationDirectory": {
+      "va": "0x4089cc0",
+      "type": "char[260]",
+      "owner": "WinMain",
+      "extent": 260,
+      "source_definition": "src/nemu64/WinMain.cpp"
+    },
+    "PIFRam": {
+      "va": "0x3e64e20",
+      "type": "unsigned char[64]",
+      "owner": "Memory",
+      "extent": 64,
+      "source_definition": "src/nemu64/Memory.cpp"
+    },
+    "HLETaskAddress": {
+      "va": "0x3e69524",
+      "type": "unsigned int",
+      "owner": "Memory",
+      "extent": 4,
+      "source_definition": "src/nemu64/Memory.cpp"
+    },
+    "StatusWindow": {
+      "va": "0x04089dec",
+      "type": "HWND",
+      "owner": "WinMain",
+      "source_definition": "src/nemu64/WinMain.cpp",
+      "extent": 4
+    },
+    "RDRAM": {
+      "va": "0x03e69554",
+      "type": "unsigned char *",
+      "owner": "Memory",
+      "source_definition": "src/nemu64/Memory.cpp",
+      "extent": 4
+    },
+    "RDRAMSize": {
+      "va": "0x03e64e68",
+      "type": "unsigned",
+      "owner": "Memory",
+      "source_definition": "src/nemu64/Memory.cpp",
+      "extent": 4
+    },
+    "ConfigurationIniPath": {
+      "va": "0x04089f00",
+      "type": "char[260]",
+      "owner": "FrontendIni",
+      "source_definition": "src/nemu64/FrontendIni.cpp",
+      "extent": 260
+    },
+    "InitialDirectory": {
+      "va": "0x04089df8",
+      "type": "char[260]",
+      "owner": "FrontendIni",
+      "source_definition": "src/nemu64/FrontendIni.cpp",
+      "extent": 260
+    },
+    "RSPShadowMemory": {
+      "va": "0x03e65348",
+      "type": "unsigned char[0x2000]",
+      "owner": "Memory",
+      "note": "DMEM at offset 0; IMEM at +0x1000. Confirmed with components owner.",
+      "source_definition": "src/nemu64/Memory.cpp",
+      "extent": 8192
+    },
+    "DPCReg": {
+      "va": "0x0406f2e0",
+      "type": "DPCRegisters",
+      "owner": "Memory",
+      "source_definition": "src/nemu64/Memory.cpp",
+      "extent": 32
+    },
+    "VIReg": {
+      "va": "0x03e65308",
+      "type": "VIRegisters",
+      "owner": "Memory",
+      "note": "VIReg.Burst at +0x14 goes to GraphicsInfo.VITiming.",
+      "source_definition": "src/nemu64/Memory.cpp",
+      "extent": 56
+    }
+  },
+  "host_interface": {
+    "size": 244,
+    "abi_fields": [
+      {
+        "offset": "0x0",
+        "field": "MainWindow",
+        "expression": "&MainWindow",
+        "target_va": "0x406f30c",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ad0f"
+      },
+      {
+        "offset": "0x4",
+        "field": "RDRAM",
+        "expression": "RDRAM",
+        "target_va": "0x3e69554",
+        "passing": "global_pointer_value",
+        "original_assignment_va": "0x0041ad02",
+        "original_value_load_va": "0x0041acf6"
+      },
+      {
+        "offset": "0x8",
+        "field": "RamSize",
+        "expression": "&RDRAMSize",
+        "target_va": "0x3e64e68",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ad17"
+      },
+      {
+        "offset": "0xc",
+        "field": "PeripheralMemory",
+        "expression": "SPMemory",
+        "target_va": "0x406b048",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ad1f"
+      },
+      {
+        "offset": "0x10",
+        "field": "ROM",
+        "expression": "ROMImage",
+        "target_va": "0x3e64fbc",
+        "passing": "global_pointer_value",
+        "original_assignment_va": "0x0041ad27",
+        "original_value_load_va": "0x0041acfb"
+      },
+      {
+        "offset": "0x14",
+        "field": "RomSize",
+        "expression": "&ROMSize",
+        "target_va": "0x3e69510",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ad2b"
+      },
+      {
+        "offset": "0x18",
+        "field": "PIFRam",
+        "expression": "PIFRam",
+        "target_va": "0x3e64e20",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ad33"
+      },
+      {
+        "offset": "0x1c",
+        "field": "RomName",
+        "expression": "CurrentRom.InternalName",
+        "target_va": "0x408a10c",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ad3b"
+      },
+      {
+        "offset": "0x20",
+        "field": "RomInternalName",
+        "expression": "CurrentRom.DisplayName",
+        "target_va": "0x408a12c",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ad43"
+      },
+      {
+        "offset": "0x24",
+        "field": "CPUProgramCounter",
+        "expression": "&CPU_PC",
+        "target_va": "0x3e69374",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ad4b"
+      },
+      {
+        "offset": "0x28",
+        "field": "CPURegisters",
+        "expression": "CPU_GPR",
+        "target_va": "0x3e64eb0",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ad53"
+      },
+      {
+        "offset": "0x2c",
+        "field": "COP0Registers",
+        "expression": "CPU_COP0",
+        "target_va": "0x406f048",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ad5b"
+      },
+      {
+        "offset": "0x30",
+        "field": "FPURegisters32",
+        "expression": "CPU_FPR.words",
+        "target_va": "0x3e69488",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ad63"
+      },
+      {
+        "offset": "0x34",
+        "field": "FCR31",
+        "expression": "&CPU_FCR31",
+        "target_va": "0x3e64e74",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ad6b"
+      },
+      {
+        "offset": "0x38",
+        "field": "RSPRegisters",
+        "expression": "RSPRegisters",
+        "target_va": "0x3e69668",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ad73"
+      },
+      {
+        "offset": "0x3c",
+        "field": "RSPFlags",
+        "expression": "RSPFlags",
+        "target_va": "0x3e64fb4",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ad7b"
+      },
+      {
+        "offset": "0x40",
+        "field": "RSPAccumulator",
+        "expression": "RSPAccumulator",
+        "target_va": "0x3e69fd0",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ad83"
+      },
+      {
+        "offset": "0x44",
+        "field": "RSPVectors",
+        "expression": "RSPVectors",
+        "target_va": "0x3e64ff0",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ad8e"
+      },
+      {
+        "offset": "0x48",
+        "field": "MultLO",
+        "expression": "&CPU_LO",
+        "target_va": "0x3e696e8",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ad99"
+      },
+      {
+        "offset": "0x4c",
+        "field": "MultHI",
+        "expression": "&CPU_HI",
+        "target_va": "0x3e64e78",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ada4"
+      },
+      {
+        "offset": "0x50",
+        "field": "CPUInstruction",
+        "expression": "&CPU_Instruction",
+        "target_va": "0x3e5ae08",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041adaf"
+      },
+      {
+        "offset": "0x54",
+        "field": "DebugFlags",
+        "expression": "&CPU_ActionFlags",
+        "target_va": "0x3e69368",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041adba"
+      },
+      {
+        "offset": "0x58",
+        "field": "EmulationThread",
+        "expression": "&CPU_Thread",
+        "target_va": "0x3e6935c",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041adc5"
+      },
+      {
+        "offset": "0x5c",
+        "field": "RegisterStatsEnabled",
+        "expression": "&RegisterStatsEnabled",
+        "target_va": "0x2e4c4e8",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041add0"
+      },
+      {
+        "offset": "0x60",
+        "field": "OpcodeStatsEnabled",
+        "expression": "&OpcodeStatsEnabled",
+        "target_va": "0x1240e6c",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041addb"
+      },
+      {
+        "offset": "0x64",
+        "field": "RegisterStats",
+        "expression": "RegisterStats",
+        "target_va": "0x1240e70",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ade6"
+      },
+      {
+        "offset": "0x68",
+        "field": "OpcodeStats",
+        "expression": "OpcodeStats",
+        "target_va": "0x97ae68",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041adf1"
+      },
+      {
+        "offset": "0x6c",
+        "field": "VICount",
+        "expression": "&VICount",
+        "target_va": "0x3e69348",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041adfc"
+      },
+      {
+        "offset": "0x70",
+        "field": "OpcodeBreakpoints",
+        "expression": "OpcodeBreakpoints",
+        "target_va": "0x2e4bce8",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ae07"
+      },
+      {
+        "offset": "0x74",
+        "field": "OpcodeBreakpointCount",
+        "expression": "&OpcodeBreakpointCount",
+        "target_va": "0x1240e64",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ae12"
+      },
+      {
+        "offset": "0x78",
+        "field": "RSPBreakpoints",
+        "expression": "RSPBreakpoints",
+        "target_va": "0x2e4bb58",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ae1d"
+      },
+      {
+        "offset": "0x7c",
+        "field": "RSPBreakpointCount",
+        "expression": "&RSPBreakpointCount",
+        "target_va": "0x1240e5c",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ae28"
+      },
+      {
+        "offset": "0x80",
+        "field": "Watches",
+        "expression": "reinterpret_cast<DebugWatch *>(MemoryBreakpoints)",
+        "target_va": "0xa3fb20",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ae33"
+      },
+      {
+        "offset": "0x84",
+        "field": "WatchCount",
+        "expression": "&MemoryBreakpointCount",
+        "target_va": "0x97ae60",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ae3e"
+      },
+      {
+        "offset": "0x88",
+        "field": "LastProgramCounter",
+        "expression": "&CPU_LastPC",
+        "target_va": "0x2f73484",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ae49"
+      },
+      {
+        "offset": "0x8c",
+        "field": "TranslateAddress",
+        "expression": "TranslateTLB",
+        "target_va": "0x419580",
+        "passing": "function_pointer",
+        "original_assignment_va": "0x0041ae54"
+      },
+      {
+        "offset": "0x90",
+        "field": "TranslateError",
+        "expression": "&TranslationError",
+        "target_va": "0x3e6a010",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ae5f"
+      },
+      {
+        "offset": "0x94",
+        "field": "ReadWord",
+        "expression": "ReadPhysicalWord",
+        "target_va": "0x417180",
+        "passing": "function_pointer",
+        "original_assignment_va": "0x0041ae6a"
+      },
+      {
+        "offset": "0x98",
+        "field": "WriteWord",
+        "expression": "WritePhysicalWord",
+        "target_va": "0x417c70",
+        "passing": "function_pointer",
+        "original_assignment_va": "0x0041ae75"
+      },
+      {
+        "offset": "0x9c",
+        "field": "ReadError",
+        "expression": "&ReadError",
+        "target_va": "0x406b040",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ae80"
+      },
+      {
+        "offset": "0xa0",
+        "field": "ShowErrors",
+        "expression": "&ShowErrors",
+        "target_va": "0x3e64e18",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ae8b"
+      },
+      {
+        "offset": "0xa4",
+        "field": "Breakpoints",
+        "expression": "CPUBreakpoints",
+        "target_va": "0x2e4c4f0",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041ae96"
+      },
+      {
+        "offset": "0xa8",
+        "field": "BreakpointCount",
+        "expression": "&CPUBreakpointCount",
+        "target_va": "0x123fe50",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041aea1"
+      },
+      {
+        "offset": "0xac",
+        "field": "RSPControlRegisters",
+        "expression": "&SPReg.MemAddress",
+        "target_va": "0x3e69534",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041aeac"
+      },
+      {
+        "offset": "0xb0",
+        "field": "MIRegisters",
+        "expression": "&MIReg.Mode",
+        "target_va": "0x3e69514",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041aeb7"
+      },
+      {
+        "offset": "0xb4",
+        "field": "RomFilename",
+        "expression": "CurrentRom.FullPath",
+        "target_va": "0x408a190",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041aec2"
+      },
+      {
+        "offset": "0xb8",
+        "field": "ControllerData",
+        "expression": "Controllers",
+        "target_va": "0x448c324",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041aecd"
+      },
+      {
+        "offset": "0xbc",
+        "field": "FPURegisters64",
+        "expression": "CPU_FPR64",
+        "target_va": "0x406f0d0",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041aed8"
+      },
+      {
+        "offset": "0xc0",
+        "field": "RSPTask",
+        "expression": "&HLETaskAddress",
+        "target_va": "0x3e69524",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041aee3"
+      },
+      {
+        "offset": "0xc4",
+        "field": "Running",
+        "expression": "&CPU_Running",
+        "target_va": "0x3e5ae0c",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041aeee"
+      },
+      {
+        "offset": "0xc8",
+        "field": "RomCRC",
+        "expression": "CurrentRom.IniSection",
+        "target_va": "0x408a290",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041aef9"
+      },
+      {
+        "offset": "0xcc",
+        "field": "GraphicsCombiner",
+        "expression": "&GraphicsCombiner",
+        "target_va": "0x406f324",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041af04"
+      },
+      {
+        "offset": "0xd0",
+        "field": "UndoEnabled",
+        "expression": "&UndoEnabled",
+        "target_va": "0x87ae51",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041af0f"
+      },
+      {
+        "offset": "0xd4",
+        "field": "UndoData",
+        "expression": "UndoData",
+        "target_va": "0x47ae38",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041af1a"
+      },
+      {
+        "offset": "0xd8",
+        "field": "UndoPosition",
+        "expression": "&UndoPosition",
+        "target_va": "0x87ae4c",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041af25"
+      },
+      {
+        "offset": "0xdc",
+        "field": "BlockExecutionCounts",
+        "expression": "BlockExecutionCounts",
+        "target_va": "0x3343d90",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041af30"
+      },
+      {
+        "offset": "0xe0",
+        "field": "BlockCycleCounts",
+        "expression": "BlockCycleCounts",
+        "target_va": "0xa3fe50",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041af3b"
+      },
+      {
+        "offset": "0xe4",
+        "field": "BlockStatsEnabled",
+        "expression": "&BlockStatsEnabled",
+        "target_va": "0x2f71474",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041af46"
+      },
+      {
+        "offset": "0xe8",
+        "field": "DPCRegisters",
+        "expression": "&DPCReg.Start",
+        "target_va": "0x406f2e0",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041af51"
+      },
+      {
+        "offset": "0xec",
+        "field": "RDPHistory",
+        "expression": "RDPHistory",
+        "target_va": "0x3e62e18",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041af5c"
+      },
+      {
+        "offset": "0xf0",
+        "field": "RDPHistoryPosition",
+        "expression": "&RDPHistoryPosition",
+        "target_va": "0x3e69350",
+        "passing": "address_of_host_object",
+        "original_assignment_va": "0x0041af67"
+      }
+    ],
+    "note": "Field names inherited from the reconstructed debugger and refined where host population proves additional fields. Host flag storage can be32bit although Delphi accesses only lowbyte.",
+    "source": "src/nemu64/WinMain.cpp",
+    "function": "InitializeTools",
+    "original_function_va": "0x0041acf0"
+  },
+  "verification": {
+    "function_count": 14,
+    "normalized_code_bytes": 3688,
+    "all_functions_equal": true,
+    "source_sha256": "0556ede7aa6e43f39601cdff0d8fa26aa9f07cd14e05508b38740a2b12b749ff",
+    "scope": "Historical standalone plugin probe only; the normalized instruction comparison is not current-source or whole-file equality.",
+    "image": "/root/.ai-tmp/nemu64-plugins-host/probe-noicf.dll",
+    "image_sha256": "20a40159ece6c9e6420a3494c78e898b834b005bc37d0d3388835f43fffdbc0f"
+  },
+  "structures": {
+    "PluginInfo": {
+      "size": 112
+    },
+    "PluginDescriptor": {
+      "size": 476,
+      "Info_offset": 4,
+      "Filename_offset": 116,
+      "callback_start": 376
+    },
+    "ToolDescriptor": {
+      "size": 1020,
+      "Flags_offset": 0,
+      "MenuText_offset": 4,
+      "Init_offset": 1004,
+      "Free_offset": 1008,
+      "Invoke_offset": 1012,
+      "GetMenuText_offset": 1016
+    },
+    "ControllerState": {
+      "size": 8,
+      "Present_offset": 0,
+      "MemPak_offset": 1,
+      "RumblePak_offset": 2,
+      "RumbleActive_offset": 3,
+      "Buttons_offset": 4
+    }
+  },
+  "evidence": {
+    "loader_probe": "/root/.ai-tmp/nemu64-plugins-host",
+    "all_functions_comparison": "/root/.ai-tmp/nemu64-plugins-host/comparison.json",
+    "selection_probe": "/root/.ai-tmp/nemu-plugin-select.1dUcjm5s/comparison-linked.json",
+    "strict_comparison_note": "Historical independent comparer confirmed all 14 instruction shapes in the NOICF diagnostic. This statement does not certify every relocated operand identity or the complete executable.",
+    "noicf_probe": "/root/.ai-tmp/nemu64-plugins-host/probe-noicf.dll"
+  },
+  "limitations": [
+    "Historical normalized matches compare instruction bytes after address-operand normalization. They are not whole-file equality or a substitute for current complete-image target verification.",
+    "UndoData usable extent is the4MiB ring independently observed in debugger consumers; CPUBreakpoints count100000 is confirmed by dynarec ownership.",
+    "Catalog and module array bounds are inferred from boundaries of independently identified adjacent globals."
+  ],
+  "rebuilt_size_provenance": {
+    "image": "/root/.ai-tmp/nemu64-plugins-host/probe-noicf.dll",
+    "scope": "Standalone plugin probe; full-program LTCG extents require independent measurement.",
+    "image_sha256": "20a40159ece6c9e6420a3494c78e898b834b005bc37d0d3388835f43fffdbc0f"
+  },
+  "source_organization": "Plugin loading and shared plugin state remain in Plugins.cpp. Main-window integration, tool menus, graphics selection and netplay start callbacks are grouped with WinMain.cpp. Original source filenames and boundaries are inferred.",
+  "metadata_audit": {
+    "scope": "Current source ownership and original address/source assignments; historical artifact hashes remain explicit.",
+    "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+    "functions_checked": 14,
+    "host_assignments_checked": 61,
+    "globals_checked": 64,
+    "source_sha256": {
+      "src/nemu64/CPU.cpp": "2f1477f964f807c0c459656089d80a26e86c525b58a4696e2def2471b511e0d6",
+      "src/nemu64/CpuControl.cpp": "34ea4d574c4a786526a5e0bce2f01204745e3fa70af75df2eb684c12283e4648",
+      "src/nemu64/FrontendIni.cpp": "85bcc6e7b9e0d4ff862e57606fb3bd1b0899ac15393c1eb947ce6bfbd3d4f52e",
+      "src/nemu64/Globals.cpp": "113a34101d3e1f75218136af378072e41ccfa33e4d2a55bf86aab9163158f821",
+      "src/nemu64/Memory.cpp": "fbe9d1f56f9fc0aa301bdf7336f2832aaf08f61b22548fb8b9fb1ca2eedf3b2d",
+      "src/nemu64/Plugins.cpp": "c3f6ad6a47cf375d83c08d65910763762a02d4d2bda6e8ee766aa8968f22b57d",
+      "src/nemu64/Plugins.h": "b29bba96e64a11b018eb760dd6261ba46e66094bcc90c7596b9077dda1acb4e9",
+      "src/nemu64/WinMain.cpp": "ea37bc07285c522fdf60a0f93de0c99307fbb05c7667dd95476e61a7af442683"
+    },
+    "host_assignment_method": "Decode original InitializeTools MOV instructions; map stack offsets 0x40..0x130 to all 61 interface fields, following the two global-pointer loads in EAX/ECX. Compare all current host.field source expressions exactly after whitespace normalization.",
+    "global_method": "Cross-check each VA and extent with the reconciled global inventory; record its current source definition. The inventory is corroborating metadata, not independent proof of every original global type.",
+    "historical_extents": "analysis/nemu-plugins-full-extents.json remains pinned to the historical complete-image SHA6d03778d7a8de045762cca4560e43d4739826f740bf2190cbe307ed67a8cf985."
+  }
+}
