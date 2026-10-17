@@ -12,7 +12,8 @@
       "finding": "All fifteen known HRESULT cases match. The default path reloads the original text argument from its stack slot; current source reuses ESI.",
       "probes": [
         "Using the parameter itself as the output message, using a separate message local, making the default MessageBox call directly, and parsing the HRESULT through va_list do not recover the original default path.",
-        "A volatile text parameter with a nonvolatile local message copy produces an exact native body. This qualifier is not adopted because original-source evidence for a volatile stack argument is missing."
+        "A volatile text parameter with a nonvolatile local message copy produces an exact native body. This qualifier is not adopted because original-source evidence for a volatile stack argument is missing.",
+        "Current full49-function native DS/config context confirms coherent variadic HRESULT extraction before or after the initial MessageBox still produces640 bytes with the same19 differences; no signature change adopted."
       ]
     },
     "AllocateSoundBuffer": {
@@ -37,7 +38,8 @@
         "Original 0x100052aa contains a dead load of its local write cursor. Volatile local play/write cursors preserve that load and reduce differing bytes to 273, but still leave the wrong stack frame and other scheduling differences. This remains a probe.",
         "/G5 increases differing non-relocation bytes to 614.",
         "A separate float samples local, assigned from the signed cursor difference, restores the original 0x2c stack frame and exact x87 operation sequence. With volatile cursor locals this leaves 263 differing bytes, principally register/scheduling differences and branch-offset propagation; complete equality is not achieved.",
-        "Separate pending-byte and write-position locals, a copied length local, counter/frequency arrays, and relocating LastBlockLength assignment do not resolve the remaining differences. A double samples local or volatile LastBlockLength worsens the match."
+        "Separate pending-byte and write-position locals, a copied length local, counter/frequency arrays, and relocating LastBlockLength assignment do not resolve the remaining differences. A double samples local or volatile LastBlockLength worsens the match.",
+        "Splitting distance subtraction/masking into two statements does not restore the retained cursor read. Three-statement volatile-position load/subtraction/masking across all updates grows the routine to1136 bytes; no change adopted."
       ]
     }
   },
