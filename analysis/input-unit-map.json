@@ -2580,18 +2580,18 @@
       }
     },
     {
-      "unit": "ToolWin",
+      "unit": "RichEdit",
       "init_table_index": 49,
       "initialization_va": 4619204,
       "finalization_va": 4619156,
       "unit_counter_va": 4761228,
       "initializer_tail": {
-        "reference_initialization_va": 4682228,
+        "reference_initialization_va": 4679464,
         "span_bytes": 8,
         "normalized_equal": true
       },
       "code_end_va": 4619212,
-      "evidence": "Initializer-table entry and matching reference unit tail, with code-symbol/RTTI ownership anchors. This empty unit has no unique executable body; its name is inferred from the PACKAGEINFO set, standard-unit dependencies, initializer ordering and neighboring identified contributions.",
+      "evidence": "Empty-unit identity corrected from the initial ambiguous assignment by the byte-exact source build. ComCtrls naturally emits RichEdit before ToolWin in CODE and initializes ToolWin before RichEdit when traversing cached DCUs. No extra ToolWin source dependency is needed.",
       "code_start_va": 4619156,
       "code_start_rva": 424852,
       "code_length": 56,
@@ -2600,7 +2600,7 @@
       "next_unit_start_va": 4619212,
       "first_build_comparison": {
         "path": "/root/.ai-tmp/nemu-input-unit-map.beo7bzx0/reference/Input.dll",
-        "start_va": 4619216,
+        "start_va": 4619160,
         "length": 56,
         "normalized_equal": true
       },
@@ -2618,18 +2618,18 @@
       }
     },
     {
-      "unit": "RichEdit",
+      "unit": "ToolWin",
       "init_table_index": 48,
       "initialization_va": 4619260,
       "finalization_va": 4619212,
       "unit_counter_va": 4761232,
       "initializer_tail": {
-        "reference_initialization_va": 4679464,
+        "reference_initialization_va": 4682228,
         "span_bytes": 8,
         "normalized_equal": true
       },
       "code_end_va": 4619268,
-      "evidence": "Initializer-table entry and matching reference unit tail, with code-symbol/RTTI ownership anchors. This empty unit has no unique executable body; its name is inferred from the PACKAGEINFO set, standard-unit dependencies, initializer ordering and neighboring identified contributions.",
+      "evidence": "Empty-unit identity corrected from the initial ambiguous assignment by the byte-exact source build. ComCtrls naturally emits RichEdit before ToolWin in CODE and initializes ToolWin before RichEdit when traversing cached DCUs. No extra ToolWin source dependency is needed.",
       "code_start_va": 4619212,
       "code_start_rva": 424908,
       "code_length": 56,
@@ -2638,7 +2638,7 @@
       "next_unit_start_va": 4619268,
       "first_build_comparison": {
         "path": "/root/.ai-tmp/nemu-input-unit-map.beo7bzx0/reference/Input.dll",
-        "start_va": 4619160,
+        "start_va": 4619216,
         "length": 56,
         "normalized_equal": true
       },
@@ -3389,8 +3389,8 @@
     "DInput",
     "UnitDecs",
     "RCP",
-    "ToolWin",
     "RichEdit",
+    "ToolWin",
     "ComStrs",
     "Buttons",
     "ExtDlgs",
@@ -3456,8 +3456,8 @@
     "Forms",
     "DInput",
     "ListActns",
-    "RichEdit",
     "ToolWin",
+    "RichEdit",
     "Buttons",
     "ExtDlgs",
     "Mapi",
@@ -3583,8 +3583,8 @@
       "DInput",
       "UnitDecs",
       "RCP",
-      "ToolWin",
       "RichEdit",
+      "ToolWin",
       "ComStrs",
       "Buttons"
     ],
@@ -3605,6 +3605,14 @@
     "RTL/VCL nontrivial initialization tails are normalized against the exact completed debugger reference. DInput tail bounds include the final DLL/API-name strings. All form VMTs and published methods lie in the assigned unit spans.",
     "BSS/DATA contributions use the source-built unit lengths in original CODE order, with every available BSS initializer counter checked and matched-body relocation observations validating original storage positions. Field-level data references remain address identity evidence rather than proof of whole-file equality.",
     "Whole-unit normalized comparisons can lose disassembly synchronization inside embedded data; false values are diagnostic, not proof that instructions differ. MultiMon was compared at all 12 mapped routine boundaries.",
-    "MultiMon is a reconstructed library variant: both monitor-location fallback conditions use AND, and GetMonitorInfo storage/body/initializer order is A, W, unsuffixed. Stock RTM/U1/U2/standalone-RTL-update sources all differ."
-  ]
+    "MultiMon is a reconstructed library variant: both monitor-location fallback conditions use AND, and GetMonitorInfo storage/body/initializer order is A, W, unsuffixed. Stock RTM/U1/U2/standalone-RTL-update sources all differ.",
+    "The initial unit map assigned the indistinguishable RichEdit/ToolWin 56-byte contributions in reverse. Full byte equality with ordinary ComCtrls dependencies establishes the reconstructed identities RichEdit=0x467B94 and ToolWin=0x467BCC. Earlier reference comparison addresses still refer to the originally named reference units; only inferred target identities were corrected."
+  ],
+  "final_identity_validation": {
+    "image": "/root/.ai-tmp/nemu-input-order.87s1jdjo/rcp_interface_cached/Input.dll",
+    "sha256": "2c0fb513c6c34115ef070c9f33767f7cf15d28de4becbd74bd90fe515e496298",
+    "map": "/root/.ai-tmp/nemu-input-order.87s1jdjo/rcp_interface_cached/Input.map",
+    "full_file_equal": true,
+    "dependency_evidence": "analysis/input-dependency-recovery.json"
+  }
 }

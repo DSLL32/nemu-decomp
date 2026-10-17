@@ -1,0 +1,341 @@
+{
+  "target": "master/Plugin/Input.dll",
+  "target_sha256": "2c0fb513c6c34115ef070c9f33767f7cf15d28de4becbd74bd90fe515e496298",
+  "compiler": {
+    "path": "toolchains/d6u2/bin/dcc32-personal.exe",
+    "sha256": "0a41eb4d0d730109ab826bfd89a2052314ada7429ed127b1e0067c3aa174dbb6",
+    "reported_version": "Borland Delphi 14.0"
+  },
+  "scope": "Explanation of compiler-generated initialization and PACKAGEINFO order. Function labels below are inferred descriptions, not recovered compiler symbols.",
+  "compiler_evidence": [
+    {
+      "va": "0x0042BF18",
+      "role": "Find or create implicit import in current compilation unit",
+      "details": "Searches current unit +0x5C list by imported unit identity and optional name. New node is prepended at 0x0042C015..0x0042C02B: node.next := unit.imports; unit.imports := node. Existing imports keep their positions."
+    },
+    {
+      "va": "0x0040DDF4",
+      "role": "Reverse import-list traversal for initialization",
+      "details": "Recurses to import.next at +0x18 before visiting import.unit at +0x14."
+    },
+    {
+      "va": "0x0040DEC0",
+      "role": "Initialization dependency traversal",
+      "details": "Uses visited bit 0x40 in unit flags at +0x0E; traverses the unit import list in reverse order, then emits the unit initialization/finalization entry via 0x0040DE10."
+    },
+    {
+      "va": "0x0040DE10",
+      "role": "Initialization entry emission",
+      "details": "Calls 0x0042BF18 to import the referenced unit into the main compilation unit; consequently initialization creates implicit main-unit imports in reverse initialization order."
+    },
+    {
+      "va": "0x0040DD20",
+      "role": "PACKAGEINFO recursive unit emission",
+      "details": "Checks and sets visited bit 0x40, emits the unit first via 0x0040DCA0, then follows its +0x5C import list forward, using node.next at +0x18."
+    },
+    {
+      "va": "0x0040DD8C",
+      "role": "PACKAGEINFO unit-list wrapper",
+      "details": "Counts and then writes the main unit followed by preorder traversal of its forward import list."
+    },
+    {
+      "va": "0x0040E258",
+      "role": "Initialization and PACKAGEINFO construction sequence",
+      "details": "Initialization generation at 0x0040E309 precedes PACKAGEINFO emission at 0x0040E3BC. PACKAGEINFO therefore observes implicit imports prepended during initialization."
+    }
+  ],
+  "ordering_rules": {
+    "initialization": "Postorder DFS over reversed in-memory import lists, with per-unit deduplication.",
+    "packageinfo": "Main unit first, then preorder DFS over forward in-memory import lists, with per-unit deduplication.",
+    "cached_dcu_import_order": "For the inspected Delphi 6 DCUs, in-memory import order is reverse physical order of imported-unit records (tags 0x64 and 0x65, followed by a short unit name and checksum).",
+    "main_roots": "Explicit DPR imports are in reverse declaration order. Symbol references can add implicit imports; this Input source adds Forms and ComCtrls. Initialization then prepends every referenced unit not already imported.",
+    "root_selection": "The last initialized implicit unit becomes the first new main-unit root. This explains CheckLst-first versus ComStrs-first PACKAGEINFO without identifier-hash sorting.",
+    "name_hash": "PACKAGEINFO records contain the known weighted identifier hash, but that hash does not determine traversal order."
+  },
+  "direct_observations": [
+    "WineDbg breakpoint at compiler VA 0x0040DD8C exposes the main import list. Fully cached untrimmed source starts ComStrs,ExtActns,Mapi; deleting only UnitSettings.dcu starts CheckLst,ComStrs,ExtActns.",
+    "A graph predictor using the retained select_both_cached DCUs reproduces all 65 non-main PACKAGEINFO entries and all 65 non-main initialization entries exactly.",
+    "Reverse imported-unit DFS rooted at CheckLst reproduces original PACKAGEINFO entries 1 through 44. Additional roots ComStrs,ExtActns,Registry,MMSystem reproduce the entire original library-unit prefix through entry 56."
+  ],
+  "cache_recipe_evidence": {
+    "problem": "A plain compiler invocation can recompile stale units in memory without writing refreshed DCUs, so repeating it does not necessarily stabilize the cache.",
+    "observed_case": "settings_trim3_build",
+    "plain_link": "1722 source lines recompiled; no DCU hashes changed.",
+    "make_option": "-M recompiled the same 1722 lines and wrote UnitSelectInputDevices, UnitSettings, UnitWaitKey and UnitSensitivity DCUs.",
+    "next_link": "Only the 361-line DPR compiled; subsequent ordinary and -M builds remained stable.",
+    "implication": "Use the compiler build/make workflow to establish consistent DCUs, then verify a stable relink. The number of make passes depends on cyclic dependency invalidation; do not assume one pass is universally sufficient."
+  },
+  "root_permutation_proof": {
+    "case": "select_both_cached",
+    "initial_difference": "All file bytes matched except 8 initialization bytes: RCP and UnitDecs entries were reversed at indexes 56 and 57.",
+    "fixed_prefix": [
+      "System",
+      "SysInit",
+      "SysUtils",
+      "Windows",
+      "Classes",
+      "Registry"
+    ],
+    "candidate_project_units": [
+      "DInput",
+      "UnitSettings",
+      "UnitDIStuff",
+      "UnitSelectInputDevices",
+      "UnitDecs",
+      "RCP",
+      "UnitAdaptoid",
+      "UnitSensitivity",
+      "UnitWaitKey"
+    ],
+    "result": "No permutation of the nine project units matches the target initialization order with this fixed DCU graph.",
+    "proof": "Prefix pruning forces DInput first. Settings next visits RCP before UnitDecs at index 56. DIStuff or Decs next emits Decs too early at index 47. Select next emits CheckLst too early at index 47. Sensitivity next emits itself at index 56. Every other next root also violates the required prefix. Thus none can extend to a complete solution.",
+    "limits": "This proves impossibility for the stated fixed graph and prefix, not uniqueness of original source."
+  },
+  "matching_source_dependency": {
+    "change": "RCP imports UnitDecs, while UnitSettings interface lists RCP before UnitDecs.",
+    "effect": "Preserves CODE/data placement and places UnitDecs before RCP in initialization, eliminating the final 8 differing bytes.",
+    "nonuniqueness": "Both an interface and an implementation uses UnitDecs in RCP produce the exact original DLL. The binary establishes a dependency-order requirement, not a unique original placement of the uses clause.",
+    "verification": [
+      {
+        "scratch_case": "/root/.ai-tmp/nemu-input-order.87s1jdjo/rcp_interface_cached",
+        "sha256": "2c0fb513c6c34115ef070c9f33767f7cf15d28de4becbd74bd90fe515e496298",
+        "byte_count": 634880,
+        "whole_file_equal": true
+      },
+      {
+        "scratch_case": "/root/.ai-tmp/nemu-input-order.87s1jdjo/rcp_implementation_make2",
+        "sha256": "2c0fb513c6c34115ef070c9f33767f7cf15d28de4becbd74bd90fe515e496298",
+        "byte_count": 634880,
+        "whole_file_equal": true
+      }
+    ]
+  },
+  "scratch_evidence": {
+    "directory": "/root/.ai-tmp/input-package-traversal.3Nh0LB",
+    "compiler_disassembly": "dcc-package.asm",
+    "cache_pass_report": "trim3-cache-report.json",
+    "root_solver_report": "select-both-roots.json",
+    "root_solver_script": "solve_roots.py",
+    "debugger_root_lists": [
+      "delete-cached-debug-root.log",
+      "delete-settings-debug-root.log",
+      "trim3-cache-debug-root.log"
+    ],
+    "note": "Debugger root-list probes altered only scratch compiler execution; they are observations, not the build process."
+  },
+  "selected_dependency_clauses": {
+    "Input.dpr": [
+      "uses\n  SysUtils,\n  Windows,\n  Classes,\n  Registry,\n  DInput in 'DInput.pas',\n  UnitSettings in 'UnitSettings.pas',\n  UnitDIStuff in 'UnitDIStuff.pas',\n  UnitSelectInputDevices in 'UnitSelectInputDevices.pas',\n  UnitDecs in 'UnitDecs.pas',\n  RCP in 'RCP.pas',\n  UnitAdaptoid in 'UnitAdaptoid.pas',\n  UnitSensitivity in 'UnitSensitivity.pas',\n  UnitWaitKey in 'UnitWaitKey.pas';"
+    ],
+    "DInput.pas": [
+      "uses Windows, MMSystem;",
+      "uses SysUtils, Forms;"
+    ],
+    "RCP.pas": [
+      "uses UnitDecs;"
+    ],
+    "UnitDecs.pas": [
+      "uses Windows;"
+    ],
+    "UnitDIStuff.pas": [
+      "uses Windows, Forms, DInput, UnitSettings, UnitDecs;",
+      "uses SysUtils, Classes, Registry;"
+    ],
+    "UnitSettings.pas": [
+      "uses\n  DInput, RCP, UnitDecs, Windows, Messages, SysUtils, Classes, Graphics, Controls, Forms, Dialogs,\n  StdCtrls, ExtCtrls, Menus, ComCtrls;",
+      "uses UnitSelectInputDevices, UnitDIStuff, UnitAdaptoid, UnitSensitivity, UnitWaitKey, Registry;"
+    ],
+    "UnitSelectInputDevices.pas": [
+      "uses\n  UnitDecs, RCP, Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,\n  Dialogs, StdCtrls, ExtCtrls, ComCtrls, CheckLst;",
+      "uses Registry, UnitDIStuff, UnitSettings, DInput;"
+    ],
+    "UnitSensitivity.pas": [
+      "uses\n  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,\n  Dialogs, StdCtrls, ExtCtrls, ComCtrls;"
+    ],
+    "UnitWaitKey.pas": [
+      "uses\n  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,\n  Dialogs, StdCtrls, ExtCtrls, Buttons;",
+      "uses UnitDIStuff, DInput;"
+    ],
+    "UnitAdaptoid.pas": [
+      "uses Windows;",
+      "uses SysUtils;"
+    ]
+  },
+  "source_inference_limits": [
+    "The matching uses clauses are a reconstruction constrained by application references, imported-unit flags, unit CODE placement, initialization order, and PACKAGEINFO traversal. The binary does not uniquely recover unused imports or interface-versus-implementation placement.",
+    "SelectInputDevices owns the CheckLst component dependency; removing generic unused CheckLst imports from Settings, WaitKey and Sensitivity avoids premature initialization. Settings imports SelectInputDevices before DIStuff in its implementation; SelectInputDevices then imports DIStuff, naturally emitting the original CheckLst/DIStuff/Select code order.",
+    "The target flags require Forms, ComCtrls, CheckLst and ToolWin to be implicit imports (flag16), and MMSystem to be weak/original-weak/implicit (flag28). They therefore cannot be direct project imports in the reconstructed DPR.",
+    "The original empty RichEdit/ToolWin contributions were initially assigned opposite names. A normal ComCtrls import emits RichEdit at0x467B94, ToolWin at0x467BCC, and cached initialization visits ToolWin before RichEdit. The exact source build resolves that reconstruction ambiguity.",
+    "The shared dialogs/debugger UnitDecs interface imports RCP. Testing that direction in Input produced exact PACKAGEINFO but1423 differing file bytes due reversed CODE/data placement. The matching Input dependency imports UnitDecs from RCP; both interface and implementation placements match, so neither exact historical placement is asserted."
+  ],
+  "fresh_source_only_proof": {
+    "directory": "/root/.ai-tmp/nemu-input-order.87s1jdjo",
+    "starting_inputs": "Only Pascal units, DPR and compiled DFM resources copied into a new empty case directory; no DLL, MAP or DCUs copied.",
+    "wine_prefix": "/root/.ai-tmp/nemu-input-order.87s1jdjo/wine",
+    "post_link_change": "Only standard resource-directory timestamp stamping to2002-07-26T23:26:24. No code, data, initialization or PACKAGEINFO bytes patched.",
+    "passes": [
+      {
+        "case": "fresh_proof_build",
+        "argv": [
+          "python3",
+          "scripts/run_toolchain.py",
+          "d6u2",
+          "dcc32-personal",
+          "-Q",
+          "-B",
+          "-GD",
+          "Input.dpr"
+        ],
+        "compiled_source_lines": 3391,
+        "sha256": "90051aed7610937bb70fc85c5f0fbc00e8bde6eca181a391e01e458a0eecd498",
+        "whole_file_differences": 171,
+        "section_differences": {
+          "CODE": 70,
+          "DATA": 0,
+          "BSS": 0,
+          ".idata": 0,
+          ".edata": 0,
+          ".reloc": 0,
+          ".rsrc": 101
+        },
+        "dcu_sha256": {
+          "DInput.dcu": "afd7f77b2a56026e643bd7161f6ef628fff5db8408df5d9dc22645155150fa37",
+          "MultiMon.dcu": "c4c379c6de9ed1847d9c30185d145e2c92ec3f50717265a9c772c42d928b5978",
+          "RCP.dcu": "00c74453b394b487369d5c4921b3eec492913ab3244867ec304bcc39cc5dd198",
+          "UnitAdaptoid.dcu": "fedb5c49940f767013ae969152d34d1efc01f9cdf1016f7dacf6fc76ce4da3f1",
+          "UnitDIStuff.dcu": "e73d2f75c20054a39c4251ee1735476a3e0afe53613da768bfcfb534f4aeceeb",
+          "UnitDecs.dcu": "4a7792b2bceca03e1272c2837636d58a0de83f9ac5c37317be4618df14dbb2bd",
+          "UnitSelectInputDevices.dcu": "eaeb0c09948865592cdfe07929488a25f49dbb586f4379c952608d3f67443252",
+          "UnitSensitivity.dcu": "97a3da5931b8f1506914d325bae14057a29fcfecb21de7c73ae223826a37b9d3",
+          "UnitSettings.dcu": "41b4add6d7ce2dacf7bd61595563712fd5734327ad30da25b25332e7e36df420",
+          "UnitWaitKey.dcu": "fff3b4630e1dceaf89c8bbbeddeecc89300181889efce30faa1026ba75e5acab"
+        }
+      },
+      {
+        "case": "fresh_proof_make",
+        "argv": [
+          "python3",
+          "scripts/run_toolchain.py",
+          "d6u2",
+          "dcc32-personal",
+          "-Q",
+          "-M",
+          "-GD",
+          "Input.dpr"
+        ],
+        "compiled_source_lines": 361,
+        "sha256": "2c0fb513c6c34115ef070c9f33767f7cf15d28de4becbd74bd90fe515e496298",
+        "whole_file_differences": 0,
+        "section_differences": {
+          "CODE": 0,
+          "DATA": 0,
+          "BSS": 0,
+          ".idata": 0,
+          ".edata": 0,
+          ".reloc": 0,
+          ".rsrc": 0
+        },
+        "dcu_sha256": {
+          "DInput.dcu": "afd7f77b2a56026e643bd7161f6ef628fff5db8408df5d9dc22645155150fa37",
+          "MultiMon.dcu": "c4c379c6de9ed1847d9c30185d145e2c92ec3f50717265a9c772c42d928b5978",
+          "RCP.dcu": "00c74453b394b487369d5c4921b3eec492913ab3244867ec304bcc39cc5dd198",
+          "UnitAdaptoid.dcu": "fedb5c49940f767013ae969152d34d1efc01f9cdf1016f7dacf6fc76ce4da3f1",
+          "UnitDIStuff.dcu": "e73d2f75c20054a39c4251ee1735476a3e0afe53613da768bfcfb534f4aeceeb",
+          "UnitDecs.dcu": "4a7792b2bceca03e1272c2837636d58a0de83f9ac5c37317be4618df14dbb2bd",
+          "UnitSelectInputDevices.dcu": "eaeb0c09948865592cdfe07929488a25f49dbb586f4379c952608d3f67443252",
+          "UnitSensitivity.dcu": "97a3da5931b8f1506914d325bae14057a29fcfecb21de7c73ae223826a37b9d3",
+          "UnitSettings.dcu": "41b4add6d7ce2dacf7bd61595563712fd5734327ad30da25b25332e7e36df420",
+          "UnitWaitKey.dcu": "fff3b4630e1dceaf89c8bbbeddeecc89300181889efce30faa1026ba75e5acab"
+        }
+      },
+      {
+        "case": "fresh_proof_make2",
+        "argv": [
+          "python3",
+          "scripts/run_toolchain.py",
+          "d6u2",
+          "dcc32-personal",
+          "-Q",
+          "-M",
+          "-GD",
+          "Input.dpr"
+        ],
+        "compiled_source_lines": 361,
+        "sha256": "2c0fb513c6c34115ef070c9f33767f7cf15d28de4becbd74bd90fe515e496298",
+        "whole_file_differences": 0,
+        "section_differences": {
+          "CODE": 0,
+          "DATA": 0,
+          "BSS": 0,
+          ".idata": 0,
+          ".edata": 0,
+          ".reloc": 0,
+          ".rsrc": 0
+        },
+        "dcu_sha256": {
+          "DInput.dcu": "afd7f77b2a56026e643bd7161f6ef628fff5db8408df5d9dc22645155150fa37",
+          "MultiMon.dcu": "c4c379c6de9ed1847d9c30185d145e2c92ec3f50717265a9c772c42d928b5978",
+          "RCP.dcu": "00c74453b394b487369d5c4921b3eec492913ab3244867ec304bcc39cc5dd198",
+          "UnitAdaptoid.dcu": "fedb5c49940f767013ae969152d34d1efc01f9cdf1016f7dacf6fc76ce4da3f1",
+          "UnitDIStuff.dcu": "e73d2f75c20054a39c4251ee1735476a3e0afe53613da768bfcfb534f4aeceeb",
+          "UnitDecs.dcu": "4a7792b2bceca03e1272c2837636d58a0de83f9ac5c37317be4618df14dbb2bd",
+          "UnitSelectInputDevices.dcu": "eaeb0c09948865592cdfe07929488a25f49dbb586f4379c952608d3f67443252",
+          "UnitSensitivity.dcu": "97a3da5931b8f1506914d325bae14057a29fcfecb21de7c73ae223826a37b9d3",
+          "UnitSettings.dcu": "41b4add6d7ce2dacf7bd61595563712fd5734327ad30da25b25332e7e36df420",
+          "UnitWaitKey.dcu": "fff3b4630e1dceaf89c8bbbeddeecc89300181889efce30faa1026ba75e5acab"
+        }
+      },
+      {
+        "case": "fresh_proof_cached",
+        "argv": [
+          "python3",
+          "scripts/run_toolchain.py",
+          "d6u2",
+          "dcc32-personal",
+          "-Q",
+          "-GD",
+          "Input.dpr"
+        ],
+        "compiled_source_lines": 361,
+        "sha256": "2c0fb513c6c34115ef070c9f33767f7cf15d28de4becbd74bd90fe515e496298",
+        "whole_file_differences": 0,
+        "section_differences": {
+          "CODE": 0,
+          "DATA": 0,
+          "BSS": 0,
+          ".idata": 0,
+          ".edata": 0,
+          ".reloc": 0,
+          ".rsrc": 0
+        },
+        "dcu_sha256": {
+          "DInput.dcu": "afd7f77b2a56026e643bd7161f6ef628fff5db8408df5d9dc22645155150fa37",
+          "MultiMon.dcu": "c4c379c6de9ed1847d9c30185d145e2c92ec3f50717265a9c772c42d928b5978",
+          "RCP.dcu": "00c74453b394b487369d5c4921b3eec492913ab3244867ec304bcc39cc5dd198",
+          "UnitAdaptoid.dcu": "fedb5c49940f767013ae969152d34d1efc01f9cdf1016f7dacf6fc76ce4da3f1",
+          "UnitDIStuff.dcu": "e73d2f75c20054a39c4251ee1735476a3e0afe53613da768bfcfb534f4aeceeb",
+          "UnitDecs.dcu": "4a7792b2bceca03e1272c2837636d58a0de83f9ac5c37317be4618df14dbb2bd",
+          "UnitSelectInputDevices.dcu": "eaeb0c09948865592cdfe07929488a25f49dbb586f4379c952608d3f67443252",
+          "UnitSensitivity.dcu": "97a3da5931b8f1506914d325bae14057a29fcfecb21de7c73ae223826a37b9d3",
+          "UnitSettings.dcu": "41b4add6d7ce2dacf7bd61595563712fd5734327ad30da25b25332e7e36df420",
+          "UnitWaitKey.dcu": "fff3b4630e1dceaf89c8bbbeddeecc89300181889efce30faa1026ba75e5acab"
+        }
+      }
+    ]
+  },
+  "whole_file_verification": {
+    "command": [
+      "python3",
+      "scripts/verify_input.py",
+      "/root/.ai-tmp/nemu-input-order.87s1jdjo/rcp_interface_cached/Input.dll",
+      "--map",
+      "/root/.ai-tmp/nemu-input-order.87s1jdjo/rcp_interface_cached/Input.map"
+    ],
+    "forms_exact": "4/4",
+    "application_raw_blocks_exact": "44/44",
+    "unit_layouts_exact": "66/66",
+    "unit_bytes_exact": "66/66",
+    "whole_file_differences": 0,
+    "full_dll_byte_exact": true
+  }
+}
