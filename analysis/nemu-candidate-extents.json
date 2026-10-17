@@ -1,7 +1,7 @@
 {
-  "rebuilt_image": "/root/.ai-tmp/nemu-complete-relocs.ko06ekj6/nemu64.exe",
-  "rebuilt_image_sha256": "4f611be1796bf4fd8930fa7c179973b3b310684948bd334d2795d5456c361247",
-  "rebuilt_map_sha256": "0b991f03eb636398a3dc08f83a781163cb7735d34477990ac5a6c950355bb18f",
+  "rebuilt_image": "/root/.ai-tmp/nemu-complete-relocs.kvcg2ypy/nemu64.exe",
+  "rebuilt_image_sha256": "1c44cc1a0d6f5243d4d860e5397b3c189b87aa48c87fd447963a87a9f95bfdcb",
+  "rebuilt_map_sha256": "fa602cec97eaeaefebea8c6c55762a3a91d1bff0f732c2e36e67b93980bcf343",
   "measurement_script": "scripts/measure_nemu_extents.py",
   "measurement_script_sha256": "3e4b5ea132e05fa40900c10e2263051dc2a65eab4ffbd393d14babf77227154e",
   "comparison_tool_sha256": "68a389f46698cbaea256019bf4d03f2546027d0a6475ec80207690c3894b6b5b",
@@ -12,11 +12,11 @@
     },
     {
       "path": "analysis/nemu-cpu-control.json",
-      "sha256": "cabf55cb5448b8eb08af7a198c55b9ab02ab5e04bfc0821c64a64ef98a3b4577"
+      "sha256": "044e8e159d0c73993065d61a20bd746bd60d528ed46ea84ae5ac204b42cdac9e"
     },
     {
       "path": "analysis/nemu-cpu.json",
-      "sha256": "cb0d676174fbc0d0e6128811f0428ac5d296cfc15977aae6d1b5d7286255454c"
+      "sha256": "24b9206b1e36035e2751530423feb530ab165f38bc6c56815ea9836a21c3cfda"
     },
     {
       "path": "analysis/nemu-dynarec-fpu.json",
@@ -32,7 +32,7 @@
     },
     {
       "path": "analysis/nemu-dynarec.json",
-      "sha256": "720e5ddceb9fad4126e6bd0b6b75138754aa3d230e71b54533a54210a04a6852"
+      "sha256": "282a78bb1e08e32f450c160b3afba655b4aee1e4808f17084142d18669097358"
     },
     {
       "path": "analysis/nemu-frontend.json",
@@ -40,7 +40,7 @@
     },
     {
       "path": "analysis/nemu-memory.json",
-      "sha256": "c2f44116cccba2e60710543e491ac32d6afdfd2eeea33bc26819275c32094bd3"
+      "sha256": "9a1bbe2ff1c9d78d167f967e4b10e6bd22d2d1099e02a1dcef897c170d7b2c8b"
     },
     {
       "path": "analysis/nemu-pif.json",
@@ -48,11 +48,11 @@
     },
     {
       "path": "analysis/nemu-plugins.json",
-      "sha256": "e95c970e1dc458b605494e6ce3ccf4742b745692a7dee5766bbc4b611fe1832f"
+      "sha256": "86e468d5664e2b2f6daccda903ef2920031b1bc62b62ba438056c385bd1e2831"
     },
     {
       "path": "analysis/nemu-rsp.json",
-      "sha256": "158ff38fcaa289aa7ed3b60bf25312b89d71ed58013af4e531c54ba930dabd75"
+      "sha256": "886f4ded43871e797ed2705b90b23006e20c2f2a7334c0c1b2ae51a0700da8ed"
     }
   ],
   "functions": [
@@ -61,7 +61,7 @@
       "symbol": "?WriteStateChunk@@YAXPAU_iobuf@@IPBXI_N@Z",
       "original_va": 4299728,
       "original_size": 288,
-      "rebuilt_va": 4299584,
+      "rebuilt_va": 4299616,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 275,
       "map_block_size": 288,
@@ -90,7 +90,7 @@
       "symbol": "?SaveState@@YAXXZ",
       "original_va": 4300016,
       "original_size": 832,
-      "rebuilt_va": 4299872,
+      "rebuilt_va": 4299904,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 820,
       "map_block_size": 832,
@@ -118,7 +118,7 @@
       "symbol": "?SaveMovieState@@YAXXZ",
       "original_va": 4300848,
       "original_size": 176,
-      "rebuilt_va": 4300704,
+      "rebuilt_va": 4300736,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 174,
       "map_block_size": 176,
@@ -136,13 +136,13 @@
       "symbol": "?LoadState@@YA_N_N@Z",
       "original_va": 4301024,
       "original_size": 1344,
-      "rebuilt_va": 4300880,
+      "rebuilt_va": 4300912,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 1240,
       "map_block_size": 1344,
       "tables": [
         {
-          "address": "0x41a490",
+          "address": "0x41a4b0",
           "entries": 38,
           "size": 152
         }
@@ -151,7 +151,7 @@
       "seh_scope_entries": [],
       "extent_verified": false,
       "errors": [
-        "Nonpadding after measured extent: 0x41a528 add byte ptr [ecx], al"
+        "Nonpadding after measured extent: 0x41a548 add byte ptr [ecx], al"
       ]
     },
     {
@@ -159,7 +159,7 @@
       "symbol": "?FlushStateSaves@@YAXXZ",
       "original_va": 4302368,
       "original_size": 128,
-      "rebuilt_va": 4302224,
+      "rebuilt_va": 4302256,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 113,
       "map_block_size": 128,
@@ -190,7 +190,7 @@
       "symbol": "?WindowHeight@@YAHPAUHWND__@@@Z",
       "original_va": 4302496,
       "original_size": 32,
-      "rebuilt_va": 4302352,
+      "rebuilt_va": 4302384,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 27,
       "map_block_size": 32,
@@ -211,7 +211,7 @@
       "symbol": "?SetStatusText@@YAXIPBD@Z",
       "original_va": 4302528,
       "original_size": 32,
-      "rebuilt_va": 4302384,
+      "rebuilt_va": 4302416,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 21,
       "map_block_size": 32,
@@ -238,7 +238,7 @@
       "symbol": "?NetplayMessage@@YGXPBD@Z",
       "original_va": 4302576,
       "original_size": 32,
-      "rebuilt_va": 4302432,
+      "rebuilt_va": 4302464,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 28,
       "map_block_size": 32,
@@ -258,7 +258,7 @@
       "symbol": "?RebuildFavouritesMenu@@YAXXZ",
       "original_va": 4302864,
       "original_size": 528,
-      "rebuilt_va": 4302720,
+      "rebuilt_va": 4302752,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 515,
       "map_block_size": 528,
@@ -287,13 +287,13 @@
       "symbol": "?ShowFavouritesMenu@@YAXXZ",
       "original_va": 4303392,
       "original_size": 560,
-      "rebuilt_va": 4303248,
+      "rebuilt_va": 4303280,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 560,
       "map_block_size": 560,
       "tables": [
         {
-          "address": "0x41abb0",
+          "address": "0x41abd0",
           "entries": 4,
           "size": 16
         }
@@ -308,7 +308,7 @@
       "symbol": "?ShowDriveMenu@@YAXXZ",
       "original_va": 4303952,
       "original_size": 160,
-      "rebuilt_va": 4303808,
+      "rebuilt_va": 4303840,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 157,
       "map_block_size": 160,
@@ -327,7 +327,7 @@
       "symbol": "?RemoveFavouritesDialogProc@@YGHPAUHWND__@@IIJ@Z",
       "original_va": 4317328,
       "original_size": 752,
-      "rebuilt_va": 4317184,
+      "rebuilt_va": 4317216,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 743,
       "map_block_size": 752,
@@ -352,7 +352,7 @@
       "symbol": "?AboutDialogProc@@YGHPAUHWND__@@IIJ@Z",
       "original_va": 4318080,
       "original_size": 160,
-      "rebuilt_va": 4317936,
+      "rebuilt_va": 4317968,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 153,
       "map_block_size": 160,
@@ -375,7 +375,7 @@
       "symbol": "?DisclaimerDialogProc@@YGHPAUHWND__@@IIJ@Z",
       "original_va": 4318240,
       "original_size": 160,
-      "rebuilt_va": 4318096,
+      "rebuilt_va": 4318128,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 150,
       "map_block_size": 160,
@@ -401,7 +401,7 @@
       "symbol": "?ReadIniString@@YAXPBD00PAD0@Z",
       "original_va": 4318400,
       "original_size": 32,
-      "rebuilt_va": 4318256,
+      "rebuilt_va": 4318288,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 25,
       "map_block_size": 32,
@@ -424,7 +424,7 @@
       "symbol": "?ReadIniInteger@@YAHPBD0H0@Z",
       "original_va": 4318432,
       "original_size": 80,
-      "rebuilt_va": 4318288,
+      "rebuilt_va": 4318320,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 69,
       "map_block_size": 80,
@@ -451,7 +451,7 @@
       "symbol": "?WriteIniString@@YAXPBD000@Z",
       "original_va": 4318512,
       "original_size": 16,
-      "rebuilt_va": 4318368,
+      "rebuilt_va": 4318400,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 15,
       "map_block_size": 16,
@@ -468,7 +468,7 @@
       "symbol": "?WriteIniInteger@@YAXPBD0H0@Z",
       "original_va": 4318528,
       "original_size": 64,
-      "rebuilt_va": 4318384,
+      "rebuilt_va": 4318416,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 49,
       "map_block_size": 64,
@@ -499,7 +499,7 @@
       "symbol": "?InitializeIniPaths@@YAXXZ",
       "original_va": 4318592,
       "original_size": 160,
-      "rebuilt_va": 4318448,
+      "rebuilt_va": 4318480,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 151,
       "map_block_size": 160,
@@ -524,7 +524,7 @@
       "symbol": "?ReplaceExtension@@YAXPADPBD@Z",
       "original_va": 4318752,
       "original_size": 48,
-      "rebuilt_va": 4318608,
+      "rebuilt_va": 4318640,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 48,
       "map_block_size": 48,
@@ -539,7 +539,7 @@
       "symbol": "?ReadRomInteger@@YAHPBDH@Z",
       "original_va": 4318800,
       "original_size": 64,
-      "rebuilt_va": 4318656,
+      "rebuilt_va": 4318688,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 56,
       "map_block_size": 64,
@@ -563,7 +563,7 @@
       "symbol": "?ReadRomString@@YAXPBD0PAD@Z",
       "original_va": 4318864,
       "original_size": 96,
-      "rebuilt_va": 4318720,
+      "rebuilt_va": 4318752,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 84,
       "map_block_size": 96,
@@ -591,7 +591,7 @@
       "symbol": "?ReadRomConfiguration@@YAXXZ",
       "original_va": 4318960,
       "original_size": 656,
-      "rebuilt_va": 4318816,
+      "rebuilt_va": 4318848,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 655,
       "map_block_size": 656,
@@ -608,7 +608,7 @@
       "symbol": "?SaveBrowserSettings@@YAXXZ",
       "original_va": 4319616,
       "original_size": 416,
-      "rebuilt_va": 4319472,
+      "rebuilt_va": 4319504,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 416,
       "map_block_size": 416,
@@ -623,7 +623,7 @@
       "symbol": "?ReadZipRom@@YA_NPBD_NI@Z",
       "original_va": 4320032,
       "original_size": 800,
-      "rebuilt_va": 4319888,
+      "rebuilt_va": 4319920,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 797,
       "map_block_size": 800,
@@ -642,7 +642,7 @@
       "symbol": "?FreeRomImage@@YAXXZ",
       "original_va": 4320832,
       "original_size": 80,
-      "rebuilt_va": 4320688,
+      "rebuilt_va": 4320720,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 70,
       "map_block_size": 80,
@@ -668,7 +668,7 @@
       "symbol": "?ReadRomImage@@YA_NPAUHWND__@@PBD_NI@Z",
       "original_va": 4320912,
       "original_size": 1312,
-      "rebuilt_va": 4320768,
+      "rebuilt_va": 4320800,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 1306,
       "map_block_size": 1312,
@@ -690,13 +690,13 @@
       "symbol": "?LoadRom@@YA_NPAUHWND__@@PBD@Z",
       "original_va": 4322224,
       "original_size": 512,
-      "rebuilt_va": 4322080,
+      "rebuilt_va": 4322112,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 480,
       "map_block_size": 512,
       "tables": [
         {
-          "address": "0x41f4f4",
+          "address": "0x41f514",
           "entries": 3,
           "size": 12
         }
@@ -705,7 +705,7 @@
       "seh_scope_entries": [],
       "extent_verified": false,
       "errors": [
-        "Nonpadding after measured extent: 0x41f500 add byte ptr [edx], al"
+        "Nonpadding after measured extent: 0x41f520 add byte ptr [edx], al"
       ]
     },
     {
@@ -713,13 +713,13 @@
       "symbol": "?CompareBrowserItems@@YGHJJJ@Z",
       "original_va": 4322736,
       "original_size": 720,
-      "rebuilt_va": 4322592,
+      "rebuilt_va": 4322624,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 700,
       "map_block_size": 720,
       "tables": [
         {
-          "address": "0x41f7c4",
+          "address": "0x41f7e4",
           "entries": 6,
           "size": 24
         }
@@ -728,7 +728,7 @@
       "seh_scope_entries": [],
       "extent_verified": false,
       "errors": [
-        "Nonpadding after measured extent: 0x41f7dc add byte ptr [ecx], al"
+        "Nonpadding after measured extent: 0x41f7fc add byte ptr [ecx], al"
       ]
     },
     {
@@ -736,7 +736,7 @@
       "symbol": "?RefreshRomBrowser@@YAXXZ",
       "original_va": 4323456,
       "original_size": 1648,
-      "rebuilt_va": 4323312,
+      "rebuilt_va": 4323344,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 1638,
       "map_block_size": 1648,
@@ -1277,20 +1277,16 @@
       "original_size": 280,
       "rebuilt_va": 4234896,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
-      "rebuilt_size": 276,
+      "rebuilt_size": 280,
       "map_block_size": 288,
       "tables": [
         {
-          "address": "0x409f94",
+          "address": "0x409f98",
           "entries": 4,
           "size": 16
         }
       ],
       "trailing_padding": [
-        "nop",
-        "nop",
-        "nop",
-        "nop",
         "nop",
         "nop",
         "nop",
@@ -11636,7 +11632,7 @@
       "symbol": "?DynarecNoOperation@@YAXXZ",
       "original_va": 4325104,
       "original_size": 16,
-      "rebuilt_va": 4344880,
+      "rebuilt_va": 4344896,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 1,
       "map_block_size": 16,
@@ -11667,7 +11663,7 @@
       "symbol": "?HashSignatureInstruction@@YAIIIIPBI@Z",
       "original_va": 4325120,
       "original_size": 160,
-      "rebuilt_va": 4324960,
+      "rebuilt_va": 4324992,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 148,
       "map_block_size": 160,
@@ -11695,18 +11691,12 @@
       "symbol": "?SaveFunctionSignatures@@YAXPAI@Z",
       "original_va": 4325280,
       "original_size": 672,
-      "rebuilt_va": 4325120,
+      "rebuilt_va": 4325152,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
-      "rebuilt_size": 681,
-      "map_block_size": 688,
+      "rebuilt_size": 671,
+      "map_block_size": 672,
       "tables": [],
       "trailing_padding": [
-        "nop",
-        "nop",
-        "nop",
-        "nop",
-        "nop",
-        "nop",
         "nop"
       ],
       "seh_scope_entries": [],
@@ -11718,7 +11708,7 @@
       "symbol": "?ResetRuntimeReplacements@@YAXXZ",
       "original_va": 4325952,
       "original_size": 48,
-      "rebuilt_va": 4325808,
+      "rebuilt_va": 4325824,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 33,
       "map_block_size": 48,
@@ -11749,7 +11739,7 @@
       "symbol": "?FindRuntimeReplacement@@YAP6AXXZI@Z",
       "original_va": 4326000,
       "original_size": 80,
-      "rebuilt_va": 4325856,
+      "rebuilt_va": 4325872,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 67,
       "map_block_size": 80,
@@ -11778,7 +11768,7 @@
       "symbol": "?EnablePIFSuccess@@YAXXZ",
       "original_va": 4326080,
       "original_size": 16,
-      "rebuilt_va": 4325936,
+      "rebuilt_va": 4325952,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 11,
       "map_block_size": 16,
@@ -11799,7 +11789,7 @@
       "symbol": "?ResizeMainWindow@@YAXIH@Z",
       "original_va": 4305200,
       "original_size": 400,
-      "rebuilt_va": 4305056,
+      "rebuilt_va": 4305088,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 394,
       "map_block_size": 400,
@@ -11821,7 +11811,7 @@
       "symbol": "?SetEmulationMenus@@YAXE@Z",
       "original_va": 4305728,
       "original_size": 608,
-      "rebuilt_va": 4305584,
+      "rebuilt_va": 4305616,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 604,
       "map_block_size": 608,
@@ -11841,7 +11831,7 @@
       "symbol": "?DrawStatePreview@@YAXPAUHWND__@@@Z",
       "original_va": 4307248,
       "original_size": 128,
-      "rebuilt_va": 4307104,
+      "rebuilt_va": 4307136,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 126,
       "map_block_size": 128,
@@ -11859,7 +11849,7 @@
       "symbol": "?StatePreviewHook@@YGIPAUHWND__@@IIJ@Z",
       "original_va": 4307376,
       "original_size": 144,
-      "rebuilt_va": 4307232,
+      "rebuilt_va": 4307264,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 143,
       "map_block_size": 144,
@@ -11876,7 +11866,7 @@
       "symbol": "_WinMain@16",
       "original_va": 4307520,
       "original_size": 1408,
-      "rebuilt_va": 4307376,
+      "rebuilt_va": 4307408,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 1393,
       "map_block_size": 1408,
@@ -11907,7 +11897,7 @@
       "symbol": "?CaptureStatePreview@@YAXXZ",
       "original_va": 4308928,
       "original_size": 368,
-      "rebuilt_va": 4308784,
+      "rebuilt_va": 4308816,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 356,
       "map_block_size": 368,
@@ -11935,23 +11925,23 @@
       "symbol": "?MainWindowCommand@@YAJPAUHWND__@@IIJH@Z",
       "original_va": 4309296,
       "original_size": 3968,
-      "rebuilt_va": 4309152,
+      "rebuilt_va": 4309184,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 3928,
       "map_block_size": 3968,
       "tables": [
         {
-          "address": "0x41cf3c",
+          "address": "0x41cf5c",
           "entries": 6,
           "size": 24
         },
         {
-          "address": "0x41cf64",
+          "address": "0x41cf84",
           "entries": 37,
           "size": 148
         },
         {
-          "address": "0x41cf98",
+          "address": "0x41cfb8",
           "entries": 24,
           "size": 96
         }
@@ -11960,7 +11950,7 @@
       "seh_scope_entries": [],
       "extent_verified": false,
       "errors": [
-        "Nonpadding after measured extent: 0x41cff8 add byte ptr [ecx], al"
+        "Nonpadding after measured extent: 0x41d018 add byte ptr [ecx], al"
       ]
     },
     {
@@ -11968,7 +11958,7 @@
       "symbol": "?AddToolbarButton@@YAXPAU_TBBUTTON@@PAHEHEH@Z",
       "original_va": 4313264,
       "original_size": 96,
-      "rebuilt_va": 4313120,
+      "rebuilt_va": 4313152,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 83,
       "map_block_size": 96,
@@ -11997,18 +11987,18 @@
       "symbol": "?MainWindowProc@@YGJPAUHWND__@@IIJ@Z",
       "original_va": 4313360,
       "original_size": 3968,
-      "rebuilt_va": 4313216,
+      "rebuilt_va": 4313248,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 3856,
       "map_block_size": 3968,
       "tables": [
         {
-          "address": "0x41df6c",
+          "address": "0x41df8c",
           "entries": 9,
           "size": 36
         },
         {
-          "address": "0x41df80",
+          "address": "0x41dfa0",
           "entries": 4,
           "size": 16
         }
@@ -12017,7 +12007,7 @@
       "seh_scope_entries": [],
       "extent_verified": false,
       "errors": [
-        "Nonpadding after measured extent: 0x41df90 add byte ptr [ebx], al"
+        "Nonpadding after measured extent: 0x41dfb0 add byte ptr [ebx], al"
       ]
     },
     {
@@ -12360,41 +12350,41 @@
       "original_size": 6368,
       "rebuilt_va": 4291584,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
-      "rebuilt_size": 6296,
-      "map_block_size": 6336,
+      "rebuilt_size": 6336,
+      "map_block_size": 6368,
       "tables": [
         {
-          "address": "0x4192b8",
+          "address": "0x4192e0",
           "entries": 8,
           "size": 32
         },
         {
-          "address": "0x4192f8",
+          "address": "0x419320",
           "entries": 7,
           "size": 28
         },
         {
-          "address": "0x419334",
+          "address": "0x41935c",
           "entries": 22,
           "size": 88
         },
         {
-          "address": "0x419350",
+          "address": "0x419378",
           "entries": 15,
           "size": 60
         },
         {
-          "address": "0x4193c4",
+          "address": "0x4193ec",
           "entries": 11,
           "size": 44
         },
         {
-          "address": "0x419418",
+          "address": "0x419440",
           "entries": 14,
           "size": 56
         },
         {
-          "address": "0x419484",
+          "address": "0x4194ac",
           "entries": 5,
           "size": 20
         }
@@ -12420,7 +12410,7 @@
       ],
       "extent_verified": false,
       "errors": [
-        "Nonpadding after measured extent: 0x419498 add byte ptr [esp + eax], al"
+        "Nonpadding after measured extent: 0x4194c0 add byte ptr [esp + eax], al"
       ]
     },
     {
@@ -12428,7 +12418,7 @@
       "symbol": "?WritePhysicalDoubleWord@@YGXIII@Z",
       "original_va": 4298064,
       "original_size": 48,
-      "rebuilt_va": 4297920,
+      "rebuilt_va": 4297952,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 34,
       "map_block_size": 48,
@@ -12458,7 +12448,7 @@
       "symbol": "?TranslateTLB@@YGIIE@Z",
       "original_va": 4298112,
       "original_size": 288,
-      "rebuilt_va": 4297968,
+      "rebuilt_va": 4298000,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 287,
       "map_block_size": 288,
@@ -12475,7 +12465,7 @@
       "symbol": "?FindCICInput@@YAXPAU_iobuf@@PBE@Z",
       "original_va": 4326096,
       "original_size": 112,
-      "rebuilt_va": 4325952,
+      "rebuilt_va": 4325968,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 98,
       "map_block_size": 112,
@@ -12505,7 +12495,7 @@
       "symbol": "?SaveCICInput@@YAXPBE@Z",
       "original_va": 4326208,
       "original_size": 96,
-      "rebuilt_va": 4326064,
+      "rebuilt_va": 4326080,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 87,
       "map_block_size": 96,
@@ -12530,7 +12520,7 @@
       "symbol": "?CICUseTable1@@YAHPBE@Z",
       "original_va": 4326304,
       "original_size": 128,
-      "rebuilt_va": 4326160,
+      "rebuilt_va": 4326176,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 122,
       "map_block_size": 128,
@@ -12552,7 +12542,7 @@
       "symbol": "?CIC6105Challenge@@YAXPAE@Z",
       "original_va": 4326432,
       "original_size": 384,
-      "rebuilt_va": 4326288,
+      "rebuilt_va": 4326304,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 370,
       "map_block_size": 384,
@@ -12582,7 +12572,7 @@
       "symbol": "?PIFDataCRC@@YAEPBE@Z",
       "original_va": 4326816,
       "original_size": 96,
-      "rebuilt_va": 4326672,
+      "rebuilt_va": 4326688,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 82,
       "map_block_size": 96,
@@ -12612,7 +12602,7 @@
       "symbol": "?InitializePIFCommandLengths@@YAXXZ",
       "original_va": 4326912,
       "original_size": 128,
-      "rebuilt_va": 4326768,
+      "rebuilt_va": 4326784,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 114,
       "map_block_size": 128,
@@ -12642,13 +12632,13 @@
       "symbol": "?ProcessPIF@@YAXXZ",
       "original_va": 4327040,
       "original_size": 1904,
-      "rebuilt_va": 4326896,
+      "rebuilt_va": 4326912,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 1904,
       "map_block_size": 1904,
       "tables": [
         {
-          "address": "0x420d48",
+          "address": "0x420d58",
           "entries": 6,
           "size": 24
         }
@@ -12663,7 +12653,7 @@
       "symbol": "?SaveEEPROM@@YAXII@Z",
       "original_va": 4328944,
       "original_size": 144,
-      "rebuilt_va": 4328800,
+      "rebuilt_va": 4328816,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 143,
       "map_block_size": 144,
@@ -12680,7 +12670,7 @@
       "symbol": "?SaveMemPack@@YAXII@Z",
       "original_va": 4329088,
       "original_size": 144,
-      "rebuilt_va": 4328944,
+      "rebuilt_va": 4328960,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 143,
       "map_block_size": 144,
@@ -12697,7 +12687,7 @@
       "symbol": "?RecordMovieInput@@YAXXZ",
       "original_va": 4329232,
       "original_size": 240,
-      "rebuilt_va": 4329088,
+      "rebuilt_va": 4329104,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 238,
       "map_block_size": 240,
@@ -12715,7 +12705,7 @@
       "symbol": "?PlayMovieInput@@YAXXZ",
       "original_va": 4329472,
       "original_size": 224,
-      "rebuilt_va": 4329328,
+      "rebuilt_va": 4329344,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 211,
       "map_block_size": 224,
@@ -12744,7 +12734,7 @@
       "symbol": "?StopMovie@@YAXXZ",
       "original_va": 4329696,
       "original_size": 64,
-      "rebuilt_va": 4329552,
+      "rebuilt_va": 4329568,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 53,
       "map_block_size": 64,
@@ -12771,7 +12761,7 @@
       "symbol": "?SaveSRAM@@YAXII@Z",
       "original_va": 4329760,
       "original_size": 144,
-      "rebuilt_va": 4329616,
+      "rebuilt_va": 4329632,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 143,
       "map_block_size": 144,
@@ -12788,7 +12778,7 @@
       "symbol": "?WriteSRAM@@YAXIPBXI@Z",
       "original_va": 4329904,
       "original_size": 48,
-      "rebuilt_va": 4329760,
+      "rebuilt_va": 4329776,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 48,
       "map_block_size": 48,
@@ -12803,7 +12793,7 @@
       "symbol": "?ReadSRAM@@YAXPAXII@Z",
       "original_va": 4329952,
       "original_size": 48,
-      "rebuilt_va": 4329808,
+      "rebuilt_va": 4329824,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 43,
       "map_block_size": 48,
@@ -12824,7 +12814,7 @@
       "symbol": "?LoadPlugin@@YA_NPAD@Z",
       "original_va": 4298400,
       "original_size": 999,
-      "rebuilt_va": 4298256,
+      "rebuilt_va": 4298288,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 999,
       "map_block_size": 1008,
@@ -12849,7 +12839,7 @@
       "symbol": "?LoadPlugins@@YA_NXZ",
       "original_va": 4299408,
       "original_size": 236,
-      "rebuilt_va": 4299264,
+      "rebuilt_va": 4299296,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 236,
       "map_block_size": 240,
@@ -12869,7 +12859,7 @@
       "symbol": "?UnloadPlugins@@YAXXZ",
       "original_va": 4299648,
       "original_size": 65,
-      "rebuilt_va": 4299504,
+      "rebuilt_va": 4299536,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 65,
       "map_block_size": 80,
@@ -12900,7 +12890,7 @@
       "symbol": "?FreeTools@@YAXXZ",
       "original_va": 4305152,
       "original_size": 45,
-      "rebuilt_va": 4305008,
+      "rebuilt_va": 4305040,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 45,
       "map_block_size": 48,
@@ -12919,7 +12909,7 @@
       "symbol": "?InitializeTools@@YAXXZ",
       "original_va": 4304112,
       "original_size": 1029,
-      "rebuilt_va": 4303968,
+      "rebuilt_va": 4304000,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 1029,
       "map_block_size": 1040,
@@ -12961,7 +12951,7 @@
       "symbol": "?NetplayClientDropped@@YGXPADH@Z",
       "original_va": 4302560,
       "original_size": 3,
-      "rebuilt_va": 4302416,
+      "rebuilt_va": 4302448,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 3,
       "map_block_size": 16,
@@ -12990,7 +12980,7 @@
       "symbol": "?NetplayStartGame@@YGHPADHH@Z",
       "original_va": 4302608,
       "original_size": 252,
-      "rebuilt_va": 4302464,
+      "rebuilt_va": 4302496,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 252,
       "map_block_size": 256,
@@ -13010,7 +13000,7 @@
       "symbol": "?CheckGraphicsInterrupts@@YAXXZ",
       "original_va": 4325104,
       "original_size": 1,
-      "rebuilt_va": 4344880,
+      "rebuilt_va": 4344896,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 1,
       "map_block_size": 16,
@@ -13041,7 +13031,7 @@
       "symbol": "?CommitRDRAM@@YAXXZ",
       "original_va": 4305600,
       "original_size": 56,
-      "rebuilt_va": 4305456,
+      "rebuilt_va": 4305488,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 56,
       "map_block_size": 64,
@@ -13065,7 +13055,7 @@
       "symbol": "?DecommitRDRAM@@YAXXZ",
       "original_va": 4305664,
       "original_size": 54,
-      "rebuilt_va": 4305520,
+      "rebuilt_va": 4305552,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 54,
       "map_block_size": 64,
@@ -13091,7 +13081,7 @@
       "symbol": "?SelectGraphicsPlugin@@YA_NXZ",
       "original_va": 4306336,
       "original_size": 279,
-      "rebuilt_va": 4306192,
+      "rebuilt_va": 4306224,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 279,
       "map_block_size": 288,
@@ -13116,7 +13106,7 @@
       "symbol": "?ReloadConfiguration@@YAXXZ",
       "original_va": 4306624,
       "original_size": 184,
-      "rebuilt_va": 4306480,
+      "rebuilt_va": 4306512,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 184,
       "map_block_size": 192,
@@ -13140,7 +13130,7 @@
       "symbol": "?InitializeGraphicsPlugin@@YAXXZ",
       "original_va": 4306816,
       "original_size": 421,
-      "rebuilt_va": 4306672,
+      "rebuilt_va": 4306704,
       "measurement": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
       "rebuilt_size": 421,
       "map_block_size": 432,
