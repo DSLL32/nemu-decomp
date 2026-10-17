@@ -1,0 +1,265 @@
+{
+  "schema_version": 1,
+  "original": "master/nemu64.exe",
+  "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+  "status": "Validated scratch storage model; reusable staging is available. No application source/header alignment changes promoted.",
+  "method": [
+    "Move known typed application zero definitions to one translation unit in original VA order, each with an explicit zero initializer. Replace original definitions with typed extern declarations in a scratch snapshot.",
+    "Move nonzero initialized application definitions to one separate translation unit in original VA order, preserving their typed values and symbolic function references.",
+    "Represent only constrained residual zero storage with explicitly inferred byte arrays; exclude natural leading alignment. Original types, declaration count, and purpose are unknown.",
+    "Keep the final four-byte interval as an inferred zero-storage range. Original contribution alignment is an equally possible explanation; no recovered scalar or alignment attribute is claimed."
+  ],
+  "compiler": "VC7 13.00.9466 /O2 /Ob1 /ML /GL /LTCG; complete flags retained in scratch baseline-build.json",
+  "scratch": "/root/.ai-tmp/nemu-global-layout.Y1qrcGPz",
+  "reproduction": [
+    "Build a complete snapshot with scripts/build_nemu.py, or stage directly from src/nemu64.",
+    "Run python3 scripts/stage_nemu_storage.py --source <source-directory> --output ~/.ai-tmp/<new-directory>. Inputs default to the repository global inventory and this layout report.",
+    "Compile the staged original application units and generated NemuZeroStorage.cpp/NemuInitializedStorage.cpp with the existing VC7 /O2 /Ob1 /ML /GL application flags. Append those two generated objects, in that order, to the application objects before vendor objects.",
+    "Use python3 scripts/map_nemu_globals.py --layout-map <linked.map> --report <report.json> to independently reproduce every known object address comparison from repository-relative evidence."
+  ],
+  "retained_ranges": [
+    {
+      "symbol": "UnidentifiedStorage_0087AE38",
+      "start_va": "0x87ae38",
+      "end_va_exclusive": "0x87ae4c",
+      "size": 20,
+      "preceding": "UndoData",
+      "following": "UndoPosition",
+      "status": "inferred retained storage extent; unknown original object types/count/purpose",
+      "declaration": "unsigned char UnidentifiedStorage_0087AE38[0x14] = {0};",
+      "extent_confidence": "inferred from neighboring live objects, current observed extents, and natural compiler alignment",
+      "original_object_identity": "unknown; this could include retained objects or unused suffixes of neighboring objects",
+      "original_storage": "loader-zero-filled .data; no initialized bytes copied"
+    },
+    {
+      "symbol": "UnidentifiedStorage_0097B6E8",
+      "start_va": "0x97b6e8",
+      "end_va_exclusive": "0x97be08",
+      "size": 1824,
+      "preceding": "OpcodeStats",
+      "following": "Dynarec_NextPC",
+      "status": "inferred retained storage extent; unknown original object types/count/purpose",
+      "declaration": "unsigned char UnidentifiedStorage_0097B6E8[0x720] = {0};",
+      "extent_confidence": "inferred from neighboring live objects, current observed extents, and natural compiler alignment",
+      "original_object_identity": "unknown; this could include retained objects or unused suffixes of neighboring objects",
+      "original_storage": "loader-zero-filled .data; no initialized bytes copied"
+    },
+    {
+      "symbol": "UnidentifiedStorage_02F71478",
+      "start_va": "0x2f71478",
+      "end_va_exclusive": "0x2f73478",
+      "size": 8192,
+      "preceding": "BlockStatsEnabled",
+      "following": "CPU_DisableExceptions",
+      "status": "inferred retained storage extent; unknown original object types/count/purpose",
+      "declaration": "unsigned char UnidentifiedStorage_02F71478[0x2000] = {0};",
+      "extent_confidence": "inferred from neighboring live objects, current observed extents, and natural compiler alignment",
+      "original_object_identity": "unknown; this could include retained objects or unused suffixes of neighboring objects",
+      "original_storage": "loader-zero-filled .data; no initialized bytes copied"
+    },
+    {
+      "symbol": "UnidentifiedStorage_03E5ADE8",
+      "start_va": "0x3e5ade8",
+      "end_va_exclusive": "0x3e5adec",
+      "size": 4,
+      "preceding": "CPU_ExceptionPC",
+      "following": "Dynarec_FpuEndLabel",
+      "status": "inferred retained storage extent; unknown original object types/count/purpose",
+      "declaration": "unsigned char UnidentifiedStorage_03E5ADE8[0x4] = {0};",
+      "extent_confidence": "inferred from neighboring live objects, current observed extents, and natural compiler alignment",
+      "original_object_identity": "unknown; this could include retained objects or unused suffixes of neighboring objects",
+      "original_storage": "loader-zero-filled .data; no initialized bytes copied"
+    },
+    {
+      "symbol": "UnidentifiedStorage_03E64E60",
+      "start_va": "0x3e64e60",
+      "end_va_exclusive": "0x3e64e68",
+      "size": 8,
+      "preceding": "PIFRam",
+      "following": "RDRAMSize",
+      "status": "inferred retained storage extent; unknown original object types/count/purpose",
+      "declaration": "unsigned char UnidentifiedStorage_03E64E60[0x8] = {0};",
+      "extent_confidence": "inferred from neighboring live objects, current observed extents, and natural compiler alignment",
+      "original_object_identity": "unknown; this could include retained objects or unused suffixes of neighboring objects",
+      "original_storage": "loader-zero-filled .data; no initialized bytes copied"
+    },
+    {
+      "symbol": "UnidentifiedStorage_03E67348",
+      "start_va": "0x3e67348",
+      "end_va_exclusive": "0x3e69348",
+      "size": 8192,
+      "preceding": "RSPShadowMemory",
+      "following": "VICount",
+      "status": "inferred retained storage extent; unknown original object types/count/purpose",
+      "declaration": "unsigned char UnidentifiedStorage_03E67348[0x2000] = {0};",
+      "extent_confidence": "inferred from neighboring live objects, current observed extents, and natural compiler alignment",
+      "original_object_identity": "unknown; this could include retained objects or unused suffixes of neighboring objects",
+      "original_storage": "loader-zero-filled .data; no initialized bytes copied"
+    },
+    {
+      "symbol": "UnidentifiedStorage_03E696F0",
+      "start_va": "0x3e696f0",
+      "end_va_exclusive": "0x3e696f8",
+      "size": 8,
+      "preceding": "CPU_LO",
+      "following": "TLBEnabled",
+      "status": "inferred retained storage extent; unknown original object types/count/purpose",
+      "declaration": "unsigned char UnidentifiedStorage_03E696F0[0x8] = {0};",
+      "extent_confidence": "inferred from neighboring live objects, current observed extents, and natural compiler alignment",
+      "original_object_identity": "unknown; this could include retained objects or unused suffixes of neighboring objects",
+      "original_storage": "loader-zero-filled .data; no initialized bytes copied"
+    },
+    {
+      "symbol": "UnidentifiedStorage_0406F1D0",
+      "start_va": "0x406f1d0",
+      "end_va_exclusive": "0x406f2d0",
+      "size": 256,
+      "preceding": "CPU_FPR64",
+      "following": "FrameCounter",
+      "status": "inferred retained storage extent; unknown original object types/count/purpose",
+      "declaration": "unsigned char UnidentifiedStorage_0406F1D0[0x100] = {0};",
+      "extent_confidence": "inferred from neighboring live objects, current observed extents, and natural compiler alignment",
+      "original_object_identity": "unknown; this could include retained objects or unused suffixes of neighboring objects",
+      "original_storage": "loader-zero-filled .data; no initialized bytes copied"
+    },
+    {
+      "symbol": "UnidentifiedStorage_0408A5E0",
+      "start_va": "0x408a5e0",
+      "end_va_exclusive": "0x408a7c0",
+      "size": 480,
+      "preceding": "NemuIniPath",
+      "following": "RuntimeReplacementCount",
+      "status": "inferred retained storage extent; unknown original object types/count/purpose",
+      "declaration": "unsigned char UnidentifiedStorage_0408A5E0[0x1e0] = {0};",
+      "extent_confidence": "inferred from neighboring live objects, current observed extents, and natural compiler alignment",
+      "original_object_identity": "unknown; this could include retained objects or unused suffixes of neighboring objects",
+      "original_storage": "loader-zero-filled .data; no initialized bytes copied"
+    },
+    {
+      "symbol": "UnidentifiedStorage_0408B7D0",
+      "start_va": "0x408b7d0",
+      "end_va_exclusive": "0x448b7d0",
+      "size": 4194304,
+      "preceding": "RuntimeLibraryEnabled",
+      "following": "SaveStateDirectory",
+      "status": "inferred retained storage extent; unknown original object types/count/purpose",
+      "declaration": "unsigned char UnidentifiedStorage_0408B7D0[0x400000] = {0};",
+      "extent_confidence": "inferred from neighboring live objects, current observed extents, and natural compiler alignment",
+      "original_object_identity": "unknown; this could include retained objects or unused suffixes of neighboring objects",
+      "original_storage": "loader-zero-filled .data; no initialized bytes copied"
+    },
+    {
+      "symbol": "UnidentifiedStorage_0448C368",
+      "start_va": "0x448c368",
+      "end_va_exclusive": "0x448c3ac",
+      "size": 68,
+      "preceding": "PackBlock",
+      "following": "EEPROMSize",
+      "status": "inferred retained storage extent; unknown original object types/count/purpose",
+      "declaration": "unsigned char UnidentifiedStorage_0448C368[0x44] = {0};",
+      "extent_confidence": "inferred from neighboring live objects, current observed extents, and natural compiler alignment",
+      "original_object_identity": "unknown; this could include retained objects or unused suffixes of neighboring objects",
+      "original_storage": "loader-zero-filled .data; no initialized bytes copied"
+    },
+    {
+      "symbol": "UnidentifiedStorage_044CC53C",
+      "start_va": "0x44cc53c",
+      "end_va_exclusive": "0x44cc540",
+      "size": 4,
+      "preceding": "PluginCount",
+      "following": "ActivePause",
+      "status": "inferred representation of observed zero interval; original alignment versus retained object unresolved",
+      "declaration": "unsigned char UnidentifiedStorage_044CC53C[4] = {0};",
+      "extent_confidence": "four bytes constrained by neighboring live DWORDs",
+      "original_object_identity": "unknown; no original scalar is claimed",
+      "original_storage": "loader-zero-filled .data; no initialized bytes copied",
+      "alternative_explanation": "Original contribution alignment is an equally possible explanation for these four bytes."
+    }
+  ],
+  "retained_bytes": 4213360,
+  "alignment_observations": [
+    {
+      "start_va": "0x408a5dc",
+      "end_va_exclusive": "0x408a5e0",
+      "status": "four leading bytes generated naturally before the inferred 480-byte retained array"
+    },
+    {
+      "start_va": "0x408b7cc",
+      "end_va_exclusive": "0x408b7d0",
+      "status": "four leading bytes generated naturally before the inferred 4 MiB retained array"
+    },
+    {
+      "start_va": "0x448c364",
+      "end_va_exclusive": "0x448c368",
+      "status": "four leading bytes generated naturally before the inferred 68-byte retained array"
+    },
+    {
+      "start_va": "0x44cc53c",
+      "end_va_exclusive": "0x44cc540",
+      "status": "ambiguous: original contribution alignment or retained object. Final diagnostic uses explicitly inferred zero storage and leaves application type metadata unchanged."
+    },
+    {
+      "start_va": "0x479c2c",
+      "end_va_exclusive": "0x479c40",
+      "status": "CRT data/BSS boundary; original group alignment unknown. Independent native COFF probe demonstrates that a later 32-aligned BSS contribution can align the entire BSS group, so no retained object is required here."
+    }
+  ],
+  "results": {
+    "known_application_zero_objects": 264,
+    "exact_zero_object_addresses": 264,
+    "known_initialized_objects": 55,
+    "initialized_relative_addresses_exact": true,
+    "initialized_uniform_delta": 16,
+    "original_data_virtual_size": "0x408e958",
+    "compiled_data_virtual_size": "0x408e958",
+    "original_resource_va": "0x44ce000",
+    "compiled_resource_va": "0x44ce000",
+    "known_crt_tail_globals_exact": [
+      "___fastflag at0x44CC558",
+      "__adjust_fdiv at0x44CC55C"
+    ],
+    "known_zero_objects_exact": 264,
+    "normalized_function_spans_unchanged": 914,
+    "rich_records_unchanged_from_plain_gl_baseline": true,
+    "fixture_scope": "Frozen pre-POINT snapshot: 264 known zero globals and55 initialized globals.",
+    "staging_generator_validation": "Final repository generator output has every section byte identical to the accepted frozen GL retained-storage fixture, and the same Rich records. Header timestamp/checksum bytes are outside this statement."
+  },
+  "limitations": [
+    "Matching layout does not recover the original names, types, grouping, or allocation sizes of retained storage. An unused tail of a neighboring array is another possible source explanation.",
+    "MemoryBreakpoints[100] remains an inferred capacity from the next live object and natural round count, not a recovered original sizeof.",
+    "Application initialized data retain a uniform +16 displacement caused by current CRT contribution ordering; CRT internal data positions still differ.",
+    "Original function implementations are still being refined by their owners; this is a frozen snapshot proof rather than a final application build.",
+    "The four-byte final interval remains ambiguous between original contribution alignment and retained storage. The selected source representation does not claim a recovered original object."
+  ],
+  "rejected_models": [
+    {
+      "model": "first-declaration ActivePause align(8) inside GL storage TU",
+      "reason": "Changes two real bodies: WritePhysicalWord grows48 bytes with spills; MainWindowCommand shrinks240 bytes and gains EBP frame. Controlled A/B/A source hashes differ only in standalone header annotation."
+    },
+    {
+      "model": "native C++ storage TU archived after libc.lib",
+      "reason": "Preserves264 addresses and914 function spans, but adds a third native C++ Rich contribution where original has two."
+    },
+    {
+      "model": "GL archive or split GL tail TU without inferred tail storage",
+      "reason": "Preserves body bytes and Rich compiler class, but final six objects remain four bytes before target."
+    }
+  ],
+  "controlled_audit": {
+    "proof": "isolation-proof.json",
+    "body_comparison": "gl-retained-tail-vs-staged-final-binary-bodies.json",
+    "final_image": "staged-final.exe",
+    "final_map": "staged-final.map",
+    "directory": "/root/.ai-tmp/nemu-global-layout.Y1qrcGPz",
+    "normalization": "Full mapped spans, including inline switch tables and padding; only concrete references to the same named target+offset or local branch offset are rebased. No arbitrary byte masks.",
+    "scope": "No whole-application byte-exact claim; current function implementations and CRT/literal ordering still differ from original."
+  },
+  "current_source_inventory": {
+    "known_zero_objects": 263,
+    "known_initialized_objects": 55,
+    "typed_global_records": 320,
+    "change": "MainWindowX/MainWindowY are now one POINT MainWindowPosition at0x4089DD4, size8; occupied storage is unchanged.",
+    "generated_units_compile": true,
+    "whole_current_build_layout": "pending integrated build; historical264-object proof is not relabeled as current263-object proof."
+  }
+}
