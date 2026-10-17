@@ -129,8 +129,8 @@ type
 var
   FormSettings: TFormSettings;
   LastForegroundWindow: HWND;
-  ControllerData: PControllerDataArray;
-  InputSettings: TInputSettings;
+  Controllers: PControllerDataArray;
+  ControllerSettings: TInputSettings;
 
 procedure FillButtonList(Items: TStrings);
 procedure FillAxisList(Items: TStrings);
@@ -150,12 +150,12 @@ uses UnitDIStuff, UnitSelectInputDevices, UnitAdaptoid, UnitSensitivity, UnitWai
 procedure TFormSettings.UpdateLabels;
 begin
   LabelModifierExplanation.Caption := 'Without modifiers, analog stick is at ' +
-    IntToStr(InputSettings.DefaultSensitivity) + '% when button is pressed';
-  LabelAxisModifier1.Caption := IntToStr(InputSettings.Modifier1Sensitivity) + '%:';
-  LabelAxisModifier2.Caption := IntToStr(InputSettings.Modifier2Sensitivity) + '%:';
-  LabelAxisModifier3.Caption := IntToStr(InputSettings.Modifier3Sensitivity) + '%:';
-  FormSettings.ButtonAutoconfigureKeyboard.Enabled := HasKeyboard;
-  FormSettings.ButtonAutoConfigureAdaptoid.Enabled := HasAdaptoid;
+    IntToStr(ControllerSettings.DefaultSensitivity) + '% when button is pressed';
+  LabelAxisModifier1.Caption := IntToStr(ControllerSettings.Modifier1Sensitivity) + '%:';
+  LabelAxisModifier2.Caption := IntToStr(ControllerSettings.Modifier2Sensitivity) + '%:';
+  LabelAxisModifier3.Caption := IntToStr(ControllerSettings.Modifier3Sensitivity) + '%:';
+  FormSettings.ButtonAutoconfigureKeyboard.Enabled := KeyboardEnabled;
+  FormSettings.ButtonAutoConfigureAdaptoid.Enabled := AdaptoidEnabled;
 end;
 
 procedure FillButtonList(Items: TStrings);
@@ -164,17 +164,17 @@ var
 begin
   Items.Clear;
   Items.Add('(none)');
-  for I := 0 to ActiveDeviceCount - 1 do
-    case DIDevices[ActiveDevices[I].DeviceIndex].DeviceType and $FF of
+  for I := 0 to OpenDevicesCount - 1 do
+    case DIDevices[OpenDevices[I].DeviceIndex].DeviceType and $FF of
       3:
         for J := 0 to 71 do
-          Items.Add(DIDevices[ActiveDevices[I].DeviceIndex].Name + '.' + KeyDefs[J].Name);
+          Items.Add(DIDevices[OpenDevices[I].DeviceIndex].Name + '.' + Keys[J].Name);
       4:
-        for J := 0 to DIDevices[ActiveDevices[I].DeviceIndex].Caps.dwButtons - 1 do
-          Items.Add(DIDevices[ActiveDevices[I].DeviceIndex].Name + '.' + ActiveDevices[I].ButtonNames[J]);
+        for J := 0 to DIDevices[OpenDevices[I].DeviceIndex].Caps.dwButtons - 1 do
+          Items.Add(DIDevices[OpenDevices[I].DeviceIndex].Name + '.' + OpenDevices[I].ButtonNames[J]);
       2:
-        for J := 0 to DIDevices[ActiveDevices[I].DeviceIndex].Caps.dwButtons - 1 do
-          Items.Add(DIDevices[ActiveDevices[I].DeviceIndex].Name + '.' + ActiveDevices[I].ButtonNames[J]);
+        for J := 0 to DIDevices[OpenDevices[I].DeviceIndex].Caps.dwButtons - 1 do
+          Items.Add(DIDevices[OpenDevices[I].DeviceIndex].Name + '.' + OpenDevices[I].ButtonNames[J]);
     end;
 end;
 
@@ -184,9 +184,9 @@ var
 begin
   Items.Clear;
   Items.Add('(none)');
-  for I := 0 to ActiveDeviceCount - 1 do
-    for J := 1 to DIDevices[ActiveDevices[I].DeviceIndex].Caps.dwAxes do
-      Items.Add(DIDevices[ActiveDevices[I].DeviceIndex].Name + '.Axis ' + IntToStr(J));
+  for I := 0 to OpenDevicesCount - 1 do
+    for J := 1 to DIDevices[OpenDevices[I].DeviceIndex].Caps.dwAxes do
+      Items.Add(DIDevices[OpenDevices[I].DeviceIndex].Name + '.Axis ' + IntToStr(J));
 end;
 
 procedure FillDeviceList(Items: TStrings);
@@ -195,17 +195,17 @@ var
 begin
   Items.Clear;
   Items.Add('(none)');
-  for I := 0 to ActiveDeviceCount - 1 do
-    if ActiveDevices[I].ForceFeedback then
-      Items.Add(DIDevices[ActiveDevices[I].DeviceIndex].Name);
+  for I := 0 to OpenDevicesCount - 1 do
+    if OpenDevices[I].ForceFeedback then
+      Items.Add(DIDevices[OpenDevices[I].DeviceIndex].Name);
 end;
 
 function GetDeviceIndex(Name: string): Integer;
 var
   I: Integer;
 begin
-  for I := 0 to ActiveDeviceCount - 1 do
-    if DIDevices[ActiveDevices[I].DeviceIndex].Name = Name then
+  for I := 0 to OpenDevicesCount - 1 do
+    if DIDevices[OpenDevices[I].DeviceIndex].Name = Name then
     begin
       Result := I;
       Exit;
@@ -218,9 +218,9 @@ var
   I: Integer;
 begin
   for I := 0 to 71 do
-    if KeyDefs[I].Name = Name then
+    if Keys[I].Name = Name then
     begin
-      Result := KeyDefs[I].Code;
+      Result := Keys[I].Code;
       Exit;
     end;
   Result := 0;
@@ -230,8 +230,8 @@ function GetButtonIndex(Name: string; Device: Integer): Integer;
 var
   I: Integer;
 begin
-  for I := 0 to ActiveDevices[Device].ButtonCount - 1 do
-    if StrComp(@ActiveDevices[Device].ButtonNames[I][1], PChar(Name)) = 0 then
+  for I := 0 to OpenDevices[Device].ButtonCount - 1 do
+    if StrComp(@OpenDevices[Device].ButtonNames[I][1], PChar(Name)) = 0 then
     begin
       Result := I + 1;
       Exit;
@@ -244,9 +244,9 @@ var
   I: Integer;
 begin
   for I := 0 to 71 do
-    if KeyDefs[I].Code = Code then
+    if Keys[I].Code = Code then
     begin
-      Result := KeyDefs[I].Name;
+      Result := Keys[I].Name;
       Exit;
     end;
   Result := '';
@@ -278,7 +278,7 @@ end;
 procedure TFormSettings.UpdateController;
 begin
   CheckBoxPluggedIn.OnClick := nil;
-  CheckBoxPluggedIn.Checked := InputSettings.Controllers[TabControlController.TabIndex].Enabled;
+  CheckBoxPluggedIn.Checked := ControllerSettings.Controllers[TabControlController.TabIndex].Enabled;
   CheckBoxPluggedIn.OnClick := CheckBoxPluggedInClick;
   if CheckBoxPluggedIn.Checked then
   begin
@@ -293,10 +293,10 @@ begin
     GroupBoxMapping.Visible := False;
   end;
   CheckBoxMemPack.OnClick := nil;
-  CheckBoxMemPack.Checked := InputSettings.Controllers[TabControlController.TabIndex].MemPack;
+  CheckBoxMemPack.Checked := ControllerSettings.Controllers[TabControlController.TabIndex].MemPack;
   CheckBoxMemPack.OnClick := CheckBoxMemPackClick;
   CheckBoxRumblePack.OnClick := nil;
-  CheckBoxRumblePack.Checked := InputSettings.Controllers[TabControlController.TabIndex].RumblePack;
+  CheckBoxRumblePack.Checked := ControllerSettings.Controllers[TabControlController.TabIndex].RumblePack;
   CheckBoxRumblePack.OnClick := CheckBoxRumblePackClick;
   ListBoxButtonsClick(ListBoxButtons);
   if CheckBoxRumblePack.Checked then
@@ -308,7 +308,7 @@ end;
 procedure TFormSettings.CheckBoxPluggedInClick(Sender: TObject);
 begin
   SetControllerEnabled(CheckBoxPluggedIn.Checked);
-  InputSettings.Controllers[TabControlController.TabIndex].Enabled := (Sender as TCheckBox).Checked;
+  ControllerSettings.Controllers[TabControlController.TabIndex].Enabled := (Sender as TCheckBox).Checked;
 end;
 
 procedure TFormSettings.ButtonSelectInputClick(Sender: TObject);
@@ -345,28 +345,28 @@ begin
     begin
       NotebookMap.PageIndex := 1;
       case ListBoxButtons.ItemIndex of
-        0: ButtonMapping := @InputSettings.Controllers[TabControlController.TabIndex].Buttons[0];
-        1: ButtonMapping := @InputSettings.Controllers[TabControlController.TabIndex].Buttons[1];
-        2: ButtonMapping := @InputSettings.Controllers[TabControlController.TabIndex].Buttons[2];
-        3: ButtonMapping := @InputSettings.Controllers[TabControlController.TabIndex].Buttons[3];
-        4: ButtonMapping := @InputSettings.Controllers[TabControlController.TabIndex].Buttons[4];
-        5: ButtonMapping := @InputSettings.Controllers[TabControlController.TabIndex].Buttons[5];
+        0: ButtonMapping := @ControllerSettings.Controllers[TabControlController.TabIndex].Buttons[0];
+        1: ButtonMapping := @ControllerSettings.Controllers[TabControlController.TabIndex].Buttons[1];
+        2: ButtonMapping := @ControllerSettings.Controllers[TabControlController.TabIndex].Buttons[2];
+        3: ButtonMapping := @ControllerSettings.Controllers[TabControlController.TabIndex].Buttons[3];
+        4: ButtonMapping := @ControllerSettings.Controllers[TabControlController.TabIndex].Buttons[4];
+        5: ButtonMapping := @ControllerSettings.Controllers[TabControlController.TabIndex].Buttons[5];
       else
-        ButtonMapping := @InputSettings.Controllers[TabControlController.TabIndex].Buttons[0];
+        ButtonMapping := @ControllerSettings.Controllers[TabControlController.TabIndex].Buttons[0];
       end;
       if ButtonMapping^.Device = -1 then ComboBoxButton.ItemIndex := 0;
-      case DIDevices[ActiveDevices[ButtonMapping^.Device].DeviceIndex].DeviceType and $FF of
+      case DIDevices[OpenDevices[ButtonMapping^.Device].DeviceIndex].DeviceType and $FF of
         4:
           ComboBoxButton.ItemIndex := ComboBoxButton.Items.IndexOf(
-            DIDevices[ActiveDevices[ButtonMapping^.Device].DeviceIndex].Name + '.' +
-            ActiveDevices[ButtonMapping^.Device].ButtonNames[ButtonMapping^.Button - 1]);
+            DIDevices[OpenDevices[ButtonMapping^.Device].DeviceIndex].Name + '.' +
+            OpenDevices[ButtonMapping^.Device].ButtonNames[ButtonMapping^.Button - 1]);
         2:
           ComboBoxButton.ItemIndex := ComboBoxButton.Items.IndexOf(
-            DIDevices[ActiveDevices[ButtonMapping^.Device].DeviceIndex].Name + '.' +
-            ActiveDevices[ButtonMapping^.Device].ButtonNames[ButtonMapping^.Button - 1]);
+            DIDevices[OpenDevices[ButtonMapping^.Device].DeviceIndex].Name + '.' +
+            OpenDevices[ButtonMapping^.Device].ButtonNames[ButtonMapping^.Button - 1]);
         3:
           ComboBoxButton.ItemIndex := ComboBoxButton.Items.IndexOf(
-            DIDevices[ActiveDevices[ButtonMapping^.Device].DeviceIndex].Name + '.' +
+            DIDevices[OpenDevices[ButtonMapping^.Device].DeviceIndex].Name + '.' +
             GetKeyName(ButtonMapping^.Button));
       end;
       if ComboBoxButton.ItemIndex = -1 then ComboBoxButton.ItemIndex := 0;
@@ -382,26 +382,26 @@ begin
       case ListBoxButtons.ItemIndex of
         6:
         begin
-          AxisMapping := @InputSettings.Controllers[TabControlController.TabIndex].Axes[0];
-          Modifier1Mapping := @InputSettings.Controllers[TabControlController.TabIndex].Modifiers[0];
-          Modifier2Mapping := @InputSettings.Controllers[TabControlController.TabIndex].Modifiers[1];
-          Modifier3Mapping := @InputSettings.Controllers[TabControlController.TabIndex].Modifiers[2];
+          AxisMapping := @ControllerSettings.Controllers[TabControlController.TabIndex].Axes[0];
+          Modifier1Mapping := @ControllerSettings.Controllers[TabControlController.TabIndex].Modifiers[0];
+          Modifier2Mapping := @ControllerSettings.Controllers[TabControlController.TabIndex].Modifiers[1];
+          Modifier3Mapping := @ControllerSettings.Controllers[TabControlController.TabIndex].Modifiers[2];
           LabelModifierExplanation.Visible := True;
         end;
         7:
         begin
-          AxisMapping := @InputSettings.Controllers[TabControlController.TabIndex].Axes[1];
-          Modifier1Mapping := @InputSettings.Controllers[TabControlController.TabIndex].Modifiers[0];
-          Modifier2Mapping := @InputSettings.Controllers[TabControlController.TabIndex].Modifiers[1];
-          Modifier3Mapping := @InputSettings.Controllers[TabControlController.TabIndex].Modifiers[2];
+          AxisMapping := @ControllerSettings.Controllers[TabControlController.TabIndex].Axes[1];
+          Modifier1Mapping := @ControllerSettings.Controllers[TabControlController.TabIndex].Modifiers[0];
+          Modifier2Mapping := @ControllerSettings.Controllers[TabControlController.TabIndex].Modifiers[1];
+          Modifier3Mapping := @ControllerSettings.Controllers[TabControlController.TabIndex].Modifiers[2];
           LabelModifierExplanation.Visible := True;
         end;
-        8: AxisMapping := @InputSettings.Controllers[TabControlController.TabIndex].DigitalAxes[0];
-        9: AxisMapping := @InputSettings.Controllers[TabControlController.TabIndex].DigitalAxes[1];
-        10: AxisMapping := @InputSettings.Controllers[TabControlController.TabIndex].DigitalAxes[2];
-        11: AxisMapping := @InputSettings.Controllers[TabControlController.TabIndex].DigitalAxes[3];
+        8: AxisMapping := @ControllerSettings.Controllers[TabControlController.TabIndex].DigitalAxes[0];
+        9: AxisMapping := @ControllerSettings.Controllers[TabControlController.TabIndex].DigitalAxes[1];
+        10: AxisMapping := @ControllerSettings.Controllers[TabControlController.TabIndex].DigitalAxes[2];
+        11: AxisMapping := @ControllerSettings.Controllers[TabControlController.TabIndex].DigitalAxes[3];
       else
-        AxisMapping := @InputSettings.Controllers[TabControlController.TabIndex].Axes[0];
+        AxisMapping := @ControllerSettings.Controllers[TabControlController.TabIndex].Axes[0];
       end;
       ComboBoxModifier1.Visible := Modifier1Mapping <> nil;
       LabelAxisModifier1.Visible := Modifier1Mapping <> nil;
@@ -415,89 +415,89 @@ begin
       if AxisMapping^.Analog then RadioGroupAxis.ItemIndex := 0
       else RadioGroupAxis.ItemIndex := 1;
       ComboBoxAxis.ItemIndex := ComboBoxAxis.Items.IndexOf(
-        DIDevices[ActiveDevices[AxisMapping^.Device].DeviceIndex].Name + '.Axis ' +
+        DIDevices[OpenDevices[AxisMapping^.Device].DeviceIndex].Name + '.Axis ' +
         IntToStr(AxisMapping^.Axis));
       if ComboBoxAxis.ItemIndex = -1 then ComboBoxAxis.ItemIndex := 0;
-      case DIDevices[ActiveDevices[AxisMapping^.Negative.Device].DeviceIndex].DeviceType and $FF of
+      case DIDevices[OpenDevices[AxisMapping^.Negative.Device].DeviceIndex].DeviceType and $FF of
         4:
           ComboBoxAxisButton1.ItemIndex := ComboBoxAxisButton1.Items.IndexOf(
-            DIDevices[ActiveDevices[AxisMapping^.Negative.Device].DeviceIndex].Name + '.' +
-            ActiveDevices[AxisMapping^.Negative.Device].ButtonNames[AxisMapping^.Negative.Button - 1]);
+            DIDevices[OpenDevices[AxisMapping^.Negative.Device].DeviceIndex].Name + '.' +
+            OpenDevices[AxisMapping^.Negative.Device].ButtonNames[AxisMapping^.Negative.Button - 1]);
         2:
           ComboBoxAxisButton1.ItemIndex := ComboBoxAxisButton1.Items.IndexOf(
-            DIDevices[ActiveDevices[AxisMapping^.Negative.Device].DeviceIndex].Name + '.' +
-            ActiveDevices[AxisMapping^.Negative.Device].ButtonNames[AxisMapping^.Negative.Button - 1]);
+            DIDevices[OpenDevices[AxisMapping^.Negative.Device].DeviceIndex].Name + '.' +
+            OpenDevices[AxisMapping^.Negative.Device].ButtonNames[AxisMapping^.Negative.Button - 1]);
         3:
           ComboBoxAxisButton1.ItemIndex := ComboBoxAxisButton1.Items.IndexOf(
-            DIDevices[ActiveDevices[AxisMapping^.Negative.Device].DeviceIndex].Name + '.' +
+            DIDevices[OpenDevices[AxisMapping^.Negative.Device].DeviceIndex].Name + '.' +
             GetKeyName(AxisMapping^.Negative.Button));
       end;
       if ComboBoxAxisButton1.ItemIndex = -1 then ComboBoxAxisButton1.ItemIndex := 0;
-      case DIDevices[ActiveDevices[AxisMapping^.Positive.Device].DeviceIndex].DeviceType and $FF of
+      case DIDevices[OpenDevices[AxisMapping^.Positive.Device].DeviceIndex].DeviceType and $FF of
         4:
           ComboBoxAxisButton2.ItemIndex := ComboBoxAxisButton2.Items.IndexOf(
-            DIDevices[ActiveDevices[AxisMapping^.Positive.Device].DeviceIndex].Name + '.' +
-            ActiveDevices[AxisMapping^.Positive.Device].ButtonNames[AxisMapping^.Positive.Button - 1]);
+            DIDevices[OpenDevices[AxisMapping^.Positive.Device].DeviceIndex].Name + '.' +
+            OpenDevices[AxisMapping^.Positive.Device].ButtonNames[AxisMapping^.Positive.Button - 1]);
         2:
           ComboBoxAxisButton2.ItemIndex := ComboBoxAxisButton2.Items.IndexOf(
-            DIDevices[ActiveDevices[AxisMapping^.Positive.Device].DeviceIndex].Name + '.' +
-            ActiveDevices[AxisMapping^.Positive.Device].ButtonNames[AxisMapping^.Positive.Button - 1]);
+            DIDevices[OpenDevices[AxisMapping^.Positive.Device].DeviceIndex].Name + '.' +
+            OpenDevices[AxisMapping^.Positive.Device].ButtonNames[AxisMapping^.Positive.Button - 1]);
         3:
           ComboBoxAxisButton2.ItemIndex := ComboBoxAxisButton2.Items.IndexOf(
-            DIDevices[ActiveDevices[AxisMapping^.Positive.Device].DeviceIndex].Name + '.' +
+            DIDevices[OpenDevices[AxisMapping^.Positive.Device].DeviceIndex].Name + '.' +
             GetKeyName(AxisMapping^.Positive.Button));
       end;
       if ComboBoxAxisButton2.ItemIndex = -1 then ComboBoxAxisButton2.ItemIndex := 0;
       if Modifier1Mapping <> nil then
       begin
-        case DIDevices[ActiveDevices[Modifier1Mapping^.Device].DeviceIndex].DeviceType and $FF of
+        case DIDevices[OpenDevices[Modifier1Mapping^.Device].DeviceIndex].DeviceType and $FF of
           4:
             ComboBoxModifier1.ItemIndex := ComboBoxModifier1.Items.IndexOf(
-              DIDevices[ActiveDevices[Modifier1Mapping^.Device].DeviceIndex].Name + '.' +
-              ActiveDevices[Modifier1Mapping^.Device].ButtonNames[Modifier1Mapping^.Button - 1]);
+              DIDevices[OpenDevices[Modifier1Mapping^.Device].DeviceIndex].Name + '.' +
+              OpenDevices[Modifier1Mapping^.Device].ButtonNames[Modifier1Mapping^.Button - 1]);
           2:
             ComboBoxModifier1.ItemIndex := ComboBoxModifier1.Items.IndexOf(
-              DIDevices[ActiveDevices[Modifier1Mapping^.Device].DeviceIndex].Name + '.' +
-              ActiveDevices[Modifier1Mapping^.Device].ButtonNames[Modifier1Mapping^.Button - 1]);
+              DIDevices[OpenDevices[Modifier1Mapping^.Device].DeviceIndex].Name + '.' +
+              OpenDevices[Modifier1Mapping^.Device].ButtonNames[Modifier1Mapping^.Button - 1]);
           3:
             ComboBoxModifier1.ItemIndex := ComboBoxModifier1.Items.IndexOf(
-              DIDevices[ActiveDevices[Modifier1Mapping^.Device].DeviceIndex].Name + '.' +
+              DIDevices[OpenDevices[Modifier1Mapping^.Device].DeviceIndex].Name + '.' +
               GetKeyName(Modifier1Mapping^.Button));
         end;
         if ComboBoxModifier1.ItemIndex = -1 then ComboBoxModifier1.ItemIndex := 0;
       end;
       if Modifier2Mapping <> nil then
       begin
-        case DIDevices[ActiveDevices[Modifier2Mapping^.Device].DeviceIndex].DeviceType and $FF of
+        case DIDevices[OpenDevices[Modifier2Mapping^.Device].DeviceIndex].DeviceType and $FF of
           4:
             ComboBoxModifier2.ItemIndex := ComboBoxModifier2.Items.IndexOf(
-              DIDevices[ActiveDevices[Modifier2Mapping^.Device].DeviceIndex].Name + '.' +
-              ActiveDevices[Modifier2Mapping^.Device].ButtonNames[Modifier2Mapping^.Button - 1]);
+              DIDevices[OpenDevices[Modifier2Mapping^.Device].DeviceIndex].Name + '.' +
+              OpenDevices[Modifier2Mapping^.Device].ButtonNames[Modifier2Mapping^.Button - 1]);
           2:
             ComboBoxModifier2.ItemIndex := ComboBoxModifier2.Items.IndexOf(
-              DIDevices[ActiveDevices[Modifier2Mapping^.Device].DeviceIndex].Name + '.' +
-              ActiveDevices[Modifier2Mapping^.Device].ButtonNames[Modifier2Mapping^.Button - 1]);
+              DIDevices[OpenDevices[Modifier2Mapping^.Device].DeviceIndex].Name + '.' +
+              OpenDevices[Modifier2Mapping^.Device].ButtonNames[Modifier2Mapping^.Button - 1]);
           3:
             ComboBoxModifier2.ItemIndex := ComboBoxModifier2.Items.IndexOf(
-              DIDevices[ActiveDevices[Modifier2Mapping^.Device].DeviceIndex].Name + '.' +
+              DIDevices[OpenDevices[Modifier2Mapping^.Device].DeviceIndex].Name + '.' +
               GetKeyName(Modifier2Mapping^.Button));
         end;
         if ComboBoxModifier2.ItemIndex = -1 then ComboBoxModifier2.ItemIndex := 0;
       end;
       if Modifier3Mapping <> nil then
       begin
-        case DIDevices[ActiveDevices[Modifier3Mapping^.Device].DeviceIndex].DeviceType and $FF of
+        case DIDevices[OpenDevices[Modifier3Mapping^.Device].DeviceIndex].DeviceType and $FF of
           4:
             ComboBoxModifier3.ItemIndex := ComboBoxModifier3.Items.IndexOf(
-              DIDevices[ActiveDevices[Modifier3Mapping^.Device].DeviceIndex].Name + '.' +
-              ActiveDevices[Modifier3Mapping^.Device].ButtonNames[Modifier3Mapping^.Button - 1]);
+              DIDevices[OpenDevices[Modifier3Mapping^.Device].DeviceIndex].Name + '.' +
+              OpenDevices[Modifier3Mapping^.Device].ButtonNames[Modifier3Mapping^.Button - 1]);
           2:
             ComboBoxModifier3.ItemIndex := ComboBoxModifier3.Items.IndexOf(
-              DIDevices[ActiveDevices[Modifier3Mapping^.Device].DeviceIndex].Name + '.' +
-              ActiveDevices[Modifier3Mapping^.Device].ButtonNames[Modifier3Mapping^.Button - 1]);
+              DIDevices[OpenDevices[Modifier3Mapping^.Device].DeviceIndex].Name + '.' +
+              OpenDevices[Modifier3Mapping^.Device].ButtonNames[Modifier3Mapping^.Button - 1]);
           3:
             ComboBoxModifier3.ItemIndex := ComboBoxModifier3.Items.IndexOf(
-              DIDevices[ActiveDevices[Modifier3Mapping^.Device].DeviceIndex].Name + '.' +
+              DIDevices[OpenDevices[Modifier3Mapping^.Device].DeviceIndex].Name + '.' +
               GetKeyName(Modifier3Mapping^.Button));
         end;
         if ComboBoxModifier3.ItemIndex = -1 then ComboBoxModifier3.ItemIndex := 0;
@@ -508,11 +508,11 @@ begin
       NotebookMap.PageIndex := 2;
       Count := 0;
       Selection := 0;
-      for i := 0 to ActiveDeviceCount - 1 do
-        if ActiveDevices[i].ForceFeedback then
+      for i := 0 to OpenDevicesCount - 1 do
+        if OpenDevices[i].ForceFeedback then
         begin
           Inc(Count);
-          if InputSettings.Controllers[TabControlController.TabIndex].ForceFeedbackDevice = i then
+          if ControllerSettings.Controllers[TabControlController.TabIndex].ForceFeedbackDevice = i then
           begin
             Selection := Count;
             Break;
@@ -572,7 +572,7 @@ begin
     Delete(S, 1, Pos('.', S));
     Device := GetDeviceIndex(DeviceName);
     ButtonMapping.Device := Device;
-    if DIDevices[ActiveDevices[Device].DeviceIndex].DeviceType and $FF = 3 then
+    if DIDevices[OpenDevices[Device].DeviceIndex].DeviceType and $FF = 3 then
       ButtonMapping.Button := GetKeyCode(S)
     else
       ButtonMapping.Button := GetButtonIndex(S, Device);
@@ -593,7 +593,7 @@ begin
     Delete(S, 1, Pos('.', S));
     Device := GetDeviceIndex(DeviceName);
     AxisMapping.Negative.Device := Device;
-    if DIDevices[ActiveDevices[Device].DeviceIndex].DeviceType and $FF = 3 then
+    if DIDevices[OpenDevices[Device].DeviceIndex].DeviceType and $FF = 3 then
       AxisMapping.Negative.Button := GetKeyCode(S)
     else
       AxisMapping.Negative.Button := GetButtonIndex(S, Device);
@@ -614,7 +614,7 @@ begin
     Delete(S, 1, Pos('.', S));
     Device := GetDeviceIndex(DeviceName);
     AxisMapping.Positive.Device := Device;
-    if DIDevices[ActiveDevices[Device].DeviceIndex].DeviceType and $FF = 3 then
+    if DIDevices[OpenDevices[Device].DeviceIndex].DeviceType and $FF = 3 then
       AxisMapping.Positive.Button := GetKeyCode(S)
     else
       AxisMapping.Positive.Button := GetButtonIndex(S, Device);
@@ -623,7 +623,7 @@ end;
 
 procedure TFormSettings.CheckBoxMemPackClick(Sender: TObject);
 begin
-  InputSettings.Controllers[TabControlController.TabIndex].MemPack := (Sender as TCheckBox).Checked;
+  ControllerSettings.Controllers[TabControlController.TabIndex].MemPack := (Sender as TCheckBox).Checked;
   if CheckBoxMemPack.Checked then
   begin
     CheckBoxRumblePack.Checked := False;
@@ -635,7 +635,7 @@ end;
 
 procedure TFormSettings.CheckBoxRumblePackClick(Sender: TObject);
 begin
-  InputSettings.Controllers[TabControlController.TabIndex].RumblePack := (Sender as TCheckBox).Checked;
+  ControllerSettings.Controllers[TabControlController.TabIndex].RumblePack := (Sender as TCheckBox).Checked;
   if CheckBoxRumblePack.Checked then
   begin
     CheckBoxMemPack.Checked := False;
@@ -652,7 +652,7 @@ begin
   Reg := TRegistry.Create;
   Reg.RootKey := HKEY_CURRENT_USER;
   Reg.OpenKey('\Software\Nemu\0.8\Input.5', True);
-  Reg.WriteBinaryData('Data', InputSettings, SizeOf(InputSettings));
+  Reg.WriteBinaryData('Data', ControllerSettings, SizeOf(ControllerSettings));
   Reg.Free;
 end;
 
@@ -685,7 +685,7 @@ begin
     Delete(S, 1, Pos('.', S));
     Modifier2Mapping.Device := GetDeviceIndex(DeviceName);
     Device := ButtonMapping.Device;
-    if DIDevices[ActiveDevices[Device].DeviceIndex].DeviceType and $FF = 3 then
+    if DIDevices[OpenDevices[Device].DeviceIndex].DeviceType and $FF = 3 then
       Modifier2Mapping.Button := GetKeyCode(S)
     else
       Modifier2Mapping.Button := GetButtonIndex(S, Device);
@@ -706,7 +706,7 @@ begin
     Delete(S, 1, Pos('.', S));
     Modifier3Mapping.Device := GetDeviceIndex(DeviceName);
     Device := ButtonMapping.Device;
-    if DIDevices[ActiveDevices[Device].DeviceIndex].DeviceType and $FF = 3 then
+    if DIDevices[OpenDevices[Device].DeviceIndex].DeviceType and $FF = 3 then
       Modifier3Mapping.Button := GetKeyCode(S)
     else
       Modifier3Mapping.Button := GetButtonIndex(S, Device);
@@ -727,7 +727,7 @@ begin
     Delete(S, 1, Pos('.', S));
     Modifier1Mapping.Device := GetDeviceIndex(DeviceName);
     Device := ButtonMapping.Device;
-    if DIDevices[ActiveDevices[Device].DeviceIndex].DeviceType and $FF = 3 then
+    if DIDevices[OpenDevices[Device].DeviceIndex].DeviceType and $FF = 3 then
       Modifier1Mapping.Button := GetKeyCode(S)
     else
       Modifier1Mapping.Button := GetButtonIndex(S, Device);
@@ -738,17 +738,17 @@ end;
 procedure TFormSettings.ButtonSensitivityClick(Sender: TObject);
 begin
   FormSensitivity := TFormSensitivity.Create(Self);
-  FormSensitivity.UpDownDefault.Position := InputSettings.DefaultSensitivity;
-  FormSensitivity.UpDown1.Position := InputSettings.Modifier1Sensitivity;
-  FormSensitivity.UpDown2.Position := InputSettings.Modifier2Sensitivity;
-  FormSensitivity.UpDown3.Position := InputSettings.Modifier3Sensitivity;
+  FormSensitivity.UpDownDefault.Position := ControllerSettings.DefaultSensitivity;
+  FormSensitivity.UpDown1.Position := ControllerSettings.Modifier1Sensitivity;
+  FormSensitivity.UpDown2.Position := ControllerSettings.Modifier2Sensitivity;
+  FormSensitivity.UpDown3.Position := ControllerSettings.Modifier3Sensitivity;
   FormSensitivity.ParentWindow := FormSettings.Handle;
   if FormSensitivity.ShowModal = mrOK then
   begin
-    InputSettings.DefaultSensitivity := FormSensitivity.UpDownDefault.Position;
-    InputSettings.Modifier1Sensitivity := FormSensitivity.UpDown1.Position;
-    InputSettings.Modifier2Sensitivity := FormSensitivity.UpDown2.Position;
-    InputSettings.Modifier3Sensitivity := FormSensitivity.UpDown3.Position;
+    ControllerSettings.DefaultSensitivity := FormSensitivity.UpDownDefault.Position;
+    ControllerSettings.Modifier1Sensitivity := FormSensitivity.UpDown1.Position;
+    ControllerSettings.Modifier2Sensitivity := FormSensitivity.UpDown2.Position;
+    ControllerSettings.Modifier3Sensitivity := FormSensitivity.UpDown3.Position;
     UpdateLabels;
   end;
   FormSensitivity.Free;
@@ -765,9 +765,9 @@ begin
   Count := 0;
   while PopupMenuAdaptoid.Items.Count > 0 do
     PopupMenuAdaptoid.Items.Delete(0);
-  while I < ActiveDeviceCount do
+  while I < OpenDevicesCount do
   begin
-    if DIDevices[ActiveDevices[I].DeviceIndex].ProductName = 'Adaptoid' then
+    if DIDevices[OpenDevices[I].DeviceIndex].ProductName = 'Adaptoid' then
     begin
       Inc(Count);
       MenuItem := TMenuItem.Create(PopupMenuAdaptoid);
@@ -789,62 +789,62 @@ var
   I: Integer;
 begin
   I := 0;
-  while I < ActiveDeviceCount do
+  while I < OpenDevicesCount do
   begin
-    if DIDevices[ActiveDevices[I].DeviceIndex].DeviceType and $FF = 3 then
+    if DIDevices[OpenDevices[I].DeviceIndex].DeviceType and $FF = 3 then
       Break;
     Inc(I);
   end;
-  if I = ActiveDeviceCount then Exit;
-  InputSettings.Controllers[Controller].Enabled := True;
-  InputSettings.Controllers[Controller].Buttons[0].Button := $1E;
-  InputSettings.Controllers[Controller].Buttons[0].Device := I;
-  InputSettings.Controllers[Controller].Buttons[1].Button := $1F;
-  InputSettings.Controllers[Controller].Buttons[1].Device := I;
-  InputSettings.Controllers[Controller].Buttons[2].Button := $2D;
-  InputSettings.Controllers[Controller].Buttons[2].Device := I;
-  InputSettings.Controllers[Controller].Buttons[3].Button := $02;
-  InputSettings.Controllers[Controller].Buttons[3].Device := I;
-  InputSettings.Controllers[Controller].Buttons[4].Button := $10;
-  InputSettings.Controllers[Controller].Buttons[4].Device := I;
-  InputSettings.Controllers[Controller].Buttons[5].Button := $11;
-  InputSettings.Controllers[Controller].Buttons[5].Device := I;
-  InputSettings.Controllers[Controller].Modifiers[0].Button := $2A;
-  InputSettings.Controllers[Controller].Modifiers[0].Device := I;
-  InputSettings.Controllers[Controller].Modifiers[1].Button := $1D;
-  InputSettings.Controllers[Controller].Modifiers[1].Device := I;
-  InputSettings.Controllers[Controller].Modifiers[2].Button := $9D;
-  InputSettings.Controllers[Controller].Modifiers[2].Device := I;
-  InputSettings.Controllers[Controller].Axes[0].Analog := False;
-  InputSettings.Controllers[Controller].Axes[0].Negative.Button := $CB;
-  InputSettings.Controllers[Controller].Axes[0].Negative.Device := I;
-  InputSettings.Controllers[Controller].Axes[0].Positive.Button := $CD;
-  InputSettings.Controllers[Controller].Axes[0].Positive.Device := I;
-  InputSettings.Controllers[Controller].Axes[1].Analog := False;
-  InputSettings.Controllers[Controller].Axes[1].Negative.Button := $C8;
-  InputSettings.Controllers[Controller].Axes[1].Negative.Device := I;
-  InputSettings.Controllers[Controller].Axes[1].Positive.Button := $D0;
-  InputSettings.Controllers[Controller].Axes[1].Positive.Device := I;
-  InputSettings.Controllers[Controller].DigitalAxes[0].Analog := False;
-  InputSettings.Controllers[Controller].DigitalAxes[0].Negative.Button := $24;
-  InputSettings.Controllers[Controller].DigitalAxes[0].Negative.Device := I;
-  InputSettings.Controllers[Controller].DigitalAxes[0].Positive.Button := $26;
-  InputSettings.Controllers[Controller].DigitalAxes[0].Positive.Device := I;
-  InputSettings.Controllers[Controller].DigitalAxes[1].Analog := False;
-  InputSettings.Controllers[Controller].DigitalAxes[1].Negative.Button := $17;
-  InputSettings.Controllers[Controller].DigitalAxes[1].Negative.Device := I;
-  InputSettings.Controllers[Controller].DigitalAxes[1].Positive.Button := $25;
-  InputSettings.Controllers[Controller].DigitalAxes[1].Positive.Device := I;
-  InputSettings.Controllers[Controller].DigitalAxes[2].Analog := False;
-  InputSettings.Controllers[Controller].DigitalAxes[2].Negative.Button := $21;
-  InputSettings.Controllers[Controller].DigitalAxes[2].Negative.Device := I;
-  InputSettings.Controllers[Controller].DigitalAxes[2].Positive.Button := $23;
-  InputSettings.Controllers[Controller].DigitalAxes[2].Positive.Device := I;
-  InputSettings.Controllers[Controller].DigitalAxes[3].Analog := False;
-  InputSettings.Controllers[Controller].DigitalAxes[3].Negative.Button := $14;
-  InputSettings.Controllers[Controller].DigitalAxes[3].Negative.Device := I;
-  InputSettings.Controllers[Controller].DigitalAxes[3].Positive.Button := $22;
-  InputSettings.Controllers[Controller].DigitalAxes[3].Positive.Device := I;
+  if I = OpenDevicesCount then Exit;
+  ControllerSettings.Controllers[Controller].Enabled := True;
+  ControllerSettings.Controllers[Controller].Buttons[0].Button := $1E;
+  ControllerSettings.Controllers[Controller].Buttons[0].Device := I;
+  ControllerSettings.Controllers[Controller].Buttons[1].Button := $1F;
+  ControllerSettings.Controllers[Controller].Buttons[1].Device := I;
+  ControllerSettings.Controllers[Controller].Buttons[2].Button := $2D;
+  ControllerSettings.Controllers[Controller].Buttons[2].Device := I;
+  ControllerSettings.Controllers[Controller].Buttons[3].Button := $02;
+  ControllerSettings.Controllers[Controller].Buttons[3].Device := I;
+  ControllerSettings.Controllers[Controller].Buttons[4].Button := $10;
+  ControllerSettings.Controllers[Controller].Buttons[4].Device := I;
+  ControllerSettings.Controllers[Controller].Buttons[5].Button := $11;
+  ControllerSettings.Controllers[Controller].Buttons[5].Device := I;
+  ControllerSettings.Controllers[Controller].Modifiers[0].Button := $2A;
+  ControllerSettings.Controllers[Controller].Modifiers[0].Device := I;
+  ControllerSettings.Controllers[Controller].Modifiers[1].Button := $1D;
+  ControllerSettings.Controllers[Controller].Modifiers[1].Device := I;
+  ControllerSettings.Controllers[Controller].Modifiers[2].Button := $9D;
+  ControllerSettings.Controllers[Controller].Modifiers[2].Device := I;
+  ControllerSettings.Controllers[Controller].Axes[0].Analog := False;
+  ControllerSettings.Controllers[Controller].Axes[0].Negative.Button := $CB;
+  ControllerSettings.Controllers[Controller].Axes[0].Negative.Device := I;
+  ControllerSettings.Controllers[Controller].Axes[0].Positive.Button := $CD;
+  ControllerSettings.Controllers[Controller].Axes[0].Positive.Device := I;
+  ControllerSettings.Controllers[Controller].Axes[1].Analog := False;
+  ControllerSettings.Controllers[Controller].Axes[1].Negative.Button := $C8;
+  ControllerSettings.Controllers[Controller].Axes[1].Negative.Device := I;
+  ControllerSettings.Controllers[Controller].Axes[1].Positive.Button := $D0;
+  ControllerSettings.Controllers[Controller].Axes[1].Positive.Device := I;
+  ControllerSettings.Controllers[Controller].DigitalAxes[0].Analog := False;
+  ControllerSettings.Controllers[Controller].DigitalAxes[0].Negative.Button := $24;
+  ControllerSettings.Controllers[Controller].DigitalAxes[0].Negative.Device := I;
+  ControllerSettings.Controllers[Controller].DigitalAxes[0].Positive.Button := $26;
+  ControllerSettings.Controllers[Controller].DigitalAxes[0].Positive.Device := I;
+  ControllerSettings.Controllers[Controller].DigitalAxes[1].Analog := False;
+  ControllerSettings.Controllers[Controller].DigitalAxes[1].Negative.Button := $17;
+  ControllerSettings.Controllers[Controller].DigitalAxes[1].Negative.Device := I;
+  ControllerSettings.Controllers[Controller].DigitalAxes[1].Positive.Button := $25;
+  ControllerSettings.Controllers[Controller].DigitalAxes[1].Positive.Device := I;
+  ControllerSettings.Controllers[Controller].DigitalAxes[2].Analog := False;
+  ControllerSettings.Controllers[Controller].DigitalAxes[2].Negative.Button := $21;
+  ControllerSettings.Controllers[Controller].DigitalAxes[2].Negative.Device := I;
+  ControllerSettings.Controllers[Controller].DigitalAxes[2].Positive.Button := $23;
+  ControllerSettings.Controllers[Controller].DigitalAxes[2].Positive.Device := I;
+  ControllerSettings.Controllers[Controller].DigitalAxes[3].Analog := False;
+  ControllerSettings.Controllers[Controller].DigitalAxes[3].Negative.Button := $14;
+  ControllerSettings.Controllers[Controller].DigitalAxes[3].Negative.Device := I;
+  ControllerSettings.Controllers[Controller].DigitalAxes[3].Positive.Button := $22;
+  ControllerSettings.Controllers[Controller].DigitalAxes[3].Positive.Device := I;
 end;
 
 { $483594 }
@@ -863,45 +863,45 @@ var
 begin
   Controller := TabControlController.TabIndex;
   I := (Sender as TMenuItem).Tag;
-  InputSettings.Controllers[Controller].Enabled := True;
-  InputSettings.Controllers[Controller].Buttons[0].Button := 1;
-  InputSettings.Controllers[Controller].Buttons[0].Device := I;
-  InputSettings.Controllers[Controller].Buttons[1].Button := 4;
-  InputSettings.Controllers[Controller].Buttons[1].Device := I;
-  InputSettings.Controllers[Controller].Buttons[2].Button := 10;
-  InputSettings.Controllers[Controller].Buttons[2].Device := I;
-  InputSettings.Controllers[Controller].Buttons[3].Button := 9;
-  InputSettings.Controllers[Controller].Buttons[3].Device := I;
-  InputSettings.Controllers[Controller].Buttons[4].Button := 7;
-  InputSettings.Controllers[Controller].Buttons[4].Device := I;
-  InputSettings.Controllers[Controller].Buttons[5].Button := 8;
-  InputSettings.Controllers[Controller].Buttons[5].Device := I;
-  InputSettings.Controllers[Controller].Axes[0].Analog := True;
-  InputSettings.Controllers[Controller].Axes[0].Axis := 1;
-  InputSettings.Controllers[Controller].Axes[0].Device := I;
-  InputSettings.Controllers[Controller].Axes[1].Analog := True;
-  InputSettings.Controllers[Controller].Axes[1].Axis := 2;
-  InputSettings.Controllers[Controller].Axes[1].Device := I;
-  InputSettings.Controllers[Controller].DigitalAxes[0].Analog := False;
-  InputSettings.Controllers[Controller].DigitalAxes[0].Negative.Button := 13;
-  InputSettings.Controllers[Controller].DigitalAxes[0].Positive.Button := 14;
-  InputSettings.Controllers[Controller].DigitalAxes[0].Negative.Device := I;
-  InputSettings.Controllers[Controller].DigitalAxes[0].Positive.Device := I;
-  InputSettings.Controllers[Controller].DigitalAxes[1].Analog := False;
-  InputSettings.Controllers[Controller].DigitalAxes[1].Negative.Button := 11;
-  InputSettings.Controllers[Controller].DigitalAxes[1].Positive.Button := 12;
-  InputSettings.Controllers[Controller].DigitalAxes[1].Negative.Device := I;
-  InputSettings.Controllers[Controller].DigitalAxes[1].Positive.Device := I;
-  InputSettings.Controllers[Controller].DigitalAxes[2].Analog := False;
-  InputSettings.Controllers[Controller].DigitalAxes[2].Negative.Button := 5;
-  InputSettings.Controllers[Controller].DigitalAxes[2].Positive.Button := 3;
-  InputSettings.Controllers[Controller].DigitalAxes[2].Negative.Device := I;
-  InputSettings.Controllers[Controller].DigitalAxes[2].Positive.Device := I;
-  InputSettings.Controllers[Controller].DigitalAxes[3].Analog := False;
-  InputSettings.Controllers[Controller].DigitalAxes[3].Negative.Button := 6;
-  InputSettings.Controllers[Controller].DigitalAxes[3].Positive.Button := 2;
-  InputSettings.Controllers[Controller].DigitalAxes[3].Negative.Device := I;
-  InputSettings.Controllers[Controller].DigitalAxes[3].Positive.Device := I;
+  ControllerSettings.Controllers[Controller].Enabled := True;
+  ControllerSettings.Controllers[Controller].Buttons[0].Button := 1;
+  ControllerSettings.Controllers[Controller].Buttons[0].Device := I;
+  ControllerSettings.Controllers[Controller].Buttons[1].Button := 4;
+  ControllerSettings.Controllers[Controller].Buttons[1].Device := I;
+  ControllerSettings.Controllers[Controller].Buttons[2].Button := 10;
+  ControllerSettings.Controllers[Controller].Buttons[2].Device := I;
+  ControllerSettings.Controllers[Controller].Buttons[3].Button := 9;
+  ControllerSettings.Controllers[Controller].Buttons[3].Device := I;
+  ControllerSettings.Controllers[Controller].Buttons[4].Button := 7;
+  ControllerSettings.Controllers[Controller].Buttons[4].Device := I;
+  ControllerSettings.Controllers[Controller].Buttons[5].Button := 8;
+  ControllerSettings.Controllers[Controller].Buttons[5].Device := I;
+  ControllerSettings.Controllers[Controller].Axes[0].Analog := True;
+  ControllerSettings.Controllers[Controller].Axes[0].Axis := 1;
+  ControllerSettings.Controllers[Controller].Axes[0].Device := I;
+  ControllerSettings.Controllers[Controller].Axes[1].Analog := True;
+  ControllerSettings.Controllers[Controller].Axes[1].Axis := 2;
+  ControllerSettings.Controllers[Controller].Axes[1].Device := I;
+  ControllerSettings.Controllers[Controller].DigitalAxes[0].Analog := False;
+  ControllerSettings.Controllers[Controller].DigitalAxes[0].Negative.Button := 13;
+  ControllerSettings.Controllers[Controller].DigitalAxes[0].Positive.Button := 14;
+  ControllerSettings.Controllers[Controller].DigitalAxes[0].Negative.Device := I;
+  ControllerSettings.Controllers[Controller].DigitalAxes[0].Positive.Device := I;
+  ControllerSettings.Controllers[Controller].DigitalAxes[1].Analog := False;
+  ControllerSettings.Controllers[Controller].DigitalAxes[1].Negative.Button := 11;
+  ControllerSettings.Controllers[Controller].DigitalAxes[1].Positive.Button := 12;
+  ControllerSettings.Controllers[Controller].DigitalAxes[1].Negative.Device := I;
+  ControllerSettings.Controllers[Controller].DigitalAxes[1].Positive.Device := I;
+  ControllerSettings.Controllers[Controller].DigitalAxes[2].Analog := False;
+  ControllerSettings.Controllers[Controller].DigitalAxes[2].Negative.Button := 5;
+  ControllerSettings.Controllers[Controller].DigitalAxes[2].Positive.Button := 3;
+  ControllerSettings.Controllers[Controller].DigitalAxes[2].Negative.Device := I;
+  ControllerSettings.Controllers[Controller].DigitalAxes[2].Positive.Device := I;
+  ControllerSettings.Controllers[Controller].DigitalAxes[3].Analog := False;
+  ControllerSettings.Controllers[Controller].DigitalAxes[3].Negative.Button := 6;
+  ControllerSettings.Controllers[Controller].DigitalAxes[3].Positive.Button := 2;
+  ControllerSettings.Controllers[Controller].DigitalAxes[3].Negative.Device := I;
+  ControllerSettings.Controllers[Controller].DigitalAxes[3].Positive.Device := I;
   UpdateController;
   MessageBox(Handle, PChar('Controller #' + IntToStr(Controller + 1) +
     ' configured to use Adaptoid'), 'Autoconfiguration complete', MB_ICONINFORMATION);
@@ -999,8 +999,8 @@ var
 begin
   Device := -1;
   Count := 0;
-  for I := 0 to ActiveDeviceCount - 1 do
-    if ActiveDevices[I].ForceFeedback then
+  for I := 0 to OpenDevicesCount - 1 do
+    if OpenDevices[I].ForceFeedback then
     begin
       Inc(Count);
       if Count = ComboBoxDDevice.ItemIndex then
@@ -1009,7 +1009,7 @@ begin
         Break;
       end;
     end;
-  InputSettings.Controllers[TabControlController.TabIndex].ForceFeedbackDevice := Device;
+  ControllerSettings.Controllers[TabControlController.TabIndex].ForceFeedbackDevice := Device;
 end;
 
 

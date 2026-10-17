@@ -6,11 +6,11 @@ uses Windows, Forms, DInput;
 
 var
   DI: IDirectInputA;
-  DIResult: HRESULT;
-  DIDeviceCount: Integer;
+  DIError: HRESULT;
+  DeviceCount: Integer;
   DIWindow: HWND;
-  HasKeyboard: Boolean;
-  HasAdaptoid: Boolean;
+  KeyboardEnabled: Boolean;
+  AdaptoidEnabled: Boolean;
   DIDevices: array[0..19] of record
     GUID: TGUID;
     Name: string;
@@ -18,8 +18,8 @@ var
     DeviceType: DWORD;
     Caps: TDIDevCaps;
   end;
-  ActiveDeviceCount: Integer;
-  ActiveDevices: array[0..19] of record
+  OpenDevicesCount: Integer;
+  OpenDevices: array[0..19] of record
     Device: IDirectInputDevice2A;
     Effect: IDirectInputEffect;
     JoyState: TDJoyState;
@@ -31,8 +31,8 @@ var
     ForceFeedback: Boolean;
     DeadZone: Cardinal;
   end;
-  TurboState: array[0..5] of Boolean;
-  Configuring: Boolean = False;
+  TurboOn: array[0..5] of Boolean;
+  CurrentlyConfiguring: Boolean = False;
 
 type
   TKeyDef = record
@@ -41,7 +41,7 @@ type
   end;
 
 const
-  KeyDefs: array[0..71] of TKeyDef = (
+  Keys: array[0..71] of TKeyDef = (
     (Name: 'ESC'; Code: $01),
     (Name: '1'; Code: $02),
     (Name: '2'; Code: $03),
@@ -170,18 +170,18 @@ begin
     (Instance.dwDevType and $FF = DIDEVTYPE_JOYSTICK) or
     (Instance.dwDevType and $FF = DIDEVTYPE_MOUSE) then
   begin
-    DIDevices[DIDeviceCount].GUID := Instance.guidInstance;
-    DIDevices[DIDeviceCount].Name := Instance.tszInstanceName;
+    DIDevices[DeviceCount].GUID := Instance.guidInstance;
+    DIDevices[DeviceCount].Name := Instance.tszInstanceName;
     Number := 1;
-    for I := 0 to DIDeviceCount - 1 do
-      if DIDevices[DIDeviceCount].Name + ' ' + IntToStr(Number) =
+    for I := 0 to DeviceCount - 1 do
+      if DIDevices[DeviceCount].Name + ' ' + IntToStr(Number) =
         DIDevices[I].Name then Inc(Number);
-    if DIDevices[DIDeviceCount].Name <> 'Keyboard' then
-      DIDevices[DIDeviceCount].Name := DIDevices[DIDeviceCount].Name + ' ' +
+    if DIDevices[DeviceCount].Name <> 'Keyboard' then
+      DIDevices[DeviceCount].Name := DIDevices[DeviceCount].Name + ' ' +
         IntToStr(Number);
-    DIDevices[DIDeviceCount].ProductName := Instance.tszProductName;
-    DIDevices[DIDeviceCount].DeviceType := Instance.dwDevType;
-    Inc(DIDeviceCount);
+    DIDevices[DeviceCount].ProductName := Instance.tszProductName;
+    DIDevices[DeviceCount].DeviceType := Instance.dwDevType;
+    Inc(DeviceCount);
   end;
 end;
 
@@ -202,9 +202,9 @@ end;
 function EnumButtonsCallback(const Instance: TDIDeviceObjectInstanceA;
   Context: Pointer): Integer; stdcall;
 begin
-  StrCopy(@ActiveDevices[Integer(Context^)].ButtonNames[
-    ActiveDevices[Integer(Context^)].ButtonCount], Instance.tszName);
-  Inc(ActiveDevices[Integer(Context^)].ButtonCount);
+  StrCopy(@OpenDevices[Integer(Context^)].ButtonNames[
+    OpenDevices[Integer(Context^)].ButtonCount], Instance.tszName);
+  Inc(OpenDevices[Integer(Context^)].ButtonCount);
   Result := 1;
 end;
 
@@ -229,19 +229,19 @@ begin
   Reg := TRegistry.Create;
   Reg.RootKey := HKEY_CURRENT_USER;
   FillChar(DI, SizeOf(DI), 0);
-  DIResult := DirectInputCreate(HInstance, $0500, DI, nil);
-  DIErrorCheck(DIResult);
-  DIDeviceCount := 0;
-  DIResult := DI.EnumDevices(0, @EnumDevicesCallback, @EnumContext, 0);
-  DIErrorCheck(DIResult);
+  DIError := DirectInputCreate(HInstance, $0500, DI, nil);
+  DIErrorCheck(DIError);
+  DeviceCount := 0;
+  DIError := DI.EnumDevices(0, @EnumDevicesCallback, @EnumContext, 0);
+  DIErrorCheck(DIError);
   Reg.OpenKey('\Software\Nemu\0.8\Input.5\Use', True);
   Names := TStringList.Create;
   Reg.GetValueNames(Names);
-  HasKeyboard := False;
-  HasAdaptoid := False;
+  KeyboardEnabled := False;
+  AdaptoidEnabled := False;
   I := 0;
   if Names.Count = 0 then UseDefaults := True else UseDefaults := False;
-  ActiveDeviceCount := 0;
+  OpenDevicesCount := 0;
   Found := True;
   repeat
     if not UseDefaults then
@@ -251,62 +251,62 @@ begin
       Name := Names[I];
       if Name = '' then Continue;
     end;
-    for J := 0 to DIDeviceCount - 1 do
+    for J := 0 to DeviceCount - 1 do
       if UseDefaults or (DIDevices[J].Name = Name) then
       begin
         if UseDefaults then Reg.WriteString(DIDevices[J].Name, '');
         Found := True;
         DIErrorCheck(DI.CreateDevice(DIDevices[J].GUID, Device, nil));
         DIErrorCheck(Device.QueryInterface(IID_IDirectInputDevice2,
-          ActiveDevices[ActiveDeviceCount].Device));
+          OpenDevices[OpenDevicesCount].Device));
         Device := nil;
-        ActiveDevices[ActiveDeviceCount].DeviceIndex := J;
+        OpenDevices[OpenDevicesCount].DeviceIndex := J;
         case DIDevices[J].DeviceType and $FF of
           DIDEVTYPE_KEYBOARD:
             begin
               FillChar(DIDevices[J].Caps, SizeOf(TDIDevCaps), 0);
               DIDevices[J].Caps.dwSize := SizeOf(TDIDevCaps);
-              DIErrorCheck(ActiveDevices[ActiveDeviceCount].Device.GetCapabilities(
+              DIErrorCheck(OpenDevices[OpenDevicesCount].Device.GetCapabilities(
                 DIDevices[J].Caps));
-              DIErrorCheck(ActiveDevices[ActiveDeviceCount].Device.SetDataFormat(
+              DIErrorCheck(OpenDevices[OpenDevicesCount].Device.SetDataFormat(
                 c_dfDIKeyboard));
-              DIErrorCheck(ActiveDevices[ActiveDeviceCount].Device.SetCooperativeLevel(
+              DIErrorCheck(OpenDevices[OpenDevicesCount].Device.SetCooperativeLevel(
                 DIWindow, DISCL_NONEXCLUSIVE or DISCL_FOREGROUND));
-              HasKeyboard := True;
+              KeyboardEnabled := True;
             end;
           DIDEVTYPE_JOYSTICK:
             begin
               if not UseDefaults then Name := Reg.ReadString(Name);
               FillChar(DIDevices[J].Caps, SizeOf(TDIDevCaps), 0);
               DIDevices[J].Caps.dwSize := SizeOf(TDIDevCaps);
-              DIErrorCheck(ActiveDevices[ActiveDeviceCount].Device.GetCapabilities(
+              DIErrorCheck(OpenDevices[OpenDevicesCount].Device.GetCapabilities(
                 DIDevices[J].Caps));
-              DIErrorCheck(ActiveDevices[ActiveDeviceCount].Device.SetDataFormat(
+              DIErrorCheck(OpenDevices[OpenDevicesCount].Device.SetDataFormat(
                 c_dfDIJoystick));
-              DIErrorCheck(ActiveDevices[ActiveDeviceCount].Device.SetCooperativeLevel(
+              DIErrorCheck(OpenDevices[OpenDevicesCount].Device.SetCooperativeLevel(
                 DIWindow, DISCL_EXCLUSIVE or DISCL_BACKGROUND));
-              SetAxisRange(ActiveDevices[ActiveDeviceCount].Device, -126, 126);
-              DIErrorCheck(ActiveDevices[ActiveDeviceCount].Device.Acquire);
-              if DIDevices[J].ProductName = 'Adaptoid' then HasAdaptoid := True;
-              ActiveDevices[ActiveDeviceCount].ButtonCount := 0;
-              ActiveDevices[ActiveDeviceCount].Device.EnumObjects(
-                EnumButtonsCallback, @ActiveDeviceCount, DIDFT_BUTTON);
-              ActiveDevices[ActiveDeviceCount].ForceFeedback :=
+              SetAxisRange(OpenDevices[OpenDevicesCount].Device, -126, 126);
+              DIErrorCheck(OpenDevices[OpenDevicesCount].Device.Acquire);
+              if DIDevices[J].ProductName = 'Adaptoid' then AdaptoidEnabled := True;
+              OpenDevices[OpenDevicesCount].ButtonCount := 0;
+              OpenDevices[OpenDevicesCount].Device.EnumObjects(
+                EnumButtonsCallback, @OpenDevicesCount, DIDFT_BUTTON);
+              OpenDevices[OpenDevicesCount].ForceFeedback :=
                 (Pos('f', Name) <> 0) and
                 (DIDevices[J].Caps.dwFlags and DIDC_FORCEFEEDBACK <> 0);
-              ActiveDevices[ActiveDeviceCount].DeadZone :=
+              OpenDevices[OpenDevicesCount].DeadZone :=
                 StrToIntDef(Copy(Name, 2, 10), 1);
-              if ActiveDevices[ActiveDeviceCount].ForceFeedback then
+              if OpenDevices[OpenDevicesCount].ForceFeedback then
               begin
                 DeadZone.diph.dwSize := SizeOf(DeadZone);
                 DeadZone.diph.dwHeaderSize := SizeOf(DeadZone.diph);
                 DeadZone.diph.dwObj := 0;
                 DeadZone.diph.dwHow := DIPH_DEVICE;
-                DeadZone.dwData := ActiveDevices[ActiveDeviceCount].DeadZone * 100;
-                DIResult := ActiveDevices[ActiveDeviceCount].Device.SetProperty(
+                DeadZone.dwData := OpenDevices[OpenDevicesCount].DeadZone * 100;
+                DIError := OpenDevices[OpenDevicesCount].Device.SetProperty(
                   DIPROP_DEADZONE, DeadZone.diph);
-                if DIResult <> 0 then
-                  MessageBox(0, PChar(DIErrorString(DIResult)), '', 0);
+                if DIError <> 0 then
+                  MessageBox(0, PChar(DIErrorString(DIError)), '', 0);
                 Force.lMagnitude := DI_FFNOMINALMAX;
                 Effect.dwSize := SizeOf(Effect);
                 Effect.dwDuration := 100000;
@@ -322,30 +322,30 @@ begin
                 Effect.lpEnvelope := nil;
                 Effect.cbTypeSpecificParams := SizeOf(Force);
                 Effect.lpvTypeSpecificParams := @Force;
-                DIResult := ActiveDevices[ActiveDeviceCount].Device.CreateEffect(
-                  GUID_ConstantForce, Effect, ActiveDevices[ActiveDeviceCount].Effect, nil);
-                if DIResult <> 0 then
+                DIError := OpenDevices[OpenDevicesCount].Device.CreateEffect(
+                  GUID_ConstantForce, Effect, OpenDevices[OpenDevicesCount].Effect, nil);
+                if DIError <> 0 then
                   MessageBox(0, PChar('Create Effect Error: ' +
-                    DIErrorString(DIResult)), '', 0);
+                    DIErrorString(DIError)), '', 0);
               end;
             end;
           DIDEVTYPE_MOUSE:
             begin
               FillChar(DIDevices[J].Caps, SizeOf(TDIDevCaps), 0);
               DIDevices[J].Caps.dwSize := SizeOf(TDIDevCaps);
-              DIErrorCheck(ActiveDevices[ActiveDeviceCount].Device.GetCapabilities(
+              DIErrorCheck(OpenDevices[OpenDevicesCount].Device.GetCapabilities(
                 DIDevices[J].Caps));
-              DIErrorCheck(ActiveDevices[ActiveDeviceCount].Device.SetDataFormat(
+              DIErrorCheck(OpenDevices[OpenDevicesCount].Device.SetDataFormat(
                 c_dfDIMouse));
-              DIErrorCheck(ActiveDevices[ActiveDeviceCount].Device.SetCooperativeLevel(
+              DIErrorCheck(OpenDevices[OpenDevicesCount].Device.SetCooperativeLevel(
                 DIWindow, DISCL_NONEXCLUSIVE or DISCL_FOREGROUND));
-              SetRelativeAxes(ActiveDevices[ActiveDeviceCount].Device);
-              ActiveDevices[ActiveDeviceCount].ButtonCount := 0;
-              ActiveDevices[ActiveDeviceCount].Device.EnumObjects(
-                EnumButtonsCallback, @ActiveDeviceCount, DIDFT_BUTTON);
+              SetRelativeAxes(OpenDevices[OpenDevicesCount].Device);
+              OpenDevices[OpenDevicesCount].ButtonCount := 0;
+              OpenDevices[OpenDevicesCount].Device.EnumObjects(
+                EnumButtonsCallback, @OpenDevicesCount, DIDFT_BUTTON);
             end;
         end;
-        Inc(ActiveDeviceCount);
+        Inc(OpenDevicesCount);
       end;
     if not Found and not UseDefaults then Names.Delete(I);
     Inc(I);
@@ -353,23 +353,23 @@ begin
   Names.Free;
   Reg.OpenKey('\Software\Nemu\0.8\Input.5', True);
   if Reg.ValueExists('Data') then
-    Reg.ReadBinaryData('Data', InputSettings, SizeOf(InputSettings))
+    Reg.ReadBinaryData('Data', ControllerSettings, SizeOf(ControllerSettings))
   else
   begin
-    ZeroMemory(@InputSettings, SizeOf(InputSettings));
+    ZeroMemory(@ControllerSettings, SizeOf(ControllerSettings));
     AutoConfigureKeyboard(0);
-    InputSettings.Controllers[0].MemPack := False;
-    InputSettings.Controllers[0].RumblePack := False;
-    InputSettings.DefaultSensitivity := 55;
-    InputSettings.Modifier1Sensitivity := 20;
-    InputSettings.Modifier2Sensitivity := 30;
-    InputSettings.Modifier3Sensitivity := 100;
+    ControllerSettings.Controllers[0].MemPack := False;
+    ControllerSettings.Controllers[0].RumblePack := False;
+    ControllerSettings.DefaultSensitivity := 55;
+    ControllerSettings.Modifier1Sensitivity := 20;
+    ControllerSettings.Modifier2Sensitivity := 30;
+    ControllerSettings.Modifier3Sensitivity := 100;
   end;
   for I := 0 to 3 do
   begin
-    ControllerData^[I].PluggedIn := InputSettings.Controllers[I].Enabled;
-    ControllerData^[I].MemPack := InputSettings.Controllers[I].MemPack;
-    ControllerData^[I].RumblePack := InputSettings.Controllers[I].RumblePack;
+    Controllers^[I].PluggedIn := ControllerSettings.Controllers[I].Enabled;
+    Controllers^[I].MemPack := ControllerSettings.Controllers[I].MemPack;
+    Controllers^[I].RumblePack := ControllerSettings.Controllers[I].RumblePack;
   end;
   Reg.Free;
 end;
@@ -378,14 +378,14 @@ procedure FreeDirectInput;
 var
   I: Integer;
 begin
-  for I := 0 to ActiveDeviceCount - 1 do
-    if ActiveDevices[I].Device <> nil then
+  for I := 0 to OpenDevicesCount - 1 do
+    if OpenDevices[I].Device <> nil then
     begin
-      if ActiveDevices[I].ForceFeedback then
-        ActiveDevices[I].Effect.Unload;
-      ActiveDevices[I].Effect := nil;
-      ActiveDevices[I].Device.Unacquire;
-      ActiveDevices[I].Device := nil;
+      if OpenDevices[I].ForceFeedback then
+        OpenDevices[I].Effect.Unload;
+      OpenDevices[I].Effect := nil;
+      OpenDevices[I].Device.Unacquire;
+      OpenDevices[I].Device := nil;
     end;
   DI := nil;
 end;

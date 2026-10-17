@@ -46,11 +46,11 @@ begin
     Exit;
   end;
   Timer.Enabled := False;
-  for I := 0 to ActiveDeviceCount - 1 do
-    case DIDevices[ActiveDevices[I].DeviceIndex].DeviceType and $FF of
+  for I := 0 to OpenDevicesCount - 1 do
+    case DIDevices[OpenDevices[I].DeviceIndex].DeviceType and $FF of
       DIDEVTYPE_KEYBOARD:
         begin
-          KeyName := DIDevices[ActiveDevices[I].DeviceIndex].Name + '.';
+          KeyName := DIDevices[OpenDevices[I].DeviceIndex].Name + '.';
           if (GetKeyState(Ord('1')) and $80) <> 0 then
             KeyName := KeyName + '1'
           else if (GetKeyState(Ord('2')) and $80) <> 0 then
@@ -124,7 +124,7 @@ begin
                 KeyName := KeyName + C;
                 Break;
               end;
-          if KeyName <> DIDevices[ActiveDevices[I].DeviceIndex].Name + '.' then
+          if KeyName <> DIDevices[OpenDevices[I].DeviceIndex].Name + '.' then
           begin
             PanelStatus.Caption := KeyName;
             FadeOutForm(Self, 500);
@@ -134,13 +134,13 @@ begin
         end;
       DIDEVTYPE_JOYSTICK:
         begin
-          DIErrorCheck(ActiveDevices[I].Device.Poll);
-          FillChar(ActiveDevices[I].JoyState, SizeOf(TDJoyState), 0);
-          DIErrorCheck(ActiveDevices[I].Device.GetDeviceState(SizeOf(TDJoyState), ActiveDevices[I].JoyState));
-          for J := 0 to ActiveDevices[I].ButtonCount - 1 do
-            if (ActiveDevices[I].JoyState.rgbButtons[J] and $80) <> 0 then
+          DIErrorCheck(OpenDevices[I].Device.Poll);
+          FillChar(OpenDevices[I].JoyState, SizeOf(TDJoyState), 0);
+          DIErrorCheck(OpenDevices[I].Device.GetDeviceState(SizeOf(TDJoyState), OpenDevices[I].JoyState));
+          for J := 0 to OpenDevices[I].ButtonCount - 1 do
+            if (OpenDevices[I].JoyState.rgbButtons[J] and $80) <> 0 then
             begin
-              PanelStatus.Caption := DIDevices[ActiveDevices[I].DeviceIndex].Name + '.' + ActiveDevices[I].ButtonNames[J];
+              PanelStatus.Caption := DIDevices[OpenDevices[I].DeviceIndex].Name + '.' + OpenDevices[I].ButtonNames[J];
               FadeOutForm(Self, 500);
               ModalResult := mrOk;
               Exit;

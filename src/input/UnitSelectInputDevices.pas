@@ -64,10 +64,10 @@ begin
       Reg.WriteString(CheckListBox.Items[I], Value);
     end;
   Reg.Free;
-  Configuring := True;
+  CurrentlyConfiguring := True;
   FreeDirectInput;
   InitDirectInput;
-  Configuring := False;
+  CurrentlyConfiguring := False;
   FillButtonList(FormSettings.ComboBoxButton.Items);
   FillAxisList(FormSettings.ComboBoxAxis.Items);
   FillButtonList(FormSettings.ComboBoxAxisButton1.Items);
@@ -89,8 +89,8 @@ begin
   Reg := TRegistry.Create;
   Reg.RootKey := HKEY_CURRENT_USER;
   Reg.OpenKey('\Software\Nemu\0.8\Input.5\Use', True);
-  SetLength(DeviceSettings, DIDeviceCount);
-  for I := 0 to DIDeviceCount - 1 do
+  SetLength(DeviceSettings, DeviceCount);
+  for I := 0 to DeviceCount - 1 do
   begin
     CheckListBox.Items.Add(DIDevices[I].Name);
     if Reg.ValueExists(DIDevices[I].Name) then
