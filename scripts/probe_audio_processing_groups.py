@@ -111,6 +111,19 @@ def main():
     duplicates = {name: units for name, units in owners.items() if len(units) > 1}
     assert not duplicates
     assert owners['_DecodeAudioADPCMBlock'] == ['AudioProcessing.obj']
+    early = COFF(objects[0])
+    definitions = {s['name']: s for s in early.symbols}
+    lookup = definitions['_AudioSqrtMantissa']
+    uninitialized = dict(object=objects[0].name, section='.bss',
+                         bytes=early.sections[lookup['section'] - 1]['size'],
+                         lookup_offset=lookup['value'],
+                         wet_offset=definitions['_AudioEnvelopeWet']['value'],
+                         dry_offset=definitions['_AudioEnvelopeDry']['value'],
+                         lookup_private=lookup['storage_class'] == 3,
+                         proof='analysis/audio-sqrt-storage.json')
+    assert uninitialized['bytes'] == 0x40008
+    assert (uninitialized['lookup_offset'], uninitialized['wet_offset'],
+            uninitialized['dry_offset']) == (0, 0x40000, 0x40004)
     paths = inputs + [Path(__file__).resolve(), ROOT / 'scripts/verify_gs.py',
                      ROOT / 'scripts/verify_audio.py']
     paths += [ROOT / 'toolchains/vc7/bin' / name for name in ('cl.exe', 'c1.dll', 'c2.dll')]
@@ -119,11 +132,12 @@ def main():
                   hashes={str(p.relative_to(ROOT)): digest(p) for p in paths},
                   command=command, compile_log=str(log), compile_log_sha256=digest(log),
                   objects=results, initialized_data=data, alignment=alignment,
+                  uninitialized_data=uninitialized,
                   coefficient_data=coefficient_data(objects[1]),
                   function_owners=owners, duplicate_function_definitions=duplicates,
                   limitations=[
                       'Complete DLL byte equality remains unproven.',
-                      'Five incomplete kernels retain their actual differing bytes and operand failures.',
+                      'Four incomplete kernels retain their actual differing bytes and operand failures.',
                       'Macro ownership is inferred from repeated algorithm code and coherent ordinary linkage; original macro names are unknown.',
                       'The preceding external-plus-inline ownership probe failed LNK2005; no duplicate fallback or forced linker option is used here.'
                   ])

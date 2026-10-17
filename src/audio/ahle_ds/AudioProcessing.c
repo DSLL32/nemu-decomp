@@ -14,10 +14,12 @@ extern void LoadAudioBuffer(unsigned int offset, unsigned int address, int bytes
 extern void SaveAudioBuffer(unsigned int offset, unsigned int address, int bytes,
                             AudioContext *context);
 
-unsigned int AudioSqrtEvenMantissa[32768];
-unsigned int AudioSqrtOddMantissa[32768];
-int AudioEnvelopeWet;
-int AudioEnvelopeDry;
+/* The mantissa lookup uses the low exponent bit as its upper index bit.
+ * Native initialization writes the upper half for [1,2), then the lower half
+ * for [2,4). The contiguous private table precedes the envelope state. */
+static unsigned int AudioSqrtMantissa[65536];
+int AudioEnvelopeWet = 0;
+int AudioEnvelopeDry = 0;
 
 void ReadAudioSamples(short *destination, unsigned int address, int bytes)
 {
@@ -39,10 +41,10 @@ void InitializeAudioSqrt(void)
     for (index = 0; index <= 0x7fff; ++index) {
         sample.bits = (index | 0x3f8000) << 8;
         sample.value = (float)sqrt(sample.value);
-        AudioSqrtEvenMantissa[index] = sample.bits & 0x7fffff;
+        AudioSqrtMantissa[index + 0x8000] = sample.bits & 0x7fffff;
         sample.bits = (index | 0x400000) << 8;
         sample.value = (float)sqrt(sample.value);
-        AudioSqrtOddMantissa[index] = sample.bits & 0x7fffff;
+        AudioSqrtMantissa[index] = sample.bits & 0x7fffff;
     }
 }
 

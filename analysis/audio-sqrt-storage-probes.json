@@ -1,0 +1,878 @@
+{
+  "status": "storage_source_controls",
+  "source_revision": "509672b",
+  "compiler_flags": [
+    "/O2",
+    "/Ob1",
+    "/MT",
+    "/c"
+  ],
+  "variants": [
+    {
+      "variant": 0,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/sqrt-storage/SqrtStorage0.c",
+      "source_sha256": "5ed96475f87ea91da4c42dd615c253eb4b34a26c5be2e36c0ffafeca66a1f6f1",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/sqrt-storage/SqrtStorage0.obj",
+      "object_sha256": "1b61ab3d72374d263aec302bd3f14feb9c0522fe5027e810f7b5f5fe31527936",
+      "complete_bodies_matching_outside_relocations": 31,
+      "functions": 35,
+      "initializer": {
+        "name": "_InitializeAudioSqrt",
+        "object": "SqrtStorage0.obj",
+        "rebuilt_bytes": 112,
+        "status": "compared",
+        "original_va": 268480288,
+        "raw_bytes_equal": false,
+        "raw_differing_bytes": 8,
+        "compared_bytes": 112,
+        "original_size_verified": true,
+        "original_bytes": 112,
+        "size_equal": true,
+        "relocations": [
+          {
+            "offset": 62,
+            "type": "DIR32",
+            "symbol": "_AudioSqrtEvenMantissa",
+            "addend": 0,
+            "original_target_va": 269532656,
+            "original_target_symbols": [
+              "_AudioSqrtEvenMantissa"
+            ],
+            "expected_target_va": 269532656,
+            "resolution_basis": "observed_operand_inference",
+            "target_address_evidence": "Inferred from decoded original function operands.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 83,
+            "type": "DIR32",
+            "symbol": "_AudioSqrtOddMantissa",
+            "addend": 0,
+            "original_target_va": 269401584,
+            "original_target_symbols": [
+              "_AudioSqrtMantissa",
+              "_AudioSqrtOddMantissa"
+            ],
+            "expected_target_va": 269401584,
+            "resolution_basis": "observed_operand_inference",
+            "target_address_evidence": "Inferred from decoded original function operands.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": false
+          }
+        ],
+        "relocation_target_mismatch_count": 0,
+        "inferred_target_count": 2,
+        "unresolved_target_count": 0,
+        "relocation_masked_equal": true,
+        "relocation_masked_differing_bytes": 0,
+        "relocations_all_resolved": true,
+        "relocation_values_consistent": true,
+        "relocation_targets_verified": false,
+        "relocation_targets_equal": false,
+        "inferred_relocated_bytes_equal": true,
+        "relocated_bytes_equal": false,
+        "first_unmasked_differences": []
+      },
+      "storage": [
+        {
+          "name": "_AudioSqrtOddMantissa",
+          "section": ".bss",
+          "section_number": 8,
+          "offset": 131080,
+          "storage_class": 3
+        },
+        {
+          "name": "_AudioSqrtEvenMantissa",
+          "section": ".bss",
+          "section_number": 8,
+          "offset": 8,
+          "storage_class": 3
+        },
+        {
+          "name": "_AudioEnvelopeDry",
+          "section": ".bss",
+          "section_number": 8,
+          "offset": 0,
+          "storage_class": 3
+        },
+        {
+          "name": "_AudioEnvelopeWet",
+          "section": ".bss",
+          "section_number": 8,
+          "offset": 262152,
+          "storage_class": 3
+        }
+      ]
+    },
+    {
+      "variant": 1,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/sqrt-storage/SqrtStorage1.c",
+      "source_sha256": "58e2a067c8da95b03560ef6d75d29781021c79bf1ac49ea53b8e73af412568fa",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/sqrt-storage/SqrtStorage1.obj",
+      "object_sha256": "4f523bd621a856066d584d82cf52c9975fc53329c9e0b235805dd9095091178d",
+      "complete_bodies_matching_outside_relocations": 31,
+      "functions": 35,
+      "initializer": {
+        "name": "_InitializeAudioSqrt",
+        "object": "SqrtStorage1.obj",
+        "rebuilt_bytes": 112,
+        "status": "compared",
+        "original_va": 268480288,
+        "raw_bytes_equal": false,
+        "raw_differing_bytes": 8,
+        "compared_bytes": 112,
+        "original_size_verified": true,
+        "original_bytes": 112,
+        "size_equal": true,
+        "relocations": [
+          {
+            "offset": 62,
+            "type": "DIR32",
+            "symbol": "_AudioSqrtEvenMantissa",
+            "addend": 0,
+            "original_target_va": 269532656,
+            "original_target_symbols": [
+              "_AudioSqrtEvenMantissa"
+            ],
+            "expected_target_va": 269532656,
+            "resolution_basis": "observed_operand_inference",
+            "target_address_evidence": "Inferred from decoded original function operands.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 83,
+            "type": "DIR32",
+            "symbol": "_AudioSqrtOddMantissa",
+            "addend": 0,
+            "original_target_va": 269401584,
+            "original_target_symbols": [
+              "_AudioSqrtMantissa",
+              "_AudioSqrtOddMantissa"
+            ],
+            "expected_target_va": 269401584,
+            "resolution_basis": "observed_operand_inference",
+            "target_address_evidence": "Inferred from decoded original function operands.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": false
+          }
+        ],
+        "relocation_target_mismatch_count": 0,
+        "inferred_target_count": 2,
+        "unresolved_target_count": 0,
+        "relocation_masked_equal": true,
+        "relocation_masked_differing_bytes": 0,
+        "relocations_all_resolved": true,
+        "relocation_values_consistent": true,
+        "relocation_targets_verified": false,
+        "relocation_targets_equal": false,
+        "inferred_relocated_bytes_equal": true,
+        "relocated_bytes_equal": false,
+        "first_unmasked_differences": []
+      },
+      "storage": [
+        {
+          "name": "_AudioSqrtOddMantissa",
+          "section": ".bss",
+          "section_number": 8,
+          "offset": 131080,
+          "storage_class": 3
+        },
+        {
+          "name": "_AudioSqrtEvenMantissa",
+          "section": ".bss",
+          "section_number": 8,
+          "offset": 8,
+          "storage_class": 3
+        },
+        {
+          "name": "_AudioEnvelopeDry",
+          "section": ".bss",
+          "section_number": 8,
+          "offset": 0,
+          "storage_class": 3
+        },
+        {
+          "name": "_AudioEnvelopeWet",
+          "section": ".bss",
+          "section_number": 8,
+          "offset": 262152,
+          "storage_class": 3
+        }
+      ]
+    },
+    {
+      "variant": 2,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/sqrt-storage/SqrtStorage2.c",
+      "source_sha256": "cce464dc1a9f5fdef7d329c882ab4a55eed6c33456b0bd7d32febb71c113d17c",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/sqrt-storage/SqrtStorage2.obj",
+      "object_sha256": "5630365faedc24694f5da0ab14dbb35eedfe1cc899b1fe1a953a4f28d1f1e38a",
+      "complete_bodies_matching_outside_relocations": 31,
+      "functions": 35,
+      "initializer": {
+        "name": "_InitializeAudioSqrt",
+        "object": "SqrtStorage2.obj",
+        "rebuilt_bytes": 112,
+        "status": "compared",
+        "original_va": 268480288,
+        "raw_bytes_equal": false,
+        "raw_differing_bytes": 8,
+        "compared_bytes": 112,
+        "original_size_verified": true,
+        "original_bytes": 112,
+        "size_equal": true,
+        "relocations": [
+          {
+            "offset": 62,
+            "type": "DIR32",
+            "symbol": "_AudioSqrtMantissa",
+            "addend": 131072,
+            "original_target_va": 269532656,
+            "original_target_symbols": [
+              "_AudioSqrtEvenMantissa"
+            ],
+            "expected_target_va": 269532656,
+            "resolution_basis": "observed_operand_inference",
+            "target_address_evidence": "Contiguous private65536-DWORD lookup inferred from complete initializer stores at100ebdf0 and1010bdf0; unified storage gives native addends0 and0x20000. Group11 BSS probe records the equivalent two-array alternative.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 83,
+            "type": "DIR32",
+            "symbol": "_AudioSqrtMantissa",
+            "addend": 0,
+            "original_target_va": 269401584,
+            "original_target_symbols": [
+              "_AudioSqrtMantissa",
+              "_AudioSqrtOddMantissa"
+            ],
+            "expected_target_va": 269401584,
+            "resolution_basis": "observed_operand_inference",
+            "target_address_evidence": "Contiguous private65536-DWORD lookup inferred from complete initializer stores at100ebdf0 and1010bdf0; unified storage gives native addends0 and0x20000. Group11 BSS probe records the equivalent two-array alternative.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": false
+          }
+        ],
+        "relocation_target_mismatch_count": 0,
+        "inferred_target_count": 2,
+        "unresolved_target_count": 0,
+        "relocation_masked_equal": true,
+        "relocation_masked_differing_bytes": 0,
+        "relocations_all_resolved": true,
+        "relocation_values_consistent": true,
+        "relocation_targets_verified": false,
+        "relocation_targets_equal": false,
+        "inferred_relocated_bytes_equal": true,
+        "relocated_bytes_equal": false,
+        "first_unmasked_differences": []
+      },
+      "storage": [
+        {
+          "name": "_AudioSqrtMantissa",
+          "section": ".bss",
+          "section_number": 8,
+          "offset": 8,
+          "storage_class": 3
+        },
+        {
+          "name": "_AudioEnvelopeDry",
+          "section": ".bss",
+          "section_number": 8,
+          "offset": 0,
+          "storage_class": 3
+        },
+        {
+          "name": "_AudioEnvelopeWet",
+          "section": ".bss",
+          "section_number": 8,
+          "offset": 4,
+          "storage_class": 3
+        }
+      ]
+    },
+    {
+      "variant": 3,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/sqrt-storage/SqrtStorage3.c",
+      "source_sha256": "8d8864efee892cbe9d34ba5aa524ce1bc1809b1b8ce4e2078decf4bedd7a817f",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/sqrt-storage/SqrtStorage3.obj",
+      "object_sha256": "fbab3c48610f74629c1891edc40698519a854878909a6b8865b5707e642afdd1",
+      "complete_bodies_matching_outside_relocations": 33,
+      "functions": 35,
+      "initializer": {
+        "name": "_InitializeAudioSqrt",
+        "object": "SqrtStorage3.obj",
+        "rebuilt_bytes": 112,
+        "status": "compared",
+        "original_va": 268480288,
+        "raw_bytes_equal": false,
+        "raw_differing_bytes": 8,
+        "compared_bytes": 112,
+        "original_size_verified": true,
+        "original_bytes": 112,
+        "size_equal": true,
+        "relocations": [
+          {
+            "offset": 62,
+            "type": "DIR32",
+            "symbol": "_AudioSqrtEvenMantissa",
+            "addend": 0,
+            "original_target_va": 269532656,
+            "original_target_symbols": [
+              "_AudioSqrtEvenMantissa"
+            ],
+            "expected_target_va": 269532656,
+            "resolution_basis": "observed_operand_inference",
+            "target_address_evidence": "Inferred from decoded original function operands.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 83,
+            "type": "DIR32",
+            "symbol": "_AudioSqrtOddMantissa",
+            "addend": 0,
+            "original_target_va": 269401584,
+            "original_target_symbols": [
+              "_AudioSqrtMantissa",
+              "_AudioSqrtOddMantissa"
+            ],
+            "expected_target_va": 269401584,
+            "resolution_basis": "observed_operand_inference",
+            "target_address_evidence": "Inferred from decoded original function operands.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": false
+          }
+        ],
+        "relocation_target_mismatch_count": 0,
+        "inferred_target_count": 2,
+        "unresolved_target_count": 0,
+        "relocation_masked_equal": true,
+        "relocation_masked_differing_bytes": 0,
+        "relocations_all_resolved": true,
+        "relocation_values_consistent": true,
+        "relocation_targets_verified": false,
+        "relocation_targets_equal": false,
+        "inferred_relocated_bytes_equal": true,
+        "relocated_bytes_equal": false,
+        "first_unmasked_differences": []
+      },
+      "storage": [
+        {
+          "name": "_AudioEnvelopeDry",
+          "section": ".bss",
+          "section_number": 3,
+          "offset": 262148,
+          "storage_class": 2
+        },
+        {
+          "name": "_AudioEnvelopeWet",
+          "section": ".bss",
+          "section_number": 3,
+          "offset": 262144,
+          "storage_class": 2
+        },
+        {
+          "name": "_AudioSqrtOddMantissa",
+          "section": ".bss",
+          "section_number": 3,
+          "offset": 131072,
+          "storage_class": 2
+        },
+        {
+          "name": "_AudioSqrtEvenMantissa",
+          "section": ".bss",
+          "section_number": 3,
+          "offset": 0,
+          "storage_class": 2
+        }
+      ]
+    },
+    {
+      "variant": 4,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/sqrt-storage/SqrtStorage4.c",
+      "source_sha256": "6893d0b5edcc8519b5a8ca4159b4a6f7da5989562717371e351576009f5ca5d6",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/sqrt-storage/SqrtStorage4.obj",
+      "object_sha256": "beea5bebd6085dec384cc1d911812f159b8d384c55217e6a6d25e6625fc9d786",
+      "complete_bodies_matching_outside_relocations": 33,
+      "functions": 35,
+      "initializer": {
+        "name": "_InitializeAudioSqrt",
+        "object": "SqrtStorage4.obj",
+        "rebuilt_bytes": 112,
+        "status": "compared",
+        "original_va": 268480288,
+        "raw_bytes_equal": false,
+        "raw_differing_bytes": 8,
+        "compared_bytes": 112,
+        "original_size_verified": true,
+        "original_bytes": 112,
+        "size_equal": true,
+        "relocations": [
+          {
+            "offset": 62,
+            "type": "DIR32",
+            "symbol": "_AudioSqrtEvenMantissa",
+            "addend": 0,
+            "original_target_va": 269532656,
+            "original_target_symbols": [
+              "_AudioSqrtEvenMantissa"
+            ],
+            "expected_target_va": 269532656,
+            "resolution_basis": "observed_operand_inference",
+            "target_address_evidence": "Inferred from decoded original function operands.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 83,
+            "type": "DIR32",
+            "symbol": "_AudioSqrtOddMantissa",
+            "addend": 0,
+            "original_target_va": 269401584,
+            "original_target_symbols": [
+              "_AudioSqrtMantissa",
+              "_AudioSqrtOddMantissa"
+            ],
+            "expected_target_va": 269401584,
+            "resolution_basis": "observed_operand_inference",
+            "target_address_evidence": "Inferred from decoded original function operands.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": false
+          }
+        ],
+        "relocation_target_mismatch_count": 0,
+        "inferred_target_count": 2,
+        "unresolved_target_count": 0,
+        "relocation_masked_equal": true,
+        "relocation_masked_differing_bytes": 0,
+        "relocations_all_resolved": true,
+        "relocation_values_consistent": true,
+        "relocation_targets_verified": false,
+        "relocation_targets_equal": false,
+        "inferred_relocated_bytes_equal": true,
+        "relocated_bytes_equal": false,
+        "first_unmasked_differences": []
+      },
+      "storage": [
+        {
+          "name": "_AudioEnvelopeDry",
+          "section": ".bss",
+          "section_number": 3,
+          "offset": 262148,
+          "storage_class": 2
+        },
+        {
+          "name": "_AudioEnvelopeWet",
+          "section": ".bss",
+          "section_number": 3,
+          "offset": 262144,
+          "storage_class": 2
+        },
+        {
+          "name": "_AudioSqrtEvenMantissa",
+          "section": ".bss",
+          "section_number": 3,
+          "offset": 131072,
+          "storage_class": 2
+        },
+        {
+          "name": "_AudioSqrtOddMantissa",
+          "section": ".bss",
+          "section_number": 3,
+          "offset": 0,
+          "storage_class": 2
+        }
+      ]
+    },
+    {
+      "variant": 5,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/sqrt-storage/SqrtStorage5.c",
+      "source_sha256": "374933e0e02c18e648f321c3e464bf5098b2794321b53d5c8ff53dd412da7627",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/sqrt-storage/SqrtStorage5.obj",
+      "object_sha256": "2e440bb596905da46680c1c5d045232e5e0544d0965b5326f28d633d95ecf3db",
+      "complete_bodies_matching_outside_relocations": 33,
+      "functions": 35,
+      "initializer": {
+        "name": "_InitializeAudioSqrt",
+        "object": "SqrtStorage5.obj",
+        "rebuilt_bytes": 112,
+        "status": "compared",
+        "original_va": 268480288,
+        "raw_bytes_equal": false,
+        "raw_differing_bytes": 8,
+        "compared_bytes": 112,
+        "original_size_verified": true,
+        "original_bytes": 112,
+        "size_equal": true,
+        "relocations": [
+          {
+            "offset": 62,
+            "type": "DIR32",
+            "symbol": "_AudioSqrtMantissa",
+            "addend": 131072,
+            "original_target_va": 269532656,
+            "original_target_symbols": [
+              "_AudioSqrtEvenMantissa"
+            ],
+            "expected_target_va": 269532656,
+            "resolution_basis": "observed_operand_inference",
+            "target_address_evidence": "Contiguous private65536-DWORD lookup inferred from complete initializer stores at100ebdf0 and1010bdf0; unified storage gives native addends0 and0x20000. Group11 BSS probe records the equivalent two-array alternative.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 83,
+            "type": "DIR32",
+            "symbol": "_AudioSqrtMantissa",
+            "addend": 0,
+            "original_target_va": 269401584,
+            "original_target_symbols": [
+              "_AudioSqrtMantissa",
+              "_AudioSqrtOddMantissa"
+            ],
+            "expected_target_va": 269401584,
+            "resolution_basis": "observed_operand_inference",
+            "target_address_evidence": "Contiguous private65536-DWORD lookup inferred from complete initializer stores at100ebdf0 and1010bdf0; unified storage gives native addends0 and0x20000. Group11 BSS probe records the equivalent two-array alternative.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": false
+          }
+        ],
+        "relocation_target_mismatch_count": 0,
+        "inferred_target_count": 2,
+        "unresolved_target_count": 0,
+        "relocation_masked_equal": true,
+        "relocation_masked_differing_bytes": 0,
+        "relocations_all_resolved": true,
+        "relocation_values_consistent": true,
+        "relocation_targets_verified": false,
+        "relocation_targets_equal": false,
+        "inferred_relocated_bytes_equal": true,
+        "relocated_bytes_equal": false,
+        "first_unmasked_differences": []
+      },
+      "storage": [
+        {
+          "name": "_AudioEnvelopeDry",
+          "section": ".bss",
+          "section_number": 3,
+          "offset": 262148,
+          "storage_class": 2
+        },
+        {
+          "name": "_AudioEnvelopeWet",
+          "section": ".bss",
+          "section_number": 3,
+          "offset": 262144,
+          "storage_class": 2
+        },
+        {
+          "name": "_AudioSqrtMantissa",
+          "section": ".bss",
+          "section_number": 3,
+          "offset": 0,
+          "storage_class": 2
+        }
+      ]
+    },
+    {
+      "variant": 6,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/sqrt-storage/SqrtStorage6.c",
+      "source_sha256": "94dd3b3abe783b6763c6f6608c437acf5257c6a5d658ce58d9873b7e87239290",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/sqrt-storage/SqrtStorage6.obj",
+      "object_sha256": "b050986c1bba6711336b9c622983c5b2dc831454ad02eeacaa71545042f69d28",
+      "complete_bodies_matching_outside_relocations": 33,
+      "functions": 35,
+      "initializer": {
+        "name": "_InitializeAudioSqrt",
+        "object": "SqrtStorage6.obj",
+        "rebuilt_bytes": 112,
+        "status": "compared",
+        "original_va": 268480288,
+        "raw_bytes_equal": false,
+        "raw_differing_bytes": 8,
+        "compared_bytes": 112,
+        "original_size_verified": true,
+        "original_bytes": 112,
+        "size_equal": true,
+        "relocations": [
+          {
+            "offset": 62,
+            "type": "DIR32",
+            "symbol": "_AudioSqrtMantissa",
+            "addend": 131072,
+            "original_target_va": 269532656,
+            "original_target_symbols": [
+              "_AudioSqrtEvenMantissa"
+            ],
+            "expected_target_va": 269532656,
+            "resolution_basis": "observed_operand_inference",
+            "target_address_evidence": "Contiguous private65536-DWORD lookup inferred from complete initializer stores at100ebdf0 and1010bdf0; unified storage gives native addends0 and0x20000. Group11 BSS probe records the equivalent two-array alternative.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 83,
+            "type": "DIR32",
+            "symbol": "_AudioSqrtMantissa",
+            "addend": 0,
+            "original_target_va": 269401584,
+            "original_target_symbols": [
+              "_AudioSqrtMantissa",
+              "_AudioSqrtOddMantissa"
+            ],
+            "expected_target_va": 269401584,
+            "resolution_basis": "observed_operand_inference",
+            "target_address_evidence": "Contiguous private65536-DWORD lookup inferred from complete initializer stores at100ebdf0 and1010bdf0; unified storage gives native addends0 and0x20000. Group11 BSS probe records the equivalent two-array alternative.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": false
+          }
+        ],
+        "relocation_target_mismatch_count": 0,
+        "inferred_target_count": 2,
+        "unresolved_target_count": 0,
+        "relocation_masked_equal": true,
+        "relocation_masked_differing_bytes": 0,
+        "relocations_all_resolved": true,
+        "relocation_values_consistent": true,
+        "relocation_targets_verified": false,
+        "relocation_targets_equal": false,
+        "inferred_relocated_bytes_equal": true,
+        "relocated_bytes_equal": false,
+        "first_unmasked_differences": []
+      },
+      "storage": [
+        {
+          "name": "_AudioEnvelopeDry",
+          "section": ".bss",
+          "section_number": 3,
+          "offset": 262148,
+          "storage_class": 2
+        },
+        {
+          "name": "_AudioEnvelopeWet",
+          "section": ".bss",
+          "section_number": 3,
+          "offset": 262144,
+          "storage_class": 2
+        },
+        {
+          "name": "_AudioSqrtMantissa",
+          "section": ".bss",
+          "section_number": 3,
+          "offset": 0,
+          "storage_class": 3
+        }
+      ]
+    },
+    {
+      "variant": 7,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/sqrt-storage/SqrtStorage7.c",
+      "source_sha256": "9526ac999b12c247871026d3e3abb64fdb0bcc8558f027e9ddbc82601c225158",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/sqrt-storage/SqrtStorage7.obj",
+      "object_sha256": "0f27272a04e4495f4131edae28d9adb183237e62df47b80270e6e11d39102507",
+      "complete_bodies_matching_outside_relocations": 33,
+      "functions": 35,
+      "initializer": {
+        "name": "_InitializeAudioSqrt",
+        "object": "SqrtStorage7.obj",
+        "rebuilt_bytes": 112,
+        "status": "compared",
+        "original_va": 268480288,
+        "raw_bytes_equal": false,
+        "raw_differing_bytes": 8,
+        "compared_bytes": 112,
+        "original_size_verified": true,
+        "original_bytes": 112,
+        "size_equal": true,
+        "relocations": [
+          {
+            "offset": 62,
+            "type": "DIR32",
+            "symbol": "_AudioSqrtMantissa",
+            "addend": 131072,
+            "original_target_va": 269532656,
+            "original_target_symbols": [
+              "_AudioSqrtEvenMantissa"
+            ],
+            "expected_target_va": 269532656,
+            "resolution_basis": "observed_operand_inference",
+            "target_address_evidence": "Contiguous private65536-DWORD lookup inferred from complete initializer stores at100ebdf0 and1010bdf0; unified storage gives native addends0 and0x20000. Group11 BSS probe records the equivalent two-array alternative.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 83,
+            "type": "DIR32",
+            "symbol": "_AudioSqrtMantissa",
+            "addend": 0,
+            "original_target_va": 269401584,
+            "original_target_symbols": [
+              "_AudioSqrtMantissa",
+              "_AudioSqrtOddMantissa"
+            ],
+            "expected_target_va": 269401584,
+            "resolution_basis": "observed_operand_inference",
+            "target_address_evidence": "Contiguous private65536-DWORD lookup inferred from complete initializer stores at100ebdf0 and1010bdf0; unified storage gives native addends0 and0x20000. Group11 BSS probe records the equivalent two-array alternative.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": false
+          }
+        ],
+        "relocation_target_mismatch_count": 0,
+        "inferred_target_count": 2,
+        "unresolved_target_count": 0,
+        "relocation_masked_equal": true,
+        "relocation_masked_differing_bytes": 0,
+        "relocations_all_resolved": true,
+        "relocation_values_consistent": true,
+        "relocation_targets_verified": false,
+        "relocation_targets_equal": false,
+        "inferred_relocated_bytes_equal": true,
+        "relocated_bytes_equal": false,
+        "first_unmasked_differences": []
+      },
+      "storage": [
+        {
+          "name": "_AudioEnvelopeDry",
+          "section": ".bss",
+          "section_number": 3,
+          "offset": 262148,
+          "storage_class": 2
+        },
+        {
+          "name": "_AudioEnvelopeWet",
+          "section": ".bss",
+          "section_number": 3,
+          "offset": 262144,
+          "storage_class": 2
+        },
+        {
+          "name": "_AudioSqrtMantissa",
+          "section": ".bss",
+          "section_number": 3,
+          "offset": 0,
+          "storage_class": 3
+        }
+      ]
+    },
+    {
+      "variant": 8,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/sqrt-storage/SqrtStorage8.c",
+      "source_sha256": "173bee3d209bb6ace075b60cfea068431333aed448290890e14c7f3921897ffc",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/sqrt-storage/SqrtStorage8.obj",
+      "object_sha256": "4bf52618cdfaefb08cd9a66d138077cbefe8908493f5d2550d5fa13bf58c6a0c",
+      "complete_bodies_matching_outside_relocations": 33,
+      "functions": 35,
+      "initializer": {
+        "name": "_InitializeAudioSqrt",
+        "object": "SqrtStorage8.obj",
+        "rebuilt_bytes": 112,
+        "status": "compared",
+        "original_va": 268480288,
+        "raw_bytes_equal": false,
+        "raw_differing_bytes": 8,
+        "compared_bytes": 112,
+        "original_size_verified": true,
+        "original_bytes": 112,
+        "size_equal": true,
+        "relocations": [
+          {
+            "offset": 62,
+            "type": "DIR32",
+            "symbol": "_AudioSqrtEvenMantissa",
+            "addend": 0,
+            "original_target_va": 269532656,
+            "original_target_symbols": [
+              "_AudioSqrtEvenMantissa"
+            ],
+            "expected_target_va": 269532656,
+            "resolution_basis": "observed_operand_inference",
+            "target_address_evidence": "Inferred from decoded original function operands.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 83,
+            "type": "DIR32",
+            "symbol": "_AudioSqrtOddMantissa",
+            "addend": 0,
+            "original_target_va": 269401584,
+            "original_target_symbols": [
+              "_AudioSqrtMantissa",
+              "_AudioSqrtOddMantissa"
+            ],
+            "expected_target_va": 269401584,
+            "resolution_basis": "observed_operand_inference",
+            "target_address_evidence": "Inferred from decoded original function operands.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": false
+          }
+        ],
+        "relocation_target_mismatch_count": 0,
+        "inferred_target_count": 2,
+        "unresolved_target_count": 0,
+        "relocation_masked_equal": true,
+        "relocation_masked_differing_bytes": 0,
+        "relocations_all_resolved": true,
+        "relocation_values_consistent": true,
+        "relocation_targets_verified": false,
+        "relocation_targets_equal": false,
+        "inferred_relocated_bytes_equal": true,
+        "relocated_bytes_equal": false,
+        "first_unmasked_differences": []
+      },
+      "storage": [
+        {
+          "name": "_AudioEnvelopeDry",
+          "section": ".bss",
+          "section_number": 3,
+          "offset": 262148,
+          "storage_class": 2
+        },
+        {
+          "name": "_AudioEnvelopeWet",
+          "section": ".bss",
+          "section_number": 3,
+          "offset": 262144,
+          "storage_class": 2
+        },
+        {
+          "name": "_AudioSqrtEvenMantissa",
+          "section": ".bss",
+          "section_number": 3,
+          "offset": 131072,
+          "storage_class": 3
+        },
+        {
+          "name": "_AudioSqrtOddMantissa",
+          "section": ".bss",
+          "section_number": 3,
+          "offset": 0,
+          "storage_class": 3
+        }
+      ]
+    }
+  ],
+  "selection": "Variant6: one private uninitialized65536-entry lookup followed by explicitly zero-initialized public wet/dry globals. Canonical source uses direct array indexing instead of probe aliases; both produce identical112-byte initializer operands.",
+  "nonunique_alternatives": "Variants4,5,7,8 also preserve native relative placement and all33 matched group11 bodies. Storage/source spelling is inferred rather than uniquely proved.",
+  "negative_control": "Private tentative wet/dry globals permit compiler changes to Load/SaveEnvelope and do not preserve original storage offsets."
+}

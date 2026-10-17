@@ -243,6 +243,21 @@
       "address_evidence": "Unique complete SEH scope-table match after resolving both labels inside the matched AudioOSHasSSE body; see analysis/audio-processing-operands.json."
     },
     {
+      "name": "$T75349",
+      "va": 268636584,
+      "address_basis": "identified_symbol",
+      "address_evidence": "Unique complete SEH scope-table match after resolving both labels inside the matched AudioOSHasSSE body; see analysis/audio-processing-operands.json.",
+      "object": "AudioProcessing.obj"
+    },
+    {
+      "name": "_AudioSqrtMantissa",
+      "va": 269401584,
+      "size": 262144,
+      "object": "AudioProcessing.obj",
+      "address_basis": "observed_operand_inference",
+      "address_evidence": "Contiguous private65536-DWORD lookup inferred from complete initializer stores at100ebdf0 and1010bdf0; unified storage gives native addends0 and0x20000. Group11 BSS probe records the equivalent two-array alternative."
+    },
+    {
       "name": "_fprintf",
       "va": 268573299,
       "address_basis": "independent_library_mapping",
@@ -291,7 +306,7 @@
       "address_evidence": "Unique complete NUL-terminated literal match; see analysis/audio-processing-operands.json."
     },
     {
-      "name": "$T75349",
+      "name": "$T75348",
       "va": 268636584,
       "address_basis": "identified_symbol",
       "address_evidence": "Unique complete SEH scope-table match after resolving both labels inside the matched AudioOSHasSSE body; see analysis/audio-processing-operands.json.",

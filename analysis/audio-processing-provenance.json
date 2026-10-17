@@ -10,9 +10,9 @@
     "/c"
   ],
   "hashes": {
-    "src/audio/ahle_ds/AudioProcessing.c": "1a3051babf5d13db13e41a5906c7452f6c579b79b33fe35998ec953c9f7a5c2f",
-    "src/audio/ahle_ds/AudioProcessing.h": "661ae00c480be2d2a2341214fe95e52c21630af602bae4ef4d3dbd7516c8962c",
-    "src/audio/ahle_ds/AudioResample.c": "e96482b7dbdd06bf10adfbd399b6ef0949a2a7f96c7739706b2738ea36b07145",
+    "src/audio/ahle_ds/AudioProcessing.c": "09857cdf239396af5433ddd6f418691a6c180c9aaf0c003277472889f2a7ac52",
+    "src/audio/ahle_ds/AudioProcessing.h": "77bbd94523444df697a169cea26375cc673879493761452cc92add2857284c7b",
+    "src/audio/ahle_ds/AudioResample.c": "de605ba58f179efe567ffd40740c65c2cc90647a3e980cb0115cd9c14ef42907",
     "src/audio/ahle_ds/AudioHLE.h": "98475c4c2e034a7e1b16a94662078f731afcca5529140bf0d30c7e6901bdd441",
     "src/audio/ahle_ds/AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
     "scripts/verify_audio_processing_behavior.py": "5a0e436b44d7481b562de5319c9646e22a476cf0522d10ed206847e386869ab5",
@@ -22,12 +22,13 @@
     "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0",
     "scripts/verify_audio_processing_operands.py": "e610aa94bb0bae370e7c54813e57c5969f173e0b689175fcb1c0303afc14cc21",
     "scripts/check_audio_polefilter.py": "2d3fa2aa7fb9915daa4476f478f9c717b7e17256699ca66b8526a5be6832b2cb",
-    "scripts/probe_audio_processing_groups.py": "b92cbd2372aba89ecec83d809b95f7087cf209cfd6dd233c282289ee20ab0329",
+    "scripts/probe_audio_processing_groups.py": "9b4aaccfe03c7593269100147e6f550edcfe4c3c7bdd7710d7faae4adc2a5636",
     "src/audio/ahle_ds/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
     "src/audio/ahle_ds/AudioResampleTables.h": "5b95bd2db83cf7eea18b347cdf32c7a332073868cbcbd45a939f8de4537236f1",
     "src/audio/ahle_ds/AudioADPCMBlock.h": "f506d6ea97b83fcaaa78dc9ff7300bebe37aa36b9f1a01277247ee41767b4c1b",
     "src/audio/ahle_ds/AudioEnvelope.h": "8acbac16a6bc16a06782b48dea25af4e49b99c5a845f866ffe41098ec14517b7",
-    "src/audio/ahle_ds/AudioADPCMLegacy.h": "8509a1760c9dcc9b45334d103d4f09b656502bda0b8d35d039d75d7a75720f32"
+    "src/audio/ahle_ds/AudioADPCMLegacy.h": "8509a1760c9dcc9b45334d103d4f09b656502bda0b8d35d039d75d7a75720f32",
+    "scripts/verify_audio_sqrt.py": "ada861d6f23ce332e477386724385618dd31942fcbabdf45953985b32bdb69ac"
   },
   "functions": [
     {
@@ -257,9 +258,9 @@
     }
   ],
   "limitations": [
-    "The original processing scope retains twenty-one complete matching function extents, including compiler alignment. The signed ADPCM block has no relocations and matches all 560 original bytes directly. Across the two consolidated units, 36 of 41 routine bodies match outside recorded relocations. This is not whole-DLL byte equality.",
+    "The original processing scope retains twenty-one complete matching function extents, including compiler alignment. The signed ADPCM block has no relocations and matches all 560 original bytes directly. Across the two consolidated units, 37 of 41 routine bodies match outside recorded relocations. This is not whole-DLL byte equality.",
     "Data addresses marked observed_operand_inference have not been independently proved from original debug symbols.",
-    "Four processing-scope functions remain unmatched: unsigned scalar ADPCM, main ADPCM dispatcher, pole filter and scalar resampler. The consolidated unit also retains the independently tracked incomplete legacy ADPCM routine.",
+    "Four processing-scope functions remain unmatched: unsigned scalar ADPCM, main ADPCM dispatcher, pole filter and scalar resampler. The consolidated legacy ADPCM routine is now independently exact after commit509672b.",
     "The pole filter differs in seven SIB bytes that exchange equivalent base and index registers; these remain genuine byte differences.",
     "Relocation-target diagnostics for unmatched functions are position-based and may inspect unrelated original instruction bytes when code layout differs.",
     "Readable source file names and translation-unit boundaries are inferred; no original source provenance is claimed.",
@@ -371,6 +372,12 @@
     "combined_initialized_data_bytes": 6912,
     "combined_initialized_data_exact": true,
     "behavior_cases": 129,
-    "behavior_matching": 129
-  }
+    "behavior_matching": 129,
+    "matched_bodies": 37,
+    "total_bodies": 41,
+    "private_sqrt_lookup": "One private65536-DWORD table, followed by explicitly zero-initialized wet/dry globals, gives the native0x40008-byte strong BSS contribution; source spelling is inferred and equivalent two-array alternatives are documented."
+  },
+  "sqrt_storage_proof": "analysis/audio-sqrt-storage.json",
+  "sqrt_storage_controls": "analysis/audio-sqrt-storage-probes.json",
+  "scalar_negative_controls": "analysis/audio-resample-source-controls.json"
 }

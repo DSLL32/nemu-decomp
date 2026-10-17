@@ -2,8 +2,8 @@
   "status": "incomplete_native_source_groups",
   "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
   "hashes": {
-    "src/audio/ahle_ds/AudioProcessing.c": "1a3051babf5d13db13e41a5906c7452f6c579b79b33fe35998ec953c9f7a5c2f",
-    "src/audio/ahle_ds/AudioResample.c": "e96482b7dbdd06bf10adfbd399b6ef0949a2a7f96c7739706b2738ea36b07145",
+    "src/audio/ahle_ds/AudioProcessing.c": "09857cdf239396af5433ddd6f418691a6c180c9aaf0c003277472889f2a7ac52",
+    "src/audio/ahle_ds/AudioResample.c": "de605ba58f179efe567ffd40740c65c2cc90647a3e980cb0115cd9c14ef42907",
     "src/audio/ahle_ds/AudioADPCMBlock.h": "f506d6ea97b83fcaaa78dc9ff7300bebe37aa36b9f1a01277247ee41767b4c1b",
     "src/audio/ahle_ds/AudioADPCMLegacy.h": "8509a1760c9dcc9b45334d103d4f09b656502bda0b8d35d039d75d7a75720f32",
     "src/audio/ahle_ds/AudioCommands.h": "35cae30632b3a466adc0dea680c808b80995cf311b0024d25331224e7368e5f3",
@@ -11,13 +11,13 @@
     "src/audio/ahle_ds/AudioHLE.h": "98475c4c2e034a7e1b16a94662078f731afcca5529140bf0d30c7e6901bdd441",
     "src/audio/ahle_ds/AudioLegacy.h": "8f5810c3d8ae923119c733c304064310630cca3201c4b472047267d1417bee98",
     "src/audio/ahle_ds/AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
-    "src/audio/ahle_ds/AudioProcessing.h": "661ae00c480be2d2a2341214fe95e52c21630af602bae4ef4d3dbd7516c8962c",
+    "src/audio/ahle_ds/AudioProcessing.h": "77bbd94523444df697a169cea26375cc673879493761452cc92add2857284c7b",
     "src/audio/ahle_ds/AudioResampleTables.h": "5b95bd2db83cf7eea18b347cdf32c7a332073868cbcbd45a939f8de4537236f1",
     "src/audio/ahle_ds/AudioSIMD.h": "627d71fd2a53dcc36e099c214824e397454c8b78d80be503f29f08c91a18bf63",
     "src/audio/ahle_ds/DirectSound.h": "d16ad18d42c6d3081e7fc1f99caa62638965c0e6a971fab987b43f141679fb38",
     "src/audio/ahle_ds/RSP.h": "9489748e5025a27cdcbcf9853751b72d0c6c73658ddb4d62893d3f40f297b7ab",
     "src/audio/ahle_ds/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
-    "scripts/probe_audio_processing_groups.py": "b92cbd2372aba89ecec83d809b95f7087cf209cfd6dd233c282289ee20ab0329",
+    "scripts/probe_audio_processing_groups.py": "9b4aaccfe03c7593269100147e6f550edcfe4c3c7bdd7710d7faae4adc2a5636",
     "scripts/verify_gs.py": "9096c1ce5e759dc60f4fc7b84c97678b5946b7b15f6bfb56cd1fa3b9e730854c",
     "scripts/verify_audio.py": "28a7170ff98ee617437c4d735efdf740864b16be6892d860437aa419db1d7558",
     "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
@@ -34,16 +34,16 @@
     "/Ob1",
     "/MT",
     "/c",
-    "Z:\\root\\.ai-tmp\\audio-processing.bGaifE\\group-final\\AudioProcessing.c",
-    "Z:\\root\\.ai-tmp\\audio-processing.bGaifE\\group-final\\AudioResample.c",
-    "/FoZ:\\root\\.ai-tmp\\audio-processing.bGaifE\\group-final\\"
+    "Z:\\root\\.ai-tmp\\audio-processing.bGaifE\\group-bss\\AudioProcessing.c",
+    "Z:\\root\\.ai-tmp\\audio-processing.bGaifE\\group-bss\\AudioResample.c",
+    "/FoZ:\\root\\.ai-tmp\\audio-processing.bGaifE\\group-bss\\"
   ],
-  "compile_log": "/root/.ai-tmp/audio-processing.bGaifE/group-final/groups-compile.log",
-  "compile_log_sha256": "dffa19c55359b17a496af13175bf27c9f595c90e5b47cfe8cb34f8690f05d9a1",
+  "compile_log": "/root/.ai-tmp/audio-processing.bGaifE/group-bss/groups-compile.log",
+  "compile_log_sha256": "42d810aa200a2737c68ffa6490747ee74c0d6ea81378862e7c1b4b253e1bec2a",
   "objects": [
     {
-      "object": "/root/.ai-tmp/audio-processing.bGaifE/group-final/AudioProcessing.obj",
-      "sha256": "241aaeae6912a05ca8173503631624e03544d0bddca4d6ce80389473ed9e6030",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/group-bss/AudioProcessing.obj",
+      "sha256": "492c8142ce657a1a8defb16069cc212dc0188b6acafdec5a1f5ee6c9e2ae41b7",
       "literal_data_checks": [
         {
           "name": "??_C@_01EEMJAFIK@?6?$AA@",
@@ -142,15 +142,15 @@
             {
               "offset": 62,
               "type": "DIR32",
-              "symbol": "_AudioSqrtEvenMantissa",
-              "addend": 0,
+              "symbol": "_AudioSqrtMantissa",
+              "addend": 131072,
               "original_target_va": 269532656,
               "original_target_symbols": [
                 "_AudioSqrtEvenMantissa"
               ],
               "expected_target_va": 269532656,
               "resolution_basis": "observed_operand_inference",
-              "target_address_evidence": "Inferred from decoded original function operands.",
+              "target_address_evidence": "Contiguous private65536-DWORD lookup inferred from complete initializer stores at100ebdf0 and1010bdf0; unified storage gives native addends0 and0x20000. Group11 BSS probe records the equivalent two-array alternative.",
               "status": "resolved",
               "target_equal": true,
               "target_identity_verified": false
@@ -158,15 +158,16 @@
             {
               "offset": 83,
               "type": "DIR32",
-              "symbol": "_AudioSqrtOddMantissa",
+              "symbol": "_AudioSqrtMantissa",
               "addend": 0,
               "original_target_va": 269401584,
               "original_target_symbols": [
+                "_AudioSqrtMantissa",
                 "_AudioSqrtOddMantissa"
               ],
               "expected_target_va": 269401584,
               "resolution_basis": "observed_operand_inference",
-              "target_address_evidence": "Inferred from decoded original function operands.",
+              "target_address_evidence": "Contiguous private65536-DWORD lookup inferred from complete initializer stores at100ebdf0 and1010bdf0; unified storage gives native addends0 and0x20000. Group11 BSS probe records the equivalent two-array alternative.",
               "status": "resolved",
               "target_equal": true,
               "target_identity_verified": false
@@ -627,11 +628,12 @@
             {
               "offset": 6,
               "type": "DIR32",
-              "symbol": "$T75349",
+              "symbol": "$T75348",
               "addend": 0,
               "original_target_va": 268636584,
               "original_target_symbols": [
                 "$T73174",
+                "$T75348",
                 "$T75349"
               ],
               "expected_target_va": 268636584,
@@ -5928,8 +5930,8 @@
       "relocated_exact_matches": 24
     },
     {
-      "object": "/root/.ai-tmp/audio-processing.bGaifE/group-final/AudioResample.obj",
-      "sha256": "c1e058108352949b7c03ab9079861896ab2715907727bd3cae751839eeec2347",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/group-bss/AudioResample.obj",
+      "sha256": "b22cbcde8892642bde2d7457edf8b9a6804dc6fd42b5e1150b9b43ecdc765617",
       "literal_data_checks": [],
       "functions": [
         {
@@ -6717,7 +6719,7 @@
           "status": "compared",
           "original_va": 268512352,
           "raw_bytes_equal": false,
-          "raw_differing_bytes": 1348,
+          "raw_differing_bytes": 12,
           "compared_bytes": 1936,
           "original_size_verified": true,
           "original_bytes": 1936,
@@ -6756,65 +6758,34 @@
               "target_identity_verified": true
             },
             {
-              "offset": 1886,
+              "offset": 1896,
               "type": "DIR32",
               "symbol": "_RDRAM",
               "addend": 0,
-              "original_target_va": 255075396,
-              "original_target_symbols": [],
+              "original_target_va": 269925092,
+              "original_target_symbols": [
+                "_RDRAM"
+              ],
               "expected_target_va": 269925092,
               "resolution_basis": "identified_symbol",
               "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
               "status": "resolved",
-              "target_equal": false,
-              "target_identity_verified": false
+              "target_equal": true,
+              "target_identity_verified": true
             }
           ],
-          "relocation_target_mismatch_count": 1,
+          "relocation_target_mismatch_count": 0,
           "inferred_target_count": 0,
           "unresolved_target_count": 0,
-          "relocation_masked_equal": false,
-          "relocation_masked_differing_bytes": 1336,
+          "relocation_masked_equal": true,
+          "relocation_masked_differing_bytes": 0,
           "relocations_all_resolved": true,
-          "relocation_values_consistent": false,
-          "relocation_targets_verified": false,
-          "relocation_targets_equal": false,
-          "inferred_relocated_bytes_equal": false,
-          "relocated_bytes_equal": false,
-          "first_unmasked_differences": [
-            2,
-            9,
-            23,
-            49,
-            82,
-            94,
-            124,
-            132,
-            145,
-            164,
-            186,
-            190,
-            193,
-            210,
-            216,
-            223,
-            267,
-            302,
-            325,
-            344,
-            348,
-            366,
-            383,
-            387,
-            419,
-            441,
-            460,
-            478,
-            495,
-            525,
-            531,
-            534
-          ]
+          "relocation_values_consistent": true,
+          "relocation_targets_verified": true,
+          "relocation_targets_equal": true,
+          "inferred_relocated_bytes_equal": true,
+          "relocated_bytes_equal": true,
+          "first_unmasked_differences": []
         },
         {
           "name": "_LoadAudioHistory",
@@ -6990,8 +6961,8 @@
         }
       ],
       "functions_compared": 6,
-      "relocation_masked_matches": 3,
-      "relocated_exact_matches": 3
+      "relocation_masked_matches": 4,
+      "relocated_exact_matches": 4
     }
   ],
   "initialized_data": [
@@ -7018,18 +6989,18 @@
     {
       "name": "_EnvMixerSSE",
       "bytes": 9,
+      "status": "requires_final_link_alignment",
       "complete_alignment_equal": null,
       "original_hex": "cccccccccccccccccc",
-      "candidate_hex": "",
-      "status": "requires_final_link_alignment"
+      "candidate_hex": ""
     },
     {
       "name": "_EnvMixer3DNow",
       "bytes": 1,
+      "status": "requires_final_link_alignment",
       "complete_alignment_equal": null,
       "original_hex": "cc",
-      "candidate_hex": "",
-      "status": "requires_final_link_alignment"
+      "candidate_hex": ""
     }
   ],
   "coefficient_data": [
@@ -7217,8 +7188,18 @@
   "duplicate_function_definitions": {},
   "limitations": [
     "Complete DLL byte equality remains unproven.",
-    "Five incomplete kernels retain their actual differing bytes and operand failures.",
+    "Four incomplete kernels retain their actual differing bytes and operand failures.",
     "Macro ownership is inferred from repeated algorithm code and coherent ordinary linkage; original macro names are unknown.",
     "The preceding external-plus-inline ownership probe failed LNK2005; no duplicate fallback or forced linker option is used here."
-  ]
+  ],
+  "uninitialized_data": {
+    "object": "AudioProcessing.obj",
+    "section": ".bss",
+    "bytes": 262152,
+    "lookup_offset": 0,
+    "wet_offset": 262144,
+    "dry_offset": 262148,
+    "lookup_private": true,
+    "proof": "analysis/audio-sqrt-storage.json"
+  }
 }

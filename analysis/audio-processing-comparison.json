@@ -3,8 +3,8 @@
   "full_dll_byte_exact": false,
   "objects": [
     {
-      "object": "/root/.ai-tmp/audio-processing.bGaifE/coherent/AudioProcessing.obj",
-      "sha256": "84daf2e843392e9f5306b9c86a583910b465db6712db808a1b410846221a25da",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/group-bss/AudioProcessing.obj",
+      "sha256": "492c8142ce657a1a8defb16069cc212dc0188b6acafdec5a1f5ee6c9e2ae41b7",
       "literal_data_checks": [
         {
           "name": "??_C@_01EEMJAFIK@?6?$AA@",
@@ -103,15 +103,15 @@
             {
               "offset": 62,
               "type": "DIR32",
-              "symbol": "_AudioSqrtEvenMantissa",
-              "addend": 0,
+              "symbol": "_AudioSqrtMantissa",
+              "addend": 131072,
               "original_target_va": 269532656,
               "original_target_symbols": [
                 "_AudioSqrtEvenMantissa"
               ],
               "expected_target_va": 269532656,
               "resolution_basis": "observed_operand_inference",
-              "target_address_evidence": "Inferred from decoded original function operands.",
+              "target_address_evidence": "Contiguous private65536-DWORD lookup inferred from complete initializer stores at100ebdf0 and1010bdf0; unified storage gives native addends0 and0x20000. Group11 BSS probe records the equivalent two-array alternative.",
               "status": "resolved",
               "target_equal": true,
               "target_identity_verified": false
@@ -119,15 +119,16 @@
             {
               "offset": 83,
               "type": "DIR32",
-              "symbol": "_AudioSqrtOddMantissa",
+              "symbol": "_AudioSqrtMantissa",
               "addend": 0,
               "original_target_va": 269401584,
               "original_target_symbols": [
+                "_AudioSqrtMantissa",
                 "_AudioSqrtOddMantissa"
               ],
               "expected_target_va": 269401584,
               "resolution_basis": "observed_operand_inference",
-              "target_address_evidence": "Inferred from decoded original function operands.",
+              "target_address_evidence": "Contiguous private65536-DWORD lookup inferred from complete initializer stores at100ebdf0 and1010bdf0; unified storage gives native addends0 and0x20000. Group11 BSS probe records the equivalent two-array alternative.",
               "status": "resolved",
               "target_equal": true,
               "target_identity_verified": false
@@ -588,11 +589,12 @@
             {
               "offset": 6,
               "type": "DIR32",
-              "symbol": "$T75349",
+              "symbol": "$T75348",
               "addend": 0,
               "original_target_va": 268636584,
               "original_target_symbols": [
                 "$T73174",
+                "$T75348",
                 "$T75349"
               ],
               "expected_target_va": 268636584,
@@ -5889,8 +5891,8 @@
       "relocated_exact_matches": 24
     },
     {
-      "object": "/root/.ai-tmp/audio-processing.bGaifE/coherent/AudioResample.obj",
-      "sha256": "a027ddf49af0d8bd13129ec2e68d0c8b699e342aed47d485d44af80cd886e242",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/group-bss/AudioResample.obj",
+      "sha256": "b22cbcde8892642bde2d7457edf8b9a6804dc6fd42b5e1150b9b43ecdc765617",
       "literal_data_checks": [],
       "functions": [
         {
@@ -6678,7 +6680,7 @@
           "status": "compared",
           "original_va": 268512352,
           "raw_bytes_equal": false,
-          "raw_differing_bytes": 1348,
+          "raw_differing_bytes": 12,
           "compared_bytes": 1936,
           "original_size_verified": true,
           "original_bytes": 1936,
@@ -6717,65 +6719,34 @@
               "target_identity_verified": true
             },
             {
-              "offset": 1886,
+              "offset": 1896,
               "type": "DIR32",
               "symbol": "_RDRAM",
               "addend": 0,
-              "original_target_va": 255075396,
-              "original_target_symbols": [],
+              "original_target_va": 269925092,
+              "original_target_symbols": [
+                "_RDRAM"
+              ],
               "expected_target_va": 269925092,
               "resolution_basis": "identified_symbol",
               "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
               "status": "resolved",
-              "target_equal": false,
-              "target_identity_verified": false
+              "target_equal": true,
+              "target_identity_verified": true
             }
           ],
-          "relocation_target_mismatch_count": 1,
+          "relocation_target_mismatch_count": 0,
           "inferred_target_count": 0,
           "unresolved_target_count": 0,
-          "relocation_masked_equal": false,
-          "relocation_masked_differing_bytes": 1336,
+          "relocation_masked_equal": true,
+          "relocation_masked_differing_bytes": 0,
           "relocations_all_resolved": true,
-          "relocation_values_consistent": false,
-          "relocation_targets_verified": false,
-          "relocation_targets_equal": false,
-          "inferred_relocated_bytes_equal": false,
-          "relocated_bytes_equal": false,
-          "first_unmasked_differences": [
-            2,
-            9,
-            23,
-            49,
-            82,
-            94,
-            124,
-            132,
-            145,
-            164,
-            186,
-            190,
-            193,
-            210,
-            216,
-            223,
-            267,
-            302,
-            325,
-            344,
-            348,
-            366,
-            383,
-            387,
-            419,
-            441,
-            460,
-            478,
-            495,
-            525,
-            531,
-            534
-          ]
+          "relocation_values_consistent": true,
+          "relocation_targets_verified": true,
+          "relocation_targets_equal": true,
+          "inferred_relocated_bytes_equal": true,
+          "relocated_bytes_equal": true,
+          "first_unmasked_differences": []
         },
         {
           "name": "_LoadAudioHistory",
@@ -6951,8 +6922,8 @@
         }
       ],
       "functions_compared": 6,
-      "relocation_masked_matches": 3,
-      "relocated_exact_matches": 3
+      "relocation_masked_matches": 4,
+      "relocated_exact_matches": 4
     }
   ]
 }

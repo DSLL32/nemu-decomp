@@ -3,8 +3,6 @@
 
 #include "AudioHLE.h"
 
-extern unsigned int AudioSqrtEvenMantissa[32768];
-extern unsigned int AudioSqrtOddMantissa[32768];
 extern int AudioEnvelopeWet, AudioEnvelopeDry;
 
 void ReadAudioSamples(short *destination, unsigned int address, int bytes);

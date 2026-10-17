@@ -1,0 +1,41 @@
+{
+  "status": "scoped_native_storage_and_behavior_proof",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "object_sha256": "492c8142ce657a1a8defb16069cc212dc0188b6acafdec5a1f5ee6c9e2ae41b7",
+  "source_sha256": "09857cdf239396af5433ddd6f418691a6c180c9aaf0c003277472889f2a7ac52",
+  "script_sha256": "ada861d6f23ce332e477386724385618dd31942fcbabdf45953985b32bdb69ac",
+  "private_lookup_bytes": 262144,
+  "native_bss_extent": 262152,
+  "relative_storage": {
+    "lookup": 0,
+    "wet": 262144,
+    "dry": 262148
+  },
+  "complete_initializer_bytes": 112,
+  "complete_body_equal_outside_two_operands": true,
+  "operands": [
+    {
+      "instruction_va": "0x1000af5b",
+      "original_address": "0x1010bdf0",
+      "coff_offset": 62,
+      "addend": 131072,
+      "value_equal": true
+    },
+    {
+      "instruction_va": "0x1000af70",
+      "original_address": "0x100ebdf0",
+      "coff_offset": 83,
+      "addend": 0,
+      "value_equal": true
+    }
+  ],
+  "initialized_entries": 65536,
+  "initialized_bytes_equal": true,
+  "initialized_bytes_sha256": "8d3d192c67db42aa9b6ab42200373f75d008d9cd59929b93b7fefc2c13ca3c26",
+  "adjacent_state_preserved": true,
+  "limitations": [
+    "Single-table source identity is inferred; two explicitly initialized arrays also reproduce this layout.",
+    "These operand addresses come from native stores, not recovered debug symbols.",
+    "Absolute final linked placement and whole-DLL byte equality remain separate checks."
+  ]
+}
