@@ -30,9 +30,9 @@
     "--metadata",
     "analysis/nemu-rsp.json",
     "--image",
-    "/root/.ai-tmp/nemu-complete-relocs.kvcg2ypy/nemu64.exe",
+    "/root/.ai-tmp/nemu-complete-relocs.isffxrc_/nemu64.exe",
     "--map",
-    "/root/.ai-tmp/nemu-complete-relocs.kvcg2ypy/nemu64.map",
+    "/root/.ai-tmp/nemu-complete-relocs.isffxrc_/nemu64.map",
     "--symbols",
     "analysis/nemu-globals.json",
     "--symbols",
@@ -44,16 +44,18 @@
     "analysis/nemu-function-comparison.json",
     "--coverage-report",
     "analysis/nemu-function-coverage.json",
-    "--summary-only"
+    "--summary-only",
+    "--extents",
+    "/root/.ai-tmp/nemu-control-coherent-review-hkkt65yt/extents-complete.json"
   ],
   "metadata": [
     {
       "path": "analysis/nemu-browser.json",
-      "sha256": "4a6d8b276be56884b79d6471d038c1de12ec3d03c0a2b719f47202b43db1d938"
+      "sha256": "81cbe34a0750dd902719d055183729778ea29b79a53c7f8d9701022334d3f978"
     },
     {
       "path": "analysis/nemu-cpu-control.json",
-      "sha256": "044e8e159d0c73993065d61a20bd746bd60d528ed46ea84ae5ac204b42cdac9e"
+      "sha256": "1db4961d2616d2032bb0c26113e485b665b024570771f341cfdc62a48b0ba681"
     },
     {
       "path": "analysis/nemu-cpu.json",
@@ -65,7 +67,7 @@
     },
     {
       "path": "analysis/nemu-dynarec-memory.json",
-      "sha256": "921c1532415edf4f30b51bbf05e2bf728f715bfb68c7b05f3590cb8a93369d9f"
+      "sha256": "e4439e3d1f4eedafb4cf93805787fd617a9d973bc1f144ab0add508b1e08dfda"
     },
     {
       "path": "analysis/nemu-dynarec-opcodes.json",
@@ -85,7 +87,7 @@
     },
     {
       "path": "analysis/nemu-pif.json",
-      "sha256": "411043b3d10a1e68af6a3686ecf84e086addf44837d73a1b6d68b5b5791c5928"
+      "sha256": "8260493fc557ac34629df603a836940941a6e9efaf21b8bd1649a7084f7aab85"
     },
     {
       "path": "analysis/nemu-plugins.json",
@@ -93,7 +95,7 @@
     },
     {
       "path": "analysis/nemu-rsp.json",
-      "sha256": "886f4ded43871e797ed2705b90b23006e20c2f2a7334c0c1b2ae51a0700da8ed"
+      "sha256": "8f72c5c41f1ff995c7e365af92299f819510b838a52a1d37e5d3b9ef92c21875"
     }
   ],
   "symbol_metadata": [
@@ -109,7 +111,11 @@
   "extent_metadata": [
     {
       "path": "analysis/nemu-candidate-extents.json",
-      "sha256": "e3e3e57bd6e347ae4c1123971e2b26638957092debdb9c32f4c6e3ac004a8d35"
+      "sha256": "d92e78bc161011a9c522375fa1c65b79bfeadb32efea4dd93f42bd31a753fbaa"
+    },
+    {
+      "path": "/root/.ai-tmp/nemu-control-coherent-review-hkkt65yt/extents-complete.json",
+      "sha256": "54faee82a156610e4f108b67d926641267c74a713823848e20b7d3ea7353ab1e"
     }
   ],
   "library_map": "/root/nemu-decomp/analysis/nemu-library-addresses.json",
@@ -117,19 +123,19 @@
   "comparisons": [
     {
       "kind": "linked_PE",
-      "path": "/root/.ai-tmp/nemu-complete-relocs.kvcg2ypy/nemu64.exe",
-      "sha256": "1c44cc1a0d6f5243d4d860e5397b3c189b87aa48c87fd447963a87a9f95bfdcb",
-      "map": "/root/.ai-tmp/nemu-complete-relocs.kvcg2ypy/nemu64.map",
-      "map_sha256": "fa602cec97eaeaefebea8c6c55762a3a91d1bff0f732c2e36e67b93980bcf343",
+      "path": "/root/.ai-tmp/nemu-complete-relocs.isffxrc_/nemu64.exe",
+      "sha256": "3ed9d1983501f2fa5113a0055f0827d9f78cd30bd40b05ca4fdaa12f30ad2edc",
+      "map": "/root/.ai-tmp/nemu-complete-relocs.isffxrc_/nemu64.map",
+      "map_sha256": "020745b1a9ebb77a6f34a003c05b2a9c878e4cd77d379fc630a3a1aef1bf23d8",
       "pe_highlow_relocations": 10159,
       "fixture_manifest": {
-        "path": "/root/.ai-tmp/nemu-complete-relocs.kvcg2ypy/diagnostic.json",
-        "sha256": "619733856958dc64ba52da281db8c7ecbcc57aed08c0f90073405299943d9129",
+        "path": "/root/.ai-tmp/nemu-complete-relocs.isffxrc_/diagnostic.json",
+        "sha256": "90cc5b9cce16134beb48e2f4463ec2b03f1bc41458af78b77cdbed5889cfa67d",
         "status": "verified",
         "forced_unresolved_link": false,
         "image_hash_verified": true,
         "invalid_symbols": [],
-        "parent_artifact": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/b3108bca0d8a60e0b615eee3136a399f2ecadd8a255a5179375ddc2d9c1ffdc9",
+        "parent_artifact": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/bb842ed8647642a47c9c840c326f2cbaa8fc8bfcf184d809f8201e85789ea6d4",
         "existing_sections": [
           {
             "name": ".text",
@@ -159,19 +165,19 @@
     },
     {
       "kind": "linked_PE",
-      "path": "/root/.ai-tmp/nemu-complete-relocs.kvcg2ypy/nemu64.exe",
-      "sha256": "1c44cc1a0d6f5243d4d860e5397b3c189b87aa48c87fd447963a87a9f95bfdcb",
-      "map": "/root/.ai-tmp/nemu-complete-relocs.kvcg2ypy/nemu64.map",
-      "map_sha256": "fa602cec97eaeaefebea8c6c55762a3a91d1bff0f732c2e36e67b93980bcf343",
+      "path": "/root/.ai-tmp/nemu-complete-relocs.isffxrc_/nemu64.exe",
+      "sha256": "3ed9d1983501f2fa5113a0055f0827d9f78cd30bd40b05ca4fdaa12f30ad2edc",
+      "map": "/root/.ai-tmp/nemu-complete-relocs.isffxrc_/nemu64.map",
+      "map_sha256": "020745b1a9ebb77a6f34a003c05b2a9c878e4cd77d379fc630a3a1aef1bf23d8",
       "pe_highlow_relocations": 10159,
       "fixture_manifest": {
-        "path": "/root/.ai-tmp/nemu-complete-relocs.kvcg2ypy/diagnostic.json",
-        "sha256": "619733856958dc64ba52da281db8c7ecbcc57aed08c0f90073405299943d9129",
+        "path": "/root/.ai-tmp/nemu-complete-relocs.isffxrc_/diagnostic.json",
+        "sha256": "90cc5b9cce16134beb48e2f4463ec2b03f1bc41458af78b77cdbed5889cfa67d",
         "status": "verified",
         "forced_unresolved_link": false,
         "image_hash_verified": true,
         "invalid_symbols": [],
-        "parent_artifact": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/b3108bca0d8a60e0b615eee3136a399f2ecadd8a255a5179375ddc2d9c1ffdc9",
+        "parent_artifact": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/bb842ed8647642a47c9c840c326f2cbaa8fc8bfcf184d809f8201e85789ea6d4",
         "existing_sections": [
           {
             "name": ".text",
@@ -205,15 +211,15 @@
     "located_functions": 648,
     "inventory_entries": 648,
     "unique_original_entry_addresses": 647,
-    "matched_original_entry_addresses": 633,
+    "matched_original_entry_addresses": 634,
     "incomplete_metadata_entries": 0,
     "missing_functions": [],
     "compared_function_instances": 1296,
-    "full_shape_matches": 674,
+    "full_shape_matches": 675,
     "matching_unmeasured_prefixes": 6,
     "matching_prefixes_without_full_match": 0,
-    "unique_instruction_and_known_target_matches": 634,
-    "covered_original_bytes": 107337,
+    "unique_instruction_and_known_target_matches": 635,
+    "covered_original_bytes": 109139,
     "covered_original_ranges": [
       {
         "start": 4198400,
@@ -1060,6 +1066,10 @@
         "end": 4277380
       },
       {
+        "start": 4277392,
+        "end": 4279194
+      },
+      {
         "start": 4279200,
         "end": 4279321
       },
@@ -1191,9 +1201,9 @@
     "target_mismatches": 0,
     "invalid_link_operands": 0,
     "possible_data_target_mismatches": 0,
-    "unresolved_targets": 651,
-    "unverified_targets": 3245,
-    "not_compared_target_fields": 9913,
+    "unresolved_targets": 655,
+    "unverified_targets": 3270,
+    "not_compared_target_fields": 9813,
     "modules": [
       {
         "metadata_file": "analysis/nemu-browser.json",
@@ -1212,15 +1222,13 @@
         "metadata_file": "analysis/nemu-cpu-control.json",
         "inventory_entries": 18,
         "statuses": {
-          "instruction_and_known_target_match": 16,
-          "instruction_mismatch": 1,
+          "instruction_and_known_target_match": 17,
           "different_function_size": 1
         },
         "matching_unmeasured_prefixes": 0,
         "blockers": {
-          "missing_candidate_extent": 1,
-          "different_function_size": 2,
-          "instruction_mismatch": 2
+          "different_function_size": 1,
+          "instruction_mismatch": 1
         }
       },
       {
@@ -1344,7 +1352,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?WriteStateChunk@@YAXPAU_iobuf@@IPBXI_N@Z",
-            "rebuilt_va": 4299616,
+            "rebuilt_va": 4299632,
             "rebuilt_size": 275,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 288,
@@ -1366,7 +1374,7 @@
           },
           {
             "candidate_symbol": "?WriteStateChunk@@YAXPAU_iobuf@@IPBXI_N@Z",
-            "rebuilt_va": 4299616,
+            "rebuilt_va": 4299632,
             "rebuilt_size": 288,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 288,
@@ -1402,7 +1410,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?SaveState@@YAXXZ",
-            "rebuilt_va": 4299904,
+            "rebuilt_va": 4299920,
             "rebuilt_size": 820,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 832,
@@ -1424,7 +1432,7 @@
           },
           {
             "candidate_symbol": "?SaveState@@YAXXZ",
-            "rebuilt_va": 4299904,
+            "rebuilt_va": 4299920,
             "rebuilt_size": 832,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 832,
@@ -1460,7 +1468,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?SaveMovieState@@YAXXZ",
-            "rebuilt_va": 4300736,
+            "rebuilt_va": 4300752,
             "rebuilt_size": 174,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 176,
@@ -1482,7 +1490,7 @@
           },
           {
             "candidate_symbol": "?SaveMovieState@@YAXXZ",
-            "rebuilt_va": 4300736,
+            "rebuilt_va": 4300752,
             "rebuilt_size": 176,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 176,
@@ -1518,7 +1526,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?LoadState@@YA_N_N@Z",
-            "rebuilt_va": 4300912,
+            "rebuilt_va": 4300928,
             "rebuilt_size": 1344,
             "candidate_extent_basis": "original_sized_candidate_prefix_only",
             "candidate_map_span": 1344,
@@ -1540,7 +1548,7 @@
           },
           {
             "candidate_symbol": "?LoadState@@YA_N_N@Z",
-            "rebuilt_va": 4300912,
+            "rebuilt_va": 4300928,
             "rebuilt_size": 1344,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 1344,
@@ -1576,7 +1584,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?FlushStateSaves@@YAXXZ",
-            "rebuilt_va": 4302256,
+            "rebuilt_va": 4302272,
             "rebuilt_size": 113,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 128,
@@ -1598,7 +1606,7 @@
           },
           {
             "candidate_symbol": "?FlushStateSaves@@YAXXZ",
-            "rebuilt_va": 4302256,
+            "rebuilt_va": 4302272,
             "rebuilt_size": 128,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 128,
@@ -1634,7 +1642,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?WindowHeight@@YAHPAUHWND__@@@Z",
-            "rebuilt_va": 4302384,
+            "rebuilt_va": 4302400,
             "rebuilt_size": 27,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 32,
@@ -1656,7 +1664,7 @@
           },
           {
             "candidate_symbol": "?WindowHeight@@YAHPAUHWND__@@@Z",
-            "rebuilt_va": 4302384,
+            "rebuilt_va": 4302400,
             "rebuilt_size": 32,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 32,
@@ -1692,7 +1700,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?SetStatusText@@YAXIPBD@Z",
-            "rebuilt_va": 4302416,
+            "rebuilt_va": 4302432,
             "rebuilt_size": 21,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 32,
@@ -1714,7 +1722,7 @@
           },
           {
             "candidate_symbol": "?SetStatusText@@YAXIPBD@Z",
-            "rebuilt_va": 4302416,
+            "rebuilt_va": 4302432,
             "rebuilt_size": 32,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 32,
@@ -1750,7 +1758,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?NetplayMessage@@YGXPBD@Z",
-            "rebuilt_va": 4302464,
+            "rebuilt_va": 4302480,
             "rebuilt_size": 28,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 32,
@@ -1772,7 +1780,7 @@
           },
           {
             "candidate_symbol": "?NetplayMessage@@YGXPBD@Z",
-            "rebuilt_va": 4302464,
+            "rebuilt_va": 4302480,
             "rebuilt_size": 32,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 32,
@@ -1808,7 +1816,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?RebuildFavouritesMenu@@YAXXZ",
-            "rebuilt_va": 4302752,
+            "rebuilt_va": 4302768,
             "rebuilt_size": 515,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 528,
@@ -1830,7 +1838,7 @@
           },
           {
             "candidate_symbol": "?RebuildFavouritesMenu@@YAXXZ",
-            "rebuilt_va": 4302752,
+            "rebuilt_va": 4302768,
             "rebuilt_size": 528,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 528,
@@ -1866,7 +1874,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?ShowFavouritesMenu@@YAXXZ",
-            "rebuilt_va": 4303280,
+            "rebuilt_va": 4303296,
             "rebuilt_size": 560,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 560,
@@ -1888,7 +1896,7 @@
           },
           {
             "candidate_symbol": "?ShowFavouritesMenu@@YAXXZ",
-            "rebuilt_va": 4303280,
+            "rebuilt_va": 4303296,
             "rebuilt_size": 560,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 560,
@@ -1924,7 +1932,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?ShowDriveMenu@@YAXXZ",
-            "rebuilt_va": 4303840,
+            "rebuilt_va": 4303856,
             "rebuilt_size": 157,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 160,
@@ -1946,7 +1954,7 @@
           },
           {
             "candidate_symbol": "?ShowDriveMenu@@YAXXZ",
-            "rebuilt_va": 4303840,
+            "rebuilt_va": 4303856,
             "rebuilt_size": 160,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 160,
@@ -1982,7 +1990,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?RemoveFavouritesDialogProc@@YGHPAUHWND__@@IIJ@Z",
-            "rebuilt_va": 4317216,
+            "rebuilt_va": 4317232,
             "rebuilt_size": 743,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 752,
@@ -2004,7 +2012,7 @@
           },
           {
             "candidate_symbol": "?RemoveFavouritesDialogProc@@YGHPAUHWND__@@IIJ@Z",
-            "rebuilt_va": 4317216,
+            "rebuilt_va": 4317232,
             "rebuilt_size": 752,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 752,
@@ -2040,7 +2048,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?AboutDialogProc@@YGHPAUHWND__@@IIJ@Z",
-            "rebuilt_va": 4317968,
+            "rebuilt_va": 4317984,
             "rebuilt_size": 153,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 160,
@@ -2062,7 +2070,7 @@
           },
           {
             "candidate_symbol": "?AboutDialogProc@@YGHPAUHWND__@@IIJ@Z",
-            "rebuilt_va": 4317968,
+            "rebuilt_va": 4317984,
             "rebuilt_size": 160,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 160,
@@ -2098,7 +2106,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?DisclaimerDialogProc@@YGHPAUHWND__@@IIJ@Z",
-            "rebuilt_va": 4318128,
+            "rebuilt_va": 4318144,
             "rebuilt_size": 150,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 160,
@@ -2120,7 +2128,7 @@
           },
           {
             "candidate_symbol": "?DisclaimerDialogProc@@YGHPAUHWND__@@IIJ@Z",
-            "rebuilt_va": 4318128,
+            "rebuilt_va": 4318144,
             "rebuilt_size": 160,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 160,
@@ -2156,7 +2164,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?ReadIniString@@YAXPBD00PAD0@Z",
-            "rebuilt_va": 4318288,
+            "rebuilt_va": 4318304,
             "rebuilt_size": 25,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 32,
@@ -2178,7 +2186,7 @@
           },
           {
             "candidate_symbol": "?ReadIniString@@YAXPBD00PAD0@Z",
-            "rebuilt_va": 4318288,
+            "rebuilt_va": 4318304,
             "rebuilt_size": 32,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 32,
@@ -2214,7 +2222,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?ReadIniInteger@@YAHPBD0H0@Z",
-            "rebuilt_va": 4318320,
+            "rebuilt_va": 4318336,
             "rebuilt_size": 69,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 80,
@@ -2236,7 +2244,7 @@
           },
           {
             "candidate_symbol": "?ReadIniInteger@@YAHPBD0H0@Z",
-            "rebuilt_va": 4318320,
+            "rebuilt_va": 4318336,
             "rebuilt_size": 80,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 80,
@@ -2272,7 +2280,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?WriteIniString@@YAXPBD000@Z",
-            "rebuilt_va": 4318400,
+            "rebuilt_va": 4318416,
             "rebuilt_size": 15,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 16,
@@ -2294,7 +2302,7 @@
           },
           {
             "candidate_symbol": "?WriteIniString@@YAXPBD000@Z",
-            "rebuilt_va": 4318400,
+            "rebuilt_va": 4318416,
             "rebuilt_size": 16,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 16,
@@ -2330,7 +2338,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?WriteIniInteger@@YAXPBD0H0@Z",
-            "rebuilt_va": 4318416,
+            "rebuilt_va": 4318432,
             "rebuilt_size": 49,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 64,
@@ -2352,7 +2360,7 @@
           },
           {
             "candidate_symbol": "?WriteIniInteger@@YAXPBD0H0@Z",
-            "rebuilt_va": 4318416,
+            "rebuilt_va": 4318432,
             "rebuilt_size": 64,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 64,
@@ -2388,7 +2396,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?InitializeIniPaths@@YAXXZ",
-            "rebuilt_va": 4318480,
+            "rebuilt_va": 4318496,
             "rebuilt_size": 151,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 160,
@@ -2410,7 +2418,7 @@
           },
           {
             "candidate_symbol": "?InitializeIniPaths@@YAXXZ",
-            "rebuilt_va": 4318480,
+            "rebuilt_va": 4318496,
             "rebuilt_size": 160,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 160,
@@ -2446,7 +2454,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?ReplaceExtension@@YAXPADPBD@Z",
-            "rebuilt_va": 4318640,
+            "rebuilt_va": 4318656,
             "rebuilt_size": 48,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 48,
@@ -2468,7 +2476,7 @@
           },
           {
             "candidate_symbol": "?ReplaceExtension@@YAXPADPBD@Z",
-            "rebuilt_va": 4318640,
+            "rebuilt_va": 4318656,
             "rebuilt_size": 48,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 48,
@@ -2504,7 +2512,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?ReadRomInteger@@YAHPBDH@Z",
-            "rebuilt_va": 4318688,
+            "rebuilt_va": 4318704,
             "rebuilt_size": 56,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 64,
@@ -2526,7 +2534,7 @@
           },
           {
             "candidate_symbol": "?ReadRomInteger@@YAHPBDH@Z",
-            "rebuilt_va": 4318688,
+            "rebuilt_va": 4318704,
             "rebuilt_size": 64,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 64,
@@ -2562,7 +2570,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?ReadRomString@@YAXPBD0PAD@Z",
-            "rebuilt_va": 4318752,
+            "rebuilt_va": 4318768,
             "rebuilt_size": 84,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 96,
@@ -2584,7 +2592,7 @@
           },
           {
             "candidate_symbol": "?ReadRomString@@YAXPBD0PAD@Z",
-            "rebuilt_va": 4318752,
+            "rebuilt_va": 4318768,
             "rebuilt_size": 96,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 96,
@@ -2620,7 +2628,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?ReadRomConfiguration@@YAXXZ",
-            "rebuilt_va": 4318848,
+            "rebuilt_va": 4318864,
             "rebuilt_size": 655,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 656,
@@ -2642,7 +2650,7 @@
           },
           {
             "candidate_symbol": "?ReadRomConfiguration@@YAXXZ",
-            "rebuilt_va": 4318848,
+            "rebuilt_va": 4318864,
             "rebuilt_size": 656,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 656,
@@ -2678,7 +2686,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?SaveBrowserSettings@@YAXXZ",
-            "rebuilt_va": 4319504,
+            "rebuilt_va": 4319520,
             "rebuilt_size": 416,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 416,
@@ -2700,7 +2708,7 @@
           },
           {
             "candidate_symbol": "?SaveBrowserSettings@@YAXXZ",
-            "rebuilt_va": 4319504,
+            "rebuilt_va": 4319520,
             "rebuilt_size": 416,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 416,
@@ -2736,7 +2744,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?ReadZipRom@@YA_NPBD_NI@Z",
-            "rebuilt_va": 4319920,
+            "rebuilt_va": 4319936,
             "rebuilt_size": 797,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 800,
@@ -2758,7 +2766,7 @@
           },
           {
             "candidate_symbol": "?ReadZipRom@@YA_NPBD_NI@Z",
-            "rebuilt_va": 4319920,
+            "rebuilt_va": 4319936,
             "rebuilt_size": 800,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 800,
@@ -2794,7 +2802,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?FreeRomImage@@YAXXZ",
-            "rebuilt_va": 4320720,
+            "rebuilt_va": 4320736,
             "rebuilt_size": 70,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 80,
@@ -2816,7 +2824,7 @@
           },
           {
             "candidate_symbol": "?FreeRomImage@@YAXXZ",
-            "rebuilt_va": 4320720,
+            "rebuilt_va": 4320736,
             "rebuilt_size": 80,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 80,
@@ -2852,7 +2860,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?ReadRomImage@@YA_NPAUHWND__@@PBD_NI@Z",
-            "rebuilt_va": 4320800,
+            "rebuilt_va": 4320816,
             "rebuilt_size": 1306,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 1312,
@@ -2874,7 +2882,7 @@
           },
           {
             "candidate_symbol": "?ReadRomImage@@YA_NPAUHWND__@@PBD_NI@Z",
-            "rebuilt_va": 4320800,
+            "rebuilt_va": 4320816,
             "rebuilt_size": 1312,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 1312,
@@ -2910,7 +2918,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?LoadRom@@YA_NPAUHWND__@@PBD@Z",
-            "rebuilt_va": 4322112,
+            "rebuilt_va": 4322128,
             "rebuilt_size": 512,
             "candidate_extent_basis": "original_sized_candidate_prefix_only",
             "candidate_map_span": 512,
@@ -2932,7 +2940,7 @@
           },
           {
             "candidate_symbol": "?LoadRom@@YA_NPAUHWND__@@PBD@Z",
-            "rebuilt_va": 4322112,
+            "rebuilt_va": 4322128,
             "rebuilt_size": 512,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 512,
@@ -2971,7 +2979,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?CompareBrowserItems@@YGHJJJ@Z",
-            "rebuilt_va": 4322624,
+            "rebuilt_va": 4322640,
             "rebuilt_size": 720,
             "candidate_extent_basis": "original_sized_candidate_prefix_only",
             "candidate_map_span": 720,
@@ -3026,7 +3034,7 @@
           },
           {
             "candidate_symbol": "?CompareBrowserItems@@YGHJJJ@Z",
-            "rebuilt_va": 4322624,
+            "rebuilt_va": 4322640,
             "rebuilt_size": 720,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 720,
@@ -3095,7 +3103,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?RefreshRomBrowser@@YAXXZ",
-            "rebuilt_va": 4323344,
+            "rebuilt_va": 4323360,
             "rebuilt_size": 1638,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 1648,
@@ -3117,7 +3125,7 @@
           },
           {
             "candidate_symbol": "?RefreshRomBrowser@@YAXXZ",
-            "rebuilt_va": 4323344,
+            "rebuilt_va": 4323360,
             "rebuilt_size": 1648,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 1648,
@@ -3206,117 +3214,47 @@
         "metadata_index": 1,
         "source": "src/nemu64/CpuControl.cpp",
         "original_extent_basis": "raw x86 function and local table extent excluding trailing alignment",
-        "status": "instruction_mismatch",
-        "blockers": [
-          "missing_candidate_extent",
-          "different_function_size",
-          "instruction_mismatch"
-        ],
+        "status": "instruction_and_known_target_match",
+        "blockers": [],
         "comparisons": [
           {
             "candidate_symbol": "?CPUHostException@@YAJPAU_EXCEPTION_POINTERS@@@Z",
             "rebuilt_va": 4277296,
             "rebuilt_size": 1802,
-            "candidate_extent_basis": "original_sized_candidate_prefix_only",
-            "candidate_map_span": 1792,
-            "candidate_extent_hash_matches": null,
-            "candidate_extent_metadata_file": null,
-            "rebuilt_extent_verified": false,
+            "candidate_extent_basis": "CFG and relocated DWORD tables plus independently bounded byte selectors; selector values resolve to decoded instruction starts. Six trailing NOPs excluded.",
+            "candidate_map_span": 1808,
+            "candidate_extent_hash_matches": true,
+            "candidate_extent_metadata_file": "/root/.ai-tmp/nemu-control-coherent-review-hkkt65yt/extents-complete.json",
+            "rebuilt_extent_verified": true,
             "raw_bytes_equal": false,
-            "full_function_shape_match": false,
-            "normalized_prefix_equal": false,
-            "prefix_instruction_and_known_target_match": false,
-            "instruction_and_known_target_match": false,
-            "normalized_differing_bytes": 495,
-            "first_unmasked_differences": [
-              905,
-              907,
-              911,
-              912,
-              913,
-              916,
-              923,
-              929,
-              936,
-              941,
-              943,
-              944,
-              945,
-              946,
-              947,
-              948,
-              949,
-              950,
-              951,
-              952,
-              957,
-              958,
-              959,
-              960,
-              961,
-              962,
-              963,
-              964,
-              965,
-              966,
-              967,
-              968
-            ],
+            "full_function_shape_match": true,
+            "normalized_prefix_equal": true,
+            "prefix_instruction_and_known_target_match": true,
+            "instruction_and_known_target_match": true,
+            "normalized_differing_bytes": 0,
+            "first_unmasked_differences": [],
             "target_mismatches": 0,
-            "unresolved_targets": 0,
-            "unverified_targets": 0,
+            "unresolved_targets": 4,
+            "unverified_targets": 25,
             "invalid_link_operands": 0,
             "possible_data_target_mismatches": 0
           },
           {
             "candidate_symbol": "?CPUHostException@@YAJPAU_EXCEPTION_POINTERS@@@Z",
             "rebuilt_va": 4277296,
-            "rebuilt_size": 1792,
+            "rebuilt_size": 1808,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
-            "candidate_map_span": 1792,
-            "candidate_extent_hash_matches": null,
-            "candidate_extent_metadata_file": null,
+            "candidate_map_span": 1808,
+            "candidate_extent_hash_matches": true,
+            "candidate_extent_metadata_file": "/root/.ai-tmp/nemu-control-coherent-review-hkkt65yt/extents-complete.json",
             "rebuilt_extent_verified": true,
             "raw_bytes_equal": false,
             "full_function_shape_match": false,
             "normalized_prefix_equal": false,
             "prefix_instruction_and_known_target_match": false,
             "instruction_and_known_target_match": false,
-            "normalized_differing_bytes": 496,
-            "first_unmasked_differences": [
-              905,
-              907,
-              911,
-              912,
-              913,
-              916,
-              923,
-              929,
-              936,
-              941,
-              943,
-              944,
-              945,
-              946,
-              947,
-              948,
-              949,
-              950,
-              951,
-              952,
-              957,
-              958,
-              959,
-              960,
-              961,
-              962,
-              963,
-              964,
-              965,
-              966,
-              967,
-              968
-            ],
+            "normalized_differing_bytes": 6,
+            "first_unmasked_differences": [],
             "target_mismatches": 0,
             "unresolved_targets": 0,
             "unverified_targets": 0,
@@ -3339,7 +3277,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?MultiplyUnsigned64@@YGXIIII@Z",
-            "rebuilt_va": 4279088,
+            "rebuilt_va": 4279104,
             "rebuilt_size": 121,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 128,
@@ -3361,7 +3299,7 @@
           },
           {
             "candidate_symbol": "?MultiplyUnsigned64@@YGXIIII@Z",
-            "rebuilt_va": 4279088,
+            "rebuilt_va": 4279104,
             "rebuilt_size": 128,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 128,
@@ -3397,7 +3335,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?MultiplySigned64@@YGX_J0@Z",
-            "rebuilt_va": 4279216,
+            "rebuilt_va": 4279232,
             "rebuilt_size": 201,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 208,
@@ -3419,7 +3357,7 @@
           },
           {
             "candidate_symbol": "?MultiplySigned64@@YGX_J0@Z",
-            "rebuilt_va": 4279216,
+            "rebuilt_va": 4279232,
             "rebuilt_size": 208,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 208,
@@ -3455,7 +3393,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?DivideUnsigned64@@YGX_K0@Z",
-            "rebuilt_va": 4279424,
+            "rebuilt_va": 4279440,
             "rebuilt_size": 94,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 96,
@@ -3477,7 +3415,7 @@
           },
           {
             "candidate_symbol": "?DivideUnsigned64@@YGX_K0@Z",
-            "rebuilt_va": 4279424,
+            "rebuilt_va": 4279440,
             "rebuilt_size": 96,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 96,
@@ -3513,7 +3451,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?DivideSigned64@@YGX_J0@Z",
-            "rebuilt_va": 4279520,
+            "rebuilt_va": 4279536,
             "rebuilt_size": 94,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 96,
@@ -3535,7 +3473,7 @@
           },
           {
             "candidate_symbol": "?DivideSigned64@@YGX_J0@Z",
-            "rebuilt_va": 4279520,
+            "rebuilt_va": 4279536,
             "rebuilt_size": 96,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 96,
@@ -3571,7 +3509,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?ReportCPUErrorFormat@@YAXPBDZZ",
-            "rebuilt_va": 4279616,
+            "rebuilt_va": 4279632,
             "rebuilt_size": 116,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 128,
@@ -3593,7 +3531,7 @@
           },
           {
             "candidate_symbol": "?ReportCPUErrorFormat@@YAXPBDZZ",
-            "rebuilt_va": 4279616,
+            "rebuilt_va": 4279632,
             "rebuilt_size": 128,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 128,
@@ -3629,7 +3567,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?ReportMemoryError@@YAXPBDI@Z",
-            "rebuilt_va": 4279744,
+            "rebuilt_va": 4279760,
             "rebuilt_size": 119,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 128,
@@ -3651,7 +3589,7 @@
           },
           {
             "candidate_symbol": "?ReportMemoryError@@YAXPBDI@Z",
-            "rebuilt_va": 4279744,
+            "rebuilt_va": 4279760,
             "rebuilt_size": 128,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 128,
@@ -3687,7 +3625,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?ReportCPUError@@YAXPBD@Z",
-            "rebuilt_va": 4279872,
+            "rebuilt_va": 4279888,
             "rebuilt_size": 78,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 80,
@@ -3709,7 +3647,7 @@
           },
           {
             "candidate_symbol": "?ReportCPUError@@YAXPBD@Z",
-            "rebuilt_va": 4279872,
+            "rebuilt_va": 4279888,
             "rebuilt_size": 80,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 80,
@@ -3745,7 +3683,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?ReportInterpreterError@@YAXPBD@Z",
-            "rebuilt_va": 4279952,
+            "rebuilt_va": 4279968,
             "rebuilt_size": 78,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 80,
@@ -3767,7 +3705,7 @@
           },
           {
             "candidate_symbol": "?ReportInterpreterError@@YAXPBD@Z",
-            "rebuilt_va": 4279952,
+            "rebuilt_va": 4279968,
             "rebuilt_size": 80,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 80,
@@ -3803,7 +3741,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?ReportCompilerError@@YAXPBD@Z",
-            "rebuilt_va": 4280032,
+            "rebuilt_va": 4280048,
             "rebuilt_size": 78,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 80,
@@ -3825,7 +3763,7 @@
           },
           {
             "candidate_symbol": "?ReportCompilerError@@YAXPBD@Z",
-            "rebuilt_va": 4280032,
+            "rebuilt_va": 4280048,
             "rebuilt_size": 80,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 80,
@@ -3861,7 +3799,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?SetFpuRounding@@YGXI@Z",
-            "rebuilt_va": 4280112,
+            "rebuilt_va": 4280128,
             "rebuilt_size": 133,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 144,
@@ -3883,7 +3821,7 @@
           },
           {
             "candidate_symbol": "?SetFpuRounding@@YGXI@Z",
-            "rebuilt_va": 4280112,
+            "rebuilt_va": 4280128,
             "rebuilt_size": 144,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 144,
@@ -3919,7 +3857,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?ResetRecompiler@@YAXXZ",
-            "rebuilt_va": 4280256,
+            "rebuilt_va": 4280272,
             "rebuilt_size": 225,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 240,
@@ -3941,7 +3879,7 @@
           },
           {
             "candidate_symbol": "?ResetRecompiler@@YAXXZ",
-            "rebuilt_va": 4280256,
+            "rebuilt_va": 4280272,
             "rebuilt_size": 240,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 240,
@@ -3980,7 +3918,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?ResetCPU@@YAXXZ",
-            "rebuilt_va": 4280496,
+            "rebuilt_va": 4280512,
             "rebuilt_size": 1611,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 1616,
@@ -4035,7 +3973,7 @@
           },
           {
             "candidate_symbol": "?ResetCPU@@YAXXZ",
-            "rebuilt_va": 4280496,
+            "rebuilt_va": 4280512,
             "rebuilt_size": 1616,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 1616,
@@ -4104,7 +4042,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?InitializeCPU@@YAXXZ",
-            "rebuilt_va": 4282112,
+            "rebuilt_va": 4282128,
             "rebuilt_size": 94,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 96,
@@ -4126,7 +4064,7 @@
           },
           {
             "candidate_symbol": "?InitializeCPU@@YAXXZ",
-            "rebuilt_va": 4282112,
+            "rebuilt_va": 4282128,
             "rebuilt_size": 96,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 96,
@@ -4162,7 +4100,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?UpdateAudioTiming@@YAXXZ",
-            "rebuilt_va": 4282208,
+            "rebuilt_va": 4282224,
             "rebuilt_size": 102,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 112,
@@ -4184,7 +4122,7 @@
           },
           {
             "candidate_symbol": "?UpdateAudioTiming@@YAXXZ",
-            "rebuilt_va": 4282208,
+            "rebuilt_va": 4282224,
             "rebuilt_size": 112,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 112,
@@ -4220,7 +4158,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?RunCPU@@YAXXZ",
-            "rebuilt_va": 4282320,
+            "rebuilt_va": 4282336,
             "rebuilt_size": 4503,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 4512,
@@ -4242,7 +4180,7 @@
           },
           {
             "candidate_symbol": "?RunCPU@@YAXXZ",
-            "rebuilt_va": 4282320,
+            "rebuilt_va": 4282336,
             "rebuilt_size": 4512,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 4512,
@@ -4278,7 +4216,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?StartCPUThread@@YAXXZ",
-            "rebuilt_va": 4286832,
+            "rebuilt_va": 4286848,
             "rebuilt_size": 30,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 32,
@@ -4300,7 +4238,7 @@
           },
           {
             "candidate_symbol": "?StartCPUThread@@YAXXZ",
-            "rebuilt_va": 4286832,
+            "rebuilt_va": 4286848,
             "rebuilt_size": 32,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 32,
@@ -4401,7 +4339,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -4459,7 +4397,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -5851,7 +5789,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -5909,7 +5847,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -5967,7 +5905,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -6025,7 +5963,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -6083,7 +6021,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -6141,7 +6079,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -6199,7 +6137,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -6257,7 +6195,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -6315,7 +6253,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -6373,7 +6311,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -6431,7 +6369,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -6489,7 +6427,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -6547,7 +6485,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -6569,7 +6507,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -6605,7 +6543,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -6663,7 +6601,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -6721,7 +6659,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -6779,7 +6717,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -6837,7 +6775,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -6895,7 +6833,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -6953,7 +6891,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -7011,7 +6949,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -7069,7 +7007,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -7707,7 +7645,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -9099,7 +9037,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -9157,7 +9095,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -9215,7 +9153,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -9273,7 +9211,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -9331,7 +9269,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -9389,7 +9327,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -10027,7 +9965,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -10085,7 +10023,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -10143,7 +10081,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -10201,7 +10139,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -10259,7 +10197,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -10317,7 +10255,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -10781,7 +10719,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -10839,7 +10777,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -10897,7 +10835,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -10955,7 +10893,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -16523,7 +16461,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -16581,7 +16519,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -16603,7 +16541,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -17183,7 +17121,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -17241,7 +17179,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -20721,7 +20659,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -21707,7 +21645,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -21823,7 +21761,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -22055,7 +21993,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -22867,7 +22805,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -22925,7 +22863,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -22983,7 +22921,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -23019,7 +22957,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -23041,7 +22979,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -27971,7 +27909,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -28029,7 +27967,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -28087,7 +28025,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -28145,7 +28083,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -28261,7 +28199,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -28355,7 +28293,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -28377,7 +28315,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -29479,7 +29417,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -29914,7 +29852,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?DynarecNoOperation@@YAXXZ",
-            "rebuilt_va": 4344896,
+            "rebuilt_va": 4344912,
             "rebuilt_size": 1,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 16,
@@ -29936,7 +29874,7 @@
           },
           {
             "candidate_symbol": "?DynarecNoOperation@@YAXXZ",
-            "rebuilt_va": 4344896,
+            "rebuilt_va": 4344912,
             "rebuilt_size": 16,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 16,
@@ -29972,7 +29910,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?HashSignatureInstruction@@YAIIIIPBI@Z",
-            "rebuilt_va": 4324992,
+            "rebuilt_va": 4325008,
             "rebuilt_size": 148,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 160,
@@ -29994,7 +29932,7 @@
           },
           {
             "candidate_symbol": "?HashSignatureInstruction@@YAIIIIPBI@Z",
-            "rebuilt_va": 4324992,
+            "rebuilt_va": 4325008,
             "rebuilt_size": 160,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 160,
@@ -30033,7 +29971,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?SaveFunctionSignatures@@YAXPAI@Z",
-            "rebuilt_va": 4325152,
+            "rebuilt_va": 4325168,
             "rebuilt_size": 671,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 672,
@@ -30088,7 +30026,7 @@
           },
           {
             "candidate_symbol": "?SaveFunctionSignatures@@YAXPAI@Z",
-            "rebuilt_va": 4325152,
+            "rebuilt_va": 4325168,
             "rebuilt_size": 672,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 672,
@@ -30157,7 +30095,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?ResetRuntimeReplacements@@YAXXZ",
-            "rebuilt_va": 4325824,
+            "rebuilt_va": 4325840,
             "rebuilt_size": 33,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 48,
@@ -30179,7 +30117,7 @@
           },
           {
             "candidate_symbol": "?ResetRuntimeReplacements@@YAXXZ",
-            "rebuilt_va": 4325824,
+            "rebuilt_va": 4325840,
             "rebuilt_size": 48,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 48,
@@ -30215,7 +30153,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?FindRuntimeReplacement@@YAP6AXXZI@Z",
-            "rebuilt_va": 4325872,
+            "rebuilt_va": 4325888,
             "rebuilt_size": 67,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 80,
@@ -30237,7 +30175,7 @@
           },
           {
             "candidate_symbol": "?FindRuntimeReplacement@@YAP6AXXZI@Z",
-            "rebuilt_va": 4325872,
+            "rebuilt_va": 4325888,
             "rebuilt_size": 80,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 80,
@@ -30273,7 +30211,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?EnablePIFSuccess@@YAXXZ",
-            "rebuilt_va": 4325952,
+            "rebuilt_va": 4325968,
             "rebuilt_size": 11,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 16,
@@ -30295,7 +30233,7 @@
           },
           {
             "candidate_symbol": "?EnablePIFSuccess@@YAXXZ",
-            "rebuilt_va": 4325952,
+            "rebuilt_va": 4325968,
             "rebuilt_size": 16,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 16,
@@ -30331,7 +30269,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?ResizeMainWindow@@YAXIH@Z",
-            "rebuilt_va": 4305088,
+            "rebuilt_va": 4305104,
             "rebuilt_size": 394,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 400,
@@ -30353,7 +30291,7 @@
           },
           {
             "candidate_symbol": "?ResizeMainWindow@@YAXIH@Z",
-            "rebuilt_va": 4305088,
+            "rebuilt_va": 4305104,
             "rebuilt_size": 400,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 400,
@@ -30389,7 +30327,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?SetEmulationMenus@@YAXE@Z",
-            "rebuilt_va": 4305616,
+            "rebuilt_va": 4305632,
             "rebuilt_size": 604,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 608,
@@ -30411,7 +30349,7 @@
           },
           {
             "candidate_symbol": "?SetEmulationMenus@@YAXE@Z",
-            "rebuilt_va": 4305616,
+            "rebuilt_va": 4305632,
             "rebuilt_size": 608,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 608,
@@ -30447,7 +30385,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?DrawStatePreview@@YAXPAUHWND__@@@Z",
-            "rebuilt_va": 4307136,
+            "rebuilt_va": 4307152,
             "rebuilt_size": 126,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 128,
@@ -30469,7 +30407,7 @@
           },
           {
             "candidate_symbol": "?DrawStatePreview@@YAXPAUHWND__@@@Z",
-            "rebuilt_va": 4307136,
+            "rebuilt_va": 4307152,
             "rebuilt_size": 128,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 128,
@@ -30505,7 +30443,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?StatePreviewHook@@YGIPAUHWND__@@IIJ@Z",
-            "rebuilt_va": 4307264,
+            "rebuilt_va": 4307280,
             "rebuilt_size": 143,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 144,
@@ -30527,7 +30465,7 @@
           },
           {
             "candidate_symbol": "?StatePreviewHook@@YGIPAUHWND__@@IIJ@Z",
-            "rebuilt_va": 4307264,
+            "rebuilt_va": 4307280,
             "rebuilt_size": 144,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 144,
@@ -30563,7 +30501,7 @@
         "comparisons": [
           {
             "candidate_symbol": "_WinMain@16",
-            "rebuilt_va": 4307408,
+            "rebuilt_va": 4307424,
             "rebuilt_size": 1393,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 1408,
@@ -30585,7 +30523,7 @@
           },
           {
             "candidate_symbol": "_WinMain@16",
-            "rebuilt_va": 4307408,
+            "rebuilt_va": 4307424,
             "rebuilt_size": 1408,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 1408,
@@ -30621,7 +30559,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?CaptureStatePreview@@YAXXZ",
-            "rebuilt_va": 4308816,
+            "rebuilt_va": 4308832,
             "rebuilt_size": 356,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 368,
@@ -30643,7 +30581,7 @@
           },
           {
             "candidate_symbol": "?CaptureStatePreview@@YAXXZ",
-            "rebuilt_va": 4308816,
+            "rebuilt_va": 4308832,
             "rebuilt_size": 368,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 368,
@@ -30679,7 +30617,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?MainWindowCommand@@YAJPAUHWND__@@IIJH@Z",
-            "rebuilt_va": 4309184,
+            "rebuilt_va": 4309200,
             "rebuilt_size": 3968,
             "candidate_extent_basis": "original_sized_candidate_prefix_only",
             "candidate_map_span": 3968,
@@ -30701,7 +30639,7 @@
           },
           {
             "candidate_symbol": "?MainWindowCommand@@YAJPAUHWND__@@IIJH@Z",
-            "rebuilt_va": 4309184,
+            "rebuilt_va": 4309200,
             "rebuilt_size": 3968,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 3968,
@@ -30737,7 +30675,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?AddToolbarButton@@YAXPAU_TBBUTTON@@PAHEHEH@Z",
-            "rebuilt_va": 4313152,
+            "rebuilt_va": 4313168,
             "rebuilt_size": 83,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 96,
@@ -30759,7 +30697,7 @@
           },
           {
             "candidate_symbol": "?AddToolbarButton@@YAXPAU_TBBUTTON@@PAHEHEH@Z",
-            "rebuilt_va": 4313152,
+            "rebuilt_va": 4313168,
             "rebuilt_size": 96,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 96,
@@ -30795,7 +30733,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?MainWindowProc@@YGJPAUHWND__@@IIJ@Z",
-            "rebuilt_va": 4313248,
+            "rebuilt_va": 4313264,
             "rebuilt_size": 3968,
             "candidate_extent_basis": "original_sized_candidate_prefix_only",
             "candidate_map_span": 3968,
@@ -30817,7 +30755,7 @@
           },
           {
             "candidate_symbol": "?MainWindowProc@@YGJPAUHWND__@@IIJ@Z",
-            "rebuilt_va": 4313248,
+            "rebuilt_va": 4313264,
             "rebuilt_size": 3968,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 3968,
@@ -30853,7 +30791,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?CopyByteSwapped@@YAXPAXPBXI@Z",
-            "rebuilt_va": 4286864,
+            "rebuilt_va": 4286880,
             "rebuilt_size": 344,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 352,
@@ -30875,7 +30813,7 @@
           },
           {
             "candidate_symbol": "?CopyByteSwapped@@YAXPAXPBXI@Z",
-            "rebuilt_va": 4286864,
+            "rebuilt_va": 4286880,
             "rebuilt_size": 352,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 352,
@@ -30911,7 +30849,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?TLBRead@@YGXXZ",
-            "rebuilt_va": 4287216,
+            "rebuilt_va": 4287232,
             "rebuilt_size": 81,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 96,
@@ -30933,7 +30871,7 @@
           },
           {
             "candidate_symbol": "?TLBRead@@YGXXZ",
-            "rebuilt_va": 4287216,
+            "rebuilt_va": 4287232,
             "rebuilt_size": 96,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 96,
@@ -30969,7 +30907,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?TLBWrite@@YGXI@Z",
-            "rebuilt_va": 4287312,
+            "rebuilt_va": 4287328,
             "rebuilt_size": 725,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 736,
@@ -30991,7 +30929,7 @@
           },
           {
             "candidate_symbol": "?TLBWrite@@YGXI@Z",
-            "rebuilt_va": 4287312,
+            "rebuilt_va": 4287328,
             "rebuilt_size": 736,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 736,
@@ -31027,7 +30965,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?TLBProbe@@YGXXZ",
-            "rebuilt_va": 4288048,
+            "rebuilt_va": 4288064,
             "rebuilt_size": 87,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 96,
@@ -31049,7 +30987,7 @@
           },
           {
             "candidate_symbol": "?TLBProbe@@YGXXZ",
-            "rebuilt_va": 4288048,
+            "rebuilt_va": 4288064,
             "rebuilt_size": 96,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 96,
@@ -31085,7 +31023,7 @@
         "comparisons": [
           {
             "candidate_symbol": "_CopyAndSwapWords",
-            "rebuilt_va": 4288144,
+            "rebuilt_va": 4288160,
             "rebuilt_size": 36,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 48,
@@ -31107,7 +31045,7 @@
           },
           {
             "candidate_symbol": "_CopyAndSwapWords",
-            "rebuilt_va": 4288144,
+            "rebuilt_va": 4288160,
             "rebuilt_size": 48,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 48,
@@ -31143,7 +31081,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?InvalidateRecompiledRange@@YAXII@Z",
-            "rebuilt_va": 4288192,
+            "rebuilt_va": 4288208,
             "rebuilt_size": 94,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 96,
@@ -31165,7 +31103,7 @@
           },
           {
             "candidate_symbol": "?InvalidateRecompiledRange@@YAXII@Z",
-            "rebuilt_va": 4288192,
+            "rebuilt_va": 4288208,
             "rebuilt_size": 96,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 96,
@@ -31201,7 +31139,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?ReadPhysicalByte@@YGEI@Z",
-            "rebuilt_va": 4288288,
+            "rebuilt_va": 4288304,
             "rebuilt_size": 199,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 208,
@@ -31223,7 +31161,7 @@
           },
           {
             "candidate_symbol": "?ReadPhysicalByte@@YGEI@Z",
-            "rebuilt_va": 4288288,
+            "rebuilt_va": 4288304,
             "rebuilt_size": 208,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 208,
@@ -31259,7 +31197,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?ReadPhysicalHalf@@YGGI@Z",
-            "rebuilt_va": 4288496,
+            "rebuilt_va": 4288512,
             "rebuilt_size": 273,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 288,
@@ -31281,7 +31219,7 @@
           },
           {
             "candidate_symbol": "?ReadPhysicalHalf@@YGGI@Z",
-            "rebuilt_va": 4288496,
+            "rebuilt_va": 4288512,
             "rebuilt_size": 288,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 288,
@@ -31317,7 +31255,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?ReadPhysicalWord@@YGII@Z",
-            "rebuilt_va": 4288784,
+            "rebuilt_va": 4288800,
             "rebuilt_size": 2192,
             "candidate_extent_basis": "original_sized_candidate_prefix_only",
             "candidate_map_span": 2192,
@@ -31339,7 +31277,7 @@
           },
           {
             "candidate_symbol": "?ReadPhysicalWord@@YGII@Z",
-            "rebuilt_va": 4288784,
+            "rebuilt_va": 4288800,
             "rebuilt_size": 2192,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 2192,
@@ -31375,7 +31313,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?WritePhysicalByte@@YGXIE@Z",
-            "rebuilt_va": 4290976,
+            "rebuilt_va": 4290992,
             "rebuilt_size": 286,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 288,
@@ -31397,7 +31335,7 @@
           },
           {
             "candidate_symbol": "?WritePhysicalByte@@YGXIE@Z",
-            "rebuilt_va": 4290976,
+            "rebuilt_va": 4290992,
             "rebuilt_size": 288,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 288,
@@ -31433,7 +31371,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?WritePhysicalHalf@@YGXIG@Z",
-            "rebuilt_va": 4291264,
+            "rebuilt_va": 4291280,
             "rebuilt_size": 312,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 320,
@@ -31455,7 +31393,7 @@
           },
           {
             "candidate_symbol": "?WritePhysicalHalf@@YGXIG@Z",
-            "rebuilt_va": 4291264,
+            "rebuilt_va": 4291280,
             "rebuilt_size": 320,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 320,
@@ -31494,7 +31432,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?WritePhysicalWord@@YGXII@Z",
-            "rebuilt_va": 4291584,
+            "rebuilt_va": 4291600,
             "rebuilt_size": 6368,
             "candidate_extent_basis": "original_sized_candidate_prefix_only",
             "candidate_map_span": 6368,
@@ -31528,7 +31466,7 @@
           },
           {
             "candidate_symbol": "?WritePhysicalWord@@YGXII@Z",
-            "rebuilt_va": 4291584,
+            "rebuilt_va": 4291600,
             "rebuilt_size": 6368,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 6368,
@@ -31576,7 +31514,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?WritePhysicalDoubleWord@@YGXIII@Z",
-            "rebuilt_va": 4297952,
+            "rebuilt_va": 4297968,
             "rebuilt_size": 34,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 48,
@@ -31598,7 +31536,7 @@
           },
           {
             "candidate_symbol": "?WritePhysicalDoubleWord@@YGXIII@Z",
-            "rebuilt_va": 4297952,
+            "rebuilt_va": 4297968,
             "rebuilt_size": 48,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 48,
@@ -31634,7 +31572,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?TranslateTLB@@YGIIE@Z",
-            "rebuilt_va": 4298000,
+            "rebuilt_va": 4298016,
             "rebuilt_size": 287,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 288,
@@ -31656,7 +31594,7 @@
           },
           {
             "candidate_symbol": "?TranslateTLB@@YGIIE@Z",
-            "rebuilt_va": 4298000,
+            "rebuilt_va": 4298016,
             "rebuilt_size": 288,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 288,
@@ -31692,7 +31630,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?FindCICInput@@YAXPAU_iobuf@@PBE@Z",
-            "rebuilt_va": 4325968,
+            "rebuilt_va": 4325984,
             "rebuilt_size": 98,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 112,
@@ -31714,7 +31652,7 @@
           },
           {
             "candidate_symbol": "?FindCICInput@@YAXPAU_iobuf@@PBE@Z",
-            "rebuilt_va": 4325968,
+            "rebuilt_va": 4325984,
             "rebuilt_size": 112,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 112,
@@ -31750,7 +31688,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?SaveCICInput@@YAXPBE@Z",
-            "rebuilt_va": 4326080,
+            "rebuilt_va": 4326096,
             "rebuilt_size": 87,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 96,
@@ -31772,7 +31710,7 @@
           },
           {
             "candidate_symbol": "?SaveCICInput@@YAXPBE@Z",
-            "rebuilt_va": 4326080,
+            "rebuilt_va": 4326096,
             "rebuilt_size": 96,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 96,
@@ -31808,7 +31746,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?CICUseTable1@@YAHPBE@Z",
-            "rebuilt_va": 4326176,
+            "rebuilt_va": 4326192,
             "rebuilt_size": 122,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 128,
@@ -31830,7 +31768,7 @@
           },
           {
             "candidate_symbol": "?CICUseTable1@@YAHPBE@Z",
-            "rebuilt_va": 4326176,
+            "rebuilt_va": 4326192,
             "rebuilt_size": 128,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 128,
@@ -31866,7 +31804,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?CIC6105Challenge@@YAXPAE@Z",
-            "rebuilt_va": 4326304,
+            "rebuilt_va": 4326320,
             "rebuilt_size": 370,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 384,
@@ -31888,7 +31826,7 @@
           },
           {
             "candidate_symbol": "?CIC6105Challenge@@YAXPAE@Z",
-            "rebuilt_va": 4326304,
+            "rebuilt_va": 4326320,
             "rebuilt_size": 384,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 384,
@@ -31924,7 +31862,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?PIFDataCRC@@YAEPBE@Z",
-            "rebuilt_va": 4326688,
+            "rebuilt_va": 4326704,
             "rebuilt_size": 82,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 96,
@@ -31946,7 +31884,7 @@
           },
           {
             "candidate_symbol": "?PIFDataCRC@@YAEPBE@Z",
-            "rebuilt_va": 4326688,
+            "rebuilt_va": 4326704,
             "rebuilt_size": 96,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 96,
@@ -31982,7 +31920,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?InitializePIFCommandLengths@@YAXXZ",
-            "rebuilt_va": 4326784,
+            "rebuilt_va": 4326800,
             "rebuilt_size": 114,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 128,
@@ -32004,7 +31942,7 @@
           },
           {
             "candidate_symbol": "?InitializePIFCommandLengths@@YAXXZ",
-            "rebuilt_va": 4326784,
+            "rebuilt_va": 4326800,
             "rebuilt_size": 128,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 128,
@@ -32042,7 +31980,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?ProcessPIF@@YAXXZ",
-            "rebuilt_va": 4326912,
+            "rebuilt_va": 4326928,
             "rebuilt_size": 1904,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 1904,
@@ -32097,7 +32035,7 @@
           },
           {
             "candidate_symbol": "?ProcessPIF@@YAXXZ",
-            "rebuilt_va": 4326912,
+            "rebuilt_va": 4326928,
             "rebuilt_size": 1904,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 1904,
@@ -32166,7 +32104,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?SaveEEPROM@@YAXII@Z",
-            "rebuilt_va": 4328816,
+            "rebuilt_va": 4328832,
             "rebuilt_size": 143,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 144,
@@ -32188,7 +32126,7 @@
           },
           {
             "candidate_symbol": "?SaveEEPROM@@YAXII@Z",
-            "rebuilt_va": 4328816,
+            "rebuilt_va": 4328832,
             "rebuilt_size": 144,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 144,
@@ -32224,7 +32162,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?SaveMemPack@@YAXII@Z",
-            "rebuilt_va": 4328960,
+            "rebuilt_va": 4328976,
             "rebuilt_size": 143,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 144,
@@ -32246,7 +32184,7 @@
           },
           {
             "candidate_symbol": "?SaveMemPack@@YAXII@Z",
-            "rebuilt_va": 4328960,
+            "rebuilt_va": 4328976,
             "rebuilt_size": 144,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 144,
@@ -32282,7 +32220,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?RecordMovieInput@@YAXXZ",
-            "rebuilt_va": 4329104,
+            "rebuilt_va": 4329120,
             "rebuilt_size": 238,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 240,
@@ -32304,7 +32242,7 @@
           },
           {
             "candidate_symbol": "?RecordMovieInput@@YAXXZ",
-            "rebuilt_va": 4329104,
+            "rebuilt_va": 4329120,
             "rebuilt_size": 240,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 240,
@@ -32340,7 +32278,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?PlayMovieInput@@YAXXZ",
-            "rebuilt_va": 4329344,
+            "rebuilt_va": 4329360,
             "rebuilt_size": 211,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 224,
@@ -32362,7 +32300,7 @@
           },
           {
             "candidate_symbol": "?PlayMovieInput@@YAXXZ",
-            "rebuilt_va": 4329344,
+            "rebuilt_va": 4329360,
             "rebuilt_size": 224,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 224,
@@ -32398,7 +32336,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?StopMovie@@YAXXZ",
-            "rebuilt_va": 4329568,
+            "rebuilt_va": 4329584,
             "rebuilt_size": 53,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 64,
@@ -32420,7 +32358,7 @@
           },
           {
             "candidate_symbol": "?StopMovie@@YAXXZ",
-            "rebuilt_va": 4329568,
+            "rebuilt_va": 4329584,
             "rebuilt_size": 64,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 64,
@@ -32456,7 +32394,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?SaveSRAM@@YAXII@Z",
-            "rebuilt_va": 4329632,
+            "rebuilt_va": 4329648,
             "rebuilt_size": 143,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 144,
@@ -32478,7 +32416,7 @@
           },
           {
             "candidate_symbol": "?SaveSRAM@@YAXII@Z",
-            "rebuilt_va": 4329632,
+            "rebuilt_va": 4329648,
             "rebuilt_size": 144,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 144,
@@ -32514,7 +32452,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?WriteSRAM@@YAXIPBXI@Z",
-            "rebuilt_va": 4329776,
+            "rebuilt_va": 4329792,
             "rebuilt_size": 48,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 48,
@@ -32536,7 +32474,7 @@
           },
           {
             "candidate_symbol": "?WriteSRAM@@YAXIPBXI@Z",
-            "rebuilt_va": 4329776,
+            "rebuilt_va": 4329792,
             "rebuilt_size": 48,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 48,
@@ -32572,7 +32510,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?ReadSRAM@@YAXPAXII@Z",
-            "rebuilt_va": 4329824,
+            "rebuilt_va": 4329840,
             "rebuilt_size": 43,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 48,
@@ -32594,7 +32532,7 @@
           },
           {
             "candidate_symbol": "?ReadSRAM@@YAXPAXII@Z",
-            "rebuilt_va": 4329824,
+            "rebuilt_va": 4329840,
             "rebuilt_size": 48,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 48,
@@ -32630,7 +32568,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?LoadPlugin@@YA_NPAD@Z",
-            "rebuilt_va": 4298288,
+            "rebuilt_va": 4298304,
             "rebuilt_size": 999,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 1008,
@@ -32652,7 +32590,7 @@
           },
           {
             "candidate_symbol": "?LoadPlugin@@YA_NPAD@Z",
-            "rebuilt_va": 4298288,
+            "rebuilt_va": 4298304,
             "rebuilt_size": 1008,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 1008,
@@ -32688,7 +32626,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?LoadPlugins@@YA_NXZ",
-            "rebuilt_va": 4299296,
+            "rebuilt_va": 4299312,
             "rebuilt_size": 236,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 240,
@@ -32710,7 +32648,7 @@
           },
           {
             "candidate_symbol": "?LoadPlugins@@YA_NXZ",
-            "rebuilt_va": 4299296,
+            "rebuilt_va": 4299312,
             "rebuilt_size": 240,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 240,
@@ -32746,7 +32684,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?UnloadPlugins@@YAXXZ",
-            "rebuilt_va": 4299536,
+            "rebuilt_va": 4299552,
             "rebuilt_size": 65,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 80,
@@ -32768,7 +32706,7 @@
           },
           {
             "candidate_symbol": "?UnloadPlugins@@YAXXZ",
-            "rebuilt_va": 4299536,
+            "rebuilt_va": 4299552,
             "rebuilt_size": 80,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 80,
@@ -32804,7 +32742,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?FreeTools@@YAXXZ",
-            "rebuilt_va": 4305040,
+            "rebuilt_va": 4305056,
             "rebuilt_size": 45,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 48,
@@ -32826,7 +32764,7 @@
           },
           {
             "candidate_symbol": "?FreeTools@@YAXXZ",
-            "rebuilt_va": 4305040,
+            "rebuilt_va": 4305056,
             "rebuilt_size": 48,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 48,
@@ -32862,7 +32800,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?InitializeTools@@YAXXZ",
-            "rebuilt_va": 4304000,
+            "rebuilt_va": 4304016,
             "rebuilt_size": 1029,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 1040,
@@ -32884,7 +32822,7 @@
           },
           {
             "candidate_symbol": "?InitializeTools@@YAXXZ",
-            "rebuilt_va": 4304000,
+            "rebuilt_va": 4304016,
             "rebuilt_size": 1040,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 1040,
@@ -32978,7 +32916,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?NetplayClientDropped@@YGXPADH@Z",
-            "rebuilt_va": 4302448,
+            "rebuilt_va": 4302464,
             "rebuilt_size": 3,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 16,
@@ -33000,7 +32938,7 @@
           },
           {
             "candidate_symbol": "?NetplayClientDropped@@YGXPADH@Z",
-            "rebuilt_va": 4302448,
+            "rebuilt_va": 4302464,
             "rebuilt_size": 16,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 16,
@@ -33036,7 +32974,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?NetplayStartGame@@YGHPADHH@Z",
-            "rebuilt_va": 4302496,
+            "rebuilt_va": 4302512,
             "rebuilt_size": 252,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 256,
@@ -33058,7 +32996,7 @@
           },
           {
             "candidate_symbol": "?NetplayStartGame@@YGHPADHH@Z",
-            "rebuilt_va": 4302496,
+            "rebuilt_va": 4302512,
             "rebuilt_size": 256,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 256,
@@ -33094,7 +33032,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?CheckGraphicsInterrupts@@YAXXZ",
-            "rebuilt_va": 4344896,
+            "rebuilt_va": 4344912,
             "rebuilt_size": 1,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 16,
@@ -33116,7 +33054,7 @@
           },
           {
             "candidate_symbol": "?CheckGraphicsInterrupts@@YAXXZ",
-            "rebuilt_va": 4344896,
+            "rebuilt_va": 4344912,
             "rebuilt_size": 16,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 16,
@@ -33152,7 +33090,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?CommitRDRAM@@YAXXZ",
-            "rebuilt_va": 4305488,
+            "rebuilt_va": 4305504,
             "rebuilt_size": 56,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 64,
@@ -33174,7 +33112,7 @@
           },
           {
             "candidate_symbol": "?CommitRDRAM@@YAXXZ",
-            "rebuilt_va": 4305488,
+            "rebuilt_va": 4305504,
             "rebuilt_size": 64,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 64,
@@ -33210,7 +33148,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?DecommitRDRAM@@YAXXZ",
-            "rebuilt_va": 4305552,
+            "rebuilt_va": 4305568,
             "rebuilt_size": 54,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 64,
@@ -33232,7 +33170,7 @@
           },
           {
             "candidate_symbol": "?DecommitRDRAM@@YAXXZ",
-            "rebuilt_va": 4305552,
+            "rebuilt_va": 4305568,
             "rebuilt_size": 64,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 64,
@@ -33268,7 +33206,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?SelectGraphicsPlugin@@YA_NXZ",
-            "rebuilt_va": 4306224,
+            "rebuilt_va": 4306240,
             "rebuilt_size": 279,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 288,
@@ -33290,7 +33228,7 @@
           },
           {
             "candidate_symbol": "?SelectGraphicsPlugin@@YA_NXZ",
-            "rebuilt_va": 4306224,
+            "rebuilt_va": 4306240,
             "rebuilt_size": 288,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 288,
@@ -33326,7 +33264,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?ReloadConfiguration@@YAXXZ",
-            "rebuilt_va": 4306512,
+            "rebuilt_va": 4306528,
             "rebuilt_size": 184,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 192,
@@ -33348,7 +33286,7 @@
           },
           {
             "candidate_symbol": "?ReloadConfiguration@@YAXXZ",
-            "rebuilt_va": 4306512,
+            "rebuilt_va": 4306528,
             "rebuilt_size": 192,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 192,
@@ -33384,7 +33322,7 @@
         "comparisons": [
           {
             "candidate_symbol": "?InitializeGraphicsPlugin@@YAXXZ",
-            "rebuilt_va": 4306704,
+            "rebuilt_va": 4306720,
             "rebuilt_size": 421,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "candidate_map_span": 432,
@@ -33406,7 +33344,7 @@
           },
           {
             "candidate_symbol": "?InitializeGraphicsPlugin@@YAXXZ",
-            "rebuilt_va": 4306704,
+            "rebuilt_va": 4306720,
             "rebuilt_size": 432,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "candidate_map_span": 432,
@@ -38779,7 +38717,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -38837,7 +38775,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -39301,7 +39239,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -39359,7 +39297,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -39417,7 +39355,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -39475,7 +39413,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -39533,7 +39471,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -39591,7 +39529,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
@@ -39649,7 +39587,7 @@
             "candidate_extent_hash_matches": true,
             "candidate_extent_metadata_file": "analysis/nemu-candidate-extents.json",
             "rebuilt_extent_verified": true,
-            "raw_bytes_equal": false,
+            "raw_bytes_equal": true,
             "full_function_shape_match": true,
             "normalized_prefix_equal": true,
             "prefix_instruction_and_known_target_match": true,
