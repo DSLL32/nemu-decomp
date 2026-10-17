@@ -1,0 +1,144 @@
+{
+  "status": "passed",
+  "evidence_type": "behavioral_differential_only_not_byte_equality",
+  "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+  "rebuilt_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+  "rebuilt_map_sha256": "70df4ed46a8867f160afd7d3745dd4a469343fa4a01802df646b41d41decd16f",
+  "script_sha256": "3f897931c99f4ad6075513e4297c32edb2685ad56512bc131793d230f0fb8e1f",
+  "metadata": [
+    {
+      "path": "analysis/nemu-cpu.json",
+      "sha256": "1c4ffe59f35af9e9bf06d42efaea818e08d65824d851cb6cebe71013a5b73177"
+    },
+    {
+      "path": "analysis/nemu-cpu-control.json",
+      "sha256": "d5152b800a9c727a6e1521b6f6b22f6932d4992f55ca23c7a7818c631eb665cd"
+    },
+    {
+      "path": "analysis/nemu-dynarec.json",
+      "sha256": "114341c65705a925b3cb96be6ad914b62eed60d9e8e536ee6a8d1e9a5b13020c"
+    },
+    {
+      "path": "analysis/nemu-dynarec-opcodes.json",
+      "sha256": "e63c17bc4e81b206bd446fd74a483c72cc2cba657ff273397535fc36b53d7aa3"
+    },
+    {
+      "path": "analysis/nemu-dynarec-fpu.json",
+      "sha256": "0bd7c27fdc8f854d4a22d60e96c1bdf5fad399e23646b5a1cd926d05bc708b2b"
+    },
+    {
+      "path": "analysis/nemu-dynarec-memory.json",
+      "sha256": "b5a49a3907ba7d3327195528619b4ea377cf3b893e0b6a1f42bc8464f843c02e"
+    },
+    {
+      "path": "analysis/nemu-memory.json",
+      "sha256": "b8612e4e48bfa821e6b7cf611f8ef8aec96192009a489b2aca5f2bd410fe4d72"
+    },
+    {
+      "path": "analysis/nemu-plugins.json",
+      "sha256": "e1289fb9e6333d1cceb742c9dd1f1ad442152614faaa5975b38dfad1bddbe5b9"
+    },
+    {
+      "path": "analysis/nemu-runtime.json",
+      "sha256": "2f2266723a84c1a5b0cd5a58305c0d0cac867f27a0fb4a5d9503d50af9d0485d"
+    },
+    {
+      "path": "analysis/nemu-globals.json",
+      "sha256": "e779b7af5f95a5f187834d34405f7d9b199825aa0b65f956b47c32389e95b15a"
+    }
+  ],
+  "tests": 1361,
+  "functions": 83,
+  "cases_per_function": {
+    "Recompile_ADD": 15,
+    "Recompile_ADDI": 15,
+    "Recompile_ADDIU": 15,
+    "Recompile_AND": 15,
+    "Recompile_ANDI": 15,
+    "Recompile_BEQ": 19,
+    "Recompile_BEQL": 18,
+    "Recompile_BGEZ": 18,
+    "Recompile_BGEZAL": 30,
+    "Recompile_BGEZALL": 18,
+    "Recompile_BGEZL": 18,
+    "Recompile_BGTZ": 18,
+    "Recompile_BGTZL": 18,
+    "Recompile_BLEZ": 18,
+    "Recompile_BLEZL": 18,
+    "Recompile_BLTZ": 18,
+    "Recompile_BLTZAL": 18,
+    "Recompile_BLTZALL": 18,
+    "Recompile_BLTZL": 18,
+    "Recompile_BNE": 18,
+    "Recompile_BNEL": 18,
+    "Recompile_BREAK": 15,
+    "Recompile_Breakpoint": 2,
+    "Recompile_COP0": 2,
+    "Recompile_COP1": 2,
+    "Recompile_DADD": 15,
+    "Recompile_DADDI": 15,
+    "Recompile_DDIV": 15,
+    "Recompile_DDIVU": 15,
+    "Recompile_DIV": 15,
+    "Recompile_DIVU": 15,
+    "Recompile_DMULT": 15,
+    "Recompile_DMULTU": 15,
+    "Recompile_DSLL": 15,
+    "Recompile_DSLL32": 15,
+    "Recompile_DSLLV": 15,
+    "Recompile_DSRA": 15,
+    "Recompile_DSRA32": 15,
+    "Recompile_DSRAV": 15,
+    "Recompile_DSRL": 15,
+    "Recompile_DSRL32": 15,
+    "Recompile_DSRLV": 15,
+    "Recompile_DSUB": 15,
+    "Recompile_ERET": 15,
+    "Recompile_J": 18,
+    "Recompile_JAL": 17,
+    "Recompile_JALR": 15,
+    "Recompile_JR": 15,
+    "Recompile_LUI": 15,
+    "Recompile_MFC0": 79,
+    "Recompile_MFHI": 15,
+    "Recompile_MFLO": 15,
+    "Recompile_MTC0": 79,
+    "Recompile_MTHI": 15,
+    "Recompile_MTLO": 15,
+    "Recompile_MULT": 15,
+    "Recompile_MULTU": 15,
+    "Recompile_NOR": 15,
+    "Recompile_OR": 15,
+    "Recompile_ORI": 15,
+    "Recompile_REGIMM": 2,
+    "Recompile_SLL": 15,
+    "Recompile_SLLV": 15,
+    "Recompile_SLT": 15,
+    "Recompile_SLTI": 15,
+    "Recompile_SLTIU": 15,
+    "Recompile_SLTU": 15,
+    "Recompile_SPECIAL": 2,
+    "Recompile_SRA": 15,
+    "Recompile_SRAV": 15,
+    "Recompile_SRL": 15,
+    "Recompile_SRLV": 15,
+    "Recompile_SUB": 15,
+    "Recompile_SYSCALL": 15,
+    "Recompile_TEQ": 15,
+    "Recompile_TLB": 2,
+    "Recompile_TLBP": 15,
+    "Recompile_TLBR": 15,
+    "Recompile_TLBWI": 15,
+    "Recompile_TLBWR": 15,
+    "Recompile_Unknown": 15,
+    "Recompile_XOR": 15,
+    "Recompile_XORI": 15
+  },
+  "original_results_sha256": "7fcd860f85121e73178a479691aaa69b932d4c650b310ecf3bb160b929e9ed23",
+  "rebuilt_results_sha256": "7fcd860f85121e73178a479691aaa69b932d4c650b310ecf3bb160b929e9ed23",
+  "dispatch_tables": {
+    "entries_checked": 352,
+    "failures": []
+  },
+  "failures": []
+}

@@ -1,0 +1,5434 @@
+{
+  "target": "master/nemu64.exe",
+  "target_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+  "source": "src/nemu64/DynarecOpcodes.cpp",
+  "header": "src/nemu64/DynarecOpcodes.h",
+  "status": "All assigned integer/control translator and native-helper source implemented; full byte equality not established.",
+  "source_organization": "Inferred names and file organization, separated from emitter and memory/FPU translator families for reconstruction.",
+  "compiler": {
+    "toolchain": "toolchains/vc7",
+    "flags": [
+      "/O2",
+      "/Ob1",
+      "/ML",
+      "/GL"
+    ],
+    "translation_unit_compiles": true,
+    "warnings": 0
+  },
+  "functions": [
+    {
+      "va": "0x0040D590",
+      "name": "Recompile_Unknown",
+      "dispatch": [
+        {
+          "kind": "primary",
+          "mnemonic": "unused",
+          "index": 18
+        },
+        {
+          "kind": "primary",
+          "mnemonic": "unused",
+          "index": 19
+        },
+        {
+          "kind": "primary",
+          "mnemonic": "unused",
+          "index": 28
+        },
+        {
+          "kind": "primary",
+          "mnemonic": "unused",
+          "index": 29
+        },
+        {
+          "kind": "primary",
+          "mnemonic": "unused",
+          "index": 30
+        },
+        {
+          "kind": "primary",
+          "mnemonic": "unused",
+          "index": 31
+        },
+        {
+          "kind": "primary",
+          "mnemonic": "LWC2",
+          "index": 50
+        },
+        {
+          "kind": "primary",
+          "mnemonic": "unused",
+          "index": 51
+        },
+        {
+          "kind": "primary",
+          "mnemonic": "LDC2",
+          "index": 54
+        },
+        {
+          "kind": "primary",
+          "mnemonic": "SWC2",
+          "index": 58
+        },
+        {
+          "kind": "primary",
+          "mnemonic": "SDC2",
+          "index": 62
+        },
+        {
+          "kind": "special",
+          "mnemonic": "unused",
+          "index": 1
+        },
+        {
+          "kind": "special",
+          "mnemonic": "unused",
+          "index": 5
+        },
+        {
+          "kind": "special",
+          "mnemonic": "unused",
+          "index": 10
+        },
+        {
+          "kind": "special",
+          "mnemonic": "unused",
+          "index": 11
+        },
+        {
+          "kind": "special",
+          "mnemonic": "unused",
+          "index": 14
+        },
+        {
+          "kind": "special",
+          "mnemonic": "unused",
+          "index": 21
+        },
+        {
+          "kind": "special",
+          "mnemonic": "unused",
+          "index": 40
+        },
+        {
+          "kind": "special",
+          "mnemonic": "unused",
+          "index": 41
+        },
+        {
+          "kind": "special",
+          "mnemonic": "unused",
+          "index": 53
+        },
+        {
+          "kind": "special",
+          "mnemonic": "unused",
+          "index": 55
+        },
+        {
+          "kind": "special",
+          "mnemonic": "unused",
+          "index": 57
+        },
+        {
+          "kind": "special",
+          "mnemonic": "unused",
+          "index": 61
+        },
+        {
+          "kind": "regimm",
+          "mnemonic": "unused",
+          "index": 4
+        },
+        {
+          "kind": "regimm",
+          "mnemonic": "unused",
+          "index": 5
+        },
+        {
+          "kind": "regimm",
+          "mnemonic": "unused",
+          "index": 6
+        },
+        {
+          "kind": "regimm",
+          "mnemonic": "unused",
+          "index": 7
+        },
+        {
+          "kind": "regimm",
+          "mnemonic": "unused",
+          "index": 13
+        },
+        {
+          "kind": "regimm",
+          "mnemonic": "unused",
+          "index": 15
+        },
+        {
+          "kind": "regimm",
+          "mnemonic": "reserved",
+          "index": 20
+        },
+        {
+          "kind": "regimm",
+          "mnemonic": "reserved",
+          "index": 21
+        },
+        {
+          "kind": "regimm",
+          "mnemonic": "reserved",
+          "index": 22
+        },
+        {
+          "kind": "regimm",
+          "mnemonic": "reserved",
+          "index": 23
+        },
+        {
+          "kind": "regimm",
+          "mnemonic": "reserved",
+          "index": 24
+        },
+        {
+          "kind": "regimm",
+          "mnemonic": "reserved",
+          "index": 25
+        },
+        {
+          "kind": "regimm",
+          "mnemonic": "reserved",
+          "index": 26
+        },
+        {
+          "kind": "regimm",
+          "mnemonic": "reserved",
+          "index": 27
+        },
+        {
+          "kind": "regimm",
+          "mnemonic": "reserved",
+          "index": 28
+        },
+        {
+          "kind": "regimm",
+          "mnemonic": "reserved",
+          "index": 29
+        },
+        {
+          "kind": "regimm",
+          "mnemonic": "reserved",
+          "index": 30
+        },
+        {
+          "kind": "regimm",
+          "mnemonic": "reserved",
+          "index": 31
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 1
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 2
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 3
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 5
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 6
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 7
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 8
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 9
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 10
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 11
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 12
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 13
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 14
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 15
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 17
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 18
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 19
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 20
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 21
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 22
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 23
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 24
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 25
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 26
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 27
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 28
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 29
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 30
+        },
+        {
+          "kind": "cop0",
+          "mnemonic": "unused",
+          "index": 31
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 0
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 3
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 4
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 5
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 7
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 9
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 10
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 11
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 12
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 13
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 14
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 15
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 16
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 17
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 18
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 19
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 20
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 21
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 22
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 23
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 25
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 26
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 27
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 28
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 29
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 30
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 31
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 32
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 33
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 34
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 35
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 36
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 37
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 38
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 39
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 40
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 41
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 42
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 43
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 44
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 45
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 46
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 47
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 48
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 49
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 50
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 51
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 52
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 53
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 54
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 55
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 56
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 57
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 58
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 59
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 60
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 61
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 62
+        },
+        {
+          "kind": "tlb",
+          "mnemonic": "unused",
+          "index": 63
+        },
+        {
+          "kind": "cop1",
+          "mnemonic": "unused",
+          "index": 3
+        },
+        {
+          "kind": "cop1",
+          "mnemonic": "unused",
+          "index": 7
+        },
+        {
+          "kind": "cop1",
+          "mnemonic": "unused",
+          "index": 9
+        },
+        {
+          "kind": "cop1",
+          "mnemonic": "unused",
+          "index": 10
+        },
+        {
+          "kind": "cop1",
+          "mnemonic": "unused",
+          "index": 11
+        },
+        {
+          "kind": "cop1",
+          "mnemonic": "unused",
+          "index": 12
+        },
+        {
+          "kind": "cop1",
+          "mnemonic": "unused",
+          "index": 13
+        },
+        {
+          "kind": "cop1",
+          "mnemonic": "unused",
+          "index": 14
+        },
+        {
+          "kind": "cop1",
+          "mnemonic": "unused",
+          "index": 15
+        },
+        {
+          "kind": "cop1",
+          "mnemonic": "unused",
+          "index": 18
+        },
+        {
+          "kind": "cop1",
+          "mnemonic": "unused",
+          "index": 19
+        },
+        {
+          "kind": "cop1",
+          "mnemonic": "unused",
+          "index": 22
+        },
+        {
+          "kind": "cop1",
+          "mnemonic": "unused",
+          "index": 23
+        },
+        {
+          "kind": "cop1",
+          "mnemonic": "unused",
+          "index": 24
+        },
+        {
+          "kind": "cop1",
+          "mnemonic": "unused",
+          "index": 25
+        },
+        {
+          "kind": "cop1",
+          "mnemonic": "unused",
+          "index": 26
+        },
+        {
+          "kind": "cop1",
+          "mnemonic": "unused",
+          "index": 27
+        },
+        {
+          "kind": "cop1",
+          "mnemonic": "unused",
+          "index": 28
+        },
+        {
+          "kind": "cop1",
+          "mnemonic": "unused",
+          "index": 29
+        },
+        {
+          "kind": "cop1",
+          "mnemonic": "unused",
+          "index": 30
+        },
+        {
+          "kind": "cop1",
+          "mnemonic": "unused",
+          "index": 31
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 16
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 17
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 18
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 19
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 20
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 21
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 22
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 23
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 24
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 25
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 26
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 27
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 28
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 29
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 30
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 31
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 34
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 35
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 38
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 39
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 40
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 41
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 42
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 43
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 44
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 45
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 46
+        },
+        {
+          "kind": "cop1_function",
+          "mnemonic": "unused",
+          "index": 47
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 64,
+      "end_va_exclusive": "0x0040D5D0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040D5C2",
+        "last_instruction_end": "0x0040D5C7",
+        "trailing_bytes": 9
+      },
+      "rebuilt_size": 64,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040D5D0",
+      "name": "ReportDynarecError3",
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 16,
+      "end_va_exclusive": "0x0040D5E0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040D5DB",
+        "last_instruction_end": "0x0040D5DC",
+        "trailing_bytes": 4
+      },
+      "rebuilt_size": 16,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040D5E0",
+      "name": "ReportDynarecError2",
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 16,
+      "end_va_exclusive": "0x0040D5F0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040D5EB",
+        "last_instruction_end": "0x0040D5EC",
+        "trailing_bytes": 4
+      },
+      "rebuilt_size": 16,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040D5F0",
+      "name": "Recompile_Breakpoint",
+      "dispatch": [
+        {
+          "kind": "primary",
+          "mnemonic": "unused",
+          "index": 59
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 192,
+      "end_va_exclusive": "0x0040D6B0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040D6A2",
+        "last_instruction_end": "0x0040D6A9",
+        "trailing_bytes": 7
+      },
+      "rebuilt_size": 192,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040D6B0",
+      "name": "Recompile_SPECIAL",
+      "dispatch": [
+        {
+          "kind": "primary",
+          "mnemonic": "SPECIAL",
+          "index": 0
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 64,
+      "end_va_exclusive": "0x0040D6F0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040D6E6",
+        "last_instruction_end": "0x0040D6ED",
+        "trailing_bytes": 3
+      },
+      "rebuilt_size": 64,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040D6F0",
+      "name": "Recompile_REGIMM",
+      "dispatch": [
+        {
+          "kind": "primary",
+          "mnemonic": "REGIMM",
+          "index": 1
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 64,
+      "end_va_exclusive": "0x0040D730",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040D726",
+        "last_instruction_end": "0x0040D72D",
+        "trailing_bytes": 3
+      },
+      "rebuilt_size": 64,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040D730",
+      "name": "Recompile_J",
+      "dispatch": [
+        {
+          "kind": "primary",
+          "mnemonic": "J",
+          "index": 2
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 128,
+      "end_va_exclusive": "0x0040D7B0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040D7A1",
+        "last_instruction_end": "0x0040D7A2",
+        "trailing_bytes": 14
+      },
+      "rebuilt_size": 128,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040D7B0",
+      "name": "Recompile_JAL",
+      "dispatch": [
+        {
+          "kind": "primary",
+          "mnemonic": "JAL",
+          "index": 3
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 240,
+      "end_va_exclusive": "0x0040D8A0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040D897",
+        "last_instruction_end": "0x0040D898",
+        "trailing_bytes": 8
+      },
+      "rebuilt_size": 240,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040D8A0",
+      "name": "Recompile_BEQ",
+      "dispatch": [
+        {
+          "kind": "primary",
+          "mnemonic": "BEQ",
+          "index": 4
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 128,
+      "end_va_exclusive": "0x0040D920",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040D912",
+        "last_instruction_end": "0x0040D913",
+        "trailing_bytes": 13
+      },
+      "rebuilt_size": 128,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040D920",
+      "name": "Recompile_BNE",
+      "dispatch": [
+        {
+          "kind": "primary",
+          "mnemonic": "BNE",
+          "index": 5
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 16,
+      "end_va_exclusive": "0x0040D930",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040D92E",
+        "last_instruction_end": "0x0040D92F",
+        "trailing_bytes": 1
+      },
+      "rebuilt_size": 16,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040D930",
+      "name": "Recompile_BLEZ",
+      "dispatch": [
+        {
+          "kind": "primary",
+          "mnemonic": "BLEZ",
+          "index": 6
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 16,
+      "end_va_exclusive": "0x0040D940",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040D93E",
+        "last_instruction_end": "0x0040D93F",
+        "trailing_bytes": 1
+      },
+      "rebuilt_size": 16,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040D940",
+      "name": "Recompile_BGTZ",
+      "dispatch": [
+        {
+          "kind": "primary",
+          "mnemonic": "BGTZ",
+          "index": 7
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 16,
+      "end_va_exclusive": "0x0040D950",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040D94E",
+        "last_instruction_end": "0x0040D94F",
+        "trailing_bytes": 1
+      },
+      "rebuilt_size": 16,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040D950",
+      "name": "Recompile_ADDI",
+      "dispatch": [
+        {
+          "kind": "primary",
+          "mnemonic": "ADDI",
+          "index": 8
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 16,
+      "end_va_exclusive": "0x0040D960",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040D950",
+        "last_instruction_end": "0x0040D955",
+        "trailing_bytes": 11
+      },
+      "rebuilt_size": 16,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040D960",
+      "name": "Recompile_ADDIU",
+      "dispatch": [
+        {
+          "kind": "primary",
+          "mnemonic": "ADDIU",
+          "index": 9
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 80,
+      "end_va_exclusive": "0x0040D9B0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040D9AA",
+        "last_instruction_end": "0x0040D9AF",
+        "trailing_bytes": 1
+      },
+      "rebuilt_size": 80,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040D9B0",
+      "name": "Recompile_SLTI",
+      "dispatch": [
+        {
+          "kind": "primary",
+          "mnemonic": "SLTI",
+          "index": 10
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 160,
+      "end_va_exclusive": "0x0040DA50",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040DA44",
+        "last_instruction_end": "0x0040DA49",
+        "trailing_bytes": 7
+      },
+      "rebuilt_size": 160,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040DA50",
+      "name": "Recompile_SLTIU",
+      "dispatch": [
+        {
+          "kind": "primary",
+          "mnemonic": "SLTIU",
+          "index": 11
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 160,
+      "end_va_exclusive": "0x0040DAF0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040DAE4",
+        "last_instruction_end": "0x0040DAE9",
+        "trailing_bytes": 7
+      },
+      "rebuilt_size": 160,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040DAF0",
+      "name": "Recompile_ANDI",
+      "dispatch": [
+        {
+          "kind": "primary",
+          "mnemonic": "ANDI",
+          "index": 12
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 64,
+      "end_va_exclusive": "0x0040DB30",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040DB20",
+        "last_instruction_end": "0x0040DB25",
+        "trailing_bytes": 11
+      },
+      "rebuilt_size": 64,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040DB30",
+      "name": "Recompile_ORI",
+      "dispatch": [
+        {
+          "kind": "primary",
+          "mnemonic": "ORI",
+          "index": 13
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 48,
+      "end_va_exclusive": "0x0040DB60",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040DB5F",
+        "last_instruction_end": "0x0040DB60",
+        "trailing_bytes": 0
+      },
+      "rebuilt_size": 48,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040DB60",
+      "name": "Recompile_XORI",
+      "dispatch": [
+        {
+          "kind": "primary",
+          "mnemonic": "XORI",
+          "index": 14
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 48,
+      "end_va_exclusive": "0x0040DB90",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040DB8F",
+        "last_instruction_end": "0x0040DB90",
+        "trailing_bytes": 0
+      },
+      "rebuilt_size": 48,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040DB90",
+      "name": "Recompile_LUI",
+      "dispatch": [
+        {
+          "kind": "primary",
+          "mnemonic": "LUI",
+          "index": 15
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 112,
+      "end_va_exclusive": "0x0040DC00",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040DBFD",
+        "last_instruction_end": "0x0040DBFE",
+        "trailing_bytes": 2
+      },
+      "rebuilt_size": 112,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040DC00",
+      "name": "Recompile_COP0",
+      "dispatch": [
+        {
+          "kind": "primary",
+          "mnemonic": "COP0",
+          "index": 16
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 64,
+      "end_va_exclusive": "0x0040DC40",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040DC38",
+        "last_instruction_end": "0x0040DC3F",
+        "trailing_bytes": 1
+      },
+      "rebuilt_size": 64,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040DC40",
+      "name": "Recompile_COP1",
+      "dispatch": [
+        {
+          "kind": "primary",
+          "mnemonic": "COP1",
+          "index": 17
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 64,
+      "end_va_exclusive": "0x0040DC80",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040DC78",
+        "last_instruction_end": "0x0040DC7F",
+        "trailing_bytes": 1
+      },
+      "rebuilt_size": 64,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040DC80",
+      "name": "Recompile_BEQL",
+      "dispatch": [
+        {
+          "kind": "primary",
+          "mnemonic": "BEQL",
+          "index": 20
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 16,
+      "end_va_exclusive": "0x0040DC90",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040DC8E",
+        "last_instruction_end": "0x0040DC8F",
+        "trailing_bytes": 1
+      },
+      "rebuilt_size": 16,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040DC90",
+      "name": "Recompile_BNEL",
+      "dispatch": [
+        {
+          "kind": "primary",
+          "mnemonic": "BNEL",
+          "index": 21
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 16,
+      "end_va_exclusive": "0x0040DCA0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040DC9E",
+        "last_instruction_end": "0x0040DC9F",
+        "trailing_bytes": 1
+      },
+      "rebuilt_size": 16,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040DCA0",
+      "name": "Recompile_BLEZL",
+      "dispatch": [
+        {
+          "kind": "primary",
+          "mnemonic": "BLEZL",
+          "index": 22
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 16,
+      "end_va_exclusive": "0x0040DCB0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040DCAE",
+        "last_instruction_end": "0x0040DCAF",
+        "trailing_bytes": 1
+      },
+      "rebuilt_size": 16,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040DCB0",
+      "name": "Recompile_BGTZL",
+      "dispatch": [
+        {
+          "kind": "primary",
+          "mnemonic": "BGTZL",
+          "index": 23
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 16,
+      "end_va_exclusive": "0x0040DCC0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040DCBE",
+        "last_instruction_end": "0x0040DCBF",
+        "trailing_bytes": 1
+      },
+      "rebuilt_size": 16,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040DCC0",
+      "name": "Recompile_DADDI",
+      "dispatch": [
+        {
+          "kind": "primary",
+          "mnemonic": "DADDI",
+          "index": 24
+        },
+        {
+          "kind": "primary",
+          "mnemonic": "DADDIU",
+          "index": 25
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 80,
+      "end_va_exclusive": "0x0040DD10",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040DD0B",
+        "last_instruction_end": "0x0040DD0C",
+        "trailing_bytes": 4
+      },
+      "rebuilt_size": 80,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040FA00",
+      "name": "Recompile_SLL",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "SLL",
+          "index": 0
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 80,
+      "end_va_exclusive": "0x0040FA50",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040FA44",
+        "last_instruction_end": "0x0040FA45",
+        "trailing_bytes": 11
+      },
+      "rebuilt_size": 80,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040FA50",
+      "name": "Recompile_SRL",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "SRL",
+          "index": 2
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 64,
+      "end_va_exclusive": "0x0040FA90",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040FA86",
+        "last_instruction_end": "0x0040FA8B",
+        "trailing_bytes": 5
+      },
+      "rebuilt_size": 64,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040FA90",
+      "name": "Recompile_SRA",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "SRA",
+          "index": 3
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 64,
+      "end_va_exclusive": "0x0040FAD0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040FAC6",
+        "last_instruction_end": "0x0040FACB",
+        "trailing_bytes": 5
+      },
+      "rebuilt_size": 64,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040FAD0",
+      "name": "Recompile_SLLV",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "SLLV",
+          "index": 4
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 64,
+      "end_va_exclusive": "0x0040FB10",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040FB02",
+        "last_instruction_end": "0x0040FB07",
+        "trailing_bytes": 9
+      },
+      "rebuilt_size": 64,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040FB10",
+      "name": "Recompile_SRLV",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "SRLV",
+          "index": 6
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 64,
+      "end_va_exclusive": "0x0040FB50",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040FB42",
+        "last_instruction_end": "0x0040FB47",
+        "trailing_bytes": 9
+      },
+      "rebuilt_size": 64,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040FB50",
+      "name": "Recompile_SRAV",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "SRAV",
+          "index": 7
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 64,
+      "end_va_exclusive": "0x0040FB90",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040FB82",
+        "last_instruction_end": "0x0040FB87",
+        "trailing_bytes": 9
+      },
+      "rebuilt_size": 64,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040FB90",
+      "name": "Recompile_JR",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "JR",
+          "index": 8
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 96,
+      "end_va_exclusive": "0x0040FBF0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040FBED",
+        "last_instruction_end": "0x0040FBEE",
+        "trailing_bytes": 2
+      },
+      "rebuilt_size": 96,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040FBF0",
+      "name": "Recompile_JALR",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "JALR",
+          "index": 9
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 80,
+      "end_va_exclusive": "0x0040FC40",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040FC37",
+        "last_instruction_end": "0x0040FC38",
+        "trailing_bytes": 8
+      },
+      "rebuilt_size": 80,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040FC40",
+      "name": "Recompile_SYSCALL",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "SYSCALL",
+          "index": 12
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 64,
+      "end_va_exclusive": "0x0040FC80",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040FC7E",
+        "last_instruction_end": "0x0040FC7F",
+        "trailing_bytes": 1
+      },
+      "rebuilt_size": 64,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040FC80",
+      "name": "Recompile_BREAK",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "BREAK",
+          "index": 13
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 16,
+      "end_va_exclusive": "0x0040FC90",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040FC8F",
+        "last_instruction_end": "0x0040FC90",
+        "trailing_bytes": 0
+      },
+      "rebuilt_size": 16,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040FC90",
+      "name": "Recompile_MFHI",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "MFHI",
+          "index": 16
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 64,
+      "end_va_exclusive": "0x0040FCD0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040FCC4",
+        "last_instruction_end": "0x0040FCC5",
+        "trailing_bytes": 11
+      },
+      "rebuilt_size": 64,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040FCD0",
+      "name": "Recompile_MTHI",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "MTHI",
+          "index": 17
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 64,
+      "end_va_exclusive": "0x0040FD10",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040FD03",
+        "last_instruction_end": "0x0040FD04",
+        "trailing_bytes": 12
+      },
+      "rebuilt_size": 64,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040FD10",
+      "name": "Recompile_MFLO",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "MFLO",
+          "index": 18
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 64,
+      "end_va_exclusive": "0x0040FD50",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040FD44",
+        "last_instruction_end": "0x0040FD45",
+        "trailing_bytes": 11
+      },
+      "rebuilt_size": 64,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040FD50",
+      "name": "Recompile_MTLO",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "MTLO",
+          "index": 19
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 64,
+      "end_va_exclusive": "0x0040FD90",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040FD83",
+        "last_instruction_end": "0x0040FD84",
+        "trailing_bytes": 12
+      },
+      "rebuilt_size": 64,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040FD90",
+      "name": "Recompile_DSLLV",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "DSLLV",
+          "index": 20
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 192,
+      "end_va_exclusive": "0x0040FE50",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040FE45",
+        "last_instruction_end": "0x0040FE46",
+        "trailing_bytes": 10
+      },
+      "rebuilt_size": 192,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040FE50",
+      "name": "Recompile_DSRLV",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "DSRLV",
+          "index": 22
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 192,
+      "end_va_exclusive": "0x0040FF10",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040FF05",
+        "last_instruction_end": "0x0040FF06",
+        "trailing_bytes": 10
+      },
+      "rebuilt_size": 192,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040FF10",
+      "name": "Recompile_DSRAV",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "DSRAV",
+          "index": 23
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 192,
+      "end_va_exclusive": "0x0040FFD0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040FFC5",
+        "last_instruction_end": "0x0040FFC6",
+        "trailing_bytes": 10
+      },
+      "rebuilt_size": 192,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x0040FFD0",
+      "name": "Recompile_MULT",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "MULT",
+          "index": 24
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 48,
+      "end_va_exclusive": "0x00410000",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0040FFF7",
+        "last_instruction_end": "0x0040FFFC",
+        "trailing_bytes": 4
+      },
+      "rebuilt_size": 48,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410000",
+      "name": "Recompile_MULTU",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "MULTU",
+          "index": 25
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 48,
+      "end_va_exclusive": "0x00410030",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x00410027",
+        "last_instruction_end": "0x0041002C",
+        "trailing_bytes": 4
+      },
+      "rebuilt_size": 48,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410030",
+      "name": "Recompile_DIV",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "DIV",
+          "index": 26
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 192,
+      "end_va_exclusive": "0x004100F0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x004100DD",
+        "last_instruction_end": "0x004100E2",
+        "trailing_bytes": 14
+      },
+      "rebuilt_size": 192,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x004100F0",
+      "name": "Recompile_DIVU",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "DIVU",
+          "index": 27
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 192,
+      "end_va_exclusive": "0x004101B0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0041019C",
+        "last_instruction_end": "0x004101A1",
+        "trailing_bytes": 15
+      },
+      "rebuilt_size": 192,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x004101B0",
+      "name": "Recompile_DMULT",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "DMULT",
+          "index": 28
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 80,
+      "end_va_exclusive": "0x00410200",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x004101F0",
+        "last_instruction_end": "0x004101F5",
+        "trailing_bytes": 11
+      },
+      "rebuilt_size": 80,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410200",
+      "name": "Recompile_DMULTU",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "DMULTU",
+          "index": 29
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 80,
+      "end_va_exclusive": "0x00410250",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x00410240",
+        "last_instruction_end": "0x00410245",
+        "trailing_bytes": 11
+      },
+      "rebuilt_size": 80,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410250",
+      "name": "Recompile_DDIV",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "DDIV",
+          "index": 30
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 80,
+      "end_va_exclusive": "0x004102A0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x00410290",
+        "last_instruction_end": "0x00410295",
+        "trailing_bytes": 11
+      },
+      "rebuilt_size": 80,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x004102A0",
+      "name": "Recompile_DDIVU",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "DDIVU",
+          "index": 31
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 80,
+      "end_va_exclusive": "0x004102F0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x004102E0",
+        "last_instruction_end": "0x004102E5",
+        "trailing_bytes": 11
+      },
+      "rebuilt_size": 80,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x004102F0",
+      "name": "Recompile_ADD",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "ADD",
+          "index": 32
+        },
+        {
+          "kind": "special",
+          "mnemonic": "ADDU",
+          "index": 33
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 64,
+      "end_va_exclusive": "0x00410330",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x00410324",
+        "last_instruction_end": "0x00410329",
+        "trailing_bytes": 7
+      },
+      "rebuilt_size": 64,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410330",
+      "name": "Recompile_SUB",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "SUB",
+          "index": 34
+        },
+        {
+          "kind": "special",
+          "mnemonic": "SUBU",
+          "index": 35
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 64,
+      "end_va_exclusive": "0x00410370",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x00410364",
+        "last_instruction_end": "0x00410369",
+        "trailing_bytes": 7
+      },
+      "rebuilt_size": 64,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410370",
+      "name": "Recompile_AND",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "AND",
+          "index": 36
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 80,
+      "end_va_exclusive": "0x004103C0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x004103BA",
+        "last_instruction_end": "0x004103BB",
+        "trailing_bytes": 5
+      },
+      "rebuilt_size": 80,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x004103C0",
+      "name": "Recompile_OR",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "OR",
+          "index": 37
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 80,
+      "end_va_exclusive": "0x00410410",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0041040A",
+        "last_instruction_end": "0x0041040B",
+        "trailing_bytes": 5
+      },
+      "rebuilt_size": 80,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410410",
+      "name": "Recompile_XOR",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "XOR",
+          "index": 38
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 80,
+      "end_va_exclusive": "0x00410460",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0041045A",
+        "last_instruction_end": "0x0041045B",
+        "trailing_bytes": 5
+      },
+      "rebuilt_size": 80,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410460",
+      "name": "Recompile_NOR",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "NOR",
+          "index": 39
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 96,
+      "end_va_exclusive": "0x004104C0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x004104BC",
+        "last_instruction_end": "0x004104BD",
+        "trailing_bytes": 3
+      },
+      "rebuilt_size": 96,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x004104C0",
+      "name": "Recompile_SLT",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "SLT",
+          "index": 42
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 160,
+      "end_va_exclusive": "0x00410560",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x00410559",
+        "last_instruction_end": "0x0041055E",
+        "trailing_bytes": 2
+      },
+      "rebuilt_size": 160,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410560",
+      "name": "Recompile_SLTU",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "SLTU",
+          "index": 43
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 160,
+      "end_va_exclusive": "0x00410600",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x004105F9",
+        "last_instruction_end": "0x004105FE",
+        "trailing_bytes": 2
+      },
+      "rebuilt_size": 160,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410600",
+      "name": "Recompile_DADD",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "DADD",
+          "index": 44
+        },
+        {
+          "kind": "special",
+          "mnemonic": "DADDU",
+          "index": 45
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 80,
+      "end_va_exclusive": "0x00410650",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0041064A",
+        "last_instruction_end": "0x0041064B",
+        "trailing_bytes": 5
+      },
+      "rebuilt_size": 80,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410650",
+      "name": "Recompile_DSUB",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "DSUB",
+          "index": 46
+        },
+        {
+          "kind": "special",
+          "mnemonic": "DSUBU",
+          "index": 47
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 80,
+      "end_va_exclusive": "0x004106A0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0041069A",
+        "last_instruction_end": "0x0041069B",
+        "trailing_bytes": 5
+      },
+      "rebuilt_size": 80,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x004106A0",
+      "name": "WarnCrackedRom",
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 48,
+      "end_va_exclusive": "0x004106D0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x004106C0",
+        "last_instruction_end": "0x004106C1",
+        "trailing_bytes": 15
+      },
+      "rebuilt_size": 48,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x004106D0",
+      "name": "Recompile_TEQ",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "TEQ",
+          "index": 52
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 16,
+      "end_va_exclusive": "0x004106E0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x004106DA",
+        "last_instruction_end": "0x004106DF",
+        "trailing_bytes": 1
+      },
+      "rebuilt_size": 16,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x004106E0",
+      "name": "Recompile_DSLL",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "DSLL",
+          "index": 56
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 80,
+      "end_va_exclusive": "0x00410730",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0041072D",
+        "last_instruction_end": "0x0041072E",
+        "trailing_bytes": 2
+      },
+      "rebuilt_size": 80,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410730",
+      "name": "Recompile_DSRL",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "DSRL",
+          "index": 58
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 80,
+      "end_va_exclusive": "0x00410780",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0041077D",
+        "last_instruction_end": "0x0041077E",
+        "trailing_bytes": 2
+      },
+      "rebuilt_size": 80,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410780",
+      "name": "Recompile_DSRA",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "DSRA",
+          "index": 59
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 80,
+      "end_va_exclusive": "0x004107D0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x004107CD",
+        "last_instruction_end": "0x004107CE",
+        "trailing_bytes": 2
+      },
+      "rebuilt_size": 80,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x004107D0",
+      "name": "Recompile_DSLL32",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "DSLL32",
+          "index": 60
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 80,
+      "end_va_exclusive": "0x00410820",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0041081C",
+        "last_instruction_end": "0x0041081D",
+        "trailing_bytes": 3
+      },
+      "rebuilt_size": 80,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410820",
+      "name": "Recompile_DSRL32",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "DSRL32",
+          "index": 62
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 80,
+      "end_va_exclusive": "0x00410870",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0041086C",
+        "last_instruction_end": "0x0041086D",
+        "trailing_bytes": 3
+      },
+      "rebuilt_size": 80,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410870",
+      "name": "Recompile_DSRA32",
+      "dispatch": [
+        {
+          "kind": "special",
+          "mnemonic": "DSRA32",
+          "index": 63
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 64,
+      "end_va_exclusive": "0x004108B0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x004108AA",
+        "last_instruction_end": "0x004108AF",
+        "trailing_bytes": 1
+      },
+      "rebuilt_size": 64,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x004108B0",
+      "name": "Recompile_BLTZ",
+      "dispatch": [
+        {
+          "kind": "regimm",
+          "mnemonic": "BLTZ",
+          "index": 0
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 16,
+      "end_va_exclusive": "0x004108C0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x004108BE",
+        "last_instruction_end": "0x004108BF",
+        "trailing_bytes": 1
+      },
+      "rebuilt_size": 16,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x004108C0",
+      "name": "Recompile_BGEZ",
+      "dispatch": [
+        {
+          "kind": "regimm",
+          "mnemonic": "BGEZ",
+          "index": 1
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 16,
+      "end_va_exclusive": "0x004108D0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x004108CE",
+        "last_instruction_end": "0x004108CF",
+        "trailing_bytes": 1
+      },
+      "rebuilt_size": 16,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x004108D0",
+      "name": "Recompile_BLTZL",
+      "dispatch": [
+        {
+          "kind": "regimm",
+          "mnemonic": "BLTZL",
+          "index": 2
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 16,
+      "end_va_exclusive": "0x004108E0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x004108DE",
+        "last_instruction_end": "0x004108DF",
+        "trailing_bytes": 1
+      },
+      "rebuilt_size": 16,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x004108E0",
+      "name": "Recompile_BGEZL",
+      "dispatch": [
+        {
+          "kind": "regimm",
+          "mnemonic": "BGEZL",
+          "index": 3
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 16,
+      "end_va_exclusive": "0x004108F0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x004108EE",
+        "last_instruction_end": "0x004108EF",
+        "trailing_bytes": 1
+      },
+      "rebuilt_size": 16,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x004108F0",
+      "name": "Recompile_BLTZAL",
+      "dispatch": [
+        {
+          "kind": "regimm",
+          "mnemonic": "BLTZAL",
+          "index": 16
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 16,
+      "end_va_exclusive": "0x00410900",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x004108FE",
+        "last_instruction_end": "0x004108FF",
+        "trailing_bytes": 1
+      },
+      "rebuilt_size": 16,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410900",
+      "name": "Recompile_BGEZAL",
+      "dispatch": [
+        {
+          "kind": "regimm",
+          "mnemonic": "BGEZAL",
+          "index": 17
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 128,
+      "end_va_exclusive": "0x00410980",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0041097A",
+        "last_instruction_end": "0x0041097B",
+        "trailing_bytes": 5
+      },
+      "rebuilt_size": 128,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410980",
+      "name": "Recompile_BLTZALL",
+      "dispatch": [
+        {
+          "kind": "regimm",
+          "mnemonic": "BLTZALL",
+          "index": 18
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 16,
+      "end_va_exclusive": "0x00410990",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0041098E",
+        "last_instruction_end": "0x0041098F",
+        "trailing_bytes": 1
+      },
+      "rebuilt_size": 16,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410990",
+      "name": "Recompile_BGEZALL",
+      "dispatch": [
+        {
+          "kind": "regimm",
+          "mnemonic": "BGEZALL",
+          "index": 19
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 16,
+      "end_va_exclusive": "0x004109A0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0041099E",
+        "last_instruction_end": "0x0041099F",
+        "trailing_bytes": 1
+      },
+      "rebuilt_size": 16,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x004109A0",
+      "name": "Recompile_MFC0",
+      "dispatch": [
+        {
+          "kind": "cop0",
+          "mnemonic": "MFC0",
+          "index": 0
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 432,
+      "end_va_exclusive": "0x00410B50",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x00410ACA",
+        "last_instruction_end": "0x00410ACF",
+        "trailing_bytes": 129
+      },
+      "rebuilt_size": 432,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410B50",
+      "name": "UpdateFpuRegisterMode",
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 112,
+      "end_va_exclusive": "0x00410BC0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x00410BB0",
+        "last_instruction_end": "0x00410BB1",
+        "trailing_bytes": 15
+      },
+      "rebuilt_size": 112,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410BC0",
+      "name": "ClampRandomRegister",
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 32,
+      "end_va_exclusive": "0x00410BE0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x00410BD2",
+        "last_instruction_end": "0x00410BD3",
+        "trailing_bytes": 13
+      },
+      "rebuilt_size": 32,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410BE0",
+      "name": "WarnFpuModeInDelaySlot",
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 16,
+      "end_va_exclusive": "0x00410BF0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x00410BEB",
+        "last_instruction_end": "0x00410BEC",
+        "trailing_bytes": 4
+      },
+      "rebuilt_size": 16,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410BF0",
+      "name": "Recompile_MTC0",
+      "dispatch": [
+        {
+          "kind": "cop0",
+          "mnemonic": "MTC0",
+          "index": 4
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 912,
+      "end_va_exclusive": "0x00410F80",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x00410EF5",
+        "last_instruction_end": "0x00410EF6",
+        "trailing_bytes": 138
+      },
+      "rebuilt_size": 912,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410F80",
+      "name": "Recompile_TLB",
+      "dispatch": [
+        {
+          "kind": "cop0",
+          "mnemonic": "TLB",
+          "index": 16
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 64,
+      "end_va_exclusive": "0x00410FC0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x00410FB7",
+        "last_instruction_end": "0x00410FBE",
+        "trailing_bytes": 2
+      },
+      "rebuilt_size": 64,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410FC0",
+      "name": "Recompile_TLBR",
+      "dispatch": [
+        {
+          "kind": "tlb",
+          "mnemonic": "TLBR",
+          "index": 1
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 16,
+      "end_va_exclusive": "0x00410FD0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x00410FC5",
+        "last_instruction_end": "0x00410FCA",
+        "trailing_bytes": 6
+      },
+      "rebuilt_size": 16,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410FD0",
+      "name": "WarnTlbWriteInDelaySlot",
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 16,
+      "end_va_exclusive": "0x00410FE0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x00410FDB",
+        "last_instruction_end": "0x00410FDC",
+        "trailing_bytes": 4
+      },
+      "rebuilt_size": 16,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00410FE0",
+      "name": "Recompile_TLBWI",
+      "dispatch": [
+        {
+          "kind": "tlb",
+          "mnemonic": "TLBWI",
+          "index": 2
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 112,
+      "end_va_exclusive": "0x00411050",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x00411044",
+        "last_instruction_end": "0x00411049",
+        "trailing_bytes": 7
+      },
+      "rebuilt_size": 112,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00411050",
+      "name": "Recompile_TLBWR",
+      "dispatch": [
+        {
+          "kind": "tlb",
+          "mnemonic": "TLBWR",
+          "index": 6
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 192,
+      "end_va_exclusive": "0x00411110",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x0041110A",
+        "last_instruction_end": "0x0041110F",
+        "trailing_bytes": 1
+      },
+      "rebuilt_size": 192,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00411110",
+      "name": "Recompile_TLBP",
+      "dispatch": [
+        {
+          "kind": "tlb",
+          "mnemonic": "TLBP",
+          "index": 8
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 16,
+      "end_va_exclusive": "0x00411120",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x00411115",
+        "last_instruction_end": "0x0041111A",
+        "trailing_bytes": 6
+      },
+      "rebuilt_size": 16,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    },
+    {
+      "va": "0x00411120",
+      "name": "Recompile_ERET",
+      "dispatch": [
+        {
+          "kind": "tlb",
+          "mnemonic": "ERET",
+          "index": 24
+        }
+      ],
+      "owner": "DynarecOpcodes",
+      "status": "full instruction/known-target match in pinned linked fixture; absolute operand identity and full-image equality pending",
+      "original_size": 160,
+      "end_va_exclusive": "0x004111C0",
+      "extent_basis": "explicit_link_span_including_alignment",
+      "boundary_evidence": {
+        "start": "Original dispatch target or independently recovered direct call target",
+        "end": "Next Ghidra function entry, independently exported assembly",
+        "last_instruction_va": "0x004111B6",
+        "last_instruction_end": "0x004111B7",
+        "trailing_bytes": 9
+      },
+      "rebuilt_size": 160,
+      "rebuilt_image_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "rebuilt_extent_basis": "consecutive_distinct_MAP_function_starts_in_same_text_section_including_alignment_and_embedded_data"
+    }
+  ],
+  "globals": [
+    {
+      "name": "CPU_FpuModeChanges",
+      "va": "0x03E64E80",
+      "type": "unsigned",
+      "size": 4,
+      "initialization": "zero-filled PE data tail"
+    }
+  ],
+  "dispatch_tables": [
+    {
+      "name": "Dynarec_MainDispatch",
+      "va": "0x00477820",
+      "count": 64,
+      "entries": [
+        {
+          "index": 0,
+          "mnemonic": "SPECIAL",
+          "va": "0x0040D6B0",
+          "name": "Recompile_SPECIAL"
+        },
+        {
+          "index": 1,
+          "mnemonic": "REGIMM",
+          "va": "0x0040D6F0",
+          "name": "Recompile_REGIMM"
+        },
+        {
+          "index": 2,
+          "mnemonic": "J",
+          "va": "0x0040D730",
+          "name": "Recompile_J"
+        },
+        {
+          "index": 3,
+          "mnemonic": "JAL",
+          "va": "0x0040D7B0",
+          "name": "Recompile_JAL"
+        },
+        {
+          "index": 4,
+          "mnemonic": "BEQ",
+          "va": "0x0040D8A0",
+          "name": "Recompile_BEQ"
+        },
+        {
+          "index": 5,
+          "mnemonic": "BNE",
+          "va": "0x0040D920",
+          "name": "Recompile_BNE"
+        },
+        {
+          "index": 6,
+          "mnemonic": "BLEZ",
+          "va": "0x0040D930",
+          "name": "Recompile_BLEZ"
+        },
+        {
+          "index": 7,
+          "mnemonic": "BGTZ",
+          "va": "0x0040D940",
+          "name": "Recompile_BGTZ"
+        },
+        {
+          "index": 8,
+          "mnemonic": "ADDI",
+          "va": "0x0040D950",
+          "name": "Recompile_ADDI"
+        },
+        {
+          "index": 9,
+          "mnemonic": "ADDIU",
+          "va": "0x0040D960",
+          "name": "Recompile_ADDIU"
+        },
+        {
+          "index": 10,
+          "mnemonic": "SLTI",
+          "va": "0x0040D9B0",
+          "name": "Recompile_SLTI"
+        },
+        {
+          "index": 11,
+          "mnemonic": "SLTIU",
+          "va": "0x0040DA50",
+          "name": "Recompile_SLTIU"
+        },
+        {
+          "index": 12,
+          "mnemonic": "ANDI",
+          "va": "0x0040DAF0",
+          "name": "Recompile_ANDI"
+        },
+        {
+          "index": 13,
+          "mnemonic": "ORI",
+          "va": "0x0040DB30",
+          "name": "Recompile_ORI"
+        },
+        {
+          "index": 14,
+          "mnemonic": "XORI",
+          "va": "0x0040DB60",
+          "name": "Recompile_XORI"
+        },
+        {
+          "index": 15,
+          "mnemonic": "LUI",
+          "va": "0x0040DB90",
+          "name": "Recompile_LUI"
+        },
+        {
+          "index": 16,
+          "mnemonic": "COP0",
+          "va": "0x0040DC00",
+          "name": "Recompile_COP0"
+        },
+        {
+          "index": 17,
+          "mnemonic": "COP1",
+          "va": "0x0040DC40",
+          "name": "Recompile_COP1"
+        },
+        {
+          "index": 18,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 19,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 20,
+          "mnemonic": "BEQL",
+          "va": "0x0040DC80",
+          "name": "Recompile_BEQL"
+        },
+        {
+          "index": 21,
+          "mnemonic": "BNEL",
+          "va": "0x0040DC90",
+          "name": "Recompile_BNEL"
+        },
+        {
+          "index": 22,
+          "mnemonic": "BLEZL",
+          "va": "0x0040DCA0",
+          "name": "Recompile_BLEZL"
+        },
+        {
+          "index": 23,
+          "mnemonic": "BGTZL",
+          "va": "0x0040DCB0",
+          "name": "Recompile_BGTZL"
+        },
+        {
+          "index": 24,
+          "mnemonic": "DADDI",
+          "va": "0x0040DCC0",
+          "name": "Recompile_DADDI"
+        },
+        {
+          "index": 25,
+          "mnemonic": "DADDIU",
+          "va": "0x0040DCC0",
+          "name": "Recompile_DADDI"
+        },
+        {
+          "index": 26,
+          "mnemonic": "LDL",
+          "va": "0x0040DDA0",
+          "name": "Recompile_LDL"
+        },
+        {
+          "index": 27,
+          "mnemonic": "LDR",
+          "va": "0x0040DEC0",
+          "name": "Recompile_LDR"
+        },
+        {
+          "index": 28,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 29,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 30,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 31,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 32,
+          "mnemonic": "LB",
+          "va": "0x0040DF50",
+          "name": "Recompile_LB"
+        },
+        {
+          "index": 33,
+          "mnemonic": "LH",
+          "va": "0x0040E010",
+          "name": "Recompile_LH"
+        },
+        {
+          "index": 34,
+          "mnemonic": "LWL",
+          "va": "0x0040E0D0",
+          "name": "Recompile_LWL"
+        },
+        {
+          "index": 35,
+          "mnemonic": "LW",
+          "va": "0x0040E210",
+          "name": "Recompile_LW"
+        },
+        {
+          "index": 36,
+          "mnemonic": "LBU",
+          "va": "0x0040E2C0",
+          "name": "Recompile_LBU"
+        },
+        {
+          "index": 37,
+          "mnemonic": "LHU",
+          "va": "0x0040E380",
+          "name": "Recompile_LHU"
+        },
+        {
+          "index": 38,
+          "mnemonic": "LWR",
+          "va": "0x0040E440",
+          "name": "Recompile_LWR"
+        },
+        {
+          "index": 39,
+          "mnemonic": "LWU",
+          "va": "0x0040E580",
+          "name": "Recompile_LWU"
+        },
+        {
+          "index": 40,
+          "mnemonic": "SB",
+          "va": "0x0040E630",
+          "name": "Recompile_SB"
+        },
+        {
+          "index": 41,
+          "mnemonic": "SH",
+          "va": "0x0040E730",
+          "name": "Recompile_SH"
+        },
+        {
+          "index": 42,
+          "mnemonic": "SWL",
+          "va": "0x0040E830",
+          "name": "Recompile_SWL"
+        },
+        {
+          "index": 43,
+          "mnemonic": "SW",
+          "va": "0x0040E9F0",
+          "name": "Recompile_SW"
+        },
+        {
+          "index": 44,
+          "mnemonic": "SDL",
+          "va": "0x0040EB70",
+          "name": "Recompile_SDL"
+        },
+        {
+          "index": 45,
+          "mnemonic": "SDR",
+          "va": "0x0040ECA0",
+          "name": "Recompile_SDR"
+        },
+        {
+          "index": 46,
+          "mnemonic": "SWR",
+          "va": "0x0040ED40",
+          "name": "Recompile_SWR"
+        },
+        {
+          "index": 47,
+          "mnemonic": "CACHE",
+          "va": "0x0040EFB0",
+          "name": "Recompile_CACHE"
+        },
+        {
+          "index": 48,
+          "mnemonic": "LL",
+          "va": "0x0040F570",
+          "name": "Recompile_Unimplemented"
+        },
+        {
+          "index": 49,
+          "mnemonic": "LWC1",
+          "va": "0x0040F130",
+          "name": "Recompile_LWC1"
+        },
+        {
+          "index": 50,
+          "mnemonic": "LWC2",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 51,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 52,
+          "mnemonic": "LLD",
+          "va": "0x0040F570",
+          "name": "Recompile_Unimplemented"
+        },
+        {
+          "index": 53,
+          "mnemonic": "LDC1",
+          "va": "0x0040F290",
+          "name": "Recompile_LDC1"
+        },
+        {
+          "index": 54,
+          "mnemonic": "LDC2",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 55,
+          "mnemonic": "LD",
+          "va": "0x0040F480",
+          "name": "Recompile_LD"
+        },
+        {
+          "index": 56,
+          "mnemonic": "SC",
+          "va": "0x0040F570",
+          "name": "Recompile_Unimplemented"
+        },
+        {
+          "index": 57,
+          "mnemonic": "SWC1",
+          "va": "0x0040F580",
+          "name": "Recompile_SWC1"
+        },
+        {
+          "index": 58,
+          "mnemonic": "SWC2",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 59,
+          "mnemonic": "unused",
+          "va": "0x0040D5F0",
+          "name": "Recompile_Breakpoint"
+        },
+        {
+          "index": 60,
+          "mnemonic": "SCD",
+          "va": "0x0040F570",
+          "name": "Recompile_Unimplemented"
+        },
+        {
+          "index": 61,
+          "mnemonic": "SDC1",
+          "va": "0x0040F720",
+          "name": "Recompile_SDC1"
+        },
+        {
+          "index": 62,
+          "mnemonic": "SDC2",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 63,
+          "mnemonic": "SD",
+          "va": "0x0040F8E0",
+          "name": "Recompile_SD"
+        }
+      ],
+      "source_entries_verified": true
+    },
+    {
+      "name": "Dynarec_SpecialDispatch",
+      "va": "0x00477920",
+      "count": 64,
+      "entries": [
+        {
+          "index": 0,
+          "mnemonic": "SLL",
+          "va": "0x0040FA00",
+          "name": "Recompile_SLL"
+        },
+        {
+          "index": 1,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 2,
+          "mnemonic": "SRL",
+          "va": "0x0040FA50",
+          "name": "Recompile_SRL"
+        },
+        {
+          "index": 3,
+          "mnemonic": "SRA",
+          "va": "0x0040FA90",
+          "name": "Recompile_SRA"
+        },
+        {
+          "index": 4,
+          "mnemonic": "SLLV",
+          "va": "0x0040FAD0",
+          "name": "Recompile_SLLV"
+        },
+        {
+          "index": 5,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 6,
+          "mnemonic": "SRLV",
+          "va": "0x0040FB10",
+          "name": "Recompile_SRLV"
+        },
+        {
+          "index": 7,
+          "mnemonic": "SRAV",
+          "va": "0x0040FB50",
+          "name": "Recompile_SRAV"
+        },
+        {
+          "index": 8,
+          "mnemonic": "JR",
+          "va": "0x0040FB90",
+          "name": "Recompile_JR"
+        },
+        {
+          "index": 9,
+          "mnemonic": "JALR",
+          "va": "0x0040FBF0",
+          "name": "Recompile_JALR"
+        },
+        {
+          "index": 10,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 11,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 12,
+          "mnemonic": "SYSCALL",
+          "va": "0x0040FC40",
+          "name": "Recompile_SYSCALL"
+        },
+        {
+          "index": 13,
+          "mnemonic": "BREAK",
+          "va": "0x0040FC80",
+          "name": "Recompile_BREAK"
+        },
+        {
+          "index": 14,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 15,
+          "mnemonic": "SYNC",
+          "va": "0x0041FEF0",
+          "name": "DynarecNoOperation"
+        },
+        {
+          "index": 16,
+          "mnemonic": "MFHI",
+          "va": "0x0040FC90",
+          "name": "Recompile_MFHI"
+        },
+        {
+          "index": 17,
+          "mnemonic": "MTHI",
+          "va": "0x0040FCD0",
+          "name": "Recompile_MTHI"
+        },
+        {
+          "index": 18,
+          "mnemonic": "MFLO",
+          "va": "0x0040FD10",
+          "name": "Recompile_MFLO"
+        },
+        {
+          "index": 19,
+          "mnemonic": "MTLO",
+          "va": "0x0040FD50",
+          "name": "Recompile_MTLO"
+        },
+        {
+          "index": 20,
+          "mnemonic": "DSLLV",
+          "va": "0x0040FD90",
+          "name": "Recompile_DSLLV"
+        },
+        {
+          "index": 21,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 22,
+          "mnemonic": "DSRLV",
+          "va": "0x0040FE50",
+          "name": "Recompile_DSRLV"
+        },
+        {
+          "index": 23,
+          "mnemonic": "DSRAV",
+          "va": "0x0040FF10",
+          "name": "Recompile_DSRAV"
+        },
+        {
+          "index": 24,
+          "mnemonic": "MULT",
+          "va": "0x0040FFD0",
+          "name": "Recompile_MULT"
+        },
+        {
+          "index": 25,
+          "mnemonic": "MULTU",
+          "va": "0x00410000",
+          "name": "Recompile_MULTU"
+        },
+        {
+          "index": 26,
+          "mnemonic": "DIV",
+          "va": "0x00410030",
+          "name": "Recompile_DIV"
+        },
+        {
+          "index": 27,
+          "mnemonic": "DIVU",
+          "va": "0x004100F0",
+          "name": "Recompile_DIVU"
+        },
+        {
+          "index": 28,
+          "mnemonic": "DMULT",
+          "va": "0x004101B0",
+          "name": "Recompile_DMULT"
+        },
+        {
+          "index": 29,
+          "mnemonic": "DMULTU",
+          "va": "0x00410200",
+          "name": "Recompile_DMULTU"
+        },
+        {
+          "index": 30,
+          "mnemonic": "DDIV",
+          "va": "0x00410250",
+          "name": "Recompile_DDIV"
+        },
+        {
+          "index": 31,
+          "mnemonic": "DDIVU",
+          "va": "0x004102A0",
+          "name": "Recompile_DDIVU"
+        },
+        {
+          "index": 32,
+          "mnemonic": "ADD",
+          "va": "0x004102F0",
+          "name": "Recompile_ADD"
+        },
+        {
+          "index": 33,
+          "mnemonic": "ADDU",
+          "va": "0x004102F0",
+          "name": "Recompile_ADD"
+        },
+        {
+          "index": 34,
+          "mnemonic": "SUB",
+          "va": "0x00410330",
+          "name": "Recompile_SUB"
+        },
+        {
+          "index": 35,
+          "mnemonic": "SUBU",
+          "va": "0x00410330",
+          "name": "Recompile_SUB"
+        },
+        {
+          "index": 36,
+          "mnemonic": "AND",
+          "va": "0x00410370",
+          "name": "Recompile_AND"
+        },
+        {
+          "index": 37,
+          "mnemonic": "OR",
+          "va": "0x004103C0",
+          "name": "Recompile_OR"
+        },
+        {
+          "index": 38,
+          "mnemonic": "XOR",
+          "va": "0x00410410",
+          "name": "Recompile_XOR"
+        },
+        {
+          "index": 39,
+          "mnemonic": "NOR",
+          "va": "0x00410460",
+          "name": "Recompile_NOR"
+        },
+        {
+          "index": 40,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 41,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 42,
+          "mnemonic": "SLT",
+          "va": "0x004104C0",
+          "name": "Recompile_SLT"
+        },
+        {
+          "index": 43,
+          "mnemonic": "SLTU",
+          "va": "0x00410560",
+          "name": "Recompile_SLTU"
+        },
+        {
+          "index": 44,
+          "mnemonic": "DADD",
+          "va": "0x00410600",
+          "name": "Recompile_DADD"
+        },
+        {
+          "index": 45,
+          "mnemonic": "DADDU",
+          "va": "0x00410600",
+          "name": "Recompile_DADD"
+        },
+        {
+          "index": 46,
+          "mnemonic": "DSUB",
+          "va": "0x00410650",
+          "name": "Recompile_DSUB"
+        },
+        {
+          "index": 47,
+          "mnemonic": "DSUBU",
+          "va": "0x00410650",
+          "name": "Recompile_DSUB"
+        },
+        {
+          "index": 48,
+          "mnemonic": "TGE",
+          "va": "0x0040F570",
+          "name": "Recompile_Unimplemented"
+        },
+        {
+          "index": 49,
+          "mnemonic": "TGEU",
+          "va": "0x0040F570",
+          "name": "Recompile_Unimplemented"
+        },
+        {
+          "index": 50,
+          "mnemonic": "TLT",
+          "va": "0x0040F570",
+          "name": "Recompile_Unimplemented"
+        },
+        {
+          "index": 51,
+          "mnemonic": "TLTU",
+          "va": "0x0040F570",
+          "name": "Recompile_Unimplemented"
+        },
+        {
+          "index": 52,
+          "mnemonic": "TEQ",
+          "va": "0x004106D0",
+          "name": "Recompile_TEQ"
+        },
+        {
+          "index": 53,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 54,
+          "mnemonic": "TNE",
+          "va": "0x0040F570",
+          "name": "Recompile_Unimplemented"
+        },
+        {
+          "index": 55,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 56,
+          "mnemonic": "DSLL",
+          "va": "0x004106E0",
+          "name": "Recompile_DSLL"
+        },
+        {
+          "index": 57,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 58,
+          "mnemonic": "DSRL",
+          "va": "0x00410730",
+          "name": "Recompile_DSRL"
+        },
+        {
+          "index": 59,
+          "mnemonic": "DSRA",
+          "va": "0x00410780",
+          "name": "Recompile_DSRA"
+        },
+        {
+          "index": 60,
+          "mnemonic": "DSLL32",
+          "va": "0x004107D0",
+          "name": "Recompile_DSLL32"
+        },
+        {
+          "index": 61,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 62,
+          "mnemonic": "DSRL32",
+          "va": "0x00410820",
+          "name": "Recompile_DSRL32"
+        },
+        {
+          "index": 63,
+          "mnemonic": "DSRA32",
+          "va": "0x00410870",
+          "name": "Recompile_DSRA32"
+        }
+      ],
+      "source_entries_verified": true
+    },
+    {
+      "name": "Dynarec_RegImmDispatch",
+      "va": "0x00477A20",
+      "count": 32,
+      "entries": [
+        {
+          "index": 0,
+          "mnemonic": "BLTZ",
+          "va": "0x004108B0",
+          "name": "Recompile_BLTZ"
+        },
+        {
+          "index": 1,
+          "mnemonic": "BGEZ",
+          "va": "0x004108C0",
+          "name": "Recompile_BGEZ"
+        },
+        {
+          "index": 2,
+          "mnemonic": "BLTZL",
+          "va": "0x004108D0",
+          "name": "Recompile_BLTZL"
+        },
+        {
+          "index": 3,
+          "mnemonic": "BGEZL",
+          "va": "0x004108E0",
+          "name": "Recompile_BGEZL"
+        },
+        {
+          "index": 4,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 5,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 6,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 7,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 8,
+          "mnemonic": "TGEI",
+          "va": "0x0040F570",
+          "name": "Recompile_Unimplemented"
+        },
+        {
+          "index": 9,
+          "mnemonic": "TGEIU",
+          "va": "0x0040F570",
+          "name": "Recompile_Unimplemented"
+        },
+        {
+          "index": 10,
+          "mnemonic": "TLTI",
+          "va": "0x0040F570",
+          "name": "Recompile_Unimplemented"
+        },
+        {
+          "index": 11,
+          "mnemonic": "TLTIU",
+          "va": "0x0040F570",
+          "name": "Recompile_Unimplemented"
+        },
+        {
+          "index": 12,
+          "mnemonic": "TEQI",
+          "va": "0x0040F570",
+          "name": "Recompile_Unimplemented"
+        },
+        {
+          "index": 13,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 14,
+          "mnemonic": "TNEI",
+          "va": "0x0040F570",
+          "name": "Recompile_Unimplemented"
+        },
+        {
+          "index": 15,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 16,
+          "mnemonic": "BLTZAL",
+          "va": "0x004108F0",
+          "name": "Recompile_BLTZAL"
+        },
+        {
+          "index": 17,
+          "mnemonic": "BGEZAL",
+          "va": "0x00410900",
+          "name": "Recompile_BGEZAL"
+        },
+        {
+          "index": 18,
+          "mnemonic": "BLTZALL",
+          "va": "0x00410980",
+          "name": "Recompile_BLTZALL"
+        },
+        {
+          "index": 19,
+          "mnemonic": "BGEZALL",
+          "va": "0x00410990",
+          "name": "Recompile_BGEZALL"
+        },
+        {
+          "index": 20,
+          "mnemonic": "reserved",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 21,
+          "mnemonic": "reserved",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 22,
+          "mnemonic": "reserved",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 23,
+          "mnemonic": "reserved",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 24,
+          "mnemonic": "reserved",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 25,
+          "mnemonic": "reserved",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 26,
+          "mnemonic": "reserved",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 27,
+          "mnemonic": "reserved",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 28,
+          "mnemonic": "reserved",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 29,
+          "mnemonic": "reserved",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 30,
+          "mnemonic": "reserved",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 31,
+          "mnemonic": "reserved",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        }
+      ],
+      "source_entries_verified": true
+    },
+    {
+      "name": "Dynarec_Cop0Dispatch",
+      "va": "0x00477AA0",
+      "count": 32,
+      "entries": [
+        {
+          "index": 0,
+          "mnemonic": "MFC0",
+          "va": "0x004109A0",
+          "name": "Recompile_MFC0"
+        },
+        {
+          "index": 1,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 2,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 3,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 4,
+          "mnemonic": "MTC0",
+          "va": "0x00410BF0",
+          "name": "Recompile_MTC0"
+        },
+        {
+          "index": 5,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 6,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 7,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 8,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 9,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 10,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 11,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 12,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 13,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 14,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 15,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 16,
+          "mnemonic": "TLB",
+          "va": "0x00410F80",
+          "name": "Recompile_TLB"
+        },
+        {
+          "index": 17,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 18,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 19,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 20,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 21,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 22,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 23,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 24,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 25,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 26,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 27,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 28,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 29,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 30,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 31,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        }
+      ],
+      "source_entries_verified": true
+    },
+    {
+      "name": "Dynarec_Cop0FunctionDispatch",
+      "va": "0x00477B20",
+      "count": 64,
+      "entries": [
+        {
+          "index": 0,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 1,
+          "mnemonic": "TLBR",
+          "va": "0x00410FC0",
+          "name": "Recompile_TLBR"
+        },
+        {
+          "index": 2,
+          "mnemonic": "TLBWI",
+          "va": "0x00410FE0",
+          "name": "Recompile_TLBWI"
+        },
+        {
+          "index": 3,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 4,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 5,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 6,
+          "mnemonic": "TLBWR",
+          "va": "0x00411050",
+          "name": "Recompile_TLBWR"
+        },
+        {
+          "index": 7,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 8,
+          "mnemonic": "TLBP",
+          "va": "0x00411110",
+          "name": "Recompile_TLBP"
+        },
+        {
+          "index": 9,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 10,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 11,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 12,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 13,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 14,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 15,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 16,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 17,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 18,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 19,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 20,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 21,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 22,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 23,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 24,
+          "mnemonic": "ERET",
+          "va": "0x00411120",
+          "name": "Recompile_ERET"
+        },
+        {
+          "index": 25,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 26,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 27,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 28,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 29,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 30,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 31,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 32,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 33,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 34,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 35,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 36,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 37,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 38,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 39,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 40,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 41,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 42,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 43,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 44,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 45,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 46,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 47,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 48,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 49,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 50,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 51,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 52,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 53,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 54,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 55,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 56,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 57,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 58,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 59,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 60,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 61,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 62,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 63,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        }
+      ],
+      "source_entries_verified": true
+    },
+    {
+      "name": "Dynarec_Cop1Dispatch",
+      "va": "0x00477C20",
+      "count": 32,
+      "entries": [
+        {
+          "index": 0,
+          "mnemonic": "MFC1",
+          "va": "0x004111C0",
+          "name": "Recompile_MFC1"
+        },
+        {
+          "index": 1,
+          "mnemonic": "DMFC1",
+          "va": "0x004112A0",
+          "name": "Recompile_DMFC1"
+        },
+        {
+          "index": 2,
+          "mnemonic": "CFC1",
+          "va": "0x004113D0",
+          "name": "Recompile_CFC1"
+        },
+        {
+          "index": 3,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 4,
+          "mnemonic": "MTC1",
+          "va": "0x00411430",
+          "name": "Recompile_MTC1"
+        },
+        {
+          "index": 5,
+          "mnemonic": "DMTC1",
+          "va": "0x00411520",
+          "name": "Recompile_DMTC1"
+        },
+        {
+          "index": 6,
+          "mnemonic": "CTC1",
+          "va": "0x00411640",
+          "name": "Recompile_CTC1"
+        },
+        {
+          "index": 7,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 8,
+          "mnemonic": "BC",
+          "va": "0x00411690",
+          "name": "Recompile_COP1_BC"
+        },
+        {
+          "index": 9,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 10,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 11,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 12,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 13,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 14,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 15,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 16,
+          "mnemonic": "S",
+          "va": "0x00411740",
+          "name": "Recompile_COP1_S"
+        },
+        {
+          "index": 17,
+          "mnemonic": "D",
+          "va": "0x00411790",
+          "name": "Recompile_COP1_D"
+        },
+        {
+          "index": 18,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 19,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 20,
+          "mnemonic": "W",
+          "va": "0x004117E0",
+          "name": "Recompile_COP1_W"
+        },
+        {
+          "index": 21,
+          "mnemonic": "L",
+          "va": "0x00411830",
+          "name": "Recompile_COP1_L"
+        },
+        {
+          "index": 22,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 23,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 24,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 25,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 26,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 27,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 28,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 29,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 30,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 31,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        }
+      ],
+      "source_entries_verified": true
+    },
+    {
+      "name": "Dynarec_Cop1FunctionDispatch",
+      "va": "0x00477CA0",
+      "count": 64,
+      "entries": [
+        {
+          "index": 0,
+          "mnemonic": "ADD",
+          "va": "0x00411880",
+          "name": "Recompile_COP1_ADD"
+        },
+        {
+          "index": 1,
+          "mnemonic": "SUB",
+          "va": "0x004119C0",
+          "name": "Recompile_COP1_SUB"
+        },
+        {
+          "index": 2,
+          "mnemonic": "MUL",
+          "va": "0x00411B00",
+          "name": "Recompile_COP1_MUL"
+        },
+        {
+          "index": 3,
+          "mnemonic": "DIV",
+          "va": "0x00411C40",
+          "name": "Recompile_COP1_DIV"
+        },
+        {
+          "index": 4,
+          "mnemonic": "SQRT",
+          "va": "0x00411D80",
+          "name": "Recompile_COP1_SQRT"
+        },
+        {
+          "index": 5,
+          "mnemonic": "ABS",
+          "va": "0x00411E40",
+          "name": "Recompile_COP1_ABS"
+        },
+        {
+          "index": 6,
+          "mnemonic": "MOV",
+          "va": "0x00411F00",
+          "name": "Recompile_COP1_MOV"
+        },
+        {
+          "index": 7,
+          "mnemonic": "NEG",
+          "va": "0x00411FB0",
+          "name": "Recompile_COP1_NEG"
+        },
+        {
+          "index": 8,
+          "mnemonic": "ROUND.L",
+          "va": "0x00412070",
+          "name": "Recompile_COP1_ROUND_L"
+        },
+        {
+          "index": 9,
+          "mnemonic": "TRUNC.L",
+          "va": "0x00412140",
+          "name": "Recompile_COP1_TRUNC_L"
+        },
+        {
+          "index": 10,
+          "mnemonic": "CEIL.L",
+          "va": "0x00412210",
+          "name": "Recompile_COP1_CEIL_L"
+        },
+        {
+          "index": 11,
+          "mnemonic": "FLOOR.L",
+          "va": "0x004122E0",
+          "name": "Recompile_COP1_FLOOR_L"
+        },
+        {
+          "index": 12,
+          "mnemonic": "ROUND.W",
+          "va": "0x004123B0",
+          "name": "Recompile_COP1_ROUND_W"
+        },
+        {
+          "index": 13,
+          "mnemonic": "TRUNC.W",
+          "va": "0x00412480",
+          "name": "Recompile_COP1_TRUNC_W"
+        },
+        {
+          "index": 14,
+          "mnemonic": "CEIL.W",
+          "va": "0x00412550",
+          "name": "Recompile_COP1_CEIL_W"
+        },
+        {
+          "index": 15,
+          "mnemonic": "FLOOR.W",
+          "va": "0x00412620",
+          "name": "Recompile_COP1_FLOOR_W"
+        },
+        {
+          "index": 16,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 17,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 18,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 19,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 20,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 21,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 22,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 23,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 24,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 25,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 26,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 27,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 28,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 29,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 30,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 31,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 32,
+          "mnemonic": "CVT.S",
+          "va": "0x004126F0",
+          "name": "Recompile_COP1_CVT_S"
+        },
+        {
+          "index": 33,
+          "mnemonic": "CVT.D",
+          "va": "0x004127C0",
+          "name": "Recompile_COP1_CVT_D"
+        },
+        {
+          "index": 34,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 35,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 36,
+          "mnemonic": "CVT.W",
+          "va": "0x00412890",
+          "name": "Recompile_COP1_CVT_W"
+        },
+        {
+          "index": 37,
+          "mnemonic": "CVT.L",
+          "va": "0x00412960",
+          "name": "Recompile_COP1_CVT_L"
+        },
+        {
+          "index": 38,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 39,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 40,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 41,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 42,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 43,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 44,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 45,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 46,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 47,
+          "mnemonic": "unused",
+          "va": "0x0040D590",
+          "name": "Recompile_Unknown"
+        },
+        {
+          "index": 48,
+          "mnemonic": "C.F",
+          "va": "0x00412A20",
+          "name": "Recompile_COP1_C_F"
+        },
+        {
+          "index": 49,
+          "mnemonic": "C.UN",
+          "va": "0x00412A40",
+          "name": "Recompile_COP1_C_UN"
+        },
+        {
+          "index": 50,
+          "mnemonic": "C.EQ",
+          "va": "0x00412EA0",
+          "name": "Recompile_COP1_C_EQ"
+        },
+        {
+          "index": 51,
+          "mnemonic": "C.UEQ",
+          "va": "0x00412EA0",
+          "name": "Recompile_COP1_C_EQ"
+        },
+        {
+          "index": 52,
+          "mnemonic": "C.OLT",
+          "va": "0x00412EB0",
+          "name": "Recompile_COP1_C_OLT"
+        },
+        {
+          "index": 53,
+          "mnemonic": "C.ULT",
+          "va": "0x00412EB0",
+          "name": "Recompile_COP1_C_OLT"
+        },
+        {
+          "index": 54,
+          "mnemonic": "C.OLE",
+          "va": "0x00412EC0",
+          "name": "Recompile_COP1_C_OLE"
+        },
+        {
+          "index": 55,
+          "mnemonic": "C.ULE",
+          "va": "0x00412EC0",
+          "name": "Recompile_COP1_C_OLE"
+        },
+        {
+          "index": 56,
+          "mnemonic": "C.SF",
+          "va": "0x00412BD0",
+          "name": "Recompile_COP1_C_SF"
+        },
+        {
+          "index": 57,
+          "mnemonic": "C.NGLE",
+          "va": "0x00412D30",
+          "name": "Recompile_COP1_C_NGLE"
+        },
+        {
+          "index": 58,
+          "mnemonic": "C.SEQ",
+          "va": "0x00412EA0",
+          "name": "Recompile_COP1_C_EQ"
+        },
+        {
+          "index": 59,
+          "mnemonic": "C.NGL",
+          "va": "0x00412EA0",
+          "name": "Recompile_COP1_C_EQ"
+        },
+        {
+          "index": 60,
+          "mnemonic": "C.LT",
+          "va": "0x00412EB0",
+          "name": "Recompile_COP1_C_OLT"
+        },
+        {
+          "index": 61,
+          "mnemonic": "C.NGE",
+          "va": "0x00412EB0",
+          "name": "Recompile_COP1_C_OLT"
+        },
+        {
+          "index": 62,
+          "mnemonic": "C.LE",
+          "va": "0x00412EC0",
+          "name": "Recompile_COP1_C_OLE"
+        },
+        {
+          "index": 63,
+          "mnemonic": "C.NGT",
+          "va": "0x00412EC0",
+          "name": "Recompile_COP1_C_OLE"
+        }
+      ],
+      "source_entries_verified": true
+    }
+  ],
+  "observed_quirks": [
+    "COP0 TLB dispatch profiling uses RS rather than the TLB function index, matching original assembly.",
+    "Reserved MFC0 encodings still emit StoreGPRSigned32 without a preceding load.",
+    "LUI may write register-zero storage directly; no semantic correction was applied.",
+    "SYSCALL, BREAK and ERET terminate the compiled block exactly as the original control flow dictates.",
+    "Division-by-zero emitted results preserve the original implementation, including signed DIV quotient +1."
+  ],
+  "verification": {
+    "dispatch_entries_checked": 352,
+    "function_byte_comparison": "All 90 assigned function link spans match instruction bytes and known target constraints in a real reconstructed executable. Absolute addresses remain relocated and some target identities remain unverified; full-image byte equality is not established.",
+    "ir_differential": {
+      "script": "scripts/verify_nemu_dynarec_ir.py",
+      "cases": 1361,
+      "functions": 83,
+      "failures": 0,
+      "dispatch_targets": 352,
+      "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+      "rebuilt_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "original_results_sha256": "7fcd860f85121e73178a479691aaa69b932d4c650b310ecf3bb160b929e9ed23",
+      "rebuilt_results_sha256": "7fcd860f85121e73178a479691aaa69b932d4c650b310ecf3bb160b929e9ed23",
+      "scope": "Behavioral evidence for sampled input/control states; all actual translator/emitter/delay-slot code executes in Unicorn. Only IR address fields are normalized to recovered symbols. No application function stubs."
+    },
+    "instruction_diagnostic": {
+      "candidate_sha256": "6009556dcdefe3310a84731c9163f3b2e67f62962e9e06f685d244bb0a0ff13f",
+      "functions_located": 90,
+      "instruction_and_known_target_matches": 90,
+      "matched_link_span_bytes": 8000,
+      "known_target_mismatches": 0,
+      "unresolved_targets": 170,
+      "unverified_targets": 761,
+      "limits": "Address identities from application observations remain inferred, and normalized instruction matches are not whole-image byte equality. The shared signed-branch helper itself remains under independent refinement."
+    }
+  }
+}
