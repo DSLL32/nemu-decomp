@@ -1,0 +1,124 @@
+{
+  "source_sha256": "2987001ea09ddc8a1d27d77f1185895e66866160e1fd41f6b9917c57765eec21",
+  "translated_sha256": "4403705a48fe7f9de68175ea1dcbe140abfa97c3fd807bb43e88c53d67519fcf",
+  "flags": [
+    "/O2",
+    "/Ob1",
+    "/MT"
+  ],
+  "results": {
+    "baseline": {
+      "functions": 180,
+      "exact": 146,
+      "unresolved": 0
+    },
+    "cpp": {
+      "functions": 180,
+      "exact": 146,
+      "unresolved": 0
+    },
+    "c": {
+      "functions": 180,
+      "exact": 146,
+      "unresolved": 0
+    }
+  },
+  "comparisons": {
+    "baseline-to-cpp": {
+      "compared": 210,
+      "changed": []
+    },
+    "cpp-to-c": {
+      "compared": 210,
+      "changed": [
+        {
+          "name": "RSP_VCL",
+          "baseline_size": 1472,
+          "candidate_size": 1456,
+          "baseline_exact": false,
+          "candidate_exact": false,
+          "baseline_difference_bytes": 784,
+          "candidate_difference_bytes": 1081,
+          "baseline_materialized_sha256": "51d754a71b57a13b770d0f6d0cebca92367df3a7be0d654d7ac8b1a7e1b6a5a1",
+          "candidate_materialized_sha256": "3d4874cf05cf69685f946764075851359bdb2c7f4bed2499fa9d59e60882d661"
+        },
+        {
+          "name": "RSP_VCH",
+          "baseline_size": 1248,
+          "candidate_size": 1280,
+          "baseline_exact": false,
+          "candidate_exact": false,
+          "baseline_difference_bytes": 1029,
+          "candidate_difference_bytes": 1066,
+          "baseline_materialized_sha256": "9a114d169478bdec37c7b7cc4f5c207cd9069d530d92a1934be4b526f1ff3c97",
+          "candidate_materialized_sha256": "55f562e3f766d2e3fe6b83e480c1d6bf1868c5a295681553ae36a6ef5c3a2bc0"
+        },
+        {
+          "name": "RSP_VCR",
+          "baseline_size": 880,
+          "candidate_size": 864,
+          "baseline_exact": false,
+          "candidate_exact": false,
+          "baseline_difference_bytes": 645,
+          "candidate_difference_bytes": 703,
+          "baseline_materialized_sha256": "083fc39879b27893f20e62a9dfd32c3874b7ca4530ed0cd7e5cdea4a19d401f6",
+          "candidate_materialized_sha256": "0b2f731e96b0fb0ad17f15a302e7315f4a9e70a66e7996bd3a98711d7c4e925b"
+        }
+      ]
+    },
+    "baseline-to-c": {
+      "compared": 210,
+      "changed": [
+        {
+          "name": "RSP_VCL",
+          "baseline_size": 1472,
+          "candidate_size": 1456,
+          "baseline_exact": false,
+          "candidate_exact": false,
+          "baseline_difference_bytes": 784,
+          "candidate_difference_bytes": 1081,
+          "baseline_materialized_sha256": "51d754a71b57a13b770d0f6d0cebca92367df3a7be0d654d7ac8b1a7e1b6a5a1",
+          "candidate_materialized_sha256": "3d4874cf05cf69685f946764075851359bdb2c7f4bed2499fa9d59e60882d661"
+        },
+        {
+          "name": "RSP_VCH",
+          "baseline_size": 1248,
+          "candidate_size": 1280,
+          "baseline_exact": false,
+          "candidate_exact": false,
+          "baseline_difference_bytes": 1029,
+          "candidate_difference_bytes": 1066,
+          "baseline_materialized_sha256": "9a114d169478bdec37c7b7cc4f5c207cd9069d530d92a1934be4b526f1ff3c97",
+          "candidate_materialized_sha256": "55f562e3f766d2e3fe6b83e480c1d6bf1868c5a295681553ae36a6ef5c3a2bc0"
+        },
+        {
+          "name": "RSP_VCR",
+          "baseline_size": 880,
+          "candidate_size": 864,
+          "baseline_exact": false,
+          "candidate_exact": false,
+          "baseline_difference_bytes": 645,
+          "candidate_difference_bytes": 703,
+          "baseline_materialized_sha256": "083fc39879b27893f20e62a9dfd32c3874b7ca4530ed0cd7e5cdea4a19d401f6",
+          "candidate_materialized_sha256": "0b2f731e96b0fb0ad17f15a302e7315f4a9e70a66e7996bd3a98711d7c4e925b"
+        }
+      ]
+    }
+  },
+  "original": "master/Plugin/audio.dll",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "diagnostic_only": true,
+  "promoted": false,
+  "method": "The same C89-compatible source was compiled with /TP and /TC. Block scopes move no expressions or assignments. /TP preserves all original reconstructed function/data hashes, isolating frontend effects from the syntax conversion.",
+  "conclusion": "C changes only the three already-unmatched vector comparison routines. No exact function regresses or improves; C++ remains the current reconstruction language without claiming unique original-language identification.",
+  "scratch": "/root/.ai-tmp/nemu-audio-rsp-language.6czf01af",
+  "artifact_sha256": {
+    "RSP.cpp": "2987001ea09ddc8a1d27d77f1185895e66866160e1fd41f6b9917c57765eec21",
+    "RSP-c89.cpp": "4403705a48fe7f9de68175ea1dcbe140abfa97c3fd807bb43e88c53d67519fcf",
+    "RSP-C.obj": "5cd96f741feb06980c4999614984178d30bedde39fa5212d4906ea8ae2db6b7a",
+    "RSP-CPP.obj": "f07d0cf9e38c4850e0bdb61e1259ca7cd2d7a10f2babe29136003c84825dd5cf",
+    "convert.py": "af91133faf4867bb0d059ccfd1670c82da5cc93eee529e85bcbb831710956ee6",
+    "translation.json": "f001dc3cbeb2c070811993e3b4a945d2cfe81f8415a2a31589c9f77daf796fa2",
+    "compare.py": "36e33a378140041a9aafb760af175d37a7dc678773f327a08b2160270fb19017"
+  }
+}
