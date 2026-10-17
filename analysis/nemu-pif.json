@@ -1,0 +1,636 @@
+{
+  "status": "15 reconstructed functions; 14 complete instruction shapes match, and ProcessPIF now has the original 1904-byte extent; parser instructions and final executable layout remain in progress",
+  "source": "src/nemu64/PIF.cpp",
+  "globals": [
+    {
+      "name": "PIFResponse",
+      "va": "0x448b8d8",
+      "type": "unsigned char",
+      "count": 64,
+      "size": 64,
+      "initializer": 0,
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "MemPackFilename",
+      "va": "0x448b918",
+      "type": "char",
+      "count": 260,
+      "size": 260,
+      "initializer": 0,
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "PIFCommandLengths",
+      "va": "0x448ba20",
+      "type": "PIFCommandLength",
+      "count": 256,
+      "size": 2048,
+      "initializer": 0,
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "SRAMFilename",
+      "va": "0x448c220",
+      "type": "char",
+      "count": 260,
+      "size": 260,
+      "initializer": 0,
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "Controllers",
+      "va": "0x448c324",
+      "type": "ControllerState",
+      "count": 4,
+      "size": 32,
+      "initializer": 0,
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "PackBlock",
+      "va": "0x448c344",
+      "type": "unsigned char",
+      "count": 32,
+      "size": 32,
+      "initializer": 0,
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "EEPROMSize",
+      "va": "0x448c3ac",
+      "type": "int",
+      "count": 1,
+      "size": 4,
+      "initializer": 0,
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "PIFCommand",
+      "va": "0x448c3b0",
+      "type": "unsigned char",
+      "count": 64,
+      "size": 64,
+      "initializer": 0,
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "MovieFile",
+      "va": "0x448c3f0",
+      "type": "FILE *",
+      "count": 1,
+      "size": 4,
+      "initializer": 0,
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "EEPROMEnabled",
+      "va": "0x448c3f4",
+      "type": "int",
+      "count": 1,
+      "size": 4,
+      "initializer": 0,
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "EEPROMFilename",
+      "va": "0x448c3f8",
+      "type": "char",
+      "count": 260,
+      "size": 260,
+      "initializer": 0,
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "SRAMData",
+      "va": "0x448c508",
+      "type": "unsigned char",
+      "count": 262144,
+      "size": 262144,
+      "initializer": 0,
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "EEPROMData",
+      "va": "0x406a818",
+      "type": "unsigned char",
+      "count": 2048,
+      "size": 2048,
+      "initializer": 0,
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "MemPackData",
+      "va": "0x3e5ae10",
+      "type": "unsigned char",
+      "count": 32768,
+      "size": 32768,
+      "initializer": 0,
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "SRAMUsed",
+      "va": "0x3e62e10",
+      "type": "int",
+      "count": 1,
+      "size": 4,
+      "initializer": 0,
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "MemPackUsed",
+      "va": "0x3e64e70",
+      "type": "int",
+      "count": 1,
+      "size": 4,
+      "initializer": 0,
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "EEPROMUsed",
+      "va": "0x3e69558",
+      "type": "int",
+      "count": 1,
+      "size": 4,
+      "initializer": 0,
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "DisableSaveWrites",
+      "va": "0x3e65304",
+      "type": "int",
+      "count": 1,
+      "size": 4,
+      "initializer": 0,
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "MovieRecord",
+      "va": "0x44cc510",
+      "type": "int",
+      "count": 1,
+      "size": 4,
+      "initializer": 0,
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "MoviePlay",
+      "va": "0x44cc514",
+      "type": "int",
+      "count": 1,
+      "size": 4,
+      "initializer": 0,
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "CIC6105Table",
+      "va": "0x44cc518",
+      "type": "unsigned *",
+      "count": 1,
+      "size": 4,
+      "initializer": 0,
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "CICState",
+      "va": "0x44cc51c",
+      "type": "int",
+      "count": 1,
+      "size": 4,
+      "initializer": 0,
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "MovieLastButtons",
+      "va": "0x44cc520",
+      "type": "unsigned",
+      "count": 1,
+      "size": 4,
+      "initializer": 0,
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "MovieRepeatCount",
+      "va": "0x44cc524",
+      "type": "unsigned short",
+      "count": 1,
+      "size": 2,
+      "initializer": 0,
+      "basis": "StopMovie stores AX at 0x421104; adjacent globals occupy upper word"
+    },
+    {
+      "name": "MovieNewRun",
+      "va": "0x460d10",
+      "type": "int",
+      "count": 1,
+      "size": 4,
+      "initializer": 1,
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "ForcePIFSuccess",
+      "va": "0x44cc50c",
+      "type": "int",
+      "count": 1,
+      "size": 4,
+      "initializer": 0,
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "PIFNTSCFilename",
+      "va": "0x3e69380",
+      "type": "char",
+      "count": 256,
+      "size": 256,
+      "initializer": 0,
+      "basis": "Consumers use filename strings; independently identified adjacent DWORD global proves 256-byte extent"
+    },
+    {
+      "name": "PIFPALFilename",
+      "va": "0x3e65200",
+      "type": "char",
+      "count": 256,
+      "size": 256,
+      "initializer": 0,
+      "basis": "Consumers use filename strings; independently identified adjacent DWORD global proves 256-byte extent"
+    },
+    {
+      "name": "PifResponseTable1",
+      "va": "0x440b10",
+      "type": "unsigned char",
+      "count": 256,
+      "size": 256,
+      "initializer": "algorithmic generated table",
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "PifResponseTable0",
+      "va": "0x440c10",
+      "type": "unsigned char",
+      "count": 256,
+      "size": 256,
+      "initializer": "algorithmic generated table",
+      "basis": "original code access width, stride, and address; names inferred"
+    },
+    {
+      "name": "PifResponseHistory",
+      "va": "0x440d10",
+      "type": "unsigned long",
+      "count": 32768,
+      "size": 131072,
+      "initializer": "algorithmic generated table",
+      "basis": "original code access width, stride, and address; names inferred"
+    }
+  ],
+  "functions": [
+    {
+      "name": "FindCICInput",
+      "va": "0x4202d0",
+      "size": 112,
+      "linked_validation": {
+        "rebuilt_va": "0x420210",
+        "rebuilt_size": 112,
+        "candidate_map_span": 112,
+        "size_equal": true,
+        "raw_bytes_equal": false,
+        "full_function_shape_match": true,
+        "normalized_differing_bytes": 0,
+        "target_mismatches": 0,
+        "invalid_link_operands": 0,
+        "unresolved_targets": 0,
+        "unverified_targets": 0
+      }
+    },
+    {
+      "name": "SaveCICInput",
+      "va": "0x420340",
+      "size": 96,
+      "linked_validation": {
+        "rebuilt_va": "0x420280",
+        "rebuilt_size": 96,
+        "candidate_map_span": 96,
+        "size_equal": true,
+        "raw_bytes_equal": false,
+        "full_function_shape_match": true,
+        "normalized_differing_bytes": 0,
+        "target_mismatches": 0,
+        "invalid_link_operands": 0,
+        "unresolved_targets": 4,
+        "unverified_targets": 5
+      }
+    },
+    {
+      "name": "CICUseTable1",
+      "va": "0x4203a0",
+      "size": 128,
+      "linked_validation": {
+        "rebuilt_va": "0x4202e0",
+        "rebuilt_size": 128,
+        "candidate_map_span": 128,
+        "size_equal": true,
+        "raw_bytes_equal": false,
+        "full_function_shape_match": true,
+        "normalized_differing_bytes": 0,
+        "target_mismatches": 0,
+        "invalid_link_operands": 0,
+        "unresolved_targets": 0,
+        "unverified_targets": 2
+      }
+    },
+    {
+      "name": "CIC6105Challenge",
+      "va": "0x420420",
+      "size": 384,
+      "linked_validation": {
+        "rebuilt_va": "0x420360",
+        "rebuilt_size": 384,
+        "candidate_map_span": 384,
+        "size_equal": true,
+        "raw_bytes_equal": false,
+        "full_function_shape_match": true,
+        "normalized_differing_bytes": 0,
+        "target_mismatches": 0,
+        "invalid_link_operands": 0,
+        "unresolved_targets": 0,
+        "unverified_targets": 6
+      }
+    },
+    {
+      "name": "PIFDataCRC",
+      "va": "0x4205a0",
+      "validation": {
+        "compiler": "VC7 13.00.9466",
+        "flags": "/O2 /Ob1 /ML /DWIN32 /DNDEBUG",
+        "byte_length_including_padding": 96,
+        "fixed_bytes_match": true,
+        "independently_validated_call_relocations": 0,
+        "data_relocations": "Original operand observations; final global layout remains to be matched"
+      },
+      "size": 96,
+      "linked_validation": {
+        "rebuilt_va": "0x4204e0",
+        "rebuilt_size": 96,
+        "candidate_map_span": 96,
+        "size_equal": true,
+        "raw_bytes_equal": true,
+        "full_function_shape_match": true,
+        "normalized_differing_bytes": 0,
+        "target_mismatches": 0,
+        "invalid_link_operands": 0,
+        "unresolved_targets": 0,
+        "unverified_targets": 0
+      }
+    },
+    {
+      "name": "InitializePIFCommandLengths",
+      "va": "0x420600",
+      "validation": {
+        "compiler": "VC7 13.00.9466",
+        "flags": "/O2 /Ob1 /ML /DWIN32 /DNDEBUG",
+        "byte_length_including_padding": 128,
+        "fixed_bytes_match": true,
+        "independently_validated_call_relocations": 0,
+        "data_relocations": "Original operand observations; final global layout remains to be matched"
+      },
+      "size": 128,
+      "linked_validation": {
+        "rebuilt_va": "0x420540",
+        "rebuilt_size": 128,
+        "candidate_map_span": 128,
+        "size_equal": true,
+        "raw_bytes_equal": false,
+        "full_function_shape_match": true,
+        "normalized_differing_bytes": 0,
+        "target_mismatches": 0,
+        "invalid_link_operands": 0,
+        "unresolved_targets": 13,
+        "unverified_targets": 14
+      }
+    },
+    {
+      "name": "ProcessPIF",
+      "va": "0x420680",
+      "size": 1904,
+      "linked_validation": {
+        "rebuilt_va": "0x4205c0",
+        "rebuilt_size": 1904,
+        "candidate_map_span": 1904,
+        "size_equal": true,
+        "raw_bytes_equal": false,
+        "full_function_shape_match": false,
+        "normalized_differing_bytes": 1017,
+        "target_mismatches": 0,
+        "invalid_link_operands": 0,
+        "unresolved_targets": 0,
+        "unverified_targets": 0
+      }
+    },
+    {
+      "name": "SaveEEPROM",
+      "va": "0x420df0",
+      "size": 144,
+      "linked_validation": {
+        "rebuilt_va": "0x420d30",
+        "rebuilt_size": 144,
+        "candidate_map_span": 144,
+        "size_equal": true,
+        "raw_bytes_equal": false,
+        "full_function_shape_match": true,
+        "normalized_differing_bytes": 0,
+        "target_mismatches": 0,
+        "invalid_link_operands": 0,
+        "unresolved_targets": 2,
+        "unverified_targets": 7
+      }
+    },
+    {
+      "name": "SaveMemPack",
+      "va": "0x420e80",
+      "size": 144,
+      "linked_validation": {
+        "rebuilt_va": "0x420dc0",
+        "rebuilt_size": 144,
+        "candidate_map_span": 144,
+        "size_equal": true,
+        "raw_bytes_equal": false,
+        "full_function_shape_match": true,
+        "normalized_differing_bytes": 0,
+        "target_mismatches": 0,
+        "invalid_link_operands": 0,
+        "unresolved_targets": 2,
+        "unverified_targets": 7
+      }
+    },
+    {
+      "name": "RecordMovieInput",
+      "va": "0x420f10",
+      "validation": {
+        "compiler": "VC7 13.00.9466",
+        "flags": "/O2 /Ob1 /ML /DWIN32 /DNDEBUG",
+        "byte_length_including_padding": 240,
+        "fixed_bytes_match": true,
+        "independently_validated_call_relocations": 8,
+        "data_relocations": "Original operand observations; final global layout remains to be matched"
+      },
+      "size": 240,
+      "linked_validation": {
+        "rebuilt_va": "0x420e50",
+        "rebuilt_size": 240,
+        "candidate_map_span": 240,
+        "size_equal": true,
+        "raw_bytes_equal": false,
+        "full_function_shape_match": true,
+        "normalized_differing_bytes": 0,
+        "target_mismatches": 0,
+        "invalid_link_operands": 0,
+        "unresolved_targets": 5,
+        "unverified_targets": 24
+      }
+    },
+    {
+      "name": "PlayMovieInput",
+      "va": "0x421000",
+      "validation": {
+        "compiler": "VC7 13.00.9466",
+        "flags": "/O2 /Ob1 /ML /DWIN32 /DNDEBUG",
+        "byte_length_including_padding": 224,
+        "fixed_bytes_match": true,
+        "independently_validated_call_relocations": 7,
+        "data_relocations": "Original operand observations; final global layout remains to be matched"
+      },
+      "size": 224,
+      "linked_validation": {
+        "rebuilt_va": "0x420f40",
+        "rebuilt_size": 224,
+        "candidate_map_span": 224,
+        "size_equal": true,
+        "raw_bytes_equal": false,
+        "full_function_shape_match": true,
+        "normalized_differing_bytes": 0,
+        "target_mismatches": 0,
+        "invalid_link_operands": 0,
+        "unresolved_targets": 5,
+        "unverified_targets": 20
+      }
+    },
+    {
+      "name": "StopMovie",
+      "va": "0x4210e0",
+      "validation": {
+        "compiler": "VC7 13.00.9466",
+        "flags": "/O2 /Ob1 /ML /DWIN32 /DNDEBUG",
+        "byte_length_including_padding": 64,
+        "fixed_bytes_match": true,
+        "independently_validated_call_relocations": 1,
+        "data_relocations": "Original operand observations; final global layout remains to be matched"
+      },
+      "size": 64,
+      "linked_validation": {
+        "rebuilt_va": "0x421020",
+        "rebuilt_size": 64,
+        "candidate_map_span": 64,
+        "size_equal": true,
+        "raw_bytes_equal": false,
+        "full_function_shape_match": true,
+        "normalized_differing_bytes": 0,
+        "target_mismatches": 0,
+        "invalid_link_operands": 0,
+        "unresolved_targets": 0,
+        "unverified_targets": 7
+      }
+    },
+    {
+      "name": "SaveSRAM",
+      "va": "0x421120",
+      "size": 144,
+      "linked_validation": {
+        "rebuilt_va": "0x421060",
+        "rebuilt_size": 144,
+        "candidate_map_span": 144,
+        "size_equal": true,
+        "raw_bytes_equal": false,
+        "full_function_shape_match": true,
+        "normalized_differing_bytes": 0,
+        "target_mismatches": 0,
+        "invalid_link_operands": 0,
+        "unresolved_targets": 2,
+        "unverified_targets": 7
+      }
+    },
+    {
+      "name": "WriteSRAM",
+      "va": "0x4211b0",
+      "size": 48,
+      "linked_validation": {
+        "rebuilt_va": "0x4210f0",
+        "rebuilt_size": 48,
+        "candidate_map_span": 48,
+        "size_equal": true,
+        "raw_bytes_equal": false,
+        "full_function_shape_match": true,
+        "normalized_differing_bytes": 0,
+        "target_mismatches": 0,
+        "invalid_link_operands": 0,
+        "unresolved_targets": 0,
+        "unverified_targets": 4
+      }
+    },
+    {
+      "name": "ReadSRAM",
+      "va": "0x4211e0",
+      "size": 48,
+      "linked_validation": {
+        "rebuilt_va": "0x421120",
+        "rebuilt_size": 48,
+        "candidate_map_span": 48,
+        "size_equal": true,
+        "raw_bytes_equal": false,
+        "full_function_shape_match": true,
+        "normalized_differing_bytes": 0,
+        "target_mismatches": 0,
+        "invalid_link_operands": 0,
+        "unresolved_targets": 0,
+        "unverified_targets": 3
+      }
+    }
+  ],
+  "notes": [
+    "Names and original source file grouping are inferred.",
+    "PIFDataCRC matches all 96 bytes including padding without masked operands. Four additional function bodies match with recorded COFF relocation fields excluded; their CRT call destinations are independently verified.",
+    "A real complete /GL link confirms 14 original full extents (2,000 bytes) with matching instruction shapes. The reconstructed ProcessPIF occupies the original 1,904-byte span; its remaining instruction differences are not treated as a match.",
+    "PIFRam and PIFRom are declared in Memory.h; ordinary PIF global definitions belong to Globals.cpp.",
+    "PifResponseTable0, PifResponseTable1 and PifResponseHistory are generated algorithmically by res/generate_pif_tables.py.",
+    "CICUseTable1 compares its iterator to PifResponseHistory + 0x20000; the original one-past-end address coincides with MovieNewRun but is not an access to that adjacent object."
+  ],
+  "linked_validation": {
+    "compiler": "VC7 13.00.9466",
+    "flags": "/O2 /Ob1 /ML /GL /DWIN32 /DNDEBUG",
+    "source_sha256": "5d2a65ef2509f119a3029c018315c50a52ef1e9103cf9d479090fac62e9f1223",
+    "candidate_image_sha256": "6478b6453bf5d9095abed35db9abda5dca2be83a225cbac30f55ea9259b677bf",
+    "candidate_map_sha256": "39f9cfbd3bb1e752ed49fff4af45303c1c31f5d0513ed41b1be7101a004ca999",
+    "image_kind": "real complete link with /FIXED:NO; never /FORCE",
+    "matching_complete_function_extents": 14,
+    "matching_original_bytes": 2000,
+    "normalization": "Only PE HIGHLOW fixups and decoded relative call operands; internal branches, local offsets, and alignment bytes remain exact",
+    "limitation": "Instruction-shape evidence, not byte-exact module completion. Some original data/string identities are unverified; final image layout and ProcessPIF still differ.",
+    "historical_fixture": {
+      "image": "/root/.ai-tmp/nemu-pif-full.7m3lqg9b/natural.exe",
+      "map": "/root/.ai-tmp/nemu-pif-full.7m3lqg9b/natural.map",
+      "comparison": "/root/.ai-tmp/nemu-pif-full.7m3lqg9b/natural-sized.json",
+      "scope": "Historical instruction-shape proof for the recorded source hash; not a claim about the latest executable layout."
+    }
+  },
+  "original_file": "master/nemu64.exe",
+  "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+  "behavioral_validation": {
+    "script": "scripts/verify_nemu_pif.py",
+    "report": "analysis/nemu-pif-behavior.json",
+    "scope": "Controlled and seeded actual-PE differential with external plugin/UI hooks; separately labeled malformed probes and write-range rejections. Behavioral evidence only, not byte equality.",
+    "metadata_dependencies": [
+      "analysis/nemu-pif.json",
+      "analysis/nemu-plugins.json",
+      "analysis/nemu-memory.json",
+      "analysis/nemu-cpu.json"
+    ]
+  }
+}
