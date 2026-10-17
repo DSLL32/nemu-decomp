@@ -1,457 +1,1352 @@
 {
   "target": "master/Plugin/Input.dll",
   "target_sha256": "2c0fb513c6c34115ef070c9f33767f7cf15d28de4becbd74bd90fe515e496298",
-  "candidate": "/root/.ai-tmp/input-settings/verified/Input.dll",
-  "candidate_sha256": "3f81b7124fcd1ada762e91ca3b169b7485358afed8016d844861ecf83e92f3db",
-  "source": "src/input/UnitSettings.pas",
-  "source_sha256": "284b85bfddecf29fec415b3ed45414fce0255f0fc0ef8a7000bfb3a12652d0cd",
-  "compiled_source_snapshot": "/root/.ai-tmp/input-settings/verified/UnitSettings.pas",
-  "compiled_source_sha256": "3216384ab7a8cb44c0c13683b356891586bc0a29c79c9a8e097b52add16ad2ad",
-  "source_difference": "Only explanatory comments were removed after this build.",
+  "candidate": "/root/.ai-tmp/nemu-input-build.4o6ntfa8/build/Input.dll",
+  "candidate_sha256": "069260c051af4dddc2d500e7465fcb966e2d33fee0e2297e140dafbbae28e90e",
+  "compiled_source_snapshot": "/root/.ai-tmp/nemu-input-build.4o6ntfa8/build/UnitSettings.pas",
+  "compiled_source_sha256": "d7fbdfcf66fc3915a46e9e7eb5dbdb42ca68b8afcd16fe86bfe12134a548659b",
   "compiler": "toolchains/d6u2/bin/dcc32-personal.exe",
   "full_dll_byte_exact": false,
+  "full_dll_differing_bytes": 2167,
+  "unit_original_va": "0x4801a8",
+  "unit_rebuilt_va": "0x4801a8",
+  "unit_bytes": 15540,
+  "unit_raw_differing_bytes": 203,
+  "relocation_count": 469,
+  "relocation_positions_equal": true,
+  "changed_alias_operands": 147,
+  "alias_target_identities_proved": 147,
+  "all_other_unit_bytes_raw_equal": true,
   "form_fields_exact": true,
   "form_instance_size": 944,
   "form_instance_size_exact": true,
-  "published_methods_exact": true,
-  "routine_count": 42,
-  "address_normalized_matching_routines": 42,
-  "scope": "Routine lengths, instruction bytes, literal data and relocation positions match after address normalization. Only ListBoxButtonsClick has all masked operand identities independently proved here. Complete DLL equality remains required.",
-  "selection_audit": "/root/.ai-tmp/input-settings/verified/audit.json",
-  "blocks": [
+  "published_method_names_exact": true,
+  "verification": "/root/.ai-tmp/nemu-input-build.4o6ntfa8/audit_settings.py",
+  "scope": "The entire unit is compared byte for byte. Only relocated pointers into Delphi unit-import DATA tables may be translated, and both table entries must point to the exact same original global address. Direct calls, literal data, branch targets, metadata and all remaining bytes are unmodified in this comparison. DLL files are never changed.",
+  "prior_audit_correction": "The initial selection audit incorrectly labeled original $4045A0 as @LStrFromArray. It is @LStrFromPCharLen. Recovering ButtonNames as array[1..40] of Char fixes all fourteen UnitSettings conversion calls. The current whole-unit comparison checks those calls without masking.",
+  "aliases": [
     {
-      "name": "TFormSettings.UpdateLabels",
-      "original": "0x480ac4",
-      "rebuilt": "0x47e654",
-      "size": 384,
-      "rebuilt_size": 384,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x480b8e",
+      "original_alias": "0x487bcc",
+      "rebuilt_alias": "0x487b7c",
+      "original_global": "0x48a70c",
+      "rebuilt_global": "0x48a70c",
+      "symbol": "HasKeyboard",
+      "same_global": true
     },
     {
-      "name": "FillButtonList",
-      "original": "0x480c44",
-      "rebuilt": "0x47e7d4",
-      "size": 460,
-      "rebuilt_size": 460,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x480ba6",
+      "original_alias": "0x487a7c",
+      "rebuilt_alias": "0x487a14",
+      "original_global": "0x48a70d",
+      "rebuilt_global": "0x48a70d",
+      "symbol": "HasAdaptoid",
+      "same_global": true
     },
     {
-      "name": "FillAxisList",
-      "original": "0x480e10",
-      "rebuilt": "0x47e9a0",
-      "size": 252,
-      "rebuilt_size": 252,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x480c7a",
+      "original_alias": "0x4878a8",
+      "rebuilt_alias": "0x4878e4",
+      "original_global": "0x48acb0",
+      "rebuilt_global": "0x48acb0",
+      "symbol": "ActiveDeviceCount",
+      "same_global": true
     },
     {
-      "name": "FillDeviceList",
-      "original": "0x480f0c",
-      "rebuilt": "0x47ea9c",
-      "size": 112,
-      "rebuilt_size": 112,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x480c8f",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
     },
     {
-      "name": "GetDeviceIndex",
-      "original": "0x480f7c",
-      "rebuilt": "0x47eb0c",
-      "size": 140,
-      "rebuilt_size": 140,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x480ca0",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
     },
     {
-      "name": "GetKeyCode",
-      "original": "0x481008",
-      "rebuilt": "0x47eb98",
-      "size": 104,
-      "rebuilt_size": 104,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x480cc9",
+      "original_alias": "0x487998",
+      "rebuilt_alias": "0x487b68",
+      "original_global": "0x487658",
+      "rebuilt_global": "0x487658",
+      "symbol": "KeyDefs",
+      "same_global": true
     },
     {
-      "name": "GetButtonIndex",
-      "original": "0x481070",
-      "rebuilt": "0x47ec00",
-      "size": 156,
-      "rebuilt_size": 156,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x480cd4",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
     },
     {
-      "name": "GetKeyName",
-      "original": "0x48110c",
-      "rebuilt": "0x47ec9c",
-      "size": 52,
-      "rebuilt_size": 52,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x480d08",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.SetControllerEnabled",
-      "original": "0x481140",
-      "rebuilt": "0x47ecd0",
-      "size": 172,
-      "rebuilt_size": 172,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x480d24",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.UpdateController",
-      "original": "0x4811ec",
-      "rebuilt": "0x47ed7c",
-      "size": 400,
-      "rebuilt_size": 400,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x480d65",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.CheckBoxPluggedInClick",
-      "original": "0x48137c",
-      "rebuilt": "0x47ef0c",
-      "size": 76,
-      "rebuilt_size": 76,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x480d7d",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.ButtonSelectInputClick",
-      "original": "0x4813c8",
-      "rebuilt": "0x47ef58",
-      "size": 112,
-      "rebuilt_size": 112,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x480e48",
+      "original_alias": "0x4878a8",
+      "rebuilt_alias": "0x4878e4",
+      "original_global": "0x48acb0",
+      "rebuilt_global": "0x48acb0",
+      "symbol": "ActiveDeviceCount",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.ListBoxButtonsDrawItem",
-      "original": "0x481438",
-      "rebuilt": "0x47efc8",
-      "size": 160,
-      "rebuilt_size": 160,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x480e59",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.ListBoxButtonsClick",
-      "original": "0x4814d8",
-      "rebuilt": "0x47f068",
-      "size": 4520,
-      "rebuilt_size": 4520,
-      "equal": true,
-      "diffs": 0,
-      "first": [],
-      "linear_decoder_result": {
-        "equal": false,
-        "diffs": 8,
-        "first": [
-          198,
-          199,
-          200,
-          201,
-          1038
-        ]
-      },
-      "address_operands": 198,
-      "identities_proved": 198,
-      "decoder": "Two verified six-entry jump tables skipped during instruction decoding."
+      "instruction_operand_va": "0x480e6a",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.RadioGroupAxisClick",
-      "original": "0x482680",
-      "rebuilt": "0x480210",
-      "size": 64,
-      "rebuilt_size": 64,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x480e82",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.FormShow",
-      "original": "0x4826c0",
-      "rebuilt": "0x480250",
-      "size": 64,
-      "rebuilt_size": 64,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x480f26",
+      "original_alias": "0x4878a8",
+      "rebuilt_alias": "0x4878e4",
+      "original_global": "0x48acb0",
+      "rebuilt_global": "0x48acb0",
+      "symbol": "ActiveDeviceCount",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.ComboBoxAxisChange",
-      "original": "0x482700",
-      "rebuilt": "0x480290",
-      "size": 276,
-      "rebuilt_size": 276,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x480f34",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.ComboBoxButtonChange",
-      "original": "0x482814",
-      "rebuilt": "0x4803a4",
-      "size": 320,
-      "rebuilt_size": 320,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x480f4e",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.ComboBoxAxisButton1Change",
-      "original": "0x482954",
-      "rebuilt": "0x4804e4",
-      "size": 320,
-      "rebuilt_size": 320,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x480f9e",
+      "original_alias": "0x4878a8",
+      "rebuilt_alias": "0x4878e4",
+      "original_global": "0x48acb0",
+      "rebuilt_global": "0x48acb0",
+      "symbol": "ActiveDeviceCount",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.ComboBoxAxisButton2Change",
-      "original": "0x482a94",
-      "rebuilt": "0x480624",
-      "size": 320,
-      "rebuilt_size": 320,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x480fae",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.CheckBoxMemPackClick",
-      "original": "0x482bd4",
-      "rebuilt": "0x480764",
-      "size": 116,
-      "rebuilt_size": 116,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x480fbf",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.CheckBoxRumblePackClick",
-      "original": "0x482c48",
-      "rebuilt": "0x4807d8",
-      "size": 116,
-      "rebuilt_size": 116,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x48102e",
+      "original_alias": "0x487998",
+      "rebuilt_alias": "0x487b68",
+      "original_global": "0x487658",
+      "rebuilt_global": "0x487658",
+      "symbol": "KeyDefs",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.SaveSettings",
-      "original": "0x482cbc",
-      "rebuilt": "0x48084c",
-      "size": 124,
-      "rebuilt_size": 124,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x48109e",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.ButtonOKClick",
-      "original": "0x482d38",
-      "rebuilt": "0x4808c8",
-      "size": 8,
-      "rebuilt_size": 8,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x4810b3",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.GroupBoxSettingsClick",
-      "original": "0x482d40",
-      "rebuilt": "0x4808d0",
-      "size": 12,
-      "rebuilt_size": 12,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x481117",
+      "original_alias": "0x487998",
+      "rebuilt_alias": "0x487b68",
+      "original_global": "0x487658",
+      "rebuilt_global": "0x487658",
+      "symbol": "KeyDefs",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.CheckBoxTurboFireClick",
-      "original": "0x482d4c",
-      "rebuilt": "0x4808dc",
-      "size": 28,
-      "rebuilt_size": 28,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x4813e6",
+      "original_alias": "0x487988",
+      "rebuilt_alias": "0x48797c",
+      "original_global": "0x496660",
+      "rebuilt_global": "0x496660",
+      "symbol": "FormSelectInputDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.ComboBoxModifier2Change",
-      "original": "0x482d68",
-      "rebuilt": "0x4808f8",
-      "size": 328,
-      "rebuilt_size": 328,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x4813f9",
+      "original_alias": "0x487988",
+      "rebuilt_alias": "0x48797c",
+      "original_global": "0x496660",
+      "rebuilt_global": "0x496660",
+      "symbol": "FormSelectInputDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.ComboBoxModifier3Change",
-      "original": "0x482eb0",
-      "rebuilt": "0x480a40",
-      "size": 328,
-      "rebuilt_size": 328,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x481405",
+      "original_alias": "0x487988",
+      "rebuilt_alias": "0x48797c",
+      "original_global": "0x496660",
+      "rebuilt_global": "0x496660",
+      "symbol": "FormSelectInputDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.ComboBoxModifier1Change",
-      "original": "0x482ff8",
-      "rebuilt": "0x480b88",
-      "size": 328,
-      "rebuilt_size": 328,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x481424",
+      "original_alias": "0x487988",
+      "rebuilt_alias": "0x48797c",
+      "original_global": "0x496660",
+      "rebuilt_global": "0x496660",
+      "symbol": "FormSelectInputDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.ButtonSensitivityClick",
-      "original": "0x483140",
-      "rebuilt": "0x480cd0",
-      "size": 224,
-      "rebuilt_size": 224,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x481690",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.ButtonAutoConfigureAdaptoidClick",
-      "original": "0x483220",
-      "rebuilt": "0x480db0",
-      "size": 412,
-      "rebuilt_size": 412,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x4816a0",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
     },
     {
-      "name": "AutoConfigureKeyboard",
-      "original": "0x4833bc",
-      "rebuilt": "0x480f4c",
-      "size": 472,
-      "rebuilt_size": 472,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x4816d3",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.ButtonAutoconfigureKeyboardClick",
-      "original": "0x483594",
-      "rebuilt": "0x481124",
-      "size": 252,
-      "rebuilt_size": 252,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x4816e3",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.MenuItemAdaptoidClick",
-      "original": "0x483690",
-      "rebuilt": "0x481220",
-      "size": 580,
-      "rebuilt_size": 580,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x4816f5",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.TabControlControllerChange",
-      "original": "0x4838d4",
-      "rebuilt": "0x481464",
-      "size": 8,
-      "rebuilt_size": 8,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x48175b",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.ButtonWaitButtonClick",
-      "original": "0x4838dc",
-      "rebuilt": "0x48146c",
-      "size": 204,
-      "rebuilt_size": 204,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x48176b",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.ButtonWaitAxisButton2Click",
-      "original": "0x4839a8",
-      "rebuilt": "0x481538",
-      "size": 204,
-      "rebuilt_size": 204,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x48177d",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.ButtonWaitAxisButton1Click",
-      "original": "0x483a74",
-      "rebuilt": "0x481604",
-      "size": 204,
-      "rebuilt_size": 204,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x4817e0",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.ButtonWaitAxisModifier1Click",
-      "original": "0x483b40",
-      "rebuilt": "0x4816d0",
-      "size": 204,
-      "rebuilt_size": 204,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x4817f0",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.ButtonWaitAxisModifier2Click",
-      "original": "0x483c0c",
-      "rebuilt": "0x48179c",
-      "size": 204,
-      "rebuilt_size": 204,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x481b60",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.ButtonWaitAxisModifier3Click",
-      "original": "0x483cd8",
-      "rebuilt": "0x481868",
-      "size": 204,
-      "rebuilt_size": 204,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x481b70",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
     },
     {
-      "name": "TFormSettings.ComboBoxDDeviceChange",
-      "original": "0x483da4",
-      "rebuilt": "0x481934",
-      "size": 128,
-      "rebuilt_size": 128,
-      "equal": true,
-      "diffs": 0,
-      "first": []
+      "instruction_operand_va": "0x481beb",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x481bfb",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x481c2e",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x481c3e",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x481c50",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x481cb6",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x481cc6",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x481cd8",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x481d3b",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x481d4b",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x481dc2",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x481dd2",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x481e05",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x481e15",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x481e27",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x481e8d",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x481e9d",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x481eaf",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x481f12",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x481f22",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x481fa1",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x481fb1",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x481fe4",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x481ff4",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x482006",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x48206c",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x48207c",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x48208e",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x4820f1",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x482101",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x482185",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x482195",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x4821c8",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x4821d8",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x4821fa",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x482263",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x482273",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x482295",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x482301",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x482311",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x4823a1",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x4823b1",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x4823e4",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x4823f4",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x482416",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x482485",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x482495",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x4824b7",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x482523",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x482533",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x4825d1",
+      "original_alias": "0x4878a8",
+      "rebuilt_alias": "0x4878e4",
+      "original_global": "0x48acb0",
+      "rebuilt_global": "0x48acb0",
+      "symbol": "ActiveDeviceCount",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x4825e6",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x4828c6",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x4828d6",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x482a06",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x482a16",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x482b46",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x482b56",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x482e21",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x482e31",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x482f69",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x482f79",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x4830b1",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x4830c1",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483147",
+      "original_alias": "0x4879ac",
+      "rebuilt_alias": "0x48799c",
+      "original_global": "0x4968f4",
+      "rebuilt_global": "0x4968f4",
+      "symbol": "FormSensitivity",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483270",
+      "original_alias": "0x4878a8",
+      "rebuilt_alias": "0x4878e4",
+      "original_global": "0x48acb0",
+      "rebuilt_global": "0x48acb0",
+      "symbol": "ActiveDeviceCount",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483284",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483294",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483309",
+      "original_alias": "0x4878a8",
+      "rebuilt_alias": "0x4878e4",
+      "original_global": "0x48acb0",
+      "rebuilt_global": "0x48acb0",
+      "symbol": "ActiveDeviceCount",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x4833c7",
+      "original_alias": "0x4878a8",
+      "rebuilt_alias": "0x4878e4",
+      "original_global": "0x48acb0",
+      "rebuilt_global": "0x48acb0",
+      "symbol": "ActiveDeviceCount",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x4833d7",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x4833e7",
+      "original_alias": "0x4879e4",
+      "rebuilt_alias": "0x4879d4",
+      "original_global": "0x48a710",
+      "rebuilt_global": "0x48a710",
+      "symbol": "DIDevices",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x4833fd",
+      "original_alias": "0x4878a8",
+      "rebuilt_alias": "0x4878e4",
+      "original_global": "0x48acb0",
+      "rebuilt_global": "0x48acb0",
+      "symbol": "ActiveDeviceCount",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483407",
+      "original_alias": "0x4878a8",
+      "rebuilt_alias": "0x4878e4",
+      "original_global": "0x48acb0",
+      "rebuilt_global": "0x48acb0",
+      "symbol": "ActiveDeviceCount",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483907",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x48391a",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483926",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x48393b",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x48397a",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x4839d3",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x4839e6",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x4839f2",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483a07",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483a46",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483a9f",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483ab2",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483abe",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483ad3",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483b12",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483b6b",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483b7e",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483b8a",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483b9f",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483bde",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483c37",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483c4a",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483c56",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483c6b",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483caa",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483d03",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483d16",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483d22",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483d37",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483d76",
+      "original_alias": "0x487bf0",
+      "rebuilt_alias": "0x487be4",
+      "original_global": "0x4968fc",
+      "rebuilt_global": "0x4968fc",
+      "symbol": "FormWait",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483dba",
+      "original_alias": "0x4878a8",
+      "rebuilt_alias": "0x4878e4",
+      "original_global": "0x48acb0",
+      "rebuilt_global": "0x48acb0",
+      "symbol": "ActiveDeviceCount",
+      "same_global": true
+    },
+    {
+      "instruction_operand_va": "0x483dca",
+      "original_alias": "0x487908",
+      "rebuilt_alias": "0x487be8",
+      "original_global": "0x48acb4",
+      "rebuilt_global": "0x48acb4",
+      "symbol": "ActiveDevices",
+      "same_global": true
     }
   ]
 }
