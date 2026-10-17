@@ -56,10 +56,11 @@
       "iat_va": "0x43013c",
       "hint_name_va": "0x43ef2c",
       "thunk_va": "0x42dca0",
-      "thunk_alignment_observed": 16
+      "thunk_alignment_observed": 16,
+      "alignment_owner": "Reproduced by preceding oldnames alias contributions; not an intrinsic import-member requirement."
     }
   },
-  "interpretation": "A historical ordinary import-member variant remains a hypothesis, not an identified dependency. Its hint values, member layout and Rich contribution counts must all fit. Current tracked short imports have matching hints but do not yet reproduce three IAT insertion positions or RtlUnwind thunk alignment.",
+  "interpretation": "No additional local member variant was found. Subsequent ordinary-link proof reproduces RtlUnwind alignment through the two unchanged empty oldnames .text contributions selected after setmode.obj. Therefore a long-form SDK import is no longer needed to explain the code gap. Three IAT insertion positions remain unresolved; matching hints alone do not prove original import-member provenance.",
   "existing_vc6_long_form_probe": {
     "path": "/root/.ai-tmp/nemu-import-long.hd265hht/gs-vc6long.lib",
     "command_option": "/LINK50COMPAT",
@@ -79,5 +80,6 @@
     "_USER1.CAB.unshield.txt",
     "_SYS1.CAB.unshield.txt"
   ],
-  "program_or_library_bytes_modified": false
+  "program_or_library_bytes_modified": false,
+  "alias_alignment_resolution_evidence": "/root/.ai-tmp/nemu-native-import-combined.8zr4trbq/alias-padding-proof.json"
 }

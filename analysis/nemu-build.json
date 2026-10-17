@@ -1964,7 +1964,7 @@
   "build_script": "scripts/build_nemu.py",
   "integration_validation": {
     "command": "python3 scripts/build_nemu.py --work /root/.ai-tmp/nemu-build-investigate.ULGEobKx --ordered-libraries --function-order src/nemu64/application.order --stage-storage",
-    "build_report": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/b3108bca0d8a60e0b615eee3136a399f2ecadd8a255a5179375ddc2d9c1ffdc9/build.json",
+    "build_report": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/bb842ed8647642a47c9c840c326f2cbaa8fc8bfcf184d809f8201e85789ea6d4/build.json",
     "status": "All current real source units compile and link successfully; full executable bytes differ.",
     "application_units_compiled": 21,
     "application_units": [
@@ -1997,15 +1997,15 @@
     "resource_compilation": "passed",
     "link_unresolved_externals": 0,
     "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
-    "rebuilt_sha256": "b3108bca0d8a60e0b615eee3136a399f2ecadd8a255a5179375ddc2d9c1ffdc9",
+    "rebuilt_sha256": "bb842ed8647642a47c9c840c326f2cbaa8fc8bfcf184d809f8201e85789ea6d4",
     "original_file_bytes": 4796416,
     "rebuilt_file_bytes": 4796416,
-    "differing_file_bytes": 184851,
+    "differing_file_bytes": 184736,
     "resource_payloads_equal": true,
     "resource_payload_count": 29,
     "full_executable_match_claimed": false,
-    "immutable_source_and_object_snapshot": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/b3108bca0d8a60e0b615eee3136a399f2ecadd8a255a5179375ddc2d9c1ffdc9",
-    "relocation_diagnostic": "/root/.ai-tmp/nemu-complete-relocs.kvcg2ypy",
+    "immutable_source_and_object_snapshot": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/bb842ed8647642a47c9c840c326f2cbaa8fc8bfcf184d809f8201e85789ea6d4",
+    "relocation_diagnostic": "/root/.ai-tmp/nemu-complete-relocs.isffxrc_",
     "relocation_diagnostic_preserves_all_existing_section_bytes": true,
     "note": "Raw whole-file comparison includes all code, data, resources, padding and metadata. No bytes are restored or patched. Diagnostic /FIXED:NO adds relocation records for independent operand comparison; it is not the intended original output.",
     "function_order": {
@@ -2039,8 +2039,8 @@
       "position_invariance_evidence": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/storage-order-invariance.json"
     },
     "section_differing_bytes": {
-      ".text": 180217,
-      ".rdata": 3263,
+      ".text": 180107,
+      ".rdata": 3258,
       ".data": 1247,
       ".rsrc": 0
     },
@@ -2051,12 +2051,10 @@
       "unique_application_literals_checked": 499,
       "limitation": "Inferred coherent translation-unit grouping preserves reconstructed bodies; original filenames were not retained."
     },
-    "current_text_virtual_size": 190349,
+    "current_text_virtual_size": 190365,
     "original_text_virtual_size": 190477,
     "source_refinements_since_previous_snapshot": [
-      "Branch source-width and volatile-formal reconstruction now matches all144 CPU functions in the owner full-context check.",
-      "SaveFunctionSignatures natural EAX return convention and WritePhysicalWord source refinement are closer complete-span candidates; remaining differences are explicit.",
-      "WinMain close-ROM/load-ROM arm order changes literal discovery while preserving all reconstructed text/data bytes after identified literal relocation."
+      "CPUHostException inferred typed storage view and control-flow reconstruction matches the owner1802-byte code body; full1808-byte central span is being independently checked. Other current bodies and canonical linker inputs were preserved."
     ],
     "data_change_identity_audit": {
       "evidence": "/root/.ai-tmp/nemu-data-refresh.cuq07m2x/report.json",
@@ -2128,7 +2126,7 @@
       },
       "common_storage_observation": "A single archive with ordered already-retained symbol roots preserves original COMMON allocation. Ninety-five separate single-member archives reverse member groups and match only30 of54 observed native BSS addresses.",
       "native_import_chronology_evidence": "/root/.ai-tmp/nemu-native-import-combined.8zr4trbq/forced-report.json",
-      "best_chronology_variant": "timeline-forced-rtl",
+      "best_chronology_variant": "aliases-itoa-first",
       "best_chronology_metrics": {
         "function_order_inversions": 0,
         "observed_crt_bss_exact": 54,
@@ -2138,7 +2136,8 @@
           "0x43ef38"
         ],
         "differing_import_region_bytes": 41,
-        "all_non_lookup_array_bytes_in_import_region_equal": true
+        "all_non_lookup_array_bytes_in_import_region_equal": true,
+        "all_187_native_function_address_deltas_equal": -192
       },
       "remaining_import_insertions": [
         "GetSystemInfo",
@@ -2152,7 +2151,8 @@
         "original_gap_value": "CC",
         "native_short_import_alignment": 2,
         "only_original_caller": "0x42db43 in CRT exsup.obj",
-        "padding_added": false
+        "padding_added": false,
+        "explanation": "The original gap is naturally reproduced by the two unchanged empty oldnames .text contributions immediately before RtlUnwind. The short import itself still requires only2-byte alignment; original16-byte thunk alignment is not an import-member requirement."
       },
       "bounded_negative_checks": [
         "All tracked VC6/VC7 kernel32 RtlUnwind members are short import records; no tracked VC7 ordinary library object defines this thunk.",
@@ -2160,7 +2160,23 @@
         "Win98 linker version override preserves the same result.",
         "DEBUG with PDB:NONE changes debug metadata but leaves the thunk alignment unchanged."
       ],
-      "scope": "Original extraction chronology and import-member form remain under investigation. No CRT/object/PE bytes were modified; no padding, stub, or opaque original program bytes were introduced."
+      "scope": "Original extraction chronology and import-member form remain under investigation. No CRT/object/PE bytes were modified; no padding, stub, or opaque original program bytes were introduced.",
+      "alias_contribution_alignment": {
+        "evidence": "/root/.ai-tmp/nemu-native-import-combined.8zr4trbq/alias-padding-proof.json",
+        "recipe_evidence": "/root/.ai-tmp/nemu-native-import-combined.8zr4trbq/aliases-report.json",
+        "original_setmode_raw_size": 119,
+        "original_setmode_section_alignment": 1,
+        "oldnames_member_count": 2,
+        "oldnames_text_raw_size_each": 0,
+        "oldnames_text_characteristics": "60000020",
+        "inferred_selection_point": "After CRT setmode.obj, before RtlUnwind import thunk and CRT xtoa.obj.",
+        "same_unchanged_member_bytes": true,
+        "original_11_cc_gap_reproduced": true,
+        "native_code_layout_reproduced_up_to_uniform_application_displacement": true,
+        "both_alias_orders_equivalent": true,
+        "rich_counts_preserved": true,
+        "padding_added_or_patched": false
+      }
     }
   }
 }
