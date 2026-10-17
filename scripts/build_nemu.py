@@ -30,10 +30,11 @@ SOURCE = ROOT / 'src/nemu64'
 # Inferred application ordering. Include every additional real source unit
 # after these; this list is not a claim that the original filenames survived.
 APPLICATION_ORDER = [
-    'RSP.cpp', 'Dynarec.cpp', 'CPU.cpp', 'DynarecOpcodes.cpp',
+    'RSP.cpp', 'RSPReciprocal.cpp', 'DynarecTracking.cpp', 'DynarecEmitter.cpp',
+    'Dynarec.cpp', 'CPU.cpp', 'CPUFPU.cpp', 'CPUExecution.cpp', 'DynarecOpcodes.cpp',
     'DynarecMemoryOps.cpp', 'DynarecFPU.cpp', 'CpuControl.cpp', 'Memory.cpp',
     'Plugins.cpp', 'State.cpp', 'WinMain.cpp',
-    'FrontendIni.cpp', 'Rom.cpp', 'RomBrowser.cpp', 'RuntimeSignatures.cpp', 'PIF.cpp',
+    'FrontendIni.cpp', 'Rom.cpp', 'RomBrowser.cpp', 'RuntimeSignatures.cpp', 'CIC.cpp', 'PIF.cpp', 'SaveDevices.cpp',
     'Globals.cpp', 'LegacyData.cpp', 'ByteSwap.c',
 ]
 

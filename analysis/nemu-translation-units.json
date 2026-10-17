@@ -1,7 +1,7 @@
 {
   "original": "master/nemu64.exe",
   "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
-  "status": "Read-only source-organization evidence; all seven additional partitions remain scratch hypotheses.",
+  "status": "Seven meaningful inferred partitions promoted after current-source complete-build verification. Filenames and historical translation-unit boundaries remain non-unique; older scratch probes below are retained as historical evidence.",
   "original_cpp_ltcg_contributions": 27,
   "baseline_cpp_ltcg_contributions": 20,
   "baseline": {
@@ -23,8 +23,10 @@
       "evidence": "Contiguous COP1 dispatch handler family; depends on CPU floating-register interfaces and its own decoding macros.",
       "transform": "Move the existing self-contained COP1 source block, preserving every definition and macro.",
       "scratch_source_sha256": "0991f82fa3aa6ae0ca9ff141e35449f1d812a74ee7781c50fd10f2991ad44ddc",
-      "promoted": false,
-      "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof"
+      "promoted": true,
+      "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof",
+      "promoted_source_sha256": "0991f82fa3aa6ae0ca9ff141e35449f1d812a74ee7781c50fd10f2991ad44ddc",
+      "promotion_basis": "Current-source replay preserves every byte of all four complete program sections and all common public addresses, while all compiler-id/count pairs and the Rich checksum match the original. This establishes compatibility, not unique historical file organization."
     },
     {
       "provisional_name": "DynarecTracking.cpp",
@@ -38,8 +40,10 @@
       "evidence": "Nine adjacent state-change recording functions use UndoData and tracking state, independently of instruction encoding.",
       "transform": "Move TrackWord, TrackDoubleWord, TrackGPR, TrackFPR, TrackRegister64, TrackRegister32, TrackMemory, TrackProgramCounter and TrackInstructionChanges unchanged.",
       "scratch_source_sha256": "f22cd5e7de10a50722f11e308808ad7263edbb79e0f3f15bb6256a656a5e085b",
-      "promoted": false,
-      "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof"
+      "promoted": true,
+      "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof",
+      "promoted_source_sha256": "f22cd5e7de10a50722f11e308808ad7263edbb79e0f3f15bb6256a656a5e085b",
+      "promotion_basis": "Current-source replay preserves every byte of all four complete program sections and all common public addresses, while all compiler-id/count pairs and the Rich checksum match the original. This establishes compatibility, not unique historical file organization."
     },
     {
       "provisional_name": "DynarecEmitter.cpp",
@@ -53,8 +57,10 @@
       "evidence": "Typed intermediate-instruction record construction and wrappers form a contiguous helper family with one AddJumpTarget diagnostic literal.",
       "transform": "Move the independently mapped function definitions in this band, preserving bodies and native-address order. Low-level EmitByte/EmitDword helpers used by AssembleInstructions remain with that caller.",
       "scratch_source_sha256": "978d2e889e10068956eb092c884c461392378692b03cb7eaca66e730e4551949",
-      "promoted": false,
-      "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof"
+      "promoted": true,
+      "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof",
+      "promoted_source_sha256": "978d2e889e10068956eb092c884c461392378692b03cb7eaca66e730e4551949",
+      "promotion_basis": "Current-source replay preserves every byte of all four complete program sections and all common public addresses, while all compiler-id/count pairs and the Rich checksum match the original. This establishes compatibility, not unique historical file organization."
     },
     {
       "provisional_name": "RSPReciprocal.cpp",
@@ -68,8 +74,10 @@
       "evidence": "Reciprocal arithmetic and lookup-table initialization/diagnostics are independent of opcode-field decoding. RSP.h already declares their shared state and interfaces.",
       "transform": "Move RSP_Reciprocal and RSP_InitializeReciprocalTable unchanged; leave instruction decoding in RSP.cpp. Centralized storage placement stays fixed.",
       "scratch_source_sha256": "be7ab260eb368fab0461ea2f67ca6fbdc5cc0c5fbfa6739b1e5e11bee1aec739",
-      "promoted": false,
-      "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof"
+      "promoted": true,
+      "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof",
+      "promoted_source_sha256": "be7ab260eb368fab0461ea2f67ca6fbdc5cc0c5fbfa6739b1e5e11bee1aec739",
+      "promotion_basis": "Current-source replay preserves every byte of all four complete program sections and all common public addresses, while all compiler-id/count pairs and the Rich checksum match the original. This establishes compatibility, not unique historical file organization."
     },
     {
       "provisional_name": "CPUExecution.cpp",
@@ -87,8 +95,10 @@
       "evidence": "The execution loop owns scheduling, peripheral timing, debugger events and its sole inline interrupt helper, distinct from opcode handlers.",
       "transform": "Move ExecuteInterpreter and ReportInvalidOpcode plus their used RaisePendingInterrupt inline helper and netplay import declaration. No function body changes.",
       "scratch_source_sha256": "0e839605e4885f9f2a5ca1d1fdce143ae84b1e55d9cd334f15df910e01e12c19",
-      "promoted": false,
-      "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof"
+      "promoted": true,
+      "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof",
+      "promoted_source_sha256": "0e839605e4885f9f2a5ca1d1fdce143ae84b1e55d9cd334f15df910e01e12c19",
+      "promotion_basis": "Current-source replay preserves every byte of all four complete program sections and all common public addresses, while all compiler-id/count pairs and the Rich checksum match the original. This establishes compatibility, not unique historical file organization."
     },
     {
       "provisional_name": "CIC.cpp",
@@ -102,8 +112,10 @@
       "evidence": "Four challenge/history routines and their private byte-swap helper consume CIC lookup data and a distinct diagnostic file literal.",
       "transform": "Move FindCICInput, SaveCICInput, CICUseTable1 and CIC6105Challenge with the ByteSwap helper unchanged.",
       "scratch_source_sha256": "f5571582d25177b13a49f024a98eaca72a58703460edcd019ff77cb019c45095",
-      "promoted": false,
-      "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof"
+      "promoted": true,
+      "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof",
+      "promoted_source_sha256": "f5571582d25177b13a49f024a98eaca72a58703460edcd019ff77cb019c45095",
+      "promotion_basis": "Current-source replay preserves every byte of all four complete program sections and all common public addresses, while all compiler-id/count pairs and the Rich checksum match the original. This establishes compatibility, not unique historical file organization."
     },
     {
       "provisional_name": "SaveDevices.cpp",
@@ -117,8 +129,10 @@
       "evidence": "Eight file-backed EEPROM, memory-pack, SRAM and input-movie routines are separate from the PIF command decoder.",
       "transform": "Move SaveEEPROM, SaveMemPack, RecordMovieInput, PlayMovieInput, StopMovie, SaveSRAM, WriteSRAM and ReadSRAM unchanged.",
       "scratch_source_sha256": "2dfa457a028ecfc526fd5594b24ed7e27e69af87acfced65366ebe431d5409da",
-      "promoted": false,
-      "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof"
+      "promoted": true,
+      "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof",
+      "promoted_source_sha256": "2dfa457a028ecfc526fd5594b24ed7e27e69af87acfced65366ebe431d5409da",
+      "promotion_basis": "Current-source replay preserves every byte of all four complete program sections and all common public addresses, while all compiler-id/count pairs and the Rich checksum match the original. This establishes compatibility, not unique historical file organization."
     }
   ],
   "probes": [
@@ -531,15 +545,6 @@
       "source_snapshot": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/auxiliary-partitions"
     }
   ],
-  "conclusions": [
-    "Three core splits produce 23 C++ LTCG records; all seven produce 27. Matching that count does not establish the original partitions or filenames.",
-    "Both combined experiments preserve the entire readonly, writable and resource sections byte for byte, and all 1,381 common code/data public addresses.",
-    "Tracking alone and emitter alone preserve every code byte. COP1 alone or both tracking/emitter together change 12 code bytes in WritePhysicalWord. All seven splits change 8 bytes in that same previously unmatched function.",
-    "The changed bytes are operand evaluation/register choices for additions; no moved addresses or relocations explain them. This demonstrates cross-unit LTCG context sensitivity and does not prove an improved original-image match.",
-    "All other native function bodies, including Branch, ResetCPU and CompareBrowserItems, remain identical to their pinned baseline bodies. No claim is made about later source revisions.",
-    "All literal/asset/float placements stay unchanged; the generated 4294967296.0f constant remains at 43E04C instead of target 43E01C.",
-    "No partition is promoted solely to reproduce the Rich contribution count. Original file organization remains non-unique."
-  ],
   "batch_compilation_control": {
     "proof": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/batch-invariance.json",
     "commands": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/batch-commands.json",
@@ -551,10 +556,11 @@
     "result": "Stock /INCLUDE:__real@4f800000 fails with unresolved external before LTCG; no output or workaround promoted."
   },
   "limitations": [
-    "Semantic code bands are independently observed responsibilities, not recovered compiler contribution boundaries.",
-    "Original Rich count constrains the number of compilation records but does not recover their names, file contents or source order.",
-    "Current centralized initialized/zero-storage units themselves are explicit inferred organization.",
-    "Scratch probes use a frozen baseline predating subsequent matched function refinements; newer source must be restaged and compared before any promotion."
+    "Semantic code bands and a compatible Rich contribution count do not uniquely recover source filenames, source order or historical translation-unit boundaries.",
+    "Current centralized initialized/zero-storage units remain explicitly inferred organization.",
+    "Rich compiler-id/count pairs and checksum match, but record order remains different. Whole-executable equality is not achieved.",
+    "WritePhysicalWord retains eleven normalized opcode differences and two explicitly audited reversed FlashRamAddress/RDRAM operand identities. The whole-function comparer skips identities while its instruction shape differs.",
+    "Older scratch probes above predate subsequent source refinements and must not be substituted for the current-source replay."
   ],
   "chronological_import_control": {
     "report": "/root/.ai-tmp/nemu-import-tu-count.k64lyv1a/report.json",
@@ -566,5 +572,1233 @@
     "method": "Relink the existing seven domain splits (27 LTCG C++ contributions) with the unchanged alias/native archive chronology recipe. No source edits or recompilation; use the same frozen earlier source generation as the20-contribution chronology control.",
     "result": "The entire0x3e118..0x3ef38 import descriptor/name region and all IAT identities/positions are byte-identical to the20-contribution control. Both retain115/152 exact IAT slots and41 differing import-region bytes. Thus this meaningful20-to27 partition change does not resolve the chronology recipe's remaining import ordering.",
     "limits": "Negative source-organization control on a historical frozen source snapshot; not whole-image equality or recovered original translation-unit boundaries."
-  }
+  },
+  "historical_probe_conclusions": [
+    "Three core splits produce 23 C++ LTCG records; all seven produce 27. Matching that count does not establish the original partitions or filenames.",
+    "Both combined experiments preserve the entire readonly, writable and resource sections byte for byte, and all 1,381 common code/data public addresses.",
+    "Tracking alone and emitter alone preserve every code byte. COP1 alone or both tracking/emitter together change 12 code bytes in WritePhysicalWord. All seven splits change 8 bytes in that same previously unmatched function.",
+    "The changed bytes are operand evaluation/register choices for additions; no moved addresses or relocations explain them. This demonstrates cross-unit LTCG context sensitivity and does not prove an improved original-image match.",
+    "All other native function bodies, including Branch, ResetCPU and CompareBrowserItems, remain identical to their pinned baseline bodies. No claim is made about later source revisions.",
+    "All literal/asset/float placements stay unchanged; the generated 4294967296.0f constant remains at 43E04C instead of target 43E01C.",
+    "No partition is promoted solely to reproduce the Rich contribution count. Original file organization remains non-unique."
+  ],
+  "current_source_replay": {
+    "status": "promoted_after_parent_review",
+    "scratch_report": "/root/.ai-tmp/nemu-tu-replay.5cmhtxeq/report.json",
+    "scratch_report_sha256": "8d59912d03635f668f464e891942740538dd8fe69a979079e64eea02f002334e",
+    "preserved_source_generator": "/root/.ai-tmp/nemu-tu-replay.5cmhtxeq/replay.py",
+    "preserved_source_generator_sha256": "c23cd0ef4674c9555a58579f23e41ab428c64e8e035b6eb70a7d59b90f4dbe6e",
+    "source_definition_check": "392 complete known function definitions occur exactly once unchanged after partitioning; every changed live source/build-order input matches the compiled split snapshot SHA-256.",
+    "source_baseline_commits": [
+      "125e905 (Branch)",
+      "a156186 (RSP VADD/VSUB/VSUT)",
+      "3b92b7e (SaveFunctionSignatures; source copied before its commit, with identical recorded SHA-256)"
+    ],
+    "rebuild_command": [
+      "python3",
+      "scripts/build_nemu.py",
+      "--work",
+      "<new directory under ~/.ai-tmp>",
+      "--stage-storage",
+      "--chronological-libraries",
+      "--function-order",
+      "src/nemu64/application.order"
+    ],
+    "reproducibility": "Exact control and split commands, source snapshots, tool recipes, compiler inputs and unforced link response files are preserved under each recorded build/artifact directory. This normal rebuild command reconstructs the promoted split. Link timestamps are not restored or patched.",
+    "evidence": {
+      "kind": "scratch_current_source_translation_unit_replay",
+      "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+      "status": "review_only_not_promoted",
+      "source_snapshot": "b1fcec4f8d43fb74318f56313bd0e5030ea48239",
+      "source_snapshot_pending_change": "RuntimeSignatures.cpp SaveFunctionSignatures source later committed unchanged as3b92b7e",
+      "source_identity_proof": "/root/.ai-tmp/nemu-tu-replay.5cmhtxeq/partition-proof.json",
+      "source_identity_proof_sha256": "b2e35a019b077f7b448d91e0e80066a528c9c9d5636c45600466998a9e247d41",
+      "unchanged_complete_definitions": 392,
+      "patch": "/root/.ai-tmp/nemu-tu-replay.5cmhtxeq/seven-partitions.patch",
+      "patch_sha256": "6a056c0f99f8321b7fd6ef7e76da3a55dde10d3c10b040a585b952cdde89bd11",
+      "patch_applies_to_current_checkout": true,
+      "builds": {
+        "control": {
+          "paths": {
+            "build": "/root/.ai-tmp/nemu-tu-replay.5cmhtxeq/control-build",
+            "repo": "/root/.ai-tmp/nemu-tu-replay.5cmhtxeq/control-repo",
+            "diagnostic": "/root/.ai-tmp/nemu-complete-relocs.wn1a657s",
+            "build_command": [
+              "/usr/bin/python3",
+              "/root/.ai-tmp/nemu-tu-replay.5cmhtxeq/control-repo/scripts/build_nemu.py",
+              "--work",
+              "/root/.ai-tmp/nemu-tu-replay.5cmhtxeq/control-build",
+              "--stage-storage",
+              "--chronological-libraries",
+              "--function-order",
+              "/root/.ai-tmp/nemu-tu-replay.5cmhtxeq/control-repo/src/nemu64/application.order"
+            ]
+          },
+          "build_report": "/root/.ai-tmp/nemu-tu-replay.5cmhtxeq/control-build/build.json",
+          "build_report_sha256": "a17ba24bc33eb451638d4b57544b0e1043128600b7fb22bbba58108f731aef82",
+          "image_sha256": "733ba82fa71061fa05bc5288973d1d105050d136bb220dc183934e7ff026fe1d",
+          "image_bytes": 4796416,
+          "rich": {
+            "offset": 128,
+            "xor_key": "83c07c26",
+            "checksum_valid": true,
+            "records": [
+              {
+                "comp_id": "001d24fa",
+                "product_id": 29,
+                "build": 9466,
+                "count": 2
+              },
+              {
+                "comp_id": "002723ca",
+                "product_id": 39,
+                "build": 9162,
+                "count": 2
+              },
+              {
+                "comp_id": "004024fa",
+                "product_id": 64,
+                "build": 9466,
+                "count": 20
+              },
+              {
+                "comp_id": "000420ff",
+                "product_id": 4,
+                "build": 8447,
+                "count": 2
+              },
+              {
+                "comp_id": "00041fe8",
+                "product_id": 4,
+                "build": 8168,
+                "count": 2
+              },
+              {
+                "comp_id": "001923fa",
+                "product_id": 25,
+                "build": 9210,
+                "count": 15
+              },
+              {
+                "comp_id": "00010000",
+                "product_id": 1,
+                "build": 0,
+                "count": 153
+              },
+              {
+                "comp_id": "001c24fa",
+                "product_id": 28,
+                "build": 9466,
+                "count": 93
+              },
+              {
+                "comp_id": "002c24fa",
+                "product_id": 44,
+                "build": 9466,
+                "count": 20
+              },
+              {
+                "comp_id": "000a1fe8",
+                "product_id": 10,
+                "build": 8168,
+                "count": 14
+              },
+              {
+                "comp_id": "004524fa",
+                "product_id": 69,
+                "build": 9466,
+                "count": 1
+              },
+              {
+                "comp_id": "003d24fa",
+                "product_id": 61,
+                "build": 9466,
+                "count": 1
+              }
+            ]
+          },
+          "application_units": [
+            "RSP.cpp",
+            "Dynarec.cpp",
+            "CPU.cpp",
+            "DynarecOpcodes.cpp",
+            "DynarecMemoryOps.cpp",
+            "DynarecFPU.cpp",
+            "CpuControl.cpp",
+            "Memory.cpp",
+            "Plugins.cpp",
+            "State.cpp",
+            "WinMain.cpp",
+            "FrontendIni.cpp",
+            "Rom.cpp",
+            "RomBrowser.cpp",
+            "NemuInitializedStorage.cpp",
+            "RuntimeSignatures.cpp",
+            "PIF.cpp",
+            "Globals.cpp",
+            "LegacyData.cpp",
+            "ByteSwap.c",
+            "NemuZeroStorage.cpp"
+          ],
+          "native_import_layout": {
+            "executable_sha256": "733ba82fa71061fa05bc5288973d1d105050d136bb220dc183934e7ff026fe1d",
+            "native_functions": {
+              "expected": 187,
+              "present": 187,
+              "missing_or_ambiguous": [],
+              "address_delta_counts": {
+                "0": 187
+              },
+              "uniform_displacement": true,
+              "order_inversions": 0,
+              "qualification": "Placement only; independent library-body evidence is in the inventory."
+            },
+            "observed_native_storage": {
+              "observations": 72,
+              "map_symbols": 54,
+              "exact": 54,
+              "mismatches": [],
+              "unavailable": [
+                "_FloatFormat",
+                "?_pgmname@?1??_setargv@@9@9",
+                "?f_use@?1??__crtGetEnvironmentStringsA@@9@9",
+                "?f_use@?1??__crtGetStringTypeA@@9@9",
+                "_fSystemSet",
+                "?pfnMessageBoxA@?1??__crtMessageBoxA@@9@9",
+                "?pfnGetActiveWindow@?1??__crtMessageBoxA@@9@9",
+                "?pfnGetLastActivePopup@?1??__crtMessageBoxA@@9@9",
+                "?pfnGetProcessWindowStation@?1??__crtMessageBoxA@@9@9",
+                "?pfnGetUserObjectInformationA@?1??__crtMessageBoxA@@9@9",
+                "_user_handler",
+                "?f_use@?1??__crtLCMapStringA@@9@9",
+                "_g_pflt",
+                "_g_fmt",
+                "_g_magnitude",
+                "_g_round_expansion",
+                "_fos",
+                "_ret"
+              ],
+              "qualification": "Library-operand observations, not independently proved original identities; includes initialized storage and BSS."
+            },
+            "imports": {
+              "expected_count": 152,
+              "actual_count": 152,
+              "identity_sets_equal": true,
+              "exact_iat_slots": 115,
+              "names_and_slots_equal": false,
+              "relative_order_excluding_recorded_insertions_equal": true,
+              "relative_order_count": 148,
+              "excluded_insertion_positions": [
+                {
+                  "dll": "kernel32.dll",
+                  "name": "GetOEMCP"
+                },
+                {
+                  "dll": "kernel32.dll",
+                  "name": "GetSystemInfo"
+                },
+                {
+                  "dll": "kernel32.dll",
+                  "name": "VirtualQuery"
+                },
+                {
+                  "dll": "kernel32.dll",
+                  "name": "RtlUnwind"
+                }
+              ],
+              "ranges": [
+                {
+                  "name": "import_descriptors_and_lookup_arrays",
+                  "rva_start": 254232,
+                  "rva_end": 255092,
+                  "bytes": 860,
+                  "equal": false,
+                  "differing_bytes": 41
+                },
+                {
+                  "name": "complete_hint_and_dll_name_pool",
+                  "rva_start": 255092,
+                  "rva_end": 257848,
+                  "bytes": 2756,
+                  "equal": true,
+                  "differing_bytes": 0
+                }
+              ]
+            },
+            "alias_alignment": {
+              "original_start": 4381845,
+              "original_end": 4381856,
+              "rebuilt_start": 4381845,
+              "rebuilt_end": 4381856,
+              "bytes_equal": true,
+              "original_bytes": 11,
+              "rebuilt_bytes": 11
+            },
+            "rich_counts": {
+              "original": {
+                "002723ca": 2,
+                "001d24fa": 2,
+                "004024fa": 20,
+                "001c24fa": 93,
+                "000420ff": 2,
+                "000a1fe8": 14,
+                "00041fe8": 2,
+                "001923fa": 15,
+                "00010000": 153,
+                "002c24fa": 27,
+                "004524fa": 1,
+                "003d24fa": 1
+              },
+              "rebuilt": {
+                "001d24fa": 2,
+                "002723ca": 2,
+                "004024fa": 20,
+                "000420ff": 2,
+                "00041fe8": 2,
+                "001923fa": 15,
+                "00010000": 153,
+                "001c24fa": 93,
+                "002c24fa": 20,
+                "000a1fe8": 14,
+                "004524fa": 1,
+                "003d24fa": 1
+              }
+            }
+          },
+          "function_comparison": {
+            "requested_functions": 648,
+            "located_functions": 648,
+            "unique_instruction_and_known_target_matches": 635,
+            "unresolved_targets": 655,
+            "unverified_targets": 3270,
+            "invalid_link_operands": 0,
+            "target_mismatches": 0
+          },
+          "function_comparison_report": "/root/.ai-tmp/nemu-tu-replay.5cmhtxeq/control-verification/comparison.json",
+          "function_comparison_sha256": "5acda1f5f2b5bcb2f02046b403152ad199b925918572bb34d8dba508e0e3632a",
+          "global_layout": {
+            "groups": {
+              ".data initialized": {
+                "objects": 55,
+                "exact_addresses": 55
+              },
+              ".data zero": {
+                "objects": 263,
+                "exact_addresses": 263
+              }
+            },
+            "missing_map_symbols": [
+              "BootRspImem",
+              "DefaultMemPack"
+            ]
+          },
+          "readonly": {
+            "summary": {
+              "literal_symbols": 524,
+              "uniquely_located": 499,
+              "ambiguous": 25,
+              "absent": 0
+            },
+            "exact_unique_literal_positions": 499,
+            "exact_application_literal_positions": 459,
+            "other_objects": [
+              {
+                "name": "BootRspImem",
+                "original_va": "0x4348e0",
+                "size": 4096,
+                "complete_byte_matches": [
+                  "0x4348e0"
+                ]
+              },
+              {
+                "name": "DefaultMemPack",
+                "original_va": "0x4358e0",
+                "size": 32768,
+                "complete_byte_matches": [
+                  "0x4358e0"
+                ]
+              },
+              {
+                "name": "__real@4f800000",
+                "original_va": "0x43e01c",
+                "size": 4,
+                "candidate_va": "0x43e04c",
+                "delta": 48,
+                "complete_bytes_equal": true
+              },
+              {
+                "name": "__real@3fe0000000000000",
+                "original_va": "0x43e020",
+                "size": 8,
+                "candidate_va": "0x43e020",
+                "delta": 0,
+                "complete_bytes_equal": true
+              },
+              {
+                "name": "__real@3f847ae147ae147b",
+                "original_va": "0x43e028",
+                "size": 8,
+                "candidate_va": "0x43e028",
+                "delta": 0,
+                "complete_bytes_equal": true
+              },
+              {
+                "name": "__real@41f0000000000000",
+                "original_va": "0x43e030",
+                "size": 8,
+                "candidate_va": "0x43e030",
+                "delta": 0,
+                "complete_bytes_equal": true
+              },
+              {
+                "name": "__real@3f7ae148",
+                "original_va": "0x43e038",
+                "size": 4,
+                "candidate_va": "0x43e038",
+                "delta": 0,
+                "complete_bytes_equal": true
+              },
+              {
+                "name": "__real@48000000",
+                "original_va": "0x43e03c",
+                "size": 4,
+                "candidate_va": "0x43e03c",
+                "delta": 0,
+                "complete_bytes_equal": true
+              },
+              {
+                "name": "__real@44000000",
+                "original_va": "0x43e040",
+                "size": 4,
+                "candidate_va": "0x43e040",
+                "delta": 0,
+                "complete_bytes_equal": true
+              },
+              {
+                "name": "__real@41400000",
+                "original_va": "0x43e044",
+                "size": 4,
+                "candidate_va": "0x43e044",
+                "delta": 0,
+                "complete_bytes_equal": true
+              },
+              {
+                "name": "__real@3a83126f",
+                "original_va": "0x43e048",
+                "size": 4,
+                "candidate_va": "0x43e048",
+                "delta": 0,
+                "complete_bytes_equal": true
+              },
+              {
+                "name": "__real@41f80000",
+                "original_va": "0x43e084",
+                "size": 4,
+                "candidate_va": "0x43e084",
+                "delta": 0,
+                "complete_bytes_equal": true
+              },
+              {
+                "name": "__real@447a0000",
+                "original_va": "0x43e088",
+                "size": 4,
+                "candidate_va": "0x43e088",
+                "delta": 0,
+                "complete_bytes_equal": true
+              }
+            ]
+          },
+          "write_word_summary": {
+            "original_va": 4291696,
+            "original_size": 6368,
+            "rebuilt_va": 4291696,
+            "rebuilt_size": 6368,
+            "raw_differing_bytes": 28,
+            "normalized_differing_bytes": 11,
+            "target_comparison_performed": false,
+            "not_compared_target_fields": 386
+          },
+          "whole_file_equal": false,
+          "whole_file_differing_bytes": 34801
+        },
+        "split": {
+          "paths": {
+            "build": "/root/.ai-tmp/nemu-tu-replay.5cmhtxeq/split-build",
+            "repo": "/root/.ai-tmp/nemu-tu-replay.5cmhtxeq/split-repo",
+            "diagnostic": "/root/.ai-tmp/nemu-complete-relocs.ufk06ns2",
+            "build_command": [
+              "/usr/bin/python3",
+              "/root/.ai-tmp/nemu-tu-replay.5cmhtxeq/split-repo/scripts/build_nemu.py",
+              "--work",
+              "/root/.ai-tmp/nemu-tu-replay.5cmhtxeq/split-build",
+              "--stage-storage",
+              "--chronological-libraries",
+              "--function-order",
+              "/root/.ai-tmp/nemu-tu-replay.5cmhtxeq/split-repo/src/nemu64/application.order"
+            ]
+          },
+          "build_report": "/root/.ai-tmp/nemu-tu-replay.5cmhtxeq/split-build/build.json",
+          "build_report_sha256": "164a1781567a6d16d204925af2c34f6b7569a32e2a2977d416d4712f2d8ac2f4",
+          "image_sha256": "7bc21cd774853d489bdf361b4f1aeb41f85655108baa891f6ec60e72fc12f585",
+          "image_bytes": 4796416,
+          "rich": {
+            "offset": 128,
+            "xor_key": "0421da8b",
+            "checksum_valid": true,
+            "records": [
+              {
+                "comp_id": "001d24fa",
+                "product_id": 29,
+                "build": 9466,
+                "count": 2
+              },
+              {
+                "comp_id": "002723ca",
+                "product_id": 39,
+                "build": 9162,
+                "count": 2
+              },
+              {
+                "comp_id": "004024fa",
+                "product_id": 64,
+                "build": 9466,
+                "count": 20
+              },
+              {
+                "comp_id": "000420ff",
+                "product_id": 4,
+                "build": 8447,
+                "count": 2
+              },
+              {
+                "comp_id": "00041fe8",
+                "product_id": 4,
+                "build": 8168,
+                "count": 2
+              },
+              {
+                "comp_id": "001923fa",
+                "product_id": 25,
+                "build": 9210,
+                "count": 15
+              },
+              {
+                "comp_id": "00010000",
+                "product_id": 1,
+                "build": 0,
+                "count": 153
+              },
+              {
+                "comp_id": "001c24fa",
+                "product_id": 28,
+                "build": 9466,
+                "count": 93
+              },
+              {
+                "comp_id": "002c24fa",
+                "product_id": 44,
+                "build": 9466,
+                "count": 27
+              },
+              {
+                "comp_id": "000a1fe8",
+                "product_id": 10,
+                "build": 8168,
+                "count": 14
+              },
+              {
+                "comp_id": "004524fa",
+                "product_id": 69,
+                "build": 9466,
+                "count": 1
+              },
+              {
+                "comp_id": "003d24fa",
+                "product_id": 61,
+                "build": 9466,
+                "count": 1
+              }
+            ]
+          },
+          "application_units": [
+            "RSP.cpp",
+            "RSPReciprocal.cpp",
+            "DynarecTracking.cpp",
+            "DynarecEmitter.cpp",
+            "Dynarec.cpp",
+            "CPU.cpp",
+            "CPUFPU.cpp",
+            "CPUExecution.cpp",
+            "DynarecOpcodes.cpp",
+            "DynarecMemoryOps.cpp",
+            "DynarecFPU.cpp",
+            "CpuControl.cpp",
+            "Memory.cpp",
+            "Plugins.cpp",
+            "State.cpp",
+            "WinMain.cpp",
+            "FrontendIni.cpp",
+            "Rom.cpp",
+            "RomBrowser.cpp",
+            "NemuInitializedStorage.cpp",
+            "RuntimeSignatures.cpp",
+            "CIC.cpp",
+            "PIF.cpp",
+            "SaveDevices.cpp",
+            "Globals.cpp",
+            "LegacyData.cpp",
+            "ByteSwap.c",
+            "NemuZeroStorage.cpp"
+          ],
+          "native_import_layout": {
+            "executable_sha256": "7bc21cd774853d489bdf361b4f1aeb41f85655108baa891f6ec60e72fc12f585",
+            "native_functions": {
+              "expected": 187,
+              "present": 187,
+              "missing_or_ambiguous": [],
+              "address_delta_counts": {
+                "0": 187
+              },
+              "uniform_displacement": true,
+              "order_inversions": 0,
+              "qualification": "Placement only; independent library-body evidence is in the inventory."
+            },
+            "observed_native_storage": {
+              "observations": 72,
+              "map_symbols": 54,
+              "exact": 54,
+              "mismatches": [],
+              "unavailable": [
+                "_FloatFormat",
+                "?_pgmname@?1??_setargv@@9@9",
+                "?f_use@?1??__crtGetEnvironmentStringsA@@9@9",
+                "?f_use@?1??__crtGetStringTypeA@@9@9",
+                "_fSystemSet",
+                "?pfnMessageBoxA@?1??__crtMessageBoxA@@9@9",
+                "?pfnGetActiveWindow@?1??__crtMessageBoxA@@9@9",
+                "?pfnGetLastActivePopup@?1??__crtMessageBoxA@@9@9",
+                "?pfnGetProcessWindowStation@?1??__crtMessageBoxA@@9@9",
+                "?pfnGetUserObjectInformationA@?1??__crtMessageBoxA@@9@9",
+                "_user_handler",
+                "?f_use@?1??__crtLCMapStringA@@9@9",
+                "_g_pflt",
+                "_g_fmt",
+                "_g_magnitude",
+                "_g_round_expansion",
+                "_fos",
+                "_ret"
+              ],
+              "qualification": "Library-operand observations, not independently proved original identities; includes initialized storage and BSS."
+            },
+            "imports": {
+              "expected_count": 152,
+              "actual_count": 152,
+              "identity_sets_equal": true,
+              "exact_iat_slots": 115,
+              "names_and_slots_equal": false,
+              "relative_order_excluding_recorded_insertions_equal": true,
+              "relative_order_count": 148,
+              "excluded_insertion_positions": [
+                {
+                  "dll": "kernel32.dll",
+                  "name": "GetOEMCP"
+                },
+                {
+                  "dll": "kernel32.dll",
+                  "name": "GetSystemInfo"
+                },
+                {
+                  "dll": "kernel32.dll",
+                  "name": "VirtualQuery"
+                },
+                {
+                  "dll": "kernel32.dll",
+                  "name": "RtlUnwind"
+                }
+              ],
+              "ranges": [
+                {
+                  "name": "import_descriptors_and_lookup_arrays",
+                  "rva_start": 254232,
+                  "rva_end": 255092,
+                  "bytes": 860,
+                  "equal": false,
+                  "differing_bytes": 41
+                },
+                {
+                  "name": "complete_hint_and_dll_name_pool",
+                  "rva_start": 255092,
+                  "rva_end": 257848,
+                  "bytes": 2756,
+                  "equal": true,
+                  "differing_bytes": 0
+                }
+              ]
+            },
+            "alias_alignment": {
+              "original_start": 4381845,
+              "original_end": 4381856,
+              "rebuilt_start": 4381845,
+              "rebuilt_end": 4381856,
+              "bytes_equal": true,
+              "original_bytes": 11,
+              "rebuilt_bytes": 11
+            },
+            "rich_counts": {
+              "original": {
+                "002723ca": 2,
+                "001d24fa": 2,
+                "004024fa": 20,
+                "001c24fa": 93,
+                "000420ff": 2,
+                "000a1fe8": 14,
+                "00041fe8": 2,
+                "001923fa": 15,
+                "00010000": 153,
+                "002c24fa": 27,
+                "004524fa": 1,
+                "003d24fa": 1
+              },
+              "rebuilt": {
+                "001d24fa": 2,
+                "002723ca": 2,
+                "004024fa": 20,
+                "000420ff": 2,
+                "00041fe8": 2,
+                "001923fa": 15,
+                "00010000": 153,
+                "001c24fa": 93,
+                "002c24fa": 27,
+                "000a1fe8": 14,
+                "004524fa": 1,
+                "003d24fa": 1
+              }
+            }
+          },
+          "function_comparison": {
+            "requested_functions": 648,
+            "located_functions": 648,
+            "unique_instruction_and_known_target_matches": 635,
+            "unresolved_targets": 655,
+            "unverified_targets": 3270,
+            "invalid_link_operands": 0,
+            "target_mismatches": 0
+          },
+          "function_comparison_report": "/root/.ai-tmp/nemu-tu-replay.5cmhtxeq/split-verification/comparison.json",
+          "function_comparison_sha256": "95fd175321fbd040f7d6bab482054dbc2f938cd372618edd8f05d29cb3439ac7",
+          "global_layout": {
+            "groups": {
+              ".data initialized": {
+                "objects": 55,
+                "exact_addresses": 55
+              },
+              ".data zero": {
+                "objects": 263,
+                "exact_addresses": 263
+              }
+            },
+            "missing_map_symbols": [
+              "BootRspImem",
+              "DefaultMemPack"
+            ]
+          },
+          "readonly": {
+            "summary": {
+              "literal_symbols": 524,
+              "uniquely_located": 499,
+              "ambiguous": 25,
+              "absent": 0
+            },
+            "exact_unique_literal_positions": 499,
+            "exact_application_literal_positions": 459,
+            "other_objects": [
+              {
+                "name": "BootRspImem",
+                "original_va": "0x4348e0",
+                "size": 4096,
+                "complete_byte_matches": [
+                  "0x4348e0"
+                ]
+              },
+              {
+                "name": "DefaultMemPack",
+                "original_va": "0x4358e0",
+                "size": 32768,
+                "complete_byte_matches": [
+                  "0x4358e0"
+                ]
+              },
+              {
+                "name": "__real@4f800000",
+                "original_va": "0x43e01c",
+                "size": 4,
+                "candidate_va": "0x43e04c",
+                "delta": 48,
+                "complete_bytes_equal": true
+              },
+              {
+                "name": "__real@3fe0000000000000",
+                "original_va": "0x43e020",
+                "size": 8,
+                "candidate_va": "0x43e020",
+                "delta": 0,
+                "complete_bytes_equal": true
+              },
+              {
+                "name": "__real@3f847ae147ae147b",
+                "original_va": "0x43e028",
+                "size": 8,
+                "candidate_va": "0x43e028",
+                "delta": 0,
+                "complete_bytes_equal": true
+              },
+              {
+                "name": "__real@41f0000000000000",
+                "original_va": "0x43e030",
+                "size": 8,
+                "candidate_va": "0x43e030",
+                "delta": 0,
+                "complete_bytes_equal": true
+              },
+              {
+                "name": "__real@3f7ae148",
+                "original_va": "0x43e038",
+                "size": 4,
+                "candidate_va": "0x43e038",
+                "delta": 0,
+                "complete_bytes_equal": true
+              },
+              {
+                "name": "__real@48000000",
+                "original_va": "0x43e03c",
+                "size": 4,
+                "candidate_va": "0x43e03c",
+                "delta": 0,
+                "complete_bytes_equal": true
+              },
+              {
+                "name": "__real@44000000",
+                "original_va": "0x43e040",
+                "size": 4,
+                "candidate_va": "0x43e040",
+                "delta": 0,
+                "complete_bytes_equal": true
+              },
+              {
+                "name": "__real@41400000",
+                "original_va": "0x43e044",
+                "size": 4,
+                "candidate_va": "0x43e044",
+                "delta": 0,
+                "complete_bytes_equal": true
+              },
+              {
+                "name": "__real@3a83126f",
+                "original_va": "0x43e048",
+                "size": 4,
+                "candidate_va": "0x43e048",
+                "delta": 0,
+                "complete_bytes_equal": true
+              },
+              {
+                "name": "__real@41f80000",
+                "original_va": "0x43e084",
+                "size": 4,
+                "candidate_va": "0x43e084",
+                "delta": 0,
+                "complete_bytes_equal": true
+              },
+              {
+                "name": "__real@447a0000",
+                "original_va": "0x43e088",
+                "size": 4,
+                "candidate_va": "0x43e088",
+                "delta": 0,
+                "complete_bytes_equal": true
+              }
+            ]
+          },
+          "write_word_summary": {
+            "original_va": 4291696,
+            "original_size": 6368,
+            "rebuilt_va": 4291696,
+            "rebuilt_size": 6368,
+            "raw_differing_bytes": 28,
+            "normalized_differing_bytes": 11,
+            "target_comparison_performed": false,
+            "not_compared_target_fields": 386
+          },
+          "whole_file_equal": false,
+          "whole_file_differing_bytes": 34716
+        }
+      },
+      "control_split_sections": [
+        {
+          "name": ".text",
+          "layout_equal": true,
+          "compared_bytes": 192512,
+          "raw_bytes_equal": true,
+          "differing_bytes": 0,
+          "sha256": "f30865681b0947afb00594a0fc7eabbea58af50e744c80679cf3285fb43a4d49"
+        },
+        {
+          "name": ".rdata",
+          "layout_equal": true,
+          "compared_bytes": 61440,
+          "raw_bytes_equal": true,
+          "differing_bytes": 0,
+          "sha256": "b400f47013f238451cd486c400fa31d8e7dcd5df0fcc7e535c700befee99e1eb"
+        },
+        {
+          "name": ".data",
+          "layout_equal": true,
+          "compared_bytes": 241664,
+          "raw_bytes_equal": true,
+          "differing_bytes": 0,
+          "sha256": "b193410f91fe73d48e73dcd76907f935317dbd7d7a9fb86015087578752792db"
+        },
+        {
+          "name": ".rsrc",
+          "layout_equal": true,
+          "compared_bytes": 4296704,
+          "raw_bytes_equal": true,
+          "differing_bytes": 0,
+          "sha256": "6b75135c0e7c12a98c1bd1d23fd4cc946f17ecac8411156b0b94247960d8aa58"
+        }
+      ],
+      "layout_invariance": {
+        "scope": "Reconstructed-build layout invariance; no original-image equality claim.",
+        "baseline": "/root/.ai-tmp/nemu-complete-relocs.wn1a657s/nemu64.exe",
+        "candidate": "/root/.ai-tmp/nemu-complete-relocs.ufk06ns2/nemu64.exe",
+        "baseline_sha256": "da945d9318b246a579a285ee29088771d4e6fc1a7c37d9a4121fe4a0d1a0b152",
+        "candidate_sha256": "f245a64a054705fcbbfadf40ccdf8530d778dd760ac62264e3bfcd251081a535",
+        "fixed_code_and_data_publics": 1381,
+        "readonly_anchors": [],
+        "moved_publics_not_used_for_normalization": [],
+        "sections": [
+          {
+            "name": ".text",
+            "compared_raw_bytes": 192512,
+            "relocated_readonly_references": [],
+            "residual_different_bytes": 0,
+            "first_difference_rvas": []
+          },
+          {
+            "name": ".data",
+            "compared_raw_bytes": 241664,
+            "relocated_readonly_references": [],
+            "residual_different_bytes": 0,
+            "first_difference_rvas": []
+          }
+        ],
+        "passed": true
+      },
+      "rich_comparison": {
+        "all_compiler_ids_and_counts_equal": true,
+        "record_order_equal": false,
+        "original": {
+          "offset": 128,
+          "xor_key": "0421da8b",
+          "checksum_valid": true,
+          "records": [
+            {
+              "comp_id": "002723ca",
+              "product_id": 39,
+              "build": 9162,
+              "count": 2
+            },
+            {
+              "comp_id": "001d24fa",
+              "product_id": 29,
+              "build": 9466,
+              "count": 2
+            },
+            {
+              "comp_id": "004024fa",
+              "product_id": 64,
+              "build": 9466,
+              "count": 20
+            },
+            {
+              "comp_id": "001c24fa",
+              "product_id": 28,
+              "build": 9466,
+              "count": 93
+            },
+            {
+              "comp_id": "000420ff",
+              "product_id": 4,
+              "build": 8447,
+              "count": 2
+            },
+            {
+              "comp_id": "000a1fe8",
+              "product_id": 10,
+              "build": 8168,
+              "count": 14
+            },
+            {
+              "comp_id": "00041fe8",
+              "product_id": 4,
+              "build": 8168,
+              "count": 2
+            },
+            {
+              "comp_id": "001923fa",
+              "product_id": 25,
+              "build": 9210,
+              "count": 15
+            },
+            {
+              "comp_id": "00010000",
+              "product_id": 1,
+              "build": 0,
+              "count": 153
+            },
+            {
+              "comp_id": "002c24fa",
+              "product_id": 44,
+              "build": 9466,
+              "count": 27
+            },
+            {
+              "comp_id": "004524fa",
+              "product_id": 69,
+              "build": 9466,
+              "count": 1
+            },
+            {
+              "comp_id": "003d24fa",
+              "product_id": 61,
+              "build": 9466,
+              "count": 1
+            }
+          ]
+        },
+        "rebuilt": {
+          "offset": 128,
+          "xor_key": "0421da8b",
+          "checksum_valid": true,
+          "records": [
+            {
+              "comp_id": "001d24fa",
+              "product_id": 29,
+              "build": 9466,
+              "count": 2
+            },
+            {
+              "comp_id": "002723ca",
+              "product_id": 39,
+              "build": 9162,
+              "count": 2
+            },
+            {
+              "comp_id": "004024fa",
+              "product_id": 64,
+              "build": 9466,
+              "count": 20
+            },
+            {
+              "comp_id": "000420ff",
+              "product_id": 4,
+              "build": 8447,
+              "count": 2
+            },
+            {
+              "comp_id": "00041fe8",
+              "product_id": 4,
+              "build": 8168,
+              "count": 2
+            },
+            {
+              "comp_id": "001923fa",
+              "product_id": 25,
+              "build": 9210,
+              "count": 15
+            },
+            {
+              "comp_id": "00010000",
+              "product_id": 1,
+              "build": 0,
+              "count": 153
+            },
+            {
+              "comp_id": "001c24fa",
+              "product_id": 28,
+              "build": 9466,
+              "count": 93
+            },
+            {
+              "comp_id": "002c24fa",
+              "product_id": 44,
+              "build": 9466,
+              "count": 27
+            },
+            {
+              "comp_id": "000a1fe8",
+              "product_id": 10,
+              "build": 8168,
+              "count": 14
+            },
+            {
+              "comp_id": "004524fa",
+              "product_id": 69,
+              "build": 9466,
+              "count": 1
+            },
+            {
+              "comp_id": "003d24fa",
+              "product_id": 61,
+              "build": 9466,
+              "count": 1
+            }
+          ]
+        },
+        "checksum_and_key_equal": true
+      },
+      "write_word_flash_operand_identity_audit": {
+        "fields": [
+          {
+            "instruction_va": "0x419288",
+            "operand_va": "0x41928a",
+            "register": "ecx",
+            "original_target": "0x448c500",
+            "original_identity": "FlashRamAddress",
+            "control_target": "0x3e69554",
+            "split_target": "0x3e69554",
+            "candidate_identity": "RDRAM",
+            "match": false,
+            "evidence": "Original bytes and candidate PE HIGHLOW operand; both concrete object addresses independently present in authoritative global inventory and MAP."
+          },
+          {
+            "instruction_va": "0x41928e",
+            "operand_va": "0x419290",
+            "register": "edx",
+            "original_target": "0x3e69554",
+            "original_identity": "RDRAM",
+            "control_target": "0x448c500",
+            "split_target": "0x448c500",
+            "candidate_identity": "FlashRamAddress",
+            "match": false,
+            "evidence": "Original bytes and candidate PE HIGHLOW operand; both concrete object addresses independently present in authoritative global inventory and MAP."
+          }
+        ],
+        "known_identity_mismatches": 2,
+        "following_addition": "ADD ECX,EDX at419294",
+        "source_expression": "WriteSRAM(value, RDRAM + FlashRamAddress,128)",
+        "interpretation": "Both builds retain the reversed operand identities. The following addition is commutative, but that does not satisfy byte-exact reconstruction. No repair or relaxed identity rule was applied.",
+        "central_tool_limit": "WritePhysicalWord has11 other normalized opcode differences, so its whole-function target comparison is skipped; the zero overall target_mismatches summary does not certify these fields."
+      },
+      "organization_rationale": [
+        {
+          "name": "CPUFPU.cpp",
+          "prior_file": "CPU.cpp",
+          "original_code_bands": [
+            [
+              "0x40bfb0",
+              "0x40c9a0"
+            ]
+          ],
+          "evidence": "Contiguous COP1 dispatch handler family; depends on CPU floating-register interfaces and its own decoding macros.",
+          "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof"
+        },
+        {
+          "name": "DynarecTracking.cpp",
+          "prior_file": "Dynarec.cpp",
+          "original_code_bands": [
+            [
+              "0x406a60",
+              "0x4070b0"
+            ]
+          ],
+          "evidence": "Nine adjacent state-change recording functions use UndoData and tracking state, independently of instruction encoding.",
+          "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof"
+        },
+        {
+          "name": "DynarecEmitter.cpp",
+          "prior_file": "Dynarec.cpp",
+          "original_code_bands": [
+            [
+              "0x4070b0",
+              "0x408330"
+            ]
+          ],
+          "evidence": "Typed intermediate-instruction record construction and wrappers form a contiguous helper family with one AddJumpTarget diagnostic literal.",
+          "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof"
+        },
+        {
+          "name": "RSPReciprocal.cpp",
+          "prior_file": "RSP.cpp",
+          "original_code_bands": [
+            [
+              "0x406820",
+              "0x406a60"
+            ]
+          ],
+          "evidence": "Reciprocal arithmetic and lookup-table initialization/diagnostics are independent of opcode-field decoding. RSP.h already declares their shared state and interfaces.",
+          "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof"
+        },
+        {
+          "name": "CPUExecution.cpp",
+          "prior_file": "CPU.cpp",
+          "original_code_bands": [
+            [
+              "0x409e00",
+              "0x409e80"
+            ],
+            [
+              "0x40c9a0",
+              "0x40d590"
+            ]
+          ],
+          "evidence": "The execution loop owns scheduling, peripheral timing, debugger events and its sole inline interrupt helper, distinct from opcode handlers.",
+          "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof"
+        },
+        {
+          "name": "CIC.cpp",
+          "prior_file": "PIF.cpp",
+          "original_code_bands": [
+            [
+              "0x4202d0",
+              "0x4205a0"
+            ]
+          ],
+          "evidence": "Four challenge/history routines and their private byte-swap helper consume CIC lookup data and a distinct diagnostic file literal.",
+          "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof"
+        },
+        {
+          "name": "SaveDevices.cpp",
+          "prior_file": "PIF.cpp",
+          "original_code_bands": [
+            [
+              "0x420df0",
+              "0x421210"
+            ]
+          ],
+          "evidence": "Eight file-backed EEPROM, memory-pack, SRAM and input-movie routines are separate from the PIF command decoder.",
+          "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof"
+        }
+      ],
+      "conclusions": [
+        "All seven cuts consist of current unchanged complete function definitions and their used inline helpers/macros. No empty units, artificial uses, toolchain changes, or executable patches were introduced.",
+        "The27-unit result fits the original compiler contribution count and semantic code bands, but source filenames, boundaries, and ordering remain non-unique. Exact section invariance demonstrates compatibility, not historical proof.",
+        "The current-source control and all-seven split build have byte-identical text, readonly data, writable data, and resources, and all1381 common code/data public addresses. The historical eight-byte WritePhysicalWord sensitivity does not recur in this snapshot.",
+        "Both retain635/648 full instruction/known-target matches, with655 unresolved and3270 not independently verified target fields. Whole-executable equality is still false.",
+        "All187 independently mapped CRT functions and54 available observed CRT storage symbols use original addresses. All318 mapped application globals use original addresses; both readonly assets match complete original bytes at original locations.",
+        "All499 uniquely located literals retain original addresses;25 remain ambiguous. The generated2^32 float remains48 bytes late. Import ordering retains115/152 correct IAT slots and41 descriptor/lookup byte differences.",
+        "All12 Rich compiler-id/count pairs and checksum key0421da8b match, but Rich record order still differs.",
+        "The two FlashRamAddress/RDRAM operand identities remain reversed and are explicitly reported independently of the skipped whole-function identity check."
+      ]
+    }
+  },
+  "conclusions": [
+    "All seven cuts consist of current unchanged complete function definitions and their used inline helpers/macros. No empty units, artificial uses, toolchain changes, or executable patches were introduced.",
+    "The27-unit result fits the original compiler contribution count and semantic code bands, but source filenames, boundaries, and ordering remain non-unique. Exact section invariance demonstrates compatibility, not historical proof.",
+    "The current-source control and all-seven split build have byte-identical text, readonly data, writable data, and resources, and all1381 common code/data public addresses. The historical eight-byte WritePhysicalWord sensitivity does not recur in this snapshot.",
+    "Both retain635/648 full instruction/known-target matches, with655 unresolved and3270 not independently verified target fields. Whole-executable equality is still false.",
+    "All187 independently mapped CRT functions and54 available observed CRT storage symbols use original addresses. All318 mapped application globals use original addresses; both readonly assets match complete original bytes at original locations.",
+    "All499 uniquely located literals retain original addresses;25 remain ambiguous. The generated2^32 float remains48 bytes late. Import ordering retains115/152 correct IAT slots and41 descriptor/lookup byte differences.",
+    "All12 Rich compiler-id/count pairs and checksum key0421da8b match, but Rich record order still differs.",
+    "The two FlashRamAddress/RDRAM operand identities remain reversed and are explicitly reported independently of the skipped whole-function identity check."
+  ]
 }
