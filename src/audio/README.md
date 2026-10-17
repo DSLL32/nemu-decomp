@@ -1,8 +1,9 @@
 # audio.dll reconstruction
 
-This reconstruction is incomplete. The native build currently reproduces 377
-of 417 unique function contributions after independently recorded relocation
-checks; 40 functions and parts of the data layout remain unresolved. The full
+This reconstruction is incomplete. Native object checks match the instruction
+bodies of 377 of 417 unique functions. Relocation identities and remaining
+inferences are recorded separately; 40 functions and parts of the data layout
+remain unresolved. The full
 290,816-byte DLL does **not** match the original. See
 [`analysis/audio-integration-comparison.json`](../../analysis/audio-integration-comparison.json)
 for the frozen build, exact counts, and limitations.
