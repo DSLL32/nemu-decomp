@@ -53,153 +53,156 @@ enum { ROMAlternateBase = 0x13FCB4D0 };
 // 00414490. Names are inferred; the exception-context accesses are recovered.
 LONG CPUHostException(EXCEPTION_POINTERS *exception)
 {
-    char message[60];
     char opcodeMessage[100];
-    if (exception->ExceptionRecord->ExceptionCode != EXCEPTION_ACCESS_VIOLATION) {
+    switch (exception->ExceptionRecord->ExceptionCode) {
+    case EXCEPTION_ACCESS_VIOLATION: {
+        CpuU32 index = Dynarec_ConversionCount - 1;
+        while (index < Dynarec_ConversionCount) {
+            if ((BYTE *)exception->ExceptionRecord->ExceptionAddress >=
+                Dynarec_MainCode + Dynarec_AddressMap[index].offset)
+                break;
+            --index;
+        }
+        int disposition;
+        // The original failure path reads an uninitialized local disposition.
+        if (index > Dynarec_ConversionCount) {
+            char message[60];
+            sprintf(message, "Invalid Access Violation: 0x%X. Can't recover execution",
+                    exception->ExceptionRecord->ExceptionAddress);
+            MessageBox(MainWindow, message, "Error", MB_ICONERROR);
+            CPU_ActionFlags |= 0x00400000;
+        } else {
+            CpuU32 oldPC = CPU_PC;
+            CPU_PC += Dynarec_AddressMap[index].physical -
+                (((CPU_PC & 0xC0000000) == 0x80000000) ? CPU_PC & 0x1FFFFFFF : TranslateTLB(CPU_PC, FALSE));
+            CpuU32 physicalPC = ((CPU_PC & 0xC0000000) == 0x80000000) ?
+                CPU_PC & 0x1FFFFFFF : TranslateTLB(CPU_PC, FALSE);
+            CpuU32 address;
+            bool hostByteOrder;
+            if (TLBEnabled && !TLBRamMapped) {
+                address = ((exception->ContextRecord->Ebx & 0xC0000000) == 0x80000000) ?
+                    exception->ContextRecord->Ebx & 0x1FFFFFFF : TranslateTLB(exception->ContextRecord->Ebx, FALSE);
+                hostByteOrder = false;
+            } else {
+                address = exception->ExceptionRecord->ExceptionInformation[1] - (CpuU32)RDRAM;
+                hostByteOrder = true;
+            }
+            if (address >= RDRAMSize ||
+                (TLBEnabled && !TLBRamMapped && (exception->ExceptionRecord->ExceptionInformation[1] - (CpuU32)RDRAM) >= RDRAMSize)) {
+                switch (Dynarec_Mode) {
+                case 0: case 3: case 4: case 5:
+                    if (physicalPC < RDRAMSize)
+                        memset(&Dynarec_BlockCode[(physicalPC >> 2) & 0x3FFFFC00], 0, 0x1000);
+                    break;
+                case 1: case 2:
+                    for (index = 0; index < CPUBreakpointCount; ++index) {
+                        if ((CPUBreakpoints[index].Address & 0xFFFFF000) ==
+                            (physicalPC & 0xFFFFF000)) {
+                            if (ReadPhysicalWord(CPUBreakpoints[index].Address) ==
+                                (CPUBreakpoints[index].CodeOffset | 0xEC000000))
+                                WritePhysicalWord(CPUBreakpoints[index].Address,
+                                          CPUBreakpoints[index].Instruction);
+                            if (index + 1 <= CPUBreakpointCount - 1) {
+                                if (index < CPUBreakpointCount)
+                                    for (CpuU32 j = index; j < CPUBreakpointCount; ++j)
+                                        CPUBreakpoints[j] = CPUBreakpoints[j + 1];
+                                --CPUBreakpointCount;
+                            }
+                        }
+                    }
+                    break;
+                }
+            }
+            if (address == 0x00800001) {
+                CPU_ActionFlags |= 0x00040000;
+                FaultingInstructions[physicalPC >> 2] = 1;
+                disposition = EXCEPTION_EXECUTE_HANDLER;
+                goto finishException;
+            }
+            disposition = EXCEPTION_CONTINUE_EXECUTION;
+            DWORD oldProtection;
+            if (address < RDRAMSize &&
+                (!TLBEnabled || TLBRamMapped || (exception->ExceptionRecord->ExceptionInformation[1] - (CpuU32)RDRAM) < RDRAMSize)) {
+                memset(&Dynarec_BlockCode[(address >> 2) & 0x3FFFFC00], 0, 0x1000);
+                VirtualProtect(RDRAM + (address & 0xFFFFF000), 0x1000, PAGE_READWRITE, &oldProtection);
+            } else {
+                FaultingInstructions[physicalPC >> 2] = 1;
+            }
+
+            switch (((BYTE *)exception->ExceptionRecord->ExceptionAddress)[0]) {
+            case 0x88: {
+                CpuU32 value = *ContextRegister(exception->ContextRecord,
+                    (((BYTE *)exception->ExceptionRecord->ExceptionAddress)[1] >> 3) & 7);
+                WritePhysicalByte(hostByteOrder ? address ^ 3 : address, value);
+                exception->ContextRecord->Eip += 6;
+                break;
+            }
+            case 0x66: {
+                CpuU32 value = *ContextRegister(exception->ContextRecord,
+                    (((BYTE *)exception->ExceptionRecord->ExceptionAddress)[2] >> 3) & 7);
+                WritePhysicalHalf(hostByteOrder ? address ^ 2 : address, value);
+                exception->ContextRecord->Eip += 7;
+                break;
+            }
+            case 0x89:
+                WritePhysicalWord(address, *ContextRegister(exception->ContextRecord, (((BYTE *)exception->ExceptionRecord->ExceptionAddress)[1] >> 3) & 7));
+                exception->ContextRecord->Eip += 6;
+                break;
+            case 0xC7:
+                WritePhysicalWord(address, *(CpuU32 *)((BYTE *)exception->ExceptionRecord->ExceptionAddress + 6));
+                exception->ContextRecord->Eip += 10;
+                break;
+            case 0x0F: {
+                CpuU32 value; // Unsupported secondary opcodes retain the original uninitialized value.
+                switch (((BYTE *)exception->ExceptionRecord->ExceptionAddress)[1]) {
+                case 0xB6: value = ReadPhysicalByte((hostByteOrder ? address ^ 3 : address)); break;
+                case 0xB7: value = ReadPhysicalHalf((hostByteOrder ? address ^ 2 : address)); break;
+                case 0xBE: value = (signed char)ReadPhysicalByte((hostByteOrder ? address ^ 3 : address)); break;
+                case 0xBF: value = (short)ReadPhysicalHalf((hostByteOrder ? address ^ 2 : address)); break;
+                }
+                *ContextRegister(exception->ContextRecord, (((BYTE *)exception->ExceptionRecord->ExceptionAddress)[2] >> 3) & 7) = value;
+                exception->ContextRecord->Eip += 7;
+                break;
+            }
+            case 0x8B:
+                *ContextRegister(exception->ContextRecord, (((BYTE *)exception->ExceptionRecord->ExceptionAddress)[1] >> 3) & 7) = ReadPhysicalWord(address);
+                exception->ContextRecord->Eip += 6;
+                break;
+            default:
+                sprintf(opcodeMessage, "Unhandled mov(sx/zx) caused exception: %X", ((BYTE *)exception->ExceptionRecord->ExceptionAddress)[0]);
+                ReportCPUError(opcodeMessage);
+                disposition = EXCEPTION_EXECUTE_HANDLER;
+                break;
+            }
+            if ((address >= RDRAMSize ||
+                (TLBEnabled && !TLBRamMapped && (exception->ExceptionRecord->ExceptionInformation[1] - (CpuU32)RDRAM) >= RDRAMSize)) &&
+                disposition == EXCEPTION_CONTINUE_EXECUTION) {
+                CPU_COP0[9] -= 10000;
+                CPU_VideoCyclesRemaining += 10000;
+                CPU_AudioCyclesRemaining += 10000;
+                exception->ContextRecord->Esi -= 10000;
+            }
+            if (MemoryBreakHit) {
+                CPU_ActionFlags |= 0x10000;
+                MemoryBreakHit = 0;
+                disposition = EXCEPTION_EXECUTE_HANDLER;
+            }
+            if (disposition == EXCEPTION_CONTINUE_EXECUTION)
+                CPU_PC = oldPC;
+        }
+    finishException:
+        if (disposition == EXCEPTION_EXECUTE_HANDLER)
+            CPU_GPR[29] = exception->ContextRecord->Edi;
+        return disposition;
+    }
+    default: {
+        char message[60];
         sprintf(message, "Unhandled Exception, you should stop emulation: %X",
                 exception->ExceptionRecord->ExceptionCode);
         ReportCPUError(message);
         return EXCEPTION_EXECUTE_HANDLER;
     }
-
-    CpuU32 index = Dynarec_ConversionCount - 1;
-    while (index < Dynarec_ConversionCount) {
-        if ((BYTE *)exception->ExceptionRecord->ExceptionAddress >=
-            Dynarec_MainCode + Dynarec_AddressMap[index].offset)
-            break;
-        --index;
     }
-    int disposition;
-    // The original failure path reads an uninitialized local disposition.
-    if (index > Dynarec_ConversionCount) {
-        sprintf(message, "Invalid Access Violation: 0x%X. Can't recover execution",
-                exception->ExceptionRecord->ExceptionAddress);
-        MessageBox(MainWindow, message, "Error", MB_ICONERROR);
-        CPU_ActionFlags |= 0x00400000;
-        goto finishException;
-    }
-
-    CpuU32 oldPC = CPU_PC;
-    CPU_PC += Dynarec_AddressMap[index].physical -
-        (((CPU_PC & 0xC0000000) == 0x80000000) ? CPU_PC & 0x1FFFFFFF : TranslateTLB(CPU_PC, FALSE));
-    CpuU32 physicalPC = ((CPU_PC & 0xC0000000) == 0x80000000) ?
-        CPU_PC & 0x1FFFFFFF : TranslateTLB(CPU_PC, FALSE);
-    CpuU32 address;
-    bool hostByteOrder;
-    if (TLBEnabled && !TLBRamMapped) {
-        address = ((exception->ContextRecord->Ebx & 0xC0000000) == 0x80000000) ?
-            exception->ContextRecord->Ebx & 0x1FFFFFFF : TranslateTLB(exception->ContextRecord->Ebx, FALSE);
-        hostByteOrder = false;
-    } else {
-        address = exception->ExceptionRecord->ExceptionInformation[1] - (CpuU32)RDRAM;
-        hostByteOrder = true;
-    }
-    if (address >= RDRAMSize ||
-        (TLBEnabled && !TLBRamMapped && (exception->ExceptionRecord->ExceptionInformation[1] - (CpuU32)RDRAM) >= RDRAMSize)) {
-        switch (Dynarec_Mode) {
-        case 0: case 3: case 4: case 5:
-            if (physicalPC < RDRAMSize)
-                memset(&Dynarec_BlockCode[(physicalPC >> 2) & 0x3FFFFC00], 0, 0x1000);
-            break;
-        case 1: case 2:
-            for (index = 0; index < CPUBreakpointCount; ++index) {
-                if ((CPUBreakpoints[index].Address & 0xFFFFF000) ==
-                    (physicalPC & 0xFFFFF000)) {
-                    if (ReadPhysicalWord(CPUBreakpoints[index].Address) ==
-                        (CPUBreakpoints[index].CodeOffset | 0xEC000000))
-                        WritePhysicalWord(CPUBreakpoints[index].Address,
-                                  CPUBreakpoints[index].Instruction);
-                    if (index + 1 <= CPUBreakpointCount - 1) {
-                        if (index < CPUBreakpointCount)
-                            memcpy(&CPUBreakpoints[index], &CPUBreakpoints[index + 1],
-                                   (CPUBreakpointCount - index) * sizeof(DebugBreakpoint));
-                        --CPUBreakpointCount;
-                    }
-                }
-            }
-            break;
-        }
-    }
-    if (address == 0x00800001) {
-        CPU_ActionFlags |= 0x00040000;
-        FaultingInstructions[physicalPC >> 2] = 1;
-        disposition = EXCEPTION_EXECUTE_HANDLER;
-        goto finishException;
-    }
-    disposition = EXCEPTION_CONTINUE_EXECUTION;
-    DWORD oldProtection;
-    if (address < RDRAMSize &&
-        (!TLBEnabled || TLBRamMapped || (exception->ExceptionRecord->ExceptionInformation[1] - (CpuU32)RDRAM) < RDRAMSize)) {
-        memset(&Dynarec_BlockCode[(address >> 2) & 0x3FFFFC00], 0, 0x1000);
-        VirtualProtect(RDRAM + (address & 0xFFFFF000), 0x1000, PAGE_READWRITE, &oldProtection);
-    } else {
-        FaultingInstructions[physicalPC >> 2] = 1;
-    }
-
-    switch (((BYTE *)exception->ExceptionRecord->ExceptionAddress)[0]) {
-    case 0x88: {
-        CpuU32 value = *ContextRegister(exception->ContextRecord,
-            (((BYTE *)exception->ExceptionRecord->ExceptionAddress)[1] >> 3) & 7);
-        WritePhysicalByte(hostByteOrder ? address ^ 3 : address, value);
-        exception->ContextRecord->Eip += 6;
-        break;
-    }
-    case 0x66: {
-        CpuU32 value = *ContextRegister(exception->ContextRecord,
-            (((BYTE *)exception->ExceptionRecord->ExceptionAddress)[2] >> 3) & 7);
-        WritePhysicalHalf(hostByteOrder ? address ^ 2 : address, value);
-        exception->ContextRecord->Eip += 7;
-        break;
-    }
-    case 0x89:
-        WritePhysicalWord(address, *ContextRegister(exception->ContextRecord, (((BYTE *)exception->ExceptionRecord->ExceptionAddress)[1] >> 3) & 7));
-        exception->ContextRecord->Eip += 6;
-        break;
-    case 0xC7:
-        WritePhysicalWord(address, *(CpuU32 *)((BYTE *)exception->ExceptionRecord->ExceptionAddress + 6));
-        exception->ContextRecord->Eip += 10;
-        break;
-    case 0x0F: {
-        CpuU32 value; // Unsupported secondary opcodes retain the original uninitialized value.
-        switch (((BYTE *)exception->ExceptionRecord->ExceptionAddress)[1]) {
-        case 0xB6: value = ReadPhysicalByte((hostByteOrder ? address ^ 3 : address)); break;
-        case 0xB7: value = ReadPhysicalHalf((hostByteOrder ? address ^ 2 : address)); break;
-        case 0xBE: value = (signed char)ReadPhysicalByte((hostByteOrder ? address ^ 3 : address)); break;
-        case 0xBF: value = (short)ReadPhysicalHalf((hostByteOrder ? address ^ 2 : address)); break;
-        }
-        *ContextRegister(exception->ContextRecord, (((BYTE *)exception->ExceptionRecord->ExceptionAddress)[2] >> 3) & 7) = value;
-        exception->ContextRecord->Eip += 7;
-        break;
-    }
-    case 0x8B:
-        *ContextRegister(exception->ContextRecord, (((BYTE *)exception->ExceptionRecord->ExceptionAddress)[1] >> 3) & 7) = ReadPhysicalWord(address);
-        exception->ContextRecord->Eip += 6;
-        break;
-    default:
-        sprintf(opcodeMessage, "Unhandled mov(sx/zx) caused exception: %X", ((BYTE *)exception->ExceptionRecord->ExceptionAddress)[0]);
-        ReportCPUError(opcodeMessage);
-        disposition = EXCEPTION_EXECUTE_HANDLER;
-        break;
-    }
-    if ((address >= RDRAMSize ||
-        (TLBEnabled && !TLBRamMapped && (exception->ExceptionRecord->ExceptionInformation[1] - (CpuU32)RDRAM) >= RDRAMSize)) &&
-        disposition == EXCEPTION_CONTINUE_EXECUTION) {
-        CPU_COP0[9] -= 10000;
-        CPU_VideoCyclesRemaining += 10000;
-        CPU_AudioCyclesRemaining += 10000;
-        exception->ContextRecord->Esi -= 10000;
-    }
-    if (MemoryBreakHit) {
-        CPU_ActionFlags |= 0x10000;
-        MemoryBreakHit = 0;
-        disposition = EXCEPTION_EXECUTE_HANDLER;
-    }
-    if (disposition == EXCEPTION_CONTINUE_EXECUTION)
-        CPU_PC = oldPC;
-finishException:
-    if (disposition == EXCEPTION_EXECUTE_HANDLER)
-        CPU_GPR[29] = exception->ContextRecord->Edi;
-    return disposition;
 }
 
 static const BYTE BootRspImem[0x1000] = {

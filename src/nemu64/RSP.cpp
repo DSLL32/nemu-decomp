@@ -489,12 +489,12 @@ void RSP_VectorMultiply()
         resultMask = 0xfff0;
         break;
     case 4:
-        productShift = -16; clampMin = 0; clampMax = 0xffff;
+        productShift = -16;
+    case 6:
+        clampMin = 0; clampMax = 0xffff;
         break;
     case 5:
         accumulatorShift = 16;
-        break;
-    case 6:
         break;
     case 7:
         accumulatorShift = 16; productShift = 16;

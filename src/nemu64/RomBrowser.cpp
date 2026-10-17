@@ -35,17 +35,17 @@ int CALLBACK CompareBrowserItems(LPARAM first, LPARAM second, LPARAM)
     int firstIndex = ListView_FindItem(BrowserWindow, -1, &find);
     find.lParam = second;
     b.iItem = ListView_FindItem(BrowserWindow, -1, &find);
-    a.iItem = firstIndex;
     a.pszText = aText;
     b.cchTextMax = a.cchTextMax = 100;
     b.mask = a.mask = LVIF_TEXT | LVIF_IMAGE;
+    a.iItem = firstIndex;
     b.iSubItem = a.iSubItem = 0;
     b.pszText = bText;
     ListView_GetItem(BrowserWindow, &a);
     ListView_GetItem(BrowserWindow, &b);
     if (a.iImage == 5) {
         if (b.iImage != 5)
-            return -BrowserSortMode;
+            goto negative;
         goto compareText;
     }
     if (b.iImage == 5)
@@ -65,7 +65,7 @@ compareText:
         int left = strtol(a.pszText, &end, 10);
         int right = strtol(b.pszText, &end, 10);
         if (left < right) return BrowserSortMode;
-        if (left > right) return -BrowserSortMode;
+        if (left > right) { negative: return -BrowserSortMode; }
         return 0;
     }
     case -4: case 4:
@@ -88,23 +88,21 @@ void RefreshRomBrowser()
     HANDLE search;
     WIN32_FIND_DATAA data;
     char text[100], status[100], title[100];
-    do {
-        sprintf(title, "Nemu64 - Exploring %s", RomDirectory);
-        SetWindowTextA(MainWindow, title);
-        ListView_DeleteAllItems(BrowserWindow);
-        item.mask = LVIF_TEXT | LVIF_IMAGE | LVIF_PARAM;
-        item.iItem = 0;
-        item.iSubItem = 0;
-        item.lParam = 1;
-        BrowserRomCount = 0;
-        strcpy(text, RomDirectory);
-        strcat(text, "*.*");
-        search = FindFirstFileA(text, &data);
-        if (search != INVALID_HANDLE_VALUE)
-            break;
-        MessageBoxA(MainWindow, "Error accessing drive or invalid folder. Setting to C:\\", "Error", MB_ICONERROR);
-        strcpy(RomDirectory, "C:\\");
-    } while (true);
+retry:
+    sprintf(title, "Nemu64 - Exploring %s", RomDirectory);
+    SetWindowTextA(MainWindow, title);
+    ListView_DeleteAllItems(BrowserWindow);
+    item.mask = LVIF_TEXT | LVIF_IMAGE | LVIF_PARAM;
+    item.iItem = 0;
+    item.iSubItem = 0;
+    item.lParam = 1;
+    BrowserRomCount = 0;
+    strcpy(text, RomDirectory);
+    strcat(text, "*.*");
+    search = FindFirstFileA(text, &data);
+    if (search == INVALID_HANDLE_VALUE)
+        goto invalidDirectory;
+
     do {
         item.pszText = text;
         item.iSubItem = 0;
@@ -178,4 +176,9 @@ void RefreshRomBrowser()
     FindClose(search);
     SetStatusText(0, "I am Bender - please insert Gurder");
     ListView_SortItems(BrowserWindow, CompareBrowserItems, BrowserSortMode);
+    return;
+invalidDirectory:
+    MessageBoxA(MainWindow, "Error accessing drive or invalid folder. Setting to C:\\", "Error", MB_ICONERROR);
+    strcpy(RomDirectory, "C:\\");
+    goto retry;
 }
