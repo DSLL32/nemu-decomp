@@ -2176,6 +2176,27 @@
         "both_alias_orders_equivalent": true,
         "rich_counts_preserved": true,
         "padding_added_or_patched": false
+      },
+      "three_import_preseed_control": {
+        "evidence": "/root/.ai-tmp/nemu-import-preseed.n4fg8u5m/report.json",
+        "application_fixture": "/root/.ai-tmp/nemu-complete-relocs.isffxrc_",
+        "variants_including_baseline": 8,
+        "exact_iat_slots_in_every_variant": 115,
+        "differing_import_region_bytes_in_every_variant": 41,
+        "hint_name_pool_equal_in_every_variant": true,
+        "observed_crt_bss_exact_in_every_variant": 54,
+        "rich_counts_equal_in_every_variant": true,
+        "baseline_native_function_uniform_displacement": -96,
+        "result": "Prepending IAT names before every CRT root does not change import-slot order. An early Rtl root moves its thunk before the CRT; direct GetSystemInfo/VirtualQuery roots retain two additional unwanted thunks. These variants are rejected; canonical recipe unchanged.",
+        "coff_reference_kinds": {
+          "resetstk.obj": [
+            "__imp__GetSystemInfo@4",
+            "__imp__VirtualQuery@12"
+          ],
+          "exsup.obj": [
+            "_RtlUnwind@16"
+          ]
+        }
       }
     }
   }
