@@ -143,7 +143,7 @@ procedure AutoConfigureKeyboard(Controller: Integer);
 
 implementation
 
-uses UnitDIStuff, UnitSelectInputDevices, UnitSensitivity, UnitWaitKey, Registry;
+uses UnitDIStuff, UnitSelectInputDevices, UnitAdaptoid, UnitSensitivity, UnitWaitKey, Registry;
 
 {$R *.dfm}
 
@@ -231,7 +231,7 @@ var
   I: Integer;
 begin
   for I := 0 to ActiveDevices[Device].ButtonCount - 1 do
-    if StrComp(ActiveDevices[Device].ButtonNames[I], PChar(Name)) = 0 then
+    if StrComp(@ActiveDevices[Device].ButtonNames[I][1], PChar(Name)) = 0 then
     begin
       Result := I + 1;
       Exit;
