@@ -1,0 +1,345 @@
+{
+  "original": "master/nemu64.exe",
+  "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+  "status": "Promoted source regrouping and verified stock-link ordering; full executable byte equality remains pending.",
+  "method": "Move complete current C++ definitions and genuine typed storage contributions. No byte patches, copied machine instructions, invented storage, or padding definitions.",
+  "input_order_rules": [
+    "NemuInitializedStorage precedes RuntimeSignatures so the preserved signature table literals follow its helper literals.",
+    "RomBrowser follows Rom, retaining only the browser comparator and list refresh; main-window/menu/dialog integration resides with WinMain.",
+    "Late CRT members are supplied lazily from an unchanged archive; the library owner records the independently audited member sequence."
+  ],
+  "source_transformations": [
+    {
+      "method": "Move exact current definitions and attached comments into their coherent main-window unit, ordered by independently recovered entrypoint VA.",
+      "files": [
+        {
+          "source": "Plugins",
+          "before_sha256": "060c44923117a59f98b1c5bbd8d7b33d05035b2cdda85844ccc6214c97af7f75",
+          "after_sha256": "c3f6ad6a47cf375d83c08d65910763762a02d4d2bda6e8ee766aa8968f22b57d"
+        },
+        {
+          "source": "RomBrowser",
+          "before_sha256": "93dfc1de41d67157d2a95b800714ea83ab378e69c1dd004b53fd104234783aa7",
+          "after_sha256": "b8c3637c1dbac0e2499313c27458ca0f049b0c25bec97129f104e1d9cc6ba226"
+        },
+        {
+          "source": "WinMain",
+          "before_sha256": "0029cc3368b090e73cf1f420052e26d7469fee9b0c6be489720eae125dfeeb1e",
+          "after_sha256": "5d90c0c7b58c1f6237ec6d5dba4250b8465da20e877e7f0a26e09a0b2b169884"
+        }
+      ],
+      "functions": [
+        {
+          "name": "FreeTools",
+          "va": "0x41b100",
+          "previous_source": "Plugins",
+          "source": "WinMain",
+          "body_sha256": "f153674cf3b11f9302e41a9ade75f1c7fcbffa3012890d47d13cfd6e7fbef107"
+        },
+        {
+          "name": "InitializeTools",
+          "va": "0x41acf0",
+          "previous_source": "Plugins",
+          "source": "WinMain",
+          "body_sha256": "a4246611708fab1bedcc96994a01076f21e69f6172af0040885024e72ad5c1cd"
+        },
+        {
+          "name": "NetplayClientDropped",
+          "va": "0x41a6e0",
+          "previous_source": "Plugins",
+          "source": "WinMain",
+          "body_sha256": "2869d16f99999f5235411bab01ee51b653b10d6358d76a29ee7f379ac730318c"
+        },
+        {
+          "name": "NetplayStartGame",
+          "va": "0x41a710",
+          "previous_source": "Plugins",
+          "source": "WinMain",
+          "body_sha256": "d7235b150c79a4f9a571a22eb3fdac4fac9f33d4d7f2bdb0404108048a14ba67"
+        },
+        {
+          "name": "CommitRDRAM",
+          "va": "0x41b2c0",
+          "previous_source": "Plugins",
+          "source": "WinMain",
+          "body_sha256": "5b226c7735f26d2db98c182257e5ab9c3cf22984ca12b6d0db40f6614ca1a460"
+        },
+        {
+          "name": "DecommitRDRAM",
+          "va": "0x41b300",
+          "previous_source": "Plugins",
+          "source": "WinMain",
+          "body_sha256": "8bdf1d59460baf46184ceba83c9310ec5599c5ad7ffeebe5972836c5afcc8bdc"
+        },
+        {
+          "name": "SelectGraphicsPlugin",
+          "va": "0x41b5a0",
+          "previous_source": "Plugins",
+          "source": "WinMain",
+          "body_sha256": "ff3541d33db1a638fdd56fd526cf5d31782985bceb0215d8851bfbf312b215a0"
+        },
+        {
+          "name": "ReloadConfiguration",
+          "va": "0x41b6c0",
+          "previous_source": "Plugins",
+          "source": "WinMain",
+          "body_sha256": "f2b08bbcad42407a6954c9fc1ec9d831f2867c1e17400dc4895350c56dbbead7"
+        },
+        {
+          "name": "InitializeGraphicsPlugin",
+          "va": "0x41b780",
+          "previous_source": "Plugins",
+          "source": "WinMain",
+          "body_sha256": "2693a0450e3195e724ed1723c3b13fc8e2f6082f084ef9408b609b638a920a77"
+        },
+        {
+          "name": "WindowHeight",
+          "va": "0x41a6a0",
+          "previous_source": "RomBrowser",
+          "source": "WinMain",
+          "body_sha256": "05dd3ec84f3f47547350ca327f1df92112518ab8c77a0eb3c9ea98bd14281574"
+        },
+        {
+          "name": "SetStatusText",
+          "va": "0x41a6c0",
+          "previous_source": "RomBrowser",
+          "source": "WinMain",
+          "body_sha256": "75d93ed96fc293296d79f7ce3f9dd0bc9cbed92fb1d222382607e95cd50d4d72"
+        },
+        {
+          "name": "NetplayMessage",
+          "va": "0x41a6f0",
+          "previous_source": "RomBrowser",
+          "source": "WinMain",
+          "body_sha256": "ba171adf41a400afd1e05ef74e88e8b93742639b0a26dfb5b79d364fbc3c6eea"
+        },
+        {
+          "name": "RebuildFavouritesMenu",
+          "va": "0x41a810",
+          "previous_source": "RomBrowser",
+          "source": "WinMain",
+          "body_sha256": "139648617af742dbd9ffcbb890372e51d8c2f94c9c082e5a04b64e46d1ebb9bb"
+        },
+        {
+          "name": "ShowFavouritesMenu",
+          "va": "0x41aa20",
+          "previous_source": "RomBrowser",
+          "source": "WinMain",
+          "body_sha256": "e671fc2f06a095714e5a3abff72c5b7ad5e19ec47a21ba7c4cdf38ebcd78b0a0"
+        },
+        {
+          "name": "ShowDriveMenu",
+          "va": "0x41ac50",
+          "previous_source": "RomBrowser",
+          "source": "WinMain",
+          "body_sha256": "9705933f887eaa6a82df859e97da6ab87564a4092a38bac090b9d2bf14480d6d"
+        },
+        {
+          "name": "RemoveFavouritesDialogProc",
+          "va": "0x41e090",
+          "previous_source": "RomBrowser",
+          "source": "WinMain",
+          "body_sha256": "9cebb48b538b25f5bbddd5396c3331ae0f42f4204d47771e9e26a505911d9bd9"
+        },
+        {
+          "name": "AboutDialogProc",
+          "va": "0x41e380",
+          "previous_source": "RomBrowser",
+          "source": "WinMain",
+          "body_sha256": "e4d8325d2318e0367c24b4043804aa1814b031c48d17b3fddb8f168b9827de09"
+        },
+        {
+          "name": "DisclaimerDialogProc",
+          "va": "0x41e420",
+          "previous_source": "RomBrowser",
+          "source": "WinMain",
+          "body_sha256": "2eed8f80042b85dfe475a443cf24b701ad3408cb9d30391ebd8f3115d21eb1de"
+        },
+        {
+          "name": "ResizeMainWindow",
+          "va": "0x41b130",
+          "previous_source": "WinMain",
+          "source": "WinMain",
+          "body_sha256": "da4271634832a37457d0bfe28a8c6cc58cb433736dd24c3107507fd456d7fa24"
+        },
+        {
+          "name": "SetEmulationMenus",
+          "va": "0x41b340",
+          "previous_source": "WinMain",
+          "source": "WinMain",
+          "body_sha256": "af98d75d586bd7657d729a1e1f1fb8d889da675367bf9016744ee2cf5865ca36"
+        },
+        {
+          "name": "DrawStatePreview",
+          "va": "0x41b930",
+          "previous_source": "WinMain",
+          "source": "WinMain",
+          "body_sha256": "68348312f7189214828af20a4ad4dc63b040357edb5e7430723ef4025f1e990f"
+        },
+        {
+          "name": "CaptureStatePreview",
+          "va": "0x41bfc0",
+          "previous_source": "WinMain",
+          "source": "WinMain",
+          "body_sha256": "c492496416cde902a2359c21f8b0a820bb2998fc2ae718d59822c3bd0b226faa"
+        },
+        {
+          "name": "AddToolbarButton",
+          "va": "0x41d0b0",
+          "previous_source": "WinMain",
+          "source": "WinMain",
+          "body_sha256": "69c9d2fa7d836805663befe298dcea101f79de18e8e29b42a28236daddce761f"
+        },
+        {
+          "name": "StatePreviewHook",
+          "va": "0x41b9b0",
+          "previous_source": "WinMain",
+          "source": "WinMain",
+          "body_sha256": "0921c06e67253496834f3f3387972f93c2f601ee21f8412064df0f31b4a172a8"
+        },
+        {
+          "name": "MainWindowProc",
+          "va": "0x41d110",
+          "previous_source": "WinMain",
+          "source": "WinMain",
+          "body_sha256": "bc7205339b001cf26735af8005e0a86f0c32d1648b0cda02802426be0a6a8059"
+        },
+        {
+          "name": "WinMain",
+          "va": "0x41ba40",
+          "previous_source": "WinMain",
+          "source": "WinMain",
+          "body_sha256": "68d5742e2351cb504271f696e8b6d3e430abf0a640aa64fc5997418943bb5d61"
+        },
+        {
+          "name": "MainWindowCommand",
+          "va": "0x41c130",
+          "previous_source": "WinMain",
+          "source": "WinMain",
+          "body_sha256": "dc2b6fe8529554071ea11040ffaf220a0ef511ce89f037a79ccae306e0e36fca"
+        }
+      ]
+    },
+    {
+      "function": "Recompile_CACHE",
+      "original_va": "0x40efb0",
+      "previous_source": "src/nemu64/DynarecMemoryOps.cpp",
+      "source": "src/nemu64/DynarecOpcodes.cpp",
+      "body_sha256": "ef06036a0b1063638cfd12aa5060a53ad6bface9d05a929cf5a3d305a57b7c46",
+      "files": [
+        {
+          "source": "src/nemu64/DynarecMemoryOps.cpp",
+          "before_sha256": "f329981134e87a06088ce92315c6a441172bd5b155fb8890cce6944a3856a468",
+          "after_sha256": "7d1512650c3bd3febe9ec768c3fb18fc17af1bc2b6ef41be114ea1cdadfdd621"
+        },
+        {
+          "source": "src/nemu64/DynarecOpcodes.cpp",
+          "before_sha256": "65a3b9e0fedf30423862f14494fbcb0462f3af9e13a3846088f6250d52a647ca",
+          "after_sha256": "f647b81200db5617f8a4b60591afc36deb4f8132b19e3154adc80270d28a9a69"
+        }
+      ]
+    }
+  ],
+  "proofs": [
+    {
+      "name": "frontend_regroup_latest_fixture",
+      "comparison_proof": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/frontend-current-reusable-proof.json",
+      "baseline": "/root/.ai-tmp/nemu-complete-relocs.qj3p8i4s/nemu64.exe",
+      "baseline_sha256": "077625bafd94b7ea17bd31f69c4fedc354371e17f92aebc54df12c50c4626d65",
+      "candidate": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/frontend-current/frontend.exe",
+      "candidate_sha256": "05c584ea3631dad3fbce9625f989f8f32bde7722f944d8aebb513f1751fe13f5",
+      "fixed_code_and_data_publics": 1381,
+      "residual_different_bytes": {
+        ".text": 0,
+        ".data": 0
+      },
+      "changed_readonly_reference_count": {
+        ".text": 516,
+        ".data": 0
+      },
+      "unique_literal_positions_exact": 479,
+      "unique_application_literal_positions_exact": 439,
+      "uniquely_located_literals": 499
+    },
+    {
+      "name": "cache_control_grouping",
+      "comparison_proof": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/cache-reusable-proof.json",
+      "baseline": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/frontend/frontend.exe",
+      "baseline_sha256": "6b10f0ab4b90a656b8f48065e34d7afc4bb3102809f8743aa4d3519bf37846f6",
+      "candidate": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/cache/cache.exe",
+      "candidate_sha256": "26c1f9943c310d555ac037bd0ef63122a0be7afbef8c3a7c3c5a5969705f8eaf",
+      "fixed_code_and_data_publics": 1379,
+      "residual_different_bytes": {
+        ".text": 0,
+        ".data": 0
+      },
+      "changed_readonly_reference_count": {
+        ".text": 5,
+        ".data": 0
+      },
+      "unique_literal_positions_exact": 484,
+      "unique_application_literal_positions_exact": 444,
+      "uniquely_located_literals": 499
+    }
+  ],
+  "comparison_tool": "scripts/compare_nemu_layout_move.py",
+  "comparison_command_example": [
+    "python3",
+    "scripts/compare_nemu_layout_move.py",
+    "/root/.ai-tmp/nemu-complete-relocs.qj3p8i4s/nemu64.exe",
+    "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/frontend-current/frontend.exe",
+    "--anchor",
+    "BootRspImem",
+    "0x4348d8",
+    "0x4348e0",
+    "4096",
+    "--anchor",
+    "DefaultMemPack",
+    "0x4358d8",
+    "0x4358e0",
+    "32768",
+    "--anchor",
+    "WriteWordScopeTable",
+    "0x43e048",
+    "0x43e050",
+    "24",
+    "--anchor",
+    "WriteHalfScopeTable",
+    "0x43e060",
+    "0x43e068",
+    "12",
+    "--anchor",
+    "WriteByteScopeTable",
+    "0x43e070",
+    "0x43e078",
+    "12",
+    "--anchor",
+    "RunCPUScopeTable",
+    "0x43e088",
+    "0x43e090",
+    "24",
+    "--output",
+    "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/frontend-current-reusable-proof.json"
+  ],
+  "readonly_result": {
+    "complete_boot_imem_size": 4096,
+    "complete_boot_imem_va": "0x4348e0",
+    "complete_default_mempak_size": 32768,
+    "complete_default_mempak_va": "0x4358e0",
+    "restored_zero_alignment_bytes": 8,
+    "explicit_floating_constants_at_original_addresses": 10,
+    "remaining_generated_float_constant": {
+      "value": "4294967296.0f",
+      "original_va": "0x43e01c",
+      "candidate_va": "0x43e04c"
+    },
+    "remaining_unique_literal_placements_after_cache_grouping": 15
+  },
+  "limitations": [
+    "Original source filenames and translation-unit boundaries remain inferred. Literal ownership alone does not prove a historical filename.",
+    "Twenty-seven original C++ LTCG contributions remain unexplained; file regrouping does not manufacture this count.",
+    "Invariance checks compare reconstructed builds, with every changed operand backed by a real PE relocation and complete readonly-object identity. They do not establish correctness of previously unmatched functions.",
+    "Callback source identities remain separate even where the linker folds identical bodies.",
+    "The frontend and CACHE proofs use separate immutable snapshots; the subsequent complete integration build must verify their combined effect."
+  ]
+}

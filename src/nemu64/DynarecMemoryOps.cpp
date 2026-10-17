@@ -475,50 +475,6 @@ void __stdcall RemovePageBreakpoints(unsigned page)
     }
 }
 
-void Recompile_CACHE()
-{
-    if (Dynarec_Mode == 1 || Dynarec_Mode == 3 || Dynarec_Mode == 5)
-        return;
-    if (((CPU_Instruction >> 16) & 3) != 0 && ((CPU_Instruction >> 16) & 3) != 2)
-        return;
-    unsigned operation = (CPU_Instruction >> 18) & 7;
-    if (operation != 0 && (operation <= 3 || operation > 5))
-        return;
-    if (Dynarec_Mode == 4) {
-        Dynarec_ResetRequired = 1;
-        return;
-    }
-    LoadGPRLow((CPU_Instruction >> 21) & 31);
-    EmitAddImmediate(X86_EAX, (short)CPU_Instruction);
-    EmitTranslateAddress(0);
-    EmitAndImmediate(1, X86_EAX, 0xfffff000);
-    EmitCompareImmediate(1, X86_EAX, RDRAMSize);
-    unsigned outside = EmitConditionalJump(3);
-    EmitMove(1, X86_EAX, X86_ECX);
-    EmitShiftRight(1, X86_ECX, 12);
-    EmitLoad(0, X86_EBX, 0x81, (unsigned)Dynarec_CompiledPages);
-    EmitCompareImmediate(0, X86_EBX, 1);
-    unsigned empty = EmitConditionalJump(5);
-    EmitStoreImmediate(0, 0x81, (unsigned)Dynarec_CompiledPages, 0);
-    EmitPush(X86_EAX);
-    switch (Dynarec_Mode) {
-    case 0: EmitCall((unsigned)InvalidateRecompiledPage); break;
-    case 2: EmitCall((unsigned)RemovePageBreakpoints); break;
-    }
-    EmitCompareImmediate(1, X86_EAX, Dynarec_PageAddress);
-    unsigned otherPage = EmitConditionalJump(5);
-    if (Dynarec_DelaySlot)
-        ReportCPUError("ICACHE in delay slot - this might crash");
-    else {
-        EmitStoreImmediate(1, 5, (unsigned)&CPU_PC, CPU_LastPC + 4);
-        FinishInstruction();
-        EmitReturn();
-    }
-    EmitLabel(otherPage);
-    EmitLabel(empty);
-    EmitLabel(outside);
-}
-
 void Recompile_LWC1()
 {
     CheckFPUEnabled();

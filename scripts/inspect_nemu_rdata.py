@@ -62,6 +62,9 @@ def main():
     data = original.data[sec['offset']:sec['offset'] + sec['virtual_size']]
     vendor = json.loads((ROOT / 'analysis/nemu-vendor-data.json').read_text())
     vendor_names = {r['object'] for r in vendor['data_sections']}
+    runtime = json.loads((ROOT / 'analysis/nemu-library-addresses.json').read_text())
+    runtime_names = {r['object'].replace('\\', '/').rsplit('/', 1)[-1]
+                     for r in runtime['data_sections']}
     rows = []
     for symbol, entry in publics(args.map_file).items():
         match = LITERAL.match(symbol)
@@ -78,7 +81,10 @@ def main():
                    text_preview=value[:120].decode('latin1'),
                    original_occurrence_count=len(positions),
                    original_occurrences=[hex(p) for p in positions[:32]],
-                   application=not entry['owner'].startswith('LIBC:') and entry['owner'] not in vendor_names)
+                   application=not entry['owner'].startswith('LIBC:')
+                       and not re.match(r'^crt-\d+\.obj$', entry['owner'])
+                       and entry['owner'].rsplit(':', 1)[-1] not in runtime_names
+                       and entry['owner'] not in vendor_names)
         if len(positions) == 1:
             row['original_va'] = positions[0]
         rows.append(row)
