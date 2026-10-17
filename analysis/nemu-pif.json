@@ -299,7 +299,8 @@
         "invalid_link_operands": 0,
         "unresolved_targets": 0,
         "unverified_targets": 0
-      }
+      },
+      "source": "src/nemu64/CIC.cpp"
     },
     {
       "name": "SaveCICInput",
@@ -317,7 +318,8 @@
         "invalid_link_operands": 0,
         "unresolved_targets": 4,
         "unverified_targets": 5
-      }
+      },
+      "source": "src/nemu64/CIC.cpp"
     },
     {
       "name": "CICUseTable1",
@@ -335,7 +337,8 @@
         "invalid_link_operands": 0,
         "unresolved_targets": 0,
         "unverified_targets": 2
-      }
+      },
+      "source": "src/nemu64/CIC.cpp"
     },
     {
       "name": "CIC6105Challenge",
@@ -353,7 +356,8 @@
         "invalid_link_operands": 0,
         "unresolved_targets": 0,
         "unverified_targets": 6
-      }
+      },
+      "source": "src/nemu64/CIC.cpp"
     },
     {
       "name": "PIFDataCRC",
@@ -379,7 +383,8 @@
         "invalid_link_operands": 0,
         "unresolved_targets": 0,
         "unverified_targets": 0
-      }
+      },
+      "source": "src/nemu64/PIF.cpp"
     },
     {
       "name": "InitializePIFCommandLengths",
@@ -405,7 +410,8 @@
         "invalid_link_operands": 0,
         "unresolved_targets": 13,
         "unverified_targets": 14
-      }
+      },
+      "source": "src/nemu64/PIF.cpp"
     },
     {
       "name": "ProcessPIF",
@@ -423,7 +429,8 @@
         "invalid_link_operands": 0,
         "unresolved_targets": 0,
         "unverified_targets": 0
-      }
+      },
+      "source": "src/nemu64/PIF.cpp"
     },
     {
       "name": "SaveEEPROM",
@@ -441,7 +448,8 @@
         "invalid_link_operands": 0,
         "unresolved_targets": 2,
         "unverified_targets": 7
-      }
+      },
+      "source": "src/nemu64/SaveDevices.cpp"
     },
     {
       "name": "SaveMemPack",
@@ -459,7 +467,8 @@
         "invalid_link_operands": 0,
         "unresolved_targets": 2,
         "unverified_targets": 7
-      }
+      },
+      "source": "src/nemu64/SaveDevices.cpp"
     },
     {
       "name": "RecordMovieInput",
@@ -485,7 +494,8 @@
         "invalid_link_operands": 0,
         "unresolved_targets": 5,
         "unverified_targets": 24
-      }
+      },
+      "source": "src/nemu64/SaveDevices.cpp"
     },
     {
       "name": "PlayMovieInput",
@@ -511,7 +521,8 @@
         "invalid_link_operands": 0,
         "unresolved_targets": 5,
         "unverified_targets": 20
-      }
+      },
+      "source": "src/nemu64/SaveDevices.cpp"
     },
     {
       "name": "StopMovie",
@@ -537,7 +548,8 @@
         "invalid_link_operands": 0,
         "unresolved_targets": 0,
         "unverified_targets": 7
-      }
+      },
+      "source": "src/nemu64/SaveDevices.cpp"
     },
     {
       "name": "SaveSRAM",
@@ -555,7 +567,8 @@
         "invalid_link_operands": 0,
         "unresolved_targets": 2,
         "unverified_targets": 7
-      }
+      },
+      "source": "src/nemu64/SaveDevices.cpp"
     },
     {
       "name": "WriteSRAM",
@@ -573,7 +586,8 @@
         "invalid_link_operands": 0,
         "unresolved_targets": 0,
         "unverified_targets": 4
-      }
+      },
+      "source": "src/nemu64/SaveDevices.cpp"
     },
     {
       "name": "ReadSRAM",
@@ -591,7 +605,8 @@
         "invalid_link_operands": 0,
         "unresolved_targets": 0,
         "unverified_targets": 3
-      }
+      },
+      "source": "src/nemu64/SaveDevices.cpp"
     }
   ],
   "notes": [
@@ -618,7 +633,8 @@
       "map": "/root/.ai-tmp/nemu-pif-full.7m3lqg9b/natural.map",
       "comparison": "/root/.ai-tmp/nemu-pif-full.7m3lqg9b/natural-sized.json",
       "scope": "Historical instruction-shape proof for the recorded source hash; not a claim about the latest executable layout."
-    }
+    },
+    "source_sha256_scope": "Historical combined PIF.cpp input for this recorded probe, before unchanged CIC and save-device/movie routines moved to CIC.cpp and SaveDevices.cpp."
   },
   "original_file": "master/nemu64.exe",
   "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
@@ -632,5 +648,11 @@
       "analysis/nemu-memory.json",
       "analysis/nemu-cpu.json"
     ]
-  }
+  },
+  "source_units": [
+    "src/nemu64/CIC.cpp",
+    "src/nemu64/PIF.cpp",
+    "src/nemu64/SaveDevices.cpp"
+  ],
+  "source_reference_scope": "source_units and per-function source fields describe the current definitions. A top-level source is the primary unit. Recorded proof source paths and hashes continue to identify their historical compiler inputs; they are not reassigned by this source-organization update."
 }

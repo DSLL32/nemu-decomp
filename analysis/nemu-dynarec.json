@@ -20,9 +20,12 @@
     "inferred": true,
     "evidence": "Adjacent emitter constructors, opcode emitters, and MIPS translation tables support the dynarec grouping. Runtime signature names occupy a separate original literal run at 0x431F70..0x432AD8, while emitter diagnostics occupy 0x43DD54..0x43DDE9; a separate RuntimeSignatures.cpp preserves this grouping. Names and filenames remain inferred.",
     "sources": [
+      "src/nemu64/DynarecTracking.cpp",
+      "src/nemu64/DynarecEmitter.cpp",
       "src/nemu64/Dynarec.cpp",
       "src/nemu64/RuntimeSignatures.cpp"
-    ]
+    ],
+    "translation_unit_reconstruction": "Track* state-change recording and the contiguous intermediate-instruction emitters are separate inferred units, DynarecTracking.cpp and DynarecEmitter.cpp. Complete definitions are unchanged. The current-source section-invariance and Rich-count evidence is recorded in analysis/nemu-translation-units.json; original filenames and boundaries remain non-unique."
   },
   "globals": [
     {
@@ -340,7 +343,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 136,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecTracking.cpp"
     },
     {
       "name": "TrackDoubleWord",
@@ -349,7 +352,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 178,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecTracking.cpp"
     },
     {
       "name": "TrackGPR",
@@ -358,7 +361,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 15,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecTracking.cpp"
     },
     {
       "name": "TrackFPR",
@@ -367,7 +370,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 233,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecTracking.cpp"
     },
     {
       "name": "TrackRegister64",
@@ -376,7 +379,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecTracking.cpp"
     },
     {
       "name": "TrackRegister32",
@@ -385,7 +388,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 19,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecTracking.cpp"
     },
     {
       "name": "TrackMemory",
@@ -394,7 +397,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 87,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecTracking.cpp"
     },
     {
       "name": "TrackProgramCounter",
@@ -403,7 +406,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 22,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecTracking.cpp"
     },
     {
       "name": "TrackInstructionChanges",
@@ -412,7 +415,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 479,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecTracking.cpp"
     },
     {
       "name": "AddJumpTarget",
@@ -421,7 +424,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 172,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "AddInstruction",
@@ -430,7 +433,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 209,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "AddInstructionThreeSources",
@@ -439,14 +442,14 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 221,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "AddInstructionTwoDestinations",
       "va": "0x00407320",
       "original_size": 224,
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitLabel",
@@ -455,7 +458,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 8,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitAdc",
@@ -464,7 +467,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 38,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitAdcImmediate",
@@ -473,7 +476,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitAdd",
@@ -482,7 +485,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 38,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitAddImmediate",
@@ -491,7 +494,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 51,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitAddMemory",
@@ -500,7 +503,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 46,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitAndMemory",
@@ -509,7 +512,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitAndImmediate",
@@ -518,7 +521,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitAnd",
@@ -527,7 +530,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 38,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitSignExtend",
@@ -536,7 +539,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 37,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitCompare",
@@ -545,7 +548,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 39,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitCompareImmediate",
@@ -554,14 +557,14 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 51,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitCall",
       "va": "0x00407640",
       "original_size": 32,
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitDivide",
@@ -570,7 +573,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 40,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitSignedDivide",
@@ -579,7 +582,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 40,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitSignedMultiply",
@@ -588,7 +591,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 40,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitConditionalJump",
@@ -597,7 +600,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 52,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitConditionalJumpOffset",
@@ -606,28 +609,28 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 34,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitJump",
       "va": "0x00407760",
       "original_size": 48,
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitJumpOffset",
       "va": "0x00407790",
       "original_size": 32,
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitJumpGuest",
       "va": "0x004077B0",
       "original_size": 32,
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitMove",
@@ -636,7 +639,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 39,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitLoad",
@@ -645,7 +648,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 38,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitStore",
@@ -654,7 +657,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 38,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitStoreHalf",
@@ -663,7 +666,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 36,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitMoveImmediate",
@@ -672,7 +675,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 36,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitStoreImmediate",
@@ -681,7 +684,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitLoadSigned",
@@ -690,7 +693,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 37,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitMoveSigned",
@@ -699,7 +702,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 39,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitLoadUnsigned",
@@ -708,7 +711,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 37,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitMoveUnsigned",
@@ -717,7 +720,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 39,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitMultiply",
@@ -726,21 +729,21 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 40,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitNegate",
       "va": "0x004079E0",
       "original_size": 32,
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitNot",
       "va": "0x00407A00",
       "original_size": 32,
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitOrAccumulator",
@@ -749,7 +752,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 30,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitOrMemory",
@@ -758,7 +761,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitOr",
@@ -767,7 +770,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 38,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitPop",
@@ -776,7 +779,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 42,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitPush",
@@ -785,7 +788,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitReadTimestamp",
@@ -794,7 +797,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 40,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitReturn",
@@ -803,7 +806,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 33,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitStoreFlags",
@@ -812,7 +815,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 33,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitArithmeticShiftRight",
@@ -821,14 +824,14 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 38,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitArithmeticShiftRightCL",
       "va": "0x00407BC0",
       "original_size": 32,
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitSbb",
@@ -837,7 +840,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 38,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitSetMemory",
@@ -846,7 +849,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 36,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitSet",
@@ -855,14 +858,14 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 37,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitShiftLeftCL",
       "va": "0x00407C70",
       "original_size": 32,
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitShiftLeft",
@@ -871,7 +874,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 38,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitDoubleShiftLeftCL",
@@ -880,7 +883,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 41,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitDoubleShiftLeft",
@@ -889,14 +892,14 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 38,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitShiftRightCL",
       "va": "0x00407D20",
       "original_size": 32,
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitShiftRight",
@@ -905,7 +908,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 38,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitDoubleShiftRightCL",
@@ -914,7 +917,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 41,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitDoubleShiftRight",
@@ -923,7 +926,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 38,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitSubtract",
@@ -932,7 +935,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 38,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitExchange",
@@ -941,7 +944,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 40,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitTestMemory",
@@ -950,7 +953,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitXorAccumulator",
@@ -959,7 +962,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 30,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitXor",
@@ -968,7 +971,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 38,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitFpuAbsolute",
@@ -977,7 +980,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 36,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitFpuAddSingle",
@@ -986,7 +989,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitFpuAddDouble",
@@ -995,7 +998,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitFpuChangeSign",
@@ -1004,7 +1007,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 36,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitFpuClearExceptions",
@@ -1013,7 +1016,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 36,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitFpuCompareSingle",
@@ -1022,7 +1025,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitFpuCompareDouble",
@@ -1031,7 +1034,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitFpuDivideSingle",
@@ -1040,7 +1043,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitFpuDivideDouble",
@@ -1049,7 +1052,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitFpuLoadInt32",
@@ -1058,7 +1061,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitFpuLoadInt64",
@@ -1067,7 +1070,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitFpuStoreInt32",
@@ -1076,7 +1079,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitFpuStoreInt64",
@@ -1085,7 +1088,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitFpuLoadSingle",
@@ -1094,7 +1097,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitFpuLoadDouble",
@@ -1103,7 +1106,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitFpuLoadControl",
@@ -1112,7 +1115,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitFpuMultiplySingle",
@@ -1121,7 +1124,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitFpuMultiplyDouble",
@@ -1130,7 +1133,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitFpuSquareRoot",
@@ -1139,7 +1142,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 36,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitFpuPopSingle",
@@ -1148,7 +1151,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitFpuPopDouble",
@@ -1157,7 +1160,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitFpuStoreStatus",
@@ -1166,7 +1169,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 36,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitFpuSubtractSingle",
@@ -1175,7 +1178,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "EmitFpuSubtractDouble",
@@ -1184,7 +1187,7 @@
       "status": "Full instruction span and known target identities match in the complete linked probe; absolute image equality pending.",
       "original_code_size": 35,
       "extent_basis": "Span through the next independently identified function entry; includes original alignment and any inline jump tables.",
-      "source": "src/nemu64/Dynarec.cpp"
+      "source": "src/nemu64/DynarecEmitter.cpp"
     },
     {
       "name": "RequiresMemoryCheck",
@@ -4221,5 +4224,12 @@
         "The original aggregate type/name is inferred, not established. No original-versus-rebuilt file-I/O execution test was performed."
       ]
     }
-  }
+  },
+  "source_units": [
+    "src/nemu64/DynarecTracking.cpp",
+    "src/nemu64/DynarecEmitter.cpp",
+    "src/nemu64/Dynarec.cpp",
+    "src/nemu64/RuntimeSignatures.cpp"
+  ],
+  "source_reference_scope": "source_units and per-function source fields describe the current definitions. A top-level source is the primary unit. Recorded proof source paths and hashes continue to identify their historical compiler inputs; they are not reassigned by this source-organization update."
 }

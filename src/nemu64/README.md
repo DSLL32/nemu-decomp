@@ -41,8 +41,10 @@ This option implies `--ordered-libraries`. It selects the same unchanged
 historical members through ordinary archives and explicit linker roots. The
 two empty alias sections follow `setmode`, producing the original alignment
 before `RtlUnwind`; the import hint/name pool also matches. The 187 identified
-native functions retain their original relative placement. Their absolute
-addresses still depend on the unfinished application code.
+native functions now occupy their original absolute addresses with the current
+tracked sources; all 54 mapped native-storage observations also have their
+original addresses. These are layout observations, not a proof of complete
+instruction or executable equality.
 
 This remains an alternative under investigation: **115 of 152 IAT slots
 match**, compared with 152 in the canonical recipe. Four imports have the
@@ -60,6 +62,13 @@ calling convention and accounts for the remaining native C compiler record.
 The unchanged zlib 1.1.3/minizip sources use Visual C++ 6.0 RTM build 8168.
 The build also reconstructs the GameShark and Kaillera import libraries with
 their corresponding historical librarians.
+
+The staged build contains 27 C++ translation units: 25 tracked source files
+and two generated storage units. Seven inferred function-family splits preserve
+every byte of all four program sections against the same-source 20-unit
+control. The chronological build matches every original Rich compiler
+ID/count pair and its checksum; the order of those records still differs. The splits and reproducible evidence
+are documented in `analysis/nemu-translation-units.json`.
 
 Private identifiers, filenames, and translation-unit boundaries are inferred.
 Address inventories under `analysis/nemu-*.json` distinguish source recovery,

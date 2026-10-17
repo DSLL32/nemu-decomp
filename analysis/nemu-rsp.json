@@ -1294,7 +1294,7 @@
       "va": 4220960,
       "size": 224,
       "source_present": true,
-      "source": "src/nemu64/RSP.cpp",
+      "source": "src/nemu64/RSPReciprocal.cpp",
       "original_extent_basis": "original dispatched entry or directly called helper, bounded by next established function including alignment",
       "rebuilt_size": 224,
       "rebuilt_image_sha256": "3b895af6802a3c2eb0e23479d1809f88bd997387bbd2280a0a3fa58685d6f34d",
@@ -1307,7 +1307,7 @@
       "va": 4221184,
       "size": 352,
       "source_present": true,
-      "source": "src/nemu64/RSP.cpp",
+      "source": "src/nemu64/RSPReciprocal.cpp",
       "original_extent_basis": "original dispatched entry or directly called helper, bounded by next established function including alignment",
       "rebuilt_size": 352,
       "rebuilt_image_sha256": "3b895af6802a3c2eb0e23479d1809f88bd997387bbd2280a0a3fa58685d6f34d",
@@ -1676,7 +1676,8 @@
     "image_path": "/root/.ai-tmp/nemu-rsp-unsigned-loops.b9s6celg/candidate.dll",
     "map_path": "/root/.ai-tmp/nemu-rsp-unsigned-loops.b9s6celg/candidate.map",
     "compiler_input": "/root/.ai-tmp/nemu-rsp-unsigned-loops.b9s6celg/candidate.cpp",
-    "report_path": "/root/.ai-tmp/nemu-rsp-unsigned-loops.b9s6celg/candidate-comparison.json"
+    "report_path": "/root/.ai-tmp/nemu-rsp-unsigned-loops.b9s6celg/candidate-comparison.json",
+    "source_sha256_scope": "Historical combined RSP.cpp input for this recorded probe, before the unchanged reciprocal helpers moved to RSPReciprocal.cpp."
   },
   "codegen_hypothesis_checks": {
     "source_sha256": "5a3dfcc71492f763a563746595773d5fa3d9a41189b5536d22e0538452363b92",
@@ -1863,7 +1864,8 @@
         "image_sha256": "59f68e24f5e4321fa402360f74cbdee2b0edb44caf73b121fbbd5e21f287333f",
         "source_sha256": "592ef54478f221d206f005055174f51a0e97d9f8eb09f5d8a2bc08bf37b06750"
       }
-    ]
+    ],
+    "source_sha256_scope": "Historical combined RSP.cpp input for this recorded probe, before the unchanged reciprocal helpers moved to RSPReciprocal.cpp."
   },
   "vcl_reconstruction": {
     "status": "improved_honest_source_still_unmatched",
@@ -1902,7 +1904,8 @@
       "behavior_report": "/root/.ai-tmp/nemu-rsp-vcl-promotion.k8dcd48g/behavior.json",
       "behavior_report_sha256": "5a91e5af8edd8196a682b5bffb93c0a2b41190260f6235a6af0bd45a37862927"
     },
-    "limitation": "Diagnostic DLL evidence does not prove final whole-program LTCG code or complete EXE byte equality."
+    "limitation": "Diagnostic DLL evidence does not prove final whole-program LTCG code or complete EXE byte equality.",
+    "source_sha256_scope": "Historical combined RSP.cpp input for this recorded probe, before the unchanged reciprocal helpers moved to RSPReciprocal.cpp."
   },
   "arithmetic_loop_reconstruction": {
     "status": "improved_inferred_source_all_three_still_unmatched",
@@ -1987,6 +1990,12 @@
       "behavior_report": "/root/.ai-tmp/nemu-rsp-unsigned-loops.b9s6celg/behavior.json",
       "behavior_report_sha256": "f7df6282327bb3b157819e7835bb335dd14012eb78956b6ee031f02ac0fa8630"
     },
-    "limitation": "Diagnostic DLL evidence does not establish final whole-program LTCG allocation or complete EXE byte identity."
-  }
+    "limitation": "Diagnostic DLL evidence does not establish final whole-program LTCG allocation or complete EXE byte identity.",
+    "source_sha256_scope": "Historical combined RSP.cpp input for this recorded probe, before the unchanged reciprocal helpers moved to RSPReciprocal.cpp."
+  },
+  "source_units": [
+    "src/nemu64/RSP.cpp",
+    "src/nemu64/RSPReciprocal.cpp"
+  ],
+  "source_reference_scope": "source_units and per-function source fields describe the current definitions. A top-level source is the primary unit. Recorded proof source paths and hashes continue to identify their historical compiler inputs; they are not reassigned by this source-organization update."
 }
