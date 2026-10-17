@@ -1,0 +1,257 @@
+{
+  "scope": "Negative native-compiler controls for four retained vector-copy handlers; no shared source changed and no full DLL match claimed.",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "artifact": "/root/.ai-tmp/audio-small-copies.bs9s3uqv",
+  "flags": [
+    "/O2",
+    "/Ob1",
+    "/MT",
+    "/W3",
+    "/DWIN32",
+    "/DNDEBUG",
+    "/D_WINDOWS",
+    "/D_USRDLL"
+  ],
+  "baseline": "Full current RSP.cpp recompile has all177 raw function bodies identical to frozen0374mhty. The source and all header inputs are identical.",
+  "baseline_source_sha256": "c7af8470ebe01038716dde99f7c76c79116aa2078a46588f759e927ef19fc380",
+  "observed_difference": "SDV differs by five bytes: original shl edx,4;mov esi,edx versus candidate mov esi,edx;shl esi,4. The other three share this vector-row scaling/allocation issue plus instruction scheduling.",
+  "source_controls": [
+    "Vector-index local signed/byte/halfword types; element local signed/byte/halfword types.",
+    "All six address/vector/element initialization orders.",
+    "Explicit byte offsets, multiplication and shift statements.",
+    "Typed struct/union views with 16-/32-/64-bit members.",
+    "Ordinary inline vector byte getters/setters and vector pointer getter.",
+    "Equivalent pointer cast spellings and a C++ byte-array reference."
+  ],
+  "results": {
+    "result.json": {
+      "sha256": "a1275e7ac4dc790b01063b0a3c4c4bbd2286b67f7dec1e45483d5dcbfcf3fe7c",
+      "functions_compared": 80,
+      "exact": 0,
+      "best_differing_bytes": {
+        "RSP_LLV": 20,
+        "RSP_LDV": 29,
+        "RSP_SLV": 10,
+        "RSP_SDV": 5
+      }
+    },
+    "types-result.json": {
+      "sha256": "d3c879c88c82775b7fa6eb5a3694d2a5b1b853fd4ac1d33546196dbea7a55fc9",
+      "functions_compared": 20,
+      "exact": 0,
+      "best_differing_bytes": {
+        "RSP_LLV": 20,
+        "RSP_LDV": 29,
+        "RSP_SLV": 10,
+        "RSP_SDV": 5
+      }
+    },
+    "helpers-result.json": {
+      "sha256": "e4db40dc90ec0dd7d91bf2653208611c019b12e47717789629f5f8d262a98d84",
+      "functions_compared": 18,
+      "exact": 0,
+      "best_differing_bytes": {
+        "RSP_LLV": 20,
+        "RSP_LDV": 29,
+        "RSP_SLV": 10,
+        "RSP_SDV": 5
+      }
+    },
+    "casts-result.json": {
+      "sha256": "96deabd299e8b49455e4b5141b2f73969fdb158b30e9bb1b05f6336c155826ad",
+      "functions_compared": 24,
+      "exact": 0,
+      "best_differing_bytes": {
+        "RSP_LLV": 20,
+        "RSP_LDV": 29,
+        "RSP_SLV": 10,
+        "RSP_SDV": 5
+      }
+    }
+  },
+  "processor_controls": [
+    {
+      "flag": "G3",
+      "exact": 56,
+      "bytes": 1152,
+      "warnings": "baseline.cpp\nbaseline.cpp(92) : warning C4244: 'initializing' : conversion from 'CpuS64' to 'CpuS32', possible loss of data\nbaseline.cpp(244) : warning C4244: '=' : conversion from 'CpuU16' to 'CpuU8', possible loss of data\n",
+      "small": [
+        [
+          "RSP_LLV",
+          160,
+          137
+        ],
+        [
+          "RSP_LDV",
+          240,
+          219
+        ],
+        [
+          "RSP_SLV",
+          160,
+          129
+        ],
+        [
+          "RSP_SDV",
+          224,
+          205
+        ]
+      ]
+    },
+    {
+      "flag": "G4",
+      "exact": 56,
+      "bytes": 1152,
+      "warnings": "baseline.cpp\nbaseline.cpp(92) : warning C4244: 'initializing' : conversion from 'CpuS64' to 'CpuS32', possible loss of data\nbaseline.cpp(244) : warning C4244: '=' : conversion from 'CpuU16' to 'CpuU8', possible loss of data\n",
+      "small": [
+        [
+          "RSP_LLV",
+          160,
+          137
+        ],
+        [
+          "RSP_LDV",
+          240,
+          219
+        ],
+        [
+          "RSP_SLV",
+          160,
+          129
+        ],
+        [
+          "RSP_SDV",
+          224,
+          205
+        ]
+      ]
+    },
+    {
+      "flag": "G5",
+      "exact": 56,
+      "bytes": 1152,
+      "warnings": "baseline.cpp\nbaseline.cpp(92) : warning C4244: 'initializing' : conversion from 'CpuS64' to 'CpuS32', possible loss of data\nbaseline.cpp(244) : warning C4244: '=' : conversion from 'CpuU16' to 'CpuU8', possible loss of data\n",
+      "small": [
+        [
+          "RSP_LLV",
+          160,
+          137
+        ],
+        [
+          "RSP_LDV",
+          240,
+          219
+        ],
+        [
+          "RSP_SLV",
+          160,
+          129
+        ],
+        [
+          "RSP_SDV",
+          224,
+          205
+        ]
+      ]
+    },
+    {
+      "flag": "G6",
+      "exact": 145,
+      "bytes": 16192,
+      "warnings": "baseline.cpp\nbaseline.cpp(92) : warning C4244: 'initializing' : conversion from 'CpuS64' to 'CpuS32', possible loss of data\nbaseline.cpp(244) : warning C4244: '=' : conversion from 'CpuU16' to 'CpuU8', possible loss of data\n",
+      "small": [
+        [
+          "RSP_LLV",
+          160,
+          20
+        ],
+        [
+          "RSP_LDV",
+          240,
+          29
+        ],
+        [
+          "RSP_SLV",
+          160,
+          10
+        ],
+        [
+          "RSP_SDV",
+          224,
+          5
+        ]
+      ]
+    },
+    {
+      "flag": "G7",
+      "exact": 145,
+      "bytes": 16192,
+      "warnings": "baseline.cpp\nbaseline.cpp(92) : warning C4244: 'initializing' : conversion from 'CpuS64' to 'CpuS32', possible loss of data\nbaseline.cpp(244) : warning C4244: '=' : conversion from 'CpuU16' to 'CpuU8', possible loss of data\ncl : Command line warning D4002 : ignoring unknown option '/G7'\n",
+      "small": [
+        [
+          "RSP_LLV",
+          160,
+          20
+        ],
+        [
+          "RSP_LDV",
+          240,
+          29
+        ],
+        [
+          "RSP_SLV",
+          160,
+          10
+        ],
+        [
+          "RSP_SDV",
+          224,
+          5
+        ]
+      ]
+    }
+  ],
+  "processor_conclusion": "/G3, /G4 and /G5 regress to56/177 complete matches. /G6 equals default145/177. /G7 is explicitly ignored with warning D4002 and is not an independent supported control.",
+  "files": [
+    {
+      "path": "/root/.ai-tmp/audio-small-copies.bs9s3uqv/probe.py",
+      "sha256": "d707265e412722e64687f955dec184dcb58237257b97b409e91ad92b948def13"
+    },
+    {
+      "path": "/root/.ai-tmp/audio-small-copies.bs9s3uqv/probe-types.py",
+      "sha256": "b42785dcb19911159e684fe0f5a4f8ed70d1c39ca3c2818096440d0d4badfd3d"
+    },
+    {
+      "path": "/root/.ai-tmp/audio-small-copies.bs9s3uqv/probe-helper.py",
+      "sha256": "13caafb33797cf49e95ba4aec50f6dad4f42fabe52046d9da48448efc75eac68"
+    },
+    {
+      "path": "/root/.ai-tmp/audio-small-copies.bs9s3uqv/probe-casts.py",
+      "sha256": "2c72ab75e5b9209142359848295d20c596894e2a862d2c5b2e6b5708e8971022"
+    },
+    {
+      "path": "/root/.ai-tmp/audio-small-copies.bs9s3uqv/cpu-controls.py",
+      "sha256": "6765e414514cd5b5797fa6d5e186ccd8a269186988e183fedb11643aea3e3355"
+    },
+    {
+      "path": "/root/.ai-tmp/audio-small-copies.bs9s3uqv/probe.cpp",
+      "sha256": "2745efbbc4f427795da0ff3e6d9ca2879338fe76803327e33753a038a4b1042f"
+    },
+    {
+      "path": "/root/.ai-tmp/audio-small-copies.bs9s3uqv/types.cpp",
+      "sha256": "5b76bc2dfabe1512d85ac2590f8b88aedcf6a66c455486fac6e9a182984ce1e1"
+    },
+    {
+      "path": "/root/.ai-tmp/audio-small-copies.bs9s3uqv/helpers.cpp",
+      "sha256": "fedc0b233444165fdfbad1e467e020f6875399c0c9b15995ea6aaa84baac0874"
+    },
+    {
+      "path": "/root/.ai-tmp/audio-small-copies.bs9s3uqv/casts.cpp",
+      "sha256": "cfa5cbecb77730d71b91205c144607423ab8a0e2be4f1fd391720abe3f4cfa47"
+    },
+    {
+      "path": "/root/.ai-tmp/audio-small-copies.bs9s3uqv/RSP-current.json",
+      "sha256": "4f7cccd659e6fbb2288c373e6d8eab589152b292c9c59e4c100ee457cca96c9c"
+    }
+  ]
+}
