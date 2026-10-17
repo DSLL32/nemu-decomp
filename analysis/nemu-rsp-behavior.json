@@ -1,0 +1,72 @@
+{
+  "status": "passed",
+  "evidence_type": "actual_PE_behavioral_differential_only_not_byte_equality",
+  "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+  "rebuilt_sha256": "2e63c785446addc66d243760a203769da98d35278c7831bcd857ff040a8d811b",
+  "rebuilt_map_sha256": "048e1caa82ca6e91bb1be6ca6a47499c9a741e2e98f49f0e76bdcb9cda0baced",
+  "script_sha256": "bfc979e83b1f4262a9c8f0246b1be77726b72a5016c5f7f7ec44fd6a95d736f3",
+  "metadata_sha256": "225f62c23831616405bd7cdad8475fde83af51d17299bc502c6190ea6f3bd086",
+  "seed": 5395280,
+  "random_cases_per_opcode": 128,
+  "selected_functions": null,
+  "tests": 13218,
+  "passed": 13218,
+  "cases_by_function": {
+    "RSP_VectorMultiply": 6146,
+    "RSP_VADD": 384,
+    "RSP_VSUB": 384,
+    "RSP_VSUT": 384,
+    "RSP_VABS": 384,
+    "RSP_VADDC": 384,
+    "RSP_VSUBC": 384,
+    "RSP_VCL": 896,
+    "RSP_LoadVector": 1936,
+    "RSP_StoreVector": 1936
+  },
+  "failures_by_function": {},
+  "failures_by_opcode": {},
+  "original_results_sha256": "0a65fe039037f61c8f9930530792c2da21aa25ac1a73bcdb58c106a5f59a4027",
+  "rebuilt_results_sha256": "0a65fe039037f61c8f9930530792c2da21aa25ac1a73bcdb58c106a5f59a4027",
+  "write_coverage": "Every emulated write is checked against the complete compared state objects or the emulated stack.",
+  "external_callbacks": "No callbacks are simulated. Reaching error reporting or physical-memory dependency routines fails the case.",
+  "limitations": [
+    "Differential equality can preserve original bugs; this is not an RSP architectural conformance test.",
+    "Only the selected vector handlers and reachable helpers are exercised, not the complete RSP dispatcher or host UI.",
+    "Invalid vector memory opcode 10 and vector-register-array overrun are excluded.",
+    "The standalone candidate may contain dependency stubs, but reaching the listed dependency functions is a test failure."
+  ],
+  "failures": [],
+  "rerun": "python3 scripts/verify_nemu_rsp.py --image PATH/TO/nemu64.exe --map PATH/TO/nemu64.map --report PATH/TO/rsp-behavior.json",
+  "candidate_kind": "VC7 /O2 /Ob1 /ML /GL /LTCG standalone RSP diagnostic DLL; linked dependency stubs are unreachable in every passing case.",
+  "coverage": [
+    "All 16 multiply/accumulate opcodes across all 16 vector element modes, signed/unsigned 16-bit edge inputs and signed 48-bit accumulator boundaries.",
+    "Destination/source alias patterns, preserved accumulator storage bits, edge and seeded random vectors, full flags and guest-visible state.",
+    "All 32 combinations of the five VCL input flag bits in every lane; 896 VCL cases total.",
+    "Every supported vector load/store kind with all 16 element indexes, negative and positive displacement limits, 4 KiB wrap, and enabled/disabled/inhibited memory breakpoints."
+  ],
+  "recovered_regression": {
+    "function": "RSP_VectorMultiply",
+    "opcode": "0x0e (VMADN)",
+    "instruction": "0x4a0208ce",
+    "evidence": "Original switch table 0x401620 maps kind 4 to 0x401290 and kind 6 to 0x401298: productShift=-16 in case 4 falls into the shared unsigned clamp bounds in case 6.",
+    "prior_failures": 362,
+    "prior_tests": 13218,
+    "minimal_cases": [
+      {
+        "accumulator_low48": "0x000080000000",
+        "original_destination": "0xffff",
+        "prior_rebuilt_destination": "0x7fff"
+      },
+      {
+        "accumulator_low48": "0xffff7fffffff",
+        "original_destination": "0x0000",
+        "prior_rebuilt_destination": "0x8000"
+      }
+    ],
+    "source_fix": "Restore case-4 fallthrough into case-6 clampMin=0 and clampMax=0xffff."
+  },
+  "harness_rejection_checks": [
+    "Calling original/rebuilt RSP_VADDB is rejected at ReportCPUError instead of executing a diagnostic stub.",
+    "An original vector load beyond the complete vector-register array is rejected by the emulated write-range guard."
+  ]
+}
