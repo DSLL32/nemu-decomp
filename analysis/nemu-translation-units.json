@@ -1,0 +1,559 @@
+{
+  "original": "master/nemu64.exe",
+  "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+  "status": "Read-only source-organization evidence; all seven additional partitions remain scratch hypotheses.",
+  "original_cpp_ltcg_contributions": 27,
+  "baseline_cpp_ltcg_contributions": 20,
+  "baseline": {
+    "fixture": "/root/.ai-tmp/nemu-complete-relocs.q7uf3wsx",
+    "sha256": "1d2f1ea7e77737551c1125adfdc9d3895232587a81a9a8149dc1815cf8dd9250",
+    "parent_artifact": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/5d7b30487b460005452b71de72aa71304a8b49f900fbe2fd068e4d29f707e06f"
+  },
+  "method": "Compile complete unchanged C++ function definitions in meaningful separate units using the normal stock VC7 toolchain and unchanged linker inputs. No empty units, artificial source uses, byte patches or additional data.",
+  "partitions": [
+    {
+      "provisional_name": "CPUFPU.cpp",
+      "prior_file": "CPU.cpp",
+      "original_code_bands": [
+        [
+          "0x40bfb0",
+          "0x40c9a0"
+        ]
+      ],
+      "evidence": "Contiguous COP1 dispatch handler family; depends on CPU floating-register interfaces and its own decoding macros.",
+      "transform": "Move the existing self-contained COP1 source block, preserving every definition and macro.",
+      "scratch_source_sha256": "0991f82fa3aa6ae0ca9ff141e35449f1d812a74ee7781c50fd10f2991ad44ddc",
+      "promoted": false,
+      "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof"
+    },
+    {
+      "provisional_name": "DynarecTracking.cpp",
+      "prior_file": "Dynarec.cpp",
+      "original_code_bands": [
+        [
+          "0x406a60",
+          "0x4070b0"
+        ]
+      ],
+      "evidence": "Nine adjacent state-change recording functions use UndoData and tracking state, independently of instruction encoding.",
+      "transform": "Move TrackWord, TrackDoubleWord, TrackGPR, TrackFPR, TrackRegister64, TrackRegister32, TrackMemory, TrackProgramCounter and TrackInstructionChanges unchanged.",
+      "scratch_source_sha256": "f22cd5e7de10a50722f11e308808ad7263edbb79e0f3f15bb6256a656a5e085b",
+      "promoted": false,
+      "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof"
+    },
+    {
+      "provisional_name": "DynarecEmitter.cpp",
+      "prior_file": "Dynarec.cpp",
+      "original_code_bands": [
+        [
+          "0x4070b0",
+          "0x408330"
+        ]
+      ],
+      "evidence": "Typed intermediate-instruction record construction and wrappers form a contiguous helper family with one AddJumpTarget diagnostic literal.",
+      "transform": "Move the independently mapped function definitions in this band, preserving bodies and native-address order. Low-level EmitByte/EmitDword helpers used by AssembleInstructions remain with that caller.",
+      "scratch_source_sha256": "978d2e889e10068956eb092c884c461392378692b03cb7eaca66e730e4551949",
+      "promoted": false,
+      "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof"
+    },
+    {
+      "provisional_name": "RSPReciprocal.cpp",
+      "prior_file": "RSP.cpp",
+      "original_code_bands": [
+        [
+          "0x406820",
+          "0x406a60"
+        ]
+      ],
+      "evidence": "Reciprocal arithmetic and lookup-table initialization/diagnostics are independent of opcode-field decoding. RSP.h already declares their shared state and interfaces.",
+      "transform": "Move RSP_Reciprocal and RSP_InitializeReciprocalTable unchanged; leave instruction decoding in RSP.cpp. Centralized storage placement stays fixed.",
+      "scratch_source_sha256": "be7ab260eb368fab0461ea2f67ca6fbdc5cc0c5fbfa6739b1e5e11bee1aec739",
+      "promoted": false,
+      "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof"
+    },
+    {
+      "provisional_name": "CPUExecution.cpp",
+      "prior_file": "CPU.cpp",
+      "original_code_bands": [
+        [
+          "0x409e00",
+          "0x409e80"
+        ],
+        [
+          "0x40c9a0",
+          "0x40d590"
+        ]
+      ],
+      "evidence": "The execution loop owns scheduling, peripheral timing, debugger events and its sole inline interrupt helper, distinct from opcode handlers.",
+      "transform": "Move ExecuteInterpreter and ReportInvalidOpcode plus their used RaisePendingInterrupt inline helper and netplay import declaration. No function body changes.",
+      "scratch_source_sha256": "0e839605e4885f9f2a5ca1d1fdce143ae84b1e55d9cd334f15df910e01e12c19",
+      "promoted": false,
+      "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof"
+    },
+    {
+      "provisional_name": "CIC.cpp",
+      "prior_file": "PIF.cpp",
+      "original_code_bands": [
+        [
+          "0x4202d0",
+          "0x4205a0"
+        ]
+      ],
+      "evidence": "Four challenge/history routines and their private byte-swap helper consume CIC lookup data and a distinct diagnostic file literal.",
+      "transform": "Move FindCICInput, SaveCICInput, CICUseTable1 and CIC6105Challenge with the ByteSwap helper unchanged.",
+      "scratch_source_sha256": "f5571582d25177b13a49f024a98eaca72a58703460edcd019ff77cb019c45095",
+      "promoted": false,
+      "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof"
+    },
+    {
+      "provisional_name": "SaveDevices.cpp",
+      "prior_file": "PIF.cpp",
+      "original_code_bands": [
+        [
+          "0x420df0",
+          "0x421210"
+        ]
+      ],
+      "evidence": "Eight file-backed EEPROM, memory-pack, SRAM and input-movie routines are separate from the PIF command decoder.",
+      "transform": "Move SaveEEPROM, SaveMemPack, RecordMovieInput, PlayMovieInput, StopMovie, SaveSRAM, WriteSRAM and ReadSRAM unchanged.",
+      "scratch_source_sha256": "2dfa457a028ecfc526fd5594b24ed7e27e69af87acfced65366ebe431d5409da",
+      "promoted": false,
+      "boundary_confidence": "semantic_partition_compatible_with_layout_not_historical_TU_proof"
+    }
+  ],
+  "probes": [
+    {
+      "name": "cop1",
+      "candidate": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/split-cop1/split.exe",
+      "sha256": "1f0fbef1d5a6f55e61bf148f70b89c872194443d18d7a565f28298a8f3406a26",
+      "comparison": {
+        "scope": "Reconstructed-build layout invariance; no original-image equality claim.",
+        "baseline": "/root/.ai-tmp/nemu-complete-relocs.q7uf3wsx/nemu64.exe",
+        "candidate": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/split-cop1/split.exe",
+        "baseline_sha256": "1d2f1ea7e77737551c1125adfdc9d3895232587a81a9a8149dc1815cf8dd9250",
+        "candidate_sha256": "1f0fbef1d5a6f55e61bf148f70b89c872194443d18d7a565f28298a8f3406a26",
+        "fixed_code_and_data_publics": 1381,
+        "readonly_anchors": [],
+        "moved_publics_not_used_for_normalization": [],
+        "sections": [
+          {
+            "name": ".text",
+            "compared_raw_bytes": 192512,
+            "relocated_readonly_references": [],
+            "residual_different_bytes": 12,
+            "first_difference_rvas": [
+              "0x18b69",
+              "0x18b6a",
+              "0x18b6b",
+              "0x18b6c",
+              "0x18b6f",
+              "0x18b70",
+              "0x18b71",
+              "0x18b72",
+              "0x18ef4",
+              "0x18efa",
+              "0x18eff",
+              "0x18f00"
+            ]
+          },
+          {
+            "name": ".data",
+            "compared_raw_bytes": 241664,
+            "relocated_readonly_references": [],
+            "residual_different_bytes": 0,
+            "first_difference_rvas": []
+          }
+        ],
+        "passed": false
+      },
+      "sections": [
+        {
+          "name": ".text",
+          "same_virtual_extent": true,
+          "compared_raw_bytes": 192512,
+          "raw_different_bytes": 12
+        },
+        {
+          "name": ".rdata",
+          "same_virtual_extent": true,
+          "compared_raw_bytes": 61440,
+          "raw_different_bytes": 0
+        },
+        {
+          "name": ".data",
+          "same_virtual_extent": true,
+          "compared_raw_bytes": 241664,
+          "raw_different_bytes": 0
+        },
+        {
+          "name": ".rsrc",
+          "same_virtual_extent": true,
+          "compared_raw_bytes": 4296704,
+          "raw_different_bytes": 0
+        }
+      ],
+      "commands": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/cop1-split-commands.json",
+      "source_snapshot": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/split-cop1"
+    },
+    {
+      "name": "tracking",
+      "candidate": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/split-tracking/split.exe",
+      "sha256": "a374df1ea5ae3ea2910322ab3c30c1ee606c097b9a5b1d8f457d30457d89a0be",
+      "comparison": {
+        "scope": "Reconstructed-build layout invariance; no original-image equality claim.",
+        "baseline": "/root/.ai-tmp/nemu-complete-relocs.q7uf3wsx/nemu64.exe",
+        "candidate": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/split-tracking/split.exe",
+        "baseline_sha256": "1d2f1ea7e77737551c1125adfdc9d3895232587a81a9a8149dc1815cf8dd9250",
+        "candidate_sha256": "a374df1ea5ae3ea2910322ab3c30c1ee606c097b9a5b1d8f457d30457d89a0be",
+        "fixed_code_and_data_publics": 1381,
+        "readonly_anchors": [],
+        "moved_publics_not_used_for_normalization": [],
+        "sections": [
+          {
+            "name": ".text",
+            "compared_raw_bytes": 192512,
+            "relocated_readonly_references": [],
+            "residual_different_bytes": 0,
+            "first_difference_rvas": []
+          },
+          {
+            "name": ".data",
+            "compared_raw_bytes": 241664,
+            "relocated_readonly_references": [],
+            "residual_different_bytes": 0,
+            "first_difference_rvas": []
+          }
+        ],
+        "passed": true
+      },
+      "sections": [
+        {
+          "name": ".text",
+          "same_virtual_extent": true,
+          "compared_raw_bytes": 192512,
+          "raw_different_bytes": 0
+        },
+        {
+          "name": ".rdata",
+          "same_virtual_extent": true,
+          "compared_raw_bytes": 61440,
+          "raw_different_bytes": 0
+        },
+        {
+          "name": ".data",
+          "same_virtual_extent": true,
+          "compared_raw_bytes": 241664,
+          "raw_different_bytes": 0
+        },
+        {
+          "name": ".rsrc",
+          "same_virtual_extent": true,
+          "compared_raw_bytes": 4296704,
+          "raw_different_bytes": 0
+        }
+      ],
+      "commands": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/tracking-split-commands.json",
+      "source_snapshot": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/split-tracking"
+    },
+    {
+      "name": "emitter",
+      "candidate": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/split-emitter/split.exe",
+      "sha256": "547264615d72dd999c6aa90cf4128f8677413abb174bf6b9d4e7b2580af2954b",
+      "comparison": {
+        "scope": "Reconstructed-build layout invariance; no original-image equality claim.",
+        "baseline": "/root/.ai-tmp/nemu-complete-relocs.q7uf3wsx/nemu64.exe",
+        "candidate": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/split-emitter/split.exe",
+        "baseline_sha256": "1d2f1ea7e77737551c1125adfdc9d3895232587a81a9a8149dc1815cf8dd9250",
+        "candidate_sha256": "547264615d72dd999c6aa90cf4128f8677413abb174bf6b9d4e7b2580af2954b",
+        "fixed_code_and_data_publics": 1381,
+        "readonly_anchors": [],
+        "moved_publics_not_used_for_normalization": [],
+        "sections": [
+          {
+            "name": ".text",
+            "compared_raw_bytes": 192512,
+            "relocated_readonly_references": [],
+            "residual_different_bytes": 0,
+            "first_difference_rvas": []
+          },
+          {
+            "name": ".data",
+            "compared_raw_bytes": 241664,
+            "relocated_readonly_references": [],
+            "residual_different_bytes": 0,
+            "first_difference_rvas": []
+          }
+        ],
+        "passed": true
+      },
+      "sections": [
+        {
+          "name": ".text",
+          "same_virtual_extent": true,
+          "compared_raw_bytes": 192512,
+          "raw_different_bytes": 0
+        },
+        {
+          "name": ".rdata",
+          "same_virtual_extent": true,
+          "compared_raw_bytes": 61440,
+          "raw_different_bytes": 0
+        },
+        {
+          "name": ".data",
+          "same_virtual_extent": true,
+          "compared_raw_bytes": 241664,
+          "raw_different_bytes": 0
+        },
+        {
+          "name": ".rsrc",
+          "same_virtual_extent": true,
+          "compared_raw_bytes": 4296704,
+          "raw_different_bytes": 0
+        }
+      ],
+      "commands": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/emitter-split-commands.json",
+      "source_snapshot": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/split-emitter"
+    },
+    {
+      "name": "dynarec",
+      "candidate": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/split-dynarec/split.exe",
+      "sha256": "216cbf91e84c5436cd019db166bd51898d281b9d68030171c6cf82d838ba2dc0",
+      "comparison": {
+        "scope": "Reconstructed-build layout invariance; no original-image equality claim.",
+        "baseline": "/root/.ai-tmp/nemu-complete-relocs.q7uf3wsx/nemu64.exe",
+        "candidate": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/split-dynarec/split.exe",
+        "baseline_sha256": "1d2f1ea7e77737551c1125adfdc9d3895232587a81a9a8149dc1815cf8dd9250",
+        "candidate_sha256": "216cbf91e84c5436cd019db166bd51898d281b9d68030171c6cf82d838ba2dc0",
+        "fixed_code_and_data_publics": 1381,
+        "readonly_anchors": [],
+        "moved_publics_not_used_for_normalization": [],
+        "sections": [
+          {
+            "name": ".text",
+            "compared_raw_bytes": 192512,
+            "relocated_readonly_references": [],
+            "residual_different_bytes": 12,
+            "first_difference_rvas": [
+              "0x18b69",
+              "0x18b6a",
+              "0x18b6b",
+              "0x18b6c",
+              "0x18b6f",
+              "0x18b70",
+              "0x18b71",
+              "0x18b72",
+              "0x18f26",
+              "0x18f2c",
+              "0x18f31",
+              "0x18f32"
+            ]
+          },
+          {
+            "name": ".data",
+            "compared_raw_bytes": 241664,
+            "relocated_readonly_references": [],
+            "residual_different_bytes": 0,
+            "first_difference_rvas": []
+          }
+        ],
+        "passed": false
+      },
+      "sections": [
+        {
+          "name": ".text",
+          "same_virtual_extent": true,
+          "compared_raw_bytes": 192512,
+          "raw_different_bytes": 12
+        },
+        {
+          "name": ".rdata",
+          "same_virtual_extent": true,
+          "compared_raw_bytes": 61440,
+          "raw_different_bytes": 0
+        },
+        {
+          "name": ".data",
+          "same_virtual_extent": true,
+          "compared_raw_bytes": 241664,
+          "raw_different_bytes": 0
+        },
+        {
+          "name": ".rsrc",
+          "same_virtual_extent": true,
+          "compared_raw_bytes": 4296704,
+          "raw_different_bytes": 0
+        }
+      ],
+      "commands": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/dynarec-split-commands.json",
+      "source_snapshot": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/split-dynarec"
+    },
+    {
+      "name": "three_core_splits",
+      "candidate": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/core-partitions/core-partitions.exe",
+      "sha256": "0abfa2a9e26a7650a053f7affcbef9579b677530b73d6d465e73a0256dff1420",
+      "comparison": {
+        "scope": "Reconstructed-build layout invariance; no original-image equality claim.",
+        "baseline": "/root/.ai-tmp/nemu-complete-relocs.q7uf3wsx/nemu64.exe",
+        "candidate": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/core-partitions/core-partitions.exe",
+        "baseline_sha256": "1d2f1ea7e77737551c1125adfdc9d3895232587a81a9a8149dc1815cf8dd9250",
+        "candidate_sha256": "0abfa2a9e26a7650a053f7affcbef9579b677530b73d6d465e73a0256dff1420",
+        "fixed_code_and_data_publics": 1381,
+        "readonly_anchors": [],
+        "moved_publics_not_used_for_normalization": [],
+        "sections": [
+          {
+            "name": ".text",
+            "compared_raw_bytes": 192512,
+            "relocated_readonly_references": [],
+            "residual_different_bytes": 12,
+            "first_difference_rvas": [
+              "0x18b69",
+              "0x18b6a",
+              "0x18b6b",
+              "0x18b6c",
+              "0x18b6f",
+              "0x18b70",
+              "0x18b71",
+              "0x18b72",
+              "0x18ef4",
+              "0x18efa",
+              "0x18eff",
+              "0x18f00"
+            ]
+          },
+          {
+            "name": ".data",
+            "compared_raw_bytes": 241664,
+            "relocated_readonly_references": [],
+            "residual_different_bytes": 0,
+            "first_difference_rvas": []
+          }
+        ],
+        "passed": false
+      },
+      "sections": [
+        {
+          "name": ".text",
+          "same_virtual_extent": true,
+          "compared_raw_bytes": 192512,
+          "raw_different_bytes": 12
+        },
+        {
+          "name": ".rdata",
+          "same_virtual_extent": true,
+          "compared_raw_bytes": 61440,
+          "raw_different_bytes": 0
+        },
+        {
+          "name": ".data",
+          "same_virtual_extent": true,
+          "compared_raw_bytes": 241664,
+          "raw_different_bytes": 0
+        },
+        {
+          "name": ".rsrc",
+          "same_virtual_extent": true,
+          "compared_raw_bytes": 4296704,
+          "raw_different_bytes": 0
+        }
+      ],
+      "commands": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/core-partitions-commands.json",
+      "source_snapshot": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/core-partitions"
+    },
+    {
+      "name": "seven_domain_splits",
+      "candidate": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/auxiliary-partitions/auxiliary.exe",
+      "sha256": "28b85f92bb2fc33ff917a7aace0748c65581439a3f6e0a0b1814161a4b68e62c",
+      "comparison": {
+        "scope": "Reconstructed-build layout invariance; no original-image equality claim.",
+        "baseline": "/root/.ai-tmp/nemu-complete-relocs.q7uf3wsx/nemu64.exe",
+        "candidate": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/auxiliary-partitions/auxiliary.exe",
+        "baseline_sha256": "1d2f1ea7e77737551c1125adfdc9d3895232587a81a9a8149dc1815cf8dd9250",
+        "candidate_sha256": "28b85f92bb2fc33ff917a7aace0748c65581439a3f6e0a0b1814161a4b68e62c",
+        "fixed_code_and_data_publics": 1381,
+        "readonly_anchors": [],
+        "moved_publics_not_used_for_normalization": [],
+        "sections": [
+          {
+            "name": ".text",
+            "compared_raw_bytes": 192512,
+            "relocated_readonly_references": [],
+            "residual_different_bytes": 8,
+            "first_difference_rvas": [
+              "0x18b69",
+              "0x18b6a",
+              "0x18b6b",
+              "0x18b6c",
+              "0x18b6f",
+              "0x18b70",
+              "0x18b71",
+              "0x18b72"
+            ]
+          },
+          {
+            "name": ".data",
+            "compared_raw_bytes": 241664,
+            "relocated_readonly_references": [],
+            "residual_different_bytes": 0,
+            "first_difference_rvas": []
+          }
+        ],
+        "passed": false
+      },
+      "sections": [
+        {
+          "name": ".text",
+          "same_virtual_extent": true,
+          "compared_raw_bytes": 192512,
+          "raw_different_bytes": 8
+        },
+        {
+          "name": ".rdata",
+          "same_virtual_extent": true,
+          "compared_raw_bytes": 61440,
+          "raw_different_bytes": 0
+        },
+        {
+          "name": ".data",
+          "same_virtual_extent": true,
+          "compared_raw_bytes": 241664,
+          "raw_different_bytes": 0
+        },
+        {
+          "name": ".rsrc",
+          "same_virtual_extent": true,
+          "compared_raw_bytes": 4296704,
+          "raw_different_bytes": 0
+        }
+      ],
+      "commands": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/auxiliary-commands.json",
+      "source_snapshot": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/auxiliary-partitions"
+    }
+  ],
+  "conclusions": [
+    "Three core splits produce 23 C++ LTCG records; all seven produce 27. Matching that count does not establish the original partitions or filenames.",
+    "Both combined experiments preserve the entire readonly, writable and resource sections byte for byte, and all 1,381 common code/data public addresses.",
+    "Tracking alone and emitter alone preserve every code byte. COP1 alone or both tracking/emitter together change 12 code bytes in WritePhysicalWord. All seven splits change 8 bytes in that same previously unmatched function.",
+    "The changed bytes are operand evaluation/register choices for additions; no moved addresses or relocations explain them. This demonstrates cross-unit LTCG context sensitivity and does not prove an improved original-image match.",
+    "All other native function bodies, including Branch, ResetCPU and CompareBrowserItems, remain identical to their pinned baseline bodies. No claim is made about later source revisions.",
+    "All literal/asset/float placements stay unchanged; the generated 4294967296.0f constant remains at 43E04C instead of target 43E01C.",
+    "No partition is promoted solely to reproduce the Rich contribution count. Original file organization remains non-unique."
+  ],
+  "batch_compilation_control": {
+    "proof": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/batch-invariance.json",
+    "commands": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/batch-commands.json",
+    "result": "Compiling all 20 inputs in one stock cl invocation changes intermediate object hashes but leaves every byte of all four native program sections identical; no function-body effect."
+  },
+  "generated_float_include_control": {
+    "commands": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/include-float-command.json",
+    "log": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/include-float-link.log",
+    "result": "Stock /INCLUDE:__real@4f800000 fails with unresolved external before LTCG; no output or workaround promoted."
+  },
+  "limitations": [
+    "Semantic code bands are independently observed responsibilities, not recovered compiler contribution boundaries.",
+    "Original Rich count constrains the number of compilation records but does not recover their names, file contents or source order.",
+    "Current centralized initialized/zero-storage units themselves are explicit inferred organization.",
+    "Scratch probes use a frozen baseline predating subsequent matched function refinements; newer source must be restaged and compared before any promotion."
+  ]
+}

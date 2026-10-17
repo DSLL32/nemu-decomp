@@ -425,5 +425,62 @@
       "generated_float_va": "0x43e04c",
       "proof": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/explicit-float-invariance.json"
     }
-  ]
+  ],
+  "subsequent_integrated_build": {
+    "fixture": "/root/.ai-tmp/nemu-complete-relocs.ko06ekj6",
+    "exe_sha256": "4f611be1796bf4fd8930fa7c179973b3b310684948bd334d2795d5456c361247",
+    "map_sha256": "0b991f03eb636398a3dc08f83a781163cb7735d34477990ac5a6c950355bb18f",
+    "parent_artifact": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/e1a1292540d8bae84e649df80d8dd5cc9509dc90864c01ee8b63b7a06c7e0f78",
+    "literal_report": "/root/.ai-tmp/nemu-rdata-integrate.nf59jomo/latest-rdata.json",
+    "unique_literals_at_original_addresses": 493,
+    "application_literals_at_original_addresses": 453,
+    "remaining_unique_literal_placements": [
+      {
+        "symbol": "??_C@_05NBHGANLM@?2cod?2?$AA@",
+        "owner": "RuntimeSignatures.obj",
+        "text": "\\cod\\\u0000",
+        "original_va": "0x431fb4",
+        "candidate_va": "0x431fac"
+      },
+      {
+        "symbol": "??_C@_0EM@KHBGAJLM@Rom?5and?5Zip?5files?$AA?$CK?4zip?$DL?$CK?4?$DP64?$DL?$CK?4@",
+        "owner": "WinMain.obj",
+        "text": "Rom and Zip files\u0000*.zip;*.?64;*.rom;*.usa;*.pal;*.eur;*.bin\u0000All files\u0000*.*\u0000\u0000\u0000",
+        "original_va": "0x4330c8",
+        "candidate_va": "0x4330b8"
+      },
+      {
+        "symbol": "??_C@_0M@PICIMBAM@Open?5rom?4?4?4?$AA@",
+        "owner": "WinMain.obj",
+        "text": "Open rom...\u0000",
+        "original_va": "0x433114",
+        "candidate_va": "0x433104"
+      },
+      {
+        "symbol": "??_C@_0P@JANIMIII@Closing?5rom?4?4?4?$AA@",
+        "owner": "WinMain.obj",
+        "text": "Closing rom...\u0000",
+        "original_va": "0x4330b4",
+        "candidate_va": "0x433110"
+      },
+      {
+        "symbol": "??_C@_0BF@BBHJOAEM@SP?5DMA?5out?5of?5bounds?$AA@",
+        "owner": "Memory.obj",
+        "text": "SP DMA out of bounds\u0000",
+        "original_va": "0x434610",
+        "candidate_va": "0x4345e4"
+      },
+      {
+        "symbol": "??_C@_0CJ@GGBIDPBO@Error?3?5Start?$CLSize?5of?5sp?5dma?5not?5@",
+        "owner": "Memory.obj",
+        "text": "Error: Start+Size of sp dma not in rdram\u0000",
+        "original_va": "0x4345e4",
+        "candidate_va": "0x4345fc"
+      }
+    ],
+    "changes": "Includes independently owned RefreshRomBrowser error/restart source structure and CPUHostException outer switch; their complete code invariance is recorded by their owners.",
+    "generated_float_original_va": "0x43e01c",
+    "generated_float_candidate_va": "0x43e04c"
+  },
+  "translation_unit_evidence": "analysis/nemu-translation-units.json"
 }
