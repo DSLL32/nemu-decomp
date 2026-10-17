@@ -90,6 +90,48 @@ def compare_data(path, pe, symbols):
     return rows
 
 
+def compare_initialized_contribution(path, pe, symbols):
+    """Check the complete source data contribution at its independently audited base.
+
+    This resolves the two text pointers for comparison only. It neither rewrites
+    an object nor asserts that the integrated linker selected these addresses.
+    """
+    bases = {'DirectSound.obj': 0x10038b18, 'AudioLog.obj': 0x100393c8}
+    obj = COFF(path)
+    section, = [s for s in obj.sections if s['name'] == '.data']
+    base = bases[path.name]
+    data = bytearray(section['data'])
+    relocations = []
+    for relocation in section['relocations']:
+        target, = symbols.candidates(relocation['symbol']['name'], path.name)
+        if relocation['type'] != 6 or target['address_basis'] != 'identified_symbol':
+            raise ValueError('Initialized-data pointer lacks independent target attribution')
+        offset = relocation['offset']
+        addend = struct.unpack_from('<I', data, offset)[0]
+        value = target['va'] + addend
+        original_value = struct.unpack('<I', original_bytes(pe, base + offset, 4))[0]
+        struct.pack_into('<I', data, offset, value)
+        relocations.append(dict(offset=offset, name=relocation['symbol']['name'],
+                                target_va=value, original_target_va=original_value,
+                                target_equal=value == original_value,
+                                address_basis=target['address_basis']))
+    layout = []
+    for symbol in obj.symbols:
+        if symbol['section'] != section['index'] or symbol['name'] == '.data':
+            continue
+        target, = symbols.candidates(symbol['name'], path.name)
+        layout.append(dict(name=symbol['name'], offset=symbol['value'],
+                           va=target['va'], layout_equal=base + symbol['value'] == target['va']))
+    expected = original_bytes(pe, base, len(data))
+    return dict(original_va=base, size=len(data),
+                original_sha256=hashlib.sha256(expected).hexdigest(),
+                source_data_sha256=hashlib.sha256(section['data']).hexdigest(),
+                resolved_data_sha256=hashlib.sha256(data).hexdigest(),
+                resolved_bytes_equal=data == expected, relocations=relocations,
+                symbol_layout=layout,
+                note='Complete native .data contribution; linker alignment and final linked addresses remain integration checks.')
+
+
 def resources(path, original):
     data = path.read_bytes()
     pos, result = 0, []
@@ -159,6 +201,8 @@ def main():
                                 ROOT / 'toolchains/vc7/bin/rc.exe']},
                   objects=objects, object_summary=summarize_objects(objects),
                   data={unit: compare_data(artifact / (unit + '.obj'), pe, symbols) for unit in UNITS},
+                  initialized_contributions={unit: compare_initialized_contribution(
+                      artifact / (unit + '.obj'), pe, symbols) for unit in UNITS},
                   resources=resources(artifact / 'Audio.res', pe.data),
                   notes=['Private filenames remain inferred; DirectSound/config grouping and the separate log unit are constrained by original initialized-data contributions and native compiler counts.',
                          'Function extents include original switch tables and natural compiler alignment.',
@@ -171,8 +215,11 @@ def main():
     print(f'Report: {output}')
     print(f"Complete aligned function-body matches: {sum(o['relocation_masked_matches'] for o in objects)}/{sum(len(o['functions']) for o in objects)}")
     print(f"Resource payloads exact: {all(r['payload_byte_exact'] for r in report['resources'])}")
-    return 0 if all(f.get('relocation_masked_equal') and not f.get('relocation_target_mismatch_count')
-                    for o in objects for f in o['functions']) else 1
+    functions_equal = all(f.get('relocation_masked_equal') and not f.get('relocation_target_mismatch_count')
+                          for o in objects for f in o['functions'])
+    data_equal = all(c['resolved_bytes_equal'] and all(s['layout_equal'] for s in c['symbol_layout'])
+                     for c in report['initialized_contributions'].values())
+    return 0 if functions_equal and data_equal and all(r['payload_byte_exact'] for r in report['resources']) else 1
 
 
 if __name__ == '__main__':

@@ -764,5 +764,617 @@
       ]
     }
   ],
-  "base_source_note": "The frozen control source predates promotion of the sample pass and SubmitAudio refinements. Its target differences are 50 and 440; current adopted source is compared separately in audio-dsound-comparison.json."
+  "base_source_note": "The frozen control source predates promotion of the sample pass and SubmitAudio refinements. Its target differences are 50 and 440; current adopted source is compared separately in audio-dsound-comparison.json.",
+  "native_group6_followup": {
+    "status": "Original-order DS/config C consolidation preserves all57 prior complete bodies. Three unmatched routines remain.",
+    "committed_grouping": "c172358",
+    "frozen_comparison": "/root/.ai-tmp/audio-dsound.6t4_1qa3/run.yfnrbc73",
+    "source_sha256": {
+      "src/audio/ahle_ds/DirectSound.c": "04a1371514d1eb9ebc52923e334cbdd8c021f21fb88f43bd639868c05daf1a6f",
+      "src/audio/ahle_ds/AudioLog.c": "cd3388766f9de563af27e1c22e7582461a5358c0bc90888fd023c6c87eb1fe9f",
+      "src/audio/ahle_ds/DirectSound.h": "d16ad18d42c6d3081e7fc1f99caa62638965c0e6a971fab987b43f141679fb38",
+      "src/audio/ahle_ds/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
+      "src/audio/ahle_ds/Audio.rc": "b551863a11341c7440df2425b5620cda11c9eaef312179e8dd925fd05b12bf93"
+    },
+    "probes": [
+      {
+        "artifact": "/root/.ai-tmp/audio-dsound.6t4_1qa3/intrinsic.9w61b5cs",
+        "report_sha256": "6426761ba3665a46182d4768fde0e2c28d32cdf7754030d6e91d53dd991bcbdf",
+        "results": [
+          {
+            "name": "explicit-mem",
+            "commands": [
+              "python3",
+              "/root/nemu-decomp/scripts/run_toolchain.py",
+              "vc7",
+              "cl",
+              "/nologo",
+              "/O2",
+              "/Ob1",
+              "/MT",
+              "/Oi-",
+              "/c",
+              "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\intrinsic.9w61b5cs\\explicit-mem\\DirectSound.obj",
+              "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\intrinsic.9w61b5cs\\explicit-mem\\DirectSound.c"
+            ],
+            "source_sha256": "581b0fe31a27fe91f22099ae2632f8fcaafa6aa88aaa88198989aa5c8f9315a5",
+            "object_sha256": "d9bbda4c770c9e1e137eb8f9cbd4823f0e6bcfd9b31c9c67fc086f9620bd60a2",
+            "matches": 46,
+            "total": 49,
+            "unmatched": [
+              {
+                "name": "_AudioError",
+                "original": 640,
+                "rebuilt": 640,
+                "differences": 19
+              },
+              {
+                "name": "_AllocateSoundBuffer",
+                "original": 96,
+                "rebuilt": 80,
+                "differences": 50
+              },
+              {
+                "name": "_SubmitAudio",
+                "original": 1120,
+                "rebuilt": 1120,
+                "differences": 421
+              }
+            ]
+          },
+          {
+            "name": "void-memset",
+            "commands": [
+              "python3",
+              "/root/nemu-decomp/scripts/run_toolchain.py",
+              "vc7",
+              "cl",
+              "/nologo",
+              "/O2",
+              "/Ob1",
+              "/MT",
+              "/c",
+              "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\intrinsic.9w61b5cs\\void-memset\\DirectSound.obj",
+              "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\intrinsic.9w61b5cs\\void-memset\\DirectSound.c"
+            ],
+            "source_sha256": "ab95a0432aad9a322365e344b2d1aa2f6409858b065bb1301c9b9b659f9ed269",
+            "object_sha256": "d2126b97fe8edde09ad8a0a35cd0f826c1c3350162c8c01b0ab5cc310eacbaf8",
+            "matches": 46,
+            "total": 49,
+            "unmatched": [
+              {
+                "name": "_AudioError",
+                "original": 640,
+                "rebuilt": 640,
+                "differences": 19
+              },
+              {
+                "name": "_AllocateSoundBuffer",
+                "original": 96,
+                "rebuilt": 80,
+                "differences": 50
+              },
+              {
+                "name": "_SubmitAudio",
+                "original": 1120,
+                "rebuilt": 1120,
+                "differences": 421
+              }
+            ]
+          },
+          {
+            "name": "zero-memory",
+            "commands": [
+              "python3",
+              "/root/nemu-decomp/scripts/run_toolchain.py",
+              "vc7",
+              "cl",
+              "/nologo",
+              "/O2",
+              "/Ob1",
+              "/MT",
+              "/c",
+              "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\intrinsic.9w61b5cs\\zero-memory\\DirectSound.obj",
+              "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\intrinsic.9w61b5cs\\zero-memory\\DirectSound.c"
+            ],
+            "source_sha256": "1ea9060f08ed5f3cd7f68b4c3c613f0e4ed84fad494fa9599ab7681c134ee224",
+            "object_sha256": "0306b01679a9322a5f822c18b788578183bf13b4bf91c2282ab08b1bf6236eb7",
+            "matches": 46,
+            "total": 49,
+            "unmatched": [
+              {
+                "name": "_AudioError",
+                "original": 640,
+                "rebuilt": 640,
+                "differences": 19
+              },
+              {
+                "name": "_AllocateSoundBuffer",
+                "original": 96,
+                "rebuilt": 80,
+                "differences": 50
+              },
+              {
+                "name": "_SubmitAudio",
+                "original": 1120,
+                "rebuilt": 1120,
+                "differences": 421
+              }
+            ]
+          },
+          {
+            "name": "inline-clear",
+            "commands": [
+              "python3",
+              "/root/nemu-decomp/scripts/run_toolchain.py",
+              "vc7",
+              "cl",
+              "/nologo",
+              "/O2",
+              "/Ob1",
+              "/MT",
+              "/c",
+              "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\intrinsic.9w61b5cs\\inline-clear\\DirectSound.obj",
+              "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\intrinsic.9w61b5cs\\inline-clear\\DirectSound.c"
+            ],
+            "source_sha256": "e7df1eb94431e032c1eef89fd509771f2b08335c7dc28f689120e04d1deff8f1",
+            "object_sha256": "ab2d554c0562342d3c4899487cc753172338709a76fed9780160770c9b3efd5b",
+            "matches": 46,
+            "total": 50,
+            "unmatched": [
+              {
+                "name": "_AudioError",
+                "original": 640,
+                "rebuilt": 640,
+                "differences": 19
+              },
+              {
+                "name": "_ZeroAudioBuffer",
+                "original": null,
+                "rebuilt": 32,
+                "differences": null
+              },
+              {
+                "name": "_AllocateSoundBuffer",
+                "original": 96,
+                "rebuilt": 80,
+                "differences": 50
+              },
+              {
+                "name": "_SubmitAudio",
+                "original": 1120,
+                "rebuilt": 1120,
+                "differences": 421
+              }
+            ]
+          },
+          {
+            "name": "explicit-inline-clear",
+            "commands": [
+              "python3",
+              "/root/nemu-decomp/scripts/run_toolchain.py",
+              "vc7",
+              "cl",
+              "/nologo",
+              "/O2",
+              "/Ob1",
+              "/MT",
+              "/Oi-",
+              "/c",
+              "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\intrinsic.9w61b5cs\\explicit-inline-clear\\DirectSound.obj",
+              "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\intrinsic.9w61b5cs\\explicit-inline-clear\\DirectSound.c"
+            ],
+            "source_sha256": "a595653ce1e32253182f40ed7de492fbe5ee90abc85c1dae98133c250628ee0b",
+            "object_sha256": "ada672d6fbd71f24b3dd35cae9342342f5f7ffcfdd5fb5947dd45dd66599c702",
+            "matches": 46,
+            "total": 50,
+            "unmatched": [
+              {
+                "name": "_AudioError",
+                "original": 640,
+                "rebuilt": 640,
+                "differences": 19
+              },
+              {
+                "name": "_ZeroAudioBuffer",
+                "original": null,
+                "rebuilt": 32,
+                "differences": null
+              },
+              {
+                "name": "_AllocateSoundBuffer",
+                "original": 96,
+                "rebuilt": 80,
+                "differences": 50
+              },
+              {
+                "name": "_SubmitAudio",
+                "original": 1120,
+                "rebuilt": 1120,
+                "differences": 421
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "artifact": "/root/.ai-tmp/audio-dsound.6t4_1qa3/timing-types.5juudrp3",
+        "report_sha256": "7274bc08207a82ee1c57467f1ba5cc82b1242ee7090f9acc24d832641c10694a",
+        "results": [
+          {
+            "name": "int-samples",
+            "commands": [
+              "python3",
+              "/root/nemu-decomp/scripts/run_toolchain.py",
+              "vc7",
+              "cl",
+              "/nologo",
+              "/O2",
+              "/Ob1",
+              "/MT",
+              "/c",
+              "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\timing-types.5juudrp3\\int-samples\\DirectSound.obj",
+              "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\timing-types.5juudrp3\\int-samples\\DirectSound.c"
+            ],
+            "source_sha256": "8591ed5f16992b76751c2721fa9ba323ac3108f25a8ca509933a2059df92ccab",
+            "object_sha256": "47fb233a1b79a7f22c3db13fcc06be6d372bc5cd89ce01c735f795389cb1416e",
+            "matches": 46,
+            "total": 49,
+            "unmatched": [
+              {
+                "name": "_AudioError",
+                "original": 640,
+                "rebuilt": 640,
+                "differences": 19
+              },
+              {
+                "name": "_AllocateSoundBuffer",
+                "original": 96,
+                "rebuilt": 80,
+                "differences": 50
+              },
+              {
+                "name": "_SubmitAudio",
+                "original": 1120,
+                "rebuilt": 1120,
+                "differences": 427
+              }
+            ]
+          },
+          {
+            "name": "long-cursors",
+            "commands": [
+              "python3",
+              "/root/nemu-decomp/scripts/run_toolchain.py",
+              "vc7",
+              "cl",
+              "/nologo",
+              "/O2",
+              "/Ob1",
+              "/MT",
+              "/c",
+              "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\timing-types.5juudrp3\\long-cursors\\DirectSound.obj",
+              "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\timing-types.5juudrp3\\long-cursors\\DirectSound.c"
+            ],
+            "source_sha256": "38cec27e2ae237f53d9bf7e8ff7ca56639d0427ea420582c9e190cdb9e724ca1",
+            "object_sha256": "5072ff2aef528e8f0419d13b4681bdad194cb8251f860181062d6a9eae9eb79e",
+            "matches": 46,
+            "total": 49,
+            "unmatched": [
+              {
+                "name": "_AudioError",
+                "original": 640,
+                "rebuilt": 640,
+                "differences": 19
+              },
+              {
+                "name": "_AllocateSoundBuffer",
+                "original": 96,
+                "rebuilt": 80,
+                "differences": 50
+              },
+              {
+                "name": "_SubmitAudio",
+                "original": 1120,
+                "rebuilt": 1120,
+                "differences": 421
+              }
+            ]
+          },
+          {
+            "name": "int-cursors",
+            "commands": [
+              "python3",
+              "/root/nemu-decomp/scripts/run_toolchain.py",
+              "vc7",
+              "cl",
+              "/nologo",
+              "/O2",
+              "/Ob1",
+              "/MT",
+              "/c",
+              "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\timing-types.5juudrp3\\int-cursors\\DirectSound.obj",
+              "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\timing-types.5juudrp3\\int-cursors\\DirectSound.c"
+            ],
+            "source_sha256": "a8e85330dd7b90948699575ebfc561942b89f7e05981159215c8c6e78fe05653",
+            "object_sha256": "3d5b6049c860df4bbd9b61d1fe553fa9d4c5a163fc6dc26d997d759088abb91b",
+            "matches": 46,
+            "total": 49,
+            "unmatched": [
+              {
+                "name": "_AudioError",
+                "original": 640,
+                "rebuilt": 640,
+                "differences": 19
+              },
+              {
+                "name": "_AllocateSoundBuffer",
+                "original": 96,
+                "rebuilt": 80,
+                "differences": 50
+              },
+              {
+                "name": "_SubmitAudio",
+                "original": 1120,
+                "rebuilt": 1120,
+                "differences": 421
+              }
+            ]
+          },
+          {
+            "name": "unsigned-int-cursors",
+            "commands": [
+              "python3",
+              "/root/nemu-decomp/scripts/run_toolchain.py",
+              "vc7",
+              "cl",
+              "/nologo",
+              "/O2",
+              "/Ob1",
+              "/MT",
+              "/c",
+              "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\timing-types.5juudrp3\\unsigned-int-cursors\\DirectSound.obj",
+              "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\timing-types.5juudrp3\\unsigned-int-cursors\\DirectSound.c"
+            ],
+            "source_sha256": "5bdeb9f9565b6e6aad42a1f492b8070a66ed98ddf6aa38975ce8f78c94a93919",
+            "object_sha256": "419bb3e846f8a8ca792c96797dfd2cb3a22269e79392f33ce7b71f7e233b3bc7",
+            "matches": 46,
+            "total": 49,
+            "unmatched": [
+              {
+                "name": "_AudioError",
+                "original": 640,
+                "rebuilt": 640,
+                "differences": 19
+              },
+              {
+                "name": "_AllocateSoundBuffer",
+                "original": 96,
+                "rebuilt": 80,
+                "differences": 50
+              },
+              {
+                "name": "_SubmitAudio",
+                "original": 1120,
+                "rebuilt": 1120,
+                "differences": 421
+              }
+            ]
+          },
+          {
+            "name": "int-samples-cursors",
+            "commands": [
+              "python3",
+              "/root/nemu-decomp/scripts/run_toolchain.py",
+              "vc7",
+              "cl",
+              "/nologo",
+              "/O2",
+              "/Ob1",
+              "/MT",
+              "/c",
+              "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\timing-types.5juudrp3\\int-samples-cursors\\DirectSound.obj",
+              "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\timing-types.5juudrp3\\int-samples-cursors\\DirectSound.c"
+            ],
+            "source_sha256": "1644903a96f1bcdb8c800e1a7a34f50d80c25dae29ad63c6c0a1448e47042d5e",
+            "object_sha256": "6ade8cd5398c344493b4f9a6f294c154de7d83a26e6d7a7aa347af13928a5d7d",
+            "matches": 46,
+            "total": 49,
+            "unmatched": [
+              {
+                "name": "_AudioError",
+                "original": 640,
+                "rebuilt": 640,
+                "differences": 19
+              },
+              {
+                "name": "_AllocateSoundBuffer",
+                "original": 96,
+                "rebuilt": 80,
+                "differences": 50
+              },
+              {
+                "name": "_SubmitAudio",
+                "original": 1120,
+                "rebuilt": 1120,
+                "differences": 427
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "artifact": "/root/.ai-tmp/audio-dsound.6t4_1qa3/error-order.1db_1i5t",
+        "report_sha256": "f6495c7047a2521339f95238e676f46b5d0ed3913439e252c26edc3f052954d9",
+        "results": [
+          {
+            "name": "message-first",
+            "commands": [
+              "python3",
+              "/root/nemu-decomp/scripts/run_toolchain.py",
+              "vc7",
+              "cl",
+              "/nologo",
+              "/O2",
+              "/Ob1",
+              "/MT",
+              "/c",
+              "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\error-order.1db_1i5t\\message-first\\DirectSound.obj",
+              "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\error-order.1db_1i5t\\message-first\\DirectSound.c"
+            ],
+            "source_sha256": "2074dfd16bb0a41cd0524e5292d30ba79c0ac60df802988042e9a52a9cd33ecf",
+            "object_sha256": "ae4cc2783286a4cb56ce2bd31e606ecc14d5135578472fe22f268871bc58b9b9",
+            "matches": 46,
+            "total": 49,
+            "unmatched": [
+              {
+                "name": "_AudioError",
+                "original": 640,
+                "rebuilt": 656,
+                "differences": 383
+              },
+              {
+                "name": "_AllocateSoundBuffer",
+                "original": 96,
+                "rebuilt": 80,
+                "differences": 50
+              },
+              {
+                "name": "_SubmitAudio",
+                "original": 1120,
+                "rebuilt": 1120,
+                "differences": 421
+              }
+            ]
+          },
+          {
+            "name": "message-first-direct",
+            "commands": [
+              "python3",
+              "/root/nemu-decomp/scripts/run_toolchain.py",
+              "vc7",
+              "cl",
+              "/nologo",
+              "/O2",
+              "/Ob1",
+              "/MT",
+              "/c",
+              "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\error-order.1db_1i5t\\message-first-direct\\DirectSound.obj",
+              "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\error-order.1db_1i5t\\message-first-direct\\DirectSound.c"
+            ],
+            "source_sha256": "03ae6c656553f71e07f08d9ba0578c7851d6f3fca7876ad28c8aba2d05544f2c",
+            "object_sha256": "8db718846fadd3ca0fe42f8d0cad614312cc8591c0b6fa6fac368a5d1f5d8f7b",
+            "matches": 46,
+            "total": 49,
+            "unmatched": [
+              {
+                "name": "_AudioError",
+                "original": 640,
+                "rebuilt": 656,
+                "differences": 383
+              },
+              {
+                "name": "_AllocateSoundBuffer",
+                "original": 96,
+                "rebuilt": 80,
+                "differences": 50
+              },
+              {
+                "name": "_SubmitAudio",
+                "original": 1120,
+                "rebuilt": 1120,
+                "differences": 421
+              }
+            ]
+          },
+          {
+            "name": "message-assignment",
+            "commands": [
+              "python3",
+              "/root/nemu-decomp/scripts/run_toolchain.py",
+              "vc7",
+              "cl",
+              "/nologo",
+              "/O2",
+              "/Ob1",
+              "/MT",
+              "/c",
+              "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\error-order.1db_1i5t\\message-assignment\\DirectSound.obj",
+              "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\error-order.1db_1i5t\\message-assignment\\DirectSound.c"
+            ],
+            "source_sha256": "0f1d6ac681ebf024a8dd63c3da34ea4710c9d85750416a3821c8ec9f75968ee5",
+            "object_sha256": "5f58848d0ee103b6b34ee9409ad22ee5e25cbb23ae2836c24188b9ba6f84c54d",
+            "matches": 46,
+            "total": 49,
+            "unmatched": [
+              {
+                "name": "_AudioError",
+                "original": 640,
+                "rebuilt": 656,
+                "differences": 383
+              },
+              {
+                "name": "_AllocateSoundBuffer",
+                "original": 96,
+                "rebuilt": 80,
+                "differences": 50
+              },
+              {
+                "name": "_SubmitAudio",
+                "original": 1120,
+                "rebuilt": 1120,
+                "differences": 421
+              }
+            ]
+          },
+          {
+            "name": "all-before",
+            "commands": [
+              "python3",
+              "/root/nemu-decomp/scripts/run_toolchain.py",
+              "vc7",
+              "cl",
+              "/nologo",
+              "/O2",
+              "/Ob1",
+              "/MT",
+              "/c",
+              "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\error-order.1db_1i5t\\all-before\\DirectSound.obj",
+              "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\error-order.1db_1i5t\\all-before\\DirectSound.c"
+            ],
+            "source_sha256": "db9bbb1d39bb8ca9aca586d55b0dee5c7a27d5f8dee83abaf16a56aeef8d4610",
+            "object_sha256": "fce66b82b08be1f3e3273060903e00099d3b9d6b3d34a7347027256a8530fd81",
+            "matches": 46,
+            "total": 49,
+            "unmatched": [
+              {
+                "name": "_AudioError",
+                "original": 640,
+                "rebuilt": 656,
+                "differences": 379
+              },
+              {
+                "name": "_AllocateSoundBuffer",
+                "original": 96,
+                "rebuilt": 80,
+                "differences": 50
+              },
+              {
+                "name": "_SubmitAudio",
+                "original": 1120,
+                "rebuilt": 1120,
+                "differences": 421
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "findings": [
+      "Explicit memset/memcpy intrinsic selection under /Oi-, (void)memset, ZeroMemory and ordinary inline clear helpers do not change either allocation or submission mismatches. Helpers also emit additional unmatched code and are not retained.",
+      "Signed long, signed int or unsigned int cursor locals leave SubmitAudio unchanged. An integer sample-distance local worsens differences from421 to427; not retained.",
+      "Assigning the default error message before sprintf, in the destination argument, or with both output locals assigned before sprintf grows AudioError from640 to656 bytes; not retained.",
+      "No speculative source qualifiers, pragma settings, extra helper functions or artificial work were promoted."
+    ]
+  }
 }
