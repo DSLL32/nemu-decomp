@@ -142,9 +142,9 @@ unsigned int get_feature_flags(void)
     }
 }
 
-int Use3DNow;
-int UseSSE;
-int UseMMXExt;
+extern int Use3DNow;
+extern int UseSSE;
+extern int UseMMXExt;
 
 void DetectCPUFeatures(void)
 {
