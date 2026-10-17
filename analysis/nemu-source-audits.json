@@ -1,0 +1,63 @@
+{
+  "status": "Bounded rejected hypotheses; no application source or binary bytes changed.",
+  "date_utc": "2026-10-17",
+  "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+  "baseline": {
+    "artifact": "/root/.ai-tmp/nemu-build.kf09k5wb/artifacts/cafc8da82df6c9379ffa85d2d11d62257b7c3cff7b0fbbcba403f1ed099a4c20",
+    "whole_file_differing_bytes": 16718,
+    "function_instruction_known_target_matches": "635/648",
+    "RSP_source_sha256": "c8c37bd19270ef2d01e71d93e8990cc52ab7d17b414e8abd02c965f62fc6085e",
+    "PIF_source_sha256": "ce07503f880707e727e47003142c5489b0900d3dd05bb552eb2662829b904276"
+  },
+  "audits": [
+    {
+      "name": "declared instruction union",
+      "evidence": "/root/.ai-tmp/nemu-rsp-instruction-union.ql1gfvgd/report.json",
+      "evidence_sha256": "a38b0ee86af2065be801beefe92b309164b7aa6e5c94239d7729e810389c9c25",
+      "hypothesis": "Declare the shared instruction storage as its union instead of accessing scalar storage through a union cast.",
+      "result": "All 101 normalized bodies, relocation field sets, and measured extents remain identical; 93 matches retained.",
+      "source_promoted": false
+    },
+    {
+      "name": "SP register bank shape",
+      "evidence": "/root/.ai-tmp/nemu-rsp-bank-shape.ah5384wl/report.json",
+      "evidence_sha256": "ed19f3f30c3a065900a731f3836215644f556424ce54eab28c9a49838ddf673b",
+      "hypothesis": "Replace the inferred eight-field SP register aggregate coherently with an unsigned array or independent scalar globals.",
+      "result": "Both alternatives preserve all 101 normalized bodies, relocation fields, and extents; 93 matches retained. VADD still uses a PC load/add/store. The standalone scalar fixture also loses the contiguous bank layout required by reset and state code.",
+      "source_promoted": false
+    },
+    {
+      "name": "VSUBC classification",
+      "evidence": "/root/.ai-tmp/nemu-vsubc-two-conditions.fki20bl5/report.json",
+      "evidence_sha256": "c8bb486cc16c3d3bf8da48b138349849be767806fe7019ea32f7f96badfcb822",
+      "hypothesis": "Initialize flags to zero followed by separate negative/positive assignments; separately classify a real copy of the signed result in place.",
+      "result": "The signed and unsigned two-condition forms produce four JNS/JLE pairs but do not reproduce the original shared-tail jumps. Their bodies are 481 and 477 bytes; in-place classification is 500 bytes, versus original 480. All 100 unrelated bodies remain unchanged and all 93 existing matches are retained.",
+      "source_promoted": false
+    },
+    {
+      "name": "controller and EEPROM serialization",
+      "evidence": "/root/.ai-tmp/nemu-pif-audit.yzj0tytr/audit.json",
+      "evidence_sha256": "558df42a533b25486812d0518877d0d386126336bbb4d9f4e0dffb2a905b0d9b",
+      "hypothesis": "Use natural short serialization loops, pointer/reference helpers, byte views, or eight-byte EEPROM block types.",
+      "result": "Twelve complete-link probes preserve all 14 already matching PIF/CIC/save functions. No ProcessPIF match: lower positional counts from serialization loops remove the original low-byte reload. The current 1904-byte span and 845 normalized differences are retained.",
+      "source_promoted": false
+    },
+    {
+      "name": "native float provider provenance",
+      "evidence": "/root/.ai-tmp/nemu-native-float-provenance.ic4m9ew2/report.json",
+      "evidence_sha256": "e81b9c4ba9c6efceb19ac2978dfe58dac79511798381a488ade0f0ca7126534e",
+      "hypothesis": "Could an original native helper, discarded after generating a constant, explain 2^32f before the first LTCG doubles?",
+      "result": "Both native C++ members have original body and data evidence. All 114 current CRT members lack the constant. More decisively, the desired position is internal to a single contiguous LTCG readonly contribution block; ordinary native object selection places data outside that block. This does not establish hashes or complete contents of lost original objects.",
+      "source_promoted": false
+    },
+    {
+      "name": "backend revision",
+      "evidence": "/root/.ai-tmp/nemu-source-review.iqPp7De8/backend-version/assessment.json",
+      "evidence_sha256": "5219223fc529f0581bd9342a444f5ddf03662ba89d11424372574259c0d27fbd",
+      "hypothesis": "Could Rich identify only the compiler frontend while a different C2 backend explains remaining output?",
+      "result": "C2 itself constructs the LTCG C++ product/build identifier using hardcoded build 9466. All four local VC7 C2 copies are identical. No provenance-backed distinct backend was found; Rich still does not prove original binary identity.",
+      "source_promoted": false
+    }
+  ],
+  "limitations": "The RSP probes are complete subsystem fixtures, not full executable builds. They compare every existing function and relocation field set, with unknown target identities still explicitly unresolved. Same span, fewer differing positions, or behavior equivalence alone does not establish reconstruction. Detailed frozen inputs and commands remain in the referenced scratch reports; this file is an audit index, not a replacement for those inputs."
+}
