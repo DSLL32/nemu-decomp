@@ -3,53 +3,1207 @@
   "purpose": "Classify remaining independent address proof gaps from one complete passing comparison per requested function. Does not change masks, target statuses, function coverage, or whole-file equality.",
   "comparison_report": {
     "path": "analysis/nemu-function-comparison.json",
-    "sha256": "b8bf0c29c9e69bcd55307e1e5b278ade55528e48b9b9ce04b28bc69e2195f314"
+    "sha256": "0fad36881e1b6d51bca03489d414a975be5377e81363e9c796517b9112dc171e"
   },
   "coverage_report": {
     "path": "analysis/nemu-function-coverage.json",
-    "sha256": "4de7f79309325148c328a6e4479883fd0b9cf19ba3f81b4d4035047228c6847c"
+    "sha256": "f19708d848e976ee01bb22dc30400895942d8e06bd1eb8bd729ed4a8a00039c7"
   },
   "extent_report": {
     "path": "analysis/nemu-candidate-extents.json",
-    "sha256": "658fad061fb8e814fa743f727dd37daa09b42fa9cc53be3582c04db9cf035314"
+    "sha256": "603f72d1945863d3626fcec3b70920fa2a9e1518368c795f5349d41c21cdc586"
   },
   "generator": {
-    "path": "/root/.ai-tmp/nemu-matrix-lq0s.mctzr30j/summarize.py",
-    "sha256": "9054d303210f80af3a012e80642e579fe1414392e3176499ec5a0551fc588d94"
+    "path": "/root/.ai-tmp/nemu-matrix-wn1a.ku311hs6/summarize.py",
+    "sha256": "54c3341ff9905582d5f8802f9330f8b9a172ca4958dc3c30580ddcd05e79623f"
   },
   "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
-  "candidate_image": "/root/.ai-tmp/nemu-complete-relocs.lq0snspy/nemu64.exe",
-  "candidate_image_sha256": "f21ef0d193bd05820514c74bc82f30ea0cc566fa97609ebb5a2bb303519d6d44",
-  "candidate_map": "/root/.ai-tmp/nemu-complete-relocs.lq0snspy/nemu64.map",
-  "candidate_map_sha256": "3719b8177bd984f04de315e10a57cfa99c94ef696fc0d0a99606546259998146",
+  "candidate_image": "/root/.ai-tmp/nemu-complete-relocs.wn1a657s/nemu64.exe",
+  "candidate_image_sha256": "da945d9318b246a579a285ee29088771d4e6fc1a7c37d9a4121fe4a0d1a0b152",
+  "candidate_map": "/root/.ai-tmp/nemu-complete-relocs.wn1a657s/nemu64.map",
+  "candidate_map_sha256": "55e4ce33cb045494f8778ec02fd72235ff91a4611c4846e7813766f75d0faa48",
+  "build_variant": {
+    "mode": "chronological",
+    "optional_mode": true,
+    "role": "Current-source chronological control before the independently tested source-unit split is built from the tracked tree. This report does not assert that the default library-input mode has the same bytes.",
+    "build_manifest": "/root/.ai-tmp/nemu-tu-replay.5cmhtxeq/control-build/artifacts/733ba82fa71061fa05bc5288973d1d105050d136bb220dc183934e7ff026fe1d/build.json",
+    "build_manifest_sha256": "a17ba24bc33eb451638d4b57544b0e1043128600b7fb22bbba58108f731aef82",
+    "application_units": [
+      "RSP.cpp",
+      "Dynarec.cpp",
+      "CPU.cpp",
+      "DynarecOpcodes.cpp",
+      "DynarecMemoryOps.cpp",
+      "DynarecFPU.cpp",
+      "CpuControl.cpp",
+      "Memory.cpp",
+      "Plugins.cpp",
+      "State.cpp",
+      "WinMain.cpp",
+      "FrontendIni.cpp",
+      "Rom.cpp",
+      "RomBrowser.cpp",
+      "NemuInitializedStorage.cpp",
+      "RuntimeSignatures.cpp",
+      "PIF.cpp",
+      "Globals.cpp",
+      "LegacyData.cpp",
+      "ByteSwap.c",
+      "NemuZeroStorage.cpp"
+    ],
+    "native_function_address_checks": [
+      {
+        "name": "__fsopen",
+        "original_va": 4357122,
+        "candidate_va": 4357122,
+        "exact": true
+      },
+      {
+        "name": "_fopen",
+        "original_va": 4357164,
+        "candidate_va": 4357164,
+        "exact": true
+      },
+      {
+        "name": "_fprintf",
+        "original_va": 4357183,
+        "candidate_va": 4357183,
+        "exact": true
+      },
+      {
+        "name": "_sprintf",
+        "original_va": 4357233,
+        "candidate_va": 4357233,
+        "exact": true
+      },
+      {
+        "name": "_vsprintf",
+        "original_va": 4357321,
+        "candidate_va": 4357321,
+        "exact": true
+      },
+      {
+        "name": "_fread",
+        "original_va": 4357408,
+        "candidate_va": 4357408,
+        "exact": true
+      },
+      {
+        "name": "_fclose",
+        "original_va": 4357641,
+        "candidate_va": 4357641,
+        "exact": true
+      },
+      {
+        "name": "_free",
+        "original_va": 4357727,
+        "candidate_va": 4357727,
+        "exact": true
+      },
+      {
+        "name": "__heap_alloc",
+        "original_va": 4357783,
+        "candidate_va": 4357783,
+        "exact": true
+      },
+      {
+        "name": "__nh_malloc",
+        "original_va": 4357853,
+        "candidate_va": 4357853,
+        "exact": true
+      },
+      {
+        "name": "_malloc",
+        "original_va": 4357897,
+        "candidate_va": 4357897,
+        "exact": true
+      },
+      {
+        "name": "_fgetpos",
+        "original_va": 4357915,
+        "candidate_va": 4357915,
+        "exact": true
+      },
+      {
+        "name": "_fwrite",
+        "original_va": 4357949,
+        "candidate_va": 4357949,
+        "exact": true
+      },
+      {
+        "name": "_ftell",
+        "original_va": 4358212,
+        "candidate_va": 4358212,
+        "exact": true
+      },
+      {
+        "name": "_fseek",
+        "original_va": 4358557,
+        "candidate_va": 4358557,
+        "exact": true
+      },
+      {
+        "name": "_strncpy",
+        "original_va": 4358704,
+        "candidate_va": 4358704,
+        "exact": true
+      },
+      {
+        "name": "_fgets",
+        "original_va": 4358996,
+        "candidate_va": 4358996,
+        "exact": true
+      },
+      {
+        "name": "_realloc",
+        "original_va": 4359083,
+        "candidate_va": 4359083,
+        "exact": true
+      },
+      {
+        "name": "_$$$00001",
+        "original_va": 4359440,
+        "candidate_va": 4359440,
+        "exact": true
+      },
+      {
+        "name": "_strchr",
+        "original_va": 4359456,
+        "candidate_va": 4359456,
+        "exact": true
+      },
+      {
+        "name": "_atol",
+        "original_va": 4359646,
+        "candidate_va": 4359646,
+        "exact": true
+      },
+      {
+        "name": "_atoi",
+        "original_va": 4359734,
+        "candidate_va": 4359734,
+        "exact": true
+      },
+      {
+        "name": "_strtoxl",
+        "original_va": 4359739,
+        "candidate_va": 4359739,
+        "exact": true
+      },
+      {
+        "name": "_strtol",
+        "original_va": 4360168,
+        "candidate_va": 4360168,
+        "exact": true
+      },
+      {
+        "name": "__flush",
+        "original_va": 4360191,
+        "candidate_va": 4360191,
+        "exact": true
+      },
+      {
+        "name": "_fflush",
+        "original_va": 4360284,
+        "candidate_va": 4360284,
+        "exact": true
+      },
+      {
+        "name": "_flsall",
+        "original_va": 4360343,
+        "candidate_va": 4360343,
+        "exact": true
+      },
+      {
+        "name": "__flushall",
+        "original_va": 4360452,
+        "candidate_va": 4360452,
+        "exact": true
+      },
+      {
+        "name": "__amsg_exit",
+        "original_va": 4360461,
+        "candidate_va": 4360461,
+        "exact": true
+      },
+      {
+        "name": "_WinMainCRTStartup",
+        "original_va": 4360498,
+        "candidate_va": 4360498,
+        "exact": true
+      },
+      {
+        "name": "_calloc",
+        "original_va": 4360971,
+        "candidate_va": 4360971,
+        "exact": true
+      },
+      {
+        "name": "__openfile",
+        "original_va": 4361094,
+        "candidate_va": 4361094,
+        "exact": true
+      },
+      {
+        "name": "___crtExitProcess",
+        "original_va": 4361454,
+        "candidate_va": 4361454,
+        "exact": true
+      },
+      {
+        "name": "__cinit",
+        "original_va": 4361502,
+        "candidate_va": 4361502,
+        "exact": true
+      },
+      {
+        "name": "_doexit",
+        "original_va": 4361603,
+        "candidate_va": 4361603,
+        "exact": true
+      },
+      {
+        "name": "_exit",
+        "original_va": 4361797,
+        "candidate_va": 4361797,
+        "exact": true
+      },
+      {
+        "name": "__exit",
+        "original_va": 4361814,
+        "candidate_va": 4361814,
+        "exact": true
+      },
+      {
+        "name": "__cexit",
+        "original_va": 4361831,
+        "candidate_va": 4361831,
+        "exact": true
+      },
+      {
+        "name": "__c_exit",
+        "original_va": 4361846,
+        "candidate_va": 4361846,
+        "exact": true
+      },
+      {
+        "name": "__getstream",
+        "original_va": 4361861,
+        "candidate_va": 4361861,
+        "exact": true
+      },
+      {
+        "name": "__stbuf",
+        "original_va": 4361975,
+        "candidate_va": 4361975,
+        "exact": true
+      },
+      {
+        "name": "__ftbuf",
+        "original_va": 4362111,
+        "candidate_va": 4362111,
+        "exact": true
+      },
+      {
+        "name": "_write_char",
+        "original_va": 4362171,
+        "candidate_va": 4362171,
+        "exact": true
+      },
+      {
+        "name": "_write_multi_char",
+        "original_va": 4362222,
+        "candidate_va": 4362222,
+        "exact": true
+      },
+      {
+        "name": "_write_string",
+        "original_va": 4362258,
+        "candidate_va": 4362258,
+        "exact": true
+      },
+      {
+        "name": "__output",
+        "original_va": 4362313,
+        "candidate_va": 4362313,
+        "exact": true
+      },
+      {
+        "name": "__flsbuf",
+        "original_va": 4364254,
+        "candidate_va": 4364254,
+        "exact": true
+      },
+      {
+        "name": "__filbuf",
+        "original_va": 4364532,
+        "candidate_va": 4364532,
+        "exact": true
+      },
+      {
+        "name": "__read",
+        "original_va": 4364754,
+        "candidate_va": 4364754,
+        "exact": true
+      },
+      {
+        "name": "_memcpy",
+        "original_va": 4365248,
+        "candidate_va": 4365248,
+        "exact": true
+      },
+      {
+        "name": "__close",
+        "original_va": 4366077,
+        "candidate_va": 4366077,
+        "exact": true
+      },
+      {
+        "name": "__freebuf",
+        "original_va": 4366256,
+        "candidate_va": 4366256,
+        "exact": true
+      },
+      {
+        "name": "___heap_select",
+        "original_va": 4366299,
+        "candidate_va": 4366299,
+        "exact": true
+      },
+      {
+        "name": "__heap_init",
+        "original_va": 4366325,
+        "candidate_va": 4366325,
+        "exact": true
+      },
+      {
+        "name": "___sbh_heap_init",
+        "original_va": 4366406,
+        "candidate_va": 4366406,
+        "exact": true
+      },
+      {
+        "name": "___sbh_find_block",
+        "original_va": 4366478,
+        "candidate_va": 4366478,
+        "exact": true
+      },
+      {
+        "name": "___sbh_free_block",
+        "original_va": 4366521,
+        "candidate_va": 4366521,
+        "exact": true
+      },
+      {
+        "name": "___sbh_alloc_new_region",
+        "original_va": 4367313,
+        "candidate_va": 4367313,
+        "exact": true
+      },
+      {
+        "name": "___sbh_alloc_new_group",
+        "original_va": 4367496,
+        "candidate_va": 4367496,
+        "exact": true
+      },
+      {
+        "name": "___sbh_resize_block",
+        "original_va": 4367758,
+        "candidate_va": 4367758,
+        "exact": true
+      },
+      {
+        "name": "___sbh_alloc_block",
+        "original_va": 4368493,
+        "candidate_va": 4368493,
+        "exact": true
+      },
+      {
+        "name": "__callnewh",
+        "original_va": 4369257,
+        "candidate_va": 4369257,
+        "exact": true
+      },
+      {
+        "name": "__ftelli64",
+        "original_va": 4369284,
+        "candidate_va": 4369284,
+        "exact": true
+      },
+      {
+        "name": "__write",
+        "original_va": 4369676,
+        "candidate_va": 4369676,
+        "exact": true
+      },
+      {
+        "name": "__ioinit",
+        "original_va": 4370112,
+        "candidate_va": 4370112,
+        "exact": true
+      },
+      {
+        "name": "__lseek",
+        "original_va": 4370539,
+        "candidate_va": 4370539,
+        "exact": true
+      },
+      {
+        "name": "__ismbcspace",
+        "original_va": 4370679,
+        "candidate_va": 4370679,
+        "exact": true
+      },
+      {
+        "name": "__allmul",
+        "original_va": 4370832,
+        "candidate_va": 4370832,
+        "exact": true
+      },
+      {
+        "name": "__isctype",
+        "original_va": 4370884,
+        "candidate_va": 4370884,
+        "exact": true
+      },
+      {
+        "name": "__commit",
+        "original_va": 4371010,
+        "candidate_va": 4371010,
+        "exact": true
+      },
+      {
+        "name": "___initstdio",
+        "original_va": 4371097,
+        "candidate_va": 4371097,
+        "exact": true
+      },
+      {
+        "name": "___endstdio",
+        "original_va": 4371263,
+        "candidate_va": 4371263,
+        "exact": true
+      },
+      {
+        "name": "__NMSG_WRITE",
+        "original_va": 4371283,
+        "candidate_va": 4371283,
+        "exact": true
+      },
+      {
+        "name": "__FF_MSGBANNER",
+        "original_va": 4371658,
+        "candidate_va": 4371658,
+        "exact": true
+      },
+      {
+        "name": "__XcptFilter",
+        "original_va": 4371715,
+        "candidate_va": 4371715,
+        "exact": true
+      },
+      {
+        "name": "__wincmdln",
+        "original_va": 4372084,
+        "candidate_va": 4372084,
+        "exact": true
+      },
+      {
+        "name": "__setenvp",
+        "original_va": 4372189,
+        "candidate_va": 4372189,
+        "exact": true
+      },
+      {
+        "name": "_parse_cmdline",
+        "original_va": 4372388,
+        "candidate_va": 4372388,
+        "exact": true
+      },
+      {
+        "name": "__setargv",
+        "original_va": 4372752,
+        "candidate_va": 4372752,
+        "exact": true
+      },
+      {
+        "name": "___crtGetEnvironmentStringsA",
+        "original_va": 4372914,
+        "candidate_va": 4372914,
+        "exact": true
+      },
+      {
+        "name": "__RTC_Initialize",
+        "original_va": 4373204,
+        "candidate_va": 4373204,
+        "exact": true
+      },
+      {
+        "name": "__RTC_Terminate",
+        "original_va": 4373272,
+        "candidate_va": 4373272,
+        "exact": true
+      },
+      {
+        "name": "__SEH_prolog",
+        "original_va": 4373340,
+        "candidate_va": 4373340,
+        "exact": true
+      },
+      {
+        "name": "__SEH_epilog",
+        "original_va": 4373399,
+        "candidate_va": 4373399,
+        "exact": true
+      },
+      {
+        "name": "__chkstk",
+        "original_va": 4373424,
+        "candidate_va": 4373424,
+        "exact": true
+      },
+      {
+        "name": "_memset",
+        "original_va": 4373488,
+        "candidate_va": 4373488,
+        "exact": true
+      },
+      {
+        "name": "__sopen",
+        "original_va": 4373584,
+        "candidate_va": 4373584,
+        "exact": true
+      },
+      {
+        "name": "__onexit",
+        "original_va": 4374304,
+        "candidate_va": 4374304,
+        "exact": true
+      },
+      {
+        "name": "_atexit",
+        "original_va": 4374434,
+        "candidate_va": 4374434,
+        "exact": true
+      },
+      {
+        "name": "___onexitinit",
+        "original_va": 4374452,
+        "candidate_va": 4374452,
+        "exact": true
+      },
+      {
+        "name": "__isatty",
+        "original_va": 4374492,
+        "candidate_va": 4374492,
+        "exact": true
+      },
+      {
+        "name": "_strlen",
+        "original_va": 4374544,
+        "candidate_va": 4374544,
+        "exact": true
+      },
+      {
+        "name": "_wctomb",
+        "original_va": 4374683,
+        "candidate_va": 4374683,
+        "exact": true
+      },
+      {
+        "name": "_report_failure",
+        "original_va": 4374785,
+        "candidate_va": 4374785,
+        "exact": true
+      },
+      {
+        "name": "@__security_check_cookie@4",
+        "original_va": 4374834,
+        "candidate_va": 4374834,
+        "exact": true
+      },
+      {
+        "name": "__aulldvrm",
+        "original_va": 4374848,
+        "candidate_va": 4374848,
+        "exact": true
+      },
+      {
+        "name": "__getbuf",
+        "original_va": 4374997,
+        "candidate_va": 4374997,
+        "exact": true
+      },
+      {
+        "name": "__dosmaperr",
+        "original_va": 4375065,
+        "candidate_va": 4375065,
+        "exact": true
+      },
+      {
+        "name": "__alloc_osfhnd",
+        "original_va": 4375160,
+        "candidate_va": 4375160,
+        "exact": true
+      },
+      {
+        "name": "__set_osfhnd",
+        "original_va": 4375317,
+        "candidate_va": 4375317,
+        "exact": true
+      },
+      {
+        "name": "__free_osfhnd",
+        "original_va": 4375436,
+        "candidate_va": 4375436,
+        "exact": true
+      },
+      {
+        "name": "__get_osfhandle",
+        "original_va": 4375558,
+        "candidate_va": 4375558,
+        "exact": true
+      },
+      {
+        "name": "_memmove",
+        "original_va": 4375632,
+        "candidate_va": 4375632,
+        "exact": true
+      },
+      {
+        "name": "__lseeki64",
+        "original_va": 4376461,
+        "candidate_va": 4376461,
+        "exact": true
+      },
+      {
+        "name": "___crtGetStringTypeA",
+        "original_va": 4376620,
+        "candidate_va": 4376620,
+        "exact": true
+      },
+      {
+        "name": "_CPtoLCID",
+        "original_va": 4377062,
+        "candidate_va": 4377062,
+        "exact": true
+      },
+      {
+        "name": "_setSBCS",
+        "original_va": 4377109,
+        "candidate_va": 4377109,
+        "exact": true
+      },
+      {
+        "name": "_setSBUpLow",
+        "original_va": 4377150,
+        "candidate_va": 4377150,
+        "exact": true
+      },
+      {
+        "name": "__setmbcp",
+        "original_va": 4377552,
+        "candidate_va": 4377552,
+        "exact": true
+      },
+      {
+        "name": "___initmbctable",
+        "original_va": 4378044,
+        "candidate_va": 4378044,
+        "exact": true
+      },
+      {
+        "name": "__fcloseall",
+        "original_va": 4378074,
+        "candidate_va": 4378074,
+        "exact": true
+      },
+      {
+        "name": "___crtMessageBoxA",
+        "original_va": 4378162,
+        "candidate_va": 4378162,
+        "exact": true
+      },
+      {
+        "name": "_strcpy",
+        "original_va": 4378416,
+        "candidate_va": 4378416,
+        "exact": true
+      },
+      {
+        "name": "_strcat",
+        "original_va": 4378432,
+        "candidate_va": 4378432,
+        "exact": true
+      },
+      {
+        "name": "_x_ismbbtype",
+        "original_va": 4378664,
+        "candidate_va": 4378664,
+        "exact": true
+      },
+      {
+        "name": "__ismbblead",
+        "original_va": 4378713,
+        "candidate_va": 4378713,
+        "exact": true
+      },
+      {
+        "name": "__except_handler3",
+        "original_va": 4378740,
+        "candidate_va": 4378740,
+        "exact": true
+      },
+      {
+        "name": "__seh_longjmp_unwind@4",
+        "original_va": 4378929,
+        "candidate_va": 4378929,
+        "exact": true
+      },
+      {
+        "name": "__chsize",
+        "original_va": 4378956,
+        "candidate_va": 4378956,
+        "exact": true
+      },
+      {
+        "name": "__msize",
+        "original_va": 4379304,
+        "candidate_va": 4379304,
+        "exact": true
+      },
+      {
+        "name": "__fptrap",
+        "original_va": 4379360,
+        "candidate_va": 4379360,
+        "exact": true
+      },
+      {
+        "name": "___security_init_cookie",
+        "original_va": 4379369,
+        "candidate_va": 4379369,
+        "exact": true
+      },
+      {
+        "name": "___security_error_handler",
+        "original_va": 4379455,
+        "candidate_va": 4379455,
+        "exact": true
+      },
+      {
+        "name": "___ansicp",
+        "original_va": 4379785,
+        "candidate_va": 4379785,
+        "exact": true
+      },
+      {
+        "name": "___convertcp",
+        "original_va": 4379858,
+        "candidate_va": 4379858,
+        "exact": true
+      },
+      {
+        "name": "__resetstkoflw",
+        "original_va": 4380321,
+        "candidate_va": 4380321,
+        "exact": true
+      },
+      {
+        "name": "___crtLCMapStringA",
+        "original_va": 4380530,
+        "candidate_va": 4380530,
+        "exact": true
+      },
+      {
+        "name": "__global_unwind2",
+        "original_va": 4381488,
+        "candidate_va": 4381488,
+        "exact": true
+      },
+      {
+        "name": "__unwind_handler",
+        "original_va": 4381520,
+        "candidate_va": 4381520,
+        "exact": true
+      },
+      {
+        "name": "__local_unwind2",
+        "original_va": 4381554,
+        "candidate_va": 4381554,
+        "exact": true
+      },
+      {
+        "name": "__abnormal_termination",
+        "original_va": 4381658,
+        "candidate_va": 4381658,
+        "exact": true
+      },
+      {
+        "name": "__NLG_Notify1",
+        "original_va": 4381693,
+        "candidate_va": 4381693,
+        "exact": true
+      },
+      {
+        "name": "__NLG_Notify",
+        "original_va": 4381702,
+        "candidate_va": 4381702,
+        "exact": true
+      },
+      {
+        "name": "__setmode",
+        "original_va": 4381726,
+        "candidate_va": 4381726,
+        "exact": true
+      },
+      {
+        "name": "_xtoa",
+        "original_va": 4381862,
+        "candidate_va": 4381862,
+        "exact": true
+      },
+      {
+        "name": "__itoa",
+        "original_va": 4381924,
+        "candidate_va": 4381924,
+        "exact": true
+      },
+      {
+        "name": "__stricmp",
+        "original_va": 4381966,
+        "candidate_va": 4381966,
+        "exact": true
+      },
+      {
+        "name": "_tolower",
+        "original_va": 4382033,
+        "candidate_va": 4382033,
+        "exact": true
+      },
+      {
+        "name": "___ascii_stricmp",
+        "original_va": 4382256,
+        "candidate_va": 4382256,
+        "exact": true
+      },
+      {
+        "name": "__fpclear",
+        "original_va": 4382334,
+        "candidate_va": 4382334,
+        "exact": true
+      },
+      {
+        "name": "__cfltcvt_init",
+        "original_va": 4382335,
+        "candidate_va": 4382335,
+        "exact": true
+      },
+      {
+        "name": "__fpmath",
+        "original_va": 4382391,
+        "candidate_va": 4382391,
+        "exact": true
+      },
+      {
+        "name": "__ftol2",
+        "original_va": 4382416,
+        "candidate_va": 4382416,
+        "exact": true
+      },
+      {
+        "name": "__alldiv",
+        "original_va": 4382544,
+        "candidate_va": 4382544,
+        "exact": true
+      },
+      {
+        "name": "__alldvrm",
+        "original_va": 4382720,
+        "candidate_va": 4382720,
+        "exact": true
+      },
+      {
+        "name": "__allshr",
+        "original_va": 4382944,
+        "candidate_va": 4382944,
+        "exact": true
+      },
+      {
+        "name": "__aullshr",
+        "original_va": 4382992,
+        "candidate_va": 4382992,
+        "exact": true
+      },
+      {
+        "name": "__allshl",
+        "original_va": 4383024,
+        "candidate_va": 4383024,
+        "exact": true
+      },
+      {
+        "name": "__forcdecpt",
+        "original_va": 4383055,
+        "candidate_va": 4383055,
+        "exact": true
+      },
+      {
+        "name": "__cropzeros",
+        "original_va": 4383143,
+        "candidate_va": 4383143,
+        "exact": true
+      },
+      {
+        "name": "__positive",
+        "original_va": 4383218,
+        "candidate_va": 4383218,
+        "exact": true
+      },
+      {
+        "name": "__fassign",
+        "original_va": 4383244,
+        "candidate_va": 4383244,
+        "exact": true
+      },
+      {
+        "name": "__shift",
+        "original_va": 4383306,
+        "candidate_va": 4383306,
+        "exact": true
+      },
+      {
+        "name": "__cftoe",
+        "original_va": 4383335,
+        "candidate_va": 4383335,
+        "exact": true
+      },
+      {
+        "name": "__cftof",
+        "original_va": 4383578,
+        "candidate_va": 4383578,
+        "exact": true
+      },
+      {
+        "name": "__cftog",
+        "original_va": 4383799,
+        "candidate_va": 4383799,
+        "exact": true
+      },
+      {
+        "name": "__cfltcvt",
+        "original_va": 4383969,
+        "candidate_va": 4383969,
+        "exact": true
+      },
+      {
+        "name": "__setdefaultprecision",
+        "original_va": 4384050,
+        "candidate_va": 4384050,
+        "exact": true
+      },
+      {
+        "name": "__ms_p5_test_fdiv",
+        "original_va": 4384068,
+        "candidate_va": 4384068,
+        "exact": true
+      },
+      {
+        "name": "__ms_p5_mp_test_fdiv",
+        "original_va": 4384132,
+        "candidate_va": 4384132,
+        "exact": true
+      },
+      {
+        "name": "__ZeroTail",
+        "original_va": 4384173,
+        "candidate_va": 4384173,
+        "exact": true
+      },
+      {
+        "name": "__IncMan",
+        "original_va": 4384223,
+        "candidate_va": 4384223,
+        "exact": true
+      },
+      {
+        "name": "__RoundMan",
+        "original_va": 4384300,
+        "candidate_va": 4384300,
+        "exact": true
+      },
+      {
+        "name": "__CopyMan",
+        "original_va": 4384414,
+        "candidate_va": 4384414,
+        "exact": true
+      },
+      {
+        "name": "__IsZeroMan",
+        "original_va": 4384441,
+        "candidate_va": 4384441,
+        "exact": true
+      },
+      {
+        "name": "__ShrMan",
+        "original_va": 4384466,
+        "candidate_va": 4384466,
+        "exact": true
+      },
+      {
+        "name": "__ld12cvt",
+        "original_va": 4384589,
+        "candidate_va": 4384589,
+        "exact": true
+      },
+      {
+        "name": "__ld12tod",
+        "original_va": 4384933,
+        "candidate_va": 4384933,
+        "exact": true
+      },
+      {
+        "name": "__ld12tof",
+        "original_va": 4384955,
+        "candidate_va": 4384955,
+        "exact": true
+      },
+      {
+        "name": "__atodbl",
+        "original_va": 4384977,
+        "candidate_va": 4384977,
+        "exact": true
+      },
+      {
+        "name": "__atoflt",
+        "original_va": 4385044,
+        "candidate_va": 4385044,
+        "exact": true
+      },
+      {
+        "name": "__fptostr",
+        "original_va": 4385111,
+        "candidate_va": 4385111,
+        "exact": true
+      },
+      {
+        "name": "___dtold",
+        "original_va": 4385230,
+        "candidate_va": 4385230,
+        "exact": true
+      },
+      {
+        "name": "__fltout",
+        "original_va": 4385416,
+        "candidate_va": 4385416,
+        "exact": true
+      },
+      {
+        "name": "__abstract_cw",
+        "original_va": 4385538,
+        "candidate_va": 4385538,
+        "exact": true
+      },
+      {
+        "name": "__hw_cw",
+        "original_va": 4385684,
+        "candidate_va": 4385684,
+        "exact": true
+      },
+      {
+        "name": "__control87",
+        "original_va": 4385826,
+        "candidate_va": 4385826,
+        "exact": true
+      },
+      {
+        "name": "__controlfp",
+        "original_va": 4385876,
+        "candidate_va": 4385876,
+        "exact": true
+      },
+      {
+        "name": "___addl",
+        "original_va": 4385898,
+        "candidate_va": 4385898,
+        "exact": true
+      },
+      {
+        "name": "___add_12",
+        "original_va": 4385931,
+        "candidate_va": 4385931,
+        "exact": true
+      },
+      {
+        "name": "___shl_12",
+        "original_va": 4386025,
+        "candidate_va": 4386025,
+        "exact": true
+      },
+      {
+        "name": "___shr_12",
+        "original_va": 4386071,
+        "candidate_va": 4386071,
+        "exact": true
+      },
+      {
+        "name": "___mtold12",
+        "original_va": 4386116,
+        "candidate_va": 4386116,
+        "exact": true
+      },
+      {
+        "name": "___strgtold12",
+        "original_va": 4386344,
+        "candidate_va": 4386344,
+        "exact": true
+      },
+      {
+        "name": "_$I10_OUTPUT",
+        "original_va": 4387509,
+        "candidate_va": 4387509,
+        "exact": true
+      },
+      {
+        "name": "___ld12mul",
+        "original_va": 4388169,
+        "candidate_va": 4388169,
+        "exact": true
+      },
+      {
+        "name": "___multtenpow12",
+        "original_va": 4388737,
+        "candidate_va": 4388737,
+        "exact": true
+      }
+    ]
+  },
   "provenance_validation": {
-    "manifest": "/root/.ai-tmp/nemu-complete-relocs.lq0snspy/diagnostic.json",
-    "manifest_sha256": "ac4cb47d7574c09e172242434fd2e6fa9cca21fec5fb297601b940d5e5b11611",
+    "manifest": "/root/.ai-tmp/nemu-complete-relocs.wn1a657s/diagnostic.json",
+    "manifest_sha256": "9cbd3239183895aef4a1a6522b91d2b43dce8279fbb45377d4938d1d30dd9ed3",
     "manifest_image_hash_verified": true,
     "unforced_link_returncode": 0,
-    "fixed_parent": "/root/.ai-tmp/nemu-build.7zi4t73x/artifacts/827ba6b25744599645f554ba325c1ecf5f1c57a4b2f434feaf22095be1699f45/nemu64.exe",
-    "fixed_parent_sha256": "827ba6b25744599645f554ba325c1ecf5f1c57a4b2f434feaf22095be1699f45",
+    "fixed_parent": "/root/.ai-tmp/nemu-tu-replay.5cmhtxeq/control-build/artifacts/733ba82fa71061fa05bc5288973d1d105050d136bb220dc183934e7ff026fe1d/nemu64.exe",
+    "fixed_parent_sha256": "733ba82fa71061fa05bc5288973d1d105050d136bb220dc183934e7ff026fe1d",
     "existing_sections": [
       {
         "name": ".text",
         "layout_equal": true,
         "raw_bytes_equal": true,
         "raw_size": 192512,
-        "raw_sha256": "17b258e4c511505c0c2381a7d1c8223cf833599b8281587ef64c92b4d8ee0560"
+        "raw_sha256": "f30865681b0947afb00594a0fc7eabbea58af50e744c80679cf3285fb43a4d49"
       },
       {
         "name": ".rdata",
         "layout_equal": true,
         "raw_bytes_equal": true,
         "raw_size": 61440,
-        "raw_sha256": "f68aaa9a3bbf3e465586c6e106ff0026275b3a6882e8ba8c645803cd6be1c3a2"
+        "raw_sha256": "b400f47013f238451cd486c400fa31d8e7dcd5df0fcc7e535c700befee99e1eb"
       },
       {
         "name": ".data",
         "layout_equal": true,
         "raw_bytes_equal": true,
         "raw_size": 241664,
-        "raw_sha256": "245772f01c765c385d5eca82ef79023085fc05d73d62b9a499ed5a9b98fa9652"
+        "raw_sha256": "b193410f91fe73d48e73dcd76907f935317dbd7d7a9fb86015087578752792db"
       },
       {
         "name": ".rsrc",
@@ -92,7 +1246,7 @@
       },
       {
         "path": "analysis/nemu-dynarec.json",
-        "sha256": "282a78bb1e08e32f450c160b3afba655b4aee1e4808f17084142d18669097358",
+        "sha256": "5caac2c806dc57b97fca9a0f13dab888fb27f450681f93757f2bee99f6351e70",
         "verified_copy": "analysis/nemu-dynarec.json"
       },
       {
@@ -132,7 +1286,7 @@
       },
       {
         "path": "analysis/nemu-candidate-extents.json",
-        "sha256": "658fad061fb8e814fa743f727dd37daa09b42fa9cc53be3582c04db9cf035314",
+        "sha256": "603f72d1945863d3626fcec3b70920fa2a9e1518368c795f5349d41c21cdc586",
         "verified_copy": "analysis/nemu-candidate-extents.json"
       }
     ],
@@ -238,11 +1392,143 @@
     }
   ],
   "regression_comparison": {
-    "previous_report": "/root/.ai-tmp/nemu-matrix-lq0s.mctzr30j/nemu-function-comparison.json",
-    "previous_report_sha256": "5eec696a9119505820eceb4c3aea231ec43c1db47d9f8b74faacfa36303c7619",
-    "previous_image_sha256": "3ed9d1983501f2fa5113a0055f0827d9f78cd30bd40b05ca4fdaa12f30ad2edc",
+    "previous_report": "/root/.ai-tmp/nemu-matrix-wn1a.ku311hs6/nemu-function-comparison.json",
+    "previous_report_sha256": "b8bf0c29c9e69bcd55307e1e5b278ade55528e48b9b9ce04b28bc69e2195f314",
+    "previous_image_sha256": "f21ef0d193bd05820514c74bc82f30ea0cc566fa97609ebb5a2bb303519d6d44",
     "lost_passing_functions": [],
     "newly_passing_functions": [],
+    "changed_comparisons": [
+      {
+        "name": "SaveFunctionSignatures",
+        "comparison_index": 0,
+        "extent_mode": "explicit_extent_or_original_sized_prefix",
+        "changes": {
+          "normalized_differing_bytes": {
+            "previous": 198,
+            "current": 180
+          }
+        }
+      },
+      {
+        "name": "RSP_VADD",
+        "comparison_index": 0,
+        "extent_mode": "explicit_extent_or_original_sized_prefix",
+        "changes": {
+          "rebuilt_size": {
+            "previous": 611,
+            "current": 629
+          },
+          "normalized_differing_bytes": {
+            "previous": 547,
+            "current": 550
+          }
+        }
+      },
+      {
+        "name": "RSP_VSUB",
+        "comparison_index": 0,
+        "extent_mode": "explicit_extent_or_original_sized_prefix",
+        "changes": {
+          "rebuilt_size": {
+            "previous": 611,
+            "current": 629
+          },
+          "normalized_differing_bytes": {
+            "previous": 546,
+            "current": 549
+          }
+        }
+      },
+      {
+        "name": "RSP_VSUT",
+        "comparison_index": 0,
+        "extent_mode": "explicit_extent_or_original_sized_prefix",
+        "changes": {
+          "rebuilt_size": {
+            "previous": 611,
+            "current": 629
+          },
+          "normalized_differing_bytes": {
+            "previous": 537,
+            "current": 553
+          }
+        }
+      },
+      {
+        "name": "SaveFunctionSignatures",
+        "comparison_index": 1,
+        "extent_mode": "MAP_blocks_including_alignment",
+        "changes": {
+          "normalized_differing_bytes": {
+            "previous": 197,
+            "current": 179
+          }
+        }
+      },
+      {
+        "name": "RSP_VADD",
+        "comparison_index": 1,
+        "extent_mode": "MAP_blocks_including_alignment",
+        "changes": {
+          "rebuilt_size": {
+            "previous": 624,
+            "current": 640
+          },
+          "normalized_differing_bytes": {
+            "previous": 547,
+            "current": 539
+          }
+        }
+      },
+      {
+        "name": "RSP_VSUB",
+        "comparison_index": 1,
+        "extent_mode": "MAP_blocks_including_alignment",
+        "changes": {
+          "rebuilt_size": {
+            "previous": 624,
+            "current": 640
+          },
+          "normalized_differing_bytes": {
+            "previous": 546,
+            "current": 538
+          }
+        }
+      },
+      {
+        "name": "RSP_VSUT",
+        "comparison_index": 1,
+        "extent_mode": "MAP_blocks_including_alignment",
+        "changes": {
+          "rebuilt_size": {
+            "previous": 624,
+            "current": 640
+          },
+          "normalized_differing_bytes": {
+            "previous": 537,
+            "current": 542
+          }
+        }
+      }
+    ],
+    "source_review": [
+      {
+        "file": "RSP.cpp",
+        "previous_path": "/root/.ai-tmp/nemu-complete-relocs.lq0snspy/src/nemu64/RSP.cpp",
+        "previous_sha256": "03f603dc36625be089b9f5fb88c12d9cbaaff450acce6b75d6eb2458702e9cbf",
+        "current_path": "/root/.ai-tmp/nemu-complete-relocs.wn1a657s/src/nemu64/RSP.cpp",
+        "current_sha256": "a46f4c06524585f074eb31e16aec7cfa2f9c58ffd7cd96200befea435cf9e747",
+        "review": "Reviewed input diff changes only VADD, VSUB and VSUT: declaration order, unsigned lane index, and explicit element-index/lane-mask expression. The three complete MAP spans grow by 16 bytes; none was previously a matching function. VSUT normalized differences increase from 537 to 542 and remain a recorded mismatch."
+      },
+      {
+        "file": "RuntimeSignatures.cpp",
+        "previous_path": "/root/.ai-tmp/nemu-complete-relocs.lq0snspy/src/nemu64/RuntimeSignatures.cpp",
+        "previous_sha256": "c2231541074d9ad7329bda65192d3ac0cebc74c166fffe4bfde2963f275ba7df",
+        "current_path": "/root/.ai-tmp/nemu-complete-relocs.wn1a657s/src/nemu64/RuntimeSignatures.cpp",
+        "current_sha256": "3cd2bddac95a910c3cc563c86290b14f2e291a4c6d391442712bac8087948d7b",
+        "review": "Reviewed SaveFunctionSignatures input diff groups FILE pointer, length and filename in an inferred ordinary local aggregate and makes last-match selection explicit. Complete MAP span remains 672 bytes, with normalized differences decreasing from 197 to 179; target identity checking remains suppressed because instruction shape does not match."
+      }
+    ],
     "remaining_functions": [
       {
         "name": "CompareBrowserItems",
@@ -292,13 +1578,13 @@
         "comparisons": [
           {
             "rebuilt_size": 671,
-            "normalized_differing_bytes": 198,
+            "normalized_differing_bytes": 180,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "rebuilt_extent_verified": true
           },
           {
             "rebuilt_size": 672,
-            "normalized_differing_bytes": 197,
+            "normalized_differing_bytes": 179,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "rebuilt_extent_verified": true
           }
@@ -408,17 +1694,17 @@
         "name": "RSP_VADD",
         "original_va": 4209376,
         "original_size": 640,
-        "status": "different_function_size",
+        "status": "instruction_mismatch",
         "comparisons": [
           {
-            "rebuilt_size": 611,
-            "normalized_differing_bytes": 547,
+            "rebuilt_size": 629,
+            "normalized_differing_bytes": 550,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "rebuilt_extent_verified": true
           },
           {
-            "rebuilt_size": 624,
-            "normalized_differing_bytes": 547,
+            "rebuilt_size": 640,
+            "normalized_differing_bytes": 539,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "rebuilt_extent_verified": true
           }
@@ -428,17 +1714,17 @@
         "name": "RSP_VSUB",
         "original_va": 4210016,
         "original_size": 640,
-        "status": "different_function_size",
+        "status": "instruction_mismatch",
         "comparisons": [
           {
-            "rebuilt_size": 611,
-            "normalized_differing_bytes": 546,
+            "rebuilt_size": 629,
+            "normalized_differing_bytes": 549,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "rebuilt_extent_verified": true
           },
           {
-            "rebuilt_size": 624,
-            "normalized_differing_bytes": 546,
+            "rebuilt_size": 640,
+            "normalized_differing_bytes": 538,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "rebuilt_extent_verified": true
           }
@@ -448,17 +1734,17 @@
         "name": "RSP_VSUT",
         "original_va": 4210656,
         "original_size": 640,
-        "status": "different_function_size",
+        "status": "instruction_mismatch",
         "comparisons": [
           {
-            "rebuilt_size": 611,
-            "normalized_differing_bytes": 537,
+            "rebuilt_size": 629,
+            "normalized_differing_bytes": 553,
             "candidate_extent_basis": "Contiguous extent from entry through highest reachable instruction end or PE-relocated inline switch-table end; includes intervening gaps, excludes separately decoded trailing alignment padding.",
             "rebuilt_extent_verified": true
           },
           {
-            "rebuilt_size": 624,
-            "normalized_differing_bytes": 537,
+            "rebuilt_size": 640,
+            "normalized_differing_bytes": 542,
             "candidate_extent_basis": "linked_MAP_span_to_next_function_symbol_including_alignment",
             "rebuilt_extent_verified": true
           }
@@ -8416,11 +9702,11 @@
         "width": 4,
         "kind": "DIR32",
         "authority": "PE_HIGHLOW",
-        "candidate_target": 4344960,
+        "candidate_target": 4345008,
         "address_use": "immediate_address",
         "instruction_offset": 74,
         "instruction_size": 11,
-        "instruction": "mov dword ptr [esp + 0xfc], 0x424c80",
+        "instruction": "mov dword ptr [esp + 0xfc], 0x424cb0",
         "original_target": 4325104,
         "original_target_names": [
           "CheckGraphicsInterrupts",
@@ -13806,7 +15092,7 @@
         "width": 4,
         "kind": "REL",
         "authority": "decoded_external_branch",
-        "candidate_target": 4381843,
+        "candidate_target": 4381924,
         "instruction_offset": 11,
         "instruction_size": 5,
         "original_target": 4381924,
@@ -15190,7 +16476,7 @@
         "width": 4,
         "kind": "REL",
         "authority": "decoded_external_branch",
-        "candidate_target": 4381885,
+        "candidate_target": 4381966,
         "instruction_offset": 42,
         "instruction_size": 5,
         "original_target": 4381966,
@@ -15545,7 +16831,7 @@
         "width": 4,
         "kind": "REL",
         "authority": "decoded_external_branch",
-        "candidate_target": 4381885,
+        "candidate_target": 4381966,
         "instruction_offset": 124,
         "instruction_size": 5,
         "original_target": 4381966,
@@ -15575,7 +16861,7 @@
         "width": 4,
         "kind": "REL",
         "authority": "decoded_external_branch",
-        "candidate_target": 4381885,
+        "candidate_target": 4381966,
         "instruction_offset": 165,
         "instruction_size": 5,
         "original_target": 4381966,
@@ -15605,7 +16891,7 @@
         "width": 4,
         "kind": "REL",
         "authority": "decoded_external_branch",
-        "candidate_target": 4381885,
+        "candidate_target": 4381966,
         "instruction_offset": 210,
         "instruction_size": 5,
         "original_target": 4381966,
@@ -15635,7 +16921,7 @@
         "width": 4,
         "kind": "REL",
         "authority": "decoded_external_branch",
-        "candidate_target": 4381885,
+        "candidate_target": 4381966,
         "instruction_offset": 257,
         "instruction_size": 5,
         "original_target": 4381966,
@@ -15665,7 +16951,7 @@
         "width": 4,
         "kind": "REL",
         "authority": "decoded_external_branch",
-        "candidate_target": 4381885,
+        "candidate_target": 4381966,
         "instruction_offset": 298,
         "instruction_size": 5,
         "original_target": 4381966,
@@ -15695,7 +16981,7 @@
         "width": 4,
         "kind": "REL",
         "authority": "decoded_external_branch",
-        "candidate_target": 4381885,
+        "candidate_target": 4381966,
         "instruction_offset": 339,
         "instruction_size": 5,
         "original_target": 4381966,
@@ -15725,7 +17011,7 @@
         "width": 4,
         "kind": "REL",
         "authority": "decoded_external_branch",
-        "candidate_target": 4381885,
+        "candidate_target": 4381966,
         "instruction_offset": 375,
         "instruction_size": 5,
         "original_target": 4381966,
@@ -15755,7 +17041,7 @@
         "width": 4,
         "kind": "REL",
         "authority": "decoded_external_branch",
-        "candidate_target": 4381885,
+        "candidate_target": 4381966,
         "instruction_offset": 417,
         "instruction_size": 5,
         "original_target": 4381966,
@@ -16589,7 +17875,7 @@
         "width": 4,
         "kind": "REL",
         "authority": "decoded_external_branch",
-        "candidate_target": 4381885,
+        "candidate_target": 4381966,
         "instruction_offset": 284,
         "instruction_size": 5,
         "original_target": 4381966,
@@ -16619,7 +17905,7 @@
         "width": 4,
         "kind": "REL",
         "authority": "decoded_external_branch",
-        "candidate_target": 4381885,
+        "candidate_target": 4381966,
         "instruction_offset": 313,
         "instruction_size": 5,
         "original_target": 4381966,
@@ -16649,7 +17935,7 @@
         "width": 4,
         "kind": "REL",
         "authority": "decoded_external_branch",
-        "candidate_target": 4381885,
+        "candidate_target": 4381966,
         "instruction_offset": 428,
         "instruction_size": 5,
         "original_target": 4381966,
@@ -16679,7 +17965,7 @@
         "width": 4,
         "kind": "REL",
         "authority": "decoded_external_branch",
-        "candidate_target": 4381885,
+        "candidate_target": 4381966,
         "instruction_offset": 476,
         "instruction_size": 5,
         "original_target": 4381966,
@@ -16709,7 +17995,7 @@
         "width": 4,
         "kind": "REL",
         "authority": "decoded_external_branch",
-        "candidate_target": 4381885,
+        "candidate_target": 4381966,
         "instruction_offset": 524,
         "instruction_size": 5,
         "original_target": 4381966,
@@ -16739,7 +18025,7 @@
         "width": 4,
         "kind": "REL",
         "authority": "decoded_external_branch",
-        "candidate_target": 4381885,
+        "candidate_target": 4381966,
         "instruction_offset": 572,
         "instruction_size": 5,
         "original_target": 4381966,
@@ -16769,7 +18055,7 @@
         "width": 4,
         "kind": "REL",
         "authority": "decoded_external_branch",
-        "candidate_target": 4381885,
+        "candidate_target": 4381966,
         "instruction_offset": 620,
         "instruction_size": 5,
         "original_target": 4381966,
@@ -16799,7 +18085,7 @@
         "width": 4,
         "kind": "REL",
         "authority": "decoded_external_branch",
-        "candidate_target": 4381885,
+        "candidate_target": 4381966,
         "instruction_offset": 668,
         "instruction_size": 5,
         "original_target": 4381966,
@@ -16829,7 +18115,7 @@
         "width": 4,
         "kind": "REL",
         "authority": "decoded_external_branch",
-        "candidate_target": 4381885,
+        "candidate_target": 4381966,
         "instruction_offset": 716,
         "instruction_size": 5,
         "original_target": 4381966,
@@ -16859,7 +18145,7 @@
         "width": 4,
         "kind": "REL",
         "authority": "decoded_external_branch",
-        "candidate_target": 4381885,
+        "candidate_target": 4381966,
         "instruction_offset": 760,
         "instruction_size": 5,
         "original_target": 4381966,
@@ -16889,7 +18175,7 @@
         "width": 4,
         "kind": "REL",
         "authority": "decoded_external_branch",
-        "candidate_target": 4381885,
+        "candidate_target": 4381966,
         "instruction_offset": 806,
         "instruction_size": 5,
         "original_target": 4381966,
@@ -16919,7 +18205,7 @@
         "width": 4,
         "kind": "REL",
         "authority": "decoded_external_branch",
-        "candidate_target": 4381885,
+        "candidate_target": 4381966,
         "instruction_offset": 1158,
         "instruction_size": 5,
         "original_target": 4381966,
@@ -17685,16 +18971,16 @@
           "table_va": 4448400,
           "entry_index": 0,
           "enclosing_level": -1,
-          "filter_va": 4282854,
-          "handler_va": 4282867,
+          "filter_va": 4282902,
+          "handler_va": 4282915,
           "evidence": "relocated_scope_table_referenced_by_validated___except_handler3_prolog"
         },
         {
           "table_va": 4448400,
           "entry_index": 1,
           "enclosing_level": -1,
-          "filter_va": 4286762,
-          "handler_va": 4286768,
+          "filter_va": 4286810,
+          "handler_va": 4286816,
           "evidence": "relocated_scope_table_referenced_by_validated___except_handler3_prolog"
         }
       ],
@@ -18160,7 +19446,7 @@
         "width": 4,
         "kind": "REL",
         "authority": "decoded_external_branch",
-        "candidate_target": 4344960,
+        "candidate_target": 4345008,
         "instruction_offset": 3946,
         "instruction_size": 5,
         "original_target": 4325104,
@@ -19446,11 +20732,11 @@
         "width": 4,
         "kind": "DIR32",
         "authority": "PE_HIGHLOW",
-        "candidate_target": 4344960,
+        "candidate_target": 4345008,
         "address_use": "immediate_address",
         "instruction_offset": 153,
         "instruction_size": 5,
-        "instruction": "mov eax, 0x424c80",
+        "instruction": "mov eax, 0x424cb0",
         "original_target": 4325104,
         "original_target_names": [
           "CheckGraphicsInterrupts",
@@ -19480,11 +20766,11 @@
         "width": 4,
         "kind": "DIR32",
         "authority": "PE_HIGHLOW",
-        "candidate_target": 4344960,
+        "candidate_target": 4345008,
         "address_use": "immediate_address",
         "instruction_offset": 111,
         "instruction_size": 5,
-        "instruction": "mov eax, 0x424c80",
+        "instruction": "mov eax, 0x424cb0",
         "original_target": 4325104,
         "original_target_names": [
           "CheckGraphicsInterrupts",
@@ -20620,7 +21906,7 @@
         "width": 4,
         "kind": "REL",
         "authority": "decoded_external_branch",
-        "candidate_target": 4381843,
+        "candidate_target": 4381924,
         "instruction_offset": 11,
         "instruction_size": 5,
         "original_target": 4381924,
@@ -20666,8 +21952,8 @@
           "table_va": 4448376,
           "entry_index": 0,
           "enclosing_level": -1,
-          "filter_va": 4291098,
-          "handler_va": 4291104,
+          "filter_va": 4291146,
+          "handler_va": 4291152,
           "evidence": "relocated_scope_table_referenced_by_validated___except_handler3_prolog"
         }
       ],
@@ -20786,8 +22072,8 @@
           "table_va": 4448360,
           "entry_index": 0,
           "enclosing_level": -1,
-          "filter_va": 4291386,
-          "handler_va": 4291392,
+          "filter_va": 4291434,
+          "handler_va": 4291440,
           "evidence": "relocated_scope_table_referenced_by_validated___except_handler3_prolog"
         }
       ],
