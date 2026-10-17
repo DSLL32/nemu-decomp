@@ -1,0 +1,135 @@
+{
+  "scope": "Complete native LegacyInterleave function and compiler alignment, not whole-DLL equality.",
+  "original": "master/Plugin/audio.dll",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "function": "_LegacyInterleave",
+  "original_va": "0x10003b10",
+  "original_size": 192,
+  "source_file": "src/audio/ahle_ds/AudioLegacy.c",
+  "private_name_inferred": true,
+  "source_fragment": "/root/.ai-tmp/audio-interleave.qcffk782/matched-fragment.c",
+  "source_fragment_sha256": "d2666702c59d2562e2a80cdabd7b0e66af099bdd65b6608dc0226889b35a21c5",
+  "source_inference": [
+    "Decode left/right/output addresses and count in bytes before converting them to samples.",
+    "Shift count first and round it to eight samples, then shift left, right and output addresses. This sequence is also natural in the neighboring ABI1 interleave implementation.",
+    "The delayed left/right conversions reproduce the original reuse of the dead command argument home for saved output and the dead context argument home for the synthesized loop countdown.",
+    "Signed or unsigned left and either count/output declaration order produce the same matching body. The exact original local declarations and private spelling remain unknown."
+  ],
+  "comparison": {
+    "name": "_LegacyInterleave",
+    "object": "sibling_raw.obj",
+    "rebuilt_bytes": 192,
+    "status": "compared",
+    "original_va": 268450576,
+    "raw_bytes_equal": false,
+    "raw_differing_bytes": 4,
+    "compared_bytes": 192,
+    "original_size_verified": true,
+    "original_bytes": 192,
+    "size_equal": true,
+    "relocations": [
+      {
+        "offset": 178,
+        "type": "REL32",
+        "symbol": "_RecordHLEBuffer",
+        "addend": 0,
+        "original_target_va": 268445424,
+        "original_target_symbols": [
+          "_RecordHLEBuffer"
+        ],
+        "expected_target_va": 268445424,
+        "resolution_basis": "identified_symbol",
+        "status": "resolved",
+        "target_equal": true,
+        "target_identity_verified": true
+      }
+    ],
+    "relocation_target_mismatch_count": 0,
+    "inferred_target_count": 0,
+    "unresolved_target_count": 0,
+    "relocation_masked_equal": true,
+    "relocation_masked_differing_bytes": 0,
+    "relocations_all_resolved": true,
+    "relocation_values_consistent": true,
+    "relocation_targets_verified": true,
+    "relocation_targets_equal": true,
+    "inferred_relocated_bytes_equal": true,
+    "relocated_bytes_equal": true,
+    "first_unmasked_differences": []
+  },
+  "full_context": [
+    {
+      "flags": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/FoZ:\\root\\.ai-tmp\\audio-interleave.qcffk782\\full\\LegacyUnit-Ob1.obj",
+        "Z:\\root\\.ai-tmp\\audio-interleave.qcffk782\\full\\LegacyUnit.c"
+      ],
+      "candidate_source_sha256": "d01e59c7e49711cddf1e1a0e7a7a21eb6557e40c032e5c62403453f0bedaa324",
+      "object_sha256": "80b7c13ed501997f6b6922fad6e0345436212fc71cc3a74b61f3309d703ddb01",
+      "exact_functions": 14,
+      "total_functions": 17,
+      "interleave_exact": true,
+      "report": "/root/.ai-tmp/audio-interleave.qcffk782/full/Ob1-comparison.json"
+    },
+    {
+      "flags": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob2",
+        "/MT",
+        "/FoZ:\\root\\.ai-tmp\\audio-interleave.qcffk782\\full\\LegacyUnit-Ob2.obj",
+        "Z:\\root\\.ai-tmp\\audio-interleave.qcffk782\\full\\LegacyUnit.c"
+      ],
+      "candidate_source_sha256": "d01e59c7e49711cddf1e1a0e7a7a21eb6557e40c032e5c62403453f0bedaa324",
+      "object_sha256": "b536b4920e716e2ed77048c164646640e415262a56cd02123ffffcebc7e047d7",
+      "exact_functions": 15,
+      "total_functions": 17,
+      "interleave_exact": true,
+      "report": "/root/.ai-tmp/audio-interleave.qcffk782/full/Ob2-comparison.json"
+    }
+  ],
+  "full_context_input_snapshot": [
+    {
+      "source": "/root/nemu-decomp/src/audio/ahle_ds/AudioPlugin.h",
+      "original_sha256": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e"
+    },
+    {
+      "source": "/root/nemu-decomp/src/audio/ahle_ds/AudioHLE.h",
+      "original_sha256": "82e6544a76ee5d0e361f785773e5da8bd91070019a65367d89d6cb0defd8b3ee"
+    },
+    {
+      "source": "/root/nemu-decomp/src/audio/ahle_ds/AudioLegacy.h",
+      "original_sha256": "8f5810c3d8ae923119c733c304064310630cca3201c4b472047267d1417bee98"
+    },
+    {
+      "source": "/root/nemu-decomp/src/audio/ahle_ds/AudioLegacy.c",
+      "original_sha256": "9101ae72a2d109e49c3a43fde192c67273ee59de72c2b02cd29ba4cc7b1e5ea6"
+    },
+    {
+      "source": "/root/nemu-decomp/src/audio/ahle_ds/AudioMemory.c",
+      "original_sha256": "59368497ce7ed445665ad2f0fc5e838e5a31ba35c6f903ddb537a840114acab3"
+    }
+  ],
+  "proof_files": [
+    "/root/.ai-tmp/audio-interleave.qcffk782/report.json",
+    "/root/.ai-tmp/audio-interleave.qcffk782/report_more.json",
+    "/root/.ai-tmp/audio-interleave.qcffk782/report_sibling.json",
+    "/root/.ai-tmp/audio-interleave.qcffk782/full-verification.json"
+  ],
+  "verification": "Both native VC7 /O2 /Ob1 /MT and /O2 /Ob2 /MT reproduce all192bytes after resolving the sole recorded COFF REL32 operand at+0xb2 to RecordHLEBuffer at0x100026f0. Internal branches and stack displacements are not normalized. The /Ob2 full legacy unit improves from14/17 to15/17; EnvelopeMixer and Resample remain unmatched.",
+  "rejected_hypotheses": "Separating/grouping declarations, moving scalar sample scope, long locals, K&R or array formals, constant/read-only command pointer, byte-count expression forms, inline clipping and explicit countdown index all retain the same five differences. Advancing cursors change register allocation. Moving left/right shifts before count rounding also restores the five-slot mismatch.",
+  "limitations": "This report pins immutable scratch compiler inputs. Source promotion is handled by the owner of AudioLegacy.c; no source file was changed by this audit."
+}
