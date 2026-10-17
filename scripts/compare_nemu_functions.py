@@ -310,16 +310,22 @@ def seh_scope_entries(image, va, size, fixups, symbols):
     return scopes
 
 
-def reachable_instructions(data, va, fixups, extra_entries=()):
+def reachable_instructions(data, va, fixups, extra_entries=(), table_data=None, table_reads=None):
     """Decode control flow; never manufacture branch masks from table bytes.
 
     Direct branches/calls within the declared block are followed. Indexed
     indirect jumps can add switch successors only through actual contiguous
-    PE HIGHLOW table entries addressed by that jump instruction.
+    PE HIGHLOW table entries addressed by that jump instruction. table_data
+    may include the rest of the independently bounded MAP block when a measured
+    code body excludes its following tables. Successors remain inside data.
     """
     decoder = Cs(CS_ARCH_X86, CS_MODE_32)
     decoder.detail = True
     end = va + len(data)
+    table_data = data if table_data is None else table_data
+    if not table_data.startswith(data):
+        raise ValueError('Switch-table view must contain the unchanged candidate body prefix')
+    table_end = va + len(table_data)
     pending, decoded = [va, *extra_entries], {}
     while pending:
         address = pending.pop()
@@ -339,19 +345,28 @@ def reachable_instructions(data, va, fixups, extra_entries=()):
                 elif (ins.group(CS_GRP_JUMP) and operand.type == X86_OP_MEM and
                       not operand.mem.base and operand.mem.scale == 4):
                     table = operand.mem.disp & 0xffffffff
-                    while table in fixups and va <= table and table + 4 <= end:
-                        target = int.from_bytes(data[table - va:table - va + 4], 'little')
+                    first, targets = table, []
+                    while table in fixups and va <= table and table + 4 <= table_end:
+                        target = int.from_bytes(table_data[table - va:table - va + 4], 'little')
                         if not va <= target < end:
                             break
                         pending.append(target)
+                        targets.append(target)
                         table += 4
+                    if targets and table_reads is not None:
+                        table_reads.append(dict(instruction_va=ins.address, table_va=first,
+                            entry_count=len(targets), end_va=table,
+                            outside_compared_body=first < va or table > end,
+                            evidence='indexed_indirect_jump_and_contiguous_PE_HIGHLOW_entries',
+                            code_successor_bound=[va, end], table_read_bound=[va, table_end]))
                 if ins.mnemonic in ('jmp', 'ljmp'):
                     break
             address += ins.size
     return [decoded[address] for address in sorted(decoded)]
 
 
-def linked_fields(data, va, size, fixups, candidate_symbols, infer_map_addresses=False, extra_entries=()):
+def linked_fields(data, va, size, fixups, candidate_symbols, infer_map_addresses=False, extra_entries=(),
+                  table_data=None, table_reads=None):
     fields = {}
     local_fixups = sorted(address for address in fixups if va <= address < va + len(data))
     fixup_bytes = {byte for address in local_fixups for byte in range(address, address + 4)}
@@ -360,7 +375,7 @@ def linked_fields(data, va, size, fixups, candidate_symbols, infer_map_addresses
             off = address - va
             fields[off] = dict(offset=off, width=4, kind='DIR32', authority='PE_HIGHLOW',
                                candidate_target=int.from_bytes(data[off:off + 4], 'little'))
-    for ins in reachable_instructions(data, va, fixups, extra_entries):
+    for ins in reachable_instructions(data, va, fixups, extra_entries, table_data, table_reads):
         off = ins.address - va
         # An instruction overlapping a recorded
         # relocation field cannot provide additional branch-mask authority.
@@ -715,15 +730,20 @@ def compare_linked(path, map_path, functions, original, targets, infer_map_addre
             extent_verified = True
             basis = 'linked_MAP_span_to_next_function_symbol_including_alignment'
         data = image_bytes(image, symbol['va'], size)
+        map_span = spans.get(symbol['va'], size)
+        table_data = image_bytes(image, symbol['va'], max(size, map_span))
         scopes = seh_scope_entries(image, symbol['va'], size, fixups, candidates)
         entries = {s[k] for s in scopes for k in ('filter_va', 'handler_va') if s[k]}
-        fields = linked_fields(data, symbol['va'], size, fixups, candidates, infer_map_addresses, entries)
+        table_reads = []
+        fields = linked_fields(data, symbol['va'], size, fixups, candidates, infer_map_addresses, entries,
+                               table_data, table_reads)
         result = compare_bytes(function, data, size, symbol['va'], fields, original, targets,
                                candidates, extent_verified=extent_verified)
         result.update(status='compared', candidate_symbol=symbol['name'],
                       candidate_extent_basis=basis, candidate_map_span=spans.get(symbol['va']),
                       candidate_extent_metadata_file=function.get('rebuilt_extent_metadata_file'),
                       seh_scope_entries=scopes,
+                      switch_table_reads=table_reads,
                       candidate_extent_hash_matches=extent_hash == image_hash if extent_hash else None)
         results.append(result)
     return dict(kind='linked_PE', path=str(path), sha256=digest(image.data), map=str(map_path),
@@ -818,6 +838,8 @@ def coverage(reports, functions):
                             blockers=dict(Counter(x for r in selected for x in r['blockers']))))
     return dict(requested_functions=len(requested), located_functions=len(located),
                 inventory_entries=len(functions),
+                unique_original_entry_addresses=len({f['va'] for f in functions if f['va'] is not None}),
+                matched_original_entry_addresses=len({va for va, _ in passing}),
                 incomplete_metadata_entries=sum(bool(f.get('metadata_problems')) for f in functions),
                 missing_functions=sorted({f['name'] for f in functions if not f.get('metadata_problems') and
                                           (f['va'], f['size']) not in located}),

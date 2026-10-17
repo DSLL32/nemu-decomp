@@ -70,6 +70,21 @@ class ComparisonEvidenceTests(unittest.TestCase):
         code = bytes.fromhex('c3e87f7f7f7f')
         self.assertEqual(compare.linked_fields(code, 0x501000, len(code), set(), self.candidate), [])
 
+    def test_relocated_table_after_code_body_can_reach_body_cases(self):
+        code = bytes.fromhex('ff2485') + struct.pack('<I', 0x501014)
+        code += b'\xe8' + struct.pack('<i', 0x502000 - 0x50100c) + b'\xc3'
+        block = code + b'\x90' * (20 - len(code)) + struct.pack('<I', 0x501007)
+        fixups = {0x501003, 0x501014}
+        reads = []
+        fields = compare.linked_fields(code, 0x501000, len(code), fixups, self.candidate,
+                                       table_data=block, table_reads=reads)
+        self.assertEqual([(r['offset'], r['kind']) for r in fields], [(3, 'DIR32'), (8, 'REL')])
+        self.assertTrue(reads[0]['outside_compared_body'])
+        self.assertEqual(reads[0]['code_successor_bound'], [0x501000, 0x50100d])
+        fields = compare.linked_fields(code, 0x501000, len(code), fixups - {0x501014}, self.candidate,
+                                       table_data=block)
+        self.assertEqual([(r['offset'], r['kind']) for r in fields], [(3, 'DIR32')])
+
     def test_map_data_aliases_remain_observations(self):
         function = dict(name='Function', va=0x401000, size=16)
         for target in (0x520000, 0x520001):
