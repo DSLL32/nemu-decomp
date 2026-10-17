@@ -11,7 +11,7 @@ The original executable is 4,796,416 bytes, with SHA-256
 Build from the repository root:
 
 ```sh
-python3 scripts/build_nemu.py --ordered-libraries --stage-storage \
+python3 scripts/build_nemu.py --chronological-libraries --stage-storage \
   --function-order src/nemu64/application.order
 ```
 
@@ -23,28 +23,28 @@ that comparison fails, even when compilation and linking succeed. Use
 
 The checked-in order file places the 648 application symbols in their observed
 original order using the stock linker. The other two options use the recovered
-CRT/import-member order and stage typed storage definitions at the inferred
+CRT/import-library chronology and stage typed storage definitions at the inferred
 original boundaries. These are the settings used by the latest complete-build
 comparisons. The unmodified source snapshot and actual staged compiler inputs
 are saved separately. Regenerate the order file with
 `scripts/order_nemu_functions.py CANDIDATE.map --output application.order` when
 a source change alters symbol decoration.
 
-An optional library chronology recipe can be tested with:
+The earlier library-member ordering remains available for comparison:
 
 ```sh
-python3 scripts/build_nemu.py --chronological-libraries --stage-storage \
+python3 scripts/build_nemu.py --ordered-libraries --stage-storage \
   --function-order src/nemu64/application.order
 ```
 
-This option implies `--ordered-libraries`. It selects the same unchanged
+The chronological option implies `--ordered-libraries`. It selects the same unchanged
 historical members through ordinary archives and explicit linker roots. The
 two empty alias sections follow `setmode`, producing the original alignment
 before `RtlUnwind`; the import hint/name pool also matches. The 187 identified
-native functions now occupy their original absolute addresses with the current
-tracked sources; all 54 mapped native-storage observations also have their
-original addresses. These are layout observations, not a proof of complete
-instruction or executable equality.
+native functions now occupy their original absolute addresses, and all 31,594
+bytes in their independently inventoried bodies match without normalization.
+All 54 mapped native-storage observations also have their original addresses.
+The complete executable remains unmatched.
 
 The compiled zlib and native `ByteSwap` members are also supplied through
 ordinary archives. This grouping selects the original empty callback
