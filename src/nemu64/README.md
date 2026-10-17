@@ -54,12 +54,17 @@ Separating the CRT members through `setmode`, the two aliases, `RtlUnwind`, and
 the remaining early CRT members into ordinary archives also reproduces the
 complete original Rich header without changing any program-section bytes.
 
-This remains an alternative under investigation: **115 of 152 IAT slots
-match**, compared with 152 in the canonical recipe. Four imports have the
-wrong insertion positions, displacing 37 slots. The other 148 retain their
-original relative order. Neither recipe produces an exact executable. The
-build report records native placement, observed native storage addresses,
-import positions, Rich counts, resources, and every complete-file difference.
+All **152 IAT slots**, import descriptors, lookup arrays, and hint/DLL names
+now match. The unchanged CRT `sbheap` member references `IsBadWritePtr`, whose
+unused import is later discarded. Selecting that unchanged import member
+during the CRT import sequence restores the original ordering produced by the
+linker's unstable DLL-name sort. Several selection positions produce the same
+result; the original position is not uniquely known. No additional symbol root
+or retained import is introduced.
+
+Neither recipe produces an exact executable. The build report records native
+placement, observed native storage addresses, import positions, Rich counts,
+resources, and every complete-file difference.
 The inferred recipe is in `imports/link-chronology.json`; no scratch files or
 modified object bodies are required.
 

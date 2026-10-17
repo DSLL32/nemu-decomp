@@ -1,10 +1,10 @@
 {
   "schema_version": 1,
-  "status": "Optional reproducible input recipe; complete executable does not match.",
+  "status": "Optional reproducible input recipe matches complete original import layout and Rich header; complete executable still differs.",
   "original": "master/nemu64.exe",
   "original_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
   "recipe": "src/nemu64/imports/link-chronology.json",
-  "recipe_sha256": "14192ae3c21bc28179469dbc1aa50208a80d382a27add569b683e1cf459895ec",
+  "recipe_sha256": "97ad5965efd0cd3a6661bb832721005e41c26bf49caf8a82795335f419c84e5c",
   "builder": "scripts/build_nemu.py",
   "generator": "scripts/build_nemu_link_inputs.py",
   "layout_inspector": "scripts/inspect_nemu_link_layout.py",
@@ -18,7 +18,8 @@
     "The two unchanged Machine=0 oldnames alias members follow setmode; their empty text sections naturally create the original eleven CC alignment bytes before the unchanged short RtlUnwind import.",
     "The final 19 native CRT members remain in the deferred archive, preserving post-LTCG floating data/literal placement.",
     "Every other selected short import has a one-member ordinary archive; each DLL has a separate unchanged metadata archive. Input chronology follows original hint/name and DLL-name positions.",
-    "No object body, instruction, data, PE header, or padding byte is patched. Only ordinary archive indexes/headers and response files are generated."
+    "No object body, instruction, data, PE header, or padding byte is patched. Only ordinary archive indexes/headers and response files are generated.",
+    "The retained sbheap member references the ultimately discarded IsBadWritePtr import. Selecting its unchanged short-import member between CRT imports, without an added root, restores the stock unstable DLL-name qsort permutation and all152 original IAT slots."
   ],
   "canonical": {
     "artifact": "/root/.ai-tmp/nemu-build.7zi4t73x/artifacts/827ba6b25744599645f554ba325c1ecf5f1c57a4b2f434feaf22095be1699f45",
@@ -378,14 +379,13 @@
     "unchanged_canonical_generated_files": 250
   },
   "limitations": [
-    "Only115 of152 IAT slots match in this optional recipe; the canonical recipe still matches all152.",
     "No complete-executable match is claimed; the raw whole-file comparison remains the completion criterion.",
-    "Every original Rich header byte is now reproduced by unchanged ordinary archive inputs; only the COFF timestamp differs elsewhere in the headers. Application code and import ordering still prevent a complete executable match."
+    "Import layout and complete Rich bytes now match, but original archive names and discarded-import selection position remain nonunique compatible inferences. Application code still differs."
   ],
   "current_native_archive_grouping": {
     "report": "analysis/nemu-rich-order.json",
-    "artifact": "/root/.ai-tmp/nemu-build.hngf789h/artifacts/516de1c174cd4d02d0031d14e6ab2d4111635c209a8abd4aa665aa009c15317b",
-    "sha256": "516de1c174cd4d02d0031d14e6ab2d4111635c209a8abd4aa665aa009c15317b",
+    "artifact": "/root/.ai-tmp/nemu-build.a3tp5puc/artifacts/382fb954a6cf9885da6a3c624a8fe974564b703bf396e6b0535b6fc51f15f775",
+    "sha256": "382fb954a6cf9885da6a3c624a8fe974564b703bf396e6b0535b6fc51f15f775",
     "source_partitions": "analysis/nemu-translation-units.json",
     "native_function_count": 187,
     "native_function_address_delta": 0,
@@ -394,14 +394,17 @@
     "all_original_rich_count_pairs_equal": true,
     "rich_xor_key_equal": true,
     "rich_record_order_equal": true,
-    "differing_file_bytes": 17152,
+    "differing_file_bytes": 16997,
     "section_differing_bytes": {
-      ".text": 16759,
-      ".rdata": 86,
+      ".text": 16686,
+      ".rdata": 4,
       ".data": 303,
       ".rsrc": 0
     },
     "scope": "Later supported archive organization and source partitions; earlier paired canonical/chronological builds above remain historical, not same-source controls for this artifact.",
-    "complete_original_rich_header_bytes_equal": true
+    "complete_original_rich_header_bytes_equal": true,
+    "import_sort_report": "analysis/nemu-import-sort.json",
+    "all152_iat_slots_exact": true,
+    "complete_import_name_lookup_region_exact": true
   }
 }

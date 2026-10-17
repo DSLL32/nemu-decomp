@@ -1,0 +1,2914 @@
+{
+  "schema_version": 1,
+  "status": "All original import slots and complete hint/name/lookup bytes reproduced through unchanged ordinary archive selection.",
+  "original": "master/nemu64.exe",
+  "linker": "toolchains/vc7/bin/link.exe",
+  "mechanism": {
+    "grouping_function_va": "0x459650",
+    "sort_function_va": "0x41e940",
+    "comparator_va": "0x41e910",
+    "comparator": "MSVCR70!_mbscmp on contribution.module.name only; equal DLL names are unordered ties.",
+    "sort_call_va": "0x41e993",
+    "null_terminator_grouping_va": "0x41e9e0",
+    "hint_name_section": ".idata$6 is not passed through this sort."
+  },
+  "qsort_model": {
+    "source": "toolchains/vc7/crt/src/qsort.c",
+    "source_sha256": "c06eca0555661e8423ec26336076fa141ca0f113b9dda72eb431d61b1be58373",
+    "script": "scripts/inspect_nemu_import_sort.py",
+    "observed_runtime_algorithm_equal": true,
+    "ascii_module_names_make_mbscmp_equivalent_to_ordinal_string_compare": true
+  },
+  "observed_pre_sort": [
+    {
+      "module_name": "COMCTL32.dll",
+      "import_name": "ordinal:17",
+      "discarded": false
+    },
+    {
+      "module_name": "COMCTL32.dll",
+      "import_name": "ImageList_AddMasked",
+      "discarded": false
+    },
+    {
+      "module_name": "COMCTL32.dll",
+      "import_name": "ImageList_Create",
+      "discarded": false
+    },
+    {
+      "module_name": "COMCTL32.dll",
+      "import_name": null,
+      "discarded": false
+    },
+    {
+      "module_name": "WINMM.dll",
+      "import_name": "timeGetTime",
+      "discarded": false
+    },
+    {
+      "module_name": "WINMM.dll",
+      "import_name": null,
+      "discarded": false
+    },
+    {
+      "module_name": "kailleraclient.dll",
+      "import_name": "_kailleraModifyPlayValues@8",
+      "discarded": false
+    },
+    {
+      "module_name": "kailleraclient.dll",
+      "import_name": "_kailleraEndGame@0",
+      "discarded": false
+    },
+    {
+      "module_name": "kailleraclient.dll",
+      "import_name": "_kailleraInit@0",
+      "discarded": false
+    },
+    {
+      "module_name": "kailleraclient.dll",
+      "import_name": "_kailleraSelectServerDialog@4",
+      "discarded": false
+    },
+    {
+      "module_name": "kailleraclient.dll",
+      "import_name": "_kailleraShutdown@0",
+      "discarded": false
+    },
+    {
+      "module_name": "kailleraclient.dll",
+      "import_name": "_kailleraSetInfos@4",
+      "discarded": false
+    },
+    {
+      "module_name": "kailleraclient.dll",
+      "import_name": null,
+      "discarded": false
+    },
+    {
+      "module_name": "gs_dll.dll",
+      "import_name": "?GSInitialize@@YAXPAD00@Z",
+      "discarded": false
+    },
+    {
+      "module_name": "gs_dll.dll",
+      "import_name": "?GSUpdate@@YAXXZ",
+      "discarded": false
+    },
+    {
+      "module_name": "gs_dll.dll",
+      "import_name": "?GSConfigure@@YAXXZ",
+      "discarded": false
+    },
+    {
+      "module_name": "gs_dll.dll",
+      "import_name": null,
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "VirtualProtect",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "SuspendThread",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "QueryPerformanceCounter",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "Sleep",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "SetThreadPriority",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "QueryPerformanceFrequency",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "CloseHandle",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "CreateThread",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "FreeLibrary",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "FindFirstFileA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetProcAddress",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "FindClose",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "LoadLibraryA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "FindNextFileA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "FindResourceA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "lstrlenA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "lstrcpynA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "LoadResource",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetLogicalDrives",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "VirtualFree",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetDriveTypeA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetVolumeInformationA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "lstrcatA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "SetCurrentDirectoryA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetLastError",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "VirtualAlloc",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "MoveFileA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "LockResource",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetPrivateProfileStructA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetCurrentDirectoryA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "ResumeThread",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "DeleteFileA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetFileSize",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "OpenFile",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "WritePrivateProfileStructA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "ReadFile",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetPrivateProfileStringA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "WritePrivateProfileStringA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "lstrcpyA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": null,
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "MessageBoxA",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "EnableMenuItem",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "GetMenu",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "SendMessageA",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "MoveWindow",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "GetWindow",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "CheckMenuItem",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "DialogBoxParamA",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "LoadCursorA",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "DestroyMenu",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "AdjustWindowRect",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "EnableWindow",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "UpdateWindow",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "LoadImageA",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "DispatchMessageA",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "DrawMenuBar",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "CreatePopupMenu",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "ShowWindow",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "LoadAcceleratorsA",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "GetMenuItemInfoA",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "SetWindowPos",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "DefWindowProcA",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "EndDialog",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "TranslateAcceleratorA",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "ReleaseDC",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "CreateWindowExA",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "InvalidateRect",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "CheckMenuRadioItem",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "TrackPopupMenuEx",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "TranslateMessage",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "GetDC",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "BeginPaint",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "SetFocus",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "GetClientRect",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "FindWindowExA",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "LoadIconA",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "LoadStringA",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "PostQuitMessage",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "RegisterClassExA",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "InsertMenuItemA",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "GetWindowRect",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "GetMessageA",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "DestroyWindow",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "ClientToScreen",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "EndPaint",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": "SetWindowTextA",
+      "discarded": false
+    },
+    {
+      "module_name": "USER32.dll",
+      "import_name": null,
+      "discarded": false
+    },
+    {
+      "module_name": "GDI32.dll",
+      "import_name": "GetPixel",
+      "discarded": false
+    },
+    {
+      "module_name": "GDI32.dll",
+      "import_name": "SetPixelV",
+      "discarded": false
+    },
+    {
+      "module_name": "GDI32.dll",
+      "import_name": "DeleteObject",
+      "discarded": false
+    },
+    {
+      "module_name": "GDI32.dll",
+      "import_name": null,
+      "discarded": false
+    },
+    {
+      "module_name": "comdlg32.dll",
+      "import_name": "GetSaveFileNameA",
+      "discarded": false
+    },
+    {
+      "module_name": "comdlg32.dll",
+      "import_name": "GetOpenFileNameA",
+      "discarded": false
+    },
+    {
+      "module_name": "comdlg32.dll",
+      "import_name": null,
+      "discarded": false
+    },
+    {
+      "module_name": "SHELL32.dll",
+      "import_name": "DragQueryFileA",
+      "discarded": false
+    },
+    {
+      "module_name": "SHELL32.dll",
+      "import_name": "ShellExecuteA",
+      "discarded": false
+    },
+    {
+      "module_name": "SHELL32.dll",
+      "import_name": "DragAcceptFiles",
+      "discarded": false
+    },
+    {
+      "module_name": "SHELL32.dll",
+      "import_name": "DragFinish",
+      "discarded": false
+    },
+    {
+      "module_name": "SHELL32.dll",
+      "import_name": null,
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "HeapFree",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "HeapAlloc",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "HeapReAlloc",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetModuleHandleA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetStartupInfoA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetCommandLineA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetVersionExA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "ExitProcess",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "TerminateProcess",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetCurrentProcess",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "HeapDestroy",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "HeapCreate",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "WriteFile",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "SetHandleCount",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetStdHandle",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetFileType",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "SetFilePointer",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "FlushFileBuffers",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetModuleFileNameA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "UnhandledExceptionFilter",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "FreeEnvironmentStringsA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetEnvironmentStrings",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "FreeEnvironmentStringsW",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "WideCharToMultiByte",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetEnvironmentStringsW",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "CreateFileA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "SetStdHandle",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetStringTypeA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "MultiByteToWideChar",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetStringTypeW",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetACP",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetOEMCP",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetCPInfo",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "SetEndOfFile",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "HeapSize",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetTickCount",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetCurrentThreadId",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetCurrentProcessId",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetSystemTimeAsFileTime",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetLocaleInfoA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "GetSystemInfo",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "VirtualQuery",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "LCMapStringA",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "LCMapStringW",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "RtlUnwind",
+      "discarded": false
+    },
+    {
+      "module_name": "KERNEL32.dll",
+      "import_name": "IsBadWritePtr",
+      "discarded": true
+    }
+  ],
+  "observed_sort_permutation": [
+    1,
+    2,
+    3,
+    0,
+    105,
+    106,
+    107,
+    104,
+    156,
+    155,
+    154,
+    153,
+    152,
+    151,
+    150,
+    149,
+    148,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    157,
+    48,
+    49,
+    50,
+    51,
+    52,
+    53,
+    54,
+    55,
+    56,
+    147,
+    146,
+    145,
+    144,
+    143,
+    142,
+    141,
+    140,
+    139,
+    138,
+    137,
+    136,
+    135,
+    134,
+    133,
+    132,
+    131,
+    130,
+    129,
+    128,
+    127,
+    126,
+    125,
+    124,
+    161,
+    123,
+    122,
+    121,
+    120,
+    119,
+    118,
+    117,
+    116,
+    158,
+    159,
+    160,
+    47,
+    115,
+    113,
+    112,
+    111,
+    114,
+    99,
+    100,
+    101,
+    102,
+    103,
+    98,
+    92,
+    91,
+    90,
+    57,
+    58,
+    59,
+    97,
+    96,
+    95,
+    93,
+    94,
+    89,
+    88,
+    87,
+    86,
+    85,
+    84,
+    83,
+    82,
+    80,
+    79,
+    78,
+    77,
+    76,
+    75,
+    74,
+    73,
+    72,
+    71,
+    70,
+    69,
+    68,
+    67,
+    66,
+    65,
+    64,
+    63,
+    62,
+    61,
+    60,
+    81,
+    4,
+    5,
+    108,
+    109,
+    110,
+    13,
+    15,
+    14,
+    16,
+    10,
+    7,
+    6,
+    12,
+    8,
+    9,
+    11
+  ],
+  "discarded_import": {
+    "name": "IsBadWritePtr",
+    "reference": "__imp__IsBadWritePtr@8 in unchanged CRT sbheap.obj",
+    "independent_dependency_check": "Removing the default kernel32 archive without supplying this member gives LNK2001 from sbheap.obj for __imp__IsBadWritePtr@8.",
+    "rich_selected_short_imports": 153,
+    "final_imports": 152,
+    "root_added": false,
+    "member_body_changed": false
+  },
+  "selection_position_inference": {
+    "original_observation": 161,
+    "compatible_positions": [
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      140,
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147
+    ],
+    "chosen_position": 124,
+    "uniquely_recovered": false,
+    "scope": "Moving only this discarded contribution in the observed pre-sort list explains all four displaced import identities and all37 displaced slots."
+  },
+  "probes": [
+    {
+      "label": "early-crt-control",
+      "returncode": 0,
+      "rich_equal": true,
+      "baseline_sections": {
+        ".text": {
+          "layout_equal": true,
+          "different_bytes": 0
+        },
+        ".rdata": {
+          "layout_equal": true,
+          "different_bytes": 0
+        },
+        ".data": {
+          "layout_equal": true,
+          "different_bytes": 0
+        },
+        ".rsrc": {
+          "layout_equal": true,
+          "different_bytes": 0
+        }
+      },
+      "native_functions": {
+        "expected": 187,
+        "present": 187,
+        "missing_or_ambiguous": [],
+        "address_delta_counts": {
+          "0": 187
+        },
+        "uniform_displacement": true,
+        "order_inversions": 0,
+        "qualification": "Placement only; independent library-body evidence is in the inventory."
+      },
+      "observed_native_storage_exact": 54,
+      "imports": {
+        "expected_count": 152,
+        "actual_count": 152,
+        "identity_sets_equal": true,
+        "exact_iat_slots": 115,
+        "names_and_slots_equal": false,
+        "relative_order_excluding_recorded_insertions_equal": true,
+        "relative_order_count": 148,
+        "excluded_insertion_positions": [
+          {
+            "dll": "kernel32.dll",
+            "name": "GetOEMCP"
+          },
+          {
+            "dll": "kernel32.dll",
+            "name": "GetSystemInfo"
+          },
+          {
+            "dll": "kernel32.dll",
+            "name": "VirtualQuery"
+          },
+          {
+            "dll": "kernel32.dll",
+            "name": "RtlUnwind"
+          }
+        ],
+        "ranges": [
+          {
+            "name": "import_descriptors_and_lookup_arrays",
+            "rva_start": 254232,
+            "rva_end": 255092,
+            "bytes": 860,
+            "equal": false,
+            "differing_bytes": 41
+          },
+          {
+            "name": "complete_hint_and_dll_name_pool",
+            "rva_start": 255092,
+            "rva_end": 257848,
+            "bytes": 2756,
+            "equal": true,
+            "differing_bytes": 0
+          }
+        ]
+      },
+      "differing_file_bytes": 17152
+    },
+    {
+      "label": "unused-before124",
+      "returncode": 0,
+      "rich_equal": true,
+      "baseline_sections": {
+        ".text": {
+          "layout_equal": true,
+          "different_bytes": 73
+        },
+        ".rdata": {
+          "layout_equal": true,
+          "different_bytes": 82
+        },
+        ".data": {
+          "layout_equal": true,
+          "different_bytes": 0
+        },
+        ".rsrc": {
+          "layout_equal": true,
+          "different_bytes": 0
+        }
+      },
+      "native_functions": {
+        "expected": 187,
+        "present": 187,
+        "missing_or_ambiguous": [],
+        "address_delta_counts": {
+          "0": 187
+        },
+        "uniform_displacement": true,
+        "order_inversions": 0,
+        "qualification": "Placement only; independent library-body evidence is in the inventory."
+      },
+      "observed_native_storage_exact": 54,
+      "imports": {
+        "expected_count": 152,
+        "actual_count": 152,
+        "identity_sets_equal": true,
+        "exact_iat_slots": 152,
+        "names_and_slots_equal": true,
+        "relative_order_excluding_recorded_insertions_equal": true,
+        "relative_order_count": 148,
+        "excluded_insertion_positions": [
+          {
+            "dll": "kernel32.dll",
+            "name": "GetOEMCP"
+          },
+          {
+            "dll": "kernel32.dll",
+            "name": "GetSystemInfo"
+          },
+          {
+            "dll": "kernel32.dll",
+            "name": "VirtualQuery"
+          },
+          {
+            "dll": "kernel32.dll",
+            "name": "RtlUnwind"
+          }
+        ],
+        "ranges": [
+          {
+            "name": "import_descriptors_and_lookup_arrays",
+            "rva_start": 254232,
+            "rva_end": 255092,
+            "bytes": 860,
+            "equal": true,
+            "differing_bytes": 0
+          },
+          {
+            "name": "complete_hint_and_dll_name_pool",
+            "rva_start": 255092,
+            "rva_end": 257848,
+            "bytes": 2756,
+            "equal": true,
+            "differing_bytes": 0
+          }
+        ]
+      },
+      "differing_file_bytes": 16997
+    },
+    {
+      "label": "unused-before147",
+      "returncode": 0,
+      "rich_equal": true,
+      "baseline_sections": {
+        ".text": {
+          "layout_equal": true,
+          "different_bytes": 73
+        },
+        ".rdata": {
+          "layout_equal": true,
+          "different_bytes": 82
+        },
+        ".data": {
+          "layout_equal": true,
+          "different_bytes": 0
+        },
+        ".rsrc": {
+          "layout_equal": true,
+          "different_bytes": 0
+        }
+      },
+      "native_functions": {
+        "expected": 187,
+        "present": 187,
+        "missing_or_ambiguous": [],
+        "address_delta_counts": {
+          "0": 187
+        },
+        "uniform_displacement": true,
+        "order_inversions": 0,
+        "qualification": "Placement only; independent library-body evidence is in the inventory."
+      },
+      "observed_native_storage_exact": 54,
+      "imports": {
+        "expected_count": 152,
+        "actual_count": 152,
+        "identity_sets_equal": true,
+        "exact_iat_slots": 152,
+        "names_and_slots_equal": true,
+        "relative_order_excluding_recorded_insertions_equal": true,
+        "relative_order_count": 148,
+        "excluded_insertion_positions": [
+          {
+            "dll": "kernel32.dll",
+            "name": "GetOEMCP"
+          },
+          {
+            "dll": "kernel32.dll",
+            "name": "GetSystemInfo"
+          },
+          {
+            "dll": "kernel32.dll",
+            "name": "VirtualQuery"
+          },
+          {
+            "dll": "kernel32.dll",
+            "name": "RtlUnwind"
+          }
+        ],
+        "ranges": [
+          {
+            "name": "import_descriptors_and_lookup_arrays",
+            "rva_start": 254232,
+            "rva_end": 255092,
+            "bytes": 860,
+            "equal": true,
+            "differing_bytes": 0
+          },
+          {
+            "name": "complete_hint_and_dll_name_pool",
+            "rva_start": 255092,
+            "rva_end": 257848,
+            "bytes": 2756,
+            "equal": true,
+            "differing_bytes": 0
+          }
+        ]
+      },
+      "differing_file_bytes": 16997
+    }
+  ],
+  "operand_audit": {
+    "fixed_executable": "/root/.ai-tmp/nemu-import-linker.iwp8drpv/unused-before124.exe",
+    "relocated_executable": "/root/.ai-tmp/nemu-import-linker.iwp8drpv/unused-before124-relocs.exe",
+    "relocated_sha256": "6c9d90e59ff023cdf6d6a25d29da135b3049baa5f1e1fa4cf48a6aa1a1b198ef",
+    "existing_sections": [
+      {
+        "name": ".text",
+        "layout_equal": true,
+        "bytes_equal": true
+      },
+      {
+        "name": ".rdata",
+        "layout_equal": true,
+        "bytes_equal": true
+      },
+      {
+        "name": ".data",
+        "layout_equal": true,
+        "bytes_equal": true
+      },
+      {
+        "name": ".rsrc",
+        "layout_equal": true,
+        "bytes_equal": true
+      }
+    ],
+    "all_relocation_locations_unchanged": true,
+    "text_changed_bytes": 73,
+    "changed_fields": [
+      {
+        "va": "0x428d98",
+        "before": "0x430138",
+        "after": "0x430134",
+        "identity": [
+          "kernel32.dll",
+          "GetCurrentProcess"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x428d9f",
+        "before": "0x43013c",
+        "after": "0x430138",
+        "identity": [
+          "kernel32.dll",
+          "TerminateProcess"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42a008",
+        "before": "0x430130",
+        "after": "0x43012c",
+        "identity": [
+          "kernel32.dll",
+          "HeapCreate"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42a03b",
+        "before": "0x430134",
+        "after": "0x430130",
+        "identity": [
+          "kernel32.dll",
+          "HeapDestroy"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42adf1",
+        "before": "0x43012c",
+        "after": "0x430128",
+        "identity": [
+          "kernel32.dll",
+          "WriteFile"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42ae47",
+        "before": "0x43012c",
+        "after": "0x430128",
+        "identity": [
+          "kernel32.dll",
+          "WriteFile"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42afc0",
+        "before": "0x430120",
+        "after": "0x43011c",
+        "identity": [
+          "kernel32.dll",
+          "GetFileType"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42b019",
+        "before": "0x430124",
+        "after": "0x430120",
+        "identity": [
+          "kernel32.dll",
+          "GetStdHandle"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42b027",
+        "before": "0x430120",
+        "after": "0x43011c",
+        "identity": [
+          "kernel32.dll",
+          "GetFileType"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42b05e",
+        "before": "0x430128",
+        "after": "0x430124",
+        "identity": [
+          "kernel32.dll",
+          "SetHandleCount"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42b0b0",
+        "before": "0x43011c",
+        "after": "0x430118",
+        "identity": [
+          "kernel32.dll",
+          "SetFilePointer"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42b270",
+        "before": "0x430118",
+        "after": "0x430114",
+        "identity": [
+          "kernel32.dll",
+          "FlushFileBuffers"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42b3ce",
+        "before": "0x430114",
+        "after": "0x430110",
+        "identity": [
+          "kernel32.dll",
+          "GetModuleFileNameA"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42b4a9",
+        "before": "0x430124",
+        "after": "0x430120",
+        "identity": [
+          "kernel32.dll",
+          "GetStdHandle"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42b4b0",
+        "before": "0x43012c",
+        "after": "0x430128",
+        "identity": [
+          "kernel32.dll",
+          "WriteFile"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42b66c",
+        "before": "0x430110",
+        "after": "0x43010c",
+        "identity": [
+          "kernel32.dll",
+          "UnhandledExceptionFilter"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42b93c",
+        "before": "0x430114",
+        "after": "0x430110",
+        "identity": [
+          "kernel32.dll",
+          "GetModuleFileNameA"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42b9bf",
+        "before": "0x4300fc",
+        "after": "0x4300f8",
+        "identity": [
+          "kernel32.dll",
+          "GetEnvironmentStringsW"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42ba23",
+        "before": "0x430100",
+        "after": "0x4300fc",
+        "identity": [
+          "kernel32.dll",
+          "WideCharToMultiByte"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42ba75",
+        "before": "0x430104",
+        "after": "0x430100",
+        "identity": [
+          "kernel32.dll",
+          "FreeEnvironmentStringsW"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42ba8b",
+        "before": "0x430108",
+        "after": "0x430104",
+        "identity": [
+          "kernel32.dll",
+          "GetEnvironmentStrings"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42bac7",
+        "before": "0x43010c",
+        "after": "0x430108",
+        "identity": [
+          "kernel32.dll",
+          "FreeEnvironmentStringsA"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42be1e",
+        "before": "0x4300f8",
+        "after": "0x4300f4",
+        "identity": [
+          "kernel32.dll",
+          "CreateFileA"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42be2b",
+        "before": "0x430120",
+        "after": "0x43011c",
+        "identity": [
+          "kernel32.dll",
+          "GetFileType"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42c0e4",
+        "before": "0x430100",
+        "after": "0x4300fc",
+        "identity": [
+          "kernel32.dll",
+          "WideCharToMultiByte"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42c367",
+        "before": "0x4300f4",
+        "after": "0x4300f0",
+        "identity": [
+          "kernel32.dll",
+          "SetStdHandle"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42c3e1",
+        "before": "0x4300f4",
+        "after": "0x4300f0",
+        "identity": [
+          "kernel32.dll",
+          "SetStdHandle"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42c7e1",
+        "before": "0x43011c",
+        "after": "0x430118",
+        "identity": [
+          "kernel32.dll",
+          "SetFilePointer"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42c852",
+        "before": "0x4300e8",
+        "after": "0x4300e4",
+        "identity": [
+          "kernel32.dll",
+          "GetStringTypeW"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42c8c6",
+        "before": "0x4300ec",
+        "after": "0x4300e8",
+        "identity": [
+          "kernel32.dll",
+          "MultiByteToWideChar"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42c944",
+        "before": "0x4300ec",
+        "after": "0x4300e8",
+        "identity": [
+          "kernel32.dll",
+          "MultiByteToWideChar"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42c956",
+        "before": "0x4300e8",
+        "after": "0x4300e4",
+        "identity": [
+          "kernel32.dll",
+          "GetStringTypeW"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42c9ca",
+        "before": "0x4300f0",
+        "after": "0x4300ec",
+        "identity": [
+          "kernel32.dll",
+          "GetStringTypeA"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42ca5f",
+        "before": "0x430040",
+        "after": "0x43003c",
+        "identity": [
+          "kernel32.dll",
+          "GetCPInfo"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42cc00",
+        "before": "0x4300e0",
+        "after": "0x430040",
+        "identity": [
+          "kernel32.dll",
+          "GetOEMCP"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42cc17",
+        "before": "0x4300e4",
+        "after": "0x4300e0",
+        "identity": [
+          "kernel32.dll",
+          "GetACP"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42cc68",
+        "before": "0x430040",
+        "after": "0x43003c",
+        "identity": [
+          "kernel32.dll",
+          "GetCPInfo"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42d252",
+        "before": "0x43003c",
+        "after": "0x430038",
+        "identity": [
+          "kernel32.dll",
+          "SetEndOfFile"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42d2da",
+        "before": "0x430038",
+        "after": "0x430034",
+        "identity": [
+          "kernel32.dll",
+          "HeapSize"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42d2f6",
+        "before": "0x430028",
+        "after": "0x430024",
+        "identity": [
+          "kernel32.dll",
+          "GetSystemTimeAsFileTime"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42d302",
+        "before": "0x43002c",
+        "after": "0x430028",
+        "identity": [
+          "kernel32.dll",
+          "GetCurrentProcessId"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42d30a",
+        "before": "0x430030",
+        "after": "0x43002c",
+        "identity": [
+          "kernel32.dll",
+          "GetCurrentThreadId"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42d312",
+        "before": "0x430034",
+        "after": "0x430030",
+        "identity": [
+          "kernel32.dll",
+          "GetTickCount"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42d3bf",
+        "before": "0x430114",
+        "after": "0x430110",
+        "identity": [
+          "kernel32.dll",
+          "GetModuleFileNameA"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42d4ae",
+        "before": "0x430024",
+        "after": "0x430020",
+        "identity": [
+          "kernel32.dll",
+          "GetLocaleInfoA"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42d50f",
+        "before": "0x430040",
+        "after": "0x43003c",
+        "identity": [
+          "kernel32.dll",
+          "GetCPInfo"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42d56d",
+        "before": "0x4300ec",
+        "after": "0x4300e8",
+        "identity": [
+          "kernel32.dll",
+          "MultiByteToWideChar"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42d5ef",
+        "before": "0x4300ec",
+        "after": "0x4300e8",
+        "identity": [
+          "kernel32.dll",
+          "MultiByteToWideChar"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42d610",
+        "before": "0x430100",
+        "after": "0x4300fc",
+        "identity": [
+          "kernel32.dll",
+          "WideCharToMultiByte"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42d631",
+        "before": "0x430100",
+        "after": "0x4300fc",
+        "identity": [
+          "kernel32.dll",
+          "WideCharToMultiByte"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42d658",
+        "before": "0x430100",
+        "after": "0x4300fc",
+        "identity": [
+          "kernel32.dll",
+          "WideCharToMultiByte"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42d6bd",
+        "before": "0x4300bc",
+        "after": "0x430160",
+        "identity": [
+          "kernel32.dll",
+          "VirtualQuery"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42d6ce",
+        "before": "0x430020",
+        "after": "0x4300bc",
+        "identity": [
+          "kernel32.dll",
+          "GetSystemInfo"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42d714",
+        "before": "0x4300bc",
+        "after": "0x430160",
+        "identity": [
+          "kernel32.dll",
+          "VirtualQuery"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42d79b",
+        "before": "0x430164",
+        "after": "0x430168",
+        "identity": [
+          "kernel32.dll",
+          "LCMapStringW"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42d834",
+        "before": "0x4300ec",
+        "after": "0x4300e8",
+        "identity": [
+          "kernel32.dll",
+          "MultiByteToWideChar"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42d8b5",
+        "before": "0x4300ec",
+        "after": "0x4300e8",
+        "identity": [
+          "kernel32.dll",
+          "MultiByteToWideChar"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42d8cf",
+        "before": "0x430164",
+        "after": "0x430168",
+        "identity": [
+          "kernel32.dll",
+          "LCMapStringW"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42d90a",
+        "before": "0x430164",
+        "after": "0x430168",
+        "identity": [
+          "kernel32.dll",
+          "LCMapStringW"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42d97e",
+        "before": "0x430164",
+        "after": "0x430168",
+        "identity": [
+          "kernel32.dll",
+          "LCMapStringW"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42d9a1",
+        "before": "0x430100",
+        "after": "0x4300fc",
+        "identity": [
+          "kernel32.dll",
+          "WideCharToMultiByte"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42da37",
+        "before": "0x430160",
+        "after": "0x430164",
+        "identity": [
+          "kernel32.dll",
+          "LCMapStringA"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42dab8",
+        "before": "0x430160",
+        "after": "0x430164",
+        "identity": [
+          "kernel32.dll",
+          "LCMapStringA"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42db0f",
+        "before": "0x430160",
+        "after": "0x430164",
+        "identity": [
+          "kernel32.dll",
+          "LCMapStringA"
+        ],
+        "original_operand_equal": true
+      },
+      {
+        "va": "0x42dca2",
+        "before": "0x430168",
+        "after": "0x43013c",
+        "identity": [
+          "kernel32.dll",
+          "RtlUnwind"
+        ],
+        "original_operand_equal": true
+      }
+    ],
+    "text_residual_bytes": 0,
+    "all_changes_are_corrected_same_identity_iat_operands": true,
+    "data_and_resources_unchanged": true,
+    "all152_imports_original_exact": true,
+    "entire_hint_name_and_lookup_region_original_exact": true,
+    "complete_rich_header_original_exact": true
+  },
+  "runtime_observation": {
+    "directory": "/root/.ai-tmp/nemu-import-linker.iwp8drpv",
+    "sort_lists_sha256": "f9155f90f7e75a5e4f396870ffb023611722a1ee240ad2990fe8d0c1ca253ed4"
+  },
+  "limitations": [
+    "Original archive names and the unused-import selection position are inferred and nonunique.",
+    "This addresses import selection/layout, not the remaining application-code differences. Raw whole-file equality remains the completion criterion."
+  ],
+  "fresh_tracked_recipe_build": {
+    "artifact": "/root/.ai-tmp/nemu-build.a3tp5puc/artifacts/382fb954a6cf9885da6a3c624a8fe974564b703bf396e6b0535b6fc51f15f775",
+    "sha256": "382fb954a6cf9885da6a3c624a8fe974564b703bf396e6b0535b6fc51f15f775",
+    "command": "python3 scripts/build_nemu.py --chronological-libraries --stage-storage --function-order src/nemu64/application.order",
+    "all_program_sections_equal_reviewed_probe": true,
+    "source_snapshot": "/root/.ai-tmp/nemu-build.a3tp5puc/artifacts/382fb954a6cf9885da6a3c624a8fe974564b703bf396e6b0535b6fc51f15f775/source-snapshot",
+    "compiler_inputs": "/root/.ai-tmp/nemu-build.a3tp5puc/artifacts/382fb954a6cf9885da6a3c624a8fe974564b703bf396e6b0535b6fc51f15f775/build-tree",
+    "manifest": "/root/.ai-tmp/nemu-build.a3tp5puc/artifacts/382fb954a6cf9885da6a3c624a8fe974564b703bf396e6b0535b6fc51f15f775/snapshot-manifest.json",
+    "relocation_fixture": {
+      "mode": "chronological",
+      "path": "/root/.ai-tmp/nemu-chronology-relocs.oy5riysy",
+      "sha256": "ec564a8b7cd0f1b8a959bcd5c6b1f1cfac11a6bb8acdaa96c7912abf394d4ab7",
+      "parent_artifact": "/root/.ai-tmp/nemu-build.a3tp5puc/artifacts/382fb954a6cf9885da6a3c624a8fe974564b703bf396e6b0535b6fc51f15f775"
+    },
+    "relocation_fixture_existing_sections_identical": true,
+    "imports": {
+      "expected_count": 152,
+      "actual_count": 152,
+      "identity_sets_equal": true,
+      "exact_iat_slots": 152,
+      "names_and_slots_equal": true,
+      "relative_order_excluding_recorded_insertions_equal": true,
+      "relative_order_count": 152,
+      "excluded_insertion_positions": [],
+      "ranges": [
+        {
+          "name": "import_descriptors_and_lookup_arrays",
+          "rva_start": 254232,
+          "rva_end": 255092,
+          "bytes": 860,
+          "equal": true,
+          "differing_bytes": 0
+        },
+        {
+          "name": "complete_hint_and_dll_name_pool",
+          "rva_start": 255092,
+          "rva_end": 257848,
+          "bytes": 2756,
+          "equal": true,
+          "differing_bytes": 0
+        }
+      ]
+    },
+    "native_functions": {
+      "expected": 187,
+      "present": 187,
+      "missing_or_ambiguous": [],
+      "address_delta_counts": {
+        "0": 187
+      },
+      "uniform_displacement": true,
+      "order_inversions": 0,
+      "qualification": "Placement only; independent library-body evidence is in the inventory."
+    },
+    "observed_native_storage": {
+      "observations": 72,
+      "map_symbols": 54,
+      "exact": 54,
+      "mismatches": [],
+      "unavailable": [
+        "_FloatFormat",
+        "?_pgmname@?1??_setargv@@9@9",
+        "?f_use@?1??__crtGetEnvironmentStringsA@@9@9",
+        "?f_use@?1??__crtGetStringTypeA@@9@9",
+        "_fSystemSet",
+        "?pfnMessageBoxA@?1??__crtMessageBoxA@@9@9",
+        "?pfnGetActiveWindow@?1??__crtMessageBoxA@@9@9",
+        "?pfnGetLastActivePopup@?1??__crtMessageBoxA@@9@9",
+        "?pfnGetProcessWindowStation@?1??__crtMessageBoxA@@9@9",
+        "?pfnGetUserObjectInformationA@?1??__crtMessageBoxA@@9@9",
+        "_user_handler",
+        "?f_use@?1??__crtLCMapStringA@@9@9",
+        "_g_pflt",
+        "_g_fmt",
+        "_g_magnitude",
+        "_g_round_expansion",
+        "_fos",
+        "_ret"
+      ],
+      "qualification": "Library-operand observations, not independently proved original identities; includes initialized storage and BSS."
+    },
+    "rich_original_exact": true,
+    "header_differences_only_four_coff_timestamp_bytes": true,
+    "differing_file_bytes": 16997,
+    "section_differing_bytes": {
+      ".text": 16686,
+      ".rdata": 4,
+      ".data": 303,
+      ".rsrc": 0
+    }
+  },
+  "reproducible_sort_model": {
+    "scratch": "/root/.ai-tmp/nemu-import-sort.39cci5pu",
+    "observed_sort_permutation_reproduced": true,
+    "baseline_exact_iat_slots": 115,
+    "original_import_count": 152,
+    "exact_selection_positions": [
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      140,
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147
+    ],
+    "selection_position_results": [
+      {
+        "position": 0,
+        "matching_slots": 50,
+        "complete_order_equal": false
+      },
+      {
+        "position": 1,
+        "matching_slots": 55,
+        "complete_order_equal": false
+      },
+      {
+        "position": 2,
+        "matching_slots": 55,
+        "complete_order_equal": false
+      },
+      {
+        "position": 3,
+        "matching_slots": 55,
+        "complete_order_equal": false
+      },
+      {
+        "position": 4,
+        "matching_slots": 55,
+        "complete_order_equal": false
+      },
+      {
+        "position": 5,
+        "matching_slots": 55,
+        "complete_order_equal": false
+      },
+      {
+        "position": 6,
+        "matching_slots": 55,
+        "complete_order_equal": false
+      },
+      {
+        "position": 7,
+        "matching_slots": 96,
+        "complete_order_equal": false
+      },
+      {
+        "position": 8,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 9,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 10,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 11,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 12,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 13,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 14,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 15,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 16,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 17,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 18,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 19,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 20,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 21,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 22,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 23,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 24,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 25,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 26,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 27,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 28,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 29,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 30,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 31,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 32,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 33,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 34,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 35,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 36,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 37,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 38,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 39,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 40,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 41,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 42,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 43,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 44,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 45,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 46,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 47,
+        "matching_slots": 93,
+        "complete_order_equal": false
+      },
+      {
+        "position": 48,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 49,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 50,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 51,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 52,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 53,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 54,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 55,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 56,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 57,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 58,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 59,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 60,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 61,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 62,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 63,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 64,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 65,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 66,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 67,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 68,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 69,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 70,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 71,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 72,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 73,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 74,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 75,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 76,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 77,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 78,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 79,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 80,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 81,
+        "matching_slots": 110,
+        "complete_order_equal": false
+      },
+      {
+        "position": 82,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 83,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 84,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 85,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 86,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 87,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 88,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 89,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 90,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 91,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 92,
+        "matching_slots": 137,
+        "complete_order_equal": false
+      },
+      {
+        "position": 93,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 94,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 95,
+        "matching_slots": 135,
+        "complete_order_equal": false
+      },
+      {
+        "position": 96,
+        "matching_slots": 133,
+        "complete_order_equal": false
+      },
+      {
+        "position": 97,
+        "matching_slots": 132,
+        "complete_order_equal": false
+      },
+      {
+        "position": 98,
+        "matching_slots": 132,
+        "complete_order_equal": false
+      },
+      {
+        "position": 99,
+        "matching_slots": 132,
+        "complete_order_equal": false
+      },
+      {
+        "position": 100,
+        "matching_slots": 133,
+        "complete_order_equal": false
+      },
+      {
+        "position": 101,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 102,
+        "matching_slots": 135,
+        "complete_order_equal": false
+      },
+      {
+        "position": 103,
+        "matching_slots": 136,
+        "complete_order_equal": false
+      },
+      {
+        "position": 104,
+        "matching_slots": 136,
+        "complete_order_equal": false
+      },
+      {
+        "position": 105,
+        "matching_slots": 139,
+        "complete_order_equal": false
+      },
+      {
+        "position": 106,
+        "matching_slots": 139,
+        "complete_order_equal": false
+      },
+      {
+        "position": 107,
+        "matching_slots": 139,
+        "complete_order_equal": false
+      },
+      {
+        "position": 108,
+        "matching_slots": 139,
+        "complete_order_equal": false
+      },
+      {
+        "position": 109,
+        "matching_slots": 140,
+        "complete_order_equal": false
+      },
+      {
+        "position": 110,
+        "matching_slots": 141,
+        "complete_order_equal": false
+      },
+      {
+        "position": 111,
+        "matching_slots": 142,
+        "complete_order_equal": false
+      },
+      {
+        "position": 112,
+        "matching_slots": 143,
+        "complete_order_equal": false
+      },
+      {
+        "position": 113,
+        "matching_slots": 144,
+        "complete_order_equal": false
+      },
+      {
+        "position": 114,
+        "matching_slots": 145,
+        "complete_order_equal": false
+      },
+      {
+        "position": 115,
+        "matching_slots": 148,
+        "complete_order_equal": false
+      },
+      {
+        "position": 116,
+        "matching_slots": 150,
+        "complete_order_equal": false
+      },
+      {
+        "position": 117,
+        "matching_slots": 150,
+        "complete_order_equal": false
+      },
+      {
+        "position": 118,
+        "matching_slots": 150,
+        "complete_order_equal": false
+      },
+      {
+        "position": 119,
+        "matching_slots": 150,
+        "complete_order_equal": false
+      },
+      {
+        "position": 120,
+        "matching_slots": 150,
+        "complete_order_equal": false
+      },
+      {
+        "position": 121,
+        "matching_slots": 150,
+        "complete_order_equal": false
+      },
+      {
+        "position": 122,
+        "matching_slots": 150,
+        "complete_order_equal": false
+      },
+      {
+        "position": 123,
+        "matching_slots": 150,
+        "complete_order_equal": false
+      },
+      {
+        "position": 124,
+        "matching_slots": 152,
+        "complete_order_equal": true
+      },
+      {
+        "position": 125,
+        "matching_slots": 152,
+        "complete_order_equal": true
+      },
+      {
+        "position": 126,
+        "matching_slots": 152,
+        "complete_order_equal": true
+      },
+      {
+        "position": 127,
+        "matching_slots": 152,
+        "complete_order_equal": true
+      },
+      {
+        "position": 128,
+        "matching_slots": 152,
+        "complete_order_equal": true
+      },
+      {
+        "position": 129,
+        "matching_slots": 152,
+        "complete_order_equal": true
+      },
+      {
+        "position": 130,
+        "matching_slots": 152,
+        "complete_order_equal": true
+      },
+      {
+        "position": 131,
+        "matching_slots": 152,
+        "complete_order_equal": true
+      },
+      {
+        "position": 132,
+        "matching_slots": 152,
+        "complete_order_equal": true
+      },
+      {
+        "position": 133,
+        "matching_slots": 152,
+        "complete_order_equal": true
+      },
+      {
+        "position": 134,
+        "matching_slots": 152,
+        "complete_order_equal": true
+      },
+      {
+        "position": 135,
+        "matching_slots": 152,
+        "complete_order_equal": true
+      },
+      {
+        "position": 136,
+        "matching_slots": 152,
+        "complete_order_equal": true
+      },
+      {
+        "position": 137,
+        "matching_slots": 152,
+        "complete_order_equal": true
+      },
+      {
+        "position": 138,
+        "matching_slots": 152,
+        "complete_order_equal": true
+      },
+      {
+        "position": 139,
+        "matching_slots": 152,
+        "complete_order_equal": true
+      },
+      {
+        "position": 140,
+        "matching_slots": 152,
+        "complete_order_equal": true
+      },
+      {
+        "position": 141,
+        "matching_slots": 152,
+        "complete_order_equal": true
+      },
+      {
+        "position": 142,
+        "matching_slots": 152,
+        "complete_order_equal": true
+      },
+      {
+        "position": 143,
+        "matching_slots": 152,
+        "complete_order_equal": true
+      },
+      {
+        "position": 144,
+        "matching_slots": 152,
+        "complete_order_equal": true
+      },
+      {
+        "position": 145,
+        "matching_slots": 152,
+        "complete_order_equal": true
+      },
+      {
+        "position": 146,
+        "matching_slots": 152,
+        "complete_order_equal": true
+      },
+      {
+        "position": 147,
+        "matching_slots": 152,
+        "complete_order_equal": true
+      },
+      {
+        "position": 148,
+        "matching_slots": 112,
+        "complete_order_equal": false
+      },
+      {
+        "position": 149,
+        "matching_slots": 112,
+        "complete_order_equal": false
+      },
+      {
+        "position": 150,
+        "matching_slots": 112,
+        "complete_order_equal": false
+      },
+      {
+        "position": 151,
+        "matching_slots": 112,
+        "complete_order_equal": false
+      },
+      {
+        "position": 152,
+        "matching_slots": 112,
+        "complete_order_equal": false
+      },
+      {
+        "position": 153,
+        "matching_slots": 112,
+        "complete_order_equal": false
+      },
+      {
+        "position": 154,
+        "matching_slots": 112,
+        "complete_order_equal": false
+      },
+      {
+        "position": 155,
+        "matching_slots": 112,
+        "complete_order_equal": false
+      },
+      {
+        "position": 156,
+        "matching_slots": 112,
+        "complete_order_equal": false
+      },
+      {
+        "position": 157,
+        "matching_slots": 134,
+        "complete_order_equal": false
+      },
+      {
+        "position": 158,
+        "matching_slots": 109,
+        "complete_order_equal": false
+      },
+      {
+        "position": 159,
+        "matching_slots": 109,
+        "complete_order_equal": false
+      },
+      {
+        "position": 160,
+        "matching_slots": 109,
+        "complete_order_equal": false
+      },
+      {
+        "position": 161,
+        "matching_slots": 115,
+        "complete_order_equal": false
+      }
+    ]
+  }
+}

@@ -172,7 +172,7 @@ def chronological_inputs(recipe, chronology, output, imports, report, compiled_p
             raise ValueError('Native archive name must be a basename')
         file = output / row['archive']
         write_archive(file, selected_members)
-        native_archives.append(file)
+        native_archives.append((row.get('after'), file))
         native_records.append(dict(row, file=str(file), members=[
             dict(object=name, sha256=hashlib.sha256(data).hexdigest())
             for name, data, symbols in selected_members], member_bytes_unchanged=True))
@@ -208,9 +208,27 @@ def chronological_inputs(recipe, chronology, output, imports, report, compiled_p
         compiled_archives.append((row['after'], file))
         report['compiled_archives'].append(dict(archive=row['archive'], file=str(file),
             after=row['after'], members=records, member_bytes_unchanged=True))
+    discarded_archives = []
+    report['discarded_imports'] = []
+    for row in chronology.get('discarded_imports', []):
+        key = row['dll'], row['name']
+        if key in expected:
+            raise ValueError('A discarded import must not be in the final import inventory')
+        original, provenance = imports[key]
+        if provenance['import_member_sha256'] != row['import_member_sha256']:
+            raise ValueError('Discarded import member bytes changed')
+        file = output / row['archive']
+        write_archive(file, [original[-1]])
+        discarded_archives.append((row['before'], file))
+        report['discarded_imports'].append(dict(row, **provenance, file=str(file),
+            root_added=False, member_bytes_unchanged=True))
     objects, import_roots, descriptor_roots = [], [], []
-    inserted_compiled_archives = []
+    inserted_compiled_archives, inserted_native_archives, inserted_discarded_archives = [], [], []
     for index, row in enumerate(timeline):
+        for placement, file in discarded_archives:
+            if all(row.get(key) == value for key, value in placement.items()):
+                objects.append(file)
+                inserted_discarded_archives.append(file)
         if row['kind'] == 'import':
             key = row['dll'], row['name']
             original, provenance = imports[key]
@@ -236,11 +254,20 @@ def chronological_inputs(recipe, chronology, output, imports, report, compiled_p
             if all(row.get(key) == value for key, value in placement.items()):
                 objects.append(file)
                 inserted_compiled_archives.append(file)
+        for placement, file in native_archives:
+            if placement and all(row.get(key) == value for key, value in placement.items()):
+                objects.append(file)
+                inserted_native_archives.append(file)
     if sorted(inserted_compiled_archives) != sorted(file for _, file in compiled_archives):
         raise ValueError('Compiled archive placement must select exactly one chronology entry')
+    if sorted(inserted_native_archives) != sorted(file for placement, file in native_archives if placement):
+        raise ValueError('Native archive placement must select exactly one chronology entry')
+    if sorted(inserted_discarded_archives) != sorted(file for _, file in discarded_archives):
+        raise ValueError('Discarded archive placement must select exactly one chronology entry')
     if sorted(descriptor_roots) != sorted(chronology['descriptor_roots']):
         raise ValueError('Import descriptor roots changed')
-    objects.extend(native_archives + [output / 'crt-late.lib'])
+    objects.extend([file for placement, file in native_archives if not placement]
+                   + [output / 'crt-late.lib'])
     report['chronology'] = dict(crt_roots=roots, alias_targets=aliases,
         descriptor_roots=chronology['descriptor_roots'], limitations=chronology['limitations'],
         native_archives=native_records,

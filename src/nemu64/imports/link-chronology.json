@@ -9,10 +9,11 @@
     "Import wrappers follow original hint/name and DLL-name positions; ordinal-only InitCommonControls has no hint/name record and is selected first.",
     "This compatible recipe is not a uniquely recovered original link command.",
     "Ordinary archives for the freshly compiled zlib and native ByteSwap members reproduce the original relative Rich grouping and select the original empty application ICF representative at0x41fef0. Archive names and original native-helper membership remain inferred.",
-    "Separate ordinary archives for the first91 CRT members, two aliases, RtlUnwind import and remaining4 CRT members reproduce the original Rich record order while preserving all program sections. Library names and boundaries are a compatible inference, not uniquely recovered history."
+    "Separate ordinary archives for the first91 CRT members, two aliases, RtlUnwind import and remaining4 CRT members reproduce the original Rich record order while preserving all program sections. Library names and boundaries are a compatible inference, not uniquely recovered history.",
+    "Selecting the unchanged unused IsBadWritePtr import after the initial CRT members and before TerminateProcess preserves all hint names and makes the stock unstable DLL-name qsort reproduce every original IAT slot. The extra selected short-import member is also required by the original Rich count153, versus152 final imports."
   ],
   "limitations": [
-    "Only 115 of 152 IAT slots currently match. GetOEMCP, GetSystemInfo, VirtualQuery and RtlUnwind have incorrect insertion positions; the remaining 148 imports have the original relative order."
+    "Source/archive organization is a compatible inference, not a uniquely recovered original project. Whole executable equality remains the completion criterion."
   ],
   "crt_roots": [
     {
@@ -1388,24 +1389,7 @@
       "rva_end": 257848
     }
   ],
-  "remaining_insertion_positions": [
-    {
-      "dll": "kernel32.dll",
-      "name": "GetOEMCP"
-    },
-    {
-      "dll": "kernel32.dll",
-      "name": "GetSystemInfo"
-    },
-    {
-      "dll": "kernel32.dll",
-      "name": "VirtualQuery"
-    },
-    {
-      "dll": "kernel32.dll",
-      "name": "RtlUnwind"
-    }
-  ],
+  "remaining_insertion_positions": [],
   "compiled_archives": [
     {
       "archive": "zlib-native.lib",
@@ -1489,7 +1473,11 @@
     {
       "archive": "crt-early.lib",
       "selection": "crt_before_aliases",
-      "member_count": 91
+      "member_count": 91,
+      "after": {
+        "kind": "descriptor",
+        "dll": "shell32.dll"
+      }
     },
     {
       "archive": "crt-aliases.lib",
@@ -1505,6 +1493,21 @@
       "archive": "crt-tail.lib",
       "selection": "crt_after_unwind",
       "member_count": 4
+    }
+  ],
+  "discarded_imports": [
+    {
+      "archive": "discarded-kernel.lib",
+      "dll": "kernel32.dll",
+      "name": "IsBadWritePtr",
+      "import_member_sha256": "f3c7de79887f628f22261814a02ed9124085eaa62e81f06ce09596eb7ece6ac3",
+      "before": {
+        "kind": "import",
+        "dll": "kernel32.dll",
+        "name": "TerminateProcess"
+      },
+      "selection_reason": "The unchanged retained sbheap.obj references this member. OPT:REF discards its final import contributions; no root is added.",
+      "position_inference": "Any pre-sort position124 through147 reproduces the original IAT permutation; choosing the first compatible position does not uniquely recover original extraction history."
     }
   ]
 }
