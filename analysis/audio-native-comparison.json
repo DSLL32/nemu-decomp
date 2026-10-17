@@ -1,0 +1,1878 @@
+{
+  "original": "/root/nemu-decomp/master/Plugin/audio.dll",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "full_dll_byte_exact": false,
+  "diagnostic_only": true,
+  "work": "/root/.ai-tmp/nemu-audio-recovery/build-probe/build",
+  "wine_prefix": "/root/.ai-tmp/nemu-audio-recovery/build-probe/wine",
+  "source_sha256": {
+    "AudioSIMD.c": "28ccb6f9e1f950f6975a848a489d26e079a2b3f7c9ee6e8810d7b1941e2dc17f",
+    "Mp3Butterfly.c": "7d73131f77b649520b9a4c397edd51ad56ccd314b69b6ec7583cc3e98eb15103",
+    "Jpeg.c": "8b819f6c1bd8cb0cb3564122fb591274bf6a48a50f7fcda46b867f0b5ad92ad7",
+    "AudioHLE.h": "82e6544a76ee5d0e361f785773e5da8bd91070019a65367d89d6cb0defd8b3ee",
+    "DirectSound.c": "867b080a6b5083a4da61a32a9533da8b7b7e1b0cbdf879332fd13d769fd0fcab",
+    "AudioProcessing.c": "14bb93830b0fb64cca8e25ebe91dd4761e0ecfd01de2049b036f5f2932e3d679",
+    "AudioADPCM.c": "b5d92ba45bafa0b961663c230c3cc5d1a323ea3a8e6a9a619df0f85667e76187",
+    "audio.def": "f34ad9fa1d564c407483eabd05363f0c95a4cf69a81f6c4ffcb0dd95ddcb4b34",
+    "transform.c": "b180da5ba72e8396d9764fe50f2cf50752968d74bb4a6bfbc20d9ea978e063e5",
+    "AudioSSE.c": "37da4a9d22e3e1b8e33e5d381dac340ad2b38a59dacf7492f4aa6e5ad87c954f",
+    "AudioPlugin.c": "1ef5cae24d718299f960693d86973c72c120c9adcc4cd89861a7d34a718ac522",
+    "CPUFeatures.c": "a55e83d032646d320c166d151ca650ff5112ebb76da8fcca1bbbf5fa3a74293c",
+    "AudioProfile.c": "cec145766acd789e0b31b003942d6bc5ba63463876dc037ed966e6c0a1e28639",
+    "AudioLegacy.h": "8f5810c3d8ae923119c733c304064310630cca3201c4b472047267d1417bee98",
+    "AudioConfig.c": "76e185edbddec6ac5d53e97e11a605428aca3e5083896850b8bc1a5c455b5159",
+    "AudioLog.c": "fd03c7d067e114e302c457febe54e65c938276f1415272ce793c030e57abea58",
+    "Mp3Primitives.c": "6df9f3d0a0abf9abcc3805acab361d21bb9bd0a66ddc9eea3ddaacdbed7b0782",
+    "AudioMemory.c": "073af2a2f51206fb2fe7212371c0a33b8e9d65fb9bf6a24e572c156227e9ba3c",
+    "AudioLegacy.c": "954d1b09230db5c8d7ac31c8b17b68c8211ef1591a3e4146dcc8eaf1974c8343",
+    "transform.h": "2f1675aeb0422aa4a52fa4191cf239d4b1432ebc6ae5b3993243efd5c88a80a4",
+    "AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
+    "AMP-LICENSE.txt": "133f385d28039b18f9900e1cd933119ccae0462b495999a2750dea9fb8430640",
+    "DirectSound.h": "7b43d2cdc49eddde700729c11226fa7c2bc1d1b5233cbf232eb03b7f7adfdd44",
+    "Audio.rc": "b551863a11341c7440df2425b5620cda11c9eaef312179e8dd925fd05b12bf93"
+  },
+  "tool_sha256": {
+    "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
+    "toolchains/vc7/bin/c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
+    "toolchains/vc7/bin/c1xx.dll": "30c3affd786752b4a037c4b4f035b7962d1fb5a335366e093bc73d0eb02e5558",
+    "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0",
+    "toolchains/vc7/bin/link.exe": "1560d85164dfb763dd13f90f33ff9c6f1cd80f2afada03eed8d0a314593581f1",
+    "toolchains/vc7/lib/libcmt.lib": "8815af7b9b6e0e28b77708ede25ab7ecfc4b05e1d8811f092c516cff5ce19d94",
+    "scripts/build_audio.py": "b8f321349a90b1e1cc238f29a4314cc5c74fb2907e31fe27544dc00b7a9a9d6f",
+    "scripts/verify_audio.py": "44d65d751129d51d5296a68f81735be23f068c7e0d3b8694d5074333dcc0d490",
+    "scripts/verify_gs.py": "9096c1ce5e759dc60f4fc7b84c97678b5946b7b15f6bfb56cd1fa3b9e730854c",
+    "scripts/run_toolchain.py": "489681186d7cde23f42d0a6f154f3e9723b060fa769a1ce2d0f31e656074ea9e"
+  },
+  "commands": [
+    {
+      "label": "compile-CPUFeatures",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_USRDLL",
+        "/FoCPUFeatures.obj",
+        "CPUFeatures.c"
+      ],
+      "exit_code": 0
+    },
+    {
+      "label": "compile-AudioPlugin",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_USRDLL",
+        "/FoAudioPlugin.obj",
+        "AudioPlugin.c"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "artifact": "/root/.ai-tmp/nemu-audio-recovery/build-probe/runs/c6tlb2c5",
+  "objects": [
+    {
+      "object": "/root/.ai-tmp/nemu-audio-recovery/build-probe/build/CPUFeatures.obj",
+      "sha256": "84db349dc1bdf1e5654487b4988821b4daa027a713fe5ecfc9c6d1eb25655dde",
+      "literal_data_checks": [
+        {
+          "name": "??_C@_0N@GFHLKNJN@UnknownVendr?$AA@",
+          "va": 268636264,
+          "object": "CPUFeatures.obj",
+          "address_basis": "identified_symbol",
+          "address_evidence": "Complete compiler-emitted source string equals original data",
+          "size": 13,
+          "sha256": "f7eb8376ace1d9f8fedb4d9c42995bbd768ac2cbaba0bccea2b18acaa45de3d9"
+        },
+        {
+          "name": "??_C@_0N@FFJGBINN@AuthenticAMD?$AA@",
+          "va": 268636248,
+          "object": "CPUFeatures.obj",
+          "address_basis": "identified_symbol",
+          "address_evidence": "Complete compiler-emitted source string equals original data",
+          "size": 13,
+          "sha256": "769063edb8e80a29330105d88592190aa870bdd17ddec81564decdc6f05adec6"
+        }
+      ],
+      "functions": [
+        {
+          "name": "_get_feature_flags",
+          "object": "CPUFeatures.obj",
+          "rebuilt_bytes": 544,
+          "status": "compared",
+          "original_va": 268462688,
+          "raw_bytes_equal": false,
+          "raw_differing_bytes": 40,
+          "compared_bytes": 544,
+          "original_size_verified": false,
+          "relocations": [
+            {
+              "offset": 6,
+              "type": "DIR32",
+              "symbol": "$T594",
+              "addend": 0,
+              "original_target_va": 268636280,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 11,
+              "type": "DIR32",
+              "symbol": "__except_handler3",
+              "addend": 0,
+              "original_target_va": 268573644,
+              "original_target_symbols": [
+                "__except_handler3"
+              ],
+              "expected_target_va": 268573644,
+              "resolution_basis": "independent_library_mapping",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 17,
+              "type": "DIR32",
+              "symbol": "__except_list",
+              "addend": 0,
+              "original_target_va": 0,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 25,
+              "type": "DIR32",
+              "symbol": "__except_list",
+              "addend": 0,
+              "original_target_va": 0,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 45,
+              "type": "DIR32",
+              "symbol": "??_C@_0N@GFHLKNJN@UnknownVendr?$AA@",
+              "addend": 0,
+              "original_target_va": 268636264,
+              "original_target_symbols": [
+                "??_C@_0N@GFHLKNJN@UnknownVendr?$AA@"
+              ],
+              "expected_target_va": 268636264,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 54,
+              "type": "DIR32",
+              "symbol": "??_C@_0N@GFHLKNJN@UnknownVendr?$AA@",
+              "addend": 4,
+              "original_target_va": 268636268,
+              "original_target_symbols": [],
+              "expected_target_va": 268636268,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 63,
+              "type": "DIR32",
+              "symbol": "??_C@_0N@GFHLKNJN@UnknownVendr?$AA@",
+              "addend": 8,
+              "original_target_va": 268636272,
+              "original_target_symbols": [],
+              "expected_target_va": 268636272,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 72,
+              "type": "DIR32",
+              "symbol": "??_C@_0N@GFHLKNJN@UnknownVendr?$AA@",
+              "addend": 12,
+              "original_target_va": 268636276,
+              "original_target_symbols": [],
+              "expected_target_va": 268636276,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 81,
+              "type": "DIR32",
+              "symbol": "??_C@_0N@FFJGBINN@AuthenticAMD?$AA@",
+              "addend": 0,
+              "original_target_va": 268636248,
+              "original_target_symbols": [
+                "??_C@_0N@FFJGBINN@AuthenticAMD?$AA@"
+              ],
+              "expected_target_va": 268636248,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 90,
+              "type": "DIR32",
+              "symbol": "??_C@_0N@FFJGBINN@AuthenticAMD?$AA@",
+              "addend": 4,
+              "original_target_va": 268636252,
+              "original_target_symbols": [],
+              "expected_target_va": 268636252,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 99,
+              "type": "DIR32",
+              "symbol": "??_C@_0N@FFJGBINN@AuthenticAMD?$AA@",
+              "addend": 8,
+              "original_target_va": 268636256,
+              "original_target_symbols": [],
+              "expected_target_va": 268636256,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 108,
+              "type": "DIR32",
+              "symbol": "??_C@_0N@FFJGBINN@AuthenticAMD?$AA@",
+              "addend": 12,
+              "original_target_va": 268636260,
+              "original_target_symbols": [],
+              "expected_target_va": 268636260,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 450,
+              "type": "DIR32",
+              "symbol": "__except_list",
+              "addend": 0,
+              "original_target_va": 0,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 491,
+              "type": "DIR32",
+              "symbol": "__except_list",
+              "addend": 0,
+              "original_target_va": 0,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 526,
+              "type": "DIR32",
+              "symbol": "__except_list",
+              "addend": 0,
+              "original_target_va": 0,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            }
+          ],
+          "relocation_target_mismatch_count": 0,
+          "inferred_target_count": 0,
+          "unresolved_target_count": 6,
+          "relocation_masked_equal": true,
+          "relocation_masked_differing_bytes": 0,
+          "relocations_all_resolved": false,
+          "relocation_values_consistent": false,
+          "relocation_targets_verified": false,
+          "relocation_targets_equal": false,
+          "inferred_relocated_bytes_equal": false,
+          "relocated_bytes_equal": false,
+          "first_unmasked_differences": []
+        },
+        {
+          "name": "_DetectCPUFeatures",
+          "object": "CPUFeatures.obj",
+          "rebuilt_bytes": 48,
+          "status": "compared",
+          "original_va": 268463232,
+          "raw_bytes_equal": false,
+          "raw_differing_bytes": 16,
+          "compared_bytes": 48,
+          "original_size_verified": false,
+          "relocations": [
+            {
+              "offset": 1,
+              "type": "REL32",
+              "symbol": "_get_feature_flags",
+              "addend": 0,
+              "original_target_va": 268462688,
+              "original_target_symbols": [
+                "_get_feature_flags"
+              ],
+              "expected_target_va": 268462688,
+              "resolution_basis": "identified_symbol",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 28,
+              "type": "DIR32",
+              "symbol": "_Use3DNow",
+              "addend": 0,
+              "original_target_va": 269389592,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 34,
+              "type": "DIR32",
+              "symbol": "_UseMMXExt",
+              "addend": 0,
+              "original_target_va": 269389600,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 39,
+              "type": "DIR32",
+              "symbol": "_UseSSE",
+              "addend": 0,
+              "original_target_va": 269389596,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            }
+          ],
+          "relocation_target_mismatch_count": 0,
+          "inferred_target_count": 0,
+          "unresolved_target_count": 3,
+          "relocation_masked_equal": true,
+          "relocation_masked_differing_bytes": 0,
+          "relocations_all_resolved": false,
+          "relocation_values_consistent": false,
+          "relocation_targets_verified": false,
+          "relocation_targets_equal": false,
+          "inferred_relocated_bytes_equal": false,
+          "relocated_bytes_equal": false,
+          "first_unmasked_differences": []
+        }
+      ],
+      "functions_compared": 2,
+      "relocation_masked_matches": 2,
+      "relocated_exact_matches": 0
+    },
+    {
+      "object": "/root/.ai-tmp/nemu-audio-recovery/build-probe/build/AudioPlugin.obj",
+      "sha256": "44bd65f60b985a15156a45bbc15a8d0fe1432a4e3ad235a6a9c22368be210256",
+      "literal_data_checks": [
+        {
+          "name": "??_C@_05BDOHFCKE@About?$AA@",
+          "va": 268635564,
+          "object": "AudioPlugin.obj",
+          "address_basis": "identified_symbol",
+          "address_evidence": "Complete compiler-emitted source string equals original data",
+          "size": 6,
+          "sha256": "636b67c6d57d767d9c509e44f8792abed506fedb3a3faab54926ae61f0154ce0"
+        },
+        {
+          "name": "??_C@_0BJ@DHOPPHEK@plugin?1attachedAudio?4dll?$AA@",
+          "va": 268637296,
+          "object": "AudioPlugin.obj",
+          "address_basis": "identified_symbol",
+          "address_evidence": "Complete compiler-emitted source string equals original data",
+          "size": 25,
+          "sha256": "f223d08260020a86349fb60ed768b31b7a3d1f7d1adc7d236b79323027a554a0"
+        },
+        {
+          "name": "??_C@_0BB@EJEGOIGK@AiDacrateChanged?$AA@",
+          "va": 268637276,
+          "object": "AudioPlugin.obj",
+          "address_basis": "identified_symbol",
+          "address_evidence": "Complete compiler-emitted source string equals original data",
+          "size": 17,
+          "sha256": "7f6331d36b90bfcdf2845c6236a5962e01255f6357ab485695b906c5d0a6a044"
+        },
+        {
+          "name": "??_C@_0N@EJMLADGN@AiLenChanged?$AA@",
+          "va": 268637260,
+          "object": "AudioPlugin.obj",
+          "address_basis": "identified_symbol",
+          "address_evidence": "Complete compiler-emitted source string equals original data",
+          "size": 13,
+          "sha256": "60bdb6ee45bf857ab3cd2874c6a9e9ba2a7dc3bf726d67ba80f9fab4aa2cb7f5"
+        },
+        {
+          "name": "??_C@_0N@IIHDJBOM@AiReadLength?$AA@",
+          "va": 268637244,
+          "object": "AudioPlugin.obj",
+          "address_basis": "identified_symbol",
+          "address_evidence": "Complete compiler-emitted source string equals original data",
+          "size": 13,
+          "sha256": "50c2f645987621280936b4109b88ed6d820148e40d1bc2a40141b180670888d4"
+        },
+        {
+          "name": "??_C@_08OJANGBPO@CloseDLL?$AA@",
+          "va": 268637232,
+          "object": "AudioPlugin.obj",
+          "address_basis": "identified_symbol",
+          "address_evidence": "Complete compiler-emitted source string equals original data",
+          "size": 9,
+          "sha256": "a5e2dd5c4fc5e498168e6d076ed4431bd6d2f4b1d24b6bf0adcec11cae408906"
+        },
+        {
+          "name": "??_C@_08MAACGMH@DllAbout?$AA@",
+          "va": 268637220,
+          "object": "AudioPlugin.obj",
+          "address_basis": "identified_symbol",
+          "address_evidence": "Complete compiler-emitted source string equals original data",
+          "size": 9,
+          "sha256": "f5eaf816d4ffd4b1cef7c741f946adf57d30df4e89281cae2d419015038881ab"
+        },
+        {
+          "name": "??_C@_09GPIDEJEA@DllConfig?$AA@",
+          "va": 268637208,
+          "object": "AudioPlugin.obj",
+          "address_basis": "identified_symbol",
+          "address_evidence": "Complete compiler-emitted source string equals original data",
+          "size": 10,
+          "sha256": "d0e12a8486e63c8e0bbc8cc38759305a16f53859a5510da668bfdc5618f05cfe"
+        },
+        {
+          "name": "??_C@_07NIKFABPA@DllTest?$AA@",
+          "va": 268637200,
+          "object": "AudioPlugin.obj",
+          "address_basis": "identified_symbol",
+          "address_evidence": "Complete compiler-emitted source string equals original data",
+          "size": 8,
+          "sha256": "f80d9100791903a22c62b7b17f52cb4680fbe08df09c6dbcffa79bdeff21f690"
+        },
+        {
+          "name": "??_C@_0L@EPFIEAMH@GetDllInfo?$AA@",
+          "va": 268637188,
+          "object": "AudioPlugin.obj",
+          "address_basis": "identified_symbol",
+          "address_evidence": "Complete compiler-emitted source string equals original data",
+          "size": 11,
+          "sha256": "3fa38037671f196db3b9de6ba891095cc7aaa42ae87599e5260365f8fe3a3f68"
+        },
+        {
+          "name": "??_C@_0O@LNNBDIBP@InitiateAudio?$AA@",
+          "va": 268637172,
+          "object": "AudioPlugin.obj",
+          "address_basis": "identified_symbol",
+          "address_evidence": "Complete compiler-emitted source string equals original data",
+          "size": 14,
+          "sha256": "87c1079879c4f557d6d3914fb08fc18612a314ee678ca9d3df39a4f8748ee192"
+        },
+        {
+          "name": "??_C@_0N@CDOKGKDH@ProcessAList?$AA@",
+          "va": 268637156,
+          "object": "AudioPlugin.obj",
+          "address_basis": "identified_symbol",
+          "address_evidence": "Complete compiler-emitted source string equals original data",
+          "size": 13,
+          "sha256": "e4e863379a7c0aa6d5d2706f9d5216f196fdfb1a382686c891a9fea6e522a61d"
+        },
+        {
+          "name": "??_C@_09EOBANCKA@RomClosed?$AA@",
+          "va": 268637144,
+          "object": "AudioPlugin.obj",
+          "address_basis": "identified_symbol",
+          "address_evidence": "Complete compiler-emitted source string equals original data",
+          "size": 10,
+          "sha256": "9d62e3e697d94827c2007b7a8c3115db738a18ab71728c22a5c9e2f917587f73"
+        },
+        {
+          "name": "??_C@_08MBCOJCNB@AiUpdate?$AA@",
+          "va": 268637132,
+          "object": "AudioPlugin.obj",
+          "address_basis": "identified_symbol",
+          "address_evidence": "Complete compiler-emitted source string equals original data",
+          "size": 9,
+          "sha256": "199fc35921a7781e0305b75604aafd0f9b38985384871a3c1e8ee7da82ae0876"
+        },
+        {
+          "name": "??_C@_02GMLFBBN@wb?$AA@",
+          "va": 268633292,
+          "object": "AudioPlugin.obj",
+          "address_basis": "identified_symbol",
+          "address_evidence": "Complete compiler-emitted source string equals original data",
+          "size": 3,
+          "sha256": "229b7c9a4f22005ef2af2aa0e5b226b59c93e9fe97ffd2a05019cb831eaa6121"
+        },
+        {
+          "name": "??_C@_0BD@DEKEIGM@abi_ucode_dmem?4dmp?$AA@",
+          "va": 268633272,
+          "object": "AudioPlugin.obj",
+          "address_basis": "identified_symbol",
+          "address_evidence": "Complete compiler-emitted source string equals original data",
+          "size": 19,
+          "sha256": "1cf95528bbecf5edbc61833fe358eae28f0231d85d33546882b3ef8daf4f9850"
+        },
+        {
+          "name": "??_C@_0BD@PCAFKPDL@abi_ucode_imem?4dmp?$AA@",
+          "va": 268633252,
+          "object": "AudioPlugin.obj",
+          "address_basis": "identified_symbol",
+          "address_evidence": "Complete compiler-emitted source string equals original data",
+          "size": 19,
+          "sha256": "e29fcff3e741ca17ceffaffcb83e1c14796f5411a3498e08481990de0ce7213b"
+        }
+      ],
+      "functions": [
+        {
+          "name": "_AudioPluginReserved",
+          "object": "AudioPlugin.obj",
+          "rebuilt_bytes": 16,
+          "status": "compared",
+          "original_va": 268515264,
+          "raw_bytes_equal": true,
+          "raw_differing_bytes": 0,
+          "compared_bytes": 16,
+          "original_size_verified": false,
+          "relocations": [],
+          "relocation_target_mismatch_count": 0,
+          "inferred_target_count": 0,
+          "unresolved_target_count": 0,
+          "relocation_masked_equal": true,
+          "relocation_masked_differing_bytes": 0,
+          "relocations_all_resolved": true,
+          "relocation_values_consistent": true,
+          "relocation_targets_verified": true,
+          "relocation_targets_equal": true,
+          "inferred_relocated_bytes_equal": true,
+          "relocated_bytes_equal": true,
+          "first_unmasked_differences": []
+        },
+        {
+          "name": "_AiUpdate",
+          "object": "AudioPlugin.obj",
+          "rebuilt_bytes": 16,
+          "status": "compared",
+          "original_va": 268515280,
+          "raw_bytes_equal": false,
+          "raw_differing_bytes": 4,
+          "compared_bytes": 16,
+          "original_size_verified": false,
+          "relocations": [
+            {
+              "offset": 2,
+              "type": "DIR32",
+              "symbol": "_AttachedAiUpdate",
+              "addend": 0,
+              "original_target_va": 269682328,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            }
+          ],
+          "relocation_target_mismatch_count": 0,
+          "inferred_target_count": 0,
+          "unresolved_target_count": 1,
+          "relocation_masked_equal": true,
+          "relocation_masked_differing_bytes": 0,
+          "relocations_all_resolved": false,
+          "relocation_values_consistent": false,
+          "relocation_targets_verified": false,
+          "relocation_targets_equal": false,
+          "inferred_relocated_bytes_equal": false,
+          "relocated_bytes_equal": false,
+          "first_unmasked_differences": []
+        },
+        {
+          "name": "_AiDacrateChanged",
+          "object": "AudioPlugin.obj",
+          "rebuilt_bytes": 16,
+          "status": "compared",
+          "original_va": 268515296,
+          "raw_bytes_equal": false,
+          "raw_differing_bytes": 4,
+          "compared_bytes": 16,
+          "original_size_verified": false,
+          "relocations": [
+            {
+              "offset": 2,
+              "type": "DIR32",
+              "symbol": "_AttachedAiDacrateChanged",
+              "addend": 0,
+              "original_target_va": 269682320,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            }
+          ],
+          "relocation_target_mismatch_count": 0,
+          "inferred_target_count": 0,
+          "unresolved_target_count": 1,
+          "relocation_masked_equal": true,
+          "relocation_masked_differing_bytes": 0,
+          "relocations_all_resolved": false,
+          "relocation_values_consistent": false,
+          "relocation_targets_verified": false,
+          "relocation_targets_equal": false,
+          "inferred_relocated_bytes_equal": false,
+          "relocated_bytes_equal": false,
+          "first_unmasked_differences": []
+        },
+        {
+          "name": "_AiLenChanged",
+          "object": "AudioPlugin.obj",
+          "rebuilt_bytes": 16,
+          "status": "compared",
+          "original_va": 268515312,
+          "raw_bytes_equal": false,
+          "raw_differing_bytes": 4,
+          "compared_bytes": 16,
+          "original_size_verified": false,
+          "relocations": [
+            {
+              "offset": 2,
+              "type": "DIR32",
+              "symbol": "_AttachedAiLenChanged",
+              "addend": 0,
+              "original_target_va": 269682324,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            }
+          ],
+          "relocation_target_mismatch_count": 0,
+          "inferred_target_count": 0,
+          "unresolved_target_count": 1,
+          "relocation_masked_equal": true,
+          "relocation_masked_differing_bytes": 0,
+          "relocations_all_resolved": false,
+          "relocation_values_consistent": false,
+          "relocation_targets_verified": false,
+          "relocation_targets_equal": false,
+          "inferred_relocated_bytes_equal": false,
+          "relocated_bytes_equal": false,
+          "first_unmasked_differences": []
+        },
+        {
+          "name": "_AiReadLength",
+          "object": "AudioPlugin.obj",
+          "rebuilt_bytes": 16,
+          "status": "compared",
+          "original_va": 268515328,
+          "raw_bytes_equal": false,
+          "raw_differing_bytes": 4,
+          "compared_bytes": 16,
+          "original_size_verified": false,
+          "relocations": [
+            {
+              "offset": 2,
+              "type": "DIR32",
+              "symbol": "_AttachedAiReadLength",
+              "addend": 0,
+              "original_target_va": 269682284,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            }
+          ],
+          "relocation_target_mismatch_count": 0,
+          "inferred_target_count": 0,
+          "unresolved_target_count": 1,
+          "relocation_masked_equal": true,
+          "relocation_masked_differing_bytes": 0,
+          "relocations_all_resolved": false,
+          "relocation_values_consistent": false,
+          "relocation_targets_verified": false,
+          "relocation_targets_equal": false,
+          "inferred_relocated_bytes_equal": false,
+          "relocated_bytes_equal": false,
+          "first_unmasked_differences": []
+        },
+        {
+          "name": "_CloseDLL",
+          "object": "AudioPlugin.obj",
+          "rebuilt_bytes": 48,
+          "status": "compared",
+          "original_va": 268515344,
+          "raw_bytes_equal": false,
+          "raw_differing_bytes": 23,
+          "compared_bytes": 48,
+          "original_size_verified": false,
+          "relocations": [
+            {
+              "offset": 1,
+              "type": "DIR32",
+              "symbol": "_PluginInitialized",
+              "addend": 0,
+              "original_target_va": 269682280,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 11,
+              "type": "DIR32",
+              "symbol": "_PluginInitialized",
+              "addend": 0,
+              "original_target_va": 269682280,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 20,
+              "type": "REL32",
+              "symbol": "_FreeAudioHLE",
+              "addend": 0,
+              "original_target_va": 268446144,
+              "original_target_symbols": [
+                "_FreeAudioHLE"
+              ],
+              "expected_target_va": 268446144,
+              "resolution_basis": "observed_operand_inference",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": false
+            },
+            {
+              "offset": 26,
+              "type": "DIR32",
+              "symbol": "_AttachedCloseDLL",
+              "addend": 0,
+              "original_target_va": 269682060,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 31,
+              "type": "DIR32",
+              "symbol": "_AttachedAudio",
+              "addend": 0,
+              "original_target_va": 269682308,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 38,
+              "type": "DIR32",
+              "symbol": "__imp__FreeLibrary@4",
+              "addend": 0,
+              "original_target_va": 268632148,
+              "original_target_symbols": [
+                "__imp_FreeLibrary",
+                "__imp__FreeLibrary"
+              ],
+              "expected_target_va": 268632148,
+              "resolution_basis": "import_table",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            }
+          ],
+          "relocation_target_mismatch_count": 0,
+          "inferred_target_count": 1,
+          "unresolved_target_count": 4,
+          "relocation_masked_equal": true,
+          "relocation_masked_differing_bytes": 0,
+          "relocations_all_resolved": false,
+          "relocation_values_consistent": false,
+          "relocation_targets_verified": false,
+          "relocation_targets_equal": false,
+          "inferred_relocated_bytes_equal": false,
+          "relocated_bytes_equal": false,
+          "first_unmasked_differences": []
+        },
+        {
+          "name": "_DllAbout",
+          "object": "AudioPlugin.obj",
+          "rebuilt_bytes": 32,
+          "status": "compared",
+          "original_va": 268515392,
+          "raw_bytes_equal": false,
+          "raw_differing_bytes": 12,
+          "compared_bytes": 32,
+          "original_size_verified": false,
+          "relocations": [
+            {
+              "offset": 7,
+              "type": "DIR32",
+              "symbol": "??_C@_05BDOHFCKE@About?$AA@",
+              "addend": 0,
+              "original_target_va": 268635564,
+              "original_target_symbols": [
+                "??_C@_05BDOHFCKE@About?$AA@"
+              ],
+              "expected_target_va": 268635564,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 12,
+              "type": "DIR32",
+              "symbol": "_PluginName",
+              "addend": 0,
+              "original_target_va": 268688208,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 19,
+              "type": "DIR32",
+              "symbol": "__imp__MessageBoxA@16",
+              "addend": 0,
+              "original_target_va": 268632524,
+              "original_target_symbols": [
+                "__imp_MessageBoxA",
+                "__imp__MessageBoxA"
+              ],
+              "expected_target_va": 268632524,
+              "resolution_basis": "import_table",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            }
+          ],
+          "relocation_target_mismatch_count": 0,
+          "inferred_target_count": 0,
+          "unresolved_target_count": 1,
+          "relocation_masked_equal": true,
+          "relocation_masked_differing_bytes": 0,
+          "relocations_all_resolved": false,
+          "relocation_values_consistent": false,
+          "relocation_targets_verified": false,
+          "relocation_targets_equal": false,
+          "inferred_relocated_bytes_equal": false,
+          "relocated_bytes_equal": false,
+          "first_unmasked_differences": []
+        },
+        {
+          "name": "_DllConfig",
+          "object": "AudioPlugin.obj",
+          "rebuilt_bytes": 16,
+          "status": "compared",
+          "original_va": 268515424,
+          "raw_bytes_equal": false,
+          "raw_differing_bytes": 4,
+          "compared_bytes": 16,
+          "original_size_verified": false,
+          "relocations": [
+            {
+              "offset": 1,
+              "type": "REL32",
+              "symbol": "_AIConfigure",
+              "addend": 0,
+              "original_target_va": 268459888,
+              "original_target_symbols": [
+                "_AIConfigure"
+              ],
+              "expected_target_va": 268459888,
+              "resolution_basis": "identified_symbol",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            }
+          ],
+          "relocation_target_mismatch_count": 0,
+          "inferred_target_count": 0,
+          "unresolved_target_count": 0,
+          "relocation_masked_equal": true,
+          "relocation_masked_differing_bytes": 0,
+          "relocations_all_resolved": true,
+          "relocation_values_consistent": true,
+          "relocation_targets_verified": true,
+          "relocation_targets_equal": true,
+          "inferred_relocated_bytes_equal": true,
+          "relocated_bytes_equal": true,
+          "first_unmasked_differences": []
+        },
+        {
+          "name": "_DllTest",
+          "object": "AudioPlugin.obj",
+          "rebuilt_bytes": 16,
+          "status": "compared",
+          "original_va": 268515440,
+          "raw_bytes_equal": false,
+          "raw_differing_bytes": 4,
+          "compared_bytes": 16,
+          "original_size_verified": false,
+          "relocations": [
+            {
+              "offset": 2,
+              "type": "DIR32",
+              "symbol": "_AttachedDllTest",
+              "addend": 0,
+              "original_target_va": 269682296,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            }
+          ],
+          "relocation_target_mismatch_count": 0,
+          "inferred_target_count": 0,
+          "unresolved_target_count": 1,
+          "relocation_masked_equal": true,
+          "relocation_masked_differing_bytes": 0,
+          "relocations_all_resolved": false,
+          "relocation_values_consistent": false,
+          "relocation_targets_verified": false,
+          "relocation_targets_equal": false,
+          "inferred_relocated_bytes_equal": false,
+          "relocated_bytes_equal": false,
+          "first_unmasked_differences": []
+        },
+        {
+          "name": "_GetDllInfo",
+          "object": "AudioPlugin.obj",
+          "rebuilt_bytes": 64,
+          "status": "compared",
+          "original_va": 268515456,
+          "raw_bytes_equal": false,
+          "raw_differing_bytes": 4,
+          "compared_bytes": 64,
+          "original_size_verified": false,
+          "relocations": [
+            {
+              "offset": 6,
+              "type": "DIR32",
+              "symbol": "_PluginName",
+              "addend": 0,
+              "original_target_va": 268688208,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            }
+          ],
+          "relocation_target_mismatch_count": 0,
+          "inferred_target_count": 0,
+          "unresolved_target_count": 1,
+          "relocation_masked_equal": true,
+          "relocation_masked_differing_bytes": 0,
+          "relocations_all_resolved": false,
+          "relocation_values_consistent": false,
+          "relocation_targets_verified": false,
+          "relocation_targets_equal": false,
+          "inferred_relocated_bytes_equal": false,
+          "relocated_bytes_equal": false,
+          "first_unmasked_differences": []
+        },
+        {
+          "name": "_InitiateAudio",
+          "object": "AudioPlugin.obj",
+          "rebuilt_bytes": 352,
+          "status": "compared",
+          "original_va": 268515520,
+          "raw_bytes_equal": false,
+          "raw_differing_bytes": 186,
+          "compared_bytes": 352,
+          "original_size_verified": false,
+          "relocations": [
+            {
+              "offset": 1,
+              "type": "DIR32",
+              "symbol": "_PluginInitialized",
+              "addend": 0,
+              "original_target_va": 269682280,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 16,
+              "type": "REL32",
+              "symbol": "_DetectCPUFeatures",
+              "addend": 0,
+              "original_target_va": 268463232,
+              "original_target_symbols": [
+                "_DetectCPUFeatures"
+              ],
+              "expected_target_va": 268463232,
+              "resolution_basis": "identified_symbol",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 21,
+              "type": "DIR32",
+              "symbol": "??_C@_0BJ@DHOPPHEK@plugin?1attachedAudio?4dll?$AA@",
+              "addend": 0,
+              "original_target_va": 268637296,
+              "original_target_symbols": [
+                "??_C@_0BJ@DHOPPHEK@plugin?1attachedAudio?4dll?$AA@"
+              ],
+              "expected_target_va": 268637296,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 27,
+              "type": "DIR32",
+              "symbol": "__imp__LoadLibraryA@4",
+              "addend": 0,
+              "original_target_va": 268632156,
+              "original_target_symbols": [
+                "__imp_LoadLibraryA",
+                "__imp__LoadLibraryA"
+              ],
+              "expected_target_va": 268632156,
+              "resolution_basis": "import_table",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 33,
+              "type": "DIR32",
+              "symbol": "__imp__GetProcAddress@8",
+              "addend": 0,
+              "original_target_va": 268632152,
+              "original_target_symbols": [
+                "__imp_GetProcAddress",
+                "__imp__GetProcAddress"
+              ],
+              "expected_target_va": 268632152,
+              "resolution_basis": "import_table",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 38,
+              "type": "DIR32",
+              "symbol": "??_C@_0BB@EJEGOIGK@AiDacrateChanged?$AA@",
+              "addend": 0,
+              "original_target_va": 268637276,
+              "original_target_symbols": [
+                "??_C@_0BB@EJEGOIGK@AiDacrateChanged?$AA@"
+              ],
+              "expected_target_va": 268637276,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 44,
+              "type": "DIR32",
+              "symbol": "_AttachedAudio",
+              "addend": 0,
+              "original_target_va": 269682308,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 51,
+              "type": "DIR32",
+              "symbol": "_AttachedAiDacrateChanged",
+              "addend": 0,
+              "original_target_va": 269682320,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 56,
+              "type": "DIR32",
+              "symbol": "_AttachedAudio",
+              "addend": 0,
+              "original_target_va": 269682308,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 61,
+              "type": "DIR32",
+              "symbol": "??_C@_0N@EJMLADGN@AiLenChanged?$AA@",
+              "addend": 0,
+              "original_target_va": 268637260,
+              "original_target_symbols": [
+                "??_C@_0N@EJMLADGN@AiLenChanged?$AA@"
+              ],
+              "expected_target_va": 268637260,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 70,
+              "type": "DIR32",
+              "symbol": "_AttachedAudio",
+              "addend": 0,
+              "original_target_va": 269682308,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 75,
+              "type": "DIR32",
+              "symbol": "??_C@_0N@IIHDJBOM@AiReadLength?$AA@",
+              "addend": 0,
+              "original_target_va": 268637244,
+              "original_target_symbols": [
+                "??_C@_0N@IIHDJBOM@AiReadLength?$AA@"
+              ],
+              "expected_target_va": 268637244,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 81,
+              "type": "DIR32",
+              "symbol": "_AttachedAiLenChanged",
+              "addend": 0,
+              "original_target_va": 269682324,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 89,
+              "type": "DIR32",
+              "symbol": "_AttachedAudio",
+              "addend": 0,
+              "original_target_va": 269682308,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 94,
+              "type": "DIR32",
+              "symbol": "??_C@_08OJANGBPO@CloseDLL?$AA@",
+              "addend": 0,
+              "original_target_va": 268637232,
+              "original_target_symbols": [
+                "??_C@_08OJANGBPO@CloseDLL?$AA@"
+              ],
+              "expected_target_va": 268637232,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 100,
+              "type": "DIR32",
+              "symbol": "_AttachedAiReadLength",
+              "addend": 0,
+              "original_target_va": 269682284,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 107,
+              "type": "DIR32",
+              "symbol": "_AttachedCloseDLL",
+              "addend": 0,
+              "original_target_va": 269682060,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 112,
+              "type": "DIR32",
+              "symbol": "_AttachedAudio",
+              "addend": 0,
+              "original_target_va": 269682308,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 117,
+              "type": "DIR32",
+              "symbol": "??_C@_08MAACGMH@DllAbout?$AA@",
+              "addend": 0,
+              "original_target_va": 268637220,
+              "original_target_symbols": [
+                "??_C@_08MAACGMH@DllAbout?$AA@"
+              ],
+              "expected_target_va": 268637220,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 126,
+              "type": "DIR32",
+              "symbol": "_AttachedAudio",
+              "addend": 0,
+              "original_target_va": 269682308,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 131,
+              "type": "DIR32",
+              "symbol": "??_C@_09GPIDEJEA@DllConfig?$AA@",
+              "addend": 0,
+              "original_target_va": 268637208,
+              "original_target_symbols": [
+                "??_C@_09GPIDEJEA@DllConfig?$AA@"
+              ],
+              "expected_target_va": 268637208,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 137,
+              "type": "DIR32",
+              "symbol": "_AttachedDllAbout",
+              "addend": 0,
+              "original_target_va": 269682276,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 145,
+              "type": "DIR32",
+              "symbol": "_AttachedAudio",
+              "addend": 0,
+              "original_target_va": 269682308,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 150,
+              "type": "DIR32",
+              "symbol": "??_C@_07NIKFABPA@DllTest?$AA@",
+              "addend": 0,
+              "original_target_va": 268637200,
+              "original_target_symbols": [
+                "??_C@_07NIKFABPA@DllTest?$AA@"
+              ],
+              "expected_target_va": 268637200,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 156,
+              "type": "DIR32",
+              "symbol": "_AttachedDllConfig",
+              "addend": 0,
+              "original_target_va": 269682348,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 163,
+              "type": "DIR32",
+              "symbol": "_AttachedDllTest",
+              "addend": 0,
+              "original_target_va": 269682296,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 168,
+              "type": "DIR32",
+              "symbol": "_AttachedAudio",
+              "addend": 0,
+              "original_target_va": 269682308,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 173,
+              "type": "DIR32",
+              "symbol": "??_C@_0L@EPFIEAMH@GetDllInfo?$AA@",
+              "addend": 0,
+              "original_target_va": 268637188,
+              "original_target_symbols": [
+                "??_C@_0L@EPFIEAMH@GetDllInfo?$AA@"
+              ],
+              "expected_target_va": 268637188,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 182,
+              "type": "DIR32",
+              "symbol": "_AttachedAudio",
+              "addend": 0,
+              "original_target_va": 269682308,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 187,
+              "type": "DIR32",
+              "symbol": "??_C@_0O@LNNBDIBP@InitiateAudio?$AA@",
+              "addend": 0,
+              "original_target_va": 268637172,
+              "original_target_symbols": [
+                "??_C@_0O@LNNBDIBP@InitiateAudio?$AA@"
+              ],
+              "expected_target_va": 268637172,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 193,
+              "type": "DIR32",
+              "symbol": "_AttachedGetDllInfo",
+              "addend": 0,
+              "original_target_va": 269682352,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 201,
+              "type": "DIR32",
+              "symbol": "_AttachedAudio",
+              "addend": 0,
+              "original_target_va": 269682308,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 206,
+              "type": "DIR32",
+              "symbol": "??_C@_0N@CDOKGKDH@ProcessAList?$AA@",
+              "addend": 0,
+              "original_target_va": 268637156,
+              "original_target_symbols": [
+                "??_C@_0N@CDOKGKDH@ProcessAList?$AA@"
+              ],
+              "expected_target_va": 268637156,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 212,
+              "type": "DIR32",
+              "symbol": "_AttachedInitiateAudio",
+              "addend": 0,
+              "original_target_va": 269682304,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 219,
+              "type": "DIR32",
+              "symbol": "_AttachedProcessAList",
+              "addend": 0,
+              "original_target_va": 269682300,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 224,
+              "type": "DIR32",
+              "symbol": "_AttachedAudio",
+              "addend": 0,
+              "original_target_va": 269682308,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 229,
+              "type": "DIR32",
+              "symbol": "??_C@_09EOBANCKA@RomClosed?$AA@",
+              "addend": 0,
+              "original_target_va": 268637144,
+              "original_target_symbols": [
+                "??_C@_09EOBANCKA@RomClosed?$AA@"
+              ],
+              "expected_target_va": 268637144,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 238,
+              "type": "DIR32",
+              "symbol": "_AttachedAudio",
+              "addend": 0,
+              "original_target_va": 269682308,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 243,
+              "type": "DIR32",
+              "symbol": "??_C@_08MBCOJCNB@AiUpdate?$AA@",
+              "addend": 0,
+              "original_target_va": 268637132,
+              "original_target_symbols": [
+                "??_C@_08MBCOJCNB@AiUpdate?$AA@"
+              ],
+              "expected_target_va": 268637132,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 249,
+              "type": "DIR32",
+              "symbol": "_AttachedRomClosed",
+              "addend": 0,
+              "original_target_va": 269682268,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 258,
+              "type": "DIR32",
+              "symbol": "_AttachedAiUpdate",
+              "addend": 0,
+              "original_target_va": 269682328,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 263,
+              "type": "REL32",
+              "symbol": "_AISetUCodeID",
+              "addend": 0,
+              "original_target_va": 268451888,
+              "original_target_symbols": [
+                "_AISetUCodeID"
+              ],
+              "expected_target_va": 268451888,
+              "resolution_basis": "identified_symbol",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 281,
+              "type": "DIR32",
+              "symbol": "_PluginIMEM",
+              "addend": 0,
+              "original_target_va": 269682064,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 301,
+              "type": "DIR32",
+              "symbol": "_PluginInitialized",
+              "addend": 0,
+              "original_target_va": 269682280,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 311,
+              "type": "DIR32",
+              "symbol": "_RDRAM",
+              "addend": 0,
+              "original_target_va": 269925092,
+              "original_target_symbols": [
+                "_RDRAM"
+              ],
+              "expected_target_va": 269925092,
+              "resolution_basis": "identified_symbol",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 316,
+              "type": "DIR32",
+              "symbol": "_PluginDMEM",
+              "addend": 0,
+              "original_target_va": 269682312,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 324,
+              "type": "DIR32",
+              "symbol": "_AttachedInitiateAudio",
+              "addend": 0,
+              "original_target_va": 269682304,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            }
+          ],
+          "relocation_target_mismatch_count": 0,
+          "inferred_target_count": 0,
+          "unresolved_target_count": 29,
+          "relocation_masked_equal": true,
+          "relocation_masked_differing_bytes": 0,
+          "relocations_all_resolved": false,
+          "relocation_values_consistent": false,
+          "relocation_targets_verified": false,
+          "relocation_targets_equal": false,
+          "inferred_relocated_bytes_equal": false,
+          "relocated_bytes_equal": false,
+          "first_unmasked_differences": []
+        },
+        {
+          "name": "_ProcessAList",
+          "object": "AudioPlugin.obj",
+          "rebuilt_bytes": 224,
+          "status": "compared",
+          "original_va": 268515872,
+          "raw_bytes_equal": false,
+          "raw_differing_bytes": 60,
+          "compared_bytes": 224,
+          "original_size_verified": false,
+          "relocations": [
+            {
+              "offset": 2,
+              "type": "DIR32",
+              "symbol": "_HLEAudio",
+              "addend": 0,
+              "original_target_va": 268701368,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 17,
+              "type": "DIR32",
+              "symbol": "_PluginDMEM",
+              "addend": 0,
+              "original_target_va": 269682312,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 34,
+              "type": "DIR32",
+              "symbol": "_AudioTask",
+              "addend": 0,
+              "original_target_va": 269927360,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 39,
+              "type": "DIR32",
+              "symbol": "_AudioTask",
+              "addend": 0,
+              "original_target_va": 269927360,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 46,
+              "type": "REL32",
+              "symbol": "_ProcessAudioTask",
+              "addend": 0,
+              "original_target_va": 268445696,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 51,
+              "type": "DIR32",
+              "symbol": "_DumpMicrocode",
+              "addend": 0,
+              "original_target_va": 269389564,
+              "original_target_symbols": [
+                "_DumpMicrocode"
+              ],
+              "expected_target_va": 269389564,
+              "resolution_basis": "observed_operand_inference",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": false
+            },
+            {
+              "offset": 67,
+              "type": "DIR32",
+              "symbol": "??_C@_02GMLFBBN@wb?$AA@",
+              "addend": 0,
+              "original_target_va": 268633292,
+              "original_target_symbols": [
+                "??_C@_02GMLFBBN@wb?$AA@"
+              ],
+              "expected_target_va": 268633292,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 72,
+              "type": "DIR32",
+              "symbol": "??_C@_0BD@DEKEIGM@abi_ucode_dmem?4dmp?$AA@",
+              "addend": 0,
+              "original_target_va": 268633272,
+              "original_target_symbols": [
+                "??_C@_0BD@DEKEIGM@abi_ucode_dmem?4dmp?$AA@"
+              ],
+              "expected_target_va": 268633272,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 77,
+              "type": "REL32",
+              "symbol": "_fopen",
+              "addend": 0,
+              "original_target_va": 268571153,
+              "original_target_symbols": [
+                "_fopen"
+              ],
+              "expected_target_va": 268571153,
+              "resolution_basis": "independent_library_mapping",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 97,
+              "type": "DIR32",
+              "symbol": "_PluginDMEM",
+              "addend": 0,
+              "original_target_va": 269682312,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 121,
+              "type": "REL32",
+              "symbol": "_fwrite",
+              "addend": 0,
+              "original_target_va": 268570828,
+              "original_target_symbols": [
+                "_fwrite"
+              ],
+              "expected_target_va": 268570828,
+              "resolution_basis": "independent_library_mapping",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 141,
+              "type": "REL32",
+              "symbol": "_fclose",
+              "addend": 0,
+              "original_target_va": 268570980,
+              "original_target_symbols": [
+                "_fclose"
+              ],
+              "expected_target_va": 268570980,
+              "resolution_basis": "independent_library_mapping",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 146,
+              "type": "DIR32",
+              "symbol": "??_C@_02GMLFBBN@wb?$AA@",
+              "addend": 0,
+              "original_target_va": 268633292,
+              "original_target_symbols": [
+                "??_C@_02GMLFBBN@wb?$AA@"
+              ],
+              "expected_target_va": 268633292,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 151,
+              "type": "DIR32",
+              "symbol": "??_C@_0BD@PCAFKPDL@abi_ucode_imem?4dmp?$AA@",
+              "addend": 0,
+              "original_target_va": 268633252,
+              "original_target_symbols": [
+                "??_C@_0BD@PCAFKPDL@abi_ucode_imem?4dmp?$AA@"
+              ],
+              "expected_target_va": 268633252,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Complete compiler-emitted source string equals original data",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 156,
+              "type": "REL32",
+              "symbol": "_fopen",
+              "addend": 0,
+              "original_target_va": 268571153,
+              "original_target_symbols": [
+                "_fopen"
+              ],
+              "expected_target_va": 268571153,
+              "resolution_basis": "independent_library_mapping",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 168,
+              "type": "DIR32",
+              "symbol": "_PluginIMEM",
+              "addend": 0,
+              "original_target_va": 269682064,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            },
+            {
+              "offset": 192,
+              "type": "REL32",
+              "symbol": "_fwrite",
+              "addend": 0,
+              "original_target_va": 268570828,
+              "original_target_symbols": [
+                "_fwrite"
+              ],
+              "expected_target_va": 268570828,
+              "resolution_basis": "independent_library_mapping",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 212,
+              "type": "REL32",
+              "symbol": "_fclose",
+              "addend": 0,
+              "original_target_va": 268570980,
+              "original_target_symbols": [
+                "_fclose"
+              ],
+              "expected_target_va": 268570980,
+              "resolution_basis": "independent_library_mapping",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            }
+          ],
+          "relocation_target_mismatch_count": 0,
+          "inferred_target_count": 1,
+          "unresolved_target_count": 7,
+          "relocation_masked_equal": true,
+          "relocation_masked_differing_bytes": 0,
+          "relocations_all_resolved": false,
+          "relocation_values_consistent": false,
+          "relocation_targets_verified": false,
+          "relocation_targets_equal": false,
+          "inferred_relocated_bytes_equal": false,
+          "relocated_bytes_equal": false,
+          "first_unmasked_differences": []
+        },
+        {
+          "name": "_RomClosed",
+          "object": "AudioPlugin.obj",
+          "rebuilt_bytes": 16,
+          "status": "compared",
+          "original_va": 268516096,
+          "raw_bytes_equal": false,
+          "raw_differing_bytes": 4,
+          "compared_bytes": 16,
+          "original_size_verified": false,
+          "relocations": [
+            {
+              "offset": 2,
+              "type": "DIR32",
+              "symbol": "_AttachedRomClosed",
+              "addend": 0,
+              "original_target_va": 269682268,
+              "original_target_symbols": [],
+              "status": "unresolved"
+            }
+          ],
+          "relocation_target_mismatch_count": 0,
+          "inferred_target_count": 0,
+          "unresolved_target_count": 1,
+          "relocation_masked_equal": true,
+          "relocation_masked_differing_bytes": 0,
+          "relocations_all_resolved": false,
+          "relocation_values_consistent": false,
+          "relocation_targets_verified": false,
+          "relocation_targets_equal": false,
+          "inferred_relocated_bytes_equal": false,
+          "relocated_bytes_equal": false,
+          "first_unmasked_differences": []
+        },
+        {
+          "name": "_AudioPluginReservedEnd",
+          "object": "AudioPlugin.obj",
+          "rebuilt_bytes": 16,
+          "status": "compared",
+          "original_va": 268516112,
+          "raw_bytes_equal": true,
+          "raw_differing_bytes": 0,
+          "compared_bytes": 16,
+          "original_size_verified": false,
+          "relocations": [],
+          "relocation_target_mismatch_count": 0,
+          "inferred_target_count": 0,
+          "unresolved_target_count": 0,
+          "relocation_masked_equal": true,
+          "relocation_masked_differing_bytes": 0,
+          "relocations_all_resolved": true,
+          "relocation_values_consistent": true,
+          "relocation_targets_verified": true,
+          "relocation_targets_equal": true,
+          "inferred_relocated_bytes_equal": true,
+          "relocated_bytes_equal": true,
+          "first_unmasked_differences": []
+        }
+      ],
+      "functions_compared": 14,
+      "relocation_masked_matches": 14,
+      "relocated_exact_matches": 3
+    }
+  ],
+  "result_code": 0
+}
