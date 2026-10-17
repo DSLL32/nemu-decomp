@@ -44,3 +44,14 @@ is not host executable code. See [res/README.md](res/README.md) and
 `scripts/verify_nemu.py` provides the final unmasked whole-file check.
 `scripts/compare_nemu_functions.py` and the mapping scripts provide diagnostic
 evidence while reconstruction continues.
+
+The startup/UI fixture is available separately:
+
+```sh
+python3 scripts/check_nemu.py /path/to/rebuilt/nemu64.exe
+```
+
+It runs frozen copies in disposable Wine environments and compares the main
+window, menus, About, Disclaimer, Settings, normal shutdown, and resulting
+files. `analysis/nemu-runtime.json` identifies the exact tested executable;
+this smoke check does not exercise game execution or certify binary equality.

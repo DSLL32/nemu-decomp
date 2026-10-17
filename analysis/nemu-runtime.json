@@ -1,0 +1,104 @@
+{
+  "passed": true,
+  "scratch": "/root/.ai-tmp/nemu-startup-probe.ujdg4n7f",
+  "runs": [
+    {
+      "name": "original",
+      "exe_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+      "exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "stdout_sha256": "50fb829cd118cf5ec32f2bd433f651e6e3c1df8f31008b495560de4a1489c2a0",
+      "fixture_files": {
+        "LemD3DCombine.dat": "328a4acae7863347bac72d5dfcf96363a74127873517b9e584aefabde949831e",
+        "LemD3DCombine.new": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "Plugin/Input.dll": "2c0fb513c6c34115ef070c9f33767f7cf15d28de4becbd74bd90fe515e496298",
+        "Plugin/LemCombineDebugger.dll": "0d1105d3638f7c3d0203de44a948003e7c77a67f4185b13e9458be220d9a8fbd",
+        "Plugin/LemD3D8.dll": "df1db2f653886dcf2082ddcbe78bbecc0e512d66e99b754b624eabbeb09f8cfb",
+        "Plugin/audio.dll": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+        "Plugin/debugger.dll": "e10e8b27a53951dbaeba6d72bf61e3859d3e2654741f00d29798c993411637bd",
+        "Plugin/dialogs.dll": "73df81668476f65dcc6587dbd79c2082d6b29d05c367ffc3cf0f6e7d36af7ab5",
+        "Plugin/profile.dll": "b082cfd8a8146a5ea967c219e699658d9232347c66f8469a4a741e59becc5e68",
+        "config.ini": "571523269fbd0eaf60ae3fcdc0bfcbeff9e3f0293c52982b99d20baf0b050429",
+        "gs_dll.dll": "35a69ae0172add4355a7f4c4fa30b84adfffbd4bade67cce88631502627bc45b",
+        "kailleraclient.dll": "410503fdfd1e931adf6024df7b8d88c725260b568688c5a5a1ab9897c83ff72d",
+        "nemu-menu.txt": "c506bf2378387bec0f3c191685b81a61378e5193d737b3bb18f3a68bcb5124a6",
+        "nemu64.ini": "c31db4fe1b50d1c0fd5fdb6726c688be6e24909bbf0e8ba443b363eb7c303477"
+      },
+      "changed_files": {
+        "nemu-menu.txt": "c506bf2378387bec0f3c191685b81a61378e5193d737b3bb18f3a68bcb5124a6"
+      }
+    },
+    {
+      "name": "rebuilt",
+      "exe_sha256": "8fea32d80567b90c02f0c67ab01955119fc0b1d9a00763bbb9d375e874619170",
+      "exit_code": 0,
+      "timed_out": false,
+      "completed": true,
+      "stdout_sha256": "50fb829cd118cf5ec32f2bd433f651e6e3c1df8f31008b495560de4a1489c2a0",
+      "fixture_files": {
+        "LemD3DCombine.dat": "328a4acae7863347bac72d5dfcf96363a74127873517b9e584aefabde949831e",
+        "LemD3DCombine.new": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "Plugin/Input.dll": "2c0fb513c6c34115ef070c9f33767f7cf15d28de4becbd74bd90fe515e496298",
+        "Plugin/LemCombineDebugger.dll": "0d1105d3638f7c3d0203de44a948003e7c77a67f4185b13e9458be220d9a8fbd",
+        "Plugin/LemD3D8.dll": "df1db2f653886dcf2082ddcbe78bbecc0e512d66e99b754b624eabbeb09f8cfb",
+        "Plugin/audio.dll": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+        "Plugin/debugger.dll": "e10e8b27a53951dbaeba6d72bf61e3859d3e2654741f00d29798c993411637bd",
+        "Plugin/dialogs.dll": "73df81668476f65dcc6587dbd79c2082d6b29d05c367ffc3cf0f6e7d36af7ab5",
+        "Plugin/profile.dll": "b082cfd8a8146a5ea967c219e699658d9232347c66f8469a4a741e59becc5e68",
+        "config.ini": "571523269fbd0eaf60ae3fcdc0bfcbeff9e3f0293c52982b99d20baf0b050429",
+        "gs_dll.dll": "35a69ae0172add4355a7f4c4fa30b84adfffbd4bade67cce88631502627bc45b",
+        "kailleraclient.dll": "410503fdfd1e931adf6024df7b8d88c725260b568688c5a5a1ab9897c83ff72d",
+        "nemu-menu.txt": "c506bf2378387bec0f3c191685b81a61378e5193d737b3bb18f3a68bcb5124a6",
+        "nemu64.ini": "c31db4fe1b50d1c0fd5fdb6726c688be6e24909bbf0e8ba443b363eb7c303477"
+      },
+      "changed_files": {
+        "nemu-menu.txt": "c506bf2378387bec0f3c191685b81a61378e5193d737b3bb18f3a68bcb5124a6"
+      }
+    }
+  ],
+  "candidate_path": "/root/.ai-tmp/nemu-build-investigate.ULGEobKx/artifacts/8fea32d80567b90c02f0c67ab01955119fc0b1d9a00763bbb9d375e874619170/nemu64.exe",
+  "kind": "behavioral smoke comparison",
+  "wine_launch": "setarch i386 -R wine (deterministic host address layout)",
+  "frozen_dependencies": {
+    "LemD3DCombine.dat": "328a4acae7863347bac72d5dfcf96363a74127873517b9e584aefabde949831e",
+    "LemD3DCombine.new": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "Plugin/Input.dll": "2c0fb513c6c34115ef070c9f33767f7cf15d28de4becbd74bd90fe515e496298",
+    "Plugin/LemCombineDebugger.dll": "0d1105d3638f7c3d0203de44a948003e7c77a67f4185b13e9458be220d9a8fbd",
+    "Plugin/LemD3D8.dll": "df1db2f653886dcf2082ddcbe78bbecc0e512d66e99b754b624eabbeb09f8cfb",
+    "Plugin/audio.dll": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+    "Plugin/debugger.dll": "e10e8b27a53951dbaeba6d72bf61e3859d3e2654741f00d29798c993411637bd",
+    "Plugin/dialogs.dll": "73df81668476f65dcc6587dbd79c2082d6b29d05c367ffc3cf0f6e7d36af7ab5",
+    "Plugin/profile.dll": "b082cfd8a8146a5ea967c219e699658d9232347c66f8469a4a741e59becc5e68",
+    "config.ini": "376be86665b515d2c4fa7e21437b436ebfd9916e5db290f0ace45174018e0efe",
+    "gs_dll.dll": "35a69ae0172add4355a7f4c4fa30b84adfffbd4bade67cce88631502627bc45b",
+    "kailleraclient.dll": "410503fdfd1e931adf6024df7b8d88c725260b568688c5a5a1ab9897c83ff72d",
+    "nemu64.ini": "c31db4fe1b50d1c0fd5fdb6726c688be6e24909bbf0e8ba443b363eb7c303477"
+  },
+  "probe_sources": {
+    "nemu_probe.c": "3683d6021091ddde69b768c592dafe17ddabd19e9c60ad56dff296ac758795a2",
+    "nemu_menu_probe.c": "da7df073e06190761de137dc3db9c8e8fb6b31d4b8fe83ede825fa3298b2c3d6",
+    "nemu_menu_probe.def": "40a955f9f34a4d3cbe9feb0a77f373f4f6b5c2af7ce0ee9b8ebd7da9c33a7aaf"
+  },
+  "fixture_configuration_sha256": "571523269fbd0eaf60ae3fcdc0bfcbeff9e3f0293c52982b99d20baf0b050429",
+  "stdout_equal": true,
+  "fixture_files_equal": true,
+  "scenarios": [
+    "Launch with frozen original plug-ins and an empty ROM directory",
+    "Reach an enabled main window and inspect native controls and every menu item",
+    "Open About, open its Disclaimer, inspect both dialogs, and close with OK",
+    "Open Settings through the main menu, inspect controls and combo choices, cancel",
+    "Inspect the main window after returning from dialogs",
+    "Request WM_CLOSE and require the application to exit with status zero",
+    "Compare control/menu transcripts and every file left in the disposable fixture"
+  ],
+  "limitations": [
+    "Exercises Windows UI under Wine/Xvfb using software graphics; no real Windows run.",
+    "Uses original plug-in binaries with both executables; does not test rebuilt plug-ins.",
+    "No ROM, emulation, save-state, netplay, audio output, or rendered-pixel coverage.",
+    "Settings are inspected and canceled; no settings are applied.",
+    "A read-only SetWindowsHookEx helper inspects actual menu state inside each process, because Wine menu handles are process-local.",
+    "Control IDs and window handles are excluded because VCL can assign handles as IDs.",
+    "The test does not establish full behavioral equivalence or byte equality."
+  ]
+}

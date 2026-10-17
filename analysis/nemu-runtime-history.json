@@ -1,0 +1,68 @@
+{
+  "kind": "startup smoke validation history",
+  "current_report": "analysis/nemu-runtime.json",
+  "master_inputs_unchanged_after_validation": true,
+  "attempts": [
+    {
+      "report": "/root/.ai-tmp/nemu-startup-probe.8nvxvbob/comparison.json",
+      "report_sha256": "a127094f3d9c9134a7ec511534d2afaa70305c0ecaa71b6f7761c5db98b719b3",
+      "passed": true,
+      "runs": [
+        {
+          "name": "original",
+          "exe_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+          "completed": true,
+          "exit_code": 0
+        },
+        {
+          "name": "rebuilt",
+          "exe_sha256": "8fea32d80567b90c02f0c67ab01955119fc0b1d9a00763bbb9d375e874619170",
+          "completed": true,
+          "exit_code": 0
+        }
+      ],
+      "observation": "First complete comparison passed; combo option text was truncated by Wine ANSI cross-process marshalling."
+    },
+    {
+      "report": "/root/.ai-tmp/nemu-startup-probe.v84a7ryr/comparison.json",
+      "report_sha256": "aea9644a77562713185a1baa509506b1d2db159c609c261e5574a60e501896ed",
+      "passed": false,
+      "runs": [
+        {
+          "name": "original",
+          "exe_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+          "completed": true,
+          "exit_code": 0
+        },
+        {
+          "name": "rebuilt",
+          "exe_sha256": "8fea32d80567b90c02f0c67ab01955119fc0b1d9a00763bbb9d375e874619170",
+          "completed": false,
+          "exit_code": 5
+        }
+      ],
+      "observation": "Complete Unicode combo getter. Original passed; rebuilt displayed Could not reserve rdram-memory before its main window appeared. Same rebuilt bytes had passed the prior run. Host address-layout fragmentation is an inference, not a proven root cause."
+    },
+    {
+      "report": "/root/.ai-tmp/nemu-startup-probe.ujdg4n7f/comparison.json",
+      "report_sha256": "2f2266723a84c1a5b0cd5a58305c0d0cac867f27a0fb4a5d9503d50af9d0485d",
+      "passed": true,
+      "runs": [
+        {
+          "name": "original",
+          "exe_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+          "completed": true,
+          "exit_code": 0
+        },
+        {
+          "name": "rebuilt",
+          "exe_sha256": "8fea32d80567b90c02f0c67ab01955119fc0b1d9a00763bbb9d375e874619170",
+          "completed": true,
+          "exit_code": 0
+        }
+      ],
+      "observation": "Final fixture disables host ASLR with setarch i386 -R; both complete transcripts and all resulting fixture files match."
+    }
+  ],
+  "scope": "Behavioral startup/UI smoke only; no claim of whole-program equivalence or byte equality."
+}
