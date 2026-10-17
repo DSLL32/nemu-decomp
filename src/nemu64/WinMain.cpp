@@ -23,8 +23,7 @@ char ApplicationDirectory[MAX_PATH];
 HWND ToolbarWindow;
 HWND StatusWindow;
 HWND BrowserWindow;
-int MainWindowX;
-int MainWindowY;
+POINT MainWindowPosition;
 int DisplayResolution;
 unsigned short StatePreview[120][160];
 char StateFileName[256];
@@ -49,8 +48,8 @@ void GSConfigure();
 void ResizeMainWindow(unsigned int width, int height)
 {
     RECT rect;
-    rect.left = MainWindowX;
-    rect.top = MainWindowY;
+    rect.left = MainWindowPosition.x;
+    rect.top = MainWindowPosition.y;
     rect.right = rect.left + width;
     rect.bottom = rect.top + height;
     if (SelectedGraphicsPlugin->SetResolution)
@@ -242,15 +241,15 @@ LRESULT CALLBACK MainWindowProc(HWND window, UINT message, WPARAM wParam, LPARAM
             FavouritesMenu = NULL;
         }
         PostQuitMessage(0);
-        return 0;
+        break;
     case WM_MOVE:
         {
             PluginDescriptor* graphics = SelectedGraphicsPlugin;
-            MainWindowX = LOWORD(lParam);
-            MainWindowY = HIWORD(lParam) + 27;
+            MainWindowPosition.x = LOWORD(lParam);
+            MainWindowPosition.y = HIWORD(lParam) + 27;
             if (graphics->MoveScreen)
-                graphics->MoveScreen(MainWindowX, MainWindowY);
-            return 0;
+                graphics->MoveScreen(MainWindowPosition.x, MainWindowPosition.y);
+            break;
         }
     case WM_SIZE:
         {
@@ -264,7 +263,7 @@ LRESULT CALLBACK MainWindowProc(HWND window, UINT message, WPARAM wParam, LPARAM
                 BrowserInitialized = true;
                 RefreshRomBrowser();
             }
-            return 0;
+            break;
         }
     case WM_CREATE:
         {
@@ -375,7 +374,7 @@ LRESULT CALLBACK MainWindowProc(HWND window, UINT message, WPARAM wParam, LPARAM
             EndPaint(window, &paint);
             if (CPU_Running && SelectedGraphicsPlugin->DrawScreen)
                 SelectedGraphicsPlugin->DrawScreen();
-            return 0;
+            break;
         }
     case WM_COMMAND:
         return MainWindowCommand(window, message, wParam, lParam, 0);
@@ -391,10 +390,12 @@ LRESULT CALLBACK MainWindowProc(HWND window, UINT message, WPARAM wParam, LPARAM
                 case LVN_COLUMNCLICK:
                     {
                         int order = list->iSubItem + 1;
-                        if (BrowserSortMode == order) order = -order;
-                        BrowserSortMode = order;
-                        SendMessageA(BrowserWindow, LVM_SORTITEMS, order, (LPARAM)CompareBrowserItems);
-                        return 0;
+                        if (BrowserSortMode == order)
+                            BrowserSortMode = -order;
+                        else
+                            BrowserSortMode = order;
+                        SendMessageA(BrowserWindow, LVM_SORTITEMS, BrowserSortMode, (LPARAM)CompareBrowserItems);
+                        break;
                     }
                 case LVN_ITEMCHANGED:
                     {
@@ -406,7 +407,7 @@ LRESULT CALLBACK MainWindowProc(HWND window, UINT message, WPARAM wParam, LPARAM
                         item.cchTextMax = 11;
                         item.pszText = CurrentRom.IniSection;
                         SendMessageA(BrowserWindow, LVM_GETITEMTEXTA, list->iItem, (LPARAM)&item);
-                        return 0;
+                        break;
                     }
                 case NM_RETURN:
                 case NM_DBLCLK:
@@ -441,7 +442,7 @@ LRESULT CALLBACK MainWindowProc(HWND window, UINT message, WPARAM wParam, LPARAM
                             RefreshRomBrowser();
                         }
                     }
-                    return 0;
+                    break;
                 }
             }
             else if (notificationWindow == ToolbarWindow)
@@ -473,7 +474,7 @@ LRESULT CALLBACK MainWindowProc(HWND window, UINT message, WPARAM wParam, LPARAM
                     }
                 }
             }
-            return 0;
+            break;
         }
     case WM_DROPFILES:
         {
@@ -498,13 +499,14 @@ LRESULT CALLBACK MainWindowProc(HWND window, UINT message, WPARAM wParam, LPARAM
                     StartCPUThread();
                 }
             }
-            return 0;
+            break;
         }
     case WM_USER + 10:
-        return 0;
+        break;
     default:
         return DefWindowProcA(window, message, wParam, lParam);
     }
+    return 0;
 }
 
 int WINAPI WinMain(HINSTANCE instance, HINSTANCE previousInstance, LPSTR commandLine, int showCommand)
