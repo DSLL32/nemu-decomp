@@ -29,7 +29,7 @@ int ReadIniInteger(const char* section, const char* key, int defaultValue,
 {
     char defaultText[32];
     char value[32];
-    _itoa(defaultValue, defaultText, 10);
+    itoa(defaultValue, defaultText, 10);
     GetPrivateProfileStringA(section, key, defaultText, value, 256, filename);
     return atoi(value);
 }
@@ -44,7 +44,7 @@ void WriteIniInteger(const char* section, const char* key, int value,
                      const char* filename)
 {
     char text[32];
-    _itoa(value, text, 10);
+    itoa(value, text, 10);
     WritePrivateProfileStringA(section, key, text, filename);
 }
 

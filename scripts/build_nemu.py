@@ -176,6 +176,12 @@ def main():
         storage_rank = {'NemuZeroStorage.cpp': 1, 'NemuInitializedStorage.cpp': 2}
         application.sort(key=lambda path: (storage_rank.get(path.as_posix(), 0),
             rank.get(path.as_posix(), len(rank)), path.as_posix()))
+        initialized_storage = Path('NemuInitializedStorage.cpp')
+        if initialized_storage in application:
+            # This input position preserves the original signature-name pool
+            # beside RuntimeSignatures while .data retains its observed order.
+            application.remove(initialized_storage)
+            application.insert(application.index(Path('RuntimeSignatures.cpp')), initialized_storage)
         report['application_units'] = [str(path) for path in application]
         report['application_flags'] = APPLICATION_FLAGS
         report['native_c_flags'] = NATIVE_C_FLAGS
@@ -219,6 +225,7 @@ def main():
             '/nologo', '/LTCG', '/SUBSYSTEM:WINDOWS', '/OPT:WIN98',
             '/INCREMENTAL:NO', '/MACHINE:I386', '/BASE:0x400000', '/FIXED',
             '/OUT:' + winoutput + r'\nemu64.exe',
+            *(['@obj/link-inputs/early.rsp'] if args.ordered_libraries else []),
             *application_objects, *zlib_objects, 'obj/nemu64.res',
             *(['@obj/link-inputs/link.rsp'] if args.ordered_libraries else []),
             'comctl32.lib', 'winmm.lib', 'imports/kailleraclient.lib',

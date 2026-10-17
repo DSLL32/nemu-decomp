@@ -268,7 +268,7 @@ int CALLBACK CompareBrowserItems(LPARAM first, LPARAM second, LPARAM)
         ListView_GetItem(BrowserWindow, &b);
     case -1: case 1:
 compareText:
-        return _stricmp(a.pszText, b.pszText) * BrowserSortMode;
+        return stricmp(a.pszText, b.pszText) * BrowserSortMode;
     case -3: case 3: {
         b.iSubItem = a.iSubItem = 2;
         ListView_GetItem(BrowserWindow, &a);
@@ -283,12 +283,12 @@ compareText:
         b.iSubItem = a.iSubItem = 3;
         ListView_GetItem(BrowserWindow, &a);
         ListView_GetItem(BrowserWindow, &b);
-        return _stricmp(a.pszText, b.pszText) * BrowserSortMode;
+        return stricmp(a.pszText, b.pszText) * BrowserSortMode;
     case -5: case 5:
         b.iSubItem = a.iSubItem = 4;
         ListView_GetItem(BrowserWindow, &a);
         ListView_GetItem(BrowserWindow, &b);
-        return _stricmp(a.pszText, b.pszText) * BrowserSortMode;
+        return stricmp(a.pszText, b.pszText) * BrowserSortMode;
     }
     return 0;
 }
@@ -320,22 +320,22 @@ void RefreshRomBrowser()
         item.pszText = text;
         item.iSubItem = 0;
         if (data.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) {
-            if (_stricmp(data.cFileName, ".") && _stricmp(data.cFileName, "..")) {
+            if (stricmp(data.cFileName, ".") && stricmp(data.cFileName, "..")) {
                 strcpy(text, data.cFileName);
                 item.iImage = 5;
                 ListView_InsertItem(BrowserWindow, &item);
                 ++item.iItem;
                 ++item.lParam;
             }
-        } else if ((!_stricmp(data.cFileName + strlen(data.cFileName) - 4, ".bin") ||
-                    !_stricmp(data.cFileName + strlen(data.cFileName) - 4, ".rom") ||
-                    !_stricmp(data.cFileName + strlen(data.cFileName) - 4, ".pal") ||
-                    !_stricmp(data.cFileName + strlen(data.cFileName) - 4, ".usa") ||
-                    !_stricmp(data.cFileName + strlen(data.cFileName) - 4, ".eur") ||
-                    !_stricmp(data.cFileName + strlen(data.cFileName) - 4, ".v64") ||
-                    !_stricmp(data.cFileName + strlen(data.cFileName) - 4, ".z64") ||
-                    !_stricmp(data.cFileName + strlen(data.cFileName) - 4, ".n64") ||
-                    !_stricmp(data.cFileName + strlen(data.cFileName) - 4, ".zip")) && data.nFileSizeLow > 1024) {
+        } else if ((!stricmp(data.cFileName + strlen(data.cFileName) - 4, ".bin") ||
+                    !stricmp(data.cFileName + strlen(data.cFileName) - 4, ".rom") ||
+                    !stricmp(data.cFileName + strlen(data.cFileName) - 4, ".pal") ||
+                    !stricmp(data.cFileName + strlen(data.cFileName) - 4, ".usa") ||
+                    !stricmp(data.cFileName + strlen(data.cFileName) - 4, ".eur") ||
+                    !stricmp(data.cFileName + strlen(data.cFileName) - 4, ".v64") ||
+                    !stricmp(data.cFileName + strlen(data.cFileName) - 4, ".z64") ||
+                    !stricmp(data.cFileName + strlen(data.cFileName) - 4, ".n64") ||
+                    !stricmp(data.cFileName + strlen(data.cFileName) - 4, ".zip")) && data.nFileSizeLow > 1024) {
             item.iImage = 6;
             sprintf(status, "Getting info for %s...", data.cFileName);
             SetStatusText(0, status);
@@ -350,7 +350,7 @@ void RefreshRomBrowser()
                 strcpy(text, data.cFileName);
                 item.iSubItem = 1;
                 ListView_SetItem(BrowserWindow, &item);
-                if (!_stricmp(data.cFileName + strlen(data.cFileName) - 4, ".zip")) {
+                if (!stricmp(data.cFileName + strlen(data.cFileName) - 4, ".zip")) {
                     if (CurrentRom.FileSize)
                         sprintf(text, "%u MBIT (Ratio %u%%)", CurrentRom.FileSize >> 17,
                                 (CurrentRom.FileSize - CurrentRom.CompressedSize) * 100 / CurrentRom.FileSize);

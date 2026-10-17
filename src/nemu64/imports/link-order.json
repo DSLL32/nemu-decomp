@@ -2167,5 +2167,22 @@
       }
     ],
     "evidence": "analysis/nemu-build.json"
+  },
+  "aliases": {
+    "library": "toolchains/vc7/lib/oldnames.lib",
+    "library_sha256": "61d891d7f53dee0b38d22d6dce04374ce85e101a5a1b6c981269274979f073c5",
+    "members": [
+      {
+        "object": "build\\intel\\st_obj\\oldnames\\stricmp.obj",
+        "archive_offset": 48046,
+        "sha256": "abfb4e0d4da4d2c6b5522a23093bd10f4d871a1c2364c2572154a32ae48aefcd"
+      },
+      {
+        "object": "build\\intel\\st_obj\\oldnames\\itoa.obj",
+        "archive_offset": 51278,
+        "sha256": "09ed16ef1706c489d115d8b58d9f3330f020b41468a03464c615458cc0f86f84"
+      }
+    ],
+    "inference": "Non-underscore stricmp and itoa source spellings are one nonunique reconstruction consistent with the original two Machine=0 alias contributions. The unchanged alias objects are supplied early so their empty text contributions do not add trailing alignment."
   }
 }

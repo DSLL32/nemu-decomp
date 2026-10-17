@@ -31,14 +31,14 @@ bool ReadZipRom(const char* filename, bool showProgress, unsigned maximumBytes)
         if (unzGoToFirstFile(file) == UNZ_OK) {
             do {
                 if (unzGetCurrentFileInfo(file, &info, name, 256, NULL, 0, NULL, 0) == UNZ_OK &&
-                   (!_stricmp(name + strlen(name) - 4, ".bin") ||
-                    !_stricmp(name + strlen(name) - 4, ".rom") ||
-                    !_stricmp(name + strlen(name) - 4, ".pal") ||
-                    !_stricmp(name + strlen(name) - 4, ".usa") ||
-                    !_stricmp(name + strlen(name) - 4, ".eur") ||
-                    !_stricmp(name + strlen(name) - 4, ".v64") ||
-                    !_stricmp(name + strlen(name) - 4, ".z64") ||
-                    !_stricmp(name + strlen(name) - 4, ".n64"))) {
+                   (!stricmp(name + strlen(name) - 4, ".bin") ||
+                    !stricmp(name + strlen(name) - 4, ".rom") ||
+                    !stricmp(name + strlen(name) - 4, ".pal") ||
+                    !stricmp(name + strlen(name) - 4, ".usa") ||
+                    !stricmp(name + strlen(name) - 4, ".eur") ||
+                    !stricmp(name + strlen(name) - 4, ".v64") ||
+                    !stricmp(name + strlen(name) - 4, ".z64") ||
+                    !stricmp(name + strlen(name) - 4, ".n64"))) {
                     CurrentRom.FileSize = info.uncompressed_size;
                     CurrentRom.CompressedSize = info.compressed_size;
                     ROMSize = maximumBytes && maximumBytes < info.uncompressed_size ? maximumBytes : info.uncompressed_size;
@@ -96,7 +96,7 @@ bool ReadRomImage(HWND parent, const char* filename, bool showProgress, unsigned
     char status[100];
     DWORD read;
     unsigned* wordAddress;
-    if (!_stricmp(filename + strlen(filename) - 4, ".zip")) {
+    if (!stricmp(filename + strlen(filename) - 4, ".zip")) {
         if (!ReadZipRom(filename, showProgress, maximumBytes))
             return false;
     } else {

@@ -94,7 +94,21 @@ def import_name(data):
 
 def generate(recipe, import_dir, output):
     output.mkdir(parents=True, exist_ok=True)
-    objects, report = [], dict(crt=[], imports=[], member_bytes_unchanged=True)
+    objects, early, report = [], [], dict(crt=[], imports=[], aliases=[], member_bytes_unchanged=True)
+    aliases = recipe.get('aliases')
+    if aliases:
+        library = ROOT / aliases['library']
+        if hashlib.sha256(library.read_bytes()).hexdigest() != aliases['library_sha256']:
+            raise ValueError('CRT alias archive hash changed')
+        contents = {offset: (name, data) for name, offset, data in archive_members(library)}
+        for index, row in enumerate(aliases['members']):
+            name, data = contents[row['archive_offset']]
+            if name != row['object'] or hashlib.sha256(data).hexdigest() != row['sha256']:
+                raise ValueError('CRT alias member changed: ' + row['object'])
+            file = output / ('alias-%03d.obj' % index)
+            file.write_bytes(data)
+            early.append(file)
+            report['aliases'].append(dict(row, file=str(file)))
     crt = recipe['crt']
     deferred_names = set(crt.get('deferred_members', []))
     deferred = []
@@ -160,16 +174,17 @@ def generate(recipe, import_dir, output):
             raise ValueError('Generated import archive changed member bytes')
         objects.append(file)
         report['imports'].append(dict(row, **provenance, file=str(file)))
-    response = ['/NODEFAULTLIB:libc']
-    for file in objects:
+    def response_path(file):
         try:
             path = str(file.relative_to(Path.cwd())).replace('/', '\\')
         except ValueError:
             path = 'Z:' + str(file).replace('/', '\\')
         if any(character in path for character in '\r\n"'):
             raise ValueError('Unsupported character in linker input path')
-        response.append('"' + path + '"')
+        return '"' + path + '"'
+    response = ['/NODEFAULTLIB:libc'] + [response_path(file) for file in objects]
     (output / 'link.rsp').write_text('\n'.join(response) + '\n')
+    (output / 'early.rsp').write_text('\n'.join(response_path(file) for file in early) + '\n')
     return report
 
 
