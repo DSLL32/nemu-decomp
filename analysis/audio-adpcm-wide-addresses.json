@@ -1,0 +1,46 @@
+{
+  "symbols": [
+    {
+      "name": "_RDRAM",
+      "va": 269925092,
+      "address_basis": "observed_operand_inference",
+      "address_evidence": "Inferred from decoded original function operands."
+    },
+    {
+      "name": "_LoadAudioBuffer",
+      "va": 268440304,
+      "address_basis": "observed_operand_inference",
+      "address_evidence": "Inferred from decoded original function operands."
+    },
+    {
+      "name": "_SaveAudioBuffer",
+      "va": 268440640,
+      "address_basis": "observed_operand_inference",
+      "address_evidence": "Inferred from decoded original function operands."
+    },
+    {
+      "name": "_DecodeAudioADPCMWideCommand",
+      "va": 268508128,
+      "size": 4224,
+      "address_basis": "identified_symbol",
+      "address_evidence": "Original command body decoded through RET at 0x10012c53 and 12 bytes of compiler alignment. Semantic name inferred."
+    },
+    {
+      "name": "_ReadAudioMemory",
+      "va": 268452400,
+      "address_basis": "identified_symbol",
+      "address_evidence": "Byte-swapping copy helper identified by DirectSound reconstruction."
+    }
+  ],
+  "original": "master/Plugin/audio.dll",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "verification": {
+    "artifact": "/root/.ai-tmp/audio-adpcm-wide.ubqopvyr/artifacts/58bbd92339036f693baee12f0e938d53f068b95561926f75624664ceadd07cd6",
+    "manifest_sha256": "b9b6ec996b13a4731d31f2f6dcbc38cae543e6d720d8055706358c6f6b3909ef",
+    "body_and_alignment_bytes": 4224,
+    "independently_checked_relocations": 38,
+    "relocated_bytes_equal": true,
+    "whole_dll_claim": false,
+    "command": "python3 scripts/verify_audio.py --object /root/.ai-tmp/audio-adpcm-wide.ubqopvyr/artifacts/58bbd92339036f693baee12f0e938d53f068b95561926f75624664ceadd07cd6/AudioADPCMWide.obj"
+  }
+}
