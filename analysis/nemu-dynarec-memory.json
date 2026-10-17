@@ -1,0 +1,1335 @@
+{
+  "target": "master/nemu64.exe",
+  "source": "src/nemu64/DynarecMemoryOps.cpp",
+  "header": "src/nemu64/DynarecMemoryOps.h",
+  "status": "All 31 routines reconstructed, behavior checked, and matched over their complete linked instruction bodies with known relocation targets; complete executable byte equality remains pending.",
+  "functions": [
+    {
+      "va": "0x0040DD10",
+      "name": "LoadDoubleLeft",
+      "declaration": "void __stdcall LoadDoubleLeft(unsigned address, unsigned reg)",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 143,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 24,
+      "linked_probe": {
+        "original_size": 143,
+        "rebuilt_size": 143,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 2,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040DD9F",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040DD9C",
+        "terminal_instruction": "ret",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 143,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "LoadDoubleLeft",
+        "rebuilt_va": "0x40dcf0",
+        "rebuilt_end_va_exclusive": "0x40dd7f",
+        "rebuilt_size": 143,
+        "terminal_mnemonic": "ret",
+        "alignment_bytes": 1,
+        "next_function_va": "0x40dd80"
+      }
+    },
+    {
+      "va": "0x0040DDA0",
+      "name": "Recompile_LDL",
+      "declaration": "void Recompile_LDL()",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 129,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 32,
+      "linked_probe": {
+        "original_size": 129,
+        "rebuilt_size": 129,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 10,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040DE21",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040DE1C",
+        "terminal_instruction": "jmp",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 129,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "Recompile_LDL",
+        "rebuilt_va": "0x40dd80",
+        "rebuilt_end_va_exclusive": "0x40de01",
+        "rebuilt_size": 129,
+        "terminal_mnemonic": "jmp",
+        "alignment_bytes": 15,
+        "next_function_va": "0x40de10"
+      }
+    },
+    {
+      "va": "0x0040DE30",
+      "name": "LoadDoubleRight",
+      "declaration": "void __stdcall LoadDoubleRight(unsigned address, unsigned reg)",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 129,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 24,
+      "linked_probe": {
+        "original_size": 129,
+        "rebuilt_size": 129,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 2,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040DEB1",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040DEAE",
+        "terminal_instruction": "ret",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 129,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "LoadDoubleRight",
+        "rebuilt_va": "0x40de10",
+        "rebuilt_end_va_exclusive": "0x40de91",
+        "rebuilt_size": 129,
+        "terminal_mnemonic": "ret",
+        "alignment_bytes": 15,
+        "next_function_va": "0x40dea0"
+      }
+    },
+    {
+      "va": "0x0040DEC0",
+      "name": "Recompile_LDR",
+      "declaration": "void Recompile_LDR()",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 129,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 32,
+      "linked_probe": {
+        "original_size": 129,
+        "rebuilt_size": 129,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 10,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040DF41",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040DF3C",
+        "terminal_instruction": "jmp",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 129,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "Recompile_LDR",
+        "rebuilt_va": "0x40dea0",
+        "rebuilt_end_va_exclusive": "0x40df21",
+        "rebuilt_size": 129,
+        "terminal_mnemonic": "jmp",
+        "alignment_bytes": 15,
+        "next_function_va": "0x40df30"
+      }
+    },
+    {
+      "va": "0x0040DF50",
+      "name": "Recompile_LB",
+      "declaration": "void Recompile_LB()",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 178,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 32,
+      "linked_probe": {
+        "original_size": 178,
+        "rebuilt_size": 178,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 13,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040E002",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040E001",
+        "terminal_instruction": "ret",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 178,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "Recompile_LB",
+        "rebuilt_va": "0x40df30",
+        "rebuilt_end_va_exclusive": "0x40dfe2",
+        "rebuilt_size": 178,
+        "terminal_mnemonic": "ret",
+        "alignment_bytes": 14,
+        "next_function_va": "0x40dff0"
+      }
+    },
+    {
+      "va": "0x0040E010",
+      "name": "Recompile_LH",
+      "declaration": "void Recompile_LH()",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 178,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 32,
+      "linked_probe": {
+        "original_size": 178,
+        "rebuilt_size": 178,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 13,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040E0C2",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040E0C1",
+        "terminal_instruction": "ret",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 178,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "Recompile_LH",
+        "rebuilt_va": "0x40dff0",
+        "rebuilt_end_va_exclusive": "0x40e0a2",
+        "rebuilt_size": 178,
+        "terminal_mnemonic": "ret",
+        "alignment_bytes": 14,
+        "next_function_va": "0x40e0b0"
+      }
+    },
+    {
+      "va": "0x0040E0D0",
+      "name": "Recompile_LWL",
+      "declaration": "void Recompile_LWL()",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 312,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 32,
+      "linked_probe": {
+        "original_size": 312,
+        "rebuilt_size": 312,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 25,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040E208",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040E203",
+        "terminal_instruction": "jmp",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 312,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "Recompile_LWL",
+        "rebuilt_va": "0x40e0b0",
+        "rebuilt_end_va_exclusive": "0x40e1e8",
+        "rebuilt_size": 312,
+        "terminal_mnemonic": "jmp",
+        "alignment_bytes": 8,
+        "next_function_va": "0x40e1f0"
+      }
+    },
+    {
+      "va": "0x0040E210",
+      "name": "Recompile_LW",
+      "declaration": "void Recompile_LW()",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 172,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 32,
+      "linked_probe": {
+        "original_size": 172,
+        "rebuilt_size": 172,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 12,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040E2BC",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040E2BB",
+        "terminal_instruction": "ret",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 172,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "Recompile_LW",
+        "rebuilt_va": "0x40e1f0",
+        "rebuilt_end_va_exclusive": "0x40e29c",
+        "rebuilt_size": 172,
+        "terminal_mnemonic": "ret",
+        "alignment_bytes": 4,
+        "next_function_va": "0x40e2a0"
+      }
+    },
+    {
+      "va": "0x0040E2C0",
+      "name": "Recompile_LBU",
+      "declaration": "void Recompile_LBU()",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 178,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 32,
+      "linked_probe": {
+        "original_size": 178,
+        "rebuilt_size": 178,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 13,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040E372",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040E371",
+        "terminal_instruction": "ret",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 178,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "Recompile_LBU",
+        "rebuilt_va": "0x40e2a0",
+        "rebuilt_end_va_exclusive": "0x40e352",
+        "rebuilt_size": 178,
+        "terminal_mnemonic": "ret",
+        "alignment_bytes": 14,
+        "next_function_va": "0x40e360"
+      }
+    },
+    {
+      "va": "0x0040E380",
+      "name": "Recompile_LHU",
+      "declaration": "void Recompile_LHU()",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 178,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 32,
+      "linked_probe": {
+        "original_size": 178,
+        "rebuilt_size": 178,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 13,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040E432",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040E431",
+        "terminal_instruction": "ret",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 178,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "Recompile_LHU",
+        "rebuilt_va": "0x40e360",
+        "rebuilt_end_va_exclusive": "0x40e412",
+        "rebuilt_size": 178,
+        "terminal_mnemonic": "ret",
+        "alignment_bytes": 14,
+        "next_function_va": "0x40e420"
+      }
+    },
+    {
+      "va": "0x0040E440",
+      "name": "Recompile_LWR",
+      "declaration": "void Recompile_LWR()",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 312,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 32,
+      "linked_probe": {
+        "original_size": 312,
+        "rebuilt_size": 312,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 25,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040E578",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040E573",
+        "terminal_instruction": "jmp",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 312,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "Recompile_LWR",
+        "rebuilt_va": "0x40e420",
+        "rebuilt_end_va_exclusive": "0x40e558",
+        "rebuilt_size": 312,
+        "terminal_mnemonic": "jmp",
+        "alignment_bytes": 8,
+        "next_function_va": "0x40e560"
+      }
+    },
+    {
+      "va": "0x0040E580",
+      "name": "Recompile_LWU",
+      "declaration": "void Recompile_LWU()",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 165,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 32,
+      "linked_probe": {
+        "original_size": 165,
+        "rebuilt_size": 165,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 12,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040E625",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040E624",
+        "terminal_instruction": "ret",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 165,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "Recompile_LWU",
+        "rebuilt_va": "0x40e560",
+        "rebuilt_end_va_exclusive": "0x40e605",
+        "rebuilt_size": 165,
+        "terminal_mnemonic": "ret",
+        "alignment_bytes": 11,
+        "next_function_va": "0x40e610"
+      }
+    },
+    {
+      "va": "0x0040E630",
+      "name": "Recompile_SB",
+      "declaration": "void Recompile_SB()",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 248,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 32,
+      "linked_probe": {
+        "original_size": 248,
+        "rebuilt_size": 248,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 18,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040E728",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040E727",
+        "terminal_instruction": "ret",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 248,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "Recompile_SB",
+        "rebuilt_va": "0x40e610",
+        "rebuilt_end_va_exclusive": "0x40e708",
+        "rebuilt_size": 248,
+        "terminal_mnemonic": "ret",
+        "alignment_bytes": 8,
+        "next_function_va": "0x40e710"
+      }
+    },
+    {
+      "va": "0x0040E730",
+      "name": "Recompile_SH",
+      "declaration": "void Recompile_SH()",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 242,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 32,
+      "linked_probe": {
+        "original_size": 242,
+        "rebuilt_size": 242,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 18,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040E822",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040E821",
+        "terminal_instruction": "ret",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 242,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "Recompile_SH",
+        "rebuilt_va": "0x40e710",
+        "rebuilt_end_va_exclusive": "0x40e802",
+        "rebuilt_size": 242,
+        "terminal_mnemonic": "ret",
+        "alignment_bytes": 14,
+        "next_function_va": "0x40e810"
+      }
+    },
+    {
+      "va": "0x0040E830",
+      "name": "Recompile_SWL",
+      "declaration": "void Recompile_SWL()",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 442,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 32,
+      "linked_probe": {
+        "original_size": 442,
+        "rebuilt_size": 442,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 38,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040E9EA",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040E9E9",
+        "terminal_instruction": "ret",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 442,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "Recompile_SWL",
+        "rebuilt_va": "0x40e810",
+        "rebuilt_end_va_exclusive": "0x40e9ca",
+        "rebuilt_size": 442,
+        "terminal_mnemonic": "ret",
+        "alignment_bytes": 6,
+        "next_function_va": "0x40e9d0"
+      }
+    },
+    {
+      "va": "0x0040E9F0",
+      "name": "Recompile_SW",
+      "declaration": "void Recompile_SW()",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 227,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 32,
+      "linked_probe": {
+        "original_size": 227,
+        "rebuilt_size": 227,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 17,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040EAD3",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040EAD2",
+        "terminal_instruction": "ret",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 227,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "Recompile_SW",
+        "rebuilt_va": "0x40e9d0",
+        "rebuilt_end_va_exclusive": "0x40eab3",
+        "rebuilt_size": 227,
+        "terminal_mnemonic": "ret",
+        "alignment_bytes": 13,
+        "next_function_va": "0x40eac0"
+      }
+    },
+    {
+      "va": "0x0040EAE0",
+      "name": "StoreDoubleLeft",
+      "declaration": "void __stdcall StoreDoubleLeft(unsigned address, CpuU64 value)",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 133,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 24,
+      "linked_probe": {
+        "original_size": 133,
+        "rebuilt_size": 133,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 3,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040EB65",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040EB62",
+        "terminal_instruction": "ret",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 133,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "StoreDoubleLeft",
+        "rebuilt_va": "0x40eac0",
+        "rebuilt_end_va_exclusive": "0x40eb45",
+        "rebuilt_size": 133,
+        "terminal_mnemonic": "ret",
+        "alignment_bytes": 11,
+        "next_function_va": "0x40eb50"
+      }
+    },
+    {
+      "va": "0x0040EB70",
+      "name": "Recompile_SDL",
+      "declaration": "void Recompile_SDL()",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 160,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 32,
+      "linked_probe": {
+        "original_size": 160,
+        "rebuilt_size": 160,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 12,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040EC10",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040EC0B",
+        "terminal_instruction": "jmp",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 160,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "Recompile_SDL",
+        "rebuilt_va": "0x40eb50",
+        "rebuilt_end_va_exclusive": "0x40ebf0",
+        "rebuilt_size": 160,
+        "terminal_mnemonic": "jmp",
+        "alignment_bytes": 0,
+        "next_function_va": "0x40ebf0"
+      }
+    },
+    {
+      "va": "0x0040EC10",
+      "name": "StoreDoubleRight",
+      "declaration": "void __stdcall StoreDoubleRight(unsigned address, CpuU64 value)",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 133,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 24,
+      "linked_probe": {
+        "original_size": 133,
+        "rebuilt_size": 133,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 3,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040EC95",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040EC92",
+        "terminal_instruction": "ret",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 133,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "StoreDoubleRight",
+        "rebuilt_va": "0x40ebf0",
+        "rebuilt_end_va_exclusive": "0x40ec75",
+        "rebuilt_size": 133,
+        "terminal_mnemonic": "ret",
+        "alignment_bytes": 11,
+        "next_function_va": "0x40ec80"
+      }
+    },
+    {
+      "va": "0x0040ECA0",
+      "name": "Recompile_SDR",
+      "declaration": "void Recompile_SDR()",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 160,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 32,
+      "linked_probe": {
+        "original_size": 160,
+        "rebuilt_size": 160,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 12,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040ED40",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040ED3B",
+        "terminal_instruction": "jmp",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 160,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "Recompile_SDR",
+        "rebuilt_va": "0x40ec80",
+        "rebuilt_end_va_exclusive": "0x40ed20",
+        "rebuilt_size": 160,
+        "terminal_mnemonic": "jmp",
+        "alignment_bytes": 0,
+        "next_function_va": "0x40ed20"
+      }
+    },
+    {
+      "va": "0x0040ED40",
+      "name": "Recompile_SWR",
+      "declaration": "void Recompile_SWR()",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 428,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 32,
+      "linked_probe": {
+        "original_size": 428,
+        "rebuilt_size": 428,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 36,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040EEEC",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040EEEB",
+        "terminal_instruction": "ret",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 428,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "Recompile_SWR",
+        "rebuilt_va": "0x40ed20",
+        "rebuilt_end_va_exclusive": "0x40eecc",
+        "rebuilt_size": 428,
+        "terminal_mnemonic": "ret",
+        "alignment_bytes": 4,
+        "next_function_va": "0x40eed0"
+      }
+    },
+    {
+      "va": "0x0040EEF0",
+      "name": "InvalidateRecompiledPage",
+      "declaration": "void __stdcall InvalidateRecompiledPage(unsigned address)",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 51,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 3,
+      "linked_probe": {
+        "original_size": 51,
+        "rebuilt_size": 51,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 1,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040EF23",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040EF20",
+        "terminal_instruction": "ret",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 51,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "InvalidateRecompiledPage",
+        "rebuilt_va": "0x40eed0",
+        "rebuilt_end_va_exclusive": "0x40ef03",
+        "rebuilt_size": 51,
+        "terminal_mnemonic": "ret",
+        "alignment_bytes": 13,
+        "next_function_va": "0x40ef10"
+      }
+    },
+    {
+      "va": "0x0040EF30",
+      "name": "RemovePageBreakpoints",
+      "declaration": "void __stdcall RemovePageBreakpoints(unsigned page)",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 128,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 31,
+      "linked_probe": {
+        "original_size": 128,
+        "rebuilt_size": 128,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 2,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040EFB0",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040EFAD",
+        "terminal_instruction": "ret",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 128,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "RemovePageBreakpoints",
+        "rebuilt_va": "0x40ef10",
+        "rebuilt_end_va_exclusive": "0x40ef90",
+        "rebuilt_size": 128,
+        "terminal_mnemonic": "ret",
+        "alignment_bytes": 0,
+        "next_function_va": "0x40ef90"
+      }
+    },
+    {
+      "va": "0x0040EFB0",
+      "name": "Recompile_CACHE",
+      "declaration": "void Recompile_CACHE()",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 380,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 32,
+      "linked_probe": {
+        "original_size": 380,
+        "rebuilt_size": 380,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 1,
+        "unverified_targets": 26,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "source": "src/nemu64/DynarecOpcodes.cpp",
+      "end_va_exclusive": "0x0040F12C",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040F127",
+        "terminal_instruction": "jmp",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 380,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "Recompile_CACHE",
+        "rebuilt_va": "0x40ef90",
+        "rebuilt_end_va_exclusive": "0x40f10c",
+        "rebuilt_size": 380,
+        "terminal_mnemonic": "jmp",
+        "alignment_bytes": 4,
+        "next_function_va": "0x40f110"
+      }
+    },
+    {
+      "va": "0x0040F130",
+      "name": "Recompile_LWC1",
+      "declaration": "void Recompile_LWC1()",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 342,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 32,
+      "linked_probe": {
+        "original_size": 342,
+        "rebuilt_size": 342,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 19,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040F286",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040F285",
+        "terminal_instruction": "ret",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 342,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "Recompile_LWC1",
+        "rebuilt_va": "0x40f110",
+        "rebuilt_end_va_exclusive": "0x40f266",
+        "rebuilt_size": 342,
+        "terminal_mnemonic": "ret",
+        "alignment_bytes": 10,
+        "next_function_va": "0x40f270"
+      }
+    },
+    {
+      "va": "0x0040F290",
+      "name": "Recompile_LDC1",
+      "declaration": "void Recompile_LDC1()",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 483,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 32,
+      "linked_probe": {
+        "original_size": 483,
+        "rebuilt_size": 483,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 29,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040F473",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040F472",
+        "terminal_instruction": "ret",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 483,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "Recompile_LDC1",
+        "rebuilt_va": "0x40f270",
+        "rebuilt_end_va_exclusive": "0x40f453",
+        "rebuilt_size": 483,
+        "terminal_mnemonic": "ret",
+        "alignment_bytes": 13,
+        "next_function_va": "0x40f460"
+      }
+    },
+    {
+      "va": "0x0040F480",
+      "name": "Recompile_LD",
+      "declaration": "void Recompile_LD()",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 232,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 32,
+      "linked_probe": {
+        "original_size": 232,
+        "rebuilt_size": 232,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 19,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040F568",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040F567",
+        "terminal_instruction": "ret",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 232,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "Recompile_LD",
+        "rebuilt_va": "0x40f460",
+        "rebuilt_end_va_exclusive": "0x40f548",
+        "rebuilt_size": 232,
+        "terminal_mnemonic": "ret",
+        "alignment_bytes": 8,
+        "next_function_va": "0x40f550"
+      }
+    },
+    {
+      "va": "0x0040F570",
+      "name": "Recompile_Unimplemented",
+      "declaration": "void Recompile_Unimplemented()",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 5,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 32,
+      "linked_probe": {
+        "original_size": 5,
+        "rebuilt_size": 5,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 1,
+        "unverified_targets": 1,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040F575",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040F570",
+        "terminal_instruction": "jmp",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 5,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "Recompile_Unimplemented",
+        "rebuilt_va": "0x40f550",
+        "rebuilt_end_va_exclusive": "0x40f555",
+        "rebuilt_size": 5,
+        "terminal_mnemonic": "jmp",
+        "alignment_bytes": 11,
+        "next_function_va": "0x40f560"
+      }
+    },
+    {
+      "va": "0x0040F580",
+      "name": "Recompile_SWC1",
+      "declaration": "void Recompile_SWC1()",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 413,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 32,
+      "linked_probe": {
+        "original_size": 413,
+        "rebuilt_size": 413,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 25,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040F71D",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040F71C",
+        "terminal_instruction": "ret",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 413,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "Recompile_SWC1",
+        "rebuilt_va": "0x40f560",
+        "rebuilt_end_va_exclusive": "0x40f6fd",
+        "rebuilt_size": 413,
+        "terminal_mnemonic": "ret",
+        "alignment_bytes": 3,
+        "next_function_va": "0x40f700"
+      }
+    },
+    {
+      "va": "0x0040F720",
+      "name": "Recompile_SDC1",
+      "declaration": "void Recompile_SDC1()",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 435,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 32,
+      "linked_probe": {
+        "original_size": 435,
+        "rebuilt_size": 435,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 24,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040F8D3",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040F8D2",
+        "terminal_instruction": "ret",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 435,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "Recompile_SDC1",
+        "rebuilt_va": "0x40f700",
+        "rebuilt_end_va_exclusive": "0x40f8b3",
+        "rebuilt_size": 435,
+        "terminal_mnemonic": "ret",
+        "alignment_bytes": 13,
+        "next_function_va": "0x40f8c0"
+      }
+    },
+    {
+      "va": "0x0040F8E0",
+      "name": "Recompile_SD",
+      "declaration": "void Recompile_SD()",
+      "status": "Complete instruction and known-target match in linked probe",
+      "original_size": 287,
+      "extent_basis": "Original Ghidra instruction listing, from entry through the last listed instruction; alignment excluded.",
+      "behavior_cases": 32,
+      "linked_probe": {
+        "original_size": 287,
+        "rebuilt_size": 287,
+        "normalized_differing_bytes": 0,
+        "instruction_and_known_target_match": true,
+        "rebuilt_extent_verified": true,
+        "fully_verified_relocations": false,
+        "unresolved_targets": 0,
+        "unverified_targets": 20,
+        "candidate_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a"
+      },
+      "end_va_exclusive": "0x0040F9FF",
+      "boundary_evidence": {
+        "entry": "Recovered direct call target or opcode dispatch target",
+        "terminal_instruction_va": "0x0040F9FE",
+        "terminal_instruction": "ret",
+        "end": "End of final independently decoded instruction; alignment NOPs excluded"
+      },
+      "rebuilt_size": 287,
+      "rebuilt_image_sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+      "rebuilt_extent_basis": "Independent linked MAP span disassembly through final RET or tail JMP, followed only by NOP alignment to next distinct function entry.",
+      "rebuilt_boundary_evidence": {
+        "name": "Recompile_SD",
+        "rebuilt_va": "0x40f8c0",
+        "rebuilt_end_va_exclusive": "0x40f9df",
+        "rebuilt_size": 287,
+        "terminal_mnemonic": "ret",
+        "alignment_bytes": 1,
+        "next_function_va": "0x40f9e0"
+      }
+    }
+  ],
+  "inference_notes": [
+    "Original source names and unit boundaries did not survive and are inferred.",
+    "Generated x86 instructions are represented by typed emitter calls, not copied host machine code.",
+    "RemovePageBreakpoints retains the original last-entry and post-compaction loop behavior.",
+    "CACHE error reporting calls ReportCPUError at 00414EB0; complete CPU-control symbol metadata distinguishes it from ReportCompilerError at 00414F50."
+  ],
+  "linked_diagnostic": {
+    "image": "/root/.ai-tmp/nemu-complete-relocs.6r3eywlv/nemu64.exe",
+    "map": "/root/.ai-tmp/nemu-complete-relocs.6r3eywlv/nemu64.map",
+    "sha256": "ff5f89b99394d9adbc5191abcd1577f4ee47b6035a57847f074ad64e9450c06a",
+    "report": "/root/.ai-tmp/nemu-dynarec-memory-audit.kedw95db/linked-comparison.json",
+    "metadata": "/root/.ai-tmp/nemu-dynarec-memory-audit.kedw95db/metadata.json",
+    "build_script": "scripts/build_nemu.py",
+    "complete_real_link": true,
+    "forced_unresolved_symbols": false,
+    "instruction_known_target_matches": 31,
+    "matched_instruction_bytes": 7132,
+    "unresolved_relocation_identities": 2,
+    "unverified_relocation_identities": 473,
+    "complete_executable_byte_exact": false,
+    "source_sha256": "f329981134e87a06088ce92315c6a441172bd5b155fb8890cce6944a3856a468",
+    "fixture_manifest": "/root/.ai-tmp/nemu-complete-relocs.6r3eywlv/diagnostic.json",
+    "existing_sections_equal_true_fixed_build": true,
+    "source_sha256_scope": "Historical probe source snapshot before the unchanged Recompile_CACHE definition moved into DynarecOpcodes.cpp.",
+    "report_sha256": "911ebda8bebb1078aa1c04ce2d8549ba9ab7e66d782aa31484e0cc3221161162",
+    "metadata_sha256": "a46c650b7271732148c247c8220be9ba2754d03f8f9b61594a90df5b82f2ab80",
+    "map_sha256": "01082983128ff00bc3cf0b95141d7acf75ac40333052b6a0b1ff5b9d7e00dbba",
+    "fixture_manifest_sha256": "91e338dfd299e699d0120eaa1215eb1bfabae7e74c8106aed2343c222bab6833",
+    "comparison_tool_sha256": "68a389f46698cbaea256019bf4d03f2546027d0a6475ec80207690c3894b6b5b",
+    "symbol_metadata": [
+      {
+        "path": "analysis/nemu-cpu.json",
+        "sha256": "24b9206b1e36035e2751530423feb530ab165f38bc6c56815ea9836a21c3cfda"
+      },
+      {
+        "path": "analysis/nemu-cpu-control.json",
+        "sha256": "044e8e159d0c73993065d61a20bd746bd60d528ed46ea84ae5ac204b42cdac9e"
+      },
+      {
+        "path": "analysis/nemu-dynarec.json",
+        "sha256": "282a78bb1e08e32f450c160b3afba655b4aee1e4808f17084142d18669097358"
+      },
+      {
+        "path": "analysis/nemu-memory.json",
+        "sha256": "9a1bbe2ff1c9d78d167f967e4b10e6bd22d2d1099e02a1dcef897c170d7b2c8b"
+      },
+      {
+        "path": "analysis/nemu-globals.json",
+        "sha256": "e779b7af5f95a5f187834d34405f7d9b199825aa0b65f956b47c32389e95b15a"
+      },
+      {
+        "path": "analysis/nemu-dynarec-fpu.json",
+        "sha256": "f2ae088ae19ab15b9f60ccfe19052396cb27a89a81cedc20fb0bd375b2cc2a1d"
+      }
+    ],
+    "extent_audit": "/root/.ai-tmp/nemu-dynarec-memory-audit.kedw95db/extent-audit.json",
+    "extent_audit_sha256": "74e7690ea85ae4beda1d1976e26ac738325f4e82e10943c4a6e5494db7e8c9f1",
+    "report_scope": "Fresh audit of the pinned historical linked image; metadata and report hashes bind these results. Absolute operand identities remain partly unresolved or inferred."
+  },
+  "behavior_verification": {
+    "passed": true,
+    "cases": 930,
+    "scope": "Reference-vs-ordinary-COFF execution with external calls captured. Native helper effects, emitted argument traces, branch selection, breakpoint records, cache clears and FPU labels compare. Not full linked program behavior or machine-code equality.",
+    "report": "/root/.ai-tmp/nemu-dynarec-memory.i07r77g0/calls-comparison.json",
+    "checker": "/root/.ai-tmp/nemu-dynarec-memory.i07r77g0/check_calls.py",
+    "compiled_object_sha256": "4ba78058222a8df446f571acac5445bb509d356802f04a2e2c82d90b8f010fea",
+    "scenarios": [
+      "32 combinations per translation handler: register fields, signed immediates, TLB enable/mapped state, slow memory checks, recompiler mode, FPU format selection and delay slots",
+      "All eight byte alignments and three operand patterns for each native unaligned 64-bit helper",
+      "Page invalidation in three recompiler modes",
+      "Every selected-page membership pattern for breakpoint arrays of zero through four entries"
+    ],
+    "checker_sha256": "d563b861ddc91f6d6f111440ae25b9897b21b6b151715c968650f329c47cc996",
+    "report_sha256": "217dd7e8a575b642279c9126afcc29d923630f4e58e8dbd4673f09381bf4f3a7",
+    "compiled_object": "/root/.ai-tmp/nemu-dynarec-memory.i07r77g0/DynarecMemoryOps.obj",
+    "target_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+    "wrapper_abi_input": {
+      "path": "/root/.ai-tmp/nemu-dynarec.oll3po3h/wrappers.json",
+      "sha256": "86f93a801e1aa8a590210a947dd929ee99e6ef1829cdadb9c9072312237fda4b"
+    },
+    "audit_rerun": {
+      "report": "/root/.ai-tmp/nemu-dynarec-memory-audit.kedw95db/calls-comparison.json",
+      "sha256": "217dd7e8a575b642279c9126afcc29d923630f4e58e8dbd4673f09381bf4f3a7",
+      "historical_report_identical": true,
+      "cases": 930,
+      "failures": 0
+    },
+    "source_binding": "This execution evidence is pinned to the historical ordinary-COFF object and checker, not asserted to be a compilation of the current regrouped translation units. The separate linked proof binds its own historical C++ source snapshot."
+  },
+  "remaining_differences": [
+    "All 31 historical function instruction bodies match after relocation normalization. This is not raw executable byte equality.",
+    "The fresh audit reports 2 unresolved and 473 unverified relocation identities; no independently known target mismatches.",
+    "Behavioral evidence covers 930 sampled cases with external callees captured, not execution of the complete linked application.",
+    "Original names, source boundaries and private data identities remain partly inferred. Scratch artifacts are outside git; their hashes identify the audited evidence."
+  ],
+  "source_organization": "Most memory load/store translators and invalidation helpers reside in DynarecMemoryOps.cpp. Recompile_CACHE is grouped with system-instruction translators in DynarecOpcodes.cpp; names and unit boundaries remain inferred. Complete bodies are unchanged by this regrouping.",
+  "historical_probe_source_sha256": "f329981134e87a06088ce92315c6a441172bd5b155fb8890cce6944a3856a468",
+  "current_source_files": [
+    {
+      "path": "src/nemu64/DynarecMemoryOps.cpp",
+      "sha256": "7d1512650c3bd3febe9ec768c3fb18fc17af1bc2b6ef41be114ea1cdadfdd621"
+    },
+    {
+      "path": "src/nemu64/DynarecOpcodes.cpp",
+      "sha256": "f647b81200db5617f8a4b60591afc36deb4f8132b19e3154adc80270d28a9a69"
+    }
+  ],
+  "target_sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+  "regrouping_audit": {
+    "function": "Recompile_CACHE",
+    "original_source": "src/nemu64/DynarecMemoryOps.cpp",
+    "current_source": "src/nemu64/DynarecOpcodes.cpp",
+    "function_definition_text_sha256": "dd328b8b332f0588f4838f49dedb89a4734932bb03acd7d528d4dfa175172400",
+    "definition_text_identical": true,
+    "other_memoryops_text_unchanged_ignoring_blank_lines": true,
+    "scope": "Compared the pinned historical linked source snapshot to the current source hashes recorded above. This verifies source regrouping only; it is not a new executable match claim."
+  }
+}
