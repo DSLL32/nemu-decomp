@@ -15,7 +15,6 @@ extern void RecordHLEBuffer(const void *, int);
 void LegacyEnvelopeMixer(AudioCommand *command, AudioContext *context)
 {
     int rateLeft, rateRight, targetLeft, targetRight, dry, wet;
-    int initialLeft, initialRight;
     float rampLeft, rampRight, volumeLeft, volumeRight;
     int input, output, aux0, aux1, aux2, count, i;
     unsigned short *state;
@@ -23,29 +22,25 @@ void LegacyEnvelopeMixer(AudioCommand *command, AudioContext *context)
         state = (unsigned short *)(RDRAM + (command->words[1] & 0xffffff));
         rateLeft = (state[6] << 16) + state[5];
         rateRight = (state[9] << 16) + state[8];
-        initialLeft = (state[0] << 16) + state[1];
-        initialRight = (state[2] << 16) + state[3];
+        rampLeft = sqrt(sqrt(sqrt(rateLeft / 65536.0)));
+        rampRight = sqrt(sqrt(sqrt(rateRight / 65536.0)));
+        volumeLeft = ((state[0] << 16) + state[1]) / 65536.0;
+        volumeRight = ((state[2] << 16) + state[3]) / 65536.0;
         targetLeft = state[4];
         targetRight = state[7];
         dry = state[10];
         wet = state[11];
-        rampLeft = sqrt(sqrt(sqrt(rateLeft / 65536.0)));
-        rampRight = sqrt(sqrt(sqrt(rateRight / 65536.0)));
-        volumeLeft = initialLeft / 65536.0;
-        volumeRight = initialRight / 65536.0;
     } else {
         rateLeft = context->rateLeft16;
         rateRight = context->rateRight16;
-        targetLeft = context->targetLeft16;
-        targetRight = context->targetRight16;
-        dry = context->dry;
-        wet = context->wet;
-        initialLeft = context->volumeLeft16;
-        initialRight = context->volumeRight16;
         rampLeft = sqrt(sqrt(sqrt(rateLeft / 65536.0)));
         rampRight = sqrt(sqrt(sqrt(rateRight / 65536.0)));
-        volumeLeft = initialLeft;
-        volumeRight = initialRight;
+        targetLeft = context->targetLeft16;
+        targetRight = context->targetRight16;
+        volumeLeft = context->volumeLeft16;
+        volumeRight = context->volumeRight16;
+        wet = context->wet;
+        dry = context->dry;
     }
     input = context->input >> 1;
     output = context->outputResample >> 1;

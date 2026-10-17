@@ -136,6 +136,83 @@
       "name": "_RDRAM",
       "va": 269925092,
       "address_basis": "identified_symbol"
+    },
+    {
+      "name": "__real@3f00000000000000",
+      "va": 268633568,
+      "size": 8,
+      "address_basis": "identified_symbol",
+      "address_evidence": "Legacy envelope source constant 3.0517578125e-05, IEEE-754 binary64, agrees with its full compiler-emitted value and the original x87 operand storage.",
+      "sha256": "0051cfd064ea4a91086438ce7f6b3d21ca62d76ee264a63f3692e57cda89cd6e"
+    },
+    {
+      "name": "__real@46fffe00",
+      "va": 268633564,
+      "size": 4,
+      "address_basis": "identified_symbol",
+      "address_evidence": "Legacy envelope source constant 32767, IEEE-754 binary32, agrees with its full compiler-emitted value and the original x87 operand storage.",
+      "sha256": "461fd2eb57b562e156fa72295897db3f1dff3372c6dda9a1275d4b3d786abae6"
+    },
+    {
+      "name": "__real@c6fffe00",
+      "va": 268633560,
+      "size": 4,
+      "address_basis": "identified_symbol",
+      "address_evidence": "Legacy envelope source constant -32767, IEEE-754 binary32, agrees with its full compiler-emitted value and the original x87 operand storage.",
+      "sha256": "63f9243a1eec483040474ff2f47434da92bc4660002fcdc629806164e18155ed"
+    },
+    {
+      "name": "__real@3ef0000000000000",
+      "va": 268633576,
+      "size": 8,
+      "address_basis": "identified_symbol",
+      "address_evidence": "Legacy envelope source constant 1.52587890625e-05, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+      "sha256": "0d74047c56871c3fa5fc799e64a6b584a892a0a57488747bd6504f1deab45a05"
+    },
+    {
+      "name": "__real@3ff0000000000000",
+      "va": 268633552,
+      "size": 8,
+      "address_basis": "identified_symbol",
+      "address_evidence": "Legacy envelope source constant 1.0, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+      "sha256": "6c3c396ed6b5c36dcae172271f462051b1266b851e92df3deea8ac65478fd712"
+    },
+    {
+      "name": "__real@47800000",
+      "va": 268633544,
+      "size": 4,
+      "address_basis": "identified_symbol",
+      "address_evidence": "Legacy envelope source constant 65536.0, IEEE-754 binary32, agrees with its compiler literal name and full original operand storage.",
+      "sha256": "c57897b6c9d44e8cb9a73227a9e206cdb59cc4c3fc5094fdb3815bbb6a885cf8"
+    },
+    {
+      "name": "__ftol2",
+      "va": 268571568,
+      "size": 117,
+      "library": "toolchains/vc7/lib/libc.lib",
+      "object": "..\\build\\intel\\st_obj\\ftol2.obj",
+      "archive_offset": 2360238,
+      "sha256": "77552b21e9106ea23cbd334c99a3c5674b2b2c75f44a6a4b0043d07e6c3bbc37",
+      "comp_id": 4203770,
+      "comparison_only": false,
+      "address_basis": "independent_library_mapping",
+      "discovery": "unique_body_scan",
+      "validated_relocations": [],
+      "unresolved_relocations": [],
+      "member_alternatives": [
+        {
+          "library": "toolchains/vc7/lib/libc.lib",
+          "object": "..\\build\\intel\\st_obj\\ftol2.obj",
+          "archive_offset": 2360238,
+          "comp_id": 4203770
+        },
+        {
+          "library": "toolchains/vc7/lib/libcmt.lib",
+          "object": "..\\build\\intel\\mt_obj\\ftol2.obj",
+          "archive_offset": 2560474,
+          "comp_id": 4203770
+        }
+      ]
     }
   ]
 }
