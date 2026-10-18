@@ -1,0 +1,1727 @@
+{
+  "status": "bounded_native_carry_controls_frozen_no_source_promotion",
+  "original": "master/Plugin/audio.dll",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "historical_baseline": {
+    "source_snapshot": "/root/.ai-tmp/audio-rsp-carry-control.2qox1ehj/source",
+    "source_sha256": "fd4a3beb61f89dc2a2fb4512f784c53cde27c2646f76657c1c13576a87979ca7",
+    "description": "Frozen after a7af743 mixer match, before bf82458 LegacyVGE match. Its 167 exact routines are the baseline for these controls, not a statement of current repository coverage."
+  },
+  "method": "Fresh complete original-order native C++ translation-unit builds, VC7 /O2 /Ob1 /MT. Compare all 180 functions after independently identified symbolic relocations are materialized at original addresses for analysis; verify all 25 typed data objects and 11 overlapping fields. No output binary is patched.",
+  "prior_evidence_reviewed": [
+    "/root/.ai-tmp/nemu-audio-arithmetic.mb1o7ztm/carry.cpp",
+    "/root/.ai-tmp/nemu-audio-arithmetic.mb1o7ztm/types.cpp",
+    "/root/.ai-tmp/nemu-audio-arithmetic.mb1o7ztm/selector.cpp",
+    "/root/.ai-tmp/nemu-audio-arithmetic.mb1o7ztm/inlinehelpers.cpp",
+    "/root/.ai-tmp/nemu-rsp-arith-dataflow.3wielgks/report.json",
+    "/root/.ai-tmp/nemu-rsp-carry-getter.1jeoqnz9/report.json"
+  ],
+  "control_descriptions": {
+    "conditional-expression": "Compute left +/- right +/- 1 in the true arm of the carry conditional and left +/- right in the false arm.",
+    "conditional-adjust": "Compute left +/- right, then conditionally increment or decrement the result.",
+    "lane-only": "Repeat the lane-mask lookup instead of caching only the lane local; offset stays cached.",
+    "offset-only": "Repeat the offset-mask expression instead of caching only the offset local; lane stays cached.",
+    "unsigned-test": "Change only the carry mask from 1 << i to 1U << i, leaving signed flag-clear masks unchanged.",
+    "unsigned-masks": "Unsigned carry mask plus unsigned flag-clear mask constants.",
+    "unsigned-flags": "Cast the flag operand to CpuU32 before AND while retaining signed 1 << i.",
+    "unsigned-test-not-equal": "Unsigned carry mask with unsigned counter and i != 8 loop termination.",
+    "unsigned-test-signed-loop": "Unsigned carry mask with CpuS32 counter and i < 8."
+  },
+  "baseline": {
+    "label": "baseline",
+    "source_sha256": "fd4a3beb61f89dc2a2fb4512f784c53cde27c2646f76657c1c13576a87979ca7",
+    "object_sha256": "6da19f7d828605c31f76f7efd667e041f8a1c53422a1c651edcf277f074ad583",
+    "comparison_sha256": "e659c1a5fdebc500e7ad77a0afa0e0f09900473f2d7b2f5463922e947f8d234c",
+    "compiler_log_sha256": "a21761641590bd688463e91fd3d8f33ef117d2c4cdcd02f8e84ba8a547f5b328",
+    "compiler_command": [
+      "/usr/bin/python3",
+      "/root/nemu-decomp/scripts/run_toolchain.py",
+      "vc7",
+      "cl",
+      "/nologo",
+      "/c",
+      "/O2",
+      "/Ob1",
+      "/MT",
+      "/W3",
+      "/DWIN32",
+      "/DNDEBUG",
+      "/D_WINDOWS",
+      "/D_USRDLL",
+      "/FoRSP.obj",
+      "RSP.cpp"
+    ],
+    "exact_functions": 167,
+    "prior_exact_preserved": 167,
+    "changed_functions": [],
+    "unchanged_other_function_hashes": 175,
+    "typed_objects_exact": 25,
+    "typed_fields_exact": 11,
+    "unresolved": 0,
+    "functions": [
+      {
+        "name": "RSP_VADD",
+        "original_size": 720,
+        "candidate_size": 720,
+        "differing_bytes": 647,
+        "exact": false,
+        "candidate_materialized_sha256": "fc8791be356df4470af7c2db2a60d5fe93ed62e300c53f2cff1b9f18699aaa39"
+      },
+      {
+        "name": "RSP_VADDExec",
+        "original_size": 672,
+        "candidate_size": 672,
+        "differing_bytes": 488,
+        "exact": false,
+        "candidate_materialized_sha256": "5c58c7efc8ee2e07a03937a9f30536e80d6788b36eaf24eb6ff90c344f9b873a"
+      },
+      {
+        "name": "RSP_VSUB",
+        "original_size": 688,
+        "candidate_size": 688,
+        "differing_bytes": 623,
+        "exact": false,
+        "candidate_materialized_sha256": "4b34c25311c52e8d82ad9615f6f917f8e653ee4ef11dec48c881a57573ade206"
+      },
+      {
+        "name": "RSP_VSUBExec",
+        "original_size": 672,
+        "candidate_size": 672,
+        "differing_bytes": 505,
+        "exact": false,
+        "candidate_materialized_sha256": "4de5512c6d7b8ed8eba1372a91f139223cf9a9327612288b54facf8214fdd688"
+      },
+      {
+        "name": "RSP_VSUT",
+        "original_size": 640,
+        "candidate_size": 640,
+        "differing_bytes": 598,
+        "exact": false,
+        "candidate_materialized_sha256": "db3cbb9b81f08c86c45c6d21b734073126beb5dce87efbccc96665e54cd45dc3"
+      }
+    ],
+    "artifact_directory": "/root/.ai-tmp/audio-rsp-carry-control.2qox1ehj/baseline",
+    "whole_tu_compared_functions": 180
+  },
+  "controls": [
+    {
+      "label": "conditional-expression",
+      "source_sha256": "1fa3138f30a0c12c1af02abc60a92e06dee3c167f8c2ed648857b1a900478829",
+      "object_sha256": "af134b1053f354eda952282224fbee928a48bb32277cbc22e63ed893bcc8d10d",
+      "comparison_sha256": "93b37a9ccd316d47c38bc6774e8a58854f4ea965aee40828703a1dcdff009fde",
+      "compiler_log_sha256": "a1cf453164a2d743b91f06684822bc902187c668ee2b15fa34445f61e3f30d48",
+      "compiler_command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_USRDLL",
+        "/FoRSP.obj",
+        "RSP.cpp"
+      ],
+      "exact_functions": 167,
+      "prior_exact_preserved": 167,
+      "changed_functions": [
+        "RSP_VADD",
+        "RSP_VADDExec",
+        "RSP_VSUB",
+        "RSP_VSUBExec",
+        "RSP_VSUT"
+      ],
+      "unchanged_other_function_hashes": 175,
+      "typed_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 816,
+          "differing_bytes": 777,
+          "exact": false,
+          "candidate_materialized_sha256": "e94af1e5b862d2094f505f72de4bd6e6da0ed0b237655eb5056d2bdb38bd9bc6"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 768,
+          "differing_bytes": 674,
+          "exact": false,
+          "candidate_materialized_sha256": "14eed52e9c0eb9afeae4b004202b773bee81e4f0c2f9168d3e0798e099cc3ae0"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 752,
+          "differing_bytes": 680,
+          "exact": false,
+          "candidate_materialized_sha256": "7bd3662443ed6026067a7bbbe64be27d82286746fa1eb7504bb7044e69adfbb3"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 736,
+          "differing_bytes": 689,
+          "exact": false,
+          "candidate_materialized_sha256": "ef75a92c3b17f8a48d27949748281423050658095ceb29ea2e446c2408a8d15f"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 736,
+          "differing_bytes": 725,
+          "exact": false,
+          "candidate_materialized_sha256": "ab8546cf83ef744b065ec420441f64dd84861eca8b687065b5b8a96ad7ec3f00"
+        }
+      ],
+      "artifact_directory": "/root/.ai-tmp/audio-rsp-carry-control.2qox1ehj/conditional-expression",
+      "whole_tu_compared_functions": 180
+    },
+    {
+      "label": "conditional-adjust",
+      "source_sha256": "3eadf21862aaed3d2c4848beff126d301eb219d571e482ae83ad65fe9b3a77bc",
+      "object_sha256": "6c6ba3b7ea52e40cbf5a0751894cfb924cc7959d6e8d3c14e7c824a62651c3cb",
+      "comparison_sha256": "6722937ac830eb10ecc7d38c5fdcaf6b70bacc2c43450efeeea84571dac0315f",
+      "compiler_log_sha256": "e3b5ad418fbf081766dee100c085793c99364df9a6dab475cf5f827f4526793c",
+      "compiler_command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_USRDLL",
+        "/FoRSP.obj",
+        "RSP.cpp"
+      ],
+      "exact_functions": 167,
+      "prior_exact_preserved": 167,
+      "changed_functions": [
+        "RSP_VADD",
+        "RSP_VADDExec",
+        "RSP_VSUB",
+        "RSP_VSUBExec",
+        "RSP_VSUT"
+      ],
+      "unchanged_other_function_hashes": 175,
+      "typed_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 700,
+          "exact": false,
+          "candidate_materialized_sha256": "9537f3db5005606f31de48dd6ff38b1d069a291ce62df1f719e0d2e9ce4e6c45"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 588,
+          "exact": false,
+          "candidate_materialized_sha256": "f33562c88f85b2cc282677442a5c5a9556b016d126e221b4f71ec6e8ec4b31ee"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 608,
+          "exact": false,
+          "candidate_materialized_sha256": "f03aa4bb9b48046c4604433b5606d83d5d2e7fe84ad79eac45f032bd92525d97"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 568,
+          "exact": false,
+          "candidate_materialized_sha256": "8e48b21882921dea401138d3992bc96396232af869de9f6a816728279ea71905"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 555,
+          "exact": false,
+          "candidate_materialized_sha256": "67e445f930b0fd1cbb71496079aa85c53a45d8c4af559a969b8fd5ba3edf10a3"
+        }
+      ],
+      "artifact_directory": "/root/.ai-tmp/audio-rsp-carry-control.2qox1ehj/conditional-adjust",
+      "whole_tu_compared_functions": 180
+    },
+    {
+      "label": "lane-only",
+      "source_sha256": "7522122771e27adb9374b4df183bbf211eda0585488e2eae8f9e651706f608fe",
+      "object_sha256": "185bb5d2526b9fbb090e3e9bd880a5d131b542cc7025c067227347886489375a",
+      "comparison_sha256": "dd3ff6298eb2391d7865e4b66af9e654f13eec0dced4b70976ae97e421889df1",
+      "compiler_log_sha256": "2ee9b276603926ee338d9f61088718181086d39d9ef425450fd82f5d3c1f801b",
+      "compiler_command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_USRDLL",
+        "/FoRSP.obj",
+        "RSP.cpp"
+      ],
+      "exact_functions": 167,
+      "prior_exact_preserved": 167,
+      "changed_functions": [
+        "RSP_VADDExec"
+      ],
+      "unchanged_other_function_hashes": 175,
+      "typed_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 720,
+          "differing_bytes": 647,
+          "exact": false,
+          "candidate_materialized_sha256": "fc8791be356df4470af7c2db2a60d5fe93ed62e300c53f2cff1b9f18699aaa39"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 672,
+          "differing_bytes": 505,
+          "exact": false,
+          "candidate_materialized_sha256": "987d568909589f435b4082282914050819922c8d5108146befc33ec8a5ab087e"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 688,
+          "differing_bytes": 623,
+          "exact": false,
+          "candidate_materialized_sha256": "4b34c25311c52e8d82ad9615f6f917f8e653ee4ef11dec48c881a57573ade206"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 672,
+          "differing_bytes": 505,
+          "exact": false,
+          "candidate_materialized_sha256": "4de5512c6d7b8ed8eba1372a91f139223cf9a9327612288b54facf8214fdd688"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 640,
+          "differing_bytes": 598,
+          "exact": false,
+          "candidate_materialized_sha256": "db3cbb9b81f08c86c45c6d21b734073126beb5dce87efbccc96665e54cd45dc3"
+        }
+      ],
+      "artifact_directory": "/root/.ai-tmp/audio-rsp-carry-control.2qox1ehj/lane-only",
+      "whole_tu_compared_functions": 180
+    },
+    {
+      "label": "offset-only",
+      "source_sha256": "0c0655a2a757d0cffb35f35f0dfcbf9b7993823cf8ecac81d0880e8799e4ae2e",
+      "object_sha256": "272b71bbc297fa99b6eaead8befeb36d4534604d1b9c39fa17a7c7db9df994bc",
+      "comparison_sha256": "f673eb536a7e91374964ac873ab80b2f27abf260a8725f82a7dda6f2dc9607e4",
+      "compiler_log_sha256": "439e9e92c8a04619aa3bca651e269cf04082ef7c0252df297f070498fc7f7d09",
+      "compiler_command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_USRDLL",
+        "/FoRSP.obj",
+        "RSP.cpp"
+      ],
+      "exact_functions": 167,
+      "prior_exact_preserved": 167,
+      "changed_functions": [
+        "RSP_VADD",
+        "RSP_VADDExec",
+        "RSP_VSUB",
+        "RSP_VSUBExec",
+        "RSP_VSUT"
+      ],
+      "unchanged_other_function_hashes": 175,
+      "typed_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 695,
+          "exact": false,
+          "candidate_materialized_sha256": "164bba87f5ea2dafcd24d62e5a74993a920e6782b4e13752c33a4d14811c2a60"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 581,
+          "exact": false,
+          "candidate_materialized_sha256": "7df59a4cb52a75f421dace903a4aafac3831c2ed7ce7fb36d94e4603ff8a0767"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 664,
+          "exact": false,
+          "candidate_materialized_sha256": "cf2d245ae900e2dcc1cf4e1a4585cf15f6d5ecda8a4e5526e72a3f7c7fdc2e8e"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 580,
+          "exact": false,
+          "candidate_materialized_sha256": "d8e63dbf072b2b314f036b6fb1726c7a6a9dde52d59818e72fc3c59dc00de260"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 640,
+          "differing_bytes": 591,
+          "exact": false,
+          "candidate_materialized_sha256": "12fc3dda0361cd1a7820d91b80b6ceaba333eaa40a7c620103bc6e5121bbf88e"
+        }
+      ],
+      "artifact_directory": "/root/.ai-tmp/audio-rsp-carry-control.2qox1ehj/offset-only",
+      "whole_tu_compared_functions": 180
+    },
+    {
+      "label": "unsigned-test",
+      "source_sha256": "678ff4bee939bfa6dfc8c6e30460523427ac4a4eec1d6ee99abe48d2d57cc20e",
+      "object_sha256": "c098bc4af31ff23f59c929afa76b77686ac994c22c88946d2d620b2102e120c6",
+      "comparison_sha256": "5451e96dcfd33a3a0321c978ac72ae38cf861b657dd09ee7faf65cbc0bb5f3e6",
+      "compiler_log_sha256": "0e8832aaa7e795c23cd18d6142c90783cae30fa556409c06eb82c6229cbbb445",
+      "compiler_command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_USRDLL",
+        "/FoRSP.obj",
+        "RSP.cpp"
+      ],
+      "exact_functions": 167,
+      "prior_exact_preserved": 167,
+      "changed_functions": [
+        "RSP_VADD",
+        "RSP_VADDExec",
+        "RSP_VSUB",
+        "RSP_VSUBExec",
+        "RSP_VSUT"
+      ],
+      "unchanged_other_function_hashes": 175,
+      "typed_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 670,
+          "exact": false,
+          "candidate_materialized_sha256": "aea4d3ec67eba921cb8209b736ac6f54184e42dd128e19a38388ddad12ae3e0d"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 576,
+          "exact": false,
+          "candidate_materialized_sha256": "64368b27839a647f3f1c804086b3e0d3f473bbc301483c632846a8d8cdce8088"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 641,
+          "exact": false,
+          "candidate_materialized_sha256": "73faf27d5bb02feefbe385a0da995dc2ae25900ac09e7c048ad63c24f326a973"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 672,
+          "differing_bytes": 532,
+          "exact": false,
+          "candidate_materialized_sha256": "c5a8369ad6bb8075ce2d8b1a961ce52f5a3feefd30d82f9955852258b609a58b"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 640,
+          "differing_bytes": 619,
+          "exact": false,
+          "candidate_materialized_sha256": "5a3ab58e60028794ade1a09a77f8d06b1734074a0976a9e4bb8034cc3f0fc282"
+        }
+      ],
+      "artifact_directory": "/root/.ai-tmp/audio-rsp-carry-control.2qox1ehj/unsigned-test",
+      "whole_tu_compared_functions": 180
+    },
+    {
+      "label": "unsigned-masks",
+      "source_sha256": "97e19056b81b29c35e1206d7d37038cf782f01c9c60bd32780995d0ac91053e8",
+      "object_sha256": "8d00caf6997ddc4f20ecd79e36c5188dcb3ac9eba4d2dbb2bb00bfcf610c127e",
+      "comparison_sha256": "bb837984fc77b5de50b6bd4aff20f4835c9ad9edaf8de4c9870dc3aea348fb8d",
+      "compiler_log_sha256": "0d9f3e1f9a9fb35e27f54e2bbef8da224013babf49950026b523462b9bfc31a0",
+      "compiler_command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_USRDLL",
+        "/FoRSP.obj",
+        "RSP.cpp"
+      ],
+      "exact_functions": 167,
+      "prior_exact_preserved": 167,
+      "changed_functions": [
+        "RSP_VADD",
+        "RSP_VADDExec",
+        "RSP_VSUB",
+        "RSP_VSUBExec",
+        "RSP_VSUT"
+      ],
+      "unchanged_other_function_hashes": 175,
+      "typed_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 669,
+          "exact": false,
+          "candidate_materialized_sha256": "62d1ac6b9c8399084d4fe50d539b0967dfba186204753a1ba8b6ce79ea332c69"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 568,
+          "exact": false,
+          "candidate_materialized_sha256": "6c740f7d182166fb93c2271d06904f28e61418b47f45b88dbb42690db9230426"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 647,
+          "exact": false,
+          "candidate_materialized_sha256": "7e2ee4593c669ff5bfe3f847e7cfe31056033a29be843cc5694e0990f8956a48"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 672,
+          "differing_bytes": 536,
+          "exact": false,
+          "candidate_materialized_sha256": "e761185079f1864b6cee9114000781a00a6c00c37122c712ed1847acef5b67a0"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 640,
+          "differing_bytes": 605,
+          "exact": false,
+          "candidate_materialized_sha256": "20d81e90aa3a27419efda684a424b95c62a5d3fcb04831a89bba831e71879587"
+        }
+      ],
+      "artifact_directory": "/root/.ai-tmp/audio-rsp-carry-control.2qox1ehj/unsigned-masks",
+      "whole_tu_compared_functions": 180
+    },
+    {
+      "label": "unsigned-flags",
+      "source_sha256": "d4f1e3a5a72a13e3d8670a76b4b569437d6c3122821d4f171beb8074bc0d2db6",
+      "object_sha256": "9a7ed7a8a6a2574f4ad9a5e38a5ad54262be6ae3f97cd613babd9f407d5a5bbb",
+      "comparison_sha256": "ead1b2cb14811423c754edd21e915a01fa1d304f190a47c56309233ed627c9d8",
+      "compiler_log_sha256": "c4062d0bf4e0b2657b12633ea0f9fb4c78a2cd24bfc7eca37a4c9653051b639d",
+      "compiler_command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_USRDLL",
+        "/FoRSP.obj",
+        "RSP.cpp"
+      ],
+      "exact_functions": 167,
+      "prior_exact_preserved": 167,
+      "changed_functions": [],
+      "unchanged_other_function_hashes": 175,
+      "typed_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 720,
+          "differing_bytes": 647,
+          "exact": false,
+          "candidate_materialized_sha256": "fc8791be356df4470af7c2db2a60d5fe93ed62e300c53f2cff1b9f18699aaa39"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 672,
+          "differing_bytes": 488,
+          "exact": false,
+          "candidate_materialized_sha256": "5c58c7efc8ee2e07a03937a9f30536e80d6788b36eaf24eb6ff90c344f9b873a"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 688,
+          "differing_bytes": 623,
+          "exact": false,
+          "candidate_materialized_sha256": "4b34c25311c52e8d82ad9615f6f917f8e653ee4ef11dec48c881a57573ade206"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 672,
+          "differing_bytes": 505,
+          "exact": false,
+          "candidate_materialized_sha256": "4de5512c6d7b8ed8eba1372a91f139223cf9a9327612288b54facf8214fdd688"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 640,
+          "differing_bytes": 598,
+          "exact": false,
+          "candidate_materialized_sha256": "db3cbb9b81f08c86c45c6d21b734073126beb5dce87efbccc96665e54cd45dc3"
+        }
+      ],
+      "artifact_directory": "/root/.ai-tmp/audio-rsp-carry-control.2qox1ehj/unsigned-flags",
+      "whole_tu_compared_functions": 180
+    },
+    {
+      "label": "unsigned-test-not-equal",
+      "source_sha256": "5ae7030b61196c16e6b12b0c512f4f07e3fc76d64c289123a297241a07dddd37",
+      "object_sha256": "e4036d2589868028c2251c700e275e1e15e83a225593e70180d3f5c4990680dc",
+      "comparison_sha256": "e2e4cc1c9f7b5170cb98652e82b4ef4cfd2efcfd770bd19d1f749504c9301c2a",
+      "compiler_log_sha256": "72eb17044d2dd9cb473f6d359cf39deaf69010c1084c68b6f3d7ea29b4d7970d",
+      "compiler_command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_USRDLL",
+        "/FoRSP.obj",
+        "RSP.cpp"
+      ],
+      "exact_functions": 167,
+      "prior_exact_preserved": 167,
+      "changed_functions": [
+        "RSP_VADD",
+        "RSP_VADDExec",
+        "RSP_VSUB",
+        "RSP_VSUBExec",
+        "RSP_VSUT"
+      ],
+      "unchanged_other_function_hashes": 175,
+      "typed_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 352,
+          "differing_bytes": 706,
+          "exact": false,
+          "candidate_materialized_sha256": "70ae9c1f0eba9463bb838683289ea0f4713f0d26bcbff3809a8f1f88a450db1a"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 288,
+          "differing_bytes": 650,
+          "exact": false,
+          "candidate_materialized_sha256": "bc76b47de2430fde1a0275bce5978256bc85c47e2334b8e66b00ffd670c430db"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 320,
+          "differing_bytes": 675,
+          "exact": false,
+          "candidate_materialized_sha256": "b7a21095bdf9b5deddf2564d498f7703f22d198037e397bc97f80e2497196afb"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 304,
+          "differing_bytes": 667,
+          "exact": false,
+          "candidate_materialized_sha256": "6ab6a84afc69a1e48944274c7ad88e6f14c576c16414127cd879ae93525ea5f5"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 272,
+          "differing_bytes": 633,
+          "exact": false,
+          "candidate_materialized_sha256": "acf0160df3778f838e5c9ce0de221763a64cbaa31ea52ee2d803529c8f2fc087"
+        }
+      ],
+      "artifact_directory": "/root/.ai-tmp/audio-rsp-carry-control.2qox1ehj/unsigned-test-not-equal",
+      "whole_tu_compared_functions": 180
+    },
+    {
+      "label": "unsigned-test-signed-loop",
+      "source_sha256": "439564f23c974ad1851dc1ccf83afba7936a1772d748661d2fb1df915871dc8b",
+      "object_sha256": "598c54f4755f50e15a5220a67d8f99d3135807d7f9af767ad5b6055e5a0e9bd5",
+      "comparison_sha256": "0f3f8d5466bacd300f25c26926b0791dd42efd299336f7be093e05b50e19b729",
+      "compiler_log_sha256": "60cf25d0c817826c28d42543c8ada77b8f414aa8d05ad803d85fb0f804738d3f",
+      "compiler_command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_USRDLL",
+        "/FoRSP.obj",
+        "RSP.cpp"
+      ],
+      "exact_functions": 167,
+      "prior_exact_preserved": 167,
+      "changed_functions": [
+        "RSP_VADD",
+        "RSP_VADDExec",
+        "RSP_VSUB",
+        "RSP_VSUBExec",
+        "RSP_VSUT"
+      ],
+      "unchanged_other_function_hashes": 175,
+      "typed_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 670,
+          "exact": false,
+          "candidate_materialized_sha256": "53d5b92cbd2ee249cc84d9da7084291390c6d67419b909998a8bfd0afd5f61c3"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 576,
+          "exact": false,
+          "candidate_materialized_sha256": "d038e640374f66fb7af3c27eec58e505bb906e2bb55af2f72a8752ba5bcf3cfe"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 641,
+          "exact": false,
+          "candidate_materialized_sha256": "c0a97a56d497e9bac10b15d11522223f24a691799fabcf98bebbfe66c018954c"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 672,
+          "differing_bytes": 532,
+          "exact": false,
+          "candidate_materialized_sha256": "7daf0f0cc596c02d8415cabfda415ae8069910c754c72d6a235ca24e4752d6f9"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 640,
+          "differing_bytes": 619,
+          "exact": false,
+          "candidate_materialized_sha256": "d1237dc289fddc6bd808576309223abb93253bda5316700681058ba9e999a78c"
+        }
+      ],
+      "artifact_directory": "/root/.ai-tmp/audio-rsp-carry-control.2qox1ehj/unsigned-test-signed-loop",
+      "whole_tu_compared_functions": 180
+    }
+  ],
+  "instruction_evidence": {
+    "loop_heads": {
+      "VADD": {
+        "original": {
+          "offset": 224,
+          "first_instructions": [
+            "lea ecx, [edi - 2]",
+            "mov eax, 1",
+            "shl eax, cl",
+            "movzx esi, dx",
+            "and eax, esi",
+            "mov esi, dword ptr [esp + 0x18]",
+            "neg eax",
+            "sbb eax, eax",
+            "and esi, ecx"
+          ]
+        },
+        "baseline": {
+          "offset": 224,
+          "first_instructions": [
+            "mov eax, dword ptr [esp + 0x18]",
+            "mov ebp, dword ptr [esp + 0x1c]",
+            "lea ecx, [esi - 2]",
+            "and eax, ecx",
+            "add eax, ebp",
+            "mov ebp, 1",
+            "shl ebp, cl",
+            "movzx ecx, dx",
+            "and ebp, ecx"
+          ]
+        },
+        "conditional-expression": {
+          "offset": 224,
+          "first_instructions": [
+            "lea ecx, [ebx - 2]",
+            "mov edx, 1",
+            "shl edx, cl",
+            "movzx eax, bp",
+            "test eax, edx",
+            "je 0x10019bd1",
+            "mov eax, dword ptr [esp + 0x10]",
+            "mov edx, ecx",
+            "and edx, eax"
+          ]
+        },
+        "conditional-adjust": {
+          "offset": 226,
+          "first_instructions": [
+            "mov esi, dword ptr [esp + 0x18]",
+            "mov ebp, dword ptr [esp + 0x1c]",
+            "lea ecx, [edx - 2]",
+            "and esi, ecx",
+            "add esi, ebp",
+            "movsx ebp, word ptr [ebx - 2]",
+            "add esi, edi",
+            "movsx esi, word ptr [esi*2 + 0x1012be18]",
+            "add esi, ebp"
+          ]
+        },
+        "lane-only": {
+          "offset": 224,
+          "first_instructions": [
+            "mov eax, dword ptr [esp + 0x18]",
+            "mov ebp, dword ptr [esp + 0x1c]",
+            "lea ecx, [esi - 2]",
+            "and eax, ecx",
+            "add eax, ebp",
+            "mov ebp, 1",
+            "shl ebp, cl",
+            "movzx ecx, dx",
+            "and ebp, ecx"
+          ]
+        },
+        "offset-only": {
+          "offset": 224,
+          "first_instructions": [
+            "mov eax, dword ptr [esp + 0x14]",
+            "mov ebp, dword ptr [esp + 0x18]",
+            "lea ecx, [esi - 2]",
+            "and eax, ecx",
+            "add eax, ebp",
+            "add eax, dword ptr [esp + 0x1c]",
+            "movsx eax, word ptr [eax*2 + 0x1012be18]",
+            "mov ebp, 1",
+            "shl ebp, cl"
+          ]
+        },
+        "unsigned-test": {
+          "offset": 224,
+          "first_instructions": [
+            "lea ecx, [edx - 2]",
+            "mov eax, 1",
+            "shl eax, cl",
+            "movzx ecx, si",
+            "and eax, ecx",
+            "mov ecx, dword ptr [esp + 0x18]",
+            "neg eax",
+            "sbb eax, eax",
+            "lea ebp, [edx - 2]"
+          ]
+        },
+        "unsigned-masks": {
+          "offset": 215,
+          "first_instructions": [
+            "mov ebp, dword ptr [esp + 0x18]",
+            "lea edx, [eax - 2]",
+            "and edx, ebp",
+            "add edx, dword ptr [esp + 0x1c]",
+            "lea ecx, [eax - 2]",
+            "mov ebp, 1",
+            "shl ebp, cl",
+            "movzx ecx, si",
+            "and ebp, ecx"
+          ]
+        },
+        "unsigned-flags": {
+          "offset": 224,
+          "first_instructions": [
+            "mov eax, dword ptr [esp + 0x18]",
+            "mov ebp, dword ptr [esp + 0x1c]",
+            "lea ecx, [esi - 2]",
+            "and eax, ecx",
+            "add eax, ebp",
+            "mov ebp, 1",
+            "shl ebp, cl",
+            "movzx ecx, dx",
+            "and ebp, ecx"
+          ]
+        },
+        "unsigned-test-not-equal": {
+          "offset": 210,
+          "first_instructions": [
+            "mov edx, dword ptr [esp + 0x14]",
+            "mov ebp, dword ptr [esp + 0x18]",
+            "and edx, ecx",
+            "add edx, ebp",
+            "add edx, ebx",
+            "movsx eax, word ptr [edx*2 + 0x1012be18]",
+            "mov edx, 1",
+            "shl edx, cl",
+            "movzx ebp, di"
+          ]
+        },
+        "unsigned-test-signed-loop": {
+          "offset": 224,
+          "first_instructions": [
+            "lea ecx, [edx - 2]",
+            "mov eax, 1",
+            "shl eax, cl",
+            "movzx ecx, si",
+            "and eax, ecx",
+            "mov ecx, dword ptr [esp + 0x18]",
+            "neg eax",
+            "sbb eax, eax",
+            "lea ebp, [edx - 2]"
+          ]
+        }
+      },
+      "VADDExec": {
+        "original": {
+          "offset": 176,
+          "first_instructions": [
+            "lea ecx, [edi - 2]",
+            "mov eax, 1",
+            "shl eax, cl",
+            "movzx esi, dx",
+            "and eax, esi",
+            "mov esi, dword ptr [esp + 0x10]",
+            "neg eax",
+            "sbb eax, eax",
+            "and esi, ecx"
+          ]
+        },
+        "baseline": {
+          "offset": 176,
+          "first_instructions": [
+            "mov eax, dword ptr [esp + 0x10]",
+            "mov ebp, dword ptr [esp + 0x14]",
+            "lea ecx, [esi - 2]",
+            "and eax, ecx",
+            "add eax, ebp",
+            "mov ebp, 1",
+            "shl ebp, cl",
+            "movzx ecx, dx",
+            "and ebp, ecx"
+          ]
+        },
+        "conditional-expression": {
+          "offset": 176,
+          "first_instructions": [
+            "lea ecx, [ebx - 2]",
+            "mov edx, 1",
+            "shl edx, cl",
+            "movzx eax, bp",
+            "test eax, edx",
+            "je 0x10019e71",
+            "mov eax, dword ptr [esp + 0x20]",
+            "mov edx, ecx",
+            "and edx, eax"
+          ]
+        },
+        "conditional-adjust": {
+          "offset": 176,
+          "first_instructions": [
+            "mov esi, dword ptr [esp + 0x10]",
+            "mov ebp, dword ptr [esp + 0x14]",
+            "lea ecx, [edx - 2]",
+            "and esi, ecx",
+            "add esi, ebp",
+            "movsx ebp, word ptr [ebx - 2]",
+            "add esi, edi",
+            "movsx esi, word ptr [esi*2 + 0x1012be18]",
+            "add esi, ebp"
+          ]
+        },
+        "lane-only": {
+          "offset": 176,
+          "first_instructions": [
+            "mov eax, dword ptr [esp + 0x10]",
+            "mov ebp, dword ptr [esp + 0x14]",
+            "lea ecx, [esi - 2]",
+            "and eax, ecx",
+            "add eax, ebp",
+            "mov ebp, 1",
+            "shl ebp, cl",
+            "movzx ecx, dx",
+            "and ebp, ecx"
+          ]
+        },
+        "offset-only": {
+          "offset": 176,
+          "first_instructions": [
+            "mov eax, dword ptr [esp + 0x24]",
+            "mov ebp, dword ptr [esp + 0x10]",
+            "lea ecx, [esi - 2]",
+            "and eax, ecx",
+            "add eax, ebp",
+            "add eax, dword ptr [esp + 0x14]",
+            "movsx eax, word ptr [eax*2 + 0x1012be18]",
+            "mov ebp, 1",
+            "shl ebp, cl"
+          ]
+        },
+        "unsigned-test": {
+          "offset": 164,
+          "first_instructions": [
+            "lea ecx, [edx - 2]",
+            "mov eax, 1",
+            "shl eax, cl",
+            "movzx ecx, si",
+            "and eax, ecx",
+            "mov ecx, dword ptr [esp + 0x10]",
+            "neg eax",
+            "sbb eax, eax",
+            "lea ebp, [edx - 2]"
+          ]
+        },
+        "unsigned-masks": {
+          "offset": 164,
+          "first_instructions": [
+            "mov ebp, dword ptr [esp + 0x10]",
+            "lea edx, [eax - 2]",
+            "and edx, ebp",
+            "add edx, dword ptr [esp + 0x14]",
+            "lea ecx, [eax - 2]",
+            "mov ebp, 1",
+            "shl ebp, cl",
+            "movzx ecx, si",
+            "and ebp, ecx"
+          ]
+        },
+        "unsigned-flags": {
+          "offset": 176,
+          "first_instructions": [
+            "mov eax, dword ptr [esp + 0x10]",
+            "mov ebp, dword ptr [esp + 0x14]",
+            "lea ecx, [esi - 2]",
+            "and eax, ecx",
+            "add eax, ebp",
+            "mov ebp, 1",
+            "shl ebp, cl",
+            "movzx ecx, dx",
+            "and ebp, ecx"
+          ]
+        },
+        "unsigned-test-not-equal": {
+          "offset": 150,
+          "first_instructions": [
+            "mov edx, dword ptr [esp + 0x1c]",
+            "mov edi, dword ptr [esp + 0x10]",
+            "and edx, ecx",
+            "add edx, edi",
+            "add edx, ebx",
+            "movsx eax, word ptr [edx*2 + 0x1012be18]",
+            "mov edx, 1",
+            "shl edx, cl",
+            "movzx edi, bp"
+          ]
+        },
+        "unsigned-test-signed-loop": {
+          "offset": 164,
+          "first_instructions": [
+            "lea ecx, [edx - 2]",
+            "mov eax, 1",
+            "shl eax, cl",
+            "movzx ecx, si",
+            "and eax, ecx",
+            "mov ecx, dword ptr [esp + 0x10]",
+            "neg eax",
+            "sbb eax, eax",
+            "lea ebp, [edx - 2]"
+          ]
+        }
+      },
+      "VSUB": {
+        "original": {
+          "offset": 192,
+          "first_instructions": [
+            "lea ecx, [edi - 2]",
+            "mov eax, 1",
+            "shl eax, cl",
+            "movzx edx, si",
+            "and eax, edx",
+            "mov edx, dword ptr [esp + 0x18]",
+            "neg eax",
+            "sbb eax, eax",
+            "and edx, ecx"
+          ]
+        },
+        "baseline": {
+          "offset": 192,
+          "first_instructions": [
+            "mov eax, dword ptr [esp + 0x18]",
+            "mov ebp, dword ptr [esp + 0x1c]",
+            "lea ecx, [esi - 2]",
+            "and eax, ecx",
+            "add eax, ebp",
+            "add eax, edi",
+            "movsx ebp, word ptr [eax*2 + 0x1012be18]",
+            "movsx eax, word ptr [ebx - 2]",
+            "sub eax, ebp"
+          ]
+        },
+        "conditional-expression": {
+          "offset": 192,
+          "first_instructions": [
+            "lea ecx, [edi - 2]",
+            "mov eax, 1",
+            "shl eax, cl",
+            "movzx ebp, bx",
+            "test ebp, eax",
+            "mov ebp, dword ptr [esp + 0x10]",
+            "mov eax, ecx",
+            "je 0x1001a120",
+            "and eax, ebp"
+          ]
+        },
+        "conditional-adjust": {
+          "offset": 195,
+          "first_instructions": [
+            "mov esi, dword ptr [esp + 0x18]",
+            "mov ebp, dword ptr [esp + 0x1c]",
+            "lea ecx, [edx - 2]",
+            "and esi, ecx",
+            "add esi, ebp",
+            "add esi, edi",
+            "movsx ebp, word ptr [esi*2 + 0x1012be18]",
+            "movsx esi, word ptr [ebx - 2]",
+            "sub esi, ebp"
+          ]
+        },
+        "lane-only": {
+          "offset": 192,
+          "first_instructions": [
+            "mov eax, dword ptr [esp + 0x18]",
+            "mov ebp, dword ptr [esp + 0x1c]",
+            "lea ecx, [esi - 2]",
+            "and eax, ecx",
+            "add eax, ebp",
+            "add eax, edi",
+            "movsx ebp, word ptr [eax*2 + 0x1012be18]",
+            "movsx eax, word ptr [ebx - 2]",
+            "sub eax, ebp"
+          ]
+        },
+        "offset-only": {
+          "offset": 192,
+          "first_instructions": [
+            "mov eax, dword ptr [esp + 0x14]",
+            "mov ebp, dword ptr [esp + 0x18]",
+            "lea ecx, [esi - 2]",
+            "and eax, ecx",
+            "add eax, ebp",
+            "add eax, dword ptr [esp + 0x1c]",
+            "movsx ebp, word ptr [eax*2 + 0x1012be18]",
+            "movsx eax, word ptr [edi - 2]",
+            "sub eax, ebp"
+          ]
+        },
+        "unsigned-test": {
+          "offset": 181,
+          "first_instructions": [
+            "lea ecx, [eax - 2]",
+            "mov ebp, 1",
+            "shl ebp, cl",
+            "movzx ecx, si",
+            "and ebp, ecx",
+            "movsx ecx, word ptr [ebx - 2]",
+            "neg ebp",
+            "sbb ebp, ebp",
+            "neg ebp"
+          ]
+        },
+        "unsigned-masks": {
+          "offset": 181,
+          "first_instructions": [
+            "mov ebp, dword ptr [esp + 0x18]",
+            "lea edx, [eax - 2]",
+            "and edx, ebp",
+            "add edx, dword ptr [esp + 0x1c]",
+            "add edx, edi",
+            "movsx ebp, word ptr [edx*2 + 0x1012be18]",
+            "movsx edx, word ptr [ebx - 2]",
+            "sub edx, ebp",
+            "lea ecx, [eax - 2]"
+          ]
+        },
+        "unsigned-flags": {
+          "offset": 192,
+          "first_instructions": [
+            "mov eax, dword ptr [esp + 0x18]",
+            "mov ebp, dword ptr [esp + 0x1c]",
+            "lea ecx, [esi - 2]",
+            "and eax, ecx",
+            "add eax, ebp",
+            "add eax, edi",
+            "movsx ebp, word ptr [eax*2 + 0x1012be18]",
+            "movsx eax, word ptr [ebx - 2]",
+            "sub eax, ebp"
+          ]
+        },
+        "unsigned-test-not-equal": {
+          "offset": 176,
+          "first_instructions": [
+            "mov edx, dword ptr [esp + 0x14]",
+            "mov edi, dword ptr [esp + 0x18]",
+            "movsx eax, word ptr [esi]",
+            "and edx, ecx",
+            "add edx, edi",
+            "add edx, ebx",
+            "movsx edx, word ptr [edx*2 + 0x1012be18]",
+            "sub eax, edx",
+            "mov edx, 1"
+          ]
+        },
+        "unsigned-test-signed-loop": {
+          "offset": 181,
+          "first_instructions": [
+            "lea ecx, [eax - 2]",
+            "mov ebp, 1",
+            "shl ebp, cl",
+            "movzx ecx, si",
+            "and ebp, ecx",
+            "movsx ecx, word ptr [ebx - 2]",
+            "neg ebp",
+            "sbb ebp, ebp",
+            "neg ebp"
+          ]
+        }
+      },
+      "VSUBExec": {
+        "original": {
+          "offset": 176,
+          "first_instructions": [
+            "lea ecx, [edi - 2]",
+            "mov eax, 1",
+            "shl eax, cl",
+            "movzx edx, si",
+            "and eax, edx",
+            "mov edx, dword ptr [esp + 0x10]",
+            "neg eax",
+            "sbb eax, eax",
+            "and edx, ecx"
+          ]
+        },
+        "baseline": {
+          "offset": 176,
+          "first_instructions": [
+            "mov eax, dword ptr [esp + 0x10]",
+            "mov ebp, dword ptr [esp + 0x14]",
+            "lea ecx, [esi - 2]",
+            "and eax, ecx",
+            "add eax, ebp",
+            "add eax, edi",
+            "movsx ebp, word ptr [eax*2 + 0x1012be18]",
+            "movsx eax, word ptr [ebx - 2]",
+            "sub eax, ebp"
+          ]
+        },
+        "conditional-expression": {
+          "offset": 176,
+          "first_instructions": [
+            "lea ecx, [edi - 2]",
+            "mov eax, 1",
+            "shl eax, cl",
+            "movzx ebp, bx",
+            "test ebp, eax",
+            "mov ebp, dword ptr [esp + 0x20]",
+            "mov eax, ecx",
+            "je 0x1001a3c0",
+            "and eax, ebp"
+          ]
+        },
+        "conditional-adjust": {
+          "offset": 177,
+          "first_instructions": [
+            "mov esi, dword ptr [esp + 0x10]",
+            "mov ebp, dword ptr [esp + 0x14]",
+            "lea ecx, [edx - 2]",
+            "and esi, ecx",
+            "add esi, ebp",
+            "add esi, edi",
+            "movsx ebp, word ptr [esi*2 + 0x1012be18]",
+            "movsx esi, word ptr [ebx - 2]",
+            "sub esi, ebp"
+          ]
+        },
+        "lane-only": {
+          "offset": 176,
+          "first_instructions": [
+            "mov eax, dword ptr [esp + 0x10]",
+            "mov ebp, dword ptr [esp + 0x14]",
+            "lea ecx, [esi - 2]",
+            "and eax, ecx",
+            "add eax, ebp",
+            "add eax, edi",
+            "movsx ebp, word ptr [eax*2 + 0x1012be18]",
+            "movsx eax, word ptr [ebx - 2]",
+            "sub eax, ebp"
+          ]
+        },
+        "offset-only": {
+          "offset": 176,
+          "first_instructions": [
+            "mov eax, dword ptr [esp + 0x24]",
+            "mov ebp, dword ptr [esp + 0x10]",
+            "lea ecx, [esi - 2]",
+            "and eax, ecx",
+            "add eax, ebp",
+            "add eax, dword ptr [esp + 0x14]",
+            "movsx ebp, word ptr [eax*2 + 0x1012be18]",
+            "movsx eax, word ptr [edi - 2]",
+            "sub eax, ebp"
+          ]
+        },
+        "unsigned-test": {
+          "offset": 176,
+          "first_instructions": [
+            "lea ecx, [eax - 2]",
+            "mov ebp, 1",
+            "shl ebp, cl",
+            "movzx ecx, si",
+            "and ebp, ecx",
+            "movsx ecx, word ptr [ebx - 2]",
+            "neg ebp",
+            "sbb ebp, ebp",
+            "neg ebp"
+          ]
+        },
+        "unsigned-masks": {
+          "offset": 176,
+          "first_instructions": [
+            "mov ebp, dword ptr [esp + 0x10]",
+            "lea edx, [eax - 2]",
+            "and edx, ebp",
+            "add edx, dword ptr [esp + 0x14]",
+            "add edx, edi",
+            "movsx ebp, word ptr [edx*2 + 0x1012be18]",
+            "movsx edx, word ptr [ebx - 2]",
+            "sub edx, ebp",
+            "lea ecx, [eax - 2]"
+          ]
+        },
+        "unsigned-flags": {
+          "offset": 176,
+          "first_instructions": [
+            "mov eax, dword ptr [esp + 0x10]",
+            "mov ebp, dword ptr [esp + 0x14]",
+            "lea ecx, [esi - 2]",
+            "and eax, ecx",
+            "add eax, ebp",
+            "add eax, edi",
+            "movsx ebp, word ptr [eax*2 + 0x1012be18]",
+            "movsx eax, word ptr [ebx - 2]",
+            "sub eax, ebp"
+          ]
+        },
+        "unsigned-test-not-equal": {
+          "offset": 160,
+          "first_instructions": [
+            "mov edx, dword ptr [esp + 0x1c]",
+            "mov ebp, dword ptr [esp + 0x10]",
+            "movsx eax, word ptr [esi]",
+            "and edx, ecx",
+            "add edx, ebp",
+            "add edx, edi",
+            "movsx edx, word ptr [edx*2 + 0x1012be18]",
+            "sub eax, edx",
+            "mov edx, 1"
+          ]
+        },
+        "unsigned-test-signed-loop": {
+          "offset": 176,
+          "first_instructions": [
+            "lea ecx, [eax - 2]",
+            "mov ebp, 1",
+            "shl ebp, cl",
+            "movzx ecx, si",
+            "and ebp, ecx",
+            "movsx ecx, word ptr [ebx - 2]",
+            "neg ebp",
+            "sbb ebp, ebp",
+            "neg ebp"
+          ]
+        }
+      },
+      "VSUT": {
+        "original": {
+          "offset": 144,
+          "first_instructions": [
+            "lea ecx, [edi - 2]",
+            "mov eax, 1",
+            "shl eax, cl",
+            "movzx edx, si",
+            "and eax, edx",
+            "mov edx, dword ptr [esp + 0x18]",
+            "neg eax",
+            "sbb eax, eax",
+            "and edx, ecx"
+          ]
+        },
+        "baseline": {
+          "offset": 148,
+          "first_instructions": [
+            "mov eax, dword ptr [esp + 0x18]",
+            "mov ebp, dword ptr [esp + 0x1c]",
+            "lea ecx, [esi - 2]",
+            "and eax, ecx",
+            "add eax, ebp",
+            "mov ebp, 1",
+            "shl ebp, cl",
+            "movzx ecx, dx",
+            "and ebp, ecx"
+          ]
+        },
+        "conditional-expression": {
+          "offset": 144,
+          "first_instructions": [
+            "movzx edx, word ptr [0x1012be0c]",
+            "lea ecx, [ebx - 2]",
+            "mov eax, 1",
+            "shl eax, cl",
+            "test edx, eax",
+            "je 0x1001a642",
+            "mov edx, dword ptr [esp + 0x10]",
+            "mov eax, ecx",
+            "and eax, ebp"
+          ]
+        },
+        "conditional-adjust": {
+          "offset": 144,
+          "first_instructions": [
+            "mov edi, dword ptr [esp + 0x18]",
+            "mov ebp, dword ptr [esp + 0x1c]",
+            "lea ecx, [esi - 2]",
+            "and edi, ecx",
+            "add edi, ebp",
+            "movsx ebp, word ptr [eax - 2]",
+            "add edi, ebx",
+            "movsx edi, word ptr [edi*2 + 0x1012be18]",
+            "sub edi, ebp"
+          ]
+        },
+        "lane-only": {
+          "offset": 148,
+          "first_instructions": [
+            "mov eax, dword ptr [esp + 0x18]",
+            "mov ebp, dword ptr [esp + 0x1c]",
+            "lea ecx, [esi - 2]",
+            "and eax, ecx",
+            "add eax, ebp",
+            "mov ebp, 1",
+            "shl ebp, cl",
+            "movzx ecx, dx",
+            "and ebp, ecx"
+          ]
+        },
+        "offset-only": {
+          "offset": 153,
+          "first_instructions": [
+            "mov ebp, dword ptr [esp + 0x1c]",
+            "lea ecx, [ecx]",
+            "mov ecx, dword ptr [esp + 0x14]",
+            "lea eax, [esi - 2]",
+            "and ecx, eax",
+            "add ecx, dword ptr [esp + 0x18]",
+            "add ecx, ebp",
+            "movsx eax, word ptr [ecx*2 + 0x1012be18]",
+            "lea ecx, [esi - 2]"
+          ]
+        },
+        "unsigned-test": {
+          "offset": 145,
+          "first_instructions": [
+            "lea ecx, [eax - 2]",
+            "mov ebp, 1",
+            "shl ebp, cl",
+            "movzx ecx, si",
+            "and ebp, ecx",
+            "mov ecx, dword ptr [esp + 0x18]",
+            "neg ebp",
+            "sbb ebp, ebp",
+            "lea edx, [eax - 2]"
+          ]
+        },
+        "unsigned-masks": {
+          "offset": 145,
+          "first_instructions": [
+            "mov ebp, dword ptr [esp + 0x18]",
+            "lea edx, [eax - 2]",
+            "and edx, ebp",
+            "add edx, dword ptr [esp + 0x1c]",
+            "lea ecx, [eax - 2]",
+            "mov ebp, 1",
+            "shl ebp, cl",
+            "movzx ecx, si",
+            "and ebp, ecx"
+          ]
+        },
+        "unsigned-flags": {
+          "offset": 148,
+          "first_instructions": [
+            "mov eax, dword ptr [esp + 0x18]",
+            "mov ebp, dword ptr [esp + 0x1c]",
+            "lea ecx, [esi - 2]",
+            "and eax, ecx",
+            "add eax, ebp",
+            "mov ebp, 1",
+            "shl ebp, cl",
+            "movzx ecx, dx",
+            "and ebp, ecx"
+          ]
+        },
+        "unsigned-test-not-equal": {
+          "offset": 131,
+          "first_instructions": [
+            "mov eax, dword ptr [esp + 0x14]",
+            "mov ebp, dword ptr [esp + 0x18]",
+            "and eax, ecx",
+            "add eax, ebp",
+            "mov esi, 1",
+            "shl esi, cl",
+            "movzx ebp, di",
+            "and esi, ebp",
+            "add eax, ebx"
+          ]
+        },
+        "unsigned-test-signed-loop": {
+          "offset": 145,
+          "first_instructions": [
+            "lea ecx, [eax - 2]",
+            "mov ebp, 1",
+            "shl ebp, cl",
+            "movzx ecx, si",
+            "and ebp, ecx",
+            "mov ecx, dword ptr [esp + 0x18]",
+            "neg ebp",
+            "sbb ebp, ebp",
+            "lea edx, [eax - 2]"
+          ]
+        }
+      }
+    },
+    "causal_result": "Unsigned carry-mask formation moves the initial carry evaluation ahead of selector address formation in all five arithmetic loops. Widening only the flag operand leaves all 180 bodies identical to baseline. Making the clear masks unsigned too restores selector-first scheduling. The distinction is therefore mask-expression type, not simply the final AND type.",
+    "remaining_mismatch": "The unsigned carry-only forms retain different registers and loop control: for example original VADDExec uses a 12-byte local frame and a spilled two-count decrement loop, while the unsigned-mask candidate uses an 8-byte frame and index/comparison loop. This is not a complete match or a justified source promotion.",
+    "signed_counter_control": [
+      {
+        "name": "RSP_VADD",
+        "differences": [
+          {
+            "offset": 682,
+            "unsigned_byte": 130,
+            "signed_byte": 140
+          }
+        ],
+        "meaning": "near JB becomes near JL; all other bytes and resolved operands identical"
+      },
+      {
+        "name": "RSP_VADDExec",
+        "differences": [
+          {
+            "offset": 622,
+            "unsigned_byte": 130,
+            "signed_byte": 140
+          }
+        ],
+        "meaning": "near JB becomes near JL; all other bytes and resolved operands identical"
+      },
+      {
+        "name": "RSP_VSUB",
+        "differences": [
+          {
+            "offset": 649,
+            "unsigned_byte": 130,
+            "signed_byte": 140
+          }
+        ],
+        "meaning": "near JB becomes near JL; all other bytes and resolved operands identical"
+      },
+      {
+        "name": "RSP_VSUBExec",
+        "differences": [
+          {
+            "offset": 644,
+            "unsigned_byte": 130,
+            "signed_byte": 140
+          }
+        ],
+        "meaning": "near JB becomes near JL; all other bytes and resolved operands identical"
+      },
+      {
+        "name": "RSP_VSUT",
+        "differences": [
+          {
+            "offset": 613,
+            "unsigned_byte": 130,
+            "signed_byte": 140
+          }
+        ],
+        "meaning": "near JB becomes near JL; all other bytes and resolved operands identical"
+      }
+    ]
+  },
+  "conclusion": "No new exact routine; all 167 frozen exact routines and all other 175 body hashes remain preserved in every control. No repository application source changed. No new behavior claim is made for these rejected controls.",
+  "artifacts": {
+    "/root/.ai-tmp/audio-rsp-carry-control.2qox1ehj/freeze.py": "e6621941a7296446b3a63b27ac7fd84b6ea2a8483e07911cde8287e2b526f39e",
+    "/root/.ai-tmp/audio-rsp-carry-control.2qox1ehj/inspect.py": "371452b04ec058a06a7d47ed82b9f6d05ce95718a7a8d4debffc6bd71b6e0ad4",
+    "/root/.ai-tmp/audio-rsp-carry-control.2qox1ehj/probe-fixed-trip.py": "d5ba2c78ec3533254755bb6d9ea60da9b53faa0ba15f2f87374545486fe9663a",
+    "/root/.ai-tmp/audio-rsp-carry-control.2qox1ehj/probe-flag-type.py": "31991e458a398b627ce930457d5a3cdf8739be879d196e68ee759f0f4c7a0489",
+    "/root/.ai-tmp/audio-rsp-carry-control.2qox1ehj/probe-mask.py": "09a526881cd833643923859eb767086b2a3f45930f9006ec2f2541bebacf576b",
+    "/root/.ai-tmp/audio-rsp-carry-control.2qox1ehj/probe-selector.py": "3d544c508298146dae87cc9ef3bc146e99523fc87f95821bdce77ac5853a1753",
+    "/root/.ai-tmp/audio-rsp-carry-control.2qox1ehj/probe-signed-loop.py": "e85dc1056cc21376f3312df9f348f4f814bf4a96e71ddc846ad9e6b587e5551d",
+    "/root/.ai-tmp/audio-rsp-carry-control.2qox1ehj/probe.py": "94fadd7e60963ddcb3ae0dd4c9c554fbc8d860598a9c97b24d66d346f0f533f4"
+  },
+  "loop_heads_sha256": "2189e3f1408955090a3bc48c64c5a01fe49d90ebd4837422baad36cfc0427b84",
+  "snapshot_files": {
+    "ABI1.c": "f672bac9d9d813a5bc89ce97ce88d697b61361e90b40a3087d4a8bcd369a6327",
+    "ABI2.c": "1794fd9b3db1991241d2d948f2ef332aff3257178bd4b11e90fdd29afa6442df",
+    "ABI3.c": "28ff355e6019318aa5b61ef3930dfc6b416451cddf382404992c8883eb61c9af",
+    "AMP-LICENSE.txt": "133f385d28039b18f9900e1cd933119ccae0462b495999a2750dea9fb8430640",
+    "Audio.rc": "b551863a11341c7440df2425b5620cda11c9eaef312179e8dd925fd05b12bf93",
+    "AudioADPCM-LICENSE.txt": "9f8db578ada6153af1024a206324a03b9703abbec0e96b6ee3da72ff6eee335e",
+    "AudioADPCMBlock.h": "f506d6ea97b83fcaaa78dc9ff7300bebe37aa36b9f1a01277247ee41767b4c1b",
+    "AudioADPCMLegacy.h": "8509a1760c9dcc9b45334d103d4f09b656502bda0b8d35d039d75d7a75720f32",
+    "AudioCommands.h": "35cae30632b3a466adc0dea680c808b80995cf311b0024d25331224e7368e5f3",
+    "AudioEnvelope.h": "8acbac16a6bc16a06782b48dea25af4e49b99c5a845f866ffe41098ec14517b7",
+    "AudioHLE.c": "a449a37eb2f9fc12b2c7f2a2c5b5e3a3f51a08adeaf241ef0e5d174b8825941a",
+    "AudioHLE.h": "98475c4c2e034a7e1b16a94662078f731afcca5529140bf0d30c7e6901bdd441",
+    "AudioLegacy.c": "d81dde338f0005166893a0825c2c86f82c7956ce75a7cae552c354ca4e78dc41",
+    "AudioLegacy.h": "8f5810c3d8ae923119c733c304064310630cca3201c4b472047267d1417bee98",
+    "AudioLog.c": "84a6f797caaf244d44300550ed13225276bf1c45bf6fb3193be9047dc01226f0",
+    "AudioPlugin.c": "6fed63db83aa3a950d0ce3a2e5e9df4769674aed1b145ab3e0332c5e2c44e260",
+    "AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
+    "AudioProcessing.c": "e66e65ff34e26304fd306b14afb5540d2db060bc631e980af95b398f1a232e62",
+    "AudioProcessing.h": "77bbd94523444df697a169cea26375cc673879493761452cc92add2857284c7b",
+    "AudioResample.c": "67ced2fcbd0e6798f34cd986e5a9b77e4ba963eb03463468b5d7b68120dbde1f",
+    "AudioResampleTables.h": "5b95bd2db83cf7eea18b347cdf32c7a332073868cbcbd45a939f8de4537236f1",
+    "AudioSIMD.h": "627d71fd2a53dcc36e099c214824e397454c8b78d80be503f29f08c91a18bf63",
+    "CPUFeatures.c": "b27644d8cc3b9044125194ed7e6d03ebccfd9c705fd62b653b08667c054a3f0f",
+    "DirectSound.c": "54c293b50a6c2b0195bbc2312b8578fb1d48851d6c44f294ed46c8f522ea7895",
+    "DirectSound.h": "ab5ed735f1ab52226c0c7e7a559d080e10ec5649d2814b177f1a79686135455b",
+    "Jpeg.c": "82ebf8c9d72e8c83d42bb97e3351627462336fb2693d47b449b803d6537988ac",
+    "Mp3.c": "d9dccbd10b72f540528496c33f04f8a63d3b9bd1f39839a70ac8a16ef5a87b3a",
+    "RSP.cpp": "fd4a3beb61f89dc2a2fb4512f784c53cde27c2646f76657c1c13576a87979ca7",
+    "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+    "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88",
+    "RSPKernel.inc": "7a218993560c457a5149266e391a28fcdb0a1df5a812209c9a9b7111238eb961",
+    "RSPMicrocode.inc": "12bae4d1c37884c7d5efbf13402d326bf46fafd0ee6064feff3fe0fdd8d2ee0c",
+    "audio.def": "f34ad9fa1d564c407483eabd05363f0c95a4cf69a81f6c4ffcb0dd95ddcb4b34",
+    "transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f"
+  }
+}
