@@ -1,9 +1,9 @@
 {
   "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
-  "rebuilt_sha256": "f70456b80cde4c83158ff124177d769d8add15b87795b2c04c996e3591ae7a42",
+  "rebuilt_sha256": "c6f96c92368892e523817b242cef9a1929e0d870f11ea01a19f422adb186dc8d",
   "original_bytes": 290816,
   "rebuilt_bytes": 290816,
-  "differing_file_bytes": 180253,
+  "differing_file_bytes": 159674,
   "full_dll_byte_exact": false,
   "sections": [
     {
@@ -17,13 +17,13 @@
       },
       "rebuilt": {
         "name": ".text",
-        "virtual_size": 191264,
+        "virtual_size": 191280,
         "rva": 4096,
         "raw_size": 192512,
         "offset": 4096
       },
       "raw_bytes_equal": false,
-      "differing_bytes": 171375
+      "differing_bytes": 152034
     },
     {
       "name": ".rdata",
@@ -42,7 +42,7 @@
         "offset": 196608
       },
       "raw_bytes_equal": false,
-      "differing_bytes": 125
+      "differing_bytes": 107
     },
     {
       "name": ".data",
@@ -61,7 +61,7 @@
         "offset": 217088
       },
       "raw_bytes_equal": false,
-      "differing_bytes": 689
+      "differing_bytes": 681
     },
     {
       "name": ".rsrc",
@@ -99,50 +99,50 @@
         "offset": 270336
       },
       "raw_bytes_equal": false,
-      "differing_bytes": 8058
+      "differing_bytes": 6846
     }
   ],
   "scope": "Frozen native14-unit audio diagnostic build with historical link identity. Whole-file comparison remains a failure.",
-  "artifact": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/sx6wlsxo",
-  "frozen_full_report_sha256": "511c01e08fdda5a3bd735e9ba826b4452efe45c01ef6227856ae9a7368df53dc",
+  "artifact": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/9ablcwqz",
+  "frozen_full_report_sha256": "5b5f5e80e0f0eaa5c589e3c21a0136047fa7bab33431090e0af050872c831574",
   "source_manifest": {
-    "AudioProcessing.h": "77bbd94523444df697a169cea26375cc673879493761452cc92add2857284c7b",
     "AudioLegacy.h": "8f5810c3d8ae923119c733c304064310630cca3201c4b472047267d1417bee98",
-    "ABI1.c": "f672bac9d9d813a5bc89ce97ce88d697b61361e90b40a3087d4a8bcd369a6327",
-    "CPUFeatures.c": "b27644d8cc3b9044125194ed7e6d03ebccfd9c705fd62b653b08667c054a3f0f",
-    "RSP.cpp": "eac9ee4ca4f1fcdf359512b3a1137dcddedaf9b148757d40c9623b8643eeae38",
-    "AudioADPCM-LICENSE.txt": "9f8db578ada6153af1024a206324a03b9703abbec0e96b6ee3da72ff6eee335e",
+    "AudioEnvelope.h": "8acbac16a6bc16a06782b48dea25af4e49b99c5a845f866ffe41098ec14517b7",
     "AudioPlugin.c": "6fed63db83aa3a950d0ce3a2e5e9df4769674aed1b145ab3e0332c5e2c44e260",
-    "AudioADPCMBlock.h": "f506d6ea97b83fcaaa78dc9ff7300bebe37aa36b9f1a01277247ee41767b4c1b",
-    "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
-    "DirectSound.c": "54c293b50a6c2b0195bbc2312b8578fb1d48851d6c44f294ed46c8f522ea7895",
-    "ABI2.c": "1794fd9b3db1991241d2d948f2ef332aff3257178bd4b11e90fdd29afa6442df",
+    "AudioADPCMLegacy.h": "8509a1760c9dcc9b45334d103d4f09b656502bda0b8d35d039d75d7a75720f32",
     "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88",
+    "CPUFeatures.c": "b27644d8cc3b9044125194ed7e6d03ebccfd9c705fd62b653b08667c054a3f0f",
+    "AudioResample.c": "67ced2fcbd0e6798f34cd986e5a9b77e4ba963eb03463468b5d7b68120dbde1f",
+    "AudioCommands.h": "35cae30632b3a466adc0dea680c808b80995cf311b0024d25331224e7368e5f3",
+    "AMP-LICENSE.txt": "133f385d28039b18f9900e1cd933119ccae0462b495999a2750dea9fb8430640",
+    "DirectSound.c": "0183aca5217e7c7847ae02f4e4b74e6436b11ca54e82b8bf6bbfb7d7b77e3cb6",
+    "RSPMicrocode.inc": "12bae4d1c37884c7d5efbf13402d326bf46fafd0ee6064feff3fe0fdd8d2ee0c",
+    "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+    "RSP.cpp": "eac9ee4ca4f1fcdf359512b3a1137dcddedaf9b148757d40c9623b8643eeae38",
+    "AudioProcessing.h": "77bbd94523444df697a169cea26375cc673879493761452cc92add2857284c7b",
+    "AudioLog.c": "84a6f797caaf244d44300550ed13225276bf1c45bf6fb3193be9047dc01226f0",
+    "AudioHLE.c": "a449a37eb2f9fc12b2c7f2a2c5b5e3a3f51a08adeaf241ef0e5d174b8825941a",
+    "AudioADPCMBlock.h": "f506d6ea97b83fcaaa78dc9ff7300bebe37aa36b9f1a01277247ee41767b4c1b",
+    "DirectSound.h": "ab5ed735f1ab52226c0c7e7a559d080e10ec5649d2814b177f1a79686135455b",
+    "transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
+    "AudioADPCM-LICENSE.txt": "9f8db578ada6153af1024a206324a03b9703abbec0e96b6ee3da72ff6eee335e",
+    "ABI1.c": "f672bac9d9d813a5bc89ce97ce88d697b61361e90b40a3087d4a8bcd369a6327",
+    "AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
+    "Mp3.c": "d9dccbd10b72f540528496c33f04f8a63d3b9bd1f39839a70ac8a16ef5a87b3a",
+    "AudioLegacy.c": "d81dde338f0005166893a0825c2c86f82c7956ce75a7cae552c354ca4e78dc41",
+    "AudioResampleTables.h": "5b95bd2db83cf7eea18b347cdf32c7a332073868cbcbd45a939f8de4537236f1",
     "AudioHLE.h": "98475c4c2e034a7e1b16a94662078f731afcca5529140bf0d30c7e6901bdd441",
     "Audio.rc": "b551863a11341c7440df2425b5620cda11c9eaef312179e8dd925fd05b12bf93",
-    "ABI3.c": "28ff355e6019318aa5b61ef3930dfc6b416451cddf382404992c8883eb61c9af",
     "audio.def": "f34ad9fa1d564c407483eabd05363f0c95a4cf69a81f6c4ffcb0dd95ddcb4b34",
+    "ABI2.c": "1794fd9b3db1991241d2d948f2ef332aff3257178bd4b11e90fdd29afa6442df",
+    "RSPKernel.inc": "7a218993560c457a5149266e391a28fcdb0a1df5a812209c9a9b7111238eb961",
     "Jpeg.c": "82ebf8c9d72e8c83d42bb97e3351627462336fb2693d47b449b803d6537988ac",
-    "RSPMicrocode.inc": "12bae4d1c37884c7d5efbf13402d326bf46fafd0ee6064feff3fe0fdd8d2ee0c",
-    "DirectSound.h": "ab5ed735f1ab52226c0c7e7a559d080e10ec5649d2814b177f1a79686135455b",
-    "AudioResample.c": "67ced2fcbd0e6798f34cd986e5a9b77e4ba963eb03463468b5d7b68120dbde1f",
-    "AMP-LICENSE.txt": "133f385d28039b18f9900e1cd933119ccae0462b495999a2750dea9fb8430640",
-    "AudioADPCMLegacy.h": "8509a1760c9dcc9b45334d103d4f09b656502bda0b8d35d039d75d7a75720f32",
-    "AudioCommands.h": "35cae30632b3a466adc0dea680c808b80995cf311b0024d25331224e7368e5f3",
-    "AudioEnvelope.h": "8acbac16a6bc16a06782b48dea25af4e49b99c5a845f866ffe41098ec14517b7",
-    "AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
+    "ABI3.c": "28ff355e6019318aa5b61ef3930dfc6b416451cddf382404992c8883eb61c9af",
     "AudioSIMD.h": "627d71fd2a53dcc36e099c214824e397454c8b78d80be503f29f08c91a18bf63",
-    "AudioProcessing.c": "e66e65ff34e26304fd306b14afb5540d2db060bc631e980af95b398f1a232e62",
-    "AudioLegacy.c": "d81dde338f0005166893a0825c2c86f82c7956ce75a7cae552c354ca4e78dc41",
-    "transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
-    "AudioHLE.c": "a449a37eb2f9fc12b2c7f2a2c5b5e3a3f51a08adeaf241ef0e5d174b8825941a",
-    "Mp3.c": "d9dccbd10b72f540528496c33f04f8a63d3b9bd1f39839a70ac8a16ef5a87b3a",
-    "AudioLog.c": "84a6f797caaf244d44300550ed13225276bf1c45bf6fb3193be9047dc01226f0",
-    "AudioResampleTables.h": "5b95bd2db83cf7eea18b347cdf32c7a332073868cbcbd45a939f8de4537236f1",
-    "RSPKernel.inc": "7a218993560c457a5149266e391a28fcdb0a1df5a812209c9a9b7111238eb961"
+    "AudioProcessing.c": "e66e65ff34e26304fd306b14afb5540d2db060bc631e980af95b398f1a232e62"
   },
   "toolchain_manifest": {
-    "path": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/sx6wlsxo/toolchain-sha256.json",
+    "path": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/9ablcwqz/toolchain-sha256.json",
     "sha256": "074a8a0899d15f4dcd40d134cb560c57ceba76e9a3100e8fd6fb41f85ebf062d",
     "files": 3712
   },
@@ -174,7 +174,7 @@
     },
     {
       "name": "DirectSound.obj",
-      "matched": 46,
+      "matched": 47,
       "total": 49
     },
     {
@@ -219,7 +219,7 @@
     }
   ],
   "unique_native_spans": 417,
-  "instruction_matches": 397,
+  "instruction_matches": 398,
   "native_first_band": [
     {
       "name": "_ResampleAudioMMX",
@@ -894,8 +894,8 @@
   "historical_link_identity": {
     "seed": {
       "scope": "Historical PDB identity restored in toolchain-generated metadata; no executable edits.",
-      "original_sha256": "90ab46b1c683d1d46e1561ba929111a82df13d65a3a964842542c944c87d4f32",
-      "seeded_sha256": "bfce2f8500051c1599a8e17f36f6300e166a434bf2cd7c02023a119557352da5",
+      "original_sha256": "bc0e7ed5ec9a316a46fce7deda16127da669ebedac16c9920435e8c41f9dfa3c",
+      "seeded_sha256": "2f41dfe0ec8a41d572500641b392f6e52205bb39dbb10b9187179e31ab735fd4",
       "size": 551936,
       "guid": "53a2b525-689f-4912-82cd-8a849f0d4dcb",
       "prior_age": 7,
@@ -936,7 +936,7 @@
             541722,
             541723
           ],
-          "before": "6607645c44e73c44863c7955c9622cf2",
+          "before": "15e0e885b2830246b035724f4d431761",
           "after": "25b5a2539f68124982cd8a849f0d4dcb"
         },
         {
@@ -976,7 +976,7 @@
     },
     "clock_environment": {
       "LD_PRELOAD": "/usr/$LIB/faketime/libfaketime.so.1",
-      "FAKETIME_TIMESTAMP_FILE": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/sx6wlsxo/link-clock.txt",
+      "FAKETIME_TIMESTAMP_FILE": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/9ablcwqz/link-clock.txt",
       "FAKETIME_NO_CACHE": "1",
       "FAKETIME_DONT_FAKE_MONOTONIC": "1",
       "FAKETIME_DISABLE_SHM": "1",
@@ -986,15 +986,15 @@
     "warmup_clock": "+0",
     "export_clock": "2003-03-23 04:56:25",
     "final_clock": "2003-03-23 04:56:26",
-    "initial_dll_sha256": "79ec731150902e3eab1186f327d3500c74770f3d34f2a9538b24118e40eee80d",
-    "initial_pdb_sha256": "90ab46b1c683d1d46e1561ba929111a82df13d65a3a964842542c944c87d4f32",
-    "seeded_pdb_sha256": "bfce2f8500051c1599a8e17f36f6300e166a434bf2cd7c02023a119557352da5",
+    "initial_dll_sha256": "38de0da5a56f999f89b785507f27ef1f95fa3c202f3e7adeccfe8c67989eedc2",
+    "initial_pdb_sha256": "bc0e7ed5ec9a316a46fce7deda16127da669ebedac16c9920435e8c41f9dfa3c",
+    "seeded_pdb_sha256": "2f41dfe0ec8a41d572500641b392f6e52205bb39dbb10b9187179e31ab735fd4",
     "faketime_libraries": {
       "/usr/lib/x86_64-linux-gnu/faketime/libfaketime.so.1": "f38066cb0a4a0bb6a8955c7cb48704ae3aec1b28a8e1ad45ba3db3429050cc40",
       "/usr/lib/i386-linux-gnu/faketime/libfaketime.so.1": "d3e307d70ca6845d4a85d254be9943ec3ae256f7977ca3d316f7675912dd5016"
     },
     "export_object_sha256": "3defebb1c6b2838d4242f4f559a4e5c5707e29696d0660db88656dc94727c712",
-    "final_pdb_sha256": "387c404036f8802e02cb20677878a1b313f2c57f3b1a65700292c9139d98f7b6",
+    "final_pdb_sha256": "c90ef0e38d2b2351738090a5cc0ec130ac9e07d95aaa39756eea664d9e3526e3",
     "emitted_metadata": {
       "coff_timestamp": 1048395386,
       "debug_timestamp": 1048395386,
@@ -1012,7 +1012,7 @@
   "native_link_layout": {
     "scope": "Native application function placement; full DLL equality is checked separately.",
     "selected_unique_functions": 417,
-    "exact_entry_addresses": 117,
+    "exact_entry_addresses": 183,
     "native_order_exact": true,
     "original_order": [
       "_ResampleAudioMMX",
@@ -3053,258 +3053,258 @@
           {
             "name": "_ClearAudio",
             "original_va": 268452832,
-            "linked_va": 268452816,
+            "linked_va": 268452832,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_WaitForSoundBuffer",
             "original_va": 268452880,
-            "linked_va": 268452864,
+            "linked_va": 268452880,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_ClearSoundBuffer",
             "original_va": 268453072,
-            "linked_va": 268453056,
+            "linked_va": 268453072,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_AudioNotificationThread",
             "original_va": 268453296,
-            "linked_va": 268453280,
+            "linked_va": 268453296,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_GetSoundPosition",
             "original_va": 268453472,
-            "linked_va": 268453456,
+            "linked_va": 268453472,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_AudioTimerReserved@20",
             "original_va": 268453552,
-            "linked_va": 268453536,
+            "linked_va": 268453552,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_ShowDriverInfo",
             "original_va": 268453568,
-            "linked_va": 268453552,
+            "linked_va": 268453568,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_WriteWaveHeader",
             "original_va": 268454432,
-            "linked_va": 268454416,
+            "linked_va": 268454432,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_ReadIniString",
             "original_va": 268454672,
-            "linked_va": 268454656,
+            "linked_va": 268454672,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_ReadIniInt",
             "original_va": 268454720,
-            "linked_va": 268454704,
+            "linked_va": 268454720,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_WriteIniString",
             "original_va": 268454800,
-            "linked_va": 268454784,
+            "linked_va": 268454800,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_WriteIniInt",
             "original_va": 268454832,
-            "linked_va": 268454816,
+            "linked_va": 268454832,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_ReadAudioSettings",
             "original_va": 268454896,
-            "linked_va": 268454880,
+            "linked_va": 268454896,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_DllMain@12",
             "original_va": 268455344,
-            "linked_va": 268455328,
+            "linked_va": 268455344,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_StopAudio",
             "original_va": 268455392,
-            "linked_va": 268455376,
+            "linked_va": 268455392,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_AIFree",
             "original_va": 268455584,
-            "linked_va": 268455568,
+            "linked_va": 268455584,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_ReleaseAudioBlock",
             "original_va": 268455648,
-            "linked_va": 268455632,
+            "linked_va": 268455648,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_WriteAudioSamples",
             "original_va": 268455680,
-            "linked_va": 268455664,
+            "linked_va": 268455680,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_WriteAudioBytes",
             "original_va": 268455712,
-            "linked_va": 268455696,
+            "linked_va": 268455712,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_WriteSoundBuffer",
             "original_va": 268455760,
-            "linked_va": 268455744,
+            "linked_va": 268455760,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_SubmitAudio",
             "original_va": 268455952,
-            "linked_va": 268455936,
+            "linked_va": 268455952,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_AudioTimer@20",
             "original_va": 268457072,
-            "linked_va": 268457056,
+            "linked_va": 268457072,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_AudioConfigDialog@16",
             "original_va": 268457824,
-            "linked_va": 268457808,
+            "linked_va": 268457824,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_AIConfigure",
             "original_va": 268459888,
-            "linked_va": 268459872,
+            "linked_va": 268459888,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_StartAudio",
             "original_va": 268459952,
-            "linked_va": 268459936,
+            "linked_va": 268459952,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_AIInit",
             "original_va": 268460432,
-            "linked_va": 268460416,
+            "linked_va": 268460432,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_ProcessAudioRegisters",
             "original_va": 268460736,
-            "linked_va": 268460720,
+            "linked_va": 268460736,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_AISetReg",
             "original_va": 268460960,
-            "linked_va": 268460944,
+            "linked_va": 268460960,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_AppendRegisterAudio",
             "original_va": 268461248,
-            "linked_va": 268461232,
+            "linked_va": 268461248,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_CompleteAudioDMA",
             "original_va": 268461360,
-            "linked_va": 268461344,
+            "linked_va": 268461360,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_ReadAudioLength",
             "original_va": 268461504,
-            "linked_va": 268461488,
+            "linked_va": 268461504,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_AIGetReg",
             "original_va": 268461520,
-            "linked_va": 268461504,
+            "linked_va": 268461520,
             "selected_object": "DirectSound.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           }
         ],
         "native_order_exact": true,
@@ -3417,90 +3417,90 @@
           {
             "name": "_ToggleLogWindow",
             "original_va": 268461584,
-            "linked_va": 268461568,
+            "linked_va": 268461584,
             "selected_object": "AudioLog.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_ClearLogWindow",
             "original_va": 268461648,
-            "linked_va": 268461632,
+            "linked_va": 268461648,
             "selected_object": "AudioLog.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_DestroyLogWindow",
             "original_va": 268461680,
-            "linked_va": 268461664,
+            "linked_va": 268461680,
             "selected_object": "AudioLog.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_CreateLogWindow",
             "original_va": 268461712,
-            "linked_va": 268461696,
+            "linked_va": 268461712,
             "selected_object": "AudioLog.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_FilePrint",
             "original_va": 268461808,
-            "linked_va": 268461792,
+            "linked_va": 268461808,
             "selected_object": "AudioLog.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_DebugPrint",
             "original_va": 268461888,
-            "linked_va": 268461872,
+            "linked_va": 268461888,
             "selected_object": "AudioLog.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_FlushAudioLog",
             "original_va": 268461984,
-            "linked_va": 268461968,
+            "linked_va": 268461984,
             "selected_object": "AudioLog.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_CloseAudioLog",
             "original_va": 268462000,
-            "linked_va": 268461984,
+            "linked_va": 268462000,
             "selected_object": "AudioLog.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_LogWindowProc@16",
             "original_va": 268462016,
-            "linked_va": 268462000,
+            "linked_va": 268462016,
             "selected_object": "AudioLog.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_RegisterLogWindow",
             "original_va": 268462496,
-            "linked_va": 268462480,
+            "linked_va": 268462496,
             "selected_object": "AudioLog.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_OpenAudioLog",
             "original_va": 268462656,
-            "linked_va": 268462640,
+            "linked_va": 268462656,
             "selected_object": "AudioLog.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           }
         ],
         "native_order_exact": true,
@@ -3537,18 +3537,18 @@
           {
             "name": "_get_feature_flags",
             "original_va": 268462688,
-            "linked_va": 268462672,
+            "linked_va": 268462688,
             "selected_object": "CPUFeatures.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_DetectCPUFeatures",
             "original_va": 268463232,
-            "linked_va": 268463216,
+            "linked_va": 268463232,
             "selected_object": "CPUFeatures.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           }
         ],
         "native_order_exact": true,
@@ -3567,82 +3567,82 @@
           {
             "name": "_JpegReadBlock",
             "original_va": 268463280,
-            "linked_va": 268463264,
+            "linked_va": 268463280,
             "selected_object": "Jpeg.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_JpegWriteBlock",
             "original_va": 268463376,
-            "linked_va": 268463360,
+            "linked_va": 268463376,
             "selected_object": "Jpeg.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_JpegInitializeCosine",
             "original_va": 268463472,
-            "linked_va": 268463456,
+            "linked_va": 268463472,
             "selected_object": "Jpeg.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_JpegSwapSample",
             "original_va": 268463568,
-            "linked_va": 268463552,
+            "linked_va": 268463568,
             "selected_object": "Jpeg.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_JpegCopyBlock",
             "original_va": 268463584,
-            "linked_va": 268463568,
+            "linked_va": 268463584,
             "selected_object": "Jpeg.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_JpegInverseDCT",
             "original_va": 268463616,
-            "linked_va": 268463600,
+            "linked_va": 268463616,
             "selected_object": "Jpeg.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_JpegInverseDCTAlternate",
             "original_va": 268464592,
-            "linked_va": 268464576,
+            "linked_va": 268464592,
             "selected_object": "Jpeg.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_JpegDecodeMacroblock",
             "original_va": 268465568,
-            "linked_va": 268465552,
+            "linked_va": 268465568,
             "selected_object": "Jpeg.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_DCTList",
             "original_va": 268466976,
-            "linked_va": 268466960,
+            "linked_va": 268466976,
             "selected_object": "Jpeg.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_poly",
             "original_va": 268467328,
-            "linked_va": 268467312,
+            "linked_va": 268467328,
             "selected_object": "Jpeg.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           }
         ],
         "native_order_exact": true,
@@ -3677,95 +3677,95 @@
           {
             "name": "_Mp3Narrow",
             "original_va": 268473328,
-            "linked_va": 268473312,
+            "linked_va": 268473328,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_Mp3Add",
             "original_va": 268473344,
-            "linked_va": 268473328,
+            "linked_va": 268473344,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_Mp3Subtract",
             "original_va": 268473360,
-            "linked_va": 268473344,
+            "linked_va": 268473360,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_Mp3MultiplyFraction",
             "original_va": 268473376,
-            "linked_va": 268473360,
+            "linked_va": 268473376,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_Mp3MultiplyUnsigned",
             "original_va": 268473408,
-            "linked_va": 268473392,
+            "linked_va": 268473408,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_Mp3MultiplySplit",
             "original_va": 268473440,
-            "linked_va": 268473424,
+            "linked_va": 268473440,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_Mp3AccumulateFraction",
             "original_va": 268473472,
-            "linked_va": 268473456,
+            "linked_va": 268473472,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_Mp3AccumulateUnsigned",
             "original_va": 268473552,
-            "linked_va": 268473536,
+            "linked_va": 268473552,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_Mp3ReadSamples",
             "original_va": 268473600,
-            "linked_va": 268473584,
+            "linked_va": 268473600,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_Mp3Butterfly",
             "original_va": 268473680,
-            "linked_va": 268473664,
+            "linked_va": 268473680,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_Mp3DCT",
             "original_va": 268475104,
-            "linked_va": 268475088,
+            "linked_va": 268475104,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
-            "entry_exact": false
+            "entry_exact": true
           },
           {
             "name": "_ReadAudioSamples",
             "original_va": 268480208,
-            "linked_va": 268480128,
+            "linked_va": 268480144,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -3773,7 +3773,7 @@
           {
             "name": "_InitializeAudioSqrt",
             "original_va": 268480288,
-            "linked_va": 268480208,
+            "linked_va": 268480224,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -3781,7 +3781,7 @@
           {
             "name": "_LoadAudioEnvelope",
             "original_va": 268480400,
-            "linked_va": 268480320,
+            "linked_va": 268480336,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -3789,7 +3789,7 @@
           {
             "name": "_SaveAudioEnvelope",
             "original_va": 268480608,
-            "linked_va": 268480528,
+            "linked_va": 268480544,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -3797,7 +3797,7 @@
           {
             "name": "_ResetAudioEnvelope",
             "original_va": 268480816,
-            "linked_va": 268480736,
+            "linked_va": 268480752,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -3805,7 +3805,7 @@
           {
             "name": "_AudioCPUHasSSE",
             "original_va": 268480864,
-            "linked_va": 268480784,
+            "linked_va": 268480800,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -3813,7 +3813,7 @@
           {
             "name": "_AudioOSHasSSE",
             "original_va": 268480912,
-            "linked_va": 268480832,
+            "linked_va": 268480848,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -3821,7 +3821,7 @@
           {
             "name": "_AudioClampECX",
             "original_va": 268481024,
-            "linked_va": 268480944,
+            "linked_va": 268480960,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -3829,7 +3829,7 @@
           {
             "name": "_EnvMixerSSE",
             "original_va": 268481056,
-            "linked_va": 268480976,
+            "linked_va": 268480992,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -3837,7 +3837,7 @@
           {
             "name": "_EnvMixer3DNow",
             "original_va": 268484080,
-            "linked_va": 268484000,
+            "linked_va": 268484016,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -3845,7 +3845,7 @@
           {
             "name": "_EnvMixerScalar",
             "original_va": 268487008,
-            "linked_va": 268486928,
+            "linked_va": 268486944,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -3853,7 +3853,7 @@
           {
             "name": "_EnvMixerBlockScalar",
             "original_va": 268488112,
-            "linked_va": 268488032,
+            "linked_va": 268488048,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -3861,7 +3861,7 @@
           {
             "name": "_EnvMixerABI3Scalar",
             "original_va": 268489200,
-            "linked_va": 268489120,
+            "linked_va": 268489136,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -3869,7 +3869,7 @@
           {
             "name": "_EnvMixerABI3_3DNow",
             "original_va": 268490176,
-            "linked_va": 268490096,
+            "linked_va": 268490112,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -3877,7 +3877,7 @@
           {
             "name": "_EnvMixerABI3SSE",
             "original_va": 268492896,
-            "linked_va": 268492816,
+            "linked_va": 268492832,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -3885,7 +3885,7 @@
           {
             "name": "_EnvMixerSpecial",
             "original_va": 268495712,
-            "linked_va": 268495632,
+            "linked_va": 268495648,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -3893,7 +3893,7 @@
           {
             "name": "_ClampAudioSample",
             "original_va": 268496720,
-            "linked_va": 268496640,
+            "linked_va": 268496656,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -3901,7 +3901,7 @@
           {
             "name": "_MixAudioEnvelopeCommand",
             "original_va": 268496752,
-            "linked_va": 268496672,
+            "linked_va": 268496688,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -3909,7 +3909,7 @@
           {
             "name": "_MixAudioEnvelopeClamped",
             "original_va": 268498304,
-            "linked_va": 268498224,
+            "linked_va": 268498240,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -3917,7 +3917,7 @@
           {
             "name": "_MixAudioEnvelope",
             "original_va": 268499168,
-            "linked_va": 268499088,
+            "linked_va": 268499104,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -3925,7 +3925,7 @@
           {
             "name": "_MixAudioEnvelopeLegacy",
             "original_va": 268500240,
-            "linked_va": 268500160,
+            "linked_va": 268500176,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -3933,7 +3933,7 @@
           {
             "name": "_MixAudioEnvelopeUnsigned",
             "original_va": 268501088,
-            "linked_va": 268501008,
+            "linked_va": 268501024,
             "selected_object": "Mp3.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4017,7 +4017,7 @@
           {
             "name": "_ScaleAudioBuffer",
             "original_va": 268502416,
-            "linked_va": 268502336,
+            "linked_va": 268502352,
             "selected_object": "AudioProcessing.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4025,7 +4025,7 @@
           {
             "name": "_ScaleAudioBufferCommand",
             "original_va": 268502512,
-            "linked_va": 268502432,
+            "linked_va": 268502448,
             "selected_object": "AudioProcessing.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4033,7 +4033,7 @@
           {
             "name": "_FilterAudioBlock",
             "original_va": 268502624,
-            "linked_va": 268502544,
+            "linked_va": 268502560,
             "selected_object": "AudioProcessing.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4041,7 +4041,7 @@
           {
             "name": "_FilterAudioBuffer",
             "original_va": 268503056,
-            "linked_va": 268502976,
+            "linked_va": 268502992,
             "selected_object": "AudioProcessing.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4049,7 +4049,7 @@
           {
             "name": "_ResetAudioProfile",
             "original_va": 268503248,
-            "linked_va": 268503168,
+            "linked_va": 268503184,
             "selected_object": "AudioProcessing.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4057,7 +4057,7 @@
           {
             "name": "_AverageAudioProfile",
             "original_va": 268503280,
-            "linked_va": 268503200,
+            "linked_va": 268503216,
             "selected_object": "AudioProcessing.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4065,7 +4065,7 @@
           {
             "name": "_AdjustAudioProfileMaximum",
             "original_va": 268503344,
-            "linked_va": 268503264,
+            "linked_va": 268503280,
             "selected_object": "AudioProcessing.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4073,7 +4073,7 @@
           {
             "name": "_StartAudioProfile",
             "original_va": 268503408,
-            "linked_va": 268503328,
+            "linked_va": 268503344,
             "selected_object": "AudioProcessing.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4081,7 +4081,7 @@
           {
             "name": "_StopAudioProfile",
             "original_va": 268503488,
-            "linked_va": 268503408,
+            "linked_va": 268503424,
             "selected_object": "AudioProcessing.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4117,7 +4117,7 @@
           {
             "name": "_DumpAudioCommand",
             "original_va": 268503712,
-            "linked_va": 268503632,
+            "linked_va": 268503648,
             "selected_object": "AudioResample.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4125,7 +4125,7 @@
           {
             "name": "_DecodeAudioADPCMUnsigned",
             "original_va": 268503840,
-            "linked_va": 268503760,
+            "linked_va": 268503776,
             "selected_object": "AudioResample.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4133,7 +4133,7 @@
           {
             "name": "_DecodeAudioADPCMBlock",
             "original_va": 268504592,
-            "linked_va": 268504448,
+            "linked_va": 268504464,
             "selected_object": "AudioResample.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4141,7 +4141,7 @@
           {
             "name": "_PoleFilterAudioCommand",
             "original_va": 268505152,
-            "linked_va": 268505008,
+            "linked_va": 268505024,
             "selected_object": "AudioResample.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4149,7 +4149,7 @@
           {
             "name": "_ResampleAudioScalar",
             "original_va": 268507472,
-            "linked_va": 268507328,
+            "linked_va": 268507344,
             "selected_object": "AudioResample.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4157,7 +4157,7 @@
           {
             "name": "_DecodeAudioADPCMWideCommand",
             "original_va": 268508128,
-            "linked_va": 268507984,
+            "linked_va": 268508000,
             "selected_object": "AudioResample.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4165,7 +4165,7 @@
           {
             "name": "_DecodeAudioADPCMLegacy",
             "original_va": 268512352,
-            "linked_va": 268512208,
+            "linked_va": 268512224,
             "selected_object": "AudioResample.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4173,7 +4173,7 @@
           {
             "name": "_LoadAudioHistory",
             "original_va": 268514288,
-            "linked_va": 268514144,
+            "linked_va": 268514160,
             "selected_object": "AudioResample.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4181,7 +4181,7 @@
           {
             "name": "_SaveAudioHistory",
             "original_va": 268514384,
-            "linked_va": 268514240,
+            "linked_va": 268514256,
             "selected_object": "AudioResample.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4189,7 +4189,7 @@
           {
             "name": "_DecodeAudioADPCM",
             "original_va": 268514400,
-            "linked_va": 268514256,
+            "linked_va": 268514272,
             "selected_object": "AudioResample.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4227,7 +4227,7 @@
           {
             "name": "_RaiseAudioInterrupt",
             "original_va": 268515264,
-            "linked_va": 268515120,
+            "linked_va": 268515136,
             "selected_object": "AudioPlugin.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4235,7 +4235,7 @@
           {
             "name": "_AiUpdate",
             "original_va": 268515280,
-            "linked_va": 268515136,
+            "linked_va": 268515152,
             "selected_object": "AudioPlugin.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4243,7 +4243,7 @@
           {
             "name": "_AiDacrateChanged",
             "original_va": 268515296,
-            "linked_va": 268515152,
+            "linked_va": 268515168,
             "selected_object": "AudioPlugin.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4251,7 +4251,7 @@
           {
             "name": "_AiLenChanged",
             "original_va": 268515312,
-            "linked_va": 268515168,
+            "linked_va": 268515184,
             "selected_object": "AudioPlugin.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4259,7 +4259,7 @@
           {
             "name": "_AiReadLength",
             "original_va": 268515328,
-            "linked_va": 268515184,
+            "linked_va": 268515200,
             "selected_object": "AudioPlugin.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4267,7 +4267,7 @@
           {
             "name": "_CloseDLL",
             "original_va": 268515344,
-            "linked_va": 268515200,
+            "linked_va": 268515216,
             "selected_object": "AudioPlugin.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4275,7 +4275,7 @@
           {
             "name": "_DllAbout",
             "original_va": 268515392,
-            "linked_va": 268515248,
+            "linked_va": 268515264,
             "selected_object": "AudioPlugin.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4283,7 +4283,7 @@
           {
             "name": "_DllConfig",
             "original_va": 268515424,
-            "linked_va": 268515280,
+            "linked_va": 268515296,
             "selected_object": "AudioPlugin.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4291,7 +4291,7 @@
           {
             "name": "_DllTest",
             "original_va": 268515440,
-            "linked_va": 268515296,
+            "linked_va": 268515312,
             "selected_object": "AudioPlugin.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4299,7 +4299,7 @@
           {
             "name": "_GetDllInfo",
             "original_va": 268515456,
-            "linked_va": 268515312,
+            "linked_va": 268515328,
             "selected_object": "AudioPlugin.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4307,7 +4307,7 @@
           {
             "name": "_InitiateAudio",
             "original_va": 268515520,
-            "linked_va": 268515376,
+            "linked_va": 268515392,
             "selected_object": "AudioPlugin.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4315,7 +4315,7 @@
           {
             "name": "_ProcessAList",
             "original_va": 268515872,
-            "linked_va": 268515728,
+            "linked_va": 268515744,
             "selected_object": "AudioPlugin.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4323,7 +4323,7 @@
           {
             "name": "_RomClosed",
             "original_va": 268516096,
-            "linked_va": 268515952,
+            "linked_va": 268515968,
             "selected_object": "AudioPlugin.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4367,7 +4367,7 @@
           {
             "name": "_RSP_ReciprocalInstruction",
             "original_va": 268516112,
-            "linked_va": 268515968,
+            "linked_va": 268515984,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4375,7 +4375,7 @@
           {
             "name": "_RSP_VectorMultiplyExec",
             "original_va": 268516128,
-            "linked_va": 268515984,
+            "linked_va": 268516000,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4383,7 +4383,7 @@
           {
             "name": "_RSP_VectorMultiply",
             "original_va": 268517456,
-            "linked_va": 268517296,
+            "linked_va": 268517312,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4391,7 +4391,7 @@
           {
             "name": "_RSP_VectorMultiplyOpcode",
             "original_va": 268517504,
-            "linked_va": 268517344,
+            "linked_va": 268517360,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4399,7 +4399,7 @@
           {
             "name": "_RSP_SelectElement",
             "original_va": 268517520,
-            "linked_va": 268517360,
+            "linked_va": 268517376,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4407,7 +4407,7 @@
           {
             "name": "_RSP_ReportError",
             "original_va": 268517584,
-            "linked_va": 268517424,
+            "linked_va": 268517440,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4415,7 +4415,7 @@
           {
             "name": "_RSP_ReadByte",
             "original_va": 268517648,
-            "linked_va": 268517488,
+            "linked_va": 268517504,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4423,7 +4423,7 @@
           {
             "name": "_RSP_WriteByte",
             "original_va": 268517664,
-            "linked_va": 268517504,
+            "linked_va": 268517520,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4431,7 +4431,7 @@
           {
             "name": "_RSP_StoreVectorExec",
             "original_va": 268517680,
-            "linked_va": 268517520,
+            "linked_va": 268517536,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4439,7 +4439,7 @@
           {
             "name": "_RSP_StoreVector",
             "original_va": 268519936,
-            "linked_va": 268519776,
+            "linked_va": 268519792,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4447,7 +4447,7 @@
           {
             "name": "_RSP_StoreVectorOpcode",
             "original_va": 268519968,
-            "linked_va": 268519808,
+            "linked_va": 268519824,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4455,7 +4455,7 @@
           {
             "name": "_RSP_InvalidOpcode",
             "original_va": 268519984,
-            "linked_va": 268519824,
+            "linked_va": 268519840,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4463,7 +4463,7 @@
           {
             "name": "_RSP_SPECIAL",
             "original_va": 268520032,
-            "linked_va": 268519872,
+            "linked_va": 268519888,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4471,7 +4471,7 @@
           {
             "name": "_RSP_REGIMM",
             "original_va": 268520064,
-            "linked_va": 268519904,
+            "linked_va": 268519920,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4479,7 +4479,7 @@
           {
             "name": "_RSP_J",
             "original_va": 268520096,
-            "linked_va": 268519936,
+            "linked_va": 268519952,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4487,7 +4487,7 @@
           {
             "name": "_RSP_JAL",
             "original_va": 268520144,
-            "linked_va": 268519984,
+            "linked_va": 268520000,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4495,7 +4495,7 @@
           {
             "name": "_RSP_BEQ",
             "original_va": 268520192,
-            "linked_va": 268520032,
+            "linked_va": 268520048,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4503,7 +4503,7 @@
           {
             "name": "_RSP_BNE",
             "original_va": 268520272,
-            "linked_va": 268520112,
+            "linked_va": 268520128,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4511,7 +4511,7 @@
           {
             "name": "_RSP_BLEZ",
             "original_va": 268520352,
-            "linked_va": 268520192,
+            "linked_va": 268520208,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4519,7 +4519,7 @@
           {
             "name": "_RSP_BGTZ",
             "original_va": 268520416,
-            "linked_va": 268520256,
+            "linked_va": 268520272,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4527,7 +4527,7 @@
           {
             "name": "_RSP_ADDI",
             "original_va": 268520480,
-            "linked_va": 268520320,
+            "linked_va": 268520336,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4535,7 +4535,7 @@
           {
             "name": "_RSP_ADDIOpcode",
             "original_va": 268520528,
-            "linked_va": 268520368,
+            "linked_va": 268520384,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4543,7 +4543,7 @@
           {
             "name": "_RSP_ADDIU",
             "original_va": 268520576,
-            "linked_va": 268520416,
+            "linked_va": 268520432,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4551,7 +4551,7 @@
           {
             "name": "_RSP_SLTI",
             "original_va": 268520624,
-            "linked_va": 268520464,
+            "linked_va": 268520480,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4559,7 +4559,7 @@
           {
             "name": "_RSP_SLTIU",
             "original_va": 268520688,
-            "linked_va": 268520528,
+            "linked_va": 268520544,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4567,7 +4567,7 @@
           {
             "name": "_RSP_ANDI",
             "original_va": 268520752,
-            "linked_va": 268520592,
+            "linked_va": 268520608,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4575,7 +4575,7 @@
           {
             "name": "_RSP_ANDIOpcode",
             "original_va": 268520816,
-            "linked_va": 268520656,
+            "linked_va": 268520672,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4583,7 +4583,7 @@
           {
             "name": "_RSP_ORI",
             "original_va": 268520864,
-            "linked_va": 268520704,
+            "linked_va": 268520720,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4591,7 +4591,7 @@
           {
             "name": "_RSP_XORI",
             "original_va": 268520928,
-            "linked_va": 268520768,
+            "linked_va": 268520784,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4599,7 +4599,7 @@
           {
             "name": "_RSP_LUI",
             "original_va": 268520992,
-            "linked_va": 268520832,
+            "linked_va": 268520848,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4607,7 +4607,7 @@
           {
             "name": "_RSP_COP0",
             "original_va": 268521040,
-            "linked_va": 268520880,
+            "linked_va": 268520896,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4615,7 +4615,7 @@
           {
             "name": "_RSP_COP2",
             "original_va": 268521072,
-            "linked_va": 268520912,
+            "linked_va": 268520928,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4623,7 +4623,7 @@
           {
             "name": "_RSP_LB",
             "original_va": 268521104,
-            "linked_va": 268520944,
+            "linked_va": 268520960,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4631,7 +4631,7 @@
           {
             "name": "_RSP_LH",
             "original_va": 268521168,
-            "linked_va": 268521008,
+            "linked_va": 268521024,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4639,7 +4639,7 @@
           {
             "name": "_RSP_LW",
             "original_va": 268521248,
-            "linked_va": 268521088,
+            "linked_va": 268521104,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4647,7 +4647,7 @@
           {
             "name": "_RSP_LWOpcode",
             "original_va": 268521360,
-            "linked_va": 268521200,
+            "linked_va": 268521216,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4655,7 +4655,7 @@
           {
             "name": "_RSP_LBU",
             "original_va": 268521456,
-            "linked_va": 268521296,
+            "linked_va": 268521312,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4663,7 +4663,7 @@
           {
             "name": "_RSP_LHU",
             "original_va": 268521520,
-            "linked_va": 268521360,
+            "linked_va": 268521376,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4671,7 +4671,7 @@
           {
             "name": "_RSP_SB",
             "original_va": 268521600,
-            "linked_va": 268521440,
+            "linked_va": 268521456,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4679,7 +4679,7 @@
           {
             "name": "_RSP_SH",
             "original_va": 268521680,
-            "linked_va": 268521520,
+            "linked_va": 268521536,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4687,7 +4687,7 @@
           {
             "name": "_RSP_SW",
             "original_va": 268521776,
-            "linked_va": 268521616,
+            "linked_va": 268521632,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4695,7 +4695,7 @@
           {
             "name": "_RSP_SWOpcode",
             "original_va": 268521888,
-            "linked_va": 268521728,
+            "linked_va": 268521744,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4703,7 +4703,7 @@
           {
             "name": "_RSP_LWC2",
             "original_va": 268521984,
-            "linked_va": 268521824,
+            "linked_va": 268521840,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4711,7 +4711,7 @@
           {
             "name": "_RSP_SWC2",
             "original_va": 268522016,
-            "linked_va": 268521856,
+            "linked_va": 268521872,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4719,7 +4719,7 @@
           {
             "name": "_RSP_SLL",
             "original_va": 268522048,
-            "linked_va": 268521888,
+            "linked_va": 268521904,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4727,7 +4727,7 @@
           {
             "name": "_RSP_SLLOpcode",
             "original_va": 268522112,
-            "linked_va": 268521952,
+            "linked_va": 268521968,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4735,7 +4735,7 @@
           {
             "name": "_RSP_SRL",
             "original_va": 268522160,
-            "linked_va": 268522000,
+            "linked_va": 268522016,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4743,7 +4743,7 @@
           {
             "name": "_RSP_SRLOpcode",
             "original_va": 268522224,
-            "linked_va": 268522064,
+            "linked_va": 268522080,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4751,7 +4751,7 @@
           {
             "name": "_RSP_SRA",
             "original_va": 268522272,
-            "linked_va": 268522112,
+            "linked_va": 268522128,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4759,7 +4759,7 @@
           {
             "name": "_RSP_SLLV",
             "original_va": 268522336,
-            "linked_va": 268522176,
+            "linked_va": 268522192,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4767,7 +4767,7 @@
           {
             "name": "_RSP_SRLV",
             "original_va": 268522416,
-            "linked_va": 268522256,
+            "linked_va": 268522272,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4775,7 +4775,7 @@
           {
             "name": "_RSP_SRAV",
             "original_va": 268522496,
-            "linked_va": 268522336,
+            "linked_va": 268522352,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4783,7 +4783,7 @@
           {
             "name": "_RSP_ClampSample",
             "original_va": 268522576,
-            "linked_va": 268522416,
+            "linked_va": 268522432,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4791,7 +4791,7 @@
           {
             "name": "_RSP_MixAudio",
             "original_va": 268522608,
-            "linked_va": 268522448,
+            "linked_va": 268522464,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4799,7 +4799,7 @@
           {
             "name": "_RSP_JR",
             "original_va": 268523248,
-            "linked_va": 268523088,
+            "linked_va": 268523104,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4807,7 +4807,7 @@
           {
             "name": "_RSP_JALR",
             "original_va": 268523296,
-            "linked_va": 268523136,
+            "linked_va": 268523152,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4815,7 +4815,7 @@
           {
             "name": "_RSP_BREAK",
             "original_va": 268523360,
-            "linked_va": 268523200,
+            "linked_va": 268523216,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4823,7 +4823,7 @@
           {
             "name": "_RSP_ADD",
             "original_va": 268523376,
-            "linked_va": 268523216,
+            "linked_va": 268523232,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4831,7 +4831,7 @@
           {
             "name": "_RSP_ADDOpcode",
             "original_va": 268523456,
-            "linked_va": 268523296,
+            "linked_va": 268523312,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4839,7 +4839,7 @@
           {
             "name": "_RSP_ADDU",
             "original_va": 268523520,
-            "linked_va": 268523360,
+            "linked_va": 268523376,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4847,7 +4847,7 @@
           {
             "name": "_RSP_SUB",
             "original_va": 268523600,
-            "linked_va": 268523440,
+            "linked_va": 268523456,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4855,7 +4855,7 @@
           {
             "name": "_RSP_SUBOpcode",
             "original_va": 268523680,
-            "linked_va": 268523520,
+            "linked_va": 268523536,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4863,7 +4863,7 @@
           {
             "name": "_RSP_SUBU",
             "original_va": 268523744,
-            "linked_va": 268523584,
+            "linked_va": 268523600,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4871,7 +4871,7 @@
           {
             "name": "_RSP_AND",
             "original_va": 268523824,
-            "linked_va": 268523664,
+            "linked_va": 268523680,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4879,7 +4879,7 @@
           {
             "name": "_RSP_OR",
             "original_va": 268523904,
-            "linked_va": 268523744,
+            "linked_va": 268523760,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4887,7 +4887,7 @@
           {
             "name": "_RSP_OROpcode",
             "original_va": 268523984,
-            "linked_va": 268523824,
+            "linked_va": 268523840,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4895,7 +4895,7 @@
           {
             "name": "_RSP_XOR",
             "original_va": 268524048,
-            "linked_va": 268523888,
+            "linked_va": 268523904,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4903,7 +4903,7 @@
           {
             "name": "_RSP_NOR",
             "original_va": 268524128,
-            "linked_va": 268523968,
+            "linked_va": 268523984,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4911,7 +4911,7 @@
           {
             "name": "_RSP_SLT",
             "original_va": 268524208,
-            "linked_va": 268524048,
+            "linked_va": 268524064,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4919,7 +4919,7 @@
           {
             "name": "_RSP_SLTU",
             "original_va": 268524288,
-            "linked_va": 268524128,
+            "linked_va": 268524144,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4927,7 +4927,7 @@
           {
             "name": "_RSP_BLTZ",
             "original_va": 268524368,
-            "linked_va": 268524208,
+            "linked_va": 268524224,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4935,7 +4935,7 @@
           {
             "name": "_RSP_BGEZ",
             "original_va": 268524432,
-            "linked_va": 268524272,
+            "linked_va": 268524288,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4943,7 +4943,7 @@
           {
             "name": "_RSP_BLTZAL",
             "original_va": 268524496,
-            "linked_va": 268524336,
+            "linked_va": 268524352,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4951,7 +4951,7 @@
           {
             "name": "_RSP_BGEZAL",
             "original_va": 268524576,
-            "linked_va": 268524416,
+            "linked_va": 268524432,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4959,7 +4959,7 @@
           {
             "name": "_RSP_WriteCOP0",
             "original_va": 268524656,
-            "linked_va": 268524496,
+            "linked_va": 268524512,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4967,7 +4967,7 @@
           {
             "name": "_RSP_ReadCOP0",
             "original_va": 268524928,
-            "linked_va": 268524768,
+            "linked_va": 268524784,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4975,7 +4975,7 @@
           {
             "name": "_RSP_MFC0",
             "original_va": 268524944,
-            "linked_va": 268524784,
+            "linked_va": 268524800,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4983,7 +4983,7 @@
           {
             "name": "_RSP_MTC0",
             "original_va": 268525408,
-            "linked_va": 268525248,
+            "linked_va": 268525264,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4991,7 +4991,7 @@
           {
             "name": "_RSP_MFC2",
             "original_va": 268525632,
-            "linked_va": 268525472,
+            "linked_va": 268525488,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -4999,7 +4999,7 @@
           {
             "name": "_RSP_CFC2",
             "original_va": 268525728,
-            "linked_va": 268525568,
+            "linked_va": 268525584,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5007,7 +5007,7 @@
           {
             "name": "_RSP_MTC2",
             "original_va": 268525872,
-            "linked_va": 268525712,
+            "linked_va": 268525728,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5015,7 +5015,7 @@
           {
             "name": "_RSP_CTC2",
             "original_va": 268525968,
-            "linked_va": 268525808,
+            "linked_va": 268525824,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5023,7 +5023,7 @@
           {
             "name": "_RSP_VECTOR",
             "original_va": 268526064,
-            "linked_va": 268525904,
+            "linked_va": 268525920,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5031,7 +5031,7 @@
           {
             "name": "_RSP_LBV",
             "original_va": 268526096,
-            "linked_va": 268525936,
+            "linked_va": 268525952,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5039,7 +5039,7 @@
           {
             "name": "_RSP_LSV",
             "original_va": 268526176,
-            "linked_va": 268526016,
+            "linked_va": 268526032,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5047,7 +5047,7 @@
           {
             "name": "_RSP_LLV",
             "original_va": 268526288,
-            "linked_va": 268526128,
+            "linked_va": 268526144,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5055,7 +5055,7 @@
           {
             "name": "_RSP_LDV",
             "original_va": 268526448,
-            "linked_va": 268526288,
+            "linked_va": 268526304,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5063,7 +5063,7 @@
           {
             "name": "_RSP_LQV",
             "original_va": 268526688,
-            "linked_va": 268526528,
+            "linked_va": 268526544,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5071,7 +5071,7 @@
           {
             "name": "_RSP_LRV",
             "original_va": 268526800,
-            "linked_va": 268526640,
+            "linked_va": 268526656,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5079,7 +5079,7 @@
           {
             "name": "_RSP_LPV",
             "original_va": 268526816,
-            "linked_va": 268526656,
+            "linked_va": 268526672,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5087,7 +5087,7 @@
           {
             "name": "_RSP_LUV",
             "original_va": 268526992,
-            "linked_va": 268526832,
+            "linked_va": 268526848,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5095,7 +5095,7 @@
           {
             "name": "_RSP_LHV",
             "original_va": 268527200,
-            "linked_va": 268527040,
+            "linked_va": 268527056,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5103,7 +5103,7 @@
           {
             "name": "_RSP_LFV",
             "original_va": 268527216,
-            "linked_va": 268527056,
+            "linked_va": 268527072,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5111,7 +5111,7 @@
           {
             "name": "_RSP_LTV",
             "original_va": 268527232,
-            "linked_va": 268527072,
+            "linked_va": 268527088,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5119,7 +5119,7 @@
           {
             "name": "_RSP_SBV",
             "original_va": 268527248,
-            "linked_va": 268527088,
+            "linked_va": 268527104,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5127,7 +5127,7 @@
           {
             "name": "_RSP_SSV",
             "original_va": 268527344,
-            "linked_va": 268527184,
+            "linked_va": 268527200,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5135,7 +5135,7 @@
           {
             "name": "_RSP_SLV",
             "original_va": 268527456,
-            "linked_va": 268527296,
+            "linked_va": 268527312,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5143,7 +5143,7 @@
           {
             "name": "_RSP_SDV",
             "original_va": 268527616,
-            "linked_va": 268527456,
+            "linked_va": 268527472,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5151,7 +5151,7 @@
           {
             "name": "_RSP_SQV",
             "original_va": 268527840,
-            "linked_va": 268527680,
+            "linked_va": 268527696,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5159,7 +5159,7 @@
           {
             "name": "_RSP_SRV",
             "original_va": 268527952,
-            "linked_va": 268527792,
+            "linked_va": 268527808,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5167,7 +5167,7 @@
           {
             "name": "_RSP_SPV",
             "original_va": 268527968,
-            "linked_va": 268527808,
+            "linked_va": 268527824,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5175,7 +5175,7 @@
           {
             "name": "_RSP_SUV",
             "original_va": 268527984,
-            "linked_va": 268527824,
+            "linked_va": 268527840,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5183,7 +5183,7 @@
           {
             "name": "_RSP_SHV",
             "original_va": 268528000,
-            "linked_va": 268527840,
+            "linked_va": 268527856,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5191,7 +5191,7 @@
           {
             "name": "_RSP_SFV",
             "original_va": 268528016,
-            "linked_va": 268527856,
+            "linked_va": 268527872,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5199,7 +5199,7 @@
           {
             "name": "_RSP_SWV",
             "original_va": 268528032,
-            "linked_va": 268527872,
+            "linked_va": 268527888,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5207,7 +5207,7 @@
           {
             "name": "_RSP_STV",
             "original_va": 268528048,
-            "linked_va": 268527888,
+            "linked_va": 268527904,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5215,7 +5215,7 @@
           {
             "name": "_RSP_VMULF",
             "original_va": 268528064,
-            "linked_va": 268527904,
+            "linked_va": 268527920,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5223,7 +5223,7 @@
           {
             "name": "_RSP_VMULU",
             "original_va": 268528992,
-            "linked_va": 268528832,
+            "linked_va": 268528848,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5231,7 +5231,7 @@
           {
             "name": "_RSP_VRNDP",
             "original_va": 268530016,
-            "linked_va": 268529856,
+            "linked_va": 268529872,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5239,7 +5239,7 @@
           {
             "name": "_RSP_VMULQ",
             "original_va": 268530032,
-            "linked_va": 268529872,
+            "linked_va": 268529888,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5247,7 +5247,7 @@
           {
             "name": "_RSP_VMUDL",
             "original_va": 268530048,
-            "linked_va": 268529888,
+            "linked_va": 268529904,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5255,7 +5255,7 @@
           {
             "name": "_RSP_VMUDM",
             "original_va": 268530784,
-            "linked_va": 268530624,
+            "linked_va": 268530640,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5263,7 +5263,7 @@
           {
             "name": "_RSP_VMUDN",
             "original_va": 268531744,
-            "linked_va": 268531584,
+            "linked_va": 268531600,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5271,7 +5271,7 @@
           {
             "name": "_RSP_VMUDH",
             "original_va": 268532640,
-            "linked_va": 268532480,
+            "linked_va": 268532496,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5279,7 +5279,7 @@
           {
             "name": "_RSP_VMACF",
             "original_va": 268533600,
-            "linked_va": 268533440,
+            "linked_va": 268533456,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5287,7 +5287,7 @@
           {
             "name": "_RSP_VMACU",
             "original_va": 268534832,
-            "linked_va": 268534672,
+            "linked_va": 268534688,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5295,7 +5295,7 @@
           {
             "name": "_RSP_VRNDN",
             "original_va": 268535984,
-            "linked_va": 268535824,
+            "linked_va": 268535840,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5303,7 +5303,7 @@
           {
             "name": "_RSP_VMACQ",
             "original_va": 268536000,
-            "linked_va": 268535840,
+            "linked_va": 268535856,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5311,7 +5311,7 @@
           {
             "name": "_RSP_VMADL",
             "original_va": 268536016,
-            "linked_va": 268535856,
+            "linked_va": 268535872,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5319,7 +5319,7 @@
           {
             "name": "_RSP_VMADM",
             "original_va": 268537136,
-            "linked_va": 268536976,
+            "linked_va": 268536992,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5327,7 +5327,7 @@
           {
             "name": "_RSP_VMADN",
             "original_va": 268538288,
-            "linked_va": 268538128,
+            "linked_va": 268538144,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5335,7 +5335,7 @@
           {
             "name": "_RSP_VMADH",
             "original_va": 268539392,
-            "linked_va": 268539232,
+            "linked_va": 268539248,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5343,7 +5343,7 @@
           {
             "name": "_RSP_VADD",
             "original_va": 268540608,
-            "linked_va": 268540448,
+            "linked_va": 268540464,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5351,7 +5351,7 @@
           {
             "name": "_RSP_VADDExec",
             "original_va": 268541328,
-            "linked_va": 268541168,
+            "linked_va": 268541184,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5359,7 +5359,7 @@
           {
             "name": "_RSP_VSUB",
             "original_va": 268542000,
-            "linked_va": 268541840,
+            "linked_va": 268541856,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5367,7 +5367,7 @@
           {
             "name": "_RSP_VSUBExec",
             "original_va": 268542688,
-            "linked_va": 268542528,
+            "linked_va": 268542544,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5375,7 +5375,7 @@
           {
             "name": "_RSP_VSUT",
             "original_va": 268543360,
-            "linked_va": 268543200,
+            "linked_va": 268543216,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5383,7 +5383,7 @@
           {
             "name": "_RSP_VABS",
             "original_va": 268544000,
-            "linked_va": 268543840,
+            "linked_va": 268543856,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5391,7 +5391,7 @@
           {
             "name": "_RSP_VADDC",
             "original_va": 268544528,
-            "linked_va": 268544368,
+            "linked_va": 268544384,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5399,7 +5399,7 @@
           {
             "name": "_RSP_VSUBC",
             "original_va": 268544960,
-            "linked_va": 268544800,
+            "linked_va": 268544816,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5407,7 +5407,7 @@
           {
             "name": "_RSP_VADDB",
             "original_va": 268545440,
-            "linked_va": 268545312,
+            "linked_va": 268545328,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5415,7 +5415,7 @@
           {
             "name": "_RSP_VSUBB",
             "original_va": 268545456,
-            "linked_va": 268545328,
+            "linked_va": 268545344,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5423,7 +5423,7 @@
           {
             "name": "_RSP_VACCB",
             "original_va": 268545472,
-            "linked_va": 268545344,
+            "linked_va": 268545360,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5431,7 +5431,7 @@
           {
             "name": "_RSP_VSUCB",
             "original_va": 268545488,
-            "linked_va": 268545360,
+            "linked_va": 268545376,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5439,7 +5439,7 @@
           {
             "name": "_RSP_VSAD",
             "original_va": 268545504,
-            "linked_va": 268545376,
+            "linked_va": 268545392,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5447,7 +5447,7 @@
           {
             "name": "_RSP_VSAC",
             "original_va": 268545520,
-            "linked_va": 268545392,
+            "linked_va": 268545408,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5455,7 +5455,7 @@
           {
             "name": "_RSP_VSUM",
             "original_va": 268545536,
-            "linked_va": 268545408,
+            "linked_va": 268545424,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5463,7 +5463,7 @@
           {
             "name": "_RSP_VSAW",
             "original_va": 268545552,
-            "linked_va": 268545424,
+            "linked_va": 268545440,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5471,7 +5471,7 @@
           {
             "name": "_RSP_VLT",
             "original_va": 268546160,
-            "linked_va": 268546032,
+            "linked_va": 268546048,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5479,7 +5479,7 @@
           {
             "name": "_RSP_VEQ",
             "original_va": 268547152,
-            "linked_va": 268547024,
+            "linked_va": 268547040,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5487,7 +5487,7 @@
           {
             "name": "_RSP_VNE",
             "original_va": 268548080,
-            "linked_va": 268547952,
+            "linked_va": 268547968,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5495,7 +5495,7 @@
           {
             "name": "_RSP_LegacyVGE",
             "original_va": 268549008,
-            "linked_va": 268548880,
+            "linked_va": 268548896,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5503,7 +5503,7 @@
           {
             "name": "_RSP_VGE",
             "original_va": 268550112,
-            "linked_va": 268549984,
+            "linked_va": 268550000,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5511,7 +5511,7 @@
           {
             "name": "_RSP_VCL",
             "original_va": 268551104,
-            "linked_va": 268550976,
+            "linked_va": 268550992,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5519,7 +5519,7 @@
           {
             "name": "_RSP_VCH",
             "original_va": 268552576,
-            "linked_va": 268552448,
+            "linked_va": 268552464,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5527,7 +5527,7 @@
           {
             "name": "_RSP_VCR",
             "original_va": 268553808,
-            "linked_va": 268553696,
+            "linked_va": 268553712,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5535,7 +5535,7 @@
           {
             "name": "_RSP_VMRG",
             "original_va": 268554656,
-            "linked_va": 268554576,
+            "linked_va": 268554592,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5543,7 +5543,7 @@
           {
             "name": "_RSP_VAND",
             "original_va": 268554896,
-            "linked_va": 268554816,
+            "linked_va": 268554832,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5551,7 +5551,7 @@
           {
             "name": "_RSP_VNAND",
             "original_va": 268555312,
-            "linked_va": 268555232,
+            "linked_va": 268555248,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5559,7 +5559,7 @@
           {
             "name": "_RSP_VOR",
             "original_va": 268555744,
-            "linked_va": 268555664,
+            "linked_va": 268555680,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5567,7 +5567,7 @@
           {
             "name": "_RSP_VNOR",
             "original_va": 268556160,
-            "linked_va": 268556080,
+            "linked_va": 268556096,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5575,7 +5575,7 @@
           {
             "name": "_RSP_VXOR",
             "original_va": 268556592,
-            "linked_va": 268556512,
+            "linked_va": 268556528,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5583,7 +5583,7 @@
           {
             "name": "_RSP_VXOROpcode",
             "original_va": 268557008,
-            "linked_va": 268556928,
+            "linked_va": 268556944,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5591,7 +5591,7 @@
           {
             "name": "_RSP_VNXOR",
             "original_va": 268557408,
-            "linked_va": 268557328,
+            "linked_va": 268557344,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5599,7 +5599,7 @@
           {
             "name": "_RSP_LegacyVRCP",
             "original_va": 268557840,
-            "linked_va": 268557760,
+            "linked_va": 268557776,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5607,7 +5607,7 @@
           {
             "name": "_RSP_LegacyVRCPL",
             "original_va": 268557856,
-            "linked_va": 268557776,
+            "linked_va": 268557792,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5615,7 +5615,7 @@
           {
             "name": "_RSP_LegacyVRCPH",
             "original_va": 268557872,
-            "linked_va": 268557792,
+            "linked_va": 268557808,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5623,7 +5623,7 @@
           {
             "name": "_RSP_LegacyVMOV",
             "original_va": 268557888,
-            "linked_va": 268557808,
+            "linked_va": 268557824,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5631,7 +5631,7 @@
           {
             "name": "_RSP_LegacyVRSQ",
             "original_va": 268557984,
-            "linked_va": 268557904,
+            "linked_va": 268557920,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5639,7 +5639,7 @@
           {
             "name": "_RSP_LegacyVRSQL",
             "original_va": 268558000,
-            "linked_va": 268557920,
+            "linked_va": 268557936,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5647,7 +5647,7 @@
           {
             "name": "_RSP_LegacyVRSQH",
             "original_va": 268558016,
-            "linked_va": 268557936,
+            "linked_va": 268557952,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5655,7 +5655,7 @@
           {
             "name": "_RSP_VNOOP",
             "original_va": 268558032,
-            "linked_va": 268557952,
+            "linked_va": 268557968,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5663,7 +5663,7 @@
           {
             "name": "_RSP_VEXTT",
             "original_va": 268558048,
-            "linked_va": 268557968,
+            "linked_va": 268557984,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5671,7 +5671,7 @@
           {
             "name": "_RSP_VEXTQ",
             "original_va": 268558064,
-            "linked_va": 268557984,
+            "linked_va": 268558000,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5679,7 +5679,7 @@
           {
             "name": "_RSP_VEXTN",
             "original_va": 268558080,
-            "linked_va": 268558000,
+            "linked_va": 268558016,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5687,7 +5687,7 @@
           {
             "name": "_RSP_VINST",
             "original_va": 268558096,
-            "linked_va": 268558016,
+            "linked_va": 268558032,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5695,7 +5695,7 @@
           {
             "name": "_RSP_VINSQ",
             "original_va": 268558112,
-            "linked_va": 268558032,
+            "linked_va": 268558048,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5703,7 +5703,7 @@
           {
             "name": "_RSP_VINSN",
             "original_va": 268558128,
-            "linked_va": 268558048,
+            "linked_va": 268558064,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5711,7 +5711,7 @@
           {
             "name": "_RSP_PrepareAudioMicrocode",
             "original_va": 268558144,
-            "linked_va": 268558064,
+            "linked_va": 268558080,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5719,7 +5719,7 @@
           {
             "name": "_RSP_InterpretAudioMicrocode",
             "original_va": 268558256,
-            "linked_va": 268558176,
+            "linked_va": 268558192,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5727,7 +5727,7 @@
           {
             "name": "_RSP_AudioMicrocodeNoOp",
             "original_va": 268558464,
-            "linked_va": 268558384,
+            "linked_va": 268558400,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5735,7 +5735,7 @@
           {
             "name": "_RSP_AudioDMARead",
             "original_va": 268558480,
-            "linked_va": 268558400,
+            "linked_va": 268558416,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5743,7 +5743,7 @@
           {
             "name": "_RSP_AudioDMAWrite",
             "original_va": 268558528,
-            "linked_va": 268558448,
+            "linked_va": 268558464,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5751,7 +5751,7 @@
           {
             "name": "_RSP_UnusedEntry1001E0F0",
             "original_va": 268558576,
-            "linked_va": 268558496,
+            "linked_va": 268558512,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5759,7 +5759,7 @@
           {
             "name": "_RSP_LoadVectorExec",
             "original_va": 268558592,
-            "linked_va": 268558512,
+            "linked_va": 268558528,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5767,7 +5767,7 @@
           {
             "name": "_RSP_LoadVector",
             "original_va": 268560608,
-            "linked_va": 268560528,
+            "linked_va": 268560544,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5775,7 +5775,7 @@
           {
             "name": "_RSP_LoadVectorOpcode",
             "original_va": 268560640,
-            "linked_va": 268560560,
+            "linked_va": 268560576,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5783,7 +5783,7 @@
           {
             "name": "_RSP_AudioTransformStage",
             "original_va": 268560656,
-            "linked_va": 268560576,
+            "linked_va": 268560592,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5791,7 +5791,7 @@
           {
             "name": "_RSP_ExecuteAudioMicrocode",
             "original_va": 268561936,
-            "linked_va": 268561856,
+            "linked_va": 268561872,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -5799,7 +5799,7 @@
           {
             "name": "_RSP_RunAudioMicrocode",
             "original_va": 268570128,
-            "linked_va": 268570048,
+            "linked_va": 268570064,
             "selected_object": "RSP.obj",
             "selected_from_this_object": true,
             "entry_exact": false
@@ -6182,7 +6182,7 @@
     "limitation": "This independent data-layout diagnostic does not prove relocated pointer values. Strict whole-file equality remains false."
   },
   "remaining_work": [
-    "Complete 20 unmatched unique native bodies across DirectSound, MP3, processing and RSP.",
+    "Complete 19 unmatched unique native bodies across DirectSound, MP3, processing and RSP.",
     "Recover the remaining 416-byte strong/common BSS extent deficit, original identifiers/order.",
     "Preserve independently identified relocation targets while completing absolute code/data layout.",
     "Run fresh clean complete-byte acceptance after all source and build recovery."
@@ -6569,18 +6569,19 @@
       "analysis/audio-rsp-vector-store-match.json",
       "analysis/audio-rsp-small-copy-match.json",
       "analysis/audio-rsp-mixer-match.json",
-      "analysis/audio-rsp-legacy-vge-match.json"
+      "analysis/audio-rsp-legacy-vge-match.json",
+      "analysis/audio-dsound-lifetimes.json"
     ],
     "prior_instruction_matches": 377,
-    "current_instruction_matches": 397,
-    "note": "Twelve retained vector-multiply handlers, both general vector-memory helpers, four vector-copy handlers, the mixer and the legacy VGE comparison now reproduce complete native spans; other reconstructed functions retain their prior status."
+    "current_instruction_matches": 398,
+    "note": "Twelve retained vector-multiply handlers, both general vector-memory helpers, four vector-copy handlers, the mixer, legacy VGE and the DirectSound buffer allocator now reproduce complete native spans; other reconstructed functions retain their prior status."
   },
   "readonly_layout": {
     "report": "analysis/audio-readonly-comparison.json",
-    "sha256": "d3d575e6e8f12310887962d5db222446cad376212b359b1f57e80f5e64f98f16",
+    "sha256": "2b9dbcd99d5a53bf67396d92629e05bc91684372550e9e88ec61b60b31ed8a2f",
     "virtual_bytes": 17059,
     "raw_bytes": 20480,
-    "raw_differing_bytes": 125,
+    "raw_differing_bytes": 107,
     "highlow_sites_exact": true,
     "highlow_fields": 216,
     "export_layout_exact": true,
@@ -6591,24 +6592,24 @@
     "limitation": "Matching non-address bytes does not establish the identities or values of differing address fields, nor full DLL equality."
   },
   "matched_body_operands": {
-    "matched_coff_entries": 398,
+    "matched_coff_entries": 399,
     "unresolved_operands": 0,
     "mismatched_targets": 0,
-    "inferred_targets": 749,
+    "inferred_targets": 756,
     "limitation": "Resolved inferred targets establish consistency only; independent identities retain their separate evidence classifications."
   },
   "repeatability": {
     "status": "Current source checkpoint has one fresh frozen whole build; final acceptance remains pending.",
-    "prior_checkpoint_report_commit": "5ee8dea",
-    "prior_artifact": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/1zvd13or",
-    "prior_dll_sha256": "237ebec927158a848576604c9bab3702091ca736cfd7c080c32cd9e0cf85262a"
+    "prior_checkpoint_report_commit": "6520a09",
+    "prior_artifact": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/sx6wlsxo",
+    "prior_dll_sha256": "f70456b80cde4c83158ff124177d769d8add15b87795b2c04c996e3591ae7a42"
   },
   "latest_source_change": {
-    "commit": "bf82458",
-    "description": "Decode element first and use an unsigned loop index in the retained legacy VGE comparison. All 1104 bytes match with all 179 other RSP bodies unchanged.",
+    "commit": "9f83dcf",
+    "description": "Move the existing play-position reset before the half-buffer assignment, as observed in the older native routine. All96 allocator bytes match, preserving the other59 host bodies.",
     "instruction_matches_preserved": true,
     "full_dll_equal": false,
-    "independent_replay": "/root/.ai-tmp/audio-wrapper-root.8eyzxsw9/legacy-vge-replay.json",
-    "independent_replay_sha256": "0925487a79ff5ca4a604bfdff0d132cfb290bbeae4b43875ef0bb16352c28217"
+    "independent_replay": "/root/.ai-tmp/audio-dsound-replay-root.3zjt2v40/summary.json",
+    "independent_replay_sha256": "ad80de01830ec97686d6fdb1905bd456913fb484b24fa7600dcd75c689889a52"
   }
 }
