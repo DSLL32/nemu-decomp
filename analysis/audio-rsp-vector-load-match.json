@@ -1810,5 +1810,40 @@
     "All comparisons cover complete native extents, including switch table and compiler alignment. Relocations are materialized only in comparison buffers using the recorded independent-address map; no object or DLL is patched.",
     "This exact function does not establish complete DLL equality. Whole-file acceptance remains pending.",
     "These two ordinary source forms explain the native schedules; exact historical variable names and spelling remain inferred."
-  ]
+  ],
+  "independent_replay": {
+    "summary": {
+      "scratch": "/root/.ai-tmp/audio-rsp-load-replay-root.ebvdjgv7",
+      "command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_USRDLL",
+        "/FoRSP.obj",
+        "RSP.cpp"
+      ],
+      "functions": 180,
+      "exact": 161,
+      "matching_bytes": 40192,
+      "data_exact": 25,
+      "fields_exact": 11,
+      "unresolved": 0,
+      "changed_from_combined": [],
+      "source_sha256": "e02030c131406793734e61a5002920f7b4fe2f83e787cf00d6bab4a1da059c61",
+      "object_sha256": "36d058f2b419fec81b777b8d372a21f150ec2d7f9eae300a46f622a9129d75f3"
+    },
+    "summary_sha256": "07c0c214f58903ace2946a9e084764ee344a9f15b576982a79f5e9a23607988c",
+    "comparison_sha256": "6fc1bf2cba6469abeb6b346257d16ec7fc42484be3726deeb4902dad790dce17",
+    "compile_log_sha256": "a64316677225786753c0fafe00c313e135a78a9c060ebe622bc6957d62449f7d"
+  }
 }
