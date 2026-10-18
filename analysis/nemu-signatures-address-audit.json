@@ -1,0 +1,556 @@
+{
+  "kind": "SaveFunctionSignatures bounded source-mechanism audit",
+  "status": "incomplete; no better candidate and no source promotion",
+  "original": {
+    "path": "/root/nemu-decomp/master/nemu64.exe",
+    "sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a",
+    "entry": "0x0041FFA0",
+    "code_size": 663,
+    "complete_span": 672
+  },
+  "frozen_parent": {
+    "path": "/root/.ai-tmp/nemu-complete-relocs.jzocsk89/nemu64.exe",
+    "sha256": "f4841cdbdb5bf9e546812eb2af534eb58ef5fb8ee6c9d43c34f3f552de7f567f",
+    "fixed_parent_artifact": "/root/.ai-tmp/nemu-build.kf09k5wb/artifacts/cafc8da82df6c9379ffa85d2d11d62257b7c3cff7b0fbbcba403f1ed099a4c20"
+  },
+  "current_source": {
+    "path": "src/nemu64/RuntimeSignatures.cpp",
+    "sha256": "0af5a51b47b60aacbb62533c44ee7446937e74cf017c4665bc085f1acb438b6b",
+    "unchanged": true
+  },
+  "scratch": "/root/.ai-tmp/nemu-signature-address.f3njlcue",
+  "wine_prefix": "/root/.ai-tmp/nemu-signature-address.f3njlcue/wine",
+  "compiler": "VC7 /O2 /Ob1 /ML /GL; full /LTCG link with existing real relocation fixture",
+  "baseline_sections_vs_frozen_parent": [
+    {
+      "name": ".text",
+      "raw_size": 192512,
+      "equal": true,
+      "differing_bytes": 0,
+      "parent_sha256": "f39233c3adf7de73508325afa25a3adac3f4b17442c626c18ab5eb9d59a5cf12",
+      "baseline_sha256": "f39233c3adf7de73508325afa25a3adac3f4b17442c626c18ab5eb9d59a5cf12"
+    },
+    {
+      "name": ".rdata",
+      "raw_size": 61440,
+      "equal": true,
+      "differing_bytes": 0,
+      "parent_sha256": "fe26fddc7fb57a4c74e2ee2bfaaa07e1bba5e4a5d86084b7da5ae97b7a380aa7",
+      "baseline_sha256": "fe26fddc7fb57a4c74e2ee2bfaaa07e1bba5e4a5d86084b7da5ae97b7a380aa7"
+    },
+    {
+      "name": ".data",
+      "raw_size": 241664,
+      "equal": true,
+      "differing_bytes": 0,
+      "parent_sha256": "1755e98245636df24e833ec7f472fec413f5c541cdc1fca7004fd244834509b9",
+      "baseline_sha256": "1755e98245636df24e833ec7f472fec413f5c541cdc1fca7004fd244834509b9"
+    },
+    {
+      "name": ".rsrc",
+      "raw_size": 4296704,
+      "equal": true,
+      "differing_bytes": 0,
+      "parent_sha256": "6b75135c0e7c12a98c1bd1d23fd4cc946f17ecac8411156b0b94247960d8aa58",
+      "baseline_sha256": "6b75135c0e7c12a98c1bd1d23fd4cc946f17ecac8411156b0b94247960d8aa58"
+    },
+    {
+      "name": ".reloc",
+      "raw_size": 126976,
+      "equal": true,
+      "differing_bytes": 0,
+      "parent_sha256": "159b10117ca08e13a71db0477c5ac55cab8133b58add16a8dd52c90c720c1499",
+      "baseline_sha256": "159b10117ca08e13a71db0477c5ac55cab8133b58add16a8dd52c90c720c1499"
+    }
+  ],
+  "baseline": {
+    "complete_span": 672,
+    "code_size": 671,
+    "normalized_differing_bytes": 179
+  },
+  "comparison_count": 15,
+  "control_count_excluding_baseline": 14,
+  "scope": "Only SaveFunctionSignatures text changed in copied staged RuntimeSignatures.cpp; parent files and repository source untouched. Compiler and linker executed under private Wine prefix; generated app binaries were not executed.",
+  "prior_followups_checked": [
+    {
+      "hypothesis": "lastMatch immediately before FILE in inferred local aggregate",
+      "evidence": "/root/.ai-tmp/nemu-signature-lifetimes.7yc2ugv6/results/adjacent_history_field-report.json",
+      "result": "already tested; invariant 672-byte span / 179 differences"
+    },
+    {
+      "hypothesis": "late signature-entry reference after fflush or before address construction",
+      "evidence": "/root/.ai-tmp/nemu-signature-lifetimes.7yc2ugv6/HANDOFF.txt",
+      "result": "already tested; 672-byte span / 224 differences; table pointer still occupies EBP"
+    },
+    {
+      "hypothesis": "missing loop edge or alias explaining register lifetime",
+      "evidence": "/root/.ai-tmp/nemu-signature-dataflow.k0e2n69m/HANDOFF.txt",
+      "result": "previous actual-PE audit maps all 41 reachable blocks and finds no supported missing edge or frame-address escape"
+    }
+  ],
+  "findings": [
+    "The target restores the invariant scan base into EBP between the hash CMP at +18F and its JNE; the current body restores it later on separate success/mismatch paths.",
+    "Separate physical and virtual address locals, signed byte offset, in-place pointer-to-offset conversion, and named fprintf operands are byte invariant to the retained baseline.",
+    "Repeated guest-address expressions and formatting the stored replacement address both produce 672 bytes / 210 differences. They recover an offset-to-EAX copy but allocate the saved candidate to EBP, so this copy alone does not establish target base lifetime.",
+    "An explicit signature cursor and per-iteration entry reference retain the full 672-byte span but worsen allocation to 317 and 315 differences, respectively.",
+    "No control improves on 179 differences. HashSignatureInstruction remains a complete 160-byte match in all 15 linked outputs.",
+    "All five reproduced-baseline PE sections equal the frozen parent. No source was integrated, so the parent's previously matched functions remain unchanged."
+  ],
+  "limits": [
+    "Normalized byte metrics are not original-source proof.",
+    "Current SaveFunctionSignatures still does not match the original machine code.",
+    "This pass does not establish an alternative source declaration, compiler flag, or alias sufficient to explain the target allocation."
+  ],
+  "results": [
+    {
+      "variant": "address_first_record",
+      "source": "/root/.ai-tmp/nemu-signature-address.f3njlcue/variants/address_first_record.cpp",
+      "source_sha256": "7cd30cb74ebce054c12f8d5ceb45663a267e85756fceddafad67db591553c02e",
+      "image": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/address_first_record.exe",
+      "image_sha256": "c5b07f85b276a3c4eea6ba8cc588121a110d1cc03fb9c0ba32afe95f6f29d989",
+      "map_sha256": "debe83253696f3caee6f6d6d384e8267e224fc45676581b3f4ed3e0fce3cb673",
+      "report": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/address_first_record-report.json",
+      "report_sha256": "8b2f1288906333dd1e420660d862454435ed7ff781c604769735d57e2bfa5941",
+      "functions": [
+        {
+          "name": "HashSignatureInstruction",
+          "original_size": 160,
+          "rebuilt_size": 160,
+          "normalized_differing_bytes": 0,
+          "full_function_shape_match": true,
+          "instruction_and_known_target_match": true,
+          "rebuilt_extent_verified": true
+        },
+        {
+          "name": "SaveFunctionSignatures",
+          "original_size": 672,
+          "rebuilt_size": 688,
+          "normalized_differing_bytes": 220,
+          "full_function_shape_match": false,
+          "instruction_and_known_target_match": false,
+          "rebuilt_extent_verified": true
+        }
+      ]
+    },
+    {
+      "variant": "baseline",
+      "source": "/root/.ai-tmp/nemu-signature-address.f3njlcue/variants/baseline.cpp",
+      "source_sha256": "3cd2bddac95a910c3cc563c86290b14f2e291a4c6d391442712bac8087948d7b",
+      "image": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/baseline.exe",
+      "image_sha256": "5fc6f1c97e1b1c236d68403637f1cc6c4832e3517d7bfe6e8a7d9c26163e23c4",
+      "map_sha256": "5b5abcc2f7af9e9fcb18ef9042783b786b5e830722ee5009cee31e9fe058c4fc",
+      "report": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/baseline-report.json",
+      "report_sha256": "5d9c76e13ec3f2d7371e5709442e0a4cae2e8c75b90009bc5073cbce7210d521",
+      "functions": [
+        {
+          "name": "HashSignatureInstruction",
+          "original_size": 160,
+          "rebuilt_size": 160,
+          "normalized_differing_bytes": 0,
+          "full_function_shape_match": true,
+          "instruction_and_known_target_match": true,
+          "rebuilt_extent_verified": true
+        },
+        {
+          "name": "SaveFunctionSignatures",
+          "original_size": 672,
+          "rebuilt_size": 672,
+          "normalized_differing_bytes": 179,
+          "full_function_shape_match": false,
+          "instruction_and_known_target_match": false,
+          "rebuilt_extent_verified": true
+        }
+      ]
+    },
+    {
+      "variant": "byte_ptrdiff",
+      "source": "/root/.ai-tmp/nemu-signature-address.f3njlcue/variants/byte_ptrdiff.cpp",
+      "source_sha256": "674699cc5c02610d08a78278604fdc77c2ebe6f9fae854860d6cd19b54eef560",
+      "image": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/byte_ptrdiff.exe",
+      "image_sha256": "3b1eadde834366e67cea45e9858ef6b6ff425a1bf236ba325c3c7ca0a29e5303",
+      "map_sha256": "53842aaf5a7b9eae9c44ee148b6f8f20b989f62176e2f21222d91f3b598b06ee",
+      "report": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/byte_ptrdiff-report.json",
+      "report_sha256": "45be21a2fe9797ff7a219a77e4a78161c29d8ea482ea11173197103a7b75544f",
+      "functions": [
+        {
+          "name": "HashSignatureInstruction",
+          "original_size": 160,
+          "rebuilt_size": 160,
+          "normalized_differing_bytes": 0,
+          "full_function_shape_match": true,
+          "instruction_and_known_target_match": true,
+          "rebuilt_extent_verified": true
+        },
+        {
+          "name": "SaveFunctionSignatures",
+          "original_size": 672,
+          "rebuilt_size": 672,
+          "normalized_differing_bytes": 179,
+          "full_function_shape_match": false,
+          "instruction_and_known_target_match": false,
+          "rebuilt_extent_verified": true
+        }
+      ]
+    },
+    {
+      "variant": "candidate_to_physical_offset",
+      "source": "/root/.ai-tmp/nemu-signature-address.f3njlcue/variants/candidate_to_physical_offset.cpp",
+      "source_sha256": "a297dba6b9edae876787152b7b06e68d44fe7ce81cda400bf21aa68f444af4e3",
+      "image": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/candidate_to_physical_offset.exe",
+      "image_sha256": "338261e8f82737e848f3357d0d41602c3d88c1ae128556a3e6e41c02481c40ce",
+      "map_sha256": "d9a7dae119e1c2653e64e219f57ab95ae7bcb9de51c3dd340fc37db3bfd8405a",
+      "report": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/candidate_to_physical_offset-report.json",
+      "report_sha256": "6e93707c3af622e96f7e22e699e51f1f0bc85db3307cc0816fbdab06ed273d12",
+      "functions": [
+        {
+          "name": "HashSignatureInstruction",
+          "original_size": 160,
+          "rebuilt_size": 160,
+          "normalized_differing_bytes": 0,
+          "full_function_shape_match": true,
+          "instruction_and_known_target_match": true,
+          "rebuilt_extent_verified": true
+        },
+        {
+          "name": "SaveFunctionSignatures",
+          "original_size": 672,
+          "rebuilt_size": 672,
+          "normalized_differing_bytes": 179,
+          "full_function_shape_match": false,
+          "instruction_and_known_target_match": false,
+          "rebuilt_extent_verified": true
+        }
+      ]
+    },
+    {
+      "variant": "entry_iteration_reference",
+      "source": "/root/.ai-tmp/nemu-signature-address.f3njlcue/variants/entry_iteration_reference.cpp",
+      "source_sha256": "4ffc26ecc3e84499327184b2f8370cb0884481de87f82224c10bf24af3817d93",
+      "image": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/entry_iteration_reference.exe",
+      "image_sha256": "387ec58924f49ec801629a1d54889249e25914748bc623e5b4afe4d155de370d",
+      "map_sha256": "73dba162f571e58d5e0b3aef8b9d148a3d174c95b1b6a3a0f179433cb4eb2acb",
+      "report": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/entry_iteration_reference-report.json",
+      "report_sha256": "b366e509e6e264c99aa9e3dc25d146eb472ccc7d39eaa726b856cd1989773b2d",
+      "functions": [
+        {
+          "name": "HashSignatureInstruction",
+          "original_size": 160,
+          "rebuilt_size": 160,
+          "normalized_differing_bytes": 0,
+          "full_function_shape_match": true,
+          "instruction_and_known_target_match": true,
+          "rebuilt_extent_verified": true
+        },
+        {
+          "name": "SaveFunctionSignatures",
+          "original_size": 672,
+          "rebuilt_size": 672,
+          "normalized_differing_bytes": 315,
+          "full_function_shape_match": false,
+          "instruction_and_known_target_match": false,
+          "rebuilt_extent_verified": true
+        }
+      ]
+    },
+    {
+      "variant": "explicit_entry_cursor",
+      "source": "/root/.ai-tmp/nemu-signature-address.f3njlcue/variants/explicit_entry_cursor.cpp",
+      "source_sha256": "4d2acbca35b08b3985b1c6d71406b41e12b60f563fdb06423dc43a6070a6518f",
+      "image": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/explicit_entry_cursor.exe",
+      "image_sha256": "40371ea278b4b7e66e0f5fc25a8be2611530488a6fe4013e34bd8bc39bbc1727",
+      "map_sha256": "e8c24a1f3bb0ded60b9b9104acc1a0fbe1c0ad94aa6d40dc210acaf11685abcf",
+      "report": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/explicit_entry_cursor-report.json",
+      "report_sha256": "b9621fcae3e7793da84c49648a5a501b2167ff99ff31b2e340b8723fd0ca545a",
+      "functions": [
+        {
+          "name": "HashSignatureInstruction",
+          "original_size": 160,
+          "rebuilt_size": 160,
+          "normalized_differing_bytes": 0,
+          "full_function_shape_match": true,
+          "instruction_and_known_target_match": true,
+          "rebuilt_extent_verified": true
+        },
+        {
+          "name": "SaveFunctionSignatures",
+          "original_size": 672,
+          "rebuilt_size": 672,
+          "normalized_differing_bytes": 317,
+          "full_function_shape_match": false,
+          "instruction_and_known_target_match": false,
+          "rebuilt_extent_verified": true
+        }
+      ]
+    },
+    {
+      "variant": "format_stored_address",
+      "source": "/root/.ai-tmp/nemu-signature-address.f3njlcue/variants/format_stored_address.cpp",
+      "source_sha256": "45508ddfb91faca39be0de8d41ee172b617fd74c2f89503cc74b11b13e2a0b25",
+      "image": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/format_stored_address.exe",
+      "image_sha256": "836a9a8107cdebcb0533b696fd15568e70c0cfe86a6dff3455e0cb2428fa2741",
+      "map_sha256": "32dd1953f00d4f066bd09cf62de7092ffb5474effd3d8a588e458027e6718879",
+      "report": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/format_stored_address-report.json",
+      "report_sha256": "d43c1cbb9de6f9b44968a58a4cf2ba3ffe51366ae2ae6dfbdd3b4d1a6943ef12",
+      "functions": [
+        {
+          "name": "HashSignatureInstruction",
+          "original_size": 160,
+          "rebuilt_size": 160,
+          "normalized_differing_bytes": 0,
+          "full_function_shape_match": true,
+          "instruction_and_known_target_match": true,
+          "rebuilt_extent_verified": true
+        },
+        {
+          "name": "SaveFunctionSignatures",
+          "original_size": 672,
+          "rebuilt_size": 672,
+          "normalized_differing_bytes": 210,
+          "full_function_shape_match": false,
+          "instruction_and_known_target_match": false,
+          "rebuilt_extent_verified": true
+        }
+      ]
+    },
+    {
+      "variant": "named_log_address",
+      "source": "/root/.ai-tmp/nemu-signature-address.f3njlcue/variants/named_log_address.cpp",
+      "source_sha256": "82bfb5361a5272b2cbb25e54d131cf57a5872678b30c3013e06210b019b03795",
+      "image": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/named_log_address.exe",
+      "image_sha256": "21a0ecfda3ef8426e28437f2b4de761a6981a988cab473cd896257481bee66c1",
+      "map_sha256": "8073a8875a0b467f3aa60c7bb7e69d5f15643aca0af2813ae6f506f3708f0da7",
+      "report": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/named_log_address-report.json",
+      "report_sha256": "c87c1eec33a5d4d5eb5ea408d43bdf8c2344f12bc9c21153ecd2b783901c6008",
+      "functions": [
+        {
+          "name": "HashSignatureInstruction",
+          "original_size": 160,
+          "rebuilt_size": 160,
+          "normalized_differing_bytes": 0,
+          "full_function_shape_match": true,
+          "instruction_and_known_target_match": true,
+          "rebuilt_extent_verified": true
+        },
+        {
+          "name": "SaveFunctionSignatures",
+          "original_size": 672,
+          "rebuilt_size": 672,
+          "normalized_differing_bytes": 179,
+          "full_function_shape_match": false,
+          "instruction_and_known_target_match": false,
+          "rebuilt_extent_verified": true
+        }
+      ]
+    },
+    {
+      "variant": "named_log_name",
+      "source": "/root/.ai-tmp/nemu-signature-address.f3njlcue/variants/named_log_name.cpp",
+      "source_sha256": "e66c43cc6d9c3b94fb94c72792fefe00013dd5b21997b11dbb3095f5b1adb91a",
+      "image": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/named_log_name.exe",
+      "image_sha256": "64001437698c481e021321a22ddbfeaf4000d6302cb265b16aa6d2fe82f9896f",
+      "map_sha256": "f61c00f0bd16663553a17c502347573705ba31bffd3e516d0e10dd8673e7a924",
+      "report": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/named_log_name-report.json",
+      "report_sha256": "68ba81eebfb1ef100b2257c32f8614f429f4e7a53c74a013f09d95569f8e215c",
+      "functions": [
+        {
+          "name": "HashSignatureInstruction",
+          "original_size": 160,
+          "rebuilt_size": 160,
+          "normalized_differing_bytes": 0,
+          "full_function_shape_match": true,
+          "instruction_and_known_target_match": true,
+          "rebuilt_extent_verified": true
+        },
+        {
+          "name": "SaveFunctionSignatures",
+          "original_size": 672,
+          "rebuilt_size": 672,
+          "normalized_differing_bytes": 179,
+          "full_function_shape_match": false,
+          "instruction_and_known_target_match": false,
+          "rebuilt_extent_verified": true
+        }
+      ]
+    },
+    {
+      "variant": "physical_then_virtual",
+      "source": "/root/.ai-tmp/nemu-signature-address.f3njlcue/variants/physical_then_virtual.cpp",
+      "source_sha256": "ee622d2784e68da00dc9e9acee0789d4fedb1b077aa4a63ad101d0c5f91e41ff",
+      "image": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/physical_then_virtual.exe",
+      "image_sha256": "1e7228d422d5067a0d4faffc16f24fd5a4986556fe2db4e040815078493905ab",
+      "map_sha256": "4646354d10aa3c8084dd361f10b682b1045ae8abd426f9f006c7618cd02be9b0",
+      "report": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/physical_then_virtual-report.json",
+      "report_sha256": "d93c32a85283a3215a4f20f25e056890532fa3e9e94caa1ffc5a4d16b52ef044",
+      "functions": [
+        {
+          "name": "HashSignatureInstruction",
+          "original_size": 160,
+          "rebuilt_size": 160,
+          "normalized_differing_bytes": 0,
+          "full_function_shape_match": true,
+          "instruction_and_known_target_match": true,
+          "rebuilt_extent_verified": true
+        },
+        {
+          "name": "SaveFunctionSignatures",
+          "original_size": 672,
+          "rebuilt_size": 672,
+          "normalized_differing_bytes": 179,
+          "full_function_shape_match": false,
+          "instruction_and_known_target_match": false,
+          "rebuilt_extent_verified": true
+        }
+      ]
+    },
+    {
+      "variant": "repeat_address_expression",
+      "source": "/root/.ai-tmp/nemu-signature-address.f3njlcue/variants/repeat_address_expression.cpp",
+      "source_sha256": "785515a85a9d04c35e269332be2953320c7d6304595793b2bc49b634c1d0d342",
+      "image": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/repeat_address_expression.exe",
+      "image_sha256": "b27fca7afb44a558a697059956b123c6161de22cf52180b5e57b44dd238ca4a7",
+      "map_sha256": "55c7a5be667badfdcf29e72a8109540c054762ea87cf420bc6e326908acae968",
+      "report": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/repeat_address_expression-report.json",
+      "report_sha256": "85e4f06d7f08322bd3c378835f977473398d48894c4e2eb5b873e980ca9a62a0",
+      "functions": [
+        {
+          "name": "HashSignatureInstruction",
+          "original_size": 160,
+          "rebuilt_size": 160,
+          "normalized_differing_bytes": 0,
+          "full_function_shape_match": true,
+          "instruction_and_known_target_match": true,
+          "rebuilt_extent_verified": true
+        },
+        {
+          "name": "SaveFunctionSignatures",
+          "original_size": 672,
+          "rebuilt_size": 672,
+          "normalized_differing_bytes": 210,
+          "full_function_shape_match": false,
+          "instruction_and_known_target_match": false,
+          "rebuilt_extent_verified": true
+        }
+      ]
+    },
+    {
+      "variant": "replacement_record",
+      "source": "/root/.ai-tmp/nemu-signature-address.f3njlcue/variants/replacement_record.cpp",
+      "source_sha256": "49d17cf2d64fe6bc0408e3d1c86c0ce703e006b1e9fd93aedc9b1a1ad037b75a",
+      "image": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/replacement_record.exe",
+      "image_sha256": "7f35b4e7d0df8ca6d9f5a94138ec2751440c50523d3ce659ed09cc2466ab3b1c",
+      "map_sha256": "bab3a485a5ef6db9aa06d1246ec3348cc949f1a1b9cf9ee9b06ba18ef1685700",
+      "report": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/replacement_record-report.json",
+      "report_sha256": "5769c44cc5eed87a76da9f310b6b8462c33a36ef67033c6c7f1dc861a10e9555",
+      "functions": [
+        {
+          "name": "HashSignatureInstruction",
+          "original_size": 160,
+          "rebuilt_size": 160,
+          "normalized_differing_bytes": 0,
+          "full_function_shape_match": true,
+          "instruction_and_known_target_match": true,
+          "rebuilt_extent_verified": true
+        },
+        {
+          "name": "SaveFunctionSignatures",
+          "original_size": 672,
+          "rebuilt_size": 688,
+          "normalized_differing_bytes": 531,
+          "full_function_shape_match": false,
+          "instruction_and_known_target_match": false,
+          "rebuilt_extent_verified": true
+        }
+      ]
+    },
+    {
+      "variant": "replacement_reference",
+      "source": "/root/.ai-tmp/nemu-signature-address.f3njlcue/variants/replacement_reference.cpp",
+      "source_sha256": "cfe97c158acf20f0bd4f0d8b5f125b041a4154c366b32495382d6cf499601d6b",
+      "image": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/replacement_reference.exe",
+      "image_sha256": "725762ffcb763fc521fac960b561d90c40e5744fb14ccd3f19c219a2adb7940a",
+      "map_sha256": "ed40693d8e70bce68b54b4f9bc851742ca9ba48a5bc271eeece70d53aa56c36c",
+      "report": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/replacement_reference-report.json",
+      "report_sha256": "e756257eb64137a99c2ef43a67c0c736d11c5a6685062b353958f9badea980c5",
+      "functions": [
+        {
+          "name": "HashSignatureInstruction",
+          "original_size": 160,
+          "rebuilt_size": 160,
+          "normalized_differing_bytes": 0,
+          "full_function_shape_match": true,
+          "instruction_and_known_target_match": true,
+          "rebuilt_extent_verified": true
+        },
+        {
+          "name": "SaveFunctionSignatures",
+          "original_size": 672,
+          "rebuilt_size": 672,
+          "normalized_differing_bytes": 179,
+          "full_function_shape_match": false,
+          "instruction_and_known_target_match": false,
+          "rebuilt_extent_verified": true
+        }
+      ]
+    },
+    {
+      "variant": "signed_offset_then_virtual",
+      "source": "/root/.ai-tmp/nemu-signature-address.f3njlcue/variants/signed_offset_then_virtual.cpp",
+      "source_sha256": "7e6c0f9bed8a2835efd1eba27ab1551fe0135735af2235ae79e7b2a093ada967",
+      "image": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/signed_offset_then_virtual.exe",
+      "image_sha256": "819bedc6a43748caad79dfb204c44cbb8904342356652494c81a1de1514baa70",
+      "map_sha256": "8abe854feadf9341c3c151d3fc0a1db84cc932bf64316b865a4a6808a7a8789f",
+      "report": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/signed_offset_then_virtual-report.json",
+      "report_sha256": "ee6e99adc3051b257a7a59f5c1ee21619e3525074cf23c83ed458f8dee911b7b",
+      "functions": [
+        {
+          "name": "HashSignatureInstruction",
+          "original_size": 160,
+          "rebuilt_size": 160,
+          "normalized_differing_bytes": 0,
+          "full_function_shape_match": true,
+          "instruction_and_known_target_match": true,
+          "rebuilt_extent_verified": true
+        },
+        {
+          "name": "SaveFunctionSignatures",
+          "original_size": 672,
+          "rebuilt_size": 672,
+          "normalized_differing_bytes": 179,
+          "full_function_shape_match": false,
+          "instruction_and_known_target_match": false,
+          "rebuilt_extent_verified": true
+        }
+      ]
+    },
+    {
+      "variant": "word_ptrdiff",
+      "source": "/root/.ai-tmp/nemu-signature-address.f3njlcue/variants/word_ptrdiff.cpp",
+      "source_sha256": "b081298ba7163703e7f5a0efec92f461298c9580642ebf083f42e3f1da2f847e",
+      "image": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/word_ptrdiff.exe",
+      "image_sha256": "cd1c4355eeb520a018134e35b929bad6ff7359a6c13bebcb45928e02e34e6912",
+      "map_sha256": "1d54132b687a8513bf17749f49bb907c6b138add3b884962a7e55f7039868d54",
+      "report": "/root/.ai-tmp/nemu-signature-address.f3njlcue/results/word_ptrdiff-report.json",
+      "report_sha256": "96c1a7b98afdd2f33b6dfc66fd4ea525fc3f4b56121db8219727e52cb8c11f2b",
+      "functions": [
+        {
+          "name": "HashSignatureInstruction",
+          "original_size": 160,
+          "rebuilt_size": 160,
+          "normalized_differing_bytes": 0,
+          "full_function_shape_match": true,
+          "instruction_and_known_target_match": true,
+          "rebuilt_extent_verified": true
+        },
+        {
+          "name": "SaveFunctionSignatures",
+          "original_size": 672,
+          "rebuilt_size": 688,
+          "normalized_differing_bytes": 215,
+          "full_function_shape_match": false,
+          "instruction_and_known_target_match": false,
+          "rebuilt_extent_verified": true
+        }
+      ]
+    }
+  ]
+}
