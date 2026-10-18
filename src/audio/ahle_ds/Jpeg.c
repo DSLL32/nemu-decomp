@@ -229,7 +229,7 @@ void DCTList(unsigned int address)
  * See AMP-LICENSE.txt and analysis/audio-mp3-provenance.json.
  */
 
-float res[32][18];
+extern float res[32][18];
 int nch = 1;
 
 void poly(const int ch, int f, short sample_buffer[18][32][2])

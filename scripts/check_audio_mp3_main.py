@@ -93,7 +93,8 @@ def behavior(image, addresses, obj, seed, phase):
                ('state_input', STATE, STATE, 0x440),
                ('local_dmem', STACK - 0x3248, STACK - 0x3248, 0x1000)]
     regions += [(name, osymbols[name], rsymbols[name], 2)
-                for name in ('_Mp3V' + str(i) for i in range(32))]
+                for name in (['_d' + str(i) for i in range(32)] +
+                             ['_c' + str(i) for i in range(16)])]
     differences = []
     for region, left_address, right_address, size in regions:
         left = original.mem_read(left_address, size)

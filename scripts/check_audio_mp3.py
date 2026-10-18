@@ -111,6 +111,22 @@ def run(output):
         symbol_offsets_match=all(s['section'] == bss['index'] and s['value'] == offset
                                  for s, (_, offset) in zip(bss_symbols, bss_layout)),
         notes='Private ownership and extent are supported; original private names and array order remain unresolved.')
+    # The ancestor-backed scalar names reproduce the native LINK allocation.
+    # Check that this executable object retains the same common-symbol roster
+    # as the declaration-only control, including the unused inherited state.
+    common_audit_path = ROOT / 'analysis/audio-mp3-global-storage.json'
+    common_audit = json.loads(common_audit_path.read_text())
+    common = {unit: [dict(symbol=s['name'], size=s['value'])
+                     for s in obj.symbols if s['section'] == 0 and s['value']]
+              for unit, obj in objects.items()}
+    common_storage = dict(
+        audit=str(common_audit_path.relative_to(ROOT)),
+        audit_sha256=digest(common_audit_path),
+        original_va='0x101686c0', original_size=0x964,
+        symbols=common['Mp3'],
+        roster_and_order_equal=common['Mp3'] == common_audit['native_control']['common_symbols'],
+        jpeg_has_no_allocated_common_symbols=not common['Jpeg'],
+        notes='The native declaration-only LINK control establishes relative allocation; integrated absolute placement remains a separate check.')
     functions = [f for r in reports for f in r['functions']]
     result = dict(
         status='partial_native_source_reconstruction',
@@ -124,6 +140,7 @@ def run(output):
         address_map_sha256=digest(address_map), objects=reports, initialized_data=data,
         contiguous_initialized_layout=contiguous,
         private_uninitialized_layout=storage,
+        common_uninitialized_layout=common_storage,
         summary=dict(functions=len(functions),
                      original_function_bytes=sum(f.get('original_bytes', 0) for f in functions),
                      matching_complete_extents=sum(f.get('relocation_masked_equal', False)

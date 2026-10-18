@@ -25,7 +25,8 @@
     "No original x86 blobs, byte patches, dummy computation or synthetic padding are used. Compiler alignment belongs to complete measured function extents.",
     "The integer primitives, butterfly and Mp3DCT share one inferred Mp3.c unit: VC7 uses callee information to hoist invariant calls out of the synthesis loop.",
     "The inlined MultiplyFraction, AccumulateFraction and AccumulateUnsigned results stay 32-bit in the target caller. Their int-return declarations preserve all three out-of-line byte matches and remove unsupported caller narrowing; Mp3DCT remains unmatched.",
-    "The original contains thirteen complete 124-byte b1..b31 blocks. All 80 poly references use the ordinary private non-COMDAT block at 0x10031090. Header-only native compiler controls retain these unused constants in C and omit them in C++, while retaining t_dewindow in both languages; this independently agrees with thirteen C units and one C++ unit."
+    "The original contains thirteen complete 124-byte b1..b31 blocks. All 80 poly references use the ordinary private non-COMDAT block at 0x10031090. Header-only native compiler controls retain these unused constants in C and omit them in C++, while retaining t_dewindow in both languages; this independently agrees with thirteen C units and one C++ unit.",
+    "The fixed-point AMP workspace uses source-backed d0..d31,c0..c15 names. All 247 original scalar references are direct WORD accesses. Retaining the 16 unused inherited d16..d31 globals and placing res in Mp3.c gives the stock compiler/linker exactly the 49-symbol common roster and every observed relative address across the 0x964-byte interval; 4 natural alignment bytes remain before res."
   ],
   "unreconstructed": [],
   "unmatched": [
@@ -66,8 +67,12 @@
       "functions": 11,
       "initialized_start": "0x1003af50",
       "initialized_bytes": 2176,
-      "evidence": "The independently constrained 14 application translation units retain one common-header dewindow table each. Including transform.h first emits the tenth table unchanged and preserves all ten exact MP3 helper and butterfly bodies. Mp3DCT remains explicitly unmatched."
+      "evidence": "The independently constrained 14 application translation units retain one common-header dewindow table each. Including transform.h first emits the tenth table unchanged and preserves all ten exact MP3 helper and butterfly bodies. Mp3DCT remains explicitly unmatched.",
+      "common_uninitialized_start": "0x101686c0",
+      "common_uninitialized_bytes": 2404,
+      "common_uninitialized_evidence": "All 48 ancestor-backed short scalars and res[32][18] belong to Mp3.c. A declaration-only native LINK control reproduces all 32 observed scalar addresses and res relative to the group start. The 16 unused scalar addresses are explicitly inferred from this source-backed layout; integrated absolute placement remains separately checked."
     }
   ],
-  "storage_audit": "analysis/audio-mp3-storage-audit.json"
+  "storage_audit": "analysis/audio-mp3-storage-audit.json",
+  "global_storage_audit": "analysis/audio-mp3-global-storage.json"
 }

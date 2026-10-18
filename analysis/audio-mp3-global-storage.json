@@ -1,0 +1,795 @@
+{
+  "status": "source_backed_common_storage_reconstruction",
+  "original": "master/Plugin/audio.dll",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "primary_source": {
+    "url": "https://sources.debian.org/data/non-free/a/amp/0.7.6-1/transform.c",
+    "sha256": "35cab7a8eeb8be7a5b972a1aa108c7fc24ab05496962a33b43e8ba421b4703e0",
+    "declaration_lines": [
+      406,
+      407,
+      430
+    ],
+    "evidence": "AMP poly declares d0..d31 and c0..c15 as floating-point locals. The fixed-point target has the same initial d0,d1,d3,d2,d6,d7,d5,d4,d12,d13,d15,d14,d10,d11,d9,d8 input assignment order and matching butterfly dataflow. Its active WORD globals map to d0..d15 and c0..c15; all 48 inherited names are emitted as tentative short globals."
+  },
+  "original_operand_audit": {
+    "script": "/root/.ai-tmp/audio-mp3-20261017/storage-scan/scan.py",
+    "script_sha256": "ea19e76418af92288e7e5f246d920e2aeb55f1f163a51f90603158895a710eb5",
+    "report": "/root/.ai-tmp/audio-mp3-20261017/storage-scan/accesses.json",
+    "report_sha256": "1c3d5c47f7b29ccc6e7162081f12ecea8f941d683fa87cdff8823e6076fac5f4",
+    "references": 247,
+    "distinct_active_symbols": 32,
+    "all_widths_are_word": true,
+    "all_unindexed": true,
+    "all_relocation_fields_inside_decoded_instructions": true,
+    "functions": [
+      "Mp3Butterfly",
+      "Mp3DCT"
+    ],
+    "scope": "All target HIGHLOW relocations into the observed scalar storage slots; no references into the scalar gaps were found."
+  },
+  "compiler_flags": [
+    "/O2",
+    "/Ob1",
+    "/MT"
+  ],
+  "compiler_sha256": {
+    "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
+    "toolchains/vc7/bin/c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
+    "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0",
+    "toolchains/vc7/bin/link.exe": "1560d85164dfb763dd13f90f33ff9c6f1cd80f2afada03eed8d0a314593581f1"
+  },
+  "source_sha256": {
+    "src/audio/ahle_ds/Jpeg.c": "d6df5e74727885a45c0e0aa4beccbb860b7ef430030c3f1581404218ac04317a",
+    "src/audio/ahle_ds/Mp3.c": "68c1091a63569e6357ee8795ce4ee5b35ab718d0c23bae7246ae037f7174308d",
+    "src/audio/ahle_ds/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f"
+  },
+  "native_control": {
+    "source": "/root/.ai-tmp/audio-mp3-20261017/storage-scan/amp_globals.c",
+    "source_text": "short d0,d1,d2,d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d13,d14,d15;\nshort d16,d17,d18,d19,d20,d21,d22,d23,d24,d25,d26,d27,d28,d29,d30,d31;\nshort c0,c1,c2,c3,c4,c5,c6,c7,c8,c9,c10,c11,c12,c13,c14,c15;\nfloat res[32][18];\n",
+    "source_sha256": "b1ce72a892dd25a922ccfbdfeda51e771842621e858f1ee775d05c4f5d842523",
+    "object": "/root/.ai-tmp/audio-mp3-20261017/amp_globals.obj",
+    "object_sha256": "2b4e1a9db40372ce58fe0ec0aa23279edabe11595d8222de1ab7fd5444e99b1e",
+    "map": "/root/.ai-tmp/audio-mp3-20261017/storage-scan/amp_globals.map",
+    "map_sha256": "0dac4778371797064403ce720ecc6bdec0e308dc34c16573c305c0d449949573",
+    "dll": "/root/.ai-tmp/audio-mp3-20261017/storage-scan/amp_globals.dll",
+    "dll_sha256": "dfe76af65c82c3cb47dd50be68b89249f4117d6ad36eb06f091d2905aeff90f0",
+    "link_flags": [
+      "/DLL",
+      "/NOENTRY",
+      "/NODEFAULTLIB",
+      "/OPT:NOREF"
+    ],
+    "bss_extent_bytes": 2404,
+    "common_symbols": [
+      {
+        "symbol": "_d27",
+        "size": 2
+      },
+      {
+        "symbol": "_c14",
+        "size": 2
+      },
+      {
+        "symbol": "_res",
+        "size": 2304
+      },
+      {
+        "symbol": "_d15",
+        "size": 2
+      },
+      {
+        "symbol": "_d20",
+        "size": 2
+      },
+      {
+        "symbol": "_d13",
+        "size": 2
+      },
+      {
+        "symbol": "_d28",
+        "size": 2
+      },
+      {
+        "symbol": "_d1",
+        "size": 2
+      },
+      {
+        "symbol": "_c13",
+        "size": 2
+      },
+      {
+        "symbol": "_d30",
+        "size": 2
+      },
+      {
+        "symbol": "_d9",
+        "size": 2
+      },
+      {
+        "symbol": "_d25",
+        "size": 2
+      },
+      {
+        "symbol": "_c3",
+        "size": 2
+      },
+      {
+        "symbol": "_d31",
+        "size": 2
+      },
+      {
+        "symbol": "_d29",
+        "size": 2
+      },
+      {
+        "symbol": "_c6",
+        "size": 2
+      },
+      {
+        "symbol": "_d14",
+        "size": 2
+      },
+      {
+        "symbol": "_d4",
+        "size": 2
+      },
+      {
+        "symbol": "_d7",
+        "size": 2
+      },
+      {
+        "symbol": "_c0",
+        "size": 2
+      },
+      {
+        "symbol": "_d24",
+        "size": 2
+      },
+      {
+        "symbol": "_d3",
+        "size": 2
+      },
+      {
+        "symbol": "_c9",
+        "size": 2
+      },
+      {
+        "symbol": "_c15",
+        "size": 2
+      },
+      {
+        "symbol": "_c7",
+        "size": 2
+      },
+      {
+        "symbol": "_d5",
+        "size": 2
+      },
+      {
+        "symbol": "_c11",
+        "size": 2
+      },
+      {
+        "symbol": "_c12",
+        "size": 2
+      },
+      {
+        "symbol": "_d0",
+        "size": 2
+      },
+      {
+        "symbol": "_d11",
+        "size": 2
+      },
+      {
+        "symbol": "_d26",
+        "size": 2
+      },
+      {
+        "symbol": "_c4",
+        "size": 2
+      },
+      {
+        "symbol": "_d22",
+        "size": 2
+      },
+      {
+        "symbol": "_d12",
+        "size": 2
+      },
+      {
+        "symbol": "_c5",
+        "size": 2
+      },
+      {
+        "symbol": "_d8",
+        "size": 2
+      },
+      {
+        "symbol": "_d18",
+        "size": 2
+      },
+      {
+        "symbol": "_d10",
+        "size": 2
+      },
+      {
+        "symbol": "_c8",
+        "size": 2
+      },
+      {
+        "symbol": "_d23",
+        "size": 2
+      },
+      {
+        "symbol": "_d19",
+        "size": 2
+      },
+      {
+        "symbol": "_d21",
+        "size": 2
+      },
+      {
+        "symbol": "_d2",
+        "size": 2
+      },
+      {
+        "symbol": "_d16",
+        "size": 2
+      },
+      {
+        "symbol": "_c2",
+        "size": 2
+      },
+      {
+        "symbol": "_c10",
+        "size": 2
+      },
+      {
+        "symbol": "_d6",
+        "size": 2
+      },
+      {
+        "symbol": "_c1",
+        "size": 2
+      },
+      {
+        "symbol": "_d17",
+        "size": 2
+      }
+    ],
+    "notes": [
+      "This isolated compiler/linker control contains only genuine candidate declarations, with no functions. It is not linked into the reconstructed DLL.",
+      "No synthetic padding, symbol-name search, target instruction bytes or patched objects are used."
+    ]
+  },
+  "canonical_object": {
+    "path": "/root/.ai-tmp/audio-mp3-20261017/storage-scan/Mp3-promoted.obj",
+    "sha256": "21a138e9ac690204b5b55d0cf1838d45c027d3db130cb5be2e71f9f7ca3fea99",
+    "common_roster_and_order_equal_to_control": true,
+    "jpeg_common_symbols": [],
+    "res_owner": "src/audio/ahle_ds/Mp3.c",
+    "res_consumer": "extern declaration in src/audio/ahle_ds/Jpeg.c"
+  },
+  "layout": {
+    "original_start": "0x101686c0",
+    "original_end": "0x10169024",
+    "extent_bytes": 2404,
+    "known_active_short_symbols": 32,
+    "ancestor_backed_unused_short_symbols": 16,
+    "res_bytes": 2304,
+    "short_bytes_before_res": 92,
+    "natural_alignment_bytes_before_res": 4,
+    "short_bytes_after_res": 4,
+    "all_33_observed_addresses_match_control_relative_offsets": true,
+    "symbols": [
+      {
+        "symbol": "_d17",
+        "relative_offset": 0,
+        "control_va": "0x10001000",
+        "target_va": "0x101686c0",
+        "size": 2,
+        "address_basis": "ancestor_names_and_native_common_layout_inference",
+        "original_word_references": 0,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_c1",
+        "relative_offset": 2,
+        "control_va": "0x10001002",
+        "target_va": "0x101686c2",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 5,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d6",
+        "relative_offset": 4,
+        "control_va": "0x10001004",
+        "target_va": "0x101686c4",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 9,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_c10",
+        "relative_offset": 6,
+        "control_va": "0x10001006",
+        "target_va": "0x101686c6",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 8,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_c2",
+        "relative_offset": 8,
+        "control_va": "0x10001008",
+        "target_va": "0x101686c8",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 6,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d16",
+        "relative_offset": 10,
+        "control_va": "0x1000100a",
+        "target_va": "0x101686ca",
+        "size": 2,
+        "address_basis": "ancestor_names_and_native_common_layout_inference",
+        "original_word_references": 0,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d2",
+        "relative_offset": 12,
+        "control_va": "0x1000100c",
+        "target_va": "0x101686cc",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 7,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d21",
+        "relative_offset": 14,
+        "control_va": "0x1000100e",
+        "target_va": "0x101686ce",
+        "size": 2,
+        "address_basis": "ancestor_names_and_native_common_layout_inference",
+        "original_word_references": 0,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d19",
+        "relative_offset": 16,
+        "control_va": "0x10001010",
+        "target_va": "0x101686d0",
+        "size": 2,
+        "address_basis": "ancestor_names_and_native_common_layout_inference",
+        "original_word_references": 0,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d23",
+        "relative_offset": 18,
+        "control_va": "0x10001012",
+        "target_va": "0x101686d2",
+        "size": 2,
+        "address_basis": "ancestor_names_and_native_common_layout_inference",
+        "original_word_references": 0,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_c8",
+        "relative_offset": 20,
+        "control_va": "0x10001014",
+        "target_va": "0x101686d4",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 6,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d10",
+        "relative_offset": 22,
+        "control_va": "0x10001016",
+        "target_va": "0x101686d6",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 9,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d18",
+        "relative_offset": 24,
+        "control_va": "0x10001018",
+        "target_va": "0x101686d8",
+        "size": 2,
+        "address_basis": "ancestor_names_and_native_common_layout_inference",
+        "original_word_references": 0,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d8",
+        "relative_offset": 26,
+        "control_va": "0x1000101a",
+        "target_va": "0x101686da",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 6,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_c5",
+        "relative_offset": 28,
+        "control_va": "0x1000101c",
+        "target_va": "0x101686dc",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 6,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d12",
+        "relative_offset": 30,
+        "control_va": "0x1000101e",
+        "target_va": "0x101686de",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 9,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d22",
+        "relative_offset": 32,
+        "control_va": "0x10001020",
+        "target_va": "0x101686e0",
+        "size": 2,
+        "address_basis": "ancestor_names_and_native_common_layout_inference",
+        "original_word_references": 0,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_c4",
+        "relative_offset": 34,
+        "control_va": "0x10001022",
+        "target_va": "0x101686e2",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 4,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d26",
+        "relative_offset": 36,
+        "control_va": "0x10001024",
+        "target_va": "0x101686e4",
+        "size": 2,
+        "address_basis": "ancestor_names_and_native_common_layout_inference",
+        "original_word_references": 0,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d11",
+        "relative_offset": 38,
+        "control_va": "0x10001026",
+        "target_va": "0x101686e6",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 7,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d0",
+        "relative_offset": 40,
+        "control_va": "0x10001028",
+        "target_va": "0x101686e8",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 7,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_c12",
+        "relative_offset": 42,
+        "control_va": "0x1000102a",
+        "target_va": "0x101686ea",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 10,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_c11",
+        "relative_offset": 44,
+        "control_va": "0x1000102c",
+        "target_va": "0x101686ec",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 10,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d5",
+        "relative_offset": 46,
+        "control_va": "0x1000102e",
+        "target_va": "0x101686ee",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 9,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_c7",
+        "relative_offset": 48,
+        "control_va": "0x10001030",
+        "target_va": "0x101686f0",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 10,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_c15",
+        "relative_offset": 50,
+        "control_va": "0x10001032",
+        "target_va": "0x101686f2",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 11,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_c9",
+        "relative_offset": 52,
+        "control_va": "0x10001034",
+        "target_va": "0x101686f4",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 6,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d3",
+        "relative_offset": 54,
+        "control_va": "0x10001036",
+        "target_va": "0x101686f6",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 7,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d24",
+        "relative_offset": 56,
+        "control_va": "0x10001038",
+        "target_va": "0x101686f8",
+        "size": 2,
+        "address_basis": "ancestor_names_and_native_common_layout_inference",
+        "original_word_references": 0,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_c0",
+        "relative_offset": 58,
+        "control_va": "0x1000103a",
+        "target_va": "0x101686fa",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 5,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d7",
+        "relative_offset": 60,
+        "control_va": "0x1000103c",
+        "target_va": "0x101686fc",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 7,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d4",
+        "relative_offset": 62,
+        "control_va": "0x1000103e",
+        "target_va": "0x101686fe",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 9,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d14",
+        "relative_offset": 64,
+        "control_va": "0x10001040",
+        "target_va": "0x10168700",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 9,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_c6",
+        "relative_offset": 66,
+        "control_va": "0x10001042",
+        "target_va": "0x10168702",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 9,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d29",
+        "relative_offset": 68,
+        "control_va": "0x10001044",
+        "target_va": "0x10168704",
+        "size": 2,
+        "address_basis": "ancestor_names_and_native_common_layout_inference",
+        "original_word_references": 0,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d31",
+        "relative_offset": 70,
+        "control_va": "0x10001046",
+        "target_va": "0x10168706",
+        "size": 2,
+        "address_basis": "ancestor_names_and_native_common_layout_inference",
+        "original_word_references": 0,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_c3",
+        "relative_offset": 72,
+        "control_va": "0x10001048",
+        "target_va": "0x10168708",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 8,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d25",
+        "relative_offset": 74,
+        "control_va": "0x1000104a",
+        "target_va": "0x1016870a",
+        "size": 2,
+        "address_basis": "ancestor_names_and_native_common_layout_inference",
+        "original_word_references": 0,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d9",
+        "relative_offset": 76,
+        "control_va": "0x1000104c",
+        "target_va": "0x1016870c",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 7,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d30",
+        "relative_offset": 78,
+        "control_va": "0x1000104e",
+        "target_va": "0x1016870e",
+        "size": 2,
+        "address_basis": "ancestor_names_and_native_common_layout_inference",
+        "original_word_references": 0,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_c13",
+        "relative_offset": 80,
+        "control_va": "0x10001050",
+        "target_va": "0x10168710",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 10,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d1",
+        "relative_offset": 82,
+        "control_va": "0x10001052",
+        "target_va": "0x10168712",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 7,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d28",
+        "relative_offset": 84,
+        "control_va": "0x10001054",
+        "target_va": "0x10168714",
+        "size": 2,
+        "address_basis": "ancestor_names_and_native_common_layout_inference",
+        "original_word_references": 0,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d13",
+        "relative_offset": 86,
+        "control_va": "0x10001056",
+        "target_va": "0x10168716",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 6,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d20",
+        "relative_offset": 88,
+        "control_va": "0x10001058",
+        "target_va": "0x10168718",
+        "size": 2,
+        "address_basis": "ancestor_names_and_native_common_layout_inference",
+        "original_word_references": 0,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d15",
+        "relative_offset": 90,
+        "control_va": "0x1000105a",
+        "target_va": "0x1016871a",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 7,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_res",
+        "relative_offset": 96,
+        "control_va": "0x10001060",
+        "target_va": "0x10168720",
+        "size": 2304,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 0,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_c14",
+        "relative_offset": 2400,
+        "control_va": "0x10001960",
+        "target_va": "0x10169020",
+        "size": 2,
+        "address_basis": "original_absolute_operands",
+        "original_word_references": 11,
+        "relative_offset_matches": true
+      },
+      {
+        "symbol": "_d27",
+        "relative_offset": 2402,
+        "control_va": "0x10001962",
+        "target_va": "0x10169022",
+        "size": 2,
+        "address_basis": "ancestor_names_and_native_common_layout_inference",
+        "original_word_references": 0,
+        "relative_offset_matches": true
+      }
+    ]
+  },
+  "validation": {
+    "component_report": "analysis/audio-mp3-comparison.json",
+    "matching_complete_extents": 20,
+    "matching_complete_extent_bytes": 11824,
+    "initialized_data_bytes": 5016,
+    "initialized_data_equal": true,
+    "main_report": "analysis/audio-mp3-main-comparison.json",
+    "main_byte_exact": false,
+    "behavioral_cases_matching": 48,
+    "behavioral_cases": 48
+  },
+  "limitations": [
+    "The 16 unused short addresses are inferred from the ancestor names and native layout; no target instructions reference them.",
+    "The isolated control proves native relative allocation, while absolute placement still depends on the integrated linker inputs.",
+    "Mp3DCT and JPEG private-array order remain unmatched; this storage reconstruction does not establish whole-DLL byte identity."
+  ]
+}
