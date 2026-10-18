@@ -17,7 +17,7 @@ import subprocess
 import sys
 import tempfile
 
-from verify_audio import compare_objects, load_symbols, ORIGINAL
+from verify_audio import compare_objects, compare_native_link_layout, load_symbols, ORIGINAL
 from verify_gs import compare_dll
 from pe_fingerprints import PE32
 from seed_audio_pdb import seed_pdb
@@ -166,6 +166,7 @@ def main():
                 emitted_metadata=actual,expected_metadata=expected,metadata_exact=actual==expected)
             if actual!=expected: raise RuntimeError('Native final LINK did not reproduce historical metadata')
             report.update(compare_dll(work/'audio.dll',ORIGINAL))
+            report['native_link_layout'] = compare_native_link_layout(report['objects'], work/'audio.map')
             result=0 if report['full_dll_byte_exact'] else 1
     except (RuntimeError,subprocess.TimeoutExpired) as error:
         report['build_error']=str(error)

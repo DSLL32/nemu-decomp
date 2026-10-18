@@ -8,6 +8,7 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
+import re
 
 from pe_fingerprints import PE32
 from verify_gs import COFF, TargetSymbols, compare_function, compare_dll
@@ -74,6 +75,55 @@ def compare_objects(paths, records=None):
                             relocation_masked_matches=sum(f.get('relocation_masked_equal',False) for f in functions),
                             relocated_exact_matches=sum(f.get('relocated_bytes_equal',False) for f in functions)))
     return results
+
+
+def compare_native_link_layout(objects, map_path):
+    """Check actual LINK placement, including natural COMDAT selection.
+
+    A matching object body does not establish the order of linked functions.
+    In particular, VC7 can defer callers of forward-declared inline helpers.
+    This records the selected owner and compares the complete native order.
+    It remains a diagnostic; only a complete DLL byte comparison is acceptance.
+    """
+    linked = {}
+    pattern = re.compile(
+        r'^\s+[0-9a-fA-F]{4}:[0-9a-fA-F]{8}\s+(\S+)\s+'
+        r'([0-9a-fA-F]{8})\s+(?:f\s+)?(?:i\s+)?(\S+)\s*$')
+    for line in Path(map_path).read_text(errors='replace').splitlines():
+        match = pattern.match(line)
+        if match:
+            linked[match[1]] = (int(match[2], 16), match[3])
+    units, selected = [], {}
+    for obj in objects:
+        name = Path(obj['object']).name
+        functions = []
+        for function in obj['functions']:
+            if function['status'] != 'compared':
+                continue
+            original = function['original_va']
+            if isinstance(original, str):
+                original = int(original, 0)
+            address, owner = linked.get(function['name'], (None, None))
+            row = dict(name=function['name'], original_va=original,
+                       linked_va=address, selected_object=owner,
+                       selected_from_this_object=owner == name,
+                       entry_exact=address == original)
+            functions.append(row)
+            if owner == name:
+                selected[row['name']] = row
+        retained = [f for f in functions if f['selected_from_this_object']]
+        original_order = [f['name'] for f in sorted(retained, key=lambda f: f['original_va'])]
+        linked_order = [f['name'] for f in sorted(retained, key=lambda f: f['linked_va'])]
+        units.append(dict(object=name, functions=functions,
+                          native_order_exact=original_order == linked_order,
+                          original_order=original_order, linked_order=linked_order))
+    original_order = [f['name'] for f in sorted(selected.values(), key=lambda f: f['original_va'])]
+    linked_order = [f['name'] for f in sorted(selected.values(), key=lambda f: f['linked_va'])]
+    return dict(scope='Native application function placement; full DLL equality is checked separately.',
+                selected_unique_functions=len(selected),
+                exact_entry_addresses=sum(f['entry_exact'] for f in selected.values()),
+                native_order_exact=original_order == linked_order,
+                original_order=original_order, linked_order=linked_order, units=units)
 
 
 def main():
