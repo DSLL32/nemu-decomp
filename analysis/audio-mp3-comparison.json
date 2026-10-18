@@ -16,14 +16,14 @@
   },
   "source_sha256": {
     "src/audio/ahle_ds/Jpeg.c": "82ebf8c9d72e8c83d42bb97e3351627462336fb2693d47b449b803d6537988ac",
-    "src/audio/ahle_ds/Mp3.c": "68c1091a63569e6357ee8795ce4ee5b35ab718d0c23bae7246ae037f7174308d",
+    "src/audio/ahle_ds/Mp3.c": "d9dccbd10b72f540528496c33f04f8a63d3b9bd1f39839a70ac8a16ef5a87b3a",
     "src/audio/ahle_ds/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f"
   },
   "address_map_sha256": "3a150ef38580419ad2d620c48087d4710ea206172de55b9c5b815de17a04272d",
   "objects": [
     {
-      "object": "/root/.ai-tmp/audio-jpeg-shape.m1xd3v4y/canonical/Jpeg.obj",
-      "sha256": "3e396dffbd5caab7cf2e179b187d5858d053f65b6a1616797d9becc91d2a1497",
+      "object": "/root/.ai-tmp/audio-mp3-20261017/Jpeg.obj",
+      "sha256": "3eef4ba176ad51411dc0aa957c625e34fbb132baa1143559f4f640a54257a39f",
       "original": "/root/nemu-decomp/master/Plugin/audio.dll",
       "functions": [
         {
@@ -3827,11 +3827,12 @@
       "relocation_checked_matches": 2,
       "relocation_target_mismatches": 0,
       "inferred_targets": 79,
-      "unresolved_targets": 0
+      "unresolved_targets": 0,
+      "additional_functions_outside_component_scope": []
     },
     {
-      "object": "/root/.ai-tmp/audio-jpeg-shape.m1xd3v4y/canonical/Mp3.obj",
-      "sha256": "880a2d90f78c3909ac1be88265274ca418cd6c3eaa9bfc8a0411fbfd40f5a655",
+      "object": "/root/.ai-tmp/audio-mp3-20261017/Mp3.obj",
+      "sha256": "6698f79dd4eda035275f5f5d4bf6ced5abefa3c2dab6a062a4083cfae573e1a5",
       "original": "/root/nemu-decomp/master/Plugin/audio.dll",
       "functions": [
         {
@@ -8505,7 +8506,31 @@
       "relocation_checked_matches": 9,
       "relocation_target_mismatches": 104,
       "inferred_targets": 1,
-      "unresolved_targets": 0
+      "unresolved_targets": 0,
+      "additional_functions_outside_component_scope": [
+        "_ReadAudioSamples",
+        "_InitializeAudioSqrt",
+        "_LoadAudioEnvelope",
+        "_SaveAudioEnvelope",
+        "_ResetAudioEnvelope",
+        "_AudioCPUHasSSE",
+        "_AudioOSHasSSE",
+        "_AudioClampECX",
+        "_EnvMixerSSE",
+        "_EnvMixer3DNow",
+        "_EnvMixerScalar",
+        "_EnvMixerBlockScalar",
+        "_EnvMixerABI3Scalar",
+        "_EnvMixerABI3_3DNow",
+        "_EnvMixerABI3SSE",
+        "_EnvMixerSpecial",
+        "_ClampAudioSample",
+        "_MixAudioEnvelopeCommand",
+        "_MixAudioEnvelopeClamped",
+        "_MixAudioEnvelope",
+        "_MixAudioEnvelopeLegacy",
+        "_MixAudioEnvelopeUnsigned"
+      ]
     }
   ],
   "initialized_data": [
@@ -8922,6 +8947,7 @@
   ],
   "whole_dll_byte_exact": false,
   "notes": [
+    "The component scope is the original JPEG/MP3 band 0x10006cb0..0x1000aed0; later functions sharing Mp3.c are covered by whole-audio diagnostics.",
     "Code comparisons cover complete function extents, including stock compiler alignment.",
     "Only recorded COFF relocation fields are masked; local branches and SIB bytes are compared.",
     "Reconstruction names and BSS addresses inferred from operands remain explicitly labelled.",

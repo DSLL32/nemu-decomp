@@ -16,13 +16,13 @@
     "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0"
   },
   "source_sha256": {
-    "src/audio/ahle_ds/Mp3.c": "68c1091a63569e6357ee8795ce4ee5b35ab718d0c23bae7246ae037f7174308d",
+    "src/audio/ahle_ds/Mp3.c": "d9dccbd10b72f540528496c33f04f8a63d3b9bd1f39839a70ac8a16ef5a87b3a",
     "src/audio/ahle_ds/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
-    "scripts/check_audio_mp3_main.py": "ca6102443dbf3fae589e15e9f19f1eae3162f7ba4d889b60d427b2864a6c97b2"
+    "scripts/check_audio_mp3_main.py": "190013b5ce934a0344b68a24693e45fd5695b20898415ab0155020e6a5374956"
   },
-  "address_map_sha256": "8ab75d14769e0ca66d3254773cbe552b234b05a56e2212051f47d780eb9758be",
+  "address_map_sha256": "3a150ef38580419ad2d620c48087d4710ea206172de55b9c5b815de17a04272d",
   "crt_map_sha256": "261eb6b86c3254d8d5183c79eaf8bee91b0acae5406ac98bbf5a398a0a92018d",
-  "object_sha256": "80374675e471783726bb41fbc61644ad48f54dc402a6952fe2a333055bba3649",
+  "object_sha256": "af54b656e29c8206284a4501932f3d3b82c66b4d3f407bc0010a8ae8402b22d5",
   "comparison": {
     "name": "_Mp3DCT",
     "object": null,
@@ -1912,6 +1912,14 @@
       281
     ]
   },
+  "compiled_function_count": 33,
+  "emulated_coff_sections": [
+    8,
+    10,
+    22,
+    24,
+    26
+  ],
   "frame_exact": true,
   "behavioral_cases": [
     {
@@ -2210,6 +2218,7 @@
     "Mp3DCT is included in diagnostic DLL builds, but its complete function bytes do not match.",
     "Finite behavioral matches do not establish byte equality or universal equivalence.",
     "The emulator runs the original independently identified CRT and memory-copy callees.",
+    "Only actual COFF sections reachable from Mp3DCT are emulated; unrelated processing/envelope functions in the same unit are checked separately.",
     "Only ordinary COFF relocations are applied inside disposable emulator memory.",
     "Helper declarations, local value widths and original source layout remain unresolved."
   ]

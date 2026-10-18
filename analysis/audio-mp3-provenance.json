@@ -26,7 +26,8 @@
     "The integer primitives, butterfly and Mp3DCT share one inferred Mp3.c unit: VC7 uses callee information to hoist invariant calls out of the synthesis loop.",
     "The inlined MultiplyFraction, AccumulateFraction and AccumulateUnsigned results stay 32-bit in the target caller. Their int-return declarations preserve all three out-of-line byte matches and remove unsupported caller narrowing; Mp3DCT remains unmatched.",
     "The original contains thirteen complete 124-byte b1..b31 blocks. All 80 poly references use the ordinary private non-COMDAT block at 0x10031090. Header-only native compiler controls retain these unused constants in C and omit them in C++, while retaining t_dewindow in both languages; this independently agrees with thirteen C units and one C++ unit.",
-    "The fixed-point AMP workspace uses source-backed d0..d31,c0..c15 names. All 247 original scalar references are direct WORD accesses. Retaining the 16 unused inherited d16..d31 globals and placing res in Mp3.c gives the stock compiler/linker exactly the 49-symbol common roster and every observed relative address across the 0x964-byte interval; 4 natural alignment bytes remain before res."
+    "The fixed-point AMP workspace uses source-backed d0..d31,c0..c15 names. All 247 original scalar references are direct WORD accesses. Retaining the 16 unused inherited d16..d31 globals and placing res in Mp3.c gives the stock compiler/linker exactly the 49-symbol common roster and every observed relative address across the 0x964-byte interval; 4 natural alignment bytes remain before res.",
+    "The MP3 component check selects its original eleven functions from the expanded 33-function Mp3.c unit and reports the other twenty-two separately. Its machine-execution diagnostic follows actual COFF section dependencies from Mp3DCT, without resolving unrelated processing imports."
   ],
   "unreconstructed": [],
   "unmatched": [
@@ -63,17 +64,24 @@
     {
       "source": "src/audio/ahle_ds/Mp3.c",
       "start": "0x100093f0",
-      "end": "0x1000aed0",
-      "functions": 11,
+      "end": "0x10010590",
+      "functions": 33,
       "initialized_start": "0x1003af50",
       "initialized_bytes": 2176,
-      "evidence": "The independently constrained 14 application translation units retain one common-header dewindow table each. Including transform.h first emits the tenth table unchanged and preserves all ten exact MP3 helper and butterfly bodies. Mp3DCT remains explicitly unmatched.",
+      "evidence": "The native readonly layout places the tenth 124-byte AMP constant block before the SSE scope record and envelope literals. Combining the MP3 functions with the following processing/envelope prefix, while separating Scale/FIR/profile and Dump/decoders into the next two units, places all thirteen constant blocks at their original addresses and preserves all 52 existing raw COFF bodies. The tenth dewindow table remains unchanged. File names are inferred; Mp3DCT remains explicitly unmatched.",
       "common_uninitialized_start": "0x101686c0",
       "common_uninitialized_bytes": 2404,
-      "common_uninitialized_evidence": "All 48 ancestor-backed short scalars and res[32][18] belong to Mp3.c. A declaration-only native LINK control reproduces all 32 observed scalar addresses and res relative to the group start. The 16 unused scalar addresses are explicitly inferred from this source-backed layout; integrated absolute placement remains separately checked."
+      "common_uninitialized_evidence": "All 48 ancestor-backed short scalars and res[32][18] belong to Mp3.c. A declaration-only native LINK control reproduces all 32 observed scalar addresses and res relative to the group start. The 16 unused scalar addresses are explicitly inferred from this source-backed layout; integrated absolute placement remains separately checked.",
+      "component_scope": {
+        "start": "0x100093f0",
+        "end": "0x1000aed0",
+        "functions": 11,
+        "additional_functions_checked_by": "analysis/audio-source-grouping.json"
+      }
     }
   ],
   "storage_audit": "analysis/audio-mp3-storage-audit.json",
   "global_storage_audit": "analysis/audio-mp3-global-storage.json",
-  "jpeg_storage_ancestry": "analysis/audio-jpeg-storage-ancestry.json"
+  "jpeg_storage_ancestry": "analysis/audio-jpeg-storage-ancestry.json",
+  "source_grouping_audit": "analysis/audio-source-grouping.json"
 }

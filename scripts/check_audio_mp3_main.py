@@ -37,6 +37,23 @@ def winpath(path):
     return 'Z:' + str(path.resolve()).replace('/', '\\')
 
 
+def reachable_sections(obj, root='_Mp3DCT'):
+    """Follow actual COFF references without relocating unrelated unit code."""
+    symbol = next(s for s in obj.symbols if s['name'] == root and s['section'] > 0)
+    pending = [symbol['section']]
+    selected = set()
+    while pending:
+        index = pending.pop()
+        if index in selected:
+            continue
+        selected.add(index)
+        for relocation in obj.sections[index - 1]['relocations']:
+            target = relocation['symbol']['section']
+            if target > 0:
+                pending.append(target)
+    return selected
+
+
 def machine(image, addresses, obj=None):
     from unicorn import Uc, UC_ARCH_X86, UC_MODE_32
     cpu = Uc(UC_ARCH_X86, UC_MODE_32)
@@ -49,14 +66,19 @@ def machine(image, addresses, obj=None):
         cpu.mem_map(address, size)
     symbols = dict(addresses)
     if obj:
-        cpu.mem_map(0x20000000, (len(obj.sections) + 1) * 0x100000)
-        for index, section in enumerate(obj.sections):
-            cpu.mem_write(0x20000000 + index * 0x100000, section['data'])
+        selected = reachable_sections(obj)
+        for index in sorted(selected):
+            section = obj.sections[index - 1]
+            address = 0x20000000 + (index - 1) * 0x100000
+            cpu.mem_map(address, 0x100000)
+            cpu.mem_write(address, section['data'])
         for symbol in obj.symbols:
-            if symbol['section'] > 0:
+            if symbol['section'] in selected:
                 symbols[symbol['name']] = (0x20000000 +
                     (symbol['section'] - 1) * 0x100000 + symbol['value'])
-        for index, section in enumerate(obj.sections):
+        for section_index in sorted(selected):
+            index = section_index - 1
+            section = obj.sections[index]
             for relocation in section['relocations']:
                 address = 0x20000000 + index * 0x100000 + relocation['offset']
                 addend = struct.unpack('<I', cpu.mem_read(address, 4))[0]
@@ -144,6 +166,8 @@ def run(output):
         source_sha256={str(p.relative_to(ROOT)): digest(p) for p in sources},
         address_map_sha256=digest(map_path), crt_map_sha256=digest(library_path),
         object_sha256=digest(objpath), comparison=comparison,
+        compiled_function_count=sum(1 for _ in obj.functions()),
+        emulated_coff_sections=sorted(reachable_sections(obj)),
         frame_exact=frame_exact, behavioral_cases=cases,
         behavioral_matching=sum(c['matching'] for c in cases),
         byte_exact=bool(comparison.get('inferred_relocated_bytes_equal')),
@@ -152,6 +176,7 @@ def run(output):
             'Mp3DCT is included in diagnostic DLL builds, but its complete function bytes do not match.',
             'Finite behavioral matches do not establish byte equality or universal equivalence.',
             'The emulator runs the original independently identified CRT and memory-copy callees.',
+            'Only actual COFF sections reachable from Mp3DCT are emulated; unrelated processing/envelope functions in the same unit are checked separately.',
             'Only ordinary COFF relocations are applied inside disposable emulator memory.',
             'Helper declarations, local value widths and original source layout remain unresolved.',
         ])

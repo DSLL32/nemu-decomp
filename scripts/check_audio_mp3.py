@@ -52,9 +52,17 @@ def run(output):
     original = ROOT / 'master/Plugin/audio.dll'
     image = PE32(original)
     address_map = ROOT / 'analysis/audio-mp3-addresses.json'
-    reports = [compare_object(output / (unit + '.obj'), original, address_map)
+    # Mp3.c also owns the following processing/envelope band. This diagnostic
+    # keeps its original JPEG/MP3 scope; the whole-audio verifier covers the
+    # additional functions in the same native object.
+    reports = [compare_object(output / (unit + '.obj'), original, address_map,
+                              symbol_filter='_Mp3' if unit == 'Mp3' else None)
                for unit in UNITS]
     objects = {unit: COFF(output / (unit + '.obj')) for unit in UNITS}
+    for report, unit in zip(reports, UNITS):
+        selected = {f['name'] for f in report['functions']}
+        report['additional_functions_outside_component_scope'] = [
+            f['name'] for f in objects[unit].functions() if f['name'] not in selected]
     data = []
     for unit, name, address, size in DATA:
         obj = objects[unit]
@@ -156,6 +164,7 @@ def run(output):
         unmatched=[f['name'] for f in functions if not f.get('relocation_masked_equal')],
         whole_dll_byte_exact=False,
         notes=[
+            'The component scope is the original JPEG/MP3 band 0x10006cb0..0x1000aed0; later functions sharing Mp3.c are covered by whole-audio diagnostics.',
             'Code comparisons cover complete function extents, including stock compiler alignment.',
             'Only recorded COFF relocation fields are masked; local branches and SIB bytes are compared.',
             'Reconstruction names and BSS addresses inferred from operands remain explicitly labelled.',
