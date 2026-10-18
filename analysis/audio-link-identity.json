@@ -10,7 +10,8 @@
     "record_size": 89,
     "record_sha256": "e22a3dec65221be54118acdd7f2819315eb425e17f2ea18f8ca6e948308cae7f",
     "coff_timestamp": 1048395386,
-    "debug_timestamp": 1048395386
+    "debug_timestamp": 1048395386,
+    "export_timestamp": 1048395385
   },
   "reconstruction": {
     "helper": "scripts/seed_audio_pdb.py",
@@ -28,8 +29,8 @@
       "Initialize Wine using real advancing time. For the final link clock, start a persistent Wine server with the dynamic clock environment below, whose file initially contains +0. Run wineboot -u and wait for completion.",
       "Link the reconstructed application objects normally with /debug /incremental:no, preserving the first DLL and native PDB.",
       "Run seed_audio_pdb.py INITIAL_PDB SEEDED_PDB --report REPORT, preserving INITIAL_PDB. Place SEEDED_PDB at the historical e: path.",
-      "Atomically replace the dynamic clock file content with 2003-03-23 04:56:26 followed by newline.",
-      "Link the same objects using /pdb:e:\\nemu\\audiohle\\ahle_ds\\ahle_ds___Win32_Release_nemu8\\audio.pdb under that clock environment. LINK preserves GUID and increments age7 to8.",
+      "Atomically set the dynamic clock to 2003-03-23 04:56:25. Run native VC7 LIB /def:audio.def /machine:ix86 /out:audio.lib to generate the ordinary export object. Preserve that object.",
+      "Atomically set the dynamic clock to 2003-03-23 04:56:26. Link the same application objects plus the generated audio.exp, omitting /def, and use the historical /pdb path. LINK preserves the seeded GUID, increments age7 to8, retains the export clock, and emits the later COFF/debug clocks.",
       "Verify the final complete DLL against the original independently; successful metadata reconstruction does not imply code or layout equality."
     ],
     "clock_environment": {
@@ -205,5 +206,218 @@
     "The repeat-link probe uses an ordinary minimal DLL; it is not the reconstructed audio.dll.",
     "The helper also parsed the full diagnostic application PDB and changed only the three identity fields. That application DLL still has code and layout differences.",
     "Filename/source layout and original project history remain inferred."
-  ]
+  ],
+  "native_export_clock_probe": {
+    "scope": "Natural export-object generation at the original earlier timestamp; no DLL patches.",
+    "artifact": "/root/.ai-tmp/audio-export-clock.3j__b1xj",
+    "proof_sha256": "359c239bc4563d4dd205f5b38f8184424ca9eb5ead1726522b9535d51c47e3d2",
+    "commands": [
+      {
+        "label": "wineboot",
+        "argv": [
+          "wineboot",
+          "-u"
+        ],
+        "exit_code": 0
+      },
+      {
+        "label": "lib-exports",
+        "argv": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "lib",
+          "/nologo",
+          "/def:audio.def",
+          "/machine:ix86",
+          "/out:audio.lib"
+        ],
+        "exit_code": 0
+      },
+      {
+        "label": "link-exp",
+        "argv": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "link",
+          "/nologo",
+          "/dll",
+          "/incremental:no",
+          "/debug",
+          "/opt:noref",
+          "/opt:noicf",
+          "/subsystem:windows",
+          "/machine:I386",
+          "/base:0x10000000",
+          "/align:4096",
+          "/filealign:4096",
+          "/out:audio.dll",
+          "/pdb:e:\\nemu\\audiohle\\ahle_ds\\ahle_ds___Win32_Release_nemu8\\audio.pdb",
+          "/map:audio.map",
+          "ABI1.obj",
+          "ABI2.obj",
+          "AudioHLE.obj",
+          "ABI3.obj",
+          "AudioLegacy.obj",
+          "DirectSound.obj",
+          "AudioLog.obj",
+          "CPUFeatures.obj",
+          "Jpeg.obj",
+          "Mp3.obj",
+          "AudioProcessing.obj",
+          "AudioResample.obj",
+          "AudioPlugin.obj",
+          "RSP.obj",
+          "Audio.res",
+          "Z:\\root\\nemu-decomp\\toolchains\\vc6\\lib\\dsound.lib",
+          "winmm.lib",
+          "kernel32.lib",
+          "user32.lib",
+          "gdi32.lib",
+          "audio.exp"
+        ],
+        "exit_code": 0
+      }
+    ],
+    "original": {
+      "coff": 1048395386,
+      "export": 1048395385,
+      "rich": [
+        {
+          "comp_id": "002723ca",
+          "product_id": 39,
+          "build": 9162,
+          "count": 1
+        },
+        {
+          "comp_id": "004024fa",
+          "product_id": 64,
+          "build": 9466,
+          "count": 30
+        },
+        {
+          "comp_id": "001923fa",
+          "product_id": 25,
+          "build": 9210,
+          "count": 8
+        },
+        {
+          "comp_id": "00131f62",
+          "product_id": 19,
+          "build": 8034,
+          "count": 3
+        },
+        {
+          "comp_id": "00010000",
+          "product_id": 1,
+          "build": 0,
+          "count": 117
+        },
+        {
+          "comp_id": "001c24fa",
+          "product_id": 28,
+          "build": 9466,
+          "count": 131
+        },
+        {
+          "comp_id": "001d24fa",
+          "product_id": 29,
+          "build": 9466,
+          "count": 3
+        },
+        {
+          "comp_id": "003f24fa",
+          "product_id": 63,
+          "build": 9466,
+          "count": 1
+        },
+        {
+          "comp_id": "004524fa",
+          "product_id": 69,
+          "build": 9466,
+          "count": 1
+        },
+        {
+          "comp_id": "003d24fa",
+          "product_id": 61,
+          "build": 9466,
+          "count": 1
+        }
+      ]
+    },
+    "rebuilt": {
+      "coff": 1048395386,
+      "export": 1048395385,
+      "rich": [
+        {
+          "comp_id": "002723ca",
+          "product_id": 39,
+          "build": 9162,
+          "count": 1
+        },
+        {
+          "comp_id": "004024fa",
+          "product_id": 64,
+          "build": 9466,
+          "count": 30
+        },
+        {
+          "comp_id": "001923fa",
+          "product_id": 25,
+          "build": 9210,
+          "count": 8
+        },
+        {
+          "comp_id": "00131f62",
+          "product_id": 19,
+          "build": 8034,
+          "count": 3
+        },
+        {
+          "comp_id": "00010000",
+          "product_id": 1,
+          "build": 0,
+          "count": 117
+        },
+        {
+          "comp_id": "001c24fa",
+          "product_id": 28,
+          "build": 9466,
+          "count": 131
+        },
+        {
+          "comp_id": "001d24fa",
+          "product_id": 29,
+          "build": 9466,
+          "count": 3
+        },
+        {
+          "comp_id": "003f24fa",
+          "product_id": 63,
+          "build": 9466,
+          "count": 1
+        },
+        {
+          "comp_id": "004524fa",
+          "product_id": 69,
+          "build": 9466,
+          "count": 1
+        },
+        {
+          "comp_id": "003d24fa",
+          "product_id": 61,
+          "build": 9466,
+          "count": 1
+        }
+      ]
+    },
+    "dll_sha256": "76e0c3b4f51acae955e77c20e90ae0cb8ae9e57437d8b150f45f96b067dd17ef",
+    "export_object_sha256": "3defebb1c6b2838d4242f4f559a4e5c5707e29696d0660db88656dc94727c712",
+    "native_tools": {
+      "lib.exe": "8973d6e9643ea23e1815623252ee30cecc64dd1ed2071003e889ec2ca3013dca",
+      "link.exe": "1560d85164dfb763dd13f90f33ff9c6f1cd80f2afada03eed8d0a314593581f1"
+    },
+    "inference": "The separate LIB pass is a reproducible metadata workflow. It does not claim the historical build invoked LIB separately; the two observed native clock values may have arisen during one LINK invocation."
+  }
 }

@@ -1,3 +1,137 @@
+/* Command diagnostics, ADPCM, pole filtering and scalar resampling.
+ * This inferred unit begins at DumpAudioCommand (10AA0); its readonly constants
+ * immediately precede the diagnostic strings. See audio-source-grouping.json. */
+#include "transform.h"
+#include "AudioADPCMBlock.h"
+#include "AudioProcessing.h"
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+extern FILE *HLELogFile;
+void DumpAudioCommand(AudioCommand *command)
+{
+    int i;
+    if (HLELogFile) {
+        fprintf(HLELogFile, "\n");
+        for (i = 3; i >= 0; --i)
+            fprintf(HLELogFile, " %02X", command->bytes[i]);
+        for (i = 3; i >= 0; --i)
+            fprintf(HLELogFile, " %02X", command->bytes[i + 4]);
+        fprintf(HLELogFile, "\n\n");
+    }
+}
+/* Scalar ADPCM kernels. The original source filename is unknown.
+ * The signed decoder shares its indexed packet-copy and two-bit decoding
+ * skeleton with UltraHLE src/SLIST.C; target-specific assembly and arithmetic
+ * are recovered from audio.dll. See audio-processing-provenance.json. */
+#include "AudioProcessing.h"
+#include <string.h>
+
+void DecodeAudioADPCMUnsigned(unsigned short *output, unsigned short *history,
+                             int offset, unsigned short *book,
+                             int bitsPerSample, AudioContext *context)
+{
+    unsigned char data[16];
+    int i = 0;
+    int index = offset >> 1;
+    short *input;
+    unsigned int coefficient1, coefficient2, previous1, previous2, shift;
+    unsigned int first, second;
+    if (offset & 1) {
+        data[i++] = ((unsigned char *)context->buffer)[index * 2];
+        ++index;
+    }
+    input = &context->buffer[index];
+    do {
+        int pair = *input++;
+        data[i++] = pair >> 8;
+        data[i++] = pair;
+    } while (i < 9);
+
+    previous1 = history[14];
+    previous2 = history[15];
+    shift = (data[0] >> 4) + 11;
+    coefficient1 = book[(data[0] & 15) * 2];
+    coefficient2 = book[(data[0] & 15) * 2 + 1];
+
+    /* Each packet contains eight packed pairs of four-bit samples. */
+#define DECODE_PAIR(n) \
+    first = (data[(n) + 1] >> 4) << shift; \
+    second = (data[(n) + 1] & 15) << shift; \
+    first = (first + previous1 * coefficient1 + previous2 * coefficient2) >> 11; \
+    output[(n) * 2] = first; \
+    previous1 = previous2; \
+    previous2 = first; \
+    second = (second + previous1 * coefficient1 + previous2 * coefficient2) >> 11; \
+    output[(n) * 2 + 1] = second; \
+    previous1 = previous2; \
+    previous2 = second;
+    DECODE_PAIR(0)
+    DECODE_PAIR(1)
+    DECODE_PAIR(2)
+    DECODE_PAIR(3)
+    DECODE_PAIR(4)
+    DECODE_PAIR(5)
+    DECODE_PAIR(6)
+    DECODE_PAIR(7)
+#undef DECODE_PAIR
+}
+
+void DecodeAudioADPCMBlock(short *output, short *history, int offset,
+                                   short *book, int bitsPerSample,
+                                   AudioContext *context)
+{
+    DECODE_AUDIO_ADPCM_BLOCK(output, history, offset, book, bitsPerSample, context, standalone)
+}
+#include "AudioProcessing.h"
+
+void PoleFilterAudioCommand(AudioCommand *command, AudioContext *context)
+{
+    int output = context->outputResample >> 1;
+    short *state = (short *)((command->words[1] & 0xffffff) + RDRAM);
+    int input = context->inputResample >> 1;
+    unsigned int instruction = command->words[0];
+    int count = context->count >> 1;
+    int gain = instruction & 0xffff;
+    short history[4];
+    short *coefficients;
+    int scaled[8];
+    int i, tap, row;
+    __int64 accumulator[8];
+    if (count == 0) return;
+    if (!(instruction & 0x10000)) {
+        for (i = 0; i < 4; ++i) history[i] = state[i];
+    } else {
+        for (i = 0; i < 4; ++i) history[i] = 0;
+    }
+    coefficients = &context->buffer[0x400];
+    for (i = 0; i < 8; ++i)
+        scaled[i] = (coefficients[i + 8] * gain) / 0x4000;
+    for (i = 0; i < count; i += 8) {
+        for (tap = 0; tap < 8; ++tap)
+            accumulator[tap] = coefficients[tap] * history[2];
+        for (tap = 0; tap < 8; ++tap)
+            accumulator[tap] += coefficients[tap + 8] * history[3];
+        for (tap = 0; tap < 8; ++tap)
+            accumulator[tap] += context->buffer[input + tap] * gain;
+        for (row = 0; row < 8; ++row)
+            for (tap = row + 1; tap < 8; ++tap)
+                accumulator[tap] += context->buffer[input + row] * scaled[tap - row - 1];
+        for (tap = 0; tap < 8; ++tap) {
+            __int64 sample = accumulator[tap] / 0x4000;
+            if (accumulator[tap] - sample * 0x4000 < 0) --sample;
+            if (sample > 32767) sample = 32767;
+            else if (sample < -32767) sample = -32767;
+            context->buffer[output++] = (short)sample;
+        }
+        history[2] = context->buffer[output - 2];
+        history[3] = context->buffer[output - 1];
+        input += 8;
+    }
+    state = (short *)(RDRAM + (command->words[1] & 0xffffff));
+    for (i = 0; i < 4; ++i) state[i] = history[i];
+}
+
 /* Scalar resampling and ADPCM commands. Original unit boundary inferred from
  * native code order and this unit's retained coefficient data. */
 #include "AudioADPCMBlock.h"

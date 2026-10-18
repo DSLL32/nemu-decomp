@@ -1,0 +1,68 @@
+{
+  "scope": "Resolve three independently verified data identities in the combined metadata registry; no source or DLL edits.",
+  "artifact": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/kpw4bash",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "proofs": [
+    {
+      "object": "CPUFeatures.obj",
+      "symbol": "$T634",
+      "va": 268636280,
+      "bytes": 24,
+      "compiled_object_sha256": "56733173584b007e778402488ff131273eea35e34619ac2714072000ccf12f23",
+      "resolved_data_sha256": "197e6d4ac1ab71af0bbf524a835bbed115147781eaeb4ee3527db2e7e51f0308",
+      "full_data_exact": true,
+      "labels": [
+        {
+          "offset": 4,
+          "function_offset": 502,
+          "original_destination": 268463190
+        },
+        {
+          "offset": 8,
+          "function_offset": 508,
+          "original_destination": 268463196
+        },
+        {
+          "offset": 16,
+          "function_offset": 461,
+          "original_destination": 268463149
+        },
+        {
+          "offset": 20,
+          "function_offset": 467,
+          "original_destination": 268463155
+        }
+      ],
+      "unique_original_occurrences": 1,
+      "evidence": "Complete 24-byte SEH scope table uniquely matches after its four internal labels are resolved to offsets502,508,461,467 in the matched get_feature_flags body."
+    },
+    {
+      "object": "DirectSound.obj",
+      "symbol": "__real@3f000000",
+      "va": 268635860,
+      "bytes": 4,
+      "compiled_object_sha256": "ec783c484ab603194b9f3eae75fb5272c005cd71b98e7e314449918b8790599b",
+      "resolved_data_sha256": "d99e58435243d9fef9c88273b8d553b4fba4d0baf8009d29eae74fa99e0d9f57",
+      "full_data_exact": true,
+      "labels": [],
+      "unique_original_occurrences": 4,
+      "evidence": "Complete source-compiled float0.5 literal and its native linked address independently equal original10030ED4."
+    },
+    {
+      "object": "Jpeg.obj",
+      "symbol": "_t_dewindow",
+      "va": 268674248,
+      "bytes": 2176,
+      "compiled_object_sha256": "250c6500171d6574e56de1d6784d3c3e2b350843e00f3e4a11b62bb117c1b10c",
+      "resolved_data_sha256": "52c695ac3a77f57ebb82e12d2474f02ce47ab544ef0dc05d6ecdfc6d5e4ff100",
+      "full_data_exact": true,
+      "labels": [],
+      "unique_original_occurrences": 14,
+      "evidence": "Complete source-compiled2176-byte AMP table, exact native data contribution offset and linked address1003A4C8 independently identify the Jpeg-private copy."
+    }
+  ],
+  "limitations": [
+    "Other unit copies of the AMP table retain their own object scope.",
+    "Partial functions retain actual unresolved operands; no original code offsets are guessed for mismatched instruction layouts."
+  ]
+}

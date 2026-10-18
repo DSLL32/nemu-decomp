@@ -4,7 +4,9 @@ This reconstruction is incomplete. Native object checks match the instruction
 bodies of 377 of 417 unique functions. Relocation identities and remaining
 inferences are recorded separately; 40 functions and parts of the data layout
 remain unresolved. All 417 retained functions now link in their original order,
-and the complete resource section matches. The full 290,816-byte DLL does
+and the complete resource section matches. Readonly layout and all bytes outside
+recorded address fields also match; those address values remain incomplete.
+The full 290,816-byte DLL does
 **not** match the original. See
 [`analysis/audio-integration-comparison.json`](../../analysis/audio-integration-comparison.json)
 for the frozen build, exact counts, and limitations.
@@ -29,13 +31,21 @@ SDK imports reproduce the original ordered Rich records. The `ahle_ds` project
 directory is preserved in the original PDB path; private filenames and some
 identifiers remain inferred.
 
+The integer synthesis and envelope routines share one inferred source unit.
+Buffer filtering/profiling form the next unit, followed by diagnostics and
+decoders. These boundaries reproduce all thirteen repeated readonly constant
+blocks and their surrounding literals without changing any of the 52 affected
+function bodies. See
+[`analysis/audio-source-grouping.json`](../../analysis/audio-source-grouping.json).
+
 Historical link metadata is reproduced separately from source recovery. The
 first DLL and generated PDB are preserved. The build restores the recorded GUID
 and prior revision in three parsed fields of a copy of that generated PDB, then
 runs the original linker at the recorded time and PDB path. LINK emits the final
-RSDS record, revision, and timestamps itself; no DLL bytes are patched. The
-initial PDB, metadata seed, final PDB, audit, and unstamped DLL remain in the
-frozen build directory. See
+RSDS record and revision itself. Native LIB generates the export object at its
+recorded timestamp, one second before the final LINK clock. No DLL bytes are
+patched. The initial PDB, metadata seed, export object, final PDB, audit, and
+unstamped DLL remain in the frozen build directory. See
 [`analysis/audio-link-identity.json`](../../analysis/audio-link-identity.json).
 
 Resources are readable source in `Audio.rc`. Recovered AMP and UltraHLE/Azimer

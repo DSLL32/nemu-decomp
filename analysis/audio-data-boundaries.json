@@ -845,7 +845,29 @@
     ],
     "initial_group_probe": "Audio integrator independently compiled the first five natural units: ABI1 27/28, ABI2 24/25, HLE10/11, ABI3 18/19, ABI4 18/18 extents match. All previously exact functions were preserved; four source mismatches remained at that checkpoint.",
     "followup": "All100 complete first-band instruction spans now match in a fresh common-unit diagnostic, with88 independently identified relocation matches and12 retaining inferred globals. Physical five-unit helper emission remains under integration.",
-    "rsp_grouping_resolution": "Commit b5c61b7 reconstructs one RSP.cpp unit with a natural20-byte instruction/comparison/flag control aggregate. All180 prior function hashes are preserved,148 original spans match,29 typed objects match, and the retained2176-byte header table immediately precedes the guest program. This resolves the former separate-kernel visibility conflict; see analysis/audio-rsp-organization.json."
+    "rsp_grouping_resolution": "Commit b5c61b7 reconstructs one RSP.cpp unit with a natural20-byte instruction/comparison/flag control aggregate. All180 prior function hashes are preserved,148 original spans match,29 typed objects match, and the retained2176-byte header table immediately precedes the guest program. This resolves the former separate-kernel visibility conflict; see analysis/audio-rsp-organization.json.",
+    "status": "Historical initial grouping proposal; current source boundaries are recorded separately below.",
+    "current_grouping": {
+      "proof": "analysis/audio-source-grouping.json",
+      "groups": [
+        "ABI1 helpers and commands; exact end must account for retained variadic helper at10001fd0.",
+        "ABI2 helpers and commands before task dispatch.",
+        "Task/HLE dispatch at100026f0..10002d60.",
+        "ABI3 commands at10002d60..10003180, with unused guest program/header pointer.",
+        "Legacy ABI at10003180..10003c40.",
+        "DirectSound and configuration dialog combined through10006610.",
+        "AudioLog at10006610..10006a60.",
+        "CPUFeatures at10006a60..10006cb0.",
+        "JPEG plus AMP polyphase transform at10006cb0..100093f0.",
+        "Integer MP3 plus sample/state helpers, SSE probes and envelopes at100093f0..10010590.",
+        "Buffer scaling/filtering and profiling at10010590..10010aa0.",
+        "Command diagnostics, ADPCM/pole-filter/scalar-resample/history/main decoder band at10010aa0..100137c0, owning resampling tables.",
+        "Plugin interface before10013b10.",
+        "RSP interpreter, storage and guest-program translation after10013b10."
+      ],
+      "native_validation": "All417 retained functions preserve original relative order; all13 readonly constant blocks have original addresses; all readonly bytes outside actual address fields match. Ordered Rich records and all14 initialized table copies remain exact.",
+      "limitation": "Forty application function bodies and BSS layout remain unresolved; original private filenames remain inferred."
+    }
   },
   "frozen_inputs": [
     {

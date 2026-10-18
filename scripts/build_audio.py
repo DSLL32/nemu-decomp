@@ -67,7 +67,8 @@ def main():
                 toolchain_manifest=dict(path=str(manifest),sha256=sha(manifest),files=len(toolchain_manifest)),
                 tool_sha256={str(p.relative_to(ROOT)):sha(p) for p in [ROOT/'toolchains/vc7/bin/cl.exe',
                     ROOT/'toolchains/vc7/bin/c1.dll',ROOT/'toolchains/vc7/bin/c1xx.dll',ROOT/'toolchains/vc7/bin/c2.dll',
-                    ROOT/'toolchains/vc7/bin/link.exe',ROOT/'toolchains/vc7/lib/libcmt.lib',
+                    ROOT/'toolchains/vc7/bin/link.exe',ROOT/'toolchains/vc7/bin/lib.exe',
+                    ROOT/'toolchains/vc7/lib/libcmt.lib',
                     *[ROOT/'scripts'/name for name in ['build_audio.py','verify_audio.py','verify_gs.py','run_toolchain.py','seed_audio_pdb.py']]]},
                 commands=[],artifact=str(snapshot))
     print('Audio build:',work,'\nWine prefix:',env['WINEPREFIX'],flush=True)
@@ -111,6 +112,7 @@ def main():
             tool('link','link',*link_options)
             shutil.copyfile(work/'audio.dll',work/'audio.unstamped.dll')
             shutil.copyfile(work/'audio.pdb',snapshot/'audio.initial.pdb')
+            shutil.copyfile(work/'audio.exp',snapshot/'audio.initial.exp')
 
             # Recover only the historical PDB identity. LINK generates the
             # complete final image, including all clock fields and RSDS bytes.
@@ -132,7 +134,8 @@ def main():
                 FAKETIME_TIMESTAMP_FILE=str(clock_file),FAKETIME_NO_CACHE='1',
                 FAKETIME_DONT_FAKE_MONOTONIC='1',FAKETIME_DISABLE_SHM='1',NO_FAKE_STAT='1',TZ='UTC')
             report['link_identity']=dict(seed=identity,clock_environment=clock_env,
-                warmup_clock='+0',final_clock='2003-03-23 04:56:26',
+                warmup_clock='+0',export_clock='2003-03-23 04:56:25',
+                final_clock='2003-03-23 04:56:26',
                 initial_dll_sha256=sha(work/'audio.unstamped.dll'),
                 initial_pdb_sha256=sha(snapshot/'audio.initial.pdb'),
                 seeded_pdb_sha256=sha(snapshot/'audio.seeded.pdb'),
@@ -148,10 +151,21 @@ def main():
             wine_control('clock-start-server',['wineserver','-p'],clock_env)
             wine_control('clock-warm-wine',['wineboot','-u'],clock_env)
             next_clock=clock_file.with_suffix('.new')
+            # The original export directory predates the COFF/debug clocks by
+            # one second. Generate its ordinary .exp input with native LIB at
+            # that time; LINK then emits the DLL at the later recorded time.
+            # Both export data and the final image remain tool-generated.
+            next_clock.write_text('2003-03-23 04:56:25\n')
+            next_clock.replace(clock_file)
+            tool('exports-historical','lib','/nologo','/def:audio.def',
+                 '/machine:ix86','/out:audio.lib',extra_env=clock_env)
+            shutil.copyfile(work/'audio.exp',snapshot/'audio.exports.exp')
+            report['link_identity']['export_object_sha256']=sha(snapshot/'audio.exports.exp')
             next_clock.write_text('2003-03-23 04:56:26\n')
             next_clock.replace(clock_file)
             historical_path=r'e:\nemu\audiohle\ahle_ds\ahle_ds___Win32_Release_nemu8\audio.pdb'
-            final_options=[('/pdb:'+historical_path) if x=='/pdb:audio.pdb' else x for x in link_options]
+            final_options=[('/pdb:'+historical_path) if x=='/pdb:audio.pdb' else x
+                           for x in link_options if x!='/def:audio.def'] + ['audio.exp']
             tool('link-historical','link',*final_options,extra_env=clock_env)
             shutil.copyfile(historical_pdb,snapshot/'audio.final.pdb')
             def link_metadata(path):
@@ -159,8 +173,11 @@ def main():
                 rva,size=pe.directory(6)
                 if size!=28: raise RuntimeError('Expected one native debug-directory entry')
                 entry=struct.unpack_from('<IIHHIIII',pe.data,pe.offset(rva))
+                export_rva,_=pe.directory(0)
                 return dict(coff_timestamp=struct.unpack_from('<I',pe.data,pe.pe+8)[0],
-                    debug_timestamp=entry[1],codeview=pe.data[entry[-1]:entry[-1]+entry[-3]].hex())
+                    debug_timestamp=entry[1],
+                    export_timestamp=struct.unpack_from('<I',pe.data,pe.offset(export_rva)+4)[0],
+                    codeview=pe.data[entry[-1]:entry[-1]+entry[-3]].hex())
             actual=link_metadata(work/'audio.dll');expected=link_metadata(ORIGINAL)
             report['link_identity'].update(final_pdb_sha256=sha(snapshot/'audio.final.pdb'),
                 emitted_metadata=actual,expected_metadata=expected,metadata_exact=actual==expected)

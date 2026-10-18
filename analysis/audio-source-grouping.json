@@ -1,0 +1,557 @@
+{
+  "status": "inferred_source_grouping_verified_by_native_code_and_readonly_layout",
+  "full_dll_byte_exact": false,
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "baseline_artifact": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/6dqd7843",
+  "grouping_probe": "/root/.ai-tmp/audio-three-unit-order.3s7cd54o/build-work/runs/y6hvpqy7",
+  "fresh_canonical_artifact": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/708tkzze",
+  "fresh_report_sha256": "cd96ce35583f16dbaa3c741f35aee28ce97c711eab1d7050ab60e0a36fcf7a66",
+  "source_sha256": {
+    "Mp3.c": "d9dccbd10b72f540528496c33f04f8a63d3b9bd1f39839a70ac8a16ef5a87b3a",
+    "AudioProcessing.c": "e66e65ff34e26304fd306b14afb5540d2db060bc631e980af95b398f1a232e62",
+    "AudioResample.c": "67ced2fcbd0e6798f34cd986e5a9b77e4ba963eb03463468b5d7b68120dbde1f"
+  },
+  "toolchain_manifest": {
+    "path": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/708tkzze/toolchain-sha256.json",
+    "sha256": "074a8a0899d15f4dcd40d134cb560c57ceba76e9a3100e8fd6fb41f85ebf062d",
+    "files": 3712
+  },
+  "groups": [
+    {
+      "unit": "Mp3.c",
+      "native_start": "0x100093f0",
+      "native_end_exclusive": "0x10010590",
+      "functions": 33,
+      "contents": "Integer MP3, sample/state helpers, CPU SSE probes, envelope mixers."
+    },
+    {
+      "unit": "AudioProcessing.c",
+      "native_start": "0x10010590",
+      "native_end_exclusive": "0x10010aa0",
+      "functions": 9,
+      "contents": "Buffer scaling/filtering and profiling."
+    },
+    {
+      "unit": "AudioResample.c",
+      "native_start": "0x10010aa0",
+      "native_end_exclusive": "0x100137c0",
+      "functions": 10,
+      "contents": "Command diagnostics, ADPCM variants, pole filtering, scalar resampling and history helpers."
+    }
+  ],
+  "evidence": [
+    "All thirteen ordinary file-scope readonly b1..b31 contributions now occupy their exact original addresses.",
+    "The 77 original SSE/envelope readonly references occur after constant copy10; Scale/FIR/profile contribute no intervening literal references; command dump strings follow copy12.",
+    "All 52 complete native COFF function payloads remain byte-for-byte identical to the previous source organization, including the five unmatched candidates.",
+    "All 417 retained application functions preserve original relative native LINK order.",
+    "Every readonly byte except genuine HIGHLOW pointer fields and export function-RVA fields is exact; those address values remain unmodified and differ because code addresses remain incomplete.",
+    "The complete source grouping preserves thirteen C and one C++ application units and exact original ordered Rich records."
+  ],
+  "readonly_audit": "analysis/audio-readonly-comparison.json",
+  "readonly_audit_sha256": "8683f0e5787a0cb234b44edd61ab21cbefcd2d10ddc81dfd1133bc703d68dc8a",
+  "functions": [
+    {
+      "name": "_Mp3Narrow",
+      "prior_object": "Mp3.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 16,
+      "raw_coff_sha256": "161c1b24a81c2fe20556bf8b28bd6bbce4415ffd1875cbae67189455de85444a",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_Mp3Add",
+      "prior_object": "Mp3.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 16,
+      "raw_coff_sha256": "856b4f01337f7d4a6beae515a793d8701b0ee994ba1c9669a4d6f2e7acf1e3d6",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_Mp3Subtract",
+      "prior_object": "Mp3.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 16,
+      "raw_coff_sha256": "cf4fbf7efe84c810572daad913999e9d849102424fc05a58b407438a8e7d9eaa",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_Mp3MultiplyFraction",
+      "prior_object": "Mp3.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 32,
+      "raw_coff_sha256": "84f0e57e48310d611d3e690a2af4e96e5112ff6d51c9120b60b27d502a2ad71a",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_Mp3MultiplyUnsigned",
+      "prior_object": "Mp3.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 32,
+      "raw_coff_sha256": "245b3cffa99dad2ea0481c65178b3b8159d50605354ab6b54e4922b70ae1694d",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_Mp3MultiplySplit",
+      "prior_object": "Mp3.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 32,
+      "raw_coff_sha256": "bc053dd9385978b6e67ca753b0d41d7bb80e442906eb9cf0c155989c9915f103",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_Mp3AccumulateFraction",
+      "prior_object": "Mp3.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 80,
+      "raw_coff_sha256": "4326160e3fa12561f6b444c37d6004d2e6f4fd51bd2a949d1cd65d519b860dce",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_Mp3AccumulateUnsigned",
+      "prior_object": "Mp3.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 48,
+      "raw_coff_sha256": "4c7536d618394fd2e7d24d9d92aa4dc22a587be8f7a327aa36ad099c47ddf47a",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_Mp3ReadSamples",
+      "prior_object": "Mp3.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 80,
+      "raw_coff_sha256": "7ae90e0db548e537a10ceee22c3256825ef3bb0cebc2419d981584966daa491e",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_Mp3Butterfly",
+      "prior_object": "Mp3.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 1424,
+      "raw_coff_sha256": "bc167afd42cfe4ed0a2dd826b9b4c61996477b69486aac55fa853dbd97029359",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_Mp3DCT",
+      "prior_object": "Mp3.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 5040,
+      "raw_coff_sha256": "9e34b64d04b9a4e3ddb9fc39816f3ae6bf94568a38de3587e088e7ddc0fe4a4d",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_ReadAudioSamples",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 80,
+      "raw_coff_sha256": "8f95bd31d61318549685b11e514655378eb08a9b145c2a826a38c4a1858681ca",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_InitializeAudioSqrt",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 112,
+      "raw_coff_sha256": "57a39789b8c76488ea1f253063d7a0be05bb2f33a9e6d71249ee873c80a9cc1e",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_LoadAudioEnvelope",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 208,
+      "raw_coff_sha256": "f07eadd7d82f8b766ab9e587d5b94bc640f23297d0be8a4174959399a1eb7988",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_SaveAudioEnvelope",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 208,
+      "raw_coff_sha256": "a8f7f69b9b4510a5893e181d5e188fdb7eef32e1b84827bc07e3900ff790c2db",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_ResetAudioEnvelope",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 48,
+      "raw_coff_sha256": "97232f67fe42bd7a6841f2127b83e16c3f9f16c543776b927734771e40639570",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_AudioCPUHasSSE",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 48,
+      "raw_coff_sha256": "3ba7435beb27b13c528870bb755ff63f7e73873e8c831b10ce146c96cb7d2431",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_AudioOSHasSSE",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 112,
+      "raw_coff_sha256": "7dc666252ce87fc56a784e21384f0e1102235c17a708f8708e5747235bcfcf2a",
+      "bytes_unchanged": true,
+      "relocation_name_changes": [
+        {
+          "offset": 6,
+          "before": "$T75412",
+          "after": "$T75624"
+        }
+      ]
+    },
+    {
+      "name": "_AudioClampECX",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 32,
+      "raw_coff_sha256": "f5237e98743121264990b660939e7d1207dfdeac2a8a607bb9c4e447631a2408",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_EnvMixerSSE",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 3015,
+      "raw_coff_sha256": "088ff5653de39f2b58a06972feecbe49947c445fcc347b99ce26af737ba8e814",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_EnvMixer3DNow",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 2927,
+      "raw_coff_sha256": "b0fbd59f8aa920b9731ec26048525fbba05807c1dffeaf1af4008d3d97d3f627",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_EnvMixerScalar",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 1104,
+      "raw_coff_sha256": "226cb56708afca260cd5c13f297373ec53db30371b10952b7dd949e96d4133e4",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_EnvMixerBlockScalar",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 1088,
+      "raw_coff_sha256": "84439e57d1acfd4d7d63ebfdc3175302014563422b3994d7f23d9aa63666f464",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_EnvMixerABI3Scalar",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 976,
+      "raw_coff_sha256": "add0c820d08087d0a57de7ff989d7a8b846808159178dc8fadf441a3196a1d96",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_EnvMixerABI3_3DNow",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 2716,
+      "raw_coff_sha256": "2080d35f389e70bc3c124d3682e48070de36a2a246aaad971639b0ade8a52526",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_EnvMixerABI3SSE",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 2804,
+      "raw_coff_sha256": "e1051f73f7b1dfa75c6d9465098f2de5a188627c624d30b9d58d8746b93183fc",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_EnvMixerSpecial",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 1008,
+      "raw_coff_sha256": "671bfa33092ddbe52faf2b88c4cfc1ab8f3a5904b36c91ff981db9a14ffd51f1",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_ClampAudioSample",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 32,
+      "raw_coff_sha256": "54996b4504b9d6030247be4aa2d52640cf786809dc27564ad1a7dc232811bb5e",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_MixAudioEnvelopeCommand",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 1552,
+      "raw_coff_sha256": "c501d923fdad8b2b43036659ab8c7bbabd62496fb00b855c1435410cd6232fd0",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_MixAudioEnvelopeClamped",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 864,
+      "raw_coff_sha256": "6a196cf25fa989a9854f3a62332c85d0022c08a9a829b80dab2995b9e2f82daf",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_MixAudioEnvelope",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 1072,
+      "raw_coff_sha256": "86572b59cd2e5a3f64448dcc8f194506691329cc6624a426ac92d6e6bb57a2ad",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_MixAudioEnvelopeLegacy",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 848,
+      "raw_coff_sha256": "ea3cd4fdf126eec1c83f70ee20ac5cda80a5bc88fd8c20cd898be6aa10edfbee",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_MixAudioEnvelopeUnsigned",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "Mp3.obj",
+      "complete_bytes": 1328,
+      "raw_coff_sha256": "415feaa7b8c8bad9fd7a191bcbd2fc3eb6c4d88e9f537cb207760125778952ce",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_ScaleAudioBuffer",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "AudioProcessing.obj",
+      "complete_bytes": 96,
+      "raw_coff_sha256": "ceb8d554acf538386b3cc767d6ce773e757612964965a76828b8a1cebb3ea861",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_ScaleAudioBufferCommand",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "AudioProcessing.obj",
+      "complete_bytes": 112,
+      "raw_coff_sha256": "d8c748ea9af5060e37aefa581bb04f0666bf2fbe9900b88a94ca446d5c7a8512",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_FilterAudioBlock",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "AudioProcessing.obj",
+      "complete_bytes": 432,
+      "raw_coff_sha256": "792fba82a06ee6796f1cc14889ded6e8f5c503e33d6226b83f735ad9d0f9911d",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_FilterAudioBuffer",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "AudioProcessing.obj",
+      "complete_bytes": 192,
+      "raw_coff_sha256": "63f9c7e6a7779435a3ba5ce80a2c619c902cedd9a2b443feaf17ee7c5fa59bfd",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_ResetAudioProfile",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "AudioProcessing.obj",
+      "complete_bytes": 32,
+      "raw_coff_sha256": "ff4e255b0de0384410bceede97d45a1892fc5ff042fed41da580c20fd2abd586",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_AverageAudioProfile",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "AudioProcessing.obj",
+      "complete_bytes": 64,
+      "raw_coff_sha256": "7172489ac02bda93aa9cc89d87ec6aa3d47a0c08776c7e9acb5e5e0c9f2113a1",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_AdjustAudioProfileMaximum",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "AudioProcessing.obj",
+      "complete_bytes": 64,
+      "raw_coff_sha256": "5d1ea1be4967b1fe9cb817682d21f6cc87072b2a7cf4c36e01a36f4055523ec9",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_StartAudioProfile",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "AudioProcessing.obj",
+      "complete_bytes": 80,
+      "raw_coff_sha256": "0eec052ad14d225965e29cb8550e8f5281b9e3f7fea635eb846c2fc08cf8f836",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_StopAudioProfile",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "AudioProcessing.obj",
+      "complete_bytes": 224,
+      "raw_coff_sha256": "dc5b617c16e064ac099cb3e7b27092a6e02f9feb9cf9aca3e9a7f64f7f4e4278",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_DumpAudioCommand",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "AudioResample.obj",
+      "complete_bytes": 128,
+      "raw_coff_sha256": "9856afcf30b8a865aec88aa4e9885ad8ddd0f57ea289935b98c572d712db37fc",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_DecodeAudioADPCMUnsigned",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "AudioResample.obj",
+      "complete_bytes": 688,
+      "raw_coff_sha256": "a751f8d2b560468ed1c6b5dea161f24e57733025808c1e1eddcfacf091ac6e07",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_DecodeAudioADPCMBlock",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "AudioResample.obj",
+      "complete_bytes": 560,
+      "raw_coff_sha256": "6afc332ed9ba60594dc969497fa427173a17cbdce1be56c258672c8cde8df921",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_PoleFilterAudioCommand",
+      "prior_object": "AudioProcessing.obj",
+      "new_object": "AudioResample.obj",
+      "complete_bytes": 2320,
+      "raw_coff_sha256": "1bee554405161000cd11fe3dd7e949e3848e1289bbf432af8695f61e2074a301",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_ResampleAudioScalar",
+      "prior_object": "AudioResample.obj",
+      "new_object": "AudioResample.obj",
+      "complete_bytes": 656,
+      "raw_coff_sha256": "7e885c6cd97ac73981ef3539e2d344a0b5bcc67c9f535037b1cb7327e446a6aa",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_DecodeAudioADPCMWideCommand",
+      "prior_object": "AudioResample.obj",
+      "new_object": "AudioResample.obj",
+      "complete_bytes": 4224,
+      "raw_coff_sha256": "2e7e559259de6f44ef7dfdae365c7157226e2044b95d57778e0981bda2e0db3c",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_DecodeAudioADPCMLegacy",
+      "prior_object": "AudioResample.obj",
+      "new_object": "AudioResample.obj",
+      "complete_bytes": 1936,
+      "raw_coff_sha256": "9684c1a8e8a6de416c4afbfe735418a77b50f8d85e5e501edfe35cc762dcf5c8",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_LoadAudioHistory",
+      "prior_object": "AudioResample.obj",
+      "new_object": "AudioResample.obj",
+      "complete_bytes": 96,
+      "raw_coff_sha256": "a3473048ec491b9366e3546fb472b843c740b0d61324eca77959d5f6651942df",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_SaveAudioHistory",
+      "prior_object": "AudioResample.obj",
+      "new_object": "AudioResample.obj",
+      "complete_bytes": 16,
+      "raw_coff_sha256": "aece41e2c24e4b5ddf59ddaa27e131a6a3512cbe403507e2f54b683bf41b17e3",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    },
+    {
+      "name": "_DecodeAudioADPCM",
+      "prior_object": "AudioResample.obj",
+      "new_object": "AudioResample.obj",
+      "complete_bytes": 864,
+      "raw_coff_sha256": "bfe9382166c2e88ebf8f8d03a2c7144a3c51081069d0168578d035b6c5cc9882",
+      "bytes_unchanged": true,
+      "relocation_name_changes": []
+    }
+  ],
+  "seh_table": {
+    "name": "$T75624",
+    "original_va": "0x100311a8",
+    "complete_bytes": 12,
+    "resolved_hex": "ffffffffd5b10010dbb10010",
+    "unique_original_occurrence": true,
+    "labels": [
+      {
+        "offset": 4,
+        "function_offset": 69
+      },
+      {
+        "offset": 8,
+        "function_offset": 75
+      }
+    ]
+  },
+  "native_order_exact": true,
+  "private_storage": [
+    "The 0x40008-byte lookup/envelope-state contribution belongs to Mp3.c.",
+    "The 0x38000-byte profile common array belongs to AudioProcessing.c.",
+    "The mutable coefficient family remains in AudioResample.c.",
+    "No padding objects, ordering directives, table suppression, code patches or extra source units were added."
+  ],
+  "limitations": [
+    "Private filenames and exact historical boundary spelling remain inferred. The compiler/linker output strongly constrains this organization but does not establish a unique historical source.",
+    "Forty native application functions and BSS layout remain unmatched; the complete DLL is not byte exact.",
+    "Readonly address-field classification does not itself prove all pointer target identities. Those targets remain separately recorded in function/library metadata."
+  ]
+}
