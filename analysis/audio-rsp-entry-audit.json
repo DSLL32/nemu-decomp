@@ -1,0 +1,720 @@
+{
+  "original": "master/Plugin/audio.dll",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "status": "bounded_negative_source_boundary_audit",
+  "full_dll_byte_exact": false,
+  "baseline_whole_build": {
+    "source": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/qi6oo33_/build",
+    "source_sha256": {
+      "RSP.cpp": "e2ebc258be25fca598896c4bc9639e24c61c859aaf34bab5682d034df2fd3a43",
+      "RSP.h": "9489748e5025a27cdcbcf9853751b72d0c6c73658ddb4d62893d3f40f297b7ab",
+      "RSPData.inc": "f7a6f57795b41b7203b63302205c50de7bbd459971f9d2974d9d12b1c74bbd4d",
+      "RSPKernel.inc": "7a218993560c457a5149266e391a28fcdb0a1df5a812209c9a9b7111238eb961"
+    },
+    "live_source_same": true
+  },
+  "baseline_object_sha256": "f0d263666f4d6f459e95e79cae58e0e67f241cecf2a9a6486b9480d6db947c8b",
+  "baseline_source_commit": "584e569",
+  "functions_exact": 148,
+  "functions_compared": 180,
+  "typed_objects_exact": 29,
+  "typed_objects_compared": 29,
+  "new_complete_matches": 0,
+  "source_changes_promoted": false,
+  "entry_dataflow_finding": "Both entries compute the same live-out decoded values. The original coalesces the raw opcode with ECX, the eventual vs register; the candidate coalesces it with EDI, the eventual element register. That choice also moves the ESI/EDI saves. No missing value calculation or memory operation was found.",
+  "coalescing_control": "Decoding vs last does choose ECX for the opcode but moves the PC temporary to EBP and lengthens its lifetime. It worsens the five complete bodies and is rejected. Conventional source-operands-first declarations also worsen them. No declaration permutation sweep was run.",
+  "complete_suffix_evidence": [
+    {
+      "name": "RSP_VMULF",
+      "original_va": "0x100169c0",
+      "span": 928,
+      "different_entry_bytes": 25,
+      "suffix_offset": 41,
+      "matching_suffix_sha256": "b5b2551f8f522b0a4f80f0501a984291ac9de454ce36db79a7011f3f3c793454",
+      "original_entry": [
+        "00: sub esp, 0x10",
+        "03: mov eax, dword ptr [0x1012c03c]",
+        "08: mov ecx, dword ptr [0x1012be00]",
+        "0e: add eax, 4",
+        "11: push ebx",
+        "12: push ebp",
+        "13: mov dword ptr [0x1012c03c], eax",
+        "18: mov eax, ecx",
+        "1a: xor edx, edx",
+        "1c: mov dl, byte ptr [0x1012be02]",
+        "22: push esi",
+        "23: push edi",
+        "24: mov edi, ecx",
+        "26: shr eax, 6"
+      ],
+      "candidate_entry": [
+        "00: sub esp, 0x10",
+        "03: mov eax, dword ptr [0x1012c03c]",
+        "08: push ebx",
+        "09: push ebp",
+        "0a: add eax, 4",
+        "0d: push esi",
+        "0e: push edi",
+        "0f: mov edi, dword ptr [0x1012be00]",
+        "15: mov dword ptr [0x1012c03c], eax",
+        "1a: xor edx, edx",
+        "1c: mov dl, byte ptr [0x1012be02]",
+        "22: mov eax, edi",
+        "24: shr eax, 6",
+        "27: mov ecx, edi"
+      ]
+    },
+    {
+      "name": "RSP_VMUDL",
+      "original_va": "0x10017180",
+      "span": 736,
+      "different_entry_bytes": 25,
+      "suffix_offset": 41,
+      "matching_suffix_sha256": "6c23f302ca1b8c9625558ac3bb4bde10d8a1b28c04f849637302d11bc113184e"
+    },
+    {
+      "name": "RSP_VMUDM",
+      "original_va": "0x10017460",
+      "span": 960,
+      "different_entry_bytes": 25,
+      "suffix_offset": 41,
+      "matching_suffix_sha256": "aeda5549123e9131abe1b4a8f14d750b6da2614b14eaedbcfef5744fa58e7fee"
+    },
+    {
+      "name": "RSP_VMUDN",
+      "original_va": "0x10017820",
+      "span": 896,
+      "different_entry_bytes": 25,
+      "suffix_offset": 41,
+      "matching_suffix_sha256": "14b017a133879c382b53a2e994d4fceabe2e6d0b63f59ea79abe76b3224b69b2"
+    },
+    {
+      "name": "RSP_VMUDH",
+      "original_va": "0x10017ba0",
+      "span": 960,
+      "different_entry_bytes": 25,
+      "suffix_offset": 41,
+      "matching_suffix_sha256": "27cad9fb68bcad4b4f1cf5926e7b7d44fe658a42ec365f7acfe619dea10f3ca5"
+    }
+  ],
+  "controls": [
+    {
+      "label": "declared-union-field",
+      "report": "/root/.ai-tmp/audio-rsp-entry-boundary.5ak0rpyh/declared-union-field/summary.json",
+      "report_sha256": "c72846185634b65763a8e2183734d5f1012ad81577f3e35be8491a866298cbad",
+      "source_sha256": "e2ebc258be25fca598896c4bc9639e24c61c859aaf34bab5682d034df2fd3a43",
+      "header_sha256": "5f25153f32aa17f454c92e2e2a1a918ee27dd22aedaee0557f04e16c6eadf8fc",
+      "object_sha256": "49d73a10cf4d90fbdba81643341c4c2538be831209d1a02d0e2eba56daebcf6e",
+      "result": {
+        "label": "declared-union-field",
+        "command": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/FoRSP.obj",
+          "RSP.cpp"
+        ],
+        "functions": 180,
+        "exact": 148,
+        "data_exact": 29,
+        "unresolved": 0,
+        "changed": [],
+        "object_sha256": "49d73a10cf4d90fbdba81643341c4c2538be831209d1a02d0e2eba56daebcf6e"
+      }
+    },
+    {
+      "label": "decode-before-advance",
+      "report": "/root/.ai-tmp/audio-rsp-entry-boundary.5ak0rpyh/decode-before-advance/summary.json",
+      "report_sha256": "234bfa8c17832496eee8d640a49944b17828c77866ec7dc514ee7878e678dd6a",
+      "source_sha256": "f4e4d745f70ec59627aa5c455877a6edbead490194ee6dd7ce04ac8367e520bf",
+      "header_sha256": "9489748e5025a27cdcbcf9853751b72d0c6c73658ddb4d62893d3f40f297b7ab",
+      "object_sha256": "95bd88cb6790d3391c12dfc9d34250c9d2c006b0327dd308024177b2ec920673",
+      "result": {
+        "label": "decode-before-advance",
+        "command": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/FoRSP.obj",
+          "RSP.cpp"
+        ],
+        "functions": 180,
+        "exact": 148,
+        "data_exact": 29,
+        "unresolved": 0,
+        "changed": [
+          {
+            "name": "RSP_VMULF",
+            "size": 928,
+            "diff": 907,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMULU",
+            "size": 1024,
+            "diff": 974,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDL",
+            "size": 736,
+            "diff": 719,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDM",
+            "size": 960,
+            "diff": 929,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDN",
+            "size": 912,
+            "diff": 883,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDH",
+            "size": 960,
+            "diff": 922,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMACF",
+            "size": 1216,
+            "diff": 1092,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMACU",
+            "size": 1136,
+            "diff": 1031,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADL",
+            "size": 1104,
+            "diff": 843,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADM",
+            "size": 1120,
+            "diff": 1096,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADN",
+            "size": 1088,
+            "diff": 831,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADH",
+            "size": 1184,
+            "diff": 1175,
+            "previously_exact": false
+          }
+        ],
+        "object_sha256": "95bd88cb6790d3391c12dfc9d34250c9d2c006b0327dd308024177b2ec920673"
+      }
+    },
+    {
+      "label": "decode-source-operands-first",
+      "report": "/root/.ai-tmp/audio-rsp-entry-boundary.5ak0rpyh/decode-source-operands-first/summary.json",
+      "report_sha256": "7f84ba5de393f52d8e08ac79c92aab89d66d779084a13adafc5f9c2f1a77725f",
+      "source_sha256": "a5b33456984034f8f321ba581676ccfb066a227d2e77abda1ec5bde3736c3b3a",
+      "header_sha256": "9489748e5025a27cdcbcf9853751b72d0c6c73658ddb4d62893d3f40f297b7ab",
+      "object_sha256": "ce117c56a63797eaca2f255668c027ec89acc84fef0be4d28d21859636160475",
+      "result": {
+        "label": "decode-source-operands-first",
+        "command": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/FoRSP.obj",
+          "RSP.cpp"
+        ],
+        "functions": 180,
+        "exact": 148,
+        "data_exact": 29,
+        "unresolved": 0,
+        "changed": [
+          {
+            "name": "RSP_VMULF",
+            "size": 928,
+            "diff": 877,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMULU",
+            "size": 1024,
+            "diff": 975,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDL",
+            "size": 736,
+            "diff": 691,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDM",
+            "size": 960,
+            "diff": 899,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDN",
+            "size": 912,
+            "diff": 855,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDH",
+            "size": 960,
+            "diff": 892,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMACF",
+            "size": 1216,
+            "diff": 1066,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMACU",
+            "size": 1136,
+            "diff": 1006,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADL",
+            "size": 1104,
+            "diff": 845,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADM",
+            "size": 1120,
+            "diff": 1097,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADN",
+            "size": 1088,
+            "diff": 833,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADH",
+            "size": 1184,
+            "diff": 1163,
+            "previously_exact": false
+          }
+        ],
+        "object_sha256": "ce117c56a63797eaca2f255668c027ec89acc84fef0be4d28d21859636160475"
+      }
+    },
+    {
+      "label": "decode-vs-last",
+      "report": "/root/.ai-tmp/audio-rsp-entry-boundary.5ak0rpyh/decode-vs-last/summary.json",
+      "report_sha256": "2027a0e7c2ae372c1c1e1f6956fc7c06a3e893a8de0e73bc3bfb23f2ee6f5424",
+      "source_sha256": "11249f0aa557fb69b843c945b4ad86213f5a37c815c9c2ee62d5c971b526e56d",
+      "header_sha256": "9489748e5025a27cdcbcf9853751b72d0c6c73658ddb4d62893d3f40f297b7ab",
+      "object_sha256": "dfc9b9ab37294c3e0a33a18863fbe46e47280678c6b2d3195e193c67820065b8",
+      "result": {
+        "label": "decode-vs-last",
+        "command": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/FoRSP.obj",
+          "RSP.cpp"
+        ],
+        "functions": 180,
+        "exact": 148,
+        "data_exact": 29,
+        "unresolved": 0,
+        "changed": [
+          {
+            "name": "RSP_VMULF",
+            "size": 928,
+            "diff": 906,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMULU",
+            "size": 1008,
+            "diff": 830,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDL",
+            "size": 736,
+            "diff": 719,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDM",
+            "size": 960,
+            "diff": 928,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDN",
+            "size": 912,
+            "diff": 883,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDH",
+            "size": 960,
+            "diff": 921,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMACF",
+            "size": 1232,
+            "diff": 826,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMACU",
+            "size": 1136,
+            "diff": 770,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADL",
+            "size": 1104,
+            "diff": 847,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADM",
+            "size": 1120,
+            "diff": 1098,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADN",
+            "size": 1088,
+            "diff": 835,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADH",
+            "size": 1200,
+            "diff": 1118,
+            "previously_exact": false
+          }
+        ],
+        "object_sha256": "dfc9b9ab37294c3e0a33a18863fbe46e47280678c6b2d3195e193c67820065b8"
+      }
+    },
+    {
+      "label": "ordinary-decoded-helper",
+      "report": "/root/.ai-tmp/audio-rsp-entry-boundary.5ak0rpyh/ordinary-decoded-helper/summary.json",
+      "report_sha256": "f87a7557174d619116caa7d17f9055f0e468a2be8578f4c5e8e9980e7e495249",
+      "source_sha256": "0cc5d4cbdadda332fcb9cda11e57fae06e4a63b7c2681f9aaa5c7117aec6d9a7",
+      "header_sha256": "9489748e5025a27cdcbcf9853751b72d0c6c73658ddb4d62893d3f40f297b7ab",
+      "object_sha256": "a72361cdc083f1723db4cc8c2618492dfbc2dab9d76b3d2b1a9afb27aac4f33f",
+      "result": {
+        "conclusion": "Rejected: ordinary inline definitions remain native helper calls under /Ob1. Extra bodies and unresolved helper-call targets are explicitly reported, never assigned invented original addresses.",
+        "functions_compared": 180,
+        "exact": 148,
+        "data_exact": 29,
+        "extra_bodies": [
+          {
+            "symbol": "?RSP_VMULFDecoded@@YAXTRSPInstructionWord@@@Z",
+            "size": 912
+          },
+          {
+            "symbol": "?RSP_VMUDLDecoded@@YAXTRSPInstructionWord@@@Z",
+            "size": 720
+          }
+        ],
+        "changed": [
+          {
+            "name": "RSP_VMULF",
+            "size": 32,
+            "unresolved": 1
+          },
+          {
+            "name": "RSP_VMUDL",
+            "size": 32,
+            "unresolved": 1
+          }
+        ],
+        "unresolved": 2
+      }
+    },
+    {
+      "label": "snapshot-before-advance",
+      "report": "/root/.ai-tmp/audio-rsp-entry-boundary.5ak0rpyh/snapshot-before-advance/summary.json",
+      "report_sha256": "7c0740f3bbf26ad354ec24800219f3b08277790bf300c37eaf32775d2d79c646",
+      "source_sha256": "ae6919f8910e89bc10f30233f72f9ae8bb0f22cbf2a835aa241648ecb27f113c",
+      "header_sha256": "9489748e5025a27cdcbcf9853751b72d0c6c73658ddb4d62893d3f40f297b7ab",
+      "object_sha256": "a8c72383652953c8e741d1c06d61e99014fb18a87d78e9826245f4c90f4863d1",
+      "result": {
+        "label": "snapshot-before-advance",
+        "command": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/FoRSP.obj",
+          "RSP.cpp"
+        ],
+        "functions": 180,
+        "exact": 148,
+        "data_exact": 29,
+        "unresolved": 0,
+        "changed": [
+          {
+            "name": "RSP_VMULF",
+            "size": 928,
+            "diff": 892,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMULU",
+            "size": 1040,
+            "diff": 984,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDL",
+            "size": 736,
+            "diff": 684,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDM",
+            "size": 976,
+            "diff": 928,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDN",
+            "size": 912,
+            "diff": 861,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMUDH",
+            "size": 960,
+            "diff": 910,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMACF",
+            "size": 1216,
+            "diff": 1144,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMACU",
+            "size": 1136,
+            "diff": 1076,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADL",
+            "size": 1104,
+            "diff": 1059,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADM",
+            "size": 1120,
+            "diff": 960,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADN",
+            "size": 1088,
+            "diff": 1044,
+            "previously_exact": false
+          },
+          {
+            "name": "RSP_VMADH",
+            "size": 1184,
+            "diff": 1172,
+            "previously_exact": false
+          }
+        ],
+        "object_sha256": "a8c72383652953c8e741d1c06d61e99014fb18a87d78e9826245f4c90f4863d1"
+      }
+    },
+    {
+      "label": "unsigned-long-word",
+      "report": "/root/.ai-tmp/audio-rsp-entry-boundary.5ak0rpyh/unsigned-long-word/summary.json",
+      "report_sha256": "97a05f64b72385b829f8c9594abfd914263a75362a5129ba3fe7c4be78159507",
+      "source_sha256": "e2ebc258be25fca598896c4bc9639e24c61c859aaf34bab5682d034df2fd3a43",
+      "header_sha256": "05c21a09d0e1b90e1f553f9cb3ca2152aef8aaacfe17685ec049bfd7752681cb",
+      "object_sha256": "18d56619be9518719e60a28960110357901e7f8015331401bf93c1a122424ee2",
+      "result": {
+        "label": "unsigned-long-word",
+        "command": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/FoRSP.obj",
+          "RSP.cpp"
+        ],
+        "functions": 180,
+        "exact": 148,
+        "data_exact": 29,
+        "unresolved": 0,
+        "changed": [],
+        "object_sha256": "18d56619be9518719e60a28960110357901e7f8015331401bf93c1a122424ee2"
+      }
+    },
+    {
+      "label": "vector-element-view",
+      "report": "/root/.ai-tmp/audio-rsp-entry-boundary.5ak0rpyh/vector-element-view/summary.json",
+      "report_sha256": "3d58f4c8c8ccf5a4ab7061ade7ba39a3a55c076a7b3aa56ea23dd95c8b9b4c29",
+      "source_sha256": "d3528cec9795f59fc9b5585f1ffddcca99a42c84505245b4ec396c00dc81174a",
+      "header_sha256": "6251123687d64afdf0010e32361ad9c8ec9e944d692e8a7eb3a16c4ddb56963f",
+      "object_sha256": "4b04db05007f3163b8e06fb6aceb59ec3a0700dbc111820e716aecd50a01940c",
+      "result": {
+        "label": "vector-element-view",
+        "command": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/FoRSP.obj",
+          "RSP.cpp"
+        ],
+        "functions": 180,
+        "exact": 148,
+        "data_exact": 29,
+        "unresolved": 0,
+        "changed": [],
+        "object_sha256": "4b04db05007f3163b8e06fb6aceb59ec3a0700dbc111820e716aecd50a01940c"
+      }
+    },
+    {
+      "label": "vs-first-products",
+      "report": "/root/.ai-tmp/audio-rsp-entry-boundary.5ak0rpyh/vs-first-products/summary.json",
+      "report_sha256": "a0681510d722cc96627c133cf0ebced52957dbbc56e977fbe37584a7976d1278",
+      "source_sha256": "0ab3bf5914cb2cc1c036d8e0f76dff29c3738a4de4595f2fd064fbbd372b8598",
+      "header_sha256": "9489748e5025a27cdcbcf9853751b72d0c6c73658ddb4d62893d3f40f297b7ab",
+      "object_sha256": "dc1d73b00e1d55edf5926b1a2ed665d53b47aeb20ea9fa93f1695fd6ede748f9",
+      "result": {
+        "label": "vs-first-products",
+        "command": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/FoRSP.obj",
+          "RSP.cpp"
+        ],
+        "functions": 180,
+        "exact": 148,
+        "data_exact": 29,
+        "unresolved": 0,
+        "changed": [],
+        "object_sha256": "dc1d73b00e1d55edf5926b1a2ed665d53b47aeb20ea9fa93f1695fd6ede748f9"
+      }
+    }
+  ],
+  "reproducer": {
+    "script": "/root/.ai-tmp/audio-rsp-entry-boundary.5ak0rpyh/probe.py",
+    "sha256": "d62e912e4a2f96050cd61e4f95f1e63538049fc29b528a10c904aa87c55bfe9e"
+  },
+  "limits": [
+    "The four byte-identical controls need no new behavior test. Changed, rejected controls were not promoted or counted as behavioral proofs.",
+    "The ordinary inline-helper control emits two additional native bodies and has two unresolved helper-call operands. Its partial comparison explicitly reports those extras; no original addresses were invented.",
+    "The current 148 exact bodies and 29 typed objects remain unchanged because this audit makes no application-source edits. The 32 unmatched functions remain unresolved."
+  ]
+}
