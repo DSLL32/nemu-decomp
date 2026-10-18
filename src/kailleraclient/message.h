@@ -16,9 +16,9 @@ public:
     void readString(char *text, int size);
     void appendInt(int value);
     int readInt();
-    void appendByte(char value);
+    void appendByte(unsigned char value);
     unsigned char readByte();
-    void appendWord(short value);
+    void appendWord(unsigned short value);
     unsigned short readWord();
     int pack(char *data, int size);
     void unpack(char *data, int size);

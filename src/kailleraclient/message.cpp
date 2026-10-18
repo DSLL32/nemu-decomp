@@ -59,21 +59,22 @@ void Message::read(void *data,int size)
 
 void Message::appendString(char *text) { append(text,strlen(text)+1); }
 
-void Message::readString(char *text,int size)
+void Message::readString(char *text,int limit)
 {
+    int size=limit;
     if (size>(int)strlen(buffer)) size=strlen(buffer);
     if (length+1<=size) size=length+1;
     strncpy(text,buffer,size);
-    *(size+text)=0;
+    text[size]=0;
     length-=size+1;
     memcpy(buffer,buffer+size+1,length);
 }
 
 void Message::appendInt(int value) { append(&value,4); }
 int Message::readInt() { int value=0; read(&value,4); return value; }
-void Message::appendByte(char value) { append(&value,1); }
+void Message::appendByte(unsigned char value) { append(&value,1); }
 unsigned char Message::readByte() { unsigned char value=0; read(&value,1); return value; }
-void Message::appendWord(short value) { append(&value,2); }
+void Message::appendWord(unsigned short value) { append(&value,2); }
 unsigned short Message::readWord() { unsigned short value=0; read(&value,2); return value; }
 
 int Message::pack(char *data,int size)
