@@ -19,7 +19,7 @@
     "native_language_control": "analysis/audio-rsp-language-control.json"
   },
   "source_sha256": {
-    "RSP.cpp": "e2ebc258be25fca598896c4bc9639e24c61c859aaf34bab5682d034df2fd3a43",
+    "RSP.cpp": "b1774a705cf7cc2b294773d5bba10e003650dfcd857efadc2ab995f87da44c29",
     "RSPKernel.inc": "7a218993560c457a5149266e391a28fcdb0a1df5a812209c9a9b7111238eb961",
     "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88",
     "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
@@ -40,8 +40,9 @@
       "All 180 materialized native function hashes are unchanged from the earlier separate-unit reconstruction. The retained header table is restored before the guest program.",
       "The earlier C/C++ frontend comparison is historical evidence from its recorded source snapshot, not a whole-unit language control on this final organization.",
       "Signed lane indices recover the observed four-lane countdown loops in all twelve retained multiply functions. The code remains unmatched; two complete suffixes now match after their first 41 bytes.",
-      "Three-arm signed clamping in VMUDM, VMUDN and VMUDH recovers their complete suffixes after the first 41 bytes. Together with VMULF and VMUDL, five still-unmatched functions now have identical 25-byte entry residuals.",
-      "The five live SP hardware-register scalars are fields of an inferred eight-word bank matching the native Nemu layout. Status, Semaphore and Bist are explicitly inferred retained fields. This preserves all 180 materialized function hashes and all 29 earlier typed data ranges; the unidentified C020 interval remains unresolved."
+      "Three-arm signed clamping in VMUDM, VMUDN and VMUDH recovers their complete suffixes after the first 41 bytes. At that checkpoint, VMULF, VMUDL and these three functions retained identical 25-byte entry residuals; the later element-first decode order resolves all five.",
+      "The five live SP hardware-register scalars are fields of an inferred eight-word bank matching the native Nemu layout. Status, Semaphore and Bist are explicitly inferred retained fields. This preserves all 180 materialized function hashes and all 29 earlier typed data ranges; the unidentified C020 interval remains unresolved.",
+      "Element-first operand decoding matches the complete VMULF, VMUDL, VMUDM, VMUDN and VMUDH bodies. An independent fresh native compilation reproduces all 180 recorded candidate hashes, with 153 complete matches."
     ],
     "invariance_evidence": "analysis/audio-rsp-organization.json",
     "language_control": "analysis/audio-rsp-language-control.json",
@@ -55,7 +56,8 @@
     },
     "retained_multiply_refinement": "analysis/audio-rsp-multiply-refinement.json",
     "retained_multiply_clamp_refinement": "analysis/audio-rsp-clamp-refinement.json",
-    "sp_register_bank": "analysis/audio-rsp-sp-bank.json"
+    "sp_register_bank": "analysis/audio-rsp-sp-bank.json",
+    "multiply_entry_match": "analysis/audio-rsp-multiply-entry-match.json"
   },
   "coverage": {
     "start": "0x10013b10",
@@ -66,18 +68,18 @@
     "basis": "Complete native disassembly and terminal returns/tail calls, including retained entries absent from dispatch tables. Compiler-generated switch tables and NOP alignment remain in each compared extent."
   },
   "comparison": {
-    "functions_exact": 148,
+    "functions_exact": 153,
     "functions_compared": 180,
-    "matching_function_bytes": 25696,
+    "matching_function_bytes": 30176,
     "typed_objects_exact": 25,
     "typed_objects_compared": 25,
     "initialized_data_bytes": 7752,
     "zero_initialized_object_bytes": 17164,
     "unresolved_relocations": 0,
     "method": "Ordinary COFF DIR32 and REL32 relocations materialized using separately identified original targets. Every byte of each recorded span is compared; no masks or executable patches.",
-    "artifact": "/root/.ai-tmp/audio-rsp-spbank.pbyh2667/promoted-strict.json",
-    "artifact_sha256": "2cd3f72799e20e5c086901d8b98a8046d3514470037563a217c7ac794d077f0b",
-    "source_snapshot": "/root/.ai-tmp/audio-rsp-spbank.pbyh2667/bank",
+    "artifact": "/root/.ai-tmp/audio-rsp-accumulate.zoqqom7a/baseline/comparison.json",
+    "artifact_sha256": "a50e31548769c994ef0e0712ce6d7860a0fd5a8a90d43b1fbce626386a47d3b7",
+    "source_snapshot": "/root/.ai-tmp/audio-rsp-accumulate.zoqqom7a/baseline",
     "typed_fields_exact": 11,
     "typed_fields_compared": 11,
     "object_count_note": "Five scalar objects became fields of one aggregate; all 29 prior typed ranges remain separately verified. Field checks overlap aggregates."
@@ -1255,10 +1257,10 @@
       "va": 268528064,
       "original_size": 928,
       "candidate_size": 928,
-      "exact": false,
-      "differing_bytes": 25,
+      "exact": true,
+      "differing_bytes": 0,
       "original_sha256": "4eca8a3bc579df2e2918a10778e696a43e393c7eaa8be564748f353b4c7606ef",
-      "candidate_materialized_sha256": "f936f94479b9e2a75745e47db345b6bdd0c36dc8bd380faa2b61451e738d7782"
+      "candidate_materialized_sha256": "4eca8a3bc579df2e2918a10778e696a43e393c7eaa8be564748f353b4c7606ef"
     },
     {
       "name": "RSP_VMULU",
@@ -1299,10 +1301,10 @@
       "va": 268530048,
       "original_size": 736,
       "candidate_size": 736,
-      "exact": false,
-      "differing_bytes": 25,
+      "exact": true,
+      "differing_bytes": 0,
       "original_sha256": "8611c3202c89381a9e5e154a5dd5dbb6410e6be724348b24d436ef68da266f4f",
-      "candidate_materialized_sha256": "011e76beba9fcfee18b91e3b0d583740b763e7a4c9a766ee7e304013b57bcc9d"
+      "candidate_materialized_sha256": "8611c3202c89381a9e5e154a5dd5dbb6410e6be724348b24d436ef68da266f4f"
     },
     {
       "name": "RSP_VMUDM",
@@ -1310,10 +1312,10 @@
       "va": 268530784,
       "original_size": 960,
       "candidate_size": 960,
-      "exact": false,
-      "differing_bytes": 25,
+      "exact": true,
+      "differing_bytes": 0,
       "original_sha256": "325d0f0968fb00ee99c7886117903cda4fcb0e153a5edd72a718400e52f3dce6",
-      "candidate_materialized_sha256": "b4bf0bf3118282b3a0676e14f75253ca65e0de0ff1453d747fd1a5918d16a18c"
+      "candidate_materialized_sha256": "325d0f0968fb00ee99c7886117903cda4fcb0e153a5edd72a718400e52f3dce6"
     },
     {
       "name": "RSP_VMUDN",
@@ -1321,10 +1323,10 @@
       "va": 268531744,
       "original_size": 896,
       "candidate_size": 896,
-      "exact": false,
-      "differing_bytes": 25,
+      "exact": true,
+      "differing_bytes": 0,
       "original_sha256": "bc7362adfdb380e636fb4e009ca35c266167f53de8131615785e134bf9f0ad7f",
-      "candidate_materialized_sha256": "95e4ba60f01fb0b5ef0babd032f98faee994dedd887fd652d5e11e398191f5e8"
+      "candidate_materialized_sha256": "bc7362adfdb380e636fb4e009ca35c266167f53de8131615785e134bf9f0ad7f"
     },
     {
       "name": "RSP_VMUDH",
@@ -1332,10 +1334,10 @@
       "va": 268532640,
       "original_size": 960,
       "candidate_size": 960,
-      "exact": false,
-      "differing_bytes": 25,
+      "exact": true,
+      "differing_bytes": 0,
       "original_sha256": "6e0631ad884c5cecb63f55cacc2d4ef10e6b3191594dee0be35d79bf97f0a5da",
-      "candidate_materialized_sha256": "4c858d2516ef559b10bd84687ec5b8196602419021dc66dc5914dd0c6822302d"
+      "candidate_materialized_sha256": "6e0631ad884c5cecb63f55cacc2d4ef10e6b3191594dee0be35d79bf97f0a5da"
     },
     {
       "name": "RSP_VMACF",
@@ -2397,11 +2399,12 @@
     "organization_change": "The unit-organization checkpoint preserves all 180 earlier native hashes. The later signed-index refinement changes twelve unmatched functions and has 6144 new differential cases; all 168 other function hashes and 29 data hashes are unchanged. The later three-arm clamp refinement changes three of those unmatched functions and has 6144 additional native cases; all 177 other function hashes and 29 data hashes remain unchanged.",
     "current_code_cases": 149376,
     "historical_superseded_cases": 3072,
-    "sp_register_bank_change": "No native instruction semantics changed: all 180 complete materialized bodies and all 29 prior typed data ranges are preserved; see analysis/audio-rsp-sp-bank.json."
+    "sp_register_bank_change": "No native instruction semantics changed: all 180 complete materialized bodies and all 29 prior typed data ranges are preserved; see analysis/audio-rsp-sp-bank.json.",
+    "multiply_entry_change": "Only operand-decoding declaration order changes. All five complete native bodies now equal the original; the other 175 bodies and all typed data remain unchanged. No additional behavior cases are claimed."
   },
   "shared_nemu_evidence": "analysis/audio-rsp-cross-image.json",
   "limitations": [
-    "32 native functions remain instruction-unmatched; reconstructed source coverage is not complete DLL identity.",
+    "27 native functions remain instruction-unmatched; reconstructed source coverage is not complete DLL identity.",
     "Function/data placement, PE metadata, imports, resources and libraries require the integrator's complete-image comparison.",
     "Inferred private names and unused-entry purposes are identified as such. No unknown memory gaps are filled with opaque objects."
   ],
