@@ -1,0 +1,1462 @@
+{
+  "scope": "One diagnostic storage hypothesis, plus a recompiled baseline, using the complete AudioPlugin translation unit and an actual complete14-object native link. No canonical source declarations or build settings were changed.",
+  "artifact": "/root/.ai-tmp/audio-plugin-struct-control.st65fi9l",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "hypothesis": {
+    "declarations": "PLUGIN_INFO PluginInfo; AUDIO_INFO AudioInfo; plus the eight separately evidenced old ABI register-pointer/callback slots under their standard ABI field spellings.",
+    "source_basis": "The primary Zilmar sample defines AUDIO_INFO AudioInfo and both ABI types. The independent2001 LaC image proves separate old pointer fields. PluginInfo is a conventional inferred loader name. Neither retaining both structs nor these private identifiers is established in the2003 target.",
+    "expected_geometric_fit_only": "112+60-byte structs can occupy the original200-byte internal interval with28 bytes of ordinary alignment if suitably ordered. Eight4-byte slots fit the remaining32 internal bytes. This arithmetic motivated one compatibility check; it was not taken as source evidence.",
+    "declaration_order": "PluginInfo, AudioInfo, then MI_INTR_REG, AI_DRAM_ADDR_REG, AI_LEN_REG, AI_CONTROL_REG, AI_STATUS_REG, AI_DACRATE_REG, AI_BITRATE_REG, CheckInterrupts. No identifier or ordering grid was run."
+  },
+  "compilation_results": [
+    {
+      "variant": "current",
+      "command": [
+        "python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/c",
+        "/FoZ:\\root\\.ai-tmp\\audio-plugin-struct-control.st65fi9l\\current\\AudioPlugin.obj",
+        "Z:\\root\\.ai-tmp\\audio-plugin-struct-control.st65fi9l\\current\\AudioPlugin.c"
+      ],
+      "source_sha256": "6fed63db83aa3a950d0ce3a2e5e9df4769674aed1b145ab3e0332c5e2c44e260",
+      "object_sha256": "44459b92fd7dd42665a4ae8f7c478301c8ae1208aa42f046bc964c9a01eef40b",
+      "comparison_sha256": "55a89890680ec397275f820559bce4c60732b9f5a3d117e5f163352bd59e9dd7",
+      "coff_common_order": [
+        {
+          "name": "_AttachedAudio",
+          "bytes": 4
+        },
+        {
+          "name": "_AttachedDllTest",
+          "bytes": 4
+        },
+        {
+          "name": "_AttachedAiDacrateChanged",
+          "bytes": 4
+        },
+        {
+          "name": "_AttachedCloseDLL",
+          "bytes": 4
+        },
+        {
+          "name": "_PluginDMEM",
+          "bytes": 4
+        },
+        {
+          "name": "_AttachedAiLenChanged",
+          "bytes": 4
+        },
+        {
+          "name": "_AttachedDllConfig",
+          "bytes": 4
+        },
+        {
+          "name": "_AttachedDllAbout",
+          "bytes": 4
+        },
+        {
+          "name": "_PluginInitialized",
+          "bytes": 4
+        },
+        {
+          "name": "_PluginIMEM",
+          "bytes": 4
+        },
+        {
+          "name": "_AttachedInitiateAudio",
+          "bytes": 4
+        },
+        {
+          "name": "_AttachedRomClosed",
+          "bytes": 4
+        },
+        {
+          "name": "_AttachedAiUpdate",
+          "bytes": 4
+        },
+        {
+          "name": "_AttachedAiReadLength",
+          "bytes": 4
+        },
+        {
+          "name": "_AttachedProcessAList",
+          "bytes": 4
+        },
+        {
+          "name": "_AttachedGetDllInfo",
+          "bytes": 4
+        }
+      ],
+      "complete_instruction_matches": 13,
+      "functions": 13,
+      "original_target_comparison": {
+        "functions_compared": 13,
+        "relocation_masked_matches": 13,
+        "relocation_consistent_matches": 9,
+        "relocation_checked_matches": 3,
+        "relocation_target_mismatches": 0,
+        "inferred_targets": 47,
+        "unresolved_targets": 26
+      },
+      "source_inputs_sha256": {
+        "AudioPlugin.c": "6fed63db83aa3a950d0ce3a2e5e9df4769674aed1b145ab3e0332c5e2c44e260",
+        "AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
+        "transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f"
+      }
+    },
+    {
+      "variant": "abi-structs-and-fields",
+      "command": [
+        "python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/c",
+        "/FoZ:\\root\\.ai-tmp\\audio-plugin-struct-control.st65fi9l\\abi-structs-and-fields\\AudioPlugin.obj",
+        "Z:\\root\\.ai-tmp\\audio-plugin-struct-control.st65fi9l\\abi-structs-and-fields\\AudioPlugin.c"
+      ],
+      "source_sha256": "39d92084ada206d66b7247955ee40311976c984498c1823fd4309b590b8a4d80",
+      "object_sha256": "ae513d8bd46ae4b523d71cb738e00787bedec21ae0b4b18b5183f77ada3416de",
+      "comparison_sha256": "e5fdb2390bf67ba77bcf6db9c08b7f9ba30b66fd051b29ac24678e7e169a32c8",
+      "coff_common_order": [
+        {
+          "name": "_AttachedAudio",
+          "bytes": 4
+        },
+        {
+          "name": "_AI_BITRATE_REG",
+          "bytes": 4
+        },
+        {
+          "name": "_AI_DACRATE_REG",
+          "bytes": 4
+        },
+        {
+          "name": "_AttachedDllTest",
+          "bytes": 4
+        },
+        {
+          "name": "_AudioInfo",
+          "bytes": 60
+        },
+        {
+          "name": "_AttachedAiDacrateChanged",
+          "bytes": 4
+        },
+        {
+          "name": "_AttachedCloseDLL",
+          "bytes": 4
+        },
+        {
+          "name": "_PluginDMEM",
+          "bytes": 4
+        },
+        {
+          "name": "_AttachedAiLenChanged",
+          "bytes": 4
+        },
+        {
+          "name": "_AttachedDllConfig",
+          "bytes": 4
+        },
+        {
+          "name": "_AttachedDllAbout",
+          "bytes": 4
+        },
+        {
+          "name": "_AI_STATUS_REG",
+          "bytes": 4
+        },
+        {
+          "name": "_PluginInitialized",
+          "bytes": 4
+        },
+        {
+          "name": "_AI_CONTROL_REG",
+          "bytes": 4
+        },
+        {
+          "name": "_CheckInterrupts",
+          "bytes": 4
+        },
+        {
+          "name": "_PluginIMEM",
+          "bytes": 4
+        },
+        {
+          "name": "_AI_LEN_REG",
+          "bytes": 4
+        },
+        {
+          "name": "_AttachedInitiateAudio",
+          "bytes": 4
+        },
+        {
+          "name": "_AttachedRomClosed",
+          "bytes": 4
+        },
+        {
+          "name": "_AttachedAiUpdate",
+          "bytes": 4
+        },
+        {
+          "name": "_AttachedAiReadLength",
+          "bytes": 4
+        },
+        {
+          "name": "_AttachedProcessAList",
+          "bytes": 4
+        },
+        {
+          "name": "_AttachedGetDllInfo",
+          "bytes": 4
+        },
+        {
+          "name": "_AI_DRAM_ADDR_REG",
+          "bytes": 4
+        },
+        {
+          "name": "_MI_INTR_REG",
+          "bytes": 4
+        },
+        {
+          "name": "_PluginInfo",
+          "bytes": 112
+        }
+      ],
+      "complete_instruction_matches": 13,
+      "functions": 13,
+      "original_target_comparison": {
+        "functions_compared": 13,
+        "relocation_masked_matches": 13,
+        "relocation_consistent_matches": 9,
+        "relocation_checked_matches": 3,
+        "relocation_target_mismatches": 0,
+        "inferred_targets": 47,
+        "unresolved_targets": 26
+      },
+      "source_inputs_sha256": {
+        "AudioPlugin.c": "39d92084ada206d66b7247955ee40311976c984498c1823fd4309b590b8a4d80",
+        "AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
+        "transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f"
+      }
+    }
+  ],
+  "regression_evidence": {
+    "all_complete_text_sections_raw_bytes_and_named_relocations_unchanged": true,
+    "matches_frozen_integration_object": true,
+    "method": "Compare every complete .text section byte string and every relocation actual offset/type/target name/target section/target value. Symbol-table index renumbering from added declarations is excluded from this semantic COFF comparison; no original machine-code fields are normalized.",
+    "complete_text_sections": [
+      {
+        "functions": [
+          "_RaiseAudioInterrupt"
+        ],
+        "bytes": 16,
+        "raw_sha256": "499f1f307c1cb989f968a6b7fcaec591e1828877223d0b0e7e8e8b76cde8c9ca",
+        "relocations": []
+      },
+      {
+        "functions": [
+          "_AiUpdate"
+        ],
+        "bytes": 16,
+        "raw_sha256": "247599aa11966badf77d9bbec40b25aca3a5e0bc652cb153ca2a57eb58b7c953",
+        "relocations": [
+          {
+            "offset": 2,
+            "type": 6,
+            "symbol": "_AttachedAiUpdate",
+            "target_section": 0,
+            "target_value": 4
+          }
+        ]
+      },
+      {
+        "functions": [
+          "_AiDacrateChanged"
+        ],
+        "bytes": 16,
+        "raw_sha256": "247599aa11966badf77d9bbec40b25aca3a5e0bc652cb153ca2a57eb58b7c953",
+        "relocations": [
+          {
+            "offset": 2,
+            "type": 6,
+            "symbol": "_AttachedAiDacrateChanged",
+            "target_section": 0,
+            "target_value": 4
+          }
+        ]
+      },
+      {
+        "functions": [
+          "_AiLenChanged"
+        ],
+        "bytes": 16,
+        "raw_sha256": "247599aa11966badf77d9bbec40b25aca3a5e0bc652cb153ca2a57eb58b7c953",
+        "relocations": [
+          {
+            "offset": 2,
+            "type": 6,
+            "symbol": "_AttachedAiLenChanged",
+            "target_section": 0,
+            "target_value": 4
+          }
+        ]
+      },
+      {
+        "functions": [
+          "_AiReadLength"
+        ],
+        "bytes": 16,
+        "raw_sha256": "247599aa11966badf77d9bbec40b25aca3a5e0bc652cb153ca2a57eb58b7c953",
+        "relocations": [
+          {
+            "offset": 2,
+            "type": 6,
+            "symbol": "_AttachedAiReadLength",
+            "target_section": 0,
+            "target_value": 4
+          }
+        ]
+      },
+      {
+        "functions": [
+          "_CloseDLL"
+        ],
+        "bytes": 48,
+        "raw_sha256": "23ca6df0d25b3c93121e380ad3f15b21922e8452841dd61de52e3f2dff5199fb",
+        "relocations": [
+          {
+            "offset": 1,
+            "type": 6,
+            "symbol": "_PluginInitialized",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 11,
+            "type": 6,
+            "symbol": "_PluginInitialized",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 20,
+            "type": 20,
+            "symbol": "_FreeAudioHLE",
+            "target_section": 0,
+            "target_value": 0
+          },
+          {
+            "offset": 26,
+            "type": 6,
+            "symbol": "_AttachedCloseDLL",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 31,
+            "type": 6,
+            "symbol": "_AttachedAudio",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 38,
+            "type": 6,
+            "symbol": "__imp__FreeLibrary@4",
+            "target_section": 0,
+            "target_value": 0
+          }
+        ]
+      },
+      {
+        "functions": [
+          "_DllAbout"
+        ],
+        "bytes": 32,
+        "raw_sha256": "1b11bbacdd7e9cce1bdc0d5f454991d33845df44df0c7f794d3ab22fb221c970",
+        "relocations": [
+          {
+            "offset": 7,
+            "type": 6,
+            "symbol": "??_C@_05BDOHFCKE@About?$AA@",
+            "target_section": 18,
+            "target_value": 0
+          },
+          {
+            "offset": 12,
+            "type": 6,
+            "symbol": "_PluginName",
+            "target_section": 3,
+            "target_value": 2176
+          },
+          {
+            "offset": 19,
+            "type": 6,
+            "symbol": "__imp__MessageBoxA@16",
+            "target_section": 0,
+            "target_value": 0
+          }
+        ]
+      },
+      {
+        "functions": [
+          "_DllConfig"
+        ],
+        "bytes": 16,
+        "raw_sha256": "ba7d1522ead1d288cfb795c9d1f2bddb3fbcf76832ab6d74b38ba952d1c6a454",
+        "relocations": [
+          {
+            "offset": 1,
+            "type": 20,
+            "symbol": "_AIConfigure",
+            "target_section": 0,
+            "target_value": 0
+          }
+        ]
+      },
+      {
+        "functions": [
+          "_DllTest"
+        ],
+        "bytes": 16,
+        "raw_sha256": "247599aa11966badf77d9bbec40b25aca3a5e0bc652cb153ca2a57eb58b7c953",
+        "relocations": [
+          {
+            "offset": 2,
+            "type": 6,
+            "symbol": "_AttachedDllTest",
+            "target_section": 0,
+            "target_value": 4
+          }
+        ]
+      },
+      {
+        "functions": [
+          "_GetDllInfo"
+        ],
+        "bytes": 64,
+        "raw_sha256": "e546be1546319e741c1ccd3ad7806b5b624d089647e886aac0172b1e27191f92",
+        "relocations": [
+          {
+            "offset": 6,
+            "type": 6,
+            "symbol": "_PluginName",
+            "target_section": 3,
+            "target_value": 2176
+          }
+        ]
+      },
+      {
+        "functions": [
+          "_InitiateAudio"
+        ],
+        "bytes": 352,
+        "raw_sha256": "e5d2c1b4faada688db159b3d1e785e467666884bc47248d84517d3c948c68e56",
+        "relocations": [
+          {
+            "offset": 1,
+            "type": 6,
+            "symbol": "_PluginInitialized",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 16,
+            "type": 20,
+            "symbol": "_DetectCPUFeatures",
+            "target_section": 0,
+            "target_value": 0
+          },
+          {
+            "offset": 21,
+            "type": 6,
+            "symbol": "??_C@_0BJ@DHOPPHEK@plugin?1attachedAudio?4dll?$AA@",
+            "target_section": 39,
+            "target_value": 0
+          },
+          {
+            "offset": 27,
+            "type": 6,
+            "symbol": "__imp__LoadLibraryA@4",
+            "target_section": 0,
+            "target_value": 0
+          },
+          {
+            "offset": 33,
+            "type": 6,
+            "symbol": "__imp__GetProcAddress@8",
+            "target_section": 0,
+            "target_value": 0
+          },
+          {
+            "offset": 38,
+            "type": 6,
+            "symbol": "??_C@_0BB@EJEGOIGK@AiDacrateChanged?$AA@",
+            "target_section": 38,
+            "target_value": 0
+          },
+          {
+            "offset": 44,
+            "type": 6,
+            "symbol": "_AttachedAudio",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 51,
+            "type": 6,
+            "symbol": "_AttachedAiDacrateChanged",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 56,
+            "type": 6,
+            "symbol": "_AttachedAudio",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 61,
+            "type": 6,
+            "symbol": "??_C@_0N@EJMLADGN@AiLenChanged?$AA@",
+            "target_section": 37,
+            "target_value": 0
+          },
+          {
+            "offset": 70,
+            "type": 6,
+            "symbol": "_AttachedAudio",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 75,
+            "type": 6,
+            "symbol": "??_C@_0N@IIHDJBOM@AiReadLength?$AA@",
+            "target_section": 36,
+            "target_value": 0
+          },
+          {
+            "offset": 81,
+            "type": 6,
+            "symbol": "_AttachedAiLenChanged",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 89,
+            "type": 6,
+            "symbol": "_AttachedAudio",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 94,
+            "type": 6,
+            "symbol": "??_C@_08OJANGBPO@CloseDLL?$AA@",
+            "target_section": 35,
+            "target_value": 0
+          },
+          {
+            "offset": 100,
+            "type": 6,
+            "symbol": "_AttachedAiReadLength",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 107,
+            "type": 6,
+            "symbol": "_AttachedCloseDLL",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 112,
+            "type": 6,
+            "symbol": "_AttachedAudio",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 117,
+            "type": 6,
+            "symbol": "??_C@_08MAACGMH@DllAbout?$AA@",
+            "target_section": 34,
+            "target_value": 0
+          },
+          {
+            "offset": 126,
+            "type": 6,
+            "symbol": "_AttachedAudio",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 131,
+            "type": 6,
+            "symbol": "??_C@_09GPIDEJEA@DllConfig?$AA@",
+            "target_section": 33,
+            "target_value": 0
+          },
+          {
+            "offset": 137,
+            "type": 6,
+            "symbol": "_AttachedDllAbout",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 145,
+            "type": 6,
+            "symbol": "_AttachedAudio",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 150,
+            "type": 6,
+            "symbol": "??_C@_07NIKFABPA@DllTest?$AA@",
+            "target_section": 32,
+            "target_value": 0
+          },
+          {
+            "offset": 156,
+            "type": 6,
+            "symbol": "_AttachedDllConfig",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 163,
+            "type": 6,
+            "symbol": "_AttachedDllTest",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 168,
+            "type": 6,
+            "symbol": "_AttachedAudio",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 173,
+            "type": 6,
+            "symbol": "??_C@_0L@EPFIEAMH@GetDllInfo?$AA@",
+            "target_section": 31,
+            "target_value": 0
+          },
+          {
+            "offset": 182,
+            "type": 6,
+            "symbol": "_AttachedAudio",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 187,
+            "type": 6,
+            "symbol": "??_C@_0O@LNNBDIBP@InitiateAudio?$AA@",
+            "target_section": 30,
+            "target_value": 0
+          },
+          {
+            "offset": 193,
+            "type": 6,
+            "symbol": "_AttachedGetDllInfo",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 201,
+            "type": 6,
+            "symbol": "_AttachedAudio",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 206,
+            "type": 6,
+            "symbol": "??_C@_0N@CDOKGKDH@ProcessAList?$AA@",
+            "target_section": 29,
+            "target_value": 0
+          },
+          {
+            "offset": 212,
+            "type": 6,
+            "symbol": "_AttachedInitiateAudio",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 219,
+            "type": 6,
+            "symbol": "_AttachedProcessAList",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 224,
+            "type": 6,
+            "symbol": "_AttachedAudio",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 229,
+            "type": 6,
+            "symbol": "??_C@_09EOBANCKA@RomClosed?$AA@",
+            "target_section": 28,
+            "target_value": 0
+          },
+          {
+            "offset": 238,
+            "type": 6,
+            "symbol": "_AttachedAudio",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 243,
+            "type": 6,
+            "symbol": "??_C@_08MBCOJCNB@AiUpdate?$AA@",
+            "target_section": 27,
+            "target_value": 0
+          },
+          {
+            "offset": 249,
+            "type": 6,
+            "symbol": "_AttachedRomClosed",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 258,
+            "type": 6,
+            "symbol": "_AttachedAiUpdate",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 263,
+            "type": 20,
+            "symbol": "_AISetUCodeID",
+            "target_section": 0,
+            "target_value": 0
+          },
+          {
+            "offset": 281,
+            "type": 6,
+            "symbol": "_PluginIMEM",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 301,
+            "type": 6,
+            "symbol": "_PluginInitialized",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 311,
+            "type": 6,
+            "symbol": "_RDRAM",
+            "target_section": 0,
+            "target_value": 0
+          },
+          {
+            "offset": 316,
+            "type": 6,
+            "symbol": "_PluginDMEM",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 324,
+            "type": 6,
+            "symbol": "_AttachedInitiateAudio",
+            "target_section": 0,
+            "target_value": 4
+          }
+        ]
+      },
+      {
+        "functions": [
+          "_ProcessAList"
+        ],
+        "bytes": 224,
+        "raw_sha256": "4a0553ab0debaa4825c8859d544da2afe32cd9bdb6f554972f72049988a77234",
+        "relocations": [
+          {
+            "offset": 2,
+            "type": 6,
+            "symbol": "_HLEAudio",
+            "target_section": 0,
+            "target_value": 0
+          },
+          {
+            "offset": 17,
+            "type": 6,
+            "symbol": "_PluginDMEM",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 34,
+            "type": 6,
+            "symbol": "_AudioTask",
+            "target_section": 0,
+            "target_value": 0
+          },
+          {
+            "offset": 39,
+            "type": 6,
+            "symbol": "_AudioTask",
+            "target_section": 0,
+            "target_value": 0
+          },
+          {
+            "offset": 46,
+            "type": 20,
+            "symbol": "_ProcessAudioTask",
+            "target_section": 0,
+            "target_value": 0
+          },
+          {
+            "offset": 51,
+            "type": 6,
+            "symbol": "_DumpMicrocode",
+            "target_section": 0,
+            "target_value": 0
+          },
+          {
+            "offset": 67,
+            "type": 6,
+            "symbol": "??_C@_02GMLFBBN@wb?$AA@",
+            "target_section": 44,
+            "target_value": 0
+          },
+          {
+            "offset": 72,
+            "type": 6,
+            "symbol": "??_C@_0BD@DEKEIGM@abi_ucode_dmem?4dmp?$AA@",
+            "target_section": 43,
+            "target_value": 0
+          },
+          {
+            "offset": 77,
+            "type": 20,
+            "symbol": "_fopen",
+            "target_section": 0,
+            "target_value": 0
+          },
+          {
+            "offset": 97,
+            "type": 6,
+            "symbol": "_PluginDMEM",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 121,
+            "type": 20,
+            "symbol": "_fwrite",
+            "target_section": 0,
+            "target_value": 0
+          },
+          {
+            "offset": 141,
+            "type": 20,
+            "symbol": "_fclose",
+            "target_section": 0,
+            "target_value": 0
+          },
+          {
+            "offset": 146,
+            "type": 6,
+            "symbol": "??_C@_02GMLFBBN@wb?$AA@",
+            "target_section": 44,
+            "target_value": 0
+          },
+          {
+            "offset": 151,
+            "type": 6,
+            "symbol": "??_C@_0BD@PCAFKPDL@abi_ucode_imem?4dmp?$AA@",
+            "target_section": 42,
+            "target_value": 0
+          },
+          {
+            "offset": 156,
+            "type": 20,
+            "symbol": "_fopen",
+            "target_section": 0,
+            "target_value": 0
+          },
+          {
+            "offset": 168,
+            "type": 6,
+            "symbol": "_PluginIMEM",
+            "target_section": 0,
+            "target_value": 4
+          },
+          {
+            "offset": 192,
+            "type": 20,
+            "symbol": "_fwrite",
+            "target_section": 0,
+            "target_value": 0
+          },
+          {
+            "offset": 212,
+            "type": 20,
+            "symbol": "_fclose",
+            "target_section": 0,
+            "target_value": 0
+          }
+        ]
+      },
+      {
+        "functions": [
+          "_RomClosed"
+        ],
+        "bytes": 16,
+        "raw_sha256": "247599aa11966badf77d9bbec40b25aca3a5e0bc652cb153ca2a57eb58b7c953",
+        "relocations": [
+          {
+            "offset": 2,
+            "type": 6,
+            "symbol": "_AttachedRomClosed",
+            "target_section": 0,
+            "target_value": 4
+          }
+        ]
+      }
+    ],
+    "limits": "The original-target single-map checks still carry unresolved and inferred targets, recorded above.13 non-relocation body matches are not thirteen independently proven complete linked bodies. The baseline/candidate regression has identical raw section bytes and actual named relocation records."
+  },
+  "native_link_control": {
+    "frozen_whole_run": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/a_xvg64e",
+    "frozen_manifest_sha256": "992e2d7316467c00fe85c873b5d107a2477c5caeade641582641a3109c379d18",
+    "results": [
+      {
+        "variant": "current",
+        "work": "/root/.ai-tmp/audio-plugin-struct-control.st65fi9l/current/link",
+        "command": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "link",
+          "/nologo",
+          "/dll",
+          "/incremental:no",
+          "/debug",
+          "/opt:noref",
+          "/opt:noicf",
+          "/subsystem:windows",
+          "/machine:I386",
+          "/base:0x10000000",
+          "/align:4096",
+          "/filealign:4096",
+          "/out:audio.dll",
+          "/pdb:audio.pdb",
+          "/map:audio.map",
+          "/def:audio.def",
+          "ABI1.obj",
+          "ABI2.obj",
+          "AudioHLE.obj",
+          "ABI3.obj",
+          "AudioLegacy.obj",
+          "DirectSound.obj",
+          "AudioLog.obj",
+          "CPUFeatures.obj",
+          "Jpeg.obj",
+          "Mp3.obj",
+          "AudioProcessing.obj",
+          "AudioResample.obj",
+          "AudioPlugin.obj",
+          "RSP.obj",
+          "Audio.res",
+          "Z:\\root\\nemu-decomp\\toolchains\\vc6\\lib\\dsound.lib",
+          "winmm.lib",
+          "kernel32.lib",
+          "user32.lib",
+          "gdi32.lib"
+        ],
+        "input_sha256": {
+          "audio.def": "f34ad9fa1d564c407483eabd05363f0c95a4cf69a81f6c4ffcb0dd95ddcb4b34",
+          "ABI1.obj": "84bbdd37487b4b69e1f1d0713218b98daca5330d97da0dc0baf9f757db14230f",
+          "ABI2.obj": "f295b291adb6c293797dbb3e20d501db4a13fd6bb22f39d37ee99a60faeabaa1",
+          "AudioHLE.obj": "e0ba40650e0454d8a0f18e8e147480a525c3e2dee8d1e2b592535a313e7b546a",
+          "ABI3.obj": "3fe2ac1f499681dcb8c8feca9cb0337c2be16c0a4ed6d38be5c718877d16b61c",
+          "AudioLegacy.obj": "081ad0021923e76c22c1a743a5a143bca870a9a978f9c708097517cac8f8bfba",
+          "DirectSound.obj": "148ca3c3c1d974e3ed109102ed8218accd576c7901a0cb69ed3b2122b5366f6a",
+          "AudioLog.obj": "41c853e2dba5ffe64164aaebe0cfdb1f6fd13aa836ba2cd24df57b1f2cf30faa",
+          "CPUFeatures.obj": "ec4e7f0bca0dd7ef669b69d68ab682c70d2a5a4a24fd9ec17a58e9fe084f9bf0",
+          "Jpeg.obj": "da0ce69d824b931ff112631e101bb001db6a04d715b5791eb350b2e0d78e428a",
+          "Mp3.obj": "e550d396ea934e92ad9cdd470576fb35477e5800f23d07f650d0e0a8be1fcb5b",
+          "AudioProcessing.obj": "52d510fccc9c0f0034f087ee649bdb9e250652ca20744ef2d3e6d210123b1ba5",
+          "AudioResample.obj": "3f1751752e882280268e1024b43e065d9ccc5801ff3159a24b5e4e51e45123a3",
+          "AudioPlugin.obj": "44459b92fd7dd42665a4ae8f7c478301c8ae1208aa42f046bc964c9a01eef40b",
+          "RSP.obj": "c388e3ac5421a269b4eba5d918662e830c7d39d21fef2554b66fe87083c1d9d1",
+          "Audio.res": "2a0c51c1b458d8abe45fd78bd70da51f5c56fa5303a595bfb35828a77e0b72a6"
+        },
+        "dll_sha256": "0d31496b373c42467105b3d3c1001dbd74133c714254f1dd982bb45ae819432b",
+        "map_sha256": "4e29fab081d48d56ef8a5220881a26b7cefaf861a60df87e4fbe2e99a7271810",
+        "data_section": {
+          "name": ".data",
+          "virtual_size": 1279532,
+          "rva": 217088,
+          "raw_size": 49152,
+          "offset": 217088
+        },
+        "plugin_common_extent": {
+          "start": "0x1013052c",
+          "end": "0x1013056c",
+          "bytes": 64,
+          "object_bytes": 64,
+          "internal_alignment_bytes": 0
+        },
+        "plugin_common_map": [
+          {
+            "name": "_AttachedGetDllInfo",
+            "va": "0x1013052c",
+            "bytes": 4,
+            "offset": 0
+          },
+          {
+            "name": "_AttachedProcessAList",
+            "va": "0x10130530",
+            "bytes": 4,
+            "offset": 4
+          },
+          {
+            "name": "_AttachedAiReadLength",
+            "va": "0x10130534",
+            "bytes": 4,
+            "offset": 8
+          },
+          {
+            "name": "_AttachedAiUpdate",
+            "va": "0x10130538",
+            "bytes": 4,
+            "offset": 12
+          },
+          {
+            "name": "_AttachedRomClosed",
+            "va": "0x1013053c",
+            "bytes": 4,
+            "offset": 16
+          },
+          {
+            "name": "_AttachedInitiateAudio",
+            "va": "0x10130540",
+            "bytes": 4,
+            "offset": 20
+          },
+          {
+            "name": "_PluginIMEM",
+            "va": "0x10130544",
+            "bytes": 4,
+            "offset": 24
+          },
+          {
+            "name": "_PluginInitialized",
+            "va": "0x10130548",
+            "bytes": 4,
+            "offset": 28
+          },
+          {
+            "name": "_AttachedDllAbout",
+            "va": "0x1013054c",
+            "bytes": 4,
+            "offset": 32
+          },
+          {
+            "name": "_AttachedDllConfig",
+            "va": "0x10130550",
+            "bytes": 4,
+            "offset": 36
+          },
+          {
+            "name": "_AttachedAiLenChanged",
+            "va": "0x10130554",
+            "bytes": 4,
+            "offset": 40
+          },
+          {
+            "name": "_PluginDMEM",
+            "va": "0x10130558",
+            "bytes": 4,
+            "offset": 44
+          },
+          {
+            "name": "_AttachedCloseDLL",
+            "va": "0x1013055c",
+            "bytes": 4,
+            "offset": 48
+          },
+          {
+            "name": "_AttachedAiDacrateChanged",
+            "va": "0x10130560",
+            "bytes": 4,
+            "offset": 52
+          },
+          {
+            "name": "_AttachedDllTest",
+            "va": "0x10130564",
+            "bytes": 4,
+            "offset": 56
+          },
+          {
+            "name": "_AttachedAudio",
+            "va": "0x10130568",
+            "bytes": 4,
+            "offset": 60
+          }
+        ],
+        "original_data_virtual_size": 1279948,
+        "data_virtual_deficit": 416,
+        "following_ProfileCounters": "0x10130580",
+        "original_ProfileCounters": "0x101306c0",
+        "ProfileCounters_delta": -320
+      },
+      {
+        "variant": "abi-structs-and-fields",
+        "work": "/root/.ai-tmp/audio-plugin-struct-control.st65fi9l/abi-structs-and-fields/link",
+        "command": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "link",
+          "/nologo",
+          "/dll",
+          "/incremental:no",
+          "/debug",
+          "/opt:noref",
+          "/opt:noicf",
+          "/subsystem:windows",
+          "/machine:I386",
+          "/base:0x10000000",
+          "/align:4096",
+          "/filealign:4096",
+          "/out:audio.dll",
+          "/pdb:audio.pdb",
+          "/map:audio.map",
+          "/def:audio.def",
+          "ABI1.obj",
+          "ABI2.obj",
+          "AudioHLE.obj",
+          "ABI3.obj",
+          "AudioLegacy.obj",
+          "DirectSound.obj",
+          "AudioLog.obj",
+          "CPUFeatures.obj",
+          "Jpeg.obj",
+          "Mp3.obj",
+          "AudioProcessing.obj",
+          "AudioResample.obj",
+          "AudioPlugin.obj",
+          "RSP.obj",
+          "Audio.res",
+          "Z:\\root\\nemu-decomp\\toolchains\\vc6\\lib\\dsound.lib",
+          "winmm.lib",
+          "kernel32.lib",
+          "user32.lib",
+          "gdi32.lib"
+        ],
+        "input_sha256": {
+          "audio.def": "f34ad9fa1d564c407483eabd05363f0c95a4cf69a81f6c4ffcb0dd95ddcb4b34",
+          "ABI1.obj": "84bbdd37487b4b69e1f1d0713218b98daca5330d97da0dc0baf9f757db14230f",
+          "ABI2.obj": "f295b291adb6c293797dbb3e20d501db4a13fd6bb22f39d37ee99a60faeabaa1",
+          "AudioHLE.obj": "e0ba40650e0454d8a0f18e8e147480a525c3e2dee8d1e2b592535a313e7b546a",
+          "ABI3.obj": "3fe2ac1f499681dcb8c8feca9cb0337c2be16c0a4ed6d38be5c718877d16b61c",
+          "AudioLegacy.obj": "081ad0021923e76c22c1a743a5a143bca870a9a978f9c708097517cac8f8bfba",
+          "DirectSound.obj": "148ca3c3c1d974e3ed109102ed8218accd576c7901a0cb69ed3b2122b5366f6a",
+          "AudioLog.obj": "41c853e2dba5ffe64164aaebe0cfdb1f6fd13aa836ba2cd24df57b1f2cf30faa",
+          "CPUFeatures.obj": "ec4e7f0bca0dd7ef669b69d68ab682c70d2a5a4a24fd9ec17a58e9fe084f9bf0",
+          "Jpeg.obj": "da0ce69d824b931ff112631e101bb001db6a04d715b5791eb350b2e0d78e428a",
+          "Mp3.obj": "e550d396ea934e92ad9cdd470576fb35477e5800f23d07f650d0e0a8be1fcb5b",
+          "AudioProcessing.obj": "52d510fccc9c0f0034f087ee649bdb9e250652ca20744ef2d3e6d210123b1ba5",
+          "AudioResample.obj": "3f1751752e882280268e1024b43e065d9ccc5801ff3159a24b5e4e51e45123a3",
+          "AudioPlugin.obj": "ae513d8bd46ae4b523d71cb738e00787bedec21ae0b4b18b5183f77ada3416de",
+          "RSP.obj": "c388e3ac5421a269b4eba5d918662e830c7d39d21fef2554b66fe87083c1d9d1",
+          "Audio.res": "2a0c51c1b458d8abe45fd78bd70da51f5c56fa5303a595bfb35828a77e0b72a6"
+        },
+        "dll_sha256": "3fce624ac9a8244441b34d4f61c2d0816971640f81e87a13a760b9d6d5d2243c",
+        "map_sha256": "f4f32539654056f5bc736fc5d61abaf234e8215be9da9113e9603bdab60ac44b",
+        "data_section": {
+          "name": ".data",
+          "virtual_size": 1279756,
+          "rva": 217088,
+          "raw_size": 49152,
+          "offset": 217088
+        },
+        "plugin_common_extent": {
+          "start": "0x10130540",
+          "end": "0x1013064c",
+          "bytes": 268,
+          "object_bytes": 268,
+          "internal_alignment_bytes": 0
+        },
+        "plugin_common_map": [
+          {
+            "name": "_PluginInfo",
+            "va": "0x10130540",
+            "bytes": 112,
+            "offset": 0
+          },
+          {
+            "name": "_MI_INTR_REG",
+            "va": "0x101305b0",
+            "bytes": 4,
+            "offset": 112
+          },
+          {
+            "name": "_AI_DRAM_ADDR_REG",
+            "va": "0x101305b4",
+            "bytes": 4,
+            "offset": 116
+          },
+          {
+            "name": "_AttachedGetDllInfo",
+            "va": "0x101305b8",
+            "bytes": 4,
+            "offset": 120
+          },
+          {
+            "name": "_AttachedProcessAList",
+            "va": "0x101305bc",
+            "bytes": 4,
+            "offset": 124
+          },
+          {
+            "name": "_AttachedAiReadLength",
+            "va": "0x101305c0",
+            "bytes": 4,
+            "offset": 128
+          },
+          {
+            "name": "_AttachedAiUpdate",
+            "va": "0x101305c4",
+            "bytes": 4,
+            "offset": 132
+          },
+          {
+            "name": "_AttachedRomClosed",
+            "va": "0x101305c8",
+            "bytes": 4,
+            "offset": 136
+          },
+          {
+            "name": "_AttachedInitiateAudio",
+            "va": "0x101305cc",
+            "bytes": 4,
+            "offset": 140
+          },
+          {
+            "name": "_AI_LEN_REG",
+            "va": "0x101305d0",
+            "bytes": 4,
+            "offset": 144
+          },
+          {
+            "name": "_PluginIMEM",
+            "va": "0x101305d4",
+            "bytes": 4,
+            "offset": 148
+          },
+          {
+            "name": "_CheckInterrupts",
+            "va": "0x101305d8",
+            "bytes": 4,
+            "offset": 152
+          },
+          {
+            "name": "_AI_CONTROL_REG",
+            "va": "0x101305dc",
+            "bytes": 4,
+            "offset": 156
+          },
+          {
+            "name": "_PluginInitialized",
+            "va": "0x101305e0",
+            "bytes": 4,
+            "offset": 160
+          },
+          {
+            "name": "_AI_STATUS_REG",
+            "va": "0x101305e4",
+            "bytes": 4,
+            "offset": 164
+          },
+          {
+            "name": "_AttachedDllAbout",
+            "va": "0x101305e8",
+            "bytes": 4,
+            "offset": 168
+          },
+          {
+            "name": "_AttachedDllConfig",
+            "va": "0x101305ec",
+            "bytes": 4,
+            "offset": 172
+          },
+          {
+            "name": "_AttachedAiLenChanged",
+            "va": "0x101305f0",
+            "bytes": 4,
+            "offset": 176
+          },
+          {
+            "name": "_PluginDMEM",
+            "va": "0x101305f4",
+            "bytes": 4,
+            "offset": 180
+          },
+          {
+            "name": "_AttachedCloseDLL",
+            "va": "0x101305f8",
+            "bytes": 4,
+            "offset": 184
+          },
+          {
+            "name": "_AttachedAiDacrateChanged",
+            "va": "0x101305fc",
+            "bytes": 4,
+            "offset": 188
+          },
+          {
+            "name": "_AudioInfo",
+            "va": "0x10130600",
+            "bytes": 60,
+            "offset": 192
+          },
+          {
+            "name": "_AttachedDllTest",
+            "va": "0x1013063c",
+            "bytes": 4,
+            "offset": 252
+          },
+          {
+            "name": "_AI_DACRATE_REG",
+            "va": "0x10130640",
+            "bytes": 4,
+            "offset": 256
+          },
+          {
+            "name": "_AI_BITRATE_REG",
+            "va": "0x10130644",
+            "bytes": 4,
+            "offset": 260
+          },
+          {
+            "name": "_AttachedAudio",
+            "va": "0x10130648",
+            "bytes": 4,
+            "offset": 264
+          }
+        ],
+        "original_data_virtual_size": 1279948,
+        "data_virtual_deficit": 192,
+        "following_ProfileCounters": "0x10130660",
+        "original_ProfileCounters": "0x101306c0",
+        "ProfileCounters_delta": -96
+      }
+    ]
+  },
+  "findings": [
+    "The candidate adds exactly204 bytes of real typed common objects. Native placement and surrounding alignment increase the complete .data virtual extent by224 bytes (1279532 to1279756), reducing the overall original-image deficit from416 to192 bytes.",
+    "The candidate shifts the following AudioProfileCounters from0x10130580 to0x10130660, still96 bytes below its independently identified original0x101306c0 address.",
+    "Actual native common placement is PluginInfo at0x10130540, many live pointer/callback objects, then AudioInfo at0x10130600. It does not reproduce the original200-byte internal interval immediately after PluginIMEM, or the original live-callback ordering.",
+    "The original roster could be arithmetically compatible with these types, but the tested source does not reconstruct its placement. The224-byte extent coincidence does not prove original retention or names; no candidate declarations were promoted.",
+    "Both links use copied frozen original integration objects and resources, replacing only the one freshly compiled AudioPlugin object. They use the existing native linker/runtime/import libraries, without forced unresolved symbols, source stubs, padding, binary data patches or metadata-equality claims."
+  ],
+  "native_tool_sha256": {
+    "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
+    "toolchains/vc7/bin/c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
+    "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0",
+    "toolchains/vc7/bin/link.exe": "1560d85164dfb763dd13f90f33ff9c6f1cd80f2afada03eed8d0a314593581f1",
+    "toolchains/vc7/lib/libcmt.lib": "8815af7b9b6e0e28b77708ede25ab7ecfc4b05e1d8811f092c516cff5ce19d94",
+    "toolchains/vc6/lib/dsound.lib": "37679dff670270005be960defafa10fab2ba4eda6706ffed7cbb5818007a6105"
+  },
+  "artifact_sha256": {
+    "abi-structs-and-fields/AudioPlugin.c": "39d92084ada206d66b7247955ee40311976c984498c1823fd4309b590b8a4d80",
+    "abi-structs-and-fields/AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
+    "abi-structs-and-fields/AudioPlugin.obj": "ae513d8bd46ae4b523d71cb738e00787bedec21ae0b4b18b5183f77ada3416de",
+    "abi-structs-and-fields/comparison.json": "e5fdb2390bf67ba77bcf6db9c08b7f9ba30b66fd051b29ac24678e7e169a32c8",
+    "abi-structs-and-fields/compile.log": "f3db8989d9857f37ccc10105229e25bd70c70699f57bb9ac4c9ff7c1edbef5b5",
+    "abi-structs-and-fields/link/ABI1.obj": "84bbdd37487b4b69e1f1d0713218b98daca5330d97da0dc0baf9f757db14230f",
+    "abi-structs-and-fields/link/ABI2.obj": "f295b291adb6c293797dbb3e20d501db4a13fd6bb22f39d37ee99a60faeabaa1",
+    "abi-structs-and-fields/link/ABI3.obj": "3fe2ac1f499681dcb8c8feca9cb0337c2be16c0a4ed6d38be5c718877d16b61c",
+    "abi-structs-and-fields/link/Audio.res": "2a0c51c1b458d8abe45fd78bd70da51f5c56fa5303a595bfb35828a77e0b72a6",
+    "abi-structs-and-fields/link/AudioHLE.obj": "e0ba40650e0454d8a0f18e8e147480a525c3e2dee8d1e2b592535a313e7b546a",
+    "abi-structs-and-fields/link/AudioLegacy.obj": "081ad0021923e76c22c1a743a5a143bca870a9a978f9c708097517cac8f8bfba",
+    "abi-structs-and-fields/link/AudioLog.obj": "41c853e2dba5ffe64164aaebe0cfdb1f6fd13aa836ba2cd24df57b1f2cf30faa",
+    "abi-structs-and-fields/link/AudioPlugin.obj": "ae513d8bd46ae4b523d71cb738e00787bedec21ae0b4b18b5183f77ada3416de",
+    "abi-structs-and-fields/link/AudioProcessing.obj": "52d510fccc9c0f0034f087ee649bdb9e250652ca20744ef2d3e6d210123b1ba5",
+    "abi-structs-and-fields/link/AudioResample.obj": "3f1751752e882280268e1024b43e065d9ccc5801ff3159a24b5e4e51e45123a3",
+    "abi-structs-and-fields/link/CPUFeatures.obj": "ec4e7f0bca0dd7ef669b69d68ab682c70d2a5a4a24fd9ec17a58e9fe084f9bf0",
+    "abi-structs-and-fields/link/DirectSound.obj": "148ca3c3c1d974e3ed109102ed8218accd576c7901a0cb69ed3b2122b5366f6a",
+    "abi-structs-and-fields/link/Jpeg.obj": "da0ce69d824b931ff112631e101bb001db6a04d715b5791eb350b2e0d78e428a",
+    "abi-structs-and-fields/link/Mp3.obj": "e550d396ea934e92ad9cdd470576fb35477e5800f23d07f650d0e0a8be1fcb5b",
+    "abi-structs-and-fields/link/RSP.obj": "c388e3ac5421a269b4eba5d918662e830c7d39d21fef2554b66fe87083c1d9d1",
+    "abi-structs-and-fields/link/audio.def": "f34ad9fa1d564c407483eabd05363f0c95a4cf69a81f6c4ffcb0dd95ddcb4b34",
+    "abi-structs-and-fields/link/audio.dll": "3fce624ac9a8244441b34d4f61c2d0816971640f81e87a13a760b9d6d5d2243c",
+    "abi-structs-and-fields/link/audio.exp": "af8ddbebad47fcccba292b04fe9284f9be1977834b5343f8170f7bf3c3872235",
+    "abi-structs-and-fields/link/audio.lib": "c99ab18a24f64ed74eeab2b1214dd447bf47cff29bc29f58c0a845e682cf2a0b",
+    "abi-structs-and-fields/link/audio.map": "f4f32539654056f5bc736fc5d61abaf234e8215be9da9113e9603bdab60ac44b",
+    "abi-structs-and-fields/link/audio.pdb": "9c0980e3a57dd089df847f23d80506075c985787030ee0f36d0c2c6766d9ef2a",
+    "abi-structs-and-fields/link.log": "55ab2cecfbe563e13d0e6dd42cedeba8d1a226f0f141da28fc741266152c4567",
+    "abi-structs-and-fields/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
+    "control.py": "b5cc99d4fc3d8d1e898a77424b327cdd0502611411cc5ff271a6f907ba3261a4",
+    "current/AudioPlugin.c": "6fed63db83aa3a950d0ce3a2e5e9df4769674aed1b145ab3e0332c5e2c44e260",
+    "current/AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
+    "current/AudioPlugin.obj": "44459b92fd7dd42665a4ae8f7c478301c8ae1208aa42f046bc964c9a01eef40b",
+    "current/comparison.json": "55a89890680ec397275f820559bce4c60732b9f5a3d117e5f163352bd59e9dd7",
+    "current/compile.log": "f3db8989d9857f37ccc10105229e25bd70c70699f57bb9ac4c9ff7c1edbef5b5",
+    "current/link/ABI1.obj": "84bbdd37487b4b69e1f1d0713218b98daca5330d97da0dc0baf9f757db14230f",
+    "current/link/ABI2.obj": "f295b291adb6c293797dbb3e20d501db4a13fd6bb22f39d37ee99a60faeabaa1",
+    "current/link/ABI3.obj": "3fe2ac1f499681dcb8c8feca9cb0337c2be16c0a4ed6d38be5c718877d16b61c",
+    "current/link/Audio.res": "2a0c51c1b458d8abe45fd78bd70da51f5c56fa5303a595bfb35828a77e0b72a6",
+    "current/link/AudioHLE.obj": "e0ba40650e0454d8a0f18e8e147480a525c3e2dee8d1e2b592535a313e7b546a",
+    "current/link/AudioLegacy.obj": "081ad0021923e76c22c1a743a5a143bca870a9a978f9c708097517cac8f8bfba",
+    "current/link/AudioLog.obj": "41c853e2dba5ffe64164aaebe0cfdb1f6fd13aa836ba2cd24df57b1f2cf30faa",
+    "current/link/AudioPlugin.obj": "44459b92fd7dd42665a4ae8f7c478301c8ae1208aa42f046bc964c9a01eef40b",
+    "current/link/AudioProcessing.obj": "52d510fccc9c0f0034f087ee649bdb9e250652ca20744ef2d3e6d210123b1ba5",
+    "current/link/AudioResample.obj": "3f1751752e882280268e1024b43e065d9ccc5801ff3159a24b5e4e51e45123a3",
+    "current/link/CPUFeatures.obj": "ec4e7f0bca0dd7ef669b69d68ab682c70d2a5a4a24fd9ec17a58e9fe084f9bf0",
+    "current/link/DirectSound.obj": "148ca3c3c1d974e3ed109102ed8218accd576c7901a0cb69ed3b2122b5366f6a",
+    "current/link/Jpeg.obj": "da0ce69d824b931ff112631e101bb001db6a04d715b5791eb350b2e0d78e428a",
+    "current/link/Mp3.obj": "e550d396ea934e92ad9cdd470576fb35477e5800f23d07f650d0e0a8be1fcb5b",
+    "current/link/RSP.obj": "c388e3ac5421a269b4eba5d918662e830c7d39d21fef2554b66fe87083c1d9d1",
+    "current/link/audio.def": "f34ad9fa1d564c407483eabd05363f0c95a4cf69a81f6c4ffcb0dd95ddcb4b34",
+    "current/link/audio.dll": "0d31496b373c42467105b3d3c1001dbd74133c714254f1dd982bb45ae819432b",
+    "current/link/audio.exp": "fb304c3d72703fe4bb803c24802fa1d7e40560c1140fc4641b136ac600124e9b",
+    "current/link/audio.lib": "b161a2063f5baceb6aad04ee15032c12a1c6ba43826a5872e5d5955c9d4e6cd0",
+    "current/link/audio.map": "4e29fab081d48d56ef8a5220881a26b7cefaf861a60df87e4fbe2e99a7271810",
+    "current/link/audio.pdb": "8a10a8dadea745d25bdbd6fd74408dce4693637d92d5ca211b06a1f09f0052d6",
+    "current/link.log": "55ab2cecfbe563e13d0e6dd42cedeba8d1a226f0f141da28fc741266152c4567",
+    "current/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
+    "link-control.json": "5985eab8fc625682fff7389f140438d92a2cd6f125d2e06d22c0f8ec394ccb5d",
+    "link-control.py": "f55011f252bfafb90d0801971da2b6b2058c1e78fa5b99f77babd2d052141e49",
+    "roster-control.json": "822b857ed18d92453a1dd988d17afd0068eb827b7fa5adb9eb6514ebd183a110",
+    "write-report.py": "ab23692cf527d4eb8938fc6cded0ab4605d9e93f087aaafadc46d2de41cbc42b"
+  },
+  "decision": "Hold the storage hypothesis. Further adoption requires independent source/identifier/retention evidence and exact common placement, not another broad naming search."
+}
