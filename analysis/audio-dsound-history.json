@@ -178,5 +178,96 @@
     "all_matching_body_relocation_targets_equal": true,
     "initialized_contributions_equal": true,
     "resources_equal": true
+  },
+  "historical_compiler_controls": {
+    "scope": "Isolated readable AudioError and AllocateSoundBuffer C bodies; no original code bytes embedded. Original known targets were used only for masked diagnostic comparison.",
+    "probes": [
+      {
+        "artifact": "/root/.ai-tmp/audio-dsound-history.lgz8m8yz/vc6-rtm-control",
+        "commands": [
+          "python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc6rtm",
+          "cl",
+          "/IZ:\\root\\nemu-decomp\\toolchains\\vc6rtm\\include",
+          "/IZ:\\root\\nemu-decomp\\toolchains\\vc6\\include",
+          "/nologo",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/c",
+          "/FoZ:\\root\\.ai-tmp\\audio-dsound-history.lgz8m8yz\\vc6-rtm-control\\DirectSound.obj",
+          "Z:\\root\\.ai-tmp\\audio-dsound-history.lgz8m8yz\\vc6-rtm-control\\DirectSound.c"
+        ],
+        "source_sha256": "f8cad25ed1aca1bc50c73e65012df7d9d9a4ad8db4b7a74fb20f57b3ee0ab782",
+        "object_sha256": "c29252806530033e7a318c35cef89a43dc8e15d5c26752fa2dc1ed83aadc5eef",
+        "tool_sha256": {
+          "toolchains/vc6rtm/bin/cl.exe": "d9220fdfaf355c81f26e7b03c5dc628ec72ff81c99dc38ed98b1ad4bdbbb309c",
+          "toolchains/vc6rtm/bin/c1.dll": "ee14a2603a1339f95db2e396751f7e51b50e421731229fb2416a01f974689d80",
+          "toolchains/vc6rtm/bin/c2.dll": "45187b0b6288240f73272a7c61e6329c50048a76e57db3bb87b6f0229e09e27d"
+        },
+        "functions": [
+          {
+            "name": "_AudioError",
+            "original_bytes": 624,
+            "rebuilt_bytes": 624,
+            "relocation_masked_equal": false,
+            "relocation_masked_differing_bytes": 88
+          },
+          {
+            "name": "_AllocateSoundBuffer",
+            "original_bytes": 96,
+            "rebuilt_bytes": 80,
+            "relocation_masked_equal": false,
+            "relocation_masked_differing_bytes": 54
+          }
+        ]
+      },
+      {
+        "artifact": "/root/.ai-tmp/audio-dsound-history.lgz8m8yz/vc6-control",
+        "commands": [
+          "python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc6",
+          "cl",
+          "/nologo",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/c",
+          "/FoZ:\\root\\.ai-tmp\\audio-dsound-history.lgz8m8yz\\vc6-control\\DirectSound.obj",
+          "Z:\\root\\.ai-tmp\\audio-dsound-history.lgz8m8yz\\vc6-control\\DirectSound.c"
+        ],
+        "source_sha256": "f8cad25ed1aca1bc50c73e65012df7d9d9a4ad8db4b7a74fb20f57b3ee0ab782",
+        "object_sha256": "42161ee93161f47b0177e19b66870b29c310ff75b8b4219e0a027f8616839a82",
+        "tool_sha256": {
+          "toolchains/vc6/bin/cl.exe": "1bf99f206271ecdbd13da2829192ea2c02e2a44c740b8d72935d5d9cb753b156",
+          "toolchains/vc6/bin/c1.dll": "0792033fc3d2fec262ff95478c6a9e70a06e836ed55f0a9710200fa06c204754",
+          "toolchains/vc6/bin/c2.dll": "6c8e3988a5ccd69a9f9829b5c7512848d71c018b8d24be3928d7b00b5f79f231"
+        },
+        "functions": [
+          {
+            "name": "_AudioError",
+            "original_bytes": 624,
+            "rebuilt_bytes": 624,
+            "relocation_masked_equal": false,
+            "relocation_masked_differing_bytes": 88
+          },
+          {
+            "name": "_AllocateSoundBuffer",
+            "original_bytes": 96,
+            "rebuilt_bytes": 80,
+            "relocation_masked_equal": false,
+            "relocation_masked_differing_bytes": 54
+          }
+        ]
+      }
+    ],
+    "finding": "The current simple C sources do not reproduce either historical complete body under the matching VC6 RTM compiler or the later VC6 SP5 control. AllocateSoundBuffer remains 80 bytes instead of 96, with register-zero sharing.",
+    "limits": [
+      "The full historical translation unit and its source order have not been reconstructed; these isolated negative probes do not exclude compiler-context effects.",
+      "Windows/DirectSound declarations use the tracked VC6 SDK headers; this is a diagnostic source hypothesis, not a complete historical rebuild.",
+      "No compiler option, volatile qualifier or alternative source body was promoted from these probes."
+    ]
   }
 }
