@@ -130,5 +130,65 @@
     "all180_function_hashes_equal_lead": true,
     "legacy_vge_exact": true,
     "legacy_vge_bytes": 1104
+  },
+  "native_fast_flag_types": {
+    "scratch": "/root/.ai-tmp/audio-wrapper-types-root.ntwso7yc",
+    "mechanism": "Coherent signed long, unsigned int and unsigned long declaration/definition of the existing four-byte fast-mode flag; original dword operand rules out byte-sized bool. All three represent valid flag values identically. No new storage or qualifiers.",
+    "driver_sha256": "e37f139ca636e4ba30b146587509d34e9f6794b5f6319833b4faace16fbb4491",
+    "runs": [
+      {
+        "label": "baseline",
+        "exact": 168,
+        "data_exact": 25,
+        "fields_exact": 11,
+        "unresolved": 0,
+        "changed": [],
+        "source_sha256": "eac9ee4ca4f1fcdf359512b3a1137dcddedaf9b148757d40c9623b8643eeae38",
+        "object_sha256": "9effbb7c33077a578e34837a03d26ca259cc65b70770322acae7e5eb850fad40",
+        "RSP.h_sha256": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc_sha256": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88",
+        "comparison.json_sha256": "2e2e360d8e605ae4f7a9ce597fe7c3b166393692d8b6a3cff6adbbdec75a924f"
+      },
+      {
+        "label": "signed-long",
+        "exact": 168,
+        "data_exact": 25,
+        "fields_exact": 11,
+        "unresolved": 0,
+        "changed": [],
+        "source_sha256": "eac9ee4ca4f1fcdf359512b3a1137dcddedaf9b148757d40c9623b8643eeae38",
+        "object_sha256": "c88036fd34e39d2a3ca54e18e9dba7b8e1dc6595bc44a5bfca2215ac038c16de",
+        "RSP.h_sha256": "a410f8428c697fc5c2b5ad350e171139be8305025316f8779a6ce8bb1d6ea183",
+        "RSPData.inc_sha256": "abb631929645705ca6dff9d881df324fea255373d8359652c550d87bbd16ac0c",
+        "comparison.json_sha256": "f3c931a83c25c0c9982fa57fec72556514888de537cab6228ee73a29ebe4d677"
+      },
+      {
+        "label": "unsigned-int",
+        "exact": 168,
+        "data_exact": 25,
+        "fields_exact": 11,
+        "unresolved": 0,
+        "changed": [],
+        "source_sha256": "eac9ee4ca4f1fcdf359512b3a1137dcddedaf9b148757d40c9623b8643eeae38",
+        "object_sha256": "9ca108bef848d6f36fe82961d778b9fbdcb55c4d74565351f42a7aec806c6fcb",
+        "RSP.h_sha256": "9bb74a32bcb4f622478d4d7b28d6b48332bbc891b99de2c0e8f22f3317016a38",
+        "RSPData.inc_sha256": "913fc90f51a00510ead67acbd89ea91e0179a1cc119bd78cef4315782d664dbb",
+        "comparison.json_sha256": "a546419965d9d5088bdea2c8b6d0e7908546f0a2b7b8848caab8763e07214bf0"
+      },
+      {
+        "label": "unsigned-long",
+        "exact": 168,
+        "data_exact": 25,
+        "fields_exact": 11,
+        "unresolved": 0,
+        "changed": [],
+        "source_sha256": "eac9ee4ca4f1fcdf359512b3a1137dcddedaf9b148757d40c9623b8643eeae38",
+        "object_sha256": "c53759b3f5b1145d5a540e945606463824eeaf6052eaf7fb9695733d86035422",
+        "RSP.h_sha256": "090c283a4ae611883a8d956e335601281cdc6e3baee3c9d67e713074d1c03e2a",
+        "RSPData.inc_sha256": "23f5e69e89d03ad684a616db3a04c327741fa7eb340b0ffde1cd14ef18ed44ff",
+        "comparison.json_sha256": "54c11a700d076c7112892841d49dbb3e8010b9b1275f5f414cda19bdf7032b79"
+      }
+    ],
+    "result": "All180 native function hashes unchanged,168 exact,25 objects and11fields exact,zero unresolved operands. No canonical source changes."
   }
 }
