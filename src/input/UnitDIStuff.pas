@@ -232,7 +232,18 @@ begin
   DIError := DirectInputCreate(HInstance, $0500, DI, nil);
   DIErrorCheck(DIError);
   DeviceCount := 0;
+{$IFDEF NEMU_FIX_HID_ENUMERATION}
+  { Filter before DirectInput creates devices. The callback ignores other
+    classes too, but some modern HID devices corrupt the legacy DirectInput
+    heap during initialization, before that callback can reject them. }
+  DIError := DI.EnumDevices(DIDEVTYPE_MOUSE, @EnumDevicesCallback, @EnumContext, 0);
+  DIErrorCheck(DIError);
+  DIError := DI.EnumDevices(DIDEVTYPE_KEYBOARD, @EnumDevicesCallback, @EnumContext, 0);
+  DIErrorCheck(DIError);
+  DIError := DI.EnumDevices(DIDEVTYPE_JOYSTICK, @EnumDevicesCallback, @EnumContext, 0);
+{$ELSE}
   DIError := DI.EnumDevices(0, @EnumDevicesCallback, @EnumContext, 0);
+{$ENDIF}
   DIErrorCheck(DIError);
   Reg.OpenKey('\Software\Nemu\0.8\Input.5\Use', True);
   Names := TStringList.Create;
