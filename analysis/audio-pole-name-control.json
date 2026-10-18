@@ -1,0 +1,258 @@
+{
+  "status": "bounded_local_name_control_negative_no_canonical_source_change",
+  "scope": "One native naming control, then read-only source inventory. No compiler grids.",
+  "control": {
+    "scope": "One full-unit alpha-renaming native control; no expression, declaration order, type or statement change. Names are ordinary source spellings, not claimed original identifiers.",
+    "source_sha256": "67ced2fcbd0e6798f34cd986e5a9b77e4ba963eb03463468b5d7b68120dbde1f",
+    "names": {
+      "command": "cmd",
+      "context": "sst",
+      "output": "dst",
+      "state": "mem",
+      "input": "src",
+      "instruction": "inst",
+      "count": "cnt",
+      "gain": "vol",
+      "history": "prev",
+      "coefficients": "coef",
+      "scaled": "coef2",
+      "i": "a",
+      "tap": "b",
+      "row": "c",
+      "accumulator": "accum",
+      "sample": "v"
+    },
+    "command": [
+      "/usr/bin/python3",
+      "/root/nemu-decomp/scripts/run_toolchain.py",
+      "vc7",
+      "cl",
+      "/nologo",
+      "/c",
+      "/O2",
+      "/Ob1",
+      "/MT",
+      "/W3",
+      "/DWIN32",
+      "/DNDEBUG",
+      "/D_WINDOWS",
+      "/D_USRDLL",
+      "/FoAudioResample.obj",
+      "AudioResample.c"
+    ],
+    "wine_prefix": "/root/.ai-tmp/audio-processing.bGaifE/wine",
+    "baseline_object": "/root/.ai-tmp/audio-pole-direct.edn_4ht4/baseline/AudioResample.obj",
+    "baseline_object_sha256": "a6779397c78955acb67c671128ea06685170e3b2f92838484403e52727bba538",
+    "object_sha256": "b0bcee084d11e31209802338840ea6c894c760ec4ca2252fe6d80976805ef3a6",
+    "renamed_source_sha256": "64ade7fad12efb2ed9727382ac874b5736112e973b3ef239419dbbcdeb02fa06",
+    "size": 2320,
+    "differing_bytes": 7,
+    "unresolved": 0,
+    "operand_mismatches": 0,
+    "emitted_function_count": 10,
+    "changed_raw_bodies": [],
+    "findings": [
+      "A broad 16-identifier spelling change does not affect this tested C2 output if changed_raw_bodies is empty. This excludes the tested naming mechanism, not every possible compiler dependence on arbitrary spelling.",
+      "Seven scale-one SIB differences remain real byte failures; no canonical source promoted."
+    ],
+    "tools": {
+      "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
+      "toolchains/vc7/bin/c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
+      "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0",
+      "scripts/verify_audio.py": "e319652ed8a706fe105d29c297f28f1d41288440df2b7f5cd27b3af213272244",
+      "scripts/run_toolchain.py": "489681186d7cde23f42d0a6f154f3e9723b060fa769a1ce2d0f31e656074ea9e"
+    },
+    "probe_sha256": "0868c08cfa844ebe69e4ef58389f511768ddb90b5abc17ed733aa2956aec168e"
+  },
+  "renamed_identifier_count": 16,
+  "original_differences": [
+    {
+      "offset": "0x2b3",
+      "original_bytes": "8d4c38fa",
+      "candidate_bytes": "8d4c07fa",
+      "original": "lea ecx, [eax + edi - 6]",
+      "candidate": "lea ecx, [edi + eax - 6]",
+      "instruction_va": "0x100112f3",
+      "source_operation": "Forms input sample pointer used by taps 0 and 1, then retained for row convolution"
+    },
+    {
+      "offset": "0x2ee",
+      "original_bytes": "0fbf443afe",
+      "candidate_bytes": "0fbf4417fe",
+      "original": "movsx eax, word ptr [edx + edi - 2]",
+      "candidate": "movsx eax, word ptr [edi + edx - 2]",
+      "instruction_va": "0x1001132e",
+      "source_operation": "Direct input sample times gain, tap 2"
+    },
+    {
+      "offset": "0x30b",
+      "original_bytes": "0fbf0438",
+      "candidate_bytes": "0fbf0407",
+      "original": "movsx eax, word ptr [eax + edi]",
+      "candidate": "movsx eax, word ptr [edi + eax]",
+      "instruction_va": "0x1001134b",
+      "source_operation": "Direct input sample times gain, tap 3"
+    },
+    {
+      "offset": "0x32d",
+      "original_bytes": "0fbf443a02",
+      "candidate_bytes": "0fbf441702",
+      "original": "movsx eax, word ptr [edx + edi + 2]",
+      "candidate": "movsx eax, word ptr [edi + edx + 2]",
+      "instruction_va": "0x1001136d",
+      "source_operation": "Direct input sample times gain, tap 4"
+    },
+    {
+      "offset": "0x34a",
+      "original_bytes": "0fbf443804",
+      "candidate_bytes": "0fbf440704",
+      "original": "movsx eax, word ptr [eax + edi + 4]",
+      "candidate": "movsx eax, word ptr [edi + eax + 4]",
+      "instruction_va": "0x1001138a",
+      "source_operation": "Direct input sample times gain, tap 5"
+    },
+    {
+      "offset": "0x371",
+      "original_bytes": "0fbf443a06",
+      "candidate_bytes": "0fbf441706",
+      "original": "movsx eax, word ptr [edx + edi + 6]",
+      "candidate": "movsx eax, word ptr [edi + edx + 6]",
+      "instruction_va": "0x100113b1",
+      "source_operation": "Direct input sample times gain, tap 6"
+    },
+    {
+      "offset": "0x38e",
+      "original_bytes": "0fbf443808",
+      "candidate_bytes": "0fbf440708",
+      "original": "movsx eax, word ptr [eax + edi + 8]",
+      "candidate": "movsx eax, word ptr [edi + eax + 8]",
+      "instruction_va": "0x100113ce",
+      "source_operation": "Direct input sample times gain, tap 7"
+    }
+  ],
+  "dataflow_findings": [
+    "All seven differences belong to the direct gain pass; the nested row convolution already matches exactly.",
+    "Native ESP+0x18 holds 2*input+6. EDI holds the PCM buffer. The first LEA subtracts 6 to form the tap-0 pointer, also used by tap 1 and later the row loop. Subsequent direct taps 2 through 7 use displacements -2, 0, 2, 4, 6, 8 relative to that same biased input offset.",
+    "Every target differing SIB uses the input offset as base and EDI as scale-one index. The candidate exchanges these slots. This is diagnostic equivalence, never byte-exact acceptance."
+  ],
+  "prior_split_byte_address_controls": {
+    "source": "/root/.ai-tmp/audio-processing.bGaifE/PoleBytePointer.c",
+    "source_sha256": "6f5762578389bfa5d0c585e677ca6147547e7ac8c575d2a93a7c66409241cd23",
+    "examples": [
+      {
+        "function": "PoleBytePointer2",
+        "line": 104,
+        "load": "*(short *)((unsigned char *)context->buffer + input * 2 + tap * 2)",
+        "scope": "tap only"
+      },
+      {
+        "function": "PoleBytePointer3",
+        "line": 154,
+        "load": "*(short *)((unsigned char *)context->buffer + input * 2 + tap * 2)",
+        "scope": "tap and row"
+      },
+      {
+        "function": "PoleBytePointer4",
+        "line": 204,
+        "load": "*(short *)(input * 2 + (unsigned char *)context->buffer + tap * 2)",
+        "scope": "tap only"
+      },
+      {
+        "function": "PoleBytePointer5",
+        "line": 254,
+        "load": "*(short *)(input * 2 + (unsigned char *)context->buffer + tap * 2)",
+        "scope": "tap and row"
+      },
+      {
+        "function": "PoleBytePointer8",
+        "line": 404,
+        "load": "((short *)((unsigned char *)context->buffer + input * 2))[tap]",
+        "scope": "tap only"
+      },
+      {
+        "function": "PoleBytePointer9",
+        "line": 454,
+        "load": "((short *)((unsigned char *)context->buffer + input * 2))[tap]",
+        "scope": "tap and row"
+      }
+    ],
+    "existing_comparison": "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/PoleBytePointer-prior-comparison.json",
+    "result": "These split-product and reassociated forms were already compiled; none is exact. No repeat performed."
+  },
+  "typed_load_inventory": {
+    "inspected_function_texts": 532,
+    "unsigned_word_pointer_forms_found": [],
+    "finding": "Unsigned-word lvalue load followed by signed-short value conversion is absent from these controls. Prior byte/void/integer pointer forms cast back to signed short* before loading. Root owns the separate typed-load probe.",
+    "source_hashes": {
+      "/root/.ai-tmp/audio-processing.bGaifE/PoleLong.c": "adb1b6089458f93014f2f862ea562b1a91f7079ff7817f6f2762b6cd3d93b1ee",
+      "/root/.ai-tmp/audio-processing.bGaifE/PoleAddressVariants.c": "439579ff0605854f43697ac70142ab9d21e7e22c0d9abf8b3886b5364ded7a8c",
+      "/root/.ai-tmp/audio-processing.bGaifE/PolePointer.c": "5df4bb2ef87a46d56ca57b10c5932df6c837a638924f1b3eb93d15f8bcce3aff",
+      "/root/.ai-tmp/audio-processing.bGaifE/PoleBytePointer.c": "6f5762578389bfa5d0c585e677ca6147547e7ac8c575d2a93a7c66409241cd23",
+      "/root/.ai-tmp/audio-processing.bGaifE/PoleSignVariants.c": "f9e39c12b213a0321099e841e723a8ca5a6cabbca79da2094b7b1202b4f81e0d",
+      "/root/.ai-tmp/audio-processing.bGaifE/PoleLoopTypes.c": "652471b929bb911b3f1eae695e2c5b224921d9d95d6a5dda15bbbe3fef22ed24",
+      "/root/.ai-tmp/audio-processing.bGaifE/PoleVariants.c": "fc7716f2db07e8be4a886440978aa0df1204d5ad94fdf7c3f1c28911ab35c5d6",
+      "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/convolution_byte_pointer/AudioProcessing.c": "f2cb0217589d958ff8f301ff5456e8c4bdab76cd0f7841f4b6a9238d7b4c054b",
+      "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/row_const_pointer/AudioProcessing.c": "3566dbcd8bcf1d9e02a2ebda51784f9df9cdeead551262ac3e8da18177c96b6a",
+      "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/convolution_pointer/AudioProcessing.c": "0662311bc6744d517eb39a1f1e6d58a7f9c7bc0b19c52d877f3aee8fe4ecc22c",
+      "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/row_byte_pointer/AudioProcessing.c": "e844339068d4685d80100eec7aca7862adb277bffd843579eec68ab7d8f61929",
+      "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/row_short_sample/AudioProcessing.c": "450d9b310250449f8a38850ca507aed194903accadc8e7bcddcd6b477e2ee000",
+      "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/baseline/AudioProcessing.c": "3a2100b5d7d1408a1df95136709fde946cea70f8272da76e6d9e7a56aeaaf27c",
+      "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/row_int_sample/AudioProcessing.c": "b6bc74acbf592753f731593f37aefc35618aecbd34bf06b10547e2aed28e4bf3",
+      "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/row_pointer/AudioProcessing.c": "6d4c4faeb169cb5201fbf2bbf0e7673beabb7400e290f1ec3ef8300b774f5763",
+      "/root/.ai-tmp/audio-pole-reassociate._0a5zjoi/integer-tap-reverse/AudioResample.c": "01d0bc54fed3a7a83e7573b75db7527d948ae0f2cc7c09973447c1a07645e56a",
+      "/root/.ai-tmp/audio-pole-reassociate._0a5zjoi/baseline/AudioResample.c": "67ced2fcbd0e6798f34cd986e5a9b77e4ba963eb03463468b5d7b68120dbde1f",
+      "/root/.ai-tmp/audio-pole-reassociate._0a5zjoi/scale-product/AudioResample.c": "d75c0d34da7dd650870e5a0bc498587961b945bbc4d903d801db5277784a2333",
+      "/root/.ai-tmp/audio-pole-reassociate._0a5zjoi/loop-order-i-row-tap/AudioResample.c": "7f07949d1e287ef5cfbf808ece91ae5f1a07915132ad82711b8749a72ed8ae81",
+      "/root/.ai-tmp/audio-pole-reassociate._0a5zjoi/all-products/AudioResample.c": "2605d8a09ab33862d398de846a5d489b5eae22517838e1ad904de991ec487839",
+      "/root/.ai-tmp/audio-pole-reassociate._0a5zjoi/integer-signed-both-reverse/AudioResample.c": "ea079b30b1d351d0a0de2683d0d54ad7d85d79aa9951eb38c972d27d324657dd",
+      "/root/.ai-tmp/audio-pole-reassociate._0a5zjoi/buffer-field-integer/AudioResample.c": "b629c12f789dbeb4c0dc4de1ccfdc830cd55b8f5f160bfb82c5560739135418b",
+      "/root/.ai-tmp/audio-pole-reassociate._0a5zjoi/pointer-declared-first/AudioResample.c": "60b7e84153d4445f46cfa80b9bad6d89d11d54061110acddc36c479e9bbb1e36",
+      "/root/.ai-tmp/audio-pole-reassociate._0a5zjoi/integer-tap/AudioResample.c": "ea8459ad93f60777c8de42c62fd2c081371ed6ec9df0058f05db7da9291e9ffc",
+      "/root/.ai-tmp/audio-pole-reassociate._0a5zjoi/integer-signed-both/AudioResample.c": "4447619c509832db6b3ff2bdbcf9eb861f3bc020cc574d676136e50aa249e253",
+      "/root/.ai-tmp/audio-pole-reassociate._0a5zjoi/loop-order-row-tap-i/AudioResample.c": "b8d834c3fa146a0f41fb66f41a4293bd96fd6633e39b214a3a0ebc61bfc9b766",
+      "/root/.ai-tmp/audio-pole-reassociate._0a5zjoi/coefficient-products/AudioResample.c": "521759ff24ed43759d049fea8f0ec308b853faee933a3b944eaa9de188bba4b3",
+      "/root/.ai-tmp/audio-pole-reassociate._0a5zjoi/loop-order-row-i-tap/AudioResample.c": "d157c39690522187a0c0b7a4637a5a16d4a48880a66f1f6ec6a435f7cfefc142",
+      "/root/.ai-tmp/audio-pole-reassociate._0a5zjoi/loops-declared-first/AudioResample.c": "fcd61c21d1180a8fb76cdb4a5e2ef0f3d3b7d6ec9861c16eadd861986a0e0799",
+      "/root/.ai-tmp/audio-pole-reassociate._0a5zjoi/source/AudioResample.c": "67ced2fcbd0e6798f34cd986e5a9b77e4ba963eb03463468b5d7b68120dbde1f",
+      "/root/.ai-tmp/audio-pole-reassociate._0a5zjoi/loop-order-tap-i-row/AudioResample.c": "9b1a2720966fa2089f44e811b6fc20cd4a025c107bb5a473ab170ba7e85df8f9",
+      "/root/.ai-tmp/audio-pole-reassociate._0a5zjoi/integer-both-reverse/AudioResample.c": "22e71deab48e2f61b511076003b76d79dca3cafbd7d8f42e11745852d2795bc2",
+      "/root/.ai-tmp/audio-pole-reassociate._0a5zjoi/row-product/AudioResample.c": "d81b0a1bff465114148fd906f01bb434286322ae3698db51f09b2df8aceec5ab",
+      "/root/.ai-tmp/audio-pole-reassociate._0a5zjoi/buffer-field-byte/AudioResample.c": "b629c12f789dbeb4c0dc4de1ccfdc830cd55b8f5f160bfb82c5560739135418b",
+      "/root/.ai-tmp/audio-pole-reassociate._0a5zjoi/buffer-field-void/AudioResample.c": "b629c12f789dbeb4c0dc4de1ccfdc830cd55b8f5f160bfb82c5560739135418b",
+      "/root/.ai-tmp/audio-pole-reassociate._0a5zjoi/integer-both/AudioResample.c": "8798f26e9292b597fd789de067bc463bccf3ee6c31c0425adfc95c487fba3518",
+      "/root/.ai-tmp/audio-pole-reassociate._0a5zjoi/loop-order-tap-row-i/AudioResample.c": "50f79355a735b0f1784abe09f71c713f32267407502cd0f58a1946638fe7c6f3",
+      "/root/.ai-tmp/audio-pole-direct.edn_4ht4/signed-all-four/AudioResample.c": "ed61e85d54e591ff947432ffde2ac1e666f16471df6bf53978c67396fc99af20",
+      "/root/.ai-tmp/audio-pole-direct.edn_4ht4/count/AudioResample.c": "bbe7249fdc09839f311b52cb54100530578ce39bbd5d76eed5371361675adf61",
+      "/root/.ai-tmp/audio-pole-direct.edn_4ht4/instruction/AudioResample.c": "347e991812b5b2b2d4783ccc806b898ac5344b553dc9a86d1491b5660a7005d4",
+      "/root/.ai-tmp/audio-pole-direct.edn_4ht4/coefficients-gain/AudioResample.c": "d367cd3fb2259883d3258c927c06d7dbee70ac826a3215d4acae3658ee740265",
+      "/root/.ai-tmp/audio-pole-direct.edn_4ht4/baseline/AudioResample.c": "67ced2fcbd0e6798f34cd986e5a9b77e4ba963eb03463468b5d7b68120dbde1f",
+      "/root/.ai-tmp/audio-pole-direct.edn_4ht4/coefficients/AudioResample.c": "ad8a4c6366ab22e128d33e10c5a96dbe499c1a4bad4abde0783f8349e54be6b6",
+      "/root/.ai-tmp/audio-pole-direct.edn_4ht4/signed-instruction-gain/AudioResample.c": "c79c2f23c85a7f7bed88c05efa3ef15a435ce352436565bbc9d473930cfd9888",
+      "/root/.ai-tmp/audio-pole-direct.edn_4ht4/signed-coefficients-gain/AudioResample.c": "f8558c7339b084510bad7e1913487a02a3982fc918f129d9a507f0175d76136e",
+      "/root/.ai-tmp/audio-pole-direct.edn_4ht4/direct-input/AudioResample.c": "b0ad3a6e94366de61aa01215e5d2e196d70b12637e767707b7d03d433d44e71d",
+      "/root/.ai-tmp/audio-pole-direct.edn_4ht4/all-four/AudioResample.c": "4d30da028544b6f544115a3f699988a0270633ffcf9b187cb4c1da6dcc9683d4",
+      "/root/.ai-tmp/audio-pole-direct.edn_4ht4/gain/AudioResample.c": "e121992bc2cd37ceb6f10db03b34e00dbd58e11756a793111560edf9ccab2d00",
+      "/root/.ai-tmp/audio-pole-direct.edn_4ht4/instruction-gain/AudioResample.c": "87ae9556269dc0002fdb1073b9926dc385cae05a83c91d261aef0fe6bb13c867",
+      "/root/.ai-tmp/audio-pole-direct.edn_4ht4/source/AudioResample.c": "67ced2fcbd0e6798f34cd986e5a9b77e4ba963eb03463468b5d7b68120dbde1f",
+      "/root/.ai-tmp/audio-pole-direct.edn_4ht4/signed-gain/AudioResample.c": "2fcd78e7af791b0526658f6dd67ec9f797daf2b4e39a046914f34b6ec5e9bfba"
+    }
+  },
+  "historical_source_limit": {
+    "source": "/root/.ai-tmp/audio-envelope-ancestry.c5DMoPAf/ultrahle/src/SLIST.C",
+    "sha256": "4ca967ed6c8ed18a33c1adafdbf9c3fa6d1c48670ddf9942ddbda2c06a970a51",
+    "line": 1404,
+    "finding": "The UltraHLE POLEFILTER command is explicitly ignored. It supplies neither this algorithm nor its local identifier spelling. The tested short names are not attributed as original names."
+  },
+  "limitations": [
+    "The tested 16-identifier alpha-renaming has no native effect. This does not mathematically exclude every possible compiler dependence on spelling, but provides no evidence to justify a spelling grid.",
+    "No new source-supported pointer/index structure emerged beyond the separately owned unsigned-lvalue hypothesis. All prior seven genuine byte differences remain."
+  ],
+  "artifacts": {
+    "/root/.ai-tmp/audio-pole-naming.6vwdvsip/probe.py": "0868c08cfa844ebe69e4ef58389f511768ddb90b5abc17ed733aa2956aec168e",
+    "/root/.ai-tmp/audio-pole-naming.6vwdvsip/result.json": "c0a71b428fc79b17a61eb0accb83c32883d9411ec124b6684e634196cda7818a",
+    "/root/.ai-tmp/audio-pole-naming.6vwdvsip/comparison.json": "1f697199e9c6e96094cb0d7eb4238cfad53aecdd8f01af749f39b712474fa6df",
+    "/root/.ai-tmp/audio-pole-naming.6vwdvsip/renamed/AudioResample.c": "64ade7fad12efb2ed9727382ac874b5736112e973b3ef239419dbbcdeb02fa06",
+    "/root/.ai-tmp/audio-pole-naming.6vwdvsip/renamed/AudioResample.obj": "b0bcee084d11e31209802338840ea6c894c760ec4ca2252fe6d80976805ef3a6",
+    "/root/.ai-tmp/audio-pole-naming.6vwdvsip/freeze.py": "d6671f56cd06fd816c227d5f57fa120ba84dd22e28822ec8fd294d9cf6d956b5"
+  }
+}
