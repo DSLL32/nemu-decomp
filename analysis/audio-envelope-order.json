@@ -1,0 +1,4022 @@
+{
+  "status": "Native source-order and complete-body proof; whole audio.dll remains incomplete.",
+  "original": {
+    "path": "master/Plugin/audio.dll",
+    "sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808"
+  },
+  "source": "src/audio/ahle_ds/AudioProcessing.c",
+  "source_sha256": "3a2100b5d7d1408a1df95136709fde946cea70f8272da76e6d9e7a56aeaaf27c",
+  "change": "Replace the 16 forward inline ClampAudioSample calls in four scalar envelope functions with equivalent ordinary local integer saturation statements. The standalone helper and its later command-mixer calls remain in native order.",
+  "reason": "VC7 defers callers of a later-defined inline helper until the end of the translation unit. Explicit saturation statements emit these four functions where they appear in source and reproduce their original algorithm without linker ordering directives.",
+  "source_form_evidence": [
+    "All 35 function bodies in the grouped unit are byte-for-byte unchanged before relocation; all 14 envelope contributions retain exact original bytes and verified targets.",
+    "Explicit sample clamps also occur in the recovered integer mixer family and archived UltraHLE SLIST.C. Exact original names and file boundaries remain inferred.",
+    "No instruction embedding, code patching, synthetic padding, or linker /ORDER was used."
+  ],
+  "native_envelope_order": [
+    "_EnvMixerSSE",
+    "_EnvMixer3DNow",
+    "_EnvMixerScalar",
+    "_EnvMixerBlockScalar",
+    "_EnvMixerABI3Scalar",
+    "_EnvMixerABI3_3DNow",
+    "_EnvMixerABI3SSE",
+    "_EnvMixerSpecial",
+    "_ClampAudioSample",
+    "_MixAudioEnvelopeCommand",
+    "_MixAudioEnvelopeClamped",
+    "_MixAudioEnvelope",
+    "_MixAudioEnvelopeLegacy",
+    "_MixAudioEnvelopeUnsigned"
+  ],
+  "previous_envelope_order": [
+    "_EnvMixerSSE",
+    "_EnvMixer3DNow",
+    "_EnvMixerABI3_3DNow",
+    "_EnvMixerABI3SSE",
+    "_ClampAudioSample",
+    "_MixAudioEnvelopeCommand",
+    "_MixAudioEnvelopeClamped",
+    "_MixAudioEnvelope",
+    "_MixAudioEnvelopeLegacy",
+    "_MixAudioEnvelopeUnsigned",
+    "_EnvMixerScalar",
+    "_EnvMixerBlockScalar",
+    "_EnvMixerABI3Scalar",
+    "_EnvMixerSpecial"
+  ],
+  "regression": {
+    "functions_compared": 35,
+    "all_raw_function_bodies_unchanged": true,
+    "previous_and_current_instruction_matches": 33,
+    "previous_and_current_fully_identified_matches": 24,
+    "envelope_functions_exact": 14,
+    "envelope_native_contribution_bytes": 21334,
+    "envelope_verified_relocations": 208,
+    "unchanged_functions": [
+      {
+        "name": "_ReadAudioSamples",
+        "bytes": 80,
+        "sha256": "8f95bd31d61318549685b11e514655378eb08a9b145c2a826a38c4a1858681ca"
+      },
+      {
+        "name": "_InitializeAudioSqrt",
+        "bytes": 112,
+        "sha256": "57a39789b8c76488ea1f253063d7a0be05bb2f33a9e6d71249ee873c80a9cc1e"
+      },
+      {
+        "name": "_LoadAudioEnvelope",
+        "bytes": 208,
+        "sha256": "f07eadd7d82f8b766ab9e587d5b94bc640f23297d0be8a4174959399a1eb7988"
+      },
+      {
+        "name": "_SaveAudioEnvelope",
+        "bytes": 208,
+        "sha256": "a8f7f69b9b4510a5893e181d5e188fdb7eef32e1b84827bc07e3900ff790c2db"
+      },
+      {
+        "name": "_ResetAudioEnvelope",
+        "bytes": 48,
+        "sha256": "97232f67fe42bd7a6841f2127b83e16c3f9f16c543776b927734771e40639570"
+      },
+      {
+        "name": "_AudioCPUHasSSE",
+        "bytes": 48,
+        "sha256": "3ba7435beb27b13c528870bb755ff63f7e73873e8c831b10ce146c96cb7d2431"
+      },
+      {
+        "name": "_AudioOSHasSSE",
+        "bytes": 112,
+        "sha256": "7dc666252ce87fc56a784e21384f0e1102235c17a708f8708e5747235bcfcf2a"
+      },
+      {
+        "name": "_AudioClampECX",
+        "bytes": 32,
+        "sha256": "f5237e98743121264990b660939e7d1207dfdeac2a8a607bb9c4e447631a2408"
+      },
+      {
+        "name": "_EnvMixerSSE",
+        "bytes": 3015,
+        "sha256": "088ff5653de39f2b58a06972feecbe49947c445fcc347b99ce26af737ba8e814"
+      },
+      {
+        "name": "_EnvMixer3DNow",
+        "bytes": 2927,
+        "sha256": "b0fbd59f8aa920b9731ec26048525fbba05807c1dffeaf1af4008d3d97d3f627"
+      },
+      {
+        "name": "_EnvMixerABI3_3DNow",
+        "bytes": 2716,
+        "sha256": "2080d35f389e70bc3c124d3682e48070de36a2a246aaad971639b0ade8a52526"
+      },
+      {
+        "name": "_EnvMixerABI3SSE",
+        "bytes": 2804,
+        "sha256": "e1051f73f7b1dfa75c6d9465098f2de5a188627c624d30b9d58d8746b93183fc"
+      },
+      {
+        "name": "_ClampAudioSample",
+        "bytes": 32,
+        "sha256": "54996b4504b9d6030247be4aa2d52640cf786809dc27564ad1a7dc232811bb5e"
+      },
+      {
+        "name": "_MixAudioEnvelopeCommand",
+        "bytes": 1552,
+        "sha256": "c501d923fdad8b2b43036659ab8c7bbabd62496fb00b855c1435410cd6232fd0"
+      },
+      {
+        "name": "_MixAudioEnvelopeClamped",
+        "bytes": 864,
+        "sha256": "6a196cf25fa989a9854f3a62332c85d0022c08a9a829b80dab2995b9e2f82daf"
+      },
+      {
+        "name": "_MixAudioEnvelope",
+        "bytes": 1072,
+        "sha256": "86572b59cd2e5a3f64448dcc8f194506691329cc6624a426ac92d6e6bb57a2ad"
+      },
+      {
+        "name": "_MixAudioEnvelopeLegacy",
+        "bytes": 848,
+        "sha256": "ea3cd4fdf126eec1c83f70ee20ac5cda80a5bc88fd8c20cd898be6aa10edfbee"
+      },
+      {
+        "name": "_MixAudioEnvelopeUnsigned",
+        "bytes": 1328,
+        "sha256": "415feaa7b8c8bad9fd7a191bcbd2fc3eb6c4d88e9f537cb207760125778952ce"
+      },
+      {
+        "name": "_ScaleAudioBuffer",
+        "bytes": 96,
+        "sha256": "ceb8d554acf538386b3cc767d6ce773e757612964965a76828b8a1cebb3ea861"
+      },
+      {
+        "name": "_ScaleAudioBufferCommand",
+        "bytes": 112,
+        "sha256": "d8c748ea9af5060e37aefa581bb04f0666bf2fbe9900b88a94ca446d5c7a8512"
+      },
+      {
+        "name": "_FilterAudioBlock",
+        "bytes": 432,
+        "sha256": "792fba82a06ee6796f1cc14889ded6e8f5c503e33d6226b83f735ad9d0f9911d"
+      },
+      {
+        "name": "_FilterAudioBuffer",
+        "bytes": 192,
+        "sha256": "63f9c7e6a7779435a3ba5ce80a2c619c902cedd9a2b443feaf17ee7c5fa59bfd"
+      },
+      {
+        "name": "_ResetAudioProfile",
+        "bytes": 32,
+        "sha256": "ff4e255b0de0384410bceede97d45a1892fc5ff042fed41da580c20fd2abd586"
+      },
+      {
+        "name": "_AverageAudioProfile",
+        "bytes": 64,
+        "sha256": "7172489ac02bda93aa9cc89d87ec6aa3d47a0c08776c7e9acb5e5e0c9f2113a1"
+      },
+      {
+        "name": "_AdjustAudioProfileMaximum",
+        "bytes": 64,
+        "sha256": "5d1ea1be4967b1fe9cb817682d21f6cc87072b2a7cf4c36e01a36f4055523ec9"
+      },
+      {
+        "name": "_StartAudioProfile",
+        "bytes": 80,
+        "sha256": "0eec052ad14d225965e29cb8550e8f5281b9e3f7fea635eb846c2fc08cf8f836"
+      },
+      {
+        "name": "_StopAudioProfile",
+        "bytes": 224,
+        "sha256": "dc5b617c16e064ac099cb3e7b27092a6e02f9feb9cf9aca3e9a7f64f7f4e4278"
+      },
+      {
+        "name": "_DumpAudioCommand",
+        "bytes": 128,
+        "sha256": "9856afcf30b8a865aec88aa4e9885ad8ddd0f57ea289935b98c572d712db37fc"
+      },
+      {
+        "name": "_DecodeAudioADPCMUnsigned",
+        "bytes": 688,
+        "sha256": "a751f8d2b560468ed1c6b5dea161f24e57733025808c1e1eddcfacf091ac6e07"
+      },
+      {
+        "name": "_DecodeAudioADPCMBlock",
+        "bytes": 560,
+        "sha256": "6afc332ed9ba60594dc969497fa427173a17cbdce1be56c258672c8cde8df921"
+      },
+      {
+        "name": "_PoleFilterAudioCommand",
+        "bytes": 2320,
+        "sha256": "1bee554405161000cd11fe3dd7e949e3848e1289bbf432af8695f61e2074a301"
+      },
+      {
+        "name": "_EnvMixerScalar",
+        "bytes": 1104,
+        "sha256": "226cb56708afca260cd5c13f297373ec53db30371b10952b7dd949e96d4133e4"
+      },
+      {
+        "name": "_EnvMixerBlockScalar",
+        "bytes": 1088,
+        "sha256": "84439e57d1acfd4d7d63ebfdc3175302014563422b3994d7f23d9aa63666f464"
+      },
+      {
+        "name": "_EnvMixerABI3Scalar",
+        "bytes": 976,
+        "sha256": "add0c820d08087d0a57de7ff989d7a8b846808159178dc8fadf441a3196a1d96"
+      },
+      {
+        "name": "_EnvMixerSpecial",
+        "bytes": 1008,
+        "sha256": "671bfa33092ddbe52faf2b88c4cfc1ab8f3a5904b36c91ff981db9a14ffd51f1"
+      }
+    ],
+    "existing_unmatched_functions": [
+      {
+        "name": "_DecodeAudioADPCMUnsigned",
+        "differing_bytes": 617
+      },
+      {
+        "name": "_PoleFilterAudioCommand",
+        "differing_bytes": 7
+      }
+    ],
+    "linker_alignment_note": "The four SIMD COFF contributions exclude 26 bytes of following native linker alignment. Their placement remains part of the complete DLL comparison."
+  },
+  "metadata_change": {
+    "symbol": {
+      "name": "$T75412",
+      "va": 268636584,
+      "object": "AudioProcessing.obj",
+      "address_basis": "identified_symbol",
+      "address_evidence": "Unique complete 12-byte SEH scope table after resolving both internal labels in the unchanged, exact AudioOSHasSSE body; see analysis/audio-envelope-order.json.",
+      "size": 12
+    },
+    "complete_data_hex": "ffffffffd5b10010dbb10010",
+    "sha256": "c4e8e22e6809481e3cb45b41cc9badc156df1057a68801cbe97661d775c1419a",
+    "labels": [
+      {
+        "offset": 4,
+        "function_offset": 69,
+        "destination": 268480981
+      },
+      {
+        "offset": 8,
+        "function_offset": 75,
+        "destination": 268480987
+      }
+    ],
+    "unique_matches": [
+      268636584
+    ]
+  },
+  "negative_controls": {
+    "remove_inline_forward_declaration": "All bodies still match, but the four scalar callers remain deferred.",
+    "ternary_clamp_expression": "Restores order but mismatches two scalar bodies.",
+    "lower_limit_first_if_else": "Restores order but mismatches all four scalar bodies."
+  },
+  "frozen_evidence": {
+    "directory": "/root/.ai-tmp/audio-envelope-order.qieazif1",
+    "wine_prefix": "/root/.ai-tmp/audio-envelope/wine",
+    "files": {
+      "probe.py": "52908bf5f1c1d8939d03fb2caf63985df28b3b53456745fa5c19076c0eac1acf",
+      "source/AudioProcessing.c": "09857cdf239396af5433ddd6f418691a6c180c9aaf0c003277472889f2a7ac52",
+      "baseline/AudioProcessing.obj": "94c434495f95e2d4e9cf2da225055b31baadfcef94b06763b39094ace8766af0",
+      "baseline/comparison.json": "0c5abd455d360d2b75ee2b91f7a96552a8c66f63019ef7618ae428910ba36fc1",
+      "block/AudioProcessing.c": "3a2100b5d7d1408a1df95136709fde946cea70f8272da76e6d9e7a56aeaaf27c",
+      "block/AudioProcessing.obj": "1e6efb4555eb13635b00cd37a94335721d5ac0e166bdb0c5e1f0439114278330",
+      "block/comparison.json": "060c013aec6d0cd698cd2ae8af514bc247d516b78eddbf13fb8dd6edf452a53d",
+      "block/verified-comparison.json": "5716d06cee90b180d24814482d10edba7887305253246cc111691806458a7b92",
+      "block/compile.log": "1dbb40bbb57938df42ed2df7acc0792c5a092e9a1750e557426cfb78b98f01b4",
+      "seh-proof.json": "ae7465b4e934a1da02be3c39ad6921cd57b4a6e445730890868773f63cc1daea",
+      "explicit-clamps.patch": "4a5a8006595160f93c48e72530e13ff4240f1d5c5daf6cb1e07a21cb89f61862"
+    },
+    "address_map_sha256": {
+      "audio-addresses.json": "1f4bc664d664d2d5dd2f497b53daba8975b418b576b33a714afd2d19ee3ca590",
+      "audio-adpcm-legacy-addresses.json": "d0063241bba197bc1006989a371bd5da6ee1febafea91b8b5d895e24bdca750b",
+      "audio-adpcm-wide-addresses.json": "ccc0c87c84e88882cd27c5b96464c14a054e13fbb99b2331443ce333a4dda986",
+      "audio-command-addresses.json": "acd7b3f5c9d32db55405350d8f3b277a80cfb8b7b99388d6e7e7422779891359",
+      "audio-dsound-addresses.json": "d5a25cafda8d05967f75593a4f8a074fb21ddb5173005e6a4f1e5205cc5035fb",
+      "audio-envelope-addresses.json": "9371885610cf1cb89b740e78106dfa4dd46cb8ddbd9f6157afdfa50d6c2fe7ea",
+      "audio-envelope-order-addresses.json": "527f71ccbd89bdad2c0bfc7308a6cca87f0e910ddc61438fdcbb79834a7ee169",
+      "audio-hle-addresses.json": "64a9557fc06b802d50e14777f587fbefac70a5828d75524119a1fc422ff98cf8",
+      "audio-legacy-addresses.json": "1bd4dbe2c84328c3e4a70879e25e8b07dd98e5e6490ff5540f3ae8426977ccd0",
+      "audio-libraries.json": "261eb6b86c3254d8d5183c79eaf8bee91b0acae5406ac98bbf5a398a0a92018d",
+      "audio-mp3-addresses.json": "8c5b6f817b7f7287ed0c6c5e716dd5173ea1c0b62cc240929d8470597dc1b2af",
+      "audio-processing-addresses.json": "c0901dec825b413078a30215805b4d0e8254a9f378722fe85b5d04f4c8658bd9",
+      "audio-rsp-addresses.json": "2763ebdd6a7c4fbf808c0dbd2dc81e5a731381068914b55d1b595f21880739d2",
+      "audio-simd-addresses.json": "672a730298162d536003eb239bf64440a2579e83646491d93215cc02af9cea6c"
+    }
+  },
+  "compiler": {
+    "command": [
+      "/usr/bin/python3",
+      "/root/nemu-decomp/scripts/run_toolchain.py",
+      "vc7",
+      "cl",
+      "/nologo",
+      "/c",
+      "/O2",
+      "/Ob1",
+      "/MT",
+      "/IZ:\\root\\.ai-tmp\\audio-envelope-order.qieazif1\\source",
+      "/FoZ:\\root\\.ai-tmp\\audio-envelope-order.qieazif1\\block\\AudioProcessing.obj",
+      "Z:\\root\\.ai-tmp\\audio-envelope-order.qieazif1\\block\\AudioProcessing.c"
+    ],
+    "sha256": {
+      "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
+      "toolchains/vc7/bin/c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
+      "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0"
+    }
+  },
+  "envelope_comparisons": [
+    {
+      "name": "_EnvMixerSSE",
+      "object": "AudioProcessing.obj",
+      "rebuilt_bytes": 3015,
+      "status": "compared",
+      "original_va": 268481056,
+      "raw_bytes_equal": false,
+      "raw_differing_bytes": 112,
+      "compared_bytes": 3015,
+      "original_size_verified": true,
+      "original_bytes": 3015,
+      "size_equal": true,
+      "relocations": [
+        {
+          "offset": 172,
+          "type": "DIR32",
+          "symbol": "_RDRAM",
+          "addend": 0,
+          "original_target_va": 269925092,
+          "original_target_symbols": [
+            "_RDRAM"
+          ],
+          "expected_target_va": 269925092,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 251,
+          "type": "DIR32",
+          "symbol": "__real@47800000",
+          "addend": 0,
+          "original_target_va": 268633544,
+          "original_target_symbols": [
+            "__real@47800000"
+          ],
+          "expected_target_va": 268633544,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.; Legacy envelope source constant 65536.0, IEEE-754 binary32, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 285,
+          "type": "DIR32",
+          "symbol": "__real@47800000",
+          "addend": 0,
+          "original_target_va": 268633544,
+          "original_target_symbols": [
+            "__real@47800000"
+          ],
+          "expected_target_va": 268633544,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.; Legacy envelope source constant 65536.0, IEEE-754 binary32, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 610,
+          "type": "DIR32",
+          "symbol": "__real@40f0000000000000",
+          "addend": 0,
+          "original_target_va": 268636600,
+          "original_target_symbols": [
+            "__real@40f0000000000000"
+          ],
+          "expected_target_va": 268636600,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary64; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 625,
+          "type": "DIR32",
+          "symbol": "__real@40f0000000000000",
+          "addend": 0,
+          "original_target_va": 268636600,
+          "original_target_symbols": [
+            "__real@40f0000000000000"
+          ],
+          "expected_target_va": 268636600,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary64; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 683,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 702,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 718,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 741,
+          "type": "REL32",
+          "symbol": "__CIsqrt",
+          "addend": 0,
+          "original_target_va": 268573984,
+          "original_target_symbols": [
+            "__CIsqrt"
+          ],
+          "expected_target_va": 268573984,
+          "resolution_basis": "independent_library_mapping",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 746,
+          "type": "REL32",
+          "symbol": "__CIsqrt",
+          "addend": 0,
+          "original_target_va": 268573984,
+          "original_target_symbols": [
+            "__CIsqrt"
+          ],
+          "expected_target_va": 268573984,
+          "resolution_basis": "independent_library_mapping",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 751,
+          "type": "REL32",
+          "symbol": "__CIsqrt",
+          "addend": 0,
+          "original_target_va": 268573984,
+          "original_target_symbols": [
+            "__CIsqrt"
+          ],
+          "expected_target_va": 268573984,
+          "resolution_basis": "independent_library_mapping",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 768,
+          "type": "REL32",
+          "symbol": "__CIsqrt",
+          "addend": 0,
+          "original_target_va": 268573984,
+          "original_target_symbols": [
+            "__CIsqrt"
+          ],
+          "expected_target_va": 268573984,
+          "resolution_basis": "independent_library_mapping",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 773,
+          "type": "REL32",
+          "symbol": "__CIsqrt",
+          "addend": 0,
+          "original_target_va": 268573984,
+          "original_target_symbols": [
+            "__CIsqrt"
+          ],
+          "expected_target_va": 268573984,
+          "resolution_basis": "independent_library_mapping",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 778,
+          "type": "REL32",
+          "symbol": "__CIsqrt",
+          "addend": 0,
+          "original_target_va": 268573984,
+          "original_target_symbols": [
+            "__CIsqrt"
+          ],
+          "expected_target_va": 268573984,
+          "resolution_basis": "independent_library_mapping",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 796,
+          "type": "DIR32",
+          "symbol": "__real@3ff0000000000000",
+          "addend": 0,
+          "original_target_va": 268633552,
+          "original_target_symbols": [
+            "__real@3ff0000000000000"
+          ],
+          "expected_target_va": 268633552,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage.; Legacy envelope source constant 1.0, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 815,
+          "type": "DIR32",
+          "symbol": "__real@3ff0000000000000",
+          "addend": 0,
+          "original_target_va": 268633552,
+          "original_target_symbols": [
+            "__real@3ff0000000000000"
+          ],
+          "expected_target_va": 268633552,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage.; Legacy envelope source constant 1.0, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 846,
+          "type": "DIR32",
+          "symbol": "__real@3ff0000000000000",
+          "addend": 0,
+          "original_target_va": 268633552,
+          "original_target_symbols": [
+            "__real@3ff0000000000000"
+          ],
+          "expected_target_va": 268633552,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage.; Legacy envelope source constant 1.0, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 865,
+          "type": "DIR32",
+          "symbol": "__real@3ff0000000000000",
+          "addend": 0,
+          "original_target_va": 268633552,
+          "original_target_symbols": [
+            "__real@3ff0000000000000"
+          ],
+          "expected_target_va": 268633552,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage.; Legacy envelope source constant 1.0, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 893,
+          "type": "DIR32",
+          "symbol": "__real@3ff0000000000000",
+          "addend": 0,
+          "original_target_va": 268633552,
+          "original_target_symbols": [
+            "__real@3ff0000000000000"
+          ],
+          "expected_target_va": 268633552,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage.; Legacy envelope source constant 1.0, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 912,
+          "type": "DIR32",
+          "symbol": "__real@3ff0000000000000",
+          "addend": 0,
+          "original_target_va": 268633552,
+          "original_target_symbols": [
+            "__real@3ff0000000000000"
+          ],
+          "expected_target_va": 268633552,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage.; Legacy envelope source constant 1.0, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 940,
+          "type": "DIR32",
+          "symbol": "__real@3ff0000000000000",
+          "addend": 0,
+          "original_target_va": 268633552,
+          "original_target_symbols": [
+            "__real@3ff0000000000000"
+          ],
+          "expected_target_va": 268633552,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage.; Legacy envelope source constant 1.0, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 959,
+          "type": "DIR32",
+          "symbol": "__real@3ff0000000000000",
+          "addend": 0,
+          "original_target_va": 268633552,
+          "original_target_symbols": [
+            "__real@3ff0000000000000"
+          ],
+          "expected_target_va": 268633552,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage.; Legacy envelope source constant 1.0, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2767,
+          "type": "DIR32",
+          "symbol": "_RDRAM",
+          "addend": 0,
+          "original_target_va": 269925092,
+          "original_target_symbols": [
+            "_RDRAM"
+          ],
+          "expected_target_va": 269925092,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2780,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2813,
+          "type": "DIR32",
+          "symbol": "__real@47800000",
+          "addend": 0,
+          "original_target_va": 268633544,
+          "original_target_symbols": [
+            "__real@47800000"
+          ],
+          "expected_target_va": 268633544,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.; Legacy envelope source constant 65536.0, IEEE-754 binary32, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2818,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2833,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2868,
+          "type": "DIR32",
+          "symbol": "__real@47800000",
+          "addend": 0,
+          "original_target_va": 268633544,
+          "original_target_symbols": [
+            "__real@47800000"
+          ],
+          "expected_target_va": 268633544,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.; Legacy envelope source constant 65536.0, IEEE-754 binary32, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2873,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2948,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2966,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        }
+      ],
+      "relocation_target_mismatch_count": 0,
+      "inferred_target_count": 0,
+      "unresolved_target_count": 0,
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "relocations_all_resolved": true,
+      "relocation_values_consistent": true,
+      "relocation_targets_verified": true,
+      "relocation_targets_equal": true,
+      "inferred_relocated_bytes_equal": true,
+      "relocated_bytes_equal": true,
+      "first_unmasked_differences": []
+    },
+    {
+      "name": "_EnvMixer3DNow",
+      "object": "AudioProcessing.obj",
+      "rebuilt_bytes": 2927,
+      "status": "compared",
+      "original_va": 268484080,
+      "raw_bytes_equal": false,
+      "raw_differing_bytes": 112,
+      "compared_bytes": 2927,
+      "original_size_verified": true,
+      "original_bytes": 2927,
+      "size_equal": true,
+      "relocations": [
+        {
+          "offset": 130,
+          "type": "DIR32",
+          "symbol": "_RDRAM",
+          "addend": 0,
+          "original_target_va": 269925092,
+          "original_target_symbols": [
+            "_RDRAM"
+          ],
+          "expected_target_va": 269925092,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 209,
+          "type": "DIR32",
+          "symbol": "__real@47800000",
+          "addend": 0,
+          "original_target_va": 268633544,
+          "original_target_symbols": [
+            "__real@47800000"
+          ],
+          "expected_target_va": 268633544,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.; Legacy envelope source constant 65536.0, IEEE-754 binary32, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 243,
+          "type": "DIR32",
+          "symbol": "__real@47800000",
+          "addend": 0,
+          "original_target_va": 268633544,
+          "original_target_symbols": [
+            "__real@47800000"
+          ],
+          "expected_target_va": 268633544,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.; Legacy envelope source constant 65536.0, IEEE-754 binary32, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 568,
+          "type": "DIR32",
+          "symbol": "__real@40f0000000000000",
+          "addend": 0,
+          "original_target_va": 268636600,
+          "original_target_symbols": [
+            "__real@40f0000000000000"
+          ],
+          "expected_target_va": 268636600,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary64; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 583,
+          "type": "DIR32",
+          "symbol": "__real@40f0000000000000",
+          "addend": 0,
+          "original_target_va": 268636600,
+          "original_target_symbols": [
+            "__real@40f0000000000000"
+          ],
+          "expected_target_va": 268636600,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary64; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 641,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 660,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 676,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 699,
+          "type": "REL32",
+          "symbol": "__CIsqrt",
+          "addend": 0,
+          "original_target_va": 268573984,
+          "original_target_symbols": [
+            "__CIsqrt"
+          ],
+          "expected_target_va": 268573984,
+          "resolution_basis": "independent_library_mapping",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 704,
+          "type": "REL32",
+          "symbol": "__CIsqrt",
+          "addend": 0,
+          "original_target_va": 268573984,
+          "original_target_symbols": [
+            "__CIsqrt"
+          ],
+          "expected_target_va": 268573984,
+          "resolution_basis": "independent_library_mapping",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 709,
+          "type": "REL32",
+          "symbol": "__CIsqrt",
+          "addend": 0,
+          "original_target_va": 268573984,
+          "original_target_symbols": [
+            "__CIsqrt"
+          ],
+          "expected_target_va": 268573984,
+          "resolution_basis": "independent_library_mapping",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 726,
+          "type": "REL32",
+          "symbol": "__CIsqrt",
+          "addend": 0,
+          "original_target_va": 268573984,
+          "original_target_symbols": [
+            "__CIsqrt"
+          ],
+          "expected_target_va": 268573984,
+          "resolution_basis": "independent_library_mapping",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 731,
+          "type": "REL32",
+          "symbol": "__CIsqrt",
+          "addend": 0,
+          "original_target_va": 268573984,
+          "original_target_symbols": [
+            "__CIsqrt"
+          ],
+          "expected_target_va": 268573984,
+          "resolution_basis": "independent_library_mapping",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 736,
+          "type": "REL32",
+          "symbol": "__CIsqrt",
+          "addend": 0,
+          "original_target_va": 268573984,
+          "original_target_symbols": [
+            "__CIsqrt"
+          ],
+          "expected_target_va": 268573984,
+          "resolution_basis": "independent_library_mapping",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 754,
+          "type": "DIR32",
+          "symbol": "__real@3ff0000000000000",
+          "addend": 0,
+          "original_target_va": 268633552,
+          "original_target_symbols": [
+            "__real@3ff0000000000000"
+          ],
+          "expected_target_va": 268633552,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage.; Legacy envelope source constant 1.0, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 773,
+          "type": "DIR32",
+          "symbol": "__real@3ff0000000000000",
+          "addend": 0,
+          "original_target_va": 268633552,
+          "original_target_symbols": [
+            "__real@3ff0000000000000"
+          ],
+          "expected_target_va": 268633552,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage.; Legacy envelope source constant 1.0, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 804,
+          "type": "DIR32",
+          "symbol": "__real@3ff0000000000000",
+          "addend": 0,
+          "original_target_va": 268633552,
+          "original_target_symbols": [
+            "__real@3ff0000000000000"
+          ],
+          "expected_target_va": 268633552,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage.; Legacy envelope source constant 1.0, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 823,
+          "type": "DIR32",
+          "symbol": "__real@3ff0000000000000",
+          "addend": 0,
+          "original_target_va": 268633552,
+          "original_target_symbols": [
+            "__real@3ff0000000000000"
+          ],
+          "expected_target_va": 268633552,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage.; Legacy envelope source constant 1.0, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 851,
+          "type": "DIR32",
+          "symbol": "__real@3ff0000000000000",
+          "addend": 0,
+          "original_target_va": 268633552,
+          "original_target_symbols": [
+            "__real@3ff0000000000000"
+          ],
+          "expected_target_va": 268633552,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage.; Legacy envelope source constant 1.0, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 870,
+          "type": "DIR32",
+          "symbol": "__real@3ff0000000000000",
+          "addend": 0,
+          "original_target_va": 268633552,
+          "original_target_symbols": [
+            "__real@3ff0000000000000"
+          ],
+          "expected_target_va": 268633552,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage.; Legacy envelope source constant 1.0, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 898,
+          "type": "DIR32",
+          "symbol": "__real@3ff0000000000000",
+          "addend": 0,
+          "original_target_va": 268633552,
+          "original_target_symbols": [
+            "__real@3ff0000000000000"
+          ],
+          "expected_target_va": 268633552,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage.; Legacy envelope source constant 1.0, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 917,
+          "type": "DIR32",
+          "symbol": "__real@3ff0000000000000",
+          "addend": 0,
+          "original_target_va": 268633552,
+          "original_target_symbols": [
+            "__real@3ff0000000000000"
+          ],
+          "expected_target_va": 268633552,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage.; Legacy envelope source constant 1.0, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2679,
+          "type": "DIR32",
+          "symbol": "_RDRAM",
+          "addend": 0,
+          "original_target_va": 269925092,
+          "original_target_symbols": [
+            "_RDRAM"
+          ],
+          "expected_target_va": 269925092,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2692,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2725,
+          "type": "DIR32",
+          "symbol": "__real@47800000",
+          "addend": 0,
+          "original_target_va": 268633544,
+          "original_target_symbols": [
+            "__real@47800000"
+          ],
+          "expected_target_va": 268633544,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.; Legacy envelope source constant 65536.0, IEEE-754 binary32, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2730,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2745,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2780,
+          "type": "DIR32",
+          "symbol": "__real@47800000",
+          "addend": 0,
+          "original_target_va": 268633544,
+          "original_target_symbols": [
+            "__real@47800000"
+          ],
+          "expected_target_va": 268633544,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.; Legacy envelope source constant 65536.0, IEEE-754 binary32, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2785,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2860,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2878,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        }
+      ],
+      "relocation_target_mismatch_count": 0,
+      "inferred_target_count": 0,
+      "unresolved_target_count": 0,
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "relocations_all_resolved": true,
+      "relocation_values_consistent": true,
+      "relocation_targets_verified": true,
+      "relocation_targets_equal": true,
+      "inferred_relocated_bytes_equal": true,
+      "relocated_bytes_equal": true,
+      "first_unmasked_differences": []
+    },
+    {
+      "name": "_EnvMixerScalar",
+      "object": "AudioProcessing.obj",
+      "rebuilt_bytes": 1104,
+      "status": "compared",
+      "original_va": 268487008,
+      "raw_bytes_equal": false,
+      "raw_differing_bytes": 86,
+      "compared_bytes": 1104,
+      "original_size_verified": true,
+      "original_bytes": 1104,
+      "size_equal": true,
+      "relocations": [
+        {
+          "offset": 20,
+          "type": "DIR32",
+          "symbol": "??_C@_0HJ@JHFJABPL@A_MIX?5Set?5in?5envmixer?$DP?$CB?5heavens?5@",
+          "addend": 0,
+          "original_target_va": 268636616,
+          "original_target_symbols": [
+            "??_C@_0HJ@JHFJABPL@A_MIX?5Set?5in?5envmixer?$DP?$CB?5heavens?5@"
+          ],
+          "expected_target_va": 268636616,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 25,
+          "type": "REL32",
+          "symbol": "_AudioError",
+          "addend": 0,
+          "original_target_va": 268450880,
+          "original_target_symbols": [
+            "_AudioError"
+          ],
+          "expected_target_va": 268450880,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "The complete original body independently dispatches all fifteen DirectSound HRESULT errors, uses their exact error-name strings, formats the unknown-code case, and invokes MessageBoxA. Reconstructed source default-path instruction scheduling remains unmatched.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 51,
+          "type": "DIR32",
+          "symbol": "_RDRAM",
+          "addend": 0,
+          "original_target_va": 269925092,
+          "original_target_symbols": [
+            "_RDRAM"
+          ],
+          "expected_target_va": 269925092,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 132,
+          "type": "DIR32",
+          "symbol": "__real@37800000",
+          "addend": 0,
+          "original_target_va": 268636612,
+          "original_target_symbols": [
+            "__real@37800000"
+          ],
+          "expected_target_va": 268636612,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/65536 matches the compiler constant bits and the corresponding original envelope arithmetic operand.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 162,
+          "type": "DIR32",
+          "symbol": "__real@37800000",
+          "addend": 0,
+          "original_target_va": 268636612,
+          "original_target_symbols": [
+            "__real@37800000"
+          ],
+          "expected_target_va": 268636612,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/65536 matches the compiler constant bits and the corresponding original envelope arithmetic operand.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 276,
+          "type": "DIR32",
+          "symbol": "__real@3ef0000000000000",
+          "addend": 0,
+          "original_target_va": 268633576,
+          "original_target_symbols": [
+            "__real@3ef0000000000000"
+          ],
+          "expected_target_va": 268633576,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/65536 matches the compiler constant bits and the corresponding original envelope arithmetic operand.; Legacy envelope source constant 1.52587890625e-05, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 338,
+          "type": "DIR32",
+          "symbol": "__real@3ef0000000000000",
+          "addend": 0,
+          "original_target_va": 268633576,
+          "original_target_symbols": [
+            "__real@3ef0000000000000"
+          ],
+          "expected_target_va": 268633576,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/65536 matches the compiler constant bits and the corresponding original envelope arithmetic operand.; Legacy envelope source constant 1.52587890625e-05, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 364,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 381,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 394,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 481,
+          "type": "DIR32",
+          "symbol": "__real@38000000",
+          "addend": 0,
+          "original_target_va": 268636608,
+          "original_target_symbols": [
+            "__real@38000000"
+          ],
+          "expected_target_va": 268636608,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/32768 matches the compiler constant bits and the corresponding original envelope arithmetic operand.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 486,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 641,
+          "type": "DIR32",
+          "symbol": "__real@38000000",
+          "addend": 0,
+          "original_target_va": 268636608,
+          "original_target_symbols": [
+            "__real@38000000"
+          ],
+          "expected_target_va": 268636608,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/32768 matches the compiler constant bits and the corresponding original envelope arithmetic operand.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 646,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 805,
+          "type": "DIR32",
+          "symbol": "__real@3ff0000000000000",
+          "addend": 0,
+          "original_target_va": 268633552,
+          "original_target_symbols": [
+            "__real@3ff0000000000000"
+          ],
+          "expected_target_va": 268633552,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage.; Legacy envelope source constant 1.0, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 864,
+          "type": "DIR32",
+          "symbol": "__real@3ff0000000000000",
+          "addend": 0,
+          "original_target_va": 268633552,
+          "original_target_symbols": [
+            "__real@3ff0000000000000"
+          ],
+          "expected_target_va": 268633552,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage.; Legacy envelope source constant 1.0, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 922,
+          "type": "DIR32",
+          "symbol": "_RDRAM",
+          "addend": 0,
+          "original_target_va": 269925092,
+          "original_target_symbols": [
+            "_RDRAM"
+          ],
+          "expected_target_va": 269925092,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 935,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 959,
+          "type": "DIR32",
+          "symbol": "__real@47800000",
+          "addend": 0,
+          "original_target_va": 268633544,
+          "original_target_symbols": [
+            "__real@47800000"
+          ],
+          "expected_target_va": 268633544,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.; Legacy envelope source constant 65536.0, IEEE-754 binary32, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 964,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 975,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 998,
+          "type": "DIR32",
+          "symbol": "__real@47800000",
+          "addend": 0,
+          "original_target_va": 268633544,
+          "original_target_symbols": [
+            "__real@47800000"
+          ],
+          "expected_target_va": 268633544,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.; Legacy envelope source constant 65536.0, IEEE-754 binary32, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 1003,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        }
+      ],
+      "relocation_target_mismatch_count": 0,
+      "inferred_target_count": 0,
+      "unresolved_target_count": 0,
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "relocations_all_resolved": true,
+      "relocation_values_consistent": true,
+      "relocation_targets_verified": true,
+      "relocation_targets_equal": true,
+      "inferred_relocated_bytes_equal": true,
+      "relocated_bytes_equal": true,
+      "first_unmasked_differences": []
+    },
+    {
+      "name": "_EnvMixerBlockScalar",
+      "object": "AudioProcessing.obj",
+      "rebuilt_bytes": 1088,
+      "status": "compared",
+      "original_va": 268488112,
+      "raw_bytes_equal": false,
+      "raw_differing_bytes": 94,
+      "compared_bytes": 1088,
+      "original_size_verified": true,
+      "original_bytes": 1088,
+      "size_equal": true,
+      "relocations": [
+        {
+          "offset": 20,
+          "type": "DIR32",
+          "symbol": "??_C@_0HJ@JHFJABPL@A_MIX?5Set?5in?5envmixer?$DP?$CB?5heavens?5@",
+          "addend": 0,
+          "original_target_va": 268636616,
+          "original_target_symbols": [
+            "??_C@_0HJ@JHFJABPL@A_MIX?5Set?5in?5envmixer?$DP?$CB?5heavens?5@"
+          ],
+          "expected_target_va": 268636616,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 25,
+          "type": "REL32",
+          "symbol": "_AudioError",
+          "addend": 0,
+          "original_target_va": 268450880,
+          "original_target_symbols": [
+            "_AudioError"
+          ],
+          "expected_target_va": 268450880,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "The complete original body independently dispatches all fifteen DirectSound HRESULT errors, uses their exact error-name strings, formats the unknown-code case, and invokes MessageBoxA. Reconstructed source default-path instruction scheduling remains unmatched.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 51,
+          "type": "DIR32",
+          "symbol": "_RDRAM",
+          "addend": 0,
+          "original_target_va": 269925092,
+          "original_target_symbols": [
+            "_RDRAM"
+          ],
+          "expected_target_va": 269925092,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 132,
+          "type": "DIR32",
+          "symbol": "__real@37800000",
+          "addend": 0,
+          "original_target_va": 268636612,
+          "original_target_symbols": [
+            "__real@37800000"
+          ],
+          "expected_target_va": 268636612,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/65536 matches the compiler constant bits and the corresponding original envelope arithmetic operand.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 162,
+          "type": "DIR32",
+          "symbol": "__real@37800000",
+          "addend": 0,
+          "original_target_va": 268636612,
+          "original_target_symbols": [
+            "__real@37800000"
+          ],
+          "expected_target_va": 268636612,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/65536 matches the compiler constant bits and the corresponding original envelope arithmetic operand.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 276,
+          "type": "DIR32",
+          "symbol": "__real@3ef0000000000000",
+          "addend": 0,
+          "original_target_va": 268633576,
+          "original_target_symbols": [
+            "__real@3ef0000000000000"
+          ],
+          "expected_target_va": 268633576,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/65536 matches the compiler constant bits and the corresponding original envelope arithmetic operand.; Legacy envelope source constant 1.52587890625e-05, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 298,
+          "type": "DIR32",
+          "symbol": "__real@3ef0000000000000",
+          "addend": 0,
+          "original_target_va": 268633576,
+          "original_target_symbols": [
+            "__real@3ef0000000000000"
+          ],
+          "expected_target_va": 268633576,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/65536 matches the compiler constant bits and the corresponding original envelope arithmetic operand.; Legacy envelope source constant 1.52587890625e-05, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 356,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 373,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 386,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 449,
+          "type": "DIR32",
+          "symbol": "__real@38000000",
+          "addend": 0,
+          "original_target_va": 268636608,
+          "original_target_symbols": [
+            "__real@38000000"
+          ],
+          "expected_target_va": 268636608,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/32768 matches the compiler constant bits and the corresponding original envelope arithmetic operand.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 454,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 590,
+          "type": "DIR32",
+          "symbol": "__real@38000000",
+          "addend": 0,
+          "original_target_va": 268636608,
+          "original_target_symbols": [
+            "__real@38000000"
+          ],
+          "expected_target_va": 268636608,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/32768 matches the compiler constant bits and the corresponding original envelope arithmetic operand.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 595,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 743,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 760,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 789,
+          "type": "DIR32",
+          "symbol": "__real@3ff0000000000000",
+          "addend": 0,
+          "original_target_va": 268633552,
+          "original_target_symbols": [
+            "__real@3ff0000000000000"
+          ],
+          "expected_target_va": 268633552,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage.; Legacy envelope source constant 1.0, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 846,
+          "type": "DIR32",
+          "symbol": "__real@3ff0000000000000",
+          "addend": 0,
+          "original_target_va": 268633552,
+          "original_target_symbols": [
+            "__real@3ff0000000000000"
+          ],
+          "expected_target_va": 268633552,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage.; Legacy envelope source constant 1.0, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 915,
+          "type": "DIR32",
+          "symbol": "_RDRAM",
+          "addend": 0,
+          "original_target_va": 269925092,
+          "original_target_symbols": [
+            "_RDRAM"
+          ],
+          "expected_target_va": 269925092,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 928,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 952,
+          "type": "DIR32",
+          "symbol": "__real@47800000",
+          "addend": 0,
+          "original_target_va": 268633544,
+          "original_target_symbols": [
+            "__real@47800000"
+          ],
+          "expected_target_va": 268633544,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.; Legacy envelope source constant 65536.0, IEEE-754 binary32, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 957,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 968,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 991,
+          "type": "DIR32",
+          "symbol": "__real@47800000",
+          "addend": 0,
+          "original_target_va": 268633544,
+          "original_target_symbols": [
+            "__real@47800000"
+          ],
+          "expected_target_va": 268633544,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.; Legacy envelope source constant 65536.0, IEEE-754 binary32, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 996,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        }
+      ],
+      "relocation_target_mismatch_count": 0,
+      "inferred_target_count": 0,
+      "unresolved_target_count": 0,
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "relocations_all_resolved": true,
+      "relocation_values_consistent": true,
+      "relocation_targets_verified": true,
+      "relocation_targets_equal": true,
+      "inferred_relocated_bytes_equal": true,
+      "relocated_bytes_equal": true,
+      "first_unmasked_differences": []
+    },
+    {
+      "name": "_EnvMixerABI3Scalar",
+      "object": "AudioProcessing.obj",
+      "rebuilt_bytes": 976,
+      "status": "compared",
+      "original_va": 268489200,
+      "raw_bytes_equal": false,
+      "raw_differing_bytes": 82,
+      "compared_bytes": 976,
+      "original_size_verified": true,
+      "original_bytes": 976,
+      "size_equal": true,
+      "relocations": [
+        {
+          "offset": 20,
+          "type": "DIR32",
+          "symbol": "??_C@_0HJ@JHFJABPL@A_MIX?5Set?5in?5envmixer?$DP?$CB?5heavens?5@",
+          "addend": 0,
+          "original_target_va": 268636616,
+          "original_target_symbols": [
+            "??_C@_0HJ@JHFJABPL@A_MIX?5Set?5in?5envmixer?$DP?$CB?5heavens?5@"
+          ],
+          "expected_target_va": 268636616,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 25,
+          "type": "REL32",
+          "symbol": "_AudioError",
+          "addend": 0,
+          "original_target_va": 268450880,
+          "original_target_symbols": [
+            "_AudioError"
+          ],
+          "expected_target_va": 268450880,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "The complete original body independently dispatches all fifteen DirectSound HRESULT errors, uses their exact error-name strings, formats the unknown-code case, and invokes MessageBoxA. Reconstructed source default-path instruction scheduling remains unmatched.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 51,
+          "type": "DIR32",
+          "symbol": "_RDRAM",
+          "addend": 0,
+          "original_target_va": 269925092,
+          "original_target_symbols": [
+            "_RDRAM"
+          ],
+          "expected_target_va": 269925092,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 141,
+          "type": "DIR32",
+          "symbol": "__real@37800000",
+          "addend": 0,
+          "original_target_va": 268636612,
+          "original_target_symbols": [
+            "__real@37800000"
+          ],
+          "expected_target_va": 268636612,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/65536 matches the compiler constant bits and the corresponding original envelope arithmetic operand.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 171,
+          "type": "DIR32",
+          "symbol": "__real@37800000",
+          "addend": 0,
+          "original_target_va": 268636612,
+          "original_target_symbols": [
+            "__real@37800000"
+          ],
+          "expected_target_va": 268636612,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/65536 matches the compiler constant bits and the corresponding original envelope arithmetic operand.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 260,
+          "type": "DIR32",
+          "symbol": "__real@3ef0000000000000",
+          "addend": 0,
+          "original_target_va": 268633576,
+          "original_target_symbols": [
+            "__real@3ef0000000000000"
+          ],
+          "expected_target_va": 268633576,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/65536 matches the compiler constant bits and the corresponding original envelope arithmetic operand.; Legacy envelope source constant 1.52587890625e-05, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 273,
+          "type": "DIR32",
+          "symbol": "__real@3e000000",
+          "addend": 0,
+          "original_target_va": 268636740,
+          "original_target_symbols": [
+            "__real@3e000000"
+          ],
+          "expected_target_va": 268636740,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/8 matches the compiler constant bits and the corresponding original envelope arithmetic operand.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 309,
+          "type": "DIR32",
+          "symbol": "__real@3ef0000000000000",
+          "addend": 0,
+          "original_target_va": 268633576,
+          "original_target_symbols": [
+            "__real@3ef0000000000000"
+          ],
+          "expected_target_va": 268633576,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/65536 matches the compiler constant bits and the corresponding original envelope arithmetic operand.; Legacy envelope source constant 1.52587890625e-05, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 329,
+          "type": "DIR32",
+          "symbol": "__real@3e000000",
+          "addend": 0,
+          "original_target_va": 268636740,
+          "original_target_symbols": [
+            "__real@3e000000"
+          ],
+          "expected_target_va": 268636740,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/8 matches the compiler constant bits and the corresponding original envelope arithmetic operand.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 408,
+          "type": "DIR32",
+          "symbol": "__real@38000000",
+          "addend": 0,
+          "original_target_va": 268636608,
+          "original_target_symbols": [
+            "__real@38000000"
+          ],
+          "expected_target_va": 268636608,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/32768 matches the compiler constant bits and the corresponding original envelope arithmetic operand.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 413,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 539,
+          "type": "DIR32",
+          "symbol": "__real@38000000",
+          "addend": 0,
+          "original_target_va": 268636608,
+          "original_target_symbols": [
+            "__real@38000000"
+          ],
+          "expected_target_va": 268636608,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/32768 matches the compiler constant bits and the corresponding original envelope arithmetic operand.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 544,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 698,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 753,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 810,
+          "type": "DIR32",
+          "symbol": "_RDRAM",
+          "addend": 0,
+          "original_target_va": 269925092,
+          "original_target_symbols": [
+            "_RDRAM"
+          ],
+          "expected_target_va": 269925092,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 823,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 847,
+          "type": "DIR32",
+          "symbol": "__real@47800000",
+          "addend": 0,
+          "original_target_va": 268633544,
+          "original_target_symbols": [
+            "__real@47800000"
+          ],
+          "expected_target_va": 268633544,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.; Legacy envelope source constant 65536.0, IEEE-754 binary32, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 852,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 863,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 886,
+          "type": "DIR32",
+          "symbol": "__real@47800000",
+          "addend": 0,
+          "original_target_va": 268633544,
+          "original_target_symbols": [
+            "__real@47800000"
+          ],
+          "expected_target_va": 268633544,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.; Legacy envelope source constant 65536.0, IEEE-754 binary32, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 891,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        }
+      ],
+      "relocation_target_mismatch_count": 0,
+      "inferred_target_count": 0,
+      "unresolved_target_count": 0,
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "relocations_all_resolved": true,
+      "relocation_values_consistent": true,
+      "relocation_targets_verified": true,
+      "relocation_targets_equal": true,
+      "inferred_relocated_bytes_equal": true,
+      "relocated_bytes_equal": true,
+      "first_unmasked_differences": []
+    },
+    {
+      "name": "_EnvMixerABI3_3DNow",
+      "object": "AudioProcessing.obj",
+      "rebuilt_bytes": 2716,
+      "status": "compared",
+      "original_va": 268490176,
+      "raw_bytes_equal": false,
+      "raw_differing_bytes": 102,
+      "compared_bytes": 2716,
+      "original_size_verified": true,
+      "original_bytes": 2716,
+      "size_equal": true,
+      "relocations": [
+        {
+          "offset": 130,
+          "type": "DIR32",
+          "symbol": "_RDRAM",
+          "addend": 0,
+          "original_target_va": 269925092,
+          "original_target_symbols": [
+            "_RDRAM"
+          ],
+          "expected_target_va": 269925092,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 209,
+          "type": "DIR32",
+          "symbol": "__real@47800000",
+          "addend": 0,
+          "original_target_va": 268633544,
+          "original_target_symbols": [
+            "__real@47800000"
+          ],
+          "expected_target_va": 268633544,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.; Legacy envelope source constant 65536.0, IEEE-754 binary32, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 243,
+          "type": "DIR32",
+          "symbol": "__real@47800000",
+          "addend": 0,
+          "original_target_va": 268633544,
+          "original_target_symbols": [
+            "__real@47800000"
+          ],
+          "expected_target_va": 268633544,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.; Legacy envelope source constant 65536.0, IEEE-754 binary32, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 554,
+          "type": "DIR32",
+          "symbol": "__real@40f0000000000000",
+          "addend": 0,
+          "original_target_va": 268636600,
+          "original_target_symbols": [
+            "__real@40f0000000000000"
+          ],
+          "expected_target_va": 268636600,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary64; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 569,
+          "type": "DIR32",
+          "symbol": "__real@40f0000000000000",
+          "addend": 0,
+          "original_target_va": 268636600,
+          "original_target_symbols": [
+            "__real@40f0000000000000"
+          ],
+          "expected_target_va": 268636600,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary64; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 627,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 646,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 662,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 686,
+          "type": "DIR32",
+          "symbol": "__real@41000000",
+          "addend": 0,
+          "original_target_va": 268636744,
+          "original_target_symbols": [
+            "__real@41000000"
+          ],
+          "expected_target_va": 268636744,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal 8 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 704,
+          "type": "DIR32",
+          "symbol": "__real@41000000",
+          "addend": 0,
+          "original_target_va": 268636744,
+          "original_target_symbols": [
+            "__real@41000000"
+          ],
+          "expected_target_va": 268636744,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal 8 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 722,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 741,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 772,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 791,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 819,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 838,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 866,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 885,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2467,
+          "type": "DIR32",
+          "symbol": "_RDRAM",
+          "addend": 0,
+          "original_target_va": 269925092,
+          "original_target_symbols": [
+            "_RDRAM"
+          ],
+          "expected_target_va": 269925092,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2480,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2513,
+          "type": "DIR32",
+          "symbol": "__real@47800000",
+          "addend": 0,
+          "original_target_va": 268633544,
+          "original_target_symbols": [
+            "__real@47800000"
+          ],
+          "expected_target_va": 268633544,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.; Legacy envelope source constant 65536.0, IEEE-754 binary32, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2518,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2533,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2568,
+          "type": "DIR32",
+          "symbol": "__real@47800000",
+          "addend": 0,
+          "original_target_va": 268633544,
+          "original_target_symbols": [
+            "__real@47800000"
+          ],
+          "expected_target_va": 268633544,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.; Legacy envelope source constant 65536.0, IEEE-754 binary32, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2573,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2649,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2667,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        }
+      ],
+      "relocation_target_mismatch_count": 0,
+      "inferred_target_count": 0,
+      "unresolved_target_count": 0,
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "relocations_all_resolved": true,
+      "relocation_values_consistent": true,
+      "relocation_targets_verified": true,
+      "relocation_targets_equal": true,
+      "inferred_relocated_bytes_equal": true,
+      "relocated_bytes_equal": true,
+      "first_unmasked_differences": []
+    },
+    {
+      "name": "_EnvMixerABI3SSE",
+      "object": "AudioProcessing.obj",
+      "rebuilt_bytes": 2804,
+      "status": "compared",
+      "original_va": 268492896,
+      "raw_bytes_equal": false,
+      "raw_differing_bytes": 102,
+      "compared_bytes": 2804,
+      "original_size_verified": true,
+      "original_bytes": 2804,
+      "size_equal": true,
+      "relocations": [
+        {
+          "offset": 172,
+          "type": "DIR32",
+          "symbol": "_RDRAM",
+          "addend": 0,
+          "original_target_va": 269925092,
+          "original_target_symbols": [
+            "_RDRAM"
+          ],
+          "expected_target_va": 269925092,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 251,
+          "type": "DIR32",
+          "symbol": "__real@47800000",
+          "addend": 0,
+          "original_target_va": 268633544,
+          "original_target_symbols": [
+            "__real@47800000"
+          ],
+          "expected_target_va": 268633544,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.; Legacy envelope source constant 65536.0, IEEE-754 binary32, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 285,
+          "type": "DIR32",
+          "symbol": "__real@47800000",
+          "addend": 0,
+          "original_target_va": 268633544,
+          "original_target_symbols": [
+            "__real@47800000"
+          ],
+          "expected_target_va": 268633544,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.; Legacy envelope source constant 65536.0, IEEE-754 binary32, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 596,
+          "type": "DIR32",
+          "symbol": "__real@40f0000000000000",
+          "addend": 0,
+          "original_target_va": 268636600,
+          "original_target_symbols": [
+            "__real@40f0000000000000"
+          ],
+          "expected_target_va": 268636600,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary64; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 611,
+          "type": "DIR32",
+          "symbol": "__real@40f0000000000000",
+          "addend": 0,
+          "original_target_va": 268636600,
+          "original_target_symbols": [
+            "__real@40f0000000000000"
+          ],
+          "expected_target_va": 268636600,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary64; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 669,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 688,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 704,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 728,
+          "type": "DIR32",
+          "symbol": "__real@41000000",
+          "addend": 0,
+          "original_target_va": 268636744,
+          "original_target_symbols": [
+            "__real@41000000"
+          ],
+          "expected_target_va": 268636744,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal 8 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 746,
+          "type": "DIR32",
+          "symbol": "__real@41000000",
+          "addend": 0,
+          "original_target_va": 268636744,
+          "original_target_symbols": [
+            "__real@41000000"
+          ],
+          "expected_target_va": 268636744,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal 8 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 764,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 783,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 814,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 833,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 861,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 880,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 908,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 927,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2555,
+          "type": "DIR32",
+          "symbol": "_RDRAM",
+          "addend": 0,
+          "original_target_va": 269925092,
+          "original_target_symbols": [
+            "_RDRAM"
+          ],
+          "expected_target_va": 269925092,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2568,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2601,
+          "type": "DIR32",
+          "symbol": "__real@47800000",
+          "addend": 0,
+          "original_target_va": 268633544,
+          "original_target_symbols": [
+            "__real@47800000"
+          ],
+          "expected_target_va": 268633544,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.; Legacy envelope source constant 65536.0, IEEE-754 binary32, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2606,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2621,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2656,
+          "type": "DIR32",
+          "symbol": "__real@47800000",
+          "addend": 0,
+          "original_target_va": 268633544,
+          "original_target_symbols": [
+            "__real@47800000"
+          ],
+          "expected_target_va": 268633544,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.; Legacy envelope source constant 65536.0, IEEE-754 binary32, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2661,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2737,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 2755,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        }
+      ],
+      "relocation_target_mismatch_count": 0,
+      "inferred_target_count": 0,
+      "unresolved_target_count": 0,
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "relocations_all_resolved": true,
+      "relocation_values_consistent": true,
+      "relocation_targets_verified": true,
+      "relocation_targets_equal": true,
+      "inferred_relocated_bytes_equal": true,
+      "relocated_bytes_equal": true,
+      "first_unmasked_differences": []
+    },
+    {
+      "name": "_EnvMixerSpecial",
+      "object": "AudioProcessing.obj",
+      "rebuilt_bytes": 1008,
+      "status": "compared",
+      "original_va": 268495712,
+      "raw_bytes_equal": false,
+      "raw_differing_bytes": 82,
+      "compared_bytes": 1008,
+      "original_size_verified": true,
+      "original_bytes": 1008,
+      "size_equal": true,
+      "relocations": [
+        {
+          "offset": 20,
+          "type": "DIR32",
+          "symbol": "??_C@_0HJ@JHFJABPL@A_MIX?5Set?5in?5envmixer?$DP?$CB?5heavens?5@",
+          "addend": 0,
+          "original_target_va": 268636616,
+          "original_target_symbols": [
+            "??_C@_0HJ@JHFJABPL@A_MIX?5Set?5in?5envmixer?$DP?$CB?5heavens?5@"
+          ],
+          "expected_target_va": 268636616,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 25,
+          "type": "REL32",
+          "symbol": "_AudioError",
+          "addend": 0,
+          "original_target_va": 268450880,
+          "original_target_symbols": [
+            "_AudioError"
+          ],
+          "expected_target_va": 268450880,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "The complete original body independently dispatches all fifteen DirectSound HRESULT errors, uses their exact error-name strings, formats the unknown-code case, and invokes MessageBoxA. Reconstructed source default-path instruction scheduling remains unmatched.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 51,
+          "type": "DIR32",
+          "symbol": "_RDRAM",
+          "addend": 0,
+          "original_target_va": 269925092,
+          "original_target_symbols": [
+            "_RDRAM"
+          ],
+          "expected_target_va": 269925092,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 130,
+          "type": "DIR32",
+          "symbol": "__real@37800000",
+          "addend": 0,
+          "original_target_va": 268636612,
+          "original_target_symbols": [
+            "__real@37800000"
+          ],
+          "expected_target_va": 268636612,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/65536 matches the compiler constant bits and the corresponding original envelope arithmetic operand.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 160,
+          "type": "DIR32",
+          "symbol": "__real@37800000",
+          "addend": 0,
+          "original_target_va": 268636612,
+          "original_target_symbols": [
+            "__real@37800000"
+          ],
+          "expected_target_va": 268636612,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/65536 matches the compiler constant bits and the corresponding original envelope arithmetic operand.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 272,
+          "type": "DIR32",
+          "symbol": "__real@3ef0000000000000",
+          "addend": 0,
+          "original_target_va": 268633576,
+          "original_target_symbols": [
+            "__real@3ef0000000000000"
+          ],
+          "expected_target_va": 268633576,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/65536 matches the compiler constant bits and the corresponding original envelope arithmetic operand.; Legacy envelope source constant 1.52587890625e-05, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 285,
+          "type": "DIR32",
+          "symbol": "__real@3e000000",
+          "addend": 0,
+          "original_target_va": 268636740,
+          "original_target_symbols": [
+            "__real@3e000000"
+          ],
+          "expected_target_va": 268636740,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/8 matches the compiler constant bits and the corresponding original envelope arithmetic operand.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 316,
+          "type": "DIR32",
+          "symbol": "__real@3ef0000000000000",
+          "addend": 0,
+          "original_target_va": 268633576,
+          "original_target_symbols": [
+            "__real@3ef0000000000000"
+          ],
+          "expected_target_va": 268633576,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/65536 matches the compiler constant bits and the corresponding original envelope arithmetic operand.; Legacy envelope source constant 1.52587890625e-05, IEEE-754 binary64, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 326,
+          "type": "DIR32",
+          "symbol": "__real@3e000000",
+          "addend": 0,
+          "original_target_va": 268636740,
+          "original_target_symbols": [
+            "__real@3e000000"
+          ],
+          "expected_target_va": 268636740,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/8 matches the compiler constant bits and the corresponding original envelope arithmetic operand.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 418,
+          "type": "DIR32",
+          "symbol": "__real@38000000",
+          "addend": 0,
+          "original_target_va": 268636608,
+          "original_target_symbols": [
+            "__real@38000000"
+          ],
+          "expected_target_va": 268636608,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/32768 matches the compiler constant bits and the corresponding original envelope arithmetic operand.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 423,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 561,
+          "type": "DIR32",
+          "symbol": "__real@38000000",
+          "addend": 0,
+          "original_target_va": 268636608,
+          "original_target_symbols": [
+            "__real@38000000"
+          ],
+          "expected_target_va": 268636608,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "IEEE-754 literal 1/32768 matches the compiler constant bits and the corresponding original envelope arithmetic operand.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 566,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 709,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 768,
+          "type": "DIR32",
+          "symbol": "__real@00000000",
+          "addend": 0,
+          "original_target_va": 268636596,
+          "original_target_symbols": [
+            "__real@00000000"
+          ],
+          "expected_target_va": 268636596,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 0 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 830,
+          "type": "DIR32",
+          "symbol": "_RDRAM",
+          "addend": 0,
+          "original_target_va": 269925092,
+          "original_target_symbols": [
+            "_RDRAM"
+          ],
+          "expected_target_va": 269925092,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 843,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 867,
+          "type": "DIR32",
+          "symbol": "__real@47800000",
+          "addend": 0,
+          "original_target_va": 268633544,
+          "original_target_symbols": [
+            "__real@47800000"
+          ],
+          "expected_target_va": 268633544,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.; Legacy envelope source constant 65536.0, IEEE-754 binary32, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 872,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 883,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 906,
+          "type": "DIR32",
+          "symbol": "__real@47800000",
+          "addend": 0,
+          "original_target_va": 268633544,
+          "original_target_symbols": [
+            "__real@47800000"
+          ],
+          "expected_target_va": 268633544,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Literal numeric value and envelope floating operation agree with original storage. Literal 65536 stored as IEEE-754 binary32; type and numeric value agree with envelope conversion/division operands.; Legacy envelope source constant 65536.0, IEEE-754 binary32, agrees with its compiler literal name and full original operand storage.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 911,
+          "type": "REL32",
+          "symbol": "__ftol2",
+          "addend": 0,
+          "original_target_va": 268571568,
+          "original_target_symbols": [
+            "__ftol2"
+          ],
+          "expected_target_va": 268571568,
+          "resolution_basis": "independent_library_mapping",
+          "target_address_evidence": "Complete stock VC7 archive body independently matched: analysis/audio-libraries.json.",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        }
+      ],
+      "relocation_target_mismatch_count": 0,
+      "inferred_target_count": 0,
+      "unresolved_target_count": 0,
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "relocations_all_resolved": true,
+      "relocation_values_consistent": true,
+      "relocation_targets_verified": true,
+      "relocation_targets_equal": true,
+      "inferred_relocated_bytes_equal": true,
+      "relocated_bytes_equal": true,
+      "first_unmasked_differences": []
+    },
+    {
+      "name": "_ClampAudioSample",
+      "object": "AudioProcessing.obj",
+      "rebuilt_bytes": 32,
+      "status": "compared",
+      "original_va": 268496720,
+      "raw_bytes_equal": true,
+      "raw_differing_bytes": 0,
+      "compared_bytes": 32,
+      "original_size_verified": true,
+      "original_bytes": 32,
+      "size_equal": true,
+      "relocations": [],
+      "relocation_target_mismatch_count": 0,
+      "inferred_target_count": 0,
+      "unresolved_target_count": 0,
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "relocations_all_resolved": true,
+      "relocation_values_consistent": true,
+      "relocation_targets_verified": true,
+      "relocation_targets_equal": true,
+      "inferred_relocated_bytes_equal": true,
+      "relocated_bytes_equal": true,
+      "first_unmasked_differences": []
+    },
+    {
+      "name": "_MixAudioEnvelopeCommand",
+      "object": "AudioProcessing.obj",
+      "rebuilt_bytes": 1552,
+      "status": "compared",
+      "original_va": 268496752,
+      "raw_bytes_equal": true,
+      "raw_differing_bytes": 0,
+      "compared_bytes": 1552,
+      "original_size_verified": true,
+      "original_bytes": 1552,
+      "size_equal": true,
+      "relocations": [],
+      "relocation_target_mismatch_count": 0,
+      "inferred_target_count": 0,
+      "unresolved_target_count": 0,
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "relocations_all_resolved": true,
+      "relocation_values_consistent": true,
+      "relocation_targets_verified": true,
+      "relocation_targets_equal": true,
+      "inferred_relocated_bytes_equal": true,
+      "relocated_bytes_equal": true,
+      "first_unmasked_differences": []
+    },
+    {
+      "name": "_MixAudioEnvelopeClamped",
+      "object": "AudioProcessing.obj",
+      "rebuilt_bytes": 864,
+      "status": "compared",
+      "original_va": 268498304,
+      "raw_bytes_equal": true,
+      "raw_differing_bytes": 0,
+      "compared_bytes": 864,
+      "original_size_verified": true,
+      "original_bytes": 864,
+      "size_equal": true,
+      "relocations": [],
+      "relocation_target_mismatch_count": 0,
+      "inferred_target_count": 0,
+      "unresolved_target_count": 0,
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "relocations_all_resolved": true,
+      "relocation_values_consistent": true,
+      "relocation_targets_verified": true,
+      "relocation_targets_equal": true,
+      "inferred_relocated_bytes_equal": true,
+      "relocated_bytes_equal": true,
+      "first_unmasked_differences": []
+    },
+    {
+      "name": "_MixAudioEnvelope",
+      "object": "AudioProcessing.obj",
+      "rebuilt_bytes": 1072,
+      "status": "compared",
+      "original_va": 268499168,
+      "raw_bytes_equal": true,
+      "raw_differing_bytes": 0,
+      "compared_bytes": 1072,
+      "original_size_verified": true,
+      "original_bytes": 1072,
+      "size_equal": true,
+      "relocations": [],
+      "relocation_target_mismatch_count": 0,
+      "inferred_target_count": 0,
+      "unresolved_target_count": 0,
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "relocations_all_resolved": true,
+      "relocation_values_consistent": true,
+      "relocation_targets_verified": true,
+      "relocation_targets_equal": true,
+      "inferred_relocated_bytes_equal": true,
+      "relocated_bytes_equal": true,
+      "first_unmasked_differences": []
+    },
+    {
+      "name": "_MixAudioEnvelopeLegacy",
+      "object": "AudioProcessing.obj",
+      "rebuilt_bytes": 848,
+      "status": "compared",
+      "original_va": 268500240,
+      "raw_bytes_equal": true,
+      "raw_differing_bytes": 0,
+      "compared_bytes": 848,
+      "original_size_verified": true,
+      "original_bytes": 848,
+      "size_equal": true,
+      "relocations": [],
+      "relocation_target_mismatch_count": 0,
+      "inferred_target_count": 0,
+      "unresolved_target_count": 0,
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "relocations_all_resolved": true,
+      "relocation_values_consistent": true,
+      "relocation_targets_verified": true,
+      "relocation_targets_equal": true,
+      "inferred_relocated_bytes_equal": true,
+      "relocated_bytes_equal": true,
+      "first_unmasked_differences": []
+    },
+    {
+      "name": "_MixAudioEnvelopeUnsigned",
+      "object": "AudioProcessing.obj",
+      "rebuilt_bytes": 1328,
+      "status": "compared",
+      "original_va": 268501088,
+      "raw_bytes_equal": true,
+      "raw_differing_bytes": 0,
+      "compared_bytes": 1328,
+      "original_size_verified": true,
+      "original_bytes": 1328,
+      "size_equal": true,
+      "relocations": [],
+      "relocation_target_mismatch_count": 0,
+      "inferred_target_count": 0,
+      "unresolved_target_count": 0,
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "relocations_all_resolved": true,
+      "relocation_values_consistent": true,
+      "relocation_targets_verified": true,
+      "relocation_targets_equal": true,
+      "inferred_relocated_bytes_equal": true,
+      "relocated_bytes_equal": true,
+      "first_unmasked_differences": []
+    }
+  ],
+  "full_dll_byte_exact": false
+}

@@ -1127,17 +1127,37 @@ void EnvMixerScalar(AudioCommand *command, AudioContext *context)
         return;
     for (i = count + 1; i > 1; --i) {
         sample = (int)(buffer[input] * volumeLeft / 32768.0f);
-        buffer[outputLeft] = ClampAudioSample(buffer[outputLeft] + sample * dry / 32768);
+        {
+            int mixed = buffer[outputLeft] + sample * dry / 32768;
+            if (mixed > 32767) mixed = 32767;
+            else if (mixed < -32767) mixed = -32767;
+            buffer[outputLeft] = mixed;
+        }
         ++outputLeft;
         if ((flags & 8) && wetLeft) {
-            buffer[wetLeft] = ClampAudioSample(buffer[wetLeft] + sample * wet / 32768);
+            {
+                int mixed = buffer[wetLeft] + sample * wet / 32768;
+                if (mixed > 32767) mixed = 32767;
+                else if (mixed < -32767) mixed = -32767;
+                buffer[wetLeft] = mixed;
+            }
             ++wetLeft;
         }
         sample = (int)(buffer[input++] * volumeRight / 32768.0f);
-        buffer[outputRight] = ClampAudioSample(buffer[outputRight] + sample * dry / 32768);
+        {
+            int mixed = buffer[outputRight] + sample * dry / 32768;
+            if (mixed > 32767) mixed = 32767;
+            else if (mixed < -32767) mixed = -32767;
+            buffer[outputRight] = mixed;
+        }
         ++outputRight;
         if ((flags & 8) && wetRight) {
-            buffer[wetRight] = ClampAudioSample(buffer[wetRight] + sample * wet / 32768);
+            {
+                int mixed = buffer[wetRight] + sample * wet / 32768;
+                if (mixed > 32767) mixed = 32767;
+                else if (mixed < -32767) mixed = -32767;
+                buffer[wetRight] = mixed;
+            }
             ++wetRight;
         }
         volumeLeft *= stepLeft;
@@ -1213,17 +1233,37 @@ void EnvMixerBlockScalar(AudioCommand *command, AudioContext *context)
         return;
     while (count > 0) {
         sample = (int)(buffer[input] * volumeLeft / 32768.0f);
-        buffer[outputLeft] = ClampAudioSample(buffer[outputLeft] + sample);
+        {
+            int mixed = buffer[outputLeft] + sample;
+            if (mixed > 32767) mixed = 32767;
+            else if (mixed < -32767) mixed = -32767;
+            buffer[outputLeft] = mixed;
+        }
         ++outputLeft;
         if ((flags & 8) && wetLeft) {
-            buffer[wetLeft] = ClampAudioSample(buffer[wetLeft] + sample * wet / 32768);
+            {
+                int mixed = buffer[wetLeft] + sample * wet / 32768;
+                if (mixed > 32767) mixed = 32767;
+                else if (mixed < -32767) mixed = -32767;
+                buffer[wetLeft] = mixed;
+            }
             ++wetLeft;
         }
         sample = (int)(buffer[input++] * volumeRight / 32768.0f);
-        buffer[outputRight] = ClampAudioSample(buffer[outputRight] + sample);
+        {
+            int mixed = buffer[outputRight] + sample;
+            if (mixed > 32767) mixed = 32767;
+            else if (mixed < -32767) mixed = -32767;
+            buffer[outputRight] = mixed;
+        }
         ++outputRight;
         if ((flags & 8) && wetRight) {
-            buffer[wetRight] = ClampAudioSample(buffer[wetRight] + sample * wet / 32768);
+            {
+                int mixed = buffer[wetRight] + sample * wet / 32768;
+                if (mixed > 32767) mixed = 32767;
+                else if (mixed < -32767) mixed = -32767;
+                buffer[wetRight] = mixed;
+            }
             ++wetRight;
         }
         if (!(count % 8) && (stepLeft != 0 || stepRight != 0)) {
@@ -1311,14 +1351,34 @@ void EnvMixerABI3Scalar(AudioCommand *command, AudioContext *context)
         raw ^= dryMask;
         raw ^= wetMask;
         sampleLeft = (int)(raw * volumeLeft / 32768.f);
-        buffer[outputLeft] = ClampAudioSample(buffer[outputLeft] + sampleLeft * dry / 32768);
+        {
+            int mixed = buffer[outputLeft] + sampleLeft * dry / 32768;
+            if (mixed > 32767) mixed = 32767;
+            else if (mixed < -32767) mixed = -32767;
+            buffer[outputLeft] = mixed;
+        }
         ++outputLeft;
-        buffer[wetLeft] = ClampAudioSample(buffer[wetLeft] + sampleLeft * wet / 32768);
+        {
+            int mixed = buffer[wetLeft] + sampleLeft * wet / 32768;
+            if (mixed > 32767) mixed = 32767;
+            else if (mixed < -32767) mixed = -32767;
+            buffer[wetLeft] = mixed;
+        }
         ++wetLeft;
         sampleRight = (int)(raw * volumeRight / 32768.f);
-        buffer[outputRight] = ClampAudioSample(buffer[outputRight] + sampleRight * dry / 32768);
+        {
+            int mixed = buffer[outputRight] + sampleRight * dry / 32768;
+            if (mixed > 32767) mixed = 32767;
+            else if (mixed < -32767) mixed = -32767;
+            buffer[outputRight] = mixed;
+        }
         ++outputRight;
-        buffer[wetRight] = ClampAudioSample(buffer[wetRight] + sampleRight * wet / 32768);
+        {
+            int mixed = buffer[wetRight] + sampleRight * wet / 32768;
+            if (mixed > 32767) mixed = 32767;
+            else if (mixed < -32767) mixed = -32767;
+            buffer[wetRight] = mixed;
+        }
         ++wetRight;
         volumeLeft += stepLeft;
         volumeRight += stepRight;
@@ -1865,14 +1925,34 @@ void EnvMixerSpecial(AudioCommand *command, AudioContext *context)
     for (i = 0; i < count; ++i) {
         int sampleLeft, sampleRight;
         sampleLeft = (int)(buffer[input] * volumeLeft / 32768.f);
-        buffer[outputLeft] = ClampAudioSample(buffer[outputLeft] + sampleLeft * dry / 32768);
+        {
+            int mixed = buffer[outputLeft] + sampleLeft * dry / 32768;
+            if (mixed > 32767) mixed = 32767;
+            else if (mixed < -32767) mixed = -32767;
+            buffer[outputLeft] = mixed;
+        }
         ++outputLeft;
-        buffer[wetLeft] = ClampAudioSample(buffer[wetLeft] + sampleLeft * wet / 32768);
+        {
+            int mixed = buffer[wetLeft] + sampleLeft * wet / 32768;
+            if (mixed > 32767) mixed = 32767;
+            else if (mixed < -32767) mixed = -32767;
+            buffer[wetLeft] = mixed;
+        }
         ++wetLeft;
         sampleRight = (int)(buffer[input++] * volumeRight / 32768.f);
-        buffer[outputRight] = ClampAudioSample(buffer[outputRight] + sampleRight * dry / 32768);
+        {
+            int mixed = buffer[outputRight] + sampleRight * dry / 32768;
+            if (mixed > 32767) mixed = 32767;
+            else if (mixed < -32767) mixed = -32767;
+            buffer[outputRight] = mixed;
+        }
         ++outputRight;
-        buffer[wetRight] = ClampAudioSample(buffer[wetRight] + sampleRight * wet / 32768);
+        {
+            int mixed = buffer[wetRight] + sampleRight * wet / 32768;
+            if (mixed > 32767) mixed = 32767;
+            else if (mixed < -32767) mixed = -32767;
+            buffer[wetRight] = mixed;
+        }
         ++wetRight;
         volumeLeft += stepLeft;
         if (stepLeft > 0.f) {
