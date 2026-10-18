@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-"""Compile and audit the inferred eleventh/twelfth audio C translation units.
+"""Compile and audit the three units containing the audio processing routines.
 
 The earlier six-way inline ownership experiment is frozen at commit 2027a7c
 and in analysis/audio-processing-groups.json. This checks the coherent source
-layout: one ordinary signed decoder and two genuine macro expansions.
+layout: processing/envelopes follow MP3, Scale/FIR/profile form the next unit,
+and diagnostics/decoders/filter/resampler form the following unit. The eleven
+MP3 functions sharing the first unit are reported outside the processing scope.
 Remaining mismatched kernels keep this an incomplete reconstruction diagnostic.
 """
 import argparse
@@ -20,7 +22,24 @@ from pe_fingerprints import PE32
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'src/audio/ahle_ds'
-UNITS = ('AudioProcessing', 'AudioResample')
+UNITS = ('Mp3', 'AudioProcessing', 'AudioResample')
+
+
+def processing_scope(function):
+    return 0x1000aed0 <= function.get('original_va', 0) < 0x100137c0
+
+
+def scoped_results(results, include_processing):
+    output = []
+    for result in results:
+        functions = [f for f in result['functions']
+                     if processing_scope(f) == include_processing]
+        if functions:
+            output.append(dict(result, functions=functions,
+                functions_compared=sum(f['status'] == 'compared' for f in functions),
+                relocation_masked_matches=sum(f.get('relocation_masked_equal', False) for f in functions),
+                relocated_exact_matches=sum(f.get('relocated_bytes_equal', False) for f in functions)))
+    return output
 
 def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -77,11 +96,15 @@ def main():
     if process.returncode:
         raise RuntimeError(f'Compiler failed; see {log}')
     objects = [scratch / (name + '.obj') for name in UNITS]
-    results = compare_objects(objects)
+    all_results = compare_objects(objects)
+    results = scoped_results(all_results, True)
+    outside_scope = scoped_results(all_results, False)
+    assert sum(len(r['functions']) for r in results) == 41
+    assert sum(len(r['functions']) for r in outside_scope) == 11
     original = PE32(ROOT / 'master/Plugin/audio.dll')
     data, alignment, owners = [], [], {}
     records = {r['name']: r for r in load_symbols() if r.get('alignment_span')}
-    for obj, va in zip(objects, (0x1003b7d0, 0x1003c050)):
+    for obj, va in zip(objects, (0x1003af50, 0x1003b7d0, 0x1003c050)):
         coff = COFF(obj)
         sections = [s for s in coff.sections if s['name'] == '.data']
         section, = sections
@@ -110,7 +133,7 @@ def main():
                                   original_hex=expected.hex(), candidate_hex=raw.hex()))
     duplicates = {name: units for name, units in owners.items() if len(units) > 1}
     assert not duplicates
-    assert owners['_DecodeAudioADPCMBlock'] == ['AudioProcessing.obj']
+    assert owners['_DecodeAudioADPCMBlock'] == ['AudioResample.obj']
     early = COFF(objects[0])
     definitions = {s['name']: s for s in early.symbols}
     lookup = definitions['_AudioSqrtMantissa']
@@ -131,9 +154,14 @@ def main():
                   original_sha256=digest(ROOT / 'master/Plugin/audio.dll'),
                   hashes={str(p.relative_to(ROOT)): digest(p) for p in paths},
                   command=command, compile_log=str(log), compile_log_sha256=digest(log),
-                  objects=results, initialized_data=data, alignment=alignment,
+                  processing_scope=dict(functions=41,
+                      relocation_masked_matches=sum(r['relocation_masked_matches'] for r in results),
+                      relocated_exact_matches=sum(r['relocated_exact_matches'] for r in results)),
+                  objects=results, outside_processing_scope=dict(
+                      description='Eleven MP3 functions sharing Mp3.obj; excluded from the41 processing functions.',
+                      objects=outside_scope), initialized_data=data, alignment=alignment,
                   uninitialized_data=uninitialized,
-                  coefficient_data=coefficient_data(objects[1]),
+                  coefficient_data=coefficient_data(objects[2]),
                   function_owners=owners, duplicate_function_definitions=duplicates,
                   limitations=[
                       'Complete DLL byte equality remains unproven.',
@@ -145,6 +173,9 @@ def main():
     for obj in results:
         print(Path(obj['object']).name, obj['relocation_masked_matches'], '/',
               len(obj['functions']), 'complete bodies match outside relocations')
+    for obj in outside_scope:
+        print(Path(obj['object']).name, 'outside processing scope:',
+              obj['relocation_masked_matches'], '/', len(obj['functions']))
     print('Initialized .data:', sum(r['bytes'] for r in data), 'bytes;',
           'exact:', all(r['exact_bytes'] for r in data))
     return 0 if all(f.get('relocated_bytes_equal', False)

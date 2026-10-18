@@ -26,7 +26,8 @@ def main():
     parser.add_argument('--report', required=True, type=Path)
     args = parser.parse_args()
     fixture = Fixture(args.objects)
-    path = args.objects / 'AudioProcessing.obj'
+    owner = fixture.owners['_InitializeAudioSqrt']
+    path = args.objects / (owner + '.obj')
     coff = COFF(path)
     symbols = {s['name']: s for s in coff.symbols}
     lookup = symbols['_AudioSqrtMantissa']
@@ -64,7 +65,7 @@ def main():
     assert [r['addend'] for r in operands] == [0x20000, 0]
     assert masked_target == masked_candidate
     original, original_symbols = fixture.machine()
-    candidate, candidate_symbols = fixture.machine('AudioProcessing')
+    candidate, candidate_symbols = fixture.machine(owner)
     original.mem_write(0x1012bdf0, b'WET!DRY!')
     candidate.mem_write(candidate_symbols['_AudioEnvelopeWet'], b'WET!DRY!')
     fixture.call(original, original_symbols['_InitializeAudioSqrt'], [])
@@ -76,7 +77,8 @@ def main():
     assert bytes(candidate.mem_read(candidate_symbols['_AudioEnvelopeWet'], 8)) == b'WET!DRY!'
     report = dict(status='scoped_native_storage_and_behavior_proof',
                   original_sha256=sha(ROOT / 'master/Plugin/audio.dll'),
-                  object_sha256=sha(path), source_sha256=sha(ROOT / 'src/audio/ahle_ds/AudioProcessing.c'),
+                  object=path.name, object_sha256=sha(path),
+                  source=owner + '.c', source_sha256=sha(ROOT / 'src/audio/ahle_ds' / (owner + '.c')),
                   script_sha256=sha(Path(__file__)), private_lookup_bytes=0x40000,
                   native_bss_extent=0x40008, relative_storage=dict(lookup=0, wet=0x40000, dry=0x40004),
                   complete_initializer_bytes=112, complete_body_equal_outside_two_operands=True,

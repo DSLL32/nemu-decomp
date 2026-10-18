@@ -27,6 +27,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--objects', required=True, type=Path)
     parser.add_argument('--report', required=True, type=Path)
+    parser.add_argument('--comparison', type=Path,
+                        default=ROOT / 'analysis/audio-processing-comparison.json')
     parser.add_argument('--update-addresses', action='store_true')
     args = parser.parse_args()
     original = PE32(ROOT / 'master/Plugin/audio.dll')
@@ -36,7 +38,7 @@ def main():
     assert libraries['original_sha256'] == ORIGINAL_SHA256
     addresses_path = ROOT / 'analysis/audio-processing-addresses.json'
     addresses = json.loads(addresses_path.read_text())
-    comparison_path = ROOT / 'analysis/audio-processing-comparison.json'
+    comparison_path = args.comparison
     comparison = json.loads(comparison_path.read_text())
     compiled = {Path(o['object']).name: o for o in comparison['objects']}
     rows, symbols = [], []
@@ -54,11 +56,12 @@ def main():
                 start = offset + 1
         return matches
 
-    def record(name, va, basis, evidence, **details):
-        rows.append(dict(name=name, va=va, address_basis=basis, **details))
+    def record(name, va, basis, evidence, object_name=None, **details):
+        rows.append(dict(name=name, va=va, address_basis=basis,
+                         **({'object': object_name} if object_name else {}), **details))
         symbols.append(dict(name=name, va=va, address_basis=basis,
                             address_evidence=evidence,
-                            **({'object': 'AudioProcessing.obj'} if name.startswith('$T') else {})))
+                            **({'object': object_name} if object_name else {})))
 
     for name in ('_fprintf', '__aulldiv', '__alldiv', '__allmul', '__except_handler3'):
         matches = [r for r in libraries['symbols'] if r['name'] == name]
@@ -73,7 +76,11 @@ def main():
                member_sha256=row['sha256'], size=row['size'])
 
     for purpose in ('literals', 'seh'):
-        object_name = 'AudioProcessing.obj'
+        function_name = '_DumpAudioCommand' if purpose == 'literals' else '_AudioOSHasSSE'
+        owners = [name for name, obj in compiled.items()
+                  if any(f['name'] == function_name for f in obj['functions'])]
+        assert len(owners) == 1
+        object_name, = owners
         coff = COFF(args.objects / object_name)
         assert digest(coff.data) == compiled[object_name]['sha256']
         if purpose == 'literals':
@@ -130,6 +137,7 @@ def main():
             record(name, matches[0], 'identified_symbol',
                    'Unique complete SEH scope-table match after resolving both labels inside '
                    'the matched AudioOSHasSSE body; see analysis/audio-processing-operands.json.',
+                   object_name=object_name,
                    complete_data_hex=data.hex(), complete_data_sha256=digest(data),
                    internal_targets=destinations, matches=[hex(v) for v in matches])
 

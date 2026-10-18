@@ -46,7 +46,7 @@ class Fixture:
         self.objects = Path(object_directory)
         self.original = PE32(ROOT / 'master/Plugin/audio.dll')
         self.addresses = {r['name']: number(r['va']) for r in load_symbols()}
-        self.object_names = ('AudioProcessing', 'AudioResample')
+        self.object_names = ('Mp3', 'AudioProcessing', 'AudioResample')
         self.owners = {f['name']: name for name in self.object_names
                        for f in COFF(self.objects / (name + '.obj')).functions()}
         library = json.loads((ROOT / 'analysis/audio-libraries.json').read_text())
@@ -126,7 +126,7 @@ class Fixture:
         for address, data in writes:
             original.mem_write(address, data)
             candidate.mem_write(address, data)
-        result = dict(function=name, case=label, seed=seed)
+        result = dict(function=name, object=self.owners['_' + name], case=label, seed=seed)
         try:
             self.call(original, original_symbols['_' + name], arguments)
             self.call(candidate, candidate_symbols['_' + name], arguments)
@@ -167,16 +167,17 @@ def main():
             ('ScaleAudioBuffer', [0x200, 64, 0x180, CONTEXT]),
             ('FilterAudioBlock', [0x100, BOOK, CONTEXT]),
         ]:
-            results.append(fixture.compare('AudioProcessing', name, arguments, seed, 'random samples'))
+            results.append(fixture.compare(fixture.owners['_' + name], name,
+                                           arguments, seed, 'random samples'))
         for bits in (2, 4):
             for offset in (0x200, 0x201):
-                results.append(fixture.compare('AudioADPCM', 'DecodeAudioADPCMBlock',
+                results.append(fixture.compare('AudioResample', 'DecodeAudioADPCMBlock',
                     [OUTPUT, HISTORY, offset, BOOK, bits, CONTEXT], seed,
                     f'{bits}-bit block, offset {offset:#x}'))
-        results.append(fixture.compare('AudioADPCM', 'DecodeAudioADPCMUnsigned',
+        results.append(fixture.compare('AudioResample', 'DecodeAudioADPCMUnsigned',
             [OUTPUT, HISTORY, 0x200, BOOK, 4, CONTEXT], seed, 'unsigned predictor'))
         for flags in range(8):
-            results.append(fixture.compare('AudioADPCM', 'DecodeAudioADPCM',
+            results.append(fixture.compare('AudioResample', 'DecodeAudioADPCM',
                 [0x1000, 0x200, 0x800, 64, flags, CONTEXT], seed, f'flags {flags}'))
         for flags in range(4):
             for count in (0, 2, 32, 96):
@@ -188,7 +189,7 @@ def main():
         for flags in (0, 1):
             for gain in (0, 0x1800, 0x8000, 0xffff):
                 writes = [(COMMAND, struct.pack('<II', (flags << 16) | gain, 0x1000))]
-                results.append(fixture.compare('AudioPoleFilter', 'PoleFilterAudioCommand',
+                results.append(fixture.compare('AudioResample', 'PoleFilterAudioCommand',
                     [COMMAND, CONTEXT], seed, f'flags {flags}, gain {gain:#x}', writes))
     sources = [ROOT / 'src/audio/ahle_ds' / (name + '.c') for name in objects]
     sources += [ROOT / 'src/audio/ahle_ds' / name for name in
