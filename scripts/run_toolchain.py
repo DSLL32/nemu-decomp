@@ -42,7 +42,7 @@ def main():
     if args.toolchain == "vc6":
         include, lib = ("include", "mfc/include", "atl/include"), ("lib", "mfc/lib")
     elif args.toolchain == "vc6rtm":
-        include, lib = ("include",), ()
+        include, lib = ("include",), ("lib",)
     elif args.toolchain == "vc7":
         include = ("include", "atlmfc/include", "platformsdk/include")
         lib = ("lib", "atlmfc/lib", "platformsdk/lib")

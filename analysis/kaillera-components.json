@@ -1,0 +1,5952 @@
+{
+  "status": "incomplete-reconstruction",
+  "work": "/root/.ai-tmp/kaillera.TniiE1/component-build",
+  "wine_prefix": "/root/.ai-tmp/kaillera.TniiE1/component-build/wine",
+  "full_dll_byte_exact": false,
+  "sources": {
+    "README.md": "ecd5a3f43408e713706cb4a6a98e498e6b55cb8f04aea7c1809b2b335e16323d",
+    "client.h": "23562dabc4c4dcf2beaeaf907eab364e39b6d66351de74922ab1c23f3ce4e6f8",
+    "config.cpp": "8afba28081e7502fa728810f0c8044b7ec4501134b53c0ee9329ba12e2bff488",
+    "config.h": "ab5553e88e42e701113d09b3cc45f2362ef880d928b237d414bc18c965a5e264",
+    "connect.cpp": "f4737c171673e3f6cfe7f581793ae0a69436d50e94e12a48dd2566322d9b1683",
+    "jnetlib/asyncdns.cpp": "d8a58447fa81e445d70601022cb4e1f981b78d9843a3d7fe85b922e39ecea953",
+    "jnetlib/asyncdns.h": "a6f8b1718d955d8f6b2154adf09ec96a83172e9435fc20ec6bcc420ab7c899b8",
+    "jnetlib/connection.cpp": "7e10301d5031560eccbce0704097fcfebb5b4a0f83ea32904441fd1cfb096fe7",
+    "jnetlib/connection.h": "27053ced02bc8a773ff7bf7934270df7cb38fbfb6bde85e16bbca28dd4a21219",
+    "jnetlib/httpget.cpp": "9aacccc04e2d82452f6ff7d6c15a231b9ba700d55cc85ca8012d8d40e17702e8",
+    "jnetlib/httpget.h": "deadb49cd7fd43b67e47222c1418d4171d65683f4b39fd35b8c980d2d525c6f7",
+    "jnetlib/jnetlib.h": "ccecc1cf5c6ad44c28eff1e131d8f14da6ab4636cc2df1bba10d579055a772c9",
+    "jnetlib/netinc.h": "802854d887b4a9cddc0be7e94c4392c315afa6e21acc04e172834effdea9279b",
+    "jnetlib/util.cpp": "c13c83dea03fd0eeb4a2469102696ac0ad135ae44213112197fea46862daac68",
+    "jnetlib/util.h": "e651df1e1eca6cba968de85d21548542479958ac3b3557b7c04568203f1b6dda",
+    "kaillera.ico": "5a1da7cdb99fb19451ca688261b63392f791ea092e9793de9e955e8657da5496",
+    "kaillera.rc": "de4756aefe582113daf24c7ef6dc585b56bb418fedc232c9ad32a350b2be7794",
+    "kailleraclient.cpp": "430a1b3cfec1467b518d6fe8702de71fd2876791c72557a3df96f5390b099b2e",
+    "kailleraclient.h": "f2191acbffebe2fd9a8e27222fec083f84d63090eee504ed579f2284da93d201",
+    "message.cpp": "750ccb812375cfa56e1c8fbc4db33449d659fe26766393b2b0f0b0b830b0d5b8",
+    "message.h": "c80971a9e03b0ef87a3885b1ef3ef46c3078e9aa70cfdc564b5e90744581f8b9",
+    "packetcache.h": "2befc20c56031e7d48f40771db20d319b35efdf84c1e9295d075bbf29ed49884",
+    "ptrlist.h": "bc18659fe611df49be0c40f488d0565ace3f8803752f5182ef7206767a9945dc",
+    "reliableconnection.cpp": "6ffa17a4b88e36f8e96ef8ed24541a66bf2fb6afe16c1a7d748b42b2a102c267",
+    "reliableconnection.h": "795ee4b3e8df6881742bd8e17d6d8179010c14872d70cd3eb04a99a5f5ce72aa",
+    "udpconnection.cpp": "8f571506c18931b77d9645d5cf63ec32b41b18609a46d15c8944558b078348cd",
+    "udpconnection.h": "76f11db6750c24949547f64b314510b3f0403dc043a3206cbcca00c16d238bbe"
+  },
+  "commands": [
+    {
+      "label": "compile-reliableconnection",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc6rtm",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/MD",
+        "/GX",
+        "/Gy",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/FoZ:\\root\\.ai-tmp\\kaillera.TniiE1\\component-build\\output\\reliableconnection.obj",
+        "reliableconnection.cpp"
+      ],
+      "log": "/root/.ai-tmp/kaillera.TniiE1/component-build/logs/compile-reliableconnection.log",
+      "returncode": 0
+    },
+    {
+      "label": "compile-config",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc6rtm",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/MD",
+        "/GX",
+        "/Gy",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/FoZ:\\root\\.ai-tmp\\kaillera.TniiE1\\component-build\\output\\config.obj",
+        "config.cpp"
+      ],
+      "log": "/root/.ai-tmp/kaillera.TniiE1/component-build/logs/compile-config.log",
+      "returncode": 0
+    },
+    {
+      "label": "compile-message",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc6rtm",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/MD",
+        "/GX",
+        "/Gy",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/FoZ:\\root\\.ai-tmp\\kaillera.TniiE1\\component-build\\output\\message.obj",
+        "message.cpp"
+      ],
+      "log": "/root/.ai-tmp/kaillera.TniiE1/component-build/logs/compile-message.log",
+      "returncode": 0
+    },
+    {
+      "label": "compile-udpconnection",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc6rtm",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/MD",
+        "/GX",
+        "/Gy",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/FoZ:\\root\\.ai-tmp\\kaillera.TniiE1\\component-build\\output\\udpconnection.obj",
+        "udpconnection.cpp"
+      ],
+      "log": "/root/.ai-tmp/kaillera.TniiE1/component-build/logs/compile-udpconnection.log",
+      "returncode": 0
+    },
+    {
+      "label": "compile-jnetlib-asyncdns",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc6rtm",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/MD",
+        "/GX",
+        "/Gy",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/FoZ:\\root\\.ai-tmp\\kaillera.TniiE1\\component-build\\output\\jnetlib-asyncdns.obj",
+        "jnetlib/asyncdns.cpp"
+      ],
+      "log": "/root/.ai-tmp/kaillera.TniiE1/component-build/logs/compile-jnetlib-asyncdns.log",
+      "returncode": 0
+    },
+    {
+      "label": "compile-jnetlib-connection",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc6rtm",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/MD",
+        "/GX",
+        "/Gy",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/FoZ:\\root\\.ai-tmp\\kaillera.TniiE1\\component-build\\output\\jnetlib-connection.obj",
+        "jnetlib/connection.cpp"
+      ],
+      "log": "/root/.ai-tmp/kaillera.TniiE1/component-build/logs/compile-jnetlib-connection.log",
+      "returncode": 0
+    },
+    {
+      "label": "compile-jnetlib-httpget",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc6rtm",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/MD",
+        "/GX",
+        "/Gy",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/FoZ:\\root\\.ai-tmp\\kaillera.TniiE1\\component-build\\output\\jnetlib-httpget.obj",
+        "jnetlib/httpget.cpp"
+      ],
+      "log": "/root/.ai-tmp/kaillera.TniiE1/component-build/logs/compile-jnetlib-httpget.log",
+      "returncode": 0
+    },
+    {
+      "label": "compile-jnetlib-util",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc6rtm",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/MD",
+        "/GX",
+        "/Gy",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/FoZ:\\root\\.ai-tmp\\kaillera.TniiE1\\component-build\\output\\jnetlib-util.obj",
+        "jnetlib/util.cpp"
+      ],
+      "log": "/root/.ai-tmp/kaillera.TniiE1/component-build/logs/compile-jnetlib-util.log",
+      "returncode": 0
+    },
+    {
+      "label": "compile-connect",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc6rtm",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/MD",
+        "/GX",
+        "/Gy",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/FoZ:\\root\\.ai-tmp\\kaillera.TniiE1\\component-build\\output\\connect.obj",
+        "connect.cpp"
+      ],
+      "log": "/root/.ai-tmp/kaillera.TniiE1/component-build/logs/compile-connect.log",
+      "returncode": 0
+    },
+    {
+      "label": "compile-kailleraclient",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc6rtm",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/MD",
+        "/GX",
+        "/Gy",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/FoZ:\\root\\.ai-tmp\\kaillera.TniiE1\\component-build\\output\\kailleraclient.obj",
+        "kailleraclient.cpp"
+      ],
+      "log": "/root/.ai-tmp/kaillera.TniiE1/component-build/logs/compile-kailleraclient.log",
+      "returncode": 0
+    },
+    {
+      "label": "resources",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc6rtm",
+        "rc",
+        "/l",
+        "0x40c",
+        "/foZ:\\root\\.ai-tmp\\kaillera.TniiE1\\component-build\\output\\kaillera.res",
+        "kaillera.rc"
+      ],
+      "log": "/root/.ai-tmp/kaillera.TniiE1/component-build/logs/resources.log",
+      "returncode": 0
+    },
+    {
+      "label": "component-library",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc6rtm",
+        "lib",
+        "/nologo",
+        "/out:Z:\\root\\.ai-tmp\\kaillera.TniiE1\\component-build\\output\\kaillera-components.lib",
+        "Z:\\root\\.ai-tmp\\kaillera.TniiE1\\component-build\\output\\reliableconnection.obj",
+        "Z:\\root\\.ai-tmp\\kaillera.TniiE1\\component-build\\output\\config.obj",
+        "Z:\\root\\.ai-tmp\\kaillera.TniiE1\\component-build\\output\\message.obj",
+        "Z:\\root\\.ai-tmp\\kaillera.TniiE1\\component-build\\output\\udpconnection.obj",
+        "Z:\\root\\.ai-tmp\\kaillera.TniiE1\\component-build\\output\\jnetlib-asyncdns.obj",
+        "Z:\\root\\.ai-tmp\\kaillera.TniiE1\\component-build\\output\\jnetlib-connection.obj",
+        "Z:\\root\\.ai-tmp\\kaillera.TniiE1\\component-build\\output\\jnetlib-httpget.obj",
+        "Z:\\root\\.ai-tmp\\kaillera.TniiE1\\component-build\\output\\jnetlib-util.obj",
+        "Z:\\root\\.ai-tmp\\kaillera.TniiE1\\component-build\\output\\connect.obj",
+        "Z:\\root\\.ai-tmp\\kaillera.TniiE1\\component-build\\output\\kailleraclient.obj"
+      ],
+      "log": "/root/.ai-tmp/kaillera.TniiE1/component-build/logs/component-library.log",
+      "returncode": 0
+    },
+    {
+      "label": "unpack-reference-for-diagnostics",
+      "argv": [
+        "wine",
+        "/root/nemu-decomp/toolchains/upx120/upx.exe",
+        "-d",
+        "-oZ:\\root\\.ai-tmp\\kaillera.TniiE1\\component-build\\output\\reference.unpacked.dll",
+        "Z:\\root\\nemu-decomp\\master\\kailleraclient.dll"
+      ],
+      "log": "/root/.ai-tmp/kaillera.TniiE1/component-build/logs/unpack-reference-for-diagnostics.log",
+      "returncode": 0
+    }
+  ],
+  "compiler_flags": [
+    "/nologo",
+    "/c",
+    "/O2",
+    "/MD",
+    "/GX",
+    "/Gy",
+    "/DWIN32",
+    "/DNDEBUG"
+  ],
+  "executable_bytes_copied_from_reference": false,
+  "metadata_restoration": null,
+  "build_input_sha256": {
+    "scripts/build_kaillera.py": "3e89cc1e1ce2fd57a78dda7df79d4f1220b3b61bca04a3bd15cb84b85e69f4d8",
+    "scripts/check_kaillera.py": "9707984d4be37b3f9c92503bf133577ee0f98d202517ae1bf39a40f070d8837e",
+    "scripts/verify_kaillera.py": "573a703ed1c0f661d44f3b2bd31b73524d9803621eec0b8323608efda81884c0",
+    "scripts/run_toolchain.py": "d97fc39fdd02d508cd76432db9575043438b1da3aad0c391fc7758d125936cf3",
+    "toolchains/kaillera-toolchain.json": "bdc0def4c9d173fb91b632ea58bea762094b00d5af33ee48388a1c235f5aa10f",
+    "toolchains/kaillera-packer.json": "f11ccfccbc842593871c6f1282225ac65f22eb22ce4273f8ce02fad514054401",
+    "toolchains/vc6rtm/bin/cl.exe": "d9220fdfaf355c81f26e7b03c5dc628ec72ff81c99dc38ed98b1ad4bdbbb309c",
+    "toolchains/vc6rtm/bin/c1xx.dll": "4095e9e8de5ac4b13dbfe310abb8de711475b1a92c5f94375919947937f3237e",
+    "toolchains/vc6rtm/bin/c2.dll": "45187b0b6288240f73272a7c61e6329c50048a76e57db3bb87b6f0229e09e27d",
+    "toolchains/vc6rtm/bin/lib.exe": "35aa049482a40f3ce04028200151cd6f1d417dc50de6bc7951e310654f167df9",
+    "toolchains/vc6rtm/bin/rc.exe": "582d0e68739b1128199d0ffc12eb62f48a17a3216a791fd6be948ff9e2eb2ffa",
+    "toolchains/vc6rtm/bin/rcdll.dll": "5932342fc326b056988cebc710b414592b81c9ba18b9ae247b838a6021f2e434",
+    "toolchains/upx120/upx.exe": "6e8b43f3e3287e95a7e9debd065e5915d9a557b1c8191d388939fb1169c79041"
+  },
+  "diagnostic_only": true,
+  "complete_dll_available": false,
+  "original_code_virtual_bytes": 38598,
+  "unique_masked_signature_code_bytes": 11104,
+  "functions": [
+    {
+      "object": "reliableconnection.obj",
+      "name": "??0ReliableConnection@@QAE@XZ",
+      "coff_bytes": 64,
+      "fixed_bytes": 56,
+      "matching_original_vas": [
+        268439552
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 4,
+          "type": 20,
+          "symbol": "??0UDPConnection@@QAE@XZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268443712
+          ]
+        },
+        {
+          "offset": 32,
+          "type": 6,
+          "symbol": "??_7ReliableConnection@@6B@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480936
+          ]
+        }
+      ]
+    },
+    {
+      "object": "reliableconnection.obj",
+      "name": "??_GReliableConnection@@UAEPAXI@Z",
+      "coff_bytes": 32,
+      "fixed_bytes": 24,
+      "matching_original_vas": [
+        268439616,
+        268443824
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 4,
+          "type": 20,
+          "symbol": "??1ReliableConnection@@UAE@XZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268439648,
+            268443856
+          ]
+        },
+        {
+          "offset": 17,
+          "type": 20,
+          "symbol": "??3@YAXPAX@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476548,
+            268476548
+          ]
+        }
+      ]
+    },
+    {
+      "object": "reliableconnection.obj",
+      "name": "??1ReliableConnection@@UAE@XZ",
+      "coff_bytes": 112,
+      "fixed_bytes": 100,
+      "matching_original_vas": [
+        268439648
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 5,
+          "type": 6,
+          "symbol": "__imp__free",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480600
+          ]
+        },
+        {
+          "offset": 16,
+          "type": 6,
+          "symbol": "??_7ReliableConnection@@6B@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480936
+          ]
+        },
+        {
+          "offset": 98,
+          "type": 20,
+          "symbol": "??1UDPConnection@@UAE@XZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268443856
+          ]
+        }
+      ]
+    },
+    {
+      "object": "reliableconnection.obj",
+      "name": "?sendMessage@ReliableConnection@@QAEXPAVMessage@@@Z",
+      "coff_bytes": 64,
+      "fixed_bytes": 56,
+      "matching_original_vas": [
+        268439760
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 6,
+          "type": 20,
+          "symbol": "__chkstk",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476560
+          ]
+        },
+        {
+          "offset": 31,
+          "type": 20,
+          "symbol": "?pack@Message@@QAEHPADH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268443488
+          ]
+        }
+      ]
+    },
+    {
+      "object": "reliableconnection.obj",
+      "name": "?send@ReliableConnection@@UAEHPADH@Z",
+      "coff_bytes": 240,
+      "fixed_bytes": 228,
+      "matching_original_vas": [
+        268439824
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 91,
+          "type": 6,
+          "symbol": "__imp__realloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480608
+          ]
+        },
+        {
+          "offset": 141,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480604
+          ]
+        },
+        {
+          "offset": 225,
+          "type": 20,
+          "symbol": "?resend@ReliableConnection@@QAEHH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268440064
+          ]
+        }
+      ]
+    },
+    {
+      "object": "reliableconnection.obj",
+      "name": "?resend@ReliableConnection@@QAEHH@Z",
+      "coff_bytes": 176,
+      "fixed_bytes": 168,
+      "matching_original_vas": [],
+      "instruction_bytes_equal_outside_coff_relocations": false,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 6,
+          "type": 20,
+          "symbol": "__chkstk",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 159,
+          "type": 20,
+          "symbol": "?send@UDPConnection@@UAEHPADH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        }
+      ]
+    },
+    {
+      "object": "reliableconnection.obj",
+      "name": "?receiveMessage@ReliableConnection@@QAEHPAVMessage@@DPAUsockaddr_in@@@Z",
+      "coff_bytes": 112,
+      "fixed_bytes": 104,
+      "matching_original_vas": [
+        268440240
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 6,
+          "type": 20,
+          "symbol": "__chkstk",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476560
+          ]
+        },
+        {
+          "offset": 85,
+          "type": 20,
+          "symbol": "?unpack@Message@@QAEXPADH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268443616
+          ]
+        }
+      ]
+    },
+    {
+      "object": "reliableconnection.obj",
+      "name": "?dataAvailable@ReliableConnection@@UAEHXZ",
+      "coff_bytes": 32,
+      "fixed_bytes": 28,
+      "matching_original_vas": [
+        268441104
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 17,
+          "type": 20,
+          "symbol": "?dataAvailable@UDPConnection@@UAEHXZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268444960
+          ]
+        }
+      ]
+    },
+    {
+      "object": "reliableconnection.obj",
+      "name": "?receive@ReliableConnection@@UAEHPADPAHDPAUsockaddr_in@@@Z",
+      "coff_bytes": 720,
+      "fixed_bytes": 700,
+      "matching_original_vas": [],
+      "instruction_bytes_equal_outside_coff_relocations": false,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 6,
+          "type": 20,
+          "symbol": "__chkstk",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 111,
+          "type": 20,
+          "symbol": "?receive@UDPConnection@@UAEHPADPAHDPAUsockaddr_in@@@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 263,
+          "type": 6,
+          "symbol": "__imp__realloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 313,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 584,
+          "type": 6,
+          "symbol": "__imp__free",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        }
+      ]
+    },
+    {
+      "object": "config.obj",
+      "name": "?flush@Config@@QAEXXZ",
+      "coff_bytes": 256,
+      "fixed_bytes": 232,
+      "matching_original_vas": [
+        268441152
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 28,
+          "type": 6,
+          "symbol": "__imp__wsprintfA",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480744
+          ]
+        },
+        {
+          "offset": 53,
+          "type": 6,
+          "symbol": "__imp__strncpy",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480612
+          ]
+        },
+        {
+          "offset": 73,
+          "type": 6,
+          "symbol": "??_C@_02MECO@?$CFd?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268484688
+          ]
+        },
+        {
+          "offset": 106,
+          "type": 6,
+          "symbol": "__imp__WritePrivateProfileStringA@16",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480584
+          ]
+        },
+        {
+          "offset": 180,
+          "type": 6,
+          "symbol": "__imp__strncpy",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480612
+          ]
+        },
+        {
+          "offset": 217,
+          "type": 6,
+          "symbol": "__imp__WritePrivateProfileStringA@16",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480584
+          ]
+        }
+      ]
+    },
+    {
+      "object": "config.obj",
+      "name": "??1Config@@QAE@XZ",
+      "coff_bytes": 96,
+      "fixed_bytes": 88,
+      "matching_original_vas": [
+        268441408
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 5,
+          "type": 20,
+          "symbol": "?flush@Config@@QAEXXZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268441152
+          ]
+        },
+        {
+          "offset": 13,
+          "type": 6,
+          "symbol": "__imp__free",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480600
+          ]
+        }
+      ]
+    },
+    {
+      "object": "config.obj",
+      "name": "??0Config@@QAE@PAD0@Z",
+      "coff_bytes": 352,
+      "fixed_bytes": 328,
+      "matching_original_vas": [],
+      "instruction_bytes_equal_outside_coff_relocations": false,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 7,
+          "type": 6,
+          "symbol": "__imp__strncpy",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 47,
+          "type": 6,
+          "symbol": "??_C@_06FALM@config?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 129,
+          "type": 6,
+          "symbol": "__imp__GetModuleHandleA@4",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 136,
+          "type": 6,
+          "symbol": "__imp__GetModuleFileNameA@12",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 181,
+          "type": 6,
+          "symbol": "??_C@_03LBIP@ini?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 276,
+          "type": 6,
+          "symbol": "??_C@_04OOLB@?4ini?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        }
+      ]
+    },
+    {
+      "object": "config.obj",
+      "name": "?writeInt@Config@@QAEXPADHH@Z",
+      "coff_bytes": 208,
+      "fixed_bytes": 196,
+      "matching_original_vas": [
+        268441856
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 33,
+          "type": 6,
+          "symbol": "__imp__strncmp",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480616
+          ]
+        },
+        {
+          "offset": 88,
+          "type": 6,
+          "symbol": "__imp__realloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480608
+          ]
+        },
+        {
+          "offset": 114,
+          "type": 6,
+          "symbol": "__imp__strncpy",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480612
+          ]
+        }
+      ]
+    },
+    {
+      "object": "config.obj",
+      "name": "?readInt@Config@@QAEHPADH@Z",
+      "coff_bytes": 128,
+      "fixed_bytes": 116,
+      "matching_original_vas": [
+        268442064
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 33,
+          "type": 6,
+          "symbol": "__imp__strncmp",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480616
+          ]
+        },
+        {
+          "offset": 74,
+          "type": 6,
+          "symbol": "__imp__GetPrivateProfileIntA@16",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480568
+          ]
+        },
+        {
+          "offset": 87,
+          "type": 20,
+          "symbol": "?writeInt@Config@@QAEXPADHH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268441856
+          ]
+        }
+      ]
+    },
+    {
+      "object": "config.obj",
+      "name": "?writeString@Config@@QAEPADPAD0H@Z",
+      "coff_bytes": 336,
+      "fixed_bytes": 312,
+      "matching_original_vas": [
+        268442192
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 34,
+          "type": 6,
+          "symbol": "__imp__strncmp",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480616
+          ]
+        },
+        {
+          "offset": 96,
+          "type": 6,
+          "symbol": "__imp__realloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480608
+          ]
+        },
+        {
+          "offset": 124,
+          "type": 6,
+          "symbol": "__imp__strncpy",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480612
+          ]
+        },
+        {
+          "offset": 152,
+          "type": 6,
+          "symbol": "__imp__strdup",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480656
+          ]
+        },
+        {
+          "offset": 283,
+          "type": 6,
+          "symbol": "__imp__free",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480600
+          ]
+        },
+        {
+          "offset": 297,
+          "type": 6,
+          "symbol": "__imp__strdup",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480656
+          ]
+        }
+      ]
+    },
+    {
+      "object": "config.obj",
+      "name": "?readString@Config@@QAEPADPAD0@Z",
+      "coff_bytes": 160,
+      "fixed_bytes": 148,
+      "matching_original_vas": [
+        268442528
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 41,
+          "type": 6,
+          "symbol": "__imp__strncmp",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480616
+          ]
+        },
+        {
+          "offset": 95,
+          "type": 6,
+          "symbol": "__imp__GetPrivateProfileStringA@24",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480564
+          ]
+        },
+        {
+          "offset": 110,
+          "type": 20,
+          "symbol": "?writeString@Config@@QAEPADPAD0H@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268442192
+          ]
+        }
+      ]
+    },
+    {
+      "object": "message.obj",
+      "name": "??0Message@@QAE@XZ",
+      "coff_bytes": 48,
+      "fixed_bytes": 44,
+      "matching_original_vas": [
+        268442688
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 31,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480604
+          ]
+        }
+      ]
+    },
+    {
+      "object": "message.obj",
+      "name": "??1Message@@QAE@XZ",
+      "coff_bytes": 16,
+      "fixed_bytes": 12,
+      "matching_original_vas": [
+        268442736
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 6,
+          "type": 6,
+          "symbol": "__imp__free",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480600
+          ]
+        }
+      ]
+    },
+    {
+      "object": "message.obj",
+      "name": "??0Message@@QAE@ABV0@@Z",
+      "coff_bytes": 112,
+      "fixed_bytes": 108,
+      "matching_original_vas": [
+        268442752
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 59,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480604
+          ]
+        }
+      ]
+    },
+    {
+      "object": "message.obj",
+      "name": "?reserve@Message@@QAEXH@Z",
+      "coff_bytes": 64,
+      "fixed_bytes": 60,
+      "matching_original_vas": [
+        268442864
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 36,
+          "type": 6,
+          "symbol": "__imp__realloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480608
+          ]
+        }
+      ]
+    },
+    {
+      "object": "message.obj",
+      "name": "?setNick@Message@@QAEXPAD@Z",
+      "coff_bytes": 80,
+      "fixed_bytes": 76,
+      "matching_original_vas": [
+        268442928
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 53,
+          "type": 6,
+          "symbol": "__imp__strncpy",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480612
+          ]
+        }
+      ]
+    },
+    {
+      "object": "message.obj",
+      "name": "?append@Message@@QAEXPAXH@Z",
+      "coff_bytes": 80,
+      "fixed_bytes": 76,
+      "matching_original_vas": [
+        268443008
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 19,
+          "type": 20,
+          "symbol": "?reserve@Message@@QAEXH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268442864
+          ]
+        }
+      ]
+    },
+    {
+      "object": "message.obj",
+      "name": "?read@Message@@QAEXPAXH@Z",
+      "coff_bytes": 96,
+      "fixed_bytes": 96,
+      "matching_original_vas": [
+        268443088
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": []
+    },
+    {
+      "object": "message.obj",
+      "name": "?appendString@Message@@QAEXPAD@Z",
+      "coff_bytes": 48,
+      "fixed_bytes": 44,
+      "matching_original_vas": [
+        268443184
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 24,
+          "type": 20,
+          "symbol": "?append@Message@@QAEXPAXH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268443008
+          ]
+        }
+      ]
+    },
+    {
+      "object": "message.obj",
+      "name": "?readString@Message@@QAEXPADH@Z",
+      "coff_bytes": 112,
+      "fixed_bytes": 108,
+      "matching_original_vas": [],
+      "instruction_bytes_equal_outside_coff_relocations": false,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 59,
+          "type": 6,
+          "symbol": "__imp__strncpy",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        }
+      ]
+    },
+    {
+      "object": "message.obj",
+      "name": "?appendInt@Message@@QAEXH@Z",
+      "coff_bytes": 16,
+      "fixed_bytes": 12,
+      "matching_original_vas": [
+        268443344
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 8,
+          "type": 20,
+          "symbol": "?append@Message@@QAEXPAXH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268443008
+          ]
+        }
+      ]
+    },
+    {
+      "object": "message.obj",
+      "name": "?readInt@Message@@QAEHXZ",
+      "coff_bytes": 32,
+      "fixed_bytes": 28,
+      "matching_original_vas": [
+        268443360
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 17,
+          "type": 20,
+          "symbol": "?read@Message@@QAEXPAXH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268443088
+          ]
+        }
+      ]
+    },
+    {
+      "object": "message.obj",
+      "name": "?appendByte@Message@@QAEXD@Z",
+      "coff_bytes": 16,
+      "fixed_bytes": 12,
+      "matching_original_vas": [
+        268443392
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 8,
+          "type": 20,
+          "symbol": "?append@Message@@QAEXPAXH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268443008
+          ]
+        }
+      ]
+    },
+    {
+      "object": "message.obj",
+      "name": "?readByte@Message@@QAEDXZ",
+      "coff_bytes": 32,
+      "fixed_bytes": 28,
+      "matching_original_vas": [
+        268443408
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 14,
+          "type": 20,
+          "symbol": "?read@Message@@QAEXPAXH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268443088
+          ]
+        }
+      ]
+    },
+    {
+      "object": "message.obj",
+      "name": "?appendWord@Message@@QAEXF@Z",
+      "coff_bytes": 16,
+      "fixed_bytes": 12,
+      "matching_original_vas": [
+        268443440
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 8,
+          "type": 20,
+          "symbol": "?append@Message@@QAEXPAXH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268443008
+          ]
+        }
+      ]
+    },
+    {
+      "object": "message.obj",
+      "name": "?readWord@Message@@QAEFXZ",
+      "coff_bytes": 32,
+      "fixed_bytes": 28,
+      "matching_original_vas": [
+        268443456
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 17,
+          "type": 20,
+          "symbol": "?read@Message@@QAEXPAXH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268443088
+          ]
+        }
+      ]
+    },
+    {
+      "object": "message.obj",
+      "name": "?pack@Message@@QAEHPADH@Z",
+      "coff_bytes": 128,
+      "fixed_bytes": 128,
+      "matching_original_vas": [
+        268443488
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": []
+    },
+    {
+      "object": "message.obj",
+      "name": "?unpack@Message@@QAEXPADH@Z",
+      "coff_bytes": 96,
+      "fixed_bytes": 92,
+      "matching_original_vas": [
+        268443616
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 56,
+          "type": 20,
+          "symbol": "?reserve@Message@@QAEXH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268442864
+          ]
+        }
+      ]
+    },
+    {
+      "object": "udpconnection.obj",
+      "name": "_$E4",
+      "coff_bytes": 16,
+      "fixed_bytes": 8,
+      "matching_original_vas": [
+        268445168,
+        268457584,
+        268457680,
+        268457776,
+        268457840,
+        268457904,
+        268458000,
+        268458064,
+        268458128,
+        268458224,
+        268458320,
+        268471968,
+        268472064,
+        268472128,
+        268472192
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 1,
+          "type": 20,
+          "symbol": "_$E1",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268445184,
+            268457600,
+            268457696,
+            268457792,
+            268457856,
+            268457920,
+            268458016,
+            268458080,
+            268458144,
+            268458240,
+            268458336,
+            268471984,
+            268472080,
+            268472144,
+            268472208
+          ]
+        },
+        {
+          "offset": 6,
+          "type": 20,
+          "symbol": "_$E3",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268445200,
+            268457648,
+            268457744,
+            268457808,
+            268457872,
+            268457968,
+            268458032,
+            268458096,
+            268458176,
+            268458272,
+            268458368,
+            268472032,
+            268472096,
+            268472160,
+            268472224
+          ]
+        }
+      ]
+    },
+    {
+      "object": "udpconnection.obj",
+      "name": "_$E1",
+      "coff_bytes": 16,
+      "fixed_bytes": 8,
+      "matching_original_vas": [
+        268445184
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 3,
+          "type": 6,
+          "symbol": "_connections",
+          "coff_addend": 4,
+          "original_operand_or_destination": [
+            268486756
+          ]
+        },
+        {
+          "offset": 8,
+          "type": 6,
+          "symbol": "_connections",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268486752
+          ]
+        }
+      ]
+    },
+    {
+      "object": "udpconnection.obj",
+      "name": "_$E3",
+      "coff_bytes": 16,
+      "fixed_bytes": 8,
+      "matching_original_vas": [
+        268445200,
+        268457648,
+        268457744,
+        268457808,
+        268457872,
+        268457968,
+        268458032,
+        268458096,
+        268458176,
+        268458272,
+        268458368,
+        268472032,
+        268472096,
+        268472160,
+        268472224
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 1,
+          "type": 6,
+          "symbol": "_$E2",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268445216,
+            268457664,
+            268457760,
+            268457824,
+            268457888,
+            268457984,
+            268458048,
+            268458112,
+            268458192,
+            268458288,
+            268458384,
+            268472048,
+            268472112,
+            268472176,
+            268472240
+          ]
+        },
+        {
+          "offset": 6,
+          "type": 20,
+          "symbol": "_atexit",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476651,
+            268476651,
+            268476651,
+            268476651,
+            268476651,
+            268476651,
+            268476651,
+            268476651,
+            268476651,
+            268476651,
+            268476651,
+            268476651,
+            268476651,
+            268476651,
+            268476651
+          ]
+        }
+      ]
+    },
+    {
+      "object": "udpconnection.obj",
+      "name": "_$E2",
+      "coff_bytes": 32,
+      "fixed_bytes": 24,
+      "matching_original_vas": [
+        268458288,
+        268458384
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 1,
+          "type": 6,
+          "symbol": "_connections",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268488104,
+            268488088
+          ]
+        },
+        {
+          "offset": 12,
+          "type": 6,
+          "symbol": "__imp__free",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480600,
+            268480600
+          ]
+        }
+      ]
+    },
+    {
+      "object": "udpconnection.obj",
+      "name": "??0UDPConnection@@QAE@XZ",
+      "coff_bytes": 112,
+      "fixed_bytes": 68,
+      "matching_original_vas": [
+        268443712
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 8,
+          "type": 6,
+          "symbol": "??_7UDPConnection@@6B@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480980
+          ]
+        },
+        {
+          "offset": 16,
+          "type": 6,
+          "symbol": "_connections",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268486752
+          ]
+        },
+        {
+          "offset": 22,
+          "type": 6,
+          "symbol": "_connections",
+          "coff_addend": 4,
+          "original_operand_or_destination": [
+            268486756
+          ]
+        },
+        {
+          "offset": 46,
+          "type": 6,
+          "symbol": "__imp__realloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480608
+          ]
+        },
+        {
+          "offset": 52,
+          "type": 6,
+          "symbol": "_connections",
+          "coff_addend": 4,
+          "original_operand_or_destination": [
+            268486756
+          ]
+        },
+        {
+          "offset": 60,
+          "type": 6,
+          "symbol": "_connections",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268486752
+          ]
+        },
+        {
+          "offset": 69,
+          "type": 6,
+          "symbol": "_connections",
+          "coff_addend": 4,
+          "original_operand_or_destination": [
+            268486756
+          ]
+        },
+        {
+          "offset": 76,
+          "type": 6,
+          "symbol": "_connections",
+          "coff_addend": 4,
+          "original_operand_or_destination": [
+            268486756
+          ]
+        },
+        {
+          "offset": 85,
+          "type": 6,
+          "symbol": "_maximumSocket",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487288
+          ]
+        },
+        {
+          "offset": 93,
+          "type": 6,
+          "symbol": "_sockets",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268486760
+          ]
+        },
+        {
+          "offset": 99,
+          "type": 6,
+          "symbol": "_selected",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487024
+          ]
+        }
+      ]
+    },
+    {
+      "object": "udpconnection.obj",
+      "name": "??_GUDPConnection@@UAEPAXI@Z",
+      "coff_bytes": 32,
+      "fixed_bytes": 24,
+      "matching_original_vas": [
+        268439616,
+        268443824
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 4,
+          "type": 20,
+          "symbol": "??1UDPConnection@@UAE@XZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268439648,
+            268443856
+          ]
+        },
+        {
+          "offset": 17,
+          "type": 20,
+          "symbol": "??3@YAXPAX@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476548,
+            268476548
+          ]
+        }
+      ]
+    },
+    {
+      "object": "udpconnection.obj",
+      "name": "??1UDPConnection@@UAE@XZ",
+      "coff_bytes": 384,
+      "fixed_bytes": 300,
+      "matching_original_vas": [],
+      "instruction_bytes_equal_outside_coff_relocations": false,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 18,
+          "type": 6,
+          "symbol": "??_7UDPConnection@@6B@",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 34,
+          "type": 20,
+          "symbol": "_shutdown@8",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 43,
+          "type": 20,
+          "symbol": "_closesocket@4",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 49,
+          "type": 6,
+          "symbol": "_sockets",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 63,
+          "type": 6,
+          "symbol": "_sockets",
+          "coff_addend": 4,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 91,
+          "type": 6,
+          "symbol": "_sockets",
+          "coff_addend": 4,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 103,
+          "type": 6,
+          "symbol": "_sockets",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 120,
+          "type": 6,
+          "symbol": "_sockets",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 129,
+          "type": 6,
+          "symbol": "_maximumSocket",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 139,
+          "type": 6,
+          "symbol": "_connections",
+          "coff_addend": 4,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 144,
+          "type": 6,
+          "symbol": "_connections",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 154,
+          "type": 6,
+          "symbol": "_maximumSocket",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 207,
+          "type": 6,
+          "symbol": "_maximumSocket",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 250,
+          "type": 6,
+          "symbol": "_connections",
+          "coff_addend": 4,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 255,
+          "type": 6,
+          "symbol": "_connections",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 284,
+          "type": 6,
+          "symbol": "_connections",
+          "coff_addend": 4,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 318,
+          "type": 6,
+          "symbol": "_connections",
+          "coff_addend": 4,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 323,
+          "type": 6,
+          "symbol": "_connections",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 347,
+          "type": 6,
+          "symbol": "__imp__realloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 353,
+          "type": 6,
+          "symbol": "_connections",
+          "coff_addend": 4,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 361,
+          "type": 6,
+          "symbol": "_connections",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        }
+      ]
+    },
+    {
+      "object": "udpconnection.obj",
+      "name": "?bind@UDPConnection@@UAEHH@Z",
+      "coff_bytes": 272,
+      "fixed_bytes": 220,
+      "matching_original_vas": [
+        268444240
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 43,
+          "type": 20,
+          "symbol": "_htons@4",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476464
+          ]
+        },
+        {
+          "offset": 59,
+          "type": 20,
+          "symbol": "_socket@12",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476458
+          ]
+        },
+        {
+          "offset": 86,
+          "type": 20,
+          "symbol": "_htonl@4",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476452
+          ]
+        },
+        {
+          "offset": 106,
+          "type": 20,
+          "symbol": "_bind@12",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476446
+          ]
+        },
+        {
+          "offset": 149,
+          "type": 20,
+          "symbol": "_ioctlsocket@12",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476440
+          ]
+        },
+        {
+          "offset": 154,
+          "type": 6,
+          "symbol": "_sockets",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268486760
+          ]
+        },
+        {
+          "offset": 169,
+          "type": 6,
+          "symbol": "_sockets",
+          "coff_addend": 4,
+          "original_operand_or_destination": [
+            268486764
+          ]
+        },
+        {
+          "offset": 174,
+          "type": 6,
+          "symbol": "_sockets",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268486760
+          ]
+        },
+        {
+          "offset": 180,
+          "type": 6,
+          "symbol": "_sockets",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268486760
+          ]
+        },
+        {
+          "offset": 189,
+          "type": 6,
+          "symbol": "_maximumSocket",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487288
+          ]
+        },
+        {
+          "offset": 198,
+          "type": 6,
+          "symbol": "_maximumSocket",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487288
+          ]
+        },
+        {
+          "offset": 232,
+          "type": 20,
+          "symbol": "_getsockname@12",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476434
+          ]
+        },
+        {
+          "offset": 242,
+          "type": 20,
+          "symbol": "_ntohs@4",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476428
+          ]
+        }
+      ]
+    },
+    {
+      "object": "udpconnection.obj",
+      "name": "?shareSocket@UDPConnection@@UAEHPAV1@@Z",
+      "coff_bytes": 32,
+      "fixed_bytes": 32,
+      "matching_original_vas": [
+        268444512
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": []
+    },
+    {
+      "object": "udpconnection.obj",
+      "name": "?getPort@UDPConnection@@UAEHXZ",
+      "coff_bytes": 16,
+      "fixed_bytes": 16,
+      "matching_original_vas": [
+        268444544
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": []
+    },
+    {
+      "object": "udpconnection.obj",
+      "name": "?setPeer@UDPConnection@@UAEHPADH@Z",
+      "coff_bytes": 144,
+      "fixed_bytes": 132,
+      "matching_original_vas": [
+        268444560
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 34,
+          "type": 20,
+          "symbol": "_htons@4",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476464
+          ]
+        },
+        {
+          "offset": 64,
+          "type": 20,
+          "symbol": "_inet_addr@4",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476476
+          ]
+        },
+        {
+          "offset": 80,
+          "type": 20,
+          "symbol": "_gethostbyname@4",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476470
+          ]
+        }
+      ]
+    },
+    {
+      "object": "udpconnection.obj",
+      "name": "?setPeer@UDPConnection@@UAEHPAUsockaddr_in@@@Z",
+      "coff_bytes": 48,
+      "fixed_bytes": 48,
+      "matching_original_vas": [
+        268444704
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": []
+    },
+    {
+      "object": "udpconnection.obj",
+      "name": "?setPeerPort@UDPConnection@@UAEHH@Z",
+      "coff_bytes": 32,
+      "fixed_bytes": 28,
+      "matching_original_vas": [
+        268444752
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 9,
+          "type": 20,
+          "symbol": "_htons@4",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476464
+          ]
+        }
+      ]
+    },
+    {
+      "object": "udpconnection.obj",
+      "name": "?send@UDPConnection@@UAEHPADH@Z",
+      "coff_bytes": 48,
+      "fixed_bytes": 44,
+      "matching_original_vas": [
+        268444784
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 23,
+          "type": 20,
+          "symbol": "_sendto@24",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476482
+          ]
+        }
+      ]
+    },
+    {
+      "object": "udpconnection.obj",
+      "name": "?receive@UDPConnection@@UAEHPADPAHDPAUsockaddr_in@@@Z",
+      "coff_bytes": 128,
+      "fixed_bytes": 124,
+      "matching_original_vas": [
+        268444832
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 58,
+          "type": 20,
+          "symbol": "_recvfrom@24",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476488
+          ]
+        }
+      ]
+    },
+    {
+      "object": "udpconnection.obj",
+      "name": "?dataAvailable@UDPConnection@@UAEHXZ",
+      "coff_bytes": 16,
+      "fixed_bytes": 16,
+      "matching_original_vas": [
+        268444960
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": []
+    },
+    {
+      "object": "udpconnection.obj",
+      "name": "?sendEmpty@UDPConnection@@UAEXXZ",
+      "coff_bytes": 32,
+      "fixed_bytes": 28,
+      "matching_original_vas": [
+        268444976
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 23,
+          "type": 20,
+          "symbol": "_sendto@24",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476482
+          ]
+        }
+      ]
+    },
+    {
+      "object": "udpconnection.obj",
+      "name": "?selectSockets@UDPConnection@@SAHH@Z",
+      "coff_bytes": 160,
+      "fixed_bytes": 120,
+      "matching_original_vas": [],
+      "instruction_bytes_equal_outside_coff_relocations": false,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 4,
+          "type": 6,
+          "symbol": "_maximumSocket",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 16,
+          "type": 6,
+          "symbol": "_sockets",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 21,
+          "type": 6,
+          "symbol": "_selected",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 42,
+          "type": 6,
+          "symbol": "_selected",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 56,
+          "type": 20,
+          "symbol": "_select@20",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 71,
+          "type": 6,
+          "symbol": "_connections",
+          "coff_addend": 4,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 85,
+          "type": 6,
+          "symbol": "_connections",
+          "coff_addend": 4,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 98,
+          "type": 6,
+          "symbol": "_connections",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 113,
+          "type": 6,
+          "symbol": "_selected",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 119,
+          "type": 20,
+          "symbol": "___WSAFDIsSet@8",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-asyncdns.obj",
+      "name": "??0JNL_AsyncDNS@@QAE@H@Z",
+      "coff_bytes": 96,
+      "fixed_bytes": 92,
+      "matching_original_vas": [
+        268445264
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 41,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480604
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-asyncdns.obj",
+      "name": "??1JNL_AsyncDNS@@QAE@XZ",
+      "coff_bytes": 64,
+      "fixed_bytes": 52,
+      "matching_original_vas": [
+        268445360
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 22,
+          "type": 6,
+          "symbol": "__imp__WaitForSingleObject@8",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480544
+          ]
+        },
+        {
+          "offset": 32,
+          "type": 6,
+          "symbol": "__imp__CloseHandle@4",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480560
+          ]
+        },
+        {
+          "offset": 41,
+          "type": 6,
+          "symbol": "__imp__free",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480600
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-asyncdns.obj",
+      "name": "?_threadfunc@JNL_AsyncDNS@@CGKPAX@Z",
+      "coff_bytes": 336,
+      "fixed_bytes": 316,
+      "matching_original_vas": [
+        268445424
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 6,
+          "type": 20,
+          "symbol": "?open_socketlib@JNL@@SAHXZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268452128
+          ]
+        },
+        {
+          "offset": 89,
+          "type": 20,
+          "symbol": "_gethostbyname@4",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476470
+          ]
+        },
+        {
+          "offset": 171,
+          "type": 20,
+          "symbol": "_gethostbyaddr@12",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476506
+          ]
+        },
+        {
+          "offset": 196,
+          "type": 6,
+          "symbol": "__imp__strncpy",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480612
+          ]
+        },
+        {
+          "offset": 305,
+          "type": 20,
+          "symbol": "?close_socketlib@JNL@@SAXXZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268452176
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-asyncdns.obj",
+      "name": "?resolve@JNL_AsyncDNS@@QAEHPADPAK@Z",
+      "coff_bytes": 384,
+      "fixed_bytes": 364,
+      "matching_original_vas": [
+        268445760
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 12,
+          "type": 20,
+          "symbol": "_inet_addr@4",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476476
+          ]
+        },
+        {
+          "offset": 58,
+          "type": 6,
+          "symbol": "__imp__stricmp",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480660
+          ]
+        },
+        {
+          "offset": 181,
+          "type": 6,
+          "symbol": "__imp__time",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480620
+          ]
+        },
+        {
+          "offset": 346,
+          "type": 6,
+          "symbol": "__imp__time",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480620
+          ]
+        },
+        {
+          "offset": 362,
+          "type": 20,
+          "symbol": "?makesurethreadisrunning@JNL_AsyncDNS@@AAEXXZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268446144
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-asyncdns.obj",
+      "name": "?reverse@JNL_AsyncDNS@@QAEHKPAD@Z",
+      "coff_bytes": 336,
+      "fixed_bytes": 320,
+      "matching_original_vas": [],
+      "instruction_bytes_equal_outside_coff_relocations": false,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 149,
+          "type": 6,
+          "symbol": "__imp__time",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 209,
+          "type": 6,
+          "symbol": "__imp__strncpy",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 298,
+          "type": 6,
+          "symbol": "__imp__time",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 313,
+          "type": 20,
+          "symbol": "?makesurethreadisrunning@JNL_AsyncDNS@@AAEXXZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-asyncdns.obj",
+      "name": "?makesurethreadisrunning@JNL_AsyncDNS@@AAEXXZ",
+      "coff_bytes": 96,
+      "fixed_bytes": 80,
+      "matching_original_vas": [
+        268446144
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 23,
+          "type": 6,
+          "symbol": "__imp__WaitForSingleObject@8",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480544
+          ]
+        },
+        {
+          "offset": 33,
+          "type": 6,
+          "symbol": "__imp__CloseHandle@4",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480560
+          ]
+        },
+        {
+          "offset": 53,
+          "type": 6,
+          "symbol": "?_threadfunc@JNL_AsyncDNS@@CGKPAX@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268445424
+          ]
+        },
+        {
+          "offset": 63,
+          "type": 6,
+          "symbol": "__imp__CreateThread@24",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480540
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-connection.obj",
+      "name": "??0JNL_Connection@@QAE@PAVJNL_AsyncDNS@@HH@Z",
+      "coff_bytes": 272,
+      "fixed_bytes": 236,
+      "matching_original_vas": [
+        268446240
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 2,
+          "type": 6,
+          "symbol": "__except_list",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            0
+          ]
+        },
+        {
+          "offset": 9,
+          "type": 6,
+          "symbol": "$L42742",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268477051
+          ]
+        },
+        {
+          "offset": 21,
+          "type": 6,
+          "symbol": "__except_list",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            0
+          ]
+        },
+        {
+          "offset": 40,
+          "type": 6,
+          "symbol": "??_C@_00A@?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487292
+          ]
+        },
+        {
+          "offset": 49,
+          "type": 20,
+          "symbol": "??2@YAPAXI@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476670
+          ]
+        },
+        {
+          "offset": 75,
+          "type": 20,
+          "symbol": "??0JNL_AsyncDNS@@QAE@H@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268445264
+          ]
+        },
+        {
+          "offset": 132,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480604
+          ]
+        },
+        {
+          "offset": 145,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480604
+          ]
+        },
+        {
+          "offset": 260,
+          "type": 6,
+          "symbol": "__except_list",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-connection.obj",
+      "name": "?connect@JNL_Connection@@QAEXHPAUsockaddr_in@@@Z",
+      "coff_bytes": 160,
+      "fixed_bytes": 148,
+      "matching_original_vas": [],
+      "instruction_bytes_equal_outside_coff_relocations": false,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 6,
+          "type": 20,
+          "symbol": "?close@JNL_Connection@@QAEXH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 109,
+          "type": 20,
+          "symbol": "_ioctlsocket@12",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 133,
+          "type": 6,
+          "symbol": "??_C@_0CB@FPLA@invalid?5socket?5passed?5to?5connect@",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-connection.obj",
+      "name": "?connect@JNL_Connection@@QAEXPADH@Z",
+      "coff_bytes": 208,
+      "fixed_bytes": 176,
+      "matching_original_vas": [
+        268446512
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 8,
+          "type": 20,
+          "symbol": "?close@JNL_Connection@@QAEXH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268447840
+          ]
+        },
+        {
+          "offset": 27,
+          "type": 20,
+          "symbol": "_socket@12",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476458
+          ]
+        },
+        {
+          "offset": 44,
+          "type": 6,
+          "symbol": "??_C@_0BA@OCPG@creating?5socket?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268484728
+          ]
+        },
+        {
+          "offset": 85,
+          "type": 20,
+          "symbol": "_ioctlsocket@12",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476440
+          ]
+        },
+        {
+          "offset": 105,
+          "type": 6,
+          "symbol": "__imp__strncpy",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480612
+          ]
+        },
+        {
+          "offset": 150,
+          "type": 6,
+          "symbol": "??_C@_0P@KOHK@empty?5hostname?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268484712
+          ]
+        },
+        {
+          "offset": 183,
+          "type": 20,
+          "symbol": "_htons@4",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476464
+          ]
+        },
+        {
+          "offset": 193,
+          "type": 20,
+          "symbol": "_inet_addr@4",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476476
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-connection.obj",
+      "name": "??1JNL_Connection@@QAE@XZ",
+      "coff_bytes": 96,
+      "fixed_bytes": 76,
+      "matching_original_vas": [
+        268446720
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 13,
+          "type": 20,
+          "symbol": "_shutdown@8",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476422
+          ]
+        },
+        {
+          "offset": 21,
+          "type": 20,
+          "symbol": "_closesocket@4",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476416
+          ]
+        },
+        {
+          "offset": 37,
+          "type": 6,
+          "symbol": "__imp__free",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480600
+          ]
+        },
+        {
+          "offset": 77,
+          "type": 20,
+          "symbol": "??1JNL_AsyncDNS@@QAE@XZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268445360
+          ]
+        },
+        {
+          "offset": 83,
+          "type": 20,
+          "symbol": "??3@YAXPAX@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476548
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-connection.obj",
+      "name": "?run@JNL_Connection@@QAEXHHPAH0@Z",
+      "coff_bytes": 1024,
+      "fixed_bytes": 932,
+      "matching_original_vas": [
+        268446816
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 105,
+          "type": 6,
+          "symbol": "$L42778",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268447816
+          ]
+        },
+        {
+          "offset": 136,
+          "type": 20,
+          "symbol": "?resolve@JNL_AsyncDNS@@QAEHPADPAK@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268445760
+          ]
+        },
+        {
+          "offset": 160,
+          "type": 20,
+          "symbol": "_connect@12",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476530
+          ]
+        },
+        {
+          "offset": 225,
+          "type": 6,
+          "symbol": "??_C@_0BD@LILD@resolving?5hostname?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268484804
+          ]
+        },
+        {
+          "offset": 253,
+          "type": 20,
+          "symbol": "_WSAGetLastError@0",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476524
+          ]
+        },
+        {
+          "offset": 270,
+          "type": 6,
+          "symbol": "??_C@_0BD@DJLF@connecting?5to?5host?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268484784
+          ]
+        },
+        {
+          "offset": 398,
+          "type": 20,
+          "symbol": "_select@20",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476500
+          ]
+        },
+        {
+          "offset": 413,
+          "type": 6,
+          "symbol": "??_C@_0CG@POHO@connecting?5to?5host?5?$CIcalling?5sele@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268484744
+          ]
+        },
+        {
+          "offset": 452,
+          "type": 20,
+          "symbol": "___WSAFDIsSet@8",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476494
+          ]
+        },
+        {
+          "offset": 495,
+          "type": 20,
+          "symbol": "___WSAFDIsSet@8",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476494
+          ]
+        },
+        {
+          "offset": 513,
+          "type": 6,
+          "symbol": "??_C@_0BD@DJLF@connecting?5to?5host?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268484784
+          ]
+        },
+        {
+          "offset": 596,
+          "type": 20,
+          "symbol": "_send@16",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476518
+          ]
+        },
+        {
+          "offset": 606,
+          "type": 20,
+          "symbol": "_WSAGetLastError@0",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476524
+          ]
+        },
+        {
+          "offset": 688,
+          "type": 20,
+          "symbol": "_send@16",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476518
+          ]
+        },
+        {
+          "offset": 698,
+          "type": 20,
+          "symbol": "_WSAGetLastError@0",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476524
+          ]
+        },
+        {
+          "offset": 787,
+          "type": 20,
+          "symbol": "_recv@16",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476512
+          ]
+        },
+        {
+          "offset": 804,
+          "type": 20,
+          "symbol": "_WSAGetLastError@0",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476524
+          ]
+        },
+        {
+          "offset": 911,
+          "type": 20,
+          "symbol": "_recv@16",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476512
+          ]
+        },
+        {
+          "offset": 924,
+          "type": 20,
+          "symbol": "_WSAGetLastError@0",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476524
+          ]
+        },
+        {
+          "offset": 1000,
+          "type": 6,
+          "symbol": "$L42501",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268446925
+          ]
+        },
+        {
+          "offset": 1004,
+          "type": 6,
+          "symbol": "$L42516",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268447132
+          ]
+        },
+        {
+          "offset": 1008,
+          "type": 6,
+          "symbol": "$L42553",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268447356
+          ]
+        },
+        {
+          "offset": 1012,
+          "type": 6,
+          "symbol": "$L42553",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268447356
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-connection.obj",
+      "name": "?close@JNL_Connection@@QAEXH@Z",
+      "coff_bytes": 192,
+      "fixed_bytes": 184,
+      "matching_original_vas": [
+        268447840
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 74,
+          "type": 20,
+          "symbol": "_shutdown@8",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476422
+          ]
+        },
+        {
+          "offset": 82,
+          "type": 20,
+          "symbol": "_closesocket@4",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476416
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-connection.obj",
+      "name": "?send_bytes_in_queue@JNL_Connection@@QAEHXZ",
+      "coff_bytes": 16,
+      "fixed_bytes": 16,
+      "matching_original_vas": [],
+      "instruction_bytes_equal_outside_coff_relocations": false,
+      "relocation_identities_verified": false,
+      "relocations": []
+    },
+    {
+      "object": "jnetlib-connection.obj",
+      "name": "?send_bytes_available@JNL_Connection@@QAEHXZ",
+      "coff_bytes": 16,
+      "fixed_bytes": 16,
+      "matching_original_vas": [
+        268448032
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": []
+    },
+    {
+      "object": "jnetlib-connection.obj",
+      "name": "?send@JNL_Connection@@QAEHPADH@Z",
+      "coff_bytes": 128,
+      "fixed_bytes": 124,
+      "matching_original_vas": [
+        268448048
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 5,
+          "type": 20,
+          "symbol": "?send_bytes_available@JNL_Connection@@QAEHXZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268448032
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-connection.obj",
+      "name": "?send_string@JNL_Connection@@QAEHPAD@Z",
+      "coff_bytes": 48,
+      "fixed_bytes": 44,
+      "matching_original_vas": [
+        268448176
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 25,
+          "type": 20,
+          "symbol": "?send@JNL_Connection@@QAEHPADH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268448048
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-connection.obj",
+      "name": "?recv_bytes_available@JNL_Connection@@QAEHXZ",
+      "coff_bytes": 16,
+      "fixed_bytes": 16,
+      "matching_original_vas": [
+        268448224
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": []
+    },
+    {
+      "object": "jnetlib-connection.obj",
+      "name": "?peek_bytes@JNL_Connection@@QAEHPADH@Z",
+      "coff_bytes": 112,
+      "fixed_bytes": 112,
+      "matching_original_vas": [
+        268448240
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": []
+    },
+    {
+      "object": "jnetlib-connection.obj",
+      "name": "?recv_bytes@JNL_Connection@@QAEHPADH@Z",
+      "coff_bytes": 32,
+      "fixed_bytes": 28,
+      "matching_original_vas": [
+        268448352
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 16,
+          "type": 20,
+          "symbol": "?peek_bytes@JNL_Connection@@QAEHPADH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268448240
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-connection.obj",
+      "name": "?getbfromrecv@JNL_Connection@@IAEHHH@Z",
+      "coff_bytes": 80,
+      "fixed_bytes": 80,
+      "matching_original_vas": [
+        268448384
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": []
+    },
+    {
+      "object": "jnetlib-connection.obj",
+      "name": "?recv_lines_available@JNL_Connection@@QAEHXZ",
+      "coff_bytes": 96,
+      "fixed_bytes": 88,
+      "matching_original_vas": [
+        268448464
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 8,
+          "type": 20,
+          "symbol": "?recv_bytes_available@JNL_Connection@@QAEHXZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268448224
+          ]
+        },
+        {
+          "offset": 32,
+          "type": 20,
+          "symbol": "?getbfromrecv@JNL_Connection@@IAEHHH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268448384
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-connection.obj",
+      "name": "?recv_line@JNL_Connection@@QAEHPADH@Z",
+      "coff_bytes": 144,
+      "fixed_bytes": 132,
+      "matching_original_vas": [
+        268448560
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 37,
+          "type": 20,
+          "symbol": "?getbfromrecv@JNL_Connection@@IAEHHH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268448384
+          ]
+        },
+        {
+          "offset": 88,
+          "type": 20,
+          "symbol": "?getbfromrecv@JNL_Connection@@IAEHHH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268448384
+          ]
+        },
+        {
+          "offset": 113,
+          "type": 20,
+          "symbol": "?getbfromrecv@JNL_Connection@@IAEHHH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268448384
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-connection.obj",
+      "name": "?get_interface@JNL_Connection@@QAEKXZ",
+      "coff_bytes": 80,
+      "fixed_bytes": 76,
+      "matching_original_vas": [],
+      "instruction_bytes_equal_outside_coff_relocations": false,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 54,
+          "type": 20,
+          "symbol": "_getsockname@12",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-httpget.obj",
+      "name": "??0JNL_HTTPGet@@QAE@PAVJNL_AsyncDNS@@HPAD@Z",
+      "coff_bytes": 192,
+      "fixed_bytes": 176,
+      "matching_original_vas": [
+        268448704
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 61,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480604
+          ]
+        },
+        {
+          "offset": 134,
+          "type": 20,
+          "symbol": "?do_parse_url@JNL_HTTPGet@@IAEXPADPAPADPAH11@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268450432
+          ]
+        },
+        {
+          "offset": 144,
+          "type": 6,
+          "symbol": "__imp__free",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480600
+          ]
+        },
+        {
+          "offset": 167,
+          "type": 20,
+          "symbol": "?reinit@JNL_HTTPGet@@IAEXXZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268448896
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-httpget.obj",
+      "name": "?reinit@JNL_HTTPGet@@IAEXXZ",
+      "coff_bytes": 48,
+      "fixed_bytes": 48,
+      "matching_original_vas": [
+        268448896
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": []
+    },
+    {
+      "object": "jnetlib-httpget.obj",
+      "name": "?deinit@JNL_HTTPGet@@IAEXXZ",
+      "coff_bytes": 96,
+      "fixed_bytes": 80,
+      "matching_original_vas": [
+        268448944
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 14,
+          "type": 20,
+          "symbol": "??1JNL_Connection@@QAE@XZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268446720
+          ]
+        },
+        {
+          "offset": 20,
+          "type": 20,
+          "symbol": "??3@YAXPAX@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476548
+          ]
+        },
+        {
+          "offset": 32,
+          "type": 6,
+          "symbol": "__imp__free",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480600
+          ]
+        },
+        {
+          "offset": 81,
+          "type": 20,
+          "symbol": "?reinit@JNL_HTTPGet@@IAEXXZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268448896
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-httpget.obj",
+      "name": "??1JNL_HTTPGet@@QAE@XZ",
+      "coff_bytes": 48,
+      "fixed_bytes": 40,
+      "matching_original_vas": [
+        268449040
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 5,
+          "type": 20,
+          "symbol": "?deinit@JNL_HTTPGet@@IAEXXZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268448944
+          ]
+        },
+        {
+          "offset": 14,
+          "type": 6,
+          "symbol": "__imp__free",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480600
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-httpget.obj",
+      "name": "?addheader@JNL_HTTPGet@@QAEXPAD@Z",
+      "coff_bytes": 368,
+      "fixed_bytes": 336,
+      "matching_original_vas": [],
+      "instruction_bytes_equal_outside_coff_relocations": false,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 10,
+          "type": 6,
+          "symbol": "__imp__strstr",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 15,
+          "type": 6,
+          "symbol": "??_C@_01FEHD@?$AN?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 36,
+          "type": 6,
+          "symbol": "??_C@_01BJG@?6?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 76,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 130,
+          "type": 6,
+          "symbol": "??_C@_02PIMC@?$AN?6?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 206,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 291,
+          "type": 6,
+          "symbol": "??_C@_02PIMC@?$AN?6?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 336,
+          "type": 6,
+          "symbol": "__imp__free",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-httpget.obj",
+      "name": "?do_encode_mimestr@JNL_HTTPGet@@IAEXPAD0@Z",
+      "coff_bytes": 176,
+      "fixed_bytes": 172,
+      "matching_original_vas": [
+        268449088
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 15,
+          "type": 6,
+          "symbol": "??_C@_0EB@KOEG@ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268484828
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-httpget.obj",
+      "name": "?connect@JNL_HTTPGet@@QAEXPAD@Z",
+      "coff_bytes": 1168,
+      "fixed_bytes": 1024,
+      "matching_original_vas": [
+        268449264
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 2,
+          "type": 6,
+          "symbol": "__except_list",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            0
+          ]
+        },
+        {
+          "offset": 9,
+          "type": 6,
+          "symbol": "$L42867",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268477083
+          ]
+        },
+        {
+          "offset": 17,
+          "type": 6,
+          "symbol": "__except_list",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            0
+          ]
+        },
+        {
+          "offset": 28,
+          "type": 20,
+          "symbol": "?deinit@JNL_HTTPGet@@IAEXXZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268448944
+          ]
+        },
+        {
+          "offset": 50,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480604
+          ]
+        },
+        {
+          "offset": 116,
+          "type": 20,
+          "symbol": "?do_parse_url@JNL_HTTPGet@@IAEXPADPAPADPAH11@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268450432
+          ]
+        },
+        {
+          "offset": 329,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480604
+          ]
+        },
+        {
+          "offset": 352,
+          "type": 6,
+          "symbol": "__imp__free",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480600
+          ]
+        },
+        {
+          "offset": 360,
+          "type": 6,
+          "symbol": "??_C@_0BI@GMMM@error?5allocating?5memory?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268485028
+          ]
+        },
+        {
+          "offset": 376,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480604
+          ]
+        },
+        {
+          "offset": 383,
+          "type": 6,
+          "symbol": "??_C@_0BI@GMMM@error?5allocating?5memory?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268485028
+          ]
+        },
+        {
+          "offset": 453,
+          "type": 6,
+          "symbol": "__imp__wsprintfA",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480744
+          ]
+        },
+        {
+          "offset": 458,
+          "type": 6,
+          "symbol": "??_C@_0BC@BAKD@GET?5?$CFs?5HTTP?11?40?$AN?6?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268485008
+          ]
+        },
+        {
+          "offset": 485,
+          "type": 6,
+          "symbol": "??_C@_09LPBM@Host?3?$CFs?$AN?6?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268484996
+          ]
+        },
+        {
+          "offset": 510,
+          "type": 6,
+          "symbol": "??_C@_0BG@CADF@Authorization?3?5Basic?5?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268484972
+          ]
+        },
+        {
+          "offset": 571,
+          "type": 20,
+          "symbol": "?do_encode_mimestr@JNL_HTTPGet@@IAEXPAD0@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268449088
+          ]
+        },
+        {
+          "offset": 576,
+          "type": 6,
+          "symbol": "??_C@_02PIMC@?$AN?6?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268484824
+          ]
+        },
+        {
+          "offset": 630,
+          "type": 6,
+          "symbol": "??_C@_0BM@MKLO@Proxy?9Authorization?3?5Basic?5?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268484944
+          ]
+        },
+        {
+          "offset": 691,
+          "type": 20,
+          "symbol": "?do_encode_mimestr@JNL_HTTPGet@@IAEXPAD0@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268449088
+          ]
+        },
+        {
+          "offset": 696,
+          "type": 6,
+          "symbol": "??_C@_02PIMC@?$AN?6?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268484824
+          ]
+        },
+        {
+          "offset": 782,
+          "type": 6,
+          "symbol": "??_C@_02PIMC@?$AN?6?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268484824
+          ]
+        },
+        {
+          "offset": 845,
+          "type": 20,
+          "symbol": "??2@YAPAXI@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476670
+          ]
+        },
+        {
+          "offset": 888,
+          "type": 20,
+          "symbol": "??0JNL_Connection@@QAE@PAVJNL_AsyncDNS@@HH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268446240
+          ]
+        },
+        {
+          "offset": 936,
+          "type": 20,
+          "symbol": "?connect@JNL_Connection@@QAEXPADH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268446512
+          ]
+        },
+        {
+          "offset": 945,
+          "type": 20,
+          "symbol": "?send_string@JNL_Connection@@QAEHPAD@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268448176
+          ]
+        },
+        {
+          "offset": 952,
+          "type": 6,
+          "symbol": "__imp__free",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480600
+          ]
+        },
+        {
+          "offset": 977,
+          "type": 6,
+          "symbol": "__imp__free",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480600
+          ]
+        },
+        {
+          "offset": 985,
+          "type": 6,
+          "symbol": "??_C@_0CD@JNKN@could?5not?5create?5connection?5obje@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268484908
+          ]
+        },
+        {
+          "offset": 1000,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480604
+          ]
+        },
+        {
+          "offset": 1007,
+          "type": 6,
+          "symbol": "??_C@_0CD@JNKN@could?5not?5create?5connection?5obje@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268484908
+          ]
+        },
+        {
+          "offset": 1048,
+          "type": 6,
+          "symbol": "__imp__free",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480600
+          ]
+        },
+        {
+          "offset": 1074,
+          "type": 6,
+          "symbol": "__imp__free",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480600
+          ]
+        },
+        {
+          "offset": 1082,
+          "type": 6,
+          "symbol": "??_C@_0M@FMIL@invalid?5URL?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268484896
+          ]
+        },
+        {
+          "offset": 1098,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480604
+          ]
+        },
+        {
+          "offset": 1105,
+          "type": 6,
+          "symbol": "??_C@_0M@FMIL@invalid?5URL?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268484896
+          ]
+        },
+        {
+          "offset": 1154,
+          "type": 6,
+          "symbol": "__except_list",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-httpget.obj",
+      "name": "?do_parse_url@JNL_HTTPGet@@IAEXPADPAPADPAH11@Z",
+      "coff_bytes": 544,
+      "fixed_bytes": 496,
+      "matching_original_vas": [
+        268450432
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 10,
+          "type": 6,
+          "symbol": "__imp__free",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480600
+          ]
+        },
+        {
+          "offset": 51,
+          "type": 6,
+          "symbol": "__imp__strstr",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480632
+          ]
+        },
+        {
+          "offset": 66,
+          "type": 6,
+          "symbol": "??_C@_03FMJ@?3?1?1?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268485056
+          ]
+        },
+        {
+          "offset": 81,
+          "type": 6,
+          "symbol": "??_C@_03FMJ@?3?1?1?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268485056
+          ]
+        },
+        {
+          "offset": 139,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480604
+          ]
+        },
+        {
+          "offset": 194,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480604
+          ]
+        },
+        {
+          "offset": 210,
+          "type": 6,
+          "symbol": "??_C@_01FDLN@?1?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268485052
+          ]
+        },
+        {
+          "offset": 287,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480604
+          ]
+        },
+        {
+          "offset": 345,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480604
+          ]
+        },
+        {
+          "offset": 365,
+          "type": 6,
+          "symbol": "??_C@_00A@?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487292
+          ]
+        },
+        {
+          "offset": 433,
+          "type": 6,
+          "symbol": "__imp__atoi",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480636
+          ]
+        },
+        {
+          "offset": 472,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480604
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-httpget.obj",
+      "name": "?getallheaders@JNL_HTTPGet@@QAEPADXZ",
+      "coff_bytes": 16,
+      "fixed_bytes": 12,
+      "matching_original_vas": [],
+      "instruction_bytes_equal_outside_coff_relocations": false,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 8,
+          "type": 6,
+          "symbol": "??_C@_02A@?$AA?$AA?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-httpget.obj",
+      "name": "?getheader@JNL_HTTPGet@@QAEPADPAD@Z",
+      "coff_bytes": 320,
+      "fixed_bytes": 300,
+      "matching_original_vas": [],
+      "instruction_bytes_equal_outside_coff_relocations": false,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 64,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 124,
+          "type": 6,
+          "symbol": "??_C@_01PKAG@?3?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 194,
+          "type": 6,
+          "symbol": "__imp__strnicmp",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 232,
+          "type": 6,
+          "symbol": "__imp__free",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 282,
+          "type": 6,
+          "symbol": "__imp__free",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-httpget.obj",
+      "name": "?run@JNL_HTTPGet@@QAEHXZ",
+      "coff_bytes": 1072,
+      "fixed_bytes": 964,
+      "matching_original_vas": [
+        268450976
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 6,
+          "type": 20,
+          "symbol": "__chkstk",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476560
+          ]
+        },
+        {
+          "offset": 48,
+          "type": 20,
+          "symbol": "?run@JNL_Connection@@QAEXHHPAH0@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268446816
+          ]
+        },
+        {
+          "offset": 71,
+          "type": 6,
+          "symbol": "__imp__strstr",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480632
+          ]
+        },
+        {
+          "offset": 96,
+          "type": 20,
+          "symbol": "?recv_lines_available@JNL_Connection@@QAEHXZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268448464
+          ]
+        },
+        {
+          "offset": 122,
+          "type": 20,
+          "symbol": "?recv_line@JNL_Connection@@QAEHPADH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268448560
+          ]
+        },
+        {
+          "offset": 150,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480604
+          ]
+        },
+        {
+          "offset": 181,
+          "type": 6,
+          "symbol": "??_C@_03IDPJ@200?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268485084
+          ]
+        },
+        {
+          "offset": 227,
+          "type": 6,
+          "symbol": "??_C@_03HLHI@301?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268485080
+          ]
+        },
+        {
+          "offset": 246,
+          "type": 6,
+          "symbol": "??_C@_03IEMB@302?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268485076
+          ]
+        },
+        {
+          "offset": 296,
+          "type": 20,
+          "symbol": "?recv_lines_available@JNL_Connection@@QAEHXZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268448464
+          ]
+        },
+        {
+          "offset": 321,
+          "type": 20,
+          "symbol": "?recv_line@JNL_Connection@@QAEHPADH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268448560
+          ]
+        },
+        {
+          "offset": 350,
+          "type": 6,
+          "symbol": "??_C@_09KDKF@Location?3?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268485064
+          ]
+        },
+        {
+          "offset": 357,
+          "type": 6,
+          "symbol": "__imp__strnicmp",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480664
+          ]
+        },
+        {
+          "offset": 409,
+          "type": 20,
+          "symbol": "?recv_lines_available@JNL_Connection@@QAEHXZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268448464
+          ]
+        },
+        {
+          "offset": 442,
+          "type": 20,
+          "symbol": "?recv_lines_available@JNL_Connection@@QAEHXZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268448464
+          ]
+        },
+        {
+          "offset": 467,
+          "type": 20,
+          "symbol": "?run@JNL_Connection@@QAEXHHPAH0@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268446816
+          ]
+        },
+        {
+          "offset": 507,
+          "type": 6,
+          "symbol": "__imp__free",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480600
+          ]
+        },
+        {
+          "offset": 528,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480604
+          ]
+        },
+        {
+          "offset": 611,
+          "type": 6,
+          "symbol": "__imp__free",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480600
+          ]
+        },
+        {
+          "offset": 634,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480604
+          ]
+        },
+        {
+          "offset": 721,
+          "type": 20,
+          "symbol": "?connect@JNL_HTTPGet@@QAEXPAD@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268449264
+          ]
+        },
+        {
+          "offset": 742,
+          "type": 20,
+          "symbol": "?recv_lines_available@JNL_Connection@@QAEHXZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268448464
+          ]
+        },
+        {
+          "offset": 768,
+          "type": 20,
+          "symbol": "?recv_line@JNL_Connection@@QAEHPADH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268448560
+          ]
+        },
+        {
+          "offset": 813,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480604
+          ]
+        },
+        {
+          "offset": 914,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480604
+          ]
+        },
+        {
+          "offset": 999,
+          "type": 6,
+          "symbol": "__imp__free",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480600
+          ]
+        },
+        {
+          "offset": 1013,
+          "type": 20,
+          "symbol": "?recv_lines_available@JNL_Connection@@QAEHXZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268448464
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-httpget.obj",
+      "name": "?get_status@JNL_HTTPGet@@QAEHXZ",
+      "coff_bytes": 48,
+      "fixed_bytes": 48,
+      "matching_original_vas": [],
+      "instruction_bytes_equal_outside_coff_relocations": false,
+      "relocation_identities_verified": false,
+      "relocations": []
+    },
+    {
+      "object": "jnetlib-httpget.obj",
+      "name": "?getreplycode@JNL_HTTPGet@@QAEHXZ",
+      "coff_bytes": 48,
+      "fixed_bytes": 44,
+      "matching_original_vas": [],
+      "instruction_bytes_equal_outside_coff_relocations": false,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 40,
+          "type": 6,
+          "symbol": "__imp__atoi",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-httpget.obj",
+      "name": "?bytes_available@JNL_HTTPGet@@QAEHXZ",
+      "coff_bytes": 32,
+      "fixed_bytes": 28,
+      "matching_original_vas": [
+        268452048
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 16,
+          "type": 20,
+          "symbol": "?recv_bytes_available@JNL_Connection@@QAEHXZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268448224
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-httpget.obj",
+      "name": "?get_bytes@JNL_HTTPGet@@QAEHPADH@Z",
+      "coff_bytes": 48,
+      "fixed_bytes": 44,
+      "matching_original_vas": [
+        268452080
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 26,
+          "type": 20,
+          "symbol": "?recv_bytes@JNL_Connection@@QAEHPADH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268448352
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-httpget.obj",
+      "name": "?peek_bytes@JNL_HTTPGet@@QAEHPADH@Z",
+      "coff_bytes": 48,
+      "fixed_bytes": 44,
+      "matching_original_vas": [
+        268452080
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 26,
+          "type": 20,
+          "symbol": "?peek_bytes@JNL_Connection@@QAEHPADH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268448352
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-util.obj",
+      "name": "?open_socketlib@JNL@@SAHXZ",
+      "coff_bytes": 48,
+      "fixed_bytes": 44,
+      "matching_original_vas": [
+        268452128
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 17,
+          "type": 20,
+          "symbol": "_WSAStartup@8",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476536
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-util.obj",
+      "name": "?close_socketlib@JNL@@SAXXZ",
+      "coff_bytes": 16,
+      "fixed_bytes": 12,
+      "matching_original_vas": [
+        268441120,
+        268452176,
+        268457568,
+        268458159,
+        268458207,
+        268471312
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 1,
+          "type": 20,
+          "symbol": "_WSACleanup@0",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268444960,
+            268476542,
+            268458416,
+            268471696,
+            268471712,
+            268442736
+          ]
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-util.obj",
+      "name": "?ipstr_to_addr@JNL@@SAKPBD@Z",
+      "coff_bytes": 16,
+      "fixed_bytes": 12,
+      "matching_original_vas": [],
+      "instruction_bytes_equal_outside_coff_relocations": false,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 6,
+          "type": 20,
+          "symbol": "_inet_addr@4",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        }
+      ]
+    },
+    {
+      "object": "jnetlib-util.obj",
+      "name": "?addr_to_ipstr@JNL@@SAXKPADH@Z",
+      "coff_bytes": 48,
+      "fixed_bytes": 36,
+      "matching_original_vas": [],
+      "instruction_bytes_equal_outside_coff_relocations": false,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 6,
+          "type": 20,
+          "symbol": "_inet_ntoa@4",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 15,
+          "type": 6,
+          "symbol": "??_C@_00A@?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 32,
+          "type": 6,
+          "symbol": "__imp__strncpy",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        }
+      ]
+    },
+    {
+      "object": "connect.obj",
+      "name": "?connectToServer@@YAHPAUHWND__@@PAD@Z",
+      "coff_bytes": 48,
+      "fixed_bytes": 32,
+      "matching_original_vas": [
+        268455360
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 6,
+          "type": 6,
+          "symbol": "?clientInstance@@3PAUHINSTANCE__@@A",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487320
+          ]
+        },
+        {
+          "offset": 17,
+          "type": 6,
+          "symbol": "?connectionDialog@@YGHPAUHWND__@@IIJ@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268455408
+          ]
+        },
+        {
+          "offset": 26,
+          "type": 6,
+          "symbol": "_connectAddress",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487304
+          ]
+        },
+        {
+          "offset": 32,
+          "type": 6,
+          "symbol": "__imp__DialogBoxParamA@20",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480792
+          ]
+        }
+      ]
+    },
+    {
+      "object": "connect.obj",
+      "name": "?connectionDialog@@YGHPAUHWND__@@IIJ@Z",
+      "coff_bytes": 272,
+      "fixed_bytes": 208,
+      "matching_original_vas": [],
+      "instruction_bytes_equal_outside_coff_relocations": false,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 33,
+          "type": 6,
+          "symbol": "?connection@@3PAVReliableConnection@@A",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 49,
+          "type": 6,
+          "symbol": "?connection@@3PAVReliableConnection@@A",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 66,
+          "type": 6,
+          "symbol": "__imp__EndDialog@8",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 76,
+          "type": 20,
+          "symbol": "?closeHandshake@@YAXXZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 87,
+          "type": 6,
+          "symbol": "?connection@@3PAVReliableConnection@@A",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 100,
+          "type": 6,
+          "symbol": "_connectWindow",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 114,
+          "type": 6,
+          "symbol": "?connection@@3PAVReliableConnection@@A",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 130,
+          "type": 6,
+          "symbol": "__imp__GetDlgItem@8",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 145,
+          "type": 6,
+          "symbol": "_statusControl",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 151,
+          "type": 6,
+          "symbol": "_connectState",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 161,
+          "type": 6,
+          "symbol": "_cancelled",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 171,
+          "type": 6,
+          "symbol": "__imp__SetTimer@16",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 204,
+          "type": 20,
+          "symbol": "?pollConnection@@YAHXZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 221,
+          "type": 6,
+          "symbol": "__imp__EndDialog@8",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 251,
+          "type": 6,
+          "symbol": "_cancelled",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 261,
+          "type": 6,
+          "symbol": "__imp__PostMessageA@16",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        }
+      ]
+    },
+    {
+      "object": "connect.obj",
+      "name": "?closeHandshake@@YAXXZ",
+      "coff_bytes": 48,
+      "fixed_bytes": 36,
+      "matching_original_vas": [
+        268455696
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 2,
+          "type": 6,
+          "symbol": "_handshake",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487308
+          ]
+        },
+        {
+          "offset": 18,
+          "type": 6,
+          "symbol": "_handshake",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487308
+          ]
+        },
+        {
+          "offset": 28,
+          "type": 6,
+          "symbol": "_connectState",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268485144
+          ]
+        }
+      ]
+    },
+    {
+      "object": "connect.obj",
+      "name": "?pollConnection@@YAHXZ",
+      "coff_bytes": 1216,
+      "fixed_bytes": 884,
+      "matching_original_vas": [],
+      "instruction_bytes_equal_outside_coff_relocations": false,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 2,
+          "type": 6,
+          "symbol": "__except_list",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 9,
+          "type": 6,
+          "symbol": "$L42402",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 15,
+          "type": 6,
+          "symbol": "_connectState",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 22,
+          "type": 6,
+          "symbol": "__except_list",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 59,
+          "type": 6,
+          "symbol": "_handshake",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 95,
+          "type": 6,
+          "symbol": "__imp__strncmp",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 109,
+          "type": 6,
+          "symbol": "??_C@_03PHIM@VER?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 124,
+          "type": 6,
+          "symbol": "??_C@_0CA@PGKL@Can?8t?5connect?3?5Version?5mismatch?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 140,
+          "type": 6,
+          "symbol": "??_C@_03DGKD@TOO?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 155,
+          "type": 6,
+          "symbol": "??_C@_0BO@HCBE@Can?8t?5connect?3?5Too?5many?5users?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 161,
+          "type": 20,
+          "symbol": "?setStatus@@YAXPAD@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 170,
+          "type": 6,
+          "symbol": "_connectState",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 193,
+          "type": 6,
+          "symbol": "??_C@_09GBPB@HELLOD00D?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 209,
+          "type": 6,
+          "symbol": "_connectState",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 223,
+          "type": 6,
+          "symbol": "??_C@_0BJ@KFLI@Connected?4?5Logging?5in?4?4?4?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 228,
+          "type": 20,
+          "symbol": "?setStatus@@YAXPAD@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 234,
+          "type": 6,
+          "symbol": "_connectAddress",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 254,
+          "type": 6,
+          "symbol": "?serverAddress@@3PADA",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 280,
+          "type": 6,
+          "symbol": "__imp__atoi",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 286,
+          "type": 6,
+          "symbol": "_handshake",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 296,
+          "type": 6,
+          "symbol": "?serverPort@@3HA",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 315,
+          "type": 6,
+          "symbol": "_handshake",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 324,
+          "type": 20,
+          "symbol": "??2@YAPAXI@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 353,
+          "type": 20,
+          "symbol": "??0ReliableConnection@@QAE@XZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 362,
+          "type": 6,
+          "symbol": "?connection@@3PAVReliableConnection@@A",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 388,
+          "type": 6,
+          "symbol": "?connection@@3PAVReliableConnection@@A",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 394,
+          "type": 6,
+          "symbol": "?serverPort@@3HA",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 400,
+          "type": 6,
+          "symbol": "?serverAddress@@3PADA",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 414,
+          "type": 20,
+          "symbol": "??0Message@@QAE@XZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 419,
+          "type": 6,
+          "symbol": "?applicationName@@3PADA",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 448,
+          "type": 20,
+          "symbol": "?appendString@Message@@QAEXPAD@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 453,
+          "type": 6,
+          "symbol": "?username@@3PADA",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 462,
+          "type": 20,
+          "symbol": "?setNick@Message@@QAEXPAD@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 468,
+          "type": 6,
+          "symbol": "?connectionType@@3HA",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 478,
+          "type": 20,
+          "symbol": "?appendByte@Message@@QAEXD@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 484,
+          "type": 6,
+          "symbol": "?connection@@3PAVReliableConnection@@A",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 494,
+          "type": 20,
+          "symbol": "?sendMessage@ReliableConnection@@QAEXPAVMessage@@@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 514,
+          "type": 20,
+          "symbol": "??1Message@@QAE@XZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 519,
+          "type": 6,
+          "symbol": "_connectWindow",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 531,
+          "type": 6,
+          "symbol": "__imp__KillTimer@8",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 536,
+          "type": 6,
+          "symbol": "_cancelled",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 550,
+          "type": 6,
+          "symbol": "__imp__PeekMessageA@20",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 580,
+          "type": 6,
+          "symbol": "__imp__TranslateMessage@4",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 591,
+          "type": 6,
+          "symbol": "__imp__DispatchMessageA@4",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 596,
+          "type": 6,
+          "symbol": "_cancelled",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 609,
+          "type": 6,
+          "symbol": "?connection@@3PAVReliableConnection@@A",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 620,
+          "type": 20,
+          "symbol": "?selectSockets@UDPConnection@@SAHH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 626,
+          "type": 6,
+          "symbol": "?connection@@3PAVReliableConnection@@A",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 659,
+          "type": 20,
+          "symbol": "??0Message@@QAE@XZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 665,
+          "type": 6,
+          "symbol": "?connection@@3PAVReliableConnection@@A",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 690,
+          "type": 20,
+          "symbol": "?receiveMessage@ReliableConnection@@QAEHPAVMessage@@DPAUsockaddr_in@@@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 729,
+          "type": 6,
+          "symbol": "?connection@@3PAVReliableConnection@@A",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 734,
+          "type": 20,
+          "symbol": "?receiveMessage@ReliableConnection@@QAEHPAVMessage@@DPAUsockaddr_in@@@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 742,
+          "type": 6,
+          "symbol": "?connection@@3PAVReliableConnection@@A",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 752,
+          "type": 20,
+          "symbol": "?receiveMessage@ReliableConnection@@QAEHPAVMessage@@DPAUsockaddr_in@@@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 764,
+          "type": 20,
+          "symbol": "??0Message@@QAE@XZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 798,
+          "type": 20,
+          "symbol": "?appendInt@Message@@QAEXH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 810,
+          "type": 6,
+          "symbol": "?connection@@3PAVReliableConnection@@A",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 823,
+          "type": 20,
+          "symbol": "?sendMessage@ReliableConnection@@QAEXPAVMessage@@@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 843,
+          "type": 20,
+          "symbol": "??1Message@@QAE@XZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 863,
+          "type": 20,
+          "symbol": "??1Message@@QAE@XZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 868,
+          "type": 6,
+          "symbol": "_cancelled",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 893,
+          "type": 6,
+          "symbol": "_connectState",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 905,
+          "type": 20,
+          "symbol": "??1Message@@QAE@XZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 926,
+          "type": 6,
+          "symbol": "__except_list",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 940,
+          "type": 20,
+          "symbol": "?selectSockets@UDPConnection@@SAHH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 946,
+          "type": 6,
+          "symbol": "_handshake",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 972,
+          "type": 6,
+          "symbol": "??_C@_0O@JAEF@Connecting?4?4?4?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 977,
+          "type": 20,
+          "symbol": "?setStatus@@YAXPAD@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 983,
+          "type": 6,
+          "symbol": "_connectAddress",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 1023,
+          "type": 20,
+          "symbol": "??2@YAPAXI@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 1052,
+          "type": 20,
+          "symbol": "??0UDPConnection@@QAE@XZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 1061,
+          "type": 6,
+          "symbol": "_handshake",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 1086,
+          "type": 6,
+          "symbol": "_handshake",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 1096,
+          "type": 6,
+          "symbol": "__imp__atoi",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 1102,
+          "type": 6,
+          "symbol": "_connectAddress",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 1113,
+          "type": 6,
+          "symbol": "_handshake",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 1121,
+          "type": 6,
+          "symbol": "??_C@_04MPPC@0?483?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 1133,
+          "type": 6,
+          "symbol": "??_C@_07IKJP@HELLO?$CFs?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 1140,
+          "type": 6,
+          "symbol": "__imp__wsprintfA",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 1161,
+          "type": 6,
+          "symbol": "_handshake",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 1187,
+          "type": 6,
+          "symbol": "_connectState",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        },
+        {
+          "offset": 1205,
+          "type": 6,
+          "symbol": "__except_list",
+          "coff_addend": 0,
+          "original_operand_or_destination": []
+        }
+      ]
+    },
+    {
+      "object": "connect.obj",
+      "name": "?setStatus@@YAXPAD@Z",
+      "coff_bytes": 32,
+      "fixed_bytes": 24,
+      "matching_original_vas": [
+        268456960,
+        268475888
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 6,
+          "type": 6,
+          "symbol": "_statusControl",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487300,
+            268488284
+          ]
+        },
+        {
+          "offset": 14,
+          "type": 6,
+          "symbol": "__imp__SetWindowTextA@8",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480760,
+            268480760
+          ]
+        }
+      ]
+    },
+    {
+      "object": "kailleraclient.obj",
+      "name": "_DllMain@12",
+      "coff_bytes": 32,
+      "fixed_bytes": 28,
+      "matching_original_vas": [
+        268456992
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 5,
+          "type": 6,
+          "symbol": "?clientInstance@@3PAUHINSTANCE__@@A",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487320
+          ]
+        }
+      ]
+    },
+    {
+      "object": "kailleraclient.obj",
+      "name": "_kailleraGetVersion@4",
+      "coff_bytes": 48,
+      "fixed_bytes": 44,
+      "matching_original_vas": [
+        268457024
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 3,
+          "type": 6,
+          "symbol": "??_C@_04JKBH@0?484?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268485472
+          ]
+        }
+      ]
+    },
+    {
+      "object": "kailleraclient.obj",
+      "name": "_kailleraInit@0",
+      "coff_bytes": 224,
+      "fixed_bytes": 120,
+      "matching_original_vas": [
+        268457072
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 7,
+          "type": 6,
+          "symbol": "?connection@@3PAVReliableConnection@@A",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487644
+          ]
+        },
+        {
+          "offset": 16,
+          "type": 20,
+          "symbol": "??2@YAPAXI@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476670
+          ]
+        },
+        {
+          "offset": 28,
+          "type": 6,
+          "symbol": "??_C@_0P@DLGO@KailleraClient?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268485556
+          ]
+        },
+        {
+          "offset": 33,
+          "type": 6,
+          "symbol": "??_C@_0N@FNPJ@kaillera?4ini?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268485540
+          ]
+        },
+        {
+          "offset": 40,
+          "type": 20,
+          "symbol": "??0Config@@QAE@PAD0@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268441504
+          ]
+        },
+        {
+          "offset": 51,
+          "type": 6,
+          "symbol": "?defaultUsername@@3PADA",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487292
+          ]
+        },
+        {
+          "offset": 56,
+          "type": 6,
+          "symbol": "??_C@_08LGGE@username?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268485528
+          ]
+        },
+        {
+          "offset": 63,
+          "type": 6,
+          "symbol": "?settings@@3PAVConfig@@A",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487648
+          ]
+        },
+        {
+          "offset": 69,
+          "type": 6,
+          "symbol": "?applicationName@@3PADA",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487652
+          ]
+        },
+        {
+          "offset": 73,
+          "type": 6,
+          "symbol": "??_C@_07PCHH@Unknown?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268485520
+          ]
+        },
+        {
+          "offset": 78,
+          "type": 20,
+          "symbol": "?readString@Config@@QAEPADPAD0@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268442528
+          ]
+        },
+        {
+          "offset": 98,
+          "type": 6,
+          "symbol": "??_C@_08CEPH@conntype?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268485508
+          ]
+        },
+        {
+          "offset": 107,
+          "type": 6,
+          "symbol": "?username@@3PADA",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487340
+          ]
+        },
+        {
+          "offset": 125,
+          "type": 6,
+          "symbol": "?settings@@3PAVConfig@@A",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487648
+          ]
+        },
+        {
+          "offset": 131,
+          "type": 6,
+          "symbol": "?gameList@@3PADA",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487332
+          ]
+        },
+        {
+          "offset": 141,
+          "type": 6,
+          "symbol": "?localPort@@3HA",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487328
+          ]
+        },
+        {
+          "offset": 150,
+          "type": 20,
+          "symbol": "?readInt@Config@@QAEHPADH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268442064
+          ]
+        },
+        {
+          "offset": 155,
+          "type": 6,
+          "symbol": "?connectionType@@3HA",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487636
+          ]
+        },
+        {
+          "offset": 160,
+          "type": 20,
+          "symbol": "?open_socketlib@JNL@@SAHXZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268452128
+          ]
+        },
+        {
+          "offset": 166,
+          "type": 6,
+          "symbol": "__imp__InitCommonControls@0",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480512
+          ]
+        },
+        {
+          "offset": 171,
+          "type": 6,
+          "symbol": "??_C@_0L@KEOG@USER32?4DLL?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268485496
+          ]
+        },
+        {
+          "offset": 177,
+          "type": 6,
+          "symbol": "__imp__LoadLibraryA@4",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480556
+          ]
+        },
+        {
+          "offset": 184,
+          "type": 6,
+          "symbol": "??_C@_0O@FBHN@FlashWindowEx?$AA@",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268485480
+          ]
+        },
+        {
+          "offset": 191,
+          "type": 6,
+          "symbol": "__imp__GetProcAddress@8",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480588
+          ]
+        },
+        {
+          "offset": 197,
+          "type": 6,
+          "symbol": "?flashWindowEx@@3P6GHXZA",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487632
+          ]
+        },
+        {
+          "offset": 203,
+          "type": 6,
+          "symbol": "__imp__FreeLibrary@4",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480580
+          ]
+        }
+      ]
+    },
+    {
+      "object": "kailleraclient.obj",
+      "name": "_kailleraShutdown@0",
+      "coff_bytes": 48,
+      "fixed_bytes": 24,
+      "matching_original_vas": [
+        268457296
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 2,
+          "type": 20,
+          "symbol": "?close_socketlib@JNL@@SAXXZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268452176
+          ]
+        },
+        {
+          "offset": 8,
+          "type": 6,
+          "symbol": "?settings@@3PAVConfig@@A",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487648
+          ]
+        },
+        {
+          "offset": 13,
+          "type": 20,
+          "symbol": "?flush@Config@@QAEXXZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268441152
+          ]
+        },
+        {
+          "offset": 19,
+          "type": 6,
+          "symbol": "?settings@@3PAVConfig@@A",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487648
+          ]
+        },
+        {
+          "offset": 30,
+          "type": 20,
+          "symbol": "??1Config@@QAE@XZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268441408
+          ]
+        },
+        {
+          "offset": 36,
+          "type": 20,
+          "symbol": "??3@YAXPAX@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268476548
+          ]
+        }
+      ]
+    },
+    {
+      "object": "kailleraclient.obj",
+      "name": "_kailleraSetInfos@4",
+      "coff_bytes": 144,
+      "fixed_bytes": 108,
+      "matching_original_vas": [
+        268457344
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 10,
+          "type": 6,
+          "symbol": "?applicationName@@3PADA",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487652
+          ]
+        },
+        {
+          "offset": 15,
+          "type": 6,
+          "symbol": "?gameList@@3PADA",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487332
+          ]
+        },
+        {
+          "offset": 26,
+          "type": 6,
+          "symbol": "__imp__free",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480600
+          ]
+        },
+        {
+          "offset": 60,
+          "type": 6,
+          "symbol": "__imp__malloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480604
+          ]
+        },
+        {
+          "offset": 67,
+          "type": 6,
+          "symbol": "?gameList@@3PADA",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487332
+          ]
+        },
+        {
+          "offset": 98,
+          "type": 6,
+          "symbol": "?gameCallback@@3P6GHPADHH@ZA",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487324
+          ]
+        },
+        {
+          "offset": 107,
+          "type": 6,
+          "symbol": "?chatCallback@@3P6GXPAD0@ZA",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487316
+          ]
+        },
+        {
+          "offset": 116,
+          "type": 6,
+          "symbol": "?droppedCallback@@3P6GXPADH@ZA",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487336
+          ]
+        },
+        {
+          "offset": 125,
+          "type": 6,
+          "symbol": "?moreInfosCallback@@3P6GXPAD@ZA",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487628
+          ]
+        }
+      ]
+    },
+    {
+      "object": "kailleraclient.obj",
+      "name": "_kailleraSelectServerDialog@4",
+      "coff_bytes": 32,
+      "fixed_bytes": 24,
+      "matching_original_vas": [
+        268457488
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 6,
+          "type": 6,
+          "symbol": "?hostWindow@@3PAUHWND__@@A",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268487912
+          ]
+        },
+        {
+          "offset": 11,
+          "type": 20,
+          "symbol": "?selectServerDialog@@YAXPAUHWND__@@@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268472256
+          ]
+        }
+      ]
+    },
+    {
+      "object": "kailleraclient.obj",
+      "name": "_kailleraModifyPlayValues@8",
+      "coff_bytes": 32,
+      "fixed_bytes": 28,
+      "matching_original_vas": [
+        268457520
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 11,
+          "type": 20,
+          "symbol": "?modifyPlayValues@@YAHPAXH@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268468576
+          ]
+        }
+      ]
+    },
+    {
+      "object": "kailleraclient.obj",
+      "name": "_kailleraChatSend@4",
+      "coff_bytes": 16,
+      "fixed_bytes": 12,
+      "matching_original_vas": [
+        268457552
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 6,
+          "type": 20,
+          "symbol": "?sendChat@@YAXPAD@Z",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268468416
+          ]
+        }
+      ]
+    },
+    {
+      "object": "kailleraclient.obj",
+      "name": "_kailleraEndGame@0",
+      "coff_bytes": 16,
+      "fixed_bytes": 12,
+      "matching_original_vas": [
+        268441120,
+        268452176,
+        268457568,
+        268458159,
+        268458207,
+        268471312
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 1,
+          "type": 20,
+          "symbol": "?endGame@@YAXXZ",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268444960,
+            268476542,
+            268458416,
+            268471696,
+            268471712,
+            268442736
+          ]
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "path": [
+        3,
+        1,
+        1036
+      ],
+      "original_bytes": 296,
+      "rebuilt_bytes": 296,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        3,
+        2,
+        1036
+      ],
+      "original_bytes": 1384,
+      "rebuilt_bytes": 1384,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        5,
+        101,
+        1036
+      ],
+      "original_bytes": 626,
+      "rebuilt_bytes": 626,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        5,
+        102,
+        1036
+      ],
+      "original_bytes": 454,
+      "rebuilt_bytes": 454,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        5,
+        103,
+        1036
+      ],
+      "original_bytes": 154,
+      "rebuilt_bytes": 154,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        5,
+        104,
+        1036
+      ],
+      "original_bytes": 550,
+      "rebuilt_bytes": 550,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        5,
+        106,
+        1036
+      ],
+      "original_bytes": 534,
+      "rebuilt_bytes": 534,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        5,
+        107,
+        1036
+      ],
+      "original_bytes": 446,
+      "rebuilt_bytes": 446,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        5,
+        108,
+        1036
+      ],
+      "original_bytes": 370,
+      "rebuilt_bytes": 370,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        5,
+        109,
+        1036
+      ],
+      "original_bytes": 186,
+      "rebuilt_bytes": 186,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        5,
+        110,
+        1036
+      ],
+      "original_bytes": 118,
+      "rebuilt_bytes": 118,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        14,
+        105,
+        1036
+      ],
+      "original_bytes": 34,
+      "rebuilt_bytes": 34,
+      "byte_exact": true
+    }
+  ],
+  "all_resource_payloads_byte_exact": true,
+  "remaining": [
+    "server browser and lobby",
+    "game synchronization and protocol dispatch",
+    "window resizing and shared UI helpers",
+    "remaining component instruction differences",
+    "final link layout and UPX container reproduction"
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "original_binary": {
+    "path": "master/kailleraclient.dll",
+    "version": "0.84",
+    "sha256": "410503fdfd1e931adf6024df7b8d88c725260b568688c5a5a1ab9897c83ff72d"
+  },
+  "sources": [
+    {
+      "url": "https://1014.org/code/nullsoft/jnetlib/jnetlib03.zip",
+      "version": "0.3, March 29th 2001",
+      "archive_sha256": "e0e97604deb6a5805a2c3dee6b6e321075ad707ac99f0e64319f92d639efc087",
+      "files": {
+        "asyncdns.cpp": "d8a58447fa81e445d70601022cb4e1f981b78d9843a3d7fe85b922e39ecea953",
+        "asyncdns.h": "a6f8b1718d955d8f6b2154adf09ec96a83172e9435fc20ec6bcc420ab7c899b8",
+        "connection.cpp": "7e10301d5031560eccbce0704097fcfebb5b4a0f83ea32904441fd1cfb096fe7",
+        "connection.h": "27053ced02bc8a773ff7bf7934270df7cb38fbfb6bde85e16bbca28dd4a21219",
+        "httpget.cpp": "9aacccc04e2d82452f6ff7d6c15a231b9ba700d55cc85ca8012d8d40e17702e8",
+        "httpget.h": "deadb49cd7fd43b67e47222c1418d4171d65683f4b39fd35b8c980d2d525c6f7",
+        "jnetlib.h": "ccecc1cf5c6ad44c28eff1e131d8f14da6ab4636cc2df1bba10d579055a772c9",
+        "netinc.h": "802854d887b4a9cddc0be7e94c4392c315afa6e21acc04e172834effdea9279b",
+        "util.cpp": "c13c83dea03fd0eeb4a2469102696ac0ad135ae44213112197fea46862daac68",
+        "util.h": "e651df1e1eca6cba968de85d21548542479958ac3b3557b7c04568203f1b6dda"
+      }
+    },
+    {
+      "url": "http://www.kaillera.com/files/kaillera-0.9-sdk.zip",
+      "archive_sha256": "74ae59bebd21e07621274459f617151268f6e3da21309bb28c5cfb603f44b40b",
+      "note": "The publisher SDK 0.9 retains the unchanged API v0.84 header; only that header is imported, not its different client binary or library.",
+      "files": {
+        "kailleraclient.h": "f2191acbffebe2fd9a8e27222fec083f84d63090eee504ed579f2284da93d201"
+      }
+    }
+  ],
+  "original_application_source_search": "Publisher downloads and public mirrors expose SDK integration headers and independent replacement clients. No original private Kaillera client implementation was found. Application C++ files and the flat directory layout are inferred from decompilation.",
+  "reconstruction_status": "incomplete"
+}

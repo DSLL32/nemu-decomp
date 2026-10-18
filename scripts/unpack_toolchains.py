@@ -70,16 +70,22 @@ VC6RTM_HEADERS = ("errno.h", "stdarg.h", "stddef.h", "stdio.h", "stdlib.h", "str
 
 
 def install_vc6rtm(staging, scratch, destination):
-    """C compiler and headers used by the original zlib/minizip objects."""
-    print("Extracting VC6 RTM C compiler for zlib", flush=True)
+    """Original zlib C compiler and Kaillera C++/Win32 build subset."""
+    print("Extracting VC6 RTM for zlib and Kaillera", flush=True)
     base = scratch / "vc6rtm-base"
+    kaillera = json.loads((Path(__file__).resolve().parents[1] /
+                           "toolchains/kaillera-toolchain.json").read_text())
     extract(staging / "en_vs6_ent_cd1.iso", base,
             *["VC98/BIN/" + name for name in ("CL.EXE", "C1.DLL", "C2.DLL", "LINK.EXE", "LIB.EXE")],
             *["VC98/INCLUDE/" + name.upper() for name in VC6RTM_HEADERS],
+            *[row["source_member"] for row in kaillera["files"]],
             "COMMON/MSDEV98/BIN/MSPDB60.DLL")
     copy_tree(base / "VC98", destination)
     shutil.copy2(base / "COMMON/MSDEV98/BIN/MSPDB60.DLL",
                  destination / "bin/mspdb60.dll")
+    for name in ("RC.EXE", "RCDLL.DLL"):
+        shutil.copy2(base / "COMMON/MSDEV98/BIN" / name,
+                     destination / "bin" / name.lower())
 
 
 def install_vc6(staging, scratch, destination):

@@ -16,3 +16,8 @@
 /src/lemd3d/*.rc -text -filter -whitespace
 /src/lemd3d/*.asm -text -filter -whitespace
 /analysis/lemd3d-source-changes.patch -whitespace
+
+# Preserve the minimal upstream Kaillera/JNetLib source and historical packer.
+/src/kailleraclient/jnetlib/** -text -filter -whitespace
+/src/kailleraclient/kailleraclient.h -text -filter -whitespace
+/toolchains/upx120/** -text -filter
