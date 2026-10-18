@@ -1,0 +1,130 @@
+{
+  "description": "Bounded negative control: VC7 precompiled headers do not defer AudioProcessing transform.h storage until after its SEH/envelope literals.",
+  "original": "master/Plugin/audio.dll",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "original_disputed_constant_block_va": "0x1003124c",
+  "source_snapshot_commit": "b53a2488b2555810f57d804f79a2fd1b7d075b1d",
+  "source_snapshot": {
+    "src/audio/ahle_ds/AudioProcessing.c": "3a2100b5d7d1408a1df95136709fde946cea70f8272da76e6d9e7a56aeaaf27c",
+    "src/audio/ahle_ds/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f"
+  },
+  "compiler": {
+    "version": "Microsoft Visual C++ 13.00.9466",
+    "sha256": {
+      "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
+      "toolchains/vc7/bin/c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
+      "toolchains/vc7/bin/c1xx.dll": "30c3affd786752b4a037c4b4f035b7962d1fb5a335366e093bc73d0eb02e5558",
+      "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0"
+    },
+    "common_flags": [
+      "/nologo",
+      "/c",
+      "/O2",
+      "/Ob1",
+      "/MT",
+      "/W3",
+      "/DWIN32",
+      "/DNDEBUG",
+      "/D_WINDOWS",
+      "/D_USRDLL"
+    ]
+  },
+  "method": "Compile unchanged full AudioProcessing.c three times using plain compilation, creation of a PCH through transform.h, then reuse of that PCH. Compare complete emitted function bytes and ordered relocation offsets/types/target symbol names/target symbol values. Function-identity hashes serialize those fields and function names/sizes as compact sorted-key JSON; COFF section numbers are intentionally excluded because preceding storage sections disappear in the PCH-use control.",
+  "controls": [
+    {
+      "name": "plain",
+      "extra_flags": [],
+      "object_sha256": "bd2d24d0759fc743c5f2b039c25b15486a2074bbe2d20f3f5b47b3766e6dd292",
+      "functions": 35,
+      "function_bytes": 27174,
+      "functions_identical_to_plain_including_relocation_target_identities": 35,
+      "ordered_function_identity_sha256": "b948ea044f1f2604c371af8bbd27f0bcddf021d69bb96d07efd28c9edd7b1fd7",
+      "header_storage_symbols": 32,
+      "constant_block": {
+        "section_index": 5,
+        "size": 124,
+        "characteristics": "0x40300040",
+        "sha256": "02b13c7a44c028abffcc47efcb37f5f58d10894e861c45a2f4474bb0e499453d"
+      },
+      "dewindow_table": [
+        {
+          "index": 4,
+          "size": 2176,
+          "sha256": "52c695ac3a77f57ebb82e12d2474f02ce47ab544ef0dc05d6ecdfc6d5e4ff100"
+        }
+      ],
+      "first_rdata_section_index": 5,
+      "first_rdata_size": 124,
+      "remaining_rdata_comdat_contributions": 14,
+      "ordered_remaining_rdata_identity_sha256": "385c77a7bb90ef121d4b84a938db7ca09f1d3e7580827cd090570aef9a4cf6c8"
+    },
+    {
+      "name": "pch_create",
+      "extra_flags": [
+        "/Yctransform.h",
+        "/FpTransform.pch"
+      ],
+      "object_sha256": "2a1fa50e1572f3b2389ff5a12260776d2286009dc21b49c9d61fb8a5b69575f5",
+      "functions": 35,
+      "function_bytes": 27174,
+      "functions_identical_to_plain_including_relocation_target_identities": 35,
+      "ordered_function_identity_sha256": "b948ea044f1f2604c371af8bbd27f0bcddf021d69bb96d07efd28c9edd7b1fd7",
+      "header_storage_symbols": 32,
+      "constant_block": {
+        "section_index": 5,
+        "size": 124,
+        "characteristics": "0x40300040",
+        "sha256": "02b13c7a44c028abffcc47efcb37f5f58d10894e861c45a2f4474bb0e499453d"
+      },
+      "dewindow_table": [
+        {
+          "index": 4,
+          "size": 2176,
+          "sha256": "52c695ac3a77f57ebb82e12d2474f02ce47ab544ef0dc05d6ecdfc6d5e4ff100"
+        }
+      ],
+      "first_rdata_section_index": 5,
+      "first_rdata_size": 124,
+      "remaining_rdata_comdat_contributions": 14,
+      "ordered_remaining_rdata_identity_sha256": "385c77a7bb90ef121d4b84a938db7ca09f1d3e7580827cd090570aef9a4cf6c8"
+    },
+    {
+      "name": "pch_use",
+      "extra_flags": [
+        "/Yutransform.h",
+        "/FpTransform.pch"
+      ],
+      "object_sha256": "76668a044df1439c2b18dc1e812a62083d8cb451dc88b73dd09b6d11762ce4de",
+      "functions": 35,
+      "function_bytes": 27174,
+      "functions_identical_to_plain_including_relocation_target_identities": 35,
+      "ordered_function_identity_sha256": "b948ea044f1f2604c371af8bbd27f0bcddf021d69bb96d07efd28c9edd7b1fd7",
+      "header_storage_symbols": 0,
+      "constant_block": null,
+      "dewindow_table": [],
+      "first_rdata_section_index": 16,
+      "first_rdata_size": 12,
+      "remaining_rdata_comdat_contributions": 14,
+      "ordered_remaining_rdata_identity_sha256": "385c77a7bb90ef121d4b84a938db7ca09f1d3e7580827cd090570aef9a4cf6c8"
+    }
+  ],
+  "findings": [
+    "Plain and PCH-create objects retain an ordinary non-COMDAT 124-byte constants section before the SEH and string COMDAT contributions.",
+    "PCH-use suppresses both the 124-byte constants and the 2176-byte dewindow table, along with all 32 header storage symbols. It preserves the relative order and payloads of the remaining .rdata contributions.",
+    "All 35 complete emitted function bodies and their relocation target identities are unchanged in both PCH controls. This compares the controls with each other, not a claim of 35 exact original-DLL matches.",
+    "The source-header-end control was already performed by the integration owner and was not repeated. The C++ suppression control is separately documented in analysis/audio-mp3-storage-audit.json."
+  ],
+  "conclusion": "This ordinary PCH mechanism suppresses common-header storage; it does not move copy 11 after literals. A PCH reconstruction would require independent evidence of a real creator unit and correct accounting for both repeated table families. There is no justification here to change canonical source, add a data-only unit, duplicate constants, or force section order. The original translation-unit boundary/data-order issue remains unresolved.",
+  "limitations": "No whole-DLL link or new source-layout inference was established. This bounded negative control does not rule out every possible historical build mechanism.",
+  "evidence_directory": "/root/.ai-tmp/nemu-audio-rdata-review.qn4jBcht",
+  "evidence_sha256": {
+    "probe_pch.py": "63886c079b1c3fe09550a21877d29bf112b61da3690da61429650152c5ba41fc",
+    "pch-results.json": "7f9d2f922d9fbb247568a62c1b0be5827bed7e57120ef8c05b4eda54eff92591",
+    "pch-storage-details.json": "374527ef74256ce7b0ff21cfda0393a2f8214c307975c76ceb51d77d39d20a1d",
+    "Transform.pch": "6b3bcc8c7cbd43e12acdf873110571daec2a9cc0f18fb18d5e34757a9d4602df",
+    "plain.log": "3bdcc9da7c5410898d0e6081849636990e43b1dc8312f3ccd5bc8861d3748f0e",
+    "pch_create.log": "32711d6134a9a77a3b256268eb2159f10db0cc4b48a8dc0d4948a42dd1985e76",
+    "pch_use.log": "d7814209ef22eaf50cb558bae32902b33005965daa830c510ef4cf07728f1263",
+    "manifest.json": "faf2082fcabec4fc91c04444b720f268d53d676fcb78b2d137b9e8ce0444cf2b"
+  }
+}
