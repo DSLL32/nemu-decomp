@@ -1,0 +1,4015 @@
+{
+  "scope": "One scratch-only historical WaveOut storage control, plus baseline, compiled as the complete canonical DirectSound unit and linked with all14 frozen native application objects. DLLs were not executed. No source declarations or target assignments were promoted.",
+  "hypothesis": {
+    "declarations": "/* Diagnostic only. Historical WaveOut objects are independently observed;\n   retention in this target and these semantic private names are unproved. */\nHWAVEOUT WaveOutHandle;\nWAVEHDR WaveOutHeader;\n\n",
+    "basis": "The independent Nemu0.7 and0.7a images prove an actual4-byte HWAVEOUT slot and32-byte WAVEHDR object through native WaveOut APIs. Their retention in the2003 DirectSound unit is not established, and the semantic private names are inferred.",
+    "historical_evidence_report": "analysis/audio-waveout-history.json",
+    "name_variants_tested": 1
+  },
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "artifact": "/root/.ai-tmp/audio-waveout-storage-control.nm8qlzcv",
+  "native_control": {
+    "frozen_run": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/xhi52ue4",
+    "frozen_manifest_sha256": "cc66cd5564bd76efda485754ce1358be0f488519728e5ee11cd89be024a612b8",
+    "original_data": {
+      "name": ".data",
+      "virtual_size": 1279948,
+      "rva": 217088,
+      "raw_size": 49152,
+      "offset": 217088
+    },
+    "declarations": "/* Diagnostic only. Historical WaveOut objects are independently observed;\n   retention in this target and these semantic private names are unproved. */\nHWAVEOUT WaveOutHandle;\nWAVEHDR WaveOutHeader;\n\n",
+    "results": [
+      {
+        "variant": "current",
+        "compile_command": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/FoDirectSound.obj",
+          "DirectSound.c"
+        ],
+        "link_command": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "link",
+          "/nologo",
+          "/dll",
+          "/incremental:no",
+          "/debug",
+          "/opt:noref",
+          "/opt:noicf",
+          "/subsystem:windows",
+          "/machine:I386",
+          "/base:0x10000000",
+          "/align:4096",
+          "/filealign:4096",
+          "/out:audio.dll",
+          "/pdb:audio.pdb",
+          "/map:audio.map",
+          "/def:audio.def",
+          "ABI1.obj",
+          "ABI2.obj",
+          "AudioHLE.obj",
+          "ABI3.obj",
+          "AudioLegacy.obj",
+          "DirectSound.obj",
+          "AudioLog.obj",
+          "CPUFeatures.obj",
+          "Jpeg.obj",
+          "Mp3.obj",
+          "AudioProcessing.obj",
+          "AudioResample.obj",
+          "AudioPlugin.obj",
+          "RSP.obj",
+          "Audio.res",
+          "Z:\\root\\nemu-decomp\\toolchains\\vc6\\lib\\dsound.lib",
+          "winmm.lib",
+          "kernel32.lib",
+          "user32.lib",
+          "gdi32.lib"
+        ],
+        "source_sha256": {
+          "DirectSound.h": "ab5ed735f1ab52226c0c7e7a559d080e10ec5649d2814b177f1a79686135455b",
+          "DirectSound.c": "54c293b50a6c2b0195bbc2312b8578fb1d48851d6c44f294ed46c8f522ea7895",
+          "transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f"
+        },
+        "input_sha256": {
+          "audio.def": "f34ad9fa1d564c407483eabd05363f0c95a4cf69a81f6c4ffcb0dd95ddcb4b34",
+          "ABI1.obj": "95c9c27bdbe79fa1d049d6cafd7801c2b9af833c51086056996de43c21193b99",
+          "ABI2.obj": "f96b251b7ed2d403e92c025efcd7856c2a1cc32b974dec76107b250c21f45703",
+          "AudioHLE.obj": "c2c7f734eea9a3d39fed9c8292efb0ea1afaf8c57e5bef50efe2e59bdd5d1af4",
+          "ABI3.obj": "35a6d798252c9e3ae0d7c261a2e24b45684926a5e6eb02982a23632e0bf43a69",
+          "AudioLegacy.obj": "6d4c9c41dbbe7aa444db40154ec74411ccfdfe4c4504bdbd7323de44b4dc61a8",
+          "DirectSound.obj": "6bfde567f0c544eb019ca0490b2c5db980d032aa4dfe35ea1286be4b49c23921",
+          "AudioLog.obj": "9b882483610df1f433b972c5c39a9b9c44c100f88c4334f3eb2bda2754c76603",
+          "CPUFeatures.obj": "17ef58e421b5ad072cf3e250fc2238dc246fa10777a8fd9b6fe46ef8c313d638",
+          "Jpeg.obj": "8a7ab74a8a50b7b1164c3f280a557509568b0f052ab414178f14e0cde23049a6",
+          "Mp3.obj": "8ce7e6df2dc7f3f0b0151af30d634010b4208eeff96976c2484f132c6410990d",
+          "AudioProcessing.obj": "7485e7caf915f7c3cc6fc40836639967f16a514e444a2bdd6b5c2cd9479bfb89",
+          "AudioResample.obj": "304dc24892c930c722bc067953d419824124d96448f49347c00cc00316aa98df",
+          "AudioPlugin.obj": "25d2193b5ae43a52632a03daf87d53101c7850074a94001699cf1bbcef7a9108",
+          "RSP.obj": "56a0cb37a5f8ad80419f7a1cbc7435812a4cdb48df7fe3262ea814da25f491c9",
+          "Audio.res": "2a0c51c1b458d8abe45fd78bd70da51f5c56fa5303a595bfb35828a77e0b72a6"
+        },
+        "dll_sha256": "3abde74178a661c73f85e1ba4c8fb7cf724a4c65b081b0f6bd8613092a482c7d",
+        "map_sha256": "3418c2bfe361990e4639708e56e8e26e99d5696b4b568d0d394e21f0323a9fa4",
+        "comparison_sha256": "07edd778d5c20b601c48b67334e4c738a6d9db9e8b67762f6688d15029ff53d5",
+        "text_records_sha256": "b7153319b0107ccd0fafe203f14226fc521cfe6e21b61314663138ff19f3b954",
+        "all_host_text_and_resolved_coff_relocation_targets_unchanged": true,
+        "raw_text_and_literal_target_names_unchanged": true,
+        "body_checks": [
+          {
+            "unit": "DirectSound.obj",
+            "functions": 49,
+            "instruction_matches": 46,
+            "independently_relocated_matches": 13,
+            "unresolved_targets": 2,
+            "inferred_targets": 644,
+            "target_mismatches": 63
+          },
+          {
+            "unit": "AudioLog.obj",
+            "functions": 11,
+            "instruction_matches": 11,
+            "independently_relocated_matches": 2,
+            "unresolved_targets": 0,
+            "inferred_targets": 31,
+            "target_mismatches": 0
+          }
+        ],
+        "data_section": {
+          "name": ".data",
+          "virtual_size": 1279532,
+          "rva": 217088,
+          "raw_size": 49152,
+          "offset": 217088
+        },
+        "data_virtual_deficit": 416,
+        "common_rosters": {
+          "DirectSound": [
+            {
+              "name": "_QueuedBlockReady",
+              "bytes": 1200,
+              "linked_va": "0x10168f00",
+              "owner": "<common>",
+              "original_va": "0x1016b580",
+              "delta": -9856
+            },
+            {
+              "name": "_SoundBuffer",
+              "bytes": 4,
+              "linked_va": "0x101693b0",
+              "owner": "<common>",
+              "original_va": "0x1016bae8",
+              "delta": -10040
+            },
+            {
+              "name": "_QueueBytes",
+              "bytes": 4,
+              "linked_va": "0x101693b4",
+              "owner": "<common>",
+              "original_va": "0x1016ba84",
+              "delta": -9936
+            },
+            {
+              "name": "_AudioErrorText",
+              "bytes": 8192,
+              "linked_va": "0x101693c0",
+              "owner": "<common>",
+              "original_va": "0x10169560",
+              "delta": -416
+            },
+            {
+              "name": "_AudioEvents",
+              "bytes": 4,
+              "linked_va": "0x1016b3c0",
+              "owner": "<common>",
+              "original_va": "0x1016baec",
+              "delta": -1836
+            },
+            {
+              "name": "_QueueWrite",
+              "bytes": 2,
+              "linked_va": "0x1016b3c4",
+              "owner": "<common>",
+              "original_va": "0x1016ba78",
+              "delta": -1716
+            },
+            {
+              "name": "_MIRegisters",
+              "bytes": 4,
+              "linked_va": "0x1016b3c8",
+              "owner": "<common>",
+              "original_va": "0x1016ba7c",
+              "delta": -1716
+            },
+            {
+              "name": "_AudioIniKey",
+              "bytes": 32,
+              "linked_va": "0x1016b3e0",
+              "owner": "<common>",
+              "original_va": "0x1016ba40",
+              "delta": -1632
+            },
+            {
+              "name": "_QueueCount",
+              "bytes": 4,
+              "linked_va": "0x1016b400",
+              "owner": "<common>",
+              "original_va": "0x10169038",
+              "delta": 9160
+            },
+            {
+              "name": "_HLEWaveFile",
+              "bytes": 4,
+              "linked_va": "0x1016b404",
+              "owner": "<common>",
+              "original_va": "0x1016ba64",
+              "delta": -1632
+            },
+            {
+              "name": "_AudioInstance",
+              "bytes": 4,
+              "linked_va": "0x1016b408",
+              "owner": "<common>",
+              "original_va": "0x1016baf0",
+              "delta": -1768
+            },
+            {
+              "name": "_ABIFile",
+              "bytes": 4,
+              "linked_va": "0x1016b40c",
+              "owner": "<common>",
+              "original_va": "0x1016bfd8",
+              "delta": -3020
+            },
+            {
+              "name": "_SoundEvents",
+              "bytes": 64,
+              "linked_va": "0x1016b420",
+              "owner": "<common>",
+              "original_va": "0x1016baa0",
+              "delta": -1664
+            },
+            {
+              "name": "_QueuedBlockLength",
+              "bytes": 1200,
+              "linked_va": "0x1016b460",
+              "owner": "<common>",
+              "original_va": "0x10169060",
+              "delta": 9216
+            },
+            {
+              "name": "_IsNTSC",
+              "bytes": 4,
+              "linked_va": "0x1016b910",
+              "owner": "<common>",
+              "original_va": "0x1016c0e8",
+              "delta": -2008
+            },
+            {
+              "name": "_CPURegisters",
+              "bytes": 4,
+              "linked_va": "0x1016b914",
+              "owner": "<common>",
+              "original_va": "0x1016b560",
+              "delta": 948
+            },
+            {
+              "name": "_AudioIniFile",
+              "bytes": 260,
+              "linked_va": "0x1016b920",
+              "owner": "<common>",
+              "original_va": "0x1016c120",
+              "delta": -2048
+            },
+            {
+              "name": "_BufferLimit",
+              "bytes": 4,
+              "linked_va": "0x1016ba24",
+              "owner": "<common>",
+              "original_va": "0x1016ba30",
+              "delta": -12
+            },
+            {
+              "name": "_BufferPosition",
+              "bytes": 4,
+              "linked_va": "0x1016ba28",
+              "owner": "<common>",
+              "original_va": "0x1016bae0",
+              "delta": -184
+            },
+            {
+              "name": "_RDRAM",
+              "bytes": 4,
+              "linked_va": "0x1016ba2c",
+              "owner": "<common>",
+              "original_va": "0x1016bae4",
+              "delta": -184
+            },
+            {
+              "name": "_SoundCriticalSection",
+              "bytes": 24,
+              "linked_va": "0x1016ba40",
+              "owner": "<common>",
+              "original_va": "0x1016c100",
+              "delta": -1728
+            },
+            {
+              "name": "_QueuedBlocks",
+              "bytes": 1200,
+              "linked_va": "0x1016ba60",
+              "owner": "<common>",
+              "original_va": "0x1016bb00",
+              "delta": -160
+            },
+            {
+              "name": "_AudioAboutText",
+              "bytes": 256,
+              "linked_va": "0x1016bf20",
+              "owner": "<common>",
+              "original_va": "0x1016bfe0",
+              "delta": -192
+            },
+            {
+              "name": "_AIRegisters",
+              "bytes": 4,
+              "linked_va": "0x1016c020",
+              "owner": "<common>",
+              "original_va": "0x10169510",
+              "delta": 11024
+            },
+            {
+              "name": "_CurrentPlayPosition",
+              "bytes": 4,
+              "linked_va": "0x1016c024",
+              "owner": "<common>",
+              "original_va": "0x1016b568",
+              "delta": 2748
+            },
+            {
+              "name": "_DirectSound",
+              "bytes": 4,
+              "linked_va": "0x1016c028",
+              "owner": "<common>",
+              "original_va": "0x1016c0e0",
+              "delta": -184
+            },
+            {
+              "name": "_WaveFormat",
+              "bytes": 18,
+              "linked_va": "0x1016c040",
+              "owner": "<common>",
+              "original_va": "0x1016bfc0",
+              "delta": 128
+            },
+            {
+              "name": "_HLELogFile",
+              "bytes": 4,
+              "linked_va": "0x1016c054",
+              "owner": "<common>",
+              "original_va": "0x1016ba80",
+              "delta": 1492
+            },
+            {
+              "name": "_QueueRead",
+              "bytes": 2,
+              "linked_va": "0x1016c058",
+              "owner": "<common>",
+              "original_va": "0x10169040",
+              "delta": 12312
+            },
+            {
+              "name": "_PrimaryBuffer",
+              "bytes": 4,
+              "linked_va": "0x1016c05c",
+              "owner": "<common>",
+              "original_va": "0x1016ba74",
+              "delta": 1512
+            },
+            {
+              "name": "_TimerUser",
+              "bytes": 4,
+              "linked_va": "0x1016c060",
+              "owner": "<common>",
+              "original_va": "0x1016b564",
+              "delta": 2812
+            },
+            {
+              "name": "_CurrentAudioLength",
+              "bytes": 4,
+              "linked_va": "0x1016c064",
+              "owner": "<common>",
+              "original_va": "0x1016ba60",
+              "delta": 1540
+            },
+            {
+              "name": "_AudioIniSection",
+              "bytes": 64,
+              "linked_va": "0x1016c080",
+              "owner": "<common>",
+              "original_va": "0x1016c240",
+              "delta": -448
+            },
+            {
+              "name": "_AIWaveFile",
+              "bytes": 4,
+              "linked_va": "0x1016c0c0",
+              "owner": "<common>",
+              "original_va": "0x1016903c",
+              "delta": 12420
+            },
+            {
+              "name": "_BufferDescription",
+              "bytes": 36,
+              "linked_va": "0x1016c0e0",
+              "owner": "<common>",
+              "original_va": "0x10169520",
+              "delta": 11200
+            },
+            {
+              "name": "_AudioWindow",
+              "bytes": 4,
+              "linked_va": "0x1016c104",
+              "owner": "<common>",
+              "original_va": "0x1016bafc",
+              "delta": 1544
+            }
+          ],
+          "AudioLog": [
+            {
+              "name": "_LogInstance",
+              "bytes": 4,
+              "linked_va": "0x10168ee4",
+              "owner": "<common>",
+              "original_va": "0x10169024",
+              "delta": -320
+            },
+            {
+              "name": "_LogWindow",
+              "bytes": 4,
+              "linked_va": "0x10168ee8",
+              "owner": "<common>",
+              "original_va": "0x1016902c",
+              "delta": -324
+            },
+            {
+              "name": "_LogEdit",
+              "bytes": 4,
+              "linked_va": "0x10168eec",
+              "owner": "<common>",
+              "original_va": "0x10169028",
+              "delta": -316
+            }
+          ],
+          "Mp3": [
+            {
+              "name": "_d17",
+              "bytes": 2,
+              "linked_va": "0x10168580",
+              "owner": "<common>",
+              "original_va": "0x101686c0",
+              "delta": -320
+            },
+            {
+              "name": "_c1",
+              "bytes": 2,
+              "linked_va": "0x10168582",
+              "owner": "<common>",
+              "original_va": "0x101686c2",
+              "delta": -320
+            },
+            {
+              "name": "_d6",
+              "bytes": 2,
+              "linked_va": "0x10168584",
+              "owner": "<common>",
+              "original_va": "0x101686c4",
+              "delta": -320
+            },
+            {
+              "name": "_c10",
+              "bytes": 2,
+              "linked_va": "0x10168586",
+              "owner": "<common>",
+              "original_va": "0x101686c6",
+              "delta": -320
+            },
+            {
+              "name": "_c2",
+              "bytes": 2,
+              "linked_va": "0x10168588",
+              "owner": "<common>",
+              "original_va": "0x101686c8",
+              "delta": -320
+            },
+            {
+              "name": "_d16",
+              "bytes": 2,
+              "linked_va": "0x1016858a",
+              "owner": "<common>",
+              "original_va": "0x101686ca",
+              "delta": -320
+            },
+            {
+              "name": "_d2",
+              "bytes": 2,
+              "linked_va": "0x1016858c",
+              "owner": "<common>",
+              "original_va": "0x101686cc",
+              "delta": -320
+            },
+            {
+              "name": "_d21",
+              "bytes": 2,
+              "linked_va": "0x1016858e",
+              "owner": "<common>",
+              "original_va": "0x101686ce",
+              "delta": -320
+            },
+            {
+              "name": "_d19",
+              "bytes": 2,
+              "linked_va": "0x10168590",
+              "owner": "<common>",
+              "original_va": "0x101686d0",
+              "delta": -320
+            },
+            {
+              "name": "_d23",
+              "bytes": 2,
+              "linked_va": "0x10168592",
+              "owner": "<common>",
+              "original_va": "0x101686d2",
+              "delta": -320
+            },
+            {
+              "name": "_c8",
+              "bytes": 2,
+              "linked_va": "0x10168594",
+              "owner": "<common>",
+              "original_va": "0x101686d4",
+              "delta": -320
+            },
+            {
+              "name": "_d10",
+              "bytes": 2,
+              "linked_va": "0x10168596",
+              "owner": "<common>",
+              "original_va": "0x101686d6",
+              "delta": -320
+            },
+            {
+              "name": "_d18",
+              "bytes": 2,
+              "linked_va": "0x10168598",
+              "owner": "<common>",
+              "original_va": "0x101686d8",
+              "delta": -320
+            },
+            {
+              "name": "_d8",
+              "bytes": 2,
+              "linked_va": "0x1016859a",
+              "owner": "<common>",
+              "original_va": "0x101686da",
+              "delta": -320
+            },
+            {
+              "name": "_c5",
+              "bytes": 2,
+              "linked_va": "0x1016859c",
+              "owner": "<common>",
+              "original_va": "0x101686dc",
+              "delta": -320
+            },
+            {
+              "name": "_d12",
+              "bytes": 2,
+              "linked_va": "0x1016859e",
+              "owner": "<common>",
+              "original_va": "0x101686de",
+              "delta": -320
+            },
+            {
+              "name": "_d22",
+              "bytes": 2,
+              "linked_va": "0x101685a0",
+              "owner": "<common>",
+              "original_va": "0x101686e0",
+              "delta": -320
+            },
+            {
+              "name": "_c4",
+              "bytes": 2,
+              "linked_va": "0x101685a2",
+              "owner": "<common>",
+              "original_va": "0x101686e2",
+              "delta": -320
+            },
+            {
+              "name": "_d26",
+              "bytes": 2,
+              "linked_va": "0x101685a4",
+              "owner": "<common>",
+              "original_va": "0x101686e4",
+              "delta": -320
+            },
+            {
+              "name": "_d11",
+              "bytes": 2,
+              "linked_va": "0x101685a6",
+              "owner": "<common>",
+              "original_va": "0x101686e6",
+              "delta": -320
+            },
+            {
+              "name": "_d0",
+              "bytes": 2,
+              "linked_va": "0x101685a8",
+              "owner": "<common>",
+              "original_va": "0x101686e8",
+              "delta": -320
+            },
+            {
+              "name": "_c12",
+              "bytes": 2,
+              "linked_va": "0x101685aa",
+              "owner": "<common>",
+              "original_va": "0x101686ea",
+              "delta": -320
+            },
+            {
+              "name": "_c11",
+              "bytes": 2,
+              "linked_va": "0x101685ac",
+              "owner": "<common>",
+              "original_va": "0x101686ec",
+              "delta": -320
+            },
+            {
+              "name": "_d5",
+              "bytes": 2,
+              "linked_va": "0x101685ae",
+              "owner": "<common>",
+              "original_va": "0x101686ee",
+              "delta": -320
+            },
+            {
+              "name": "_c7",
+              "bytes": 2,
+              "linked_va": "0x101685b0",
+              "owner": "<common>",
+              "original_va": "0x101686f0",
+              "delta": -320
+            },
+            {
+              "name": "_c15",
+              "bytes": 2,
+              "linked_va": "0x101685b2",
+              "owner": "<common>",
+              "original_va": "0x101686f2",
+              "delta": -320
+            },
+            {
+              "name": "_c9",
+              "bytes": 2,
+              "linked_va": "0x101685b4",
+              "owner": "<common>",
+              "original_va": "0x101686f4",
+              "delta": -320
+            },
+            {
+              "name": "_d3",
+              "bytes": 2,
+              "linked_va": "0x101685b6",
+              "owner": "<common>",
+              "original_va": "0x101686f6",
+              "delta": -320
+            },
+            {
+              "name": "_d24",
+              "bytes": 2,
+              "linked_va": "0x101685b8",
+              "owner": "<common>",
+              "original_va": "0x101686f8",
+              "delta": -320
+            },
+            {
+              "name": "_c0",
+              "bytes": 2,
+              "linked_va": "0x101685ba",
+              "owner": "<common>",
+              "original_va": "0x101686fa",
+              "delta": -320
+            },
+            {
+              "name": "_d7",
+              "bytes": 2,
+              "linked_va": "0x101685bc",
+              "owner": "<common>",
+              "original_va": "0x101686fc",
+              "delta": -320
+            },
+            {
+              "name": "_d4",
+              "bytes": 2,
+              "linked_va": "0x101685be",
+              "owner": "<common>",
+              "original_va": "0x101686fe",
+              "delta": -320
+            },
+            {
+              "name": "_d14",
+              "bytes": 2,
+              "linked_va": "0x101685c0",
+              "owner": "<common>",
+              "original_va": "0x10168700",
+              "delta": -320
+            },
+            {
+              "name": "_c6",
+              "bytes": 2,
+              "linked_va": "0x101685c2",
+              "owner": "<common>",
+              "original_va": "0x10168702",
+              "delta": -320
+            },
+            {
+              "name": "_d29",
+              "bytes": 2,
+              "linked_va": "0x101685c4",
+              "owner": "<common>",
+              "original_va": "0x10168704",
+              "delta": -320
+            },
+            {
+              "name": "_d31",
+              "bytes": 2,
+              "linked_va": "0x101685c6",
+              "owner": "<common>",
+              "original_va": "0x10168706",
+              "delta": -320
+            },
+            {
+              "name": "_c3",
+              "bytes": 2,
+              "linked_va": "0x101685c8",
+              "owner": "<common>",
+              "original_va": "0x10168708",
+              "delta": -320
+            },
+            {
+              "name": "_d25",
+              "bytes": 2,
+              "linked_va": "0x101685ca",
+              "owner": "<common>",
+              "original_va": "0x1016870a",
+              "delta": -320
+            },
+            {
+              "name": "_d9",
+              "bytes": 2,
+              "linked_va": "0x101685cc",
+              "owner": "<common>",
+              "original_va": "0x1016870c",
+              "delta": -320
+            },
+            {
+              "name": "_d30",
+              "bytes": 2,
+              "linked_va": "0x101685ce",
+              "owner": "<common>",
+              "original_va": "0x1016870e",
+              "delta": -320
+            },
+            {
+              "name": "_c13",
+              "bytes": 2,
+              "linked_va": "0x101685d0",
+              "owner": "<common>",
+              "original_va": "0x10168710",
+              "delta": -320
+            },
+            {
+              "name": "_d1",
+              "bytes": 2,
+              "linked_va": "0x101685d2",
+              "owner": "<common>",
+              "original_va": "0x10168712",
+              "delta": -320
+            },
+            {
+              "name": "_d28",
+              "bytes": 2,
+              "linked_va": "0x101685d4",
+              "owner": "<common>",
+              "original_va": "0x10168714",
+              "delta": -320
+            },
+            {
+              "name": "_d13",
+              "bytes": 2,
+              "linked_va": "0x101685d6",
+              "owner": "<common>",
+              "original_va": "0x10168716",
+              "delta": -320
+            },
+            {
+              "name": "_d20",
+              "bytes": 2,
+              "linked_va": "0x101685d8",
+              "owner": "<common>",
+              "original_va": "0x10168718",
+              "delta": -320
+            },
+            {
+              "name": "_d15",
+              "bytes": 2,
+              "linked_va": "0x101685da",
+              "owner": "<common>",
+              "original_va": "0x1016871a",
+              "delta": -320
+            },
+            {
+              "name": "_res",
+              "bytes": 2304,
+              "linked_va": "0x101685e0",
+              "owner": "<common>",
+              "original_va": "0x10168720",
+              "delta": -320
+            },
+            {
+              "name": "_c14",
+              "bytes": 2,
+              "linked_va": "0x10168ee0",
+              "owner": "<common>",
+              "original_va": "0x10169020",
+              "delta": -320
+            },
+            {
+              "name": "_d27",
+              "bytes": 2,
+              "linked_va": "0x10168ee2",
+              "owner": "<common>",
+              "original_va": "0x10169022",
+              "delta": -320
+            }
+          ]
+        },
+        "selected_map": {
+          "_AudioProfileCounters": {
+            "va": "0x10130580",
+            "owner": "<common>"
+          },
+          "_d0": {
+            "va": "0x101685a8",
+            "owner": "<common>"
+          },
+          "_d31": {
+            "va": "0x101685c6",
+            "owner": "<common>"
+          },
+          "_res": {
+            "va": "0x101685e0",
+            "owner": "<common>"
+          },
+          "_LogInstance": {
+            "va": "0x10168ee4",
+            "owner": "<common>"
+          },
+          "_LogWindow": {
+            "va": "0x10168ee8",
+            "owner": "<common>"
+          },
+          "_LogEdit": {
+            "va": "0x10168eec",
+            "owner": "<common>"
+          },
+          "_AudioTaskCount": {
+            "va": "0x1016c25c",
+            "owner": "<common>"
+          }
+        }
+      },
+      {
+        "variant": "waveout-objects",
+        "compile_command": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/FoDirectSound.obj",
+          "DirectSound.c"
+        ],
+        "link_command": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "link",
+          "/nologo",
+          "/dll",
+          "/incremental:no",
+          "/debug",
+          "/opt:noref",
+          "/opt:noicf",
+          "/subsystem:windows",
+          "/machine:I386",
+          "/base:0x10000000",
+          "/align:4096",
+          "/filealign:4096",
+          "/out:audio.dll",
+          "/pdb:audio.pdb",
+          "/map:audio.map",
+          "/def:audio.def",
+          "ABI1.obj",
+          "ABI2.obj",
+          "AudioHLE.obj",
+          "ABI3.obj",
+          "AudioLegacy.obj",
+          "DirectSound.obj",
+          "AudioLog.obj",
+          "CPUFeatures.obj",
+          "Jpeg.obj",
+          "Mp3.obj",
+          "AudioProcessing.obj",
+          "AudioResample.obj",
+          "AudioPlugin.obj",
+          "RSP.obj",
+          "Audio.res",
+          "Z:\\root\\nemu-decomp\\toolchains\\vc6\\lib\\dsound.lib",
+          "winmm.lib",
+          "kernel32.lib",
+          "user32.lib",
+          "gdi32.lib"
+        ],
+        "source_sha256": {
+          "transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
+          "DirectSound.h": "ab5ed735f1ab52226c0c7e7a559d080e10ec5649d2814b177f1a79686135455b",
+          "DirectSound.c": "0efa18bf0ce90e158797cda899cd2d86b87be4c20988edf52e9c9f09507c9ab9"
+        },
+        "input_sha256": {
+          "audio.def": "f34ad9fa1d564c407483eabd05363f0c95a4cf69a81f6c4ffcb0dd95ddcb4b34",
+          "ABI1.obj": "95c9c27bdbe79fa1d049d6cafd7801c2b9af833c51086056996de43c21193b99",
+          "ABI2.obj": "f96b251b7ed2d403e92c025efcd7856c2a1cc32b974dec76107b250c21f45703",
+          "AudioHLE.obj": "c2c7f734eea9a3d39fed9c8292efb0ea1afaf8c57e5bef50efe2e59bdd5d1af4",
+          "ABI3.obj": "35a6d798252c9e3ae0d7c261a2e24b45684926a5e6eb02982a23632e0bf43a69",
+          "AudioLegacy.obj": "6d4c9c41dbbe7aa444db40154ec74411ccfdfe4c4504bdbd7323de44b4dc61a8",
+          "DirectSound.obj": "b775734230a71f902e146eb2bd71bd86520f856c79544b28c456d441edf74403",
+          "AudioLog.obj": "9b882483610df1f433b972c5c39a9b9c44c100f88c4334f3eb2bda2754c76603",
+          "CPUFeatures.obj": "17ef58e421b5ad072cf3e250fc2238dc246fa10777a8fd9b6fe46ef8c313d638",
+          "Jpeg.obj": "8a7ab74a8a50b7b1164c3f280a557509568b0f052ab414178f14e0cde23049a6",
+          "Mp3.obj": "8ce7e6df2dc7f3f0b0151af30d634010b4208eeff96976c2484f132c6410990d",
+          "AudioProcessing.obj": "7485e7caf915f7c3cc6fc40836639967f16a514e444a2bdd6b5c2cd9479bfb89",
+          "AudioResample.obj": "304dc24892c930c722bc067953d419824124d96448f49347c00cc00316aa98df",
+          "AudioPlugin.obj": "25d2193b5ae43a52632a03daf87d53101c7850074a94001699cf1bbcef7a9108",
+          "RSP.obj": "56a0cb37a5f8ad80419f7a1cbc7435812a4cdb48df7fe3262ea814da25f491c9",
+          "Audio.res": "2a0c51c1b458d8abe45fd78bd70da51f5c56fa5303a595bfb35828a77e0b72a6"
+        },
+        "dll_sha256": "2ee100657bec381b0e3196c2fb65b7615ae44e7b0d64c05e51b837adaf7673bd",
+        "map_sha256": "6cc49ea9ea87a39c594c1ac53c4740ec8ed74fa5f353f9b5bec55298eadaaa08",
+        "comparison_sha256": "66116a9e764dc1e06841c265e9e7c7b76de8d8c6aa0416b224bef613a845641a",
+        "text_records_sha256": "1e463a10b6c9fb2f418c07cde5cd7abdacac58adb3b20b615b7d2d68bde56052",
+        "all_host_text_and_resolved_coff_relocation_targets_unchanged": true,
+        "raw_text_and_literal_target_names_unchanged": false,
+        "body_checks": [
+          {
+            "unit": "DirectSound.obj",
+            "functions": 49,
+            "instruction_matches": 46,
+            "independently_relocated_matches": 13,
+            "unresolved_targets": 2,
+            "inferred_targets": 644,
+            "target_mismatches": 63
+          },
+          {
+            "unit": "AudioLog.obj",
+            "functions": 11,
+            "instruction_matches": 11,
+            "independently_relocated_matches": 2,
+            "unresolved_targets": 0,
+            "inferred_targets": 31,
+            "target_mismatches": 0
+          }
+        ],
+        "data_section": {
+          "name": ".data",
+          "virtual_size": 1279596,
+          "rva": 217088,
+          "raw_size": 49152,
+          "offset": 217088
+        },
+        "data_virtual_deficit": 352,
+        "common_rosters": {
+          "DirectSound": [
+            {
+              "name": "_QueuedBlockReady",
+              "bytes": 1200,
+              "linked_va": "0x10168f00",
+              "owner": "<common>",
+              "original_va": "0x1016b580",
+              "delta": -9856
+            },
+            {
+              "name": "_SoundBuffer",
+              "bytes": 4,
+              "linked_va": "0x101693b0",
+              "owner": "<common>",
+              "original_va": "0x1016bae8",
+              "delta": -10040
+            },
+            {
+              "name": "_QueueBytes",
+              "bytes": 4,
+              "linked_va": "0x101693b4",
+              "owner": "<common>",
+              "original_va": "0x1016ba84",
+              "delta": -9936
+            },
+            {
+              "name": "_AudioErrorText",
+              "bytes": 8192,
+              "linked_va": "0x101693c0",
+              "owner": "<common>",
+              "original_va": "0x10169560",
+              "delta": -416
+            },
+            {
+              "name": "_AudioEvents",
+              "bytes": 4,
+              "linked_va": "0x1016b3c0",
+              "owner": "<common>",
+              "original_va": "0x1016baec",
+              "delta": -1836
+            },
+            {
+              "name": "_QueueWrite",
+              "bytes": 2,
+              "linked_va": "0x1016b3c4",
+              "owner": "<common>",
+              "original_va": "0x1016ba78",
+              "delta": -1716
+            },
+            {
+              "name": "_MIRegisters",
+              "bytes": 4,
+              "linked_va": "0x1016b3c8",
+              "owner": "<common>",
+              "original_va": "0x1016ba7c",
+              "delta": -1716
+            },
+            {
+              "name": "_AudioIniKey",
+              "bytes": 32,
+              "linked_va": "0x1016b3e0",
+              "owner": "<common>",
+              "original_va": "0x1016ba40",
+              "delta": -1632
+            },
+            {
+              "name": "_QueueCount",
+              "bytes": 4,
+              "linked_va": "0x1016b400",
+              "owner": "<common>",
+              "original_va": "0x10169038",
+              "delta": 9160
+            },
+            {
+              "name": "_HLEWaveFile",
+              "bytes": 4,
+              "linked_va": "0x1016b404",
+              "owner": "<common>",
+              "original_va": "0x1016ba64",
+              "delta": -1632
+            },
+            {
+              "name": "_WaveOutHandle",
+              "bytes": 4,
+              "linked_va": "0x1016b408",
+              "owner": "<common>",
+              "original_va": null,
+              "delta": null
+            },
+            {
+              "name": "_AudioInstance",
+              "bytes": 4,
+              "linked_va": "0x1016b40c",
+              "owner": "<common>",
+              "original_va": "0x1016baf0",
+              "delta": -1764
+            },
+            {
+              "name": "_ABIFile",
+              "bytes": 4,
+              "linked_va": "0x1016b410",
+              "owner": "<common>",
+              "original_va": "0x1016bfd8",
+              "delta": -3016
+            },
+            {
+              "name": "_SoundEvents",
+              "bytes": 64,
+              "linked_va": "0x1016b420",
+              "owner": "<common>",
+              "original_va": "0x1016baa0",
+              "delta": -1664
+            },
+            {
+              "name": "_QueuedBlockLength",
+              "bytes": 1200,
+              "linked_va": "0x1016b460",
+              "owner": "<common>",
+              "original_va": "0x10169060",
+              "delta": 9216
+            },
+            {
+              "name": "_WaveOutHeader",
+              "bytes": 32,
+              "linked_va": "0x1016b920",
+              "owner": "<common>",
+              "original_va": null,
+              "delta": null
+            },
+            {
+              "name": "_IsNTSC",
+              "bytes": 4,
+              "linked_va": "0x1016b940",
+              "owner": "<common>",
+              "original_va": "0x1016c0e8",
+              "delta": -1960
+            },
+            {
+              "name": "_CPURegisters",
+              "bytes": 4,
+              "linked_va": "0x1016b944",
+              "owner": "<common>",
+              "original_va": "0x1016b560",
+              "delta": 996
+            },
+            {
+              "name": "_AudioIniFile",
+              "bytes": 260,
+              "linked_va": "0x1016b960",
+              "owner": "<common>",
+              "original_va": "0x1016c120",
+              "delta": -1984
+            },
+            {
+              "name": "_BufferLimit",
+              "bytes": 4,
+              "linked_va": "0x1016ba64",
+              "owner": "<common>",
+              "original_va": "0x1016ba30",
+              "delta": 52
+            },
+            {
+              "name": "_BufferPosition",
+              "bytes": 4,
+              "linked_va": "0x1016ba68",
+              "owner": "<common>",
+              "original_va": "0x1016bae0",
+              "delta": -120
+            },
+            {
+              "name": "_RDRAM",
+              "bytes": 4,
+              "linked_va": "0x1016ba6c",
+              "owner": "<common>",
+              "original_va": "0x1016bae4",
+              "delta": -120
+            },
+            {
+              "name": "_SoundCriticalSection",
+              "bytes": 24,
+              "linked_va": "0x1016ba80",
+              "owner": "<common>",
+              "original_va": "0x1016c100",
+              "delta": -1664
+            },
+            {
+              "name": "_QueuedBlocks",
+              "bytes": 1200,
+              "linked_va": "0x1016baa0",
+              "owner": "<common>",
+              "original_va": "0x1016bb00",
+              "delta": -96
+            },
+            {
+              "name": "_AudioAboutText",
+              "bytes": 256,
+              "linked_va": "0x1016bf60",
+              "owner": "<common>",
+              "original_va": "0x1016bfe0",
+              "delta": -128
+            },
+            {
+              "name": "_AIRegisters",
+              "bytes": 4,
+              "linked_va": "0x1016c060",
+              "owner": "<common>",
+              "original_va": "0x10169510",
+              "delta": 11088
+            },
+            {
+              "name": "_CurrentPlayPosition",
+              "bytes": 4,
+              "linked_va": "0x1016c064",
+              "owner": "<common>",
+              "original_va": "0x1016b568",
+              "delta": 2812
+            },
+            {
+              "name": "_DirectSound",
+              "bytes": 4,
+              "linked_va": "0x1016c068",
+              "owner": "<common>",
+              "original_va": "0x1016c0e0",
+              "delta": -120
+            },
+            {
+              "name": "_WaveFormat",
+              "bytes": 18,
+              "linked_va": "0x1016c080",
+              "owner": "<common>",
+              "original_va": "0x1016bfc0",
+              "delta": 192
+            },
+            {
+              "name": "_HLELogFile",
+              "bytes": 4,
+              "linked_va": "0x1016c094",
+              "owner": "<common>",
+              "original_va": "0x1016ba80",
+              "delta": 1556
+            },
+            {
+              "name": "_QueueRead",
+              "bytes": 2,
+              "linked_va": "0x1016c098",
+              "owner": "<common>",
+              "original_va": "0x10169040",
+              "delta": 12376
+            },
+            {
+              "name": "_PrimaryBuffer",
+              "bytes": 4,
+              "linked_va": "0x1016c09c",
+              "owner": "<common>",
+              "original_va": "0x1016ba74",
+              "delta": 1576
+            },
+            {
+              "name": "_TimerUser",
+              "bytes": 4,
+              "linked_va": "0x1016c0a0",
+              "owner": "<common>",
+              "original_va": "0x1016b564",
+              "delta": 2876
+            },
+            {
+              "name": "_CurrentAudioLength",
+              "bytes": 4,
+              "linked_va": "0x1016c0a4",
+              "owner": "<common>",
+              "original_va": "0x1016ba60",
+              "delta": 1604
+            },
+            {
+              "name": "_AudioIniSection",
+              "bytes": 64,
+              "linked_va": "0x1016c0c0",
+              "owner": "<common>",
+              "original_va": "0x1016c240",
+              "delta": -384
+            },
+            {
+              "name": "_AIWaveFile",
+              "bytes": 4,
+              "linked_va": "0x1016c100",
+              "owner": "<common>",
+              "original_va": "0x1016903c",
+              "delta": 12484
+            },
+            {
+              "name": "_BufferDescription",
+              "bytes": 36,
+              "linked_va": "0x1016c120",
+              "owner": "<common>",
+              "original_va": "0x10169520",
+              "delta": 11264
+            },
+            {
+              "name": "_AudioWindow",
+              "bytes": 4,
+              "linked_va": "0x1016c144",
+              "owner": "<common>",
+              "original_va": "0x1016bafc",
+              "delta": 1608
+            }
+          ],
+          "AudioLog": [
+            {
+              "name": "_LogInstance",
+              "bytes": 4,
+              "linked_va": "0x10168ee4",
+              "owner": "<common>",
+              "original_va": "0x10169024",
+              "delta": -320
+            },
+            {
+              "name": "_LogWindow",
+              "bytes": 4,
+              "linked_va": "0x10168ee8",
+              "owner": "<common>",
+              "original_va": "0x1016902c",
+              "delta": -324
+            },
+            {
+              "name": "_LogEdit",
+              "bytes": 4,
+              "linked_va": "0x10168eec",
+              "owner": "<common>",
+              "original_va": "0x10169028",
+              "delta": -316
+            }
+          ],
+          "Mp3": [
+            {
+              "name": "_d17",
+              "bytes": 2,
+              "linked_va": "0x10168580",
+              "owner": "<common>",
+              "original_va": "0x101686c0",
+              "delta": -320
+            },
+            {
+              "name": "_c1",
+              "bytes": 2,
+              "linked_va": "0x10168582",
+              "owner": "<common>",
+              "original_va": "0x101686c2",
+              "delta": -320
+            },
+            {
+              "name": "_d6",
+              "bytes": 2,
+              "linked_va": "0x10168584",
+              "owner": "<common>",
+              "original_va": "0x101686c4",
+              "delta": -320
+            },
+            {
+              "name": "_c10",
+              "bytes": 2,
+              "linked_va": "0x10168586",
+              "owner": "<common>",
+              "original_va": "0x101686c6",
+              "delta": -320
+            },
+            {
+              "name": "_c2",
+              "bytes": 2,
+              "linked_va": "0x10168588",
+              "owner": "<common>",
+              "original_va": "0x101686c8",
+              "delta": -320
+            },
+            {
+              "name": "_d16",
+              "bytes": 2,
+              "linked_va": "0x1016858a",
+              "owner": "<common>",
+              "original_va": "0x101686ca",
+              "delta": -320
+            },
+            {
+              "name": "_d2",
+              "bytes": 2,
+              "linked_va": "0x1016858c",
+              "owner": "<common>",
+              "original_va": "0x101686cc",
+              "delta": -320
+            },
+            {
+              "name": "_d21",
+              "bytes": 2,
+              "linked_va": "0x1016858e",
+              "owner": "<common>",
+              "original_va": "0x101686ce",
+              "delta": -320
+            },
+            {
+              "name": "_d19",
+              "bytes": 2,
+              "linked_va": "0x10168590",
+              "owner": "<common>",
+              "original_va": "0x101686d0",
+              "delta": -320
+            },
+            {
+              "name": "_d23",
+              "bytes": 2,
+              "linked_va": "0x10168592",
+              "owner": "<common>",
+              "original_va": "0x101686d2",
+              "delta": -320
+            },
+            {
+              "name": "_c8",
+              "bytes": 2,
+              "linked_va": "0x10168594",
+              "owner": "<common>",
+              "original_va": "0x101686d4",
+              "delta": -320
+            },
+            {
+              "name": "_d10",
+              "bytes": 2,
+              "linked_va": "0x10168596",
+              "owner": "<common>",
+              "original_va": "0x101686d6",
+              "delta": -320
+            },
+            {
+              "name": "_d18",
+              "bytes": 2,
+              "linked_va": "0x10168598",
+              "owner": "<common>",
+              "original_va": "0x101686d8",
+              "delta": -320
+            },
+            {
+              "name": "_d8",
+              "bytes": 2,
+              "linked_va": "0x1016859a",
+              "owner": "<common>",
+              "original_va": "0x101686da",
+              "delta": -320
+            },
+            {
+              "name": "_c5",
+              "bytes": 2,
+              "linked_va": "0x1016859c",
+              "owner": "<common>",
+              "original_va": "0x101686dc",
+              "delta": -320
+            },
+            {
+              "name": "_d12",
+              "bytes": 2,
+              "linked_va": "0x1016859e",
+              "owner": "<common>",
+              "original_va": "0x101686de",
+              "delta": -320
+            },
+            {
+              "name": "_d22",
+              "bytes": 2,
+              "linked_va": "0x101685a0",
+              "owner": "<common>",
+              "original_va": "0x101686e0",
+              "delta": -320
+            },
+            {
+              "name": "_c4",
+              "bytes": 2,
+              "linked_va": "0x101685a2",
+              "owner": "<common>",
+              "original_va": "0x101686e2",
+              "delta": -320
+            },
+            {
+              "name": "_d26",
+              "bytes": 2,
+              "linked_va": "0x101685a4",
+              "owner": "<common>",
+              "original_va": "0x101686e4",
+              "delta": -320
+            },
+            {
+              "name": "_d11",
+              "bytes": 2,
+              "linked_va": "0x101685a6",
+              "owner": "<common>",
+              "original_va": "0x101686e6",
+              "delta": -320
+            },
+            {
+              "name": "_d0",
+              "bytes": 2,
+              "linked_va": "0x101685a8",
+              "owner": "<common>",
+              "original_va": "0x101686e8",
+              "delta": -320
+            },
+            {
+              "name": "_c12",
+              "bytes": 2,
+              "linked_va": "0x101685aa",
+              "owner": "<common>",
+              "original_va": "0x101686ea",
+              "delta": -320
+            },
+            {
+              "name": "_c11",
+              "bytes": 2,
+              "linked_va": "0x101685ac",
+              "owner": "<common>",
+              "original_va": "0x101686ec",
+              "delta": -320
+            },
+            {
+              "name": "_d5",
+              "bytes": 2,
+              "linked_va": "0x101685ae",
+              "owner": "<common>",
+              "original_va": "0x101686ee",
+              "delta": -320
+            },
+            {
+              "name": "_c7",
+              "bytes": 2,
+              "linked_va": "0x101685b0",
+              "owner": "<common>",
+              "original_va": "0x101686f0",
+              "delta": -320
+            },
+            {
+              "name": "_c15",
+              "bytes": 2,
+              "linked_va": "0x101685b2",
+              "owner": "<common>",
+              "original_va": "0x101686f2",
+              "delta": -320
+            },
+            {
+              "name": "_c9",
+              "bytes": 2,
+              "linked_va": "0x101685b4",
+              "owner": "<common>",
+              "original_va": "0x101686f4",
+              "delta": -320
+            },
+            {
+              "name": "_d3",
+              "bytes": 2,
+              "linked_va": "0x101685b6",
+              "owner": "<common>",
+              "original_va": "0x101686f6",
+              "delta": -320
+            },
+            {
+              "name": "_d24",
+              "bytes": 2,
+              "linked_va": "0x101685b8",
+              "owner": "<common>",
+              "original_va": "0x101686f8",
+              "delta": -320
+            },
+            {
+              "name": "_c0",
+              "bytes": 2,
+              "linked_va": "0x101685ba",
+              "owner": "<common>",
+              "original_va": "0x101686fa",
+              "delta": -320
+            },
+            {
+              "name": "_d7",
+              "bytes": 2,
+              "linked_va": "0x101685bc",
+              "owner": "<common>",
+              "original_va": "0x101686fc",
+              "delta": -320
+            },
+            {
+              "name": "_d4",
+              "bytes": 2,
+              "linked_va": "0x101685be",
+              "owner": "<common>",
+              "original_va": "0x101686fe",
+              "delta": -320
+            },
+            {
+              "name": "_d14",
+              "bytes": 2,
+              "linked_va": "0x101685c0",
+              "owner": "<common>",
+              "original_va": "0x10168700",
+              "delta": -320
+            },
+            {
+              "name": "_c6",
+              "bytes": 2,
+              "linked_va": "0x101685c2",
+              "owner": "<common>",
+              "original_va": "0x10168702",
+              "delta": -320
+            },
+            {
+              "name": "_d29",
+              "bytes": 2,
+              "linked_va": "0x101685c4",
+              "owner": "<common>",
+              "original_va": "0x10168704",
+              "delta": -320
+            },
+            {
+              "name": "_d31",
+              "bytes": 2,
+              "linked_va": "0x101685c6",
+              "owner": "<common>",
+              "original_va": "0x10168706",
+              "delta": -320
+            },
+            {
+              "name": "_c3",
+              "bytes": 2,
+              "linked_va": "0x101685c8",
+              "owner": "<common>",
+              "original_va": "0x10168708",
+              "delta": -320
+            },
+            {
+              "name": "_d25",
+              "bytes": 2,
+              "linked_va": "0x101685ca",
+              "owner": "<common>",
+              "original_va": "0x1016870a",
+              "delta": -320
+            },
+            {
+              "name": "_d9",
+              "bytes": 2,
+              "linked_va": "0x101685cc",
+              "owner": "<common>",
+              "original_va": "0x1016870c",
+              "delta": -320
+            },
+            {
+              "name": "_d30",
+              "bytes": 2,
+              "linked_va": "0x101685ce",
+              "owner": "<common>",
+              "original_va": "0x1016870e",
+              "delta": -320
+            },
+            {
+              "name": "_c13",
+              "bytes": 2,
+              "linked_va": "0x101685d0",
+              "owner": "<common>",
+              "original_va": "0x10168710",
+              "delta": -320
+            },
+            {
+              "name": "_d1",
+              "bytes": 2,
+              "linked_va": "0x101685d2",
+              "owner": "<common>",
+              "original_va": "0x10168712",
+              "delta": -320
+            },
+            {
+              "name": "_d28",
+              "bytes": 2,
+              "linked_va": "0x101685d4",
+              "owner": "<common>",
+              "original_va": "0x10168714",
+              "delta": -320
+            },
+            {
+              "name": "_d13",
+              "bytes": 2,
+              "linked_va": "0x101685d6",
+              "owner": "<common>",
+              "original_va": "0x10168716",
+              "delta": -320
+            },
+            {
+              "name": "_d20",
+              "bytes": 2,
+              "linked_va": "0x101685d8",
+              "owner": "<common>",
+              "original_va": "0x10168718",
+              "delta": -320
+            },
+            {
+              "name": "_d15",
+              "bytes": 2,
+              "linked_va": "0x101685da",
+              "owner": "<common>",
+              "original_va": "0x1016871a",
+              "delta": -320
+            },
+            {
+              "name": "_res",
+              "bytes": 2304,
+              "linked_va": "0x101685e0",
+              "owner": "<common>",
+              "original_va": "0x10168720",
+              "delta": -320
+            },
+            {
+              "name": "_c14",
+              "bytes": 2,
+              "linked_va": "0x10168ee0",
+              "owner": "<common>",
+              "original_va": "0x10169020",
+              "delta": -320
+            },
+            {
+              "name": "_d27",
+              "bytes": 2,
+              "linked_va": "0x10168ee2",
+              "owner": "<common>",
+              "original_va": "0x10169022",
+              "delta": -320
+            }
+          ]
+        },
+        "selected_map": {
+          "_AudioProfileCounters": {
+            "va": "0x10130580",
+            "owner": "<common>"
+          },
+          "_d0": {
+            "va": "0x101685a8",
+            "owner": "<common>"
+          },
+          "_d31": {
+            "va": "0x101685c6",
+            "owner": "<common>"
+          },
+          "_res": {
+            "va": "0x101685e0",
+            "owner": "<common>"
+          },
+          "_LogInstance": {
+            "va": "0x10168ee4",
+            "owner": "<common>"
+          },
+          "_LogWindow": {
+            "va": "0x10168ee8",
+            "owner": "<common>"
+          },
+          "_LogEdit": {
+            "va": "0x10168eec",
+            "owner": "<common>"
+          },
+          "_WaveOutHandle": {
+            "va": "0x1016b408",
+            "owner": "<common>"
+          },
+          "_WaveOutHeader": {
+            "va": "0x1016b920",
+            "owner": "<common>"
+          },
+          "_AudioTaskCount": {
+            "va": "0x1016c29c",
+            "owner": "<common>"
+          }
+        }
+      }
+    ]
+  },
+  "regression_method": "Every complete .text section byte string and actual relocation offset/type/target is compared with the frozen objects for DirectSound and AudioLog. Externally named targets preserve names; compiler-generated local labels are identified by the actual unchanged section/value. Symbol-table indices and generated-label counters change when declarations are added. Both raw sets of relocation records are retained; no original instruction bytes are normalized.",
+  "compiler_generated_local_symbol_renames": [
+    {
+      "unit": "DirectSound",
+      "functions": [
+        "_AudioError"
+      ],
+      "baseline": {
+        "offset": 298,
+        "type": 6,
+        "name": "$L78164",
+        "section": 8,
+        "value": 532
+      },
+      "candidate": {
+        "offset": 298,
+        "type": 6,
+        "name": "$L78166",
+        "section": 8,
+        "value": 532
+      }
+    },
+    {
+      "unit": "DirectSound",
+      "functions": [
+        "_AudioError"
+      ],
+      "baseline": {
+        "offset": 305,
+        "type": 6,
+        "name": "$L78165",
+        "section": 8,
+        "value": 500
+      },
+      "candidate": {
+        "offset": 305,
+        "type": 6,
+        "name": "$L78167",
+        "section": 8,
+        "value": 500
+      }
+    },
+    {
+      "unit": "DirectSound",
+      "functions": [
+        "_AudioError"
+      ],
+      "baseline": {
+        "offset": 500,
+        "type": 6,
+        "name": "$L77213",
+        "section": 8,
+        "value": 309
+      },
+      "candidate": {
+        "offset": 500,
+        "type": 6,
+        "name": "$L77215",
+        "section": 8,
+        "value": 309
+      }
+    },
+    {
+      "unit": "DirectSound",
+      "functions": [
+        "_AudioError"
+      ],
+      "baseline": {
+        "offset": 504,
+        "type": 6,
+        "name": "$L77219",
+        "section": 8,
+        "value": 330
+      },
+      "candidate": {
+        "offset": 504,
+        "type": 6,
+        "name": "$L77221",
+        "section": 8,
+        "value": 330
+      }
+    },
+    {
+      "unit": "DirectSound",
+      "functions": [
+        "_AudioError"
+      ],
+      "baseline": {
+        "offset": 508,
+        "type": 6,
+        "name": "$L77225",
+        "section": 8,
+        "value": 351
+      },
+      "candidate": {
+        "offset": 508,
+        "type": 6,
+        "name": "$L77227",
+        "section": 8,
+        "value": 351
+      }
+    },
+    {
+      "unit": "DirectSound",
+      "functions": [
+        "_AudioError"
+      ],
+      "baseline": {
+        "offset": 512,
+        "type": 6,
+        "name": "$L77231",
+        "section": 8,
+        "value": 372
+      },
+      "candidate": {
+        "offset": 512,
+        "type": 6,
+        "name": "$L77233",
+        "section": 8,
+        "value": 372
+      }
+    },
+    {
+      "unit": "DirectSound",
+      "functions": [
+        "_AudioError"
+      ],
+      "baseline": {
+        "offset": 516,
+        "type": 6,
+        "name": "$L77237",
+        "section": 8,
+        "value": 393
+      },
+      "candidate": {
+        "offset": 516,
+        "type": 6,
+        "name": "$L77239",
+        "section": 8,
+        "value": 393
+      }
+    },
+    {
+      "unit": "DirectSound",
+      "functions": [
+        "_AudioError"
+      ],
+      "baseline": {
+        "offset": 520,
+        "type": 6,
+        "name": "$L77243",
+        "section": 8,
+        "value": 414
+      },
+      "candidate": {
+        "offset": 520,
+        "type": 6,
+        "name": "$L77245",
+        "section": 8,
+        "value": 414
+      }
+    },
+    {
+      "unit": "DirectSound",
+      "functions": [
+        "_AudioError"
+      ],
+      "baseline": {
+        "offset": 524,
+        "type": 6,
+        "name": "$L77249",
+        "section": 8,
+        "value": 435
+      },
+      "candidate": {
+        "offset": 524,
+        "type": 6,
+        "name": "$L77251",
+        "section": 8,
+        "value": 435
+      }
+    },
+    {
+      "unit": "DirectSound",
+      "functions": [
+        "_AudioError"
+      ],
+      "baseline": {
+        "offset": 528,
+        "type": 6,
+        "name": "$L77251",
+        "section": 8,
+        "value": 456
+      },
+      "candidate": {
+        "offset": 528,
+        "type": 6,
+        "name": "$L77253",
+        "section": 8,
+        "value": 456
+      }
+    },
+    {
+      "unit": "DirectSound",
+      "functions": [
+        "_AudioConfigDialog@16"
+      ],
+      "baseline": {
+        "offset": 59,
+        "type": 6,
+        "name": "$L78318",
+        "section": 164,
+        "value": 1848
+      },
+      "candidate": {
+        "offset": 59,
+        "type": 6,
+        "name": "$L78320",
+        "section": 164,
+        "value": 1848
+      }
+    },
+    {
+      "unit": "DirectSound",
+      "functions": [
+        "_AudioConfigDialog@16"
+      ],
+      "baseline": {
+        "offset": 66,
+        "type": 6,
+        "name": "$L78324",
+        "section": 164,
+        "value": 1828
+      },
+      "candidate": {
+        "offset": 66,
+        "type": 6,
+        "name": "$L78326",
+        "section": 164,
+        "value": 1828
+      }
+    },
+    {
+      "unit": "DirectSound",
+      "functions": [
+        "_AudioConfigDialog@16"
+      ],
+      "baseline": {
+        "offset": 520,
+        "type": 6,
+        "name": "$L78325",
+        "section": 164,
+        "value": 2048
+      },
+      "candidate": {
+        "offset": 520,
+        "type": 6,
+        "name": "$L78327",
+        "section": 164,
+        "value": 2048
+      }
+    },
+    {
+      "unit": "DirectSound",
+      "functions": [
+        "_AudioConfigDialog@16"
+      ],
+      "baseline": {
+        "offset": 1828,
+        "type": 6,
+        "name": "$L77816",
+        "section": 164,
+        "value": 483
+      },
+      "candidate": {
+        "offset": 1828,
+        "type": 6,
+        "name": "$L77818",
+        "section": 164,
+        "value": 483
+      }
+    },
+    {
+      "unit": "DirectSound",
+      "functions": [
+        "_AudioConfigDialog@16"
+      ],
+      "baseline": {
+        "offset": 1832,
+        "type": 6,
+        "name": "$L77806",
+        "section": 164,
+        "value": 70
+      },
+      "candidate": {
+        "offset": 1832,
+        "type": 6,
+        "name": "$L77808",
+        "section": 164,
+        "value": 70
+      }
+    },
+    {
+      "unit": "DirectSound",
+      "functions": [
+        "_AudioConfigDialog@16"
+      ],
+      "baseline": {
+        "offset": 1836,
+        "type": 6,
+        "name": "$L77825",
+        "section": 164,
+        "value": 624
+      },
+      "candidate": {
+        "offset": 1836,
+        "type": 6,
+        "name": "$L77827",
+        "section": 164,
+        "value": 624
+      }
+    },
+    {
+      "unit": "DirectSound",
+      "functions": [
+        "_AudioConfigDialog@16"
+      ],
+      "baseline": {
+        "offset": 1840,
+        "type": 6,
+        "name": "$L77865",
+        "section": 164,
+        "value": 1798
+      },
+      "candidate": {
+        "offset": 1840,
+        "type": 6,
+        "name": "$L77867",
+        "section": 164,
+        "value": 1798
+      }
+    },
+    {
+      "unit": "DirectSound",
+      "functions": [
+        "_AudioConfigDialog@16"
+      ],
+      "baseline": {
+        "offset": 1844,
+        "type": 6,
+        "name": "$L77803",
+        "section": 164,
+        "value": 1813
+      },
+      "candidate": {
+        "offset": 1844,
+        "type": 6,
+        "name": "$L77805",
+        "section": 164,
+        "value": 1813
+      }
+    },
+    {
+      "unit": "DirectSound",
+      "functions": [
+        "_AudioConfigDialog@16"
+      ],
+      "baseline": {
+        "offset": 2048,
+        "type": 6,
+        "name": "$L77821",
+        "section": 164,
+        "value": 524
+      },
+      "candidate": {
+        "offset": 2048,
+        "type": 6,
+        "name": "$L77823",
+        "section": 164,
+        "value": 524
+      }
+    },
+    {
+      "unit": "DirectSound",
+      "functions": [
+        "_AudioConfigDialog@16"
+      ],
+      "baseline": {
+        "offset": 2052,
+        "type": 6,
+        "name": "$L77822",
+        "section": 164,
+        "value": 549
+      },
+      "candidate": {
+        "offset": 2052,
+        "type": 6,
+        "name": "$L77824",
+        "section": 164,
+        "value": 549
+      }
+    },
+    {
+      "unit": "DirectSound",
+      "functions": [
+        "_AudioConfigDialog@16"
+      ],
+      "baseline": {
+        "offset": 2056,
+        "type": 6,
+        "name": "$L77823",
+        "section": 164,
+        "value": 574
+      },
+      "candidate": {
+        "offset": 2056,
+        "type": 6,
+        "name": "$L77825",
+        "section": 164,
+        "value": 574
+      }
+    },
+    {
+      "unit": "DirectSound",
+      "functions": [
+        "_AudioConfigDialog@16"
+      ],
+      "baseline": {
+        "offset": 2060,
+        "type": 6,
+        "name": "$L77824",
+        "section": 164,
+        "value": 599
+      },
+      "candidate": {
+        "offset": 2060,
+        "type": 6,
+        "name": "$L77826",
+        "section": 164,
+        "value": 599
+      }
+    }
+  ],
+  "body_status_limit": "The original-target diagnostics still distinguish non-relocation equality, unresolved and inferred target identities, and actual target mismatches. The three previously unmatched host functions remain unmatched. Identical baseline/candidate COFF records prove absence of new code changes, not whole-DLL success.",
+  "data_virtual_delta": 64,
+  "added_typed_storage_bytes": 36,
+  "known_common_address_changes": [
+    {
+      "unit": "DirectSound",
+      "name": "_QueuedBlockReady",
+      "baseline_va": "0x10168f00",
+      "candidate_va": "0x10168f00",
+      "change": 0,
+      "original_va": "0x1016b580"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_SoundBuffer",
+      "baseline_va": "0x101693b0",
+      "candidate_va": "0x101693b0",
+      "change": 0,
+      "original_va": "0x1016bae8"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_QueueBytes",
+      "baseline_va": "0x101693b4",
+      "candidate_va": "0x101693b4",
+      "change": 0,
+      "original_va": "0x1016ba84"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_AudioErrorText",
+      "baseline_va": "0x101693c0",
+      "candidate_va": "0x101693c0",
+      "change": 0,
+      "original_va": "0x10169560"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_AudioEvents",
+      "baseline_va": "0x1016b3c0",
+      "candidate_va": "0x1016b3c0",
+      "change": 0,
+      "original_va": "0x1016baec"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_QueueWrite",
+      "baseline_va": "0x1016b3c4",
+      "candidate_va": "0x1016b3c4",
+      "change": 0,
+      "original_va": "0x1016ba78"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_MIRegisters",
+      "baseline_va": "0x1016b3c8",
+      "candidate_va": "0x1016b3c8",
+      "change": 0,
+      "original_va": "0x1016ba7c"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_AudioIniKey",
+      "baseline_va": "0x1016b3e0",
+      "candidate_va": "0x1016b3e0",
+      "change": 0,
+      "original_va": "0x1016ba40"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_QueueCount",
+      "baseline_va": "0x1016b400",
+      "candidate_va": "0x1016b400",
+      "change": 0,
+      "original_va": "0x10169038"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_HLEWaveFile",
+      "baseline_va": "0x1016b404",
+      "candidate_va": "0x1016b404",
+      "change": 0,
+      "original_va": "0x1016ba64"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_WaveOutHandle",
+      "bytes": 4,
+      "added_at": "0x1016b408"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_AudioInstance",
+      "baseline_va": "0x1016b408",
+      "candidate_va": "0x1016b40c",
+      "change": 4,
+      "original_va": "0x1016baf0"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_ABIFile",
+      "baseline_va": "0x1016b40c",
+      "candidate_va": "0x1016b410",
+      "change": 4,
+      "original_va": "0x1016bfd8"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_SoundEvents",
+      "baseline_va": "0x1016b420",
+      "candidate_va": "0x1016b420",
+      "change": 0,
+      "original_va": "0x1016baa0"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_QueuedBlockLength",
+      "baseline_va": "0x1016b460",
+      "candidate_va": "0x1016b460",
+      "change": 0,
+      "original_va": "0x10169060"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_WaveOutHeader",
+      "bytes": 32,
+      "added_at": "0x1016b920"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_IsNTSC",
+      "baseline_va": "0x1016b910",
+      "candidate_va": "0x1016b940",
+      "change": 48,
+      "original_va": "0x1016c0e8"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_CPURegisters",
+      "baseline_va": "0x1016b914",
+      "candidate_va": "0x1016b944",
+      "change": 48,
+      "original_va": "0x1016b560"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_AudioIniFile",
+      "baseline_va": "0x1016b920",
+      "candidate_va": "0x1016b960",
+      "change": 64,
+      "original_va": "0x1016c120"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_BufferLimit",
+      "baseline_va": "0x1016ba24",
+      "candidate_va": "0x1016ba64",
+      "change": 64,
+      "original_va": "0x1016ba30"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_BufferPosition",
+      "baseline_va": "0x1016ba28",
+      "candidate_va": "0x1016ba68",
+      "change": 64,
+      "original_va": "0x1016bae0"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_RDRAM",
+      "baseline_va": "0x1016ba2c",
+      "candidate_va": "0x1016ba6c",
+      "change": 64,
+      "original_va": "0x1016bae4"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_SoundCriticalSection",
+      "baseline_va": "0x1016ba40",
+      "candidate_va": "0x1016ba80",
+      "change": 64,
+      "original_va": "0x1016c100"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_QueuedBlocks",
+      "baseline_va": "0x1016ba60",
+      "candidate_va": "0x1016baa0",
+      "change": 64,
+      "original_va": "0x1016bb00"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_AudioAboutText",
+      "baseline_va": "0x1016bf20",
+      "candidate_va": "0x1016bf60",
+      "change": 64,
+      "original_va": "0x1016bfe0"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_AIRegisters",
+      "baseline_va": "0x1016c020",
+      "candidate_va": "0x1016c060",
+      "change": 64,
+      "original_va": "0x10169510"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_CurrentPlayPosition",
+      "baseline_va": "0x1016c024",
+      "candidate_va": "0x1016c064",
+      "change": 64,
+      "original_va": "0x1016b568"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_DirectSound",
+      "baseline_va": "0x1016c028",
+      "candidate_va": "0x1016c068",
+      "change": 64,
+      "original_va": "0x1016c0e0"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_WaveFormat",
+      "baseline_va": "0x1016c040",
+      "candidate_va": "0x1016c080",
+      "change": 64,
+      "original_va": "0x1016bfc0"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_HLELogFile",
+      "baseline_va": "0x1016c054",
+      "candidate_va": "0x1016c094",
+      "change": 64,
+      "original_va": "0x1016ba80"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_QueueRead",
+      "baseline_va": "0x1016c058",
+      "candidate_va": "0x1016c098",
+      "change": 64,
+      "original_va": "0x10169040"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_PrimaryBuffer",
+      "baseline_va": "0x1016c05c",
+      "candidate_va": "0x1016c09c",
+      "change": 64,
+      "original_va": "0x1016ba74"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_TimerUser",
+      "baseline_va": "0x1016c060",
+      "candidate_va": "0x1016c0a0",
+      "change": 64,
+      "original_va": "0x1016b564"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_CurrentAudioLength",
+      "baseline_va": "0x1016c064",
+      "candidate_va": "0x1016c0a4",
+      "change": 64,
+      "original_va": "0x1016ba60"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_AudioIniSection",
+      "baseline_va": "0x1016c080",
+      "candidate_va": "0x1016c0c0",
+      "change": 64,
+      "original_va": "0x1016c240"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_AIWaveFile",
+      "baseline_va": "0x1016c0c0",
+      "candidate_va": "0x1016c100",
+      "change": 64,
+      "original_va": "0x1016903c"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_BufferDescription",
+      "baseline_va": "0x1016c0e0",
+      "candidate_va": "0x1016c120",
+      "change": 64,
+      "original_va": "0x10169520"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_AudioWindow",
+      "baseline_va": "0x1016c104",
+      "candidate_va": "0x1016c144",
+      "change": 64,
+      "original_va": "0x1016bafc"
+    },
+    {
+      "unit": "AudioLog",
+      "name": "_LogInstance",
+      "baseline_va": "0x10168ee4",
+      "candidate_va": "0x10168ee4",
+      "change": 0,
+      "original_va": "0x10169024"
+    },
+    {
+      "unit": "AudioLog",
+      "name": "_LogWindow",
+      "baseline_va": "0x10168ee8",
+      "candidate_va": "0x10168ee8",
+      "change": 0,
+      "original_va": "0x1016902c"
+    },
+    {
+      "unit": "AudioLog",
+      "name": "_LogEdit",
+      "baseline_va": "0x10168eec",
+      "candidate_va": "0x10168eec",
+      "change": 0,
+      "original_va": "0x10169028"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d17",
+      "baseline_va": "0x10168580",
+      "candidate_va": "0x10168580",
+      "change": 0,
+      "original_va": "0x101686c0"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c1",
+      "baseline_va": "0x10168582",
+      "candidate_va": "0x10168582",
+      "change": 0,
+      "original_va": "0x101686c2"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d6",
+      "baseline_va": "0x10168584",
+      "candidate_va": "0x10168584",
+      "change": 0,
+      "original_va": "0x101686c4"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c10",
+      "baseline_va": "0x10168586",
+      "candidate_va": "0x10168586",
+      "change": 0,
+      "original_va": "0x101686c6"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c2",
+      "baseline_va": "0x10168588",
+      "candidate_va": "0x10168588",
+      "change": 0,
+      "original_va": "0x101686c8"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d16",
+      "baseline_va": "0x1016858a",
+      "candidate_va": "0x1016858a",
+      "change": 0,
+      "original_va": "0x101686ca"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d2",
+      "baseline_va": "0x1016858c",
+      "candidate_va": "0x1016858c",
+      "change": 0,
+      "original_va": "0x101686cc"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d21",
+      "baseline_va": "0x1016858e",
+      "candidate_va": "0x1016858e",
+      "change": 0,
+      "original_va": "0x101686ce"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d19",
+      "baseline_va": "0x10168590",
+      "candidate_va": "0x10168590",
+      "change": 0,
+      "original_va": "0x101686d0"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d23",
+      "baseline_va": "0x10168592",
+      "candidate_va": "0x10168592",
+      "change": 0,
+      "original_va": "0x101686d2"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c8",
+      "baseline_va": "0x10168594",
+      "candidate_va": "0x10168594",
+      "change": 0,
+      "original_va": "0x101686d4"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d10",
+      "baseline_va": "0x10168596",
+      "candidate_va": "0x10168596",
+      "change": 0,
+      "original_va": "0x101686d6"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d18",
+      "baseline_va": "0x10168598",
+      "candidate_va": "0x10168598",
+      "change": 0,
+      "original_va": "0x101686d8"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d8",
+      "baseline_va": "0x1016859a",
+      "candidate_va": "0x1016859a",
+      "change": 0,
+      "original_va": "0x101686da"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c5",
+      "baseline_va": "0x1016859c",
+      "candidate_va": "0x1016859c",
+      "change": 0,
+      "original_va": "0x101686dc"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d12",
+      "baseline_va": "0x1016859e",
+      "candidate_va": "0x1016859e",
+      "change": 0,
+      "original_va": "0x101686de"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d22",
+      "baseline_va": "0x101685a0",
+      "candidate_va": "0x101685a0",
+      "change": 0,
+      "original_va": "0x101686e0"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c4",
+      "baseline_va": "0x101685a2",
+      "candidate_va": "0x101685a2",
+      "change": 0,
+      "original_va": "0x101686e2"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d26",
+      "baseline_va": "0x101685a4",
+      "candidate_va": "0x101685a4",
+      "change": 0,
+      "original_va": "0x101686e4"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d11",
+      "baseline_va": "0x101685a6",
+      "candidate_va": "0x101685a6",
+      "change": 0,
+      "original_va": "0x101686e6"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d0",
+      "baseline_va": "0x101685a8",
+      "candidate_va": "0x101685a8",
+      "change": 0,
+      "original_va": "0x101686e8"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c12",
+      "baseline_va": "0x101685aa",
+      "candidate_va": "0x101685aa",
+      "change": 0,
+      "original_va": "0x101686ea"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c11",
+      "baseline_va": "0x101685ac",
+      "candidate_va": "0x101685ac",
+      "change": 0,
+      "original_va": "0x101686ec"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d5",
+      "baseline_va": "0x101685ae",
+      "candidate_va": "0x101685ae",
+      "change": 0,
+      "original_va": "0x101686ee"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c7",
+      "baseline_va": "0x101685b0",
+      "candidate_va": "0x101685b0",
+      "change": 0,
+      "original_va": "0x101686f0"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c15",
+      "baseline_va": "0x101685b2",
+      "candidate_va": "0x101685b2",
+      "change": 0,
+      "original_va": "0x101686f2"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c9",
+      "baseline_va": "0x101685b4",
+      "candidate_va": "0x101685b4",
+      "change": 0,
+      "original_va": "0x101686f4"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d3",
+      "baseline_va": "0x101685b6",
+      "candidate_va": "0x101685b6",
+      "change": 0,
+      "original_va": "0x101686f6"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d24",
+      "baseline_va": "0x101685b8",
+      "candidate_va": "0x101685b8",
+      "change": 0,
+      "original_va": "0x101686f8"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c0",
+      "baseline_va": "0x101685ba",
+      "candidate_va": "0x101685ba",
+      "change": 0,
+      "original_va": "0x101686fa"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d7",
+      "baseline_va": "0x101685bc",
+      "candidate_va": "0x101685bc",
+      "change": 0,
+      "original_va": "0x101686fc"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d4",
+      "baseline_va": "0x101685be",
+      "candidate_va": "0x101685be",
+      "change": 0,
+      "original_va": "0x101686fe"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d14",
+      "baseline_va": "0x101685c0",
+      "candidate_va": "0x101685c0",
+      "change": 0,
+      "original_va": "0x10168700"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c6",
+      "baseline_va": "0x101685c2",
+      "candidate_va": "0x101685c2",
+      "change": 0,
+      "original_va": "0x10168702"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d29",
+      "baseline_va": "0x101685c4",
+      "candidate_va": "0x101685c4",
+      "change": 0,
+      "original_va": "0x10168704"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d31",
+      "baseline_va": "0x101685c6",
+      "candidate_va": "0x101685c6",
+      "change": 0,
+      "original_va": "0x10168706"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c3",
+      "baseline_va": "0x101685c8",
+      "candidate_va": "0x101685c8",
+      "change": 0,
+      "original_va": "0x10168708"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d25",
+      "baseline_va": "0x101685ca",
+      "candidate_va": "0x101685ca",
+      "change": 0,
+      "original_va": "0x1016870a"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d9",
+      "baseline_va": "0x101685cc",
+      "candidate_va": "0x101685cc",
+      "change": 0,
+      "original_va": "0x1016870c"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d30",
+      "baseline_va": "0x101685ce",
+      "candidate_va": "0x101685ce",
+      "change": 0,
+      "original_va": "0x1016870e"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c13",
+      "baseline_va": "0x101685d0",
+      "candidate_va": "0x101685d0",
+      "change": 0,
+      "original_va": "0x10168710"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d1",
+      "baseline_va": "0x101685d2",
+      "candidate_va": "0x101685d2",
+      "change": 0,
+      "original_va": "0x10168712"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d28",
+      "baseline_va": "0x101685d4",
+      "candidate_va": "0x101685d4",
+      "change": 0,
+      "original_va": "0x10168714"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d13",
+      "baseline_va": "0x101685d6",
+      "candidate_va": "0x101685d6",
+      "change": 0,
+      "original_va": "0x10168716"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d20",
+      "baseline_va": "0x101685d8",
+      "candidate_va": "0x101685d8",
+      "change": 0,
+      "original_va": "0x10168718"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d15",
+      "baseline_va": "0x101685da",
+      "candidate_va": "0x101685da",
+      "change": 0,
+      "original_va": "0x1016871a"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_res",
+      "baseline_va": "0x101685e0",
+      "candidate_va": "0x101685e0",
+      "change": 0,
+      "original_va": "0x10168720"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c14",
+      "baseline_va": "0x10168ee0",
+      "candidate_va": "0x10168ee0",
+      "change": 0,
+      "original_va": "0x10169020"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d27",
+      "baseline_va": "0x10168ee2",
+      "candidate_va": "0x10168ee2",
+      "change": 0,
+      "original_va": "0x10169022"
+    }
+  ],
+  "known_live_displacement_assessment": [
+    {
+      "unit": "DirectSound",
+      "name": "_QueuedBlockReady",
+      "baseline_va": "0x10168f00",
+      "candidate_va": "0x10168f00",
+      "change": 0,
+      "original_va": "0x1016b580",
+      "baseline_displacement": -9856,
+      "candidate_displacement": -9856,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_SoundBuffer",
+      "baseline_va": "0x101693b0",
+      "candidate_va": "0x101693b0",
+      "change": 0,
+      "original_va": "0x1016bae8",
+      "baseline_displacement": -10040,
+      "candidate_displacement": -10040,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_QueueBytes",
+      "baseline_va": "0x101693b4",
+      "candidate_va": "0x101693b4",
+      "change": 0,
+      "original_va": "0x1016ba84",
+      "baseline_displacement": -9936,
+      "candidate_displacement": -9936,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_AudioErrorText",
+      "baseline_va": "0x101693c0",
+      "candidate_va": "0x101693c0",
+      "change": 0,
+      "original_va": "0x10169560",
+      "baseline_displacement": -416,
+      "candidate_displacement": -416,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_AudioEvents",
+      "baseline_va": "0x1016b3c0",
+      "candidate_va": "0x1016b3c0",
+      "change": 0,
+      "original_va": "0x1016baec",
+      "baseline_displacement": -1836,
+      "candidate_displacement": -1836,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_QueueWrite",
+      "baseline_va": "0x1016b3c4",
+      "candidate_va": "0x1016b3c4",
+      "change": 0,
+      "original_va": "0x1016ba78",
+      "baseline_displacement": -1716,
+      "candidate_displacement": -1716,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_MIRegisters",
+      "baseline_va": "0x1016b3c8",
+      "candidate_va": "0x1016b3c8",
+      "change": 0,
+      "original_va": "0x1016ba7c",
+      "baseline_displacement": -1716,
+      "candidate_displacement": -1716,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_AudioIniKey",
+      "baseline_va": "0x1016b3e0",
+      "candidate_va": "0x1016b3e0",
+      "change": 0,
+      "original_va": "0x1016ba40",
+      "baseline_displacement": -1632,
+      "candidate_displacement": -1632,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_QueueCount",
+      "baseline_va": "0x1016b400",
+      "candidate_va": "0x1016b400",
+      "change": 0,
+      "original_va": "0x10169038",
+      "baseline_displacement": 9160,
+      "candidate_displacement": 9160,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_HLEWaveFile",
+      "baseline_va": "0x1016b404",
+      "candidate_va": "0x1016b404",
+      "change": 0,
+      "original_va": "0x1016ba64",
+      "baseline_displacement": -1632,
+      "candidate_displacement": -1632,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_AudioInstance",
+      "baseline_va": "0x1016b408",
+      "candidate_va": "0x1016b40c",
+      "change": 4,
+      "original_va": "0x1016baf0",
+      "baseline_displacement": -1768,
+      "candidate_displacement": -1764,
+      "assessment": "closer"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_ABIFile",
+      "baseline_va": "0x1016b40c",
+      "candidate_va": "0x1016b410",
+      "change": 4,
+      "original_va": "0x1016bfd8",
+      "baseline_displacement": -3020,
+      "candidate_displacement": -3016,
+      "assessment": "closer"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_SoundEvents",
+      "baseline_va": "0x1016b420",
+      "candidate_va": "0x1016b420",
+      "change": 0,
+      "original_va": "0x1016baa0",
+      "baseline_displacement": -1664,
+      "candidate_displacement": -1664,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_QueuedBlockLength",
+      "baseline_va": "0x1016b460",
+      "candidate_va": "0x1016b460",
+      "change": 0,
+      "original_va": "0x10169060",
+      "baseline_displacement": 9216,
+      "candidate_displacement": 9216,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_IsNTSC",
+      "baseline_va": "0x1016b910",
+      "candidate_va": "0x1016b940",
+      "change": 48,
+      "original_va": "0x1016c0e8",
+      "baseline_displacement": -2008,
+      "candidate_displacement": -1960,
+      "assessment": "closer"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_CPURegisters",
+      "baseline_va": "0x1016b914",
+      "candidate_va": "0x1016b944",
+      "change": 48,
+      "original_va": "0x1016b560",
+      "baseline_displacement": 948,
+      "candidate_displacement": 996,
+      "assessment": "farther"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_AudioIniFile",
+      "baseline_va": "0x1016b920",
+      "candidate_va": "0x1016b960",
+      "change": 64,
+      "original_va": "0x1016c120",
+      "baseline_displacement": -2048,
+      "candidate_displacement": -1984,
+      "assessment": "closer"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_BufferLimit",
+      "baseline_va": "0x1016ba24",
+      "candidate_va": "0x1016ba64",
+      "change": 64,
+      "original_va": "0x1016ba30",
+      "baseline_displacement": -12,
+      "candidate_displacement": 52,
+      "assessment": "farther"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_BufferPosition",
+      "baseline_va": "0x1016ba28",
+      "candidate_va": "0x1016ba68",
+      "change": 64,
+      "original_va": "0x1016bae0",
+      "baseline_displacement": -184,
+      "candidate_displacement": -120,
+      "assessment": "closer"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_RDRAM",
+      "baseline_va": "0x1016ba2c",
+      "candidate_va": "0x1016ba6c",
+      "change": 64,
+      "original_va": "0x1016bae4",
+      "baseline_displacement": -184,
+      "candidate_displacement": -120,
+      "assessment": "closer"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_SoundCriticalSection",
+      "baseline_va": "0x1016ba40",
+      "candidate_va": "0x1016ba80",
+      "change": 64,
+      "original_va": "0x1016c100",
+      "baseline_displacement": -1728,
+      "candidate_displacement": -1664,
+      "assessment": "closer"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_QueuedBlocks",
+      "baseline_va": "0x1016ba60",
+      "candidate_va": "0x1016baa0",
+      "change": 64,
+      "original_va": "0x1016bb00",
+      "baseline_displacement": -160,
+      "candidate_displacement": -96,
+      "assessment": "closer"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_AudioAboutText",
+      "baseline_va": "0x1016bf20",
+      "candidate_va": "0x1016bf60",
+      "change": 64,
+      "original_va": "0x1016bfe0",
+      "baseline_displacement": -192,
+      "candidate_displacement": -128,
+      "assessment": "closer"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_AIRegisters",
+      "baseline_va": "0x1016c020",
+      "candidate_va": "0x1016c060",
+      "change": 64,
+      "original_va": "0x10169510",
+      "baseline_displacement": 11024,
+      "candidate_displacement": 11088,
+      "assessment": "farther"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_CurrentPlayPosition",
+      "baseline_va": "0x1016c024",
+      "candidate_va": "0x1016c064",
+      "change": 64,
+      "original_va": "0x1016b568",
+      "baseline_displacement": 2748,
+      "candidate_displacement": 2812,
+      "assessment": "farther"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_DirectSound",
+      "baseline_va": "0x1016c028",
+      "candidate_va": "0x1016c068",
+      "change": 64,
+      "original_va": "0x1016c0e0",
+      "baseline_displacement": -184,
+      "candidate_displacement": -120,
+      "assessment": "closer"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_WaveFormat",
+      "baseline_va": "0x1016c040",
+      "candidate_va": "0x1016c080",
+      "change": 64,
+      "original_va": "0x1016bfc0",
+      "baseline_displacement": 128,
+      "candidate_displacement": 192,
+      "assessment": "farther"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_HLELogFile",
+      "baseline_va": "0x1016c054",
+      "candidate_va": "0x1016c094",
+      "change": 64,
+      "original_va": "0x1016ba80",
+      "baseline_displacement": 1492,
+      "candidate_displacement": 1556,
+      "assessment": "farther"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_QueueRead",
+      "baseline_va": "0x1016c058",
+      "candidate_va": "0x1016c098",
+      "change": 64,
+      "original_va": "0x10169040",
+      "baseline_displacement": 12312,
+      "candidate_displacement": 12376,
+      "assessment": "farther"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_PrimaryBuffer",
+      "baseline_va": "0x1016c05c",
+      "candidate_va": "0x1016c09c",
+      "change": 64,
+      "original_va": "0x1016ba74",
+      "baseline_displacement": 1512,
+      "candidate_displacement": 1576,
+      "assessment": "farther"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_TimerUser",
+      "baseline_va": "0x1016c060",
+      "candidate_va": "0x1016c0a0",
+      "change": 64,
+      "original_va": "0x1016b564",
+      "baseline_displacement": 2812,
+      "candidate_displacement": 2876,
+      "assessment": "farther"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_CurrentAudioLength",
+      "baseline_va": "0x1016c064",
+      "candidate_va": "0x1016c0a4",
+      "change": 64,
+      "original_va": "0x1016ba60",
+      "baseline_displacement": 1540,
+      "candidate_displacement": 1604,
+      "assessment": "farther"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_AudioIniSection",
+      "baseline_va": "0x1016c080",
+      "candidate_va": "0x1016c0c0",
+      "change": 64,
+      "original_va": "0x1016c240",
+      "baseline_displacement": -448,
+      "candidate_displacement": -384,
+      "assessment": "closer"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_AIWaveFile",
+      "baseline_va": "0x1016c0c0",
+      "candidate_va": "0x1016c100",
+      "change": 64,
+      "original_va": "0x1016903c",
+      "baseline_displacement": 12420,
+      "candidate_displacement": 12484,
+      "assessment": "farther"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_BufferDescription",
+      "baseline_va": "0x1016c0e0",
+      "candidate_va": "0x1016c120",
+      "change": 64,
+      "original_va": "0x10169520",
+      "baseline_displacement": 11200,
+      "candidate_displacement": 11264,
+      "assessment": "farther"
+    },
+    {
+      "unit": "DirectSound",
+      "name": "_AudioWindow",
+      "baseline_va": "0x1016c104",
+      "candidate_va": "0x1016c144",
+      "change": 64,
+      "original_va": "0x1016bafc",
+      "baseline_displacement": 1544,
+      "candidate_displacement": 1608,
+      "assessment": "farther"
+    },
+    {
+      "unit": "AudioLog",
+      "name": "_LogInstance",
+      "baseline_va": "0x10168ee4",
+      "candidate_va": "0x10168ee4",
+      "change": 0,
+      "original_va": "0x10169024",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "AudioLog",
+      "name": "_LogWindow",
+      "baseline_va": "0x10168ee8",
+      "candidate_va": "0x10168ee8",
+      "change": 0,
+      "original_va": "0x1016902c",
+      "baseline_displacement": -324,
+      "candidate_displacement": -324,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "AudioLog",
+      "name": "_LogEdit",
+      "baseline_va": "0x10168eec",
+      "candidate_va": "0x10168eec",
+      "change": 0,
+      "original_va": "0x10169028",
+      "baseline_displacement": -316,
+      "candidate_displacement": -316,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d17",
+      "baseline_va": "0x10168580",
+      "candidate_va": "0x10168580",
+      "change": 0,
+      "original_va": "0x101686c0",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c1",
+      "baseline_va": "0x10168582",
+      "candidate_va": "0x10168582",
+      "change": 0,
+      "original_va": "0x101686c2",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d6",
+      "baseline_va": "0x10168584",
+      "candidate_va": "0x10168584",
+      "change": 0,
+      "original_va": "0x101686c4",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c10",
+      "baseline_va": "0x10168586",
+      "candidate_va": "0x10168586",
+      "change": 0,
+      "original_va": "0x101686c6",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c2",
+      "baseline_va": "0x10168588",
+      "candidate_va": "0x10168588",
+      "change": 0,
+      "original_va": "0x101686c8",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d16",
+      "baseline_va": "0x1016858a",
+      "candidate_va": "0x1016858a",
+      "change": 0,
+      "original_va": "0x101686ca",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d2",
+      "baseline_va": "0x1016858c",
+      "candidate_va": "0x1016858c",
+      "change": 0,
+      "original_va": "0x101686cc",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d21",
+      "baseline_va": "0x1016858e",
+      "candidate_va": "0x1016858e",
+      "change": 0,
+      "original_va": "0x101686ce",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d19",
+      "baseline_va": "0x10168590",
+      "candidate_va": "0x10168590",
+      "change": 0,
+      "original_va": "0x101686d0",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d23",
+      "baseline_va": "0x10168592",
+      "candidate_va": "0x10168592",
+      "change": 0,
+      "original_va": "0x101686d2",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c8",
+      "baseline_va": "0x10168594",
+      "candidate_va": "0x10168594",
+      "change": 0,
+      "original_va": "0x101686d4",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d10",
+      "baseline_va": "0x10168596",
+      "candidate_va": "0x10168596",
+      "change": 0,
+      "original_va": "0x101686d6",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d18",
+      "baseline_va": "0x10168598",
+      "candidate_va": "0x10168598",
+      "change": 0,
+      "original_va": "0x101686d8",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d8",
+      "baseline_va": "0x1016859a",
+      "candidate_va": "0x1016859a",
+      "change": 0,
+      "original_va": "0x101686da",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c5",
+      "baseline_va": "0x1016859c",
+      "candidate_va": "0x1016859c",
+      "change": 0,
+      "original_va": "0x101686dc",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d12",
+      "baseline_va": "0x1016859e",
+      "candidate_va": "0x1016859e",
+      "change": 0,
+      "original_va": "0x101686de",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d22",
+      "baseline_va": "0x101685a0",
+      "candidate_va": "0x101685a0",
+      "change": 0,
+      "original_va": "0x101686e0",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c4",
+      "baseline_va": "0x101685a2",
+      "candidate_va": "0x101685a2",
+      "change": 0,
+      "original_va": "0x101686e2",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d26",
+      "baseline_va": "0x101685a4",
+      "candidate_va": "0x101685a4",
+      "change": 0,
+      "original_va": "0x101686e4",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d11",
+      "baseline_va": "0x101685a6",
+      "candidate_va": "0x101685a6",
+      "change": 0,
+      "original_va": "0x101686e6",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d0",
+      "baseline_va": "0x101685a8",
+      "candidate_va": "0x101685a8",
+      "change": 0,
+      "original_va": "0x101686e8",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c12",
+      "baseline_va": "0x101685aa",
+      "candidate_va": "0x101685aa",
+      "change": 0,
+      "original_va": "0x101686ea",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c11",
+      "baseline_va": "0x101685ac",
+      "candidate_va": "0x101685ac",
+      "change": 0,
+      "original_va": "0x101686ec",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d5",
+      "baseline_va": "0x101685ae",
+      "candidate_va": "0x101685ae",
+      "change": 0,
+      "original_va": "0x101686ee",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c7",
+      "baseline_va": "0x101685b0",
+      "candidate_va": "0x101685b0",
+      "change": 0,
+      "original_va": "0x101686f0",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c15",
+      "baseline_va": "0x101685b2",
+      "candidate_va": "0x101685b2",
+      "change": 0,
+      "original_va": "0x101686f2",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c9",
+      "baseline_va": "0x101685b4",
+      "candidate_va": "0x101685b4",
+      "change": 0,
+      "original_va": "0x101686f4",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d3",
+      "baseline_va": "0x101685b6",
+      "candidate_va": "0x101685b6",
+      "change": 0,
+      "original_va": "0x101686f6",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d24",
+      "baseline_va": "0x101685b8",
+      "candidate_va": "0x101685b8",
+      "change": 0,
+      "original_va": "0x101686f8",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c0",
+      "baseline_va": "0x101685ba",
+      "candidate_va": "0x101685ba",
+      "change": 0,
+      "original_va": "0x101686fa",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d7",
+      "baseline_va": "0x101685bc",
+      "candidate_va": "0x101685bc",
+      "change": 0,
+      "original_va": "0x101686fc",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d4",
+      "baseline_va": "0x101685be",
+      "candidate_va": "0x101685be",
+      "change": 0,
+      "original_va": "0x101686fe",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d14",
+      "baseline_va": "0x101685c0",
+      "candidate_va": "0x101685c0",
+      "change": 0,
+      "original_va": "0x10168700",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c6",
+      "baseline_va": "0x101685c2",
+      "candidate_va": "0x101685c2",
+      "change": 0,
+      "original_va": "0x10168702",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d29",
+      "baseline_va": "0x101685c4",
+      "candidate_va": "0x101685c4",
+      "change": 0,
+      "original_va": "0x10168704",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d31",
+      "baseline_va": "0x101685c6",
+      "candidate_va": "0x101685c6",
+      "change": 0,
+      "original_va": "0x10168706",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c3",
+      "baseline_va": "0x101685c8",
+      "candidate_va": "0x101685c8",
+      "change": 0,
+      "original_va": "0x10168708",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d25",
+      "baseline_va": "0x101685ca",
+      "candidate_va": "0x101685ca",
+      "change": 0,
+      "original_va": "0x1016870a",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d9",
+      "baseline_va": "0x101685cc",
+      "candidate_va": "0x101685cc",
+      "change": 0,
+      "original_va": "0x1016870c",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d30",
+      "baseline_va": "0x101685ce",
+      "candidate_va": "0x101685ce",
+      "change": 0,
+      "original_va": "0x1016870e",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c13",
+      "baseline_va": "0x101685d0",
+      "candidate_va": "0x101685d0",
+      "change": 0,
+      "original_va": "0x10168710",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d1",
+      "baseline_va": "0x101685d2",
+      "candidate_va": "0x101685d2",
+      "change": 0,
+      "original_va": "0x10168712",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d28",
+      "baseline_va": "0x101685d4",
+      "candidate_va": "0x101685d4",
+      "change": 0,
+      "original_va": "0x10168714",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d13",
+      "baseline_va": "0x101685d6",
+      "candidate_va": "0x101685d6",
+      "change": 0,
+      "original_va": "0x10168716",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d20",
+      "baseline_va": "0x101685d8",
+      "candidate_va": "0x101685d8",
+      "change": 0,
+      "original_va": "0x10168718",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d15",
+      "baseline_va": "0x101685da",
+      "candidate_va": "0x101685da",
+      "change": 0,
+      "original_va": "0x1016871a",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_res",
+      "baseline_va": "0x101685e0",
+      "candidate_va": "0x101685e0",
+      "change": 0,
+      "original_va": "0x10168720",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_c14",
+      "baseline_va": "0x10168ee0",
+      "candidate_va": "0x10168ee0",
+      "change": 0,
+      "original_va": "0x10169020",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    },
+    {
+      "unit": "Mp3",
+      "name": "_d27",
+      "baseline_va": "0x10168ee2",
+      "candidate_va": "0x10168ee2",
+      "change": 0,
+      "original_va": "0x10169022",
+      "baseline_displacement": -320,
+      "candidate_displacement": -320,
+      "assessment": "same_distance"
+    }
+  ],
+  "displacement_assessment_counts": {
+    "closer": 11,
+    "farther": 13,
+    "same_distance": 64
+  },
+  "displacement_limit": "Closer absolute addresses do not establish correct common order or source ownership. This records individual improvements/worsenings only; names and historical2003 retention remain unproved.",
+  "MP3_to_Log_relations": [
+    {
+      "variant": "current",
+      "res_to_LogInstance": 2308,
+      "LogInstance": "0x10168ee4",
+      "LogEdit": "0x10168eec",
+      "LogWindow": "0x10168ee8"
+    },
+    {
+      "variant": "waveout-objects",
+      "res_to_LogInstance": 2308,
+      "LogInstance": "0x10168ee4",
+      "LogEdit": "0x10168eec",
+      "LogWindow": "0x10168ee8"
+    }
+  ],
+  "MP3_and_Log_common_addresses_unchanged": true,
+  "findings": [
+    "All60 complete host code spans retain identical raw bytes and actual relocation targets. The22 differing compiler-generated local-label names refer to exactly the same section/value; their complete old/new records are retained.",
+    "Original-target diagnostics remain46/49 DirectSound plus11/11 AudioLog instruction matches. The same2 unresolved targets and63 target mismatches remain; unresolved/inferred identities are not relabeled as complete byte-exact functions.",
+    "The two real typed declarations add36 object bytes but64 bytes of whole .data virtual extent, from1279532 to1279596. The whole original-data deficit decreases416 to352 bytes. This can only be a capacity compatibility result.",
+    "WaveOutHandle is allocated at0x1016b408. AudioInstance and ABIFile move4 bytes; the following SoundEvents array remains at0x1016b420, absorbing this handle into existing alignment.",
+    "WaveOutHeader is allocated at0x1016b920. IsNTSC and CPURegisters move48 bytes, and AudioIniFile and following common objects move64 bytes after normal alignment. No manual alignment, fillers or name variants were used.",
+    "Every Mp3 and AudioLog common address remains unchanged. The independently tracked res-to-LogInstance distance stays2308 bytes; this control does not disturb that relation.",
+    "These objects are independently proved in both WaveOut historical releases, but neither retention in2003 nor the private names used here is established. No original address is assigned to either new symbol, and no canonical declaration is promoted."
+  ],
+  "native_tool_sha256": {
+    "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
+    "toolchains/vc7/bin/c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
+    "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0",
+    "toolchains/vc7/bin/link.exe": "1560d85164dfb763dd13f90f33ff9c6f1cd80f2afada03eed8d0a314593581f1",
+    "toolchains/vc7/lib/libcmt.lib": "8815af7b9b6e0e28b77708ede25ab7ecfc4b05e1d8811f092c516cff5ce19d94",
+    "toolchains/vc6/lib/dsound.lib": "37679dff670270005be960defafa10fab2ba4eda6706ffed7cbb5818007a6105"
+  },
+  "artifact_sha256": {
+    "control.json": "a046a7888816aed00d5dfb74177e485ffc08be9c79298ba107650e967d5df1d3",
+    "control.py": "095d73de3dd1b11d9904c09ec16bdd9c725ead0dd7902d6e0ecf12c6998b465b",
+    "current/ABI1.obj": "95c9c27bdbe79fa1d049d6cafd7801c2b9af833c51086056996de43c21193b99",
+    "current/ABI2.obj": "f96b251b7ed2d403e92c025efcd7856c2a1cc32b974dec76107b250c21f45703",
+    "current/ABI3.obj": "35a6d798252c9e3ae0d7c261a2e24b45684926a5e6eb02982a23632e0bf43a69",
+    "current/Audio.res": "2a0c51c1b458d8abe45fd78bd70da51f5c56fa5303a595bfb35828a77e0b72a6",
+    "current/AudioHLE.obj": "c2c7f734eea9a3d39fed9c8292efb0ea1afaf8c57e5bef50efe2e59bdd5d1af4",
+    "current/AudioLegacy.obj": "6d4c9c41dbbe7aa444db40154ec74411ccfdfe4c4504bdbd7323de44b4dc61a8",
+    "current/AudioLog.obj": "9b882483610df1f433b972c5c39a9b9c44c100f88c4334f3eb2bda2754c76603",
+    "current/AudioPlugin.obj": "25d2193b5ae43a52632a03daf87d53101c7850074a94001699cf1bbcef7a9108",
+    "current/AudioProcessing.obj": "7485e7caf915f7c3cc6fc40836639967f16a514e444a2bdd6b5c2cd9479bfb89",
+    "current/AudioResample.obj": "304dc24892c930c722bc067953d419824124d96448f49347c00cc00316aa98df",
+    "current/CPUFeatures.obj": "17ef58e421b5ad072cf3e250fc2238dc246fa10777a8fd9b6fe46ef8c313d638",
+    "current/DirectSound.c": "54c293b50a6c2b0195bbc2312b8578fb1d48851d6c44f294ed46c8f522ea7895",
+    "current/DirectSound.h": "ab5ed735f1ab52226c0c7e7a559d080e10ec5649d2814b177f1a79686135455b",
+    "current/DirectSound.obj": "6bfde567f0c544eb019ca0490b2c5db980d032aa4dfe35ea1286be4b49c23921",
+    "current/Jpeg.obj": "8a7ab74a8a50b7b1164c3f280a557509568b0f052ab414178f14e0cde23049a6",
+    "current/Mp3.obj": "8ce7e6df2dc7f3f0b0151af30d634010b4208eeff96976c2484f132c6410990d",
+    "current/RSP.obj": "56a0cb37a5f8ad80419f7a1cbc7435812a4cdb48df7fe3262ea814da25f491c9",
+    "current/audio.def": "f34ad9fa1d564c407483eabd05363f0c95a4cf69a81f6c4ffcb0dd95ddcb4b34",
+    "current/audio.dll": "3abde74178a661c73f85e1ba4c8fb7cf724a4c65b081b0f6bd8613092a482c7d",
+    "current/audio.exp": "7d28e12e1c598b95e378ee6507d1760a7a64fa370f949a6bb17d3a1f245fdfdc",
+    "current/audio.lib": "fbb407408d9ecd7ef8aaff88776e849f5620cc328f10e19ce922e074f126fb65",
+    "current/audio.map": "3418c2bfe361990e4639708e56e8e26e99d5696b4b568d0d394e21f0323a9fa4",
+    "current/audio.pdb": "7d36089dc7b1ad70c8c1ed54e1f6870735f3d05ccb00ae3fe848f5a1f2b69073",
+    "current/comparison.json": "07edd778d5c20b601c48b67334e4c738a6d9db9e8b67762f6688d15029ff53d5",
+    "current/compile.log": "a3bcc13915b932e4d0769b56318a88249d40ea7c93151b15daeb79571dc021ca",
+    "current/link.log": "55ab2cecfbe563e13d0e6dd42cedeba8d1a226f0f141da28fc741266152c4567",
+    "current/text-records.json": "b7153319b0107ccd0fafe203f14226fc521cfe6e21b61314663138ff19f3b954",
+    "current/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
+    "waveout-objects/ABI1.obj": "95c9c27bdbe79fa1d049d6cafd7801c2b9af833c51086056996de43c21193b99",
+    "waveout-objects/ABI2.obj": "f96b251b7ed2d403e92c025efcd7856c2a1cc32b974dec76107b250c21f45703",
+    "waveout-objects/ABI3.obj": "35a6d798252c9e3ae0d7c261a2e24b45684926a5e6eb02982a23632e0bf43a69",
+    "waveout-objects/Audio.res": "2a0c51c1b458d8abe45fd78bd70da51f5c56fa5303a595bfb35828a77e0b72a6",
+    "waveout-objects/AudioHLE.obj": "c2c7f734eea9a3d39fed9c8292efb0ea1afaf8c57e5bef50efe2e59bdd5d1af4",
+    "waveout-objects/AudioLegacy.obj": "6d4c9c41dbbe7aa444db40154ec74411ccfdfe4c4504bdbd7323de44b4dc61a8",
+    "waveout-objects/AudioLog.obj": "9b882483610df1f433b972c5c39a9b9c44c100f88c4334f3eb2bda2754c76603",
+    "waveout-objects/AudioPlugin.obj": "25d2193b5ae43a52632a03daf87d53101c7850074a94001699cf1bbcef7a9108",
+    "waveout-objects/AudioProcessing.obj": "7485e7caf915f7c3cc6fc40836639967f16a514e444a2bdd6b5c2cd9479bfb89",
+    "waveout-objects/AudioResample.obj": "304dc24892c930c722bc067953d419824124d96448f49347c00cc00316aa98df",
+    "waveout-objects/CPUFeatures.obj": "17ef58e421b5ad072cf3e250fc2238dc246fa10777a8fd9b6fe46ef8c313d638",
+    "waveout-objects/DirectSound.c": "0efa18bf0ce90e158797cda899cd2d86b87be4c20988edf52e9c9f09507c9ab9",
+    "waveout-objects/DirectSound.h": "ab5ed735f1ab52226c0c7e7a559d080e10ec5649d2814b177f1a79686135455b",
+    "waveout-objects/DirectSound.obj": "b775734230a71f902e146eb2bd71bd86520f856c79544b28c456d441edf74403",
+    "waveout-objects/Jpeg.obj": "8a7ab74a8a50b7b1164c3f280a557509568b0f052ab414178f14e0cde23049a6",
+    "waveout-objects/Mp3.obj": "8ce7e6df2dc7f3f0b0151af30d634010b4208eeff96976c2484f132c6410990d",
+    "waveout-objects/RSP.obj": "56a0cb37a5f8ad80419f7a1cbc7435812a4cdb48df7fe3262ea814da25f491c9",
+    "waveout-objects/audio.def": "f34ad9fa1d564c407483eabd05363f0c95a4cf69a81f6c4ffcb0dd95ddcb4b34",
+    "waveout-objects/audio.dll": "2ee100657bec381b0e3196c2fb65b7615ae44e7b0d64c05e51b837adaf7673bd",
+    "waveout-objects/audio.exp": "a9b15c22824b1d630acc886589ed271641ac3b566a929b83a78305802b3ad247",
+    "waveout-objects/audio.lib": "30a8870aba495bca80d8b9102aa432f1efcc62efef4276e3a9ba80c1e1833e26",
+    "waveout-objects/audio.map": "6cc49ea9ea87a39c594c1ac53c4740ec8ed74fa5f353f9b5bec55298eadaaa08",
+    "waveout-objects/audio.pdb": "ec66060d8a32b4840d201d59cee90429b4b797a53ad69a7907d71735f752710b",
+    "waveout-objects/comparison.json": "66116a9e764dc1e06841c265e9e7c7b76de8d8c6aa0416b224bef613a845641a",
+    "waveout-objects/compile.log": "317358b754cddb29d2e8bbc3f7cd9764983d9a0344f22aa9ce72bfe3b691be87",
+    "waveout-objects/link.log": "55ab2cecfbe563e13d0e6dd42cedeba8d1a226f0f141da28fc741266152c4567",
+    "waveout-objects/text-records.json": "1e463a10b6c9fb2f418c07cde5cd7abdacac58adb3b20b615b7d2d68bde56052",
+    "waveout-objects/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
+    "write-report.py": "eda5b4a4d75f001b78d28fa46e61cc038f95415bd60af507006ee035d230a224"
+  },
+  "decision": "Do not promote based on capacity coincidence. Original2003 retention, private identifiers and exact known common placement remain required evidence."
+}
