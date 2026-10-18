@@ -1,0 +1,784 @@
+{
+  "status": "rejected_native_parameter_type_control",
+  "full_dll_byte_exact": false,
+  "artifact": "/root/.ai-tmp/audio-error-word-type._fahrxzu",
+  "source_basis": "The existing default format literal uses %lu, motivating a bounded unsigned-long parameter control against the inferred HRESULT type.",
+  "change": "Only the AudioError result parameter changes from HRESULT to unsigned long; surrounding source and algorithm are unchanged.",
+  "result": {
+    "instruction_matches": 46,
+    "functions": 49,
+    "AudioError": {
+      "name": "_AudioError",
+      "object": "DirectSound.obj",
+      "rebuilt_bytes": 640,
+      "status": "compared",
+      "original_va": 268450880,
+      "raw_bytes_equal": false,
+      "raw_differing_bytes": 201,
+      "compared_bytes": 640,
+      "original_size_verified": true,
+      "original_bytes": 640,
+      "size_equal": true,
+      "relocations": [
+        {
+          "offset": 10,
+          "type": "DIR32",
+          "symbol": "__imp__MessageBoxA@16",
+          "addend": 0,
+          "original_target_va": 268632524,
+          "original_target_symbols": [
+            "__imp_MessageBoxA",
+            "__imp__MessageBoxA"
+          ],
+          "expected_target_va": 268632524,
+          "resolution_basis": "import_table",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 17,
+          "type": "DIR32",
+          "symbol": "_AudioWindow",
+          "addend": 0,
+          "original_target_va": 269925116,
+          "original_target_symbols": [
+            "_AudioWindow"
+          ],
+          "expected_target_va": 269925116,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 24,
+          "type": "DIR32",
+          "symbol": "??_C@_0BD@IMDJDONF@Audio?5Plugin?5Error?$AA@",
+          "addend": 0,
+          "original_target_va": 268634132,
+          "original_target_symbols": [
+            "??_C@_0BD@IMDJDONF@Audio?5Plugin?5Error?$AA@"
+          ],
+          "expected_target_va": 268634132,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Complete compiler-emitted source string equals original data",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 89,
+          "type": "DIR32",
+          "symbol": "_AudioWindow",
+          "addend": 0,
+          "original_target_va": 269925116,
+          "original_target_symbols": [
+            "_AudioWindow"
+          ],
+          "expected_target_va": 269925116,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 96,
+          "type": "DIR32",
+          "symbol": "??_C@_0BE@FNFJCFJP@DSERR_NOAGGREGATION?$AA@",
+          "addend": 0,
+          "original_target_va": 268634112,
+          "original_target_symbols": [
+            "??_C@_0BE@FNFJCFJP@DSERR_NOAGGREGATION?$AA@"
+          ],
+          "expected_target_va": 268634112,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Complete compiler-emitted source string equals original data",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 110,
+          "type": "DIR32",
+          "symbol": "_AudioWindow",
+          "addend": 0,
+          "original_target_va": 269925116,
+          "original_target_symbols": [
+            "_AudioWindow"
+          ],
+          "expected_target_va": 269925116,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 117,
+          "type": "DIR32",
+          "symbol": "??_C@_0O@PDIJJBF@DSERR_GENERIC?$AA@",
+          "addend": 0,
+          "original_target_va": 268634096,
+          "original_target_symbols": [
+            "??_C@_0O@PDIJJBF@DSERR_GENERIC?$AA@"
+          ],
+          "expected_target_va": 268634096,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 131,
+          "type": "DIR32",
+          "symbol": "_AudioWindow",
+          "addend": 0,
+          "original_target_va": 269925116,
+          "original_target_symbols": [
+            "_AudioWindow"
+          ],
+          "expected_target_va": 269925116,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 138,
+          "type": "DIR32",
+          "symbol": "??_C@_0BC@IMOOOGNJ@DSERR_UNSUPPORTED?$AA@",
+          "addend": 0,
+          "original_target_va": 268634076,
+          "original_target_symbols": [
+            "??_C@_0BC@IMOOOGNJ@DSERR_UNSUPPORTED?$AA@"
+          ],
+          "expected_target_va": 268634076,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Complete compiler-emitted source string equals original data",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 152,
+          "type": "DIR32",
+          "symbol": "_AudioWindow",
+          "addend": 0,
+          "original_target_va": 269925116,
+          "original_target_symbols": [
+            "_AudioWindow"
+          ],
+          "expected_target_va": 269925116,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 159,
+          "type": "DIR32",
+          "symbol": "??_C@_0BC@KCMPJMLN@DSERR_OUTOFMEMORY?$AA@",
+          "addend": 0,
+          "original_target_va": 268634056,
+          "original_target_symbols": [
+            "??_C@_0BC@KCMPJMLN@DSERR_OUTOFMEMORY?$AA@"
+          ],
+          "expected_target_va": 268634056,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Complete compiler-emitted source string equals original data",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 198,
+          "type": "DIR32",
+          "symbol": "_AudioWindow",
+          "addend": 0,
+          "original_target_va": 269925116,
+          "original_target_symbols": [
+            "_AudioWindow"
+          ],
+          "expected_target_va": 269925116,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 205,
+          "type": "DIR32",
+          "symbol": "??_C@_0BF@KBGGCPDE@DSERR_CONTROLUNAVAIL?$AA@",
+          "addend": 0,
+          "original_target_va": 268634032,
+          "original_target_symbols": [
+            "??_C@_0BF@KBGGCPDE@DSERR_CONTROLUNAVAIL?$AA@"
+          ],
+          "expected_target_va": 268634032,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Complete compiler-emitted source string equals original data",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 219,
+          "type": "DIR32",
+          "symbol": "_AudioWindow",
+          "addend": 0,
+          "original_target_va": 269925116,
+          "original_target_symbols": [
+            "_AudioWindow"
+          ],
+          "expected_target_va": 269925116,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 226,
+          "type": "DIR32",
+          "symbol": "??_C@_0BD@JOINHKAA@DSerrtxt_ALLOCATED?$AA@",
+          "addend": 0,
+          "original_target_va": 268634012,
+          "original_target_symbols": [
+            "??_C@_0BD@JOINHKAA@DSerrtxt_ALLOCATED?$AA@"
+          ],
+          "expected_target_va": 268634012,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Complete compiler-emitted source string equals original data",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 240,
+          "type": "DIR32",
+          "symbol": "_AudioWindow",
+          "addend": 0,
+          "original_target_va": 269925116,
+          "original_target_symbols": [
+            "_AudioWindow"
+          ],
+          "expected_target_va": 269925116,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 247,
+          "type": "DIR32",
+          "symbol": "??_C@_0BD@MODBPMIE@DSERR_INVALIDPARAM?$AA@",
+          "addend": 0,
+          "original_target_va": 268633992,
+          "original_target_symbols": [
+            "??_C@_0BD@MODBPMIE@DSERR_INVALIDPARAM?$AA@"
+          ],
+          "expected_target_va": 268633992,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Complete compiler-emitted source string equals original data; Complete compiler-emitted source string equals original data",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 261,
+          "type": "DIR32",
+          "symbol": "_AudioWindow",
+          "addend": 0,
+          "original_target_va": 269925116,
+          "original_target_symbols": [
+            "_AudioWindow"
+          ],
+          "expected_target_va": 269925116,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 268,
+          "type": "DIR32",
+          "symbol": "??_C@_0BC@NMCDDLDP@DSERR_INVALIDCALL?$AA@",
+          "addend": 0,
+          "original_target_va": 268633972,
+          "original_target_symbols": [
+            "??_C@_0BC@NMCDDLDP@DSERR_INVALIDCALL?$AA@"
+          ],
+          "expected_target_va": 268633972,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Complete compiler-emitted source string equals original data",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 298,
+          "type": "DIR32",
+          "symbol": "$L78164",
+          "addend": 0,
+          "original_target_va": 268451412,
+          "original_target_symbols": [],
+          "expected_target_va": 268451412,
+          "resolution_basis": "same_function_label",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 305,
+          "type": "DIR32",
+          "symbol": "$L78165",
+          "addend": 0,
+          "original_target_va": 268451380,
+          "original_target_symbols": [],
+          "expected_target_va": 268451380,
+          "resolution_basis": "same_function_label",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 311,
+          "type": "DIR32",
+          "symbol": "_AudioWindow",
+          "addend": 0,
+          "original_target_va": 269925116,
+          "original_target_symbols": [
+            "_AudioWindow"
+          ],
+          "expected_target_va": 269925116,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 318,
+          "type": "DIR32",
+          "symbol": "??_C@_0BG@FGFOLLAI@DSERR_PRIOLEVELNEEDED?$AA@",
+          "addend": 0,
+          "original_target_va": 268633948,
+          "original_target_symbols": [
+            "??_C@_0BG@FGFOLLAI@DSERR_PRIOLEVELNEEDED?$AA@"
+          ],
+          "expected_target_va": 268633948,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Complete compiler-emitted source string equals original data",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 332,
+          "type": "DIR32",
+          "symbol": "_AudioWindow",
+          "addend": 0,
+          "original_target_va": 269925116,
+          "original_target_symbols": [
+            "_AudioWindow"
+          ],
+          "expected_target_va": 269925116,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 339,
+          "type": "DIR32",
+          "symbol": "??_C@_0BA@ECKDOBJD@DSERR_BADFORMAT?$AA@",
+          "addend": 0,
+          "original_target_va": 268633932,
+          "original_target_symbols": [
+            "??_C@_0BA@ECKDOBJD@DSERR_BADFORMAT?$AA@"
+          ],
+          "expected_target_va": 268633932,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Complete compiler-emitted source string equals original data",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 353,
+          "type": "DIR32",
+          "symbol": "_AudioWindow",
+          "addend": 0,
+          "original_target_va": 269925116,
+          "original_target_symbols": [
+            "_AudioWindow"
+          ],
+          "expected_target_va": 269925116,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 360,
+          "type": "DIR32",
+          "symbol": "??_C@_0P@HJFILJLC@DSERR_NODRIVER?$AA@",
+          "addend": 0,
+          "original_target_va": 268633916,
+          "original_target_symbols": [
+            "??_C@_0P@HJFILJLC@DSERR_NODRIVER?$AA@"
+          ],
+          "expected_target_va": 268633916,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Complete compiler-emitted source string equals original data",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 374,
+          "type": "DIR32",
+          "symbol": "_AudioWindow",
+          "addend": 0,
+          "original_target_va": 269925116,
+          "original_target_symbols": [
+            "_AudioWindow"
+          ],
+          "expected_target_va": 269925116,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 381,
+          "type": "DIR32",
+          "symbol": "??_C@_0BJ@PODLOCNP@DSERR_ALREADYINITIALIZED?$AA@",
+          "addend": 0,
+          "original_target_va": 268633888,
+          "original_target_symbols": [
+            "??_C@_0BJ@PODLOCNP@DSERR_ALREADYINITIALIZED?$AA@"
+          ],
+          "expected_target_va": 268633888,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Complete compiler-emitted source string equals original data",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 395,
+          "type": "DIR32",
+          "symbol": "_AudioWindow",
+          "addend": 0,
+          "original_target_va": 269925116,
+          "original_target_symbols": [
+            "_AudioWindow"
+          ],
+          "expected_target_va": 269925116,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 402,
+          "type": "DIR32",
+          "symbol": "??_C@_0BB@MLKAOHBD@DSERR_BUFFERLOST?$AA@",
+          "addend": 0,
+          "original_target_va": 268633868,
+          "original_target_symbols": [
+            "??_C@_0BB@MLKAOHBD@DSERR_BUFFERLOST?$AA@"
+          ],
+          "expected_target_va": 268633868,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Complete compiler-emitted source string equals original data",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 416,
+          "type": "DIR32",
+          "symbol": "_AudioWindow",
+          "addend": 0,
+          "original_target_va": 269925116,
+          "original_target_symbols": [
+            "_AudioWindow"
+          ],
+          "expected_target_va": 269925116,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 423,
+          "type": "DIR32",
+          "symbol": "??_C@_0BG@JFJBCEJM@DSERR_OTHERAPPHASPRIO?$AA@",
+          "addend": 0,
+          "original_target_va": 268633844,
+          "original_target_symbols": [
+            "??_C@_0BG@JFJBCEJM@DSERR_OTHERAPPHASPRIO?$AA@"
+          ],
+          "expected_target_va": 268633844,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Complete compiler-emitted source string equals original data",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 437,
+          "type": "DIR32",
+          "symbol": "_AudioWindow",
+          "addend": 0,
+          "original_target_va": 269925116,
+          "original_target_symbols": [
+            "_AudioWindow"
+          ],
+          "expected_target_va": 269925116,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 444,
+          "type": "DIR32",
+          "symbol": "??_C@_0BE@BMJCAPGM@DSERR_UNINITIALIZED?$AA@",
+          "addend": 0,
+          "original_target_va": 268633824,
+          "original_target_symbols": [
+            "??_C@_0BE@BMJCAPGM@DSERR_UNINITIALIZED?$AA@"
+          ],
+          "expected_target_va": 268633824,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Complete compiler-emitted source string equals original data",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 458,
+          "type": "DIR32",
+          "symbol": "??_C@_0BC@GIADANFI@unknown?5error?5?$CFlu?$AA@",
+          "addend": 0,
+          "original_target_va": 268633804,
+          "original_target_symbols": [
+            "??_C@_0BC@GIADANFI@unknown?5error?5?$CFlu?$AA@"
+          ],
+          "expected_target_va": 268633804,
+          "resolution_basis": "identified_symbol",
+          "target_address_evidence": "Complete compiler-emitted source string equals original data",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 463,
+          "type": "DIR32",
+          "symbol": "_AudioErrorText",
+          "addend": 0,
+          "original_target_va": 269915488,
+          "original_target_symbols": [
+            "_AudioErrorText"
+          ],
+          "expected_target_va": 269915488,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 468,
+          "type": "REL32",
+          "symbol": "_sprintf",
+          "addend": 0,
+          "original_target_va": 268571685,
+          "original_target_symbols": [
+            "_sprintf"
+          ],
+          "expected_target_va": 268571685,
+          "resolution_basis": "independent_library_mapping",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 474,
+          "type": "DIR32",
+          "symbol": "_AudioWindow",
+          "addend": 0,
+          "original_target_va": 361437220,
+          "original_target_symbols": [],
+          "expected_target_va": 269925116,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": false,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 487,
+          "type": "DIR32",
+          "symbol": "_AudioErrorText",
+          "addend": 0,
+          "original_target_va": 2506145360,
+          "original_target_symbols": [],
+          "expected_target_va": 269915488,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": false,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 500,
+          "type": "DIR32",
+          "symbol": "$L77213",
+          "addend": 0,
+          "original_target_va": 268451189,
+          "original_target_symbols": [],
+          "expected_target_va": 268451189,
+          "resolution_basis": "same_function_label",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 504,
+          "type": "DIR32",
+          "symbol": "$L77219",
+          "addend": 0,
+          "original_target_va": 268451210,
+          "original_target_symbols": [],
+          "expected_target_va": 268451210,
+          "resolution_basis": "same_function_label",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 508,
+          "type": "DIR32",
+          "symbol": "$L77225",
+          "addend": 0,
+          "original_target_va": 268451231,
+          "original_target_symbols": [],
+          "expected_target_va": 268451231,
+          "resolution_basis": "same_function_label",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 512,
+          "type": "DIR32",
+          "symbol": "$L77231",
+          "addend": 0,
+          "original_target_va": 268451252,
+          "original_target_symbols": [],
+          "expected_target_va": 268451252,
+          "resolution_basis": "same_function_label",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 516,
+          "type": "DIR32",
+          "symbol": "$L77237",
+          "addend": 0,
+          "original_target_va": 268451273,
+          "original_target_symbols": [],
+          "expected_target_va": 268451273,
+          "resolution_basis": "same_function_label",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 520,
+          "type": "DIR32",
+          "symbol": "$L77243",
+          "addend": 0,
+          "original_target_va": 268451294,
+          "original_target_symbols": [],
+          "expected_target_va": 268451294,
+          "resolution_basis": "same_function_label",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 524,
+          "type": "DIR32",
+          "symbol": "$L77249",
+          "addend": 0,
+          "original_target_va": 268451315,
+          "original_target_symbols": [],
+          "expected_target_va": 268451315,
+          "resolution_basis": "same_function_label",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 528,
+          "type": "DIR32",
+          "symbol": "$L77251",
+          "addend": 0,
+          "original_target_va": 268451336,
+          "original_target_symbols": [],
+          "expected_target_va": 268451336,
+          "resolution_basis": "same_function_label",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        }
+      ],
+      "relocation_target_mismatch_count": 2,
+      "inferred_target_count": 19,
+      "unresolved_target_count": 0,
+      "relocation_masked_equal": false,
+      "relocation_masked_differing_bytes": 21,
+      "relocations_all_resolved": true,
+      "relocation_values_consistent": false,
+      "relocation_targets_verified": false,
+      "relocation_targets_equal": false,
+      "inferred_relocated_bytes_equal": false,
+      "relocated_bytes_equal": false,
+      "first_unmasked_differences": [
+        42,
+        58,
+        473,
+        478,
+        479,
+        480,
+        481,
+        482,
+        483,
+        484,
+        485,
+        486,
+        491,
+        492,
+        493,
+        494,
+        495,
+        496,
+        497,
+        498,
+        499
+      ]
+    }
+  },
+  "hashes": {
+    "/root/.ai-tmp/audio-error-word-type._fahrxzu/DirectSound.c": "f219f6c4842411f50cc16edd14c3cdbfc3fd901ac2f3b1d42115c9a6b9ed9a76",
+    "/root/.ai-tmp/audio-error-word-type._fahrxzu/DirectSound.obj": "cf704bbda60332b014349489a25f7cb714aca51851c0c11fa7d327a3e663670a",
+    "/root/.ai-tmp/audio-error-word-type._fahrxzu/compile.log": "7903765a7f8a6764757c9f282eb9226bcf50b48dc6c6ee8b27c55df7d30988b0",
+    "/root/.ai-tmp/audio-error-word-type._fahrxzu/comparison.json": "81b66306c34f1aec9bcc35069b7bc3d84b87d011140a7728c1a697967cb0bc45",
+    "/root/nemu-decomp/toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
+    "/root/nemu-decomp/toolchains/vc7/bin/c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
+    "/root/nemu-decomp/toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0"
+  },
+  "conclusion": "The parameter type does not recover the original stack-home reuse. AudioError increases from19 to21 differing non-relocation byte positions; all46 other prior instruction matches remain. No canonical source changed."
+}
