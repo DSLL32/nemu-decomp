@@ -10,7 +10,7 @@
     "/c"
   ],
   "work": "/root/.ai-tmp/audio-dsound.6t4_1qa3",
-  "artifact": "/root/.ai-tmp/audio-dsound.6t4_1qa3/run.jjqtsdzw",
+  "artifact": "/root/.ai-tmp/audio-dsound.6t4_1qa3/run.41ou8yim",
   "commands": [
     [
       "python3",
@@ -22,8 +22,8 @@
       "/Ob1",
       "/MT",
       "/c",
-      "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.jjqtsdzw\\DirectSound.obj",
-      "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.jjqtsdzw\\source\\DirectSound.c"
+      "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.41ou8yim\\DirectSound.obj",
+      "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.41ou8yim\\source\\DirectSound.c"
     ],
     [
       "python3",
@@ -35,8 +35,8 @@
       "/Ob1",
       "/MT",
       "/c",
-      "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.jjqtsdzw\\AudioLog.obj",
-      "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.jjqtsdzw\\source\\AudioLog.c"
+      "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.41ou8yim\\AudioLog.obj",
+      "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.41ou8yim\\source\\AudioLog.c"
     ],
     [
       "python3",
@@ -45,12 +45,12 @@
       "rc",
       "/l",
       "0x409",
-      "/foZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.jjqtsdzw\\Audio.res",
-      "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.jjqtsdzw\\source\\Audio.rc"
+      "/foZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.41ou8yim\\Audio.res",
+      "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.41ou8yim\\source\\Audio.rc"
     ]
   ],
   "source_sha256": {
-    "src/audio/ahle_ds/DirectSound.c": "54c293b50a6c2b0195bbc2312b8578fb1d48851d6c44f294ed46c8f522ea7895",
+    "src/audio/ahle_ds/DirectSound.c": "0183aca5217e7c7847ae02f4e4b74e6436b11ca54e82b8bf6bbfb7d7b77e3cb6",
     "src/audio/ahle_ds/AudioLog.c": "84a6f797caaf244d44300550ed13225276bf1c45bf6fb3193be9047dc01226f0",
     "src/audio/ahle_ds/DirectSound.h": "ab5ed735f1ab52226c0c7e7a559d080e10ec5649d2814b177f1a79686135455b",
     "src/audio/ahle_ds/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
@@ -64,8 +64,8 @@
   },
   "objects": [
     {
-      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/run.jjqtsdzw/DirectSound.obj",
-      "sha256": "a24885f9d80b1f46819d3f785f5319e1674fa5e60a015544274c02c6c3796926",
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/run.41ou8yim/DirectSound.obj",
+      "sha256": "20187c2611565a4f5576a00479e6f233be8a1a3f6641ab738d12032ebb634301",
       "original": "/root/nemu-decomp/master/Plugin/audio.dll",
       "functions": [
         {
@@ -2337,15 +2337,15 @@
         {
           "name": "_AllocateSoundBuffer",
           "object": "DirectSound.obj",
-          "rebuilt_bytes": 80,
+          "rebuilt_bytes": 96,
           "status": "compared",
           "original_va": 268452736,
           "raw_bytes_equal": false,
-          "raw_differing_bytes": 77,
-          "compared_bytes": 80,
+          "raw_differing_bytes": 31,
+          "compared_bytes": 96,
           "original_size_verified": true,
           "original_bytes": 96,
-          "size_equal": false,
+          "size_equal": true,
           "relocations": [
             {
               "offset": 1,
@@ -2408,103 +2408,78 @@
               "target_identity_verified": false
             },
             {
-              "offset": 41,
+              "offset": 39,
               "type": "DIR32",
               "symbol": "_AllocatedBuffer",
               "addend": 0,
-              "original_target_va": 96931852,
-              "original_target_symbols": [],
+              "original_target_va": 269225680,
+              "original_target_symbols": [
+                "_AllocatedBuffer"
+              ],
               "expected_target_va": 269225680,
               "resolution_basis": "observed_operand_inference",
               "status": "resolved",
-              "target_equal": false,
+              "target_equal": true,
               "target_identity_verified": false
             },
             {
-              "offset": 46,
+              "offset": 45,
               "type": "DIR32",
               "symbol": "_CurrentPlayPosition",
               "addend": 0,
-              "original_target_va": 1054389,
-              "original_target_symbols": [],
+              "original_target_va": 269923688,
+              "original_target_symbols": [
+                "_CurrentPlayPosition"
+              ],
               "expected_target_va": 269923688,
               "resolution_basis": "observed_operand_inference",
               "status": "resolved",
-              "target_equal": false,
+              "target_equal": true,
               "target_identity_verified": false
             },
             {
-              "offset": 51,
+              "offset": 55,
               "type": "DIR32",
               "symbol": "_CurrentAudioLength",
               "addend": 0,
-              "original_target_va": 96927744,
-              "original_target_symbols": [],
+              "original_target_va": 269924960,
+              "original_target_symbols": [
+                "_CurrentAudioLength"
+              ],
               "expected_target_va": 269924960,
               "resolution_basis": "observed_operand_inference",
               "status": "resolved",
-              "target_equal": false,
+              "target_equal": true,
               "target_identity_verified": false
             },
             {
-              "offset": 56,
+              "offset": 65,
               "type": "DIR32",
               "symbol": "_CurrentAudio",
               "addend": 0,
-              "original_target_va": 1054394,
-              "original_target_symbols": [],
+              "original_target_va": 269389636,
+              "original_target_symbols": [
+                "_CurrentAudio"
+              ],
               "expected_target_va": 269389636,
               "resolution_basis": "observed_operand_inference",
               "status": "resolved",
-              "target_equal": false,
+              "target_equal": true,
               "target_identity_verified": false
             }
           ],
-          "relocation_target_mismatch_count": 4,
+          "relocation_target_mismatch_count": 0,
           "inferred_target_count": 7,
           "unresolved_target_count": 0,
-          "relocation_masked_equal": false,
-          "relocation_masked_differing_bytes": 50,
+          "relocation_masked_equal": true,
+          "relocation_masked_differing_bytes": 0,
           "relocations_all_resolved": true,
-          "relocation_values_consistent": false,
+          "relocation_values_consistent": true,
           "relocation_targets_verified": false,
           "relocation_targets_equal": false,
-          "inferred_relocated_bytes_equal": false,
+          "inferred_relocated_bytes_equal": true,
           "relocated_bytes_equal": false,
-          "first_unmasked_differences": [
-            25,
-            26,
-            27,
-            28,
-            34,
-            35,
-            36,
-            37,
-            38,
-            39,
-            40,
-            45,
-            50,
-            55,
-            60,
-            61,
-            62,
-            63,
-            64,
-            65,
-            66,
-            67,
-            68,
-            69,
-            70,
-            71,
-            72,
-            73,
-            74,
-            75,
-            76,
-            77
-          ]
+          "first_unmasked_differences": []
         },
         {
           "name": "_ClearAudio",
@@ -14799,16 +14774,16 @@
         }
       ],
       "functions_compared": 49,
-      "relocation_masked_matches": 46,
-      "relocation_consistent_matches": 42,
+      "relocation_masked_matches": 47,
+      "relocation_consistent_matches": 43,
       "relocation_checked_matches": 13,
-      "relocation_target_mismatches": 63,
+      "relocation_target_mismatches": 59,
       "inferred_targets": 654,
       "unresolved_targets": 18
     },
     {
-      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/run.jjqtsdzw/AudioLog.obj",
-      "sha256": "5266348db597705b6ebc256f4f0c4acc589ab9be9075902b9fe490dbfa664cd6",
+      "object": "/root/.ai-tmp/audio-dsound.6t4_1qa3/run.41ou8yim/AudioLog.obj",
+      "sha256": "6b612bd301f265770fb0b4aaeb2e9a62a0ec3fba9e0457f8d87e0ad5997df0c3",
       "original": "/root/nemu-decomp/master/Plugin/audio.dll",
       "functions": [
         {
@@ -16242,8 +16217,8 @@
     "unique_functions": 60,
     "unique_function_bytes": 11808,
     "original_sizes_verified": true,
-    "relocation_masked_matches": 57,
-    "relocation_target_mismatches": 63,
+    "relocation_masked_matches": 58,
+    "relocation_target_mismatches": 59,
     "inferred_targets": 685,
     "unresolved_targets": 20
   },

@@ -308,8 +308,8 @@ void ReadAudioQueue(void)
 void AllocateSoundBuffer(void)
 {
     AllocatedBuffer = malloc(SoundBufferSize);
-    BufferPosition = SoundBufferSize / 2;
     CurrentPlayPosition = 0;
+    BufferPosition = SoundBufferSize / 2;
     CurrentAudioLength = 0;
     CurrentAudio = NULL;
     memset(AllocatedBuffer, 0, SoundBufferSize);

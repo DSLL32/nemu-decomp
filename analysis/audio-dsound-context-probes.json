@@ -1817,5 +1817,9 @@
     "differing_non_relocation_bytes": 19,
     "limits": "This prior isolated control has two relocation-target mismatches and nineteen inferred targets in its then-current symbol map. Its negative code-shape result is not treated as a target-verified match or a current complete-unit build.",
     "finding": "The requested mutable-parameter source form was already tested and retains nineteen differing non-relocation bytes. It was not promoted or rerun solely to repeat the existing negative result."
+  },
+  "allocation_order_followup": {
+    "evidence": "analysis/audio-dsound-lifetimes.json",
+    "status": "AllocateSoundBuffer is now native-exact 96 bytes. Prior zero-store permutations all kept BufferPosition before the three resets; inserting BufferPosition after the first reset is the newly recovered source ordering."
   }
 }

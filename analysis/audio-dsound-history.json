@@ -724,5 +724,9 @@
       "The VC7 comparison required the tracked SDK prerelease include directory for dsound.h; an initial missing-header attempt produced no object and is retained in missing-sdk-include.log.",
       "No canonical qualifier, function body, storage declaration or build setting was changed."
     ]
+  },
+  "allocation_order_followup": {
+    "evidence": "analysis/audio-dsound-lifetimes.json",
+    "finding": "Historical CurrentPlayPosition zero store precedes BufferPosition half-size store. This precise ordering, previously omitted from zero-store permutations, recovers all 96 bytes of the 2003 AllocateSoundBuffer with native C. The isolated matching-compiler historical control improves to 18 non-relocation differences but is not exact."
   }
 }

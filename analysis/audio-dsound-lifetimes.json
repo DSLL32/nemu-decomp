@@ -1,0 +1,915 @@
+{
+  "scope": "Bounded source lifetime/order controls and native AllocateSoundBuffer recovery. Complete aligned extents and actual-offset COFF operands are checked; no whole-DLL equality claim.",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "artifact": "/root/.ai-tmp/audio-dsound-lifetimes.r77w_2mf",
+  "source_recovery": {
+    "function": "AllocateSoundBuffer",
+    "original_va": "0x10004380",
+    "source_change": "Move CurrentPlayPosition = 0 before BufferPosition = SoundBufferSize / 2. No other statement, qualifier, helper or compiler setting changes.",
+    "independent_historical_clue": {
+      "path": "/root/.ai-tmp/audio-host-history.jg5ustfl/AUDIO.DLL",
+      "sha256": "4e7953e5a4de38c2aaa5be4ef34b644f6af3f2d39a40ff0365a380abc2757ca8",
+      "routine_va": "0x10003f70",
+      "routine_bytes": 96,
+      "first_store": "0x10003f94: mov dword ptr [0x10113128], 0 (CurrentPlayPosition)",
+      "second_store": "0x10003f9e: mov dword ptr [0x10112fa8], eax (BufferPosition)",
+      "interpretation": "The independent earlier compiler output exposes the intermediate placement of the half-buffer assignment. This supports the source ordering; native scheduling alone does not uniquely determine original lexical order."
+    },
+    "why_prior_controls_missed_it": "Earlier six zero-store order controls permuted CurrentPlayPosition, CurrentAudioLength and CurrentAudio only after BufferPosition. They never put the half-buffer assignment between the first and second zero stores. This is a previously untested ordinary source ordering, not a different translation unit, qualifier or compiler option.",
+    "native_result": {
+      "name": "_AllocateSoundBuffer",
+      "object": "DirectSound.obj",
+      "rebuilt_bytes": 96,
+      "status": "compared",
+      "original_va": 268452736,
+      "raw_bytes_equal": false,
+      "raw_differing_bytes": 31,
+      "compared_bytes": 96,
+      "original_size_verified": true,
+      "original_bytes": 96,
+      "size_equal": true,
+      "relocations": [
+        {
+          "offset": 1,
+          "type": "DIR32",
+          "symbol": "_SoundBufferSize",
+          "addend": 0,
+          "original_target_va": 268669860,
+          "original_target_symbols": [
+            "_SoundBufferSize"
+          ],
+          "expected_target_va": 268669860,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 8,
+          "type": "REL32",
+          "symbol": "_malloc",
+          "addend": 0,
+          "original_target_va": 268571452,
+          "original_target_symbols": [
+            "_malloc"
+          ],
+          "expected_target_va": 268571452,
+          "resolution_basis": "independent_library_mapping",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": true
+        },
+        {
+          "offset": 14,
+          "type": "DIR32",
+          "symbol": "_SoundBufferSize",
+          "addend": 0,
+          "original_target_va": 268669860,
+          "original_target_symbols": [
+            "_SoundBufferSize"
+          ],
+          "expected_target_va": 268669860,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 30,
+          "type": "DIR32",
+          "symbol": "_BufferPosition",
+          "addend": 0,
+          "original_target_va": 269925088,
+          "original_target_symbols": [
+            "_BufferPosition"
+          ],
+          "expected_target_va": 269925088,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 39,
+          "type": "DIR32",
+          "symbol": "_AllocatedBuffer",
+          "addend": 0,
+          "original_target_va": 269225680,
+          "original_target_symbols": [
+            "_AllocatedBuffer"
+          ],
+          "expected_target_va": 269225680,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 45,
+          "type": "DIR32",
+          "symbol": "_CurrentPlayPosition",
+          "addend": 0,
+          "original_target_va": 269923688,
+          "original_target_symbols": [
+            "_CurrentPlayPosition"
+          ],
+          "expected_target_va": 269923688,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 55,
+          "type": "DIR32",
+          "symbol": "_CurrentAudioLength",
+          "addend": 0,
+          "original_target_va": 269924960,
+          "original_target_symbols": [
+            "_CurrentAudioLength"
+          ],
+          "expected_target_va": 269924960,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 65,
+          "type": "DIR32",
+          "symbol": "_CurrentAudio",
+          "addend": 0,
+          "original_target_va": 269389636,
+          "original_target_symbols": [
+            "_CurrentAudio"
+          ],
+          "expected_target_va": 269389636,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        }
+      ],
+      "relocation_target_mismatch_count": 0,
+      "inferred_target_count": 7,
+      "unresolved_target_count": 0,
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "relocations_all_resolved": true,
+      "relocation_values_consistent": true,
+      "relocation_targets_verified": false,
+      "relocation_targets_equal": false,
+      "inferred_relocated_bytes_equal": true,
+      "relocated_bytes_equal": false,
+      "first_unmasked_differences": []
+    },
+    "mechanism": "VC7 naturally retains all three immediate-zero stores and places XOR EAX,EAX immediately before REP STOSD. The count setup and natural alignment also match. No assembly, padding, barriers or dummy work was added.",
+    "limits": "Seven global target uses retain observed-operand inference; the malloc target has independent library attribution. All eight actual relocation fields agree at their original offsets, with zero unresolved targets. This is not independent proof of every private identifier or final linked addresses."
+  },
+  "full_host_regression": {
+    "artifact": "/root/.ai-tmp/audio-dsound.6t4_1qa3/run.41ou8yim",
+    "source_sha256": {
+      "src/audio/ahle_ds/DirectSound.c": "0183aca5217e7c7847ae02f4e4b74e6436b11ca54e82b8bf6bbfb7d7b77e3cb6",
+      "src/audio/ahle_ds/AudioLog.c": "84a6f797caaf244d44300550ed13225276bf1c45bf6fb3193be9047dc01226f0",
+      "src/audio/ahle_ds/DirectSound.h": "ab5ed735f1ab52226c0c7e7a559d080e10ec5649d2814b177f1a79686135455b",
+      "src/audio/ahle_ds/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
+      "src/audio/ahle_ds/Audio.rc": "b551863a11341c7440df2425b5620cda11c9eaef312179e8dd925fd05b12bf93"
+    },
+    "tool_sha256": {
+      "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
+      "toolchains/vc7/bin/c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
+      "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0",
+      "toolchains/vc7/bin/rc.exe": "b3720d509fd0de3bc642da5345eee59a7475ad28e64292f83206d40ed1c30ffd"
+    },
+    "commands": [
+      [
+        "python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/c",
+        "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.41ou8yim\\DirectSound.obj",
+        "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.41ou8yim\\source\\DirectSound.c"
+      ],
+      [
+        "python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/c",
+        "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.41ou8yim\\AudioLog.obj",
+        "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.41ou8yim\\source\\AudioLog.c"
+      ],
+      [
+        "python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "rc",
+        "/l",
+        "0x409",
+        "/foZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.41ou8yim\\Audio.res",
+        "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\run.41ou8yim\\source\\Audio.rc"
+      ]
+    ],
+    "function_count": 60,
+    "aligned_body_matches": 58,
+    "remaining": [
+      {
+        "name": "_AudioError",
+        "original_bytes": 640,
+        "rebuilt_bytes": 640,
+        "differing_nonrelocation_bytes": 19,
+        "operand_mismatches": 2,
+        "unresolved_targets": 0
+      },
+      {
+        "name": "_SubmitAudio",
+        "original_bytes": 1120,
+        "rebuilt_bytes": 1120,
+        "differing_nonrelocation_bytes": 421,
+        "operand_mismatches": 57,
+        "unresolved_targets": 2
+      }
+    ],
+    "all_58_matched_bodies_have_zero_operand_mismatches_and_zero_unresolved_targets": true,
+    "initialized_contributions_preserved": true,
+    "resource_payloads_exact": true,
+    "target_metadata_note": "The supplemental central comparison uses the frozen union of integration metadata, including independently resolved literals absent from the narrower standalone host map. Inferred identities are not upgraded."
+  },
+  "bounded_controls": [
+    {
+      "name": "baseline",
+      "command": [
+        "python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/c",
+        "/FoDirectSound.obj",
+        "DirectSound.c"
+      ],
+      "source_sha256": "54c293b50a6c2b0195bbc2312b8578fb1d48851d6c44f294ed46c8f522ea7895",
+      "object_sha256": "6a57fad8ac3dde926c6992a16795f33b0590f4cec87b1308950d2de887cd81e3",
+      "comparison_sha256": "158ce2365579235bd7641939b7b93458b8d267c42b8636091f327a058d4cd478",
+      "matches": 46,
+      "functions": 49,
+      "unmatched": [
+        {
+          "name": "_AudioError",
+          "original": 640,
+          "rebuilt": 640,
+          "differences": 19,
+          "target_mismatches": 2,
+          "unresolved": 0
+        },
+        {
+          "name": "_AllocateSoundBuffer",
+          "original": 96,
+          "rebuilt": 80,
+          "differences": 50,
+          "target_mismatches": 4,
+          "unresolved": 0
+        },
+        {
+          "name": "_SubmitAudio",
+          "original": 1120,
+          "rebuilt": 1120,
+          "differences": 421,
+          "target_mismatches": 57,
+          "unresolved": 2
+        }
+      ]
+    },
+    {
+      "name": "allocate-local-buffer",
+      "command": [
+        "python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/c",
+        "/FoDirectSound.obj",
+        "DirectSound.c"
+      ],
+      "source_sha256": "48956b761e0ca18b801e0751fdac5b99cd0b18c6834f842b5d85d2dc17df0663",
+      "object_sha256": "f74888661b2bb4e48a8b3bee36df1125def4558c4ff2703ef392c5c47504adb5",
+      "comparison_sha256": "759a7564887a08ac42ff0205a30901a9958adb549f46360c41f9fa66c8dc6eb1",
+      "matches": 46,
+      "functions": 49,
+      "unmatched": [
+        {
+          "name": "_AudioError",
+          "original": 640,
+          "rebuilt": 640,
+          "differences": 19,
+          "target_mismatches": 2,
+          "unresolved": 0
+        },
+        {
+          "name": "_AllocateSoundBuffer",
+          "original": 96,
+          "rebuilt": 80,
+          "differences": 50,
+          "target_mismatches": 4,
+          "unresolved": 0
+        },
+        {
+          "name": "_SubmitAudio",
+          "original": 1120,
+          "rebuilt": 1120,
+          "differences": 421,
+          "target_mismatches": 57,
+          "unresolved": 2
+        }
+      ]
+    },
+    {
+      "name": "allocate-postmalloc-size",
+      "command": [
+        "python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/c",
+        "/FoDirectSound.obj",
+        "DirectSound.c"
+      ],
+      "source_sha256": "012e6f6d92daff5bb5b4205a733de7e558823bb71894f591c9f3d0f441e817b8",
+      "object_sha256": "4c487777e30022168b9a8641164cd09c2a6645fb43711b9abb949e615c71b013",
+      "comparison_sha256": "05f2b3efb5c28673123d1606e9567eb8b651ff8e1dc401b64e2f2e90ec04f018",
+      "matches": 46,
+      "functions": 49,
+      "unmatched": [
+        {
+          "name": "_AudioError",
+          "original": 640,
+          "rebuilt": 640,
+          "differences": 19,
+          "target_mismatches": 2,
+          "unresolved": 0
+        },
+        {
+          "name": "_AllocateSoundBuffer",
+          "original": 96,
+          "rebuilt": 80,
+          "differences": 50,
+          "target_mismatches": 4,
+          "unresolved": 0
+        },
+        {
+          "name": "_SubmitAudio",
+          "original": 1120,
+          "rebuilt": 1120,
+          "differences": 421,
+          "target_mismatches": 57,
+          "unresolved": 2
+        }
+      ]
+    },
+    {
+      "name": "allocate-local-buffer-size",
+      "command": [
+        "python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/c",
+        "/FoDirectSound.obj",
+        "DirectSound.c"
+      ],
+      "source_sha256": "dc73291837fc4cc62dcac703b5dd6f18d682f4aa5d575afb11dced5a8e886957",
+      "object_sha256": "e32bd7b984653c9e9c9c56a14f68b4a6af594c05fa6047dac675630e4ec1c8a2",
+      "comparison_sha256": "9a5ba49b296abb0af7294a210ca06cd9f322000178cff6333a9127eae1a98a42",
+      "matches": 46,
+      "functions": 49,
+      "unmatched": [
+        {
+          "name": "_AudioError",
+          "original": 640,
+          "rebuilt": 640,
+          "differences": 19,
+          "target_mismatches": 2,
+          "unresolved": 0
+        },
+        {
+          "name": "_AllocateSoundBuffer",
+          "original": 96,
+          "rebuilt": 80,
+          "differences": 50,
+          "target_mismatches": 4,
+          "unresolved": 0
+        },
+        {
+          "name": "_SubmitAudio",
+          "original": 1120,
+          "rebuilt": 1120,
+          "differences": 421,
+          "target_mismatches": 57,
+          "unresolved": 2
+        }
+      ]
+    },
+    {
+      "name": "submit-cursor-array",
+      "command": [
+        "python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/c",
+        "/FoDirectSound.obj",
+        "DirectSound.c"
+      ],
+      "source_sha256": "ff3422e7e8cbc56dc59b17ae3e258738b4e9e04fe44773f2792195d5ba67c6f7",
+      "object_sha256": "4209d936c5edd38493f7ed1a03108bcfa4a864f542a1f801cd5c953c5306a9d5",
+      "comparison_sha256": "52a3ef4aef67622d82879afaa57ef492352df26ddbcf76d1cb0c81426764c5dc",
+      "matches": 46,
+      "functions": 49,
+      "unmatched": [
+        {
+          "name": "_AudioError",
+          "original": 640,
+          "rebuilt": 640,
+          "differences": 19,
+          "target_mismatches": 2,
+          "unresolved": 0
+        },
+        {
+          "name": "_AllocateSoundBuffer",
+          "original": 96,
+          "rebuilt": 80,
+          "differences": 50,
+          "target_mismatches": 4,
+          "unresolved": 0
+        },
+        {
+          "name": "_SubmitAudio",
+          "original": 1120,
+          "rebuilt": 1120,
+          "differences": 663,
+          "target_mismatches": 96,
+          "unresolved": 2
+        }
+      ]
+    },
+    {
+      "name": "submit-cursor-record",
+      "command": [
+        "python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/c",
+        "/FoDirectSound.obj",
+        "DirectSound.c"
+      ],
+      "source_sha256": "604e127856dba919cbc44ddc4aa125146271397572c03d16efa9a1884465a683",
+      "object_sha256": "7619a60f7bf6dc996a15d773f09a9db0c41778d6fdfad99d306159cc505f6099",
+      "comparison_sha256": "a7dbd81c54a6f26399a7f5f66de3dca7f01b0eef5f17a9d41c935e3901fb0e73",
+      "matches": 46,
+      "functions": 49,
+      "unmatched": [
+        {
+          "name": "_AudioError",
+          "original": 640,
+          "rebuilt": 640,
+          "differences": 19,
+          "target_mismatches": 2,
+          "unresolved": 0
+        },
+        {
+          "name": "_AllocateSoundBuffer",
+          "original": 96,
+          "rebuilt": 80,
+          "differences": 50,
+          "target_mismatches": 4,
+          "unresolved": 0
+        },
+        {
+          "name": "_SubmitAudio",
+          "original": 1120,
+          "rebuilt": 1120,
+          "differences": 663,
+          "target_mismatches": 96,
+          "unresolved": 2
+        }
+      ]
+    },
+    {
+      "name": "allocate-historical-state-order",
+      "command": [
+        "python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/c",
+        "/FoDirectSound.obj",
+        "DirectSound.c"
+      ],
+      "source_sha256": "0183aca5217e7c7847ae02f4e4b74e6436b11ca54e82b8bf6bbfb7d7b77e3cb6",
+      "object_sha256": "2f4d978b7bad800a169bbacd8560eaef18415373245311d80c0b478b2547571f",
+      "comparison_sha256": "faa6438d80843740b256a4061fe14ca849c187beb4f0bce5fbf0025adbfdf352",
+      "matches": 47,
+      "functions": 49,
+      "unmatched": [
+        {
+          "name": "_AudioError",
+          "original": 640,
+          "rebuilt": 640,
+          "differences": 19,
+          "target_mismatches": 2,
+          "unresolved": 0
+        },
+        {
+          "name": "_SubmitAudio",
+          "original": 1120,
+          "rebuilt": 1120,
+          "differences": 421,
+          "target_mismatches": 57,
+          "unresolved": 2
+        }
+      ]
+    },
+    {
+      "name": "submit-reuse-write-cursor",
+      "command": [
+        "python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/c",
+        "/FoDirectSound.obj",
+        "DirectSound.c"
+      ],
+      "source_sha256": "0eafa694347956018859673e25aef41bd29f4f8d108e54111988dd4e824c76d4",
+      "object_sha256": "ca89ae7c3fe93dd2d5a1f87475b0e1446fb38baf25bbdb760f385ef2f3c355db",
+      "comparison_sha256": "a432fb754b7b2eb585a53cad25a216605b7909548ac63402a622508c92eff6f8",
+      "matches": 46,
+      "functions": 49,
+      "unmatched": [
+        {
+          "name": "_AudioError",
+          "original": 640,
+          "rebuilt": 640,
+          "differences": 19,
+          "target_mismatches": 2,
+          "unresolved": 0
+        },
+        {
+          "name": "_AllocateSoundBuffer",
+          "original": 96,
+          "rebuilt": 80,
+          "differences": 50,
+          "target_mismatches": 4,
+          "unresolved": 0
+        },
+        {
+          "name": "_SubmitAudio",
+          "original": 1120,
+          "rebuilt": 1152,
+          "differences": 713,
+          "target_mismatches": 97,
+          "unresolved": 4
+        }
+      ]
+    },
+    {
+      "name": "submit-local-cursor-copy",
+      "command": [
+        "python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/c",
+        "/FoDirectSound.obj",
+        "DirectSound.c"
+      ],
+      "source_sha256": "a655df2edd6501dbc4ce1b84e48cb378c3a65205a25533b5f171684dab36813d",
+      "object_sha256": "1d41e0a98336670fc8ecfcfe6c4921fd3898324275bbc828df11e438854706f5",
+      "comparison_sha256": "1b91443bcf0bdab5c284985645bbd1344a5039d9c6fdbc914e98eb539c232a93",
+      "matches": 46,
+      "functions": 49,
+      "unmatched": [
+        {
+          "name": "_AudioError",
+          "original": 640,
+          "rebuilt": 640,
+          "differences": 19,
+          "target_mismatches": 2,
+          "unresolved": 0
+        },
+        {
+          "name": "_AllocateSoundBuffer",
+          "original": 96,
+          "rebuilt": 80,
+          "differences": 50,
+          "target_mismatches": 4,
+          "unresolved": 0
+        },
+        {
+          "name": "_SubmitAudio",
+          "original": 1120,
+          "rebuilt": 1120,
+          "differences": 421,
+          "target_mismatches": 57,
+          "unresolved": 2
+        }
+      ]
+    },
+    {
+      "name": "submit-distance-from-cursor",
+      "command": [
+        "python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/c",
+        "/FoDirectSound.obj",
+        "DirectSound.c"
+      ],
+      "source_sha256": "df7087bfd48161d477f03a83dbb946f6bdf7e33e6a8558a4b993129faaea4a2e",
+      "object_sha256": "e48110d732835d3b743866e9f938f6f32a265fbb04def68561af86e8899f5ac0",
+      "comparison_sha256": "c4881e9b5d8cf360bc4d01c39c495bae3c38aef807078cd4a7d0636f56eae351",
+      "matches": 46,
+      "functions": 49,
+      "unmatched": [
+        {
+          "name": "_AudioError",
+          "original": 640,
+          "rebuilt": 640,
+          "differences": 19,
+          "target_mismatches": 2,
+          "unresolved": 0
+        },
+        {
+          "name": "_AllocateSoundBuffer",
+          "original": 96,
+          "rebuilt": 80,
+          "differences": 50,
+          "target_mismatches": 4,
+          "unresolved": 0
+        },
+        {
+          "name": "_SubmitAudio",
+          "original": 1120,
+          "rebuilt": 1120,
+          "differences": 421,
+          "target_mismatches": 57,
+          "unresolved": 2
+        }
+      ]
+    }
+  ],
+  "historical_compiler_control": {
+    "source": "Same two-statement reorder in the earlier isolated native VC6 RTM diagnostic unit. No historical whole-unit source reconstruction claimed.",
+    "manifest": {
+      "command": [
+        "python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc6rtm",
+        "cl",
+        "/IZ:\\root\\nemu-decomp\\toolchains\\vc6rtm\\include",
+        "/IZ:\\root\\nemu-decomp\\toolchains\\vc6\\include",
+        "/nologo",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/c",
+        "/FoDirectSound.obj",
+        "DirectSound.c"
+      ],
+      "files": {
+        "DirectSound.obj": "388a9f31a7dd41070e098decaea1f8044d69a3df85378f924ffbb7e3bf5ce0f6",
+        "compile.log": "7903765a7f8a6764757c9f282eb9226bcf50b48dc6c6ee8b27c55df7d30988b0",
+        "comparison.json": "8cc852b06b803417f43d46ecd44bdd111ed98bcdba1084428b904a14c54df791",
+        "symbols.json": "2101701aca754dec806ecf4076dea70000ff85a65148a94877de7b9d75f31d3c",
+        "DirectSound.c": "76197defcb887b1d48c9af1284f08e68a8d1d162eb259a3d6066c9be8f26731d"
+      }
+    },
+    "result": {
+      "name": "_AllocateSoundBuffer",
+      "object": "DirectSound.obj",
+      "rebuilt_bytes": 96,
+      "status": "compared",
+      "original_va": 268451696,
+      "raw_bytes_equal": false,
+      "raw_differing_bytes": 48,
+      "compared_bytes": 96,
+      "original_size_verified": true,
+      "original_bytes": 96,
+      "size_equal": true,
+      "relocations": [
+        {
+          "offset": 1,
+          "type": "DIR32",
+          "symbol": "_SoundBufferSize",
+          "addend": 0,
+          "original_target_va": 268505508,
+          "original_target_symbols": [
+            "_SoundBufferSize"
+          ],
+          "expected_target_va": 268505508,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 8,
+          "type": "REL32",
+          "symbol": "_malloc",
+          "addend": 0,
+          "original_target_va": 268468577,
+          "original_target_symbols": [
+            "_malloc"
+          ],
+          "expected_target_va": 268468577,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 14,
+          "type": "DIR32",
+          "symbol": "_SoundBufferSize",
+          "addend": 0,
+          "original_target_va": 268505508,
+          "original_target_symbols": [
+            "_SoundBufferSize"
+          ],
+          "expected_target_va": 268505508,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 30,
+          "type": "DIR32",
+          "symbol": "_AllocatedBuffer",
+          "addend": 0,
+          "original_target_va": 985939337,
+          "original_target_symbols": [],
+          "expected_target_va": 268516036,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": false,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 38,
+          "type": "DIR32",
+          "symbol": "_CurrentPlayPosition",
+          "addend": 0,
+          "original_target_va": 269562152,
+          "original_target_symbols": [
+            "_CurrentPlayPosition"
+          ],
+          "expected_target_va": 269562152,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 47,
+          "type": "DIR32",
+          "symbol": "_BufferPosition",
+          "addend": 0,
+          "original_target_va": 269561768,
+          "original_target_symbols": [
+            "_BufferPosition"
+          ],
+          "expected_target_va": 269561768,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 53,
+          "type": "DIR32",
+          "symbol": "_CurrentAudioLength",
+          "addend": 0,
+          "original_target_va": 269550912,
+          "original_target_symbols": [
+            "_CurrentAudioLength"
+          ],
+          "expected_target_va": 269550912,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": true,
+          "target_identity_verified": false
+        },
+        {
+          "offset": 67,
+          "type": "DIR32",
+          "symbol": "_CurrentAudio",
+          "addend": 0,
+          "original_target_va": 163257349,
+          "original_target_symbols": [],
+          "expected_target_va": 269073180,
+          "resolution_basis": "observed_operand_inference",
+          "status": "resolved",
+          "target_equal": false,
+          "target_identity_verified": false
+        }
+      ],
+      "relocation_target_mismatch_count": 2,
+      "inferred_target_count": 8,
+      "unresolved_target_count": 0,
+      "relocation_masked_equal": false,
+      "relocation_masked_differing_bytes": 18,
+      "relocations_all_resolved": true,
+      "relocation_values_consistent": false,
+      "relocation_targets_verified": false,
+      "relocation_targets_equal": false,
+      "inferred_relocated_bytes_equal": false,
+      "relocated_bytes_equal": false,
+      "first_unmasked_differences": [
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        34,
+        35,
+        63,
+        64,
+        65,
+        66,
+        71,
+        75,
+        76,
+        77
+      ]
+    },
+    "finding": "Original and rebuilt sizes are both 96 bytes, but 18 non-relocation differences and 2 actual-offset operand mismatches remain. The source ordering solves the 2003 target; this isolated historical control is not described as a second exact rebuild."
+  },
+  "frozen_records": {
+    "/root/.ai-tmp/audio-dsound-lifetimes.r77w_2mf/probe.py": "3cf1817c26fdce40be3729560e0dca87cda82a159e51aa7ad0df964c0a57db9b",
+    "/root/.ai-tmp/audio-dsound-lifetimes.r77w_2mf/order-probe.py": "8c80e73b3be40c1739805da512a3c200daebeab7dd14a121b666b19bf592ea28",
+    "/root/.ai-tmp/audio-dsound-lifetimes.r77w_2mf/historical-order-probe.py": "01c0c125ea5ab96f2e147cd5207f8e045ba8f56ec0313e62769abef656a339f1",
+    "/root/.ai-tmp/audio-dsound-lifetimes.r77w_2mf/results.json": "8f7332a846edfebc810e8c8a9a800bf4f6af300c52bbb9ef1cd0d6c324bd93f6",
+    "/root/.ai-tmp/audio-dsound-lifetimes.r77w_2mf/order-results.json": "257f0f2fc75fce02865fa3affd1b721246edac5c75248d30624a7646b3d5c9a3",
+    "/root/.ai-tmp/audio-dsound-lifetimes.r77w_2mf/symbols.json": "8094d5f1a780c0892d03f8bfaca3a340134d26aae7e1b298961eaf40729f1593",
+    "/root/.ai-tmp/audio-dsound-lifetimes.r77w_2mf/promoted-central-symbols.json": "8094d5f1a780c0892d03f8bfaca3a340134d26aae7e1b298961eaf40729f1593",
+    "/root/.ai-tmp/audio-dsound-lifetimes.r77w_2mf/promoted-central-comparison.json": "9ff8d47660235025980eeaaf1fdd213fdbe41593d599f32c4fbd0497a2a4f2b1",
+    "/root/.ai-tmp/audio-dsound-lifetimes.r77w_2mf/promoted-comparison.json": "3d8223d0c9a99a1fc26b1aa76df4f41b9b128257d1060ebae0b37f91a6d3e969",
+    "/root/.ai-tmp/audio-dsound-lifetimes.r77w_2mf/_AllocateSoundBuffer-original.asm": "0df4c171660f14c8c1394c464eba69a857f60e23e86b8a6b0ccb5b90f065b397",
+    "/root/.ai-tmp/audio-dsound-lifetimes.r77w_2mf/_SubmitAudio-original.asm": "8dc56e6d0722a231d68703f82b35baa699a950500ca6ae2f9e6dc05913399d0c"
+  },
+  "decision": "Promote only the historical-supported AllocateSoundBuffer statement ordering. Cursor arrays/records/reuse/copy and allocation local snapshots remain negative controls; canonical SubmitAudio and AudioError are unchanged."
+}

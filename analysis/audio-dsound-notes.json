@@ -3,7 +3,7 @@
   "scope": "Complete routine extents 0x10003c40 through 0x10006a60, including the configuration dialog and console, plus RT_DIALOG/101 and VERSION/1 payloads.",
   "status": "Partial native source reconstruction; integrated DLL equality is not established.",
   "source_structure": "Private filenames remain inferred. Independent original initialized-data order, fourteen AMP dewindow copies, and Rich compiler counts constrain DirectSound/configuration to one native C unit (0x10003c40..0x10006610), followed by the separate AudioLog C unit. Configuration functions are placed between AudioTimer and StartAudio in original function order.",
-  "compiler": "Tracked VC7 13.00.9466, native /O2 /Ob1 /MT. These options reproduce 57 of 60 complete aligned bodies; remaining routines may require different source or compilation context.",
+  "compiler": "Tracked VC7 13.00.9466, native /O2 /Ob1 /MT. These options reproduce 58 of 60 complete aligned bodies; remaining routines may require different source or compilation context.",
   "unmatched": {
     "AudioError": {
       "va": "0x10003c40",
@@ -14,16 +14,6 @@
         "Using the parameter itself as the output message, using a separate message local, making the default MessageBox call directly, and parsing the HRESULT through va_list do not recover the original default path.",
         "A volatile text parameter with a nonvolatile local message copy produces an exact native body. This qualifier is not adopted because original-source evidence for a volatile stack argument is missing.",
         "Current full49-function native DS/config context confirms coherent variadic HRESULT extraction before or after the initial MessageBox still produces640 bytes with the same19 differences; no signature change adopted."
-      ]
-    },
-    "AllocateSoundBuffer": {
-      "va": "0x10004380",
-      "original_size": 96,
-      "rebuilt_size": 80,
-      "finding": "The original stores three immediate zero values before the memset register-zero operation; current source shares the zero register. Native source initialization and memset scheduling remain unresolved.",
-      "negative_hypotheses": [
-        "All eight combinations of volatile qualification for CurrentPlayPosition, CurrentAudioLength and CurrentAudio were examined.",
-        "/Og- produces 99 bytes; /G5 still produces 80 bytes and worsens the instruction differences."
       ]
     },
     "SubmitAudio": {
@@ -79,6 +69,23 @@
         "Native C++ produces the same eliminated 16-byte aligned routine as C.",
         "/Og- retains a frame-based 38-byte loop. Register index plus register extracted bound under /Og- produces 46 bytes, not the observed 32-byte register loop."
       ]
+    },
+    "AllocateSoundBuffer": {
+      "va": "0x10004380",
+      "original_size": 96,
+      "complete_native_body_matches": true,
+      "source_recovery": "CurrentPlayPosition = 0 precedes BufferPosition = SoundBufferSize / 2, supported by independent 2001 instruction order. Complete native 96-byte extent and all eight actual-offset operands agree; seven private-global uses remain inferred.",
+      "prior_unmatched_state": {
+        "va": "0x10004380",
+        "original_size": 96,
+        "rebuilt_size": 80,
+        "finding": "The original stores three immediate zero values before the memset register-zero operation; current source shares the zero register. Native source initialization and memset scheduling remain unresolved.",
+        "negative_hypotheses": [
+          "All eight combinations of volatile qualification for CurrentPlayPosition, CurrentAudioLength and CurrentAudio were examined.",
+          "/Og- produces 99 bytes; /G5 still produces 80 bytes and worsens the instruction differences."
+        ]
+      },
+      "evidence": "analysis/audio-dsound-lifetimes.json"
     }
   },
   "context_probe_report": "analysis/audio-dsound-context-probes.json",
@@ -95,5 +102,6 @@
     "whole_link_evidence": "/root/.ai-tmp/nemu-audio-recovery/link-storage.i405gw6a/report.json",
     "whole_link_finding": "Together with the integration-owned VC6 dsound.lib selection, the ordinary source spelling reproduces the original ordered Rich records/counts and CRT order. No additional executable alias body or metadata patch is introduced."
   },
-  "historical_host_evidence": "See analysis/audio-dsound-history.json. Both 2001 and 2003 reserve an 8192-byte interval for AudioErrorText. Earlier native code already has the unresolved AudioError stack reload and AllocateSoundBuffer immediate-zero stores; 44 unreferenced state bytes persist without new semantic identity."
+  "historical_host_evidence": "See analysis/audio-dsound-history.json. Both 2001 and 2003 reserve an 8192-byte interval for AudioErrorText. Earlier native code already has the unresolved AudioError stack reload and AllocateSoundBuffer immediate-zero stores; 44 unreferenced state bytes persist without new semantic identity.",
+  "lifetime_and_order_followup": "analysis/audio-dsound-lifetimes.json: one ordinary statement reorder recovers AllocateSoundBuffer; 58/60 host bodies match. All 58 matches also have zero operand mismatches and zero unresolved targets under the frozen central metadata; inferred private identities remain explicit."
 }
