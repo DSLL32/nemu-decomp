@@ -592,13 +592,13 @@ int RSP_ClampSample(int value)
 void RSP_MixAudio()
 {
     CpuU32 command = RSPRegisters[26];
+    CpuU32 buffers = RSPRegisters[25];
     int stepLeft = RSPRegisters[21];
     int stepRight = RSPRegisters[22];
     CpuU32 gainLeft = *(CpuU32 *)&RSPVectors[1][0];
     CpuU32 gainRight = *(CpuU32 *)&RSPVectors[1][2];
     CpuU32 gainWet = *(CpuU32 *)&RSPVectors[1][4];
     int stepWet = RSPRegisters[11];
-    CpuU32 buffers = RSPRegisters[25];
     int disableWet = command & 0x10;
     int count = (command >> 8) & 0xff;
     short invert[4] = {
