@@ -9,3 +9,10 @@
 # Retain upstream zlib source bytes and the original embedded XML payload.
 /src/nemu64/vendor/zlib-1.1.3/** -text -filter -whitespace
 /src/nemu64/nemu64.manifest -text -filter -whitespace
+
+# Retain the imported LemD3D source's encoding and historical whitespace.
+/src/lemd3d/*.cpp -text -filter -whitespace
+/src/lemd3d/*.h -text -filter -whitespace
+/src/lemd3d/*.rc -text -filter -whitespace
+/src/lemd3d/*.asm -text -filter -whitespace
+/analysis/lemd3d-source-changes.patch -whitespace

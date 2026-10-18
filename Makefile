@@ -41,12 +41,12 @@ run_tool
 endef
 
 REBUILT := nemu64.exe gs_dll.dll Plugin/audio.dll Plugin/Input.dll \
-           Plugin/debugger.dll Plugin/dialogs.dll Plugin/profile.dll
+           Plugin/debugger.dll Plugin/dialogs.dll Plugin/profile.dll Plugin/LemD3D8.dll
 MASTER_FILES := $(shell cd "$(ROOT)/master" && find . -type f -printf '%P\n')
 COPIED := $(filter-out $(REBUILT),$(MASTER_FILES))
 BUILD_RECIPE := $(ROOT)/Makefile
 
-.PHONY: all clean nemu64 gs audio input debugger dialogs profile
+.PHONY: all clean nemu64 gs audio input debugger dialogs profile lemd3d
 all: $(addprefix $(OUT)/,$(REBUILT) $(COPIED))
 nemu64: $(OUT)/nemu64.exe
 gs: $(OUT)/gs_dll.dll
@@ -55,6 +55,7 @@ input: $(OUT)/Plugin/Input.dll
 debugger: $(OUT)/Plugin/debugger.dll
 dialogs: $(OUT)/Plugin/dialogs.dll
 profile: $(OUT)/Plugin/profile.dll
+lemd3d: $(OUT)/Plugin/LemD3D8.dll
 
 # Only files without a recovered build target use this fallback rule.
 $(addprefix $(OUT)/,$(COPIED)): $(OUT)/%: $(ROOT)/master/%
@@ -182,6 +183,39 @@ $(OUT)/Plugin/audio.dll: $(AUDIO_OBJS) $(WORK)/audio/Audio.res $(ROOT)/src/audio
 	    /out:bin/Plugin/audio.dll /implib:obj/audio/audio.lib \
 	    /def:src/audio/ahle_ds/audio.def $(patsubst $(ROOT)/%,%,$(AUDIO_OBJS)) obj/audio/Audio.res \
 	    toolchains/vc6/lib/dsound.lib winmm.lib kernel32.lib user32.lib gdi32.lib
+
+LEMD3D_UNITS := 3DFunctions blender combiner combtree Direct3d DListParser \
+                INIFile LemNemu prerender StdAfx
+LEMD3D_OBJS := $(addprefix $(WORK)/lemd3d/,$(addsuffix .obj,$(LEMD3D_UNITS) detect))
+LEMD3D_HEADERS := $(wildcard $(ROOT)/src/lemd3d/*.h $(ROOT)/src/lemd3d/vendor/amd3d/*.h)
+LEMD3D_FLAGS := /nologo /c /O2 /Ob2 /MT /GX /W3 /DWIN32 /DNDEBUG /D_WINDOWS /D_MBCS \
+                /D_USRDLL /DLEMNEMU_EXPORTS /Isrc/lemd3d/vendor/amd3d \
+                /Itoolchains/vc7/platformsdk/include/prerelease
+
+$(addprefix $(WORK)/lemd3d/,$(addsuffix .obj,$(LEMD3D_UNITS))): $(WORK)/lemd3d/%.obj: $(ROOT)/src/lemd3d/%.cpp $(LEMD3D_HEADERS) $(BUILD_RECIPE)
+	@cd "$(ROOT)"
+	mkdir -p obj/lemd3d
+	$(call tool,vc7,cl) $(LEMD3D_FLAGS) /Foobj/lemd3d/$*.obj src/lemd3d/$*.cpp
+
+$(WORK)/lemd3d/detect.obj: $(ROOT)/src/lemd3d/vendor/amd3d/detect.c $(LEMD3D_HEADERS) $(BUILD_RECIPE)
+	@cd "$(ROOT)"
+	mkdir -p obj/lemd3d
+	$(call tool,vc7,cl) /nologo /c /O2 /Oy- /MT /Isrc/lemd3d/vendor/amd3d \
+	    /Foobj/lemd3d/detect.obj src/lemd3d/vendor/amd3d/detect.c
+
+$(WORK)/lemd3d/LemNemu.res: $(ROOT)/src/lemd3d/LemNemu.rc $(ROOT)/src/lemd3d/resource.h $(BUILD_RECIPE)
+	@cd "$(ROOT)"
+	mkdir -p obj/lemd3d
+	$(call tool,vc7,rc) /Isrc/lemd3d /l 0x407 /d NDEBUG /foobj/lemd3d/LemNemu.res src/lemd3d/LemNemu.rc
+
+$(OUT)/Plugin/LemD3D8.dll: $(LEMD3D_OBJS) $(WORK)/lemd3d/LemNemu.res $(BUILD_RECIPE)
+	@cd "$(ROOT)"
+	mkdir -p bin/Plugin
+	$(call tool,vc7,link) /nologo /dll /incremental:no /machine:I386 /subsystem:windows /opt:ref /opt:icf \
+	    /out:bin/Plugin/LemD3D8.dll /implib:obj/lemd3d/LemD3D8.lib \
+	    /libpath:toolchains/vc7/platformsdk/lib/prerelease \
+	    $(patsubst $(ROOT)/%,%,$(LEMD3D_OBJS)) obj/lemd3d/LemNemu.res \
+	    d3dx8.lib d3d8.lib dxerr8.lib winmm.lib kernel32.lib user32.lib gdi32.lib advapi32.lib
 
 # Explicit source and project-header prerequisites for incremental builds.
 NEMU_SRC := $(ROOT)/src/nemu64

@@ -1,0 +1,793 @@
+{
+  "status": "different",
+  "work": "/root/.ai-tmp/lemd3d.8utqlr1p",
+  "wine_prefix": "/root/.ai-tmp/lemd3d.8utqlr1p/wine",
+  "sources": {
+    "3DFunctions.cpp": "ab4c9ba2ff96e9bd0ef52268017a9266dee8533819a4e24b5a35d2ee42f329f8",
+    "CombTree.h": "2a2f5313e7ca5ced226bfd1b2d8086b764a0481650b58299ef8f265c4c539282",
+    "DListParser.cpp": "1dd1539a6b24819974eede41e25b52f3a02dd40b25254c79e4a9adcaa2a34eeb",
+    "Direct3d.cpp": "19ecf401e2e569ed0b2063e7d9a15da70309e992f13a4aec14d6e59ab925eebb",
+    "INIFile.cpp": "81223c9dbae57b40c8b30b958e276a7283ecc3d56912f01e28c269ee4b057132",
+    "INIFile.h": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "LemNemu.cpp": "f013a8ba448373ef291c0e56579a8db940cd492963256a41225075a6f92876b5",
+    "LemNemu.rc": "dfb01e6d7353ea968dcb696ef52dc02476c08bc3b954c9972b6ad109580abec6",
+    "MicroCodeDetector.h": "00319d6ff2a980e231623c44cec1a940586a052681b742daaae491dc65f0ce5e",
+    "README.md": "3b36b491df1cadfbacc128aae913de85ca057b601de9609a172a104edf0ffaac",
+    "StdAfx.cpp": "23bd12aa1a0617634a51a358049557af6323c143cdd018854fee56b9fd1fe026",
+    "StdAfx.h": "441cdffc255e45d6251ac3f2394ed5051bca62f4b695e23176b7ba481a2b827a",
+    "blender.cpp": "9e5f4c0bcc98f07dfa046d3e12f9a8c4e649323911705fbd037ffc5aa95be445",
+    "combiner.cpp": "db5e27071dc3120094a9b911ed73328d8928e1e205290663aa0cb3cf08d4058e",
+    "combtree.cpp": "ef0c648de997edb0c80b2d564cbc871f77e25bd31dacd257bcf7a4ee31a59ceb",
+    "crc.asm": "80f8a7f9b48b0284510681776ca21bbeb1b75030acb610610b3e1ff9ea9155a5",
+    "dllinterface.h": "d93b10f8717ae75f140bddd5b768ecf03758045ad987c86eca972f8b3ac4813f",
+    "globals.h": "0195e88f37414cdfb1e6d5aa35e53569b44186b82f94f08a4ee9590614e600b9",
+    "prerender.cpp": "19210907e45e2912a970a7090b74fa8e0702d33e20d4ff73f17acc14dcbb2cb0",
+    "resource.h": "46881d22e7418b3e223587595e3420dc48efd397a9da3c8e8c5dd51d143d2e1f",
+    "s2dex.h": "70fa3e95e6f4937df327e85b28a3a39027e7b85cc92140d0e023dc35a7428812",
+    "vendor/amd3d/README.md": "7fc388d30d0fbb34ae0b2acc0f9e3224d728742907100e8f4be1bb5d172bbfcd",
+    "vendor/amd3d/amdlib.h": "6362440fb615859c1b6ce9ad13477d0921bd024b77b494f3873e011dc7045598",
+    "vendor/amd3d/detect.c": "66b62b1e1a8908e4f867e26958d4d835126d8c84414c007a1d83f3fe31ad70fb"
+  },
+  "commands": [
+    {
+      "label": "compile-StdAfx",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob2",
+        "/MT",
+        "/GL",
+        "/GX",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_MBCS",
+        "/D_USRDLL",
+        "/DLEMNEMU_EXPORTS",
+        "/Ivendor/amd3d",
+        "/IZ:\\root\\nemu-decomp\\toolchains\\vc7\\platformsdk\\include\\prerelease",
+        "/Ycstdafx.h",
+        "/FpZ:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\LemNemu.pch",
+        "/FoZ:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\StdAfx.obj",
+        "StdAfx.cpp"
+      ],
+      "log": "/root/.ai-tmp/lemd3d.8utqlr1p/logs/compile-StdAfx.log",
+      "returncode": 0
+    },
+    {
+      "label": "compile-3DFunctions",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob2",
+        "/MT",
+        "/GL",
+        "/GX",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_MBCS",
+        "/D_USRDLL",
+        "/DLEMNEMU_EXPORTS",
+        "/Ivendor/amd3d",
+        "/IZ:\\root\\nemu-decomp\\toolchains\\vc7\\platformsdk\\include\\prerelease",
+        "/Yustdafx.h",
+        "/FpZ:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\LemNemu.pch",
+        "/FoZ:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\3DFunctions.obj",
+        "3DFunctions.cpp"
+      ],
+      "log": "/root/.ai-tmp/lemd3d.8utqlr1p/logs/compile-3DFunctions.log",
+      "returncode": 0
+    },
+    {
+      "label": "compile-blender",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob2",
+        "/MT",
+        "/GL",
+        "/GX",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_MBCS",
+        "/D_USRDLL",
+        "/DLEMNEMU_EXPORTS",
+        "/Ivendor/amd3d",
+        "/IZ:\\root\\nemu-decomp\\toolchains\\vc7\\platformsdk\\include\\prerelease",
+        "/Yustdafx.h",
+        "/FpZ:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\LemNemu.pch",
+        "/FoZ:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\blender.obj",
+        "blender.cpp"
+      ],
+      "log": "/root/.ai-tmp/lemd3d.8utqlr1p/logs/compile-blender.log",
+      "returncode": 0
+    },
+    {
+      "label": "compile-combiner",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob2",
+        "/MT",
+        "/GL",
+        "/GX",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_MBCS",
+        "/D_USRDLL",
+        "/DLEMNEMU_EXPORTS",
+        "/Ivendor/amd3d",
+        "/IZ:\\root\\nemu-decomp\\toolchains\\vc7\\platformsdk\\include\\prerelease",
+        "/Yustdafx.h",
+        "/FpZ:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\LemNemu.pch",
+        "/FoZ:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\combiner.obj",
+        "combiner.cpp"
+      ],
+      "log": "/root/.ai-tmp/lemd3d.8utqlr1p/logs/compile-combiner.log",
+      "returncode": 0
+    },
+    {
+      "label": "compile-combtree",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob2",
+        "/MT",
+        "/GL",
+        "/GX",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_MBCS",
+        "/D_USRDLL",
+        "/DLEMNEMU_EXPORTS",
+        "/Ivendor/amd3d",
+        "/IZ:\\root\\nemu-decomp\\toolchains\\vc7\\platformsdk\\include\\prerelease",
+        "/Yustdafx.h",
+        "/FpZ:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\LemNemu.pch",
+        "/FoZ:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\combtree.obj",
+        "combtree.cpp"
+      ],
+      "log": "/root/.ai-tmp/lemd3d.8utqlr1p/logs/compile-combtree.log",
+      "returncode": 0
+    },
+    {
+      "label": "compile-Direct3d",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob2",
+        "/MT",
+        "/GL",
+        "/GX",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_MBCS",
+        "/D_USRDLL",
+        "/DLEMNEMU_EXPORTS",
+        "/Ivendor/amd3d",
+        "/IZ:\\root\\nemu-decomp\\toolchains\\vc7\\platformsdk\\include\\prerelease",
+        "/Yustdafx.h",
+        "/FpZ:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\LemNemu.pch",
+        "/FoZ:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\Direct3d.obj",
+        "Direct3d.cpp"
+      ],
+      "log": "/root/.ai-tmp/lemd3d.8utqlr1p/logs/compile-Direct3d.log",
+      "returncode": 0
+    },
+    {
+      "label": "compile-DListParser",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob2",
+        "/MT",
+        "/GL",
+        "/GX",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_MBCS",
+        "/D_USRDLL",
+        "/DLEMNEMU_EXPORTS",
+        "/Ivendor/amd3d",
+        "/IZ:\\root\\nemu-decomp\\toolchains\\vc7\\platformsdk\\include\\prerelease",
+        "/Yustdafx.h",
+        "/FpZ:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\LemNemu.pch",
+        "/FoZ:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\DListParser.obj",
+        "DListParser.cpp"
+      ],
+      "log": "/root/.ai-tmp/lemd3d.8utqlr1p/logs/compile-DListParser.log",
+      "returncode": 0
+    },
+    {
+      "label": "compile-INIFile",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob2",
+        "/MT",
+        "/GL",
+        "/GX",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_MBCS",
+        "/D_USRDLL",
+        "/DLEMNEMU_EXPORTS",
+        "/Ivendor/amd3d",
+        "/IZ:\\root\\nemu-decomp\\toolchains\\vc7\\platformsdk\\include\\prerelease",
+        "/Yustdafx.h",
+        "/FpZ:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\LemNemu.pch",
+        "/FoZ:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\INIFile.obj",
+        "INIFile.cpp"
+      ],
+      "log": "/root/.ai-tmp/lemd3d.8utqlr1p/logs/compile-INIFile.log",
+      "returncode": 0
+    },
+    {
+      "label": "compile-LemNemu",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob2",
+        "/MT",
+        "/GL",
+        "/GX",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_MBCS",
+        "/D_USRDLL",
+        "/DLEMNEMU_EXPORTS",
+        "/Ivendor/amd3d",
+        "/IZ:\\root\\nemu-decomp\\toolchains\\vc7\\platformsdk\\include\\prerelease",
+        "/Yustdafx.h",
+        "/FpZ:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\LemNemu.pch",
+        "/FoZ:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\LemNemu.obj",
+        "LemNemu.cpp"
+      ],
+      "log": "/root/.ai-tmp/lemd3d.8utqlr1p/logs/compile-LemNemu.log",
+      "returncode": 0
+    },
+    {
+      "label": "compile-prerender",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob2",
+        "/MT",
+        "/GL",
+        "/GX",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_MBCS",
+        "/D_USRDLL",
+        "/DLEMNEMU_EXPORTS",
+        "/Ivendor/amd3d",
+        "/IZ:\\root\\nemu-decomp\\toolchains\\vc7\\platformsdk\\include\\prerelease",
+        "/Yustdafx.h",
+        "/FpZ:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\LemNemu.pch",
+        "/FoZ:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\prerender.obj",
+        "prerender.cpp"
+      ],
+      "log": "/root/.ai-tmp/lemd3d.8utqlr1p/logs/compile-prerender.log",
+      "returncode": 0
+    },
+    {
+      "label": "compile-amd-detect",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Oy-",
+        "/MT",
+        "/Ivendor/amd3d",
+        "/FoZ:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\detect.obj",
+        "vendor/amd3d/detect.c"
+      ],
+      "log": "/root/.ai-tmp/lemd3d.8utqlr1p/logs/compile-amd-detect.log",
+      "returncode": 0
+    },
+    {
+      "label": "resources",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "rc",
+        "/l",
+        "0x407",
+        "/d",
+        "NDEBUG",
+        "/foZ:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\LemNemu.res",
+        "LemNemu.rc"
+      ],
+      "log": "/root/.ai-tmp/lemd3d.8utqlr1p/logs/resources.log",
+      "returncode": 0
+    },
+    {
+      "label": "link",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "link",
+        "/nologo",
+        "/dll",
+        "/incremental:no",
+        "/machine:I386",
+        "/LTCG",
+        "/filealign:4096",
+        "/opt:ref",
+        "/opt:icf",
+        "/out:Z:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\LemD3D8.dll",
+        "/implib:Z:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\LemD3D8.lib",
+        "/map:Z:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\LemD3D8.map",
+        "/libpath:Z:\\root\\nemu-decomp\\toolchains\\vc7\\platformsdk\\lib\\prerelease",
+        "Z:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\3DFunctions.obj",
+        "Z:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\blender.obj",
+        "Z:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\combiner.obj",
+        "Z:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\combtree.obj",
+        "Z:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\Direct3d.obj",
+        "Z:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\DListParser.obj",
+        "Z:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\INIFile.obj",
+        "Z:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\LemNemu.obj",
+        "Z:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\prerender.obj",
+        "Z:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\StdAfx.obj",
+        "Z:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\detect.obj",
+        "Z:\\root\\.ai-tmp\\lemd3d.8utqlr1p\\output\\LemNemu.res",
+        "d3dx8.lib",
+        "d3d8.lib",
+        "dxerr8.lib",
+        "winmm.lib",
+        "kernel32.lib",
+        "user32.lib",
+        "gdi32.lib",
+        "advapi32.lib"
+      ],
+      "log": "/root/.ai-tmp/lemd3d.8utqlr1p/logs/link.log",
+      "returncode": 0
+    }
+  ],
+  "metadata_restoration": null,
+  "build_input_sha256": {
+    "scripts/build_lemd3d.py": "126df54c7ed23b080f987b447176bd1d0e90582165fad9a81025421e8567252e",
+    "scripts/verify_lemd3d.py": "395653944b01534d5769135394a61392166caf0fdd4cd785c4e2b70794ef5c9f",
+    "scripts/run_toolchain.py": "489681186d7cde23f42d0a6f154f3e9723b060fa769a1ce2d0f31e656074ea9e",
+    "scripts/pe_fingerprints.py": "e83e1698ecfc7b8ca06ba0919578cbd225885745a96f601891bffff831d995dd",
+    "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
+    "toolchains/vc7/bin/c1xx.dll": "30c3affd786752b4a037c4b4f035b7962d1fb5a335366e093bc73d0eb02e5558",
+    "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0",
+    "toolchains/vc7/bin/link.exe": "1560d85164dfb763dd13f90f33ff9c6f1cd80f2afada03eed8d0a314593581f1",
+    "toolchains/vc7/bin/rc.exe": "b3720d509fd0de3bc642da5345eee59a7475ad28e64292f83206d40ed1c30ffd",
+    "toolchains/vc7/bin/cvtres.exe": "6d631504ba49cf31cd54fc2e04213af7d6a4d4c7ad35bb067abb105c7a857d50",
+    "toolchains/vc7/lib/libcmt.lib": "8815af7b9b6e0e28b77708ede25ab7ecfc4b05e1d8811f092c516cff5ce19d94",
+    "toolchains/vc7/lib/libcpmt.lib": "92d0b6d397e420138046b286a824bc8cc70c90a96f69042139d181b88e2eb4d8",
+    "toolchains/vc7/platformsdk/lib/prerelease/d3dx8.lib": "0d4a2b642485dcaa7671926a9a1a545c656d5eb73f160fe971b3deebf0b516b5",
+    "toolchains/vc7/platformsdk/lib/prerelease/d3d8.lib": "778e6caa3021d2685406808cabd4fde8abba09a2c08742a11ed14a0d03001930",
+    "toolchains/vc7/platformsdk/lib/prerelease/dxerr8.lib": "56a52245494143a1dad91b3ab55cc7e57659e7b0351e6f2a03e8d573abc3f38c"
+  },
+  "compiler_flags": [
+    "/nologo",
+    "/c",
+    "/O2",
+    "/Ob2",
+    "/MT",
+    "/GL",
+    "/GX",
+    "/W3",
+    "/DWIN32",
+    "/DNDEBUG",
+    "/D_WINDOWS",
+    "/D_MBCS",
+    "/D_USRDLL",
+    "/DLEMNEMU_EXPORTS"
+  ],
+  "precompiled_headers": true,
+  "output_map": "/root/.ai-tmp/lemd3d.8utqlr1p/output/LemD3D8.map",
+  "original": "/root/nemu-decomp/master/Plugin/LemD3D8.dll",
+  "rebuilt": "/root/.ai-tmp/lemd3d.8utqlr1p/output/LemD3D8.dll",
+  "original_size": 294912,
+  "rebuilt_size": 360448,
+  "original_sha256": "df1db2f653886dcf2082ddcbe78bbecc0e512d66e99b754b624eabbeb09f8cfb",
+  "rebuilt_sha256": "df69f9156c0f32d2b71d7da797c86efc6aafc9c0d0913396da47ef8ba26b217b",
+  "full_dll_byte_exact": false,
+  "differing_file_bytes": 342723,
+  "first_difference_offset": 60,
+  "sections": [
+    {
+      "name": ".text",
+      "original": {
+        "name": ".text",
+        "virtual_size": 192819,
+        "rva": 16384,
+        "raw_size": 196608,
+        "offset": 16384
+      },
+      "rebuilt": {
+        "name": ".text",
+        "virtual_size": 215712,
+        "rva": 16384,
+        "raw_size": 217088,
+        "offset": 16384
+      },
+      "byte_exact": false,
+      "original_sha256": "2a597777539e82a5378f160fcf63dc19745c141e8e350a92bcbb337559c04f99",
+      "rebuilt_sha256": "a9ae0c321b54c012d34f73264cd1affd799b3fda5d9b06c6ec9142c78bf004cb"
+    },
+    {
+      "name": ".rdata",
+      "original": {
+        "name": ".rdata",
+        "virtual_size": 28864,
+        "rva": 212992,
+        "raw_size": 32768,
+        "offset": 212992
+      },
+      "rebuilt": {
+        "name": ".rdata",
+        "virtual_size": 60544,
+        "rva": 233472,
+        "raw_size": 61440,
+        "offset": 233472
+      },
+      "byte_exact": false,
+      "original_sha256": "97e59d9d047ab10427f385de5512e50053f9ebd636340a26fd9c90cbc6a94279",
+      "rebuilt_sha256": "a439ea96a9874fdddce987ccbc15229eb7bf2aea48b0aec32e37e80451ab9a2d"
+    },
+    {
+      "name": ".data",
+      "original": {
+        "name": ".data",
+        "virtual_size": 501420,
+        "rva": 245760,
+        "raw_size": 12288,
+        "offset": 245760
+      },
+      "rebuilt": {
+        "name": ".data",
+        "virtual_size": 880220,
+        "rva": 294912,
+        "raw_size": 24576,
+        "offset": 294912
+      },
+      "byte_exact": false,
+      "original_sha256": "696b2ed237eda6a4a64d1ef6f327ac696cc287625f04629b1e24cbba5d4deaf0",
+      "rebuilt_sha256": "fc04be3b9124d6f1366722adec9f54b61ede4bc9fd597460422ccc03bbdbca09"
+    },
+    {
+      "name": ".data1",
+      "original": {
+        "name": ".data1",
+        "virtual_size": 2272,
+        "rva": 749568,
+        "raw_size": 4096,
+        "offset": 258048
+      },
+      "rebuilt": {
+        "name": ".data1",
+        "virtual_size": 2272,
+        "rva": 1175552,
+        "raw_size": 4096,
+        "offset": 319488
+      },
+      "byte_exact": true,
+      "original_sha256": "75e827cd29c3a2371f5a21d3e58eb64436f7104ec64e7898982024b953f206cf",
+      "rebuilt_sha256": "75e827cd29c3a2371f5a21d3e58eb64436f7104ec64e7898982024b953f206cf"
+    },
+    {
+      "name": ".rsrc",
+      "original": {
+        "name": ".rsrc",
+        "virtual_size": 2248,
+        "rva": 753664,
+        "raw_size": 4096,
+        "offset": 262144
+      },
+      "rebuilt": {
+        "name": ".rsrc",
+        "virtual_size": 2248,
+        "rva": 1179648,
+        "raw_size": 4096,
+        "offset": 323584
+      },
+      "byte_exact": false,
+      "original_sha256": "47bbb2f1b0ea2304ed9ec268ffd245191ff1afefc67356c55895b025b866ae05",
+      "rebuilt_sha256": "94a405f4202b1337845d677075c29b9d05c36ba995e369fac51eba89802ad248"
+    },
+    {
+      "name": ".reloc",
+      "original": {
+        "name": ".reloc",
+        "virtual_size": 24900,
+        "rva": 757760,
+        "raw_size": 28672,
+        "offset": 266240
+      },
+      "rebuilt": {
+        "name": ".reloc",
+        "virtual_size": 31176,
+        "rva": 1183744,
+        "raw_size": 32768,
+        "offset": 327680
+      },
+      "byte_exact": false,
+      "original_sha256": "af3a20157db36db97f09bb1d938e693ba4586bef9885fbf53e0af126d490c26b",
+      "rebuilt_sha256": "d657d430e94f3d586f93e7a4137f1157cdccec7b8cb53bdc1607ec0d1aaf11f8"
+    }
+  ],
+  "export_abi_exact": true,
+  "resource_payloads_exact": true,
+  "resources": [
+    {
+      "path": [
+        16,
+        1,
+        1031
+      ],
+      "original_size": 680,
+      "rebuilt_size": 680,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        5,
+        101,
+        1031
+      ],
+      "original_size": 1176,
+      "rebuilt_size": 1176,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        5,
+        102,
+        1031
+      ],
+      "original_size": 180,
+      "rebuilt_size": 180,
+      "byte_exact": true
+    }
+  ],
+  "original_exports": [
+    {
+      "name": "ChangeWindow",
+      "ordinal": 1,
+      "rva": 66944
+    },
+    {
+      "name": "CloseDLL",
+      "ordinal": 2,
+      "rva": 66736
+    },
+    {
+      "name": "DllAbout",
+      "ordinal": 3,
+      "rva": 64896
+    },
+    {
+      "name": "DllConfig",
+      "ordinal": 4,
+      "rva": 64928
+    },
+    {
+      "name": "FillRectHack",
+      "ordinal": 5,
+      "rva": 66688
+    },
+    {
+      "name": "GetCombinerPointer",
+      "ordinal": 6,
+      "rva": 66720
+    },
+    {
+      "name": "GetDllInfo",
+      "ordinal": 7,
+      "rva": 64976
+    },
+    {
+      "name": "InitiateGFX",
+      "ordinal": 8,
+      "rva": 65040
+    },
+    {
+      "name": "ProcessDList",
+      "ordinal": 9,
+      "rva": 66192
+    },
+    {
+      "name": "RomClosed",
+      "ordinal": 10,
+      "rva": 66144
+    },
+    {
+      "name": "RomOpen",
+      "ordinal": 11,
+      "rva": 65536
+    },
+    {
+      "name": "SetResolution",
+      "ordinal": 12,
+      "rva": 67072
+    },
+    {
+      "name": "UpdateScreen",
+      "ordinal": 13,
+      "rva": 66752
+    }
+  ],
+  "rebuilt_exports": [
+    {
+      "name": "ChangeWindow",
+      "ordinal": 1,
+      "rva": 83680
+    },
+    {
+      "name": "CloseDLL",
+      "ordinal": 2,
+      "rva": 83472
+    },
+    {
+      "name": "DllAbout",
+      "ordinal": 3,
+      "rva": 81552
+    },
+    {
+      "name": "DllConfig",
+      "ordinal": 4,
+      "rva": 81584
+    },
+    {
+      "name": "FillRectHack",
+      "ordinal": 5,
+      "rva": 83424
+    },
+    {
+      "name": "GetCombinerPointer",
+      "ordinal": 6,
+      "rva": 83456
+    },
+    {
+      "name": "GetDllInfo",
+      "ordinal": 7,
+      "rva": 81632
+    },
+    {
+      "name": "InitiateGFX",
+      "ordinal": 8,
+      "rva": 81696
+    },
+    {
+      "name": "ProcessDList",
+      "ordinal": 9,
+      "rva": 82848
+    },
+    {
+      "name": "RomClosed",
+      "ordinal": 10,
+      "rva": 82800
+    },
+    {
+      "name": "RomOpen",
+      "ordinal": 11,
+      "rva": 82192
+    },
+    {
+      "name": "SetResolution",
+      "ordinal": 12,
+      "rva": 83808
+    },
+    {
+      "name": "UpdateScreen",
+      "ordinal": 13,
+      "rva": 83488
+    }
+  ],
+  "original_imports": [
+    {
+      "dll": "d3d8.dll",
+      "symbol_count": 1
+    },
+    {
+      "dll": "KERNEL32.dll",
+      "symbol_count": 72
+    },
+    {
+      "dll": "USER32.dll",
+      "symbol_count": 8
+    },
+    {
+      "dll": "ADVAPI32.dll",
+      "symbol_count": 3
+    }
+  ],
+  "rebuilt_imports": [
+    {
+      "dll": "d3d8.dll",
+      "symbol_count": 1
+    },
+    {
+      "dll": "KERNEL32.dll",
+      "symbol_count": 78
+    },
+    {
+      "dll": "USER32.dll",
+      "symbol_count": 8
+    },
+    {
+      "dll": "ADVAPI32.dll",
+      "symbol_count": 3
+    }
+  ]
+}
