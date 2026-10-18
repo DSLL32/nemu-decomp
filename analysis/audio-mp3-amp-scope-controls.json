@@ -1,0 +1,329 @@
+{
+  "status": "bounded_ancestor_declaration_scope_controls_no_canonical_change",
+  "canonical_source_sha256": "d9dccbd10b72f540528496c33f04f8a63d3b9bd1f39839a70ac8a16ef5a87b3a",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "primary_source": {
+    "url": "https://sources.debian.org/data/non-free/a/amp/0.7.6-1/transform.c",
+    "sha256": "35cab7a8eeb8be7a5b972a1aa108c7fc24ab05496962a33b43e8ba421b4703e0",
+    "declaration_lines": [
+      406,
+      407
+    ],
+    "scope": "One enclosing transform block; high half d16..d31 declared before d0..d15."
+  },
+  "prior_inventory": [
+    {
+      "path": "/root/.ai-tmp/audio-mp3-20261017/probe_phase_storage.py",
+      "sha256": "66fd4e394b20562acf3033fcff8158a5d3c1d71c89802a0a9bf989cffe723890"
+    },
+    {
+      "path": "/root/.ai-tmp/audio-mp3-20261017/probe_phase2_widths.py",
+      "sha256": "bbc18a8d82669f0a82ec16e5795d8ade01c3ddc3f12131cd4560e42b60757a18"
+    },
+    {
+      "path": "/root/.ai-tmp/audio-mp3-20261017/probe_mask_types.py",
+      "sha256": "88eefe2e89101d66c3c385a17d3957450392138a818940bbd16c57b549b3e868"
+    },
+    {
+      "path": "/root/.ai-tmp/audio-mp3-20261017/probe_mixed_locals.py",
+      "sha256": "99ac45402bd0b96ef67888e55a6e548e2680f468276b88b99edff0a99a4f7be7"
+    },
+    {
+      "path": "/root/.ai-tmp/audio-mp3-20261017/probe_stage_order.py",
+      "sha256": "b6596859b7034f28eb286489e2d465d17af5904cd95ca9716d22c31c039cda53"
+    },
+    {
+      "path": "/root/.ai-tmp/audio-mp3-20261017/probe_symbol_names.py",
+      "sha256": "c87c606ea296d7147b8e10ec40839d6f87caef586a99644ff7b669da18662bd5"
+    }
+  ],
+  "prior_assessment": "Prior narrow controls retained ascending v0..v15, either shared or shadowed around one phase. Assignment controls covered small leading pair orders. None separated 32 phase-local identities in the ancestor high-half-first enclosing scope.",
+  "source_changes": [
+    "Two separate short local halves in the inner transform scope, replacing the shared function-scope int v0..v15 declaration.",
+    "First first-phase split result uses v1, corresponding to AMP d1, instead of reusing the later d11 local identity.",
+    "Second-phase locals are v16..v31. All expressions, arithmetic, statement ordering, global references and stores are unchanged.",
+    "The two controls differ only in the order of the two local declaration statements."
+  ],
+  "compiler_flags": [
+    "/O2",
+    "/Ob1",
+    "/MT"
+  ],
+  "compiler_sha256": {
+    "cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
+    "c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
+    "c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0"
+  },
+  "target_stages": [
+    {
+      "instructions": 369,
+      "mnemonics": {
+        "add": 11,
+        "and": 3,
+        "call": 36,
+        "imul": 16,
+        "jmp": 4,
+        "lea": 7,
+        "mov": 152,
+        "movsx": 19,
+        "movzx": 19,
+        "or": 2,
+        "push": 78,
+        "rep stosd": 1,
+        "sar": 16,
+        "shl": 3,
+        "sub": 1,
+        "xor": 1
+      }
+    },
+    {
+      "instructions": 225,
+      "mnemonics": {
+        "add": 21,
+        "call": 1,
+        "imul": 8,
+        "lea": 19,
+        "mov": 101,
+        "movsx": 8,
+        "movzx": 1,
+        "neg": 7,
+        "push": 1,
+        "sar": 8,
+        "shl": 4,
+        "shr": 17,
+        "sub": 20,
+        "xor": 9
+      }
+    },
+    {
+      "instructions": 626,
+      "mnemonics": {
+        "adc": 1,
+        "add": 79,
+        "and": 4,
+        "call": 2,
+        "cdq": 2,
+        "dec": 3,
+        "imul": 43,
+        "jne": 3,
+        "lea": 72,
+        "mov": 208,
+        "movsx": 76,
+        "movzx": 2,
+        "neg": 3,
+        "nop": 9,
+        "pop": 4,
+        "ret": 1,
+        "sar": 39,
+        "shl": 3,
+        "shr": 33,
+        "sub": 26,
+        "xor": 13
+      }
+    }
+  ],
+  "variants": [
+    {
+      "name": "amp_high_first",
+      "source_sha256": "68f567a6b3b87d20b84b9fc9a17d81505180ba2a7e938ba934a5db83e6c0707d",
+      "object_sha256": "e227dd8d29e73e1d5c5a87f7b0f60ee74a216b2069f082cc43863986ff88be16",
+      "command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/IZ:\\root\\nemu-decomp\\src\\audio\\ahle_ds",
+        "/FoZ:\\root\\.ai-tmp\\audio-mp3-amp-scope.lrhgrkkg\\amp_high_first\\Mp3.obj",
+        "Z:\\root\\.ai-tmp\\audio-mp3-amp-scope.lrhgrkkg\\amp_high_first\\Mp3.c"
+      ],
+      "main_bytes": 5024,
+      "complete_main_raw_sha256": "313b5d8753702d5578d8bb1d6fe979892bf42b96ae3f72c1bda99657dad2118c",
+      "complete_main_exact": false,
+      "masked_differences": 3980,
+      "exact_helper_count": 10,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 219,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 8,
+            "movzx": 1,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 6
+          }
+        },
+        {
+          "instructions": 620,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jmp": 1,
+            "jne": 3,
+            "lea": 72,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 2,
+            "neg": 2,
+            "nop": 13,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27,
+            "xor": 7
+          }
+        }
+      ]
+    },
+    {
+      "name": "low_first_control",
+      "source_sha256": "520313feb3916438c4301526db80af804bccae5effe7250587d8643e7280f6c3",
+      "object_sha256": "c4d821fe2a823615c3f9dfb66fa465183b8c986be90af1a36345f0b3b693a971",
+      "command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/IZ:\\root\\nemu-decomp\\src\\audio\\ahle_ds",
+        "/FoZ:\\root\\.ai-tmp\\audio-mp3-amp-scope.lrhgrkkg\\low_first_control\\Mp3.obj",
+        "Z:\\root\\.ai-tmp\\audio-mp3-amp-scope.lrhgrkkg\\low_first_control\\Mp3.c"
+      ],
+      "main_bytes": 5024,
+      "complete_main_raw_sha256": "313b5d8753702d5578d8bb1d6fe979892bf42b96ae3f72c1bda99657dad2118c",
+      "complete_main_exact": false,
+      "masked_differences": 3980,
+      "exact_helper_count": 10,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 219,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 8,
+            "movzx": 1,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 6
+          }
+        },
+        {
+          "instructions": 620,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jmp": 1,
+            "jne": 3,
+            "lea": 72,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 2,
+            "neg": 2,
+            "nop": 13,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27,
+            "xor": 7
+          }
+        }
+      ]
+    }
+  ],
+  "high_first_and_low_first_main_raw_equal": true,
+  "script_sha256": "f92ff2bb6f7a717832d030d1d7ee22a6a7f7aef287a70c211b9d1b5ec8dc722b",
+  "assessment": [
+    "The high-half-first and low-first controls have identical complete Mp3DCT raw bytes. Declaration order has no observable native effect for this ancestor-backed 32-local scope.",
+    "Both preserve all ten exact MP3 helper bodies. Both main candidates are5024bytes versus5104original, with3980masked differing positions. First-stage counts remain219instructions, XOR6/MOVZX1/MOVSX8 versus target225, XOR9/MOVZX1/MOVSX8.",
+    "This reproduces the previously observed all-short instruction signature. The three missing input zero extensions are not explained by this specific enclosing scope, distinct phase-local identities or high-half-first declaration order. No wider permutation search is justified by this result.",
+    "No canonical source change is promoted; the main candidate remains unmatched."
+  ],
+  "previous_all_short_body": {
+    "object": "/root/.ai-tmp/nemu-audio-mp3-type-review.r4ZgsoD7/short_control.obj",
+    "object_sha256": "a642e2a93d66112acb5adc2dd3deaa55bcc5bcc61f7f21dc1d8d9ef97b125825",
+    "complete_main_raw_sha256": "c47b0267a33137d10757ef45f90a40b0dfe61f4e1ef98bdf43d27ba559382874",
+    "raw_equal_to_new_scope": false,
+    "native_bytes": 5024
+  },
+  "scratch_report": "/root/.ai-tmp/audio-mp3-amp-scope.lrhgrkkg/report.json"
+}
