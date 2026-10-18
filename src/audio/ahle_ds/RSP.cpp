@@ -160,8 +160,9 @@ static inline void RSP_WriteByte(CpuU32 address, CpuU8 value) { SPMemory[address
 // Original audio.dll: 0x10014130.
 void RSP_StoreVectorExec(RSPInstructionWord opcode)
 {
-    CpuU32 kind = opcode.rd, vt = opcode.rt;
+    CpuU32 vt = opcode.rt;
     CpuS32 element = (opcode.Value >> 7) & 15;
+    CpuU32 kind = opcode.rd;
     CpuU32 address;
     CpuU32 group;
     if (kind == 11) group = vt & 24;
@@ -241,8 +242,7 @@ void RSP_StoreVectorExec(RSPInstructionWord opcode)
             CpuU8 transpose[16];
             address = RSPRegisters[opcode.rs] + offset * 16;
             for (i = 0; i < 8; i++) {
-                CpuU32 lane = ((element >> 1) + i) & 7;
-                CpuU16 value = kind == 11 ? RSPVectors[group + lane][i] : RSPVectors[vt][lane];
+                CpuU16 value = kind == 11 ? RSPVectors[group + (((element >> 1) + i) & 7)][i] : RSPVectors[vt][((element >> 1) + i) & 7];
                 transpose[(address + i * 2) & 15] = value >> 8;
                 transpose[(address + i * 2 + 1) & 15] = value;
             }
