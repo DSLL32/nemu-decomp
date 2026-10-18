@@ -1,0 +1,324 @@
+{
+  "status": "bounded_direct_field_controls_negative_no_source_promotion",
+  "source": "src/audio/ahle_ds/AudioResample.c",
+  "source_sha256": "67ced2fcbd0e6798f34cd986e5a9b77e4ba963eb03463468b5d7b68120dbde1f",
+  "original": "master/Plugin/audio.dll",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "function": "_PoleFilterAudioCommand",
+  "original_va": "0x10011040",
+  "complete_extent_bytes": 2320,
+  "artifact": "/root/.ai-tmp/audio-pole-direct.edn_4ht4",
+  "compiler_command": [
+    "/usr/bin/python3",
+    "/root/nemu-decomp/scripts/run_toolchain.py",
+    "vc7",
+    "cl",
+    "/nologo",
+    "/c",
+    "/O2",
+    "/Ob1",
+    "/MT",
+    "/W3",
+    "/DWIN32",
+    "/DNDEBUG",
+    "/D_WINDOWS",
+    "/D_USRDLL",
+    "/FoAudioResample.obj",
+    "AudioResample.c"
+  ],
+  "compiler_sha256": {
+    "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
+    "toolchains/vc7/bin/c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
+    "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0"
+  },
+  "prior_inventory": [
+    "analysis/audio-pole-scope-controls.json",
+    "analysis/audio-pole-address-types.json"
+  ],
+  "new_distinction": "Earlier source-address and pointer-view controls retained coefficient, instruction, gain and count locals. This bounded pass directly re-reads those expressions, motivated by independently exact RSP field/subscript source recovery.",
+  "findings": [
+    "Only removing the instruction cache preserves the baseline2320-byte body and its7 real SIB differences. No new exact function was obtained.",
+    "Removing the coefficient pointer or count cache worsens the complete span.",
+    "The first four gain-containing controls inadvertently drop the int conversion and are explicitly rejected as unsigned-arithmetic controls; four signed-cast counterparts also fail.",
+    "Replacing the advancing input local with context input plus block offset worsens the body.",
+    "Every control preserves the nine other raw function bodies and all six prior exact function comparisons. No shared source or build option is changed."
+  ],
+  "runs": [
+    {
+      "label": "baseline",
+      "size": 2320,
+      "diff": 7,
+      "exact": false,
+      "unresolved": 0,
+      "target_mismatches": 0,
+      "all_exact": 6,
+      "changed_functions": [],
+      "source_sha256": "67ced2fcbd0e6798f34cd986e5a9b77e4ba963eb03463468b5d7b68120dbde1f",
+      "object_sha256": "a6779397c78955acb67c671128ea06685170e3b2f92838484403e52727bba538",
+      "arithmetic_caveat": "No gain signedness change; field re-reading can still change source alias semantics, so this is an unpromoted source hypothesis."
+    },
+    {
+      "label": "coefficients",
+      "size": 2352,
+      "diff": 2178,
+      "exact": false,
+      "unresolved": 0,
+      "target_mismatches": 18,
+      "all_exact": 6,
+      "changed_functions": [
+        "_PoleFilterAudioCommand"
+      ],
+      "source_sha256": "ad8a4c6366ab22e128d33e10c5a96dbe499c1a4bad4abde0783f8349e54be6b6",
+      "object_sha256": "3f35fc4136642436f089c1969df81b8a663637c477e4b5fb6752e42588812d8d",
+      "arithmetic_caveat": "No gain signedness change; field re-reading can still change source alias semantics, so this is an unpromoted source hypothesis."
+    },
+    {
+      "label": "instruction",
+      "size": 2320,
+      "diff": 7,
+      "exact": false,
+      "unresolved": 0,
+      "target_mismatches": 0,
+      "all_exact": 6,
+      "changed_functions": [],
+      "source_sha256": "347e991812b5b2b2d4783ccc806b898ac5344b553dc9a86d1491b5660a7005d4",
+      "object_sha256": "6ecac54ef0651e4947235996cbef010015e4e55bcf92b575b4dafa6166c5f83d",
+      "arithmetic_caveat": "No gain signedness change; field re-reading can still change source alias semantics, so this is an unpromoted source hypothesis."
+    },
+    {
+      "label": "gain",
+      "size": 2224,
+      "diff": 2151,
+      "exact": false,
+      "unresolved": 0,
+      "target_mismatches": 18,
+      "all_exact": 6,
+      "changed_functions": [
+        "_PoleFilterAudioCommand"
+      ],
+      "source_sha256": "e121992bc2cd37ceb6f10db03b34e00dbd58e11756a793111560edf9ccab2d00",
+      "object_sha256": "6e64afe892bfc8612b9249538976c6491a8c3f1ed9302819fb91f4e7e7c31acb",
+      "arithmetic_caveat": "Rejected confounded control: removing the int gain local leaves an unsigned masked-word expression and changes product extension. The later signed-* controls preserve its int conversion."
+    },
+    {
+      "label": "count",
+      "size": 2336,
+      "diff": 277,
+      "exact": false,
+      "unresolved": 0,
+      "target_mismatches": 2,
+      "all_exact": 6,
+      "changed_functions": [
+        "_PoleFilterAudioCommand"
+      ],
+      "source_sha256": "bbe7249fdc09839f311b52cb54100530578ce39bbd5d76eed5371361675adf61",
+      "object_sha256": "834af1effd47c7633685c7db08f78730a45dc364d9a23a8a45d60366180208c1",
+      "arithmetic_caveat": "No gain signedness change; field re-reading can still change source alias semantics, so this is an unpromoted source hypothesis."
+    },
+    {
+      "label": "instruction-gain",
+      "size": 2208,
+      "diff": 2138,
+      "exact": false,
+      "unresolved": 0,
+      "target_mismatches": 18,
+      "all_exact": 6,
+      "changed_functions": [
+        "_PoleFilterAudioCommand"
+      ],
+      "source_sha256": "87ae9556269dc0002fdb1073b9926dc385cae05a83c91d261aef0fe6bb13c867",
+      "object_sha256": "51befc7c863122e0b422740c28d257b47325a9caec9bb414ee865550f5c41acf",
+      "arithmetic_caveat": "Rejected confounded control: removing the int gain local leaves an unsigned masked-word expression and changes product extension. The later signed-* controls preserve its int conversion."
+    },
+    {
+      "label": "coefficients-gain",
+      "size": 2240,
+      "diff": 2139,
+      "exact": false,
+      "unresolved": 0,
+      "target_mismatches": 18,
+      "all_exact": 6,
+      "changed_functions": [
+        "_PoleFilterAudioCommand"
+      ],
+      "source_sha256": "d367cd3fb2259883d3258c927c06d7dbee70ac826a3215d4acae3658ee740265",
+      "object_sha256": "c645ddeb505c3180ff027bdf2f43a5b435004b8123996a9696b9b43262d6e74b",
+      "arithmetic_caveat": "Rejected confounded control: removing the int gain local leaves an unsigned masked-word expression and changes product extension. The later signed-* controls preserve its int conversion."
+    },
+    {
+      "label": "all-four",
+      "size": 2288,
+      "diff": 2164,
+      "exact": false,
+      "unresolved": 0,
+      "target_mismatches": 18,
+      "all_exact": 6,
+      "changed_functions": [
+        "_PoleFilterAudioCommand"
+      ],
+      "source_sha256": "4d30da028544b6f544115a3f699988a0270633ffcf9b187cb4c1da6dcc9683d4",
+      "object_sha256": "830b6f51f43452119f6a43e68d72e269efca2f240ae62346e28bc58de68a3138",
+      "arithmetic_caveat": "Rejected confounded control: removing the int gain local leaves an unsigned masked-word expression and changes product extension. The later signed-* controls preserve its int conversion."
+    },
+    {
+      "label": "signed-gain",
+      "size": 2320,
+      "diff": 360,
+      "exact": false,
+      "unresolved": 0,
+      "target_mismatches": 1,
+      "all_exact": 6,
+      "changed_functions": [
+        "_PoleFilterAudioCommand"
+      ],
+      "source_sha256": "2fcd78e7af791b0526658f6dd67ec9f797daf2b4e39a046914f34b6ec5e9bfba",
+      "object_sha256": "7b8257089493fac2c74066b0193ac483c9c271a15aa2390a6951e665804c1696",
+      "arithmetic_caveat": "No gain signedness change; field re-reading can still change source alias semantics, so this is an unpromoted source hypothesis."
+    },
+    {
+      "label": "signed-instruction-gain",
+      "size": 2320,
+      "diff": 916,
+      "exact": false,
+      "unresolved": 0,
+      "target_mismatches": 1,
+      "all_exact": 6,
+      "changed_functions": [
+        "_PoleFilterAudioCommand"
+      ],
+      "source_sha256": "c79c2f23c85a7f7bed88c05efa3ef15a435ce352436565bbc9d473930cfd9888",
+      "object_sha256": "20cc9753e8985d0a180115da53b90271d6874a1e3592f226a29aa6045c48bb9c",
+      "arithmetic_caveat": "No gain signedness change; field re-reading can still change source alias semantics, so this is an unpromoted source hypothesis."
+    },
+    {
+      "label": "signed-coefficients-gain",
+      "size": 2320,
+      "diff": 2123,
+      "exact": false,
+      "unresolved": 0,
+      "target_mismatches": 18,
+      "all_exact": 6,
+      "changed_functions": [
+        "_PoleFilterAudioCommand"
+      ],
+      "source_sha256": "f8558c7339b084510bad7e1913487a02a3982fc918f129d9a507f0175d76136e",
+      "object_sha256": "38b5040df98b8601bfb3fc51f36cc555702945d04906b8e175976cfb77056223",
+      "arithmetic_caveat": "No gain signedness change; field re-reading can still change source alias semantics, so this is an unpromoted source hypothesis."
+    },
+    {
+      "label": "signed-all-four",
+      "size": 2400,
+      "diff": 2207,
+      "exact": false,
+      "unresolved": 1,
+      "target_mismatches": 17,
+      "all_exact": 6,
+      "changed_functions": [
+        "_PoleFilterAudioCommand"
+      ],
+      "source_sha256": "ed61e85d54e591ff947432ffde2ac1e666f16471df6bf53978c67396fc99af20",
+      "object_sha256": "9bb760854e0668ae61a15bb9490e701c7718c74ea2a8188d0e46ac0b46b7dd26",
+      "arithmetic_caveat": "No gain signedness change; field re-reading can still change source alias semantics, so this is an unpromoted source hypothesis."
+    },
+    {
+      "label": "direct-input",
+      "size": 2512,
+      "diff": 2329,
+      "exact": false,
+      "unresolved": 1,
+      "target_mismatches": 17,
+      "all_exact": 6,
+      "changed_functions": [
+        "_PoleFilterAudioCommand"
+      ],
+      "source_sha256": "b0ad3a6e94366de61aa01215e5d2e196d70b12637e767707b7d03d433d44e71d",
+      "object_sha256": "84bb2fac17a57581e01a730ec012a6d54e268abd9239ea0a37904e348ff5ccff",
+      "arithmetic_caveat": "No gain signedness change; field re-reading can still change source alias semantics, so this is an unpromoted source hypothesis."
+    }
+  ],
+  "frozen_inputs": {
+    "audio-addresses.json": "1f4bc664d664d2d5dd2f497b53daba8975b418b576b33a714afd2d19ee3ca590",
+    "audio-adpcm-legacy-addresses.json": "d0063241bba197bc1006989a371bd5da6ee1febafea91b8b5d895e24bdca750b",
+    "audio-adpcm-wide-addresses.json": "ccc0c87c84e88882cd27c5b96464c14a054e13fbb99b2331443ce333a4dda986",
+    "audio-command-addresses.json": "acd7b3f5c9d32db55405350d8f3b277a80cfb8b7b99388d6e7e7422779891359",
+    "audio-dsound-addresses.json": "d5a25cafda8d05967f75593a4f8a074fb21ddb5173005e6a4f1e5205cc5035fb",
+    "audio-envelope-addresses.json": "9371885610cf1cb89b740e78106dfa4dd46cb8ddbd9f6157afdfa50d6c2fe7ea",
+    "audio-envelope-order-addresses.json": "527f71ccbd89bdad2c0bfc7308a6cca87f0e910ddc61438fdcbb79834a7ee169",
+    "audio-hle-addresses.json": "64a9557fc06b802d50e14777f587fbefac70a5828d75524119a1fc422ff98cf8",
+    "audio-integration-addresses.json": "1666ef9a296cdc46b8ec6db0fc2335c657860d7a40dd916b0ba4ab6a5101d61b",
+    "audio-legacy-addresses.json": "1bd4dbe2c84328c3e4a70879e25e8b07dd98e5e6490ff5540f3ae8426977ccd0",
+    "audio-libraries.json": "261eb6b86c3254d8d5183c79eaf8bee91b0acae5406ac98bbf5a398a0a92018d",
+    "audio-mp3-addresses.json": "3a150ef38580419ad2d620c48087d4710ea206172de55b9c5b815de17a04272d",
+    "audio-processing-addresses.json": "006dce65c1fae528ed41824a4f994b2ca505eea43709c1d4ec07c2218130329c",
+    "audio-rsp-addresses.json": "ed2c9be3ab401a27fd4fcec55bb110d2f15615fbe279d4825e05bae25557d45f",
+    "audio-simd-addresses.json": "672a730298162d536003eb239bf64440a2579e83646491d93215cc02af9cea6c",
+    "audio-source-grouping-addresses.json": "88a04f64201a4b8b3cc9938a219998a2965eb9cb29fed28fa6cabc631b4d2bad",
+    "pe_fingerprints.py": "e83e1698ecfc7b8ca06ba0919578cbd225885745a96f601891bffff831d995dd",
+    "verify_audio.py": "e319652ed8a706fe105d29c297f28f1d41288440df2b7f5cd27b3af213272244",
+    "verify_gs.py": "9096c1ce5e759dc60f4fc7b84c97678b5946b7b15f6bfb56cd1fa3b9e730854c"
+  },
+  "frozen_evidence": {
+    "all-four/AudioResample.c": "4d30da028544b6f544115a3f699988a0270633ffcf9b187cb4c1da6dcc9683d4",
+    "all-four/AudioResample.obj": "830b6f51f43452119f6a43e68d72e269efca2f240ae62346e28bc58de68a3138",
+    "all-four/comparison.json": "b2af1b322af2e7c064528fdf365e66c0d8a993aac1bc0defb7e7d97efbeccd58",
+    "all-four/compile.log": "30f544ae7da359ea5bf4a8fcf6a85357615b0613121f63712423ed03a17c8c9c",
+    "baseline/AudioResample.c": "67ced2fcbd0e6798f34cd986e5a9b77e4ba963eb03463468b5d7b68120dbde1f",
+    "baseline/AudioResample.obj": "a6779397c78955acb67c671128ea06685170e3b2f92838484403e52727bba538",
+    "baseline/comparison.json": "43cf0bfadd3285b58a9064d7dbb9d4b7634fa5335e80b16058b45b415080b64c",
+    "baseline/compile.log": "5a9932928d0d17386b7414d0f0dc127c36d936f232c2d54cef37847b4c79a6f6",
+    "coefficients/AudioResample.c": "ad8a4c6366ab22e128d33e10c5a96dbe499c1a4bad4abde0783f8349e54be6b6",
+    "coefficients/AudioResample.obj": "3f35fc4136642436f089c1969df81b8a663637c477e4b5fb6752e42588812d8d",
+    "coefficients/comparison.json": "f267e1a9b71f84feea54a7412cc1ee0e099fd81513b51f59e2facd7945afb58a",
+    "coefficients/compile.log": "9ee9dfd06b85ade77901238ae0c4e8653c4fa3c35323288a8a14a27e9f8a06fc",
+    "coefficients-gain/AudioResample.c": "d367cd3fb2259883d3258c927c06d7dbee70ac826a3215d4acae3658ee740265",
+    "coefficients-gain/AudioResample.obj": "c645ddeb505c3180ff027bdf2f43a5b435004b8123996a9696b9b43262d6e74b",
+    "coefficients-gain/comparison.json": "99f8992a4073d6a130af78f180534f00c6a74971d8f7d84ebfa397ead455faf0",
+    "coefficients-gain/compile.log": "f4acb8d81a7e4faa38b2331ec550bbfd1c961c131c6f19833a14209c9aad1f11",
+    "count/AudioResample.c": "bbe7249fdc09839f311b52cb54100530578ce39bbd5d76eed5371361675adf61",
+    "count/AudioResample.obj": "834af1effd47c7633685c7db08f78730a45dc364d9a23a8a45d60366180208c1",
+    "count/comparison.json": "403448c8dabc027385d54393cbcd6efaccd74c809fcf1d375ff65ae90e9daec2",
+    "count/compile.log": "9339a2e81e42a9a3295362b2dd0687efc3fb6d7a5f1227d9c9bb77e6e3076d52",
+    "direct-input/AudioResample.c": "b0ad3a6e94366de61aa01215e5d2e196d70b12637e767707b7d03d433d44e71d",
+    "direct-input/AudioResample.obj": "84bb2fac17a57581e01a730ec012a6d54e268abd9239ea0a37904e348ff5ccff",
+    "direct-input/comparison.json": "84905febcede53a7390e60460eb0ed770f4daf90adcc5b8b86b1e24902befd63",
+    "direct-input/compile.log": "a2cce3d932fc4cce5a4442a6129113ddfc94c2ca5588a9be3d4df5a74824cc15",
+    "gain/AudioResample.c": "e121992bc2cd37ceb6f10db03b34e00dbd58e11756a793111560edf9ccab2d00",
+    "gain/AudioResample.obj": "6e64afe892bfc8612b9249538976c6491a8c3f1ed9302819fb91f4e7e7c31acb",
+    "gain/comparison.json": "01beec78310332beea4857d40101ac3efff80a0c3ffaf5114f584eb7566e6f5c",
+    "gain/compile.log": "9085c2ee2a1f3a12de7fac1fbbb1c2e0540b7a56eb69399ff9daae4349d49c01",
+    "instruction/AudioResample.c": "347e991812b5b2b2d4783ccc806b898ac5344b553dc9a86d1491b5660a7005d4",
+    "instruction/AudioResample.obj": "6ecac54ef0651e4947235996cbef010015e4e55bcf92b575b4dafa6166c5f83d",
+    "instruction/comparison.json": "2df0311fe5ecf7865c7bece280f6cd7afa0390c6a51d8a7b8c3ba63d3cef1973",
+    "instruction/compile.log": "59eb528909b0d1f55e78ba4b013853cb06730671c83cdfe6559da318bed8f5b6",
+    "instruction-gain/AudioResample.c": "87ae9556269dc0002fdb1073b9926dc385cae05a83c91d261aef0fe6bb13c867",
+    "instruction-gain/AudioResample.obj": "51befc7c863122e0b422740c28d257b47325a9caec9bb414ee865550f5c41acf",
+    "instruction-gain/comparison.json": "f1cd1bbb4a8814395857582f58492d71136cbcf6b74b5aaa6912b41747bc49c9",
+    "instruction-gain/compile.log": "13af0c9e3bbd72f2360e92a4637ef9726ad17b5ca863d8dfe75409adeb8935ad",
+    "probe.py": "d10a753a22c29cccb09d00ebabc552960b4a188195cb7ca8dd34fb57aa6b05da",
+    "report.json": "b94f52e9c78e0b21408b33e980d47fe8770787da40c911b753d84f0d1f68728c",
+    "signed-all-four/AudioResample.c": "ed61e85d54e591ff947432ffde2ac1e666f16471df6bf53978c67396fc99af20",
+    "signed-all-four/AudioResample.obj": "9bb760854e0668ae61a15bb9490e701c7718c74ea2a8188d0e46ac0b46b7dd26",
+    "signed-all-four/comparison.json": "7aa7654b4f5124f97fa01d7682940b8c9818ffd2f0157870a04940ab10d5cd28",
+    "signed-all-four/compile.log": "1d02cb2cce067c90b05eff85da9e8f8e5e15477416f20639e56f880b9309ca0f",
+    "signed-coefficients-gain/AudioResample.c": "f8558c7339b084510bad7e1913487a02a3982fc918f129d9a507f0175d76136e",
+    "signed-coefficients-gain/AudioResample.obj": "38b5040df98b8601bfb3fc51f36cc555702945d04906b8e175976cfb77056223",
+    "signed-coefficients-gain/comparison.json": "aeeea4fa1b4064907647795c148b5e31a9f01124f7fadca21f27bf561a1d641a",
+    "signed-coefficients-gain/compile.log": "a0ee4a54953a68bf16f39d2ffc8e902653db049db9d5fc87f25b12541a1f9a08",
+    "signed-gain/AudioResample.c": "2fcd78e7af791b0526658f6dd67ec9f797daf2b4e39a046914f34b6ec5e9bfba",
+    "signed-gain/AudioResample.obj": "7b8257089493fac2c74066b0193ac483c9c271a15aa2390a6951e665804c1696",
+    "signed-gain/comparison.json": "28794c40e3375dbc6261abd786e0a55c84d713fc21fd39f3fe812d3f827e85fb",
+    "signed-gain/compile.log": "ac3db60615ee140cbae5143e551f0d79d475c2e3cafaed02a23dc2c5f84a7f0d",
+    "signed-instruction-gain/AudioResample.c": "c79c2f23c85a7f7bed88c05efa3ef15a435ce352436565bbc9d473930cfd9888",
+    "signed-instruction-gain/AudioResample.obj": "20cc9753e8985d0a180115da53b90271d6874a1e3592f226a29aa6045c48bb9c",
+    "signed-instruction-gain/comparison.json": "4e30d2f069859df04a57dfd4be9f1974920077211920f37493ee4387811b09a9",
+    "signed-instruction-gain/compile.log": "8003e9a517ddd0e99435bf977066b4d93691c81fd14a791524d18cb24391ca0a",
+    "signed-probe.py": "31e59f5f193d049b1499bd3ee4ff98b656adacf0abad7b1f63039fcfab40c844",
+    "signed-report.json": "34695367c44b03ccb265979ed1157a019e5671b6fbc2a7dcbf0a61c1ac43bb3a",
+    "source/AudioResample.c": "67ced2fcbd0e6798f34cd986e5a9b77e4ba963eb03463468b5d7b68120dbde1f"
+  },
+  "limitations": [
+    "Complete positional byte differences include shifted branches and relocation locations; they are not a semantic distance.",
+    "Target mismatches and unresolved operands in unsuccessful variants remain explicitly recorded and are not forced into successful comparisons.",
+    "No new behavioral-equivalence claim is made for rejected variants; full DLL equality remains false."
+  ]
+}
