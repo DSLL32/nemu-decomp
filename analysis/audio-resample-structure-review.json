@@ -1,0 +1,573 @@
+{
+  "status": "bounded_source_structure_review_no_new_compile_or_source_change",
+  "historical_evidence": "analysis/audio-resample-history.json",
+  "historical_evidence_sha256": "02427394db9254c4295d24e107fe9541d2a58ef3494b5836c4bb11d270ee0395",
+  "current_candidate": {
+    "source": "src/audio/ahle_ds/AudioResample.c",
+    "complete_source_sha256": "67ced2fcbd0e6798f34cd986e5a9b77e4ba963eb03463468b5d7b68120dbde1f",
+    "scalar_function_text_sha256": "c23c4390243870593a30db018ab9ab8b74e1023fa3f5bde637401b2cdd3c005f",
+    "object": "/root/.ai-tmp/audio-processing-three-unit-check.yjmf_7hq/AudioResample.obj",
+    "object_sha256": "f90d56761cfc6dce9779f231a103215a62cd498523a08dd7b837c88ceb831318",
+    "complete_extent_bytes": 656,
+    "masked_differing_byte_positions": 278,
+    "raw_body_sha256": "7e885c6cd97ac73981ef3539e2d344a0b5bcc67c9f535037b1cb7327e446a6aa"
+  },
+  "history_cursor_constraints": [
+    {
+      "operation": "Read phase/extra and keep the state base",
+      "historical": "100063F6..10006450: EAX remains the state base while an independent byte offset walks continuation history.",
+      "target": "1001199E..100119F5: EAX remains the state base; a derived continuation-history pointer advances from state+(16-extra)*2.",
+      "source_implication": "Canonical indexed continuation history and the same state variable already produce this lifetime. Strength reduction does not establish a separately declared source cursor."
+    },
+    {
+      "operation": "Copy four primary history samples",
+      "historical": "10006450..1000647B: one loop increments EAX by 2 for each state sample.",
+      "target": "100119F5..10011A31: four stores are unrolled; EAX increments survive only where needed to form later reads.",
+      "source_implication": "This is compatible with the same advancing state cursor and different compiler unrolling. Indexed versus advancing forms and explicit unrolling already have frozen controls."
+    },
+    {
+      "operation": "Save state",
+      "historical": "10006582..1000660D recomputes state from the command, saves phase/extra, then copies continuation and four main samples.",
+      "target": "10011B57..10011BD4 performs the same sequence, with the final four-sample copy unrolled.",
+      "source_implication": "Neither native body needs a state pointer live across the resampling loop. Canonical state recomputation already reflects this."
+    }
+  ],
+  "register_lifetimes": [
+    {
+      "value": "context",
+      "historical_0_7a": "ESI, also the embedded PCM base",
+      "target": "ESI, buffer loaded separately into EDX",
+      "candidate": "EDI, buffer loaded separately into ESI"
+    },
+    {
+      "value": "input sample index",
+      "historical_0_7a": "ECX",
+      "target": "ECX",
+      "candidate": "ECX"
+    },
+    {
+      "value": "phase during convolution",
+      "historical_0_7a": "EBP remains live",
+      "target": "EDI is saved at ESP+0x18 and reused as coefficient index",
+      "candidate": "ESI is saved at ESP+0x18 and reused as PCM base"
+    },
+    {
+      "value": "table address calculation",
+      "historical_0_7a": "EDX holds 2*phaseIndex for four planar bank displacements",
+      "target": "EDI holds 4*phaseIndex; coefficient operands use scale 2",
+      "candidate": "EDX holds 8*phaseIndex; coefficient operands use scale 1"
+    },
+    {
+      "value": "output traversal",
+      "historical_0_7a": "Complete pointer at ESP+0x2c",
+      "target": "Byte offset at ESP+0x28 added to the loaded PCM base",
+      "candidate": "Same byte-offset representation at ESP+0x28"
+    }
+  ],
+  "limited_dataflow_diagnostic": {
+    "range": "0x10011998..0x10011a6a",
+    "bytes": 210,
+    "instructions": [
+      {
+        "va": "0x10011998",
+        "target": "jne 0x10011a37",
+        "candidate": "jne 0x10011a37"
+      },
+      {
+        "va": "0x1001199e",
+        "target": "test dl, 2",
+        "candidate": "test dl, 2"
+      },
+      {
+        "va": "0x100119a1",
+        "target": "movsx edi, word ptr [eax + 8]",
+        "candidate": "movsx esi, word ptr [eax + 8]"
+      },
+      {
+        "va": "0x100119a5",
+        "target": "je 0x100119f5",
+        "candidate": "je 0x100119f5"
+      },
+      {
+        "va": "0x100119a7",
+        "target": "xor ebp, ebp",
+        "candidate": "xor ebp, ebp"
+      },
+      {
+        "va": "0x100119a9",
+        "target": "mov bp, word ptr [eax + 0xa]",
+        "candidate": "mov bp, word ptr [eax + 0xa]"
+      },
+      {
+        "va": "0x100119ad",
+        "target": "movsx ebx, bp",
+        "candidate": "movsx ebx, bp"
+      },
+      {
+        "va": "0x100119b0",
+        "target": "test ebx, ebx",
+        "candidate": "test ebx, ebx"
+      },
+      {
+        "va": "0x100119b2",
+        "target": "mov dword ptr [esp + 0x10], ebp",
+        "candidate": "mov dword ptr [esp + 0x10], ebp"
+      },
+      {
+        "va": "0x100119b6",
+        "target": "jle 0x100119f5",
+        "candidate": "jle 0x100119f5"
+      },
+      {
+        "va": "0x100119b8",
+        "target": "mov edx, ecx",
+        "candidate": "mov edx, ecx"
+      },
+      {
+        "va": "0x100119ba",
+        "target": "sub edx, ebx",
+        "candidate": "sub edx, ebx"
+      },
+      {
+        "va": "0x100119bc",
+        "target": "mov ebp, 0x10",
+        "candidate": "mov ebp, 0x10"
+      },
+      {
+        "va": "0x100119c1",
+        "target": "shl edx, 1",
+        "candidate": "shl edx, 1"
+      },
+      {
+        "va": "0x100119c3",
+        "target": "sub ebp, ebx",
+        "candidate": "sub ebp, ebx"
+      },
+      {
+        "va": "0x100119c5",
+        "target": "lea ebp, [eax + ebp*2]",
+        "candidate": "lea ebp, [eax + ebp*2]"
+      },
+      {
+        "va": "0x100119c8",
+        "target": "mov dword ptr [esp + 0x28], ebp",
+        "candidate": "mov dword ptr [esp + 0x28], ebp"
+      },
+      {
+        "va": "0x100119cc",
+        "target": "mov dword ptr [esp + 0x14], ebx",
+        "candidate": "mov dword ptr [esp + 0x14], ebx"
+      },
+      {
+        "va": "0x100119d0",
+        "target": "mov ebp, dword ptr [esp + 0x28]",
+        "candidate": "mov ebp, dword ptr [esp + 0x28]"
+      },
+      {
+        "va": "0x100119d4",
+        "target": "mov ebx, dword ptr [esi]",
+        "candidate": "mov ebx, dword ptr [edi]"
+      },
+      {
+        "va": "0x100119d6",
+        "target": "mov bp, word ptr [ebp]",
+        "candidate": "mov bp, word ptr [ebp]"
+      },
+      {
+        "va": "0x100119da",
+        "target": "mov word ptr [edx + ebx], bp",
+        "candidate": "mov word ptr [edx + ebx], bp"
+      },
+      {
+        "va": "0x100119de",
+        "target": "add dword ptr [esp + 0x28], 2",
+        "candidate": "add dword ptr [esp + 0x28], 2"
+      },
+      {
+        "va": "0x100119e3",
+        "target": "mov ebx, dword ptr [esp + 0x14]",
+        "candidate": "mov ebx, dword ptr [esp + 0x14]"
+      },
+      {
+        "va": "0x100119e7",
+        "target": "add edx, 2",
+        "candidate": "add edx, 2"
+      },
+      {
+        "va": "0x100119ea",
+        "target": "dec ebx",
+        "candidate": "dec ebx"
+      },
+      {
+        "va": "0x100119eb",
+        "target": "mov dword ptr [esp + 0x14], ebx",
+        "candidate": "mov dword ptr [esp + 0x14], ebx"
+      },
+      {
+        "va": "0x100119ef",
+        "target": "jne 0x100119d0",
+        "candidate": "jne 0x100119d0"
+      },
+      {
+        "va": "0x100119f1",
+        "target": "mov ebp, dword ptr [esp + 0x10]",
+        "candidate": "mov ebp, dword ptr [esp + 0x10]"
+      },
+      {
+        "va": "0x100119f5",
+        "target": "movsx ebx, bp",
+        "candidate": "movsx ebx, bp"
+      },
+      {
+        "va": "0x100119f8",
+        "target": "mov bp, word ptr [eax]",
+        "candidate": "mov bp, word ptr [eax]"
+      },
+      {
+        "va": "0x100119fb",
+        "target": "mov edx, ecx",
+        "candidate": "mov edx, ecx"
+      },
+      {
+        "va": "0x100119fd",
+        "target": "sub edx, ebx",
+        "candidate": "sub edx, ebx"
+      },
+      {
+        "va": "0x100119ff",
+        "target": "mov ebx, dword ptr [esi]",
+        "candidate": "mov ebx, dword ptr [edi]"
+      },
+      {
+        "va": "0x10011a01",
+        "target": "mov word ptr [ebx + edx*2 - 8], bp",
+        "candidate": "mov word ptr [ebx + edx*2 - 8], bp"
+      },
+      {
+        "va": "0x10011a06",
+        "target": "mov bp, word ptr [eax + 2]",
+        "candidate": "mov bp, word ptr [eax + 2]"
+      },
+      {
+        "va": "0x10011a0a",
+        "target": "mov ebx, dword ptr [esi]",
+        "candidate": "mov ebx, dword ptr [edi]"
+      },
+      {
+        "va": "0x10011a0c",
+        "target": "mov word ptr [ebx + edx*2 - 6], bp",
+        "candidate": "mov word ptr [ebx + edx*2 - 6], bp"
+      },
+      {
+        "va": "0x10011a11",
+        "target": "mov ebx, dword ptr [esi]",
+        "candidate": "mov ebx, dword ptr [edi]"
+      },
+      {
+        "va": "0x10011a13",
+        "target": "add eax, 2",
+        "candidate": "add eax, 2"
+      },
+      {
+        "va": "0x10011a16",
+        "target": "mov bp, word ptr [eax + 2]",
+        "candidate": "mov bp, word ptr [eax + 2]"
+      },
+      {
+        "va": "0x10011a1a",
+        "target": "add eax, 2",
+        "candidate": "add eax, 2"
+      },
+      {
+        "va": "0x10011a1d",
+        "target": "mov word ptr [ebx + edx*2 - 4], bp",
+        "candidate": "mov word ptr [ebx + edx*2 - 4], bp"
+      },
+      {
+        "va": "0x10011a22",
+        "target": "mov ebx, dword ptr [esi]",
+        "candidate": "mov ebx, dword ptr [edi]"
+      },
+      {
+        "va": "0x10011a24",
+        "target": "mov ax, word ptr [eax + 2]",
+        "candidate": "mov ax, word ptr [eax + 2]"
+      },
+      {
+        "va": "0x10011a28",
+        "target": "mov ebp, dword ptr [esp + 0x10]",
+        "candidate": "mov ebp, dword ptr [esp + 0x10]"
+      },
+      {
+        "va": "0x10011a2c",
+        "target": "mov word ptr [ebx + edx*2 - 2], ax",
+        "candidate": "mov word ptr [ebx + edx*2 - 2], ax"
+      },
+      {
+        "va": "0x10011a31",
+        "target": "mov ebx, dword ptr [esp + 0x18]",
+        "candidate": "mov ebx, dword ptr [esp + 0x18]"
+      },
+      {
+        "va": "0x10011a35",
+        "target": "jmp 0x10011a57",
+        "candidate": "jmp 0x10011a57"
+      },
+      {
+        "va": "0x10011a37",
+        "target": "mov edx, dword ptr [esi]",
+        "candidate": "mov edx, dword ptr [edi]"
+      },
+      {
+        "va": "0x10011a39",
+        "target": "xor edi, edi",
+        "candidate": "xor esi, esi"
+      },
+      {
+        "va": "0x10011a3b",
+        "target": "xor eax, eax",
+        "candidate": "xor eax, eax"
+      },
+      {
+        "va": "0x10011a3d",
+        "target": "mov word ptr [edx + ecx*2 - 8], ax",
+        "candidate": "mov word ptr [edx + ecx*2 - 8], ax"
+      },
+      {
+        "va": "0x10011a42",
+        "target": "mov edx, dword ptr [esi]",
+        "candidate": "mov edx, dword ptr [edi]"
+      },
+      {
+        "va": "0x10011a44",
+        "target": "mov word ptr [edx + ecx*2 - 6], ax",
+        "candidate": "mov word ptr [edx + ecx*2 - 6], ax"
+      },
+      {
+        "va": "0x10011a49",
+        "target": "mov edx, dword ptr [esi]",
+        "candidate": "mov edx, dword ptr [edi]"
+      },
+      {
+        "va": "0x10011a4b",
+        "target": "mov word ptr [edx + ecx*2 - 4], ax",
+        "candidate": "mov word ptr [edx + ecx*2 - 4], ax"
+      },
+      {
+        "va": "0x10011a50",
+        "target": "mov edx, dword ptr [esi]",
+        "candidate": "mov edx, dword ptr [edi]"
+      },
+      {
+        "va": "0x10011a52",
+        "target": "mov word ptr [edx + ecx*2 - 2], ax",
+        "candidate": "mov word ptr [edx + ecx*2 - 2], ax"
+      },
+      {
+        "va": "0x10011a57",
+        "target": "mov eax, dword ptr [esi + 0x14]",
+        "candidate": "mov eax, dword ptr [edi + 0x14]"
+      },
+      {
+        "va": "0x10011a5a",
+        "target": "movsx edx, bp",
+        "candidate": "movsx edx, bp"
+      },
+      {
+        "va": "0x10011a5d",
+        "target": "mov ebp, 0xfffffffc",
+        "candidate": "mov ebp, 0xfffffffc"
+      },
+      {
+        "va": "0x10011a62",
+        "target": "sub ebp, edx",
+        "candidate": "sub ebp, edx"
+      },
+      {
+        "va": "0x10011a64",
+        "target": "sar eax, 1",
+        "candidate": "sar eax, 1"
+      },
+      {
+        "va": "0x10011a66",
+        "target": "add ecx, ebp",
+        "candidate": "add ecx, ebp"
+      },
+      {
+        "va": "0x10011a68",
+        "target": "test eax, eax",
+        "candidate": "test eax, eax"
+      }
+    ],
+    "role_exchange": {
+      "target_ESI": "candidate_EDI",
+      "target_EDI": "candidate_ESI"
+    },
+    "instruction_addresses_and_operations_agree_after_role_exchange": true,
+    "limitation": "This is a dataflow comparison only. Register substitution is never used for native acceptance, and the actual complete body remains278 byte positions different."
+  },
+  "prior_controls_inspected_not_recompiled": [
+    {
+      "name": "ResampleExpression",
+      "scope": "Phase initialization, table-index expressions, product operand order, and *state++ versus explicit post-increment.",
+      "compiled_resampler_functions": 64,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/ResampleExpression.c",
+      "source_sha256": "b8cebed249a0210dbe83494bdc5e7a747dd70eb13eab2d9050331d0bf9676c6e",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/ResampleExpression.obj",
+      "object_sha256": "f6e58d1583242f3371d13190b7581bc7bb94e52bd3d583dd7116a8004ecccbdf",
+      "generator": "/root/.ai-tmp/audio-processing.bGaifE/resample_variants.py",
+      "generator_sha256": "33ad791deb80ddbffdf540d4bf5dacf694d2b7241283f8913f7e87fd3e1a1d0a"
+    },
+    {
+      "name": "ResampleShape",
+      "scope": "State[i] versus advancing state cursor, phase signedness, count placement, loop condition, mutable table view.",
+      "compiled_resampler_functions": 64,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/ResampleShape.c",
+      "source_sha256": "c96744440d6854492e1a5cb18daebe833d561abd6a43b0545b2c1d7f7800a4de",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/ResampleShape.obj",
+      "object_sha256": "d1e70531fca2478568cd988cd3d26a1b06bf4a678ce1140125f19c8bc5545ee6",
+      "generator": "/root/.ai-tmp/audio-processing.bGaifE/resample_variants2.py",
+      "generator_sha256": "8635643cece1b451c609a3fc90f1bfdf73cbcb0eb59c5eec5f08c013f2b0f6f7"
+    },
+    {
+      "name": "ResampleUnroll",
+      "scope": "Loop versus explicit four history loads, zeroing stores and final state stores; final phase temporary.",
+      "compiled_resampler_functions": 16,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/ResampleUnroll.c",
+      "source_sha256": "41a05e95d35d4c1e31a8ead1aaa651cfcc0291ac30efb7a0a0b808d181b31e57",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/ResampleUnroll.obj",
+      "object_sha256": "8f236e1ee574eeb213e82ca416e2fa116a099859791fb236c2ba0f500edc2254",
+      "generator": "/root/.ai-tmp/audio-processing.bGaifE/resample_unroll.py",
+      "generator_sha256": "49a7c91fbbe82e430d095decfaf2900db02a3a40833c7d3ed7818e57fcf92589"
+    },
+    {
+      "name": "ResampleCounter",
+      "scope": "Copy/outer-loop counter widths, countdown forms, advancing state in loop increment versus expression, and indexed history reads.",
+      "compiled_resampler_functions": 54,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/ResampleCounter.c",
+      "source_sha256": "d338d4a4a40022601664b7362b65c3cec83ee4d6564d39a057cdd8e88ad74198",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/ResampleCounter.obj",
+      "object_sha256": "fb51d1020075db2dcd64bd93415f51a1f0b109a64a56651a0f38992f2574adeb",
+      "generator": "/root/.ai-tmp/audio-processing.bGaifE/resample_counters.py",
+      "generator_sha256": "87bfb80ff0c5b7ed38e0a975fa32a116e85d6a75d45b44fb137a79f92ca75524"
+    },
+    {
+      "name": "ResampleInitial",
+      "scope": "Initial input/output order, split offset conversion, flags width, cached command and delayed state initialization.",
+      "compiled_resampler_functions": 48,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/ResampleInitial.c",
+      "source_sha256": "4f4f57015bd4c0dada28d54368a1f8af57dcf5a27ee35da991ea0a07fb6e53b5",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/ResampleInitial.obj",
+      "object_sha256": "f364c4f711fa2fd2d8ffba7888b2be39e040829c636bac2328ead021be6972b8",
+      "generator": "/root/.ai-tmp/audio-processing.bGaifE/resample_initial.py",
+      "generator_sha256": "da0a17da3ae97f3701a0afdd3c71a8b5d725b99d528ab3b81c5585eebcb2f8a0"
+    },
+    {
+      "name": "ResampleInitOrder",
+      "scope": "720 permutations of six initial declarations/initializers.",
+      "compiled_resampler_functions": 720,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/ResampleInitOrder.c",
+      "source_sha256": "4c8260bd130ac9f75aadd70086a9cb0ac0915b84439ba86313b7eb9c52650a24",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/ResampleInitOrder.obj",
+      "object_sha256": "f4e147855b86186e425c0bb3eae011b62bf45fdd3846bd693f85b5b07513ff58",
+      "generator": "/root/.ai-tmp/audio-processing.bGaifE/resample_initial_order.py",
+      "generator_sha256": "f42d95beb3eec54d30ea6d40f174d642d7b8920ad53d9bf31cea1bcac1350593"
+    },
+    {
+      "name": "ResampleShared",
+      "scope": "Shared final phase temporary, command words, count placement and table-index expression split.",
+      "compiled_resampler_functions": 24,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/ResampleShared.c",
+      "source_sha256": "ed1fab7fbb3ee372b00ab91119db6890ad12cbb5e09f92ac9f3c402b677c1334",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/ResampleShared.obj",
+      "object_sha256": "e203ad09c9c31861ec23b5b0d2383390d4b5585942c26bc0e7450be2d61a9047",
+      "generator": "/root/.ai-tmp/audio-processing.bGaifE/resample_shared.py",
+      "generator_sha256": "c01a2f0938dd7ee24621a876466e219d808fc6c60bf3898abdc0fa427d9ca443"
+    },
+    {
+      "name": "ResampleBuffer",
+      "scope": "Four buffer-load placements, optional output-buffer reuse and phase/index expression forms.",
+      "compiled_resampler_functions": 16,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/ResampleBuffer.c",
+      "source_sha256": "b3717b7508988b22844754ce0510cad8729e2ec1a9ab2aec608e123def95b9c2",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/ResampleBuffer.obj",
+      "object_sha256": "34974cfa471f0222ec15c338483386c5ab1cf4ef56d7e080a955441ddad83cff",
+      "generator": "/root/.ai-tmp/audio-processing.bGaifE/resample_buffer.py",
+      "generator_sha256": "201155de929b38bdcf442791ef9e2dba41c8ba4f280116fe2ae3a4c810ae6349"
+    },
+    {
+      "name": "ResampleDot",
+      "scope": "All24 explicit four-product orders with two state-address orders and two final phase forms.",
+      "compiled_resampler_functions": 96,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/ResampleDot.c",
+      "source_sha256": "5b753327c149526a29301e2962a64d3258ce37d0bbad089a004fb4ff18a93f6c",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/ResampleDot.obj",
+      "object_sha256": "e4c056617e94599e8194c86482e78c43b9ff39bbe1810674897097f81cb4ad99",
+      "generator": "/root/.ai-tmp/audio-processing.bGaifE/resample_dot.py",
+      "generator_sha256": "d47cdf5ecabafe885ac5996683877fd36cc67f0ce6fce8bcd8106c5b2ce566dd"
+    },
+    {
+      "name": "ResampleTrees",
+      "scope": "All24 product orders across five binary addition trees or sequential accumulation.",
+      "compiled_resampler_functions": 144,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/ResampleTrees.c",
+      "source_sha256": "7721c22326a914c9687f59557d2674eb391df4481f5747e70ec554ec68f83b54",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/ResampleTrees.obj",
+      "object_sha256": "93db7015433b5c90aa73d631c502851c548f6677b065da4720f4b99bffa54f99",
+      "generator": "/root/.ai-tmp/audio-processing.bGaifE/resample_trees.py",
+      "generator_sha256": "7214f490b8218ca1ed5b853908b9e63d7dffb197a8b3df517f58be3c93123d6c"
+    },
+    {
+      "name": "ResampleRefine",
+      "scope": "Cached buffer lifetime, table-index/final phase split, loop versus explicit products or a peeled first tap.",
+      "compiled_resampler_functions": 36,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/ResampleRefine.c",
+      "source_sha256": "9f6e4e1209c504467c9d0b755d61399b605c803c618dbdb17224743e36489e11",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/ResampleRefine.obj",
+      "object_sha256": "79e25a93a5ce5da177efd3b90de910f51eabee8a1226b850d878df9e47283a39",
+      "generator": "/root/.ai-tmp/audio-processing.bGaifE/resample_refine.py",
+      "generator_sha256": "6b83a463fa27c427939f1b43077de2d2560c701f6388f76b2fbc5bb75c309936"
+    },
+    {
+      "name": "ResampleMMXLocals",
+      "scope": "The48 currently documented delayed-state/unused-local/scope/initial-load controls.",
+      "compiled_resampler_functions": 48,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/ResampleMMXLocals.c",
+      "source_sha256": "ed7ca39ee1da6e55bd9350e255e094cee399b5cbad27dd06e667edf32bfb9f73",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/ResampleMMXLocals.obj",
+      "object_sha256": "2a5b3fcbeeaaabaac48fdf49bd630cb17a9218f3fe94a0da12aac29ccf6dfae3",
+      "generator": "/root/.ai-tmp/audio-processing.bGaifE/resample_mmx_locals.py",
+      "generator_sha256": "9eb647d2b4a099300cbaac5cd1b9acf08ade9b6edefa4ed7fdb434c869612d79"
+    },
+    {
+      "name": "ResampleCurrentDot",
+      "scope": "The64 currently documented tap-type, buffer placement, dot-expression and const/mutable-view controls.",
+      "compiled_resampler_functions": 64,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/ResampleCurrentDot.c",
+      "source_sha256": "656af3a8c8df525ab7c3f065858564562d887e2c7b4b2d93f9975e94c7d48769",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/ResampleCurrentDot.obj",
+      "object_sha256": "a1f09aafd47ee8e4c7cdf6c003824f0f2604273909d17e9831751cd383e4cbc6",
+      "generator": "/root/.ai-tmp/audio-processing.bGaifE/resample_dot_current.py",
+      "generator_sha256": "fd3859d62132c25b6dec3998dcc30fbe78f303c30f2e83267c6aa94fe53ae2aa"
+    },
+    {
+      "name": "ResampleCurrentFlat",
+      "scope": "The64 current dot controls with a flat writable coefficient definition.",
+      "compiled_resampler_functions": 64,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/ResampleCurrentFlat.c",
+      "source_sha256": "97d2231bbc4812faa41a9f4f6d31e07acbb230c9e84e9aea26b6b7c1a5c78f4d",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/ResampleCurrentFlat.obj",
+      "object_sha256": "6d9d9b35d254ea95417e2805319aaf308e1d54d33e8a634042405c070562fd16"
+    }
+  ],
+  "conclusions": [
+    "The historical body supplies no new history-copy cursor or control-flow mechanism absent from the canonical candidate and frozen controls.",
+    "Extra register pressure follows the real context-layout change: the historical context is the PCM base, while the current target loads a separate buffer pointer. The target and candidate choose different values to spill/reuse during convolution.",
+    "A four-product native schedule alone cannot distinguish a source loop from explicit terms. All product orders and addition-tree forms already exist among frozen controls, beyond the 176-control summary.",
+    "No source-supported new mechanism emerged, so no compiler grid, source mutation, register-binding workaround or promotion was performed."
+  ],
+  "artifacts": {
+    "/root/.ai-tmp/audio-resample-cursor-review.vatarx0y/freeze.py": "2c521351866d4a870f06b363cdc1e51597aea4728bbc144f92729fc373a282c4",
+    "/root/.ai-tmp/audio-resample-cursor-review.vatarx0y/candidate-resolved-for-display.txt": "3014d9580cf1b0fb578a9047cca755be50e08bb07642572e5b08a8fba52770c3"
+  }
+}
