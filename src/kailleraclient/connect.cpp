@@ -31,7 +31,7 @@ static BOOL CALLBACK connectionDialog(HWND window,UINT message,WPARAM wparam,LPA
         connectState=0;
         cancelled=0;
         SetTimer(window,0xdeadc0de,1,0);
-        break;
+        return 0;
     case WM_DESTROY:
         closeHandshake();
         break;
@@ -40,9 +40,11 @@ static BOOL CALLBACK connectionDialog(HWND window,UINT message,WPARAM wparam,LPA
         EndDialog(window,0);
         break;
     case WM_COMMAND:
-        if (LOWORD(wparam)==IDCANCEL) {
+        switch (LOWORD(wparam)) {
+        case IDCANCEL:
             cancelled=1;
             PostMessage(window,WM_CLOSE,0,0);
+            break;
         }
         break;
     case WM_TIMER:
@@ -61,7 +63,6 @@ static void closeHandshake()
 
 static int pollConnection()
 {
-    char *error;
     switch (connectState) {
     case 0:
         {
@@ -69,18 +70,18 @@ static int pollConnection()
             char *p=connectAddress;
             while (*p && *p!=':') p++;
             if (*p!=':') return 0;
-            *p=0;
+            *p++=0;
             handshake=new UDPConnection;
             handshake->bind(0);
-            handshake->setPeer(connectAddress,atoi(p+1));
-            char greeting[12];
+            handshake->setPeer(connectAddress,atoi(p));
+            char greeting[128];
             wsprintf(greeting,"HELLO%s","0.83");
             handshake->send(greeting,strlen(greeting)+1);
         }
         break;
     case 1:
         UDPConnection::selectSockets(0);
-        if (!handshake->dataAvailable()) return 0;
+        if (!handshake->dataAvailable()) goto notReady;
         break;
     case 2:
         {
@@ -88,12 +89,14 @@ static int pollConnection()
             int length=256;
             handshake->receive(reply,&length,0,0);
             if (!strncmp(reply,"VER",3)) {
-                error="Can't connect: Version mismatch";
-                goto failed;
+                setStatus("Can't connect: Version mismatch");
+                connectState=-1;
+                return 0;
             }
             if (!strncmp(reply,"TOO",3)) {
-                error="Can't connect: Too many users";
-                goto failed;
+                setStatus("Can't connect: Too many users");
+                connectState=-1;
+                return 0;
             }
             if (strncmp(reply,"HELLOD00D",9)) {
                 connectState=1;
@@ -130,10 +133,7 @@ static int pollConnection()
                             return 1;
                         case 5:
                             connection->receiveMessage(&packet,0,0);
-                            {
-                                PongMessage pong;
-                                connection->sendMessage(&pong);
-                            }
+                            connection->sendMessage(&PongMessage());
                             break;
                         default:
                             connection->receiveMessage(&packet,0,0);
@@ -148,10 +148,7 @@ static int pollConnection()
         return 0;
     }
     connectState++;
-    return 0;
-failed:
-    setStatus(error);
-    connectState=-1;
+notReady:
     return 0;
 }
 
