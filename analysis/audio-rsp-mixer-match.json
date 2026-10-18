@@ -968,5 +968,40 @@
   "limitations": [
     "The complete640-byte function, including alignment, matches after materializing actual independently identified COFF relocations in comparison buffers only.",
     "No executable is patched; the remaining13 RSP functions and whole DLL remain incomplete."
-  ]
+  ],
+  "independent_replay": {
+    "summary": {
+      "scratch": "/root/.ai-tmp/audio-rsp-mixer-replay-root.r5ca7kwx",
+      "command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_USRDLL",
+        "/FoRSP.obj",
+        "RSP.cpp"
+      ],
+      "functions": 180,
+      "exact": 167,
+      "matching_bytes": 43872,
+      "data_exact": 25,
+      "fields_exact": 11,
+      "unresolved": 0,
+      "changed_from_lead": [],
+      "source_sha256": "fd4a3beb61f89dc2a2fb4512f784c53cde27c2646f76657c1c13576a87979ca7",
+      "object_sha256": "0d0f69d67764e5cb5b48f0b0d1ef510ebac851687d8f28d858018878f75cd898"
+    },
+    "summary_sha256": "597c1ba7472c249ecec47dfac4564030777e9e2620c869c5c8efa3920facb73d",
+    "comparison_sha256": "4e8bac3a0271737f33099c523aee3833d9f4bfadbf24cc4cf9836593432e34a6",
+    "compile_log_sha256": "79ccf574fdf1d28bd41095804e62aa1f83757714e6bdd38016801394c8ea0e8f"
+  }
 }
