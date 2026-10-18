@@ -1,0 +1,441 @@
+{
+  "original": "master/Plugin/audio.dll",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "status": "bounded_negative_source_controls_no_promotion",
+  "baseline": {
+    "source_commit": "962213e",
+    "source": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/source/RSP.cpp",
+    "source_sha256": "5aabd9f3295be947fa1a24d196197cd10b92458315dd3a7dccfe5dc078accc46",
+    "comparison": "/root/.ai-tmp/audio-rsp-accumulate.zoqqom7a/branch-local-result/strict.json",
+    "comparison_sha256": "b936ae8b51e2c4493031f543c8b5b0c6eb340190f1bcd991bed11cc48c253f0c",
+    "functions_exact": 160,
+    "function_count": 180,
+    "matching_bytes": 38176,
+    "typed_objects_exact": 25,
+    "typed_fields_exact": 11
+  },
+  "compiler_command": [
+    "/usr/bin/python3",
+    "/root/nemu-decomp/scripts/run_toolchain.py",
+    "vc7",
+    "cl",
+    "/nologo",
+    "/c",
+    "/O2",
+    "/Ob1",
+    "/MT",
+    "/W3",
+    "/DWIN32",
+    "/DNDEBUG",
+    "/D_WINDOWS",
+    "/D_USRDLL",
+    "/FoRSP.obj",
+    "RSP.cpp"
+  ],
+  "assembly_observations": [
+    "VADDExec original and baseline use the same 12-byte frame and four-lane loop. Original carry evaluation precedes selector/address evaluation; the baseline evaluates the selector first. Result and persistent pointer registers differ. Saturation branch predicates and all observed arithmetic operations agree.",
+    "RSP_MixAudio baseline matches the entire original suffix at offsets 0xC8 through 0x27F; all 169 differing bytes are in its initialization prefix. A setup-only match is not a complete-function match.",
+    "RSP_WriteCOP0 original initializes destination before source in each transfer direction. Its first direction uses EDI for SP destination and ESI for RAM source; the second direction uses EDI for RAM destination and EBX for SP source. This is a source-order clue, not proof of original variable names."
+  ],
+  "controls": [
+    {
+      "label": "element-first",
+      "change": "Decode the four-bit element before vd/vs/vt in VADD, VSUB, VSUT and their two native opcode helpers.",
+      "conclusion": "All five bodies lose 16 bytes; rejected.",
+      "functions_exact": 160,
+      "prior_matches_preserved": 160,
+      "other_function_hashes_unchanged": 175,
+      "data_objects_exact_and_unchanged": 25,
+      "typed_fields_exact_and_unchanged": 11,
+      "unresolved_operands": 0,
+      "changed_functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 672,
+          "exact": false,
+          "original_sha256": "bac955ffeb7743f9e805e651727a73ebf9eff92c6efab8e7b37baccd31398137",
+          "candidate_materialized_sha256": "b3f42bd37401c34bfe0ab9908bc1eb96abc47a117b04a1aad6d176f3adc94d91"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 639,
+          "exact": false,
+          "original_sha256": "787cdb63337f958648b6080173946ec1d49e2a69dd793cb1fddb711e3e2a436e",
+          "candidate_materialized_sha256": "769cc6ac409413ece7352123211da512641b81a033f01d1e5fcd3bf185f1794b"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 662,
+          "exact": false,
+          "original_sha256": "7374d71d9145199982bd0a34da769741f8af343cebfc7c16449bd1ffe2ff73f3",
+          "candidate_materialized_sha256": "bc52c806d12e520917f3419c940526aa6c5ef2191c75327a02627d232d1694e3"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 649,
+          "exact": false,
+          "original_sha256": "491c6cb7c131daf4d236374ff3a6c67dde3235ab7825ae065929dfe9217a1127",
+          "candidate_materialized_sha256": "fd85305089309dac5cf3210c8fb4e30784a83a9b42ae7e2f38b9ad16c431a34a"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 617,
+          "exact": false,
+          "original_sha256": "532b144c5929f8f6adb5054dbdb21fc803d970e6591f168b967e288fcd2c94eb",
+          "candidate_materialized_sha256": "43f6d04613e0595757fbfadd19ae961d96d98570d6e1e1b0f3f8acd3bfd34d53"
+        }
+      ],
+      "evidence": {
+        "probe.py": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/probe.py",
+          "sha256": "ecc484aac85fb87ceb947cb18df093beec67f86904baa5c6df8c357be603038c"
+        },
+        "element-first/RSP.cpp": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/element-first/RSP.cpp",
+          "sha256": "7f5d10b63cfb795a9a398aa46939b3955af19d74a41dd3b1bf7cda6da0231b3c"
+        },
+        "element-first/RSP.obj": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/element-first/RSP.obj",
+          "sha256": "87338d467409e5050747fd83ae855bcbb8315feca27d1a6a88945e0cfb94abd8"
+        },
+        "element-first/compile.log": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/element-first/compile.log",
+          "sha256": "13d29aeb0bcfab0866b430a843bf6a3b62e19a1d63e3c97ae955d5cc90193b0e"
+        },
+        "element-first/comparison.json": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/element-first/comparison.json",
+          "sha256": "7335da79b13c38de702b39f107a50343fe36a4826c72708d6a36cc15259a9f8b"
+        },
+        "element-first/summary.json": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/element-first/summary.json",
+          "sha256": "c2906dddd93553fa10e48a33785815bd0132cd1b08b4616d85fe3d96fcd8b56b"
+        }
+      }
+    },
+    {
+      "label": "branch-stores",
+      "change": "Assign the destination vector separately in all three saturation arms.",
+      "conclusion": "The compiler stops the original four-lane loop unrolling; rejected.",
+      "functions_exact": 160,
+      "prior_matches_preserved": 160,
+      "other_function_hashes_unchanged": 175,
+      "data_objects_exact_and_unchanged": 25,
+      "typed_fields_exact_and_unchanged": 11,
+      "unresolved_operands": 0,
+      "changed_functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 352,
+          "differing_bytes": 704,
+          "exact": false,
+          "original_sha256": "bac955ffeb7743f9e805e651727a73ebf9eff92c6efab8e7b37baccd31398137",
+          "candidate_materialized_sha256": "0b638cd897275d455f232369663cfe30b2a3c307836ac2ed7173b213f44129f6"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 304,
+          "differing_bytes": 652,
+          "exact": false,
+          "original_sha256": "787cdb63337f958648b6080173946ec1d49e2a69dd793cb1fddb711e3e2a436e",
+          "candidate_materialized_sha256": "7bea9026d6f01a1a2b0159d17b6828ec958fd866ff181c8a044f018b3fa943e8"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 320,
+          "differing_bytes": 677,
+          "exact": false,
+          "original_sha256": "7374d71d9145199982bd0a34da769741f8af343cebfc7c16449bd1ffe2ff73f3",
+          "candidate_materialized_sha256": "57dbd44a53d03e924eed4cb433e55b76bdb8d44871f3741e4abbff1928047e64"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 304,
+          "differing_bytes": 654,
+          "exact": false,
+          "original_sha256": "491c6cb7c131daf4d236374ff3a6c67dde3235ab7825ae065929dfe9217a1127",
+          "candidate_materialized_sha256": "2633ebe2af49d3eeebbde11afcfceedfd48008500a1ec313f4f69ad5af2cd366"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 256,
+          "differing_bytes": 628,
+          "exact": false,
+          "original_sha256": "532b144c5929f8f6adb5054dbdb21fc803d970e6591f168b967e288fcd2c94eb",
+          "candidate_materialized_sha256": "d4609de64df845d86ebd49e4ffab90f74136085abd62eefe5ffd4ac53b2a54c6"
+        }
+      ],
+      "evidence": {
+        "probe-clamp.py": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/probe-clamp.py",
+          "sha256": "1b1596de6faec545963323c487d8f07f23c457e5cbc496c862cded533b75e525"
+        },
+        "branch-stores/RSP.cpp": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/branch-stores/RSP.cpp",
+          "sha256": "2c12bb681dcfb5cd1fd03698a2c6342425ce79227a187875fbacf8e010fa05fe"
+        },
+        "branch-stores/RSP.obj": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/branch-stores/RSP.obj",
+          "sha256": "fee8f0be933df78cab1efdea1c9393e16d3d8d42835f2172aa71d507e9ab2cef"
+        },
+        "branch-stores/compile.log": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/branch-stores/compile.log",
+          "sha256": "43388a8067679000b85005f1a16ba59a29c3547424a8fb2cd15bd19a462e5a90"
+        },
+        "branch-stores/comparison.json": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/branch-stores/comparison.json",
+          "sha256": "60a9a71bc2329cb6de8a2d2e5ac8ed4ee874223325397c6cbecaf2f035faf719"
+        },
+        "branch-stores/summary.json": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/branch-stores/summary.json",
+          "sha256": "07982ea945f32eb9bcd40167065450bf6bec5c84a8f6ce2a0c29058e7622f8c2"
+        }
+      }
+    },
+    {
+      "label": "staged-result",
+      "change": "Form carry and vector arithmetic in staged result assignments.",
+      "conclusion": "All 180 materialized bodies remain identical to baseline; no new source constraint.",
+      "functions_exact": 160,
+      "prior_matches_preserved": 160,
+      "other_function_hashes_unchanged": 180,
+      "data_objects_exact_and_unchanged": 25,
+      "typed_fields_exact_and_unchanged": 11,
+      "unresolved_operands": 0,
+      "changed_functions": [],
+      "evidence": {
+        "probe-staged.py": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/probe-staged.py",
+          "sha256": "f5de6c76e77d5f4aefbc667568e457eacfc893bd412c328466eaf4b81e124ff8"
+        },
+        "staged-result/RSP.cpp": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/staged-result/RSP.cpp",
+          "sha256": "7a15fa4d6e72c4455aeeb6de6dae6edb8ba0e3f27b7b6af426f9c436f886c880"
+        },
+        "staged-result/RSP.obj": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/staged-result/RSP.obj",
+          "sha256": "8b65de4f863bd4a9645591e7e46f0fbc7b736dbeff7305ea1e1ba86f2afc9ba4"
+        },
+        "staged-result/compile.log": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/staged-result/compile.log",
+          "sha256": "ab92c0afff29eb457b511ea95119f6c72af7ac23f7cd44cdb1ab1191d0b31e89"
+        },
+        "staged-result/comparison.json": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/staged-result/comparison.json",
+          "sha256": "ea1ae090b214d7c06c082d2b0c0e8724b0c33ee3fdbafcbc56e0470f346d8abd"
+        },
+        "staged-result/summary.json": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/staged-result/summary.json",
+          "sha256": "71508b600fb0b6a7a0f06b240b3e4b0c5f1acca8bea12f9d028bde8792568834"
+        }
+      }
+    },
+    {
+      "label": "mix-step-first",
+      "change": "Initialize the left gain step before the command word, following the first original native load.",
+      "conclusion": "Mixer differs more, including beyond the prior setup-only difference; rejected.",
+      "functions_exact": 160,
+      "prior_matches_preserved": 160,
+      "other_function_hashes_unchanged": 179,
+      "data_objects_exact_and_unchanged": 25,
+      "typed_fields_exact_and_unchanged": 11,
+      "unresolved_operands": 0,
+      "changed_functions": [
+        {
+          "name": "RSP_MixAudio",
+          "original_size": 640,
+          "candidate_size": 640,
+          "differing_bytes": 237,
+          "exact": false,
+          "original_sha256": "2350b4b2e2bdcbc55c8d636a105ed4da0077bf13d56eadc85d74ab72fa4cc5fe",
+          "candidate_materialized_sha256": "27ce43a3c5bbfeb11af05d76db901e8bb86e977e25d4d91f49067016a4838968"
+        }
+      ],
+      "evidence": {
+        "probe-mix.py": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/probe-mix.py",
+          "sha256": "bcfc66edde9f11ac18ac23496a3e2303d2c76e3cb0b4d2f7205ad7f66c0f2d56"
+        },
+        "mix-step-first/RSP.cpp": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/mix-step-first/RSP.cpp",
+          "sha256": "7954271365d0caf64edc1e1ac38cd1d625d6ad6c188820827264ffdca23c0f4a"
+        },
+        "mix-step-first/RSP.obj": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/mix-step-first/RSP.obj",
+          "sha256": "150dd54694daff9797ac8492bd4f843551c0c72ae6501a2428adcc12192760dd"
+        },
+        "mix-step-first/compile.log": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/mix-step-first/compile.log",
+          "sha256": "aad43628f75ce815f34b19a65b94b1ddcdc654d67b20e593e3d297c843596604"
+        },
+        "mix-step-first/comparison.json": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/mix-step-first/comparison.json",
+          "sha256": "f0ab29dabb67dc62bc6d758f19e80f89ebef440b8ffac58b90cd9f8ffa555ba3"
+        },
+        "mix-step-first/summary.json": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/mix-step-first/summary.json",
+          "sha256": "04f526dadf12b6ba576e766103bae26bdfc287d5c066572ac37e80ae19f62dfe"
+        }
+      }
+    },
+    {
+      "label": "mix-declarations",
+      "change": "Separate mixer local declarations from assignments, including explicit inversion-array assignments.",
+      "conclusion": "All 180 materialized bodies remain identical to baseline; no new source constraint.",
+      "functions_exact": 160,
+      "prior_matches_preserved": 160,
+      "other_function_hashes_unchanged": 180,
+      "data_objects_exact_and_unchanged": 25,
+      "typed_fields_exact_and_unchanged": 11,
+      "unresolved_operands": 0,
+      "changed_functions": [],
+      "evidence": {
+        "probe-mix-decls.py": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/probe-mix-decls.py",
+          "sha256": "919beae034825e4efb9d7e0880a871b5ae258740ebfd20e2f02095204e59dac5"
+        },
+        "mix-declarations/RSP.cpp": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/mix-declarations/RSP.cpp",
+          "sha256": "3106e6b28306bda40f575c9b7a4e82153629702b540c1a9a10d589956bbed105"
+        },
+        "mix-declarations/RSP.obj": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/mix-declarations/RSP.obj",
+          "sha256": "76bee749d3a288c34492779bfe751aa5e785fdf0ee1857c92dc3a4dcb4687b4d"
+        },
+        "mix-declarations/compile.log": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/mix-declarations/compile.log",
+          "sha256": "d1aace5ae8c777705c0dd71e608b802fd7e08558ff9ba39bb3a1e3a615d4222a"
+        },
+        "mix-declarations/comparison.json": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/mix-declarations/comparison.json",
+          "sha256": "7f6f0df1a5019d77d5fcc58aac1c47564da4f64ed9e4238497aae9395126ac87"
+        },
+        "mix-declarations/summary.json": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/mix-declarations/summary.json",
+          "sha256": "c2f12f0496ff654e74f0598b7f363d5fdf02efcaedb053f700008b45d33e70a9"
+        }
+      }
+    },
+    {
+      "label": "dma-destination-first-for",
+      "change": "Initialize the destination offset before the source offset in each DMA direction and use the native count+1 counted-for idiom.",
+      "conclusion": "Reproduces the native EBP count+1 setup and write-direction initial load order, but neither complete body nor argument scheduling matches; rejected.",
+      "functions_exact": 160,
+      "prior_matches_preserved": 160,
+      "other_function_hashes_unchanged": 179,
+      "data_objects_exact_and_unchanged": 25,
+      "typed_fields_exact_and_unchanged": 11,
+      "unresolved_operands": 0,
+      "changed_functions": [
+        {
+          "name": "RSP_WriteCOP0",
+          "original_size": 272,
+          "candidate_size": 272,
+          "differing_bytes": 205,
+          "exact": false,
+          "original_sha256": "561307e2dda5935b2047a18c3f02b77d42e4694a131bd917bcb240929ba29811",
+          "candidate_materialized_sha256": "03432b6f1a4893b8177f88243879b46193a682bcda6fa0e6a60d4ae7d56f51aa"
+        }
+      ],
+      "evidence": {
+        "probe-dma.py": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/probe-dma.py",
+          "sha256": "a474c0e94b410a818162f27a1fe72b7c773e48c1e071b7008a41b5fd9c5cf843"
+        },
+        "dma-destination-first-for/RSP.cpp": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/dma-destination-first-for/RSP.cpp",
+          "sha256": "e2647204d41143139fbb95f0796c9169983020eb63581c74a8b12b1cb77f55c7"
+        },
+        "dma-destination-first-for/RSP.obj": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/dma-destination-first-for/RSP.obj",
+          "sha256": "01d05172332a62e7ce1d24b02c59a593bf03501ce6672bca2e21cb765f408b1e"
+        },
+        "dma-destination-first-for/compile.log": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/dma-destination-first-for/compile.log",
+          "sha256": "9c05d16113aa7c98217b6d232152d1f5a17551fd75b27f9474e22503959fb145"
+        },
+        "dma-destination-first-for/comparison.json": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/dma-destination-first-for/comparison.json",
+          "sha256": "07f81b1396ecfadee3d2e3bc9bd8136158151b4974a3974f036f5db46986f3be"
+        },
+        "dma-destination-first-for/summary.json": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/dma-destination-first-for/summary.json",
+          "sha256": "2234b66b9dcbb04664cc487da8e3384722b4a602da90e27febfecde8d40de4ee"
+        }
+      }
+    },
+    {
+      "label": "dma-destination-first-do",
+      "change": "Initialize the destination offset before the source offset in each DMA direction, preserving the baseline decrementing loop.",
+      "conclusion": "No exact body and no reduction in byte differences; rejected.",
+      "functions_exact": 160,
+      "prior_matches_preserved": 160,
+      "other_function_hashes_unchanged": 179,
+      "data_objects_exact_and_unchanged": 25,
+      "typed_fields_exact_and_unchanged": 11,
+      "unresolved_operands": 0,
+      "changed_functions": [
+        {
+          "name": "RSP_WriteCOP0",
+          "original_size": 272,
+          "candidate_size": 272,
+          "differing_bytes": 200,
+          "exact": false,
+          "original_sha256": "561307e2dda5935b2047a18c3f02b77d42e4694a131bd917bcb240929ba29811",
+          "candidate_materialized_sha256": "9bbb018dfa524b652953703614be35d8ffa475174328f44fa30ce4282fb6bef2"
+        }
+      ],
+      "evidence": {
+        "probe-dma.py": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/probe-dma.py",
+          "sha256": "a474c0e94b410a818162f27a1fe72b7c773e48c1e071b7008a41b5fd9c5cf843"
+        },
+        "dma-destination-first-do/RSP.cpp": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/dma-destination-first-do/RSP.cpp",
+          "sha256": "20b6341344346e63a58c2bbac0c95f2916a2a0fd17d89fb066a87802ccfd9446"
+        },
+        "dma-destination-first-do/RSP.obj": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/dma-destination-first-do/RSP.obj",
+          "sha256": "909889be94cd821ba020a9a449c62244a448dd1d0dce0315fb8e71ff7ba4ace3"
+        },
+        "dma-destination-first-do/compile.log": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/dma-destination-first-do/compile.log",
+          "sha256": "1eb9e8d688ffd94da5c0ca76e4fe8f058eee1b28d72138db3ef90fdd7a7388c2"
+        },
+        "dma-destination-first-do/comparison.json": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/dma-destination-first-do/comparison.json",
+          "sha256": "2eb17dd008740b5688529f98211dd63b382aba1ab2f428499d530ca50105100f"
+        },
+        "dma-destination-first-do/summary.json": {
+          "path": "/root/.ai-tmp/audio-rsp-arithmetic-order.z2cm6sus/dma-destination-first-do/summary.json",
+          "sha256": "9ea4478564b372e17e6f5eaedb4902cb06370faf5a2289c83bbb8e5efc2f874c"
+        }
+      }
+    }
+  ],
+  "historical_negative_controls_read_before_probing": [
+    "/root/.ai-tmp/nemu-audio-arithmetic.mb1o7ztm",
+    "/root/.ai-tmp/nemu-audio-scalar.JFg3ZrKF/dma_variants.py",
+    "/root/.ai-tmp/nemu-audio-scalar.JFg3ZrKF/dma_order.py",
+    "/root/.ai-tmp/nemu-audio-scalar.JFg3ZrKF/dma_source.py"
+  ],
+  "limitations": [
+    "No application source was changed by this audit. No new complete function match is claimed.",
+    "No behavior tests were rerun for rejected controls; they are not promoted source candidates.",
+    "These native source controls do not settle original source spelling or explain the remaining twenty RSP mismatches."
+  ]
+}
