@@ -1,8 +1,8 @@
 # audio.dll reconstruction
 
 This reconstruction is incomplete. Native object checks match the instruction
-bodies of 398 of 417 unique functions. Relocation identities and remaining
-inferences are recorded separately; 19 functions and parts of the data layout
+bodies of 399 of 417 unique functions. Relocation identities and remaining
+inferences are recorded separately; 18 functions and parts of the data layout
 remain unresolved. All 417 retained functions now link in their original order,
 and the complete resource section matches. Readonly layout and all bytes outside
 recorded address fields also match; those address values remain incomplete.
