@@ -1,5 +1,5 @@
 {
-  "description": "Bounded negative control: VC7 precompiled headers do not defer AudioProcessing transform.h storage until after its SEH/envelope literals.",
+  "description": "Bounded negative controls: VC7 precompiled headers, function packaging, and /Zi compiler debug information do not defer AudioProcessing transform.h storage until after its SEH/envelope literals.",
   "original": "master/Plugin/audio.dll",
   "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
   "original_disputed_constant_block_va": "0x1003124c",
@@ -126,5 +126,167 @@
     "pch_create.log": "32711d6134a9a77a3b256268eb2159f10db0cc4b48a8dc0d4948a42dd1985e76",
     "pch_use.log": "d7814209ef22eaf50cb558bae32902b33005965daa830c510ef4cf07728f1263",
     "manifest.json": "faf2082fcabec4fc91c04444b720f268d53d676fcb78b2d137b9e8ce0444cf2b"
+  },
+  "no_function_packaging_control": {
+    "source_sha256": "3a2100b5d7d1408a1df95136709fde946cea70f8272da76e6d9e7a56aeaaf27c",
+    "source_matches_pch_control": true,
+    "source_matches_current_canonical": true,
+    "command": [
+      "/usr/bin/python3",
+      "/root/nemu-decomp/scripts/run_toolchain.py",
+      "vc7",
+      "cl",
+      "/nologo",
+      "/c",
+      "/Og",
+      "/Oi",
+      "/Ot",
+      "/Oy",
+      "/Ob1",
+      "/Gs",
+      "/GF",
+      "/MT",
+      "/W3",
+      "/DWIN32",
+      "/DNDEBUG",
+      "/D_WINDOWS",
+      "/D_USRDLL",
+      "/FoAudioProcessing.obj",
+      "AudioProcessing.c"
+    ],
+    "object_sha256": "32f6bc2ac0c79b92d5c37e275fe13e502fa8ca5d6fe6d792dcb2ad8115dd243e",
+    "rdata": {
+      "ordinary_section_index": 5,
+      "ordinary_section_size": 140,
+      "ordinary_section_characteristics": "0x40400040",
+      "constants_offset": 0,
+      "constants_size": 124,
+      "constant_bytes_equal_baseline": true,
+      "seh_offset": 128,
+      "seh_size": 12,
+      "seh_payload_equal_baseline": true,
+      "seh_relocations_normalized_to_AudioOSHasSSE": [
+        [
+          4,
+          6,
+          69
+        ],
+        [
+          8,
+          6,
+          75
+        ]
+      ],
+      "remaining_comdat_payloads_equal_in_order": true,
+      "remaining_comdat_contributions": 13
+    },
+    "functions_compared": 35,
+    "function_bytes": 27158,
+    "raw_byte_equal_to_baseline": 20,
+    "raw_bytes_and_unmodified_named_relocations_equal_to_baseline": 19,
+    "raw_bytes_and_semantic_relocation_targets_equal_to_baseline": 20,
+    "relocation_identity_note": "AudioOSHasSSE is the twentieth byte-identical body. Its changed local scope-table symbol points to the identical 12-byte table, now at ordinary .rdata offset 128; the table still targets AudioOSHasSSE code offsets 69 and 75. The other nineteen byte-identical functions retain their named relocation identities unchanged.",
+    "different_function_bodies": [
+      "_EnvMixerScalar",
+      "_EnvMixerBlockScalar",
+      "_EnvMixerABI3Scalar",
+      "_EnvMixerSpecial",
+      "_MixAudioEnvelopeClamped",
+      "_MixAudioEnvelope",
+      "_MixAudioEnvelopeLegacy",
+      "_MixAudioEnvelopeUnsigned",
+      "_ScaleAudioBufferCommand",
+      "_FilterAudioBlock",
+      "_FilterAudioBuffer",
+      "_DumpAudioCommand",
+      "_DecodeAudioADPCMUnsigned",
+      "_DecodeAudioADPCMBlock",
+      "_PoleFilterAudioCommand"
+    ],
+    "order": "34 functions occupy ordinary .text section 6. ClampAudioSample alone remains in COMDAT .text section 18, after all those functions in section-address order instead of between EnvMixerSpecial and MixAudioEnvelopeCommand.",
+    "conclusion": "Disabling function packaging appends the SEH table after the leading constants and leaves float/string COMDAT contributions later. It does not place constants after literals, and it fails to preserve all function bodies and their order. This provides no justification for changing canonical flags or source.",
+    "evidence_directory": "/root/.ai-tmp/nemu-audio-readonly-nogy.ipq2zobm",
+    "evidence_sha256": {
+      "probe.py": "9c46f27ab52f5a1682e55ea91c4e532df925d40492c42995041c2287cee16726",
+      "command.json": "6539f897b4d64ef0fade44ea482da89a212ca010dd4072e88f77d6161fc5ccea",
+      "compile.log": "7f77b70c4963dc379df013cc4e101ff7f00781bd53d1704885a41360d262c398",
+      "object-details.json": "e2e08a049fb2d8aff168c88aa7c1c88066b06c19cee831bc8fcbc1b02a132d3f",
+      "baseline-comparison.json": "908578102d3d800686f1e3d3204a86995d672cdae66ac42b84611411a54bfaf9",
+      "original-comparison.json": "b7c078c06207dfc5838f2765f519ecf636111c33047cc4b998d9fcc097adcdab",
+      "review.json": "091049618bc73e2c0878b543423487f9a987fbaf6bbd2b03d92c4dcfb009ee7d"
+    }
+  },
+  "compiler_debug_information_control": {
+    "source_sha256": "3a2100b5d7d1408a1df95136709fde946cea70f8272da76e6d9e7a56aeaaf27c",
+    "source_matches_pch_control": true,
+    "command": [
+      "/usr/bin/python3",
+      "/root/nemu-decomp/scripts/run_toolchain.py",
+      "vc7",
+      "cl",
+      "/nologo",
+      "/c",
+      "/O2",
+      "/Ob1",
+      "/MT",
+      "/Zi",
+      "/FdAudioProcessing.pdb",
+      "/W3",
+      "/DWIN32",
+      "/DNDEBUG",
+      "/D_WINDOWS",
+      "/D_USRDLL",
+      "/FoAudioProcessing.obj",
+      "AudioProcessing.c"
+    ],
+    "object_sha256": "5e00b4d5aac8a2348d02f653b20470f64aec0cfaabfa5ceba739e2e345e1c75c",
+    "compiler_pdb_sha256": "0f74072a47bb7b4d180762bda5ae83467de1fb06421942210c0b006cc38ea3a9",
+    "functions_compared": 35,
+    "extent_method": "Compare each complete function COMDAT section, including existing alignment bytes. /Zi supplies auxiliary function sizes that exclude trailing alignment; using those sizes against the baseline uninstrumented section extents would misleadingly count harmless padding differences.",
+    "complete_function_sections_byte_equal_to_baseline": 31,
+    "complete_function_sections_and_named_relocations_equal_to_baseline": 30,
+    "complete_function_sections_and_semantic_relocation_targets_equal_to_baseline": 31,
+    "relocation_identity_note": "The only named-relocation difference among the 31 byte-identical function sections is the compiler-generated AudioOSHasSSE scope-table symbol. Its 12-byte payload and code targets at function offsets 69 and 75 remain identical.",
+    "function_section_order_preserved": true,
+    "changed_function_sections": [
+      {
+        "name": "_EnvMixerSSE",
+        "baseline_size": 3015,
+        "control_size": 3024
+      },
+      {
+        "name": "_EnvMixer3DNow",
+        "baseline_size": 2927,
+        "control_size": 2936
+      },
+      {
+        "name": "_EnvMixerABI3_3DNow",
+        "baseline_size": 2716,
+        "control_size": 2725
+      },
+      {
+        "name": "_EnvMixerABI3SSE",
+        "baseline_size": 2804,
+        "control_size": 2813
+      }
+    ],
+    "changed_prologue": "Four SIMD routines gain nine bytes in stack-frame setup: /Zi reserves eight bytes and copies the argument-frame value through EBP before establishing the aligned frame.",
+    "ordered_rdata_contributions_with_equal_payloads": 15,
+    "first_rdata": {
+      "section_index": 5,
+      "size": 124,
+      "characteristics": "0x40300040",
+      "contents": "The unchanged b1..b31 constants at offset zero; all SEH/float/string contributions still follow."
+    },
+    "conclusion": "/Zi does not alter the disputed read-only ordering and changes four previously reconstructed SIMD prologues. This supports no canonical source or flag change. This branch stops after the requested control; /ZI and broader flag combinations were not tested.",
+    "evidence_directory": "/root/.ai-tmp/nemu-audio-readonly-zi._m6ho9tr",
+    "evidence_sha256": {
+      "probe.py": "da333455893066fa3e6cc2a7f0c10e28d2a88ed5ac0ec3373e7bde49b1603fe8",
+      "command.json": "b2930759cd68c4ca53e0d71ffcd72371166451710d16e3de5ee9c39de293b198",
+      "compile.log": "5dbad9e99cf9cdcd59cb7fc6c862d3951bdd0ae68acb26b7953b080920158271",
+      "object-details.json": "85a94c36102d0417e91619e590cf2a9c32c25016bf669a7727ecd3e3681318f8",
+      "baseline-comparison.json": "c9120064a40d6c308825c824215f528d27ecd5dfb9302920ee30d54cb3315d8f",
+      "original-comparison.json": "a61de6bcc98c54eeafeb03ceb9e756cb2abe6a0137bfff63126ebb7afee7287c"
+    }
   }
 }
