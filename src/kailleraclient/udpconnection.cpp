@@ -24,14 +24,12 @@ UDPConnection::~UDPConnection()
         closesocket(socketHandle);
         FD_CLR(socketHandle,&sockets);
         if (socketHandle==maximumSocket) {
-            SOCKET maximum=0;
             maximumSocket=0;
             for (int i=0;i<connections.size();i++) {
                 if (connections.get(i)!=this) {
                     SOCKET handle=connections.get(i)->socketHandle;
-                    if (handle>maximum) {
-                        maximum=handle;
-                        maximumSocket=maximum;
+                    if (handle>maximumSocket) {
+                        maximumSocket=handle;
                     }
                 }
             }
