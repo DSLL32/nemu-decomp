@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-"""Compile recovered Kaillera components and report remaining reconstruction.
+"""Build the recovered Kaillera candidate and report remaining differences.
 
-The application is not fully reconstructed. This command produces a component
-library and resources, not a replacement DLL, and exits nonzero. Instruction
-coverage is diagnostic; verify_kaillera.py alone accepts full packed equality.
+The candidate is not yet byte exact. Instruction coverage is diagnostic;
+verify_kaillera.py alone accepts full packed equality.
 """
 
 import argparse
@@ -17,12 +16,12 @@ import sys
 import tempfile
 
 from check_kaillera import inspect
-from verify_kaillera import ORIGINAL, ORIGINAL_SHA256
+from verify_kaillera import ORIGINAL, ORIGINAL_SHA256, compare
 
 ROOT = Path(__file__).resolve().parents[1]
 UNITS = ['reliableconnection', 'config', 'message', 'udpconnection',
          'jnetlib/asyncdns', 'jnetlib/connection', 'jnetlib/httpget', 'jnetlib/util',
-         'connect', 'kailleraclient']
+         'connect', 'kailleraclient', 'listview', 'resizer', 'protocol', 'game', 'lobby', 'serverbrowser']
 FLAGS = ['/nologo', '/c', '/O2', '/MD', '/GX', '/Gy', '/DWIN32', '/DNDEBUG']
 
 
@@ -96,6 +95,21 @@ def main():
         tool('resources', 'rc', ['/l', '0x40c', '/fo' + winpath(output / 'kaillera.res'), 'kaillera.rc'])
         tool('component-library', 'lib', ['/nologo', '/out:' + winpath(output / 'kaillera-components.lib'),
                                          *map(winpath, objects)])
+        candidate = output / 'kailleraclient.unpacked.dll'
+        tool('link-candidate', 'link', ['/nologo', '/dll', '/subsystem:windows', '/machine:i386',
+            '/incremental:no', '/opt:ref', '/opt:nowin98',
+            '/out:' + winpath(candidate), '/map:' + winpath(output / 'kailleraclient.map'),
+            '/implib:' + winpath(output / 'kailleraclient.lib'),
+            *map(winpath, objects), winpath(output / 'kaillera.res'),
+            'kernel32.lib', 'comctl32.lib', 'gdi32.lib', 'msvcrt.lib',
+            'user32.lib', 'winmm.lib', 'ws2_32.lib'])
+        packed = output / 'kailleraclient.dll'
+        if packed.exists():
+            packed.unlink()
+        command('pack-candidate', ['wine', str(ROOT / 'toolchains/upx120/upx.exe'),
+            '-9', '-o' + winpath(packed), winpath(candidate)])
+        report['candidate'] = dict(unpacked=str(candidate), unpacked_sha256=digest(candidate),
+                                   packed=str(packed), packed_sha256=digest(packed))
         # The reference is consumed only by the following diagnostic phase.
         if digest(ORIGINAL) != ORIGINAL_SHA256:
             raise ValueError('Original kailleraclient.dll hash changed')
@@ -105,18 +119,18 @@ def main():
         command('unpack-reference-for-diagnostics', ['wine', str(ROOT / 'toolchains/upx120/upx.exe'),
             '-d', '-o' + winpath(reference), winpath(ORIGINAL)])
         report.update(inspect(reference, objects, output / 'kaillera.res'))
-        report.update(status='incomplete-reconstruction',
-                      remaining=['server browser and lobby', 'game synchronization and protocol dispatch',
-                                 'window resizing and shared UI helpers',
-                                 'remaining component instruction differences',
+        report.update(compare(packed))
+        report.update(status='byte-exact' if report['full_dll_byte_exact'] else 'nonmatching-reconstruction', complete_dll_available=True,
+                      remaining=['remaining component instruction differences',
                                  'final link layout and UPX container reproduction'])
         save()
         print(f'Component library: {output / "kaillera-components.lib"}\n'
               f'Resources exact: {report["all_resource_payloads_byte_exact"]}\n'
               f'Diagnostic unique masked-signature coverage: '
               f'{report["unique_masked_signature_code_bytes"]}/{report["original_code_virtual_bytes"]} bytes\n'
-              'Complete DLL byte exact: False (reconstruction incomplete)', flush=True)
-        return 1
+              f'Complete DLL byte exact: {report["full_dll_byte_exact"]}\n'
+              f'Candidate: {packed}', flush=True)
+        return 0 if report['full_dll_byte_exact'] else 1
     except (OSError, ValueError, RuntimeError, subprocess.TimeoutExpired) as error:
         report.update(status='build-failed', error=str(error))
         save()

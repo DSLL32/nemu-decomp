@@ -25,6 +25,7 @@ extern void (WINAPI *droppedCallback)(char *,int);
 extern void (WINAPI *moreInfosCallback)(char *);
 
 void selectServerDialog(HWND parent);
+int openLobby(HWND parent);
 int connectToServer(HWND parent,char *address);
 int modifyPlayValues(void *values,int size);
 void sendChat(char *text);

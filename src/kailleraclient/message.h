@@ -7,6 +7,7 @@ public:
     Message();
     ~Message();
     Message(const Message &other);
+    void setType(int value) { type=value; }
     void reserve(int size);
     void setNick(char *nick);
     void append(void *data, int size);
@@ -16,9 +17,9 @@ public:
     void appendInt(int value);
     int readInt();
     void appendByte(char value);
-    char readByte();
+    unsigned char readByte();
     void appendWord(short value);
-    short readWord();
+    unsigned short readWord();
     int pack(char *data, int size);
     void unpack(char *data, int size);
 

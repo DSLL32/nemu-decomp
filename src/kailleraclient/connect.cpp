@@ -1,4 +1,5 @@
 #include "client.h"
+#include "messages.h"
 #include <stdlib.h>
 #include <string.h>
 
@@ -72,7 +73,7 @@ static int pollConnection()
             handshake=new UDPConnection;
             handshake->bind(0);
             handshake->setPeer(connectAddress,atoi(p+1));
-            char greeting[128];
+            char greeting[12];
             wsprintf(greeting,"HELLO%s","0.83");
             handshake->send(greeting,strlen(greeting)+1);
         }
@@ -107,11 +108,7 @@ static int pollConnection()
             connection->bind(0);
             connection->setPeer(serverAddress,serverPort);
             {
-                Message login;
-                login.type=3;
-                login.appendString(applicationName);
-                login.setNick(username);
-                login.appendByte((char)connectionType);
+                LoginMessage login(applicationName,username,connectionType);
                 connection->sendMessage(&login);
             }
             KillTimer(connectWindow,0xdeadc0de);
@@ -134,9 +131,7 @@ static int pollConnection()
                         case 5:
                             connection->receiveMessage(&packet,0,0);
                             {
-                                Message pong;
-                                pong.type=6;
-                                for (int i=0;i<4;i++) pong.appendInt(i);
+                                PongMessage pong;
                                 connection->sendMessage(&pong);
                             }
                             break;

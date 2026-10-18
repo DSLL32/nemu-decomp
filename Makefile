@@ -18,6 +18,8 @@ TOOLCHAINS := toolchains
 
 vc6_INCLUDE := include mfc/include atl/include
 vc6_LIB := lib mfc/lib
+vc6rtm_INCLUDE := include
+vc6rtm_LIB := lib
 vc7_INCLUDE := include atlmfc/include platformsdk/include
 vc7_LIB := lib atlmfc/lib platformsdk/lib
 empty :=
@@ -42,12 +44,12 @@ endef
 
 REBUILT := nemu64.exe gs_dll.dll Plugin/audio.dll Plugin/Input.dll \
            Plugin/debugger.dll Plugin/dialogs.dll Plugin/profile.dll Plugin/LemD3D8.dll \
-           Plugin/LemCombineDebugger.dll
+           Plugin/LemCombineDebugger.dll kailleraclient.dll
 MASTER_FILES := $(shell cd "$(ROOT)/master" && find . -type f -printf '%P\n')
 COPIED := $(filter-out $(REBUILT),$(MASTER_FILES))
 BUILD_RECIPE := $(ROOT)/Makefile
 
-.PHONY: all clean nemu64 gs audio input debugger dialogs profile lemd3d lemcombinedebugger
+.PHONY: all clean nemu64 gs audio input debugger dialogs profile lemd3d lemcombinedebugger kaillera
 all: $(addprefix $(OUT)/,$(REBUILT) $(COPIED))
 nemu64: $(OUT)/nemu64.exe
 gs: $(OUT)/gs_dll.dll
@@ -58,6 +60,33 @@ dialogs: $(OUT)/Plugin/dialogs.dll
 profile: $(OUT)/Plugin/profile.dll
 lemd3d: $(OUT)/Plugin/LemD3D8.dll
 lemcombinedebugger: $(OUT)/Plugin/LemCombineDebugger.dll
+kaillera: $(OUT)/kailleraclient.dll
+
+KAILLERA_UNITS := reliableconnection config message udpconnection \
+                  jnetlib/asyncdns jnetlib/connection jnetlib/httpget jnetlib/util \
+                  listview resizer connect kailleraclient protocol game lobby serverbrowser
+KAILLERA_OBJS := $(addprefix $(WORK)/kaillera/,$(addsuffix .obj,$(KAILLERA_UNITS)))
+KAILLERA_HEADERS := $(wildcard $(ROOT)/src/kailleraclient/*.h) \
+                    $(wildcard $(ROOT)/src/kailleraclient/jnetlib/*.h)
+
+$(WORK)/kaillera/%.obj: $(ROOT)/src/kailleraclient/%.cpp $(KAILLERA_HEADERS) $(BUILD_RECIPE)
+	@cd "$(ROOT)"
+	mkdir -p "$(@D)"
+	$(call tool,vc6rtm,cl) /nologo /c /O2 /MD /GX /Gy /DWIN32 /DNDEBUG \
+	    /Foobj/kaillera/$*.obj src/kailleraclient/$*.cpp
+
+$(WORK)/kaillera/kaillera.res: $(ROOT)/src/kailleraclient/kaillera.rc $(ROOT)/src/kailleraclient/kaillera.ico $(BUILD_RECIPE)
+	@cd "$(ROOT)"
+	mkdir -p obj/kaillera
+	$(call tool,vc6rtm,rc) /Isrc/kailleraclient /l 0x40c /foobj/kaillera/kaillera.res src/kailleraclient/kaillera.rc
+
+$(OUT)/kailleraclient.dll: $(KAILLERA_OBJS) $(WORK)/kaillera/kaillera.res $(BUILD_RECIPE)
+	@cd "$(ROOT)"
+	mkdir -p bin
+	$(call tool,vc6rtm,link) /nologo /dll /subsystem:windows /machine:i386 \
+	    /out:bin/kailleraclient.dll /implib:obj/kaillera/kailleraclient.lib \
+	    $(patsubst $(ROOT)/%,%,$(KAILLERA_OBJS)) obj/kaillera/kaillera.res \
+	    kernel32.lib user32.lib gdi32.lib comctl32.lib winmm.lib ws2_32.lib
 
 # Only files without a recovered build target use this fallback rule.
 $(addprefix $(OUT)/,$(COPIED)): $(OUT)/%: $(ROOT)/master/%

@@ -72,9 +72,9 @@ void Message::readString(char *text,int size)
 void Message::appendInt(int value) { append(&value,4); }
 int Message::readInt() { int value=0; read(&value,4); return value; }
 void Message::appendByte(char value) { append(&value,1); }
-char Message::readByte() { char value=0; read(&value,1); return value; }
+unsigned char Message::readByte() { unsigned char value=0; read(&value,1); return value; }
 void Message::appendWord(short value) { append(&value,2); }
-short Message::readWord() { short value=0; read(&value,2); return value; }
+unsigned short Message::readWord() { unsigned short value=0; read(&value,2); return value; }
 
 int Message::pack(char *data,int size)
 {
