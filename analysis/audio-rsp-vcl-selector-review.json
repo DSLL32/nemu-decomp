@@ -1,0 +1,1226 @@
+{
+  "status": "independent_vcl_review_two_cached_selector_controls_rejected",
+  "original": "master/Plugin/audio.dll",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "source_snapshot": "/root/.ai-tmp/audio-vcl-selector-review.c5vkr5ny/source",
+  "source_sha256": "eac9ee4ca4f1fcdf359512b3a1137dcddedaf9b148757d40c9623b8643eeae38",
+  "baseline_description": "Current complete native translation unit after bf82458 LegacyVGE, containing 168 exact functions. Source frozen before these controls.",
+  "method": "Native VC7 /O2 /Ob1 /MT complete-TU build, original function order. Strict checks compare all 180 complete function extents with symbolically resolved original-address operands, 25 typed objects and 11 overlapping fields. No binary modifications or repository application-source edits.",
+  "previous_evidence_reviewed": [
+    "/root/.ai-tmp/nemu-rsp-arithmetic.PMH6Aix9/VCL-REVIEW.txt",
+    "/root/.ai-tmp/nemu-rsp-logic.4RqrtJ/VCL-NOTES.txt",
+    "/root/.ai-tmp/nemu-rsp-logic.4RqrtJ/vcl_select.py",
+    "/root/.ai-tmp/nemu-rsp-logic.4RqrtJ/vcl_scope.py",
+    "/root/.ai-tmp/nemu-rsp-arithmetic.PMH6Aix9/vcl_vectorrefs.py",
+    "/root/.ai-tmp/audio-compare-recovery.8nj785tn/probe.py"
+  ],
+  "bounded_hypothesis": "Prior selector probes kept both locals or replaced both together. The original third unrolled lane explicitly loads the selector mask into EBX; the candidate folds it into AND ECX,[esp+24h]. Test removing only lane or only offset, following the independently successful direct-expression reconstruction of the native Load/Store helpers.",
+  "baseline": {
+    "label": "baseline",
+    "source_sha256": "eac9ee4ca4f1fcdf359512b3a1137dcddedaf9b148757d40c9623b8643eeae38",
+    "object_sha256": "fbd4a1feaf0ad12b1ee36e649c5e253850bb53fc5e8027fe8c1f3eee80acc997",
+    "comparison_sha256": "82369a49484e1fc18e4fd550c617af61f8de54967f12c4ea7e68a48b24606b9b",
+    "compiler_log_sha256": "23a72b99de0cbf71bf21db49ad6f5dbdb8496490e260cf339077527fc5bd2a5e",
+    "compiler_command": [
+      "/usr/bin/python3",
+      "/root/nemu-decomp/scripts/run_toolchain.py",
+      "vc7",
+      "cl",
+      "/nologo",
+      "/c",
+      "/O2",
+      "/Ob1",
+      "/MT",
+      "/W3",
+      "/DWIN32",
+      "/DNDEBUG",
+      "/D_WINDOWS",
+      "/D_USRDLL",
+      "/FoRSP.obj",
+      "RSP.cpp"
+    ],
+    "exact_functions": 168,
+    "prior_exact_preserved": 168,
+    "changed_functions": [],
+    "unchanged_other_function_hashes": 179,
+    "typed_objects_exact": 25,
+    "typed_fields_exact": 11,
+    "unresolved": 0,
+    "functions": [
+      {
+        "name": "RSP_VCL",
+        "original_size": 1472,
+        "candidate_size": 1472,
+        "differing_bytes": 784,
+        "exact": false,
+        "candidate_materialized_sha256": "51d754a71b57a13b770d0f6d0cebca92367df3a7be0d654d7ac8b1a7e1b6a5a1"
+      }
+    ],
+    "artifact_directory": "/root/.ai-tmp/audio-vcl-selector-review.c5vkr5ny/baseline"
+  },
+  "controls": [
+    {
+      "label": "lane-only",
+      "source_sha256": "bb5d1018f8e58fb1e0ece2deda809704d7d096c4f03dca953afb2c47d6b31626",
+      "object_sha256": "671385afe1cb55ec8b8bc73f812acf0928445b8671cce0fffbe692f08886c2e7",
+      "comparison_sha256": "a3caf2c3f5d70d1d0aa3e988f98e2be41f6dd254c927a11fbca31e07f770ee06",
+      "compiler_log_sha256": "23716c7a3645cbacbd0a0ca0ab206864feb9c5293e20dacd791eaa95d8efd97c",
+      "compiler_command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_USRDLL",
+        "/FoRSP.obj",
+        "RSP.cpp"
+      ],
+      "exact_functions": 168,
+      "prior_exact_preserved": 168,
+      "changed_functions": [],
+      "unchanged_other_function_hashes": 179,
+      "typed_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VCL",
+          "original_size": 1472,
+          "candidate_size": 1472,
+          "differing_bytes": 784,
+          "exact": false,
+          "candidate_materialized_sha256": "51d754a71b57a13b770d0f6d0cebca92367df3a7be0d654d7ac8b1a7e1b6a5a1"
+        }
+      ],
+      "artifact_directory": "/root/.ai-tmp/audio-vcl-selector-review.c5vkr5ny/lane-only"
+    },
+    {
+      "label": "offset-only",
+      "source_sha256": "aca45397a09ce5c8a395cb2b1aea4f163a21573b87ef777b4f320d36917425fb",
+      "object_sha256": "c30953aaadfefe3bd86faee8512711c49dbe5fe7f75150ce82f8d463729ce8f6",
+      "comparison_sha256": "80e33c0d8b3005aa72b6998f6d88a438f65d761f28117dc9a54ad7ed4152f3e4",
+      "compiler_log_sha256": "ea9f49c7345f2e307c7c5900e5baa6c9eee804f8d4baf945851e031e116f0508",
+      "compiler_command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_USRDLL",
+        "/FoRSP.obj",
+        "RSP.cpp"
+      ],
+      "exact_functions": 168,
+      "prior_exact_preserved": 168,
+      "changed_functions": [
+        "RSP_VCL"
+      ],
+      "unchanged_other_function_hashes": 179,
+      "typed_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VCL",
+          "original_size": 1472,
+          "candidate_size": 1472,
+          "differing_bytes": 923,
+          "exact": false,
+          "candidate_materialized_sha256": "230d82fc1e2e248897891c211df5bbf9d89b3817c0d2eae6cbaedb9565ea72c6"
+        }
+      ],
+      "artifact_directory": "/root/.ai-tmp/audio-vcl-selector-review.c5vkr5ny/offset-only"
+    }
+  ],
+  "instruction_review": {
+    "original_va": 268551104,
+    "original_span": 1472,
+    "original_ret_offsets": [
+      1464
+    ],
+    "method": "Instruction sequence alignment ignores branch destinations only for diagnostic display, not as evidence of a full function match. Strict comparisons retain every operand.",
+    "candidates": [
+      {
+        "label": "baseline",
+        "first_raw_difference": 562,
+        "ret_offsets": [
+          1456
+        ],
+        "aligned_instruction_changes_diagnostic_only": [
+          {
+            "kind": "insert",
+            "original": [],
+            "candidate": [
+              {
+                "offset": 641,
+                "instruction": "mov edx, dword ptr [esp + 0x1c]"
+              }
+            ]
+          },
+          {
+            "kind": "delete",
+            "original": [
+              {
+                "offset": 647,
+                "instruction": "mov edx, dword ptr [esp + 0x1c]"
+              }
+            ],
+            "candidate": []
+          },
+          {
+            "kind": "delete",
+            "original": [
+              {
+                "offset": 659,
+                "instruction": "mov edx, dword ptr [esp + 0x1c]"
+              }
+            ],
+            "candidate": []
+          },
+          {
+            "kind": "delete",
+            "original": [
+              {
+                "offset": 727,
+                "instruction": "shl edi, cl"
+              }
+            ],
+            "candidate": []
+          },
+          {
+            "kind": "replace",
+            "original": [
+              {
+                "offset": 748,
+                "instruction": "lea ecx, [eax + 2]"
+              }
+            ],
+            "candidate": [
+              {
+                "offset": 742,
+                "instruction": "mov ecx, ebp"
+              },
+              {
+                "offset": 744,
+                "instruction": "shl edi, cl"
+              }
+            ]
+          },
+          {
+            "kind": "insert",
+            "original": [],
+            "candidate": [
+              {
+                "offset": 755,
+                "instruction": "lea ecx, [eax + 2]"
+              }
+            ]
+          },
+          {
+            "kind": "insert",
+            "original": [],
+            "candidate": [
+              {
+                "offset": 761,
+                "instruction": "or esi, edx"
+              }
+            ]
+          },
+          {
+            "kind": "delete",
+            "original": [
+              {
+                "offset": 765,
+                "instruction": "or esi, edx"
+              }
+            ],
+            "candidate": []
+          },
+          {
+            "kind": "replace",
+            "original": [
+              {
+                "offset": 828,
+                "instruction": "mov ebx, dword ptr [esp + 0x24]"
+              },
+              {
+                "offset": 832,
+                "instruction": "and ebx, ecx"
+              },
+              {
+                "offset": 834,
+                "instruction": "add ebx, dword ptr [esp + 0x28]"
+              },
+              {
+                "offset": 838,
+                "instruction": "add ebx, dword ptr [esp + 0x2c]"
+              },
+              {
+                "offset": 842,
+                "instruction": "mov cx, word ptr [ebx*2 + 0x1012be18]"
+              }
+            ],
+            "candidate": [
+              {
+                "offset": 826,
+                "instruction": "and ecx, dword ptr [esp + 0x24]"
+              },
+              {
+                "offset": 830,
+                "instruction": "add ecx, dword ptr [esp + 0x28]"
+              },
+              {
+                "offset": 834,
+                "instruction": "add ecx, dword ptr [esp + 0x2c]"
+              },
+              {
+                "offset": 838,
+                "instruction": "mov cx, word ptr [ecx*2 + 0x1012be18]"
+              }
+            ]
+          },
+          {
+            "kind": "delete",
+            "original": [
+              {
+                "offset": 1145,
+                "instruction": "and ebx, ecx"
+              }
+            ],
+            "candidate": []
+          },
+          {
+            "kind": "replace",
+            "original": [
+              {
+                "offset": 1151,
+                "instruction": "add ebx, dword ptr [esp + 0x28]"
+              },
+              {
+                "offset": 1155,
+                "instruction": "add ebx, dword ptr [esp + 0x2c]"
+              },
+              {
+                "offset": 1159,
+                "instruction": "mov cx, word ptr [ebx*2 + 0x1012be18]"
+              }
+            ],
+            "candidate": [
+              {
+                "offset": 1145,
+                "instruction": "and ecx, ebx"
+              },
+              {
+                "offset": 1147,
+                "instruction": "add ecx, dword ptr [esp + 0x28]"
+              },
+              {
+                "offset": 1151,
+                "instruction": "add ecx, dword ptr [esp + 0x2c]"
+              },
+              {
+                "offset": 1155,
+                "instruction": "mov cx, word ptr [ecx*2 + 0x1012be18]"
+              }
+            ]
+          },
+          {
+            "kind": "insert",
+            "original": [],
+            "candidate": [
+              {
+                "offset": 1277,
+                "instruction": "mov edx, dword ptr [esp + 0x1c]"
+              }
+            ]
+          },
+          {
+            "kind": "delete",
+            "original": [
+              {
+                "offset": 1287,
+                "instruction": "mov edx, dword ptr [esp + 0x1c]"
+              }
+            ],
+            "candidate": []
+          },
+          {
+            "kind": "delete",
+            "original": [
+              {
+                "offset": 1299,
+                "instruction": "mov edx, dword ptr [esp + 0x1c]"
+              }
+            ],
+            "candidate": []
+          },
+          {
+            "kind": "insert",
+            "original": [],
+            "candidate": [
+              {
+                "offset": 1464,
+                "instruction": "nop "
+              },
+              {
+                "offset": 1465,
+                "instruction": "nop "
+              },
+              {
+                "offset": 1466,
+                "instruction": "nop "
+              },
+              {
+                "offset": 1467,
+                "instruction": "nop "
+              },
+              {
+                "offset": 1468,
+                "instruction": "nop "
+              },
+              {
+                "offset": 1469,
+                "instruction": "nop "
+              },
+              {
+                "offset": 1470,
+                "instruction": "nop "
+              },
+              {
+                "offset": 1471,
+                "instruction": "nop "
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "lane-only",
+        "first_raw_difference": 562,
+        "ret_offsets": [
+          1456
+        ],
+        "aligned_instruction_changes_diagnostic_only": [
+          {
+            "kind": "insert",
+            "original": [],
+            "candidate": [
+              {
+                "offset": 641,
+                "instruction": "mov edx, dword ptr [esp + 0x1c]"
+              }
+            ]
+          },
+          {
+            "kind": "delete",
+            "original": [
+              {
+                "offset": 647,
+                "instruction": "mov edx, dword ptr [esp + 0x1c]"
+              }
+            ],
+            "candidate": []
+          },
+          {
+            "kind": "delete",
+            "original": [
+              {
+                "offset": 659,
+                "instruction": "mov edx, dword ptr [esp + 0x1c]"
+              }
+            ],
+            "candidate": []
+          },
+          {
+            "kind": "delete",
+            "original": [
+              {
+                "offset": 727,
+                "instruction": "shl edi, cl"
+              }
+            ],
+            "candidate": []
+          },
+          {
+            "kind": "replace",
+            "original": [
+              {
+                "offset": 748,
+                "instruction": "lea ecx, [eax + 2]"
+              }
+            ],
+            "candidate": [
+              {
+                "offset": 742,
+                "instruction": "mov ecx, ebp"
+              },
+              {
+                "offset": 744,
+                "instruction": "shl edi, cl"
+              }
+            ]
+          },
+          {
+            "kind": "insert",
+            "original": [],
+            "candidate": [
+              {
+                "offset": 755,
+                "instruction": "lea ecx, [eax + 2]"
+              }
+            ]
+          },
+          {
+            "kind": "insert",
+            "original": [],
+            "candidate": [
+              {
+                "offset": 761,
+                "instruction": "or esi, edx"
+              }
+            ]
+          },
+          {
+            "kind": "delete",
+            "original": [
+              {
+                "offset": 765,
+                "instruction": "or esi, edx"
+              }
+            ],
+            "candidate": []
+          },
+          {
+            "kind": "replace",
+            "original": [
+              {
+                "offset": 828,
+                "instruction": "mov ebx, dword ptr [esp + 0x24]"
+              },
+              {
+                "offset": 832,
+                "instruction": "and ebx, ecx"
+              },
+              {
+                "offset": 834,
+                "instruction": "add ebx, dword ptr [esp + 0x28]"
+              },
+              {
+                "offset": 838,
+                "instruction": "add ebx, dword ptr [esp + 0x2c]"
+              },
+              {
+                "offset": 842,
+                "instruction": "mov cx, word ptr [ebx*2 + 0x1012be18]"
+              }
+            ],
+            "candidate": [
+              {
+                "offset": 826,
+                "instruction": "and ecx, dword ptr [esp + 0x24]"
+              },
+              {
+                "offset": 830,
+                "instruction": "add ecx, dword ptr [esp + 0x28]"
+              },
+              {
+                "offset": 834,
+                "instruction": "add ecx, dword ptr [esp + 0x2c]"
+              },
+              {
+                "offset": 838,
+                "instruction": "mov cx, word ptr [ecx*2 + 0x1012be18]"
+              }
+            ]
+          },
+          {
+            "kind": "delete",
+            "original": [
+              {
+                "offset": 1145,
+                "instruction": "and ebx, ecx"
+              }
+            ],
+            "candidate": []
+          },
+          {
+            "kind": "replace",
+            "original": [
+              {
+                "offset": 1151,
+                "instruction": "add ebx, dword ptr [esp + 0x28]"
+              },
+              {
+                "offset": 1155,
+                "instruction": "add ebx, dword ptr [esp + 0x2c]"
+              },
+              {
+                "offset": 1159,
+                "instruction": "mov cx, word ptr [ebx*2 + 0x1012be18]"
+              }
+            ],
+            "candidate": [
+              {
+                "offset": 1145,
+                "instruction": "and ecx, ebx"
+              },
+              {
+                "offset": 1147,
+                "instruction": "add ecx, dword ptr [esp + 0x28]"
+              },
+              {
+                "offset": 1151,
+                "instruction": "add ecx, dword ptr [esp + 0x2c]"
+              },
+              {
+                "offset": 1155,
+                "instruction": "mov cx, word ptr [ecx*2 + 0x1012be18]"
+              }
+            ]
+          },
+          {
+            "kind": "insert",
+            "original": [],
+            "candidate": [
+              {
+                "offset": 1277,
+                "instruction": "mov edx, dword ptr [esp + 0x1c]"
+              }
+            ]
+          },
+          {
+            "kind": "delete",
+            "original": [
+              {
+                "offset": 1287,
+                "instruction": "mov edx, dword ptr [esp + 0x1c]"
+              }
+            ],
+            "candidate": []
+          },
+          {
+            "kind": "delete",
+            "original": [
+              {
+                "offset": 1299,
+                "instruction": "mov edx, dword ptr [esp + 0x1c]"
+              }
+            ],
+            "candidate": []
+          },
+          {
+            "kind": "insert",
+            "original": [],
+            "candidate": [
+              {
+                "offset": 1464,
+                "instruction": "nop "
+              },
+              {
+                "offset": 1465,
+                "instruction": "nop "
+              },
+              {
+                "offset": 1466,
+                "instruction": "nop "
+              },
+              {
+                "offset": 1467,
+                "instruction": "nop "
+              },
+              {
+                "offset": 1468,
+                "instruction": "nop "
+              },
+              {
+                "offset": 1469,
+                "instruction": "nop "
+              },
+              {
+                "offset": 1470,
+                "instruction": "nop "
+              },
+              {
+                "offset": 1471,
+                "instruction": "nop "
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "label": "offset-only",
+        "first_raw_difference": 3,
+        "ret_offsets": [
+          1456
+        ],
+        "aligned_instruction_changes_diagnostic_only": [
+          {
+            "kind": "replace",
+            "original": [
+              {
+                "offset": 3,
+                "instruction": "mov eax, dword ptr [0x1012c03c]"
+              }
+            ],
+            "candidate": [
+              {
+                "offset": 3,
+                "instruction": "mov ecx, dword ptr [0x1012c03c]"
+              }
+            ]
+          },
+          {
+            "kind": "replace",
+            "original": [
+              {
+                "offset": 11,
+                "instruction": "add eax, 4"
+              }
+            ],
+            "candidate": [
+              {
+                "offset": 12,
+                "instruction": "mov esi, dword ptr [0x1012be00]"
+              }
+            ]
+          },
+          {
+            "kind": "replace",
+            "original": [
+              {
+                "offset": 15,
+                "instruction": "mov edi, dword ptr [0x1012be00]"
+              },
+              {
+                "offset": 21,
+                "instruction": "mov dword ptr [0x1012c03c], eax"
+              },
+              {
+                "offset": 26,
+                "instruction": "xor eax, eax"
+              },
+              {
+                "offset": 28,
+                "instruction": "mov al, byte ptr [0x1012be02]"
+              },
+              {
+                "offset": 33,
+                "instruction": "mov esi, edi"
+              },
+              {
+                "offset": 35,
+                "instruction": "shr esi, 0x16"
+              },
+              {
+                "offset": 38,
+                "instruction": "and esi, 7"
+              },
+              {
+                "offset": 41,
+                "instruction": "mov ecx, edi"
+              }
+            ],
+            "candidate": [
+              {
+                "offset": 19,
+                "instruction": "mov edi, esi"
+              },
+              {
+                "offset": 21,
+                "instruction": "add ecx, 4"
+              },
+              {
+                "offset": 24,
+                "instruction": "mov dword ptr [0x1012c03c], ecx"
+              },
+              {
+                "offset": 30,
+                "instruction": "mov ecx, esi"
+              },
+              {
+                "offset": 32,
+                "instruction": "mov edx, esi"
+              },
+              {
+                "offset": 34,
+                "instruction": "shr edi, 0x16"
+              },
+              {
+                "offset": 37,
+                "instruction": "shr esi, 0x15"
+              },
+              {
+                "offset": 40,
+                "instruction": "xor ebx, ebx"
+              },
+              {
+                "offset": 42,
+                "instruction": "mov bl, byte ptr [0x1012be02]"
+              },
+              {
+                "offset": 48,
+                "instruction": "and edi, 7"
+              },
+              {
+                "offset": 51,
+                "instruction": "shl edi, 2"
+              },
+              {
+                "offset": 54,
+                "instruction": "mov ebp, dword ptr [edi + 0x1003f998]"
+              }
+            ]
+          },
+          {
+            "kind": "replace",
+            "original": [
+              {
+                "offset": 46,
+                "instruction": "shl esi, 2"
+              },
+              {
+                "offset": 49,
+                "instruction": "mov ebx, dword ptr [esi + 0x1003f998]"
+              },
+              {
+                "offset": 55,
+                "instruction": "mov esi, dword ptr [esi + 0x1003f978]"
+              },
+              {
+                "offset": 61,
+                "instruction": "mov edx, edi"
+              }
+            ],
+            "candidate": [
+              {
+                "offset": 63,
+                "instruction": "and esi, 0xf"
+              }
+            ]
+          },
+          {
+            "kind": "insert",
+            "original": [],
+            "candidate": [
+              {
+                "offset": 69,
+                "instruction": "and esi, ebp"
+              }
+            ]
+          },
+          {
+            "kind": "replace",
+            "original": [
+              {
+                "offset": 72,
+                "instruction": "and eax, 0x1f"
+              },
+              {
+                "offset": 75,
+                "instruction": "shr edi, 0x15"
+              },
+              {
+                "offset": 78,
+                "instruction": "and ebx, edi"
+              }
+            ],
+            "candidate": [
+              {
+                "offset": 77,
+                "instruction": "mov dword ptr [esp + 0x2c], esi"
+              },
+              {
+                "offset": 81,
+                "instruction": "mov esi, dword ptr [edi + 0x1003f978]"
+              }
+            ]
+          },
+          {
+            "kind": "delete",
+            "original": [
+              {
+                "offset": 83,
+                "instruction": "mov ebp, eax"
+              }
+            ],
+            "candidate": []
+          },
+          {
+            "kind": "replace",
+            "original": [
+              {
+                "offset": 88,
+                "instruction": "and ebx, 0xf"
+              }
+            ],
+            "candidate": [
+              {
+                "offset": 93,
+                "instruction": "and ebx, 0x1f"
+              }
+            ]
+          },
+          {
+            "kind": "replace",
+            "original": [
+              {
+                "offset": 109,
+                "instruction": "lea esi, [ebp*8]"
+              }
+            ],
+            "candidate": [
+              {
+                "offset": 114,
+                "instruction": "lea esi, [ebx*8]"
+              }
+            ]
+          },
+          {
+            "kind": "delete",
+            "original": [
+              {
+                "offset": 127,
+                "instruction": "mov dword ptr [esp + 0x2c], ebx"
+              }
+            ],
+            "candidate": []
+          },
+          {
+            "kind": "replace",
+            "original": [
+              {
+                "offset": 139,
+                "instruction": "jmp 0x1001c450"
+              },
+              {
+                "offset": 141,
+                "instruction": "lea ecx, [ecx]"
+              }
+            ],
+            "candidate": [
+              {
+                "offset": 140,
+                "instruction": "lea esp, [esp]"
+              }
+            ]
+          },
+          {
+            "kind": "insert",
+            "original": [],
+            "candidate": [
+              {
+                "offset": 641,
+                "instruction": "mov edx, dword ptr [esp + 0x1c]"
+              }
+            ]
+          },
+          {
+            "kind": "delete",
+            "original": [
+              {
+                "offset": 647,
+                "instruction": "mov edx, dword ptr [esp + 0x1c]"
+              }
+            ],
+            "candidate": []
+          },
+          {
+            "kind": "delete",
+            "original": [
+              {
+                "offset": 659,
+                "instruction": "mov edx, dword ptr [esp + 0x1c]"
+              }
+            ],
+            "candidate": []
+          },
+          {
+            "kind": "delete",
+            "original": [
+              {
+                "offset": 727,
+                "instruction": "shl edi, cl"
+              }
+            ],
+            "candidate": []
+          },
+          {
+            "kind": "replace",
+            "original": [
+              {
+                "offset": 748,
+                "instruction": "lea ecx, [eax + 2]"
+              }
+            ],
+            "candidate": [
+              {
+                "offset": 742,
+                "instruction": "mov ecx, ebp"
+              },
+              {
+                "offset": 744,
+                "instruction": "shl edi, cl"
+              }
+            ]
+          },
+          {
+            "kind": "insert",
+            "original": [],
+            "candidate": [
+              {
+                "offset": 755,
+                "instruction": "lea ecx, [eax + 2]"
+              }
+            ]
+          },
+          {
+            "kind": "insert",
+            "original": [],
+            "candidate": [
+              {
+                "offset": 761,
+                "instruction": "or esi, edx"
+              }
+            ]
+          },
+          {
+            "kind": "delete",
+            "original": [
+              {
+                "offset": 765,
+                "instruction": "or esi, edx"
+              }
+            ],
+            "candidate": []
+          },
+          {
+            "kind": "replace",
+            "original": [
+              {
+                "offset": 828,
+                "instruction": "mov ebx, dword ptr [esp + 0x24]"
+              },
+              {
+                "offset": 832,
+                "instruction": "and ebx, ecx"
+              },
+              {
+                "offset": 834,
+                "instruction": "add ebx, dword ptr [esp + 0x28]"
+              },
+              {
+                "offset": 838,
+                "instruction": "add ebx, dword ptr [esp + 0x2c]"
+              },
+              {
+                "offset": 842,
+                "instruction": "mov cx, word ptr [ebx*2 + 0x1012be18]"
+              }
+            ],
+            "candidate": [
+              {
+                "offset": 826,
+                "instruction": "and ecx, dword ptr [esp + 0x24]"
+              },
+              {
+                "offset": 830,
+                "instruction": "add ecx, dword ptr [esp + 0x28]"
+              },
+              {
+                "offset": 834,
+                "instruction": "add ecx, dword ptr [esp + 0x2c]"
+              },
+              {
+                "offset": 838,
+                "instruction": "mov cx, word ptr [ecx*2 + 0x1012be18]"
+              }
+            ]
+          },
+          {
+            "kind": "delete",
+            "original": [
+              {
+                "offset": 1145,
+                "instruction": "and ebx, ecx"
+              }
+            ],
+            "candidate": []
+          },
+          {
+            "kind": "replace",
+            "original": [
+              {
+                "offset": 1151,
+                "instruction": "add ebx, dword ptr [esp + 0x28]"
+              },
+              {
+                "offset": 1155,
+                "instruction": "add ebx, dword ptr [esp + 0x2c]"
+              },
+              {
+                "offset": 1159,
+                "instruction": "mov cx, word ptr [ebx*2 + 0x1012be18]"
+              }
+            ],
+            "candidate": [
+              {
+                "offset": 1145,
+                "instruction": "and ecx, ebx"
+              },
+              {
+                "offset": 1147,
+                "instruction": "add ecx, dword ptr [esp + 0x28]"
+              },
+              {
+                "offset": 1151,
+                "instruction": "add ecx, dword ptr [esp + 0x2c]"
+              },
+              {
+                "offset": 1155,
+                "instruction": "mov cx, word ptr [ecx*2 + 0x1012be18]"
+              }
+            ]
+          },
+          {
+            "kind": "insert",
+            "original": [],
+            "candidate": [
+              {
+                "offset": 1277,
+                "instruction": "mov edx, dword ptr [esp + 0x1c]"
+              }
+            ]
+          },
+          {
+            "kind": "delete",
+            "original": [
+              {
+                "offset": 1287,
+                "instruction": "mov edx, dword ptr [esp + 0x1c]"
+              }
+            ],
+            "candidate": []
+          },
+          {
+            "kind": "delete",
+            "original": [
+              {
+                "offset": 1299,
+                "instruction": "mov edx, dword ptr [esp + 0x1c]"
+              }
+            ],
+            "candidate": []
+          },
+          {
+            "kind": "insert",
+            "original": [],
+            "candidate": [
+              {
+                "offset": 1464,
+                "instruction": "nop "
+              },
+              {
+                "offset": 1465,
+                "instruction": "nop "
+              },
+              {
+                "offset": 1466,
+                "instruction": "nop "
+              },
+              {
+                "offset": 1467,
+                "instruction": "nop "
+              },
+              {
+                "offset": 1468,
+                "instruction": "nop "
+              },
+              {
+                "offset": 1469,
+                "instruction": "nop "
+              },
+              {
+                "offset": 1470,
+                "instruction": "nop "
+              },
+              {
+                "offset": 1471,
+                "instruction": "nop "
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "findings": [
+    "Removing only lane produces identical resolved hashes for all 180 functions.",
+    "Removing only offset changes only VCL, increasing its materialized differing-byte count from 784 to 923 and moving first raw divergence from 562 to 3. No exact function is gained.",
+    "The baseline first raw divergence at offset 562 is a branch displacement. The first changed instruction placement is at offset 641: candidate reloads high from [esp+1Ch] before the output branch, where original reloads separately at offsets 647 and 659. The fourth lane has the same duplication/hoist distinction.",
+    "Later differences are low/high shift and OR scheduling plus selector register choice in lanes three/four. The target RET is at offset 1464; candidate RET is at 1456. Both occupied extents are 1472 bytes; equal extent does not prove matching body.",
+    "All 168 exact baseline functions, 179 other function hashes and all 25 objects/11 fields remain unchanged. No source promotion or new behavioral claim."
+  ],
+  "artifacts": {
+    "/root/.ai-tmp/audio-vcl-selector-review.c5vkr5ny/baseline.asm": "d655b9c1059ddab823c6bb0a556b0f280bb8be19873feacbe43d67d84f83b388",
+    "/root/.ai-tmp/audio-vcl-selector-review.c5vkr5ny/freeze.py": "246e6928eb22ac0eed630fcc471a5e0fbe4b3bc6c06b9799200b5c4680159791",
+    "/root/.ai-tmp/audio-vcl-selector-review.c5vkr5ny/inspect.py": "47194e607895adb162db674d7cce8725448e7d26213938f49772a6bfaa8cab09",
+    "/root/.ai-tmp/audio-vcl-selector-review.c5vkr5ny/instruction-review.json": "bb2d9a0f93a602485dd547e5b4ac7020facd3ca6fd31637b31c3498bf6a920a3",
+    "/root/.ai-tmp/audio-vcl-selector-review.c5vkr5ny/lane-only.asm": "d655b9c1059ddab823c6bb0a556b0f280bb8be19873feacbe43d67d84f83b388",
+    "/root/.ai-tmp/audio-vcl-selector-review.c5vkr5ny/offset-only.asm": "749a4772c48a4c9597ee337392a5654be9afebe79e1d10c14cc3b9cdda4dc1e0",
+    "/root/.ai-tmp/audio-vcl-selector-review.c5vkr5ny/original.asm": "15060bb6db7177eddf2e1c96e9026c292290641715dd93ab2a271a16bbacfa45",
+    "/root/.ai-tmp/audio-vcl-selector-review.c5vkr5ny/probe.py": "70dad0340e77c19920140b4eb7cfc6e536b8e9db74bc622b834318dd3e34f865"
+  },
+  "snapshot_files": {
+    "ABI1.c": "f672bac9d9d813a5bc89ce97ce88d697b61361e90b40a3087d4a8bcd369a6327",
+    "ABI2.c": "1794fd9b3db1991241d2d948f2ef332aff3257178bd4b11e90fdd29afa6442df",
+    "ABI3.c": "28ff355e6019318aa5b61ef3930dfc6b416451cddf382404992c8883eb61c9af",
+    "AMP-LICENSE.txt": "133f385d28039b18f9900e1cd933119ccae0462b495999a2750dea9fb8430640",
+    "Audio.rc": "b551863a11341c7440df2425b5620cda11c9eaef312179e8dd925fd05b12bf93",
+    "AudioADPCM-LICENSE.txt": "9f8db578ada6153af1024a206324a03b9703abbec0e96b6ee3da72ff6eee335e",
+    "AudioADPCMBlock.h": "f506d6ea97b83fcaaa78dc9ff7300bebe37aa36b9f1a01277247ee41767b4c1b",
+    "AudioADPCMLegacy.h": "8509a1760c9dcc9b45334d103d4f09b656502bda0b8d35d039d75d7a75720f32",
+    "AudioCommands.h": "35cae30632b3a466adc0dea680c808b80995cf311b0024d25331224e7368e5f3",
+    "AudioEnvelope.h": "8acbac16a6bc16a06782b48dea25af4e49b99c5a845f866ffe41098ec14517b7",
+    "AudioHLE.c": "a449a37eb2f9fc12b2c7f2a2c5b5e3a3f51a08adeaf241ef0e5d174b8825941a",
+    "AudioHLE.h": "98475c4c2e034a7e1b16a94662078f731afcca5529140bf0d30c7e6901bdd441",
+    "AudioLegacy.c": "d81dde338f0005166893a0825c2c86f82c7956ce75a7cae552c354ca4e78dc41",
+    "AudioLegacy.h": "8f5810c3d8ae923119c733c304064310630cca3201c4b472047267d1417bee98",
+    "AudioLog.c": "84a6f797caaf244d44300550ed13225276bf1c45bf6fb3193be9047dc01226f0",
+    "AudioPlugin.c": "6fed63db83aa3a950d0ce3a2e5e9df4769674aed1b145ab3e0332c5e2c44e260",
+    "AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
+    "AudioProcessing.c": "e66e65ff34e26304fd306b14afb5540d2db060bc631e980af95b398f1a232e62",
+    "AudioProcessing.h": "77bbd94523444df697a169cea26375cc673879493761452cc92add2857284c7b",
+    "AudioResample.c": "67ced2fcbd0e6798f34cd986e5a9b77e4ba963eb03463468b5d7b68120dbde1f",
+    "AudioResampleTables.h": "5b95bd2db83cf7eea18b347cdf32c7a332073868cbcbd45a939f8de4537236f1",
+    "AudioSIMD.h": "627d71fd2a53dcc36e099c214824e397454c8b78d80be503f29f08c91a18bf63",
+    "CPUFeatures.c": "b27644d8cc3b9044125194ed7e6d03ebccfd9c705fd62b653b08667c054a3f0f",
+    "DirectSound.c": "0183aca5217e7c7847ae02f4e4b74e6436b11ca54e82b8bf6bbfb7d7b77e3cb6",
+    "DirectSound.h": "ab5ed735f1ab52226c0c7e7a559d080e10ec5649d2814b177f1a79686135455b",
+    "Jpeg.c": "82ebf8c9d72e8c83d42bb97e3351627462336fb2693d47b449b803d6537988ac",
+    "Mp3.c": "d9dccbd10b72f540528496c33f04f8a63d3b9bd1f39839a70ac8a16ef5a87b3a",
+    "RSP.cpp": "eac9ee4ca4f1fcdf359512b3a1137dcddedaf9b148757d40c9623b8643eeae38",
+    "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+    "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88",
+    "RSPKernel.inc": "7a218993560c457a5149266e391a28fcdb0a1df5a812209c9a9b7111238eb961",
+    "RSPMicrocode.inc": "12bae4d1c37884c7d5efbf13402d326bf46fafd0ee6064feff3fe0fdd8d2ee0c",
+    "audio.def": "f34ad9fa1d564c407483eabd05363f0c95a4cf69a81f6c4ffcb0dd95ddcb4b34",
+    "transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f"
+  }
+}
