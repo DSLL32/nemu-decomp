@@ -1,0 +1,2218 @@
+{
+  "original": "master/Plugin/audio.dll",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "scope": "Five complete RSP multiply handlers reconstructed; full audio DLL remains incomplete.",
+  "source": "src/audio/ahle_ds/RSP.cpp",
+  "source_sha256": "b1774a705cf7cc2b294773d5bba10e003650dfcd857efadc2ab995f87da44c29",
+  "source_change": "Decode element before vd, vs and vt in the five handlers. The inferred source order recovers opcode coalescing into ECX and the original register-save schedule without changing operations, types, flags or function boundaries.",
+  "source_nonuniqueness": "Two declaration orders (element,vd,vs,vt and element,vd,vt,vs) yield the five exact bodies; chosen source retains the conventional vd,vs,vt order. Exact source spelling is not uniquely recoverable.",
+  "compiler_command": [
+    "/usr/bin/python3",
+    "/root/nemu-decomp/scripts/run_toolchain.py",
+    "vc7",
+    "cl",
+    "/nologo",
+    "/c",
+    "/O2",
+    "/Ob1",
+    "/MT",
+    "/W3",
+    "/DWIN32",
+    "/DNDEBUG",
+    "/D_WINDOWS",
+    "/D_USRDLL",
+    "/FoRSP.obj",
+    "RSP.cpp"
+  ],
+  "new_complete_functions": [
+    {
+      "name": "RSP_VMULF",
+      "va": 268528064,
+      "original_size": 928,
+      "candidate_size": 928,
+      "exact": true,
+      "differing_bytes": 0,
+      "unresolved": 0,
+      "original_sha256": "4eca8a3bc579df2e2918a10778e696a43e393c7eaa8be564748f353b4c7606ef",
+      "candidate_materialized_sha256": "4eca8a3bc579df2e2918a10778e696a43e393c7eaa8be564748f353b4c7606ef",
+      "verified_relocation_operands": 19
+    },
+    {
+      "name": "RSP_VMUDL",
+      "va": 268530048,
+      "original_size": 736,
+      "candidate_size": 736,
+      "exact": true,
+      "differing_bytes": 0,
+      "unresolved": 0,
+      "original_sha256": "8611c3202c89381a9e5e154a5dd5dbb6410e6be724348b24d436ef68da266f4f",
+      "candidate_materialized_sha256": "8611c3202c89381a9e5e154a5dd5dbb6410e6be724348b24d436ef68da266f4f",
+      "verified_relocation_operands": 15
+    },
+    {
+      "name": "RSP_VMUDM",
+      "va": 268530784,
+      "original_size": 960,
+      "candidate_size": 960,
+      "exact": true,
+      "differing_bytes": 0,
+      "unresolved": 0,
+      "original_sha256": "325d0f0968fb00ee99c7886117903cda4fcb0e153a5edd72a718400e52f3dce6",
+      "candidate_materialized_sha256": "325d0f0968fb00ee99c7886117903cda4fcb0e153a5edd72a718400e52f3dce6",
+      "verified_relocation_operands": 15
+    },
+    {
+      "name": "RSP_VMUDN",
+      "va": 268531744,
+      "original_size": 896,
+      "candidate_size": 896,
+      "exact": true,
+      "differing_bytes": 0,
+      "unresolved": 0,
+      "original_sha256": "bc7362adfdb380e636fb4e009ca35c266167f53de8131615785e134bf9f0ad7f",
+      "candidate_materialized_sha256": "bc7362adfdb380e636fb4e009ca35c266167f53de8131615785e134bf9f0ad7f",
+      "verified_relocation_operands": 15
+    },
+    {
+      "name": "RSP_VMUDH",
+      "va": 268532640,
+      "original_size": 960,
+      "candidate_size": 960,
+      "exact": true,
+      "differing_bytes": 0,
+      "unresolved": 0,
+      "original_sha256": "6e0631ad884c5cecb63f55cacc2d4ef10e6b3191594dee0be35d79bf97f0a5da",
+      "candidate_materialized_sha256": "6e0631ad884c5cecb63f55cacc2d4ef10e6b3191594dee0be35d79bf97f0a5da",
+      "verified_relocation_operands": 15
+    }
+  ],
+  "new_exact_bytes": 4480,
+  "full_unit": {
+    "functions": 180,
+    "exact_functions": 153,
+    "other_function_hashes_preserved": 175,
+    "typed_objects_exact": 25,
+    "all_typed_object_comparisons_unchanged": true,
+    "unresolved_operands": 0
+  },
+  "evidence": {
+    "directory": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh",
+    "files": {
+      "probe.py": "60f0b5940adab8338b1445346571931677a95cc7b797d762646f5b8dea34ebcb",
+      "orders.py": "4f57410f197b0311ae49e9f024970ba54c395ca216a076b24890b6783388c408",
+      "orders.json": "0c535f508fefd58a522256daca917ee532efa7376870049763b7bfdc2db45591",
+      "baseline/RSP.obj": "e95e6400a6c3b9888045a0d40cfe8c0b8116777fca89eca8c55bfbfc28049a9b",
+      "baseline/comparison.json": "52121a89dd106ecb710e5d2c35684193461402125825fe6cb27438f9963553d4",
+      "narrow-five/RSP.obj": "ef19b6b8bd3e7aeeacc9997cbc54225d39c7011b5624d2ca610804998b6df97b",
+      "narrow-five/comparison.json": "a28f81fac4b9c2afc13d7711d7492e42ff1a2c906b7da941ce87f3094035fb8c",
+      "narrow-five/summary.json": "e82709267f46c10548c0f46a8819b2eb931a4a2f497ace8b4916b96d3cc1bb11",
+      "narrow-five/compile.log": "e3b4582c5814d4244227141916869caf5cac351363103881a693db14cd31caa7"
+    }
+  },
+  "bounded_source_controls": [
+    {
+      "label": "baseline",
+      "exact_functions": 148,
+      "changed": [],
+      "source_sha256": "e2ebc258be25fca598896c4bc9639e24c61c859aaf34bab5682d034df2fd3a43",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/baseline/summary.json",
+      "summary_sha256": "7306e7b162bcaa6d371bee816135dcd63ede954cc321db20945391061d688d30"
+    },
+    {
+      "label": "direct-fields",
+      "exact_functions": 148,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 944,
+          "diff": 916,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMULU",
+          "size": 1024,
+          "diff": 915,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDL",
+          "size": 736,
+          "diff": 634,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 976,
+          "diff": 931,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 912,
+          "diff": 856,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 960,
+          "diff": 888,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACF",
+          "size": 1216,
+          "diff": 1187,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACU",
+          "size": 1136,
+          "diff": 1109,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1104,
+          "diff": 1053,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADM",
+          "size": 1120,
+          "diff": 1051,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1088,
+          "diff": 1033,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADH",
+          "size": 1200,
+          "diff": 1064,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "03a9b352332ef82eb6ef12a9063959a759367615ec64aa47959cf245a58afa9d",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/direct-fields/summary.json",
+      "summary_sha256": "a6c3204829e0c467fe889ce947d5423be62ccff3634e0ff91a42ce3cadc2f92d"
+    },
+    {
+      "label": "direct-vs",
+      "exact_functions": 148,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 928,
+          "diff": 875,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMULU",
+          "size": 1008,
+          "diff": 961,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDL",
+          "size": 736,
+          "diff": 691,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 960,
+          "diff": 881,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 896,
+          "diff": 817,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 960,
+          "diff": 876,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACF",
+          "size": 1200,
+          "diff": 1185,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACU",
+          "size": 1136,
+          "diff": 1121,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1104,
+          "diff": 829,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADM",
+          "size": 1136,
+          "diff": 920,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1088,
+          "diff": 817,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADH",
+          "size": 1200,
+          "diff": 1108,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "30b6b2359ea8b7c99c76bdcdcaf37165db5acea80bcd1d67d00b11e1a95dd674",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/direct-vs/summary.json",
+      "summary_sha256": "f5b69c95284c3a19b41cf22e750aa35e89eb16755e1ae9baf4ed32123d68bce5"
+    },
+    {
+      "label": "narrow-five",
+      "exact_functions": 153,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 928,
+          "diff": 0,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDL",
+          "size": 736,
+          "diff": 0,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 960,
+          "diff": 0,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 896,
+          "diff": 0,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 960,
+          "diff": 0,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "b1774a705cf7cc2b294773d5bba10e003650dfcd857efadc2ab995f87da44c29",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/narrow-five/summary.json",
+      "summary_sha256": "e82709267f46c10548c0f46a8819b2eb931a4a2f497ace8b4916b96d3cc1bb11"
+    },
+    {
+      "label": "order-element-vd-vs-vt",
+      "exact_functions": 153,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 928,
+          "diff": 0,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMULU",
+          "size": 1008,
+          "diff": 727,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDL",
+          "size": 736,
+          "diff": 0,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 960,
+          "diff": 0,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 896,
+          "diff": 0,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 960,
+          "diff": 0,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACF",
+          "size": 1232,
+          "diff": 824,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACU",
+          "size": 1136,
+          "diff": 768,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1104,
+          "diff": 842,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADM",
+          "size": 1120,
+          "diff": 836,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1088,
+          "diff": 830,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADH",
+          "size": 1200,
+          "diff": 891,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "9f1d7b127fb950fee620af1782f9ddbcd43c9ee552b8cafdd595b50dc4a31991",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/order-element-vd-vs-vt/summary.json",
+      "summary_sha256": "44b586ac48f4b47acc96d5d2279077b416d13058e67ba4cc975446ed8635d511"
+    },
+    {
+      "label": "order-element-vd-vt-vs",
+      "exact_functions": 153,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 928,
+          "diff": 0,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMULU",
+          "size": 1008,
+          "diff": 727,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDL",
+          "size": 736,
+          "diff": 0,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 960,
+          "diff": 0,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 896,
+          "diff": 0,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 960,
+          "diff": 0,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACF",
+          "size": 1232,
+          "diff": 826,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACU",
+          "size": 1136,
+          "diff": 770,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1104,
+          "diff": 843,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADM",
+          "size": 1120,
+          "diff": 936,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1088,
+          "diff": 831,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADH",
+          "size": 1200,
+          "diff": 1159,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "424507482fdbc3d6d093ad404447eeda72fbf4c303166b0b735924f4e259d3bc",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/order-element-vd-vt-vs/summary.json",
+      "summary_sha256": "3f22343f16998d197e91eb52321c8d6d1a7612675f78daf64578cb4382ea471e"
+    },
+    {
+      "label": "order-element-vs-vd-vt",
+      "exact_functions": 148,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 928,
+          "diff": 38,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMULU",
+          "size": 1008,
+          "diff": 765,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDL",
+          "size": 736,
+          "diff": 38,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 960,
+          "diff": 38,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 896,
+          "diff": 38,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 960,
+          "diff": 38,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACF",
+          "size": 1232,
+          "diff": 853,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACU",
+          "size": 1136,
+          "diff": 797,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1104,
+          "diff": 833,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADM",
+          "size": 1136,
+          "diff": 830,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1088,
+          "diff": 821,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADH",
+          "size": 1200,
+          "diff": 931,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "da320c7c62955891ce2d622de44f7355fc412349fc2c8ec117270baaada4984e",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/order-element-vs-vd-vt/summary.json",
+      "summary_sha256": "ab27600ccd219dac1e7aa63e131398ad3862959b9a864df98cb95b5423b29edd"
+    },
+    {
+      "label": "order-element-vs-vt-vd",
+      "exact_functions": 148,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 928,
+          "diff": 38,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMULU",
+          "size": 1008,
+          "diff": 765,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDL",
+          "size": 736,
+          "diff": 38,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 960,
+          "diff": 38,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 896,
+          "diff": 38,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 960,
+          "diff": 38,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACF",
+          "size": 1232,
+          "diff": 853,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACU",
+          "size": 1136,
+          "diff": 797,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1104,
+          "diff": 833,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADM",
+          "size": 1136,
+          "diff": 923,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1088,
+          "diff": 821,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADH",
+          "size": 1200,
+          "diff": 1160,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "60b4b1feb16e5b713a7adbfd2abcfe6e36ccb891c6e6ba75341372b47f6aab14",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/order-element-vs-vt-vd/summary.json",
+      "summary_sha256": "6d76bb29e2aab2cadd0940c4b14adfe423957af0319e1867e75e291d06a710ce"
+    },
+    {
+      "label": "order-element-vt-vd-vs",
+      "exact_functions": 148,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 928,
+          "diff": 856,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMULU",
+          "size": 1008,
+          "diff": 946,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDL",
+          "size": 736,
+          "diff": 690,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 960,
+          "diff": 864,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 896,
+          "diff": 816,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 960,
+          "diff": 859,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACF",
+          "size": 1232,
+          "diff": 1130,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACU",
+          "size": 1152,
+          "diff": 854,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1120,
+          "diff": 824,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADM",
+          "size": 1120,
+          "diff": 933,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1088,
+          "diff": 819,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADH",
+          "size": 1200,
+          "diff": 1156,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "1a3ae865ce9f98f08019bfb977191a4592fdb668ec090c7bd7dc61f041d541b1",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/order-element-vt-vd-vs/summary.json",
+      "summary_sha256": "fadc0e8e27fdc96e070bb5d2527137301a92a5014e3c64d3e3253eaec0acb413"
+    },
+    {
+      "label": "order-element-vt-vs-vd",
+      "exact_functions": 148,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 928,
+          "diff": 857,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMULU",
+          "size": 1008,
+          "diff": 947,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDL",
+          "size": 736,
+          "diff": 691,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 960,
+          "diff": 865,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 896,
+          "diff": 817,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 960,
+          "diff": 860,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACF",
+          "size": 1232,
+          "diff": 1126,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACU",
+          "size": 1152,
+          "diff": 850,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1120,
+          "diff": 823,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADM",
+          "size": 1136,
+          "diff": 920,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1088,
+          "diff": 818,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADH",
+          "size": 1200,
+          "diff": 1156,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "a3eb3ee64e6f9c1e8f63ecc75742c6caec88f50f21ce88f88fac3a856cc037da",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/order-element-vt-vs-vd/summary.json",
+      "summary_sha256": "5dd2e908635ced40788c68ef141695ea1541d712c1ffae18f59b3b046ce36921"
+    },
+    {
+      "label": "order-vd-element-vs-vt",
+      "exact_functions": 148,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 928,
+          "diff": 906,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMULU",
+          "size": 1008,
+          "diff": 830,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDL",
+          "size": 736,
+          "diff": 719,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 960,
+          "diff": 928,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 912,
+          "diff": 883,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 960,
+          "diff": 921,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACF",
+          "size": 1232,
+          "diff": 824,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACU",
+          "size": 1136,
+          "diff": 768,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1104,
+          "diff": 847,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADM",
+          "size": 1120,
+          "diff": 909,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1088,
+          "diff": 835,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADH",
+          "size": 1200,
+          "diff": 964,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "688c34ea6778e821572bcda515d20f0ad3aecdbc91647fe03eb5a84f3590ba04",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/order-vd-element-vs-vt/summary.json",
+      "summary_sha256": "eb495c524595294e793a0a7f1283bb0c76cae23622b7c9537cea0461c49613f0"
+    },
+    {
+      "label": "order-vd-element-vt-vs",
+      "exact_functions": 148,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 928,
+          "diff": 906,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMULU",
+          "size": 1008,
+          "diff": 830,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDL",
+          "size": 736,
+          "diff": 719,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 960,
+          "diff": 928,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 912,
+          "diff": 883,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 960,
+          "diff": 921,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACF",
+          "size": 1232,
+          "diff": 826,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACU",
+          "size": 1136,
+          "diff": 770,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1104,
+          "diff": 847,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADM",
+          "size": 1120,
+          "diff": 1098,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1088,
+          "diff": 835,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADH",
+          "size": 1200,
+          "diff": 1118,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "25c2c8f3ad424f3edbf32b34a3eebfd4db4bafd24af23f8379ce5f659c08c37b",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/order-vd-element-vt-vs/summary.json",
+      "summary_sha256": "1c83cb29961eab8d6f7adb7c8db30d86ce8c489b1f36fdd7a14d84394ef7d9b5"
+    },
+    {
+      "label": "order-vd-vs-element-vt",
+      "exact_functions": 148,
+      "changed": [
+        {
+          "name": "RSP_VMULU",
+          "size": 1024,
+          "diff": 977,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACF",
+          "size": 1216,
+          "diff": 1098,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACU",
+          "size": 1136,
+          "diff": 1037,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1104,
+          "diff": 843,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1088,
+          "diff": 831,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADH",
+          "size": 1184,
+          "diff": 1084,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "bac889664cd9f7ffade8824068ec77c3c977f04b6f625df56d6a6e5dc1cd8280",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/order-vd-vs-element-vt/summary.json",
+      "summary_sha256": "455c737d1fdd30a89d47ffff3f2b19c1eac4ddfdfe0e47dbe673a5b1e4263fcd"
+    },
+    {
+      "label": "order-vd-vt-vs-element",
+      "exact_functions": 148,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 928,
+          "diff": 876,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMULU",
+          "size": 1024,
+          "diff": 978,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDL",
+          "size": 736,
+          "diff": 690,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 960,
+          "diff": 898,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 912,
+          "diff": 854,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 960,
+          "diff": 891,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACF",
+          "size": 1216,
+          "diff": 1064,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACU",
+          "size": 1136,
+          "diff": 1004,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1104,
+          "diff": 847,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADM",
+          "size": 1120,
+          "diff": 1099,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1088,
+          "diff": 835,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADH",
+          "size": 1184,
+          "diff": 1165,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "67dac6502fe23c21e753131c61a3c7b314179c82beb05917e132534251b78e58",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/order-vd-vt-vs-element/summary.json",
+      "summary_sha256": "ff5fbcb6e09aeef963434c93ae1a936dd7bb2ac2948c7da3b65b54ce6bc9662d"
+    },
+    {
+      "label": "order-vs-element-vd-vt",
+      "exact_functions": 148,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 928,
+          "diff": 907,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMULU",
+          "size": 1008,
+          "diff": 831,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDL",
+          "size": 736,
+          "diff": 719,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 960,
+          "diff": 929,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 912,
+          "diff": 883,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 960,
+          "diff": 922,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACF",
+          "size": 1232,
+          "diff": 852,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACU",
+          "size": 1136,
+          "diff": 796,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1104,
+          "diff": 847,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADM",
+          "size": 1136,
+          "diff": 897,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1088,
+          "diff": 835,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADH",
+          "size": 1200,
+          "diff": 998,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "447bfd42b7f05fa0735a2a3ff35b85ab7461a8e13bfce40027d88c262102af2f",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/order-vs-element-vd-vt/summary.json",
+      "summary_sha256": "f71065c721c9b947ec67b7c3e46dd3b42bf7983666d60043f83e0ec6ec2daf7d"
+    },
+    {
+      "label": "order-vs-element-vt-vd",
+      "exact_functions": 148,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 928,
+          "diff": 907,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMULU",
+          "size": 1008,
+          "diff": 831,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDL",
+          "size": 736,
+          "diff": 719,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 960,
+          "diff": 929,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 912,
+          "diff": 883,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 960,
+          "diff": 922,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACF",
+          "size": 1232,
+          "diff": 852,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACU",
+          "size": 1136,
+          "diff": 796,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1104,
+          "diff": 847,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADM",
+          "size": 1120,
+          "diff": 1089,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1088,
+          "diff": 835,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADH",
+          "size": 1200,
+          "diff": 1120,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "8198edc78949c2f99b1884bb59ff6043929905120effa136e4dc99e08c398126",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/order-vs-element-vt-vd/summary.json",
+      "summary_sha256": "248aa59d21f1eca7ae748a70076ef0830894e168e14ab3c57e68386faf46f47b"
+    },
+    {
+      "label": "order-vs-vd-element-vt",
+      "exact_functions": 148,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 928,
+          "diff": 44,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMULU",
+          "size": 1024,
+          "diff": 976,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDL",
+          "size": 736,
+          "diff": 44,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 960,
+          "diff": 44,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 896,
+          "diff": 44,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 960,
+          "diff": 44,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACF",
+          "size": 1216,
+          "diff": 1098,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACU",
+          "size": 1136,
+          "diff": 1037,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1104,
+          "diff": 834,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADM",
+          "size": 1120,
+          "diff": 1091,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1088,
+          "diff": 822,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADH",
+          "size": 1184,
+          "diff": 1091,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "26b89dde9bd0ef273552052b951a5f18cb27789d76f03b4b85c7ddad3dc10516",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/order-vs-vd-element-vt/summary.json",
+      "summary_sha256": "32a6f439a678ac5ceb96435533c142de1328eb1c2080050aedd0dbf2667db97a"
+    },
+    {
+      "label": "order-vs-vd-vt-element",
+      "exact_functions": 148,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 928,
+          "diff": 44,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMULU",
+          "size": 1008,
+          "diff": 820,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDL",
+          "size": 736,
+          "diff": 44,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 960,
+          "diff": 44,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 896,
+          "diff": 44,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 960,
+          "diff": 44,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACF",
+          "size": 1216,
+          "diff": 1190,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACU",
+          "size": 1120,
+          "diff": 1107,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1104,
+          "diff": 840,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADM",
+          "size": 1120,
+          "diff": 1091,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1088,
+          "diff": 828,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADH",
+          "size": 1168,
+          "diff": 1176,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "1b93e803288603cb2a5190748b382e382f9ccb459f5e7ec4ffcb5d10d9ff0d56",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/order-vs-vd-vt-element/summary.json",
+      "summary_sha256": "d8f06501cd99506990906f4906c7792f5a16d05345f1153d83e2d5aa522fa122"
+    },
+    {
+      "label": "order-vs-vt-element-vd",
+      "exact_functions": 148,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 928,
+          "diff": 907,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMULU",
+          "size": 1008,
+          "diff": 831,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDL",
+          "size": 736,
+          "diff": 719,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 960,
+          "diff": 929,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 912,
+          "diff": 883,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 960,
+          "diff": 922,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACF",
+          "size": 1232,
+          "diff": 852,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACU",
+          "size": 1136,
+          "diff": 796,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1104,
+          "diff": 847,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADM",
+          "size": 1120,
+          "diff": 1089,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1088,
+          "diff": 835,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADH",
+          "size": 1200,
+          "diff": 1120,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "088f4a652d0ffe62e1199908b6a97e2744336a8bbf37e62dbaf71f177fccde0b",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/order-vs-vt-element-vd/summary.json",
+      "summary_sha256": "ed7cfcb3b7d07bf652de5a097fd5a1aa65a9932f793e06d91f92b6177464a55d"
+    },
+    {
+      "label": "order-vt-element-vd-vs",
+      "exact_functions": 148,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 928,
+          "diff": 856,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMULU",
+          "size": 1008,
+          "diff": 946,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDL",
+          "size": 736,
+          "diff": 690,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 960,
+          "diff": 864,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 896,
+          "diff": 816,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 960,
+          "diff": 859,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACF",
+          "size": 1232,
+          "diff": 1136,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACU",
+          "size": 1152,
+          "diff": 860,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1120,
+          "diff": 826,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADM",
+          "size": 1120,
+          "diff": 902,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1088,
+          "diff": 821,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADH",
+          "size": 1200,
+          "diff": 958,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "65aba001d92c697fd0358f2b08c3e642eeef22b17d37158722c9f87e7bb22eb4",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/order-vt-element-vd-vs/summary.json",
+      "summary_sha256": "e8902aa317a7202b87f27792d0420f110541e73287c67eb725944c29cfc0002a"
+    },
+    {
+      "label": "order-vt-element-vs-vd",
+      "exact_functions": 148,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 928,
+          "diff": 857,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMULU",
+          "size": 1008,
+          "diff": 947,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDL",
+          "size": 736,
+          "diff": 691,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 960,
+          "diff": 865,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 896,
+          "diff": 817,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 960,
+          "diff": 860,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACF",
+          "size": 1232,
+          "diff": 1136,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACU",
+          "size": 1152,
+          "diff": 860,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1120,
+          "diff": 824,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADM",
+          "size": 1136,
+          "diff": 891,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1088,
+          "diff": 819,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADH",
+          "size": 1200,
+          "diff": 993,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "16ad8dc2dcbce6a28d8f572979063e42f595b404def2cc9bc0c99b16f9f34f8c",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/order-vt-element-vs-vd/summary.json",
+      "summary_sha256": "58690137deee08f0af619bdcb75746d0cc3a38e5414269669d4e1609335791e4"
+    },
+    {
+      "label": "order-vt-vd-element-vs",
+      "exact_functions": 148,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 928,
+          "diff": 872,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMULU",
+          "size": 1008,
+          "diff": 946,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDL",
+          "size": 736,
+          "diff": 704,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 960,
+          "diff": 880,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 912,
+          "diff": 845,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 960,
+          "diff": 875,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACF",
+          "size": 1232,
+          "diff": 1136,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACU",
+          "size": 1152,
+          "diff": 860,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1120,
+          "diff": 822,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADM",
+          "size": 1120,
+          "diff": 919,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1088,
+          "diff": 817,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADH",
+          "size": 1200,
+          "diff": 973,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "72fb377526f072ea3c936b55301609b13b394e82744255ea8874075f5e27a2db",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/order-vt-vd-element-vs/summary.json",
+      "summary_sha256": "effd43084c97c33c1492e6e55179d5924e9e103fe987dbe579f7f574ed7b90cf"
+    },
+    {
+      "label": "order-vt-vd-vs-element",
+      "exact_functions": 148,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 928,
+          "diff": 874,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMULU",
+          "size": 1024,
+          "diff": 973,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDL",
+          "size": 736,
+          "diff": 697,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 960,
+          "diff": 895,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 896,
+          "diff": 853,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 960,
+          "diff": 887,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACF",
+          "size": 1216,
+          "diff": 1072,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACU",
+          "size": 1136,
+          "diff": 1011,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1120,
+          "diff": 824,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADM",
+          "size": 1120,
+          "diff": 1115,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1088,
+          "diff": 819,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADH",
+          "size": 1184,
+          "diff": 1099,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "a47b7df078b13eb795576f3507b8b3236d7412e54a35c477fdf228f1ef281bd3",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/order-vt-vd-vs-element/summary.json",
+      "summary_sha256": "414859733b8a13787dd2eff8dba65e8e7ee0591a2964ac8434c99043cdc4354e"
+    },
+    {
+      "label": "order-vt-vs-element-vd",
+      "exact_functions": 148,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 928,
+          "diff": 866,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMULU",
+          "size": 1008,
+          "diff": 940,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDL",
+          "size": 736,
+          "diff": 692,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 960,
+          "diff": 874,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 912,
+          "diff": 833,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 960,
+          "diff": 869,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACF",
+          "size": 1232,
+          "diff": 1136,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACU",
+          "size": 1152,
+          "diff": 860,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1120,
+          "diff": 822,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADM",
+          "size": 1136,
+          "diff": 907,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1088,
+          "diff": 817,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADH",
+          "size": 1200,
+          "diff": 1007,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "b2bd6f372512787c5a0de478efed575e37f938113fe8d8d4d915a82b5db2579a",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/order-vt-vs-element-vd/summary.json",
+      "summary_sha256": "dd134bf3c64b08e29e8646fbafea931d14eef57be709ac9e0c40a7f54529daaa"
+    },
+    {
+      "label": "order-vt-vs-vd-element",
+      "exact_functions": 148,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 928,
+          "diff": 878,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMULU",
+          "size": 1024,
+          "diff": 972,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDL",
+          "size": 736,
+          "diff": 701,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 960,
+          "diff": 899,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 896,
+          "diff": 857,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 960,
+          "diff": 891,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACF",
+          "size": 1216,
+          "diff": 1077,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACU",
+          "size": 1136,
+          "diff": 1016,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1120,
+          "diff": 821,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADM",
+          "size": 1120,
+          "diff": 1112,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1088,
+          "diff": 816,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADH",
+          "size": 1184,
+          "diff": 1106,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "5207f152d9b66bdc7a01fd4c7c7f5358785adfd18ae33df11c20cb23b33502ec",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/order-vt-vs-vd-element/summary.json",
+      "summary_sha256": "f7535bed2fc7d5cb103b8ccf05092bbf2469d988fc0b8b8df2d1b53422e12cd8"
+    },
+    {
+      "label": "partial-cache-after",
+      "exact_functions": 148,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 928,
+          "diff": 454,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMULU",
+          "size": 1008,
+          "diff": 776,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 960,
+          "diff": 913,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 912,
+          "diff": 867,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 960,
+          "diff": 906,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1104,
+          "diff": 1063,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1072,
+          "diff": 1049,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "4a16cbacf383188fecf7b133bfdadd53032ef06a5af04af2fa0ff0dcb61e2897",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/partial-cache-after/summary.json",
+      "summary_sha256": "7e32312129aaf10125d3045ec7ecfd208d2da837918bcd55b1d129235ae91b2a"
+    },
+    {
+      "label": "partial-cache-before",
+      "exact_functions": 148,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 928,
+          "diff": 454,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMULU",
+          "size": 1008,
+          "diff": 776,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 960,
+          "diff": 913,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 912,
+          "diff": 867,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 960,
+          "diff": 906,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACF",
+          "size": 1216,
+          "diff": 1108,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACU",
+          "size": 1136,
+          "diff": 1047,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1104,
+          "diff": 840,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1088,
+          "diff": 828,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADH",
+          "size": 1184,
+          "diff": 1176,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "aea3853920c2131f8b7aa69cfacfb854e8a91cff21d90e5055af55259731a003",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/partial-cache-before/summary.json",
+      "summary_sha256": "02a9b84f16fc2490caebd21fe007b9c9e1ecd4cc7193acc2d1763f053137204d"
+    },
+    {
+      "label": "signed-indices",
+      "exact_functions": 148,
+      "changed": [],
+      "source_sha256": "23118c0495f4c1feebac9236531e9f92520a477e330c0562058bdf8d356abb66",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/signed-indices/summary.json",
+      "summary_sha256": "54dc1d69e98a452552160c9b2a35f21b6a376b971e0db78b692380ce821452cd"
+    },
+    {
+      "label": "signed-vs",
+      "exact_functions": 148,
+      "changed": [],
+      "source_sha256": "15844a18518fe5e095f8b9d19639a804b38431c33f8fdf70ececef434455ea50",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/signed-vs/summary.json",
+      "summary_sha256": "dd66da35d044ef115f9fbf61a1255580466b0a088b82309d128cdc29cb4d0f10"
+    },
+    {
+      "label": "source-pointer",
+      "exact_functions": 148,
+      "changed": [
+        {
+          "name": "RSP_VMULF",
+          "size": 944,
+          "diff": 904,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMULU",
+          "size": 1008,
+          "diff": 968,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDL",
+          "size": 736,
+          "diff": 700,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDM",
+          "size": 976,
+          "diff": 955,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDN",
+          "size": 912,
+          "diff": 874,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMUDH",
+          "size": 976,
+          "diff": 957,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACF",
+          "size": 1216,
+          "diff": 1110,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMACU",
+          "size": 1136,
+          "diff": 1041,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADL",
+          "size": 1104,
+          "diff": 909,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADM",
+          "size": 1120,
+          "diff": 1077,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADN",
+          "size": 1088,
+          "diff": 889,
+          "was_exact": false
+        },
+        {
+          "name": "RSP_VMADH",
+          "size": 1200,
+          "diff": 1136,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "5c41ccbb442a850194bc4fbc1e02738b16db52a88a2b3cffd87bfb397d2ecc8c",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/source-pointer/summary.json",
+      "summary_sha256": "c2acb58d2a27da51e2757e897d85a1b8bbf8192350b0b797f08b9d0ae39caa25"
+    },
+    {
+      "label": "top-declarations",
+      "exact_functions": 148,
+      "changed": [],
+      "source_sha256": "9e4970294845ae936b321714c3cc29bca55ee09be626bf690745eace8384eeab",
+      "summary": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/top-declarations/summary.json",
+      "summary_sha256": "5ca39a91c1f1705c5631f67e588c7247ce3293f37f69c87470ba30fa57601918"
+    }
+  ],
+  "limits": [
+    "27 RSP bodies remain incomplete. This report does not claim complete DLL equality.",
+    "No new behavior cases were needed for this declaration-only change: complete native bytes and all materialized address operands of the five changed handlers now match; all other bodies are unchanged.",
+    "The 25 current typed-object checks follow the SP register-bank consolidation; older reports counted five bank scalars separately, for29objects."
+  ]
+}

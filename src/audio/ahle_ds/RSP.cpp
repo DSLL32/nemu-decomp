@@ -1166,8 +1166,8 @@ void RSP_STV()
 void RSP_VMULF()
 {
     PC += 4;
-    CpuU32 vd = Instruction.sa, vs = Instruction.rd, vt = Instruction.rt;
     CpuU32 element = Instruction.rs & 15;
+    CpuU32 vd = Instruction.sa, vs = Instruction.rd, vt = Instruction.rt;
     for (int i = 0; i < 8; i++)
     {
         CpuU32 lane;
@@ -1225,8 +1225,8 @@ void RSP_VMULQ()
 void RSP_VMUDL()
 {
     PC += 4;
-    CpuU32 vd = Instruction.sa, vs = Instruction.rd, vt = Instruction.rt;
     CpuU32 element = Instruction.rs & 15;
+    CpuU32 vd = Instruction.sa, vs = Instruction.rd, vt = Instruction.rt;
     for (int i = 0; i < 8; i++)
     {
         CpuU32 lane;
@@ -1244,8 +1244,8 @@ void RSP_VMUDL()
 void RSP_VMUDM()
 {
     PC += 4;
-    CpuU32 vd = Instruction.sa, vs = Instruction.rd, vt = Instruction.rt;
     CpuU32 element = Instruction.rs & 15;
+    CpuU32 vd = Instruction.sa, vs = Instruction.rd, vt = Instruction.rt;
     for (int i = 0; i < 8; i++)
     {
         CpuU32 lane;
@@ -1266,8 +1266,8 @@ void RSP_VMUDM()
 void RSP_VMUDN()
 {
     PC += 4;
-    CpuU32 vd = Instruction.sa, vs = Instruction.rd, vt = Instruction.rt;
     CpuU32 element = Instruction.rs & 15;
+    CpuU32 vd = Instruction.sa, vs = Instruction.rd, vt = Instruction.rt;
     for (int i = 0; i < 8; i++)
     {
         CpuU32 lane;
@@ -1288,8 +1288,8 @@ void RSP_VMUDN()
 void RSP_VMUDH()
 {
     PC += 4;
-    CpuU32 vd = Instruction.sa, vs = Instruction.rd, vt = Instruction.rt;
     CpuU32 element = Instruction.rs & 15;
+    CpuU32 vd = Instruction.sa, vs = Instruction.rd, vt = Instruction.rt;
     for (int i = 0; i < 8; i++)
     {
         CpuU32 lane;
