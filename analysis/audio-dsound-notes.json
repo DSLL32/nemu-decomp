@@ -45,7 +45,7 @@
   },
   "layout_limits": [
     "All globals identified solely from observed operands remain explicitly tagged observed_operand_inference in the address map.",
-    "AudioIniSection is provisionally 128 bytes at 0x1016c240; its full original extent is unproved. A 256-byte declaration would overlap separately identified AudioUCode at 0x1016c300.",
+    "AudioIniSection is 64 bytes at 0x1016c240, inferred from the interval before independently identified SeenCommands[32] at 0x1016c280. Historical 2001 capacity may have been 32; exact 2003 capacity is not uniquely recovered.",
     "Initialized AudioDescription and AudioCredits pointers require integrated linker relocation/layout checks.",
     "Literal strings with multiple full or suffix occurrences remain unresolved when not independently attributable.",
     "Common zero initialization does not prove original symbol dimensions or a unique address."
@@ -94,5 +94,6 @@
     "independent_provenance": "Tracked136-byte oldnames member has comp.id002723ca and SEARCH_ALIAS fallback to __itoa; full member/library hashes and original CRT body attribution are recorded in audio-dsound-addresses.json.",
     "whole_link_evidence": "/root/.ai-tmp/nemu-audio-recovery/link-storage.i405gw6a/report.json",
     "whole_link_finding": "Together with the integration-owned VC6 dsound.lib selection, the ordinary source spelling reproduces the original ordered Rich records/counts and CRT order. No additional executable alias body or metadata patch is introduced."
-  }
+  },
+  "historical_host_evidence": "See analysis/audio-dsound-history.json. Both 2001 and 2003 reserve an 8192-byte interval for AudioErrorText. Earlier native code already has the unresolved AudioError stack reload and AllocateSoundBuffer immediate-zero stores; 44 unreferenced state bytes persist without new semantic identity."
 }

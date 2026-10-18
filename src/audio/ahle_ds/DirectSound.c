@@ -29,7 +29,8 @@ DWORD AudioClock = 48681812; /* 100393bc */
 int AudioInitialValue1 = 1; /* 100393c0 */
 int IsNTSC; /* 1016c0e8 */
 char AudioAboutText[256]; /* 1016bfe0 */
-char AudioErrorText[256]; /* 10169560 */
+/* Both 2001 and 2003 builds reserve an 8192-byte interval for this buffer. */
+char AudioErrorText[8192]; /* 10169560; capacity inferred from adjacent objects */
 BYTE *QueuedBlocks[300]; /* 1016bb00 */
 int QueuedBlockReady[300]; /* 1016b580 */
 DWORD QueuedBlockLength[300]; /* 10169060 */
@@ -496,7 +497,8 @@ BOOL WriteIniInt(char *section, char *key, int value, char *file)
     return WritePrivateProfileString(section, key, text, file);
 }
 char AudioIniFile[MAX_PATH];
-char AudioIniSection[128];
+/* 64-byte interval before SeenCommands; exact original capacity is inferred. */
+char AudioIniSection[64];
 char AudioIniKey[32];
 /* 10004bf0–10004db0 */
 void ReadAudioSettings(void)

@@ -1,0 +1,182 @@
+{
+  "scope": "Historical native host-family evidence; no claim of historical source recovery or whole 2003 DLL equality.",
+  "original_2003_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "historical_artifact": {
+    "archive_url": "https://www.zophar.net/download_file/1888",
+    "archive_sha256": "e9822d8877b9ea475b9f2b6676340de49c34c3045ff3d9916b6b63784a9c9a9c",
+    "dll_path": "/root/.ai-tmp/audio-host-history.jg5ustfl/AUDIO.DLL",
+    "dll_sha256": "4e7953e5a4de38c2aaa5be4ef34b644f6af3f2d39a40ff0365a380abc2757ca8",
+    "dll_bytes": 98304,
+    "linker": "6.0",
+    "timestamp_utc": "2001-03-16T05:02:51Z",
+    "readme_sha256": "708ad1522dc0343bbb240a4efc2f579c8c7bcb72885a0f5262d42e98c470268a",
+    "readme_identity": "LaC-authored Nemu64 Audio.dll 2.0 beta prerelease. Describes the transition from WaveOut to DirectSound, prebuffer fixes and new synchronization/configuration options."
+  },
+  "routine_counterparts": [
+    {
+      "name": "AudioError",
+      "historical_start": "0x10003380",
+      "historical_end": "0x100035f0",
+      "historical_complete_aligned_bytes": 624,
+      "current_original_start": "0x10003c40",
+      "evidence": "Same initial optional message, 15 DirectSound HRESULT cases, error-name strings and unknown-code formatting. Historical default at 0x1000354a reloads the first argument from [esp+0x18] after sprintf, as does the 2003 target at 0x10003e18."
+    },
+    {
+      "name": "AllocateSoundBuffer",
+      "historical_start": "0x10003f70",
+      "historical_end": "0x10003fd0",
+      "historical_complete_aligned_bytes": 96,
+      "current_original_start": "0x10004380",
+      "evidence": "Same malloc size, half-buffer position, three zero state stores and inline memset. Historical stores at 0x10003f94, 0x10003fa3 and 0x10003fb2 use immediate zero before XOR EAX and REP STOS, matching the source mechanism still unresolved in 2003."
+    },
+    {
+      "name": "SubmitAudio",
+      "historical_start": "0x10004200",
+      "historical_end": "0x10004500",
+      "historical_complete_aligned_bytes": 768,
+      "current_original_start": "0x10005010",
+      "evidence": "Same pending-block threshold, circular buffer cursors, waiting loop, locking/copy/unlock and reset state. The historical version lacks the later QPC duration calculation, scroll-lock toggle and underrun branch, so it does not directly explain the 2003 retained local cursor load."
+    }
+  ],
+  "capacity_evidence": {
+    "AudioErrorText": {
+      "historical_buffer": "0x101105a0",
+      "historical_next_identified_object": "SoundBuffer at0x101125a0",
+      "historical_interval_bytes": 8192,
+      "historical_buffer_references": [
+        "0x10003541",
+        "0x1000355a"
+      ],
+      "historical_next_object_references": [
+        "0x100036f3",
+        "0x10003770",
+        "0x10003812",
+        "0x10003849",
+        "0x10003951",
+        "0x100039cd",
+        "0x100039fb",
+        "0x10003c32",
+        "0x10004061",
+        "0x100040e3",
+        "0x10004111",
+        "0x10004131",
+        "0x1000419e",
+        "0x100041cb",
+        "0x100042f9",
+        "0x10004304",
+        "0x1000431f",
+        "0x1000432b",
+        "0x10004382",
+        "0x10004418",
+        "0x100044b0",
+        "0x10004513"
+      ],
+      "historical_interior_HIGHLOW_targets": [],
+      "current_original_buffer": "0x10169560",
+      "current_original_next_identified_object": "CPURegisters at0x1016b560",
+      "current_original_interval_bytes": 8192,
+      "adopted_capacity": 8192,
+      "interpretation": "The repeated natural 8192-byte interval in two independently laid-out versions corroborates this buffer capacity. Exact C bounds within linker alignment are not uniquely recoverable."
+    },
+    "AudioIniSection": {
+      "historical_buffer": "0x10112f80",
+      "historical_next_identified_object": "QueueRead at0x10112fa0",
+      "historical_interval_bytes": 32,
+      "historical_references": [
+        "0x10004d8f",
+        "0x10004dc5",
+        "0x10004def",
+        "0x10004e19",
+        "0x10004e43",
+        "0x10004e6d",
+        "0x10004e97",
+        "0x10004ec1",
+        "0x1000531d",
+        "0x10005359",
+        "0x10005396",
+        "0x100053d3",
+        "0x1000541b",
+        "0x10005458",
+        "0x10005495",
+        "0x100054ea"
+      ],
+      "historical_interior_HIGHLOW_targets": [],
+      "current_original_buffer": "0x1016c240",
+      "current_original_next_identified_object": "SeenCommands[32] at0x1016c280",
+      "current_original_interval_bytes": 64,
+      "adopted_capacity": 64,
+      "interpretation": "The 2003 available interval is 64 bytes; the prior 128-byte declaration overlapped a separately identified object. The adopted 64-byte capacity is a boundary-based source inference. The 2001 interval suggests an earlier 32-byte capacity; neither the exact later capacity nor its evolution is uniquely proved."
+    }
+  },
+  "persistent_unreferenced_state_ranges": [
+    {
+      "historical_start": "0x1009bad0",
+      "current_original_start": "0x100e8eec",
+      "bytes": 4,
+      "historical_HIGHLOW_targets": []
+    },
+    {
+      "historical_start": "0x1009bafc",
+      "current_original_start": "0x100e8f24",
+      "bytes": 4,
+      "historical_HIGHLOW_targets": []
+    },
+    {
+      "historical_start": "0x1009bb10",
+      "current_original_start": "0x100e8f38",
+      "bytes": 8,
+      "historical_HIGHLOW_targets": []
+    },
+    {
+      "historical_start": "0x1009bb34",
+      "current_original_start": "0x100e8f60",
+      "bytes": 4,
+      "historical_HIGHLOW_targets": []
+    },
+    {
+      "historical_start": "0x1009bb5c",
+      "current_original_start": "0x100e8f88",
+      "bytes": 4,
+      "historical_HIGHLOW_targets": []
+    },
+    {
+      "historical_start": "0x1009bb64",
+      "current_original_start": "0x100e8f90",
+      "bytes": 12,
+      "historical_HIGHLOW_targets": []
+    },
+    {
+      "historical_start": "0x1009bb7c",
+      "current_original_start": "0x100e8fbc",
+      "bytes": 8,
+      "historical_HIGHLOW_targets": []
+    }
+  ],
+  "persistent_unreferenced_bytes": 44,
+  "state_findings": [
+    "Forty-four of the 48 unresolved internal 2003 state bytes align with untouched gaps among independently matched 2001 state consumers. The first four-byte gap after NTSCRates has no same-location historical counterpart.",
+    "The historical DLL reveals no reference or semantics for these 44 bytes. No gap-filling declarations or unsupported alignment attributes were introduced.",
+    "A four-byte interval after TimerActive also occurs before the old empty-string pool storage; this does not establish its original type or purpose."
+  ],
+  "frozen_disassembly": {
+    "/root/.ai-tmp/audio-dsound-history.lgz8m8yz/error-start.txt": "afed20ba5dc962e5311d85cd15069d5973cc1e7d0f0058f4c3dbe88e1dfe3e4e",
+    "/root/.ai-tmp/audio-dsound-history.lgz8m8yz/submit.txt": "4d0dc9ef639a772bf48e4119a00daa3482b34c6c2b42dfe395a7280b082f2d4e",
+    "/root/.ai-tmp/audio-dsound-history.lgz8m8yz/config.txt": "b6cc6d06d7713437858c95e41a4355a55e11b091f6ed2ac1c56c2701ccddf792",
+    "/root/.ai-tmp/audio-dsound-history.lgz8m8yz/old-references.json": "29d592d721f45455bd3208dbe20b1eb386fdacdb2cdfedafe38a69e35101a965"
+  },
+  "canonical_validation": {
+    "artifact": "/root/.ai-tmp/audio-dsound.6t4_1qa3/run.jjqtsdzw",
+    "source_sha256": {
+      "src/audio/ahle_ds/DirectSound.c": "54c293b50a6c2b0195bbc2312b8578fb1d48851d6c44f294ed46c8f522ea7895",
+      "src/audio/ahle_ds/AudioLog.c": "84a6f797caaf244d44300550ed13225276bf1c45bf6fb3193be9047dc01226f0",
+      "src/audio/ahle_ds/DirectSound.h": "ab5ed735f1ab52226c0c7e7a559d080e10ec5649d2814b177f1a79686135455b",
+      "src/audio/ahle_ds/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
+      "src/audio/ahle_ds/Audio.rc": "b551863a11341c7440df2425b5620cda11c9eaef312179e8dd925fd05b12bf93"
+    },
+    "complete_body_matches": 57,
+    "complete_body_total": 60,
+    "all_matching_body_relocation_targets_equal": true,
+    "initialized_contributions_equal": true,
+    "resources_equal": true
+  }
+}

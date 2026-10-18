@@ -484,19 +484,19 @@
       "base": "0x10169560",
       "next_referenced_object": "CPURegisters at0x1016b560",
       "available_bytes": 8192,
-      "current_declaration": 256,
+      "current_declaration": 8192,
       "all_HIGHLOW_references_in_interval": [
         "0x10003e0f",
         "0x10003e29"
       ],
       "interior_HIGHLOW_targets": [],
-      "status": "8192 is a natural boundary-constrained buffer-capacity inference, not uniquely proved by access width; frozen whole-layout test pending."
+      "status": "Promoted after an independent2001DLL repeats the8192-byte buffer interval; exact Cbound within common alignment remains inferred."
     },
     "AudioIniSection": {
       "base": "0x1016c240",
       "next_referenced_object": "SeenCommands[32] at0x1016c280 (last referenced element0x1016c2fc)",
       "available_bytes": 64,
-      "current_declaration": 128,
+      "current_declaration": 64,
       "all_HIGHLOW_references_in_interval": [
         "0x10004c5f",
         "0x10004c95",
@@ -515,7 +515,7 @@
         "0x10005d0f"
       ],
       "interior_HIGHLOW_targets": [],
-      "status": "Current128 overlaps independently identified SeenCommands. Natural64-byte capacity is inferred; exact original capacity below aligned allocation extent remains unproved."
+      "status": "Promoted as64-byte boundary-based capacity before SeenCommands. Historical2001interval is32bytes; exact2003capacity/evolution remain inferred."
     }
   },
   "original_HIGHLOW_reference_audit": [
@@ -1629,5 +1629,21 @@
     "No unreferenced state objects or padding declarations were invented to close the48-byte shortfall.",
     "Early strong BSS placement is independently constrained by surrounding original data, while the final linked base remains an integration check.",
     "Common-zero bytes do not establish original capacity or unique symbol identity."
-  ]
+  ],
+  "capacity_followup": {
+    "report": "analysis/audio-dsound-history.json",
+    "frozen_artifact": "/root/.ai-tmp/audio-dsound.6t4_1qa3/run.jjqtsdzw",
+    "source_sha256": {
+      "src/audio/ahle_ds/DirectSound.c": "54c293b50a6c2b0195bbc2312b8578fb1d48851d6c44f294ed46c8f522ea7895",
+      "src/audio/ahle_ds/AudioLog.c": "84a6f797caaf244d44300550ed13225276bf1c45bf6fb3193be9047dc01226f0",
+      "src/audio/ahle_ds/DirectSound.h": "ab5ed735f1ab52226c0c7e7a559d080e10ec5649d2814b177f1a79686135455b",
+      "src/audio/ahle_ds/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
+      "src/audio/ahle_ds/Audio.rc": "b551863a11341c7440df2425b5620cda11c9eaef312179e8dd925fd05b12bf93"
+    },
+    "adopted_inferred_capacities": {
+      "AudioErrorText": 8192,
+      "AudioIniSection": 64
+    },
+    "limit": "Capacities are boundary-based inferences;common-symbol order remains unresolved. Total virtual-size coincidence was not used as proof."
+  }
 }

@@ -1495,7 +1495,9 @@
       "name": "_AudioErrorText",
       "va": 269915488,
       "address_basis": "observed_operand_inference",
-      "source": "original instruction operands and reconstructed dataflow"
+      "source": "original instruction operands and reconstructed dataflow",
+      "inferred_capacity": 8192,
+      "extent_evidence": "2003 buffer10169560 precedes independently identified CPURegisters1016b560 by8192bytes. Historical2001 AudioError buffer101105a0 precedes independently identified SoundBuffer101125a0 by the same8192bytes. Neither interval contains other HIGHLOW targets; exact C capacity within common alignment is not uniquely proved."
     },
     {
       "name": "_DirectSoundReady",
@@ -1885,7 +1887,9 @@
       "name": "_AudioIniSection",
       "va": 269926976,
       "address_basis": "observed_operand_inference",
-      "source": "original instruction operands and reconstructed dataflow"
+      "source": "original instruction operands and reconstructed dataflow",
+      "inferred_capacity": 64,
+      "extent_evidence": "2003 section1016c240 precedes independently identified SeenCommands[32] at1016c280, allowing64bytes. Prior128overlapped that object. Historical2001 section10112f80 has only32bytes before QueueRead10112fa0; capacity may have evolved. Exact original capacity remains boundary-inferred, not uniquely recovered."
     },
     {
       "name": "_AudioIniKey",

@@ -22,7 +22,7 @@ extern int StereoReversed, Prebuffer, HighQuality, RecordABI;
 extern int RequestedBufferSize, SoundBufferSize, DirectHLEAudio, SyncAudio;
 extern DWORD SampleRate, PreviousSampleRate, AudioClock;
 extern FILE *HLEWaveFile, *AIWaveFile, *HLELogFile, *ABIFile;
-extern char AudioIniFile[MAX_PATH], AudioIniSection[128], AudioIniKey[32];
+extern char AudioIniFile[MAX_PATH], AudioIniSection[64], AudioIniKey[32];
 extern int DriverInfoVisible;
 extern char *AudioDescription, *AudioCredits;
 
