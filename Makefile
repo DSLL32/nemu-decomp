@@ -184,9 +184,9 @@ $(OUT)/Plugin/audio.dll: $(AUDIO_OBJS) $(WORK)/audio/Audio.res $(ROOT)/src/audio
 	    /def:src/audio/ahle_ds/audio.def $(patsubst $(ROOT)/%,%,$(AUDIO_OBJS)) obj/audio/Audio.res \
 	    toolchains/vc6/lib/dsound.lib winmm.lib kernel32.lib user32.lib gdi32.lib
 
-LEMD3D_UNITS := 3DFunctions blender combiner combtree Direct3d DListParser \
-                INIFile LemNemu prerender StdAfx
-LEMD3D_OBJS := $(addprefix $(WORK)/lemd3d/,$(addsuffix .obj,$(LEMD3D_UNITS) detect))
+LEMD3D_UNITS := 3DFunctions DListParser Direct3d INIFile LemNemu StdAfx \
+                blender combiner prerender
+LEMD3D_OBJS := $(addprefix $(WORK)/lemd3d/,$(addsuffix .obj,$(LEMD3D_UNITS) detect matrix-c matrix-asm math_lib))
 LEMD3D_HEADERS := $(wildcard $(ROOT)/src/lemd3d/*.h $(ROOT)/src/lemd3d/vendor/amd3d/*.h)
 LEMD3D_FLAGS := /nologo /c /O2 /Ob2 /MT /GX /W3 /DWIN32 /DNDEBUG /D_WINDOWS /D_MBCS \
                 /D_USRDLL /DLEMNEMU_EXPORTS /Isrc/lemd3d/vendor/amd3d \
@@ -202,6 +202,21 @@ $(WORK)/lemd3d/detect.obj: $(ROOT)/src/lemd3d/vendor/amd3d/detect.c $(LEMD3D_HEA
 	mkdir -p obj/lemd3d
 	$(call tool,vc7,cl) /nologo /c /O2 /Oy- /MT /Isrc/lemd3d/vendor/amd3d \
 	    /Foobj/lemd3d/detect.obj src/lemd3d/vendor/amd3d/detect.c
+
+$(WORK)/lemd3d/math_lib.obj: $(ROOT)/src/lemd3d/vendor/amd3d/math_lib.c $(BUILD_RECIPE)
+	@cd "$(ROOT)"
+	mkdir -p obj/lemd3d
+	$(call tool,vc7,cl) /nologo /c /O2 /MT /Foobj/lemd3d/math_lib.obj src/lemd3d/vendor/amd3d/math_lib.c
+
+$(WORK)/lemd3d/matrix-c.obj: $(ROOT)/src/lemd3d/vendor/amd3d/matrix.c $(BUILD_RECIPE)
+	@cd "$(ROOT)"
+	mkdir -p obj/lemd3d
+	$(call tool,vc7,cl) /nologo /c /O2 /MT /Foobj/lemd3d/matrix-c.obj src/lemd3d/vendor/amd3d/matrix.c
+
+$(WORK)/lemd3d/matrix-asm.obj: $(ROOT)/src/lemd3d/vendor/amd3d/matrix.asm $(BUILD_RECIPE)
+	@cd "$(ROOT)"
+	mkdir -p obj/lemd3d
+	$(call tool,vc7,ml) /nologo /c /coff /Foobj/lemd3d/matrix-asm.obj src/lemd3d/vendor/amd3d/matrix.asm
 
 $(WORK)/lemd3d/LemNemu.res: $(ROOT)/src/lemd3d/LemNemu.rc $(ROOT)/src/lemd3d/resource.h $(BUILD_RECIPE)
 	@cd "$(ROOT)"

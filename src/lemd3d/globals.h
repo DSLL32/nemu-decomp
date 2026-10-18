@@ -13,8 +13,10 @@ typedef signed char			S8;
 #include "dllinterface.h"
 #include "stdio.h"
 #include "amdlib.h"
+#define DOITALLAMD 1
+extern "C" void _D3DMul_4x4(D3DMATRIX &result, const D3DMATRIX &a, const D3DMATRIX &b);
+extern "C" void D3DMul_4x4(D3DMATRIX &result, const D3DMATRIX &a, const D3DMATRIX &b);
 #include "s2dex.h"
-#include "combtree.h"
 
 #define LOGGING 0
 #define LOGCOMMANS LOGGING
@@ -22,7 +24,7 @@ typedef signed char			S8;
 #define COMBINEDEBUGGER 1
 #define DoOwnGeometry 0
 #define STATS LOGGING
-#define PIXELSHADER 1
+#define PIXELSHADER 0
 
 // Change this to 256 for improved gfx and lower speed
 // 512 looks a bit better
@@ -543,10 +545,10 @@ typedef struct {
 	U32 masks;
 	U32 shifts;
 	// SetTileSize
-	float uls;
-	float ult;
-	float lrs;
-	float lrt;
+	U32 uls;
+	U32 ult;
+	U32 lrs;
+	U32 lrt;
 	// if uls>lrs
 	S32 Width, Height;
 	bool MirrorX;
@@ -584,15 +586,11 @@ typedef struct {
     };
 } TMatrix2D;
 
-typedef enum {
-	Full, Game, None
-} TViewportMode;
-
 typedef struct{
 	D3DVIEWPORT8 Viewport;
 	U32 ScaleX, ScaleY, ScaleZ;
 	U32 TranslateX, TranslateY, TranslateZ;
-	TViewportMode ViewportMode;
+	BOOL ViewportChanged;
 	U32 WindowWidth, WindowHeight;
 
 	D3DXMATRIX World[128];
@@ -751,12 +749,6 @@ typedef struct{
 
 	D3DRECT Scissor;
 
-	// Pixelshaders...
-	DWORD ps_highlight;    // constant color for debuggin
-	DWORD ps_diffuseonly;	// only difuse (mov r0,diffuse)
-	DWORD ps_textureonly;  // only texture (tex t0|mov r0, t0)
-	DWORD ps_texcoloronly; // only texture color opaque
-	DWORD ps_texalphaonly; // only texture alpha opaque
 } TState;
 
 typedef struct {
@@ -885,7 +877,6 @@ extern BOOL bCPUAMD;
 extern BOOL bCPUMMX;
 extern BOOL bCPU3DNOW;
 extern FILE *fVRML;
-extern U32 uVRMLFaceIndex;
 extern U32 puCullDone, puCullCalled;
 extern U32 uRenderWidth;
 extern U32 uRenderHeight;
@@ -1480,15 +1471,11 @@ typedef TTextureStage TTextureStages[8];
 typedef struct {
 	U32 Count;
 	struct {
-		// Both
-		D3DBLEND SrcBlend, DstBlend;
-
 		// Fixed Function Pipeline
 		TTextureStages Stages;
 		U32 TFactor;
+		D3DBLEND SrcBlend, DstBlend;
 
-		// Pixel Shaders
-		char strPixelShader[10000];
 	} Passes[MaxBlendPasses];
 } TBlendPasses;
 
@@ -1498,7 +1485,6 @@ extern TBlendPasses BlendPasses;
 extern bool bHighlighted;
 extern bool SecondTex[8];
 extern bool ChangeTextureCoordinates;
-extern bool UseTexture1, UseTexture2; // set by HandleTextures
 extern char DatFilename[_MAX_PATH];
 extern char IniFilename[_MAX_PATH];
 extern U32 Texture1, Texture2; // indices into texture array
@@ -1541,13 +1527,10 @@ typedef struct {
 	U32 Count;
 	struct {
 		U32 lo, hi, blendextras;
-		char pixelshader[300];
-		char tree[300];
-		DWORD pixelshaderhandle;
 		U32 Highlight;
 		U32 Age;
 		U32 EmulationMode;  // 0=hardcoded, 1=script exists, 2=universal combiner, 3=script with other blending, 4=pixelshader
-	} Modes[500];
+	} Modes[300];
 } TLoggedCombineModes, *PLoggedCombineModes;
 
 extern TLoggedCombineModes LoggedCombineModes;
@@ -1827,7 +1810,9 @@ static void BackgroundTexture(U32 uTexAddr,
 
 	if ((uTexCRC!=State.uLastTexCRC[bgCount]) || (Options.bDisableTextureCache)){
 		State.uLastTexCRC[bgCount] = uTexCRC;
+#line 1786 "d:\\meinsc\\lemd3d\\globals.h"
 		SafeDX(texBackground[bgCount]->GetSurfaceLevel(0, &D3DSurface0));
+#line 1787 "d:\\meinsc\\lemd3d\\globals.h"
 		SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 		ImgPtr = (U16*)Rect.pBits;
 		switch (size){
@@ -1869,16 +1854,19 @@ static void BackgroundTexture(U32 uTexAddr,
 			}
 			break;
 		}
+#line 1828 "d:\\meinsc\\lemd3d\\globals.h"
 		SafeDX(D3DSurface0->UnlockRect());
 		FreeObject(D3DSurface0);
 	}
 
 	State.ZBufferWrite = false;
+#line 1833 "d:\\meinsc\\lemd3d\\globals.h"
 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, State.ZBufferWrite));
 	SetViewport();
 	D3DXMATRIX Ortho;
 	
 	D3DXMatrixOrthoOffCenterRH(&Ortho, 0, 1, 0, 1, 0.0f, 1.0f);
+#line 1838 "d:\\meinsc\\lemd3d\\globals.h"
 	SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &Ortho));
 	State.ProjectionChanged = true;
 
@@ -1942,25 +1930,24 @@ static void BackgroundTexture(U32 uTexAddr,
 		ConfigureBlender2();
 	} else {
 		BlendPasses.Count = 1;
-		SafeDX(g_pd3dDevice->SetPixelShader(State.ps_textureonly));
-/*
 		BlendPasses.Passes[0].Stages[0].ColorOp, D3DTOP_SELECTARG1;
 		BlendPasses.Passes[0].Stages[0].ColorArg1 = D3DTA_TEXTURE;
 		BlendPasses.Passes[0].Stages[0].AlphaOp = D3DTOP_SELECTARG1;
 		BlendPasses.Passes[0].Stages[0].AlphaArg1 = D3DTA_TEXTURE;
-*/
+
 	}
 	BlendPasses.Passes[0].Stages[0].Texture = texBackground[bgCount];
 	BlendPasses.Passes[0].Stages[0].AddressU = D3DTADDRESS_WRAP;
 	BlendPasses.Passes[0].Stages[0].AddressV = D3DTADDRESS_WRAP;
-	UseTexture1=true;
-	UseTexture2=false;
  	D3DTNTVERTEX *locVertexBuffer;
+#line 1911 "d:\\meinsc\\lemd3d\\globals.h"
 	SafeDX(g_VertexBuffer->Lock(0, State.D3DVertexCacheIndex*sizeof(D3DTNTVERTEX), (BYTE**)&locVertexBuffer, 0));
 	memcpy(locVertexBuffer, State.D3DVertexCache, State.D3DVertexCacheIndex*sizeof(D3DTNTVERTEX));
+#line 1913 "d:\\meinsc\\lemd3d\\globals.h"
 	SafeDX(g_VertexBuffer->Unlock());
 	for (i=0;i<BlendPasses.Count;i++){
 		SetBlendPass(i);
+#line 1916 "d:\\meinsc\\lemd3d\\globals.h"
 		SafeDX(g_pd3dDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2));
 	}
 	State.D3DVertexCacheIndex=0;

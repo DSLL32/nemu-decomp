@@ -12,7 +12,6 @@ bool bFirstDisplayList;
 bool bDListFinished;
 U32 uMicroCodeID;
 U32 uBaseMicroCodeID;
-char msExcError[100];
 
 // Stack for embedded display lists
 TStack Stack[10];
@@ -23,10 +22,6 @@ U32 Segment[16];
 // Current DList Command/Opcode
 TCommand Command;
 
-void GBI_UNKNOWN()
-{
-	LogCommand("GBI_UNKNOWN, Command Index: 0x%X, raw data(hi:lo): 0x%X:0x%X\n", Command.general.command, Command.raw.hi, Command.raw.lo);
-}
 
 void GBI_TEXRECT()
 {
@@ -50,26 +45,15 @@ void GBI_TEXRECT()
 		y2++;
 	}
 	State.ZBufferWrite = false;
+#line 52 "DListParser.cpp"
 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, false));
 
-	if ((State.Viewport.X!=0) ||
-		(State.Viewport.Y!=0) ||
-		(State.Viewport.Width!=State.WindowWidth) ||
-		(State.Viewport.Height!=State.WindowHeight) ||
-		(State.Viewport.MinZ!=0.0f) ||
-		(State.Viewport.MaxZ!=1.0f)){
-		State.Viewport.X = 0;
-		State.Viewport.Y = 0;
-		State.Viewport.Width = State.WindowWidth;
-		State.Viewport.Height = State.WindowHeight;
-		State.Viewport.MinZ = 0.0f;
-		State.Viewport.MaxZ = 1.0f;
-		SafeDX(g_pd3dDevice->SetViewport(&State.Viewport));
-	}
+	SetViewport();
 
 	D3DXMATRIX Ortho;
 	
-	D3DXMatrixOrthoOffCenterRH(&Ortho, 0, (float)State.cimg.width, (float)GetHeight(State.cimg.width), 0, 0.0f, 1.0f);
+	D3DXMatrixOrthoOffCenterRH(&Ortho, 0, (float)State.cimg.width, ((float)State.cimg.width*0.75f), 0, 0.0f, 1.0f);
+#line 57 "DListParser.cpp"
 	SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &Ortho));
 	State.ProjectionChanged = true;
 	float s, t, dsdx, dtdy;
@@ -216,40 +200,12 @@ void GBI_TEXRECT()
 	}
 }
 
-void GBI_TEXRECTFLIP()
-{
-	LogCommand("GBI_TEXRECTFLIP\n");
-}
 
-void GBI_RDPLOADSYNC()
-{
-	LogCommand("GBI_RDPLOADSYNC\n");
-}
 
-void GBI_RDPPIPESYNC()
-{
-	LogCommand("GBI_RDPPIPESYNC\n");
-}
 
-void GBI_RDPTILESYNC()
-{
-	LogCommand("GBI_RDPTILESYNC\n");
-}
 
-void GBI_RDPFULLSYNC()
-{
-	LogCommand("GBI_RDPFULLSYNC\n");
-}
 
-void GBI_SETKEYGB()
-{
-	LogCommand("GBI_SETKEYGB\n");
-}
 
-void GBI_SETKEYR()
-{
-	LogCommand("GBI_SETKEYR\n");
-}
 
 void GBI_SETCONVERT()
 {
@@ -266,39 +222,13 @@ void GBI_SETCONVERT()
 void GBI_SETSCISSOR()
 {
 	LogCommand("GBI_SETSCISSOR\n");
-	if ((State.Scissor.x1!=Command.fillrect.x0) ||
-		(State.Scissor.x2!=Command.fillrect.x1) ||
-		(State.Scissor.y1!=Command.fillrect.y0) ||
-		(State.Scissor.y2!=Command.fillrect.y1)){
-		
-		RECT r1;
-		
-		State.Scissor.x1 = Command.fillrect.x0;
-		State.Scissor.x2 = Command.fillrect.x1;
-		State.Scissor.y1 = Command.fillrect.y0;
-		State.Scissor.y2 = Command.fillrect.y1;
+	State.Scissor.x1 = Command.fillrect.x0;
+	State.Scissor.x2 = Command.fillrect.x1;
+	State.Scissor.y1 = Command.fillrect.y0;
+	State.Scissor.y2 = Command.fillrect.y1;
 
-		if (State.cimg.width!=0){
-			r1.left = Command.fillrect.x0 * State.WindowWidth / (State.cimg.width);
-			r1.right = Command.fillrect.x1 * State.WindowWidth / (State.cimg.width);
-			r1.top = Command.fillrect.y0 * State.WindowHeight / GetHeight(State.cimg.width);
-			r1.bottom = Command.fillrect.y1 * State.WindowHeight / GetHeight(State.cimg.width);
-		} else {
-			r1.left = 0;
-			r1.right = State.WindowWidth;
-			r1.top = 0;
-			r1.bottom = State.WindowHeight;
-		}
-
-		// Direct3D 8 has no SetScissorRect; retain the RDP scissor state.
-
-	}
 }
 
-void GBI_SETPRIMDEPTH()
-{
-	LogCommand("GBI_SETPRIMDEPTH\n");
-}
 
 void GBI_RDPSETOTHERMODE()
 {
@@ -339,10 +269,10 @@ void GBI_SETTILESIZE()
 	FlushVertexCache();
 
 	U32 i = Command.settilesize.tile;
-	State.Tiles[i].uls = (float)(Command.settilesize.uls+Command.settilesize.uls_frac/4.0f);
-	State.Tiles[i].ult = (float)(Command.settilesize.ult+Command.settilesize.ult_frac/4.0f);
-	State.Tiles[i].lrs = (float)(Command.settilesize.lrs+Command.settilesize.lrs_frac/4.0f);
-	State.Tiles[i].lrt = (float)(Command.settilesize.lrt+Command.settilesize.lrt_frac/4.0f);
+	State.Tiles[i].uls = Command.settilesize.uls;
+	State.Tiles[i].ult = Command.settilesize.ult;
+	State.Tiles[i].lrs = Command.settilesize.lrs;
+	State.Tiles[i].lrt = Command.settilesize.lrt;
 	LogCommand("GBI_SETTILESIZE: uls: %f, ult: %f, tile: %i, lrs: %f, lrt: %f\n",
 		State.Tiles[i].uls,
 		State.Tiles[i].ult,
@@ -516,19 +446,20 @@ void GBI_FILLRECT()
 	Rect.y1 = N64Rect.y1 * State.WindowHeight / GetHeight(State.cimg.width);
 	Rect.y2 = N64Rect.y2 * State.WindowHeight / GetHeight(State.cimg.width);
 	
-	if ((State.Viewport.X!=0) ||
-		(State.Viewport.Y!=0) ||
-		(State.Viewport.Width!=State.WindowWidth) ||
-		(State.Viewport.Height!=State.WindowHeight) ||
-		(State.Viewport.MinZ!=0.0f) ||
-		(State.Viewport.MaxZ!=1.0f)){
+	if (((long)State.Viewport.X>Rect.x1) ||
+		((long)State.Viewport.Y>Rect.y1) ||
+		((long)(State.Viewport.X+State.Viewport.Width)<Rect.x2) ||
+		((long)(State.Viewport.Y+State.Viewport.Height)<Rect.y2)){
+		State.ViewportChanged = true;
 		State.Viewport.X = 0;
 		State.Viewport.Y = 0;
 		State.Viewport.Width = State.WindowWidth;
 		State.Viewport.Height = State.WindowHeight;
-		State.Viewport.MinZ = 0.0f;
-		State.Viewport.MaxZ = 1.0f;
-		SafeDX(g_pd3dDevice->SetViewport(&State.Viewport));
+#line 487 "DListParser.cpp"
+		SafeDX(g_pd3dDevice->EndScene());
+#line 488 "DListParser.cpp"
+		SafeDX(g_pd3dDevice->BeginScene());
+		g_pd3dDevice->SetViewport(&State.Viewport);
 	}
 
 	if (State.cimg.address == State.zimg.address){
@@ -579,11 +510,14 @@ void GBI_FILLRECT()
 		} else {
 			D3DTNTVERTEX *VertexBuffer;
 			State.ZBufferWrite = false;
+#line 539 "DListParser.cpp"
 			SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, false));
 			D3DXMATRIX Ortho;
 			D3DXMatrixOrthoOffCenterRH(&Ortho, 0, (float)State.WindowWidth, (float)State.WindowHeight, 0, 0.0f, 1.0f);
+#line 542 "DListParser.cpp"
 			SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &Ortho));
 			State.ProjectionChanged = true;
+#line 544 "DListParser.cpp"
 			SafeDX(g_VertexBuffer->Lock(0, 4*sizeof(D3DTNTVERTEX), (BYTE**)&VertexBuffer, 0));
 			VertexBuffer[0].color = State.FillColor;
 			VertexBuffer[0].x = (float)Rect.x1;
@@ -604,9 +538,9 @@ void GBI_FILLRECT()
 			VertexBuffer[3].x = (float)Rect.x2;
 			VertexBuffer[3].y = (float)Rect.y2;
 			VertexBuffer[3].z = 0.0f;
+#line 564 "DListParser.cpp"
 			SafeDX(g_VertexBuffer->Unlock());
 
-/*
 			BlendPasses.Count = 1;
 			BlendPasses.Passes[0].Stages[0].ColorOp = D3DTOP_SELECTARG1;
 			BlendPasses.Passes[0].Stages[0].ColorArg1 = D3DTA_TFACTOR;
@@ -615,16 +549,9 @@ void GBI_FILLRECT()
 			BlendPasses.Passes[0].Stages[1].ColorOp = D3DTOP_DISABLE;
 			BlendPasses.Passes[0].Stages[1].AlphaOp = D3DTOP_DISABLE;
 			BlendPasses.Passes[0].TFactor = Color;
-*/
-			SafeDX(g_pd3dDevice->SetPixelShader(State.ps_highlight));
-			D3DXVECTOR4 vColor;
-			vColor.w = (FLOAT)BITS(Color, 24, 8)/255.0f;
-			vColor.x = (FLOAT)BITS(Color, 16, 8)/255.0f;
-			vColor.y = (FLOAT)BITS(Color,  8, 8)/255.0f;
-			vColor.z = (FLOAT)BITS(Color,  0, 8)/255.0f;
-			SafeDX(g_pd3dDevice->SetPixelShaderConstant(6, (float*)&vColor, 1));
-			SafeDX(g_pd3dDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA));
-			SafeDX(g_pd3dDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA));
+			SetBlendPass(0);
+
+#line 580 "DListParser.cpp"
 			SafeDX(g_pd3dDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2));
 		}
 	}
@@ -763,15 +690,20 @@ void ReleaseCustomSurface()
 	uCustomSurface = 0;
 	FlushVertexCache();
 	LogCommand("Disabling BackBuffer\n");
+#line 2548 "DListParser.cpp"
 	SafeDX(g_pd3dDevice->GetDepthStencilSurface(&DepthStencilSurface));
+#line 2548 "DListParser.cpp"
 	SafeDX(g_pd3dDevice->EndScene());
+#line 2548 "DListParser.cpp"
 	SafeDX(g_pd3dDevice->SetRenderTarget(NormalSurface, DepthStencilSurface));
+#line 2548 "DListParser.cpp"
 	SafeDX(g_pd3dDevice->BeginScene());
 	// Write back contents of Surface to RDRAM
 	D3DLOCKED_RECT Rect;
 	U32 *ImgPtr;
 	U32 x, y;
 
+#line 2548 "DListParser.cpp"
 	SafeDX(surWriteback->LockRect(&Rect, 0, D3DLOCK_READONLY));
 	U32 sx, sy;
 	for (y=0;y<uCustomSurfaceHeight;y+=10){
@@ -802,6 +734,7 @@ void ReleaseCustomSurface()
 					Col;
 		}
 	}
+#line 2548 "DListParser.cpp"
 	SafeDX(surWriteback->UnlockRect());
 }
 */
@@ -847,10 +780,6 @@ void GBI1_TRI4()
 	Tri1(Command.tri4_gbi1.v41, Command.tri4_gbi1.v42, Command.tri4_gbi1.v43);
 }
 
-void GBI1_RDPHALFCONT()
-{
-	LogCommand("GBI1_RDPHALFCONT\n");
-}
 
 void GBI1_QUAD()
 {
@@ -859,15 +788,7 @@ void GBI1_QUAD()
 }
 
 // Microcode 1 and 2 functions...
-void GBI12_SPNOOP()
-{
-	LogCommand("GBI12_SPNOOP\n");
-}
 
-void GBI12_RESERVED0()
-{
-	LogCommand("GBI12_RESERVED0, raw data (hi:lo): %X:%X\n", Command.raw.hi, Command.raw.lo);
-}
 
 void GBI12_MTX()
 {
@@ -889,6 +810,7 @@ void GBI12_MOVEMEM()
 		State.TranslateX = Read32(Command.movemem.addr + Segment[Command.movemem.segment] + 8)>>17;
 		State.TranslateY =(Read32(Command.movemem.addr + Segment[Command.movemem.segment] + 8)&BitM16)>>1;
 		State.TranslateZ = Read32(Command.movemem.addr + Segment[Command.movemem.segment] + 12)>>17;
+		State.ViewportChanged = true;
 		LogCommand("GBI12_MOVEMEM: Viewport\n");
 		break;
 	case 0x82: // LookAtY
@@ -937,10 +859,6 @@ void GBI12_MOVEMEM()
 	}
 }
 
-void GBI12_RESERVED1()
-{
-	LogCommand("GBI12_RESERVED1, raw data (hi:lo): %X:%X\n", Command.raw.hi, Command.raw.lo);
-}
 
 void GBI12_DL()
 {
@@ -960,32 +878,10 @@ void GBI12_DL()
 	//Log("%X: DL to %X\n", Stack[uStackIndex-1].PC, Stack[uStackIndex-1].PC);
 }
 
-void GBI12_RESERVED2()
-{
-	LogCommand("GBI12_RESERVED2, raw data (hi:lo): %X:%X\n", Command.raw.hi, Command.raw.lo);
-}
 
-void GBI12_RESERVED3()
-{
-	LogCommand("GBI12_RESERVED3, raw data (hi:lo): %X:%X\n", Command.raw.hi, Command.raw.lo);
-}
 
-void GBI12_SPRITE2D_BASE()
-{
-	LogCommand("GBI12_SPRITE2D_BASE\n");
-}
 
-void GBI12_RDPHALF2()
-{
-	LogCommand("GBI12_RDPHALF2, raw data (hi:lo): %X:%X\n", Command.raw.hi, Command.raw.lo);
-}
 
-void GBI12_RDPHALF1()
-{
-	// used for BranchZ and LoadUCode
-	LogCommand("GBI12_RDPHALF1, raw data (hi:lo): %X:%X\n", Command.raw.hi, Command.raw.lo);
-	State.BranchZAddress = Command.movemem.addr + Segment[Command.movemem.segment];
-}
 
 void GBI12_CLEARGEOMMODE()
 {
@@ -1080,6 +976,39 @@ void GBI12_TEXTURE()
 	State.TextureChanged = true;
 }
 
+void GBI3_TEXTURE()
+{
+	LogCommand("GBI3_TEXTURE: Enabled: %i, tile: %i, s: %i, t: %i, lodscale: %i\n", Command.texture.on, Command.texture.tile, Command.texture.s, Command.texture.t, Command.texture.lodscale);
+	//Log("Texture: Enabled: %i, tile: %i, s: %i, t: %i, lodscale: %i\n", Command.texture.on, Command.texture.tile, Command.texture.s, Command.texture.t, Command.texture.lodscale);
+	FlushVertexCache();
+	State.GeometryMode.fields.TextureEnable	= Command.texture.on!=0;
+	State.texture.tile				= &State.Tiles[Command.texture.tile];
+	switch (Command.texture.s){
+	case 0x8000:
+		State.texture.TextureScaleS		= 0.5f;
+		break;
+	case 0xFFFF:
+		State.texture.TextureScaleS		= 1.0f;
+		break;
+	default:
+		State.texture.TextureScaleS		= (Command.texture.s)/65535.0f;
+		break;
+	}
+	switch (Command.texture.t){
+	case 0x8000:
+		State.texture.TextureScaleT		= 0.5f;
+		break;
+	case 0xFFFF:
+		State.texture.TextureScaleT		= 1.0f;
+		break;
+	default:
+		State.texture.TextureScaleT		= (Command.texture.t)/65535.0f;
+		break;
+	}
+	State.texture.MipMapLevels		= Command.texture.lodscale;   // hwnd does this differently
+	State.TextureChanged = true;
+}
+
 void GBI12_MOVEWORD()
 {
 	FlushVertexCache();
@@ -1129,8 +1058,8 @@ void GBI12_MOVEWORD()
 	case 0x0A: // Lightcol
 		if (Command.moveword_gbi12.mw_index%32==0){
 			State.Lights[Command.moveword_gbi12.mw_index/32].r = BITS(Command.moveword_gbi12.data, 24, 8);
-			State.Lights[Command.moveword_gbi12.mw_index/32].g = BITS(Command.moveword_gbi12.data, 16, 8);
-			State.Lights[Command.moveword_gbi12.mw_index/32].b = BITS(Command.moveword_gbi12.data, 8, 8);
+			State.Lights[Command.moveword_gbi12.mw_index/32].g = Command.moveword_gbi12.data>>16;
+			State.Lights[Command.moveword_gbi12.mw_index/32].b = Command.moveword_gbi12.data>>8;
 		}
 		LogCommand("GBI12_MOVEWORD: Light color, Index: %i, b?: %i, color:%X\n", Command.moveword_gbi12.mw_index/32, Command.moveword_gbi12.mw_index%32!=0, Command.moveword_gbi12.data);
 		break;
@@ -1143,32 +1072,8 @@ void GBI12_MOVEWORD()
 	}
 }
 
-void GBI12_POPMTX()
-{
-	LogCommand("GBI12_POPMTX\n");
-	FlushVertexCache();
-	if (State.WorldIndex>0){
-		State.WorldIndex--;
-		State.WorldMatrix = &State.World[State.WorldIndex];
-	} else {
-		// Matrix underflow
-		ShowError("Matrix underflow");
-	}
-}
 
-void GBI12_CULLDL()
-{
-	LogCommand("GBI12_CULLDL\n");
-	if (Options.bDoCulling){
-	}
-}
 
-void GBI12_NOOP()
-{
-	LogCommand("GBI12_NOOP\n");
-}
-
-// Microcode 2 only...
 
 void GBI2_VTX()
 {
@@ -1202,17 +1107,7 @@ void GBI2_LOADUCODE()
 	}
 }
 
-void GBI2_BRANCHZ()
-{
-	LogCommand("GBI2_BRANCHZ\n");
-}
 
-void GBI2_TRI2()
-{
-	LogCommand("GBI2_TRI2\n");
-	Tri1(Command.tri2_gbi2.v1, Command.tri2_gbi2.v2, Command.tri2_gbi2.v3);
-	Tri1(Command.tri2_gbi2.v4, Command.tri2_gbi2.v5, Command.tri2_gbi2.v6);
-}
 
 void GBI2_QUAD()
 {
@@ -1269,10 +1164,6 @@ void GBI23_MODIFYVTX()
 }
 
 // Microcode 3 only
-void GBI3_NOOP()
-{
-	LogCommand("GBI3_NOOP\n");
-}
 
 void GBI3_VTX()
 {
@@ -1361,6 +1252,13 @@ void GBI3_TRI2()
 	Tri1(Command.tri2_gbi3.v4, Command.tri2_gbi3.v5, Command.tri2_gbi3.v6);
 }
 
+void GBI2_TRI2()
+{
+	LogCommand("GBI2_TRI2\n");
+	Tri1(Command.tri2_gbi2.v1, Command.tri2_gbi2.v2, Command.tri2_gbi2.v3);
+	Tri1(Command.tri2_gbi2.v4, Command.tri2_gbi2.v5, Command.tri2_gbi2.v6);
+}
+
 void GBI3_QUAD()
 {
 	LogCommand("GBI3_QUAD\n");
@@ -1368,10 +1266,6 @@ void GBI3_QUAD()
 	Tri1(Command.tri2_gbi3.v4, Command.tri2_gbi3.v5, Command.tri2_gbi3.v6);
 }
 
-void GBI3_LINE3D()
-{
-	LogCommand("GBI3_LINE3D\n");
-}
 
 void GBI3_BACKGROUND()
 {
@@ -1407,58 +1301,9 @@ void GBI3_TRI4()
 	Tri1((Command.tri4_gbi3.v41lo)|(Command.tri4_gbi3.v41hi<<2), Command.tri4_gbi3.v42, Command.tri4_gbi3.v43);
 }
 
-void GBI3_SPECIAL3()
-{
-	LogCommand("GBI3_SPECIAL3\n");
-}
 
-void GBI3_SPECIAL2()
-{
-	LogCommand("GBI3_SPECIAL2\n");
-}
 
-void GBI3_SPECIAL1()
-{
-	LogCommand("GBI3_SPECIAL1\n");
-}
 
-void GBI3_DMAIO()
-{
-	LogCommand("GBI3_DMAIO\n");
-}
-
-void GBI3_TEXTURE()
-{
-	LogCommand("GBI3_TEXTURE: Enabled: %i, tile: %i, s: %i, t: %i, lodscale: %i\n", Command.texture.on, Command.texture.tile, Command.texture.s, Command.texture.t, Command.texture.lodscale);
-	//Log("Texture: Enabled: %i, tile: %i, s: %i, t: %i, lodscale: %i\n", Command.texture.on, Command.texture.tile, Command.texture.s, Command.texture.t, Command.texture.lodscale);
-	FlushVertexCache();
-	State.GeometryMode.fields.TextureEnable	= Command.texture.on!=0;
-	State.texture.tile				= &State.Tiles[Command.texture.tile];
-	switch (Command.texture.s){
-	case 0x8000:
-		State.texture.TextureScaleS		= 0.5f;
-		break;
-	case 0xFFFF:
-		State.texture.TextureScaleS		= 1.0f;
-		break;
-	default:
-		State.texture.TextureScaleS		= (Command.texture.s)/65535.0f;
-		break;
-	}
-	switch (Command.texture.t){
-	case 0x8000:
-		State.texture.TextureScaleT		= 0.5f;
-		break;
-	case 0xFFFF:
-		State.texture.TextureScaleT		= 1.0f;
-		break;
-	default:
-		State.texture.TextureScaleT		= (Command.texture.t)/65535.0f;
-		break;
-	}
-	State.texture.MipMapLevels		= Command.texture.lodscale;   // hwnd does this differently
-	State.TextureChanged = true;
-}
 
 void GBI3_POPMATRIX()
 {
@@ -1469,7 +1314,20 @@ void GBI3_POPMATRIX()
 		State.WorldMatrix = &State.World[State.WorldIndex];
 	} else {
 		// Matrix underflow
-		//ShowError("Matrix underflow");
+		ShowError("Matrix underflow");
+	}
+}
+
+void GBI12_POPMTX()
+{
+	LogCommand("GBI12_POPMTX\n");
+	FlushVertexCache();
+	if (State.WorldIndex>0){
+		State.WorldIndex--;
+		State.WorldMatrix = &State.World[State.WorldIndex];
+	} else {
+		// Matrix underflow
+		ShowError("Matrix underflow");
 	}
 }
 
@@ -1547,13 +1405,14 @@ void GBI3_MOVEWORD()
 	case 0x0A: // Lightcol
 		if (Command.moveword_gbi3.mw_index%24==0){
 			State.Lights[Command.moveword_gbi3.mw_index/24].r = BITS(Command.moveword_gbi3.data, 24, 8);
-			State.Lights[Command.moveword_gbi3.mw_index/24].g = BITS(Command.moveword_gbi3.data, 16, 8);
-			State.Lights[Command.moveword_gbi3.mw_index/24].b = BITS(Command.moveword_gbi3.data, 8, 8);
+			State.Lights[Command.moveword_gbi3.mw_index/24].g = Command.moveword_gbi3.data>>16;
+			State.Lights[Command.moveword_gbi3.mw_index/24].b = Command.moveword_gbi3.data>>8;
 		}
 		LogCommand("GBI3_MOVEWORD: Lightcol, Index: %i, b?: %i, color:%X\n", Command.moveword_gbi3.mw_index/24, Command.moveword_gbi3.mw_index%24!=0, Command.moveword_gbi3.data);
 		break;
 	case 0x0C:
 		State.WorldMatrix = &State.Identity;
+#line 2548 "DListParser.cpp"
 		//SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &State.TempMatrix));
 		State.bForceMtx = true;
 		State.ProjectionChanged = true;
@@ -1582,6 +1441,7 @@ void GBI3_MOVEMEM()
 		State.TranslateX = Read32(Command.movemem_gbi3.addr + Segment[Command.movemem_gbi3.segment] + 8)>>17;
 		State.TranslateY =(Read32(Command.movemem_gbi3.addr + Segment[Command.movemem_gbi3.segment] + 8)&BitM16)>>1;
 		State.TranslateZ = Read32(Command.movemem_gbi3.addr + Segment[Command.movemem_gbi3.segment] + 12)>>17;
+		State.ViewportChanged = true;
 		LogCommand("GBI3_MOVEMEM: Viewport\n");
 		break;
 	case 10: // Light
@@ -1607,10 +1467,6 @@ void GBI3_MOVEMEM()
 	}
 }
 
-void GBI3_LOADUCODE()
-{
-	LogCommand("GBI3_LOADUCODE\n");
-}
 
 void GBI3_DL()
 {
@@ -1640,15 +1496,18 @@ void GBI3_ENDDL()
 	}
 }
 
-void GBI3_SPNOOP()
-{
-	LogCommand("GBI3_SPNOOP\n");
-}
 
 void GBI3_RDPHALF1()
 {
 	State.BranchZAddress = Command.movemem.addr + Segment[Command.movemem.segment];
 	LogCommand("GBI3_RDPHALF1\n");
+}
+
+void GBI12_RDPHALF1()
+{
+	// used for BranchZ and LoadUCode
+	LogCommand("GBI12_RDPHALF1, raw data (hi:lo): %X:%X\n", Command.raw.hi, Command.raw.lo);
+	State.BranchZAddress = Command.movemem.addr + Segment[Command.movemem.segment];
 }
 
 void GBI3_SETOTHERMODELO()
@@ -1671,13 +1530,7 @@ void GBI3_SETOTHERMODEHI()
 	OthermodeChanged();
 }
 
-void GBI3_RDPHALF2()
-{
-	LogCommand("GBI3_RDPHALF2\n");
-}
 
-
-// Diddy Kong Racing additions to GBI2
 void GBI5_MTX()
 {
 	// does not have a real matrix stack - just 3 world matrices
@@ -1958,8 +1811,8 @@ void GBI9_MOVEWORD()
 	case 0x0A: // Lightcol
 		if (Command.moveword_gbi12.mw_index%32==0){
 			State.Lights[Command.moveword_gbi12.mw_index/32].r = BITS(Command.moveword_gbi12.data, 24, 8);
-			State.Lights[Command.moveword_gbi12.mw_index/32].g = BITS(Command.moveword_gbi12.data, 16, 8);
-			State.Lights[Command.moveword_gbi12.mw_index/32].b = BITS(Command.moveword_gbi12.data, 8, 8);
+			State.Lights[Command.moveword_gbi12.mw_index/32].g = Command.moveword_gbi12.data>>16;
+			State.Lights[Command.moveword_gbi12.mw_index/32].b = Command.moveword_gbi12.data>>8;
 		}
 		LogCommand("GBI12_MOVEWORD: Light color, Index: %i, b?: %i, color:%X\n", Command.moveword_gbi12.mw_index/32, Command.moveword_gbi12.mw_index%32!=0, Command.moveword_gbi12.data);
 		break;
@@ -2055,11 +1908,14 @@ void GBI10_BG_1CYC()
 
 	D3DTNTVERTEX *VertexBuffer;
 	State.ZBufferWrite = false;
+#line 2548 "DListParser.cpp"
 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, false));
 	D3DXMATRIX Ortho;
-	D3DXMatrixOrthoOffCenterRH(&Ortho, 0, (float)State.cimg.width, (float)GetHeight(State.cimg.width), 0, 0.0f, 1.0f);
+	D3DXMatrixOrthoOffCenterRH(&Ortho, 0, (float)State.cimg.width, ((float)State.cimg.width*0.75f), 0, 0.0f, 1.0f);
+#line 2548 "DListParser.cpp"
 	SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &Ortho));
 	State.ProjectionChanged = true;
+#line 2548 "DListParser.cpp"
 	SafeDX(g_VertexBuffer->Lock(0, 4*sizeof(D3DTNTVERTEX), (U8**)&VertexBuffer, 0));
 	VertexBuffer[0].color = State.FillColor;
 	VertexBuffer[0].x = (float)x1;
@@ -2088,6 +1944,7 @@ void GBI10_BG_1CYC()
 	VertexBuffer[3].z = 0.0f;
 	_TexAssignU((&VertexBuffer[3])) = u2;
 	_TexAssignV((&VertexBuffer[3])) = v2;
+#line 2548 "DListParser.cpp"
 	SafeDX(g_VertexBuffer->Unlock());
 
 	U32 i;
@@ -2105,19 +1962,12 @@ void GBI10_BG_1CYC()
 	BlendPasses.Passes[0].TFactor = 0x30FF00FF;
 
 	SetBlendPass(0);
+#line 2548 "DListParser.cpp"
 	SafeDX(g_pd3dDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2));
 */
 }
 
-void GBI10_BG_COPY()
-{
-	LogCommand("GBI10_BG_COPY unhandled\n");
-}
 
-void GBI10_OBJ_RECTANGLE()
-{
-	LogCommand("GBI10_OBJ_RECTANGLE unhandled\n");
-}
 
 void GBI10_OBJ_SPRITE()
 {
@@ -2165,6 +2015,171 @@ void GBI10_OBJ_MOVEMEM()
 
 }
 
+
+
+
+void GBI_UNKNOWN()
+{
+	LogCommand("GBI_UNKNOWN, Command Index: 0x%X, raw data(hi:lo): 0x%X:0x%X\n", Command.general.command, Command.raw.hi, Command.raw.lo);
+}
+
+void GBI_TEXRECTFLIP()
+{
+	LogCommand("GBI_TEXRECTFLIP\n");
+}
+
+void GBI_RDPLOADSYNC()
+{
+	LogCommand("GBI_RDPLOADSYNC\n");
+}
+
+void GBI_RDPPIPESYNC()
+{
+	LogCommand("GBI_RDPPIPESYNC\n");
+}
+
+void GBI_RDPTILESYNC()
+{
+	LogCommand("GBI_RDPTILESYNC\n");
+}
+
+void GBI_RDPFULLSYNC()
+{
+	LogCommand("GBI_RDPFULLSYNC\n");
+}
+
+void GBI_SETKEYGB()
+{
+	LogCommand("GBI_SETKEYGB\n");
+}
+
+void GBI_SETKEYR()
+{
+	LogCommand("GBI_SETKEYR\n");
+}
+
+void GBI_SETPRIMDEPTH()
+{
+	LogCommand("GBI_SETPRIMDEPTH\n");
+}
+
+void GBI1_RDPHALFCONT()
+{
+	LogCommand("GBI1_RDPHALFCONT\n");
+}
+
+void GBI12_SPNOOP()
+{
+	LogCommand("GBI12_SPNOOP\n");
+}
+
+void GBI12_RESERVED0()
+{
+	LogCommand("GBI12_RESERVED0, raw data (hi:lo): %X:%X\n", Command.raw.hi, Command.raw.lo);
+}
+
+void GBI12_RESERVED1()
+{
+	LogCommand("GBI12_RESERVED1, raw data (hi:lo): %X:%X\n", Command.raw.hi, Command.raw.lo);
+}
+
+void GBI12_RESERVED2()
+{
+	LogCommand("GBI12_RESERVED2, raw data (hi:lo): %X:%X\n", Command.raw.hi, Command.raw.lo);
+}
+
+void GBI12_RESERVED3()
+{
+	LogCommand("GBI12_RESERVED3, raw data (hi:lo): %X:%X\n", Command.raw.hi, Command.raw.lo);
+}
+
+void GBI12_SPRITE2D_BASE()
+{
+	LogCommand("GBI12_SPRITE2D_BASE\n");
+}
+
+void GBI12_RDPHALF2()
+{
+	LogCommand("GBI12_RDPHALF2, raw data (hi:lo): %X:%X\n", Command.raw.hi, Command.raw.lo);
+}
+
+void GBI12_CULLDL()
+{
+	LogCommand("GBI12_CULLDL\n");
+	if (Options.bDoCulling){
+	}
+}
+
+void GBI12_NOOP()
+{
+	LogCommand("GBI12_NOOP\n");
+}
+
+// Microcode 2 only...
+
+void GBI2_BRANCHZ()
+{
+	LogCommand("GBI2_BRANCHZ\n");
+}
+
+void GBI3_NOOP()
+{
+	LogCommand("GBI3_NOOP\n");
+}
+
+void GBI3_LINE3D()
+{
+	LogCommand("GBI3_LINE3D\n");
+}
+
+void GBI3_SPECIAL3()
+{
+	LogCommand("GBI3_SPECIAL3\n");
+}
+
+void GBI3_SPECIAL2()
+{
+	LogCommand("GBI3_SPECIAL2\n");
+}
+
+void GBI3_SPECIAL1()
+{
+	LogCommand("GBI3_SPECIAL1\n");
+}
+
+void GBI3_DMAIO()
+{
+	LogCommand("GBI3_DMAIO\n");
+}
+
+
+void GBI3_LOADUCODE()
+{
+	LogCommand("GBI3_LOADUCODE\n");
+}
+
+void GBI3_SPNOOP()
+{
+	LogCommand("GBI3_SPNOOP\n");
+}
+
+void GBI3_RDPHALF2()
+{
+	LogCommand("GBI3_RDPHALF2\n");
+}
+
+
+// Diddy Kong Racing additions to GBI2
+void GBI10_BG_COPY()
+{
+	LogCommand("GBI10_BG_COPY unhandled\n");
+}
+
+void GBI10_OBJ_RECTANGLE()
+{
+	LogCommand("GBI10_OBJ_RECTANGLE unhandled\n");
+}
+
 void GBI10_SELECT_DL()
 {
 	LogCommand("GBI10_SELECT_DL unhandled\n");
@@ -2185,6 +2200,38 @@ void GBI10_OBJ_RECTANGLE_R()
 	S2DEX_Sprite(&Sprite->sprite);
 */
 }
+
+void GBI11_MTXPROJECTION()
+{
+	// jet force gemini matrix
+	// kann nicht multiplizieren. Lädt einfach nur eine Matrix
+	// Wahrscheinlich Projection
+	LogCommand("GBI11_MTXPROJECTION\n");
+	
+/*
+	FlushVertexCache();
+
+	LoadMatrix(Command.mtx_gbi12.addr + Segment[Command.mtx_gbi12.segment], &State.Projection);
+	State.ProjectionChanged = true;
+*/
+}
+
+void GBI_S2DEX2_UNKNOWN1()
+{
+	// reversed in 11th display list of Evangelion
+	// RSP position: 0xA40010E8
+	
+	// command does the following:
+	// Write8 (0x268, Command.raw.lo & 0xFF)
+	// Write16(0x244, 0x248 + (Command.raw.lo & 0x08))
+	// Write16(0x246, 0x258 + (Command.raw.hi & 0x08))
+	// v1 = Read32(0x234 + ((Command.raw.lo & 0x18)>>1))
+	// v0 = Read32(0x214 + ((Command.raw.lo & 0x70)>>2))
+	// Write32(0x1FC, v1)
+	// Write32(0x1F8, v0)
+}
+
+// Microcode "opcodes" finished, general code follows
 
 void GBI10_OBJ_LOADTXTR()
 {
@@ -2263,7 +2310,7 @@ void GBI11_MTX()
 				_D3DMul_4x4(*State.WorldMatrix, Matrix, State.World[LoadIndex]);
 			}
 		} else {
-			State.WorldMatrix = Matrix*State.World[LoadIndex];
+			D3DMul_4x4(*State.WorldMatrix, Matrix, State.World[LoadIndex]);
 		}
 #endif
 	} else {
@@ -2273,20 +2320,6 @@ void GBI11_MTX()
 	State.ProjectionChanged = true;
 }
 
-void GBI11_MTXPROJECTION()
-{
-	// jet force gemini matrix
-	// kann nicht multiplizieren. Lädt einfach nur eine Matrix
-	// Wahrscheinlich Projection
-	LogCommand("GBI11_MTXPROJECTION\n");
-	
-/*
-	FlushVertexCache();
-
-	LoadMatrix(Command.mtx_gbi12.addr + Segment[Command.mtx_gbi12.segment], &State.Projection);
-	State.ProjectionChanged = true;
-*/
-}
 
 void GBI11_SETMTXADD()
 {
@@ -2312,6 +2345,7 @@ void GBI_ROGUE_MOVEMEM()
 		State.TranslateX = Read32(addr + 8)>>17;
 		State.TranslateY =(Read32(addr + 8)&BitM16)>>1;
 		State.TranslateZ = Read32(addr + 12)>>17;
+		State.ViewportChanged = true;
 		LogCommand("GBI_ROGUE_MOVEMEM: Viewport\n");
 		break;
 	case 0x82: // LookAtY
@@ -2556,22 +2590,6 @@ void GBI_ROGUE_VTX()
 		(Command.raw.hi>>0xA)&0x3F, 0);
 }
 
-void GBI_S2DEX2_UNKNOWN1()
-{
-	// reversed in 11th display list of Evangelion
-	// RSP position: 0xA40010E8
-	
-	// command does the following:
-	// Write8 (0x268, Command.raw.lo & 0xFF)
-	// Write16(0x244, 0x248 + (Command.raw.lo & 0x08))
-	// Write16(0x246, 0x258 + (Command.raw.hi & 0x08))
-	// v1 = Read32(0x234 + ((Command.raw.lo & 0x18)>>1))
-	// v0 = Read32(0x214 + ((Command.raw.lo & 0x70)>>2))
-	// Write32(0x1FC, v1)
-	// Write32(0x1F8, v0)
-}
-
-// Microcode "opcodes" finished, general code follows
 
 void DetectMicroCode(U32 uIndex)
 {
@@ -2589,8 +2607,10 @@ void DetectMicroCode(U32 uIndex)
 	}
 
 	if (0&&UCode_NoN){
+#line 2548 "DListParser.cpp"
 		SafeDX(g_pd3dDevice->SetRenderState(D3DRS_CLIPPING, FALSE));
 	} else {
+#line 2548 "DListParser.cpp"
 		SafeDX(g_pd3dDevice->SetRenderState(D3DRS_CLIPPING, TRUE));
 	}
 	char szMsg[100];
@@ -3010,76 +3030,6 @@ void DetectMicroCode(U32 uIndex)
 }
 
 
-int ProcessException(LPEXCEPTION_POINTERS lpEP)
-{
-	switch(lpEP->ExceptionRecord->ExceptionCode){
-	case EXCEPTION_ACCESS_VIOLATION:
-		strcpy(msExcError, "EXCEPTION_ACCESS_VIOLATION");
-		break;
-	case EXCEPTION_ARRAY_BOUNDS_EXCEEDED:
-		strcpy(msExcError, "EXCEPTION_ARRAY_BOUNDS_EXCEEDED");
-		break;
-	case EXCEPTION_BREAKPOINT:
-		strcpy(msExcError, "EXCEPTION_BREAKPOINT");
-		break;
-	case EXCEPTION_DATATYPE_MISALIGNMENT:
-		strcpy(msExcError, "EXCEPTION_DATATYPE_MISALIGNMENT");
-		break;
-	case EXCEPTION_FLT_DENORMAL_OPERAND:
-		strcpy(msExcError, "EXCEPTION_FLT_DENORMAL_OPERAND");
-		break;
-	case EXCEPTION_FLT_DIVIDE_BY_ZERO:
-		strcpy(msExcError, "EXCEPTION_FLT_DIVIDE_BY_ZERO");
-		break;
-	case EXCEPTION_FLT_INEXACT_RESULT:
-		strcpy(msExcError, "EXCEPTION_FLT_INEXACT_RESULT");
-		break;
-	case EXCEPTION_FLT_INVALID_OPERATION:
-		strcpy(msExcError, "EXCEPTION_FLT_INVALID_OPERATION");
-		break;
-	case EXCEPTION_FLT_OVERFLOW:
-		strcpy(msExcError, "EXCEPTION_FLT_OVERFLOW");
-		break;
-	case EXCEPTION_FLT_STACK_CHECK:
-		strcpy(msExcError, "EXCEPTION_FLT_STACK_CHECK");
-		break;
-	case EXCEPTION_FLT_UNDERFLOW:
-		strcpy(msExcError, "EXCEPTION_FLT_UNDERFLOW");
-		break;
-	case EXCEPTION_ILLEGAL_INSTRUCTION:
-		strcpy(msExcError, "EXCEPTION_ILLEGAL_INSTRUCTION");
-		break;
-	case EXCEPTION_IN_PAGE_ERROR:
-		strcpy(msExcError, "EXCEPTION_IN_PAGE_ERROR");
-		break;
-	case EXCEPTION_INT_DIVIDE_BY_ZERO:
-		strcpy(msExcError, "EXCEPTION_INT_DIVIDE_BY_ZERO");
-		break;
-	case EXCEPTION_INT_OVERFLOW:
-		strcpy(msExcError, "EXCEPTION_INT_OVERFLOW");
-		break;
-	case EXCEPTION_INVALID_DISPOSITION:
-		strcpy(msExcError, "EXCEPTION_INVALID_DISPOSITION");
-		break;
-	case EXCEPTION_NONCONTINUABLE_EXCEPTION:
-		strcpy(msExcError, "EXCEPTION_NONCONTINUABLE_EXCEPTION");
-		break;
-	case EXCEPTION_PRIV_INSTRUCTION:
-		strcpy(msExcError, "EXCEPTION_PRIV_INSTRUCTION");
-		break;
-	case EXCEPTION_SINGLE_STEP:
-		strcpy(msExcError, "EXCEPTION_SINGLE_STEP");
-		break;
-	case EXCEPTION_STACK_OVERFLOW:
-		strcpy(msExcError, "EXCEPTION_STACK_OVERFLOW");
-		break;
-	default:
-		strcpy(msExcError, "Unknown Exception");
-		break;
-	}
-	return EXCEPTION_EXECUTE_HANDLER;
-}
-
 void ProcessDisplayList()
 {
 #if PROFILING
@@ -3188,9 +3138,9 @@ void ProcessDisplayList()
 			Stack[uStackIndex].PC+=8;
 			Counter++;
 		} while ((!bDListFinished) && (Counter < 100000));
-	} __except(ProcessException(GetExceptionInformation())){
+	} __except(EXCEPTION_EXECUTE_HANDLER){
 		bDListFinished=true;
-		ShowError(msExcError);
+		ShowError("An error has occured while processing display list");
 		return;
 	}
 	FlushVertexCache();

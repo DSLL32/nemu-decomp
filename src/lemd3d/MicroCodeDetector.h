@@ -69,7 +69,7 @@ const struct {
 	0x5614A9FA, 3, false, // RSP Gfx ucode L3DEX       fifo 2.08   Hey you, Pikachu
 	0xFC7C75EC, 3, false, // RSP Gfx ucode F3DEX       fifo 2.08   Tony Hawk
 	0xFEFDB476, 3, true,  // RSP Gfx ucode F3DZEX.NoN  fifo 2.06H  Zelda
-	0x4F3C60FB, 3, true, // RSP Gfx ucode F3DZEX.NoN  fifo 2.08I  Zelda MoM
+	0x4F3C60FB, 3, false, // RSP Gfx ucode F3DZEX.NoN  fifo 2.08I  Zelda MoM
 	0xFC7C35AC, 3, false, // RSP Gfx ucode F3DEX       xbus 2.08   Southpark Rally
 	0xE17526BB, 4, false, // RSP SW Version: 2.0D, 04-01-96        WaveRace US
 	0xC29D807D, 5, false, // ????????????????????????????????????  Diddy Kong Racing

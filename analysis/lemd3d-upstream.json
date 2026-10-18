@@ -88,5 +88,19 @@
     },
     "status": "Adapted to older 13-query implementation using target disassembly; not an original binary library."
   },
-  "text_normalization": "Imported Windows-1252 text retains its encoding and historical whitespace, with CRLF normalized to LF. The readable source patch compares normalized text."
+  "text_normalization": "Imported Windows-1252 text retains its encoding and historical whitespace, with CRLF normalized to LF. The readable source patch compares normalized text.",
+  "amd_matrix_sample": {
+    "download_url": "https://archive.org/download/amd-sdk/AMD_SDK.iso",
+    "disc_date": "1999-03",
+    "iso_sha256": "29bcab606a15087a40985cae7b65677fbf1e6d64ad145bc457b9b50294fef006",
+    "members_sha256": {
+      "beta/lib-src/matrx_lib.c": "79f409833c6e15458af501fb360a5123c63ba4d46ce010ccddd66cdcfa248fa5",
+      "beta/lib-src/math_lib.c": "8a33f49524268960c009f6e2313770ca9fed284a6afc3224353e8649afa29c79"
+    },
+    "status": "Direct3D handwritten assembly kernels adapted from the sample; earlier stubs and GL kernel reconstructed from the target. Scalar C and retained constants are reconstructed; module ownership is inferred."
+  },
+  "omitted_later_files": [
+    "CombTree.h",
+    "combtree.cpp"
+  ]
 }

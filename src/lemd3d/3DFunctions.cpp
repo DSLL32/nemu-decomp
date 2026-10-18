@@ -59,50 +59,57 @@ void SetViewport()
 {
 	U32 StartX, StartY, StartZ, Width, Height, Depth;
 
-	if (State.ScaleX>State.TranslateX){
-		StartX = 0;
-	} else {
-		StartX = ((State.TranslateX-State.ScaleX)>>1) * State.WindowWidth / (State.cimg.width);
-	}
-	if (StartX>State.WindowWidth){
-		StartX = State.WindowWidth;
-	}
+	if (State.ViewportChanged){
+		State.ViewportChanged = false;
+		if (State.ScaleX>State.TranslateX){
+			StartX = 0;
+		} else {
+			StartX = ((State.TranslateX-State.ScaleX)>>1) * State.WindowWidth / (State.cimg.width);
+		}
+		if (StartX>State.WindowWidth){
+			StartX = State.WindowWidth;
+		}
 
-	if (State.ScaleY>State.TranslateY){
-		StartY = 0;
-	} else {
-		StartY = ((State.TranslateY-State.ScaleY)>>1) * State.WindowHeight / GetHeight(State.cimg.width);
-	}
-	if (StartY>State.WindowHeight){
-		StartY = State.WindowHeight;
-	}
+		if (State.ScaleY>State.TranslateY){
+			StartY = 0;
+		} else {
+			StartY = ((State.TranslateY-State.ScaleY)>>1) * State.WindowHeight / GetHeight(State.cimg.width);
+		}
+		if (StartY>State.WindowHeight){
+			StartY = State.WindowHeight;
+		}
 
 	
-	if (State.ScaleZ>State.TranslateZ){
-		StartZ = 0;
-	} else {
-		StartZ = ((State.TranslateZ-State.ScaleZ)>>1);
-	}
+		if (State.ScaleZ>State.TranslateZ){
+			StartZ = 0;
+		} else {
+			StartZ = ((State.TranslateZ-State.ScaleZ)>>1);
+		}
 	
-	Width = State.ScaleX  * State.WindowWidth / (State.cimg.width);
-	if (StartX+Width>State.WindowWidth){
-		Width = State.WindowWidth-StartX;
-	}
+		Width = State.ScaleX  * State.WindowWidth / (State.cimg.width);
+		if (StartX+Width>State.WindowWidth){
+			Width = State.WindowWidth-StartX;
+		}
 
-	Height = State.ScaleY  * State.WindowHeight / GetHeight(State.cimg.width);
-	if (StartY+Height>State.WindowHeight){
-		Height = State.WindowHeight-StartY;
-	}
+		Height = State.ScaleY  * State.WindowHeight / GetHeight(State.cimg.width);
+		if (StartY+Height>State.WindowHeight){
+			Height = State.WindowHeight-StartY;
+		}
 	
-	Depth = State.ScaleZ;
-	if ((State.Viewport.X!=StartX) || (State.Viewport.Y!=StartY) || (State.Viewport.Width != Width) || (State.Viewport.Height != Height)){
-		State.Viewport.X = StartX;
-		State.Viewport.Y = StartY;
-		State.Viewport.Width = Width;
-		State.Viewport.Height = Height;
-		State.Viewport.MinZ = 0.0f;
-		State.Viewport.MaxZ = 1.0f;
-		g_pd3dDevice->SetViewport(&State.Viewport);
+		Depth = State.ScaleZ;
+		if ((State.Viewport.X!=StartX) || (State.Viewport.Y!=StartY) || (State.Viewport.Width != Width) || (State.Viewport.Height != Height)){
+			State.Viewport.X = StartX;
+			State.Viewport.Y = StartY;
+			State.Viewport.Width = Width;
+			State.Viewport.Height = Height;
+			State.Viewport.MinZ = 0.0f;
+			State.Viewport.MaxZ = 1.0f;
+	#line 110 "3DFunctions.cpp"
+			SafeDX(g_pd3dDevice->EndScene());
+	#line 111 "3DFunctions.cpp"
+			SafeDX(g_pd3dDevice->BeginScene());
+			g_pd3dDevice->SetViewport(&State.Viewport);
+		}
 	}
 }
 
@@ -148,8 +155,8 @@ __inline void xform_light(D3DXMATRIX *InverseWorld, TLightLoaded *Light)
 {
 	float tx, ty, tz, recplength;
 	tx = Light->lx*InverseWorld->_11 + Light->ly*InverseWorld->_21 + Light->lz*InverseWorld->_31;
-	ty = Light->lx*InverseWorld->_12 + Light->ly*InverseWorld->_22 + Light->lz*InverseWorld->_32;
-	tz = Light->lx*InverseWorld->_13 + Light->ly*InverseWorld->_23 + Light->lz*InverseWorld->_33;
+	ty = Light->ly*InverseWorld->_12 + Light->ly*InverseWorld->_22 + Light->lz*InverseWorld->_32;
+	tz = Light->lz*InverseWorld->_13 + Light->ly*InverseWorld->_23 + Light->lz*InverseWorld->_33;
 
 	recplength = 1.0f / sqrtf(sqr(tx)+sqr(ty)+sqr(tz));
 	// Normalize
@@ -351,8 +358,9 @@ void LoadVertices(U32 Address, U32 Number, U32 StartIndex)
 		}
 		float n1, n2, n3;
 		ProfileStart(2);
-		if (State.GeometryMode.fields.Shade){
-			if (State.GeometryMode.fields.Lighting){
+		if (!State.GeometryMode.fields.Lighting){
+			Vertex->color = (RDRAMVertex->color.alpha<<24) | (RDRAMVertex->color.c1<<16) | (RDRAMVertex->color.c2<<8) | (RDRAMVertex->color.c3);
+		} else {
 				xform_lights();
 				n1 = RDRAMVertex->normal.n1/127.0f;
 				n2 = RDRAMVertex->normal.n2/127.0f;
@@ -387,31 +395,20 @@ void LoadVertices(U32 Address, U32 Number, U32 StartIndex)
 									//0xFFFFFFFF |
 									(r<<16) | (g<<8) | b;
 				}
-			} else {
-				Vertex->color = (RDRAMVertex->color.alpha<<24) | (RDRAMVertex->color.c1<<16) | (RDRAMVertex->color.c2<<8) | (RDRAMVertex->color.c3);
 			}
-		} else {
-			Vertex->color = State.PrimColor;
-		}
 		// texture coordinates
-		if (State.GeometryMode.fields.Texture_Gen && State.GeometryMode.fields.Lighting && State.GeometryMode.fields.Shade){
+		if (State.GeometryMode.fields.Texture_Gen && State.GeometryMode.fields.Lighting){
 			Vertex->tex[0].u = (State.LookAtX.tx * n1 +
 							State.LookAtX.ty * n2 +
-							State.LookAtX.tz * n3);
+							State.LookAtX.tz * n3 + 1.0f)*0.5f;
 
-			Vertex->tex[0].v = (State.LookAtY.tx * n1 +
+			Vertex->tex[0].v = (1.0f+(-(State.LookAtY.tx * n1 +
 							State.LookAtY.ty * n2 +
-							State.LookAtY.tz * n3);
+							State.LookAtY.tz * n3)))*0.5f;
 
 			if (State.GeometryMode.fields.Texture_Gen_Linear){
-				float s, t;
-				s = Vertex->tex[0].u;
-				t =	Vertex->tex[0].v;
-				Vertex->tex[0].u = ((s*s*s + s*s*s*0.45347f + s*0.636627f)+1.0f)*0.5f/State.texture.TextureScaleS;
-				Vertex->tex[0].v = ((t*t*t + t*t*t*0.45347f + t*0.636627f)+1.0f)*0.5f/State.texture.TextureScaleT;
-			} else {
-				Vertex->tex[0].u = ((Vertex->tex[0].u)+1.0f)*0.5f/State.texture.TextureScaleS;
-				Vertex->tex[0].v = ((Vertex->tex[0].v)+1.0f)*0.5f/State.texture.TextureScaleT;
+				Vertex->tex[0].u = acosf(Vertex->tex[0].u);
+				Vertex->tex[0].v = acosf(Vertex->tex[0].v);
 			}
 		} else {
 			Vertex->tex[0].u = _10_5ToFloat(RDRAMVertex->color.tc1)*State.texture.TextureScaleS;
@@ -653,6 +650,9 @@ void CalcModifiedProjectionMatrix()
 		Matrix._33 = (1.0f/(1.0f*4));      // multiplied
 	}
 	Matrix._43 = 0.75f;                     // is added
+	if (State.DecalMode){
+		Matrix._44 = 1.0007f;
+	}
 
 	if ((uMicroCodeID==_microcode_jfg)||(uMicroCodeID==_microcode_dkr)){
 		State.ProjectionModified = State.World[State.WorldIndex]*Matrix;
@@ -719,8 +719,7 @@ void UseMatrix(U32 Address, bool Type, bool Load, bool Push)
 				_D3DMul_4x4(State.Projection, Matrix, Temp);
 			} else {
 #endif
-				State.Projection = Matrix * State.Projection;
-//				D3DMul_4x4(State.Projection, Matrix, State.Projection);
+				D3DMul_4x4(State.Projection, Matrix, State.Projection);
 #if DOITALLAMD
 			}
 #endif
@@ -740,7 +739,7 @@ void UseMatrix(U32 Address, bool Type, bool Load, bool Push)
 					_D3DMul_4x4(*State.WorldMatrix, Matrix, Temp);
 				} else {
 #endif
-					(*State.WorldMatrix) = Matrix * State.World[State.WorldIndex-1];
+					D3DMul_4x4(*State.WorldMatrix, Matrix, State.World[State.WorldIndex-1]);
 #if DOITALLAMD
 				}
 #endif
@@ -756,7 +755,7 @@ void UseMatrix(U32 Address, bool Type, bool Load, bool Push)
 					_D3DMul_4x4(*State.WorldMatrix, Matrix, Temp);
 				} else {
 #endif
-					(*State.WorldMatrix) = Matrix*State.World[State.WorldIndex];
+					D3DMul_4x4(*State.WorldMatrix, Matrix, State.World[State.WorldIndex]);
 #if DOITALLAMD
 				}
 #endif
@@ -787,7 +786,7 @@ void CalculateTileSize(TTile *tile)
 	if (tile->masks==0){
 		tile->Width = (S32)(tile->lrs-tile->uls+1);
 		D3DWidth = tile->Width;
-		tile->D3DAddressU = D3DTADDRESS_MIRROR;
+		tile->D3DAddressU = D3DTADDRESS_CLAMP;
 	} else {
 		POW2Width = 1<<tile->masks;
 		Width = (U32)(tile->lrs-tile->uls+1);
@@ -844,7 +843,7 @@ void CalculateTileSize(TTile *tile)
 	if (tile->maskt==0){
 		tile->Height = (S32)(tile->lrt-tile->ult+1);
 		D3DHeight = tile->Height;
-		tile->D3DAddressV = D3DTADDRESS_MIRROR;
+		tile->D3DAddressV = D3DTADDRESS_CLAMP;
 	} else {
 		POW2Height = 1<<tile->maskt;
 		Height = (U32)(tile->lrt-tile->ult+1);
@@ -911,10 +910,10 @@ void SetLoadTileTlutInfo(eLoadType LoadType)
 
 	TTile *tile;
 	tile = &State.Tiles[Command.loadtile.tile];
-	tile->uls = Command.loadtile.sl+Command.loadtile.slfrac/4.0f;
-	tile->ult = Command.loadtile.tl+Command.loadtile.tlfrac/4.0f;
-	tile->lrs = Command.loadtile.sh+Command.loadtile.shfrac/4.0f;
-	tile->lrt = Command.loadtile.th+Command.loadtile.thfrac/4.0f;
+	tile->uls = Command.loadtile.sl;
+	tile->ult = Command.loadtile.tl;
+	tile->lrs = Command.loadtile.sh;
+	tile->lrt = Command.loadtile.th;
 
 	U32 Height, Width;
 	Width = Command.loadtile.sh - Command.loadtile.sl+1;
@@ -1114,11 +1113,6 @@ U32 CacheTexture(TTile *tile)
 	if ((S32)D3DHeight<=0)
 		D3DHeight = 1;
 
-	if (D3DWidth<Width)
-		Width = D3DWidth;
-	
-	if (D3DHeight<Height)
-		Height = D3DHeight;
 	
 	if (tile->size==3){
 		RDPPitch = tile->line<<4;
@@ -1128,6 +1122,7 @@ U32 CacheTexture(TTile *tile)
 	if (RDPPitch==0){
 		// save a fake texture...
 		LogCommand("Error: RDPPitch==0 in CacheTexture\n");
+#line 1122 "3DFunctions.cpp"
 		SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, D3DFMT_A1R5G5B5, D3DPOOL_MANAGED, &D3DTexture));
 		if (State.TextureCount >= (MaxTextureCount-5)){
 			// Delete oldest texture
@@ -1272,9 +1267,9 @@ UTILoopInner:
 	UTI ^= Start;
 	if (State.TMEM[Start].LoadType==_LoadTile){
 		UTI ^= State.TMEM[Start].StartX;
-		UTI ^= State.TMEM[Start].StartY<<1;
-		UTI ^= State.TMEM[Start].Width<<2;
-		UTI ^= State.TMEM[Start].Height<<3;
+		UTI ^= State.TMEM[Start].StartY;
+		UTI ^= State.TMEM[Start].Width;
+		UTI ^= State.TMEM[Start].Height;
 	}
 	if (tile->fmt==2){
 		if (tile->size==0){
@@ -1295,12 +1290,6 @@ UTILoopInner:
 		if (State.TextureCount){
 			for (i=0;i<State.TextureCount;i++){
 				if ((State.Textures[i].UTI == UTI) &&
-					(State.Textures[i].cms==tile->cms) &&
-					(State.Textures[i].cmt==tile->cmt) &&
-					(State.Textures[i].masks==tile->masks) &&
-					(State.Textures[i].maskt==tile->maskt) &&
-					(State.Textures[i].DXTUsed==State.TMEM[Start].DXTUsed) &&
-					(State.Textures[i].RDPPitch==RDPPitch) &&
 					(State.Textures[i].D3DObject)){
 					Index = i;
 					break;
@@ -1346,8 +1335,11 @@ UTILoopInner:
 				case 0:
 				case 2: // RGBA 16
 					Format = D3DFMT_A1R5G5B5;
+#line 1333 "3DFunctions.cpp"
 					SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
+#line 1334 "3DFunctions.cpp"
 					SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
+#line 1335 "3DFunctions.cpp"
 					SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 					targetptr.p16 = (U16*)Rect.pBits;
 					sourceptr.p8 = &TMEMFlipped[Start];
@@ -1373,8 +1365,11 @@ UTILoopInner:
 					break;
 				case 3:  // IA 16
 					Format = D3DFMT_A8R8G8B8;
+#line 1360 "3DFunctions.cpp"
 					SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
+#line 1361 "3DFunctions.cpp"
 					SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
+#line 1362 "3DFunctions.cpp"
 					SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 					targetptr.p16 = (U16*)Rect.pBits;
 					sourceptr.p8 = &TMEMFlipped[Start];
@@ -1406,8 +1401,11 @@ UTILoopInner:
 				break;
 			case 3: // IA
 				Format = D3DFMT_A1R5G5B5;
+#line 1393 "3DFunctions.cpp"
 				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
+#line 1394 "3DFunctions.cpp"
 				SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
+#line 1395 "3DFunctions.cpp"
 				SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 				targetptr.p16 = (U16*)Rect.pBits;
 				sourceptr.p8 = &TMEMFlipped[Start];
@@ -1431,8 +1429,11 @@ UTILoopInner:
 				break;
 			case 4: // I
 				Format = D3DFMT_A8R8G8B8;
+#line 1418 "3DFunctions.cpp"
 				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
+#line 1419 "3DFunctions.cpp"
 				SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
+#line 1420 "3DFunctions.cpp"
 				SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 				targetptr.p32 = (U32*)Rect.pBits;
 				sourceptr.p8 = &TMEMFlipped[Start];
@@ -1462,8 +1463,11 @@ UTILoopInner:
 				case 0:
 				case 2: // RGBA 16
 					Format = D3DFMT_A1R5G5B5;
+#line 1449 "3DFunctions.cpp"
 					SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
+#line 1450 "3DFunctions.cpp"
 					SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
+#line 1451 "3DFunctions.cpp"
 					SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 					targetptr.p16 = (U16*)Rect.pBits;
 					sourceptr.p8 = &TMEMFlipped[Start];
@@ -1482,8 +1486,11 @@ UTILoopInner:
 					break;
 				case 3:  // IA 16
 					Format = D3DFMT_A8R8G8B8;
+#line 1469 "3DFunctions.cpp"
 					SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
+#line 1470 "3DFunctions.cpp"
 					SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
+#line 1471 "3DFunctions.cpp"
 					SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 					targetptr.p32 = (U32*)Rect.pBits;
 					sourceptr.p8 = &TMEMFlipped[Start];
@@ -1507,8 +1514,11 @@ UTILoopInner:
 				break;
 			case 3: // IA
 				Format = D3DFMT_A4R4G4B4;
+#line 1494 "3DFunctions.cpp"
 				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
+#line 1495 "3DFunctions.cpp"
 				SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
+#line 1496 "3DFunctions.cpp"
 				SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 				targetptr.p16 = (U16*)Rect.pBits;
 				sourceptr.p8 = &TMEMFlipped[Start];
@@ -1524,8 +1534,11 @@ UTILoopInner:
 				break;
 			case 4: // I
 				Format = D3DFMT_A8R8G8B8;
+#line 1511 "3DFunctions.cpp"
 				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
+#line 1512 "3DFunctions.cpp"
 				SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
+#line 1513 "3DFunctions.cpp"
 				SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 				targetptr.p32 = (U32*)Rect.pBits;
 				sourceptr.p8 = &TMEMFlipped[Start];
@@ -1544,8 +1557,11 @@ UTILoopInner:
 			switch (tile->fmt){
 			case 0: // RGBA
 				Format = D3DFMT_A1R5G5B5;
+#line 1531 "3DFunctions.cpp"
 				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
+#line 1532 "3DFunctions.cpp"
 				SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
+#line 1533 "3DFunctions.cpp"
 				SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 				targetptr.p16 = (U16*)Rect.pBits;
 				sourceptr.p8 = &TMEMFlipped[Start];
@@ -1565,8 +1581,11 @@ UTILoopInner:
 				break;
 			case 3: // IA
 				Format = D3DFMT_A8R8G8B8;
+#line 1552 "3DFunctions.cpp"
 				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
+#line 1553 "3DFunctions.cpp"
 				SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
+#line 1554 "3DFunctions.cpp"
 				SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 				targetptr.p32 = (U32*)Rect.pBits;
 				sourceptr.p8 = &TMEMFlipped[Start];
@@ -1589,8 +1608,11 @@ UTILoopInner:
 			switch (tile->fmt){
 			case 0: // RGBA
 				Format = D3DFMT_A8R8G8B8;
+#line 1576 "3DFunctions.cpp"
 				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
+#line 1577 "3DFunctions.cpp"
 				SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
+#line 1578 "3DFunctions.cpp"
 				SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 				targetptr.p32 = (U32*)Rect.pBits;
 				sourceptr.p8 = &TMEMFlipped[Start];
@@ -1676,10 +1698,10 @@ UTILoopInner:
 				}
 			}
 			if ((S32)D3DHeight>(S32)Height){
+				U32 BytesPerLine;
 				// texture was changed to a POW2 texture. To improve stretching and allow clamping fill clamp the tex
 				targetptr.p32 = (U32*)Rect.pBits;
 				sourceptr.p8 = &TMEMFlipped[Start];
-				U32 BytesPerLine;
 				switch (Format){
 				case D3DFMT_A8R8G8B8:
 					BytesPerLine = D3DWidth<<2;
@@ -1703,11 +1725,13 @@ UTILoopInner:
 					}
 				}
 			}
+#line 1690 "3DFunctions.cpp"
 			SafeDX(D3DSurface0->UnlockRect());
 			FreeObject(D3DSurface0);
 		} else {
 			// unknown texture type
 			// load black default texture
+#line 1695 "3DFunctions.cpp"
 			SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, D3DFMT_A1R5G5B5, D3DPOOL_MANAGED, &D3DTexture));
 		}
 		if (State.TextureCount >= (MaxTextureCount-5)){
@@ -1750,6 +1774,7 @@ void SetZBufferWrite()
 	bool bUseZ;
 	if ((State.Othermode.fields.rendermodezupd!=0) != State.ZBufferWrite){
 		State.ZBufferWrite = State.Othermode.fields.rendermodezupd!=0;
+#line 1737 "3DFunctions.cpp"
 		SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, State.ZBufferWrite));
 	}
 	if (Options.bForceZBuffer){
@@ -1759,6 +1784,7 @@ void SetZBufferWrite()
 	}
 	if (bUseZ != State.ZEnabled){
 		State.ZEnabled = bUseZ;
+#line 1746 "3DFunctions.cpp"
 		SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ZENABLE, State.ZEnabled));
 	}
 /*
@@ -1771,6 +1797,7 @@ void SetZBufferWrite()
 
 void HandleTextures(bool TextureEnabled, TTile *tile)
 {
+	static bool UseTexture1, UseTexture2;
 	if (TextureEnabled){
 		// check which textures are used
 		if ((State.Othermode.fields.cycletype==2)||(State.Othermode.fields.cycletype==3)){
@@ -1922,9 +1949,6 @@ void HandleTextures(bool TextureEnabled, TTile *tile)
 			State.TextureFilter = D3DTEXF_LINEAR;
 			break;
 		}
-	} else {
-		UseTexture1 = false;
-		UseTexture2 = false;
 	}
 }
 
@@ -2016,8 +2040,10 @@ void SendTrisToD3D(TTile *Tile, bool TexturesEnabled, D3DPRIMITIVETYPE BufferTyp
 	}
 #endif
 	D3DTNTVERTEX *VertexBuffer;
+#line 2003 "3DFunctions.cpp"
 	SafeDX(g_VertexBuffer->Lock(0, State.D3DVertexCacheIndex*sizeof(D3DTNTVERTEX), (BYTE**)&VertexBuffer, 0));
 	memcpy(VertexBuffer, State.D3DVertexCache, State.D3DVertexCacheIndex*sizeof(D3DTNTVERTEX));
+#line 2005 "3DFunctions.cpp"
 	SafeDX(g_VertexBuffer->Unlock());
 	U32 TriCount;
 	switch (BufferType){
@@ -2030,142 +2056,10 @@ void SendTrisToD3D(TTile *Tile, bool TexturesEnabled, D3DPRIMITIVETYPE BufferTyp
 	}
 	for (i=0;i<BlendPasses.Count;i++){
 		SetBlendPass(i);
+#line 2017 "3DFunctions.cpp"
 		SafeDX(g_pd3dDevice->DrawPrimitive(BufferType, 0, TriCount));
 	}
 	State.D3DVertexCacheIndex = 0;
-}
-
-COLORREF GetSurfacePixel(D3DFORMAT Format, D3DLOCKED_RECT Rect, int x, int y){
-	union {
-		U8* p8;
-		U16* p16;
-		U32* p32;
-		U64* p64;
-	} ptr;
-
-	ptr.p8 = (U8*)Rect.pBits;
-	ptr.p8 += y*Rect.Pitch;
-	switch (Format){
-	case D3DFMT_A8R8G8B8:
-		ptr.p32+=x;
-		return (((*ptr.p32) & 0xFF000000) >> 24) | (((*ptr.p32) & 0x00FFFFFF) << 8);
-	case D3DFMT_A1R5G5B5:
-		ptr.p16+=x;
-		return ((*ptr.p16)&Bit16?0x0:0xFF) | (BITS((U32)(*ptr.p16), 10, 5)<<(24+3)) | (BITS((U32)(*ptr.p16), 5, 5)<<(16+3)) | (BITS((U32)*(ptr.p16), 0, 5)<<(8+3));
-	case D3DFMT_A4R4G4B4:
-		ptr.p16+=x;
-		return (BITS((U32)(*ptr.p16), 12, 4)<<(24+4)) | (BITS((U32)(*ptr.p16), 8, 4)<<(24+4)) | (BITS((U32)(*ptr.p16), 4, 4)<<(16+4)) | (BITS((U32)*(ptr.p16), 0, 4)<<(8+4));
-	default:
-		return 0;
-	}
-}
-
-void SaveVRMLTexture(U32 uTextureIndex, U32 *iWidth, U32 *iHeight, bool bIsTexture1){
-	D3DLOCKED_RECT Rect;
-	D3DSURFACE_DESC Desc;
-	char sFilenameColor[256];
-	char sFilenameAlpha[256];
-	FILE *fColor, *fAlpha;
-	BITMAPFILEHEADER bitmapfileheader;
-	BITMAPINFOHEADER bitmapinfoheader;
-#if VRMLInline
-	if (bIsTexture1){
-		// texture
-		fprintf(fVRML, "				texture PixelTexture {\n");
-		IDirect3DSurface8 *Surface;
-		SafeDX(State.Textures[uTextureIndex].D3DObject->GetSurfaceLevel(0, &Surface));
-		SafeDX(Surface->GetDesc(&Desc));
-		SafeDX(Surface->LockRect(&Rect, 0, 0));
-
-		fprintf(fVRML, "					image %i %i 4 \n", State.Textures[uTextureIndex].Width, State.Textures[uTextureIndex].Height);
-		for (U32 y = 0;y<State.Textures[uTextureIndex].Height;y++){
-			fprintf(fVRML, "					");
-			for (U32 x = 0;x<State.Textures[uTextureIndex].Width;x++){
-				COLORREF c = GetSurfacePixel(Desc.Format, Rect, x, y);
-				fprintf(fVRML, "%i ", c);
-			}
-			fprintf(fVRML, "\n");
-		}
-
-		SafeDX(Surface->UnlockRect());
-		SafeDX(Surface->Release());
-		fprintf(fVRML, "					repeatS TRUE\n");
-		fprintf(fVRML, "					repeatT TRUE\n");
-		fprintf(fVRML, "				}\n");
-	}
-#else
-	if (bIsTexture1){
-		// texture
-		fprintf(fVRML, "				texture ImageTexture {\n");
-		fprintf(fVRML, "				    url \"%X_c.bmp\"\n", State.Textures[uTextureIndex].UTI);
-		fprintf(fVRML, "					repeatS TRUE\n");
-		fprintf(fVRML, "					repeatT TRUE\n");
-		fprintf(fVRML, "				}\n");
-	}
-	
-	sprintf(sFilenameColor, "c:\\vrml\\%X_c.bmp", State.Textures[uTextureIndex].UTI);
-	sprintf(sFilenameAlpha, "c:\\vrml\\%X_a.bmp", State.Textures[uTextureIndex].UTI);
-	IDirect3DSurface8 *Surface;
-	fColor = fopen(sFilenameColor, "wb");
-	fAlpha = fopen(sFilenameAlpha, "wb");
-	
-	// Write both file headers
-	bitmapfileheader.bfSize = sizeof(BITMAPFILEHEADER);
-	bitmapfileheader.bfType = 'MB';  // reverse endian of "BM"
-	bitmapfileheader.bfReserved1 = 0;
-	bitmapfileheader.bfReserved2 = 0;
-	bitmapfileheader.bfSize = sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER) + State.Textures[uTextureIndex].Width*State.Textures[uTextureIndex].Height*3;
-	bitmapfileheader.bfOffBits = sizeof(BITMAPFILEHEADER) + sizeof(BITMAPINFOHEADER);
-	fwrite(&bitmapfileheader, sizeof(BITMAPFILEHEADER), 1, fColor);
-	fwrite(&bitmapfileheader, sizeof(BITMAPFILEHEADER), 1, fAlpha);
-
-	// Write both info headers
-	bitmapinfoheader.biSize = sizeof(BITMAPINFOHEADER);
-	bitmapinfoheader.biWidth = State.Textures[uTextureIndex].Width;
-	bitmapinfoheader.biHeight = State.Textures[uTextureIndex].Height;
-	bitmapinfoheader.biPlanes = 1;
-	bitmapinfoheader.biBitCount = 24;
-	bitmapinfoheader.biCompression = BI_RGB;
-	bitmapinfoheader.biSizeImage = 0;
-	bitmapinfoheader.biXPelsPerMeter = 72;
-	bitmapinfoheader.biYPelsPerMeter = 72;
-	bitmapinfoheader.biClrUsed = 0;
-	bitmapinfoheader.biClrImportant = 0;
-	fwrite(&bitmapinfoheader, sizeof(BITMAPINFOHEADER), 1, fColor);
-	fwrite(&bitmapinfoheader, sizeof(BITMAPINFOHEADER), 1, fAlpha);
-
-	SafeDX(State.Textures[uTextureIndex].D3DObject->GetSurfaceLevel(0, &Surface));
-	SafeDX(Surface->GetDesc(&Desc));
-	SafeDX(Surface->LockRect(&Rect, 0, 0));
-
-	for (U32 y = 0;y<State.Textures[uTextureIndex].Height;y++){
-		for (U32 x = 0;x<State.Textures[uTextureIndex].Width;x++){
-			COLORREF c = GetSurfacePixel(Desc.Format, Rect, x, y);
-			COLORREF aonly, conly;
-			conly = c>>8;
-			aonly = (c&BitM8);
-			//aonly = 255-aonly;
-			aonly = RGB(aonly, aonly, aonly);
-			fwrite(&conly, 3, 1, fColor);
-			fwrite(&aonly, 3, 1, fAlpha);
-		}
-
-		// zero pad to 32 bit boundary
-		int iPad = (State.Textures[uTextureIndex].Width*3) & BitM2;
-		if (iPad!=0){
-			U32 null = 0;
-			fwrite(&null, 4-iPad, 1, fColor);
-			fwrite(&null, 4-iPad, 1, fAlpha);
-		}
-	}
-
-	SafeDX(Surface->UnlockRect());
-	SafeDX(Surface->Release());
-	fclose(fColor);
-	fclose(fAlpha);
-#endif
-	*iWidth = Desc.Width;
-	*iHeight = Desc.Height;
 }
 
 void FlushVertexCache()
@@ -2173,131 +2067,51 @@ void FlushVertexCache()
 	if (State.D3DVertexCacheIndex){
 		if (Options.bVRMLExport){
 			U32 i;
-			U32 iVRMLWidth, iVRMLHeight, iVRMLWidth2, iVRMLHeight2;
-			fprintf(fVRML, "		Shape {\n");
-			fprintf(fVRML, "			appearance DEF NemuMat%i Appearance {\n", uVRMLFaceIndex);
-			fprintf(fVRML, "				material Material {\n");
-			fprintf(fVRML, "					ambientIntensity 1\n");
-			fprintf(fVRML, "					diffuseColor ");
-			// put in diffuse color of first point
-			fprintf(fVRML, "%f %f %f\n",
-				BITS(State.D3DVertexCache[0].color, 16, 8)/256.0f,
-				BITS(State.D3DVertexCache[0].color,  8, 8)/256.0f,
-				BITS(State.D3DVertexCache[0].color,  0, 8)/256.0f);
-			fprintf(fVRML, "					specularColor 0 0 0\n");
-			fprintf(fVRML, "					emissiveColor 0 0 0\n");
-			fprintf(fVRML, "					shininess 0.0\n");
-			fprintf(fVRML, "					transparency 0\n");
-			fprintf(fVRML, "				}\n");
-
-			iVRMLWidth = 0;
-			iVRMLHeight = 0;
-			iVRMLWidth2 = 0;
-			iVRMLHeight2 = 0;
-			HandleTextures(State.GeometryMode.fields.TextureEnable, State.texture.tile);
-			if (UseTexture1){
-				SaveVRMLTexture(Texture1, &iVRMLWidth, &iVRMLHeight, true);
-			}
-			if (UseTexture2){
-				SaveVRMLTexture(Texture2, &iVRMLWidth2, &iVRMLHeight2, !UseTexture1);
-			}
-			fprintf(fVRML, "			}\n");
-
-			fprintf(fVRML, "			geometry DEF Nemu_%X_%X_%i IndexedFaceSet {\n",
-						(UseTexture1?State.Textures[Texture1].UTI:0), 
-						(UseTexture2?State.Textures[Texture2].UTI:0),
-						uVRMLFaceIndex);
-			fprintf(fVRML, "				ccw FALSE\n");
-			fprintf(fVRML, "				solid TRUE\n");
-			fprintf(fVRML, "				coord Coordinate{\n");
-			fprintf(fVRML, "					point [\n");
+			fprintf(fVRML, "Transform {\n");
+			fprintf(fVRML, "\tchildren [\n");
+			fprintf(fVRML, "\t\tShape {\n");
+			fprintf(fVRML, "\t\t\tappearance Appearance {\n");
+			fprintf(fVRML, "\t\t\t\tmaterial Material {\n");
+			fprintf(fVRML, "\t\t\t\t\tambientIntensity 1\n");
+			fprintf(fVRML, "\t\t\t\t\tspecularColor  0 0 0\n");
+			fprintf(fVRML, "\t\t\t\t\temissiveColor  0 0 0\n");
+			fprintf(fVRML, "\t\t\t\t\tshininess 1.0\n");
+			fprintf(fVRML, "\t\t\t\t\ttransparency 0\n");
+			fprintf(fVRML, "\t\t\t\t}\n");
+			fprintf(fVRML, "\t\t\t}\n");
+			fprintf(fVRML, "\t\t\tgeometry IndexedFaceSet {\n");
+			fprintf(fVRML, "\t\t\t\tccw TRUE\n");
+			fprintf(fVRML, "\t\t\t\tsolid TRUE\n");
+			fprintf(fVRML, "\t\t\t\tcoord Coordinate{\n");
+			fprintf(fVRML, "\t\t\t\t\tpoint [\n");
 			for (i=0;i<State.D3DVertexCacheIndex;i++){
-				fprintf(fVRML, "						%3.8f %3.8f %3.8f", State.D3DVertexCache[i].x/1000.0f, State.D3DVertexCache[i].y/1000.0f, State.D3DVertexCache[i].z/1000.0f);
-				if (i<State.D3DVertexCacheIndex-1){
-					fprintf(fVRML, ",");
-				}
+				fprintf(fVRML, "\t\t\t\t\t\t%3.3f %3.3f %3.3f", State.D3DVertexCache[i].x/1000.0f, State.D3DVertexCache[i].y/1000.0f, State.D3DVertexCache[i].z/1000.0f);
+				if (i<State.D3DVertexCacheIndex-1) fprintf(fVRML, ",");
 				fprintf(fVRML, "\n");
 			}
-			fprintf(fVRML, "					]\n");
-			fprintf(fVRML, "				}\n");
-
-			// Coordinate Indices...
-			fprintf(fVRML, "				coordIndex [\n");
+			fprintf(fVRML, "\t\t\t\t\t]\n");
+			fprintf(fVRML, "\t\t\t\t}\n");
+			fprintf(fVRML, "\t\t\t\tcoordIndex [\n");
 			for (i=0;i<State.D3DVertexCacheIndex;i+=3){
-				fprintf(fVRML, "					%i, %i, %i, -1", i, i+1, i+2);
-				if (i<State.D3DVertexCacheIndex-4){
-					fprintf(fVRML, ",");
-				}
-				fprintf(fVRML, "\n");
+				fprintf(fVRML, "\t\t\t\t\t%i, %i, %i, -1, \n", i, i+1, i+2);
 			}
-			fprintf(fVRML, "				]\n");
-
-			if (UseTexture1||UseTexture2){
-				// Texture coordinates...
-				fprintf(fVRML, "				texCoord TextureCoordinate {\n");
-				fprintf(fVRML, "					point [\n");
-				for (i=0;i<State.D3DVertexCacheIndex;i++){
-					float u, v;
-					u = State.D3DVertexCache[i].tex[0].u*State.Textures[Texture1].Width;
-					v = State.D3DVertexCache[i].tex[0].v*State.Textures[Texture1].Height;
-					if (iVRMLWidth){
-						u /= (S32)iVRMLWidth;
-					}
-					if (iVRMLHeight){
-						v /= (S32)iVRMLHeight;
-					}
-					fprintf(fVRML, "						%3.8f %3.8f", u, v);
-
-					if (i<State.D3DVertexCacheIndex-1){
-						fprintf(fVRML, ",");
-					}
-					fprintf(fVRML, "\n");
-				}
-				fprintf(fVRML, "					]\n");
-				fprintf(fVRML, "				}\n");
-
-				// Texture Coordinate Indices...
-				fprintf(fVRML, "				texCoordIndex [\n");
-				for (i=0;i<State.D3DVertexCacheIndex;i+=3){
-					fprintf(fVRML, "					%i, %i, %i, -1", i, i+1, i+2);
-					if (i<State.D3DVertexCacheIndex-4){
-						fprintf(fVRML, ",");
-					}
-					fprintf(fVRML, "\n");
-				}
-				fprintf(fVRML, "				]\n");
-			} else {
-				// Color...
-				fprintf(fVRML, "				colorPerVertex TRUE\n");
-				fprintf(fVRML, "				color Color {\n");
-				fprintf(fVRML, "					color [ \n");
-				for (i=0;i<State.D3DVertexCacheIndex;i++){
-					fprintf(fVRML, "						%f %f %f",
-						BITS(State.D3DVertexCache[i].color, 16, 8)/256.0f,
-						BITS(State.D3DVertexCache[i].color,  8, 8)/256.0f,
-						BITS(State.D3DVertexCache[i].color,  0, 8)/256.0f);
-					if (i<State.D3DVertexCacheIndex-1){
-						fprintf(fVRML, ",");
-					}
-					fprintf(fVRML, "\n");
-				}
-				fprintf(fVRML, "					]\n");
-				fprintf(fVRML, "				}\n");
-
-				// Color Coordinate Indices...
-				fprintf(fVRML, "				colorIndex [\n");
-				for (i=0;i<State.D3DVertexCacheIndex;i+=3){
-					fprintf(fVRML, "					%i, %i, %i, -1", i, i+1, i+2);
-					if (i<State.D3DVertexCacheIndex-4){
-						fprintf(fVRML, ",");
-					}
-					fprintf(fVRML, "\n");
-				}
-				fprintf(fVRML, "				]\n");
+			fprintf(fVRML, "\t\t\t\t]\n");
+			fprintf(fVRML, "\t\t\t\tcolorPerVertex TRUE\n");
+			fprintf(fVRML, "\t\t\t\tcolor\n");
+			fprintf(fVRML, "\t\t\t\tColor {\n");
+			fprintf(fVRML, "\t\t\t\t\tcolor [  \n");
+			for (i=0;i<State.D3DVertexCacheIndex;i++){
+				fprintf(fVRML, "\t\t\t\t\t\t%f, %f, %f,\n",
+					BITS(State.D3DVertexCache[i].color, 16, 8)/256.0f,
+					BITS(State.D3DVertexCache[i].color, 8, 8)/256.0f,
+					BITS(State.D3DVertexCache[i].color, 0, 8)/256.0f);
 			}
-			fprintf(fVRML, "			}\n");
-			fprintf(fVRML, "		}\n");
-			uVRMLFaceIndex++;
+			fprintf(fVRML, "\t\t\t\t\t]\n");
+			fprintf(fVRML, "\t\t\t\t}\n");
+			fprintf(fVRML, "\t\t\t}\n");
+			fprintf(fVRML, "\t\t}\n");
+			fprintf(fVRML, "\t]\n");
+			fprintf(fVRML, "}\n");
 		}
 		LogCommand("Rendering %i tris in %s mode\n", State.D3DVertexCacheIndex/3, (State.Othermode.fields.cycletype==0?"1 Cycle":(State.Othermode.fields.cycletype==1?"2 Cycle":(State.Othermode.fields.cycletype==2?"Copy":"Fill"))));
 		SetViewport();
@@ -2307,8 +2121,10 @@ void FlushVertexCache()
 			SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &State.Projection));
 #else
 			if (State.bForceMtx){
+#line 2087 "3DFunctions.cpp"
 				SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &State.TempMatrix));
 			} else {
+#line 2089 "3DFunctions.cpp"
 				SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &State.ProjectionModified));
 			}
 #endif
@@ -2354,8 +2170,13 @@ void CopyVtxBuffer(D3DTNTVERTEX *SourceVertex, D3DTNTVERTEX *D3DVertexBuffer, U3
 	float Width, Height;
 	Width = (float)(State.texture.tile->D3DWidth);
 	Height = (float)(State.texture.tile->D3DHeight);
+	if (State.GeometryMode.fields.Texture_Gen && State.GeometryMode.fields.Lighting){
+		_TexAssignU(D3DVertexBuffer) = SourceVertex->tex[0].u;
+		_TexAssignV(D3DVertexBuffer) = SourceVertex->tex[0].v;
+	} else {
 	_TexAssignU(D3DVertexBuffer) = (SourceVertex->tex[0].u-State.texture.tile->uls) * ShiftTable[State.texture.tile->shifts] / Width;
 	_TexAssignV(D3DVertexBuffer) = (SourceVertex->tex[0].v-State.texture.tile->ult) * ShiftTable[State.texture.tile->shiftt] / Height;
+	}
 	// use which vertex?
 	//if ((!State.GeometryMode.fields.Lighting) && (!State.GeometryMode.fields.SmoothShading)){
 	//	D3DVertexBuffer->color = VertexCache[ColorIndex].color;
@@ -2577,24 +2398,22 @@ void S2DEX_Texture(uObjTxtr *Texture)
 
 }
 
-__inline void Transform2D(D3DTNTVERTEX *v)
+__inline void Transform2D(float &vy, float &vx)
 {
-	// Uses the 2D Matrix for S2DEX ucodes...
 	float x, y;
-	x   = (v->x*State.Matrix2D._11 + v->y*State.Matrix2D._21 + State.Matrix2D._31);
-	y   = (v->x*State.Matrix2D._12 + v->y*State.Matrix2D._22 + State.Matrix2D._32);
-	v->x = x;
-	v->y = y;
+	x = vx*State.Matrix2D._11 + vy*State.Matrix2D._21 + State.Matrix2D._31;
+	y = vx*State.Matrix2D._12 + vy*State.Matrix2D._22 + State.Matrix2D._32;
+	vx = x;
+	vy = y;
 }
 
-__inline void Transform2DMove(D3DTNTVERTEX *v)
+__inline void Transform2DMove(float &vx, float &vy)
 {
-	// Uses the 2D Matrix for S2DEX ucodes...
 	float x, y;
-	x   = (v->x/State.Matrix2D._13 + State.Matrix2D._31);
-	y   = (v->y/State.Matrix2D._23 + State.Matrix2D._32);
-	v->x = x;
-	v->y = y;
+	x = vx/State.Matrix2D._13 + State.Matrix2D._31;
+	y = vy/State.Matrix2D._23 + State.Matrix2D._32;
+	vx = x;
+	vy = y;
 }
 
 void S2DEX_Sprite(uObjSprite *Sprite, U32 DoMatrix)
@@ -2646,11 +2465,14 @@ void S2DEX_Sprite(uObjSprite *Sprite, U32 DoMatrix)
 
 	D3DTNTVERTEX *VertexBuffer;
 	State.ZBufferWrite = false;
+#line 2431 "3DFunctions.cpp"
 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, false));
 	D3DXMATRIX Ortho;
-	D3DXMatrixOrthoOffCenterRH(&Ortho, 0, (float)State.cimg.width, (float)GetHeight(State.cimg.width), 0, 0.0f, 1.0f);
+	D3DXMatrixOrthoOffCenterRH(&Ortho, 0, (float)State.cimg.width, ((float)State.cimg.width*0.75f), 0, 0.0f, 1.0f);
+#line 2434 "3DFunctions.cpp"
 	SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &Ortho));
 	State.ProjectionChanged = true;
+#line 2436 "3DFunctions.cpp"
 	SafeDX(g_VertexBuffer->Lock(0, 4*sizeof(D3DTNTVERTEX), (BYTE**)&VertexBuffer, 0));
 	VertexBuffer[0].color = State.FillColor;
 	VertexBuffer[0].x = (float)x1;
@@ -2679,25 +2501,28 @@ void S2DEX_Sprite(uObjSprite *Sprite, U32 DoMatrix)
 	VertexBuffer[3].z = 0.0f;
 	_TexAssignU((&VertexBuffer[3])) = u2;
 	_TexAssignV((&VertexBuffer[3])) = v2;
+#line 2464 "3DFunctions.cpp"
 	SafeDX(g_VertexBuffer->Unlock());
 
 	U32 i;
 	switch (DoMatrix){
 	case 0:
-		for (i=0;i<4;i++){
-			Transform2D(&VertexBuffer[i]);
-		}
+		Transform2D(VertexBuffer[0].y, VertexBuffer[0].x);
+		Transform2D(VertexBuffer[1].y, VertexBuffer[1].x);
+		Transform2D(VertexBuffer[2].y, VertexBuffer[2].x);
+		Transform2D(VertexBuffer[3].y, VertexBuffer[3].x);
 		break;
 	case 1:  // Don't rotate
-		for (i=0;i<4;i++){
-			Transform2DMove(&VertexBuffer[i]);
-		}
+		Transform2DMove(VertexBuffer[0].x, VertexBuffer[0].y);
+		Transform2DMove(VertexBuffer[1].x, VertexBuffer[1].y);
+		Transform2DMove(VertexBuffer[2].x, VertexBuffer[2].y);
+		Transform2DMove(VertexBuffer[3].x, VertexBuffer[3].y);
 		break;
 	case 2:  // Don't rotate
 /*
 		for (i=0;i<4;i++){
-			VertexBuffer[i].x = VertexBuffer[i].x/2.0f + (float)GetHeight(State.cimg.width)/2.0f;
-			VertexBuffer[i].y = VertexBuffer[i].y/2.0f + (float)GetHeight(State.cimg.width)/2.0f;
+			VertexBuffer[i].x = VertexBuffer[i].x/2.0f + ((float)State.cimg.width*0.75f)/2.0f;
+			VertexBuffer[i].y = VertexBuffer[i].y/2.0f + ((float)State.cimg.width*0.75f)/2.0f;
 		}
 */
 		break;
@@ -2711,23 +2536,11 @@ void S2DEX_Sprite(uObjSprite *Sprite, U32 DoMatrix)
 	BlendPasses.Passes[0].Stages[0].AddressV = D3DTADDRESS_MIRROR;
 
 	SetBlendPass(0);
+#line 2496 "3DFunctions.cpp"
 	SafeDX(g_pd3dDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2));
 }
 
 U32 GetHeight(U32 Width)
 {
-	switch (Width){
-		case 320:
-			return 240;
-			break;
-		case 512:  // Excite Bike
-			return 240;
-			break;
-		case 640:
-			return 480;
-			break;
-		default:
-			return Width*3/4;
-			break;
-	}
+    return Width*3/4;
 }

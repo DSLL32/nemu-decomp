@@ -25,8 +25,6 @@ bool bHighlighted;
 bool ChangeTextureCoordinates;
 char DatFilename[_MAX_PATH]="";
 char IniFilename[_MAX_PATH]="";
-DWORD m_pPixelShader;
-bool UseTexture1, UseTexture2; // set by HandleTextures
 U32 Texture1, Texture2; // indices into texture array
 
 TCombineScripts CombineScripts;
@@ -111,9 +109,12 @@ U32 GenerateColorTexture(U32 Color)
 		}
 		LPDIRECT3DSURFACE8 D3DSurface0;
 		D3DLOCKED_RECT Rect;
+#line 112 "combiner.cpp"
 		SafeDX(g_ColorTexture[ColorTextureIndex].D3DObject->GetSurfaceLevel(0, &D3DSurface0));
+#line 113 "combiner.cpp"
 		SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 		*((U32*)Rect.pBits) = Color;
+#line 115 "combiner.cpp"
 		SafeDX(D3DSurface0->UnlockRect());
 		g_ColorTexture[ColorTextureIndex].Color = Color;
 	}
@@ -365,6 +366,54 @@ void FreeDatFile()
 }
 
 
+void SetBlendPass(U32 Index)
+{
+#line 265 "combiner.cpp"
+	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_SRCBLEND, BlendPasses.Passes[Index].SrcBlend));
+#line 266 "combiner.cpp"
+	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_DESTBLEND, BlendPasses.Passes[Index].DstBlend));
+#line 267 "combiner.cpp"
+	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_TEXTUREFACTOR, BlendPasses.Passes[Index].TFactor));
+	U32 i; // stage
+	for (i=0;i<8;i++){
+#line 270 "combiner.cpp"
+		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_COLOROP, BlendPasses.Passes[Index].Stages[i].ColorOp));
+#line 271 "combiner.cpp"
+		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_ALPHAOP, BlendPasses.Passes[Index].Stages[i].AlphaOp));
+		if (BlendPasses.Passes[Index].Stages[i].ColorOp == D3DTOP_DISABLE){
+			break;
+		}
+#line 275 "combiner.cpp"
+		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_COLORARG1, BlendPasses.Passes[Index].Stages[i].ColorArg1));
+#line 276 "combiner.cpp"
+		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_COLORARG2, BlendPasses.Passes[Index].Stages[i].ColorArg2));
+		//SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_COLORARG0, BlendPasses.Passes[Index].Stages[i].ColorArg3));
+#line 278 "combiner.cpp"
+		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_ALPHAARG1, BlendPasses.Passes[Index].Stages[i].AlphaArg1));
+#line 279 "combiner.cpp"
+		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_ALPHAARG2, BlendPasses.Passes[Index].Stages[i].AlphaArg2));
+		//SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_ALPHAARG0, BlendPasses.Passes[Index].Stages[i].AlphaArg3));
+#line 281 "combiner.cpp"
+		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_ADDRESSU, BlendPasses.Passes[Index].Stages[i].AddressU));
+#line 282 "combiner.cpp"
+		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_ADDRESSV, BlendPasses.Passes[Index].Stages[i].AddressV));
+#line 283 "combiner.cpp"
+		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_MAGFILTER, State.TextureFilter));
+#line 284 "combiner.cpp"
+		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_MINFILTER, State.TextureFilter));
+#line 285 "combiner.cpp"
+		SafeDX(g_pd3dDevice->SetTexture(i, BlendPasses.Passes[Index].Stages[i].Texture));
+		if ((BlendPasses.Passes[Index].Stages[i].ColorArg1==D3DTA_TEXTURE) ||
+			(BlendPasses.Passes[Index].Stages[i].ColorArg2==D3DTA_TEXTURE) ||
+			(BlendPasses.Passes[Index].Stages[i].AlphaArg1==D3DTA_TEXTURE) ||
+			(BlendPasses.Passes[Index].Stages[i].AlphaArg2==D3DTA_TEXTURE)){
+			if (BlendPasses.Passes[Index].Stages[i].Texture==0){
+				ShowError("Error SetBlendPass: Texture used but not set");
+			}
+		}
+	}
+}
+
 int _httoi(const TCHAR *value)
 {
   struct CHexMap
@@ -588,680 +637,10 @@ void LoadDatFile()
 	qsort(&CombineScripts.Script[0], CombineScripts.Count, sizeof(TScript), &ScriptCompare);
 }
 
-#if PIXELSHADER
-void SetBlendPass(U32 Index)
-{
-	D3DXVECTOR4 Colors[8];
 
-	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_SRCBLEND, BlendPasses.Passes[Index].SrcBlend));
-	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_DESTBLEND, BlendPasses.Passes[Index].DstBlend));
-	if (UseTexture1){
-/*
-		SafeDX(g_pd3dDevice->SetTexture(0, State.Textures[Texture1].D3DObject));
-		SafeDX(g_pd3dDevice->SetTextureStageState(0, D3DTSS_ADDRESSU, State.Address1U));
-		SafeDX(g_pd3dDevice->SetTextureStageState(0, D3DTSS_ADDRESSV, State.Address1V));
-*/
-		SafeDX(g_pd3dDevice->SetTexture(0, BlendPasses.Passes[0].Stages[0].Texture));
-		SafeDX(g_pd3dDevice->SetTextureStageState(0, D3DTSS_ADDRESSU, BlendPasses.Passes[0].Stages[0].AddressU));
-		SafeDX(g_pd3dDevice->SetTextureStageState(0, D3DTSS_ADDRESSV, BlendPasses.Passes[0].Stages[0].AddressV));
-		SafeDX(g_pd3dDevice->SetTextureStageState(0, D3DTSS_MAGFILTER, State.TextureFilter));
-		SafeDX(g_pd3dDevice->SetTextureStageState(0, D3DTSS_MINFILTER, State.TextureFilter));
-	}
-	if (UseTexture2){
-/*
-		SafeDX(g_pd3dDevice->SetTexture(1, State.Textures[Texture2].D3DObject));
-		SafeDX(g_pd3dDevice->SetTextureStageState(1, D3DTSS_ADDRESSU, State.Address2U));
-		SafeDX(g_pd3dDevice->SetTextureStageState(1, D3DTSS_ADDRESSV, State.Address2V));
-*/
-		SafeDX(g_pd3dDevice->SetTextureStageState(1, D3DTSS_ADDRESSU, BlendPasses.Passes[0].Stages[1].AddressU));
-		SafeDX(g_pd3dDevice->SetTextureStageState(1, D3DTSS_ADDRESSV, BlendPasses.Passes[0].Stages[1].AddressV));
-		SafeDX(g_pd3dDevice->SetTextureStageState(1, D3DTSS_MAGFILTER, State.TextureFilter));
-		SafeDX(g_pd3dDevice->SetTextureStageState(1, D3DTSS_MINFILTER, State.TextureFilter));
-		SafeDX(g_pd3dDevice->SetTexture(1, BlendPasses.Passes[0].Stages[1].Texture));
 
-	}
-	Colors[0].w = (FLOAT)BITS(State.PrimColor, 24, 8)/255.0f;
-	Colors[0].x = (FLOAT)BITS(State.PrimColor, 16, 8)/255.0f;
-	Colors[0].y = (FLOAT)BITS(State.PrimColor,  8, 8)/255.0f;
-	Colors[0].z = (FLOAT)BITS(State.PrimColor,  0, 8)/255.0f;
-	
-	Colors[1].w = (FLOAT)BITS(State.EnvColor, 24, 8)/255.0f;
-	Colors[1].x = (FLOAT)BITS(State.EnvColor, 16, 8)/255.0f;
-	Colors[1].y = (FLOAT)BITS(State.EnvColor,  8, 8)/255.0f;
-	Colors[1].z = (FLOAT)BITS(State.EnvColor,  0, 8)/255.0f;
-	
-	Colors[2].w = (FLOAT)State.Lod/255.0f;
-	Colors[2].x = Colors[2].w;
-	Colors[2].y = Colors[2].w;
-	Colors[2].z = Colors[2].w;
-
-	Colors[3].x = 0.5f;
-	Colors[3].y = 0.5f;
-	Colors[3].z = 0.5f;
-	Colors[3].w = 0.5f;
-
-	Colors[4].x = 0.0f;
-	Colors[4].y = 0.0f;
-	Colors[4].z = 0.0f;
-	Colors[4].w = 0.0f;
-
-	Colors[5].x = 1.0f;
-	Colors[5].y = 1.0f;
-	Colors[5].z = 1.0f;
-	Colors[5].w = 1.0f;
-
-	Colors[6].x = 1.0f;
-	Colors[6].y = 0.0f;
-	Colors[6].z = 1.0f;
-	Colors[6].w = 1.0f;
-
-/*
-	Colors[7].w = ((FLOAT)BITS(State.PrimColor, 24, 8)-(FLOAT)BITS(State.EnvColor, 24, 8)/255.0f);
-	Colors[7].x = ((FLOAT)BITS(State.PrimColor, 16, 8)-(FLOAT)BITS(State.EnvColor, 16, 8)/255.0f);
-	Colors[7].y = ((FLOAT)BITS(State.PrimColor,  8, 8)-(FLOAT)BITS(State.EnvColor,  8, 8)/255.0f);
-	Colors[7].z = ((FLOAT)BITS(State.PrimColor,  0, 8)-(FLOAT)BITS(State.EnvColor,  0, 8)/255.0f);
-*/
-	Colors[7].w = (FLOAT)State.Convert.K5/255.0f;
-	Colors[7].x = Colors[7].w;
-	Colors[7].y = Colors[7].w;
-	Colors[7].z = Colors[7].w;
-	SafeDX(g_pd3dDevice->SetPixelShaderConstant(0, (float*)&Colors[0], 8));
-}
-
-combtree *PSDoColorPass(combtree *firstpass, int a, int b, int c, int d)
-{
-	CombinerSource source;
-	__int32 combconstant;
-	combtree *thistree;
-	bool bCombinedColor;
-
-	combconstant = 0;
-	bCombinedColor = false;
-	switch(a){
-	case A_ShadeColor:
-		source = diffuse;
-		break;
-	case A_PrimColor:
-		source = constant;
-		combconstant = 1;
-		break;
-	case A_EnvColor:
-		source = constant;
-		combconstant = 2;
-		break;
-	case A_Tex0Color:
-		source = tex0;
-		break;
-	case A_Tex1Color:
-		source = tex1;
-		break;
-	case A_0:
-		source = zero;
-		break;
-	case A_1:
-		source = one;
-		break;
-	case A_Noise:
-		source = zero;  // is there some way to do this in ps?
-		break;
-	case A_CombinedColor:
-		bCombinedColor = true;
-		break;
-	default:
-		source = zero;
-		ShowError("Combiner Error: Unhandled Field in A");
-		break;
-	}
-	if ((firstpass==NULL) || (!bCombinedColor)){
-		thistree = new combtree(source, combconstant);
-	} else {
-		thistree = new combtree(firstpass->root);
-	}
-
-	combconstant = 0;
-	bCombinedColor = false;
-	switch(b){
-	case B_Tex0Color:
-		source = tex0;
-		break;
-	case B_Tex1Color:
-		source = tex1;
-		break;
-	case B_PrimColor:
-		source = constant;
-		combconstant = 1;
-		break;
-	case B_ShadeColor:
-		source = diffuse;
-		break;
-	case B_EnvColor:
-		source = constant;
-		combconstant = 2;
-		break;
-	case B_KeyCenter:
-		source = zero;
-		break;
-	case B_ConertK4:
-		source = zero;
-		break;
-	case B_0:
-		source = zero;
-		break;
-	case B_CombinedColor:
-		bCombinedColor = true;
-		break;
-	default:
-		source = zero;
-		ShowError("Combiner Error: Unhandled Field in B");
-		break;
-	}
-
-	if ((firstpass==NULL) || (!bCombinedColor)){
-		thistree->AddOpTop(sub, source, combconstant);
-	} else {
-		thistree->AddNodeTop(sub, true, firstpass->root);
-	}
-	
-	bCombinedColor = false;
-	combconstant = 0;
-	switch(c){
-	case C_Tex0Color:
-		source = tex0;
-		break;
-	case C_Tex1Color:
-		source = tex1;
-		break;
-	case C_Tex0Alpha:
-		source = tex0alpha;
-		break;
-	case C_Tex1Alpha:
-		source = tex1alpha;
-		break;
-	case C_PrimColor:
-		source = constant;
-		combconstant = 1;
-		break;
-	case C_ShadeColor:
-		source = diffuse;
-		break;
-	case C_ShadeAlpha:
-		source = diffusealpha;
-		break;
-	case C_EnvColor:
-		source = constant;
-		combconstant = 2;
-		break;
-	case C_EnvAlpha:
-		source = constant;
-		combconstant = -2;
-		break;
-	case C_PrimAlpha:
-		source = constant;
-		combconstant = -1;
-		break;
-	case C_0:
-		source = zero;
-		break;
-	case C_PrimLODFrac:
-		source = constant;
-		combconstant = 3;
-		break;
-	case C_CombinedColor:
-		bCombinedColor = true;
-		break;
-	case C_CombinedAlpha:
-		source = combinedalpha;
-		ShowError("Combiner Problem: CombinedAlpha for Color not yet supported.");
-		break;
-	case C_LODFraction:
-		source = constant;
-		combconstant = 4;
-		break;
-	case C_K5:
-		source = constant;
-		combconstant = 8;
-		break;
-	default:
-		source = diffuse;
-		ShowError("Combiner Error: Unhandled Field in C");
-		break;
-	}
-	if ((firstpass==NULL) || (!bCombinedColor)){
-		thistree->AddOpTop(mul, source, combconstant);
-	} else {
-		thistree->AddNodeTop(mul, true, firstpass->root);
-	}
-
-	bCombinedColor = false;
-	combconstant = 0;
-	switch(d){
-	case D_Tex0Color:
-		source = tex0;
-		break;
-	case D_Tex1Color:
-		source = tex1;
-		break;
-	case D_PrimColor:
-		source = constant;
-		combconstant = 1;
-		break;
-	case D_ShadeColor:
-		source = diffuse;
-		break;
-	case D_EnvColor:
-		source = constant;
-		combconstant = 2;
-		break;
-	case D_0:
-		source = zero;
-		break;
-	case D_1:
-		source = one;
-		break;
-	case D_CombinedColor:
-		bCombinedColor = true;
-		break;
-	default:
-		source = zero;
-		ShowError("Combiner Error: Unhandled Field in D");
-		break;
-	}
-	if ((firstpass==NULL) || (!bCombinedColor)){
-		thistree->AddOpTop(add, source, combconstant);
-	} else {
-		thistree->AddNodeTop(add, true, firstpass->root);
-	}
-	return thistree;
-}
-
-combtree *PSDoAlphaPass(combtree *firstpass, int a, int b, int c, int d)
-{
-	CombinerSource source;
-	__int32 combconstant;
-	combtree *thistree;
-	bool bCombinedAlpha;
-
-	combconstant = 0;
-	bCombinedAlpha = false;
-	switch(a){
-	case AA_ShadedAlpha:
-		source = diffusealpha;
-		break;
-	case AA_PrimAlpha:
-		source = constant;
-		combconstant = 1;
-		break;
-	case AA_EnvAlpha:
-		source = constant;
-		combconstant = 2;
-		break;
-	case AA_Tex0Alpha:
-		source = tex0alpha;
-		break;
-	case AA_Tex1Alpha:
-		source = tex1alpha;
-		break;
-	case AA_0:
-		source = zero;
-		break;
-	case AA_1:
-		source = one;
-		break;
-	case AA_CombinedAlpha:
-		bCombinedAlpha = true;
-		break;
-	default:
-		source = zero;
-		ShowError("Combiner Error: Unhandled Field in Alpha A");
-		break;
-	}
-	if ((firstpass==NULL) || (!bCombinedAlpha)){
-		thistree = new combtree(source, combconstant);
-	} else {
-		thistree = new combtree(firstpass->root);
-	}
-
-	combconstant = 0;
-	bCombinedAlpha = false;
-	switch(b){
-	case BA_Tex0Alpha:
-		source = tex0alpha;
-		break;
-	case BA_Tex1Alpha:
-		source = tex1alpha;
-		break;
-	case BA_PrimAlpha:
-		source = constant;
-		combconstant = 1;
-		break;
-	case BA_ShadedAlpha:
-		source = diffusealpha;
-		break;
-	case BA_EnvAlpha:
-		source = constant;
-		combconstant = 2;
-		break;
-	case BA_0:
-		source = zero;
-		break;
-	case BA_1:
-		source = one;
-		break;
-	case BA_CombinedAlpha:
-		bCombinedAlpha = true;
-		break;
-	default:
-		source = zero;
-		ShowError("Combiner Error: Unhandled Field in Alpha B");
-		break;
-	}
-
-	if ((firstpass==NULL) || (!bCombinedAlpha)){
-		thistree->AddOpTop(sub, source, combconstant);
-	} else {
-		thistree->AddNodeTop(sub, true, firstpass->root);
-	}
-	
-	bCombinedAlpha = false;
-	combconstant = 0;
-	switch(c){
-	case CA_Tex0Alpha:
-		source = tex0alpha;
-		break;
-	case CA_Tex1Alpha:
-		source = tex1alpha;
-		break;
-	case CA_PrimAlpha:
-		source = constant;
-		combconstant = 1;
-		break;
-	case CA_ShadedAlpha:
-		source = diffusealpha;
-		break;
-	case CA_EnvAlpha:
-		source = constant;
-		combconstant = 2;
-		break;
-	case CA_0:
-		source = zero;
-		break;
-	case CA_PrimLODFrac:
-		source = constant;
-		combconstant = 3;
-		break;
-	case CA_LODFraction:
-		source = constant;
-		combconstant = 4;
-		break;
-	default:
-		ShowError("Combiner Error: Unhandled Field in Alpha C");
-		break;
-	}
-	if ((firstpass==NULL) || (!bCombinedAlpha)){
-		thistree->AddOpTop(mul, source, combconstant);
-	} else {
-		thistree->AddNodeTop(mul, true, firstpass->root);
-	}
-
-	bCombinedAlpha = false;
-	combconstant = 0;
-	switch(d){
-	case DA_Tex0Alpha:
-		source = tex0alpha;
-		break;
-	case DA_Tex1Alpha:
-		source = tex1alpha;
-		break;
-	case DA_PrimAlpha:
-		source = constant;
-		combconstant = 1;
-		break;
-	case DA_ShadedAlpha:
-		source = diffusealpha;
-		break;
-	case DA_EnvAlpha:
-		source = constant;
-		combconstant = 2;
-		break;
-	case DA_0:
-		source = zero;
-		break;
-	case DA_1:
-		source = one;
-		break;
-	case DA_CombinedAlpha:
-		bCombinedAlpha = true;
-		break;
-	default:
-		source = zero;
-		ShowError("Combiner Error: Unhandled Field in Alpha D");
-		break;
-	}
-	if ((firstpass==NULL) || (!bCombinedAlpha)){
-		thistree->AddOpTop(add, source, combconstant);
-	} else {
-		thistree->AddNodeTop(add, true, firstpass->root);
-	}
-	return thistree;
-}
 
 void ConfigureCombiner(bool TexturesEnabled)
-{
-	combtree *firstpass;
-	combtree *bothpasses;
-	combtree *alphafirstpass;
-	combtree *alphabothpasses;
-	char sColor[1000];
-	char sAlpha[1000];
-	char sAlpha2[1000];
-	LPD3DXBUFFER pCode;
-	LPD3DXBUFFER pErrors;
-	U32 i;
-	bool bIsNew;
-	U32 LogCombineModeIndex;
-
-	if (State.CombineChanged){
-		bIsNew = true;
-		for (i=0;i<LoggedCombineModes.Count;i++){
-			if ((LoggedCombineModes.Modes[i].lo == State.Combine.raw.lo) && (LoggedCombineModes.Modes[i].hi == State.Combine.raw.hi) && (LoggedCombineModes.Modes[i].blendextras == State.BlendExtras)){
-				bIsNew = false;
-				LoggedCombineModes.Modes[i].Age=0;
-				LogCombineModeIndex = i;
-				break;
-			}
-		}
-		bHighlighted = false;
-		if (bIsNew){
-			LoggedCombineModes.Modes[LoggedCombineModes.Count].lo = State.Combine.raw.lo;
-			LoggedCombineModes.Modes[LoggedCombineModes.Count].hi = State.Combine.raw.hi;
-			LoggedCombineModes.Modes[LoggedCombineModes.Count].blendextras = State.BlendExtras;
-			LoggedCombineModes.Modes[LoggedCombineModes.Count].Age=0;
-			LoggedCombineModes.Modes[LoggedCombineModes.Count].Highlight=false;
-			LoggedCombineModes.Modes[LoggedCombineModes.Count].EmulationMode = 4;
-			LogCombineModeIndex = LoggedCombineModes.Count;
-			LoggedCombineModes.Count++;
-		}
-
-		if ((State.Othermode.fields.cycletype==2) || (State.Othermode.fields.cycletype==3)){
-			if (TexturesEnabled){
-				SafeDX(g_pd3dDevice->SetPixelShader(State.ps_textureonly));
-			} else {
-				SafeDX(g_pd3dDevice->SetPixelShader(State.ps_diffuseonly));
-			}
-		} else {
-			if (!bIsNew){
-				if (LoggedCombineModes.Modes[LogCombineModeIndex].Highlight){
-					SafeDX(g_pd3dDevice->SetPixelShader(State.ps_highlight));
-				} else {
-					SafeDX(g_pd3dDevice->SetPixelShader(LoggedCombineModes.Modes[LogCombineModeIndex].pixelshaderhandle));
-				}
-			} else {
-				firstpass = PSDoColorPass(NULL,
-					State.Combine.fields.a0,
-					State.Combine.fields.b0,
-					State.Combine.fields.c0,
-					State.Combine.fields.d0);
-
-				if (State.Othermode.fields.cycletype==1){
-					bothpasses = PSDoColorPass(firstpass,
-						State.Combine.fields.a1,
-						State.Combine.fields.b1,
-						State.Combine.fields.c1,
-						State.Combine.fields.d1);
-					delete firstpass;
-				} else {
-					bothpasses = firstpass;
-				}
-
-				alphafirstpass = PSDoAlphaPass(NULL,
-					State.Combine.fields.Aa0,
-					State.Combine.fields.Ab0,
-					State.Combine.fields.Ac0,
-					State.Combine.fields.Ad0);
-				
-				if (State.Othermode.fields.cycletype==1){
-					if (State.Combine.fields.c1==C_CombinedAlpha){
-						alphafirstpass->AddSecondPassCommand();
-					}
-					alphabothpasses = PSDoAlphaPass(alphafirstpass,
-						State.Combine.fields.Aa1,
-						State.Combine.fields.Ab1,
-						State.Combine.fields.Ac1,
-						State.Combine.fields.Ad1);
-					delete alphafirstpass;
-				} else {
-					alphabothpasses = alphafirstpass;
-				}
-				
-				char s2[3000], s3[2000];
-				bothpasses->getstring(s2);
-				bothpasses->Optimize();
-				bothpasses->getstring(s3);
-				if (strlen(s2)+strlen(s3)+5 < sizeof(LoggedCombineModes.Modes[LogCombineModeIndex].tree)){
-					strcpy(LoggedCombineModes.Modes[LogCombineModeIndex].tree, s2);
-					strcat(LoggedCombineModes.Modes[LogCombineModeIndex].tree, " *|* ");
-					strcat(LoggedCombineModes.Modes[LogCombineModeIndex].tree, s3);
-				} else {
-					strcpy(LoggedCombineModes.Modes[LogCombineModeIndex].tree, "too big");
-				}
-				alphabothpasses->Optimize();
-
-				bool bUseTex1, bUseTex2;
-				bUseTex1 = false;
-				bUseTex2 = false;
-				bothpasses->getpixelshader(sColor, false, false, &bUseTex1, &bUseTex2);
-				alphabothpasses->getpixelshader(sAlpha, true, true, &bUseTex1, &bUseTex2);
-				if ((State.Othermode.fields.cycletype==1) && (State.Combine.fields.c1==C_CombinedAlpha)){
-					alphabothpasses->getpixelshader(sAlpha2, true, false, &bUseTex1, &bUseTex2);
-				} else {
-					sAlpha2[0] = 0;
-				}
-				strcpy(BlendPasses.Passes[0].strPixelShader, "ps.1.1\n");
-				if (bUseTex1){
-					strcat(BlendPasses.Passes[0].strPixelShader, "tex t0\n");
-				}
-				if (bUseTex2){
-					strcat(BlendPasses.Passes[0].strPixelShader, "tex t1\n");
-				}
-				strcat(BlendPasses.Passes[0].strPixelShader, sAlpha);
-				strcat(BlendPasses.Passes[0].strPixelShader, "\n");
-				strcat(BlendPasses.Passes[0].strPixelShader, sColor);
-				if ((State.Othermode.fields.cycletype==1) && (State.Combine.fields.c1==C_CombinedAlpha)){
-					strcat(BlendPasses.Passes[0].strPixelShader, "\n");
-					strcat(BlendPasses.Passes[0].strPixelShader, sAlpha2);
-				}
-				delete bothpasses;
-				delete alphabothpasses;
-
-				if (strlen(BlendPasses.Passes[0].strPixelShader) > sizeof(LoggedCombineModes.Modes[LoggedCombineModes.Count].pixelshader)){
-					ShowError("Error: Pixelshader got too big!");
-				} else {
-					strcpy(LoggedCombineModes.Modes[LogCombineModeIndex].pixelshader, BlendPasses.Passes[0].strPixelShader);
-				}
-
-				// Compile Pixelshader
-				if (D3DXAssembleShader(
-						&BlendPasses.Passes[0].strPixelShader[0],
-						strlen(BlendPasses.Passes[0].strPixelShader),
-						0,
-						NULL,
-						&pCode,
-						&pErrors)!=D3D_OK){
-					ShowError((char*)pErrors->GetBufferPointer());
-				}else{
-					SafeDX(g_pd3dDevice->CreatePixelShader((DWORD*)pCode->GetBufferPointer(),
-														&m_pPixelShader));
-					SafeDX(g_pd3dDevice->SetPixelShader(m_pPixelShader));
-					LoggedCombineModes.Modes[LogCombineModeIndex].pixelshaderhandle = m_pPixelShader;
-				}
-				if (pCode){
-					SafeDX(pCode->Release());
-					pCode = NULL;
-				}
-				if (pErrors){
-					SafeDX(pErrors->Release());
-					pErrors = NULL;
-				}
-			}
-		}
-		BlendPasses.Count = 1;
-		BlendPasses.Passes[0].SrcBlend = D3DBLEND_SRCALPHA;
-		BlendPasses.Passes[0].DstBlend = D3DBLEND_INVSRCALPHA;
-	}
-	if (UseTexture1){
-		BlendPasses.Passes[0].Stages[0].Texture = State.Textures[Texture1].D3DObject;
-		BlendPasses.Passes[0].Stages[0].AddressU = State.Address1U;
-		BlendPasses.Passes[0].Stages[0].AddressV = State.Address1V;
-		SecondTex[0] = false;
-	}
-	if (UseTexture2){
-		BlendPasses.Passes[0].Stages[1].Texture = State.Textures[Texture2].D3DObject;
-		BlendPasses.Passes[0].Stages[1].AddressU = State.Address2U;
-		BlendPasses.Passes[0].Stages[1].AddressV = State.Address2V;
-		SecondTex[1] = true;
-		ChangeTextureCoordinates = true;
-	} else {
-		ChangeTextureCoordinates = false;
-	}
-}
-
-#else
-
-void SetBlendPass(U32 Index)
-{
-	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_SRCBLEND, BlendPasses.Passes[Index].SrcBlend));
-	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_DESTBLEND, BlendPasses.Passes[Index].DstBlend));
-	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_TEXTUREFACTOR, BlendPasses.Passes[Index].TFactor));
-	U32 i; // stage
-	for (i=0;i<8;i++){
-		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_COLOROP, BlendPasses.Passes[Index].Stages[i].ColorOp));
-		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_ALPHAOP, BlendPasses.Passes[Index].Stages[i].AlphaOp));
-		if (BlendPasses.Passes[Index].Stages[i].ColorOp == D3DTOP_DISABLE){
-			break;
-		}
-		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_COLORARG1, BlendPasses.Passes[Index].Stages[i].ColorArg1));
-		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_COLORARG2, BlendPasses.Passes[Index].Stages[i].ColorArg2));
-		//SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_COLORARG0, BlendPasses.Passes[Index].Stages[i].ColorArg3));
-		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_ALPHAARG1, BlendPasses.Passes[Index].Stages[i].AlphaArg1));
-		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_ALPHAARG2, BlendPasses.Passes[Index].Stages[i].AlphaArg2));
-		//SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_ALPHAARG0, BlendPasses.Passes[Index].Stages[i].AlphaArg3));
-		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_ADDRESSU, BlendPasses.Passes[Index].Stages[i].AddressU));
-		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_ADDRESSV, BlendPasses.Passes[Index].Stages[i].AddressV));
-		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_MAGFILTER, State.TextureFilter));
-		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_MINFILTER, State.TextureFilter));
-		SafeDX(g_pd3dDevice->SetTexture(i, BlendPasses.Passes[Index].Stages[i].Texture));
-		if ((BlendPasses.Passes[Index].Stages[i].ColorArg1==D3DTA_TEXTURE) ||
-			(BlendPasses.Passes[Index].Stages[i].ColorArg2==D3DTA_TEXTURE) ||
-			(BlendPasses.Passes[Index].Stages[i].AlphaArg1==D3DTA_TEXTURE) ||
-			(BlendPasses.Passes[Index].Stages[i].AlphaArg2==D3DTA_TEXTURE)){
-			if (BlendPasses.Passes[Index].Stages[i].Texture==0){
-				ShowError("Error SetBlendPass: Texture used but not set");
-			}
-		}
-	}
-}
-
-void Old_ConfigureCombiner(bool TexturesEnabled)
 {
 	U32 i;
 	bool LogCombinerOutput, Highlight=false;
@@ -4407,4 +3786,3 @@ void Old_ConfigureCombiner(bool TexturesEnabled)
 		}
 	}
 }
-#endif

@@ -11,29 +11,6 @@ U32 LastDXErrorCode;
 
 bool bFullScreen;
 
-DWORD CompileShader(char *sPS)
-{
-	DWORD pPixelShader=0;
-	LPD3DXBUFFER pCode;
-	LPD3DXBUFFER pErrors;
-
-	if (D3DXAssembleShader(sPS, strlen(sPS), 0, NULL, &pCode, &pErrors)!=D3D_OK){
-		ShowError((char*)pErrors->GetBufferPointer());
-	}else{
-		SafeDX(g_pd3dDevice->CreatePixelShader((DWORD*)pCode->GetBufferPointer(),
-											&pPixelShader));
-	}
-	if (pCode){
-		SafeDX(pCode->Release());
-		pCode = NULL;
-	}
-	if (pErrors){
-		SafeDX(pErrors->Release());
-		pErrors = NULL;
-	}
-	return pPixelShader;
-}
-
 int InitializeDirect3D()
 {
 	LPDIRECT3D8 g_pD3D;
@@ -58,6 +35,7 @@ int InitializeDirect3D()
 	d3dpp.EnableAutoDepthStencil = TRUE;
 
 	// Get Backbuffer format from current settings
+#line 38 "Direct3d.cpp"
 	SafeDX(g_pD3D->GetAdapterDisplayMode(AdapterID, &d3ddm ) );
 	d3dpp.BackBufferFormat = d3ddm.Format;
 	if (bFullScreen){
@@ -72,72 +50,75 @@ int InitializeDirect3D()
 	if (FAILED(g_pD3D->CreateDevice(AdapterID, DevType, Global_Gfx_Info.hWnd,
 								  D3DCREATE_SOFTWARE_VERTEXPROCESSING|D3DCREATE_MULTITHREADED , 
 								  &d3dpp, &g_pd3dDevice ))){
-		char s[512];
+		char s[256];
 		strcpy(s, "Direct3D Device initialization failed. This program requires DirectX8, which is available for Windows 95/98/ME, 2000 and XP. Windows NT is not supported, sorry. You can get the newest DirectX from http://www.microsoft.com/directx. If this doesn't help you might want to try upgrading your graphics drivers.");
 		ShowError(s);
 		MessageBox(Global_Gfx_Info.hWnd, s, "Error", MB_OK);
 		return E_FAIL;
 	}
 	// Save viewport data...
+#line 59 "Direct3d.cpp"
 	SafeDX(g_pd3dDevice->GetViewport(&State.Viewport));
 	State.Viewport.MinZ = 0.0f;
 	State.Viewport.MaxZ = 1.0f;
 	State.WindowWidth = State.Viewport.Width;
 	State.WindowHeight = State.Viewport.Height;
+#line 64 "Direct3d.cpp"
 	SafeDX(g_pd3dDevice->SetViewport(&State.Viewport));
 	RECT r;
 	GetClientRect(Global_Gfx_Info.hWnd, &r);
 
+#line 68 "Direct3d.cpp"
 	SafeDX(g_pd3dDevice->GetDeviceCaps(&DeviceCaps));
 
+#line 70 "Direct3d.cpp"
 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE));
+#line 71 "Direct3d.cpp"
 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_LIGHTING, FALSE));
+#line 72 "Direct3d.cpp"
 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE));
+#line 73 "Direct3d.cpp"
 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE));
+#line 74 "Direct3d.cpp"
 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ALPHAREF, 1));
+#line 75 "Direct3d.cpp"
 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATEREQUAL));
+#line 76 "Direct3d.cpp"
 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_GOURAUD));
 	//SafeDX(g_pd3dDevice->SetRenderState(D3DRS_DITHERENABLE, TRUE));
 
 	U32 i;
 	for (i=0;i<8;i++){
+#line 81 "Direct3d.cpp"
 		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_MAGFILTER, D3DTEXF_LINEAR));
+#line 82 "Direct3d.cpp"
 		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_MINFILTER, D3DTEXF_LINEAR));
 	}
 //	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME));
 
 	// Create the vertex buffer
-	SafeDX(g_pd3dDevice->CreateVertexBuffer(
-			sizeof(D3DTNTVERTEX)*D3DVertexCacheSize,
-			D3DUSAGE_WRITEONLY,
-			MY_VERTEX_TYPE,
-			D3DPOOL_SYSTEMMEM,
-			&g_VertexBuffer));
-	SafeDX(g_pd3dDevice->SetStreamSource(
-			0,
-			g_VertexBuffer,
-			sizeof(D3DTNTVERTEX)));
+#line 87 "Direct3d.cpp"
+	SafeDX(g_pd3dDevice->CreateVertexBuffer( sizeof(D3DTNTVERTEX)*D3DVertexCacheSize, D3DUSAGE_WRITEONLY, MY_VERTEX_TYPE, D3DPOOL_SYSTEMMEM, &g_VertexBuffer));
+#line 88 "Direct3d.cpp"
+	SafeDX(g_pd3dDevice->SetStreamSource( 0, g_VertexBuffer, sizeof(D3DTNTVERTEX)));
+#line 89 "Direct3d.cpp"
 	SafeDX(g_pd3dDevice->SetVertexShader(MY_VERTEX_TYPE));
 
 	// Create color textures - we use them to fake color blending if tfactor is used
+#line 92 "Direct3d.cpp"
 	SafeDX(g_pd3dDevice->CreateTexture(YoshiBGWidth, YoshiBGHeight, 1, 0, D3DFMT_A1R5G5B5, D3DPOOL_MANAGED, &texBackground[0]));
+#line 93 "Direct3d.cpp"
 	SafeDX(g_pd3dDevice->CreateTexture(YoshiBGWidth, YoshiBGHeight, 1, 0, D3DFMT_A1R5G5B5, D3DPOOL_MANAGED, &texBackground[1]));
+#line 94 "Direct3d.cpp"
 	SafeDX(g_pd3dDevice->CreateTexture(YoshiBGWidth, YoshiBGHeight, 1, 0, D3DFMT_A1R5G5B5, D3DPOOL_MANAGED, &texBackground[2]));
 	for (i=0;i<8;i++){
+#line 96 "Direct3d.cpp"
 		SafeDX(g_pd3dDevice->CreateTexture(1, 1, 1, 0, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, &g_ColorTexture[i].D3DObject));
 		g_ColorTexture[i].Color = 0;
 	}
 //	SafeDX(g_pd3dDevice->CreateRenderTarget(512, 256, d3ddm.Format, D3DMULTISAMPLE_NONE, TRUE, &surWriteback));
+#line 100 "Direct3d.cpp"
 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE));
-	
-	// Create some standard combiners...
-	// Highlight (debug)
-	State.ps_highlight = CompileShader("ps.1.1\nmov r0,c6\n");
-	State.ps_diffuseonly = CompileShader("ps.1.1\nmov r0,v0");
-	State.ps_textureonly = CompileShader("ps.1.1\ntex t0\nmov r0,t0");
-	State.ps_texcoloronly = CompileShader("ps.1.1\ntex t0\nmov r0,t0\nmov r0.a,c5");
-	State.ps_texalphaonly = CompileShader("ps.1.1\ntex t0\nmov r0,t0.a\nmov r0.a,c5");
-	
 	
 	return NOERROR;
 }
@@ -160,15 +141,6 @@ void FreeDirect3D()
 	for (i=0;i<8;i++){
 		FreeObject(g_ColorTexture[i].D3DObject);
 	}
-	for (i=0;i<LoggedCombineModes.Count;i++){
-		if (LoggedCombineModes.Modes[i].pixelshaderhandle) { SafeDX(g_pd3dDevice->DeletePixelShader(LoggedCombineModes.Modes[i].pixelshaderhandle)); LoggedCombineModes.Modes[i].pixelshaderhandle = 0; }
-	}
-	if (State.ps_texalphaonly) { SafeDX(g_pd3dDevice->DeletePixelShader(State.ps_texalphaonly)); State.ps_texalphaonly = 0; }
-	if (State.ps_texcoloronly) { SafeDX(g_pd3dDevice->DeletePixelShader(State.ps_texcoloronly)); State.ps_texcoloronly = 0; }
-	if (State.ps_diffuseonly) { SafeDX(g_pd3dDevice->DeletePixelShader(State.ps_diffuseonly)); State.ps_diffuseonly = 0; }
-	if (State.ps_highlight) { SafeDX(g_pd3dDevice->DeletePixelShader(State.ps_highlight)); State.ps_highlight = 0; }
-	if (State.ps_textureonly) { SafeDX(g_pd3dDevice->DeletePixelShader(State.ps_textureonly)); State.ps_textureonly = 0; }
-	LoggedCombineModes.Count = 0;
 //	FreeObject(surWriteback);
 	FreeObject(texBackground[2]);
 	FreeObject(texBackground[1]);

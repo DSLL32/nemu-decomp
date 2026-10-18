@@ -11,7 +11,6 @@ BOOL bCPU3DNOW;
 HANDLE hInst;
 POINT TopLeft;
 FILE *fVRML;
-U32 uVRMLFaceIndex;
 U32 uRenderWidth = 640;
 U32 uRenderHeight = 480;
 
@@ -49,99 +48,6 @@ HWND hDebugWindowProfileButton;
 HWND hDebugCommandLog;
 HWND hProfileTimesListbox;
 
-void DebugDrawTexture(U32 TextureIndex, bool Zoom){
-	D3DSURFACE_DESC Desc;
-	SafeDX(State.Textures[TextureIndex].D3DObject->GetLevelDesc(0, &Desc));
-
-	// Set Viewport...
-	D3DVIEWPORT8 Viewport;
-	Viewport.X = 0;
-	Viewport.Y = 0;
-	Viewport.Width = State.WindowWidth;
-	Viewport.Height = State.WindowHeight;
-	Viewport.MinZ = 0;
-	Viewport.MaxZ = 1.0f;
-	SafeDX(g_pd3dDevice->SetViewport(&Viewport));
-
-	D3DRECT Rect;
-	Rect.x1 = 0;
-	Rect.y1 = 0;
-	if (Zoom){
-		Rect.x2 = (Desc.Width*2)+1;
-		Rect.y2 = (Desc.Height*2)+1;
-	} else {
-		Rect.x2 = Desc.Width+1;
-		Rect.y2 = Desc.Height+1;
-	}
-	g_pd3dDevice->Clear(1, &Rect, D3DCLEAR_TARGET, 0xFFFFFFFF, 1.0f, 0);
-	if (Zoom){
-		Rect.x2 = Desc.Width*2;
-		Rect.y2 = Desc.Height*2;
-	} else {
-		Rect.x2 = Desc.Width;
-		Rect.y2 = Desc.Height;
-	}
-	g_pd3dDevice->Clear(1, &Rect, D3DCLEAR_TARGET, 0, 1.0f, 0);
-	SafeDX(g_pd3dDevice->BeginScene());
-	
-	// Set Matrices...
-	D3DXMATRIX OrthoMatrix;
-	D3DXMatrixOrthoOffCenterRH(&OrthoMatrix, 0, (float)State.WindowWidth/3, (float)State.WindowHeight/3, 0, 0.0f, 1.0f);
-	SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &OrthoMatrix));
-	SafeDX(g_pd3dDevice->SetTransform(D3DTS_WORLD, &State.Identity));
-
-	// Set texture...
-	SafeDX(g_pd3dDevice->SetTexture(0, State.Textures[TextureIndex].D3DObject));
-	SafeDX(g_pd3dDevice->SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_SELECTARG1));
-	if (bDebugTextureBackground){
-		SafeDX(g_pd3dDevice->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TEXTURE|D3DTA_ALPHAREPLICATE));
-	} else {
-		SafeDX(g_pd3dDevice->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TEXTURE));
-	}
-	SafeDX(g_pd3dDevice->SetTextureStageState(1, D3DTSS_COLOROP, D3DTOP_DISABLE));
-	SafeDX(g_pd3dDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_DISABLE));
-	if (bDebugTextureBackground){
-		SafeDX(g_pd3dDevice->SetPixelShader(State.ps_texalphaonly));
-	} else {
-		SafeDX(g_pd3dDevice->SetPixelShader(State.ps_texcoloronly));
-	}
-	
-	// Set up vertex buffer...
-	D3DTNTVERTEX *VertexBuffer;
-	SafeDX(g_VertexBuffer->Lock(0, 4*sizeof(D3DTNTVERTEX), (BYTE**)&VertexBuffer, 0));
-	VertexBuffer[0].color = 0xFFFFFFFF;
-	VertexBuffer[0].x = 0.0f;
-	VertexBuffer[0].y = 0.0f;
-	VertexBuffer[0].z = 0.0f;
-	VertexBuffer[0].tex[0].u = 0.0f;
-	VertexBuffer[0].tex[0].v = 0.0f;
-
-	VertexBuffer[1].color = 0xFFFFFFFF;
-	VertexBuffer[1].x = (float)Desc.Width;
-	VertexBuffer[1].y = 0.0f;
-	VertexBuffer[1].z = 0.0f;
-	VertexBuffer[1].tex[0].u = 1.0f;
-	VertexBuffer[1].tex[0].v = 0.0f;
-
-	VertexBuffer[2].color = 0xFFFFFFFF;
-	VertexBuffer[2].x = 0.0f;
-	VertexBuffer[2].y = (float)Desc.Height;
-	VertexBuffer[2].z = 0.0f;
-	VertexBuffer[2].tex[0].u = 0.0f;
-	VertexBuffer[2].tex[0].v = 1.0f;
-
-	VertexBuffer[3].color = 0xFFFFFFFF;
-	VertexBuffer[3].x = (float)Desc.Width;
-	VertexBuffer[3].y = (float)Desc.Height;
-	VertexBuffer[3].z = 0.0f;
-	VertexBuffer[3].tex[0].u = 1.0f;
-	VertexBuffer[3].tex[0].v = 1.0f;
-	SafeDX(g_VertexBuffer->Unlock());
-
-	SafeDX(g_pd3dDevice->SetTextureStageState(0, D3DTSS_MAGFILTER, D3DTEXF_POINT));
-	SafeDX(g_pd3dDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2));
-	SafeDX(g_pd3dDevice->EndScene());
-}
 
 void DebugShowTexture(){
 	char str[100], strdetails[200], strformat[20];
@@ -206,12 +112,116 @@ void DebugShowTexture(){
 			} else {
 				strcat(strdetails, ", loaded by LoadTile");
 			}
-			DebugDrawTexture(DebugTextureID, true);
+
+	D3DSURFACE_DESC Desc;
+#line 115 "LemNemu.cpp"
+	SafeDX(State.Textures[DebugTextureID].D3DObject->GetLevelDesc(0, &Desc));
+
+	// Set Viewport...
+	D3DVIEWPORT8 Viewport;
+	Viewport.X = 0;
+	Viewport.Y = 0;
+	Viewport.Width = State.WindowWidth;
+	Viewport.Height = State.WindowHeight;
+	Viewport.MinZ = 0;
+	Viewport.MaxZ = 1.0f;
+#line 125 "LemNemu.cpp"
+	SafeDX(g_pd3dDevice->SetViewport(&Viewport));
+
+	D3DRECT Rect;
+	Rect.x1 = 0;
+	Rect.y1 = 0;
+	if (true){
+		Rect.x2 = (Desc.Width*2)+1;
+		Rect.y2 = (Desc.Height*2)+1;
+	} else {
+		Rect.x2 = Desc.Width+1;
+		Rect.y2 = Desc.Height+1;
+	}
+	g_pd3dDevice->Clear(1, &Rect, D3DCLEAR_TARGET, 0xFFFFFFFF, 1.0f, 0);
+	if (true){
+		Rect.x2 = Desc.Width*2;
+		Rect.y2 = Desc.Height*2;
+	} else {
+		Rect.x2 = Desc.Width;
+		Rect.y2 = Desc.Height;
+	}
+	g_pd3dDevice->Clear(1, &Rect, D3DCLEAR_TARGET, 0, 1.0f, 0);
+#line 136 "LemNemu.cpp"
+	SafeDX(g_pd3dDevice->BeginScene());
+	
+	// Set Matrices...
+	D3DXMATRIX OrthoMatrix;
+	D3DXMatrixOrthoOffCenterRH(&OrthoMatrix, 0, (float)State.WindowWidth/3, (float)State.WindowHeight/3, 0, 0.0f, 1.0f);
+#line 142 "LemNemu.cpp"
+	SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &OrthoMatrix));
+#line 143 "LemNemu.cpp"
+	SafeDX(g_pd3dDevice->SetTransform(D3DTS_WORLD, &State.Identity));
+
+	// Set texture...
+#line 146 "LemNemu.cpp"
+	SafeDX(g_pd3dDevice->SetTexture(0, State.Textures[DebugTextureID].D3DObject));
+#line 147 "LemNemu.cpp"
+	SafeDX(g_pd3dDevice->SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_SELECTARG1));
+	if (bDebugTextureBackground){
+#line 149 "LemNemu.cpp"
+		SafeDX(g_pd3dDevice->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TEXTURE|D3DTA_ALPHAREPLICATE));
+	} else {
+#line 151 "LemNemu.cpp"
+		SafeDX(g_pd3dDevice->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TEXTURE));
+	}
+#line 153 "LemNemu.cpp"
+	SafeDX(g_pd3dDevice->SetTextureStageState(1, D3DTSS_COLOROP, D3DTOP_DISABLE));
+#line 154 "LemNemu.cpp"
+	SafeDX(g_pd3dDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_DISABLE));
+
+	// Set up vertex buffer...
+	D3DTNTVERTEX *VertexBuffer;
+#line 158 "LemNemu.cpp"
+	SafeDX(g_VertexBuffer->Lock(0, 4*sizeof(D3DTNTVERTEX), (BYTE**)&VertexBuffer, 0));
+	VertexBuffer[0].color = 0xFFFFFFFF;
+	VertexBuffer[0].x = 0.0f;
+	VertexBuffer[0].y = 0.0f;
+	VertexBuffer[0].z = 0.0f;
+	VertexBuffer[0].tex[0].u = 0.0f;
+	VertexBuffer[0].tex[0].v = 0.0f;
+
+	VertexBuffer[1].color = 0xFFFFFFFF;
+	VertexBuffer[1].x = (float)Desc.Width;
+	VertexBuffer[1].y = 0.0f;
+	VertexBuffer[1].z = 0.0f;
+	VertexBuffer[1].tex[0].u = 1.0f;
+	VertexBuffer[1].tex[0].v = 0.0f;
+
+	VertexBuffer[2].color = 0xFFFFFFFF;
+	VertexBuffer[2].x = 0.0f;
+	VertexBuffer[2].y = (float)Desc.Height;
+	VertexBuffer[2].z = 0.0f;
+	VertexBuffer[2].tex[0].u = 0.0f;
+	VertexBuffer[2].tex[0].v = 1.0f;
+
+	VertexBuffer[3].color = 0xFFFFFFFF;
+	VertexBuffer[3].x = (float)Desc.Width;
+	VertexBuffer[3].y = (float)Desc.Height;
+	VertexBuffer[3].z = 0.0f;
+	VertexBuffer[3].tex[0].u = 1.0f;
+	VertexBuffer[3].tex[0].v = 1.0f;
+#line 186 "LemNemu.cpp"
+	SafeDX(g_VertexBuffer->Unlock());
+
+#line 188 "LemNemu.cpp"
+	SafeDX(g_pd3dDevice->SetTextureStageState(0, D3DTSS_MAGFILTER, D3DTEXF_POINT));
+#line 189 "LemNemu.cpp"
+	SafeDX(g_pd3dDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2));
+#line 190 "LemNemu.cpp"
+	SafeDX(g_pd3dDevice->EndScene());
+
 			RECT rDstRect;
 			rDstRect.left = 0;
 			rDstRect.top = 27;
 			rDstRect.right = rDstRect.left + 640;
 			rDstRect.bottom = rDstRect.top + 480;
+#line 196 "LemNemu.cpp"
 			SafeDX(g_pd3dDevice->Present(0, &rDstRect, 0, 0));
 			SendMessage(hDebugWindowTextureDetails, WM_SETTEXT, 0, (LPARAM)strdetails);
 		}
@@ -515,9 +525,8 @@ EXPORT void CALL ProcessDList(void)
 	}
 	if (Options.bVRMLExport){
 		char sFileName[256];
-		sprintf(sFileName, "c:\\vrml\\output.wrl");
+		sprintf(sFileName, "c:\\output.wrl");
 		fVRML = fopen(sFileName, "w");
-		uVRMLFaceIndex = 1;
 		fprintf(fVRML, "#VRML V2.0 utf8\n");
 		fprintf(fVRML, "# Produced by Nemu64 - www.nemu.com\n");
 		fprintf(fVRML, "\n");
@@ -533,8 +542,6 @@ EXPORT void CALL ProcessDList(void)
 		fprintf(fVRML, "	on TRUE\n");
 		fprintf(fVRML, "}\n");
 		
-		fprintf(fVRML, "DEF NemuModel Transform {\n");
-		fprintf(fVRML, "	children [\n");
 	}
 
 	puCullDone = 0;
@@ -549,8 +556,6 @@ EXPORT void CALL ProcessDList(void)
 	*(Global_Gfx_Info.MI_INTR_REG) |= 0x20;
 	Global_Gfx_Info.CheckInterrupts();
 	if (Options.bVRMLExport){
-		fprintf(fVRML, "	]\n");
-		fprintf(fVRML, "}\n");
 		fclose(fVRML);
 	}
 

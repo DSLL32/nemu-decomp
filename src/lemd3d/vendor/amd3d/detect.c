@@ -40,8 +40,13 @@
 
 #include "amdlib.h"
 
+/* Unreferenced capability masks retained in the original native object. */
+const unsigned long capability_masks[4] = {1, 2, 4, ~0UL};
+
 typedef unsigned long DWORD;
-static DWORD features, ext_features, processor;
+static DWORD features = 0;
+static DWORD ext_features = 0;
+static DWORD processor = 0;
 
 /* Reconstruction of the earlier AMD3D implementation at 0x10027950.
  * The preserved 1999 AMD sample supplies the CPU model switch and names.
@@ -112,7 +117,7 @@ DWORD GetCPUCaps(CPUCAPS cap)
             jne centaur
             cmp edx, 0736e4978h
             jne centaur
-            cmp ecx, 064616574h
+            cmp ecx, 064656174h
             jne centaur
             mov eax, 3
             jmp vendor_done
@@ -137,7 +142,6 @@ DWORD GetCPUCaps(CPUCAPS cap)
         // as MMX and 3DNow!  Instead, use GetCPUCaps (HAS_MMX) and GetCPUCaps (HAS_3DNOW),
         // which will accurately detect the presence of these features on all chips which
         // support them.
-        res = UNKNOWN;
         switch (GetCPUCaps (CPU_MFG))
         {
         case VENDOR_AMD:
@@ -150,13 +154,13 @@ DWORD GetCPUCaps(CPUCAPS cap)
             case 5: // K6
                 switch ((processor >> 4) & 0xf) // extract model code
                 {
-                case 0:
-                case 1:
-                case 2:
+                case 0: res = AMD_K5;       break;
+                case 1: res = AMD_K5;       break;
+                case 2: res = AMD_K5;       break;
                 case 3: res = AMD_K5;       break;
-                case 4: // Not really used
-                case 5: // Not really used
-                case 6:
+                case 4: res = AMD_K6;       break;
+                case 5: res = AMD_K6;       break;
+                case 6: res = AMD_K6;       break;
                 case 7: res = AMD_K6;       break;
                 case 8: res = AMD_K6_2;     break;
                 case 9: res = AMD_K6_3;     break;

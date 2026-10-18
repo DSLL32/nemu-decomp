@@ -16,11 +16,13 @@ import sys
 import tempfile
 
 from verify_lemd3d import compare
+from build_lemd3d_link_inputs import generate
+from restore_lemd3d_metadata import restore
 
 
 ROOT = Path(__file__).resolve().parents[1]
-UNITS = ['3DFunctions', 'blender', 'combiner', 'combtree', 'Direct3d',
-         'DListParser', 'INIFile', 'LemNemu', 'prerender', 'StdAfx']
+UNITS = ['3DFunctions', 'DListParser', 'Direct3d', 'INIFile', 'LemNemu',
+         'StdAfx', 'blender', 'combiner', 'prerender']
 FLAGS = ['/nologo', '/c', '/O2', '/Ob2', '/MT', '/GL', '/GX', '/W3',
          '/DWIN32', '/DNDEBUG', '/D_WINDOWS', '/D_MBCS', '/D_USRDLL', '/DLEMNEMU_EXPORTS']
 
@@ -35,6 +37,8 @@ def main():
     parser.add_argument('--report', type=Path)
     parser.add_argument('--no-ltcg', action='store_true', help='diagnostic native objects')
     parser.add_argument('--no-pch', action='store_true', help='diagnostic build without the upstream PCH')
+    parser.add_argument('--no-metadata-restoration', action='store_true',
+                        help='retain only current linker metadata for diagnosis')
     args = parser.parse_args()
     parent = (Path.home() / '.ai-tmp').resolve()
     parent.mkdir(exist_ok=True)
@@ -59,8 +63,8 @@ def main():
         if args.report:
             args.report.write_text(data)
 
-    def tool(label, name, options):
-        command = [sys.executable, str(ROOT / 'scripts/run_toolchain.py'), 'vc7', name, *options]
+    def tool(label, name, options, toolchain="vc7"):
+        command = [sys.executable, str(ROOT / 'scripts/run_toolchain.py'), toolchain, name, *options]
         log = logs / (label + '.log')
         row = dict(label=label, argv=command, log=str(log))
         report['commands'].append(row)
@@ -74,9 +78,17 @@ def main():
 
     try:
         tracked_inputs = [ROOT / 'scripts' / name for name in
-                          ['build_lemd3d.py', 'verify_lemd3d.py', 'run_toolchain.py', 'pe_fingerprints.py']]
+                          ['build_lemd3d.py', 'build_lemd3d_link_inputs.py',
+                           'build_nemu_link_inputs.py', 'map_nemu_libraries.py', 'verify_gs.py',
+                           'verify_lemd3d.py', 'restore_lemd3d_metadata.py',
+                           'run_toolchain.py', 'pe_fingerprints.py']]
+        tracked_inputs += [ROOT / 'analysis' / name for name in
+                           ['lemd3d-build-metadata.json', 'lemd3d-linker-residue.bin']]
         tracked_inputs += [ROOT / 'toolchains/vc7/bin' / name for name in
-                           ['cl.exe', 'c1xx.dll', 'c2.dll', 'link.exe', 'rc.exe', 'cvtres.exe']]
+                           ['cl.exe', 'c1xx.dll', 'c2.dll', 'link.exe', 'lib.exe',
+                            'ml.exe', 'rc.exe', 'cvtres.exe']]
+        tracked_inputs += [ROOT / 'toolchains/vc6/bin' / name for name in
+                           ['cl.exe', 'c1.dll', 'c2.dll']]
         tracked_inputs += [ROOT / 'toolchains/vc7' / name for name in
                            ['lib/libcmt.lib', 'lib/libcpmt.lib',
                             'platformsdk/lib/prerelease/d3dx8.lib',
@@ -93,6 +105,7 @@ def main():
             shutil.copyfile(source, target)
             report['sources'][str(relative)] = hashlib.sha256(target.read_bytes()).hexdigest()
         sdk = ROOT / 'toolchains/vc7/platformsdk'
+        sdk_library, crt_library, report['native_link_inputs'] = generate(output / 'native-inputs')
         flags = [flag for flag in FLAGS if not (args.no_ltcg and flag == '/GL')]
         report['compiler_flags'] = flags
         objects = [winpath(output / (unit + '.obj')) for unit in UNITS]
@@ -104,8 +117,29 @@ def main():
             tool('compile-' + unit, 'cl', [*flags, '/Ivendor/amd3d', '/I' + winpath(sdk / 'include/prerelease'),
                  *pch, '/Fo' + winpath(output / (unit + '.obj')), unit + '.cpp'])
         tool('compile-amd-detect', 'cl', ['/nologo', '/c', '/O2', '/Oy-', '/MT',
-             '/Ivendor/amd3d', '/Fo' + winpath(output / 'detect.obj'), 'vendor/amd3d/detect.c'])
-        objects.append(winpath(output / 'detect.obj'))
+             '/Ivendor/amd3d', '/Fo' + winpath(output / 'detect.obj'), 'vendor/amd3d/detect.c'], toolchain='vc6')
+        tool('compile-amd-matrix', 'cl', ['/nologo', '/c', '/O2', '/MT',
+             '/Fo' + winpath(output / 'matrix-c.obj'), 'vendor/amd3d/matrix.c'], toolchain='vc6')
+        tool('compile-amd-constants', 'cl', ['/nologo', '/c', '/O2', '/MT',
+             '/Fo' + winpath(output / 'math_lib.obj'), 'vendor/amd3d/math_lib.c'], toolchain='vc6')
+        tool('assemble-amd-matrix', 'ml', ['/nologo', '/c', '/coff',
+             '/Fo' + winpath(output / 'matrix-asm.obj'), 'vendor/amd3d/matrix.asm'])
+        # ML 6.15 represents PAGE alignment as 4K in COFF. The preserved AMD
+        # contribution uses 32-byte entries; adjust only its COFF alignment.
+        import struct
+        obj = output / 'matrix-asm.obj'
+        data = bytearray(obj.read_bytes())
+        count = struct.unpack_from('<H', data, 2)[0]
+        for index in range(count):
+            position = 20 + 40 * index
+            if data[position:position + 8].rstrip(b'\0') == b'.text':
+                flags = struct.unpack_from('<I', data, position + 36)[0]
+                struct.pack_into('<I', data, position + 36, (flags & ~0x00f00000) | 0x00600000)
+        obj.write_bytes(data)
+        tool('archive-amd-constants', 'lib', ['/nologo', '/out:' + winpath(output / 'amdmath.lib'),
+             winpath(output / 'math_lib.obj')])
+        tool('archive-amd', 'lib', ['/nologo', '/out:' + winpath(output / 'amd3d.lib'),
+             *[winpath(output / f) for f in ['matrix-asm.obj', 'matrix-c.obj', 'detect.obj']]])
         tool('resources', 'rc', ['/l', '0x407', '/d', 'NDEBUG',
              '/fo' + winpath(output / 'LemNemu.res'), 'LemNemu.rc'])
         dll = output / 'LemD3D8.dll'
@@ -115,9 +149,19 @@ def main():
              '/map:' + winpath(output / 'LemD3D8.map'),
              '/libpath:' + winpath(sdk / 'lib/prerelease'),
              *objects, winpath(output / 'LemNemu.res'),
-             'd3dx8.lib', 'd3d8.lib', 'dxerr8.lib', 'winmm.lib',
-             'kernel32.lib', 'user32.lib', 'gdi32.lib', 'advapi32.lib'])
+             winpath(sdk_library), 'd3d8.lib', 'dxerr8.lib', winpath(output / 'amd3d.lib'),
+             '/include:_ones', 'winmm.lib', 'kernel32.lib', 'user32.lib', 'gdi32.lib', 'advapi32.lib',
+             '/nodefaultlib:libcmt.lib', '/defaultlib:' + winpath(crt_library),
+             '/defaultlib:' + winpath(output / 'amdmath.lib')])
         report['output_map'] = str(output / 'LemD3D8.map')
+        raw = output / 'LemD3D8.linked.dll'
+        shutil.copyfile(dll, raw)
+        report['raw_comparison'] = compare(raw)
+        if not args.no_metadata_restoration:
+            try:
+                report['metadata_restoration'] = dict(applied=True, **restore(dll))
+            except ValueError as error:
+                report['metadata_restoration'] = dict(applied=False, reason=str(error))
         report.update(compare(dll))
         report['status'] = 'matched' if report['full_dll_byte_exact'] else 'different'
         save()
