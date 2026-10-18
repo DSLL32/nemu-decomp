@@ -956,12 +956,11 @@ void RSP_LLV()
 {
     PC += 4;
     CpuU32 address = (RSPRegisters[Instruction.rs] + (Instruction.Value & 127) * 4) & 0xFFF;
-    CpuU32 vt = Instruction.rt;
     CpuU32 element = (Instruction.Value >> 7) & 15;
-    ((CpuU8 (*)[16])RSPVectors)[vt][(element + 0) ^ 1] = SPMemory[address + 0];
-    ((CpuU8 (*)[16])RSPVectors)[vt][(element + 1) ^ 1] = SPMemory[address + 1];
-    ((CpuU8 (*)[16])RSPVectors)[vt][(element + 2) ^ 1] = SPMemory[address + 2];
-    ((CpuU8 (*)[16])RSPVectors)[vt][(element + 3) ^ 1] = SPMemory[address + 3];
+    ((CpuU8 (*)[16])RSPVectors)[Instruction.rt][(element + 0) ^ 1] = SPMemory[address + 0];
+    ((CpuU8 (*)[16])RSPVectors)[Instruction.rt][(element + 1) ^ 1] = SPMemory[address + 1];
+    ((CpuU8 (*)[16])RSPVectors)[Instruction.rt][(element + 2) ^ 1] = SPMemory[address + 2];
+    ((CpuU8 (*)[16])RSPVectors)[Instruction.rt][(element + 3) ^ 1] = SPMemory[address + 3];
 }
 
 // Original audio.dll: 0x10016370.
@@ -969,16 +968,15 @@ void RSP_LDV()
 {
     PC += 4;
     CpuU32 address = (RSPRegisters[Instruction.rs] + (Instruction.Value & 127) * 8) & 0xFFF;
-    CpuU32 vt = Instruction.rt;
     CpuU32 element = (Instruction.Value >> 7) & 15;
-    ((CpuU8 (*)[16])RSPVectors)[vt][(element + 0) ^ 1] = SPMemory[address + 0];
-    ((CpuU8 (*)[16])RSPVectors)[vt][(element + 1) ^ 1] = SPMemory[address + 1];
-    ((CpuU8 (*)[16])RSPVectors)[vt][(element + 2) ^ 1] = SPMemory[address + 2];
-    ((CpuU8 (*)[16])RSPVectors)[vt][(element + 3) ^ 1] = SPMemory[address + 3];
-    ((CpuU8 (*)[16])RSPVectors)[vt][(element + 4) ^ 1] = SPMemory[address + 4];
-    ((CpuU8 (*)[16])RSPVectors)[vt][(element + 5) ^ 1] = SPMemory[address + 5];
-    ((CpuU8 (*)[16])RSPVectors)[vt][(element + 6) ^ 1] = SPMemory[address + 6];
-    ((CpuU8 (*)[16])RSPVectors)[vt][(element + 7) ^ 1] = SPMemory[address + 7];
+    ((CpuU8 (*)[16])RSPVectors)[Instruction.rt][(element + 0) ^ 1] = SPMemory[address + 0];
+    ((CpuU8 (*)[16])RSPVectors)[Instruction.rt][(element + 1) ^ 1] = SPMemory[address + 1];
+    ((CpuU8 (*)[16])RSPVectors)[Instruction.rt][(element + 2) ^ 1] = SPMemory[address + 2];
+    ((CpuU8 (*)[16])RSPVectors)[Instruction.rt][(element + 3) ^ 1] = SPMemory[address + 3];
+    ((CpuU8 (*)[16])RSPVectors)[Instruction.rt][(element + 4) ^ 1] = SPMemory[address + 4];
+    ((CpuU8 (*)[16])RSPVectors)[Instruction.rt][(element + 5) ^ 1] = SPMemory[address + 5];
+    ((CpuU8 (*)[16])RSPVectors)[Instruction.rt][(element + 6) ^ 1] = SPMemory[address + 6];
+    ((CpuU8 (*)[16])RSPVectors)[Instruction.rt][(element + 7) ^ 1] = SPMemory[address + 7];
 }
 
 // Original audio.dll: 0x10016460.
@@ -1080,12 +1078,11 @@ void RSP_SLV()
 {
     PC += 4;
     CpuU32 address = (RSPRegisters[Instruction.rs] + (Instruction.Value & 127) * 4) & 0xFFF;
-    CpuU32 vt = Instruction.rt;
     CpuU32 element = (Instruction.Value >> 7) & 15;
-    SPMemory[address + 0] = ((CpuU8 (*)[16])RSPVectors)[vt][(element + 0) ^ 1];
-    SPMemory[address + 1] = ((CpuU8 (*)[16])RSPVectors)[vt][(element + 1) ^ 1];
-    SPMemory[address + 2] = ((CpuU8 (*)[16])RSPVectors)[vt][(element + 2) ^ 1];
-    SPMemory[address + 3] = ((CpuU8 (*)[16])RSPVectors)[vt][(element + 3) ^ 1];
+    SPMemory[address + 0] = ((CpuU8 (*)[16])RSPVectors)[Instruction.rt][(element + 0) ^ 1];
+    SPMemory[address + 1] = ((CpuU8 (*)[16])RSPVectors)[Instruction.rt][(element + 1) ^ 1];
+    SPMemory[address + 2] = ((CpuU8 (*)[16])RSPVectors)[Instruction.rt][(element + 2) ^ 1];
+    SPMemory[address + 3] = ((CpuU8 (*)[16])RSPVectors)[Instruction.rt][(element + 3) ^ 1];
 }
 
 // Original audio.dll: 0x10016800.
@@ -1093,16 +1090,15 @@ void RSP_SDV()
 {
     PC += 4;
     CpuU32 address = (RSPRegisters[Instruction.rs] + (Instruction.Value & 127) * 8) & 0xFFF;
-    CpuU32 vt = Instruction.rt;
     CpuU32 element = (Instruction.Value >> 7) & 15;
-    SPMemory[address + 0] = ((CpuU8 (*)[16])RSPVectors)[vt][(element + 0) ^ 1];
-    SPMemory[address + 1] = ((CpuU8 (*)[16])RSPVectors)[vt][(element + 1) ^ 1];
-    SPMemory[address + 2] = ((CpuU8 (*)[16])RSPVectors)[vt][(element + 2) ^ 1];
-    SPMemory[address + 3] = ((CpuU8 (*)[16])RSPVectors)[vt][(element + 3) ^ 1];
-    SPMemory[address + 4] = ((CpuU8 (*)[16])RSPVectors)[vt][(element + 4) ^ 1];
-    SPMemory[address + 5] = ((CpuU8 (*)[16])RSPVectors)[vt][(element + 5) ^ 1];
-    SPMemory[address + 6] = ((CpuU8 (*)[16])RSPVectors)[vt][(element + 6) ^ 1];
-    SPMemory[address + 7] = ((CpuU8 (*)[16])RSPVectors)[vt][(element + 7) ^ 1];
+    SPMemory[address + 0] = ((CpuU8 (*)[16])RSPVectors)[Instruction.rt][(element + 0) ^ 1];
+    SPMemory[address + 1] = ((CpuU8 (*)[16])RSPVectors)[Instruction.rt][(element + 1) ^ 1];
+    SPMemory[address + 2] = ((CpuU8 (*)[16])RSPVectors)[Instruction.rt][(element + 2) ^ 1];
+    SPMemory[address + 3] = ((CpuU8 (*)[16])RSPVectors)[Instruction.rt][(element + 3) ^ 1];
+    SPMemory[address + 4] = ((CpuU8 (*)[16])RSPVectors)[Instruction.rt][(element + 4) ^ 1];
+    SPMemory[address + 5] = ((CpuU8 (*)[16])RSPVectors)[Instruction.rt][(element + 5) ^ 1];
+    SPMemory[address + 6] = ((CpuU8 (*)[16])RSPVectors)[Instruction.rt][(element + 6) ^ 1];
+    SPMemory[address + 7] = ((CpuU8 (*)[16])RSPVectors)[Instruction.rt][(element + 7) ^ 1];
 }
 
 // Original audio.dll: 0x100168E0.
