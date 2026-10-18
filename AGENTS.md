@@ -2,3 +2,4 @@
  - For wine, allocate a new prefix under scratch space, and reuse it where possible
  - Commit as you please per substantial change
  - Decompilation is the honest reconstruction of original source code, in its original file/folder structure (inferred if unknown), and the compiled code is byte exact to the input
+ - `Makefile` is just for users to build a working copy of the sources, not for producing byte-matching executables
