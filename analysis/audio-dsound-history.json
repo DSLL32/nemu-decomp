@@ -564,5 +564,165 @@
     },
     "limits": "Absence from this archived upstream tree does not prove absence from the unavailable original host source. Native sibling behavior is compatible with compiler intrinsic expansion, but does not uniquely identify the historical source expression.",
     "decision": "No unsupported inline-assembly helper or qualifier was promoted. AllocateSoundBuffer remains unmatched."
+  },
+  "historical_volatile_parameter_control": {
+    "artifact": "/root/.ai-tmp/audio-historical-volatile.93m8aq6m",
+    "scope": "Evidence-only control of the previously exact VC7 const char * volatile text form against the independent 2001 image. This qualifier is not asserted to be original source and was not adopted.",
+    "source_form": "Copy the volatile incoming pointer into the message local once; use that local for the initial MessageBox. The unknown-HRESULT branch reads the incoming pointer again for the caption after sprintf. All fifteen cases and literal spellings are preserved.",
+    "source_context": "The same isolated AudioError/AllocateSoundBuffer C translation unit used for the earlier historical controls. The independent 2001 complete translation unit and exact source order are not available.",
+    "historical_case_audit": {
+      "path": "/root/.ai-tmp/audio-historical-volatile.93m8aq6m/historical-case-audit.json",
+      "sha256": "6abac0662bc24e4be5cd8df9c49f00f39ed46d11703763eb1ad62641773ad6b8",
+      "cases_confirmed": 15,
+      "default_controls_confirmed": 3,
+      "unique_complete_literals": 17,
+      "method": "Trace the original signed-comparison and indexed dispatch for every source HRESULT value; verify the selected original literal. All values select the matching text, with the original DSerrtxt_ALLOCATED spelling. No cases, source constants or original operands are normalized."
+    },
+    "historical_import": {
+      "name": "USER32.dll!MessageBoxA",
+      "iat_va": "0x1000f12c",
+      "basis": "Original PE import table, resolved independently of the reconstruction. The rebuilt operand is still compared at its actual COFF offset; moved instruction fields remain mismatches."
+    },
+    "driver_sha256": "2101aff58b395c359d233354b9c2d9603a30af2e7c7eb2cfe6473a4d03788f1b",
+    "audit_script_sha256": "cb3dbf8d6fa79585684bc16856af7753629e2a3c1e8891a314c6f373740966f1",
+    "results": [
+      {
+        "name": "vc6-baseline",
+        "artifact": "/root/.ai-tmp/audio-historical-volatile.93m8aq6m/vc6-baseline",
+        "commands": [
+          "python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc6rtm",
+          "cl",
+          "/IZ:\\root\\nemu-decomp\\toolchains\\vc6rtm\\include",
+          "/IZ:\\root\\nemu-decomp\\toolchains\\vc6\\include",
+          "/nologo",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/c",
+          "/FoZ:\\root\\.ai-tmp\\audio-historical-volatile.93m8aq6m\\vc6-baseline\\DirectSound.obj",
+          "Z:\\root\\.ai-tmp\\audio-historical-volatile.93m8aq6m\\vc6-baseline\\DirectSound.c"
+        ],
+        "original_sha256": "4e7953e5a4de38c2aaa5be4ef34b644f6af3f2d39a40ff0365a380abc2757ca8",
+        "source_sha256": "f8cad25ed1aca1bc50c73e65012df7d9d9a4ad8db4b7a74fb20f57b3ee0ab782",
+        "object_sha256": "11738b4247163678f61ca196cf0f2ab2f04b9503778670950a29e277bcd8fffe",
+        "comparison_sha256": "8231fb4d3211611a6fdf63cb1c36cf67a1f32b9243a872280954ed4cb19cb3aa",
+        "symbols_sha256": "2101701aca754dec806ecf4076dea70000ff85a65148a94877de7b9d75f31d3c",
+        "tool_sha256": {
+          "/root/nemu-decomp/toolchains/vc6rtm/bin/cl.exe": "d9220fdfaf355c81f26e7b03c5dc628ec72ff81c99dc38ed98b1ad4bdbbb309c",
+          "/root/nemu-decomp/toolchains/vc6rtm/bin/c1.dll": "ee14a2603a1339f95db2e396751f7e51b50e421731229fb2416a01f974689d80",
+          "/root/nemu-decomp/toolchains/vc6rtm/bin/c2.dll": "45187b0b6288240f73272a7c61e6329c50048a76e57db3bb87b6f0229e09e27d"
+        },
+        "complete_differences_sha256": "6670042ba515193fd717695b68604aa298ea53a08c75f0013c3905df6526162c",
+        "function": {
+          "original_va": 268448640,
+          "original_bytes": 624,
+          "rebuilt_bytes": 624,
+          "raw_differing_bytes": 252,
+          "relocation_masked_differing_bytes": 88,
+          "relocation_target_mismatch_count": 28,
+          "unresolved_target_count": 0,
+          "inferred_target_count": 20,
+          "inferred_relocated_bytes_equal": false,
+          "relocated_bytes_equal": false
+        }
+      },
+      {
+        "name": "vc6-volatile",
+        "artifact": "/root/.ai-tmp/audio-historical-volatile.93m8aq6m/vc6-volatile",
+        "commands": [
+          "python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc6rtm",
+          "cl",
+          "/IZ:\\root\\nemu-decomp\\toolchains\\vc6rtm\\include",
+          "/IZ:\\root\\nemu-decomp\\toolchains\\vc6\\include",
+          "/nologo",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/c",
+          "/FoZ:\\root\\.ai-tmp\\audio-historical-volatile.93m8aq6m\\vc6-volatile\\DirectSound.obj",
+          "Z:\\root\\.ai-tmp\\audio-historical-volatile.93m8aq6m\\vc6-volatile\\DirectSound.c"
+        ],
+        "original_sha256": "4e7953e5a4de38c2aaa5be4ef34b644f6af3f2d39a40ff0365a380abc2757ca8",
+        "source_sha256": "2bee22b00670067f9fad2757c2f114702e8f61ed5be6a43e963c8b44da964a32",
+        "object_sha256": "9756f7d6533899cbb21afc3e2ebd535d5098e4872f4d4c39d501eca894de6f3f",
+        "comparison_sha256": "2d45eae23fb4ba20735ecbd0be7bb53e7304ed076c5247624ce4d5f75d4c954b",
+        "symbols_sha256": "2101701aca754dec806ecf4076dea70000ff85a65148a94877de7b9d75f31d3c",
+        "tool_sha256": {
+          "/root/nemu-decomp/toolchains/vc6rtm/bin/cl.exe": "d9220fdfaf355c81f26e7b03c5dc628ec72ff81c99dc38ed98b1ad4bdbbb309c",
+          "/root/nemu-decomp/toolchains/vc6rtm/bin/c1.dll": "ee14a2603a1339f95db2e396751f7e51b50e421731229fb2416a01f974689d80",
+          "/root/nemu-decomp/toolchains/vc6rtm/bin/c2.dll": "45187b0b6288240f73272a7c61e6329c50048a76e57db3bb87b6f0229e09e27d"
+        },
+        "complete_differences_sha256": "a20752b92e35ca29bfbb34dd71ecbdcf292ea7b3716f570b1d26c3f824de27e5",
+        "function": {
+          "original_va": 268448640,
+          "original_bytes": 624,
+          "rebuilt_bytes": 624,
+          "raw_differing_bytes": 228,
+          "relocation_masked_differing_bytes": 63,
+          "relocation_target_mismatch_count": 18,
+          "unresolved_target_count": 0,
+          "inferred_target_count": 20,
+          "inferred_relocated_bytes_equal": false,
+          "relocated_bytes_equal": false
+        }
+      },
+      {
+        "name": "vc7-volatile",
+        "artifact": "/root/.ai-tmp/audio-historical-volatile.93m8aq6m/vc7-volatile",
+        "commands": [
+          "python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/IZ:\\root\\nemu-decomp\\toolchains\\vc7\\platformsdk\\include\\prerelease",
+          "/nologo",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/c",
+          "/FoZ:\\root\\.ai-tmp\\audio-historical-volatile.93m8aq6m\\vc7-volatile\\DirectSound.obj",
+          "Z:\\root\\.ai-tmp\\audio-historical-volatile.93m8aq6m\\vc7-volatile\\DirectSound.c"
+        ],
+        "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+        "source_sha256": "2bee22b00670067f9fad2757c2f114702e8f61ed5be6a43e963c8b44da964a32",
+        "object_sha256": "560f746f59af267e8756ae2a1c694c2e68bb72447cf38fa3b2d8a40a8d132537",
+        "comparison_sha256": "5adbe83546168c88c7ea9a9f452fbc2bd5a57a5390740004b82a18bfa49c571d",
+        "symbols_sha256": "8d0a1c637f9c59f3a845d7713f1a164027bdb608377ae1aeca6da22af8157314",
+        "tool_sha256": {
+          "/root/nemu-decomp/toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
+          "/root/nemu-decomp/toolchains/vc7/bin/c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
+          "/root/nemu-decomp/toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0"
+        },
+        "complete_differences_sha256": "a14352b8acbae0f62b3421c9d3a2d057b25f8853d8a37721a8332f297d7abcbb",
+        "function": {
+          "original_va": 268450880,
+          "original_bytes": 640,
+          "rebuilt_bytes": 640,
+          "raw_differing_bytes": 180,
+          "relocation_masked_differing_bytes": 0,
+          "relocation_target_mismatch_count": 0,
+          "unresolved_target_count": 0,
+          "inferred_target_count": 19,
+          "inferred_relocated_bytes_equal": true,
+          "relocated_bytes_equal": false
+        }
+      }
+    ],
+    "findings": [
+      "The VC6 RTM control improves from 88 to 63 differing non-relocation bytes across the entire 624-byte original extent, but remains unmatched. Its actual-offset relocation mismatches improve from 28 to 18; every target is resolved, with twenty target uses still explicitly inferred.",
+      "The same volatile body under VC7 reproduces all 640 bytes after target-aware relocation comparison, with zero operand mismatches. Nineteen target uses retain inferred identities, so this is not described as an independently identified-target proof or a whole-DLL match.",
+      "Original 2001 versus rebuilt VC6 differences include initial register-save/load ordering, immediate-loading order in the repeated case returns, and the default-path stack cleanup and pointer loads. The qualifier does not explain both original bodies under the tested settings.",
+      "The complete raw and non-relocation byte-difference lists, original HIGHLOW fields, and actual COFF relocation records are retained separately for all three builds."
+    ],
+    "limits": [
+      "Historical full-unit source context and compilation options beyond the documented native /O2 /Ob1 /MT baseline remain unproved. This isolated negative result does not exclude a different historical context.",
+      "The historical call target named sprintf and private globals remain explicitly inferred; literal and import identities are independently checked. No mismatch was corrected by relocating, rewriting or normalizing original instructions.",
+      "The VC7 comparison required the tracked SDK prerelease include directory for dsound.h; an initial missing-header attempt produced no object and is retained in missing-sdk-include.log.",
+      "No canonical qualifier, function body, storage declaration or build setting was changed."
+    ]
   }
 }
