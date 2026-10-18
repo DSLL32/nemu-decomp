@@ -1189,8 +1189,8 @@ void RSP_VMULF()
 void RSP_VMULU()
 {
     PC += 4;
-    CpuU32 vd = Instruction.sa, vs = Instruction.rd, vt = Instruction.rt;
     CpuU32 element = Instruction.rs & 15;
+    CpuU32 vd = Instruction.sa, vs = Instruction.rd, vt = Instruction.rt;
     for (int i = 0; i < 8; i++)
     {
         CpuU32 lane;
@@ -1203,8 +1203,8 @@ void RSP_VMULU()
         if ((result >> 47) & 1) result = 0xFFFF000000000000 | (result & 0xFFFFFFFFFFFF);
         else result &= 0xFFFFFFFFFFFF;
         AccumulatorValue(i) = result;
-        result = AccumulatorMiddle(i);
-        if ((CpuU32)result > 0xFFFF) result = 0xFFFF;
+        if ((CpuU32)AccumulatorMiddle(i) > 0xFFFF) result = 0xFFFF;
+        else result = AccumulatorMiddle(i);
         RSPVectors[vd][i] = (CpuU16)result;
     }
 }
@@ -1310,8 +1310,8 @@ void RSP_VMUDH()
 void RSP_VMACF()
 {
     PC += 4;
-    CpuU32 vd = Instruction.sa, vs = Instruction.rd, vt = Instruction.rt;
     CpuU32 element = Instruction.rs & 15;
+    CpuU32 vd = Instruction.sa, vs = Instruction.rd, vt = Instruction.rt;
     for (int i = 0; i < 8; i++)
     {
         CpuU32 lane;
@@ -1324,9 +1324,9 @@ void RSP_VMACF()
         if ((result >> 47) & 1) result = 0xFFFF000000000000 | (result & 0xFFFFFFFFFFFF);
         else result &= 0xFFFFFFFFFFFF;
         AccumulatorValue(i) = result;
-        result = AccumulatorMiddle(i);
-        if ((CpuS32)result > 32767) result = 32767;
-        else if ((CpuS32)result < -32768) result = -32768;
+        if ((CpuS32)AccumulatorMiddle(i) > 32767) result = 32767;
+        else if ((CpuS32)AccumulatorMiddle(i) < -32768) result = -32768;
+        else result = AccumulatorMiddle(i);
         RSPVectors[vd][i] = (CpuU16)result;
     }
 }
@@ -1335,8 +1335,8 @@ void RSP_VMACF()
 void RSP_VMACU()
 {
     PC += 4;
-    CpuU32 vd = Instruction.sa, vs = Instruction.rd, vt = Instruction.rt;
     CpuU32 element = Instruction.rs & 15;
+    CpuU32 vd = Instruction.sa, vs = Instruction.rd, vt = Instruction.rt;
     for (int i = 0; i < 8; i++)
     {
         CpuU32 lane;
@@ -1349,8 +1349,8 @@ void RSP_VMACU()
         if ((result >> 47) & 1) result = 0xFFFF000000000000 | (result & 0xFFFFFFFFFFFF);
         else result &= 0xFFFFFFFFFFFF;
         AccumulatorValue(i) = result;
-        result = AccumulatorMiddle(i);
-        if ((CpuU32)result > 0xFFFF) result = 0xFFFF;
+        if ((CpuU32)AccumulatorMiddle(i) > 0xFFFF) result = 0xFFFF;
+        else result = AccumulatorMiddle(i);
         RSPVectors[vd][i] = (CpuU16)result;
     }
 }
@@ -1371,8 +1371,8 @@ void RSP_VMACQ()
 void RSP_VMADL()
 {
     PC += 4;
-    CpuU32 vd = Instruction.sa, vs = Instruction.rd, vt = Instruction.rt;
     CpuU32 element = Instruction.rs & 15;
+    CpuU32 vd = Instruction.sa, vs = Instruction.rd, vt = Instruction.rt;
     for (int i = 0; i < 8; i++)
     {
         CpuU32 lane;
@@ -1381,9 +1381,10 @@ void RSP_VMADL()
         else if ((element & 12) == 4) lane = (i & 12) + (element & 3);
         else lane = element & 7;
         AccumulatorValue(i) += (CpuU16)((RSPVectors[vt][lane] * RSPVectors[vs][i]) >> 16);
-        CpuS64 result = AccumulatorValue(i);
-        if ((CpuS32)result > 32767) result = 32767;
-        else if ((CpuS32)result < -32768) result = -32768;
+        CpuS64 result;
+        if ((CpuS32)AccumulatorValue(i) > 32767) result = 32767;
+        else if ((CpuS32)AccumulatorValue(i) < -32768) result = -32768;
+        else result = AccumulatorValue(i);
         RSPVectors[vd][i] = (CpuU16)result;
     }
 }
@@ -1392,8 +1393,8 @@ void RSP_VMADL()
 void RSP_VMADM()
 {
     PC += 4;
-    CpuU32 vd = Instruction.sa, vs = Instruction.rd, vt = Instruction.rt;
     CpuU32 element = Instruction.rs & 15;
+    CpuU32 vd = Instruction.sa, vs = Instruction.rd, vt = Instruction.rt;
     for (int i = 0; i < 8; i++)
     {
         CpuU32 lane;
@@ -1402,9 +1403,10 @@ void RSP_VMADM()
         else if ((element & 12) == 4) lane = (i & 12) + (element & 3);
         else lane = element & 7;
         AccumulatorValue(i) += RSPVectors[vt][lane] * (CpuS16)RSPVectors[vs][i];
-        CpuS64 result = AccumulatorValue(i) >> 16;
+        CpuS64 result;
         if (((CpuS32)AccumulatorValue(i) >> 16) > 32767) result = 32767;
         else if (((CpuS32)AccumulatorValue(i) >> 16) < -32768) result = -32768;
+        else result = AccumulatorValue(i) >> 16;
         RSPVectors[vd][i] = (CpuU16)result;
     }
 }
@@ -1413,8 +1415,8 @@ void RSP_VMADM()
 void RSP_VMADN()
 {
     PC += 4;
-    CpuU32 vd = Instruction.sa, vs = Instruction.rd, vt = Instruction.rt;
     CpuU32 element = Instruction.rs & 15;
+    CpuU32 vd = Instruction.sa, vs = Instruction.rd, vt = Instruction.rt;
     for (int i = 0; i < 8; i++)
     {
         CpuU32 lane;
@@ -1423,9 +1425,10 @@ void RSP_VMADN()
         else if ((element & 12) == 4) lane = (i & 12) + (element & 3);
         else lane = element & 7;
         AccumulatorValue(i) += (CpuS16)RSPVectors[vt][lane] * RSPVectors[vs][i];
-        CpuS64 result = AccumulatorValue(i);
-        if ((CpuS32)result > 32767) result = 32767;
-        else if ((CpuS32)result < -32768) result = -32768;
+        CpuS64 result;
+        if ((CpuS32)AccumulatorValue(i) > 32767) result = 32767;
+        else if ((CpuS32)AccumulatorValue(i) < -32768) result = -32768;
+        else result = AccumulatorValue(i);
         RSPVectors[vd][i] = (CpuU16)result;
     }
 }
@@ -1434,8 +1437,8 @@ void RSP_VMADN()
 void RSP_VMADH()
 {
     PC += 4;
-    CpuU32 vd = Instruction.sa, vs = Instruction.rd, vt = Instruction.rt;
     CpuU32 element = Instruction.rs & 15;
+    CpuU32 vd = Instruction.sa, vs = Instruction.rd, vt = Instruction.rt;
     for (int i = 0; i < 8; i++)
     {
         CpuU32 lane;
@@ -1444,9 +1447,10 @@ void RSP_VMADH()
         else if ((element & 12) == 4) lane = (i & 12) + (element & 3);
         else lane = element & 7;
         AccumulatorValue(i) += (CpuS64)((CpuS16)RSPVectors[vt][lane] * (CpuS16)RSPVectors[vs][i]) * 0x10000;
-        CpuS64 result = AccumulatorValue(i) >> 16;
+        CpuS64 result;
         if (((CpuS32)AccumulatorValue(i) >> 16) > 32767) result = 32767;
         else if (((CpuS32)AccumulatorValue(i) >> 16) < -32768) result = -32768;
+        else result = AccumulatorValue(i) >> 16;
         RSPVectors[vd][i] = (CpuU16)result;
     }
 }

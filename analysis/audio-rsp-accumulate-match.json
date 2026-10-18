@@ -1,0 +1,175 @@
+{
+  "original": "master/Plugin/audio.dll",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "status": "seven_complete_retained_multiply_handlers_matched",
+  "full_dll_byte_exact": false,
+  "source": "src/audio/ahle_ds/RSP.cpp",
+  "source_sha256": "5aabd9f3295be947fa1a24d196197cd10b92458315dd3a7dccfe5dc078accc46",
+  "source_changes": [
+    "Decode the element before vd/vs/vt, following the independently verified five-handler entry order.",
+    "Assign the saturated result in each signed or unsigned branch, including the in-range arm, instead of assigning a default result before the conditions. Existing accumulator operations, signedness and clamp predicates are preserved."
+  ],
+  "assembly_basis": "In VMADM, the original first distinct block at +0x102 retains the middle-word result across the signed bounds tests and assigns its 64-bit high half separately in each of three arms. The branch-local source reproduces this block and its repeated lanes. Applying the same observed structure to the sibling clamp sites matches their complete bodies.",
+  "prior_evidence": [
+    "analysis/audio-rsp-multiply-entry-match.json",
+    "analysis/audio-rsp-clamp-refinement.json"
+  ],
+  "compiler_command": [
+    "/usr/bin/python3",
+    "/root/nemu-decomp/scripts/run_toolchain.py",
+    "vc7",
+    "cl",
+    "/nologo",
+    "/c",
+    "/O2",
+    "/Ob1",
+    "/MT",
+    "/W3",
+    "/DWIN32",
+    "/DNDEBUG",
+    "/D_WINDOWS",
+    "/D_USRDLL",
+    "/FoRSP.obj",
+    "RSP.cpp"
+  ],
+  "candidate_object": {
+    "path": "/root/.ai-tmp/audio-rsp-accumulate.zoqqom7a/branch-local-result/RSP.obj",
+    "sha256": "2880afbd4abfc091e6ecb5a19710266f34d471d641607373abe05eb6e867dbc3"
+  },
+  "new_complete_functions": [
+    {
+      "name": "RSP_VMULU",
+      "symbol": "_RSP_VMULU",
+      "va": 268528992,
+      "original_size": 1024,
+      "candidate_size": 1024,
+      "exact": true,
+      "differing_bytes": 0,
+      "unresolved": 0,
+      "original_sha256": "b15c03914b5d10b99f983e9b367425c27f105e328632df5a439afe2a9c14d590",
+      "candidate_materialized_sha256": "b15c03914b5d10b99f983e9b367425c27f105e328632df5a439afe2a9c14d590",
+      "verified_relocation_operands": 19
+    },
+    {
+      "name": "RSP_VMACF",
+      "symbol": "_RSP_VMACF",
+      "va": 268533600,
+      "original_size": 1232,
+      "candidate_size": 1232,
+      "exact": true,
+      "differing_bytes": 0,
+      "unresolved": 0,
+      "original_sha256": "d65325ab1f39e5becc039db186c1e6c8ebb5de5c2d26c2bd5b8ab3b29ec43a21",
+      "candidate_materialized_sha256": "d65325ab1f39e5becc039db186c1e6c8ebb5de5c2d26c2bd5b8ab3b29ec43a21",
+      "verified_relocation_operands": 23
+    },
+    {
+      "name": "RSP_VMACU",
+      "symbol": "_RSP_VMACU",
+      "va": 268534832,
+      "original_size": 1152,
+      "candidate_size": 1152,
+      "exact": true,
+      "differing_bytes": 0,
+      "unresolved": 0,
+      "original_sha256": "ab9f9511621c8ead96e9c29443d5ebb96dc16870d0938ca94fa899bb08a312af",
+      "candidate_materialized_sha256": "ab9f9511621c8ead96e9c29443d5ebb96dc16870d0938ca94fa899bb08a312af",
+      "verified_relocation_operands": 23
+    },
+    {
+      "name": "RSP_VMADL",
+      "symbol": "_RSP_VMADL",
+      "va": 268536016,
+      "original_size": 1120,
+      "candidate_size": 1120,
+      "exact": true,
+      "differing_bytes": 0,
+      "unresolved": 0,
+      "original_sha256": "11a179d4171bb5205d422a9d652e64eed4e182af0c49641b625e36682f414741",
+      "candidate_materialized_sha256": "11a179d4171bb5205d422a9d652e64eed4e182af0c49641b625e36682f414741",
+      "verified_relocation_operands": 19
+    },
+    {
+      "name": "RSP_VMADM",
+      "symbol": "_RSP_VMADM",
+      "va": 268537136,
+      "original_size": 1152,
+      "candidate_size": 1152,
+      "exact": true,
+      "differing_bytes": 0,
+      "unresolved": 0,
+      "original_sha256": "8c0b66af250b118c99c6cd68f07304ea1574ef4c1c94dc20d9a9d3bf53165ec0",
+      "candidate_materialized_sha256": "8c0b66af250b118c99c6cd68f07304ea1574ef4c1c94dc20d9a9d3bf53165ec0",
+      "verified_relocation_operands": 19
+    },
+    {
+      "name": "RSP_VMADN",
+      "symbol": "_RSP_VMADN",
+      "va": 268538288,
+      "original_size": 1104,
+      "candidate_size": 1104,
+      "exact": true,
+      "differing_bytes": 0,
+      "unresolved": 0,
+      "original_sha256": "e655876970a6779b36ae28352d3a1ed3ad54b8063f2470c420f23a363386acff",
+      "candidate_materialized_sha256": "e655876970a6779b36ae28352d3a1ed3ad54b8063f2470c420f23a363386acff",
+      "verified_relocation_operands": 19
+    },
+    {
+      "name": "RSP_VMADH",
+      "symbol": "_RSP_VMADH",
+      "va": 268539392,
+      "original_size": 1216,
+      "candidate_size": 1216,
+      "exact": true,
+      "differing_bytes": 0,
+      "unresolved": 0,
+      "original_sha256": "6febef408b0a1630d8f34592f1c2bb651aeb2744225726efb369044ee1e03fbe",
+      "candidate_materialized_sha256": "6febef408b0a1630d8f34592f1c2bb651aeb2744225726efb369044ee1e03fbe",
+      "verified_relocation_operands": 23
+    }
+  ],
+  "new_matching_bytes": 8000,
+  "whole_unit": {
+    "functions_compared": 180,
+    "functions_exact": 160,
+    "matching_function_bytes": 38176,
+    "other_function_hashes_preserved": 173,
+    "prior_exact_functions_preserved": 153,
+    "typed_objects_exact": 25,
+    "typed_fields_exact": 11,
+    "typed_data_hashes_unchanged": true,
+    "unresolved_operands": 0
+  },
+  "behavior": {
+    "path": "/root/.ai-tmp/audio-rsp-accumulate.zoqqom7a/behavior.json",
+    "sha256": "f25ab06c9a8427aec9b1dd77f4156c7d580892d7811e7170d07845aa6e7554a0",
+    "script": "/root/.ai-tmp/audio-rsp-accumulate.zoqqom7a/native-behavior.py",
+    "script_sha256": "9d33880f88c02ef5b8eaea0fd135867004d8c89165ecafcb8c0ff38cb4c7edb8",
+    "cases": 14336,
+    "failures": 0,
+    "cases_per_function": 2048,
+    "method": "Original and compiled x86 functions executed in independent Unicorn memory images. Compared all17408 bytes of RSP state, stack balance and preserved registers. No executable files modified.",
+    "coverage": "All 16 element selectors, randomized vectors and 48-bit accumulators, signed extrema, retained accumulator high bits, and vd/vs/vt aliasing. Compared the entire RSP state, callee-saved registers and stack balance."
+  },
+  "evidence": {
+    "directory": "/root/.ai-tmp/audio-rsp-accumulate.zoqqom7a",
+    "files": {
+      "probe.py": "beb3e56d3c2e49c13062aa7c50e9ae1398e49b2a81c390410d6af7474be39d4d",
+      "inspect.py": "95739d53b91934fef50fae28f74f21b5d6b264bd374b97a5bce03d97b4ecca63",
+      "baseline/comparison.json": "a50e31548769c994ef0e0712ce6d7860a0fd5a8a90d43b1fbce626386a47d3b7",
+      "branch-local-result/RSP.cpp": "5aabd9f3295be947fa1a24d196197cd10b92458315dd3a7dccfe5dc078accc46",
+      "branch-local-result/compile.log": "2f1025c0b15261d790d995ec90ef7892c07d58da6b756f420effde610bacd341",
+      "branch-local-result/strict.json": "b936ae8b51e2c4493031f543c8b5b0c6eb340190f1bcd991bed11cc48c253f0c",
+      "branch-local-result/integrator-check.json": "693089e000849f50374943e4370d6a9ee3c45dc571124be09a6cec131aec3092",
+      "branch-local-result/summary.json": "ddf44c02a24c775a43b2c2d8959173a250bc520997db428f828d68d525e4c3cb",
+      "VMADM-original.asm": "82d0ae066905586519d4ad0327b72a725e14a6cc4bc5f5814a2908d9cbc4b1f2",
+      "VMADM-element-first.asm": "d0d795e6784a0c21c0237cc7e9aeb5b898885bc2777512c36f15483f327e45dc"
+    }
+  },
+  "limitations": [
+    "These seven handlers and the earlier five retained multiply handlers are exact; the separate generic RSP_VectorMultiplyExec helper remains unmatched.",
+    "20 native RSP functions remain unmatched. Function placement and whole-DLL equality require the integrator complete-image comparison.",
+    "No original source spelling or private filename is claimed. The selected ordinary C++ structure is constrained by its complete emitted native bodies."
+  ]
+}
