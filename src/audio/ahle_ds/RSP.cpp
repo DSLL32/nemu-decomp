@@ -2268,8 +2268,9 @@ void RSP_UnusedEntry1001E0F0() {}
 // Original audio.dll: 0x1001E100.
 void RSP_LoadVectorExec(RSPInstructionWord opcode)
 {
-    CpuU32 kind = opcode.rd, vt = opcode.rt;
+    CpuU32 vt = opcode.rt;
     CpuS32 element = (opcode.Value >> 7) & 15;
+    CpuU32 kind = opcode.rd;
     CpuU32 address;
     CpuU32 group;
     if (kind == 11) group = vt & 24;
@@ -2355,8 +2356,7 @@ void RSP_LoadVectorExec(RSPInstructionWord opcode)
                 ((CpuU8 *)transpose)[((first + i) % 8) * 2] = RSP_ReadByte(address + i * 2 + 1);
             }
             for (i = 0; i < 8; i++) {
-                CpuU32 lane = ((element >> 1) + i) & 7;
-                RSPVectors[group + lane][i] = transpose[lane];
+                RSPVectors[group + (((element >> 1) + i) & 7)][i] = transpose[((element >> 1) + i) & 7];
             }
         }
         break;
