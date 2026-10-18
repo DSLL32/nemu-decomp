@@ -1646,5 +1646,40 @@
     "This proves complete original function extents and alignment after independently materializing actual COFF relocations for comparison; no executable file is patched.",
     "Fourteen RSP bodies and full DLL code/storage layout remain unresolved.",
     "Original private identifiers and source filenames remain inferred."
-  ]
+  ],
+  "independent_replay": {
+    "summary": {
+      "scratch": "/root/.ai-tmp/audio-rsp-copy-replay-root.23tkoges",
+      "command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_USRDLL",
+        "/FoRSP.obj",
+        "RSP.cpp"
+      ],
+      "functions": 180,
+      "exact": 166,
+      "matching_bytes": 43232,
+      "data_exact": 25,
+      "fields_exact": 11,
+      "unresolved": 0,
+      "changed_from_direct_vt": [],
+      "source_sha256": "b1fef88c6539dde0c05a433fa3a5eae4ff261fe470a4171bdd816e2a8a14e2fc",
+      "object_sha256": "7652d60691bba899c511589d5e228b366b36989473f431a712b4432a5905864d"
+    },
+    "summary_sha256": "9f1856ceee4a234c7ee95bf98ec412e16ffae4fce84f311ce32a19b4f5fbfaa2",
+    "comparison_sha256": "c007dcfb373a43cc01d3ae8ea1c25d9ccc8fb5dc7cb50454d683852836fdd413",
+    "compile_log_sha256": "a8b19175837a8205fd0ae0adb36bbbd95e44cd63b80992e8b27990489bf8deb9"
+  }
 }
