@@ -1,0 +1,568 @@
+{
+  "status": "Negative source controls; canonical source unchanged.",
+  "target": "master/Plugin/audio.dll",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "source_basis": "The actual flags are three16-bit words. These controls test a16-bit narrowing boundary around the shifted carry mask or AND, distinct from the previously tested16-bit finalBoolean cast. All lane indices are0..7. The clear mask is also bounded to16 bits.",
+  "prior_evidence": [
+    "analysis/audio-rsp-carry-dataflow-controls.json",
+    "/root/.ai-tmp/nemu-audio-arithmetic.mb1o7ztm/carry.cpp"
+  ],
+  "scratch": "/root/.ai-tmp/audio-rsp-word-masks-root.ku1pzt4r",
+  "driver_sha256": "0093d4ee315320d8fdb063abde37ab477e354269e4fee38a13a79b9303946f3e",
+  "runs": [
+    {
+      "label": "baseline",
+      "source_sha256": "eac9ee4ca4f1fcdf359512b3a1137dcddedaf9b148757d40c9623b8643eeae38",
+      "object_sha256": "c020828ca87727ea4b39a777f5b3e0f3b404504903673e5c8cea5540d2e0b70f",
+      "comparison_sha256": "1d360f0b7ab30a9822f04b111aeb9c541c2899100be0f139c92a4afa355fdebe",
+      "compiler_log_sha256": "395f8ab0499a595c19a940916a2de5efa243fc3975537458607a9e41ed817c98",
+      "compiler_command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_USRDLL",
+        "/FoRSP.obj",
+        "RSP.cpp"
+      ],
+      "exact_functions": 168,
+      "prior_exact_preserved": 168,
+      "changed_functions": [],
+      "unchanged_other_function_hashes": 175,
+      "typed_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 720,
+          "differing_bytes": 647,
+          "exact": false,
+          "candidate_materialized_sha256": "fc8791be356df4470af7c2db2a60d5fe93ed62e300c53f2cff1b9f18699aaa39"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 672,
+          "differing_bytes": 488,
+          "exact": false,
+          "candidate_materialized_sha256": "5c58c7efc8ee2e07a03937a9f30536e80d6788b36eaf24eb6ff90c344f9b873a"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 688,
+          "differing_bytes": 623,
+          "exact": false,
+          "candidate_materialized_sha256": "4b34c25311c52e8d82ad9615f6f917f8e653ee4ef11dec48c881a57573ade206"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 672,
+          "differing_bytes": 505,
+          "exact": false,
+          "candidate_materialized_sha256": "4de5512c6d7b8ed8eba1372a91f139223cf9a9327612288b54facf8214fdd688"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 640,
+          "differing_bytes": 598,
+          "exact": false,
+          "candidate_materialized_sha256": "db3cbb9b81f08c86c45c6d21b734073126beb5dce87efbccc96665e54cd45dc3"
+        }
+      ]
+    },
+    {
+      "label": "carry-mask-u16",
+      "source_sha256": "f4c4f08736b441df3cf0ca8f6d1bab0c197753c498582c07ed570c651eebd4e4",
+      "object_sha256": "7bc0470952f7cb3c6653683df8195a0b3fe3f24ff81fd3d9130b2d64eff7a2ef",
+      "comparison_sha256": "1fdfca0b41df2930e03f9b8c3768ac12e326e5a06c7a5d24bdbbf35715633063",
+      "compiler_log_sha256": "bb90e27581b0bb649421f4fb0b0c7f0dbd79dba4a0297361c2b8eb955af485c3",
+      "compiler_command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_USRDLL",
+        "/FoRSP.obj",
+        "RSP.cpp"
+      ],
+      "exact_functions": 168,
+      "prior_exact_preserved": 168,
+      "changed_functions": [
+        "RSP_VADD",
+        "RSP_VADDExec",
+        "RSP_VSUB",
+        "RSP_VSUBExec",
+        "RSP_VSUT"
+      ],
+      "unchanged_other_function_hashes": 175,
+      "typed_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 692,
+          "exact": false,
+          "candidate_materialized_sha256": "505c348c87c16b5fa549f8998082e46600e3c058136cb1f1aa645bfb1069a231"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 640,
+          "differing_bytes": 584,
+          "exact": false,
+          "candidate_materialized_sha256": "8bdcaa09be9ef96ef14e81783284d4d7f76828d9aafa32fb376e85eaa82e5fcb"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 656,
+          "differing_bytes": 671,
+          "exact": false,
+          "candidate_materialized_sha256": "e2d46e7d71b86a82fcf524c6ea06d87a4683471ebc2b92a8ca9d91d28db9e9c5"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 640,
+          "differing_bytes": 593,
+          "exact": false,
+          "candidate_materialized_sha256": "aa10b89b882dd7b1d2736217d50512b6fac7c3494bde2b0993233cb7eff53499"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 592,
+          "differing_bytes": 621,
+          "exact": false,
+          "candidate_materialized_sha256": "73bcbc7914627a6ef8b05361b4e68d6f9597c1dd401cd28435266ac64b7a2ccf"
+        }
+      ]
+    },
+    {
+      "label": "carry-mask-s16",
+      "source_sha256": "d7b4d7759bc3e98fabcba974f4370a001edda2c571a090125f1d4db2d304c24b",
+      "object_sha256": "6d2fa29f3f03264368f0de8399fa19e9340e236e18d7a9d64d97658de42dc1e3",
+      "comparison_sha256": "5b8a11946b3f6352befb9d16c7f9b6bec91d4ba3a25bdc52beda6f044fc069a8",
+      "compiler_log_sha256": "56b85db2584b867bda2cfd4de4351260e929c6a0d9a4ac4684bd8bef948e49d6",
+      "compiler_command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_USRDLL",
+        "/FoRSP.obj",
+        "RSP.cpp"
+      ],
+      "exact_functions": 168,
+      "prior_exact_preserved": 168,
+      "changed_functions": [
+        "RSP_VADD",
+        "RSP_VADDExec",
+        "RSP_VSUB",
+        "RSP_VSUBExec",
+        "RSP_VSUT"
+      ],
+      "unchanged_other_function_hashes": 175,
+      "typed_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 720,
+          "differing_bytes": 689,
+          "exact": false,
+          "candidate_materialized_sha256": "15ad7d5ccd9c21f924698795f20b80fdaef5d9b17ba615a24f33f4dff1758a88"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 672,
+          "differing_bytes": 532,
+          "exact": false,
+          "candidate_materialized_sha256": "a614866cfac73a321184ae7ab50dd6333706789e8495fd559c5e4055feca523f"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 688,
+          "differing_bytes": 650,
+          "exact": false,
+          "candidate_materialized_sha256": "a9f050d3c8e78f3299ee7b991c6d5ac2bda86ad8ef200e62b92d52907a134446"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 672,
+          "differing_bytes": 533,
+          "exact": false,
+          "candidate_materialized_sha256": "19ca9f503ce23ea6c368cac7e39c5939ffb112f89bce6c120923460bd8bd950c"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 543,
+          "exact": false,
+          "candidate_materialized_sha256": "b53d97c586f7c1062f4d800a753bb19357b5218579d7c8f949c6dbd971a1d663"
+        }
+      ]
+    },
+    {
+      "label": "carry-and-u16",
+      "source_sha256": "afd8505ed00132b9d518b7e2ec45e5b02a9f7c3c2e73ecbe013eac4f02d70dd4",
+      "object_sha256": "69b1639e298ecfaf160427a0379e288050f9b8fdd23a7b2fb1a649eb9c9411fd",
+      "comparison_sha256": "944f634238385c8098ab22c58fe80e5c63d70d0425329ecf086a847c6af89fd7",
+      "compiler_log_sha256": "cda82650e2b7eea238c362cabe3b7279c4e5e449d23a6c4b7823fe4a80d1a6a6",
+      "compiler_command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_USRDLL",
+        "/FoRSP.obj",
+        "RSP.cpp"
+      ],
+      "exact_functions": 168,
+      "prior_exact_preserved": 168,
+      "changed_functions": [
+        "RSP_VADD",
+        "RSP_VADDExec",
+        "RSP_VSUB",
+        "RSP_VSUBExec",
+        "RSP_VSUT"
+      ],
+      "unchanged_other_function_hashes": 175,
+      "typed_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 692,
+          "exact": false,
+          "candidate_materialized_sha256": "505c348c87c16b5fa549f8998082e46600e3c058136cb1f1aa645bfb1069a231"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 640,
+          "differing_bytes": 584,
+          "exact": false,
+          "candidate_materialized_sha256": "8bdcaa09be9ef96ef14e81783284d4d7f76828d9aafa32fb376e85eaa82e5fcb"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 656,
+          "differing_bytes": 671,
+          "exact": false,
+          "candidate_materialized_sha256": "e2d46e7d71b86a82fcf524c6ea06d87a4683471ebc2b92a8ca9d91d28db9e9c5"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 640,
+          "differing_bytes": 593,
+          "exact": false,
+          "candidate_materialized_sha256": "aa10b89b882dd7b1d2736217d50512b6fac7c3494bde2b0993233cb7eff53499"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 592,
+          "differing_bytes": 621,
+          "exact": false,
+          "candidate_materialized_sha256": "73bcbc7914627a6ef8b05361b4e68d6f9597c1dd401cd28435266ac64b7a2ccf"
+        }
+      ]
+    },
+    {
+      "label": "carry-and-s16",
+      "source_sha256": "34d4cfe4b9b9b742a52f8766b3681ab8233d95b46039eaaff6be928bf3f714ea",
+      "object_sha256": "dc9d85511d77993b9e2582fb5f21b3ade041e978e599df5cb57690acb68c6313",
+      "comparison_sha256": "8c352ae3054113e6696d7defee5150599c03afb4aa7fcc29f320445f7f8b7bba",
+      "compiler_log_sha256": "b929a5a65c9d698e1cbe0695f19abaf5b406731ffbc36105579fa030b9c80a74",
+      "compiler_command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_USRDLL",
+        "/FoRSP.obj",
+        "RSP.cpp"
+      ],
+      "exact_functions": 168,
+      "prior_exact_preserved": 168,
+      "changed_functions": [
+        "RSP_VADD",
+        "RSP_VADDExec",
+        "RSP_VSUB",
+        "RSP_VSUBExec",
+        "RSP_VSUT"
+      ],
+      "unchanged_other_function_hashes": 175,
+      "typed_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 692,
+          "exact": false,
+          "candidate_materialized_sha256": "505c348c87c16b5fa549f8998082e46600e3c058136cb1f1aa645bfb1069a231"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 640,
+          "differing_bytes": 584,
+          "exact": false,
+          "candidate_materialized_sha256": "8bdcaa09be9ef96ef14e81783284d4d7f76828d9aafa32fb376e85eaa82e5fcb"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 656,
+          "differing_bytes": 671,
+          "exact": false,
+          "candidate_materialized_sha256": "e2d46e7d71b86a82fcf524c6ea06d87a4683471ebc2b92a8ca9d91d28db9e9c5"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 640,
+          "differing_bytes": 593,
+          "exact": false,
+          "candidate_materialized_sha256": "aa10b89b882dd7b1d2736217d50512b6fac7c3494bde2b0993233cb7eff53499"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 592,
+          "differing_bytes": 621,
+          "exact": false,
+          "candidate_materialized_sha256": "73bcbc7914627a6ef8b05361b4e68d6f9597c1dd401cd28435266ac64b7a2ccf"
+        }
+      ]
+    },
+    {
+      "label": "clear-mask-u16",
+      "source_sha256": "5198394dddf3df9071d3b237c6bd542baa62d1fa25ba4df69eb3f684f7fed15f",
+      "object_sha256": "123040c9bb37a2b2eb4ee874a76584b1bc9165e127699716a6803f0f81557da6",
+      "comparison_sha256": "df507e7918a5d2801e79dc8561df83498ed6aea698387e997d667e9008198e5e",
+      "compiler_log_sha256": "41a0d15dfcfcbef46ef1714dd0a6b32d45132da44acb4edddaf1e28f8ca660d2",
+      "compiler_command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_USRDLL",
+        "/FoRSP.obj",
+        "RSP.cpp"
+      ],
+      "exact_functions": 168,
+      "prior_exact_preserved": 168,
+      "changed_functions": [],
+      "unchanged_other_function_hashes": 175,
+      "typed_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 720,
+          "differing_bytes": 647,
+          "exact": false,
+          "candidate_materialized_sha256": "fc8791be356df4470af7c2db2a60d5fe93ed62e300c53f2cff1b9f18699aaa39"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 672,
+          "differing_bytes": 488,
+          "exact": false,
+          "candidate_materialized_sha256": "5c58c7efc8ee2e07a03937a9f30536e80d6788b36eaf24eb6ff90c344f9b873a"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 688,
+          "differing_bytes": 623,
+          "exact": false,
+          "candidate_materialized_sha256": "4b34c25311c52e8d82ad9615f6f917f8e653ee4ef11dec48c881a57573ade206"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 672,
+          "differing_bytes": 505,
+          "exact": false,
+          "candidate_materialized_sha256": "4de5512c6d7b8ed8eba1372a91f139223cf9a9327612288b54facf8214fdd688"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 640,
+          "differing_bytes": 598,
+          "exact": false,
+          "candidate_materialized_sha256": "db3cbb9b81f08c86c45c6d21b734073126beb5dce87efbccc96665e54cd45dc3"
+        }
+      ]
+    },
+    {
+      "label": "unsigned-test-clear-mask-u16",
+      "source_sha256": "10ff3d8ed2d9824bb4dd7cc81738cbc37e91d315d9fbd2a77c0bc03a559e075f",
+      "object_sha256": "006b1728bfcbf6c21ae52c39fee85c52f6a4a9de99f12014c0b49d646bf5d6b6",
+      "comparison_sha256": "be8c1f15df363b84e5b33630bf73c90efc027360c1dd7afc2321717d5ed1c160",
+      "compiler_log_sha256": "0bcf63a725a84ab0b2ef6017c63677e862bcc3db97913a92ffe74fc928da6050",
+      "compiler_command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/W3",
+        "/DWIN32",
+        "/DNDEBUG",
+        "/D_WINDOWS",
+        "/D_USRDLL",
+        "/FoRSP.obj",
+        "RSP.cpp"
+      ],
+      "exact_functions": 168,
+      "prior_exact_preserved": 168,
+      "changed_functions": [
+        "RSP_VADD",
+        "RSP_VADDExec",
+        "RSP_VSUB",
+        "RSP_VSUBExec",
+        "RSP_VSUT"
+      ],
+      "unchanged_other_function_hashes": 175,
+      "typed_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 670,
+          "exact": false,
+          "candidate_materialized_sha256": "aea4d3ec67eba921cb8209b736ac6f54184e42dd128e19a38388ddad12ae3e0d"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 576,
+          "exact": false,
+          "candidate_materialized_sha256": "64368b27839a647f3f1c804086b3e0d3f473bbc301483c632846a8d8cdce8088"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 641,
+          "exact": false,
+          "candidate_materialized_sha256": "73faf27d5bb02feefbe385a0da995dc2ae25900ac09e7c048ad63c24f326a973"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 672,
+          "differing_bytes": 532,
+          "exact": false,
+          "candidate_materialized_sha256": "c5a8369ad6bb8075ce2d8b1a961ce52f5a3feefd30d82f9955852258b609a58b"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 640,
+          "differing_bytes": 619,
+          "exact": false,
+          "candidate_materialized_sha256": "5a3ab58e60028794ade1a09a77f8d06b1734074a0976a9e4bb8034cc3f0fc282"
+        }
+      ]
+    }
+  ],
+  "findings": [
+    "Six native full-TU source controls, plus168-match baseline. No complete new function match.",
+    "A narrowed clear mask leaves all180 function hashes unchanged. Narrowing the carry mask or AND changes the five arithmetic functions but does not reproduce the original allocation or extents.",
+    "All168 existing exact routines,175 non-owned full-body hashes,25 typedobjects and11fields remain exact with zero unresolved operands.",
+    "No unverified qualifier, helper, storage or emitted instruction sequence is promoted."
+  ]
+}
