@@ -21,7 +21,7 @@ from verify_kaillera import ORIGINAL, ORIGINAL_SHA256, compare
 ROOT = Path(__file__).resolve().parents[1]
 UNITS = ['reliableconnection', 'config', 'message', 'udpconnection',
          'jnetlib/asyncdns', 'jnetlib/connection', 'jnetlib/httpget', 'jnetlib/util',
-         'connect', 'kailleraclient', 'listview', 'resizer', 'protocol', 'game', 'lobby', 'serverbrowser']
+         'listview', 'resizer', 'connect', 'kailleraclient', 'session', 'serverbrowser']
 FLAGS = ['/nologo', '/c', '/O2', '/MD', '/GX', '/Gy', '/DWIN32', '/DNDEBUG']
 
 

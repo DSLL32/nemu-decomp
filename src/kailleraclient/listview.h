@@ -12,6 +12,9 @@ public:
     LPARAM itemData(int index);
     int insert(int index,char *text,LPARAM data);
     void setText(int index,int column,char *text);
+    void getText(int index,int column,char *text,int size) {
+        ListView_GetItemText(window,index,column,text,size);
+    }
     int compare(char *first,char *second);
     static int CALLBACK sortCallback(LPARAM first,LPARAM second,LPARAM context);
     void sort();

@@ -8,7 +8,7 @@
 class ByteQueue {
 public:
     ByteQueue();
-    ~ByteQueue();
+    ~ByteQueue() { if (data) free(data); }
     void append(void *bytes,int length);
     void peek(void *bytes,int length);
     void read(void *bytes,int length);

@@ -2,17 +2,19 @@
 #define KAILLERA_PROTOCOL_H
 #include "client.h"
 #include "listview.h"
+#include "control.h"
 
 extern ListView gamesList,usersList,playersList;
-extern HWND lobbyWindow,gameWindow,gameChat,serverChat,syncWindow;
+extern HWND lobbyWindow,gameWindow,syncWindow;
+extern TextControl gameChat,serverChat;
 extern int onlineUsers,currentGame,localUser,localPlayer,totalPlayers;
 extern int runningGame,syncDelay;
 extern DWORD lastPacketTime;
 extern char *connectionTypes[];
 
-inline void appendChat(HWND &window,char *text) {
-    SendMessage(window,EM_SETSEL,GetWindowTextLength(window),GetWindowTextLength(window));
-    SendMessage(window,EM_REPLACESEL,0,(LPARAM)text);
+inline void appendChat(TextControl &window,char *text) {
+    window.select(GetWindowTextLength(window.window),GetWindowTextLength(window.window));
+    window.replace(text);
 }
 
 void updateCaption();

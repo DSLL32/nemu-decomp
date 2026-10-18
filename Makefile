@@ -64,7 +64,7 @@ kaillera: $(OUT)/kailleraclient.dll
 
 KAILLERA_UNITS := reliableconnection config message udpconnection \
                   jnetlib/asyncdns jnetlib/connection jnetlib/httpget jnetlib/util \
-                  listview resizer connect kailleraclient protocol game lobby serverbrowser
+                  listview resizer connect kailleraclient session serverbrowser
 KAILLERA_OBJS := $(addprefix $(WORK)/kaillera/,$(addsuffix .obj,$(KAILLERA_UNITS)))
 KAILLERA_HEADERS := $(wildcard $(ROOT)/src/kailleraclient/*.h) \
                     $(wildcard $(ROOT)/src/kailleraclient/jnetlib/*.h)

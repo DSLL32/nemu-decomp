@@ -2,7 +2,7 @@
 #define KAILLERA_GAME_H
 #include "protocol.h"
 #include "bytequeue.h"
-extern HWND gameInput;
+extern TextControl gameInput;
 extern char currentGameName[128];
 extern int initialSynced,syncCancelled,frameDelayCount,frameWithinPacket;
 extern ByteQueue sendByteQueue,receiveByteQueue;

@@ -49,7 +49,7 @@ lookup and transport. `reliableconnection.cpp` and `packetcache.h` restore the
 two embedded message caches and resend/receive algorithms. `connect.cpp`
 restores server negotiation and login. `kailleraclient.cpp` restores DllMain and
 the eight public wrappers. Some component instruction differences remain.
-`protocol.cpp`, `lobby.cpp`, `game.cpp` and `serverbrowser.cpp` restore the
+`session.cpp` and `serverbrowser.cpp` restore the
 partyline, packet dispatcher, game panels, input synchronization and server
 selection. `listview.cpp` and `resizer.cpp` restore shared window helpers.
 
