@@ -165,7 +165,7 @@ def main():
                   function_owners=owners, duplicate_function_definitions=duplicates,
                   limitations=[
                       'Complete DLL byte equality remains unproven.',
-                      'Four incomplete kernels retain their actual differing bytes and operand failures.',
+                      'Unmatched kernels retain their actual differing bytes and operand failures.',
                       'Macro ownership is inferred from repeated algorithm code and coherent ordinary linkage; original macro names are unknown.',
                       'The preceding external-plus-inline ownership probe failed LNK2005; no duplicate fallback or forced linker option is used here.'
                   ])

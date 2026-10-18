@@ -149,9 +149,9 @@ void ResampleAudioScalar(AudioCommand *command, AudioContext *context)
 {
     unsigned int w0 = command->words[0], w1 = command->words[1];
     int pitch = w0 & 0xffff;
-    int input = context->inputResample >> 1;
     short extra = 0;
     int output = context->outputResample >> 1;
+    int input = context->inputResample >> 1;
     unsigned char flags = (unsigned char)(w0 >> 16);
     short *state = (short *)((w1 & 0xffffff) + (unsigned int)RDRAM);
     int phase;
@@ -178,24 +178,28 @@ void ResampleAudioScalar(AudioCommand *command, AudioContext *context)
     samples = context->count >> 1;
     input -= extra + 4;
     for (i = 0; i < samples; ++i) {
+        short *destination = context->buffer;
         int sample = 0;
         short tableOffset;
+        const short *coefficients;
         int tap;
         int advance = phase >> 15;
         input += advance;
         phase -= advance << 15;
-        tableOffset = (phase << 6) >> 15; tableOffset <<= 2;
+        tableOffset = (phase * 64) >> 15; tableOffset <<= 2;
+        coefficients = (const short *)AudioResampleTable;
         for (tap = 0; tap < 4; ++tap)
             sample += context->buffer[input + tap] *
-                ((const short *)AudioResampleTable)[tableOffset + tap];
+                coefficients[tableOffset + tap];
         sample >>= 15;
         if (sample > 32767) sample = 32767;
         else if (sample < -32767) sample = -32767;
-        context->buffer[output++] = sample;
+        destination[output++] = sample;
         phase += pitch;
     }
-    input += phase >> 15;
-    phase -= (phase >> 15) << 15;
+    i = phase >> 15;
+    input += i;
+    phase -= i << 15;
     extra = (input - (context->inputResample >> 1) - 4) & 7;
     if (extra) extra = 8 - extra;
     state = (short *)(RDRAM + (command->words[1] & 0xffffff));

@@ -4,7 +4,7 @@
   "hashes": {
     "src/audio/ahle_ds/Mp3.c": "d9dccbd10b72f540528496c33f04f8a63d3b9bd1f39839a70ac8a16ef5a87b3a",
     "src/audio/ahle_ds/AudioProcessing.c": "e66e65ff34e26304fd306b14afb5540d2db060bc631e980af95b398f1a232e62",
-    "src/audio/ahle_ds/AudioResample.c": "67ced2fcbd0e6798f34cd986e5a9b77e4ba963eb03463468b5d7b68120dbde1f",
+    "src/audio/ahle_ds/AudioResample.c": "814a880ce694334ab9e4868773da06c9bf290d0f344cbb0a3ec89f905a94cf12",
     "src/audio/ahle_ds/AudioADPCMBlock.h": "f506d6ea97b83fcaaa78dc9ff7300bebe37aa36b9f1a01277247ee41767b4c1b",
     "src/audio/ahle_ds/AudioADPCMLegacy.h": "8509a1760c9dcc9b45334d103d4f09b656502bda0b8d35d039d75d7a75720f32",
     "src/audio/ahle_ds/AudioCommands.h": "35cae30632b3a466adc0dea680c808b80995cf311b0024d25331224e7368e5f3",
@@ -18,7 +18,7 @@
     "src/audio/ahle_ds/DirectSound.h": "ab5ed735f1ab52226c0c7e7a559d080e10ec5649d2814b177f1a79686135455b",
     "src/audio/ahle_ds/RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
     "src/audio/ahle_ds/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
-    "scripts/probe_audio_processing_groups.py": "1dff334447e1c42c1ad24859373fd09479b5f8b334cd7518dc55568ec8b43bbd",
+    "scripts/probe_audio_processing_groups.py": "d7bf25955b86990a1b2807a313f1e2dce77cd265fffa678c6d3eb8c07530c8d4",
     "scripts/verify_gs.py": "9096c1ce5e759dc60f4fc7b84c97678b5946b7b15f6bfb56cd1fa3b9e730854c",
     "scripts/verify_audio.py": "e319652ed8a706fe105d29c297f28f1d41288440df2b7f5cd27b3af213272244",
     "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
@@ -35,22 +35,22 @@
     "/Ob1",
     "/MT",
     "/c",
-    "Z:\\root\\.ai-tmp\\audio-processing-three-unit-check.yjmf_7hq\\Mp3.c",
-    "Z:\\root\\.ai-tmp\\audio-processing-three-unit-check.yjmf_7hq\\AudioProcessing.c",
-    "Z:\\root\\.ai-tmp\\audio-processing-three-unit-check.yjmf_7hq\\AudioResample.c",
-    "/FoZ:\\root\\.ai-tmp\\audio-processing-three-unit-check.yjmf_7hq\\"
+    "Z:\\root\\.ai-tmp\\audio-scalar-review.tglx_a1f\\final-groups-current\\Mp3.c",
+    "Z:\\root\\.ai-tmp\\audio-scalar-review.tglx_a1f\\final-groups-current\\AudioProcessing.c",
+    "Z:\\root\\.ai-tmp\\audio-scalar-review.tglx_a1f\\final-groups-current\\AudioResample.c",
+    "/FoZ:\\root\\.ai-tmp\\audio-scalar-review.tglx_a1f\\final-groups-current\\"
   ],
-  "compile_log": "/root/.ai-tmp/audio-processing-three-unit-check.yjmf_7hq/groups-compile.log",
-  "compile_log_sha256": "5b48ef9e57bdb0bee87bc31cd28a4c824e06eff91cc2679ae2e5aa96847531e9",
+  "compile_log": "/root/.ai-tmp/audio-scalar-review.tglx_a1f/final-groups-current/groups-compile.log",
+  "compile_log_sha256": "00085c3281036c229b48a9546917b9c71f8a32e9137c4a0187452dc678dca276",
   "processing_scope": {
     "functions": 41,
-    "relocation_masked_matches": 37,
-    "relocated_exact_matches": 28
+    "relocation_masked_matches": 38,
+    "relocated_exact_matches": 29
   },
   "objects": [
     {
-      "object": "/root/.ai-tmp/audio-processing-three-unit-check.yjmf_7hq/Mp3.obj",
-      "sha256": "ea224db2a78d354ca22d69ee70e800f9e93e17b962e283d16a91f1e1f78b8539",
+      "object": "/root/.ai-tmp/audio-scalar-review.tglx_a1f/final-groups-current/Mp3.obj",
+      "sha256": "c3414723989dc7acf985e8cef8d12c0edfa07b2d381407d09999d61e0c5308c6",
       "literal_data_checks": [
         {
           "name": "??_C@_0HJ@JHFJABPL@A_MIX?5Set?5in?5envmixer?$DP?$CB?5heavens?5@",
@@ -130,7 +130,7 @@
               ],
               "expected_target_va": 269532656,
               "resolution_basis": "observed_operand_inference",
-              "target_address_evidence": "Contiguous private65536-DWORD lookup inferred from complete initializer stores at100ebdf0 and1010bdf0; unified storage gives native addends0 and0x20000. Group11 BSS probe records the equivalent two-array alternative.",
+              "target_address_evidence": "Contiguous private65536-DWORD lookup inferred from complete initializer stores at100ebdf0 and1010bdf0; unified storage gives native addends0 and0x20000. The original BSS probe records the equivalent two-array alternative. Current owner Mp3.obj follows the independently verified three-unit grouping; see audio-source-grouping.json and audio-sqrt-storage.json.",
               "status": "resolved",
               "target_equal": true,
               "target_identity_verified": false
@@ -147,7 +147,7 @@
               ],
               "expected_target_va": 269401584,
               "resolution_basis": "observed_operand_inference",
-              "target_address_evidence": "Contiguous private65536-DWORD lookup inferred from complete initializer stores at100ebdf0 and1010bdf0; unified storage gives native addends0 and0x20000. Group11 BSS probe records the equivalent two-array alternative.",
+              "target_address_evidence": "Contiguous private65536-DWORD lookup inferred from complete initializer stores at100ebdf0 and1010bdf0; unified storage gives native addends0 and0x20000. The original BSS probe records the equivalent two-array alternative. Current owner Mp3.obj follows the independently verified three-unit grouping; see audio-source-grouping.json and audio-sqrt-storage.json.",
               "status": "resolved",
               "target_equal": true,
               "target_identity_verified": false
@@ -4423,8 +4423,8 @@
       "relocated_exact_matches": 19
     },
     {
-      "object": "/root/.ai-tmp/audio-processing-three-unit-check.yjmf_7hq/AudioProcessing.obj",
-      "sha256": "f3fd216764dc340dcc513bbd3d6861158018139e094ece4c43195689f1a550bb",
+      "object": "/root/.ai-tmp/audio-scalar-review.tglx_a1f/final-groups-current/AudioProcessing.obj",
+      "sha256": "532025ae918694311aff4458b61e5e4276302f2cd951f7a8280f35cf26334953",
       "literal_data_checks": [],
       "functions": [
         {
@@ -5295,8 +5295,8 @@
       "relocated_exact_matches": 4
     },
     {
-      "object": "/root/.ai-tmp/audio-processing-three-unit-check.yjmf_7hq/AudioResample.obj",
-      "sha256": "f90d56761cfc6dce9779f231a103215a62cd498523a08dd7b837c88ceb831318",
+      "object": "/root/.ai-tmp/audio-scalar-review.tglx_a1f/final-groups-current/AudioResample.obj",
+      "sha256": "85d367d5872a3329691aea4abfc8d2a5dd4fcd9440869cbd7d40b0a4a7ce205a",
       "literal_data_checks": [
         {
           "name": "??_C@_01EEMJAFIK@?6?$AA@",
@@ -5961,7 +5961,7 @@
           "status": "compared",
           "original_va": 268507472,
           "raw_bytes_equal": false,
-          "raw_differing_bytes": 302,
+          "raw_differing_bytes": 24,
           "compared_bytes": 656,
           "original_size_verified": true,
           "original_bytes": 656,
@@ -5984,121 +5984,92 @@
               "target_identity_verified": true
             },
             {
-              "offset": 335,
-              "type": "DIR32",
-              "symbol": "_AudioResampleTable",
-              "addend": 6,
-              "original_target_va": 482283512,
-              "original_target_symbols": [],
-              "expected_target_va": 268683990,
-              "resolution_basis": "identified_symbol",
-              "target_address_evidence": "Typed 64 by 4 signed-short resampling coefficients, complete 512-byte initializer equals target table.",
-              "status": "resolved",
-              "target_equal": false,
-              "target_identity_verified": false
-            },
-            {
-              "offset": 342,
+              "offset": 340,
               "type": "DIR32",
               "symbol": "_AudioResampleTable",
               "addend": 4,
-              "original_target_va": 3205435395,
+              "original_target_va": 268683988,
               "original_target_symbols": [],
               "expected_target_va": 268683988,
               "resolution_basis": "identified_symbol",
               "target_address_evidence": "Typed 64 by 4 signed-short resampling coefficients, complete 512-byte initializer equals target table.",
               "status": "resolved",
-              "target_equal": false,
-              "target_identity_verified": false
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
-              "offset": 378,
+              "offset": 353,
+              "type": "DIR32",
+              "symbol": "_AudioResampleTable",
+              "addend": 6,
+              "original_target_va": 268683990,
+              "original_target_symbols": [],
+              "expected_target_va": 268683990,
+              "resolution_basis": "identified_symbol",
+              "target_address_evidence": "Typed 64 by 4 signed-short resampling coefficients, complete 512-byte initializer equals target table.",
+              "status": "resolved",
+              "target_equal": true,
+              "target_identity_verified": true
+            },
+            {
+              "offset": 379,
               "type": "DIR32",
               "symbol": "_AudioResampleTable",
               "addend": 2,
-              "original_target_va": 63623805,
+              "original_target_va": 268683986,
               "original_target_symbols": [],
               "expected_target_va": 268683986,
               "resolution_basis": "identified_symbol",
               "target_address_evidence": "Typed 64 by 4 signed-short resampling coefficients, complete 512-byte initializer equals target table.",
               "status": "resolved",
-              "target_equal": false,
-              "target_identity_verified": false
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
-              "offset": 385,
+              "offset": 387,
               "type": "DIR32",
               "symbol": "_AudioResampleTable",
               "addend": 0,
-              "original_target_va": 3402661180,
-              "original_target_symbols": [],
+              "original_target_va": 268683984,
+              "original_target_symbols": [
+                "_AudioResampleTable"
+              ],
               "expected_target_va": 268683984,
               "resolution_basis": "identified_symbol",
               "target_address_evidence": "Typed 64 by 4 signed-short resampling coefficients, complete 512-byte initializer equals target table.",
               "status": "resolved",
-              "target_equal": false,
-              "target_identity_verified": false
+              "target_equal": true,
+              "target_identity_verified": true
             },
             {
-              "offset": 529,
+              "offset": 528,
               "type": "DIR32",
               "symbol": "_RDRAM",
               "addend": 0,
-              "original_target_va": 621811386,
-              "original_target_symbols": [],
+              "original_target_va": 269925092,
+              "original_target_symbols": [
+                "_RDRAM"
+              ],
               "expected_target_va": 269925092,
               "resolution_basis": "identified_symbol",
               "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
               "status": "resolved",
-              "target_equal": false,
-              "target_identity_verified": false
+              "target_equal": true,
+              "target_identity_verified": true
             }
           ],
-          "relocation_target_mismatch_count": 5,
+          "relocation_target_mismatch_count": 0,
           "inferred_target_count": 0,
           "unresolved_target_count": 0,
-          "relocation_masked_equal": false,
-          "relocation_masked_differing_bytes": 278,
+          "relocation_masked_equal": true,
+          "relocation_masked_differing_bytes": 0,
           "relocations_all_resolved": true,
-          "relocation_values_consistent": false,
-          "relocation_targets_verified": false,
-          "relocation_targets_equal": false,
-          "inferred_relocated_bytes_equal": false,
-          "relocated_bytes_equal": false,
-          "first_unmasked_differences": [
-            9,
-            10,
-            11,
-            12,
-            13,
-            14,
-            15,
-            16,
-            17,
-            18,
-            19,
-            20,
-            21,
-            23,
-            24,
-            25,
-            26,
-            27,
-            28,
-            29,
-            30,
-            31,
-            37,
-            40,
-            60,
-            83,
-            133,
-            176,
-            187,
-            194,
-            211,
-            232
-          ]
+          "relocation_values_consistent": true,
+          "relocation_targets_verified": true,
+          "relocation_targets_equal": true,
+          "inferred_relocated_bytes_equal": true,
+          "relocated_bytes_equal": true,
+          "first_unmasked_differences": []
         },
         {
           "name": "_DecodeAudioADPCMWideCommand",
@@ -6981,16 +6952,16 @@
         }
       ],
       "functions_compared": 10,
-      "relocation_masked_matches": 6,
-      "relocated_exact_matches": 5
+      "relocation_masked_matches": 7,
+      "relocated_exact_matches": 6
     }
   ],
   "outside_processing_scope": {
     "description": "Eleven MP3 functions sharing Mp3.obj; excluded from the41 processing functions.",
     "objects": [
       {
-        "object": "/root/.ai-tmp/audio-processing-three-unit-check.yjmf_7hq/Mp3.obj",
-        "sha256": "ea224db2a78d354ca22d69ee70e800f9e93e17b962e283d16a91f1e1f78b8539",
+        "object": "/root/.ai-tmp/audio-scalar-review.tglx_a1f/final-groups-current/Mp3.obj",
+        "sha256": "c3414723989dc7acf985e8cef8d12c0edfa07b2d381407d09999d61e0c5308c6",
         "literal_data_checks": [
           {
             "name": "??_C@_0HJ@JHFJABPL@A_MIX?5Set?5in?5envmixer?$DP?$CB?5heavens?5@",
@@ -11949,7 +11920,7 @@
   "duplicate_function_definitions": {},
   "limitations": [
     "Complete DLL byte equality remains unproven.",
-    "Four incomplete kernels retain their actual differing bytes and operand failures.",
+    "Unmatched kernels retain their actual differing bytes and operand failures.",
     "Macro ownership is inferred from repeated algorithm code and coherent ordinary linkage; original macro names are unknown.",
     "The preceding external-plus-inline ownership probe failed LNK2005; no duplicate fallback or forced linker option is used here."
   ]

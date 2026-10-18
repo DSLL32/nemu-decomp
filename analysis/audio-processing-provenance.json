@@ -10,25 +10,25 @@
     "/c"
   ],
   "hashes": {
-    "src/audio/ahle_ds/AudioProcessing.c": "09857cdf239396af5433ddd6f418691a6c180c9aaf0c003277472889f2a7ac52",
+    "src/audio/ahle_ds/AudioProcessing.c": "e66e65ff34e26304fd306b14afb5540d2db060bc631e980af95b398f1a232e62",
     "src/audio/ahle_ds/AudioProcessing.h": "77bbd94523444df697a169cea26375cc673879493761452cc92add2857284c7b",
-    "src/audio/ahle_ds/AudioResample.c": "de605ba58f179efe567ffd40740c65c2cc90647a3e980cb0115cd9c14ef42907",
+    "src/audio/ahle_ds/AudioResample.c": "814a880ce694334ab9e4868773da06c9bf290d0f344cbb0a3ec89f905a94cf12",
     "src/audio/ahle_ds/AudioHLE.h": "98475c4c2e034a7e1b16a94662078f731afcca5529140bf0d30c7e6901bdd441",
     "src/audio/ahle_ds/AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
-    "scripts/verify_audio_processing_behavior.py": "5a0e436b44d7481b562de5319c9646e22a476cf0522d10ed206847e386869ab5",
+    "scripts/verify_audio_processing_behavior.py": "e05e241f97c47effd6828ad99d3254744aa4f67427d7f777b5bf19463c24e2d9",
     "scripts/verify_gs.py": "9096c1ce5e759dc60f4fc7b84c97678b5946b7b15f6bfb56cd1fa3b9e730854c",
     "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
     "toolchains/vc7/bin/c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
     "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0",
-    "scripts/verify_audio_processing_operands.py": "e610aa94bb0bae370e7c54813e57c5969f173e0b689175fcb1c0303afc14cc21",
+    "scripts/verify_audio_processing_operands.py": "4d29d6e4c903e44a0951e3317c2bc10137f2bf17190fb12377a1d5ab22294ad5",
     "scripts/check_audio_polefilter.py": "2d3fa2aa7fb9915daa4476f478f9c717b7e17256699ca66b8526a5be6832b2cb",
-    "scripts/probe_audio_processing_groups.py": "9b4aaccfe03c7593269100147e6f550edcfe4c3c7bdd7710d7faae4adc2a5636",
+    "scripts/probe_audio_processing_groups.py": "d7bf25955b86990a1b2807a313f1e2dce77cd265fffa678c6d3eb8c07530c8d4",
     "src/audio/ahle_ds/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
     "src/audio/ahle_ds/AudioResampleTables.h": "5b95bd2db83cf7eea18b347cdf32c7a332073868cbcbd45a939f8de4537236f1",
     "src/audio/ahle_ds/AudioADPCMBlock.h": "f506d6ea97b83fcaaa78dc9ff7300bebe37aa36b9f1a01277247ee41767b4c1b",
     "src/audio/ahle_ds/AudioEnvelope.h": "8acbac16a6bc16a06782b48dea25af4e49b99c5a845f866ffe41098ec14517b7",
     "src/audio/ahle_ds/AudioADPCMLegacy.h": "8509a1760c9dcc9b45334d103d4f09b656502bda0b8d35d039d75d7a75720f32",
-    "scripts/verify_audio_sqrt.py": "ada861d6f23ce332e477386724385618dd31942fcbabdf45953985b32bdb69ac"
+    "scripts/verify_audio_sqrt.py": "7c442327556bbb730668cb6f684faeeaf9c67391d48b19da625f24875a517021"
   },
   "functions": [
     {
@@ -180,9 +180,11 @@
       "original_va": "0x10011950",
       "original_size": 656,
       "original_complete_extent_sha256": "4a38da79db200681ef6abb7dd39f33abd026a54fb4f35a20e56200f28dc2808b",
-      "relocation_masked_equal": false,
-      "relocation_masked_differing_bytes": 278,
-      "candidate_size": 656
+      "relocation_masked_equal": true,
+      "relocation_masked_differing_bytes": 0,
+      "candidate_size": 656,
+      "relocated_bytes_equal": true,
+      "proof": "analysis/audio-resample-native-match.json"
     },
     {
       "name": "_ResetAudioProfile",
@@ -258,14 +260,14 @@
     }
   ],
   "limitations": [
-    "The original processing scope retains twenty-one complete matching function extents, including compiler alignment. The signed ADPCM block has no relocations and matches all 560 original bytes directly. Across the two consolidated units, 37 of 41 routine bodies match outside recorded relocations. This is not whole-DLL byte equality.",
+    "Across the three current units, 38 of 41 processing bodies match completely with resolved native operands. This is not whole-DLL byte equality.",
     "Data addresses marked observed_operand_inference have not been independently proved from original debug symbols.",
-    "Four processing-scope functions remain unmatched: unsigned scalar ADPCM, main ADPCM dispatcher, pole filter and scalar resampler. The consolidated legacy ADPCM routine is now independently exact after commit509672b.",
+    "Three processing-scope functions remain unmatched: unsigned scalar ADPCM, main ADPCM dispatcher and pole filter.",
     "The pole filter differs in seven SIB bytes that exchange equivalent base and index registers; these remain genuine byte differences.",
     "Relocation-target diagnostics for unmatched functions are position-based and may inspect unrelated original instruction bytes when code layout differs.",
     "Readable source file names and translation-unit boundaries are inferred; no original source provenance is claimed.",
     "Behavior probes execute original external callees and do not validate a linked rebuilt DLL.",
-    "The scalar unit owns all five writable coefficient arrays after its retained AMP window table; the former SIMD definition has been removed. Scalar code remains incomplete despite instruction-supported byte flags and explicit state loads.",
+    "The scalar unit owns all five writable coefficient arrays after its retained AMP window table. The scalar resampler now matches all 656 bytes including alignment and six independently resolved operands.",
     "The two envelope SSE/3DNow bodies end before their following native INT3 alignment gaps. Those gaps are linker contributions, absent from their COFF function sections, and await final linked-image validation."
   ],
   "source_ancestry": [
@@ -296,12 +298,20 @@
     "current_report": "analysis/audio-processing-organization.json"
   },
   "scalar_source_refinements": {
-    "basis": "Matched MMX ResampleAudioMMX source skeleton plus original scalar operand widths and retained state-pointer increments. These source refinements preserve the complete656-byte extent and reduce masked position differences508 to278; they do not establish byte equality.",
     "changes": [
       "Use unsigned char command flags, matching original byte tests and the exact MMX implementation.",
       "Spell four initial history reads as explicit assignments, reproducing the two retained pointer increments at original VAs0x10011a13 and0x10011a1a.",
       "Load sample count before correcting input history, then preserve a signed short table index before scaling.",
       "Define mutable coefficient data after transform.h in the inferred twelfth unit."
+    ],
+    "historical_basis": "Matched MMX ResampleAudioMMX source skeleton plus original scalar operand widths and retained state-pointer increments. These source refinements preserve the complete656-byte extent and reduce masked position differences508 to278; they do not establish byte equality.",
+    "current_proof": "analysis/audio-resample-native-match.json",
+    "current_changes": [
+      "Initialize history count before output then input; this recovers the initial load/reset schedule.",
+      "Use an ordinary loop-local pointer to the coefficient table base; the row remains an indexed signed-short offset.",
+      "Use phase * 64, rather than phase << 6, for the 64-phase table conversion. VC7 emits the original destructive shift/saved-phase schedule.",
+      "Cache the output buffer at the start of each output iteration; moving that cache to the store reproduces every byte except the commuted SIB.",
+      "Reuse the loop index for the final phase advance, as the independently exact MMX sibling does."
     ]
   },
   "scalar_coefficient_data": [
@@ -358,7 +368,10 @@
     "src/audio/ahle_ds/AudioPoleFilter.c": "b65d389c08d2d48bb4e78bbfbfa39bfedcccb0e474410ccc13c9b8ce2a1c6f65"
   },
   "historical_source_revision": "f2cdfca",
-  "native_source_organization": {
+  "sqrt_storage_proof": "analysis/audio-sqrt-storage.json",
+  "sqrt_storage_controls": "analysis/audio-sqrt-storage-probes.json",
+  "scalar_negative_controls": "analysis/audio-resample-source-controls.json",
+  "historical_native_source_organization": {
     "unit11": "AudioProcessing.c",
     "unit12": "AudioResample.c",
     "shared_decoder": "AudioADPCMBlock.h",
@@ -377,7 +390,19 @@
     "total_bodies": 41,
     "private_sqrt_lookup": "One private65536-DWORD table, followed by explicitly zero-initialized wet/dry globals, gives the native0x40008-byte strong BSS contribution; source spelling is inferred and equivalent two-array alternatives are documented."
   },
-  "sqrt_storage_proof": "analysis/audio-sqrt-storage.json",
-  "sqrt_storage_controls": "analysis/audio-sqrt-storage-probes.json",
-  "scalar_negative_controls": "analysis/audio-resample-source-controls.json"
+  "current_native_source_organization": {
+    "units": [
+      "Mp3.c",
+      "AudioProcessing.c",
+      "AudioResample.c"
+    ],
+    "proof": "analysis/audio-source-grouping.json",
+    "current_report": "analysis/audio-processing-comparison.json",
+    "matched_bodies": 38,
+    "total_bodies": 41,
+    "initialized_bytes": 9088,
+    "initialized_exact": true,
+    "behavior_cases": 129,
+    "behavior_matching": 129
+  }
 }
