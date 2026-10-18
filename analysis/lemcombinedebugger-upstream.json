@@ -1,0 +1,48 @@
+{
+  "search_date": "2026-10-18",
+  "source_found": false,
+  "locations": [
+    {
+      "url": "https://storage.googleapis.com/google-code-archive-source/v2/code.google.com/lemd3d/source-archive.zip",
+      "archive_sha256": "3c87ccf70edb55cfc01f15b98cf51bae68a3c6e26f07eb3c29bfc609098587d9",
+      "examined": "Entire archive, including tags and trunk; no .pas or UnitCombineEditor source.",
+      "dll_path": "lemd3d/trunk/Nemu64/Plugin/LemCombineDebugger.dll",
+      "dll_sha256": "0d1105d3638f7c3d0203de44a948003e7c77a67f4185b13e9458be220d9a8fbd"
+    },
+    {
+      "url": "https://github.com/purplemarshmallow/Nemu64",
+      "head": "8797c4f5fff117a366ef330b0fe1a7918dc3f272",
+      "examined": "Tracked source tree and Git history, including first source commit; the graphics plugin is C++, no companion Pascal debugger source.",
+      "dll_path": "Nemu64/Plugin/LemCombineDebugger.dll",
+      "dll_sha256": "0d1105d3638f7c3d0203de44a948003e7c77a67f4185b13e9458be220d9a8fbd"
+    }
+  ],
+  "exact_name_searches": [
+    "\"LemCombineDebugger\" source",
+    "\"LemCombineDebugger\" pas",
+    "\"UnitCombineEditor\"",
+    "\"UnitCombiners\" Nemu"
+  ],
+  "reconstruction": "Native Pascal reconstructed from the target disassembly, RTTI, published event tables, form streams, and initialized data. Shared host ABI/register declarations cross-checked against existing debugger reconstruction and preserved graphics plugin state declarations.",
+  "runtime": {
+    "selected": "Delphi 6 Update 1",
+    "method": "Compare independently mapped RTL/VCL probes with the original DLL; all 1,188 eligible Update 1 blocks matched uniquely, six were ambiguous and none absent.",
+    "candidate_counts": {
+      "rtm": {
+        "unique": 1184,
+        "absent": 2,
+        "ambiguous": 6
+      },
+      "u1": {
+        "unique": 1188,
+        "absent": 0,
+        "ambiguous": 6
+      },
+      "u2": {
+        "unique": 1166,
+        "absent": 20,
+        "ambiguous": 6
+      }
+    }
+  }
+}

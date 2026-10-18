@@ -41,12 +41,13 @@ run_tool
 endef
 
 REBUILT := nemu64.exe gs_dll.dll Plugin/audio.dll Plugin/Input.dll \
-           Plugin/debugger.dll Plugin/dialogs.dll Plugin/profile.dll Plugin/LemD3D8.dll
+           Plugin/debugger.dll Plugin/dialogs.dll Plugin/profile.dll Plugin/LemD3D8.dll \
+           Plugin/LemCombineDebugger.dll
 MASTER_FILES := $(shell cd "$(ROOT)/master" && find . -type f -printf '%P\n')
 COPIED := $(filter-out $(REBUILT),$(MASTER_FILES))
 BUILD_RECIPE := $(ROOT)/Makefile
 
-.PHONY: all clean nemu64 gs audio input debugger dialogs profile lemd3d
+.PHONY: all clean nemu64 gs audio input debugger dialogs profile lemd3d lemcombinedebugger
 all: $(addprefix $(OUT)/,$(REBUILT) $(COPIED))
 nemu64: $(OUT)/nemu64.exe
 gs: $(OUT)/gs_dll.dll
@@ -56,6 +57,7 @@ debugger: $(OUT)/Plugin/debugger.dll
 dialogs: $(OUT)/Plugin/dialogs.dll
 profile: $(OUT)/Plugin/profile.dll
 lemd3d: $(OUT)/Plugin/LemD3D8.dll
+lemcombinedebugger: $(OUT)/Plugin/LemCombineDebugger.dll
 
 # Only files without a recovered build target use this fallback rule.
 $(addprefix $(OUT)/,$(COPIED)): $(OUT)/%: $(ROOT)/master/%
@@ -407,6 +409,7 @@ $(eval $(call delphi_project,dialogs,d6u1,dialogs))
 $(eval $(call delphi_project,debugger,d6u2,debugger))
 $(eval $(call delphi_project,input,d6u2,Input,-DNEMU_FIX_HID_ENUMERATION))
 $(eval $(call delphi_project,profile,d6rtm,profile))
+$(eval $(call delphi_project,lemcombinedebugger,d6u1,LemCombineDebugger))
 
 
 clean:

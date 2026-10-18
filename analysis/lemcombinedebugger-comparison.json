@@ -1,0 +1,1193 @@
+{
+  "status": "matched",
+  "work": "/root/.ai-tmp/lemcombinedebugger.A4RKSqFH/final",
+  "wine_prefix": "/root/.ai-tmp/lemcombinedebugger.A4RKSqFH/final/wine",
+  "sources": {
+    "LemCombineDebugger.dpr": "3df788e525ae665b78fd5528b61bdd40c8ba337f034cd507535b028cb80f54b8",
+    "RCP.pas": "4c39e6ac7290655503a302d439cba3a766bb852de1f0cc971e54219e1902e6ba",
+    "UnitCamera.dfm": "6a5dccab32a8fcc47eb608a16b9eb6e60aa2ed3a4e6e45701bfcfbbf78304aba",
+    "UnitCamera.pas": "ce4ab409d55b63fb0e2a93f9531d9b2eb32344ce9c770220e192ac0d87b19592",
+    "UnitCombineEditor.dfm": "6f7b26e5bff2384dc94878db769ed133575d9f9803a1d7e853a21f9ad657a1c9",
+    "UnitCombineEditor.pas": "9095b6aff66a77f52d54a56ee84112c02e20f15b4a03c885a5af9e0cb58a2c9e",
+    "UnitCombiners.dfm": "f13fbf3000f99ad5036fde03d5cba31c9df56c53beea7f4dcea1b20425215caf",
+    "UnitCombiners.pas": "9a23134c665fa2f82648cd8e8b201551119c971756e8dbd8c6511741c9721a22",
+    "UnitDecs.pas": "09d8edb67abfd1fb93eb6e7bf0752699a0f3650e8bb01816779e593fa43a9c62",
+    "UnitMain.pas": "f9787ecfeb66e60920fac522aa6e9131b8aabbbadc81fe41ae9e03791b6f89d4"
+  },
+  "commands": [
+    {
+      "label": "form-converter",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "d6u1",
+        "dcc32-personal",
+        "-Q",
+        "delphi_dfm.dpr"
+      ],
+      "cwd": "/root/.ai-tmp/lemcombinedebugger.A4RKSqFH/final/helper",
+      "log": "/root/.ai-tmp/lemcombinedebugger.A4RKSqFH/final/logs/form-converter.log",
+      "returncode": 0
+    },
+    {
+      "label": "form-UnitCamera",
+      "argv": [
+        "wine",
+        "/root/.ai-tmp/lemcombinedebugger.A4RKSqFH/final/helper/delphi_dfm.exe",
+        "resource",
+        "/root/.ai-tmp/lemcombinedebugger.A4RKSqFH/final/source/UnitCamera.dfm.txt",
+        "/root/.ai-tmp/lemcombinedebugger.A4RKSqFH/final/source/UnitCamera.dfm"
+      ],
+      "cwd": "/root/.ai-tmp/lemcombinedebugger.A4RKSqFH/final/source",
+      "log": "/root/.ai-tmp/lemcombinedebugger.A4RKSqFH/final/logs/form-UnitCamera.log",
+      "returncode": 0
+    },
+    {
+      "label": "form-UnitCombineEditor",
+      "argv": [
+        "wine",
+        "/root/.ai-tmp/lemcombinedebugger.A4RKSqFH/final/helper/delphi_dfm.exe",
+        "resource",
+        "/root/.ai-tmp/lemcombinedebugger.A4RKSqFH/final/source/UnitCombineEditor.dfm.txt",
+        "/root/.ai-tmp/lemcombinedebugger.A4RKSqFH/final/source/UnitCombineEditor.dfm"
+      ],
+      "cwd": "/root/.ai-tmp/lemcombinedebugger.A4RKSqFH/final/source",
+      "log": "/root/.ai-tmp/lemcombinedebugger.A4RKSqFH/final/logs/form-UnitCombineEditor.log",
+      "returncode": 0
+    },
+    {
+      "label": "form-UnitCombiners",
+      "argv": [
+        "wine",
+        "/root/.ai-tmp/lemcombinedebugger.A4RKSqFH/final/helper/delphi_dfm.exe",
+        "resource",
+        "/root/.ai-tmp/lemcombinedebugger.A4RKSqFH/final/source/UnitCombiners.dfm.txt",
+        "/root/.ai-tmp/lemcombinedebugger.A4RKSqFH/final/source/UnitCombiners.dfm"
+      ],
+      "cwd": "/root/.ai-tmp/lemcombinedebugger.A4RKSqFH/final/source",
+      "log": "/root/.ai-tmp/lemcombinedebugger.A4RKSqFH/final/logs/form-UnitCombiners.log",
+      "returncode": 0
+    },
+    {
+      "label": "camera-unit",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "d6u1",
+        "dcc32-personal",
+        "-Q",
+        "-GD",
+        "UnitCamera.pas"
+      ],
+      "cwd": "/root/.ai-tmp/lemcombinedebugger.A4RKSqFH/final/source",
+      "log": "/root/.ai-tmp/lemcombinedebugger.A4RKSqFH/final/logs/camera-unit.log",
+      "returncode": 0
+    },
+    {
+      "label": "project",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "d6u1",
+        "dcc32-personal",
+        "-Q",
+        "-GD",
+        "LemCombineDebugger.dpr"
+      ],
+      "cwd": "/root/.ai-tmp/lemcombinedebugger.A4RKSqFH/final/source",
+      "log": "/root/.ai-tmp/lemcombinedebugger.A4RKSqFH/final/logs/project.log",
+      "returncode": 0
+    }
+  ],
+  "build_input_sha256": {
+    "scripts/build_lemcombinedebugger.py": "2026fa4588ad1665f3282b73ec0f33161748d61e7dbe59193dac75b9190bfe5a",
+    "scripts/verify_lemcombinedebugger.py": "551ebc50b36ca60e2422056b36f46450f49c31f1c82a7ae740b85e65d7037bc0",
+    "scripts/restore_lemcombinedebugger_metadata.py": "326563e723a4f271301aac63ea3126f370353e660af3d4ca8a7728916c472029",
+    "scripts/lemcombinedebugger_forms.py": "5cb94b535c5c6c1839e3451d662048c7a13d2260847af620568368b815123b20",
+    "scripts/delphi_dfm.dpr": "2e03a1e8272032c80c19d7f751d7b7c8fc38069ee7fe3c9d9d82fc4c5b426a98",
+    "scripts/run_toolchain.py": "d97fc39fdd02d508cd76432db9575043438b1da3aad0c391fc7758d125936cf3",
+    "scripts/pe_fingerprints.py": "e83e1698ecfc7b8ca06ba0919578cbd225885745a96f601891bffff831d995dd",
+    "scripts/stamp_pe_resources.py": "0de1f06bcd9ddf46e2a5ac960e424590dcc60420ab2748fa0e6372792a941245",
+    "toolchains/d6u1/bin/dcc32-personal.exe": "fa7c2c74ad45f5f0d9bd23db6d4c9471476456f4064812c96b8f0b0b983e1600",
+    "toolchains/d6u1/bin/rlink32.dll": "833364ab71da405335820b3c1eb731c1791c863a79a8b05f15ccef04a3ad7267"
+  },
+  "form_serialization": {
+    "empty_items": 3,
+    "bytes_saved": 9,
+    "original_converter_payload_size": 14346,
+    "legacy_payload_size": 14337
+  },
+  "linked_library_sha256": {
+    "toolchains/d6u1/lib/activex.dcu": "f4eaeb721930ab796058048ea3c1cf322c2080eda926d22131c714a91d752cb9",
+    "toolchains/d6u1/lib/actnlist.dcu": "df0fd63a4d6984a5dbc21aca4328f3b4ce8a262f7af0cb12080f61c518131941",
+    "toolchains/d6u1/lib/buttons.dcu": "9aa56b7547a715ab4426e30d2f4c6855a190405f16608d4d8a4bcc5b403b1a09",
+    "toolchains/d6u1/lib/checklst.dcu": "d4276fdf8eaab9f425228b0f19100584dd377e626495e8378d98d61c774666ff",
+    "toolchains/d6u1/lib/classes.dcu": "761dcce29e460aab421e9976a5a8dee8c78ace2b80c99c0baa9aca5f732fe8f7",
+    "toolchains/d6u1/lib/clipbrd.dcu": "293a62df4d82ce22e31471276f634689aa21b99a840ee2db7ff5913c626907e8",
+    "toolchains/d6u1/lib/comctrls.dcu": "1edb6503e6533c76130daa8f62aa3af2d7379b9450f4e164b841e85f912e9889",
+    "toolchains/d6u1/lib/comstrs.dcu": "58745505d221295419b77298544da008aa70a47287d2c2d330efe5debe72586f",
+    "toolchains/d6u1/lib/commctrl.dcu": "4f209bf6c3b618952cbb0b1628abc5a19598ef93ee2bf69fdf0098e813a5a605",
+    "toolchains/d6u1/lib/commdlg.dcu": "4f62d4009568ee084a6404dd8c511dd4db745d207319b042a72178fce4737ecc",
+    "toolchains/d6u1/lib/consts.dcu": "92f3d722d403abf7744a7c1b7a42a1db5fdc9b2c950e039daef1face559c6225",
+    "toolchains/d6u1/lib/contnrs.dcu": "d36d4dd0673af07474877bfcfe30a3b9b743c5b62182e91030a86c0bf3ea0f14",
+    "toolchains/d6u1/lib/controls.dcu": "7d15439e670bfd580125dab01e2e5e03733e271f814b70f81b44dae70b921fa3",
+    "toolchains/d6u1/lib/dialogs.dcu": "b629a6261b01ac1d01311d628e66915c108691627adc06b9d21faf60fc8830cc",
+    "toolchains/d6u1/lib/dlgs.dcu": "5a0a57b922c6fa2597a0fe5e6ea68880bce5201dba0ca0be4256d0272c843bf8",
+    "toolchains/d6u1/lib/extactns.dcu": "fc9cf243bbe0491356d511f86b3bba49cca07fe82de7a026165e869eef484c1c",
+    "toolchains/d6u1/lib/extctrls.dcu": "6c5d8aaa07e92e90ceea29d8b04073675a4d091637f226ee4389ee81d9bf1edf",
+    "toolchains/d6u1/lib/extdlgs.dcu": "1cd27916c31682b23a8dfbaa2c2f95884f3245cc39ea4715dd62587c4e4e1a2d",
+    "toolchains/d6u1/lib/flatsb.dcu": "974a6ea590513811977216acfbbc648413540b69d9329783a4d7aca20e71c8f9",
+    "toolchains/d6u1/lib/forms.dcu": "ba74c92d9a307050954caa799827292a222e5fcbd610fed8f8b53fb8aa4beba5",
+    "toolchains/d6u1/lib/graphics.dcu": "e8885fc3be3cfd638299ab361f63b09291ca60cf1f66a9011b1daaf56f74246e",
+    "toolchains/d6u1/lib/helpintfs.dcu": "d8fed37575fbac09cb52c66a3a54847247caba46a1eb2d095107d964751e1c20",
+    "toolchains/d6u1/lib/imglist.dcu": "175b1dfc0655f7d0497732d87340c09c2e030d8f0c5096f3530e7ce87c23f3bb",
+    "toolchains/d6u1/lib/imm.dcu": "5a420542fe727729b75284e0ed13827bbdcfc90d83615248977d923ae91d96eb",
+    "toolchains/d6u1/lib/inifiles.dcu": "bf06bb29859d35d9c5bb2169c7945a51a0d5b03e36bcd7751d1cb0b069d4c165",
+    "toolchains/d6u1/lib/listactns.dcu": "d7a33014820e4feb05a2e0150df06538643660217ccde67c6192d1480a48010c",
+    "toolchains/d6u1/lib/mapi.dcu": "b1a80c00c8a7ac2df8800cf88a85358a40b084fb9cc6287ddb41be846d00fb9f",
+    "toolchains/d6u1/lib/math.dcu": "69ef8827be6161eb7b7f635ad54d2d7787538ab4c5e97c2715fb42ada8edf26d",
+    "toolchains/d6u1/lib/menus.dcu": "bbd6c03d0acb62dd36567701dc5e0688c93b789e4b2f159a2cc2380ca0c19516",
+    "toolchains/d6u1/lib/messages.dcu": "d6b271d8de81a87dde15aa8e99793300fadd2f400c4af3949908ec2d920ac77b",
+    "toolchains/d6u1/lib/multimon.dcu": "8b797d3bc8865c1f8789232553eb2925024e6b19d8cc69d6fcd1d0b41b2713b8",
+    "toolchains/d6u1/lib/printers.dcu": "04f2413c05012bf50812a14e402c96822080e120c02b56243a09ebd6d9b2c03d",
+    "toolchains/d6u1/lib/rtlconsts.dcu": "39cd362358a8cb9bbf044816f47e82b7a955846d1bd3ea7988904dcf54e8daea",
+    "toolchains/d6u1/lib/regstr.dcu": "f3a4f1ce7dbc80ad9c9bacdd73b354f582ffbb4968615712dee71752a2c52827",
+    "toolchains/d6u1/lib/registry.dcu": "af02824ab9f4927e6ed25c6321f3054ffdedf5b2f6941fa393b61153dc44e0f2",
+    "toolchains/d6u1/lib/richedit.dcu": "81a5d263a9cfc76d93ad82bfb8eaf14ba4fc82a89ff48b07553c3a9fec7e6489",
+    "toolchains/d6u1/lib/shellapi.dcu": "464c6a48dc5bd4e74b577711e2cb73b1213e736d0258f09400c2889aac85513f",
+    "toolchains/d6u1/lib/shlobj.dcu": "565f28f364ea2b3e67bfd887b67a25d07a59c55248f870e8104e5c4764cae09c",
+    "toolchains/d6u1/lib/stdactns.dcu": "a4f6475942254c90a12360fdb6708d64171f02ee3e092d17d7c8f0f02498888d",
+    "toolchains/d6u1/lib/stdctrls.dcu": "a0f87aa3728b9ec86ac5c77ee508d38f02dad141f7cf3336d114c10a05e3a9cf",
+    "toolchains/d6u1/lib/strutils.dcu": "ad5bbbdd74de31ff273983a92bb879f58f7c69d81883b3f67c93d6d955507dfd",
+    "toolchains/d6u1/lib/sysconst.dcu": "48447e7b7600e68da1256faa8b9a0b86522d5b9efb6e1363cf797401d31f0e77",
+    "toolchains/d6u1/lib/sysinit.dcu": "1044a925b450337d1fce1d1780e3b6983cee02c3b71960d7946e2a7884b740df",
+    "toolchains/d6u1/lib/sysutils.dcu": "4cae2a19e2348b0e289b16dddfc700e21c45aa72b0387f184179a6f6a2bd4179",
+    "toolchains/d6u1/lib/system.dcu": "5212420d6e6a935b4cf156a88d250dddcee2a62473e22641a5cf64c78d28c21b",
+    "toolchains/d6u1/lib/toolwin.dcu": "4cf3fdeee51e879068ee8cb5a0ed2e082cf2ff51aebd9358dec06d0851c41221",
+    "toolchains/d6u1/lib/typinfo.dcu": "f186ef22517487b875f6d5c9a0d983eefa54d190c81061f402af559e0578c351",
+    "toolchains/d6u1/lib/types.dcu": "e7804200ae7276dbb1bb8de20e495b392e27b406267b25309c1cc140dd7ef48e",
+    "toolchains/d6u1/lib/urlmon.dcu": "642cd2dd4afbd6010656b44c65b9f8f738c9baed2b1df9fe57b32b867ef49032",
+    "toolchains/d6u1/lib/varutils.dcu": "7ad5373adfaa0048cf8a9a8cabb637185184f7531d9984a47acb4456f7526d19",
+    "toolchains/d6u1/lib/variants.dcu": "6721d71793f720533dbc2b48309af5453843e69fa62ad7eab95ef19db4e1e829",
+    "toolchains/d6u1/lib/winhelpviewer.dcu": "399ff5acba5aa4fec07c3945b9f0a6c728a626af33f654fe1bea446cf0c78abb",
+    "toolchains/d6u1/lib/wininet.dcu": "b9c1a7be799f5bfbbbc16478045bffcde81ef27337e7fdaa07fc84a4a8a185ba",
+    "toolchains/d6u1/lib/winspool.dcu": "9683381af900c04bee83bce19eb985d94c2012d10298b56b48c00f9bf60e3590",
+    "toolchains/d6u1/lib/windows.dcu": "4525e6f10bcfd5ff58194734d57c29e0e4edc48e19c55a28cccaa3675e8d954d"
+  },
+  "linked_resource_sha256": {
+    "toolchains/d6u1/lib/buttons.res": "dbe02d91846d0469cd271167f073ab681b9ec2c48615e7a6e5ff81e3dfdd835d",
+    "toolchains/d6u1/lib/controls.res": "0510a80da4958c1992f29cfc8c39c194326b10dd02b6c424ff7bdce0b710d067",
+    "toolchains/d6u1/lib/extdlgs.res": "3d8fc38dcc9e61f08eb21592656dbfe09cddb632ff8112f4d3bfbaf6ed761353"
+  },
+  "compiler_output_sha256": "d33be7ea2f6b67f52c23b0643484562b739291d5db77323a9a2ec0a6f2d4a3f6",
+  "metadata_restoration": {
+    "status": "restored",
+    "scope": "PE resource-directory timestamp DWORDs only",
+    "local_dos_time": "2002-02-08T00:28:42",
+    "fields": [
+      {
+        "offset": 559108,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 559172,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 559244,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 559348,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 559372,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 559492,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 559548,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 559620,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 559644,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 559668,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 559692,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 559716,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 559740,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 559764,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 559788,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 559812,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 559836,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 559860,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 559884,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 559908,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 559932,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 559956,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 559980,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560004,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560028,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560052,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560076,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560100,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560124,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560148,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560172,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560196,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560220,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560244,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560268,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560292,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560316,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560340,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560364,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560388,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560412,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560436,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560460,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560484,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560508,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560532,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560556,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560580,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560604,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560628,
+        "old": 1565702360,
+        "restored": 742917013
+      },
+      {
+        "offset": 560652,
+        "old": 1565702360,
+        "restored": 742917013
+      }
+    ]
+  },
+  "original": "/root/nemu-decomp/master/Plugin/LemCombineDebugger.dll",
+  "rebuilt": "/root/.ai-tmp/lemcombinedebugger.A4RKSqFH/final/output/LemCombineDebugger.dll",
+  "original_size": 600064,
+  "rebuilt_size": 600064,
+  "original_sha256": "0d1105d3638f7c3d0203de44a948003e7c77a67f4185b13e9458be220d9a8fbd",
+  "rebuilt_sha256": "0d1105d3638f7c3d0203de44a948003e7c77a67f4185b13e9458be220d9a8fbd",
+  "full_dll_byte_exact": true,
+  "differing_file_bytes": 0,
+  "first_difference_offset": null,
+  "sections": [
+    {
+      "name": "CODE",
+      "original": {
+        "name": "CODE",
+        "virtual_size": 505936,
+        "rva": 4096,
+        "raw_size": 506368,
+        "offset": 1024
+      },
+      "rebuilt": {
+        "name": "CODE",
+        "virtual_size": 505936,
+        "rva": 4096,
+        "raw_size": 506368,
+        "offset": 1024
+      },
+      "byte_exact": true,
+      "original_sha256": "66b7f56d598e2a8d6128fb2f4f43ea8e4622d8a918c873353dc5e4b497267b33",
+      "rebuilt_sha256": "66b7f56d598e2a8d6128fb2f4f43ea8e4622d8a918c873353dc5e4b497267b33"
+    },
+    {
+      "name": "DATA",
+      "original": {
+        "name": "DATA",
+        "virtual_size": 5784,
+        "rva": 512000,
+        "raw_size": 6144,
+        "offset": 507392
+      },
+      "rebuilt": {
+        "name": "DATA",
+        "virtual_size": 5784,
+        "rva": 512000,
+        "raw_size": 6144,
+        "offset": 507392
+      },
+      "byte_exact": true,
+      "original_sha256": "74162e2ce0c36ccffa6d0095307ab28d1ad25dc78fb7f44198fadc2ae25fcd25",
+      "rebuilt_sha256": "74162e2ce0c36ccffa6d0095307ab28d1ad25dc78fb7f44198fadc2ae25fcd25"
+    },
+    {
+      "name": "BSS",
+      "original": {
+        "name": "BSS",
+        "virtual_size": 4457,
+        "rva": 520192,
+        "raw_size": 0,
+        "offset": 513536
+      },
+      "rebuilt": {
+        "name": "BSS",
+        "virtual_size": 4457,
+        "rva": 520192,
+        "raw_size": 0,
+        "offset": 513536
+      },
+      "byte_exact": true,
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "rebuilt_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": ".idata",
+      "original": {
+        "name": ".idata",
+        "virtual_size": 9078,
+        "rva": 528384,
+        "raw_size": 9216,
+        "offset": 513536
+      },
+      "rebuilt": {
+        "name": ".idata",
+        "virtual_size": 9078,
+        "rva": 528384,
+        "raw_size": 9216,
+        "offset": 513536
+      },
+      "byte_exact": true,
+      "original_sha256": "54c138e1c62dacf90159ce031b859107d87820f15490ad1b1fbdcec3207c399e",
+      "rebuilt_sha256": "54c138e1c62dacf90159ce031b859107d87820f15490ad1b1fbdcec3207c399e"
+    },
+    {
+      "name": ".edata",
+      "original": {
+        "name": ".edata",
+        "virtual_size": 146,
+        "rva": 540672,
+        "raw_size": 512,
+        "offset": 522752
+      },
+      "rebuilt": {
+        "name": ".edata",
+        "virtual_size": 146,
+        "rva": 540672,
+        "raw_size": 512,
+        "offset": 522752
+      },
+      "byte_exact": true,
+      "original_sha256": "b5d11725f026019dbd02676dff86637953b529e6a869acbb9539cda3fadfee52",
+      "rebuilt_sha256": "b5d11725f026019dbd02676dff86637953b529e6a869acbb9539cda3fadfee52"
+    },
+    {
+      "name": ".reloc",
+      "original": {
+        "name": ".reloc",
+        "virtual_size": 35664,
+        "rva": 544768,
+        "raw_size": 35840,
+        "offset": 523264
+      },
+      "rebuilt": {
+        "name": ".reloc",
+        "virtual_size": 35664,
+        "rva": 544768,
+        "raw_size": 35840,
+        "offset": 523264
+      },
+      "byte_exact": true,
+      "original_sha256": "95acd78ffc5966c07841ee44edbcc1f5ac322d90c4b696f8c53fb8c8f856f4e9",
+      "rebuilt_sha256": "95acd78ffc5966c07841ee44edbcc1f5ac322d90c4b696f8c53fb8c8f856f4e9"
+    },
+    {
+      "name": ".rsrc",
+      "original": {
+        "name": ".rsrc",
+        "virtual_size": 40960,
+        "rva": 581632,
+        "raw_size": 40960,
+        "offset": 559104
+      },
+      "rebuilt": {
+        "name": ".rsrc",
+        "virtual_size": 40960,
+        "rva": 581632,
+        "raw_size": 40960,
+        "offset": 559104
+      },
+      "byte_exact": true,
+      "original_sha256": "bf19ad714c60d8e0ce4419604968e293737a0d08b7e10ce2f35d57425b613a53",
+      "rebuilt_sha256": "bf19ad714c60d8e0ce4419604968e293737a0d08b7e10ce2f35d57425b613a53"
+    }
+  ],
+  "export_abi_exact": true,
+  "resource_payloads_exact": true,
+  "resources": [
+    {
+      "path": [
+        1,
+        1,
+        0
+      ],
+      "original_size": 308,
+      "rebuilt_size": 308,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        1,
+        2,
+        0
+      ],
+      "original_size": 308,
+      "rebuilt_size": 308,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        1,
+        3,
+        0
+      ],
+      "original_size": 308,
+      "rebuilt_size": 308,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        1,
+        4,
+        0
+      ],
+      "original_size": 308,
+      "rebuilt_size": 308,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        1,
+        5,
+        0
+      ],
+      "original_size": 308,
+      "rebuilt_size": 308,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        1,
+        6,
+        0
+      ],
+      "original_size": 308,
+      "rebuilt_size": 308,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        1,
+        7,
+        0
+      ],
+      "original_size": 308,
+      "rebuilt_size": 308,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        10,
+        "DVCLAL",
+        0
+      ],
+      "original_size": 16,
+      "rebuilt_size": 16,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        10,
+        "PACKAGEINFO",
+        0
+      ],
+      "original_size": 672,
+      "rebuilt_size": 672,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        10,
+        "TFORMCAMERA",
+        0
+      ],
+      "original_size": 5503,
+      "rebuilt_size": 5503,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        10,
+        "TFORMCOMBINERS",
+        0
+      ],
+      "original_size": 1478,
+      "rebuilt_size": 1478,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        10,
+        "TFORMEDITOR",
+        0
+      ],
+      "original_size": 14337,
+      "rebuilt_size": 14337,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        12,
+        32761,
+        0
+      ],
+      "original_size": 20,
+      "rebuilt_size": 20,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        12,
+        32762,
+        0
+      ],
+      "original_size": 20,
+      "rebuilt_size": 20,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        12,
+        32763,
+        0
+      ],
+      "original_size": 20,
+      "rebuilt_size": 20,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        12,
+        32764,
+        0
+      ],
+      "original_size": 20,
+      "rebuilt_size": 20,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        12,
+        32765,
+        0
+      ],
+      "original_size": 20,
+      "rebuilt_size": 20,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        12,
+        32766,
+        0
+      ],
+      "original_size": 20,
+      "rebuilt_size": 20,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        12,
+        32767,
+        0
+      ],
+      "original_size": 20,
+      "rebuilt_size": 20,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        2,
+        "BBABORT",
+        0
+      ],
+      "original_size": 464,
+      "rebuilt_size": 464,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        2,
+        "BBALL",
+        0
+      ],
+      "original_size": 484,
+      "rebuilt_size": 484,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        2,
+        "BBCANCEL",
+        0
+      ],
+      "original_size": 464,
+      "rebuilt_size": 464,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        2,
+        "BBCLOSE",
+        0
+      ],
+      "original_size": 464,
+      "rebuilt_size": 464,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        2,
+        "BBHELP",
+        0
+      ],
+      "original_size": 464,
+      "rebuilt_size": 464,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        2,
+        "BBIGNORE",
+        0
+      ],
+      "original_size": 464,
+      "rebuilt_size": 464,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        2,
+        "BBNO",
+        0
+      ],
+      "original_size": 464,
+      "rebuilt_size": 464,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        2,
+        "BBOK",
+        0
+      ],
+      "original_size": 464,
+      "rebuilt_size": 464,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        2,
+        "BBRETRY",
+        0
+      ],
+      "original_size": 464,
+      "rebuilt_size": 464,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        2,
+        "BBYES",
+        0
+      ],
+      "original_size": 464,
+      "rebuilt_size": 464,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        2,
+        "PREVIEWGLYPH",
+        0
+      ],
+      "original_size": 232,
+      "rebuilt_size": 232,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        5,
+        "DLGTEMPLATE",
+        0
+      ],
+      "original_size": 82,
+      "rebuilt_size": 82,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        6,
+        4084,
+        0
+      ],
+      "original_size": 1080,
+      "rebuilt_size": 1080,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        6,
+        4085,
+        0
+      ],
+      "original_size": 452,
+      "rebuilt_size": 452,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        6,
+        4086,
+        0
+      ],
+      "original_size": 236,
+      "rebuilt_size": 236,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        6,
+        4087,
+        0
+      ],
+      "original_size": 260,
+      "rebuilt_size": 260,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        6,
+        4088,
+        0
+      ],
+      "original_size": 1068,
+      "rebuilt_size": 1068,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        6,
+        4089,
+        0
+      ],
+      "original_size": 912,
+      "rebuilt_size": 912,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        6,
+        4090,
+        0
+      ],
+      "original_size": 896,
+      "rebuilt_size": 896,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        6,
+        4091,
+        0
+      ],
+      "original_size": 872,
+      "rebuilt_size": 872,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        6,
+        4092,
+        0
+      ],
+      "original_size": 224,
+      "rebuilt_size": 224,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        6,
+        4093,
+        0
+      ],
+      "original_size": 188,
+      "rebuilt_size": 188,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        6,
+        4094,
+        0
+      ],
+      "original_size": 804,
+      "rebuilt_size": 804,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        6,
+        4095,
+        0
+      ],
+      "original_size": 944,
+      "rebuilt_size": 944,
+      "byte_exact": true
+    },
+    {
+      "path": [
+        6,
+        4096,
+        0
+      ],
+      "original_size": 732,
+      "rebuilt_size": 732,
+      "byte_exact": true
+    }
+  ],
+  "original_exports": [
+    {
+      "name": "ToolFree",
+      "ordinal": 3,
+      "rva": 509232
+    },
+    {
+      "name": "ToolFunc",
+      "ordinal": 1,
+      "rva": 509272
+    },
+    {
+      "name": "ToolGetMenuText",
+      "ordinal": 2,
+      "rva": 509396
+    },
+    {
+      "name": "ToolInit",
+      "ordinal": 4,
+      "rva": 508688
+    }
+  ],
+  "rebuilt_exports": [
+    {
+      "name": "ToolFree",
+      "ordinal": 3,
+      "rva": 509232
+    },
+    {
+      "name": "ToolFunc",
+      "ordinal": 1,
+      "rva": 509272
+    },
+    {
+      "name": "ToolGetMenuText",
+      "ordinal": 2,
+      "rva": 509396
+    },
+    {
+      "name": "ToolInit",
+      "ordinal": 4,
+      "rva": 508688
+    }
+  ],
+  "original_imports": [
+    {
+      "dll": "kernel32.dll",
+      "symbol_count": 43
+    },
+    {
+      "dll": "user32.dll",
+      "symbol_count": 4
+    },
+    {
+      "dll": "advapi32.dll",
+      "symbol_count": 3
+    },
+    {
+      "dll": "oleaut32.dll",
+      "symbol_count": 3
+    },
+    {
+      "dll": "kernel32.dll",
+      "symbol_count": 6
+    },
+    {
+      "dll": "advapi32.dll",
+      "symbol_count": 3
+    },
+    {
+      "dll": "kernel32.dll",
+      "symbol_count": 67
+    },
+    {
+      "dll": "version.dll",
+      "symbol_count": 3
+    },
+    {
+      "dll": "gdi32.dll",
+      "symbol_count": 69
+    },
+    {
+      "dll": "user32.dll",
+      "symbol_count": 166
+    },
+    {
+      "dll": "kernel32.dll",
+      "symbol_count": 1
+    },
+    {
+      "dll": "oleaut32.dll",
+      "symbol_count": 12
+    },
+    {
+      "dll": "comctl32.dll",
+      "symbol_count": 24
+    }
+  ],
+  "rebuilt_imports": [
+    {
+      "dll": "kernel32.dll",
+      "symbol_count": 43
+    },
+    {
+      "dll": "user32.dll",
+      "symbol_count": 4
+    },
+    {
+      "dll": "advapi32.dll",
+      "symbol_count": 3
+    },
+    {
+      "dll": "oleaut32.dll",
+      "symbol_count": 3
+    },
+    {
+      "dll": "kernel32.dll",
+      "symbol_count": 6
+    },
+    {
+      "dll": "advapi32.dll",
+      "symbol_count": 3
+    },
+    {
+      "dll": "kernel32.dll",
+      "symbol_count": 67
+    },
+    {
+      "dll": "version.dll",
+      "symbol_count": 3
+    },
+    {
+      "dll": "gdi32.dll",
+      "symbol_count": 69
+    },
+    {
+      "dll": "user32.dll",
+      "symbol_count": 166
+    },
+    {
+      "dll": "kernel32.dll",
+      "symbol_count": 1
+    },
+    {
+      "dll": "oleaut32.dll",
+      "symbol_count": 12
+    },
+    {
+      "dll": "comctl32.dll",
+      "symbol_count": 24
+    }
+  ],
+  "output_map": "/root/.ai-tmp/lemcombinedebugger.A4RKSqFH/final/output/LemCombineDebugger.map"
+}

@@ -1,0 +1,109 @@
+{
+  "original_file": "master/Plugin/LemCombineDebugger.dll",
+  "scope": "Names are inferred from role and imported-data hash constraints; a matching hash does not establish original spelling.",
+  "hash_evidence": "analysis/debugger-imports.json",
+  "hash_formula": "sum(character_weights[c] for c in identifier.upper()) modulo 256",
+  "application_globals": [
+    {
+      "unit": "UnitCombineEditor",
+      "name": "CombineFilename",
+      "previous_research_name": "NemuFileDir",
+      "original_import_slot_va": "0x47e350",
+      "original_storage_va": "0x4800d8",
+      "allowed_hash_buckets": [
+        55,
+        56,
+        57,
+        58,
+        59
+      ],
+      "selected_hash": 56
+    },
+    {
+      "unit": "UnitCombineEditor",
+      "name": "NewCombineFilename",
+      "previous_research_name": "CombineFilename",
+      "original_import_slot_va": "0x47e438",
+      "original_storage_va": "0x4800dc",
+      "allowed_hash_buckets": [
+        101,
+        102,
+        103,
+        104,
+        105
+      ],
+      "selected_hash": 102
+    },
+    {
+      "unit": "UnitCombineEditor",
+      "name": "CombineFile",
+      "previous_research_name": "CombineFile",
+      "original_import_slot_va": "0x47e44c",
+      "original_storage_va": "0x47fd40",
+      "allowed_hash_buckets": [
+        105,
+        106,
+        107,
+        108,
+        109,
+        110
+      ],
+      "selected_hash": 109
+    },
+    {
+      "unit": "UnitCombineEditor",
+      "name": "NewFile",
+      "previous_research_name": "NewCombineFile",
+      "original_import_slot_va": "0x47e4d0",
+      "original_storage_va": "0x47ff0c",
+      "allowed_hash_buckets": [
+        143,
+        144,
+        145,
+        146
+      ],
+      "selected_hash": 145
+    },
+    {
+      "unit": "UnitCombiners",
+      "name": "CombinerFormHandle",
+      "previous_research_name": "CombinersFormHandle",
+      "original_import_slot_va": "0x47e51c",
+      "original_storage_va": "0x4800e8",
+      "allowed_hash_buckets": [
+        163,
+        164,
+        165,
+        166
+      ],
+      "selected_hash": 165
+    },
+    {
+      "unit": "UnitCombineEditor",
+      "name": "FormEditor",
+      "previous_research_name": "FormEditor",
+      "original_import_slot_va": "0x47e534",
+      "original_storage_va": "0x47fd34",
+      "allowed_hash_buckets": [
+        170,
+        171,
+        172
+      ],
+      "selected_hash": 171
+    },
+    {
+      "unit": "UnitCombiners",
+      "name": "FormCombiners",
+      "previous_research_name": "FormCombiners",
+      "original_import_slot_va": "0x47e570",
+      "original_storage_va": "0x4800e4",
+      "allowed_hash_buckets": [
+        184,
+        185,
+        186
+      ],
+      "selected_hash": 185
+    }
+  ],
+  "validation": "The final native link reproduces every initialized-data byte and every instruction byte without rewriting either section."
+}
