@@ -1,0 +1,134 @@
+{
+  "status": "Negative source controls; no canonical edits.",
+  "target": "master/Plugin/audio.dll",
+  "baseline_commit": "bf82458",
+  "scratch": "/root/.ai-tmp/audio-wrapper-root.8eyzxsw9",
+  "driver_sha256": "3454b43bcffa2457587dc948e1fcb7f993fd3a0b9ecfdc1c41863cbd9d39d198",
+  "baseline": "180 functions;168 exact;25 objects and11 fields exact;0 unresolved operands",
+  "runs": [
+    {
+      "label": "baseline",
+      "exact": 168,
+      "data_exact": 25,
+      "fields_exact": 11,
+      "unresolved": 0,
+      "changed": [],
+      "source_sha256": "eac9ee4ca4f1fcdf359512b3a1137dcddedaf9b148757d40c9623b8643eeae38",
+      "object_sha256": "2db41972c2c95f5b6cf61ea27f75c17e8ab359a1c2e7eb8280bba85fa9eb841c",
+      "wrapper_size": 48,
+      "wrapper_diff": 10,
+      "comparison": "/root/.ai-tmp/audio-wrapper-root.8eyzxsw9/baseline/comparison.json",
+      "comparison_sha256": "6550760b8e944bbd09c2b4aa9be90e9d90ef8b4972aa2a2e55293cb718a367b3"
+    },
+    {
+      "label": "byte-mask",
+      "exact": 168,
+      "data_exact": 25,
+      "fields_exact": 11,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiply",
+          "size": 48,
+          "diff": 41,
+          "was_exact": false
+        }
+      ],
+      "source_sha256": "9b8fb0fad69ae1b2fb3886282590c949488f8fd5f97ca1c9d3d6f304dc9d2a88",
+      "object_sha256": "68e8d7071e5449d8f90f5ead59e27df1bba54d92b33667ff0d79f5a1f920a4d5",
+      "wrapper_size": 48,
+      "wrapper_diff": 41,
+      "comparison": "/root/.ai-tmp/audio-wrapper-root.8eyzxsw9/byte-mask/comparison.json",
+      "comparison_sha256": "96c34a91e20fdac4eaa9f5cd0d1503e08d25893f7b8f6b46a19e81e201241540"
+    },
+    {
+      "label": "direct-pc-array",
+      "exact": 168,
+      "data_exact": 25,
+      "fields_exact": 11,
+      "unresolved": 0,
+      "changed": [],
+      "source_sha256": "b1dbc9a5328323726686ece793528e9f85c540cf716d05d167e8f13f48c0ede6",
+      "object_sha256": "c580a72f575b2a26a89f32af6c77352859ab1ecf40cd3a50f0f46fb3e6b5635f",
+      "wrapper_size": 48,
+      "wrapper_diff": 10,
+      "comparison": "/root/.ai-tmp/audio-wrapper-root.8eyzxsw9/direct-pc-array/comparison.json",
+      "comparison_sha256": "50979868d1429ece7787eedbc34a5d8d64f78433697238cfa7cb0ade6b355b93"
+    },
+    {
+      "label": "kind-bitfield",
+      "exact": 168,
+      "data_exact": 25,
+      "fields_exact": 11,
+      "unresolved": 0,
+      "changed": [],
+      "source_sha256": "7e9a4a0b418f5947eb3128008598247d111d395c3fd40aaf82a03c62579dab34",
+      "object_sha256": "3e99bc550829db6a7e999cb738f76d6c831d786dbe4c8003540a8c1150adea21",
+      "wrapper_size": 48,
+      "wrapper_diff": 10,
+      "comparison": "/root/.ai-tmp/audio-wrapper-root.8eyzxsw9/kind-bitfield/comparison.json",
+      "comparison_sha256": "5d6717190f0d7ea2359497eb3247ff84c01ff92b203aea94fcb89dda4e51587f"
+    },
+    {
+      "label": "pc-reference",
+      "exact": 168,
+      "data_exact": 25,
+      "fields_exact": 11,
+      "unresolved": 0,
+      "changed": [],
+      "source_sha256": "1af0e6efd18c3c8aea83a7392ab187d4dfde4716f24192989b98010920c5ad4e",
+      "object_sha256": "f91b2d6c056e2a9c4fe1951de7334ffc9fb048cff84d1bec46428c3983f6b327",
+      "wrapper_size": 48,
+      "wrapper_diff": 10,
+      "comparison": "/root/.ai-tmp/audio-wrapper-root.8eyzxsw9/pc-reference/comparison.json",
+      "comparison_sha256": "e2c49e7268285abd8e5a9f070adaa14b6fc47da3b1f1c0a61ff92c5bb1b62cd8"
+    },
+    {
+      "label": "value-mask",
+      "exact": 168,
+      "data_exact": 25,
+      "fields_exact": 11,
+      "unresolved": 0,
+      "changed": [],
+      "source_sha256": "e03a82cc99f2ced6fed307af62e8df142a95386b49f5513d1d28721968c06a6d",
+      "object_sha256": "9f25d7f6346642e1e59c24e603bd5c77bf83fc872e9c4572800302e3d8a67b2b",
+      "wrapper_size": 48,
+      "wrapper_diff": 10,
+      "comparison": "/root/.ai-tmp/audio-wrapper-root.8eyzxsw9/value-mask/comparison.json",
+      "comparison_sha256": "fbbc9fb1ff8ede85d042b26167616b11561369e2b111cc997458e243bfb88ae2"
+    }
+  ],
+  "inline_pc_helper": {
+    "status": "Full-TU checker rejects an extra unmapped16-byte helper. Manual comparison of all180 mapped bodies gives no changes; the wrapper was inlined but still has the same10 mismatching bytes.",
+    "extra_functions": [
+      {
+        "name": "?RSP_AdvancePC@@YAXXZ",
+        "size": 16
+      }
+    ],
+    "changed_mapped_functions": [],
+    "source_sha256": "2301af7bf752bde68ef07c374a3c66da66013fe524026bef0b791240aece5c70",
+    "object_sha256": "242c1f0b1e4ad8129d3bab7cfe4bb58962a7213d05c27c7a1daf4ee4dfa8ced5"
+  },
+  "findings": [
+    "The original and candidate differ only in order of two independent global loads within the48-byte wrapper. Direct word mask, a three-bit kind field, PC array access and a PC reference reproduce all180 baseline body hashes unchanged.",
+    "A byte-narrowed opcode mask worsens wrapper differences from10 to41 and leaves the other179 bodies unchanged.",
+    "The inline PC helper leaves all180 known bodies unchanged and emits an extra16-byte function. It supplies no evidence for source promotion.",
+    "None of the controls alters canonical source or compiler options. The baseline compilation independently confirms the newly reconstructed LegacyVGE."
+  ],
+  "legacy_vge_replay": {
+    "scratch": "/root/.ai-tmp/audio-wrapper-root.8eyzxsw9/baseline",
+    "source_sha256": "eac9ee4ca4f1fcdf359512b3a1137dcddedaf9b148757d40c9623b8643eeae38",
+    "object_sha256": "2db41972c2c95f5b6cf61ea27f75c17e8ab359a1c2e7eb8280bba85fa9eb841c",
+    "comparison_sha256": "6550760b8e944bbd09c2b4aa9be90e9d90ef8b4972aa2a2e55293cb718a367b3",
+    "functions": 180,
+    "exact_functions": 168,
+    "exact_bytes": 44976,
+    "typed_objects": 25,
+    "typed_fields": 11,
+    "unresolved": 0,
+    "all180_function_hashes_equal_lead": true,
+    "legacy_vge_exact": true,
+    "legacy_vge_bytes": 1104
+  }
+}
