@@ -10,16 +10,10 @@ CpuU16 RSPVectors[32][8] = {0};
 CpuU32 RSPSavedPC = 0;
 // Original 0x1012C01C.
 CpuU32 RSPDelayPC = 0;
-// Original 0x1012C024.
-CpuU32 RSPMemAddressReg = 0;
-// Original 0x1012C028.
-CpuU32 RSPDramAddressReg = 0;
-// Original 0x1012C02C.
-CpuU32 RSPReadLengthReg = 0;
-// Original 0x1012C030.
-CpuU32 RSPWriteLengthReg = 0;
-// Original 0x1012C03C.
-CpuU32 RSPPC = 0;
+// Original bank inferred at 0x1012C024; PC is its +24 field. The unused
+// Status/Semaphore/Bist fields follow the native Nemu SP register layout.
+// The unrelated four-byte interval at 0x1012C020 remains unidentified.
+RSPHardwareRegisters RSPHardware = {0};
 // Original 0x1012C048.
 CpuU32 RSPRegisters[32] = {0};
 // Original 0x1012C0C8.

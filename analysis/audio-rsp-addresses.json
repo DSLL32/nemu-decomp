@@ -2100,61 +2100,6 @@
       "kind": "data"
     },
     {
-      "name": "_RSPPC",
-      "canonical_name": "RSPPC",
-      "va": 269664316,
-      "size": 4,
-      "address_basis": "identified_symbol",
-      "address_evidence": "Original initialized table bytes, pointer contents, or repeated typed instruction accesses establish this storage identity.",
-      "source": "RSPData.inc",
-      "translation_unit": "RSP.cpp",
-      "kind": "data"
-    },
-    {
-      "name": "_RSPWriteLengthReg",
-      "canonical_name": "RSPWriteLengthReg",
-      "va": 269664304,
-      "size": 4,
-      "address_basis": "identified_symbol",
-      "address_evidence": "Original initialized table bytes, pointer contents, or repeated typed instruction accesses establish this storage identity.",
-      "source": "RSPData.inc",
-      "translation_unit": "RSP.cpp",
-      "kind": "data"
-    },
-    {
-      "name": "_RSPReadLengthReg",
-      "canonical_name": "RSPReadLengthReg",
-      "va": 269664300,
-      "size": 4,
-      "address_basis": "identified_symbol",
-      "address_evidence": "Original initialized table bytes, pointer contents, or repeated typed instruction accesses establish this storage identity.",
-      "source": "RSPData.inc",
-      "translation_unit": "RSP.cpp",
-      "kind": "data"
-    },
-    {
-      "name": "_RSPDramAddressReg",
-      "canonical_name": "RSPDramAddressReg",
-      "va": 269664296,
-      "size": 4,
-      "address_basis": "identified_symbol",
-      "address_evidence": "Original initialized table bytes, pointer contents, or repeated typed instruction accesses establish this storage identity.",
-      "source": "RSPData.inc",
-      "translation_unit": "RSP.cpp",
-      "kind": "data"
-    },
-    {
-      "name": "_RSPMemAddressReg",
-      "canonical_name": "RSPMemAddressReg",
-      "va": 269664292,
-      "size": 4,
-      "address_basis": "identified_symbol",
-      "address_evidence": "Original initialized table bytes, pointer contents, or repeated typed instruction accesses establish this storage identity.",
-      "source": "RSPData.inc",
-      "translation_unit": "RSP.cpp",
-      "kind": "data"
-    },
-    {
       "name": "_RSPDelayPC",
       "canonical_name": "RSPDelayPC",
       "va": 269664284,
@@ -2332,6 +2277,17 @@
       "module": "RSP.obj",
       "address_basis": "identified_symbol",
       "address_evidence": "The fourteenth independently verified AMP header table precedes the guest program by exactly 2176 bytes. Native compilation of the existing typed header reproduces the complete table and its adjacency to RSP_AudioMicrocode. Its private original symbol spelling is unknown."
+    },
+    {
+      "name": "_RSPHardware",
+      "canonical_name": "RSPHardware",
+      "va": 269664292,
+      "size": 32,
+      "kind": "data",
+      "source": "RSPData.inc",
+      "translation_unit": "RSP.cpp",
+      "address_basis": "identified_symbol",
+      "address_evidence": "Audio native operands identify MemAddress/DramAddress/ReadLength/WriteLength/PC at offsets 0/4/8/12/24. Nemu native hardware access proves the corresponding eight-word SP bank. Retained Status/Semaphore/Bist fields at 16/20/28 are explicitly inferred; see analysis/audio-rsp-storage-audit.json and analysis/audio-rsp-sp-bank.json."
     }
   ],
   "fields": [
@@ -2358,6 +2314,94 @@
       "offset": 0,
       "va": 269663744,
       "size": 4
+    },
+    {
+      "name": "RSPPC",
+      "parent": "RSPHardware",
+      "parent_symbol": "_RSPHardware",
+      "member": "ProgramCounter",
+      "offset": 24,
+      "va": 269664316,
+      "size": 4,
+      "address_basis": "identified_live_field",
+      "address_evidence": "Original initialized table bytes, pointer contents, or repeated typed instruction accesses establish this storage identity."
+    },
+    {
+      "name": "RSPWriteLengthReg",
+      "parent": "RSPHardware",
+      "parent_symbol": "_RSPHardware",
+      "member": "WriteLength",
+      "offset": 12,
+      "va": 269664304,
+      "size": 4,
+      "address_basis": "identified_live_field",
+      "address_evidence": "Original initialized table bytes, pointer contents, or repeated typed instruction accesses establish this storage identity."
+    },
+    {
+      "name": "RSPReadLengthReg",
+      "parent": "RSPHardware",
+      "parent_symbol": "_RSPHardware",
+      "member": "ReadLength",
+      "offset": 8,
+      "va": 269664300,
+      "size": 4,
+      "address_basis": "identified_live_field",
+      "address_evidence": "Original initialized table bytes, pointer contents, or repeated typed instruction accesses establish this storage identity."
+    },
+    {
+      "name": "RSPDramAddressReg",
+      "parent": "RSPHardware",
+      "parent_symbol": "_RSPHardware",
+      "member": "DramAddress",
+      "offset": 4,
+      "va": 269664296,
+      "size": 4,
+      "address_basis": "identified_live_field",
+      "address_evidence": "Original initialized table bytes, pointer contents, or repeated typed instruction accesses establish this storage identity."
+    },
+    {
+      "name": "RSPMemAddressReg",
+      "parent": "RSPHardware",
+      "parent_symbol": "_RSPHardware",
+      "member": "MemAddress",
+      "offset": 0,
+      "va": 269664292,
+      "size": 4,
+      "address_basis": "identified_live_field",
+      "address_evidence": "Original initialized table bytes, pointer contents, or repeated typed instruction accesses establish this storage identity."
+    },
+    {
+      "name": "RSPHardware.Status",
+      "parent": "RSPHardware",
+      "parent_symbol": "_RSPHardware",
+      "member": "Status",
+      "offset": 16,
+      "va": 269664308,
+      "size": 4,
+      "address_basis": "cross_binary_retained_field_inference",
+      "address_evidence": "No surviving Audio access. Inferred from the native Nemu eight-word SP register bank at the same relative offsets; original source spelling and declaration are unknown."
+    },
+    {
+      "name": "RSPHardware.Semaphore",
+      "parent": "RSPHardware",
+      "parent_symbol": "_RSPHardware",
+      "member": "Semaphore",
+      "offset": 20,
+      "va": 269664312,
+      "size": 4,
+      "address_basis": "cross_binary_retained_field_inference",
+      "address_evidence": "No surviving Audio access. Inferred from the native Nemu eight-word SP register bank at the same relative offsets; original source spelling and declaration are unknown."
+    },
+    {
+      "name": "RSPHardware.Bist",
+      "parent": "RSPHardware",
+      "parent_symbol": "_RSPHardware",
+      "member": "Bist",
+      "offset": 28,
+      "va": 269664320,
+      "size": 4,
+      "address_basis": "cross_binary_retained_field_inference",
+      "address_evidence": "No surviving Audio access. Inferred from the native Nemu eight-word SP register bank at the same relative offsets; original source spelling and declaration are unknown."
     }
   ]
 }

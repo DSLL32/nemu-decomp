@@ -1,0 +1,470 @@
+{
+  "status": "supported_sp_register_bank_promoted_with_all_function_bytes_preserved",
+  "original": {
+    "path": "/root/nemu-decomp/master/Plugin/audio.dll",
+    "sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808"
+  },
+  "full_dll_byte_exact": false,
+  "source_inference": {
+    "report": "analysis/audio-rsp-storage-audit.json",
+    "bank_original_va": "0x1012C024",
+    "bank_size": 32,
+    "members": [
+      "MemAddress",
+      "DramAddress",
+      "ReadLength",
+      "WriteLength",
+      "Status",
+      "Semaphore",
+      "ProgramCounter",
+      "Bist"
+    ],
+    "unused_inferred_members": [
+      "Status",
+      "Semaphore",
+      "Bist"
+    ],
+    "name_note": "ProgramCounter denotes the +24 PC field. The spelling avoids collision with the existing PC macro; original private names are unknown.",
+    "unidentified_interval": {
+      "start": "0x1012C020",
+      "size": 4,
+      "filled": false
+    },
+    "forced_alignment": false
+  },
+  "source_files": {
+    "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+    "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88",
+    "RSP.cpp": "e2ebc258be25fca598896c4bc9639e24c61c859aaf34bab5682d034df2fd3a43",
+    "RSPKernel.inc": "7a218993560c457a5149266e391a28fcdb0a1df5a812209c9a9b7111238eb961"
+  },
+  "compiler": {
+    "flags": [
+      "/O2",
+      "/Ob1",
+      "/MT",
+      "/W3",
+      "/DWIN32",
+      "/DNDEBUG",
+      "/D_WINDOWS",
+      "/D_USRDLL"
+    ],
+    "wine_prefix": "/root/.ai-tmp/nemu-audio-rsp.3f9d460s/wine",
+    "tools": [
+      {
+        "path": "/root/nemu-decomp/toolchains/vc7/bin/cl.exe",
+        "sha256": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f"
+      },
+      {
+        "path": "/root/nemu-decomp/toolchains/vc7/bin/c1xx.dll",
+        "sha256": "30c3affd786752b4a037c4b4f035b7962d1fb5a335366e093bc73d0eb02e5558"
+      },
+      {
+        "path": "/root/nemu-decomp/toolchains/vc7/bin/c2.dll",
+        "sha256": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0"
+      },
+      {
+        "path": "/root/nemu-decomp/toolchains/vc7/bin/link.exe",
+        "sha256": "1560d85164dfb763dd13f90f33ff9c6f1cd80f2afada03eed8d0a314593581f1"
+      }
+    ],
+    "compile_log": {
+      "path": "/root/.ai-tmp/audio-rsp-spbank.pbyh2667/compile-bank.log",
+      "sha256": "92ff3afef067f24cd1c4d6d09b9a41de412ea2f8831143120cd98525e87739d8"
+    },
+    "command": [
+      "python3",
+      "/root/nemu-decomp/scripts/run_toolchain.py",
+      "vc7",
+      "cl",
+      "/nologo",
+      "/c",
+      "/O2",
+      "/Ob1",
+      "/MT",
+      "/W3",
+      "/DWIN32",
+      "/DNDEBUG",
+      "/D_WINDOWS",
+      "/D_USRDLL",
+      "/FoRSP.obj",
+      "RSP.cpp"
+    ],
+    "working_directory": "/root/.ai-tmp/audio-rsp-spbank.pbyh2667/bank"
+  },
+  "function_invariance": {
+    "functions_compared": 180,
+    "complete_materialized_bodies_unchanged": 180,
+    "raw_COFF_bodies_unchanged": 41,
+    "raw_COFF_changes": "The PC references now use a relocation to RSPHardware plus a 24-byte member addend. These legitimate relocation addends change raw COFF bytes; independently materialized effective addresses and every other byte remain identical.",
+    "comparison": {
+      "path": "/root/.ai-tmp/audio-rsp-spbank.pbyh2667/comparison.json",
+      "sha256": "4ab8d7d9ce61ce5920b5acced0b34477ef476ef344fe4bde8b0d301cb13016ce"
+    },
+    "baseline": {
+      "path": "/root/.ai-tmp/audio-rsp-spbank.pbyh2667/baseline-strict.json",
+      "sha256": "9ceb3e89058282e9db03f0842535a4e7ccc518559ef1c78411f1529ca8824b4a"
+    },
+    "candidate": {
+      "path": "/root/.ai-tmp/audio-rsp-spbank.pbyh2667/promoted-strict.json",
+      "sha256": "2cd3f72799e20e5c086901d8b98a8046d3514470037563a217c7ac794d077f0b"
+    },
+    "known_exact_functions": 148,
+    "known_unmatched_functions": 32,
+    "kernel_helpers_preserved": true,
+    "integrator_checker": {
+      "path": "/root/.ai-tmp/audio-rsp-spbank.pbyh2667/integrator-check.json",
+      "sha256": "30c0d8c9726ded1c1f170512a0eb233b60347f3f73092d0248f498452262166a"
+    },
+    "all_32_partial_bodies_unchanged": true
+  },
+  "data_invariance": {
+    "prior_typed_ranges_compared": 29,
+    "prior_typed_ranges_unchanged": 29,
+    "current_aggregate_objects_exact": 25,
+    "current_aggregate_objects_compared": 25,
+    "current_typed_fields_exact": 11,
+    "current_typed_fields_compared": 11,
+    "count_note": "Five former scalar objects are fields of one 32-byte bank: 29 - 5 + 1 = 25 aggregate objects. The field checks overlap their parents and are not additive byte coverage.",
+    "prior_ranges": [
+      {
+        "previous_symbol": "_RSPDMEM",
+        "current_field_or_symbol": "_RSPDMEM",
+        "size": 4,
+        "original_va": "0x1003F9B8",
+        "materialized_value_sha256": "43e7058cf6ef84d83477a961ee9d11dc4435312c2d513f9800ba39c8c97fefb5",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSPElementIndexMask",
+        "current_field_or_symbol": "_RSPElementIndexMask",
+        "size": 32,
+        "original_va": "0x1003F998",
+        "materialized_value_sha256": "73cf936bf010a66c8b3be7aa51c759a7f002bff21093329aa2caa736a06c37ff",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSPElementLaneMask",
+        "current_field_or_symbol": "_RSPElementLaneMask",
+        "size": 32,
+        "original_va": "0x1003F978",
+        "materialized_value_sha256": "c77b81398d5699209a0e9fbbc9d58669c920e73bdb045ab4cf6719dc96ae5686",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSP_VectorDispatch",
+        "current_field_or_symbol": "_RSP_VectorDispatch",
+        "size": 256,
+        "original_va": "0x1003F878",
+        "materialized_value_sha256": "53d1313c6cb6ebd6a520c4d65784cee22145f54bf9e7faee8cfa35cc140c737b",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSP_VectorStoreDispatch",
+        "current_field_or_symbol": "_RSP_VectorStoreDispatch",
+        "size": 128,
+        "original_va": "0x1003F7F8",
+        "materialized_value_sha256": "4b108c3970c349e4dc2d8a56031144291f9d6e2573191c40ff7932232b17ed3b",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSP_VectorLoadDispatch",
+        "current_field_or_symbol": "_RSP_VectorLoadDispatch",
+        "size": 128,
+        "original_va": "0x1003F778",
+        "materialized_value_sha256": "9029df9cc3391a67b7cc444b4485b4ae5bedb19b8ff176ff758ef5d3d3d576b5",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSP_Cop2Dispatch",
+        "current_field_or_symbol": "_RSP_Cop2Dispatch",
+        "size": 128,
+        "original_va": "0x1003F6F8",
+        "materialized_value_sha256": "9264a07a7b668fe6efafd72ede49ebb5709f3f7a40a9e06d33bcc32e443dc254",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSP_Cop0Dispatch",
+        "current_field_or_symbol": "_RSP_Cop0Dispatch",
+        "size": 128,
+        "original_va": "0x1003F678",
+        "materialized_value_sha256": "e4c1983186ecda5c33785d8e1b2d7b50bb36a8d25949fbf86b4f4900f60015db",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSP_RegImmDispatch",
+        "current_field_or_symbol": "_RSP_RegImmDispatch",
+        "size": 128,
+        "original_va": "0x1003F5F8",
+        "materialized_value_sha256": "2ed8bbb080e613c108affa192e4b03a8e58efd01c7a01ddf47d4983f3089139a",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSP_SpecialDispatch",
+        "current_field_or_symbol": "_RSP_SpecialDispatch",
+        "size": 256,
+        "original_va": "0x1003F4F8",
+        "materialized_value_sha256": "a4d55dc3e5fcb51b2631688920fea41b386873467156c9c7c852c13b9c9f486b",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSP_MainDispatch",
+        "current_field_or_symbol": "_RSP_MainDispatch",
+        "size": 256,
+        "original_va": "0x1003F3F8",
+        "materialized_value_sha256": "4dedec0b301d7f937aff396842ca80cf284dd64bc70953ae5200027a68cb6ae4",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSP_AudioMicrocodeImage",
+        "current_field_or_symbol": "_RSP_AudioMicrocodeImage",
+        "size": 4,
+        "original_va": "0x1003F3F0",
+        "materialized_value_sha256": "fa5313aa1924c4e454cd01b962c712bba8e857b290316cdc4660d57cc2fc7f10",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSP_AudioMicrocode",
+        "current_field_or_symbol": "_RSP_AudioMicrocode",
+        "size": 4096,
+        "original_va": "0x1003E3F0",
+        "materialized_value_sha256": "ee1e8acebc72c8b228cc40c23f0eb184d778f4f8b8857924d316b6f290150f55",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSPFastMode",
+        "current_field_or_symbol": "_RSPFastMode",
+        "size": 4,
+        "original_va": "0x10130118",
+        "materialized_value_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSPCompareCarry",
+        "current_field_or_symbol": "_RSPCompareCarry",
+        "size": 8,
+        "original_va": "0x10130110",
+        "materialized_value_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_SPMemory",
+        "current_field_or_symbol": "_SPMemory",
+        "size": 16384,
+        "original_va": "0x1012C110",
+        "materialized_value_sha256": "4fe7b59af6de3b665b67788cc2f99892ab827efae3a467342b3bb4e3bc8e5bfe",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSPAccumulator",
+        "current_field_or_symbol": "_RSPAccumulator",
+        "size": 64,
+        "original_va": "0x1012C0D0",
+        "materialized_value_sha256": "f5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSPMemoryAddress",
+        "current_field_or_symbol": "_RSPMemoryAddress",
+        "size": 4,
+        "original_va": "0x1012C0C8",
+        "materialized_value_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSPRegisters",
+        "current_field_or_symbol": "_RSPRegisters",
+        "size": 128,
+        "original_va": "0x1012C048",
+        "materialized_value_sha256": "38723a2e5e8a17aa7950dc008209944e898f69a7bd10a23c839d341e935fd5ca",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSPPC",
+        "current_field_or_symbol": "_RSPHardware.RSPPC",
+        "size": 4,
+        "original_va": "0x1012C03C",
+        "materialized_value_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSPWriteLengthReg",
+        "current_field_or_symbol": "_RSPHardware.RSPWriteLengthReg",
+        "size": 4,
+        "original_va": "0x1012C030",
+        "materialized_value_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSPReadLengthReg",
+        "current_field_or_symbol": "_RSPHardware.RSPReadLengthReg",
+        "size": 4,
+        "original_va": "0x1012C02C",
+        "materialized_value_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSPDramAddressReg",
+        "current_field_or_symbol": "_RSPHardware.RSPDramAddressReg",
+        "size": 4,
+        "original_va": "0x1012C028",
+        "materialized_value_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSPMemAddressReg",
+        "current_field_or_symbol": "_RSPHardware.RSPMemAddressReg",
+        "size": 4,
+        "original_va": "0x1012C024",
+        "materialized_value_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSPDelayPC",
+        "current_field_or_symbol": "_RSPDelayPC",
+        "size": 4,
+        "original_va": "0x1012C01C",
+        "materialized_value_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSPSavedPC",
+        "current_field_or_symbol": "_RSPSavedPC",
+        "size": 4,
+        "original_va": "0x1012C018",
+        "materialized_value_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSPVectors",
+        "current_field_or_symbol": "_RSPVectors",
+        "size": 512,
+        "original_va": "0x1012BE18",
+        "materialized_value_sha256": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_RSPControl",
+        "current_field_or_symbol": "_RSPControl",
+        "size": 20,
+        "original_va": "0x1012BE00",
+        "materialized_value_sha256": "de47c9b27eb8d300dbb5f2c353e632c393262cf06340c4fa7f1b40c4cbd36f90",
+        "unchanged": true
+      },
+      {
+        "previous_symbol": "_t_dewindow",
+        "current_field_or_symbol": "_t_dewindow",
+        "size": 2176,
+        "original_va": "0x1003DB70",
+        "materialized_value_sha256": "52c695ac3a77f57ebb82e12d2474f02ce47ab544ef0dc05d6ecdfc6d5e4ff100",
+        "unchanged": true
+      }
+    ],
+    "initialized_typed_bytes_exact": 7752,
+    "unresolved_relocations": 0
+  },
+  "native_link": {
+    "proof": {
+      "path": "/root/.ai-tmp/audio-rsp-spbank.pbyh2667/link-invariance.json",
+      "sha256": "a2f1dcb3f61a345381da9837ff76fe6139785958f4e1207962701d5733ddb585"
+    },
+    "all_function_entry_addresses_unchanged": true,
+    "code_and_initialized_data_residual_outside_real_relocation_fields": 0,
+    "layout": [
+      {
+        "name": "RSPControl",
+        "original_va": "0x1012BE00",
+        "linked_va": "0x1012BDA8",
+        "linked_displacement": -88,
+        "coff_offset": 0,
+        "original_relative_offset": 0,
+        "internal_missing_bytes_before_field": 0
+      },
+      {
+        "name": "RSPHardware",
+        "original_va": "0x1012C024",
+        "linked_va": "0x1012BFC8",
+        "linked_displacement": -92,
+        "coff_offset": 544,
+        "original_relative_offset": 548,
+        "internal_missing_bytes_before_field": 4
+      },
+      {
+        "name": "RSPPC",
+        "original_va": "0x1012C03C",
+        "linked_va": "0x1012BFE0",
+        "linked_displacement": -92,
+        "coff_offset": 568,
+        "original_relative_offset": 572,
+        "internal_missing_bytes_before_field": 4
+      },
+      {
+        "name": "RSPRegisters",
+        "original_va": "0x1012C048",
+        "linked_va": "0x1012BFE8",
+        "linked_displacement": -96,
+        "coff_offset": 576,
+        "original_relative_offset": 584,
+        "internal_missing_bytes_before_field": 8
+      },
+      {
+        "name": "RSPMemoryAddress",
+        "original_va": "0x1012C0C8",
+        "linked_va": "0x1012C068",
+        "linked_displacement": -96,
+        "coff_offset": 704,
+        "original_relative_offset": 712,
+        "internal_missing_bytes_before_field": 8
+      },
+      {
+        "name": "RSPAccumulator",
+        "original_va": "0x1012C0D0",
+        "linked_va": "0x1012C070",
+        "linked_displacement": -96,
+        "coff_offset": 712,
+        "original_relative_offset": 720,
+        "internal_missing_bytes_before_field": 8
+      },
+      {
+        "name": "SPMemory",
+        "original_va": "0x1012C110",
+        "linked_va": "0x1012C0B0",
+        "linked_displacement": -96,
+        "coff_offset": 776,
+        "original_relative_offset": 784,
+        "internal_missing_bytes_before_field": 8
+      },
+      {
+        "name": "RSPFastMode",
+        "original_va": "0x10130118",
+        "linked_va": "0x101300B8",
+        "linked_displacement": -96,
+        "coff_offset": 17168,
+        "original_relative_offset": 17176,
+        "internal_missing_bytes_before_field": 8
+      }
+    ],
+    "rsp_bss_before": 17164,
+    "rsp_bss_after": 17172,
+    "rsp_known_original_span": 17180,
+    "rsp_internal_deficit_before": 16,
+    "rsp_internal_deficit_after": 8,
+    "whole_dll_data_deficit_before": 448,
+    "whole_dll_data_deficit_after": 448,
+    "why_whole_extent_does_not_grow": "The eight-byte contribution growth moves following BSS symbols, but is absorbed by later natural COMMON alignment before AudioProfileCounters. The array stays at 0x10130580 in both links. No explicit alignment or padding was introduced.",
+    "alignment_anchor": {
+      "AttachedAudio_before": "0x10130560",
+      "AttachedAudio_after": "0x10130568",
+      "AudioProfileCounters_before": "0x10130580",
+      "AudioProfileCounters_after": "0x10130580"
+    }
+  },
+  "behavior_evidence": "No new behavior cases are claimed. All 180 complete original-address materialized native bodies and all 29 previously identified typed ranges are unchanged, preserving the existing behavior evidence.",
+  "limitations": [
+    "The three unused members remain cross-binary inferences, not recovered Audio source declarations.",
+    "The four-byte interval C020 remains unknown. Its absence also changes the later natural array alignment, leaving an eight-byte RSP contribution deficit.",
+    "Whole-DLL .data remains 448 bytes short in this frozen link. Other units and COMMON layout remain separate work.",
+    "32 native RSP function bodies remain unmatched."
+  ],
+  "scratch": "/root/.ai-tmp/audio-rsp-spbank.pbyh2667"
+}

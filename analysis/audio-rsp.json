@@ -21,8 +21,8 @@
   "source_sha256": {
     "RSP.cpp": "e2ebc258be25fca598896c4bc9639e24c61c859aaf34bab5682d034df2fd3a43",
     "RSPKernel.inc": "7a218993560c457a5149266e391a28fcdb0a1df5a812209c9a9b7111238eb961",
-    "RSPData.inc": "f7a6f57795b41b7203b63302205c50de7bbd459971f9d2974d9d12b1c74bbd4d",
-    "RSP.h": "9489748e5025a27cdcbcf9853751b72d0c6c73658ddb4d62893d3f40f297b7ab",
+    "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88",
+    "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
     "RSPMicrocode.inc": "12bae4d1c37884c7d5efbf13402d326bf46fafd0ee6064feff3fe0fdd8d2ee0c",
     "transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f"
   },
@@ -40,7 +40,8 @@
       "All 180 materialized native function hashes are unchanged from the earlier separate-unit reconstruction. The retained header table is restored before the guest program.",
       "The earlier C/C++ frontend comparison is historical evidence from its recorded source snapshot, not a whole-unit language control on this final organization.",
       "Signed lane indices recover the observed four-lane countdown loops in all twelve retained multiply functions. The code remains unmatched; two complete suffixes now match after their first 41 bytes.",
-      "Three-arm signed clamping in VMUDM, VMUDN and VMUDH recovers their complete suffixes after the first 41 bytes. Together with VMULF and VMUDL, five still-unmatched functions now have identical 25-byte entry residuals."
+      "Three-arm signed clamping in VMUDM, VMUDN and VMUDH recovers their complete suffixes after the first 41 bytes. Together with VMULF and VMUDL, five still-unmatched functions now have identical 25-byte entry residuals.",
+      "The five live SP hardware-register scalars are fields of an inferred eight-word bank matching the native Nemu layout. Status, Semaphore and Bist are explicitly inferred retained fields. This preserves all 180 materialized function hashes and all 29 earlier typed data ranges; the unidentified C020 interval remains unresolved."
     ],
     "invariance_evidence": "analysis/audio-rsp-organization.json",
     "language_control": "analysis/audio-rsp-language-control.json",
@@ -53,7 +54,8 @@
       "other_core_functions_unchanged": 175
     },
     "retained_multiply_refinement": "analysis/audio-rsp-multiply-refinement.json",
-    "retained_multiply_clamp_refinement": "analysis/audio-rsp-clamp-refinement.json"
+    "retained_multiply_clamp_refinement": "analysis/audio-rsp-clamp-refinement.json",
+    "sp_register_bank": "analysis/audio-rsp-sp-bank.json"
   },
   "coverage": {
     "start": "0x10013b10",
@@ -67,15 +69,18 @@
     "functions_exact": 148,
     "functions_compared": 180,
     "matching_function_bytes": 25696,
-    "typed_objects_exact": 29,
-    "typed_objects_compared": 29,
+    "typed_objects_exact": 25,
+    "typed_objects_compared": 25,
     "initialized_data_bytes": 7752,
-    "zero_initialized_object_bytes": 17152,
+    "zero_initialized_object_bytes": 17164,
     "unresolved_relocations": 0,
     "method": "Ordinary COFF DIR32 and REL32 relocations materialized using separately identified original targets. Every byte of each recorded span is compared; no masks or executable patches.",
-    "artifact": "/root/.ai-tmp/audio-rsp-signed-clamp.3br9fbl5/comparison.json",
-    "artifact_sha256": "532cd6868f785fde61fb730fcb6443f732ee8e650b6315e36745a357eb6b8b17",
-    "source_snapshot": "/root/.ai-tmp/audio-rsp-signed-clamp.3br9fbl5"
+    "artifact": "/root/.ai-tmp/audio-rsp-spbank.pbyh2667/promoted-strict.json",
+    "artifact_sha256": "2cd3f72799e20e5c086901d8b98a8046d3514470037563a217c7ac794d077f0b",
+    "source_snapshot": "/root/.ai-tmp/audio-rsp-spbank.pbyh2667/bank",
+    "typed_fields_exact": 11,
+    "typed_fields_compared": 11,
+    "object_count_note": "Five scalar objects became fields of one aggregate; all 29 prior typed ranges remain separately verified. Field checks overlap aggregates."
   },
   "functions": [
     {
@@ -2241,54 +2246,14 @@
       "candidate_materialized_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
     },
     {
-      "name": "RSPMemAddressReg",
-      "symbol": "_RSPMemAddressReg",
+      "name": "RSPHardware",
+      "symbol": "_RSPHardware",
       "va": 269664292,
-      "original_size": 4,
+      "original_size": 32,
       "exact": true,
       "zero_initialized": true,
-      "original_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
-      "candidate_materialized_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
-    },
-    {
-      "name": "RSPDramAddressReg",
-      "symbol": "_RSPDramAddressReg",
-      "va": 269664296,
-      "original_size": 4,
-      "exact": true,
-      "zero_initialized": true,
-      "original_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
-      "candidate_materialized_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
-    },
-    {
-      "name": "RSPReadLengthReg",
-      "symbol": "_RSPReadLengthReg",
-      "va": 269664300,
-      "original_size": 4,
-      "exact": true,
-      "zero_initialized": true,
-      "original_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
-      "candidate_materialized_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
-    },
-    {
-      "name": "RSPWriteLengthReg",
-      "symbol": "_RSPWriteLengthReg",
-      "va": 269664304,
-      "original_size": 4,
-      "exact": true,
-      "zero_initialized": true,
-      "original_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
-      "candidate_materialized_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
-    },
-    {
-      "name": "RSPPC",
-      "symbol": "_RSPPC",
-      "va": 269664316,
-      "original_size": 4,
-      "exact": true,
-      "zero_initialized": true,
-      "original_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
-      "candidate_materialized_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+      "original_sha256": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925",
+      "candidate_materialized_sha256": "66687aadf862bd776c8fc18b8e9f8e20089714856ee233b3902a591d0d5f2925"
     },
     {
       "name": "RSPRegisters",
@@ -2431,7 +2396,8 @@
     ],
     "organization_change": "The unit-organization checkpoint preserves all 180 earlier native hashes. The later signed-index refinement changes twelve unmatched functions and has 6144 new differential cases; all 168 other function hashes and 29 data hashes are unchanged. The later three-arm clamp refinement changes three of those unmatched functions and has 6144 additional native cases; all 177 other function hashes and 29 data hashes remain unchanged.",
     "current_code_cases": 149376,
-    "historical_superseded_cases": 3072
+    "historical_superseded_cases": 3072,
+    "sp_register_bank_change": "No native instruction semantics changed: all 180 complete materialized bodies and all 29 prior typed data ranges are preserved; see analysis/audio-rsp-sp-bank.json."
   },
   "shared_nemu_evidence": "analysis/audio-rsp-cross-image.json",
   "limitations": [
@@ -2442,5 +2408,117 @@
   "reproduction": [
     "python3 scripts/build_audio.py --work <scratch-under-~/.ai-tmp> --objects-only --unit RSP --report <scratch>/build.json",
     "python3 scripts/check_audio_rsp.py --object <build.json:work>/RSP.obj --report <scratch>/rsp-comparison.json"
+  ],
+  "fields": [
+    {
+      "name": "RSPFlags",
+      "parent_symbol": "_RSPControl",
+      "offset": 12,
+      "va": 269663756,
+      "original_size": 6,
+      "exact": true,
+      "original_sha256": "b0f66adc83641586656866813fd9dd0b8ebb63796075661ba45d1aa8089e1d44",
+      "candidate_materialized_sha256": "b0f66adc83641586656866813fd9dd0b8ebb63796075661ba45d1aa8089e1d44"
+    },
+    {
+      "name": "RSPCompareNotEqual",
+      "parent_symbol": "_RSPControl",
+      "offset": 4,
+      "va": 269663748,
+      "original_size": 8,
+      "exact": true,
+      "original_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+      "candidate_materialized_sha256": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc"
+    },
+    {
+      "name": "CPU_Instruction",
+      "parent_symbol": "_RSPControl",
+      "offset": 0,
+      "va": 269663744,
+      "original_size": 4,
+      "exact": true,
+      "original_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+      "candidate_materialized_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    {
+      "name": "RSPPC",
+      "parent_symbol": "_RSPHardware",
+      "offset": 24,
+      "va": 269664316,
+      "original_size": 4,
+      "exact": true,
+      "original_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+      "candidate_materialized_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    {
+      "name": "RSPWriteLengthReg",
+      "parent_symbol": "_RSPHardware",
+      "offset": 12,
+      "va": 269664304,
+      "original_size": 4,
+      "exact": true,
+      "original_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+      "candidate_materialized_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    {
+      "name": "RSPReadLengthReg",
+      "parent_symbol": "_RSPHardware",
+      "offset": 8,
+      "va": 269664300,
+      "original_size": 4,
+      "exact": true,
+      "original_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+      "candidate_materialized_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    {
+      "name": "RSPDramAddressReg",
+      "parent_symbol": "_RSPHardware",
+      "offset": 4,
+      "va": 269664296,
+      "original_size": 4,
+      "exact": true,
+      "original_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+      "candidate_materialized_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    {
+      "name": "RSPMemAddressReg",
+      "parent_symbol": "_RSPHardware",
+      "offset": 0,
+      "va": 269664292,
+      "original_size": 4,
+      "exact": true,
+      "original_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+      "candidate_materialized_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    {
+      "name": "RSPHardware.Status",
+      "parent_symbol": "_RSPHardware",
+      "offset": 16,
+      "va": 269664308,
+      "original_size": 4,
+      "exact": true,
+      "original_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+      "candidate_materialized_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    {
+      "name": "RSPHardware.Semaphore",
+      "parent_symbol": "_RSPHardware",
+      "offset": 20,
+      "va": 269664312,
+      "original_size": 4,
+      "exact": true,
+      "original_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+      "candidate_materialized_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    {
+      "name": "RSPHardware.Bist",
+      "parent_symbol": "_RSPHardware",
+      "offset": 28,
+      "va": 269664320,
+      "original_size": 4,
+      "exact": true,
+      "original_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+      "candidate_materialized_sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    }
   ]
 }

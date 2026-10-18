@@ -158,8 +158,31 @@ class Comparison:
                 row['canonical_name'], original, candidate, details,
                 symbol=symbol['name'], va=address,
                 zero_initialized=section['name'] == '.bss'))
+        fields = []
+        symbols_by_name = {symbol['name']: symbol for symbol in obj.symbols}
+        for field in self.document.get('fields', []):
+            symbol = symbols_by_name.get(field['parent_symbol'])
+            parent = self.app.get(field['parent_symbol'])
+            if symbol is None or parent is None or symbol['section'] <= 0:
+                continue
+            offset, size = integer(field['offset']), integer(field['size'])
+            address = integer(field['va'])
+            if (offset < 0 or offset + size > integer(parent['size'])
+                    or address != integer(parent['va']) + offset):
+                raise ValueError('field exceeds or disagrees with its typed parent')
+            section = obj.sections[symbol['section'] - 1]
+            start = symbol['value'] + offset
+            relocations = [dict(r, offset=r['offset'] - start)
+                           for r in section['relocations']
+                           if start <= r['offset'] < start + size]
+            candidate, details = self.relocated(
+                obj, section['data'][start:start + size], relocations, address)
+            fields.append(self.result(
+                field['name'], read_virtual(self.image, address, size), candidate,
+                details, parent_symbol=field['parent_symbol'], offset=offset,
+                va=address))
         return dict(object=str(path), object_sha256=sha(obj.data),
-                    functions=functions, data=data)
+                    functions=functions, data=data, fields=fields)
 
 
 def main():
@@ -171,6 +194,7 @@ def main():
     objects = [comparison.object(p) for p in args.object]
     functions = [r for obj in objects for r in obj['functions']]
     data = [r for obj in objects for r in obj['data']]
+    fields = [r for obj in objects for r in obj['fields']]
     report = dict(original=str(TARGET), original_sha256=sha(comparison.image.data),
                   metadata_sha256=sha(MAP.read_bytes()), diagnostic_only=True,
                   full_dll_byte_exact=False, objects=objects,
@@ -178,17 +202,18 @@ def main():
                   functions_exact=sum(r['exact'] for r in functions),
                   matching_function_bytes=sum(r['original_size'] for r in functions if r['exact']),
                   typed_objects_compared=len(data), typed_objects_exact=sum(r['exact'] for r in data),
+                  typed_fields_compared=len(fields), typed_fields_exact=sum(r['exact'] for r in fields),
                   initialized_data_bytes=sum(r['original_size'] for r in data
                                              if r['exact'] and not r['zero_initialized']),
                   zero_initialized_object_bytes=sum(r['original_size'] for r in data
                                                      if r['exact'] and r['zero_initialized']),
-                  unresolved=sum(r['unresolved'] for r in functions + data))
+                  unresolved=sum(r['unresolved'] for r in functions + data + fields))
     if args.report:
         args.report.write_text(json.dumps(report, indent=2) + '\n')
     print('%d/%d functions exact; %d matching bytes; %d/%d typed objects exact; %d unresolved relocations' % (
         report['functions_exact'], len(functions), report['matching_function_bytes'],
         report['typed_objects_exact'], len(data), report['unresolved']))
-    return 0 if all(r['exact'] for r in functions + data) else 1
+    return 0 if all(r['exact'] for r in functions + data + fields) else 1
 
 
 if __name__ == '__main__':

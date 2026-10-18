@@ -1,0 +1,908 @@
+{
+  "status": "read_only_storage_evidence_audit_no_application_changes",
+  "full_dll_byte_exact": false,
+  "original": {
+    "path": "/root/nemu-decomp/master/Plugin/audio.dll",
+    "sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808"
+  },
+  "cross_binary_original": {
+    "path": "/root/nemu-decomp/master/nemu64.exe",
+    "sha256": "794fdc8830c5c87d770926c67291c8140cd3660576d4f0ae1cc51742f3c7cc4a"
+  },
+  "frozen_fixture": {
+    "directory": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/12iubpcl/build",
+    "files": [
+      {
+        "path": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/12iubpcl/build/audio.dll",
+        "sha256": "b4e2a794463680fb2ecf321814cb65ffc4bfd0b6da96d0e60458b78091dc6307"
+      },
+      {
+        "path": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/12iubpcl/build/audio.map",
+        "sha256": "f85a8bd0834b7bfe6fbb6607fa6a48a489974c53458fe5540dfcaae7c90b85c4"
+      },
+      {
+        "path": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/12iubpcl/build/RSP.obj",
+        "sha256": "c6233e0f05e53935be46dbf47b90940b7c0b215e7b0c1cbd4b54a1afe85626aa"
+      },
+      {
+        "path": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/12iubpcl/build/RSP.cpp",
+        "sha256": "e2ebc258be25fca598896c4bc9639e24c61c859aaf34bab5682d034df2fd3a43"
+      },
+      {
+        "path": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/12iubpcl/build/RSP.h",
+        "sha256": "9489748e5025a27cdcbcf9853751b72d0c6c73658ddb4d62893d3f40f297b7ab"
+      },
+      {
+        "path": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/12iubpcl/build/RSPData.inc",
+        "sha256": "f7a6f57795b41b7203b63302205c50de7bbd459971f9d2974d9d12b1c74bbd4d"
+      },
+      {
+        "path": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/12iubpcl/build/RSPKernel.inc",
+        "sha256": "7a218993560c457a5149266e391a28fcdb0a1df5a812209c9a9b7111238eb961"
+      },
+      {
+        "path": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/12iubpcl/build/RSPMicrocode.inc",
+        "sha256": "12bae4d1c37884c7d5efbf13402d326bf46fafd0ee6064feff3fe0fdd8d2ee0c"
+      },
+      {
+        "path": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/12iubpcl/build/transform.h",
+        "sha256": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f"
+      }
+    ]
+  },
+  "summary": {
+    "whole_dll_data_virtual_size_original": 1279948,
+    "whole_dll_data_virtual_size_candidate": 1279500,
+    "whole_dll_data_virtual_deficit": 448,
+    "rsp_inherited_displacement": -88,
+    "known_rsp_original_span": 17180,
+    "rsp_coff_bss_size": 17164,
+    "rsp_internal_deficit": 16,
+    "inferred_retained_field_bytes": 12,
+    "unidentified_bytes_at_1012C020": 4,
+    "source_fields_added": 0
+  },
+  "known_bss_layout": [
+    {
+      "name": "RSPControl",
+      "original_va": "0x1012BE00",
+      "linked_va": "0x1012BDA8",
+      "size": 20,
+      "original_relative_offset": 0,
+      "coff_relative_offset": 0,
+      "linked_displacement": -88,
+      "internal_missing_bytes_before_object": 0
+    },
+    {
+      "name": "RSPVectors",
+      "original_va": "0x1012BE18",
+      "linked_va": "0x1012BDC0",
+      "size": 512,
+      "original_relative_offset": 24,
+      "coff_relative_offset": 24,
+      "linked_displacement": -88,
+      "internal_missing_bytes_before_object": 0
+    },
+    {
+      "name": "RSPSavedPC",
+      "original_va": "0x1012C018",
+      "linked_va": "0x1012BFC0",
+      "size": 4,
+      "original_relative_offset": 536,
+      "coff_relative_offset": 536,
+      "linked_displacement": -88,
+      "internal_missing_bytes_before_object": 0
+    },
+    {
+      "name": "RSPDelayPC",
+      "original_va": "0x1012C01C",
+      "linked_va": "0x1012BFC4",
+      "size": 4,
+      "original_relative_offset": 540,
+      "coff_relative_offset": 540,
+      "linked_displacement": -88,
+      "internal_missing_bytes_before_object": 0
+    },
+    {
+      "name": "RSPMemAddressReg",
+      "original_va": "0x1012C024",
+      "linked_va": "0x1012BFC8",
+      "size": 4,
+      "original_relative_offset": 548,
+      "coff_relative_offset": 544,
+      "linked_displacement": -92,
+      "internal_missing_bytes_before_object": 4
+    },
+    {
+      "name": "RSPDramAddressReg",
+      "original_va": "0x1012C028",
+      "linked_va": "0x1012BFCC",
+      "size": 4,
+      "original_relative_offset": 552,
+      "coff_relative_offset": 548,
+      "linked_displacement": -92,
+      "internal_missing_bytes_before_object": 4
+    },
+    {
+      "name": "RSPReadLengthReg",
+      "original_va": "0x1012C02C",
+      "linked_va": "0x1012BFD0",
+      "size": 4,
+      "original_relative_offset": 556,
+      "coff_relative_offset": 552,
+      "linked_displacement": -92,
+      "internal_missing_bytes_before_object": 4
+    },
+    {
+      "name": "RSPWriteLengthReg",
+      "original_va": "0x1012C030",
+      "linked_va": "0x1012BFD4",
+      "size": 4,
+      "original_relative_offset": 560,
+      "coff_relative_offset": 556,
+      "linked_displacement": -92,
+      "internal_missing_bytes_before_object": 4
+    },
+    {
+      "name": "RSPPC",
+      "original_va": "0x1012C03C",
+      "linked_va": "0x1012BFD8",
+      "size": 4,
+      "original_relative_offset": 572,
+      "coff_relative_offset": 560,
+      "linked_displacement": -100,
+      "internal_missing_bytes_before_object": 12
+    },
+    {
+      "name": "RSPRegisters",
+      "original_va": "0x1012C048",
+      "linked_va": "0x1012BFE0",
+      "size": 128,
+      "original_relative_offset": 584,
+      "coff_relative_offset": 568,
+      "linked_displacement": -104,
+      "internal_missing_bytes_before_object": 16
+    },
+    {
+      "name": "RSPMemoryAddress",
+      "original_va": "0x1012C0C8",
+      "linked_va": "0x1012C060",
+      "size": 4,
+      "original_relative_offset": 712,
+      "coff_relative_offset": 696,
+      "linked_displacement": -104,
+      "internal_missing_bytes_before_object": 16
+    },
+    {
+      "name": "RSPAccumulator",
+      "original_va": "0x1012C0D0",
+      "linked_va": "0x1012C068",
+      "size": 64,
+      "original_relative_offset": 720,
+      "coff_relative_offset": 704,
+      "linked_displacement": -104,
+      "internal_missing_bytes_before_object": 16
+    },
+    {
+      "name": "SPMemory",
+      "original_va": "0x1012C110",
+      "linked_va": "0x1012C0A8",
+      "size": 16384,
+      "original_relative_offset": 784,
+      "coff_relative_offset": 768,
+      "linked_displacement": -104,
+      "internal_missing_bytes_before_object": 16
+    },
+    {
+      "name": "RSPCompareCarry",
+      "original_va": "0x10130110",
+      "linked_va": "0x101300A8",
+      "size": 8,
+      "original_relative_offset": 17168,
+      "coff_relative_offset": 17152,
+      "linked_displacement": -104,
+      "internal_missing_bytes_before_object": 16
+    },
+    {
+      "name": "RSPFastMode",
+      "original_va": "0x10130118",
+      "linked_va": "0x101300B0",
+      "size": 4,
+      "original_relative_offset": 17176,
+      "coff_relative_offset": 17160,
+      "linked_displacement": -104,
+      "internal_missing_bytes_before_object": 16
+    }
+  ],
+  "missing_intervals": [
+    {
+      "original_va": "0x1012C020",
+      "size": 4,
+      "description": "No source identity recovered. Neither a new delay/status variable nor padding is asserted.",
+      "classification": "unresolved",
+      "highlow_references_to_any_byte": [],
+      "raw_pointer_value_occurrences_by_byte_address": {
+        "0x1012C020": 0,
+        "0x1012C021": 0,
+        "0x1012C022": 0,
+        "0x1012C023": 0
+      }
+    },
+    {
+      "original_va": "0x1012C034",
+      "size": 4,
+      "description": "Inferred SP status field, corresponding to Nemu SPReg +16.",
+      "classification": "cross_binary_structural_inference",
+      "highlow_references_to_any_byte": [],
+      "raw_pointer_value_occurrences_by_byte_address": {
+        "0x1012C034": 0,
+        "0x1012C035": 0,
+        "0x1012C036": 0,
+        "0x1012C037": 0
+      }
+    },
+    {
+      "original_va": "0x1012C038",
+      "size": 4,
+      "description": "Inferred SP semaphore field, corresponding to Nemu SPReg +20.",
+      "classification": "cross_binary_structural_inference",
+      "highlow_references_to_any_byte": [],
+      "raw_pointer_value_occurrences_by_byte_address": {
+        "0x1012C038": 0,
+        "0x1012C039": 0,
+        "0x1012C03A": 0,
+        "0x1012C03B": 0
+      }
+    },
+    {
+      "original_va": "0x1012C040",
+      "size": 4,
+      "description": "Inferred SP BIST field, corresponding to Nemu SPReg +28.",
+      "classification": "cross_binary_structural_inference",
+      "highlow_references_to_any_byte": [],
+      "raw_pointer_value_occurrences_by_byte_address": {
+        "0x1012C040": 0,
+        "0x1012C041": 0,
+        "0x1012C042": 0,
+        "0x1012C043": 0
+      }
+    },
+    {
+      "original_va": "0x1012C044",
+      "size": 4,
+      "description": "Consistent with natural 8-byte alignment before the 128-byte scalar-register array; no independent object is required.",
+      "classification": "compiler_alignment_supported",
+      "highlow_references_to_any_byte": [],
+      "raw_pointer_value_occurrences_by_byte_address": {
+        "0x1012C044": 0,
+        "0x1012C045": 0,
+        "0x1012C046": 0,
+        "0x1012C047": 0
+      }
+    }
+  ],
+  "native_bank_evidence": {
+    "nemu_bank_base": "0x03E69534",
+    "audio_bank_base_inferred": "0x1012C024",
+    "bank_extent": 32,
+    "fields": [
+      {
+        "inferred_name": "MemAddress",
+        "offset": 0,
+        "nemu_va": "0x03E69534",
+        "audio_va": "0x1012C024",
+        "audio_live_reference_known": true
+      },
+      {
+        "inferred_name": "DramAddress",
+        "offset": 4,
+        "nemu_va": "0x03E69538",
+        "audio_va": "0x1012C028",
+        "audio_live_reference_known": true
+      },
+      {
+        "inferred_name": "ReadLength",
+        "offset": 8,
+        "nemu_va": "0x03E6953C",
+        "audio_va": "0x1012C02C",
+        "audio_live_reference_known": true
+      },
+      {
+        "inferred_name": "WriteLength",
+        "offset": 12,
+        "nemu_va": "0x03E69540",
+        "audio_va": "0x1012C030",
+        "audio_live_reference_known": true
+      },
+      {
+        "inferred_name": "Status",
+        "offset": 16,
+        "nemu_va": "0x03E69544",
+        "audio_va": "0x1012C034",
+        "audio_live_reference_known": false
+      },
+      {
+        "inferred_name": "Semaphore",
+        "offset": 20,
+        "nemu_va": "0x03E69548",
+        "audio_va": "0x1012C038",
+        "audio_live_reference_known": false
+      },
+      {
+        "inferred_name": "PC",
+        "offset": 24,
+        "nemu_va": "0x03E6954C",
+        "audio_va": "0x1012C03C",
+        "audio_live_reference_known": true
+      },
+      {
+        "inferred_name": "Bist",
+        "offset": 28,
+        "nemu_va": "0x03E69550",
+        "audio_va": "0x1012C040",
+        "audio_live_reference_known": false
+      }
+    ],
+    "read_dispatch_instructions": [
+      {
+        "va": "0x0041758E",
+        "bytes": "3d00000404",
+        "instruction": "cmp eax, 0x4040000"
+      },
+      {
+        "va": "0x00417593",
+        "bytes": "0f8286000000",
+        "instruction": "jb 0x41761f"
+      },
+      {
+        "va": "0x00417599",
+        "bytes": "3d1c000404",
+        "instruction": "cmp eax, 0x404001c"
+      },
+      {
+        "va": "0x0041759E",
+        "bytes": "777f",
+        "instruction": "ja 0x41761f"
+      },
+      {
+        "va": "0x004175A0",
+        "bytes": "8d880000fcfb",
+        "instruction": "lea ecx, [eax - 0x4040000]"
+      },
+      {
+        "va": "0x004175A6",
+        "bytes": "83f91c",
+        "instruction": "cmp ecx, 0x1c"
+      },
+      {
+        "va": "0x004175A9",
+        "bytes": "7774",
+        "instruction": "ja 0x41761f"
+      },
+      {
+        "va": "0x004175AB",
+        "bytes": "0fb68938794100",
+        "instruction": "movzx ecx, byte ptr [ecx + 0x417938]"
+      },
+      {
+        "va": "0x004175B2",
+        "bytes": "ff248d14794100",
+        "instruction": "jmp dword ptr [ecx*4 + 0x417914]"
+      }
+    ],
+    "read_dispatch_cases": [
+      {
+        "hardware_address": "0x04040000",
+        "byte_table_index": 0,
+        "native_target": "0x004175B9",
+        "first_instructions": [
+          {
+            "va": "0x004175B9",
+            "bytes": "a13495e603",
+            "instruction": "mov eax, dword ptr [0x3e69534]"
+          },
+          {
+            "va": "0x004175BE",
+            "bytes": "5e",
+            "instruction": "pop esi"
+          },
+          {
+            "va": "0x004175BF",
+            "bytes": "59",
+            "instruction": "pop ecx"
+          },
+          {
+            "va": "0x004175C0",
+            "bytes": "c20400",
+            "instruction": "ret 4"
+          }
+        ]
+      },
+      {
+        "hardware_address": "0x04040004",
+        "byte_table_index": 1,
+        "native_target": "0x004175C3",
+        "first_instructions": [
+          {
+            "va": "0x004175C3",
+            "bytes": "a13895e603",
+            "instruction": "mov eax, dword ptr [0x3e69538]"
+          },
+          {
+            "va": "0x004175C8",
+            "bytes": "5e",
+            "instruction": "pop esi"
+          },
+          {
+            "va": "0x004175C9",
+            "bytes": "59",
+            "instruction": "pop ecx"
+          },
+          {
+            "va": "0x004175CA",
+            "bytes": "c20400",
+            "instruction": "ret 4"
+          }
+        ]
+      },
+      {
+        "hardware_address": "0x04040008",
+        "byte_table_index": 2,
+        "native_target": "0x004175CD",
+        "first_instructions": [
+          {
+            "va": "0x004175CD",
+            "bytes": "a13c95e603",
+            "instruction": "mov eax, dword ptr [0x3e6953c]"
+          },
+          {
+            "va": "0x004175D2",
+            "bytes": "5e",
+            "instruction": "pop esi"
+          },
+          {
+            "va": "0x004175D3",
+            "bytes": "59",
+            "instruction": "pop ecx"
+          },
+          {
+            "va": "0x004175D4",
+            "bytes": "c20400",
+            "instruction": "ret 4"
+          }
+        ]
+      },
+      {
+        "hardware_address": "0x0404000C",
+        "byte_table_index": 3,
+        "native_target": "0x004175D7",
+        "first_instructions": [
+          {
+            "va": "0x004175D7",
+            "bytes": "a14095e603",
+            "instruction": "mov eax, dword ptr [0x3e69540]"
+          },
+          {
+            "va": "0x004175DC",
+            "bytes": "5e",
+            "instruction": "pop esi"
+          },
+          {
+            "va": "0x004175DD",
+            "bytes": "59",
+            "instruction": "pop ecx"
+          },
+          {
+            "va": "0x004175DE",
+            "bytes": "c20400",
+            "instruction": "ret 4"
+          }
+        ]
+      },
+      {
+        "hardware_address": "0x04040010",
+        "byte_table_index": 4,
+        "native_target": "0x004175E1",
+        "first_instructions": [
+          {
+            "va": "0x004175E1",
+            "bytes": "a14495e603",
+            "instruction": "mov eax, dword ptr [0x3e69544]"
+          },
+          {
+            "va": "0x004175E6",
+            "bytes": "5e",
+            "instruction": "pop esi"
+          },
+          {
+            "va": "0x004175E7",
+            "bytes": "59",
+            "instruction": "pop ecx"
+          },
+          {
+            "va": "0x004175E8",
+            "bytes": "c20400",
+            "instruction": "ret 4"
+          }
+        ]
+      },
+      {
+        "hardware_address": "0x04040014",
+        "byte_table_index": 5,
+        "native_target": "0x004175EB",
+        "first_instructions": [
+          {
+            "va": "0x004175EB",
+            "bytes": "a14495e603",
+            "instruction": "mov eax, dword ptr [0x3e69544]"
+          },
+          {
+            "va": "0x004175F0",
+            "bytes": "c1e803",
+            "instruction": "shr eax, 3"
+          },
+          {
+            "va": "0x004175F3",
+            "bytes": "83e001",
+            "instruction": "and eax, 1"
+          },
+          {
+            "va": "0x004175F6",
+            "bytes": "5e",
+            "instruction": "pop esi"
+          }
+        ]
+      },
+      {
+        "hardware_address": "0x04040018",
+        "byte_table_index": 6,
+        "native_target": "0x004175FB",
+        "first_instructions": [
+          {
+            "va": "0x004175FB",
+            "bytes": "a14495e603",
+            "instruction": "mov eax, dword ptr [0x3e69544]"
+          },
+          {
+            "va": "0x00417600",
+            "bytes": "c1e802",
+            "instruction": "shr eax, 2"
+          },
+          {
+            "va": "0x00417603",
+            "bytes": "83e001",
+            "instruction": "and eax, 1"
+          },
+          {
+            "va": "0x00417606",
+            "bytes": "5e",
+            "instruction": "pop esi"
+          }
+        ]
+      },
+      {
+        "hardware_address": "0x0404001C",
+        "byte_table_index": 7,
+        "native_target": "0x0041760B",
+        "first_instructions": [
+          {
+            "va": "0x0041760B",
+            "bytes": "a14895e603",
+            "instruction": "mov eax, dword ptr [0x3e69548]"
+          },
+          {
+            "va": "0x00417610",
+            "bytes": "c7054895e60301000000",
+            "instruction": "mov dword ptr [0x3e69548], 1"
+          },
+          {
+            "va": "0x0041761A",
+            "bytes": "5e",
+            "instruction": "pop esi"
+          },
+          {
+            "va": "0x0041761B",
+            "bytes": "59",
+            "instruction": "pop ecx"
+          }
+        ]
+      }
+    ],
+    "pc_and_bist_direct_cases": [
+      {
+        "va": "0x00417467",
+        "bytes": "3d00000804",
+        "instruction": "cmp eax, 0x4080000"
+      },
+      {
+        "va": "0x0041746C",
+        "bytes": "750a",
+        "instruction": "jne 0x417478"
+      },
+      {
+        "va": "0x0041746E",
+        "bytes": "a14c95e603",
+        "instruction": "mov eax, dword ptr [0x3e6954c]"
+      },
+      {
+        "va": "0x00417473",
+        "bytes": "5e",
+        "instruction": "pop esi"
+      },
+      {
+        "va": "0x00417474",
+        "bytes": "59",
+        "instruction": "pop ecx"
+      },
+      {
+        "va": "0x00417475",
+        "bytes": "c20400",
+        "instruction": "ret 4"
+      },
+      {
+        "va": "0x00417478",
+        "bytes": "3d04000804",
+        "instruction": "cmp eax, 0x4080004"
+      },
+      {
+        "va": "0x0041747D",
+        "bytes": "750a",
+        "instruction": "jne 0x417489"
+      },
+      {
+        "va": "0x0041747F",
+        "bytes": "a15095e603",
+        "instruction": "mov eax, dword ptr [0x3e69550]"
+      },
+      {
+        "va": "0x00417484",
+        "bytes": "5e",
+        "instruction": "pop esi"
+      },
+      {
+        "va": "0x00417485",
+        "bytes": "59",
+        "instruction": "pop ecx"
+      },
+      {
+        "va": "0x00417486",
+        "bytes": "c20400",
+        "instruction": "ret 4"
+      }
+    ],
+    "status_write_examples": [
+      {
+        "va": "0x004181A1",
+        "bytes": "8b450c",
+        "instruction": "mov eax, dword ptr [ebp + 0xc]"
+      },
+      {
+        "va": "0x004181A4",
+        "bytes": "a801",
+        "instruction": "test al, 1"
+      },
+      {
+        "va": "0x004181A6",
+        "bytes": "7407",
+        "instruction": "je 0x4181af"
+      },
+      {
+        "va": "0x004181A8",
+        "bytes": "83254495e603fe",
+        "instruction": "and dword ptr [0x3e69544], 0xfffffffe"
+      },
+      {
+        "va": "0x004181AF",
+        "bytes": "a802",
+        "instruction": "test al, 2"
+      },
+      {
+        "va": "0x004181B1",
+        "bytes": "7407",
+        "instruction": "je 0x4181ba"
+      },
+      {
+        "va": "0x004181B3",
+        "bytes": "830d4495e60301",
+        "instruction": "or dword ptr [0x3e69544], 1"
+      },
+      {
+        "va": "0x004181BA",
+        "bytes": "a804",
+        "instruction": "test al, 4"
+      },
+      {
+        "va": "0x004181BC",
+        "bytes": "7407",
+        "instruction": "je 0x4181c5"
+      },
+      {
+        "va": "0x004181BE",
+        "bytes": "83254495e603fd",
+        "instruction": "and dword ptr [0x3e69544], 0xfffffffd"
+      }
+    ],
+    "semaphore_write": [
+      {
+        "va": "0x0041851D",
+        "bytes": "8b450c",
+        "instruction": "mov eax, dword ptr [ebp + 0xc]"
+      },
+      {
+        "va": "0x00418520",
+        "bytes": "85c0",
+        "instruction": "test eax, eax"
+      },
+      {
+        "va": "0x00418522",
+        "bytes": "0f85150e0000",
+        "instruction": "jne 0x41933d"
+      },
+      {
+        "va": "0x00418528",
+        "bytes": "c7054895e60300000000",
+        "instruction": "mov dword ptr [0x3e69548], 0"
+      }
+    ],
+    "bist_write": [
+      {
+        "va": "0x0041856F",
+        "bytes": "81fe04000804",
+        "instruction": "cmp esi, 0x4080004"
+      },
+      {
+        "va": "0x00418575",
+        "bytes": "751c",
+        "instruction": "jne 0x418593"
+      },
+      {
+        "va": "0x00418577",
+        "bytes": "8b550c",
+        "instruction": "mov edx, dword ptr [ebp + 0xc]"
+      },
+      {
+        "va": "0x0041857A",
+        "bytes": "89155095e603",
+        "instruction": "mov dword ptr [0x3e69550], edx"
+      }
+    ],
+    "full_read_write_reference_inventory": {
+      "path": "/root/.ai-tmp/audio-rsp-storage.glepdleb/nemu-memory-sp-native-refs.json",
+      "sha256": "001fe5222811d3a9164b5b7d206afdea5aad084a74265efe8ee6aca95065dfae"
+    },
+    "caveat": "The Nemu field meanings are anchored in native hardware-access behavior. Their presence in unused Audio slots is an inference from the identical eight-word layout, not a recovered original declaration or original symbol spelling."
+  },
+  "alignment_control": {
+    "source": {
+      "path": "/root/.ai-tmp/audio-rsp-storage.glepdleb/alignment.cpp",
+      "sha256": "ea68024234105cb88131324b5df7be61000c81a26008b83e7a4d47997c75c443"
+    },
+    "source_text": "struct SPRegisters {\n    unsigned MemAddress, DramAddress, ReadLength, WriteLength;\n    unsigned Status, Semaphore, PC, Bist;\n};\nunsigned Before = 0;\nSPRegisters Bank = {0};\nunsigned Registers[32] = {0};\nunsigned After = 0;\n",
+    "object": {
+      "path": "/root/.ai-tmp/audio-rsp-storage.glepdleb/alignment.obj",
+      "sha256": "7fa3c40f0a14c1e8a9b10f5289f16f5d8a45ff373004eb75445ee03fd9050ad9"
+    },
+    "flags": [
+      "/c",
+      "/O2",
+      "/Ob1",
+      "/MT"
+    ],
+    "toolchain": "VC7 native C++",
+    "symbol_offsets": {
+      "?After@@3IA": 168,
+      "?Registers@@3PAIA": 40,
+      "?Bank@@3USPRegisters@@A": 4,
+      "?Before@@3IA": 0
+    },
+    "finding": "A naturally aligned eight-unsigned SPRegisters aggregate begins at offset 4, ends at offset 36, and the 32-unsigned array begins at offset 40. This exactly permits the Audio bank C024..C044 followed by array C048, without a C044 object. The scalar at C020 still cannot be attributed to this alignment.",
+    "layout_caveat": "Adding only the three inferred four-byte fields to the current independent definitions would also change subsequent natural alignment. Their 12 bytes of semantic storage do not by themselves prove a 12-byte increase in the full contribution; the unresolved preceding four bytes still prevent exact layout."
+  },
+  "initialized_data": {
+    "original_contribution_start": "0x1003DB70",
+    "original_contribution_end": "0x1003F9BC",
+    "coff_data_size": 7756,
+    "original_contribution_size": 7756,
+    "typed_initialized_bytes": 7752,
+    "natural_alignment_gap": {
+      "start": "0x1003F3F4",
+      "size": 4
+    },
+    "actual_linked_raw_checks": [
+      {
+        "name": "AMP header table, copy 14",
+        "original_va": "0x1003DB70",
+        "linked_va": "0x1003DB70",
+        "size": 2176,
+        "raw_bytes_equal": true,
+        "original_sha256": "52c695ac3a77f57ebb82e12d2474f02ce47ab544ef0dc05d6ecdfc6d5e4ff100",
+        "linked_sha256": "52c695ac3a77f57ebb82e12d2474f02ce47ab544ef0dc05d6ecdfc6d5e4ff100"
+      },
+      {
+        "name": "Guest microcode program",
+        "original_va": "0x1003E3F0",
+        "linked_va": "0x1003E3F0",
+        "size": 4096,
+        "raw_bytes_equal": true,
+        "original_sha256": "ee1e8acebc72c8b228cc40c23f0eb184d778f4f8b8857924d316b6f290150f55",
+        "linked_sha256": "ee1e8acebc72c8b228cc40c23f0eb184d778f4f8b8857924d316b6f290150f55"
+      },
+      {
+        "name": "Vector lane/index masks",
+        "original_va": "0x1003F978",
+        "linked_va": "0x1003F978",
+        "size": 64,
+        "raw_bytes_equal": true,
+        "original_sha256": "c2b48ed6a9583a283a0602a6d135a75a9ffa788dbefe020956c0d5ecfaccdc06",
+        "linked_sha256": "c2b48ed6a9583a283a0602a6d135a75a9ffa788dbefe020956c0d5ecfaccdc06"
+      }
+    ],
+    "dispatch_table_pointers": "The eight tables have 352 function entries. Original-address materialization of all typed objects is exact; actual linked function-pointer values remain dependent on unmatched code placement and are not claimed raw-equal.",
+    "object_verification": {
+      "report": {
+        "path": "/root/.ai-tmp/audio-rsp-storage.glepdleb/rsp-strict.json",
+        "sha256": "c2013b6ac2409bca0f030441880e4b190e92802872a4ecf260ce6d4cff21a5c2"
+      },
+      "functions_exact": 148,
+      "functions_compared": 180,
+      "matching_function_bytes": 25696,
+      "typed_objects_exact": 29,
+      "typed_objects_compared": 29,
+      "unresolved": 0
+    }
+  },
+  "historical_source_search": {
+    "repository": "https://github.com/purplemarshmallow/Nemu64",
+    "revision": "8797c4f5fff117a366ef330b0fe1a7918dc3f272",
+    "tree": {
+      "path": "/root/.ai-tmp/audio-rsp-storage.glepdleb/upstream-tree.json",
+      "sha256": "b9dc2f87f9451b847ee5d9d0f701442ccbb570e8be5bbc13c321d33200a02700"
+    },
+    "files": [
+      {
+        "url": "https://raw.githubusercontent.com/purplemarshmallow/Nemu64/8797c4f5fff117a366ef330b0fe1a7918dc3f272/Source/lemd3d/globals.h",
+        "file": "/root/.ai-tmp/audio-rsp-storage.glepdleb/globals.h",
+        "sha256": "bbd263956e2fe1df6f75119f75ccaed77f0971b24f3870e8116c382483879cf6"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/purplemarshmallow/Nemu64/8797c4f5fff117a366ef330b0fe1a7918dc3f272/Source/lemd3d/dllinterface.h",
+        "file": "/root/.ai-tmp/audio-rsp-storage.glepdleb/dllinterface.h",
+        "sha256": "5ab54d7f0f3c1a6991d6ee276c915441ae7ed61c7c9ce60ad0a76ab2e62525f9"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/purplemarshmallow/Nemu64/8797c4f5fff117a366ef330b0fe1a7918dc3f272/Source/lemd3d/StdAfx.h",
+        "file": "/root/.ai-tmp/audio-rsp-storage.glepdleb/StdAfx.h",
+        "sha256": "a92fe7e9664831ac15f3c909af520222eb2b3febbeec0c555991ab382c2d514b"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/purplemarshmallow/Nemu64/8797c4f5fff117a366ef330b0fe1a7918dc3f272/Source/lemd3d/LemNemu.cpp",
+        "file": "/root/.ai-tmp/audio-rsp-storage.glepdleb/LemNemu.cpp",
+        "sha256": "d543a378c845d11a4de047a768c461320c7aaf52e619a0ebf71d3c95fc6ef934"
+      }
+    ],
+    "result": "The examined public repository supplies the graphics source and did not identify the Audio interpreter storage. No historical source name was recovered for C020 or the three inferred SP fields."
+  },
+  "limitations": [
+    "No original Audio declaration, symbol name, or nonzero initialization proves the inferred Status, Semaphore, and Bist slots. The names and grouping are inferred from the native Nemu counterpart.",
+    "No HIGHLOW relocation or raw DWORD pointer occurrence targets any byte of the five audited holes. This does not exclude access through an indirectly obtained aggregate base.",
+    "C020 remains unresolved. It must not be filled with an invented status/delay variable or opaque padding merely to match section size.",
+    "DMA busy/full are read from bits of the Nemu Status field. They are not evidence for two additional retained Audio globals.",
+    "This audit neither changes application source nor improves the 148/180 function matching result. It does not claim full DLL equality."
+  ],
+  "reproduction": {
+    "generator": "/root/.ai-tmp/audio-rsp-storage.glepdleb/make_report.py",
+    "strict_command": [
+      "python3",
+      "scripts/check_audio_rsp.py",
+      "--object",
+      "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/12iubpcl/build/RSP.obj",
+      "--report",
+      "/root/.ai-tmp/audio-rsp-storage.glepdleb/rsp-strict.json"
+    ],
+    "reference_scan": {
+      "path": "/root/.ai-tmp/audio-rsp-storage.glepdleb/original-highlow-references.json",
+      "sha256": "9179a1e7797127648a828635a9e4b7a81d3c45a48ab200846692942df8c8a55f"
+    }
+  },
+  "snapshot_scope": "Frozen read-only audit before the SP register bank promotion. These source/layout counts describe fixture12iubpcl. See analysis/audio-rsp-sp-bank.json for the subsequent supported source change."
+}

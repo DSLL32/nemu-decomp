@@ -24,8 +24,22 @@ typedef union RSPAccumulatorView {
  struct { CpuS64 Value:48; } Full;
  struct { CpuS64 Low:16, Value:32; } Middle;
 } RSPAccumulatorView;
-extern CpuU32 RSPPC, RSPSavedPC, RSPDelayPC, RSPMemoryAddress;
-extern CpuU32 RSPMemAddressReg, RSPDramAddressReg, RSPReadLengthReg, RSPWriteLengthReg;
+extern CpuU32 RSPSavedPC, RSPDelayPC, RSPMemoryAddress;
+// Inferred SP register bank at original 0x1012C024. The live fields occur at
+// the same offsets as Nemu's native eight-word SP bank. Status, Semaphore,
+// and Bist are retained-field inferences; Audio has no surviving accesses.
+typedef struct RSPHardwareRegisters {
+    CpuU32 MemAddress, DramAddress, ReadLength, WriteLength;
+    CpuU32 Status, Semaphore, ProgramCounter, Bist;
+} RSPHardwareRegisters;
+typedef char RSPHardwareRegistersSizeCheck[sizeof(RSPHardwareRegisters) == 32 ? 1 : -1];
+typedef char RSPHardwarePCOffset[offsetof(RSPHardwareRegisters, ProgramCounter) == 24 ? 1 : -1];
+extern RSPHardwareRegisters RSPHardware;
+#define RSPMemAddressReg RSPHardware.MemAddress
+#define RSPDramAddressReg RSPHardware.DramAddress
+#define RSPReadLengthReg RSPHardware.ReadLength
+#define RSPWriteLengthReg RSPHardware.WriteLength
+#define RSPPC RSPHardware.ProgramCounter
 extern CpuU32 RSPRegisters[32];
 // Inferred control-state object: native accesses establish fields at 0/4/12.
 // Keeping these related fields together preserves the original native compiler's
