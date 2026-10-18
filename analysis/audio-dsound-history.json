@@ -269,5 +269,300 @@
       "Windows/DirectSound declarations use the tracked VC6 SDK headers; this is a diagnostic source hypothesis, not a complete historical rebuild.",
       "No compiler option, volatile qualifier or alternative source body was promoted from these probes."
     ]
+  },
+  "zero_fill_helper_audit": {
+    "scope": "Historical native sibling comparison and archived source search for independently supported fill-helper boundaries; no assembly source hypothesis was introduced.",
+    "native_clear_routines": [
+      {
+        "path": "/root/nemu-decomp/master/Plugin/audio.dll",
+        "sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+        "routine_va": "0x100043e0",
+        "routine_bytes": 48,
+        "routine_sha256": "bff35096f74f6715c72767dfdee70113928776f4c5fa39c7c51fd660dca82e01",
+        "fill_prefix_bytes": 25,
+        "fill_prefix_sha256": "ecedd7100b17186dd271adbea7cbbc0167d60b96e97818988989fc31419b88d1",
+        "instructions": [
+          {
+            "offset": 0,
+            "mnemonic": "mov",
+            "operands": "ecx, dword ptr [esp + 8]"
+          },
+          {
+            "offset": 4,
+            "mnemonic": "mov",
+            "operands": "edx, ecx"
+          },
+          {
+            "offset": 6,
+            "mnemonic": "push",
+            "operands": "edi"
+          },
+          {
+            "offset": 7,
+            "mnemonic": "mov",
+            "operands": "edi, dword ptr [esp + 8]"
+          },
+          {
+            "offset": 11,
+            "mnemonic": "shr",
+            "operands": "ecx, 2"
+          },
+          {
+            "offset": 14,
+            "mnemonic": "xor",
+            "operands": "eax, eax"
+          },
+          {
+            "offset": 16,
+            "mnemonic": "rep stosd",
+            "operands": "dword ptr es:[edi], eax"
+          },
+          {
+            "offset": 18,
+            "mnemonic": "mov",
+            "operands": "ecx, edx"
+          },
+          {
+            "offset": 20,
+            "mnemonic": "and",
+            "operands": "ecx, 3"
+          },
+          {
+            "offset": 23,
+            "mnemonic": "rep stosb",
+            "operands": "byte ptr es:[edi], al"
+          },
+          {
+            "offset": 25,
+            "mnemonic": "mov",
+            "operands": "eax, dword ptr [0x100e8f2c]"
+          },
+          {
+            "offset": 30,
+            "mnemonic": "test",
+            "operands": "eax, eax"
+          },
+          {
+            "offset": 32,
+            "mnemonic": "pop",
+            "operands": "edi"
+          },
+          {
+            "offset": 33,
+            "mnemonic": "je",
+            "operands": "0x10004409"
+          },
+          {
+            "offset": 35,
+            "mnemonic": "inc",
+            "operands": "eax"
+          },
+          {
+            "offset": 36,
+            "mnemonic": "mov",
+            "operands": "dword ptr [0x100e8f2c], eax"
+          },
+          {
+            "offset": 41,
+            "mnemonic": "ret",
+            "operands": ""
+          },
+          {
+            "offset": 42,
+            "mnemonic": "nop",
+            "operands": ""
+          },
+          {
+            "offset": 43,
+            "mnemonic": "nop",
+            "operands": ""
+          },
+          {
+            "offset": 44,
+            "mnemonic": "nop",
+            "operands": ""
+          },
+          {
+            "offset": 45,
+            "mnemonic": "nop",
+            "operands": ""
+          },
+          {
+            "offset": 46,
+            "mnemonic": "nop",
+            "operands": ""
+          },
+          {
+            "offset": 47,
+            "mnemonic": "nop",
+            "operands": ""
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/audio-host-history.jg5ustfl/AUDIO.DLL",
+        "sha256": "4e7953e5a4de38c2aaa5be4ef34b644f6af3f2d39a40ff0365a380abc2757ca8",
+        "routine_va": "0x10004030",
+        "routine_bytes": 48,
+        "routine_sha256": "1016147065e946f157a7aff954e0cacde3ce69137a75d19b2d1c62cac705ef01",
+        "fill_prefix_bytes": 25,
+        "fill_prefix_sha256": "ecedd7100b17186dd271adbea7cbbc0167d60b96e97818988989fc31419b88d1",
+        "instructions": [
+          {
+            "offset": 0,
+            "mnemonic": "mov",
+            "operands": "ecx, dword ptr [esp + 8]"
+          },
+          {
+            "offset": 4,
+            "mnemonic": "mov",
+            "operands": "edx, ecx"
+          },
+          {
+            "offset": 6,
+            "mnemonic": "push",
+            "operands": "edi"
+          },
+          {
+            "offset": 7,
+            "mnemonic": "mov",
+            "operands": "edi, dword ptr [esp + 8]"
+          },
+          {
+            "offset": 11,
+            "mnemonic": "shr",
+            "operands": "ecx, 2"
+          },
+          {
+            "offset": 14,
+            "mnemonic": "xor",
+            "operands": "eax, eax"
+          },
+          {
+            "offset": 16,
+            "mnemonic": "rep stosd",
+            "operands": "dword ptr es:[edi], eax"
+          },
+          {
+            "offset": 18,
+            "mnemonic": "mov",
+            "operands": "ecx, edx"
+          },
+          {
+            "offset": 20,
+            "mnemonic": "and",
+            "operands": "ecx, 3"
+          },
+          {
+            "offset": 23,
+            "mnemonic": "rep stosb",
+            "operands": "byte ptr es:[edi], al"
+          },
+          {
+            "offset": 25,
+            "mnemonic": "mov",
+            "operands": "eax, dword ptr [0x1009bb04]"
+          },
+          {
+            "offset": 30,
+            "mnemonic": "test",
+            "operands": "eax, eax"
+          },
+          {
+            "offset": 32,
+            "mnemonic": "pop",
+            "operands": "edi"
+          },
+          {
+            "offset": 33,
+            "mnemonic": "je",
+            "operands": "0x10004059"
+          },
+          {
+            "offset": 35,
+            "mnemonic": "inc",
+            "operands": "eax"
+          },
+          {
+            "offset": 36,
+            "mnemonic": "mov",
+            "operands": "dword ptr [0x1009bb04], eax"
+          },
+          {
+            "offset": 41,
+            "mnemonic": "ret",
+            "operands": ""
+          },
+          {
+            "offset": 42,
+            "mnemonic": "nop",
+            "operands": ""
+          },
+          {
+            "offset": 43,
+            "mnemonic": "nop",
+            "operands": ""
+          },
+          {
+            "offset": 44,
+            "mnemonic": "nop",
+            "operands": ""
+          },
+          {
+            "offset": 45,
+            "mnemonic": "nop",
+            "operands": ""
+          },
+          {
+            "offset": 46,
+            "mnemonic": "nop",
+            "operands": ""
+          },
+          {
+            "offset": 47,
+            "mnemonic": "nop",
+            "operands": ""
+          }
+        ]
+      }
+    ],
+    "native_findings": [
+      "Both complete 48-byte ClearAudio routines are identical after accounting for the two independently corresponding ClearCount absolute addresses; their 25-byte fill prefixes are literally identical.",
+      "The canonical ordinary C memset implementation already reproduces the complete later ClearAudio routine. AIKillSound also matches with its two ordinary C memset calls.",
+      "AllocateSoundBuffer prepares the byte count and shifted dword count before its three immediate-zero global stores, then clears EAX immediately before REP STOSD. A conventional opaque inline-assembly block containing the entire fill setup does not follow this interleaving; the instructions alone do not establish an assembly helper."
+    ],
+    "canonical_sibling_checks": [
+      {
+        "name": "_AIKillSound",
+        "original_bytes": 224,
+        "rebuilt_bytes": 224,
+        "relocation_masked_equal": true,
+        "relocation_target_mismatch_count": 0
+      },
+      {
+        "name": "_ClearAudio",
+        "original_bytes": 48,
+        "rebuilt_bytes": 48,
+        "relocation_masked_equal": true,
+        "relocation_target_mismatch_count": 0
+      }
+    ],
+    "archived_source": {
+      "path": "/root/.ai-tmp/audio-envelope-ancestry.c5DMoPAf/ultrahle/src/SOUND.C",
+      "sha256": "877c68b139af332cf3698c7ac8275f9dd85ea77b73840a3f5f197b82bc2a07e3",
+      "plain_memset_lines": [
+        96,
+        105,
+        234,
+        238
+      ]
+    },
+    "source_search": {
+      "root": "/root/.ai-tmp/audio-envelope-ancestry.c5DMoPAf/ultrahle",
+      "pattern": "stos[bdw]|zeromemory|#\\s*define\\s+memset|inline.*memset|inline.*zero|clearbuffer|clear_buffer",
+      "finding": "The archived UltraHLE tree contains ordinary UI ZeroMemory uses and disassembler mnemonic strings, but no matching assembly memset or zero-fill helper. SOUND.C itself clears DirectSound buffers with plain memset."
+    },
+    "limits": "Absence from this archived upstream tree does not prove absence from the unavailable original host source. Native sibling behavior is compatible with compiler intrinsic expansion, but does not uniquely identify the historical source expression.",
+    "decision": "No unsupported inline-assembly helper or qualifier was promoted. AllocateSoundBuffer remains unmatched."
   }
 }

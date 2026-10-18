@@ -1679,5 +1679,143 @@
       "Splitting circular-buffer distance into subtraction and masking statements, globally or only in the final unused update, leaves SubmitAudio unchanged. Separating the initial volatile WritePosition load as a third statement at every update enlarges the routine to1136 bytes and worsens its match.",
       "The default-path stack-home reload and retained local cursor read remain unresolved source/compiler-context questions. No speculative changes were promoted."
     ]
+  },
+  "current_complete_unit_cpp_control": {
+    "artifact": "/root/.ai-tmp/audio-dsound.6t4_1qa3/current-cpp.ba_ka6u5",
+    "scope": "Current combined DirectSound/configuration translation unit, with current explicit-zero/common declarations and capacities; complete aligned bodies and relocation targets compared. AudioLog remains a separate C unit.",
+    "source_transform": "The entire frozen DirectSound source is enclosed in extern \"C\"; only the two malloc assignments acquire the result casts required by C++.",
+    "frozen_inputs_sha256": {
+      "source/AudioLog.c": "84a6f797caaf244d44300550ed13225276bf1c45bf6fb3193be9047dc01226f0",
+      "source/DirectSound.c": "54c293b50a6c2b0195bbc2312b8578fb1d48851d6c44f294ed46c8f522ea7895",
+      "source/DirectSound.cpp": "72e9ffce6f3e928b2c3d03840f17d2bd8ddf5814a20d27ebffe623d6e33e4085",
+      "source/DirectSound.h": "ab5ed735f1ab52226c0c7e7a559d080e10ec5649d2814b177f1a79686135455b",
+      "source/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f"
+    },
+    "tool_sha256": {
+      "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
+      "toolchains/vc7/bin/c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
+      "toolchains/vc7/bin/c1xx.dll": "30c3affd786752b4a037c4b4f035b7962d1fb5a335366e093bc73d0eb02e5558",
+      "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0"
+    },
+    "driver_sha256": "1236efe3a32c7144481c9d9121231c7cdbe038f329db0172132f38c9c5b261f4",
+    "comparison_sha256": {
+      "AudioLog-comparison.json": "a810f40b34ec8cd3972c5c6a1f9e82f0b06d0dccbb20ebd6ab1aae8edd81e2ec",
+      "DirectSound-comparison.json": "100ad657ad1ddff852ccb5c1862d68596b1fef5879d402ec273aa7b23d1052c8"
+    },
+    "results": [
+      {
+        "unit": "DirectSound",
+        "commands": [
+          "python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/TP",
+          "/c",
+          "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\current-cpp.ba_ka6u5\\DirectSound.obj",
+          "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\current-cpp.ba_ka6u5\\source\\DirectSound.cpp"
+        ],
+        "source_sha256": "72e9ffce6f3e928b2c3d03840f17d2bd8ddf5814a20d27ebffe623d6e33e4085",
+        "object_sha256": "de48f0982e9403eb593341b660fa402d17deb151f7f98824bdb0d96496a6590e",
+        "matches": 46,
+        "functions": 49,
+        "matched_target_mismatches": 0,
+        "unmatched": [
+          {
+            "name": "_AudioError",
+            "original_bytes": 640,
+            "rebuilt_bytes": 640,
+            "relocation_masked_differing_bytes": 19
+          },
+          {
+            "name": "_AllocateSoundBuffer",
+            "original_bytes": 96,
+            "rebuilt_bytes": 80,
+            "relocation_masked_differing_bytes": 50
+          },
+          {
+            "name": "_SubmitAudio",
+            "original_bytes": 1120,
+            "rebuilt_bytes": 1120,
+            "relocation_masked_differing_bytes": 421
+          }
+        ],
+        "sections": [
+          {
+            "name": ".bss",
+            "size": 700984,
+            "characteristics": 3225419904
+          },
+          {
+            "name": ".data",
+            "size": 2220,
+            "characteristics": 3225419840
+          }
+        ],
+        "common_symbols": []
+      },
+      {
+        "unit": "AudioLog",
+        "commands": [
+          "python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/c",
+          "/FoZ:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\current-cpp.ba_ka6u5\\AudioLog.obj",
+          "Z:\\root\\.ai-tmp\\audio-dsound.6t4_1qa3\\current-cpp.ba_ka6u5\\source\\AudioLog.c"
+        ],
+        "source_sha256": "84a6f797caaf244d44300550ed13225276bf1c45bf6fb3193be9047dc01226f0",
+        "object_sha256": "5d72003755f5746c5192df7d1433a617b6ef5c3287dc773735f0703665bd32ee",
+        "matches": 11,
+        "functions": 11,
+        "matched_target_mismatches": 0,
+        "unmatched": [],
+        "sections": [
+          {
+            "name": ".bss",
+            "size": 12,
+            "characteristics": 3224371328
+          },
+          {
+            "name": ".data",
+            "size": 2176,
+            "characteristics": 3225419840
+          }
+        ],
+        "common_symbols": [
+          "_LogEdit",
+          "_LogWindow",
+          "_LogInstance"
+        ]
+      }
+    ],
+    "findings": [
+      "All 57 existing complete-body matches are preserved, and every matching body has zero relocation-target mismatches; existing inferred symbol-identity limits remain unchanged.",
+      "AudioError, AllocateSoundBuffer and SubmitAudio retain exactly the current C mismatches. The language control provides no code-recovery improvement.",
+      "The C++ DirectSound unit has no common symbols and 700984 bytes of strong .bss, compared with the canonical C strong contribution of 688328 bytes. This does not explain the independently observed split between early strong state and late common pointers/buffers.",
+      "No C++ language or storage change was promoted."
+    ]
+  },
+  "mutable_error_parameter_control": {
+    "artifact": "/root/.ai-tmp/audio-host-small",
+    "source": "/root/.ai-tmp/audio-host-small/error-direct_message.c",
+    "source_sha256": "1bc8ba3bc35909f65f47a7c230f61f4404ca5edf7987900aa55370e6d11deb75",
+    "object_sha256": "d784c3c90ed8d38493e351e915927b72365fb297a9b054af3be6efea3ed8d239",
+    "comparison_sha256": "b77755514bb8559a616ccbe6ed1c164ac5f92f870b61c4f7cac0da810f7e4581",
+    "source_form": "Fixed HRESULT parameter; default assigns error = text and text = AudioErrorText; final MessageBox uses text directly, with no separate message local.",
+    "original_bytes": 640,
+    "rebuilt_bytes": 640,
+    "differing_non_relocation_bytes": 19,
+    "limits": "This prior isolated control has two relocation-target mismatches and nineteen inferred targets in its then-current symbol map. Its negative code-shape result is not treated as a target-verified match or a current complete-unit build.",
+    "finding": "The requested mutable-parameter source form was already tested and retains nineteen differing non-relocation bytes. It was not promoted or rerun solely to repeat the existing negative result."
   }
 }
