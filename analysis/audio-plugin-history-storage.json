@@ -1,0 +1,1031 @@
+{
+  "scope": "Historical storage evidence and bounded native controls. No canonical source was changed; this report freezes the findings without promoting any retained-storage hypothesis.",
+  "images": [
+    {
+      "path": "/root/.ai-tmp/audio-host-history.jg5ustfl/AUDIO.DLL",
+      "sha256": "4e7953e5a4de38c2aaa5be4ef34b644f6af3f2d39a40ff0365a380abc2757ca8"
+    },
+    {
+      "path": "/root/nemu-decomp/master/Plugin/audio.dll",
+      "sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808"
+    }
+  ],
+  "primary_sample": {
+    "page": "https://www.zophar.net/utilities/n64spuplugins/basic-audio-plugin.html",
+    "archive_url": "https://www.zophar.net/download_file/2911",
+    "archive_sha256": "03753c3476220d225e00a6fae9fe749e0e80cda62fdb89e3a48ebca290fbe42f",
+    "files": {
+      "zilmar-basic-audio/ReadMe.txt": "57077b27d3c293b963c538d0aa5082892db44eb884dbcfeaeef235b48bdf41de",
+      "zilmar-basic-audio/VC6 Source/Audio.c": "8153daa17d6d73a91527e6c4f231c30cd7228a01206859f2f15b0940470f03ea",
+      "zilmar-basic-audio/VC6 Source/Audio.h": "34d001b0cb48ac3dfba4928321cc6e15bab1cfaf3c8dc3b60f544457e17d78fe"
+    },
+    "authorship_basis": "Included README is signed zilmar; the header identifies his audio plugin specification1.1. The archive is an authored primary source artifact hosted by a mirror.",
+    "declarations": "The sample defines one AUDIO_INFO AudioInfo (60 bytes on the target ABI); its header supplies the seven register-pointer field names and CheckInterrupts callback.",
+    "limitation": "LaC stores these fields individually in the 2001 binary, so the sample does not justify adding a whole AudioInfo global or establish LaC private variable names. It contains no LaC CPU/MI/AI backing-bank declarations."
+  },
+  "historical_bank_ownership": {
+    "banks": [
+      {
+        "role": "CPU/CP0 backing register bank",
+        "va": "0x100df0a8",
+        "argument": 3,
+        "pointer_push_instruction": "0x10007e62",
+        "separate_driver_pointer_slot": "0x10110548",
+        "slot_store_instruction": "0x100038c6",
+        "boundary_interval_bytes": 128,
+        "minimum_consumer_bytes": 56,
+        "capacity_inference": "32 DWORD CP0 registers is supported by the 128-byte interval before the MI bank and the Cause-register access at +0x34. The exact historical declaration is unavailable."
+      },
+      {
+        "role": "MI backing register bank",
+        "va": "0x100df128",
+        "argument": 5,
+        "pointer_push_instruction": "0x10007e3b",
+        "separate_driver_pointer_slot": "0x10110538",
+        "slot_store_instruction": "0x100038bf",
+        "boundary_interval_bytes": 16,
+        "minimum_consumer_bytes": 12,
+        "capacity_inference": "Three DWORD fields are observed; the 16-byte interval before the AI bank may represent four DWORDs or a 12-byte object followed by alignment. Do not promote a four-word declaration as uniquely recovered."
+      },
+      {
+        "role": "AI backing register bank",
+        "va": "0x100df138",
+        "argument": 4,
+        "pointer_push_instruction": "0x10007e4a",
+        "separate_driver_pointer_slot": "0x10113120",
+        "slot_store_instruction": "0x100038d2",
+        "boundary_interval_bytes": 32,
+        "minimum_consumer_bytes": 32,
+        "capacity_inference": "Eight DWORD fields, including the bitrate access at +0x1c, establish at least 32 bytes. The contiguous consumer layout matches the existing AudioRegisters shape."
+      }
+    ],
+    "caller": "InitiateAudio at0x10007e10",
+    "callee": "AIInit at0x100038a0",
+    "finding": "Three real backing-bank addresses are passed to AIInit and copied into separate driver pointer slots. Existing 2003 CPURegisters/MIRegisters/AIRegisters globals are only pointers and do not represent these banks. Ownership in the plugin interface unit is inferred from its sole address-taking initialization path.",
+    "non_unique_capacities": true
+  },
+  "historical_abi_roster": [
+    {
+      "semantic_identity": "DMEM",
+      "va": "0x100df4d8",
+      "bytes": 4,
+      "incoming_AUDIO_INFO_offset": 20,
+      "store_instruction": "0x10007e31",
+      "known_2003_equivalent": "0x10130688",
+      "name_status": "ABI field name or descriptive inferred flag; original private symbol not available"
+    },
+    {
+      "semantic_identity": "AI_LEN_REG",
+      "va": "0x100df4dc",
+      "bytes": 4,
+      "incoming_AUDIO_INFO_offset": 36,
+      "store_instruction": "0x10007e4f",
+      "known_2003_equivalent": null,
+      "name_status": "ABI field name or descriptive inferred flag; original private symbol not available"
+    },
+    {
+      "semantic_identity": "AI_DACRATE_REG",
+      "va": "0x100df4e0",
+      "bytes": 4,
+      "incoming_AUDIO_INFO_offset": 48,
+      "store_instruction": "0x10007e27",
+      "known_2003_equivalent": null,
+      "name_status": "ABI field name or descriptive inferred flag; original private symbol not available"
+    },
+    {
+      "semantic_identity": "AI_DRAM_ADDR_REG",
+      "va": "0x100df4e4",
+      "bytes": 4,
+      "incoming_AUDIO_INFO_offset": 32,
+      "store_instruction": "0x10007e40",
+      "known_2003_equivalent": null,
+      "name_status": "ABI field name or descriptive inferred flag; original private symbol not available"
+    },
+    {
+      "semantic_identity": "AI_BITRATE_REG",
+      "va": "0x100df4e8",
+      "bytes": 4,
+      "incoming_AUDIO_INFO_offset": 52,
+      "store_instruction": "0x10007e7d",
+      "known_2003_equivalent": null,
+      "name_status": "ABI field name or descriptive inferred flag; original private symbol not available"
+    },
+    {
+      "semantic_identity": "PluginInitialized",
+      "va": "0x100df4ec",
+      "bytes": 4,
+      "incoming_AUDIO_INFO_offset": null,
+      "store_instruction": "0x10007e9c",
+      "known_2003_equivalent": "0x10130668",
+      "name_status": "ABI field name or descriptive inferred flag; original private symbol not available"
+    },
+    {
+      "semantic_identity": "AI_CONTROL_REG",
+      "va": "0x100df4f0",
+      "bytes": 4,
+      "incoming_AUDIO_INFO_offset": 40,
+      "store_instruction": "0x10007e71",
+      "known_2003_equivalent": null,
+      "name_status": "ABI field name or descriptive inferred flag; original private symbol not available"
+    },
+    {
+      "semantic_identity": "CheckInterrupts",
+      "va": "0x100df4f4",
+      "bytes": 4,
+      "incoming_AUDIO_INFO_offset": 56,
+      "store_instruction": "0x10007e1c",
+      "known_2003_equivalent": null,
+      "name_status": "ABI field name or descriptive inferred flag; original private symbol not available"
+    },
+    {
+      "semantic_identity": "AI_STATUS_REG",
+      "va": "0x100df4f8",
+      "bytes": 4,
+      "incoming_AUDIO_INFO_offset": 44,
+      "store_instruction": "0x10007e67",
+      "known_2003_equivalent": null,
+      "name_status": "ABI field name or descriptive inferred flag; original private symbol not available"
+    },
+    {
+      "semantic_identity": "MI_INTR_REG",
+      "va": "0x100df4fc",
+      "bytes": 4,
+      "incoming_AUDIO_INFO_offset": 28,
+      "store_instruction": "0x10007e59",
+      "known_2003_equivalent": null,
+      "name_status": "ABI field name or descriptive inferred flag; original private symbol not available"
+    }
+  ],
+  "historical_raise_interrupt": {
+    "entry": "0x10007bd0",
+    "MI_INTR_slot": "0x100df4fc",
+    "callback_slot": "0x100df4f4",
+    "observed_behavior": "If MI_INTR_REG is non-null, AND its target DWORD with4; if CheckInterrupts is non-null, call through it. The original AND is retained as evidence and not corrected to OR."
+  },
+  "old_references": {
+    "0x100df4fc": [
+      "0x10007bd1",
+      "0x10007e5a"
+    ],
+    "0x100df4f4": [
+      "0x10007bdd",
+      "0x10007e1e"
+    ],
+    "0x100df4e0": [
+      "0x10007bf1",
+      "0x10007c57",
+      "0x10007cb1",
+      "0x10007d0c",
+      "0x10007e29"
+    ],
+    "0x100df4dc": [
+      "0x10007bf9",
+      "0x10007c64",
+      "0x10007cef",
+      "0x10007d19",
+      "0x10007e51"
+    ],
+    "0x100df150": [
+      "0x10007bff",
+      "0x10007c51",
+      "0x10007cbf",
+      "0x10007d06"
+    ],
+    "0x100df4e4": [
+      "0x10007c07",
+      "0x10007c72",
+      "0x10007cb9",
+      "0x10007d27",
+      "0x10007e42"
+    ],
+    "0x100df140": [
+      "0x10007c0d",
+      "0x10007c5f",
+      "0x10007d14"
+    ],
+    "0x100df4f0": [
+      "0x10007c15",
+      "0x10007c7f",
+      "0x10007cc7",
+      "0x10007d34",
+      "0x10007e73"
+    ],
+    "0x100df138": [
+      "0x10007c1b",
+      "0x10007c6c",
+      "0x10007ccc",
+      "0x10007d21",
+      "0x10007e4b"
+    ],
+    "0x100df4f8": [
+      "0x10007c23",
+      "0x10007c8c",
+      "0x10007cd3",
+      "0x10007d41",
+      "0x10007e69"
+    ],
+    "0x100df148": [
+      "0x10007c29",
+      "0x10007c79",
+      "0x10007cd9",
+      "0x10007d2e"
+    ],
+    "0x100df4e8": [
+      "0x10007c31",
+      "0x10007c9a",
+      "0x10007ce1",
+      "0x10007d4f",
+      "0x10007e7f"
+    ],
+    "0x100df14c": [
+      "0x10007c37",
+      "0x10007c87",
+      "0x10007ce7",
+      "0x10007d3c"
+    ],
+    "0x100df154": [
+      "0x10007c3f",
+      "0x10007c94",
+      "0x10007cf4",
+      "0x10007d49"
+    ],
+    "0x100df4ec": [
+      "0x10007d61",
+      "0x10007d70",
+      "0x10007e9e"
+    ],
+    "0x100df4d8": [
+      "0x10007e33"
+    ],
+    "0x100df128": [
+      "0x10007e3c"
+    ],
+    "0x100df0a8": [
+      "0x10007e63"
+    ],
+    "0x100df130": [
+      "0x10007e85"
+    ],
+    "0x100df15c": [
+      "0x1000805b"
+    ],
+    "0x100df1d8": [
+      "0x10008163",
+      "0x1000bb18"
+    ],
+    "0x100df1ec": [
+      "0x10008860",
+      "0x1000886f",
+      "0x10008882"
+    ],
+    "0x100df1ed": [
+      "0x10008877"
+    ],
+    "0x100df1f4": [
+      "0x10008888"
+    ],
+    "0x100df1f8": [
+      "0x1000888e"
+    ],
+    "0x100df1f0": [
+      "0x10008898"
+    ],
+    "0x100df164": [
+      "0x100088bf",
+      "0x1000b2da",
+      "0x1000b31c",
+      "0x1000b35f",
+      "0x1000b36b"
+    ],
+    "0x100df160": [
+      "0x100088d9",
+      "0x100088e7",
+      "0x100088ef",
+      "0x10008938"
+    ],
+    "0x100df224": [
+      "0x100088f5",
+      "0x1000b097"
+    ],
+    "0x100df16c": [
+      "0x100089c1",
+      "0x1000b6ff",
+      "0x1000b76c"
+    ],
+    "0x100df170": [
+      "0x100089d0",
+      "0x1000b70e",
+      "0x1000b77f",
+      "0x1000bd15",
+      "0x1000bd98"
+    ],
+    "0x100df220": [
+      "0x100093c4",
+      "0x1000b09d"
+    ],
+    "0x100df1dc": [
+      "0x1000a84a"
+    ],
+    "0x100df33c": [
+      "0x1000ace2"
+    ],
+    "0x100df174": [
+      "0x1000ae2f",
+      "0x1000b88c"
+    ],
+    "0x100df228": [
+      "0x1000b074",
+      "0x1000b102"
+    ],
+    "0x100df208": [
+      "0x1000b30c"
+    ],
+    "0x100df22c": [
+      "0x1000b397"
+    ],
+    "0x100df218": [
+      "0x1000b3af"
+    ],
+    "0x100df200": [
+      "0x1000b40a"
+    ],
+    "0x100df1fc": [
+      "0x1000b411"
+    ],
+    "0x100df330": [
+      "0x1000b5cf",
+      "0x1000b5f1",
+      "0x1000b60d"
+    ],
+    "0x100df334": [
+      "0x1000b720"
+    ],
+    "0x100df364": [
+      "0x1000b9e2",
+      "0x1000c00f",
+      "0x1000c07f",
+      "0x1000c118",
+      "0x1000cbca"
+    ],
+    "0x100df374": [
+      "0x1000ba19",
+      "0x1000cbf5",
+      "0x1000d14e",
+      "0x1000d5af"
+    ],
+    "0x100df338": [
+      "0x1000cb75",
+      "0x1000cbb9"
+    ],
+    "0x100df394": [
+      "0x1000ccd8"
+    ],
+    "0x100df1e8": [
+      "0x1000cdd3"
+    ],
+    "0x100df340": [
+      "0x1000d0eb",
+      "0x1000d119",
+      "0x1000d125",
+      "0x1000d13a",
+      "0x1000d154"
+    ],
+    "0x100df344": [
+      "0x1000d35f",
+      "0x1000d389",
+      "0x1000d3d7"
+    ],
+    "0x100df348": [
+      "0x1000d39e",
+      "0x1000d3aa"
+    ],
+    "0x100df34c": [
+      "0x1000d3a5",
+      "0x1000d3bb"
+    ],
+    "0x100df390": [
+      "0x1000d518",
+      "0x1000d53c",
+      "0x1000d55c",
+      "0x1000d57a"
+    ],
+    "0x100df35c": [
+      "0x1000ea2e",
+      "0x1000eb09"
+    ],
+    "0x100df178": [
+      "0x10012940"
+    ],
+    "0x100df1a8": [
+      "0x10012960"
+    ],
+    "0x100df1c0": [
+      "0x10012970"
+    ],
+    "0x100df190": [
+      "0x10012980"
+    ],
+    "0x100df404": [
+      "0x100131d4",
+      "0x100131d8",
+      "0x100131dc",
+      "0x100131e0",
+      "0x100131e4",
+      "0x100131e8",
+      "0x100131ec",
+      "0x100131f0",
+      "0x100131f4"
+    ]
+  },
+  "new_live_plugin_slots": [
+    {
+      "name": "_AttachedCloseDLL",
+      "va": "0x1013058c",
+      "bytes": 4
+    },
+    {
+      "name": "_PluginIMEM",
+      "va": "0x10130590",
+      "bytes": 4
+    },
+    {
+      "name": "_AttachedRomClosed",
+      "va": "0x1013065c",
+      "bytes": 4
+    },
+    {
+      "name": "_AttachedDllAbout",
+      "va": "0x10130664",
+      "bytes": 4
+    },
+    {
+      "name": "_PluginInitialized",
+      "va": "0x10130668",
+      "bytes": 4
+    },
+    {
+      "name": "_AttachedAiReadLength",
+      "va": "0x1013066c",
+      "bytes": 4
+    },
+    {
+      "name": "_AttachedDllTest",
+      "va": "0x10130678",
+      "bytes": 4
+    },
+    {
+      "name": "_AttachedProcessAList",
+      "va": "0x1013067c",
+      "bytes": 4
+    },
+    {
+      "name": "_AttachedInitiateAudio",
+      "va": "0x10130680",
+      "bytes": 4
+    },
+    {
+      "name": "_AttachedAudio",
+      "va": "0x10130684",
+      "bytes": 4
+    },
+    {
+      "name": "_PluginDMEM",
+      "va": "0x10130688",
+      "bytes": 4
+    },
+    {
+      "name": "_AttachedAiDacrateChanged",
+      "va": "0x10130690",
+      "bytes": 4
+    },
+    {
+      "name": "_AttachedAiLenChanged",
+      "va": "0x10130694",
+      "bytes": 4
+    },
+    {
+      "name": "_AttachedAiUpdate",
+      "va": "0x10130698",
+      "bytes": 4
+    },
+    {
+      "name": "_AttachedDllConfig",
+      "va": "0x101306ac",
+      "bytes": 4
+    },
+    {
+      "name": "_AttachedGetDllInfo",
+      "va": "0x101306b0",
+      "bytes": 4
+    }
+  ],
+  "new_references": {
+    "0x10130698": [
+      "0x100137d2",
+      "0x100139c2"
+    ],
+    "0x10130690": [
+      "0x100137e2",
+      "0x100138f3"
+    ],
+    "0x10130694": [
+      "0x100137f2",
+      "0x10013911"
+    ],
+    "0x1013066c": [
+      "0x10013802",
+      "0x10013924"
+    ],
+    "0x10130668": [
+      "0x10013811",
+      "0x1001381b",
+      "0x100138c1",
+      "0x100139ed"
+    ],
+    "0x1013058c": [
+      "0x1001382a",
+      "0x1001392b"
+    ],
+    "0x10130684": [
+      "0x1001382f",
+      "0x100138ec",
+      "0x100138f8",
+      "0x10013906",
+      "0x10013919",
+      "0x10013930",
+      "0x1001393e",
+      "0x10013951",
+      "0x10013968",
+      "0x10013976",
+      "0x10013989",
+      "0x100139a0",
+      "0x100139ae"
+    ],
+    "0x10130678": [
+      "0x10013872",
+      "0x10013963"
+    ],
+    "0x10130664": [
+      "0x10013949"
+    ],
+    "0x101306ac": [
+      "0x1001395c"
+    ],
+    "0x101306b0": [
+      "0x10013981"
+    ],
+    "0x10130680": [
+      "0x10013994",
+      "0x10013a04"
+    ],
+    "0x1013067c": [
+      "0x1001399b"
+    ],
+    "0x1013065c": [
+      "0x100139b9",
+      "0x10013b02"
+    ],
+    "0x10130590": [
+      "0x100139d9",
+      "0x10013ac8"
+    ],
+    "0x10130688": [
+      "0x100139fc",
+      "0x10013a31",
+      "0x10013a81"
+    ]
+  },
+  "new_unreferenced_intervals": [
+    {
+      "start": "0x10130594",
+      "end": "0x1013065c",
+      "bytes": 200,
+      "after": "_PluginIMEM",
+      "before": "_AttachedRomClosed"
+    },
+    {
+      "start": "0x10130660",
+      "end": "0x10130664",
+      "bytes": 4,
+      "after": "_AttachedRomClosed",
+      "before": "_AttachedDllAbout"
+    },
+    {
+      "start": "0x10130670",
+      "end": "0x10130678",
+      "bytes": 8,
+      "after": "_AttachedAiReadLength",
+      "before": "_AttachedDllTest"
+    },
+    {
+      "start": "0x1013068c",
+      "end": "0x10130690",
+      "bytes": 4,
+      "after": "_PluginDMEM",
+      "before": "_AttachedAiDacrateChanged"
+    },
+    {
+      "start": "0x1013069c",
+      "end": "0x101306ac",
+      "bytes": 16,
+      "after": "_AttachedAiUpdate",
+      "before": "_AttachedDllConfig"
+    }
+  ],
+  "capacity_assessment": {
+    "known_internal_unreferenced_bytes": 232,
+    "large_interval_bytes": 200,
+    "smaller_intervals_bytes": 32,
+    "bank_intervals_total": 176,
+    "absent_abi_pointer_roster_bytes": 32,
+    "sum_if_full_bank_intervals_retained": 208,
+    "remaining_bytes_in_that_hypothesis": 24,
+    "interpretation": "The old banks plus eight old ABI pointer/callback slots are a source-semantic candidate for most of the later Plugin gap. The arithmetic is compatible with alignment but does not prove retention, exact capacities, ordering, or any particular new address. If MI is12 bytes with4 bytes old alignment, nominal storage is204 bytes instead. No filler declaration is proposed."
+  },
+  "native_controls": {
+    "bank_storage": [
+      {
+        "compiler": "vc6rtm",
+        "command": [
+          "python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc6rtm",
+          "cl",
+          "/nologo",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/c",
+          "/FoZ:\\root\\.ai-tmp\\audio-plugin-history.ilk5mm3u\\vc6rtm-bank-storage.obj",
+          "Z:\\root\\.ai-tmp\\audio-plugin-history.ilk5mm3u\\bank-storage.c"
+        ],
+        "source_sha256": "cedc7d0e636b1a708c8e50118dd1fb96f2305e6db32e465adbda1cb23dd062b9",
+        "object_sha256": "2fd49498ab7081973e3d39be6ad4556010957f282f9499989e44428b97dc7940",
+        "symbols": [
+          {
+            "name": "_ai_bank",
+            "value": 32,
+            "section": 0,
+            "storage_class": 2
+          },
+          {
+            "name": "_mi_bank",
+            "value": 16,
+            "section": 0,
+            "storage_class": 2
+          },
+          {
+            "name": "_reg_pointer",
+            "value": 4,
+            "section": 0,
+            "storage_class": 2
+          },
+          {
+            "name": "_cpu_bank",
+            "value": 128,
+            "section": 0,
+            "storage_class": 2
+          }
+        ]
+      },
+      {
+        "compiler": "vc7",
+        "command": [
+          "python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/c",
+          "/FoZ:\\root\\.ai-tmp\\audio-plugin-history.ilk5mm3u\\vc7-bank-storage.obj",
+          "Z:\\root\\.ai-tmp\\audio-plugin-history.ilk5mm3u\\bank-storage.c"
+        ],
+        "source_sha256": "cedc7d0e636b1a708c8e50118dd1fb96f2305e6db32e465adbda1cb23dd062b9",
+        "object_sha256": "d6097e31324d597b6bfe491c878ba4435b6411d00502425894ab916ab3d09d86",
+        "symbols": [
+          {
+            "name": "_cpu_bank",
+            "value": 128,
+            "section": 0,
+            "storage_class": 2
+          },
+          {
+            "name": "_reg_pointer",
+            "value": 4,
+            "section": 0,
+            "storage_class": 2
+          },
+          {
+            "name": "_ai_bank",
+            "value": 32,
+            "section": 0,
+            "storage_class": 2
+          },
+          {
+            "name": "_mi_bank",
+            "value": 16,
+            "section": 0,
+            "storage_class": 2
+          }
+        ]
+      }
+    ],
+    "link_commands": [
+      {
+        "command": [
+          "python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/c",
+          "/FoZ:\\root\\.ai-tmp\\audio-plugin-history.ilk5mm3u\\bank-export.obj",
+          "Z:\\root\\.ai-tmp\\audio-plugin-history.ilk5mm3u\\bank-export.c"
+        ],
+        "output": "bank-export.c\n"
+      },
+      {
+        "command": [
+          "python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "link",
+          "/nologo",
+          "/dll",
+          "/noentry",
+          "/nodefaultlib",
+          "/opt:noref",
+          "/out:Z:\\root\\.ai-tmp\\audio-plugin-history.ilk5mm3u\\data-noref.dll",
+          "/map:Z:\\root\\.ai-tmp\\audio-plugin-history.ilk5mm3u\\data-noref.map",
+          "Z:\\root\\.ai-tmp\\audio-plugin-history.ilk5mm3u\\vc7-bank-storage.obj"
+        ],
+        "output": ""
+      },
+      {
+        "command": [
+          "python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "link",
+          "/nologo",
+          "/dll",
+          "/noentry",
+          "/nodefaultlib",
+          "/out:Z:\\root\\.ai-tmp\\audio-plugin-history.ilk5mm3u\\export-default.dll",
+          "/map:Z:\\root\\.ai-tmp\\audio-plugin-history.ilk5mm3u\\export-default.map",
+          "Z:\\root\\.ai-tmp\\audio-plugin-history.ilk5mm3u\\bank-export.obj"
+        ],
+        "output": "   Creating library Z:\\root\\.ai-tmp\\audio-plugin-history.ilk5mm3u\\export-default.lib and object Z:\\root\\.ai-tmp\\audio-plugin-history.ilk5mm3u\\export-default.exp\n"
+      }
+    ],
+    "roster_controls": [
+      {
+        "variant": "current",
+        "command": [
+          "python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/c",
+          "/FoZ:\\root\\.ai-tmp\\audio-plugin-history.ilk5mm3u\\current\\AudioPlugin.obj",
+          "Z:\\root\\.ai-tmp\\audio-plugin-history.ilk5mm3u\\current\\AudioPlugin.c"
+        ],
+        "source_sha256": "6fed63db83aa3a950d0ce3a2e5e9df4769674aed1b145ab3e0332c5e2c44e260",
+        "object_sha256": "e6a1e311ea4414bdd80cf69aa2b8c3e9938ecbb9c059a9f8a89953f69989a64c",
+        "comparison_sha256": "36d2e4de46aa563e096436b65e66be92db85432c0bb57fde71a175490547f7b6",
+        "coff_common_order": [
+          {
+            "name": "_AttachedAudio",
+            "bytes": 4
+          },
+          {
+            "name": "_AttachedDllTest",
+            "bytes": 4
+          },
+          {
+            "name": "_AttachedAiDacrateChanged",
+            "bytes": 4
+          },
+          {
+            "name": "_AttachedCloseDLL",
+            "bytes": 4
+          },
+          {
+            "name": "_PluginDMEM",
+            "bytes": 4
+          },
+          {
+            "name": "_AttachedAiLenChanged",
+            "bytes": 4
+          },
+          {
+            "name": "_AttachedDllConfig",
+            "bytes": 4
+          },
+          {
+            "name": "_AttachedDllAbout",
+            "bytes": 4
+          },
+          {
+            "name": "_PluginInitialized",
+            "bytes": 4
+          },
+          {
+            "name": "_PluginIMEM",
+            "bytes": 4
+          },
+          {
+            "name": "_AttachedInitiateAudio",
+            "bytes": 4
+          },
+          {
+            "name": "_AttachedRomClosed",
+            "bytes": 4
+          },
+          {
+            "name": "_AttachedAiUpdate",
+            "bytes": 4
+          },
+          {
+            "name": "_AttachedAiReadLength",
+            "bytes": 4
+          },
+          {
+            "name": "_AttachedProcessAList",
+            "bytes": 4
+          },
+          {
+            "name": "_AttachedGetDllInfo",
+            "bytes": 4
+          }
+        ],
+        "complete_instruction_matches": 13,
+        "functions": 13
+      },
+      {
+        "variant": "abi-field-names",
+        "command": [
+          "python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/c",
+          "/FoZ:\\root\\.ai-tmp\\audio-plugin-history.ilk5mm3u\\abi-field-names\\AudioPlugin.obj",
+          "Z:\\root\\.ai-tmp\\audio-plugin-history.ilk5mm3u\\abi-field-names\\AudioPlugin.c"
+        ],
+        "source_sha256": "1b05fbea1aad82bface1b25ba9b58eeb27bdb2798f2e3f4f4998a4ea04c42f3e",
+        "object_sha256": "a107ce34d442f92f6b6f8e8b1ed9ce41a682e66812529bea30e7fbcff3d5a511",
+        "comparison_sha256": "e8769ef35d385e67d4b8a717add458744d1a4c2be59bbb42f1123d9f3be96be6",
+        "coff_common_order": [
+          {
+            "name": "_AttachedAudio",
+            "bytes": 4
+          },
+          {
+            "name": "_AI_BITRATE_REG",
+            "bytes": 4
+          },
+          {
+            "name": "_AI_DACRATE_REG",
+            "bytes": 4
+          },
+          {
+            "name": "_AttachedDllTest",
+            "bytes": 4
+          },
+          {
+            "name": "_AttachedAiDacrateChanged",
+            "bytes": 4
+          },
+          {
+            "name": "_AttachedCloseDLL",
+            "bytes": 4
+          },
+          {
+            "name": "_PluginDMEM",
+            "bytes": 4
+          },
+          {
+            "name": "_AttachedAiLenChanged",
+            "bytes": 4
+          },
+          {
+            "name": "_AttachedDllConfig",
+            "bytes": 4
+          },
+          {
+            "name": "_AttachedDllAbout",
+            "bytes": 4
+          },
+          {
+            "name": "_AI_STATUS_REG",
+            "bytes": 4
+          },
+          {
+            "name": "_PluginInitialized",
+            "bytes": 4
+          },
+          {
+            "name": "_AI_CONTROL_REG",
+            "bytes": 4
+          },
+          {
+            "name": "_CheckInterrupts",
+            "bytes": 4
+          },
+          {
+            "name": "_PluginIMEM",
+            "bytes": 4
+          },
+          {
+            "name": "_AI_LEN_REG",
+            "bytes": 4
+          },
+          {
+            "name": "_AttachedInitiateAudio",
+            "bytes": 4
+          },
+          {
+            "name": "_AttachedRomClosed",
+            "bytes": 4
+          },
+          {
+            "name": "_AttachedAiUpdate",
+            "bytes": 4
+          },
+          {
+            "name": "_AttachedAiReadLength",
+            "bytes": 4
+          },
+          {
+            "name": "_AttachedProcessAList",
+            "bytes": 4
+          },
+          {
+            "name": "_AttachedGetDllInfo",
+            "bytes": 4
+          },
+          {
+            "name": "_AI_DRAM_ADDR_REG",
+            "bytes": 4
+          },
+          {
+            "name": "_MI_INTR_REG",
+            "bytes": 4
+          }
+        ],
+        "complete_instruction_matches": 13,
+        "functions": 13
+      }
+    ],
+    "all_13_plugin_body_bytes_and_relocation_identities_unchanged": true,
+    "findings": [
+      "Both VC6 RTM and VC7 emit ordinary tentative bank arrays as common symbols; historical address ordering alone does not prove explicit-zero or private-static storage.",
+      "VC7 /OPT:NOREF retains the common banks; default reference elimination removes them even when the same object exports an ordinary function. This agrees with the integrator's independently supported canonical /DEBUG /OPT:NOREF configuration.",
+      "The sample-spelled eight-pointer roster produces24 common symbols and preserves all13 current Plugin bodies, but the current inferred Attached*/Plugin* names already have a different common ordering from the original. No private-name search grid was run.",
+      "The sample array-only /OPT:NOREF control uses32-byte alignment for these array common symbols. Exact bank packing must be tested with justified source declarations and the complete link, not by treating all intervals as raw capacities."
+    ]
+  },
+  "artifacts_sha256": {
+    "old-plugin.txt": "cd411c5f8a8505b26d41ff1751371f6d69607f22de97c389d941715b16ae18f7",
+    "bank-storage.json": "eba35634b8edcc838a6a4265f33ab192e8c69a62b3bcf7b8e9be42429f5436fb",
+    "data-noref.map": "8971afc6c3491d84bbdabee3d1513f4cedcfb05eb12697135bac2b32fec89544",
+    "export-default.map": "42cece937bc34012620e7cf4044543548609d9ba14538e82fcf4bf2f89b4d005",
+    "roster-control.json": "e00b505abaf800c5a83e25d8fcc697c49355cf74c5c5c334ecd05e544bfb9baa"
+  },
+  "recommended_next_step": "The integration owner can assess a separately frozen complete-link hypothesis with three explicitly boundary-inferred legacy backing banks and the seven ABI register pointers plus callback. Any promotion still requires source naming/storage evidence and independently checked known offsets; this report assigns no new2003 identities.",
+  "artifact": "/root/.ai-tmp/audio-plugin-history.ilk5mm3u",
+  "frozen_canonical_inputs_sha256": {
+    "current/AudioPlugin.c": "6fed63db83aa3a950d0ce3a2e5e9df4769674aed1b145ab3e0332c5e2c44e260",
+    "current/AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
+    "current/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f"
+  },
+  "native_tool_sha256": {
+    "toolchains/vc6rtm/bin/cl.exe": "d9220fdfaf355c81f26e7b03c5dc628ec72ff81c99dc38ed98b1ad4bdbbb309c",
+    "toolchains/vc6rtm/bin/c1.dll": "ee14a2603a1339f95db2e396751f7e51b50e421731229fb2416a01f974689d80",
+    "toolchains/vc6rtm/bin/c2.dll": "45187b0b6288240f73272a7c61e6329c50048a76e57db3bb87b6f0229e09e27d",
+    "toolchains/vc6rtm/bin/link.exe": "08d3a4c9701c8f6c871b2c48bd74d07422aa1f86e5d9a4ddb2c9bd6a88b857e7",
+    "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
+    "toolchains/vc7/bin/c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
+    "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0",
+    "toolchains/vc7/bin/link.exe": "1560d85164dfb763dd13f90f33ff9c6f1cd80f2afada03eed8d0a314593581f1"
+  },
+  "control_script_sha256": {
+    "/root/.ai-tmp/audio-plugin-history.ilk5mm3u/roster-control.py": "d342eee0a11f71640eddd3712d324a0fe1824d8801b498dd28a9abf925528d75",
+    "/root/.ai-tmp/audio-plugin-history.ilk5mm3u/write-findings.py": "3fb18d13ef8c961604045c3ce78c177ecbf10e80bc5aa83a93f707af478dca46"
+  }
+}
