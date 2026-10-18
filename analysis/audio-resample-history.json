@@ -1,0 +1,235 @@
+{
+  "status": "historical_native_ancestry_evidence_no_source_change",
+  "scope": "Read-only comparison of unchanged Nemu0.7,0.7a and target native code. No compiler probes, binary patching or new source reconstruction.",
+  "versions": [
+    {
+      "version": "0.7",
+      "file": "/root/.ai-tmp/audio-storage-history.G9MAzuhF/nemu07/AUDIO.DLL",
+      "file_bytes": 77824,
+      "sha256": "f3d65d2b3032a000d2f95e68473acc0d4a90e9f4cc40f241fa30fd55e3b49ee2",
+      "function_va": "0x100011c0",
+      "complete_extent_bytes": 992,
+      "complete_extent_sha256": "ffdb6b86d6de0e624d01238c7e021210bcb35b096190f895ccd49d39ef304784",
+      "disassembly": "/root/.ai-tmp/audio-07a-resample.zacw_l53/0.7-resampler.txt",
+      "disassembly_sha256": "ea52fa0ff20fccb4f313c7c13653dbbf02d2f57451d3c81b96918f96f10930b2",
+      "archive": "/root/.ai-tmp/audio-storage-history.G9MAzuhF/nemu07.zip",
+      "archive_sha256": "526bbeb1bdaccf2a423044b11a781bba5d69f7078c6b2cbb7c02d4cac5572e09",
+      "provenance_url": "https://patpend.net/ftp/emulators/n64/nemu07.zip"
+    },
+    {
+      "version": "0.7a",
+      "file": "/root/.ai-tmp/audio-storage-history.G9MAzuhF/nemu07a/AUDIO.DLL",
+      "file_bytes": 86016,
+      "sha256": "035a88ebe1207588cea714a200373f973a4fe3d1846ef44111eebbdd28a9fb7d",
+      "function_va": "0x10006380",
+      "complete_extent_bytes": 656,
+      "complete_extent_sha256": "b1ab8fa96873f2cadb03a51c1924131e8d0ea0ffbfc9742f3a5c4cf2a1dde35b",
+      "disassembly": "/root/.ai-tmp/audio-07a-resample.zacw_l53/0.7a-resampler.txt",
+      "disassembly_sha256": "727592a101d2e1a1f2a6afa84263631dbcb308bd2ad4d740968e8def2208f802",
+      "archive": "/root/.ai-tmp/audio-storage-history.G9MAzuhF/nemu07a.zip",
+      "archive_sha256": "84513cc7d1b8923e161d511e1ec00f70432d3805a7ba732108d60787a146a623",
+      "provenance_url": "https://patpend.net/ftp/emulators/n64/nemu07a.zip"
+    },
+    {
+      "version": "current_target",
+      "file": "/root/nemu-decomp/master/Plugin/audio.dll",
+      "file_bytes": 290816,
+      "sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+      "function_va": "0x10011950",
+      "complete_extent_bytes": 656,
+      "complete_extent_sha256": "4a38da79db200681ef6abb7dd39f33abd026a54fb4f35a20e56200f28dc2808b",
+      "disassembly": "/root/.ai-tmp/audio-07a-resample.zacw_l53/current_target-resampler.txt",
+      "disassembly_sha256": "578d4d376252b67dea343305d9b289e10a0fe90a5f3791d070cecda94f0190ad"
+    }
+  ],
+  "author_note": {
+    "file": "/root/.ai-tmp/audio-storage-history.G9MAzuhF/nemu07a/README.TXT",
+    "sha256": "e4f87d384c4ea252f24b67f5d7e73eca65dcdfca6740228ab96ed0d9b3dcecf1",
+    "section": "0.7a changes attributed to LaC",
+    "lines": [
+      128,
+      138
+    ],
+    "excerpt": "Recoded the Audio HLE resampler",
+    "interpretation": "The release note says the resampler was rewritten and separately announces a High Quality setting. Native calls distinguish those changes: the setting selects an envelope mixer, while opcode5 uses the new resampler regardless."
+  },
+  "before_after": {
+    "0.7": {
+      "algorithm": "Q16 linear interpolation between adjacent signed16-bit PCM samples: a + (((b-a)*(phase &65535)) >>16). Pitch is doubled, count gains16 speculative samples, then phase is rewound by16 pitches before saving state.",
+      "evidence": {
+        "pitch_doubling": "10001222",
+        "extra_output_samples": "100013D6",
+        "linear_interpolation": "100013F6..10001442",
+        "phase_rewind": "10001444..10001449"
+      },
+      "history": "Eight saved input samples plus a fractional phase, loaded/stored through five byte-swapped32-bit state words.",
+      "kernel_512_bytes_present": false,
+      "dispatch": {
+        "write_instruction": "0x10002c2a",
+        "table_slot": "0x1000f2f4",
+        "table_base": "0x1000f2e0",
+        "opcode": 5,
+        "target": "0x100011c0"
+      },
+      "other_direct_caller": {
+        "wrapper": "0x100019d0",
+        "call_site": "0x100019da"
+      }
+    },
+    "0.7a": {
+      "algorithm": "Q15 phase;64 fractional positions; four signed16-bit coefficient/PCM products; arithmetic shift15; saturation to[-32767,32767].",
+      "history": "Four main samples at state[0..3], phase at state[4], signed extra-history count at state[5], and up to seven continuation samples ending at state[15]. Flags1 resets; flag2 restores continuation history.",
+      "dispatch": {
+        "write_instruction": "0x1000286f",
+        "table_slot": "0x10011704",
+        "table_base": "0x100116f0",
+        "opcode": 5,
+        "wrapper": "0x100011d0",
+        "call_site": "0x100011da",
+        "target": "0x10006380"
+      },
+      "other_direct_caller": {
+        "command_normalizing_wrapper": "0x10001f50",
+        "call_site": "0x10002036",
+        "target": "0x10006380"
+      }
+    },
+    "current_target": {
+      "algorithm_and_state": "Same four-tap Q15 algorithm and history protocol as0.7a. Command words are already byte-swapped; PCM storage is reached through context->buffer rather than embedded in context.",
+      "direct_call_or_jump_references_to_scalar_entry": [],
+      "absolute_scalar_entry_address_occurrences_in_file": 0,
+      "reference_scan_limitation": "This establishes no direct entry references in the image, not proof of reachability for every possible computed address."
+    }
+  },
+  "high_quality_switch": {
+    "global": "0x100917a8",
+    "read_instruction": "0x100010e2",
+    "conditional_call": "0x100010f3",
+    "selected_function": "0x10004c00",
+    "reason": "The surrounding command handler100010A0 loads input/output/count and all three auxiliary buffers. The selected call belongs to envelope mixing; the scalar-resampler call sites do not read this switch."
+  },
+  "coefficient_identity": {
+    "historical_planar_va": "0x10010568",
+    "current_raw_kernel_va": "0x1003c8d0",
+    "bytes": 512,
+    "sha256": "b614a26badbdd218794fb72b6b7fa8b74748d25355b60f8157df06126baf2ed2",
+    "raw_bytes_exact": true,
+    "current_interleaved_va": "0x1003cad0",
+    "current_interleaved_sha256": "e606c84c6ade13524960a0a4e290b96cd89e0fb8e6224f25ca356c47bfb743df",
+    "relation": "current[phase][tap] = historical[(3-tap)*64 + phase]",
+    "phase_count": 64,
+    "taps": 4,
+    "entries_checked": 256,
+    "all_entries_equal": true,
+    "historical_native_operand_bases": {
+      "input[0]": "0x100106e8",
+      "input[1]": "0x10010668",
+      "input[2]": "0x100105e8",
+      "input[3]": "0x10010568"
+    },
+    "historical_native_product_addition_order": [
+      1,
+      2,
+      3,
+      0
+    ],
+    "current_native_product_addition_order": [
+      2,
+      3,
+      1,
+      0
+    ],
+    "storage": "Both kernels are in writable .data. The raw coefficient identity and transformed layout do not uniquely determine the original declarations."
+  },
+  "corresponding_native_regions": [
+    {
+      "operation": "history restore/reset",
+      "historical": "100063F6..1000648F",
+      "current": "1001199E..10011A57"
+    },
+    {
+      "operation": "phase normalization, fractional index and convolution",
+      "historical": "100064B8..10006550",
+      "current": "10011A80..10011B2A"
+    },
+    {
+      "operation": "final phase and extra-history alignment",
+      "historical": "10006550..10006582",
+      "current": "10011B2A..10011B57"
+    },
+    {
+      "operation": "save complete state",
+      "historical": "100065AE..1000660D",
+      "current": "10011B6B..10011BD4"
+    }
+  ],
+  "prior_source_ancestry": {
+    "file": "/root/.ai-tmp/audio-envelope-ancestry.c5DMoPAf/ultrahle/src/SLIST.C",
+    "sha256": "4ca967ed6c8ed18a33c1adafdbf9c3fa6d1c48670ddf9942ddbda2c06a970a51",
+    "url": "https://github.com/EmulatorArchive/ultrahle/blob/435b252a51c2e3671a8614e63b3ba75e3dd80b69/src/SLIST.C",
+    "function": "resample at line569",
+    "observation": "The linear interpolation, eight-sample state, sixteen extra outputs and phase rewind appear in the older0.7 routine. This historical source does not supply the later four-tap implementation."
+  },
+  "behavior_diagnostic": {
+    "file": "/root/.ai-tmp/audio-07a-resample.zacw_l53/native-behavior.json",
+    "sha256": "e8f6be4587a2ac0e21f1c6d11e1200bd3d8c75f1bf63c139be68453108523b75",
+    "script": "/root/.ai-tmp/audio-07a-resample.zacw_l53/compare_native.py",
+    "script_sha256": "4c7f14cf4c15e4ba7b0e5d0a21023ff07dbc10f65ebc5009db3c833ac0c36276",
+    "cases": 640,
+    "matching": 640,
+    "input_space": {
+      "flags": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "pitches": [
+        0,
+        256,
+        16384,
+        32768,
+        65535
+      ],
+      "phases": [
+        0,
+        511,
+        16384,
+        32767
+      ],
+      "byte_counts": [
+        0,
+        2,
+        16,
+        64
+      ],
+      "output_layout": [
+        "disjoint from input",
+        "same input/output start"
+      ],
+      "extra_history_counts": "0..7"
+    },
+    "compared": [
+      "complete8192-byte PCM buffer",
+      "complete64-byte state",
+      "cdecl return/stack"
+    ],
+    "adaptation": "Only command byte order and context layout change: embedded historical PCM buffer and fields at220c/221c/221e versus a current buffer pointer and fields at14/24/26. Both original x86 bodies and coefficient bytes execute unchanged.",
+    "limitations": [
+      "Finite synthetic vectors do not establish equivalence for every input or recover source spelling.",
+      "No candidate compiler output or patched machine code is executed."
+    ]
+  },
+  "recovery_implications": [
+    "The target scalar routine is a retained descendant of the0.7a rewrite, not a direct translation of UltraHLE linear resample.",
+    "Its history protocol, signedness, scaling, saturation and coefficient ordering now have independent historical native evidence.",
+    "Different native product scheduling does not uniquely prove an explicit four-term expression versus an unrolled source loop. Both forms were already exercised in the176 current scalar controls; this evidence alone does not justify repeating them.",
+    "The unresolved target remains656 bytes with278 masked byte-position differences. No normalized-only match or finite behavior match is promoted to byte-exact reconstruction."
+  ],
+  "artifacts": {
+    "/root/.ai-tmp/audio-07a-resample.zacw_l53/freeze.py": "50e8025bde249f938e57dfe4dd92072f32bd432f252c711857fd7cca2f16bd48",
+    "/root/.ai-tmp/audio-07a-resample.zacw_l53/old-full-text.txt": "a65f166fc0a8e3a37ce7de1480a21407f5aeda3d1cb5a6cd3f1e1769138e430b",
+    "/root/.ai-tmp/audio-07a-resample.zacw_l53/07-full-text.txt": "51214a065b5dab36e87ec95446b3bafb96f596618c70dd69f789d794fd598e76",
+    "/root/.ai-tmp/audio-07a-resample.zacw_l53/current-scalar.txt": "578d4d376252b67dea343305d9b289e10a0fe90a5f3791d070cecda94f0190ad"
+  }
+}
