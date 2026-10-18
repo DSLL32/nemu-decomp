@@ -35,8 +35,7 @@ int ReliableConnection::resend(int count)
     int messages=count>outgoing.count?outgoing.count:count;
     data[0]=(char)messages;
     for (int i=0;i<messages;i++) {
-        PacketCache::Record *record=&outgoing.entries[outgoing.count-i-1];
-        offset+=record->pack(data+offset);
+        offset+=outgoing.pack(outgoing.count-i-1,data+offset);
     }
     UDPConnection::send(data,offset);
     return 0;
@@ -60,31 +59,26 @@ int ReliableConnection::dataAvailable()
 int ReliableConnection::receive(char *data,int *length,char peek,sockaddr_in *peer)
 {
     PacketCache *cache=&incoming;
-    int i;
-    int next=receiveNumber;
-    for (i=0;i<cache->count;i++) if (cache->entries[i].number==next) goto found;
+    int size;
+    if (!cache->get(receiveNumber,data,length)) goto found;
     {
         char packet[32768];
         memset(packet,0,sizeof(packet));
-        int size=32767;
+        size=32767;
         if (UDPConnection::receive(packet,&size,0,peer)) return 1;
         if (size<2) return 1;
         int count=*(unsigned int *)packet&255;
         char *p=packet+1;
         for (int n=0;n<count;n++) {
             unsigned short number=*(unsigned short *)p;
-            unsigned short bytes=*(unsigned short *)(p+2);
+            int bytes=*(unsigned short *)(p+2);
             if (number<receiveNumber) break;
             cache->add(number,p+4,bytes);
             p+=bytes+4;
         }
     }
-    next=receiveNumber;
-    for (i=0;i<cache->count;i++) if (cache->entries[i].number==next) goto found;
-    return 1;
+    if (cache->get(receiveNumber,data,length)) return 1;
 found:
-    *length=cache->entries[i].size;
-    memcpy(data,cache->entries[i].data,*length);
     if (!peek) receiveNumber++;
     cache->removeEarlier(receiveNumber);
     return 0;

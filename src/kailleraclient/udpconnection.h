@@ -10,8 +10,8 @@ public:
     virtual int shareSocket(UDPConnection *other);
     virtual int bind(int port);
     virtual int getPort();
-    virtual int setPeer(sockaddr_in *address);
     virtual int setPeer(char *hostname,int port);
+    virtual int setPeer(sockaddr_in *address);
     virtual int setPeerPort(int port);
     virtual int send(char *data,int length);
     virtual int receive(char *data,int *length,char peek=0,sockaddr_in *peer=0);

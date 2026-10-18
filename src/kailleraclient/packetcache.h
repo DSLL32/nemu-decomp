@@ -12,8 +12,9 @@ public:
         char *data;
         int pack(char *buffer) {
             int bytes=size+4;
-            *(unsigned int *)buffer=*(unsigned int *)this;
-            memcpy(buffer+4,data,size);
+            memcpy(buffer,this,4);
+            buffer+=4;
+            memcpy(buffer,data,size);
             return bytes;
         }
     };
@@ -45,6 +46,17 @@ public:
             }
         }
     }
+    int get(int number,char *buffer,int *length) {
+        for (int i=0;i<count;i++) {
+            if (entries[i].number==number) {
+                *length=entries[i].size;
+                memcpy(buffer,entries[i].data,*length);
+                return 0;
+            }
+        }
+        return 1;
+    }
+    int pack(int index,char *buffer) { Record *record=entries+index; int bytes=record->size+4; memcpy(buffer,record,4); buffer+=4; memcpy(buffer,record->data,record->size); return bytes; }
     Record entries[256];
     int count;
 };
