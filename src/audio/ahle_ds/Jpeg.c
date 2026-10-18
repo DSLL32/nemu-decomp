@@ -30,12 +30,15 @@ int JpegCosine[64] = {
     3, -8, 13, -15, 15, -13, 8, -3
 };
 
-static int JpegBlock[384];
-static int JpegOutput[256];
-static int JpegQuantizationCb[64];
-static int JpegPixels[16][16][4];
-static int JpegQuantizationCr[64];
-static int JpegQuantizationY[64];
+/* Private buffer names and dimensions follow the UltraHLE ZLIST.C ancestor.
+ * The target preserves these extents; some internal storage order remains
+ * unresolved. See analysis/audio-jpeg-storage-ancestry.json. */
+static int in[6][64];
+static int out[256];
+static int q2[64];
+static int rgb[256][4];
+static int q3[64];
+static int q1[64];
 
 void JpegReadBlock(int *destination, unsigned int address, int bytes)
 {
@@ -157,40 +160,40 @@ void JpegDecodeMacroblock(void)
 {
     int cb[64], cr[64];
     int x, y, bx, by;
-    JpegInverseDCT(cb, JpegBlock + 256, JpegQuantizationCb, 0);
-    JpegInverseDCT(cr, JpegBlock + 320, JpegQuantizationCr, 0);
+    JpegInverseDCT(cb, in[4], q2, 0);
+    JpegInverseDCT(cr, in[5], q3, 0);
     for (y = 0; y < 16; ++y)
         for (x = 0; x < 16; ++x) {
             int u = cb[(y >> 1) * 8 + (x >> 1)];
             int v = cr[(y >> 1) * 8 + (x >> 1)];
-            JpegPixels[y][x][0] = (v * 291) >> 8;
-            JpegPixels[y][x][1] = (-u * 101 - v * 148) >> 8;
-            JpegPixels[y][x][2] = (u * 564) >> 8;
+            rgb[y * 16 + x][0] = (v * 291) >> 8;
+            rgb[y * 16 + x][1] = (-u * 101 - v * 148) >> 8;
+            rgb[y * 16 + x][2] = (u * 564) >> 8;
         }
     for (by = 0; by <= 8; by += 8)
         for (bx = 0; bx <= 8; bx += 8) {
-            JpegInverseDCT(cr, JpegBlock + ((by / 8) * 2 + bx / 8) * 64,
-                           JpegQuantizationY, 1);
+            JpegInverseDCT(cr, in[(by / 8) * 2 + bx / 8],
+                           q1, 1);
             for (y = 0; y < 8; ++y)
                 for (x = 0; x < 8; ++x) {
-                    JpegPixels[by + y][bx + x][0] += cr[y * 8 + x] + 128;
-                    JpegPixels[by + y][bx + x][1] += cr[y * 8 + x] + 128;
-                    JpegPixels[by + y][bx + x][2] += cr[y * 8 + x] + 128;
+                    rgb[(by + y) * 16 + bx + x][0] += cr[y * 8 + x] + 128;
+                    rgb[(by + y) * 16 + bx + x][1] += cr[y * 8 + x] + 128;
+                    rgb[(by + y) * 16 + bx + x][2] += cr[y * 8 + x] + 128;
                 }
         }
     for (y = 0; y < 16; ++y)
         for (x = 0; x < 16; ++x) {
             int color, packed;
-            color = JpegPixels[y][x][0] >> 3;
+            color = rgb[y * 16 + x][0] >> 3;
             if (color < 0) color = 0; else if (color > 31) color = 31;
             packed = (color << 11) + 1;
-            color = JpegPixels[y][x][1] >> 3;
+            color = rgb[y * 16 + x][1] >> 3;
             if (color < 0) color = 0; else if (color > 31) color = 31;
             packed += color << 6;
-            color = JpegPixels[y][x][2] >> 3;
+            color = rgb[y * 16 + x][2] >> 3;
             if (color < 0) color = 0; else if (color > 31) color = 31;
             packed += color << 1;
-            JpegOutput[y * 16 + x] = packed;
+            out[y * 16 + x] = packed;
         }
 }
 
@@ -207,18 +210,18 @@ void DCTList(unsigned int address)
     if ((data & 0x7f000000) || (y & 0x7f000000) ||
         (cb & 0x7f000000) || (cr & 0x7f000000) || !data || !y || !cb || !cr)
         return;
-    JpegReadBlock(JpegQuantizationY, y, 128);
-    JpegReadBlock(JpegQuantizationCb, cb, 128);
-    JpegReadBlock(JpegQuantizationCr, cr, 128);
+    JpegReadBlock(q1, y, 128);
+    JpegReadBlock(q2, cb, 128);
+    JpegReadBlock(q3, cr, 128);
     for (i = 1; i < 64; ++i) {
-        JpegQuantizationY[i] <<= 1;
-        JpegQuantizationCb[i] <<= 1;
-        JpegQuantizationCr[i] <<= 1;
+        q1[i] <<= 1;
+        q2[i] <<= 1;
+        q3[i] <<= 1;
     }
     for (i = 0; i < 4; ++i) {
-        JpegReadBlock(JpegBlock, data, 0x300);
+        JpegReadBlock(in[0], data, 0x300);
         JpegDecodeMacroblock();
-        JpegWriteBlock(JpegOutput, data, 0x200);
+        JpegWriteBlock(out, data, 0x200);
         data += 0x300;
     }
 }

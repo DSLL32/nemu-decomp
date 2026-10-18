@@ -90,10 +90,10 @@ def run(output):
         section_sha256=hashlib.sha256(section['data']).hexdigest())
     # Original operands independently identify these offsets. Private C storage
     # explains the shared contribution; inferred names still affect its order.
-    bss_layout = [('_JpegBlock', 0), ('_JpegOutput', 0x600),
-                  ('_JpegQuantizationCb', 0xa00), ('_JpegPixels', 0xb00),
-                  ('_JpegQuantizationCr', 0x1b00), ('?u@?1??poly@@9@9', 0x1c00),
-                  ('_JpegQuantizationY', 0x2d00),
+    bss_layout = [('_in', 0), ('_out', 0x600),
+                  ('_q2', 0xa00), ('_rgb', 0xb00),
+                  ('_q3', 0x1b00), ('?u@?1??poly@@9@9', 0x1c00),
+                  ('_q1', 0x2d00),
                   ('?initialized@?1??JpegInverseDCT@@9@9', 0x2e00),
                   ('?initialized@?1??JpegInverseDCTAlternate@@9@9', 0x2e04),
                   ('?u_start@?1??poly@@9@9', 0x2e08),
@@ -110,7 +110,7 @@ def run(output):
                          for s, (_, offset) in zip(bss_symbols, bss_layout)],
         symbol_offsets_match=all(s['section'] == bss['index'] and s['value'] == offset
                                  for s, (_, offset) in zip(bss_symbols, bss_layout)),
-        notes='Private ownership and extent are supported; original private names and array order remain unresolved.')
+        notes='Private names and dimensions follow the identified ancestor; the Nemu spelling remains inferred and four array offsets remain unresolved.')
     # The ancestor-backed scalar names reproduce the native LINK allocation.
     # Check that this executable object retains the same common-symbol roster
     # as the declaration-only control, including the unused inherited state.

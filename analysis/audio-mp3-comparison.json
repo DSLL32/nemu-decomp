@@ -15,15 +15,15 @@
     "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0"
   },
   "source_sha256": {
-    "src/audio/ahle_ds/Jpeg.c": "d6df5e74727885a45c0e0aa4beccbb860b7ef430030c3f1581404218ac04317a",
+    "src/audio/ahle_ds/Jpeg.c": "82ebf8c9d72e8c83d42bb97e3351627462336fb2693d47b449b803d6537988ac",
     "src/audio/ahle_ds/Mp3.c": "68c1091a63569e6357ee8795ce4ee5b35ab718d0c23bae7246ae037f7174308d",
     "src/audio/ahle_ds/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f"
   },
-  "address_map_sha256": "8ab75d14769e0ca66d3254773cbe552b234b05a56e2212051f47d780eb9758be",
+  "address_map_sha256": "3a150ef38580419ad2d620c48087d4710ea206172de55b9c5b815de17a04272d",
   "objects": [
     {
-      "object": "/root/.ai-tmp/audio-mp3-20261017/Jpeg.obj",
-      "sha256": "8b4336194f6c0c273c447d9d115ce4771ad8649344a688fdecb91faa23c26173",
+      "object": "/root/.ai-tmp/audio-jpeg-shape.m1xd3v4y/canonical/Jpeg.obj",
+      "sha256": "3e396dffbd5caab7cf2e179b187d5858d053f65b6a1616797d9becc91d2a1497",
       "original": "/root/nemu-decomp/master/Plugin/audio.dll",
       "functions": [
         {
@@ -777,11 +777,11 @@
             {
               "offset": 13,
               "type": "DIR32",
-              "symbol": "_JpegQuantizationCb",
+              "symbol": "_q2",
               "addend": 0,
               "original_target_va": 269392344,
               "original_target_symbols": [
-                "_JpegQuantizationCb"
+                "_q2"
               ],
               "expected_target_va": 269392344,
               "resolution_basis": "observed_operand_inference",
@@ -793,7 +793,7 @@
             {
               "offset": 25,
               "type": "DIR32",
-              "symbol": "_JpegBlock",
+              "symbol": "_in",
               "addend": 1024,
               "original_target_va": 269390808,
               "original_target_symbols": [],
@@ -823,11 +823,11 @@
             {
               "offset": 38,
               "type": "DIR32",
-              "symbol": "_JpegQuantizationCr",
+              "symbol": "_q3",
               "addend": 0,
               "original_target_va": 269396696,
               "original_target_symbols": [
-                "_JpegQuantizationCr"
+                "_q3"
               ],
               "expected_target_va": 269396696,
               "resolution_basis": "observed_operand_inference",
@@ -839,7 +839,7 @@
             {
               "offset": 47,
               "type": "DIR32",
-              "symbol": "_JpegBlock",
+              "symbol": "_in",
               "addend": 1280,
               "original_target_va": 269391064,
               "original_target_symbols": [],
@@ -869,7 +869,7 @@
             {
               "offset": 63,
               "type": "DIR32",
-              "symbol": "_JpegPixels",
+              "symbol": "_rgb",
               "addend": 4,
               "original_target_va": 269392604,
               "original_target_symbols": [],
@@ -883,7 +883,7 @@
             {
               "offset": 628,
               "type": "DIR32",
-              "symbol": "_JpegPixels",
+              "symbol": "_rgb",
               "addend": 4100,
               "original_target_va": 269396700,
               "original_target_symbols": [],
@@ -897,7 +897,7 @@
             {
               "offset": 641,
               "type": "DIR32",
-              "symbol": "_JpegPixels",
+              "symbol": "_rgb",
               "addend": 4,
               "original_target_va": 269392604,
               "original_target_symbols": [],
@@ -911,11 +911,11 @@
             {
               "offset": 708,
               "type": "DIR32",
-              "symbol": "_JpegQuantizationY",
+              "symbol": "_q1",
               "addend": 0,
               "original_target_va": 269401304,
               "original_target_symbols": [
-                "_JpegQuantizationY"
+                "_q1"
               ],
               "expected_target_va": 269401304,
               "resolution_basis": "observed_operand_inference",
@@ -927,11 +927,11 @@
             {
               "offset": 713,
               "type": "DIR32",
-              "symbol": "_JpegBlock",
+              "symbol": "_in",
               "addend": 0,
               "original_target_va": 269389784,
               "original_target_symbols": [
-                "_JpegBlock"
+                "_in"
               ],
               "expected_target_va": 269389784,
               "resolution_basis": "observed_operand_inference",
@@ -959,7 +959,7 @@
             {
               "offset": 969,
               "type": "DIR32",
-              "symbol": "_JpegPixels",
+              "symbol": "_rgb",
               "addend": 2052,
               "original_target_va": 269394652,
               "original_target_symbols": [],
@@ -973,7 +973,7 @@
             {
               "offset": 988,
               "type": "DIR32",
-              "symbol": "_JpegPixels",
+              "symbol": "_rgb",
               "addend": 4,
               "original_target_va": 269392604,
               "original_target_symbols": [],
@@ -987,7 +987,7 @@
             {
               "offset": 993,
               "type": "DIR32",
-              "symbol": "_JpegOutput",
+              "symbol": "_out",
               "addend": 4,
               "original_target_va": 269391324,
               "original_target_symbols": [],
@@ -1001,7 +1001,7 @@
             {
               "offset": 1371,
               "type": "DIR32",
-              "symbol": "_JpegOutput",
+              "symbol": "_out",
               "addend": 1028,
               "original_target_va": 269392348,
               "original_target_symbols": [],
@@ -1058,11 +1058,11 @@
             {
               "offset": 167,
               "type": "DIR32",
-              "symbol": "_JpegQuantizationY",
+              "symbol": "_q1",
               "addend": 0,
               "original_target_va": 269401304,
               "original_target_symbols": [
-                "_JpegQuantizationY"
+                "_q1"
               ],
               "expected_target_va": 269401304,
               "resolution_basis": "observed_operand_inference",
@@ -1090,11 +1090,11 @@
             {
               "offset": 183,
               "type": "DIR32",
-              "symbol": "_JpegQuantizationCb",
+              "symbol": "_q2",
               "addend": 0,
               "original_target_va": 269392344,
               "original_target_symbols": [
-                "_JpegQuantizationCb"
+                "_q2"
               ],
               "expected_target_va": 269392344,
               "resolution_basis": "observed_operand_inference",
@@ -1122,11 +1122,11 @@
             {
               "offset": 199,
               "type": "DIR32",
-              "symbol": "_JpegQuantizationCr",
+              "symbol": "_q3",
               "addend": 0,
               "original_target_va": 269396696,
               "original_target_symbols": [
-                "_JpegQuantizationCr"
+                "_q3"
               ],
               "expected_target_va": 269396696,
               "resolution_basis": "observed_operand_inference",
@@ -1154,7 +1154,7 @@
             {
               "offset": 226,
               "type": "DIR32",
-              "symbol": "_JpegQuantizationY",
+              "symbol": "_q1",
               "addend": 4,
               "original_target_va": 269401308,
               "original_target_symbols": [],
@@ -1168,7 +1168,7 @@
             {
               "offset": 232,
               "type": "DIR32",
-              "symbol": "_JpegQuantizationCb",
+              "symbol": "_q2",
               "addend": 4,
               "original_target_va": 269392348,
               "original_target_symbols": [],
@@ -1182,7 +1182,7 @@
             {
               "offset": 238,
               "type": "DIR32",
-              "symbol": "_JpegQuantizationCr",
+              "symbol": "_q3",
               "addend": 4,
               "original_target_va": 269396700,
               "original_target_symbols": [],
@@ -1196,7 +1196,7 @@
             {
               "offset": 250,
               "type": "DIR32",
-              "symbol": "_JpegQuantizationY",
+              "symbol": "_q1",
               "addend": 4,
               "original_target_va": 269401308,
               "original_target_symbols": [],
@@ -1210,7 +1210,7 @@
             {
               "offset": 256,
               "type": "DIR32",
-              "symbol": "_JpegQuantizationCb",
+              "symbol": "_q2",
               "addend": 4,
               "original_target_va": 269392348,
               "original_target_symbols": [],
@@ -1224,7 +1224,7 @@
             {
               "offset": 262,
               "type": "DIR32",
-              "symbol": "_JpegQuantizationCr",
+              "symbol": "_q3",
               "addend": 4,
               "original_target_va": 269396700,
               "original_target_symbols": [],
@@ -1238,11 +1238,11 @@
             {
               "offset": 295,
               "type": "DIR32",
-              "symbol": "_JpegBlock",
+              "symbol": "_in",
               "addend": 0,
               "original_target_va": 269389784,
               "original_target_symbols": [
-                "_JpegBlock"
+                "_in"
               ],
               "expected_target_va": 269389784,
               "resolution_basis": "observed_operand_inference",
@@ -1286,11 +1286,11 @@
             {
               "offset": 316,
               "type": "DIR32",
-              "symbol": "_JpegOutput",
+              "symbol": "_out",
               "addend": 0,
               "original_target_va": 269391320,
               "original_target_symbols": [
-                "_JpegOutput"
+                "_out"
               ],
               "expected_target_va": 269391320,
               "resolution_basis": "observed_operand_inference",
@@ -3830,8 +3830,8 @@
       "unresolved_targets": 0
     },
     {
-      "object": "/root/.ai-tmp/audio-mp3-20261017/Mp3.obj",
-      "sha256": "21a138e9ac690204b5b55d0cf1838d45c027d3db130cb5be2e71f9f7ca3fea99",
+      "object": "/root/.ai-tmp/audio-jpeg-shape.m1xd3v4y/canonical/Mp3.obj",
+      "sha256": "880a2d90f78c3909ac1be88265274ca418cd6c3eaa9bfc8a0411fbfd40f5a655",
       "original": "/root/nemu-decomp/master/Plugin/audio.dll",
       "functions": [
         {
@@ -8631,46 +8631,46 @@
     "size_equal": true,
     "private_symbols": [
       {
-        "symbol": "_JpegBlock",
-        "rebuilt_offset": 9984,
-        "original_offset": 0,
-        "equal": false
-      },
-      {
-        "symbol": "_JpegOutput",
-        "rebuilt_offset": 4352,
-        "original_offset": 1536,
-        "equal": false
-      },
-      {
-        "symbol": "_JpegQuantizationCb",
+        "symbol": "_in",
         "rebuilt_offset": 0,
+        "original_offset": 0,
+        "equal": true
+      },
+      {
+        "symbol": "_out",
+        "rebuilt_offset": 1536,
+        "original_offset": 1536,
+        "equal": true
+      },
+      {
+        "symbol": "_q2",
+        "rebuilt_offset": 11520,
         "original_offset": 2560,
         "equal": false
       },
       {
-        "symbol": "_JpegPixels",
-        "rebuilt_offset": 256,
+        "symbol": "_rgb",
+        "rebuilt_offset": 3072,
         "original_offset": 2816,
         "equal": false
       },
       {
-        "symbol": "_JpegQuantizationCr",
-        "rebuilt_offset": 9728,
+        "symbol": "_q3",
+        "rebuilt_offset": 2816,
         "original_offset": 6912,
         "equal": false
       },
       {
         "symbol": "?u@?1??poly@@9@9",
-        "rebuilt_offset": 5376,
+        "rebuilt_offset": 7168,
         "original_offset": 7168,
-        "equal": false
+        "equal": true
       },
       {
-        "symbol": "_JpegQuantizationY",
-        "rebuilt_offset": 11520,
+        "symbol": "_q1",
+        "rebuilt_offset": 2560,
         "original_offset": 11520,
-        "equal": true
+        "equal": false
       },
       {
         "symbol": "?initialized@?1??JpegInverseDCT@@9@9",
@@ -8698,7 +8698,7 @@
       }
     ],
     "symbol_offsets_match": false,
-    "notes": "Private ownership and extent are supported; original private names and array order remain unresolved."
+    "notes": "Private names and dimensions follow the identified ancestor; the Nemu spelling remains inferred and four array offsets remain unresolved."
   },
   "common_uninitialized_layout": {
     "audit": "analysis/audio-mp3-global-storage.json",

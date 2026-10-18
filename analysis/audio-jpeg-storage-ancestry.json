@@ -1,0 +1,571 @@
+{
+  "status": "ancestor_names_and_dimensions_promoted_private_layout_still_partial",
+  "full_dll_byte_exact": false,
+  "native_original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "source_inference": "The identified UltraHLE/Apollo JPEG ancestor supplies the six private buffer names and two-dimensional shapes. These names are supported inferences for Nemu, not symbols recovered from its stripped DLL.",
+  "ancestors": [
+    {
+      "path": "/root/.ai-tmp/audio-mp3-20261017/UltraHLE-original/src/ZLIST.C",
+      "sha256": "1f4c51dae31d835e0fef05a2463bf9af3c25330138d59498bcee334b41a97137"
+    },
+    {
+      "path": "/root/.ai-tmp/audio-mp3-20261017/Apollo/jpgdct.cpp",
+      "sha256": "29b2d222f3fca0fe83b447d8387764df1587bed07bb2e00cb07900aa4750cf3a"
+    }
+  ],
+  "urls": [
+    "https://github.com/emu-russia/UltraHLE/blob/9ba068d67815eb482973a94c120706775bdd258a/src/ZLIST.C",
+    "https://github.com/Azimer/Apollo/blob/94e90849cb5db6a22ce93e01baf309127c7e25b8/jpgdct.cpp"
+  ],
+  "frozen": "/root/.ai-tmp/audio-jpeg-shape.m1xd3v4y/frozen-source-proof",
+  "inputs": {
+    "src/audio/ahle_ds/Jpeg.c": "82ebf8c9d72e8c83d42bb97e3351627462336fb2693d47b449b803d6537988ac",
+    "src/audio/ahle_ds/Mp3.c": "68c1091a63569e6357ee8795ce4ee5b35ab718d0c23bae7246ae037f7174308d",
+    "src/audio/ahle_ds/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
+    "analysis/audio-mp3-addresses.json": "3a150ef38580419ad2d620c48087d4710ea206172de55b9c5b815de17a04272d",
+    "scripts/check_audio_mp3.py": "f2b24d01d7b7078f4d2e761eb5183d9728bbe13ad6d648b13c994b19d420f530"
+  },
+  "objects": {
+    "Jpeg.obj": "3e396dffbd5caab7cf2e179b187d5858d053f65b6a1616797d9becc91d2a1497",
+    "Mp3.obj": "880a2d90f78c3909ac1be88265274ca418cd6c3eaa9bfc8a0411fbfd40f5a655"
+  },
+  "compiler_flags": [
+    "/nologo",
+    "/c",
+    "/O2",
+    "/Ob1",
+    "/MT"
+  ],
+  "compiler_sha256": {
+    "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
+    "toolchains/vc7/bin/c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
+    "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0"
+  },
+  "comparison_sha256": "eedaf0ef6fabde8d986011d36bcd828f4df8582790702f4d0b17c4d43a5fdae6",
+  "summary": {
+    "functions": 21,
+    "original_function_bytes": 16928,
+    "matching_complete_extents": 20,
+    "matching_complete_extent_bytes": 11824,
+    "matching_extents_with_consistent_symbolic_relocations": 20,
+    "initialized_data_bytes": 5016,
+    "initialized_data_equal": true
+  },
+  "private_layout": {
+    "unit": "Jpeg",
+    "original_va": "0x100e8fd8",
+    "original_size": 11800,
+    "rebuilt_size": 11800,
+    "size_equal": true,
+    "private_symbols": [
+      {
+        "symbol": "_in",
+        "rebuilt_offset": 0,
+        "original_offset": 0,
+        "equal": true
+      },
+      {
+        "symbol": "_out",
+        "rebuilt_offset": 1536,
+        "original_offset": 1536,
+        "equal": true
+      },
+      {
+        "symbol": "_q2",
+        "rebuilt_offset": 11520,
+        "original_offset": 2560,
+        "equal": false
+      },
+      {
+        "symbol": "_rgb",
+        "rebuilt_offset": 3072,
+        "original_offset": 2816,
+        "equal": false
+      },
+      {
+        "symbol": "_q3",
+        "rebuilt_offset": 2816,
+        "original_offset": 6912,
+        "equal": false
+      },
+      {
+        "symbol": "?u@?1??poly@@9@9",
+        "rebuilt_offset": 7168,
+        "original_offset": 7168,
+        "equal": true
+      },
+      {
+        "symbol": "_q1",
+        "rebuilt_offset": 2560,
+        "original_offset": 11520,
+        "equal": false
+      },
+      {
+        "symbol": "?initialized@?1??JpegInverseDCT@@9@9",
+        "rebuilt_offset": 11776,
+        "original_offset": 11776,
+        "equal": true
+      },
+      {
+        "symbol": "?initialized@?1??JpegInverseDCTAlternate@@9@9",
+        "rebuilt_offset": 11780,
+        "original_offset": 11780,
+        "equal": true
+      },
+      {
+        "symbol": "?u_start@?1??poly@@9@9",
+        "rebuilt_offset": 11784,
+        "original_offset": 11784,
+        "equal": true
+      },
+      {
+        "symbol": "?u_div@?1??poly@@9@9",
+        "rebuilt_offset": 11792,
+        "original_offset": 11792,
+        "equal": true
+      }
+    ],
+    "symbol_offsets_match": false,
+    "notes": "Private names and dimensions follow the identified ancestor; the Nemu spelling remains inferred and four array offsets remain unresolved."
+  },
+  "controls": [
+    {
+      "name": "names",
+      "exit": 0,
+      "functions": [
+        {
+          "name": "_JpegReadBlock",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegWriteBlock",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegInitializeCosine",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegSwapSample",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegCopyBlock",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegInverseDCT",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegInverseDCTAlternate",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegDecodeMacroblock",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_DCTList",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_poly",
+          "equal": true,
+          "relocated": true
+        }
+      ],
+      "bss": {
+        "size": 11800,
+        "symbols": [
+          {
+            "name": "_in",
+            "offset": 0
+          },
+          {
+            "name": "_out",
+            "offset": 1536
+          },
+          {
+            "name": "_q1",
+            "offset": 2560
+          },
+          {
+            "name": "_q3",
+            "offset": 2816
+          },
+          {
+            "name": "_rgb",
+            "offset": 3072
+          },
+          {
+            "name": "?u@?1??poly@@9@9",
+            "offset": 7168
+          },
+          {
+            "name": "_q2",
+            "offset": 11520
+          },
+          {
+            "name": "?initialized@?1??JpegInverseDCT@@9@9",
+            "offset": 11776
+          },
+          {
+            "name": "?initialized@?1??JpegInverseDCTAlternate@@9@9",
+            "offset": 11780
+          },
+          {
+            "name": "?u_start@?1??poly@@9@9",
+            "offset": 11784
+          },
+          {
+            "name": "?u_div@?1??poly@@9@9",
+            "offset": 11792
+          }
+        ]
+      },
+      "source_sha256": "144f22ceb285ea64c75192bcb4d2b82f6f5912120a14bead07e4caea90ea2507",
+      "object_sha256": "f62e57e6b112dd28ceeb8de6b6d9056f0515dd42faba7114aea92adf89b14768",
+      "comparison_sha256": "3a7b5fd6bf5c4854b141c1966b14b0ea738c5741ee339699f3d117f7287274cf"
+    },
+    {
+      "name": "in_2d",
+      "exit": 0,
+      "functions": [
+        {
+          "name": "_JpegReadBlock",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegWriteBlock",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegInitializeCosine",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegSwapSample",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegCopyBlock",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegInverseDCT",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegInverseDCTAlternate",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegDecodeMacroblock",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_DCTList",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_poly",
+          "equal": true,
+          "relocated": true
+        }
+      ],
+      "bss": {
+        "size": 11800,
+        "symbols": [
+          {
+            "name": "_in",
+            "offset": 0
+          },
+          {
+            "name": "_out",
+            "offset": 1536
+          },
+          {
+            "name": "_q1",
+            "offset": 2560
+          },
+          {
+            "name": "_q3",
+            "offset": 2816
+          },
+          {
+            "name": "_rgb",
+            "offset": 3072
+          },
+          {
+            "name": "?u@?1??poly@@9@9",
+            "offset": 7168
+          },
+          {
+            "name": "_q2",
+            "offset": 11520
+          },
+          {
+            "name": "?initialized@?1??JpegInverseDCT@@9@9",
+            "offset": 11776
+          },
+          {
+            "name": "?initialized@?1??JpegInverseDCTAlternate@@9@9",
+            "offset": 11780
+          },
+          {
+            "name": "?u_start@?1??poly@@9@9",
+            "offset": 11784
+          },
+          {
+            "name": "?u_div@?1??poly@@9@9",
+            "offset": 11792
+          }
+        ]
+      },
+      "source_sha256": "c8a8c2ca30e44ce9fbeb577b720fccd074a247a9d2aa13627cf2f40ae734644a",
+      "object_sha256": "5a87606d39fa7c33cc738afa83aba27172fc88d9877eedd0062b117dc79ce056",
+      "comparison_sha256": "651cb2198598f8021292fad48c28e5e16dd632ddac6c7401c444e793af6a82d7"
+    },
+    {
+      "name": "rgb_2d",
+      "exit": 0,
+      "functions": [
+        {
+          "name": "_JpegReadBlock",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegWriteBlock",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegInitializeCosine",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegSwapSample",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegCopyBlock",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegInverseDCT",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegInverseDCTAlternate",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegDecodeMacroblock",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_DCTList",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_poly",
+          "equal": true,
+          "relocated": true
+        }
+      ],
+      "bss": {
+        "size": 11800,
+        "symbols": [
+          {
+            "name": "_in",
+            "offset": 0
+          },
+          {
+            "name": "_out",
+            "offset": 1536
+          },
+          {
+            "name": "_q1",
+            "offset": 2560
+          },
+          {
+            "name": "_q3",
+            "offset": 2816
+          },
+          {
+            "name": "_rgb",
+            "offset": 3072
+          },
+          {
+            "name": "?u@?1??poly@@9@9",
+            "offset": 7168
+          },
+          {
+            "name": "_q2",
+            "offset": 11520
+          },
+          {
+            "name": "?initialized@?1??JpegInverseDCT@@9@9",
+            "offset": 11776
+          },
+          {
+            "name": "?initialized@?1??JpegInverseDCTAlternate@@9@9",
+            "offset": 11780
+          },
+          {
+            "name": "?u_start@?1??poly@@9@9",
+            "offset": 11784
+          },
+          {
+            "name": "?u_div@?1??poly@@9@9",
+            "offset": 11792
+          }
+        ]
+      },
+      "source_sha256": "073baae5a5eccacb22ea3777a635220cbe1884660e3f29444600af761c672b85",
+      "object_sha256": "bded104601381322727b5a149a820f0cc07e84835c9796fb16041cc2b33d52dc",
+      "comparison_sha256": "e99b9a9923b260fee3ee57ca42a0c364c7d486979d91c1084b29ae814c1acfa0"
+    },
+    {
+      "name": "both_2d",
+      "exit": 0,
+      "functions": [
+        {
+          "name": "_JpegReadBlock",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegWriteBlock",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegInitializeCosine",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegSwapSample",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegCopyBlock",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegInverseDCT",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegInverseDCTAlternate",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegDecodeMacroblock",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_DCTList",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_poly",
+          "equal": true,
+          "relocated": true
+        }
+      ],
+      "bss": {
+        "size": 11800,
+        "symbols": [
+          {
+            "name": "_in",
+            "offset": 0
+          },
+          {
+            "name": "_out",
+            "offset": 1536
+          },
+          {
+            "name": "_q1",
+            "offset": 2560
+          },
+          {
+            "name": "_q3",
+            "offset": 2816
+          },
+          {
+            "name": "_rgb",
+            "offset": 3072
+          },
+          {
+            "name": "?u@?1??poly@@9@9",
+            "offset": 7168
+          },
+          {
+            "name": "_q2",
+            "offset": 11520
+          },
+          {
+            "name": "?initialized@?1??JpegInverseDCT@@9@9",
+            "offset": 11776
+          },
+          {
+            "name": "?initialized@?1??JpegInverseDCTAlternate@@9@9",
+            "offset": 11780
+          },
+          {
+            "name": "?u_start@?1??poly@@9@9",
+            "offset": 11784
+          },
+          {
+            "name": "?u_div@?1??poly@@9@9",
+            "offset": 11792
+          }
+        ]
+      },
+      "source_sha256": "3d28e600ba40aa1eccdda9e17222bff6cb9a70b1c3fbeac7a68f7dbf5c44ca08",
+      "object_sha256": "d8c24900020c36f8333fa401a7f198c1e142085ac8b7ac9bf1f2fdf73d43fd36",
+      "comparison_sha256": "500079b5397460e8b51d961ffe50402e542cc6072dc5743ec83347bf388caadc"
+    }
+  ],
+  "findings": [
+    "All ten JPEG/poly complete bodies and their target bindings remain exact; the other ten exact MP3 component bodies and 5016 initialized bytes remain exact.",
+    "Source-backed names restore input at offset0 and output at offset0x600. The synthesis buffer u at0x1c00 and both initialization flags plus both index arrays also occupy their original relative offsets.",
+    "Changing only ancestor-supported array dimensions preserves code and storage. It does not resolve the remaining four quantization/color buffer offsets.",
+    "No explicit padding, alignment, order directive or invented object is added. Whole-DLL linking and four private buffer offsets remain unresolved."
+  ]
+}
