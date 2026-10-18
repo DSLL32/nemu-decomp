@@ -911,5 +911,280 @@
     "/root/.ai-tmp/audio-dsound-lifetimes.r77w_2mf/_AllocateSoundBuffer-original.asm": "0df4c171660f14c8c1394c464eba69a857f60e23e86b8a6b0ccb5b90f065b397",
     "/root/.ai-tmp/audio-dsound-lifetimes.r77w_2mf/_SubmitAudio-original.asm": "8dc56e6d0722a231d68703f82b35baa699a950500ca6ae2f9e6dc05913399d0c"
   },
-  "decision": "Promote only the historical-supported AllocateSoundBuffer statement ordering. Cursor arrays/records/reuse/copy and allocation local snapshots remain negative controls; canonical SubmitAudio and AudioError are unchanged."
+  "decision": "Promote only the historical-supported AllocateSoundBuffer statement ordering. Cursor arrays/records/reuse/copy and allocation local snapshots remain negative controls; canonical SubmitAudio and AudioError are unchanged.",
+  "submit_followup": {
+    "canonical_source_changed": false,
+    "source_context": "Current full DirectSound/config native C unit, including the newly recovered AllocateSoundBuffer ordering. This keeps all 47 known matching DS bodies intact.",
+    "rationale": [
+      "Independent 2001 SubmitAudio stores LastBlockLength before taking the write-position snapshot; the 2003 version adds timing operations. Earlier position-of-LastBlockLength controls used a different unpromoted volatile-cursor form, so the ordinary current source was checked once.",
+      "The repeated circular-distance arithmetic in SubmitAudio, WaitForSoundBuffer and AudioNotificationThread makes an ordinary inline arithmetic helper a coherent diagnostic source form. A helper is not asserted to be original source.",
+      "Moving the buffer-limit assignment after or between distance operations tests whether the newly demonstrated statement-order sensitivity also explains submission scheduling."
+    ],
+    "order_results": [
+      {
+        "name": "baseline",
+        "command": [
+          "python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/c",
+          "/FoDirectSound.obj",
+          "DirectSound.c"
+        ],
+        "source_sha256": "0183aca5217e7c7847ae02f4e4b74e6436b11ca54e82b8bf6bbfb7d7b77e3cb6",
+        "object_sha256": "b8462ea3d2b0115e32d4a6aebd4fac06e64cc248734e5e2a83f37a5612aedc9a",
+        "comparison_sha256": "c5c6f013500568a81feff0b6a93ae84c734a95c646288f208a2b45adf8d8aa09",
+        "matches": 47,
+        "functions": 49,
+        "unmatched": [
+          {
+            "name": "_AudioError",
+            "original": 640,
+            "rebuilt": 640,
+            "differences": 19,
+            "target_mismatches": 2,
+            "unresolved": 0
+          },
+          {
+            "name": "_SubmitAudio",
+            "original": 1120,
+            "rebuilt": 1120,
+            "differences": 421,
+            "target_mismatches": 57,
+            "unresolved": 2
+          }
+        ]
+      },
+      {
+        "name": "limit-after-distance",
+        "command": [
+          "python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/c",
+          "/FoDirectSound.obj",
+          "DirectSound.c"
+        ],
+        "source_sha256": "5387803c8024816f0f56d643973b4c1de846fb7cb79316978154197a16dae0a2",
+        "object_sha256": "5dbf8bc1a631981cfeafa1b7bf9e01b6a57c7967a43cddac55cb2b61495bb874",
+        "comparison_sha256": "82bd38873425ca38dc49147e43781b6f27227cd510843bd12367c5c9c0e55570",
+        "matches": 47,
+        "functions": 49,
+        "unmatched": [
+          {
+            "name": "_AudioError",
+            "original": 640,
+            "rebuilt": 640,
+            "differences": 19,
+            "target_mismatches": 2,
+            "unresolved": 0
+          },
+          {
+            "name": "_SubmitAudio",
+            "original": 1120,
+            "rebuilt": 1120,
+            "differences": 433,
+            "target_mismatches": 60,
+            "unresolved": 2
+          }
+        ]
+      },
+      {
+        "name": "limit-between-distance-calculation",
+        "command": [
+          "python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/c",
+          "/FoDirectSound.obj",
+          "DirectSound.c"
+        ],
+        "source_sha256": "bba698c7d28f3fb47dbcaa1f81d54c8442ce2551c6a63ea3fc7fd2176b270750",
+        "object_sha256": "82e384d677436607faf759633cb08a969cfc7f3473119e8feeeb0f1bdc6ac9a0",
+        "comparison_sha256": "b7936175d5fe7b02bff9b58072cf10c60b0ac1900ba2518a07892f2a57c8168a",
+        "matches": 47,
+        "functions": 49,
+        "unmatched": [
+          {
+            "name": "_AudioError",
+            "original": 640,
+            "rebuilt": 640,
+            "differences": 19,
+            "target_mismatches": 2,
+            "unresolved": 0
+          },
+          {
+            "name": "_SubmitAudio",
+            "original": 1120,
+            "rebuilt": 1120,
+            "differences": 324,
+            "target_mismatches": 46,
+            "unresolved": 2
+          }
+        ]
+      },
+      {
+        "name": "historical-last-block-first",
+        "command": [
+          "python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/c",
+          "/FoDirectSound.obj",
+          "DirectSound.c"
+        ],
+        "source_sha256": "40e613002bd447140fdc96079e4c7911b6643a4b3c258087e5c58f22ef085bb0",
+        "object_sha256": "e8c5683e864169c387296c2aa200620cf031fd448acd47628b5d9a8448bf67f4",
+        "comparison_sha256": "cc8f6b8e43a345d97b10767f145b8475b79ce49f7c0bc210ecbd7bf8bd63b2b6",
+        "matches": 47,
+        "functions": 49,
+        "unmatched": [
+          {
+            "name": "_AudioError",
+            "original": 640,
+            "rebuilt": 640,
+            "differences": 19,
+            "target_mismatches": 2,
+            "unresolved": 0
+          },
+          {
+            "name": "_SubmitAudio",
+            "original": 1120,
+            "rebuilt": 1120,
+            "differences": 420,
+            "target_mismatches": 57,
+            "unresolved": 2
+          }
+        ]
+      },
+      {
+        "name": "last-block-before-duration",
+        "command": [
+          "python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/c",
+          "/FoDirectSound.obj",
+          "DirectSound.c"
+        ],
+        "source_sha256": "26dcf56d2af33819e0b95b6dc67133945ba82d286f1f2589cadd7c0ae4e7ff34",
+        "object_sha256": "7e982b15164001b4ef1daa4185c759ec8e954229dba611005f7320d2477e5dab",
+        "comparison_sha256": "777d3bbb4d9a68e0cc49014d81a0b540f54c76fe6242af078df0890afcf4a11f",
+        "matches": 47,
+        "functions": 49,
+        "unmatched": [
+          {
+            "name": "_AudioError",
+            "original": 640,
+            "rebuilt": 640,
+            "differences": 19,
+            "target_mismatches": 2,
+            "unresolved": 0
+          },
+          {
+            "name": "_SubmitAudio",
+            "original": 1120,
+            "rebuilt": 1120,
+            "differences": 420,
+            "target_mismatches": 57,
+            "unresolved": 2
+          }
+        ]
+      }
+    ],
+    "helper_results": [
+      {
+        "name": "circular-distance-inline-helper",
+        "command": [
+          "python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/c",
+          "/FoDirectSound.obj",
+          "DirectSound.c"
+        ],
+        "source_sha256": "e1cde8577d21b1a43f2f56f8815da14712934be8eabad5b08a2eff472df0848f",
+        "object_sha256": "1781f9d279e713e08a5b3367cd498669f8e15f69ddb44bbf3bbed9895e060a71",
+        "comparison_sha256": "9098e815605626b8b4f43c7a2ffa1c71865a07dfc6718b4d7948eb41479fe117",
+        "matches": 47,
+        "functions": 49,
+        "unmatched": [
+          {
+            "name": "_AudioError",
+            "original": 640,
+            "rebuilt": 640,
+            "differences": 19,
+            "target_mismatches": 2,
+            "unresolved": 0
+          },
+          {
+            "name": "_CircularAudioDistance",
+            "original": null,
+            "rebuilt": 16,
+            "differences": null,
+            "target_mismatches": null,
+            "unresolved": null
+          },
+          {
+            "name": "_SubmitAudio",
+            "original": 1120,
+            "rebuilt": 1120,
+            "differences": 316,
+            "target_mismatches": 45,
+            "unresolved": 2
+          }
+        ]
+      }
+    ],
+    "register_storage_control": {
+      "source_sha256": "188500b434669f2dce5d9e5d349ae3e40beec0631f84e363fb66a46d3ad15f59",
+      "compile_log_sha256": "b63b08588dd64177fc0c217952dd929793ac9974e71a7d277f5c18f50899c85e",
+      "result": "Native C rejects taking the address of register cursor locals with C2103. No object was produced; this is not a valid compilation hypothesis."
+    },
+    "findings": [
+      "Moving BufferLimit between subtraction and masking reduces aligned differences from 421 to 324, largely through changed scheduling and offsets. It still has 46 actual-offset target mismatches and two unresolved targets, so was not promoted.",
+      "Historical LastBlockLength-first ordering and placing that assignment immediately before BufferDuration each leave 420 differences, 57 target mismatches and two unresolved targets.",
+      "The ordinary static inline distance helper leaves 316 non-relocation differences, 45 actual-offset target mismatches and two unresolved targets. It also emits an additional 16-byte CircularAudioDistance routine with no corresponding function in the fully mapped original host band; this is an additional reason not to adopt the helper.",
+      "The original retained unused write-cursor load and separate cursor loads elsewhere remain unexplained. No new qualifier, barrier, assembly or artificial retained work was added."
+    ],
+    "frozen_records": {
+      "/root/.ai-tmp/audio-dsound-lifetimes.r77w_2mf/submit-order-followup/probe.py": "6bad36d71b0270f37840bc598f0325726691b9b28b4b9038d153575cbb40be61",
+      "/root/.ai-tmp/audio-dsound-lifetimes.r77w_2mf/submit-order-followup/results.json": "d073f843310624e9d9b0a2c50f47f48299490c403073f33610f050e11a2c9bd3",
+      "/root/.ai-tmp/audio-dsound-lifetimes.r77w_2mf/submit-order-followup/symbols.json": "8094d5f1a780c0892d03f8bfaca3a340134d26aae7e1b298961eaf40729f1593",
+      "/root/.ai-tmp/audio-dsound-lifetimes.r77w_2mf/cursor-helper-followup/probe.py": "4c3897af52949bea86a59ea40aeeb985853f8b0d8032f8e8180c1c709dc07d10",
+      "/root/.ai-tmp/audio-dsound-lifetimes.r77w_2mf/cursor-helper-followup/results.json": "8a25266255f8dd5c8781317b4814b78d97c9df2ef23db0e2c01ada21d53d5747",
+      "/root/.ai-tmp/audio-dsound-lifetimes.r77w_2mf/cursor-helper-followup/symbols.json": "8094d5f1a780c0892d03f8bfaca3a340134d26aae7e1b298961eaf40729f1593"
+    },
+    "decision": "Keep canonical SubmitAudio and AudioError unchanged. Host status remains 58/60 matching complete aligned bodies; this is not whole-DLL equality."
+  }
 }

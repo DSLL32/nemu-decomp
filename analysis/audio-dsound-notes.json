@@ -29,7 +29,8 @@
         "/G5 increases differing non-relocation bytes to 614.",
         "A separate float samples local, assigned from the signed cursor difference, restores the original 0x2c stack frame and exact x87 operation sequence. With volatile cursor locals this leaves 263 differing bytes, principally register/scheduling differences and branch-offset propagation; complete equality is not achieved.",
         "Separate pending-byte and write-position locals, a copied length local, counter/frequency arrays, and relocating LastBlockLength assignment do not resolve the remaining differences. A double samples local or volatile LastBlockLength worsens the match.",
-        "Splitting distance subtraction/masking into two statements does not restore the retained cursor read. Three-statement volatile-position load/subtraction/masking across all updates grows the routine to1136 bytes; no change adopted."
+        "Splitting distance subtraction/masking into two statements does not restore the retained cursor read. Three-statement volatile-position load/subtraction/masking across all updates grows the routine to1136 bytes; no change adopted.",
+        "After allocation recovery, ordinary statement-order controls and a circular-distance inline helper remain unmatched; details and actual operands are frozen in audio-dsound-lifetimes.json. The helper also emits an extra 16-byte routine absent from the mapped host band; it was not adopted. Register cursor locals are rejected by the native C frontend when their addresses are passed to DirectSound."
       ]
     }
   },
