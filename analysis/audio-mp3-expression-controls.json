@@ -1,0 +1,605 @@
+{
+  "status": "expression_inventory_and_three_bounded_rejected_controls",
+  "canonical_source_changed": false,
+  "source_sha256": "d9dccbd10b72f540528496c33f04f8a63d3b9bd1f39839a70ac8a16ef5a87b3a",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "compiler_sha256": {
+    "cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
+    "c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
+    "c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0"
+  },
+  "compiler_flags": [
+    "/O2",
+    "/Ob1",
+    "/MT"
+  ],
+  "prior_inventory": [
+    {
+      "stem": "Mp3-wordmask-add",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-wordmask-add.c",
+      "source_sha256": "1ad0dd24aa9f8a9a487e171085c3aa822db4da0add9f502ba44c34af2af5e108",
+      "object_sha256": "b97076189f3b1bcb140d3c8f8d9dbf1cb8b90ea9b1a9e1662056ab21b81b9e4d",
+      "complete_main_bytes": 5120,
+      "complete_main_raw_sha256": "ffad00da2eae7ea216219f4e251984bea1a06328db7b6440d019938fd44831d9",
+      "local_declaration": "int v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v17;",
+      "defining_macros": [
+        "#define MP3_ADD16(a, b) (((int)(a) + (int)(b)) & 0xffff)",
+        "#define MP3_SUB16(a, b) ((unsigned short)((int)(a) - (short)(b)))"
+      ],
+      "first_stage": {
+        "instructions": 232,
+        "mnemonics": {
+          "add": 20,
+          "and": 5,
+          "call": 1,
+          "imul": 8,
+          "lea": 20,
+          "mov": 100,
+          "movsx": 9,
+          "movzx": 1,
+          "neg": 7,
+          "push": 1,
+          "sar": 8,
+          "shl": 4,
+          "shr": 17,
+          "sub": 20,
+          "xor": 11
+        }
+      }
+    },
+    {
+      "stem": "Mp3-wordmask-sub",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-wordmask-sub.c",
+      "source_sha256": "042a997ccd618dd4560723c11c073b2843fa78b0c0c8729dc5e1404dd7dd7aae",
+      "object_sha256": "c263dfdc7564da33dfe531a0e3fe2681a3918f00a072a95b1796ae09ea53b9e8",
+      "complete_main_bytes": 5040,
+      "complete_main_raw_sha256": "9e34b64d04b9a4e3ddb9fc39816f3ae6bf94568a38de3587e088e7ddc0fe4a4d",
+      "local_declaration": "int v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v17;",
+      "defining_macros": [
+        "#define MP3_ADD16(a, b) ((unsigned short)((int)(a) + (short)(b)))",
+        "#define MP3_SUB16(a, b) (((int)(a) - (int)(b)) & 0xffff)"
+      ],
+      "first_stage": {
+        "instructions": 222,
+        "mnemonics": {
+          "add": 20,
+          "call": 1,
+          "imul": 8,
+          "lea": 20,
+          "mov": 98,
+          "movsx": 9,
+          "movzx": 6,
+          "neg": 7,
+          "push": 1,
+          "sar": 8,
+          "shl": 4,
+          "shr": 17,
+          "sub": 20,
+          "xor": 3
+        }
+      }
+    },
+    {
+      "stem": "Mp3-wordmask-bothrightshort",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-wordmask-bothrightshort.c",
+      "source_sha256": "0b5e627d3570960c79d726049971ff809a561d13e342c5094cb8f710bb8f64d1",
+      "object_sha256": "7d33e5117ddb704e8ad94ff564b29b235245d663bcc72dadb5a305493bf86ce0",
+      "complete_main_bytes": 5120,
+      "complete_main_raw_sha256": "06db537f19bd571a180dcbf83c2475f12ce952f27a691627c6ea730790a9f063",
+      "local_declaration": "int v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v17;",
+      "defining_macros": [
+        "#define MP3_ADD16(a, b) (((int)(a) + (short)(b)) & 0xffff)",
+        "#define MP3_SUB16(a, b) (((int)(a) - (short)(b)) & 0xffff)"
+      ],
+      "first_stage": {
+        "instructions": 233,
+        "mnemonics": {
+          "add": 20,
+          "and": 5,
+          "call": 1,
+          "imul": 8,
+          "lea": 20,
+          "mov": 101,
+          "movsx": 9,
+          "movzx": 1,
+          "neg": 7,
+          "push": 1,
+          "sar": 8,
+          "shl": 4,
+          "shr": 17,
+          "sub": 20,
+          "xor": 11
+        }
+      }
+    },
+    {
+      "stem": "Mp3-masktypes-shortlocals",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-masktypes-shortlocals.c",
+      "source_sha256": "e47522d86db2f18bdf089bd9e210e90f2e4e13acab44a7f836cf5ef82d8b45ee",
+      "object_sha256": "8ebb3bae5ae2f88587bc8dd4dd2675ccc13f372ad407ed06c7582b379a23e383",
+      "complete_main_bytes": 5024,
+      "complete_main_raw_sha256": "c47b0267a33137d10757ef45f90a40b0dfe61f4e1ef98bdf43d27ba559382874",
+      "local_declaration": "short v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v17;",
+      "defining_macros": [
+        "#define MP3_ADD16(a, b) (((int)(a) + (int)(b)) & 0xffff)",
+        "#define MP3_SUB16(a, b) ((unsigned short)((int)(a) - (short)(b)))"
+      ],
+      "first_stage": {
+        "instructions": 219,
+        "mnemonics": {
+          "add": 20,
+          "call": 1,
+          "imul": 8,
+          "lea": 20,
+          "mov": 98,
+          "movsx": 8,
+          "movzx": 1,
+          "neg": 7,
+          "push": 1,
+          "sar": 8,
+          "shl": 4,
+          "shr": 17,
+          "sub": 20,
+          "xor": 6
+        }
+      }
+    },
+    {
+      "stem": "Mp3-masktypes-ushortlocals",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-masktypes-ushortlocals.c",
+      "source_sha256": "4f9ff93578f6da9c841e9bfcc70864adf3ee998c2c507ee85ae3dc6b417cb992",
+      "object_sha256": "19802f7b589890888cf8dc28d856ba57bb5f57b0f210de100711045afe06d3d0",
+      "complete_main_bytes": 5024,
+      "complete_main_raw_sha256": "d9c3055355e0920fcedcbd789dad911a3be0e394fbdfeb05058a8e22172befa9",
+      "local_declaration": "unsigned short v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v17;",
+      "defining_macros": [
+        "#define MP3_ADD16(a, b) (((int)(a) + (int)(b)) & 0xffff)",
+        "#define MP3_SUB16(a, b) ((unsigned short)((int)(a) - (short)(b)))"
+      ],
+      "first_stage": {
+        "instructions": 219,
+        "mnemonics": {
+          "add": 20,
+          "call": 1,
+          "imul": 8,
+          "lea": 20,
+          "mov": 98,
+          "movsx": 8,
+          "movzx": 1,
+          "neg": 7,
+          "push": 1,
+          "sar": 8,
+          "shl": 4,
+          "shr": 17,
+          "sub": 20,
+          "xor": 6
+        }
+      }
+    },
+    {
+      "stem": "Mp3-castmask-bothshort",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-castmask-bothshort.c",
+      "source_sha256": "a12811419f735d76f45ca8f0855d7543f6dad4dea0f5d924fbd3ede63b033b0b",
+      "object_sha256": "c039f0ec556105af19b3ace59def4ce5513e9424d280c6fd53496b3079e07a0d",
+      "complete_main_bytes": 5040,
+      "complete_main_raw_sha256": "9e34b64d04b9a4e3ddb9fc39816f3ae6bf94568a38de3587e088e7ddc0fe4a4d",
+      "local_declaration": "int v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v17;",
+      "defining_macros": [
+        "#define MP3_ADD16(a, b) ((short)((a)+(b)) & 0xffff)",
+        "#define MP3_SUB16(a, b) ((short)((a)-(b)) & 0xffff)"
+      ],
+      "first_stage": {
+        "instructions": 222,
+        "mnemonics": {
+          "add": 20,
+          "call": 1,
+          "imul": 8,
+          "lea": 20,
+          "mov": 98,
+          "movsx": 9,
+          "movzx": 6,
+          "neg": 7,
+          "push": 1,
+          "sar": 8,
+          "shl": 4,
+          "shr": 17,
+          "sub": 20,
+          "xor": 3
+        }
+      }
+    },
+    {
+      "stem": "Mp3-castmask-bothushort",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-castmask-bothushort.c",
+      "source_sha256": "e2afd8d5abd7c185f3d971d976f29c21599f42912861d3b7959a1765dd04ef2b",
+      "object_sha256": "2f1819ad6e2a79204839e6e2ed791920a3902dcc55051ab0f45ffe8c098a16c7",
+      "complete_main_bytes": 5040,
+      "complete_main_raw_sha256": "9e34b64d04b9a4e3ddb9fc39816f3ae6bf94568a38de3587e088e7ddc0fe4a4d",
+      "local_declaration": "int v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v17;",
+      "defining_macros": [
+        "#define MP3_ADD16(a, b) ((unsigned short)((a)+(b)) & 0xffff)",
+        "#define MP3_SUB16(a, b) ((unsigned short)((a)-(b)) & 0xffff)"
+      ],
+      "first_stage": {
+        "instructions": 222,
+        "mnemonics": {
+          "add": 20,
+          "call": 1,
+          "imul": 8,
+          "lea": 20,
+          "mov": 98,
+          "movsx": 9,
+          "movzx": 6,
+          "neg": 7,
+          "push": 1,
+          "sar": 8,
+          "shl": 4,
+          "shr": 17,
+          "sub": 20,
+          "xor": 3
+        }
+      }
+    },
+    {
+      "stem": "Mp3-castmask-bothnarrow",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-castmask-bothnarrow.c",
+      "source_sha256": "4b8c1d3fdbe78d3288ea8d887c1077defc7124f1f27759a7c0a79d21a345d4a1",
+      "object_sha256": "9a38480d37aaf9fb9e3dd1cbbf836a1d4f3aece655f0bae8d72bc3a80e9de791",
+      "complete_main_bytes": 5040,
+      "complete_main_raw_sha256": "9e34b64d04b9a4e3ddb9fc39816f3ae6bf94568a38de3587e088e7ddc0fe4a4d",
+      "local_declaration": "int v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v17;",
+      "defining_macros": [
+        "#define MP3_ADD16(a, b) (Mp3Narrow((a)+(b)) & 0xffff)",
+        "#define MP3_SUB16(a, b) (Mp3Narrow((a)-(b)) & 0xffff)"
+      ],
+      "first_stage": {
+        "instructions": 222,
+        "mnemonics": {
+          "add": 20,
+          "call": 1,
+          "imul": 8,
+          "lea": 20,
+          "mov": 98,
+          "movsx": 9,
+          "movzx": 6,
+          "neg": 7,
+          "push": 1,
+          "sar": 8,
+          "shl": 4,
+          "shr": 17,
+          "sub": 20,
+          "xor": 3
+        }
+      }
+    },
+    {
+      "stem": "Mp3-scalar-window1-mask",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-scalar-window1-mask.c",
+      "source_sha256": "ccfb26714fe996fe9ae0759c94ffb5e794e0e2463aca8e6d9ea6eef1cf7fd2c0",
+      "object_sha256": "39bc08c93d11e7c119432d9f929828ceda926fef33f710aa7ecddc930af34e0d",
+      "complete_main_bytes": 5120,
+      "complete_main_raw_sha256": "ffad00da2eae7ea216219f4e251984bea1a06328db7b6440d019938fd44831d9",
+      "local_declaration": "int v0, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v17;",
+      "defining_macros": [
+        "#define MP3_ADD16(a, b) (((int)(a) + (int)(b)) & 0xffff)",
+        "#define MP3_SUB16(a, b) (((int)(a) - (int)(b)) & 0xffff)"
+      ],
+      "first_stage": {
+        "instructions": 232,
+        "mnemonics": {
+          "add": 20,
+          "and": 5,
+          "call": 1,
+          "imul": 8,
+          "lea": 20,
+          "mov": 100,
+          "movsx": 9,
+          "movzx": 1,
+          "neg": 7,
+          "push": 1,
+          "sar": 8,
+          "shl": 4,
+          "shr": 17,
+          "sub": 20,
+          "xor": 11
+        }
+      }
+    }
+  ],
+  "prior_control_generators": [
+    {
+      "path": "/root/.ai-tmp/audio-mp3-20261017/probe_scalar_expr.py",
+      "sha256": "ad4eb028f010386dde1b2f1268d2dbb90a7c0d56fc37167f60942f0e662acc2a"
+    },
+    {
+      "path": "/root/.ai-tmp/audio-mp3-20261017/probe_word_masks.py",
+      "sha256": "667787d66f3f63c00129bdc39cca06707c05be2a85df638f8229cbb972dbf24e"
+    },
+    {
+      "path": "/root/.ai-tmp/audio-mp3-20261017/probe_castmask.py",
+      "sha256": "e0a33ee7d783b7f9827439c9ef47f7164145e2c85b6cde99d860a057e87f0d75"
+    },
+    {
+      "path": "/root/.ai-tmp/audio-mp3-20261017/probe_mask_types.py",
+      "sha256": "88eefe2e89101d66c3c385a17d3957450392138a818940bbd16c57b549b3e868"
+    },
+    {
+      "path": "/root/.ai-tmp/audio-mp3-20261017/probe_phase_steps.py",
+      "sha256": "99aa7fc02d53488edb894938ad6d618ebd15d072f545c9152a8efaf5463992bf"
+    },
+    {
+      "path": "/root/.ai-tmp/audio-mp3-20261017/probe_split_argument.py",
+      "sha256": "77e149f6250de26d202c031932cee4531d8771850e625da040dc894cd18908d9"
+    },
+    {
+      "path": "/root/.ai-tmp/audio-mp3-20261017/probe_inline_helpers.py",
+      "sha256": "50971f178fca1bce514187715c212785d6bbc9cf18f1eb65a243984c3ddef9cb"
+    },
+    {
+      "path": "/root/.ai-tmp/audio-mp3-20261017/probe_narrow_helpers.py",
+      "sha256": "9a643529c59f9b368caefa446a73e38da252b082f6983bad454f72fdad44bbdb"
+    }
+  ],
+  "inventory_findings": [
+    "Global cast-versus-mask probes included all four defining expressions, but used the old shared int local declaration. Explicit SUB masks alone retained the 222-instruction / XOR3 / MOVZX6 stage.",
+    "The old short-local mask controls started from ADD-mask / SUB-cast source. They did not test the three explicit subtraction masks in the all-short AMP scope. Their 219-instruction / XOR6 / MOVZX1 result is already known.",
+    "No archived full-source probe changed the four first-stage sum scalings from multiplication by 2/4 to shifts by 1/2. The older add64shift candidate changed the separate Mp3Add helper accumulator and is unrelated to these scalar expressions.",
+    "None of the four audited zero-producing expressions itself multiplies by a power of two: they are three wrapped differences and one wrapped sum. The neighboring scalings share c10/c11 or c14/c15 inputs, allowing a concrete optimizer-context comparison.",
+    "The prior split-helper parameter probe covered short, int and unsigned int, with a short-local control for each. Unsigned-short parameter was absent. Earlier unsigned-short helper probes changed return types, not this parameter.",
+    "No coefficient high-word packing multiplication control was found. The three factors are formed before the inner transform loop at A04D/A066/A077 and retained in separate stack slots. This inventory records the gap without treating it as an explanation for the four later zeroes."
+  ],
+  "bounded_controls": [
+    {
+      "name": "four_definition_masks",
+      "source_sha256": "4ae1e68385e6b18e94a25e12c9975be4def0ea1a01367bd9ddf36bda2989dd4e",
+      "object_sha256": "2083e4aa1e765bbd375458f895977c4b4b5bde32caeb1251b201bf5a8f91a2d3",
+      "command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/IZ:\\root\\nemu-decomp\\src\\audio\\ahle_ds",
+        "/FoZ:\\root\\.ai-tmp\\audio-mp3-expression-form.dOZLwvfW\\four_definition_masks\\Mp3.obj",
+        "Z:\\root\\.ai-tmp\\audio-mp3-expression-form.dOZLwvfW\\four_definition_masks\\Mp3.c"
+      ],
+      "substitutions": {
+        "v3 = MP3_SPLIT(MP3_SUB16(c2, c3),": "v3 = MP3_SPLIT((((int)c2 - (short)c3) & 0xffff),",
+        "v11 = MP3_SUB16(c10, c11);": "v11 = ((int)c10 - (short)c11) & 0xffff;",
+        "v2 = MP3_ADD16(v8, v9);": "v2 = ((int)v8 + (short)v9) & 0xffff;",
+        "v15 = MP3_SUB16(c14, c15);": "v15 = ((int)c14 - (short)c15) & 0xffff;"
+      },
+      "main_bytes": 5024,
+      "complete_main_raw_sha256": "313b5d8753702d5578d8bb1d6fe979892bf42b96ae3f72c1bda99657dad2118c",
+      "main_raw_equal_to_baseline": true,
+      "all_33_function_raw_bodies_equal_to_baseline": true,
+      "exact_helper_count": 10,
+      "complete_main_exact": false,
+      "masked_differences": 3980,
+      "first_stage": {
+        "instructions": 219,
+        "mnemonics": {
+          "add": 20,
+          "call": 1,
+          "imul": 8,
+          "lea": 20,
+          "mov": 98,
+          "movsx": 8,
+          "movzx": 1,
+          "neg": 7,
+          "push": 1,
+          "sar": 8,
+          "shl": 4,
+          "shr": 17,
+          "sub": 20,
+          "xor": 6
+        }
+      },
+      "behavior_inherited_from": "baa47f7 four-carrier control: identical complete main bytes, 48/48 cases",
+      "new_behavior_cases": 0,
+      "new_behavior_passed": 0,
+      "all_32_other_function_raw_bodies_equal": true,
+      "all_data_section_payloads_equal": true,
+      "all_non_debug_payloads_and_relocation_destinations_equal": true
+    },
+    {
+      "name": "neighbor_sum_shifts",
+      "source_sha256": "cf1bf14ae2e4dee888d8f05c2b7b06a96d7a490222deebcc5562b5788989667e",
+      "object_sha256": "643cb6522f8c85264a10f5b225633715f5e43bfe2a635717f94aefed9ff94c4a",
+      "command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/IZ:\\root\\nemu-decomp\\src\\audio\\ahle_ds",
+        "/FoZ:\\root\\.ai-tmp\\audio-mp3-expression-form.dOZLwvfW\\neighbor_sum_shifts\\Mp3.obj",
+        "Z:\\root\\.ai-tmp\\audio-mp3-expression-form.dOZLwvfW\\neighbor_sum_shifts\\Mp3.c"
+      ],
+      "substitutions": {
+        "v6 = MP3_ADD16(c6, c7) * 2;": "v6 = MP3_ADD16(c6, c7) << 1;",
+        "d10 = MP3_ADD16(c10, c11) * 2;": "d10 = MP3_ADD16(c10, c11) << 1;",
+        "d12 = MP3_ADD16(c12, c13) * 2;": "d12 = MP3_ADD16(c12, c13) << 1;",
+        "d14 = v8 -MP3_ADD16(c14, c15) * 4 + d10;": "d14 = v8 -(MP3_ADD16(c14, c15) << 2) + d10;"
+      },
+      "main_bytes": 5024,
+      "complete_main_raw_sha256": "b1fe0c2d91c0df0a3757e3f61bb4a100b2e2fbb19f7b46c80257eb6d83b120bc",
+      "main_raw_equal_to_baseline": false,
+      "all_33_function_raw_bodies_equal_to_baseline": false,
+      "exact_helper_count": 10,
+      "complete_main_exact": false,
+      "masked_differences": 3965,
+      "first_stage": {
+        "instructions": 221,
+        "mnemonics": {
+          "add": 19,
+          "call": 1,
+          "imul": 8,
+          "lea": 20,
+          "mov": 98,
+          "movsx": 8,
+          "movzx": 1,
+          "neg": 7,
+          "push": 1,
+          "sar": 8,
+          "shl": 5,
+          "shr": 17,
+          "sub": 21,
+          "xor": 7
+        }
+      },
+      "behavior_inherited_from": null,
+      "new_behavior_cases": 48,
+      "new_behavior_passed": 48,
+      "all_32_other_function_raw_bodies_equal": true,
+      "all_data_section_payloads_equal": true
+    },
+    {
+      "name": "unsigned_word_split_parameter",
+      "source_sha256": "1da15c5afe76a725fd7d2417d2768e154fb5674387f78fdfa4d1e35d9fe036f7",
+      "object_sha256": "c6bea537822b7cf0e2b1fe208dafddbf5af3070915dbcc49396c6d3c47c92522",
+      "command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/IZ:\\root\\nemu-decomp\\src\\audio\\ahle_ds",
+        "/FoZ:\\root\\.ai-tmp\\audio-mp3-expression-form.dOZLwvfW\\unsigned_word_split_parameter\\Mp3.obj",
+        "Z:\\root\\.ai-tmp\\audio-mp3-expression-form.dOZLwvfW\\unsigned_word_split_parameter\\Mp3.c"
+      ],
+      "substitutions": {
+        "short Mp3MultiplySplit(short value, unsigned short low, short high)": "__inline short Mp3MultiplySplit(unsigned short value, unsigned short low, short high)",
+        "return (value * (low + (high << 16))) >> 16;": "return ((short)value * (low + (high << 16))) >> 16;"
+      },
+      "split_calls_replaced": 14,
+      "main_bytes": 5024,
+      "complete_main_raw_sha256": "313b5d8753702d5578d8bb1d6fe979892bf42b96ae3f72c1bda99657dad2118c",
+      "main_raw_equal_to_baseline": true,
+      "all_33_function_raw_bodies_equal_to_baseline": true,
+      "exact_helper_count": 10,
+      "complete_main_exact": false,
+      "masked_differences": 3980,
+      "first_stage": {
+        "instructions": 219,
+        "mnemonics": {
+          "add": 20,
+          "call": 1,
+          "imul": 8,
+          "lea": 20,
+          "mov": 98,
+          "movsx": 8,
+          "movzx": 1,
+          "neg": 7,
+          "push": 1,
+          "sar": 8,
+          "shl": 4,
+          "shr": 17,
+          "sub": 20,
+          "xor": 6
+        }
+      },
+      "behavior_inherited_from": "baa47f7 four-carrier control: identical complete main bytes, 48/48 cases",
+      "new_behavior_cases": 0,
+      "new_behavior_passed": 0,
+      "all_32_other_function_raw_bodies_equal": true,
+      "all_data_section_payloads_equal": true,
+      "all_non_debug_payloads_and_relocation_destinations_equal": true
+    }
+  ],
+  "shift_control_dataflow": {
+    "source": "d14 = v8 - ((unsigned short)(c14+c15) << 2) + d10",
+    "emitted_chain": [
+      {
+        "va": "0x1000a358",
+        "bytes": "33db",
+        "instruction": "xor ebx, ebx",
+        "relocated_symbols": []
+      },
+      {
+        "va": "0x1000a35a",
+        "bytes": "668b1d00000000",
+        "instruction": "mov bx, word ptr [0]",
+        "relocated_symbols": [
+          "_c15"
+        ]
+      },
+      {
+        "va": "0x1000a361",
+        "bytes": "66c1e302",
+        "instruction": "shl bx, 2",
+        "relocated_symbols": []
+      },
+      {
+        "va": "0x1000a365",
+        "bytes": "8bf8",
+        "instruction": "mov edi, eax",
+        "relocated_symbols": []
+      },
+      {
+        "va": "0x1000a367",
+        "bytes": "2bfb",
+        "instruction": "sub edi, ebx",
+        "relocated_symbols": []
+      },
+      {
+        "va": "0x1000a369",
+        "bytes": "33db",
+        "instruction": "xor ebx, ebx",
+        "relocated_symbols": []
+      },
+      {
+        "va": "0x1000a36b",
+        "bytes": "668b1d00000000",
+        "instruction": "mov bx, word ptr [0]",
+        "relocated_symbols": [
+          "_c14"
+        ]
+      },
+      {
+        "va": "0x1000a372",
+        "bytes": "66c1e302",
+        "instruction": "shl bx, 2",
+        "relocated_symbols": []
+      },
+      {
+        "va": "0x1000a376",
+        "bytes": "2bfb",
+        "instruction": "sub edi, ebx",
+        "relocated_symbols": []
+      },
+      {
+        "va": "0x1000a378",
+        "bytes": "66033d00000000",
+        "instruction": "add di, word ptr [0]",
+        "relocated_symbols": [
+          "_d10"
+        ]
+      }
+    ],
+    "target_chain": "A37A XOR EDI; A37C MOV DI,c14; A383 ADD DI,c15; A38A SHL EDI,2; A38D MOV EBX,EDI; A38F MOV DI,DX; A392 SUB DI,BX.",
+    "inference": "VC7 distributes the shift variant into separately zeroed c15<<2 and c14<<2 operands, then subtracts both. Its extra XOR belongs to a split sum operand, not any of the four audited missing zero definitions.",
+    "assessment": "This proves expression spelling can change native code in this function. The target keeps one summed operand followed by a 32-bit shift, agreeing with the existing multiplication shape. The shift control is not promoted merely because the aggregate differing-position count falls from 3980 to 3965."
+  },
+  "conclusions": [
+    "The four explicit masks and the single unsigned-word split-helper parameter form both preserve all 33 complete function raw bodies and every non-debug section payload and relocation destination from the prior AMP all-short control. They recover none of the missing zeroes.",
+    "The neighboring-shift control preserves all 10 exact MP3 helpers and passes 48/48 fresh behavior cases, but gives 221 first-stage instructions / XOR7 instead of target 225 / XOR9. Its additional zero has the wrong dataflow identity.",
+    "All three full Mp3DCT candidates remain 5024 bytes versus 5104 original. No canonical source or exact-match status changes."
+  ],
+  "scratch_report": "/root/.ai-tmp/audio-mp3-expression-form.dOZLwvfW/report.json",
+  "scratch_report_sha256": "8f7f3a3be05836b8853f29470bf749ad735e978c867f393c011cccf036499701",
+  "source_generation_script": "/root/.ai-tmp/audio-mp3-expression-form.dOZLwvfW/probe.py",
+  "source_generation_script_sha256": "a38fc8436ec3ab66d4949af515c95afa17740afe5754fb79af1742db9a964075"
+}
