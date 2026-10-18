@@ -1,0 +1,3908 @@
+{
+  "status": "negative_loop_scope_controls_no_canonical_source_change",
+  "source_revision": "9ad71bcbfed797e00d68d51b9f1c3439503c29f9",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "target_function": "_PoleFilterAudioCommand",
+  "original_va": "0x10011040",
+  "complete_extent_bytes": 2320,
+  "compiler_flags": [
+    "/O2",
+    "/Ob1",
+    "/MT",
+    "/c"
+  ],
+  "wine_prefix": "/root/.ai-tmp/audio-processing.bGaifE/wine",
+  "new_source_controls": 7,
+  "baseline_controls": 1,
+  "tool_hashes": {
+    "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
+    "toolchains/vc7/bin/c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
+    "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0",
+    "scripts/run_toolchain.py": "489681186d7cde23f42d0a6f154f3e9723b060fa769a1ce2d0f31e656074ea9e",
+    "scripts/verify_gs.py": "9096c1ce5e759dc60f4fc7b84c97678b5946b7b15f6bfb56cd1fa3b9e730854c",
+    "scripts/verify_audio.py": "e319652ed8a706fe105d29c297f28f1d41288440df2b7f5cd27b3af213272244"
+  },
+  "canonical_sources": {
+    "src/audio/ahle_ds/AudioProcessing.c": "3a2100b5d7d1408a1df95136709fde946cea70f8272da76e6d9e7a56aeaaf27c",
+    "src/audio/ahle_ds/AudioResample.c": "de605ba58f179efe567ffd40740c65c2cc90647a3e980cb0115cd9c14ef42907",
+    "src/audio/ahle_ds/AudioADPCMBlock.h": "f506d6ea97b83fcaaa78dc9ff7300bebe37aa36b9f1a01277247ee41767b4c1b"
+  },
+  "frozen_inputs": {
+    "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/AudioADPCMBlock.h": "f506d6ea97b83fcaaa78dc9ff7300bebe37aa36b9f1a01277247ee41767b4c1b",
+    "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/AudioADPCMLegacy.h": "8509a1760c9dcc9b45334d103d4f09b656502bda0b8d35d039d75d7a75720f32",
+    "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/AudioCommands.h": "35cae30632b3a466adc0dea680c808b80995cf311b0024d25331224e7368e5f3",
+    "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/AudioEnvelope.h": "8acbac16a6bc16a06782b48dea25af4e49b99c5a845f866ffe41098ec14517b7",
+    "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/AudioHLE.h": "98475c4c2e034a7e1b16a94662078f731afcca5529140bf0d30c7e6901bdd441",
+    "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/AudioLegacy.h": "8f5810c3d8ae923119c733c304064310630cca3201c4b472047267d1417bee98",
+    "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
+    "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/AudioProcessing.h": "77bbd94523444df697a169cea26375cc673879493761452cc92add2857284c7b",
+    "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/AudioResampleTables.h": "5b95bd2db83cf7eea18b347cdf32c7a332073868cbcbd45a939f8de4537236f1",
+    "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/AudioSIMD.h": "627d71fd2a53dcc36e099c214824e397454c8b78d80be503f29f08c91a18bf63",
+    "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/DirectSound.h": "ab5ed735f1ab52226c0c7e7a559d080e10ec5649d2814b177f1a79686135455b",
+    "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+    "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
+    "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/AudioProcessing-baseline.c": "3a2100b5d7d1408a1df95136709fde946cea70f8272da76e6d9e7a56aeaaf27c",
+    "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/probe.py": "93e31b2ef4942a590c3eb35de77b34b07d808f69938015e7496993099423c479",
+    "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/freeze.py": "c43299bddbae1ac468925f8c77c3faab5e4448c7db9469639de035884777825a",
+    "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/variants.json": "9594723777e548d160405025e4192e203d89feba996cb887e44d02b067ee7bda",
+    "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/full-comparison.json": "f251016ccd6fbb7d928b9e1d4f66581ea80d3d9ec210593e142262260416fe51"
+  },
+  "prior_inventory": [
+    {
+      "name": "PoleAddressVariants",
+      "scope": "24 direct-tap address controls: all six permutations of buffer/input/tap addition, (buffer+tap)[input], (buffer+input)[tap], (&buffer[input])[tap], reversed subscript forms, and product operand reversal. Row load remains (input+buffer)[row] in this grid.",
+      "emitted_functions": 24,
+      "minimum_complete_body_differences": 7,
+      "exact_bodies": 0,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/PoleAddressVariants.c",
+      "source_sha256": "439579ff0605854f43697ac70142ab9d21e7e22c0d9abf8b3886b5364ded7a8c",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/PoleAddressVariants.obj",
+      "object_sha256": "2034d6fa196a5ee67a0b759462ae1a1dde52bd6a42b363619e6305b6212b224f",
+      "comparison": "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/PoleAddressVariants-prior-comparison.json",
+      "comparison_sha256": "e24f0dc98946b062245e8de1cf4b605e5d340e1dd25cd6468fd7da70a070edf5"
+    },
+    {
+      "name": "PoleBytePointer",
+      "scope": "10 byte-address spellings: char* + (input+index)*2, char* + input*2 + index*2, reordered additions, and cast-back indexed short loads. Each applies to direct tap alone or both tap and row.",
+      "emitted_functions": 10,
+      "minimum_complete_body_differences": 7,
+      "exact_bodies": 0,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/PoleBytePointer.c",
+      "source_sha256": "6f5762578389bfa5d0c585e677ca6147547e7ac8c575d2a93a7c66409241cd23",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/PoleBytePointer.obj",
+      "object_sha256": "6edd00b04a8161025f214818e41270e2962d487e50a49bcd860bb81975934984",
+      "comparison": "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/PoleBytePointer-prior-comparison.json",
+      "comparison_sha256": "d7f68d17778699608fd70715af282cb323b4e0302b72f42e4045d005e47d8626"
+    },
+    {
+      "name": "PolePointer",
+      "scope": "10 outer-block pointer forms: short*, const short*, or short* const samples=buffer+input, used by row alone or both loads, plus pointer advancement per row. Pointer declaration is at outer block start.",
+      "emitted_functions": 10,
+      "minimum_complete_body_differences": 1770,
+      "exact_bodies": 0,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/PolePointer.c",
+      "source_sha256": "5df4bb2ef87a46d56ca57b10c5932df6c837a638924f1b3eb93d15f8bcce3aff",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/PolePointer.obj",
+      "object_sha256": "cf15de551f490bddeaf7b006bdd8279eadac7a1cb9a03a80b4a20eb506ff4bc3",
+      "comparison": "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/PolePointer-prior-comparison.json",
+      "comparison_sha256": "ea9552fb963e7e541d5786b32cad65e71f28769d5009f69ee992e22de0b5dcdf"
+    },
+    {
+      "name": "PoleVariants",
+      "scope": "360 legal permutations of the six initial local declarations, using (input+buffer)[tap/row].",
+      "emitted_functions": 360,
+      "minimum_complete_body_differences": 7,
+      "exact_bodies": 0,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/PoleVariants.c",
+      "source_sha256": "fc7716f2db07e8be4a886440978aa0df1204d5ad94fdf7c3f1c28911ab35c5d6",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/PoleVariants.obj",
+      "object_sha256": "450c67ca8418662d6fed2554b7639f49c9fd84238c5c91bead0225aa8de0973e",
+      "comparison": "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/PoleVariants-prior-comparison.json",
+      "comparison_sha256": "903e3a20135258d6dcdb61b00e7005e06e00bdb22c20370512d1a4f2a48b59d2"
+    },
+    {
+      "name": "PoleLoopTypes",
+      "scope": "64 int/unsigned-int/short/unsigned-short combinations for i, tap and row.",
+      "emitted_functions": 64,
+      "minimum_complete_body_differences": 7,
+      "exact_bodies": 0,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/PoleLoopTypes.c",
+      "source_sha256": "652471b929bb911b3f1eae695e2c5b224921d9d95d6a5dda15bbbe3fef22ed24",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/PoleLoopTypes.obj",
+      "object_sha256": "0066f4f8e5ffc588b418447f04f8c5fd5f68bfdef03e11d69e76f65cd637872c",
+      "comparison": "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/PoleLoopTypes-prior-comparison.json",
+      "comparison_sha256": "308770d434b440645f8600d363fcb95b5331c05540881e8ec3ece679b604ffe7"
+    },
+    {
+      "name": "PoleLong",
+      "scope": "16 int/long combinations for offset/count-related locals.",
+      "emitted_functions": 16,
+      "minimum_complete_body_differences": 7,
+      "exact_bodies": 0,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/PoleLong.c",
+      "source_sha256": "adb1b6089458f93014f2f862ea562b1a91f7079ff7817f6f2762b6cd3d93b1ee",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/PoleLong.obj",
+      "object_sha256": "08df6f144188a590df89bfc8d43b40082e5464dda5962e518c02a66d547eeac1",
+      "comparison": "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/PoleLong-prior-comparison.json",
+      "comparison_sha256": "5f038ad5c0d89f5dea3fe2d4dece871a57d818c99587e11ce5a65e7b472f732e"
+    },
+    {
+      "name": "PoleSignVariants",
+      "scope": "Four signed/unsigned combinations for input and output offsets.",
+      "emitted_functions": 4,
+      "minimum_complete_body_differences": 7,
+      "exact_bodies": 0,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/PoleSignVariants.c",
+      "source_sha256": "f9e39c12b213a0321099e841e723a8ca5a6cabbca79da2094b7b1202b4f81e0d",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/PoleSignVariants.obj",
+      "object_sha256": "06cae434dad127b90c08d6ec8d98f5b27b64770d9291791fdd11d00a859a9c3c",
+      "comparison": "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/PoleSignVariants-prior-comparison.json",
+      "comparison_sha256": "0fb53bf7fa9960afe2c09243330c793d601c9ec2393999311b1ec8815b974148"
+    },
+    {
+      "name": "PoleCpp",
+      "scope": "C++ language control of the same pole routine.",
+      "emitted_functions": 1,
+      "minimum_complete_body_differences": 48,
+      "exact_bodies": 0,
+      "source": "/root/.ai-tmp/audio-processing.bGaifE/PoleCpp.cpp",
+      "source_sha256": "065af4e077b745e2e4294eb9510b48fe1e99f1a03188f221dd9241eb0c197546",
+      "object": "/root/.ai-tmp/audio-processing.bGaifE/PoleCpp.obj",
+      "object_sha256": "be60cdb19e0bca4924fc5360008b0c0bc91058b8dc00ac9d57c690050d1a4be0",
+      "comparison": "/root/.ai-tmp/audio-pole-row-scope.77t1_l69/PoleCpp-prior-comparison.json",
+      "comparison_sha256": "be07372ff979446da0fb832bbe34a538a4025181bb3915773cfbe24889d4a901"
+    },
+    {
+      "name": "RootReversedRowSubscripts",
+      "scope": "(input+row)[buffer], row[input+buffer], input[buffer+row], and extra +0 row-load controls, plus baseline.",
+      "emitted_functions": 5,
+      "minimum_complete_body_differences": 7,
+      "source": "/root/.ai-tmp/audio-pole-subscript.154shvpj/probe.c",
+      "source_sha256": "68c21b4aca25afac31d11a97b93e28713cfdb1af77c6415acf6cd7e02923422c",
+      "object": "/root/.ai-tmp/audio-pole-subscript.154shvpj/probe.obj",
+      "object_sha256": "a963315a775a20c3d6bbe3ab0abc7db806f1c66cb4af32963a7d37f283397676",
+      "comparison": "/root/.ai-tmp/audio-pole-subscript.154shvpj/result.json",
+      "comparison_sha256": "0fdc24b9ae7e3811041a56c1fef751d3df3529d750da0fae6145edeeb4a5d05d"
+    }
+  ],
+  "comparison_method": "Compile each source form in the entire canonical AudioProcessing translation unit. Compare the complete native2320-byte function extent, including alignment. Only18 COFF relocation operands are masked, with symbols/addends independently checked; no SIB byte is masked. Compare all34 other raw bodies and relocation signatures against the unmodified full-unit control. Resample source is unchanged; its four previously exact bodies are not recompiled by this scope-only probe.",
+  "findings": [
+    "Row-local short*, const-short*, and byte pointers produce the identical canonical pole body:2320 bytes with the same seven scale-one SIB differences.",
+    "Pointers scoped around the complete row convolution retain all seven original SIB mismatches and add13 differing bytes from induction-variable stack placement and scheduling, totaling20.",
+    "Capturing each row sample as int gives2320 bytes/1215 differing positions; short gives2336 bytes/1257. Neither recovers native code.",
+    "Every candidate preserves all34 other complete raw bodies, emitted function order, and .rdata/.data/.bss extents and bytes. Relocation identities are unchanged; the generated SEH table/label names advance, and the complete12-byte materialized table is independently proved unique at its native address. There are33 exact native functions in this unit; unsigned ADPCM remains partial.",
+    "Prior grids were inspected and their existing compiled objects rechecked, not recompiled. No additional source variants or storage are justified by these results. No canonical source or grouping change is made."
+  ],
+  "variants": [
+    {
+      "name": "baseline",
+      "source_change": "        for (row = 0; row < 8; ++row)\n            for (tap = row + 1; tap < 8; ++tap)\n                accumulator[tap] += context->buffer[input + row] * scaled[tap - row - 1];",
+      "rationale": "Unmodified canonical full-unit control.",
+      "compile_command": [
+        "/usr/bin/python3",
+        "scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/c",
+        "/IZ:\\root\\.ai-tmp\\audio-pole-row-scope.77t1_l69",
+        "/FoZ:\\root\\.ai-tmp\\audio-pole-row-scope.77t1_l69\\baseline\\AudioProcessing.obj",
+        "Z:\\root\\.ai-tmp\\audio-pole-row-scope.77t1_l69\\baseline\\AudioProcessing.c"
+      ],
+      "source_sha256": "3a2100b5d7d1408a1df95136709fde946cea70f8272da76e6d9e7a56aeaaf27c",
+      "object_sha256": "d82ac49886c4fa1a0cca34d9b7584339ff0b72e71b81b5a5ea94ff7e258d88ba",
+      "compile_log_sha256": "58b1c8361f5dacd794f0cf638989c5a19c50d5835f2aba347edafce1e0c35740",
+      "native_exact_functions_in_unit": 33,
+      "other_raw_bodies_identical_to_baseline": [
+        "_ReadAudioSamples",
+        "_InitializeAudioSqrt",
+        "_LoadAudioEnvelope",
+        "_SaveAudioEnvelope",
+        "_ResetAudioEnvelope",
+        "_AudioCPUHasSSE",
+        "_AudioOSHasSSE",
+        "_AudioClampECX",
+        "_EnvMixerSSE",
+        "_EnvMixer3DNow",
+        "_EnvMixerScalar",
+        "_EnvMixerBlockScalar",
+        "_EnvMixerABI3Scalar",
+        "_EnvMixerABI3_3DNow",
+        "_EnvMixerABI3SSE",
+        "_EnvMixerSpecial",
+        "_ClampAudioSample",
+        "_MixAudioEnvelopeCommand",
+        "_MixAudioEnvelopeClamped",
+        "_MixAudioEnvelope",
+        "_MixAudioEnvelopeLegacy",
+        "_MixAudioEnvelopeUnsigned",
+        "_ScaleAudioBuffer",
+        "_ScaleAudioBufferCommand",
+        "_FilterAudioBlock",
+        "_FilterAudioBuffer",
+        "_ResetAudioProfile",
+        "_AverageAudioProfile",
+        "_AdjustAudioProfileMaximum",
+        "_StartAudioProfile",
+        "_StopAudioProfile",
+        "_DumpAudioCommand",
+        "_DecodeAudioADPCMUnsigned",
+        "_DecodeAudioADPCMBlock"
+      ],
+      "other_relocation_signatures_identical_to_baseline": [
+        "_ReadAudioSamples",
+        "_InitializeAudioSqrt",
+        "_LoadAudioEnvelope",
+        "_SaveAudioEnvelope",
+        "_ResetAudioEnvelope",
+        "_AudioCPUHasSSE",
+        "_AudioOSHasSSE",
+        "_AudioClampECX",
+        "_EnvMixerSSE",
+        "_EnvMixer3DNow",
+        "_EnvMixerScalar",
+        "_EnvMixerBlockScalar",
+        "_EnvMixerABI3Scalar",
+        "_EnvMixerABI3_3DNow",
+        "_EnvMixerABI3SSE",
+        "_EnvMixerSpecial",
+        "_ClampAudioSample",
+        "_MixAudioEnvelopeCommand",
+        "_MixAudioEnvelopeClamped",
+        "_MixAudioEnvelope",
+        "_MixAudioEnvelopeLegacy",
+        "_MixAudioEnvelopeUnsigned",
+        "_ScaleAudioBuffer",
+        "_ScaleAudioBufferCommand",
+        "_FilterAudioBlock",
+        "_FilterAudioBuffer",
+        "_ResetAudioProfile",
+        "_AverageAudioProfile",
+        "_AdjustAudioProfileMaximum",
+        "_StartAudioProfile",
+        "_StopAudioProfile",
+        "_DumpAudioCommand",
+        "_DecodeAudioADPCMUnsigned",
+        "_DecodeAudioADPCMBlock"
+      ],
+      "compiler_generated_seh_scope_identity": {
+        "symbol": "$T75412",
+        "original_va": "0x100311a8",
+        "complete_table_bytes": 12,
+        "materialized_sha256": "c4e8e22e6809481e3cb45b41cc9badc156df1057a68801cbe97661d775c1419a",
+        "unique_complete_original_match": true,
+        "label_destinations": [
+          {
+            "table_offset": 4,
+            "local_symbol": "$L75408",
+            "function_offset": 69,
+            "destination": "0x1000b1d5"
+          },
+          {
+            "table_offset": 8,
+            "local_symbol": "$L75409",
+            "function_offset": 75,
+            "destination": "0x1000b1db"
+          }
+        ]
+      },
+      "emitted_function_order_identical": true,
+      "noncode_sections": [
+        {
+          "name": ".rdata",
+          "same_extents_and_contents": true
+        },
+        {
+          "name": ".data",
+          "same_extents_and_contents": true
+        },
+        {
+          "name": ".bss",
+          "same_extents_and_contents": true
+        }
+      ],
+      "pole_complete_comparison": {
+        "name": "_PoleFilterAudioCommand",
+        "object": "AudioProcessing.obj",
+        "rebuilt_bytes": 2320,
+        "status": "compared",
+        "original_va": 268505152,
+        "raw_bytes_equal": false,
+        "raw_differing_bytes": 63,
+        "compared_bytes": 2320,
+        "original_size_verified": true,
+        "original_bytes": 2320,
+        "size_equal": true,
+        "relocations": [
+          {
+            "offset": 24,
+            "type": "DIR32",
+            "symbol": "_RDRAM",
+            "addend": 0,
+            "original_target_va": 269925092,
+            "original_target_symbols": [
+              "_RDRAM"
+            ],
+            "expected_target_va": 269925092,
+            "resolution_basis": "identified_symbol",
+            "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1047,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1067,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1189,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1207,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1328,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1348,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1477,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1497,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1626,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1646,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1775,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1795,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1924,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1944,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 2073,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 2093,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 2252,
+            "type": "DIR32",
+            "symbol": "_RDRAM",
+            "addend": 0,
+            "original_target_va": 269925092,
+            "original_target_symbols": [
+              "_RDRAM"
+            ],
+            "expected_target_va": 269925092,
+            "resolution_basis": "identified_symbol",
+            "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          }
+        ],
+        "relocation_target_mismatch_count": 0,
+        "inferred_target_count": 0,
+        "unresolved_target_count": 0,
+        "relocation_masked_equal": false,
+        "relocation_masked_differing_bytes": 7,
+        "relocations_all_resolved": true,
+        "relocation_values_consistent": true,
+        "relocation_targets_verified": true,
+        "relocation_targets_equal": true,
+        "inferred_relocated_bytes_equal": false,
+        "relocated_bytes_equal": false,
+        "first_unmasked_differences": [
+          693,
+          753,
+          782,
+          816,
+          845,
+          884,
+          913
+        ]
+      },
+      "differing_byte_offsets_if_at_most_32": [
+        693,
+        753,
+        782,
+        816,
+        845,
+        884,
+        913
+      ],
+      "pole_raw_body_sha256": "1bee554405161000cd11fe3dd7e949e3848e1289bbf432af8695f61e2074a301"
+    },
+    {
+      "name": "row_pointer",
+      "source_change": "        for (row = 0; row < 8; ++row) {\n            short *rowInput = context->buffer + input + row;\n            for (tap = row + 1; tap < 8; ++tap)\n                accumulator[tap] += *rowInput * scaled[tap - row - 1];\n        }",
+      "rationale": "A genuine row input pointer/value scoped inside each row iteration.",
+      "compile_command": [
+        "/usr/bin/python3",
+        "scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/c",
+        "/IZ:\\root\\.ai-tmp\\audio-pole-row-scope.77t1_l69",
+        "/FoZ:\\root\\.ai-tmp\\audio-pole-row-scope.77t1_l69\\row_pointer\\AudioProcessing.obj",
+        "Z:\\root\\.ai-tmp\\audio-pole-row-scope.77t1_l69\\row_pointer\\AudioProcessing.c"
+      ],
+      "source_sha256": "6d4c4faeb169cb5201fbf2bbf0e7673beabb7400e290f1ec3ef8300b774f5763",
+      "object_sha256": "782cd6ef4a5b1538c30ac35ac0dcb3a2892b0b9bf24fd72441394588965a9f7e",
+      "compile_log_sha256": "7fb559a500d7f6d9135af7db7ec581aa464217171a6154b5d2c217cf485dc903",
+      "native_exact_functions_in_unit": 33,
+      "other_raw_bodies_identical_to_baseline": [
+        "_ReadAudioSamples",
+        "_InitializeAudioSqrt",
+        "_LoadAudioEnvelope",
+        "_SaveAudioEnvelope",
+        "_ResetAudioEnvelope",
+        "_AudioCPUHasSSE",
+        "_AudioOSHasSSE",
+        "_AudioClampECX",
+        "_EnvMixerSSE",
+        "_EnvMixer3DNow",
+        "_EnvMixerScalar",
+        "_EnvMixerBlockScalar",
+        "_EnvMixerABI3Scalar",
+        "_EnvMixerABI3_3DNow",
+        "_EnvMixerABI3SSE",
+        "_EnvMixerSpecial",
+        "_ClampAudioSample",
+        "_MixAudioEnvelopeCommand",
+        "_MixAudioEnvelopeClamped",
+        "_MixAudioEnvelope",
+        "_MixAudioEnvelopeLegacy",
+        "_MixAudioEnvelopeUnsigned",
+        "_ScaleAudioBuffer",
+        "_ScaleAudioBufferCommand",
+        "_FilterAudioBlock",
+        "_FilterAudioBuffer",
+        "_ResetAudioProfile",
+        "_AverageAudioProfile",
+        "_AdjustAudioProfileMaximum",
+        "_StartAudioProfile",
+        "_StopAudioProfile",
+        "_DumpAudioCommand",
+        "_DecodeAudioADPCMUnsigned",
+        "_DecodeAudioADPCMBlock"
+      ],
+      "other_relocation_signatures_identical_to_baseline": [
+        "_ReadAudioSamples",
+        "_InitializeAudioSqrt",
+        "_LoadAudioEnvelope",
+        "_SaveAudioEnvelope",
+        "_ResetAudioEnvelope",
+        "_AudioCPUHasSSE",
+        "_AudioOSHasSSE",
+        "_AudioClampECX",
+        "_EnvMixerSSE",
+        "_EnvMixer3DNow",
+        "_EnvMixerScalar",
+        "_EnvMixerBlockScalar",
+        "_EnvMixerABI3Scalar",
+        "_EnvMixerABI3_3DNow",
+        "_EnvMixerABI3SSE",
+        "_EnvMixerSpecial",
+        "_ClampAudioSample",
+        "_MixAudioEnvelopeCommand",
+        "_MixAudioEnvelopeClamped",
+        "_MixAudioEnvelope",
+        "_MixAudioEnvelopeLegacy",
+        "_MixAudioEnvelopeUnsigned",
+        "_ScaleAudioBuffer",
+        "_ScaleAudioBufferCommand",
+        "_FilterAudioBlock",
+        "_FilterAudioBuffer",
+        "_ResetAudioProfile",
+        "_AverageAudioProfile",
+        "_AdjustAudioProfileMaximum",
+        "_StartAudioProfile",
+        "_StopAudioProfile",
+        "_DumpAudioCommand",
+        "_DecodeAudioADPCMUnsigned",
+        "_DecodeAudioADPCMBlock"
+      ],
+      "compiler_generated_seh_scope_identity": {
+        "symbol": "$T75413",
+        "original_va": "0x100311a8",
+        "complete_table_bytes": 12,
+        "materialized_sha256": "c4e8e22e6809481e3cb45b41cc9badc156df1057a68801cbe97661d775c1419a",
+        "unique_complete_original_match": true,
+        "label_destinations": [
+          {
+            "table_offset": 4,
+            "local_symbol": "$L75409",
+            "function_offset": 69,
+            "destination": "0x1000b1d5"
+          },
+          {
+            "table_offset": 8,
+            "local_symbol": "$L75410",
+            "function_offset": 75,
+            "destination": "0x1000b1db"
+          }
+        ]
+      },
+      "emitted_function_order_identical": true,
+      "noncode_sections": [
+        {
+          "name": ".rdata",
+          "same_extents_and_contents": true
+        },
+        {
+          "name": ".data",
+          "same_extents_and_contents": true
+        },
+        {
+          "name": ".bss",
+          "same_extents_and_contents": true
+        }
+      ],
+      "pole_complete_comparison": {
+        "name": "_PoleFilterAudioCommand",
+        "object": "AudioProcessing.obj",
+        "rebuilt_bytes": 2320,
+        "status": "compared",
+        "original_va": 268505152,
+        "raw_bytes_equal": false,
+        "raw_differing_bytes": 63,
+        "compared_bytes": 2320,
+        "original_size_verified": true,
+        "original_bytes": 2320,
+        "size_equal": true,
+        "relocations": [
+          {
+            "offset": 24,
+            "type": "DIR32",
+            "symbol": "_RDRAM",
+            "addend": 0,
+            "original_target_va": 269925092,
+            "original_target_symbols": [
+              "_RDRAM"
+            ],
+            "expected_target_va": 269925092,
+            "resolution_basis": "identified_symbol",
+            "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1047,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1067,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1189,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1207,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1328,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1348,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1477,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1497,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1626,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1646,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1775,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1795,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1924,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1944,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 2073,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 2093,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 2252,
+            "type": "DIR32",
+            "symbol": "_RDRAM",
+            "addend": 0,
+            "original_target_va": 269925092,
+            "original_target_symbols": [
+              "_RDRAM"
+            ],
+            "expected_target_va": 269925092,
+            "resolution_basis": "identified_symbol",
+            "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          }
+        ],
+        "relocation_target_mismatch_count": 0,
+        "inferred_target_count": 0,
+        "unresolved_target_count": 0,
+        "relocation_masked_equal": false,
+        "relocation_masked_differing_bytes": 7,
+        "relocations_all_resolved": true,
+        "relocation_values_consistent": true,
+        "relocation_targets_verified": true,
+        "relocation_targets_equal": true,
+        "inferred_relocated_bytes_equal": false,
+        "relocated_bytes_equal": false,
+        "first_unmasked_differences": [
+          693,
+          753,
+          782,
+          816,
+          845,
+          884,
+          913
+        ]
+      },
+      "differing_byte_offsets_if_at_most_32": [
+        693,
+        753,
+        782,
+        816,
+        845,
+        884,
+        913
+      ],
+      "pole_raw_body_sha256": "1bee554405161000cd11fe3dd7e949e3848e1289bbf432af8695f61e2074a301"
+    },
+    {
+      "name": "row_const_pointer",
+      "source_change": "        for (row = 0; row < 8; ++row) {\n            const short *rowInput = context->buffer + input + row;\n            for (tap = row + 1; tap < 8; ++tap)\n                accumulator[tap] += *rowInput * scaled[tap - row - 1];\n        }",
+      "rationale": "A genuine row input pointer/value scoped inside each row iteration.",
+      "compile_command": [
+        "/usr/bin/python3",
+        "scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/c",
+        "/IZ:\\root\\.ai-tmp\\audio-pole-row-scope.77t1_l69",
+        "/FoZ:\\root\\.ai-tmp\\audio-pole-row-scope.77t1_l69\\row_const_pointer\\AudioProcessing.obj",
+        "Z:\\root\\.ai-tmp\\audio-pole-row-scope.77t1_l69\\row_const_pointer\\AudioProcessing.c"
+      ],
+      "source_sha256": "3566dbcd8bcf1d9e02a2ebda51784f9df9cdeead551262ac3e8da18177c96b6a",
+      "object_sha256": "c9fe0bd0d3ae1833c8f01354411600328c916068494122d992b8a23693427ff8",
+      "compile_log_sha256": "009575954440ee059d1cb40d340258676e8d8fce586a9a100b51452ed558100b",
+      "native_exact_functions_in_unit": 33,
+      "other_raw_bodies_identical_to_baseline": [
+        "_ReadAudioSamples",
+        "_InitializeAudioSqrt",
+        "_LoadAudioEnvelope",
+        "_SaveAudioEnvelope",
+        "_ResetAudioEnvelope",
+        "_AudioCPUHasSSE",
+        "_AudioOSHasSSE",
+        "_AudioClampECX",
+        "_EnvMixerSSE",
+        "_EnvMixer3DNow",
+        "_EnvMixerScalar",
+        "_EnvMixerBlockScalar",
+        "_EnvMixerABI3Scalar",
+        "_EnvMixerABI3_3DNow",
+        "_EnvMixerABI3SSE",
+        "_EnvMixerSpecial",
+        "_ClampAudioSample",
+        "_MixAudioEnvelopeCommand",
+        "_MixAudioEnvelopeClamped",
+        "_MixAudioEnvelope",
+        "_MixAudioEnvelopeLegacy",
+        "_MixAudioEnvelopeUnsigned",
+        "_ScaleAudioBuffer",
+        "_ScaleAudioBufferCommand",
+        "_FilterAudioBlock",
+        "_FilterAudioBuffer",
+        "_ResetAudioProfile",
+        "_AverageAudioProfile",
+        "_AdjustAudioProfileMaximum",
+        "_StartAudioProfile",
+        "_StopAudioProfile",
+        "_DumpAudioCommand",
+        "_DecodeAudioADPCMUnsigned",
+        "_DecodeAudioADPCMBlock"
+      ],
+      "other_relocation_signatures_identical_to_baseline": [
+        "_ReadAudioSamples",
+        "_InitializeAudioSqrt",
+        "_LoadAudioEnvelope",
+        "_SaveAudioEnvelope",
+        "_ResetAudioEnvelope",
+        "_AudioCPUHasSSE",
+        "_AudioOSHasSSE",
+        "_AudioClampECX",
+        "_EnvMixerSSE",
+        "_EnvMixer3DNow",
+        "_EnvMixerScalar",
+        "_EnvMixerBlockScalar",
+        "_EnvMixerABI3Scalar",
+        "_EnvMixerABI3_3DNow",
+        "_EnvMixerABI3SSE",
+        "_EnvMixerSpecial",
+        "_ClampAudioSample",
+        "_MixAudioEnvelopeCommand",
+        "_MixAudioEnvelopeClamped",
+        "_MixAudioEnvelope",
+        "_MixAudioEnvelopeLegacy",
+        "_MixAudioEnvelopeUnsigned",
+        "_ScaleAudioBuffer",
+        "_ScaleAudioBufferCommand",
+        "_FilterAudioBlock",
+        "_FilterAudioBuffer",
+        "_ResetAudioProfile",
+        "_AverageAudioProfile",
+        "_AdjustAudioProfileMaximum",
+        "_StartAudioProfile",
+        "_StopAudioProfile",
+        "_DumpAudioCommand",
+        "_DecodeAudioADPCMUnsigned",
+        "_DecodeAudioADPCMBlock"
+      ],
+      "compiler_generated_seh_scope_identity": {
+        "symbol": "$T75413",
+        "original_va": "0x100311a8",
+        "complete_table_bytes": 12,
+        "materialized_sha256": "c4e8e22e6809481e3cb45b41cc9badc156df1057a68801cbe97661d775c1419a",
+        "unique_complete_original_match": true,
+        "label_destinations": [
+          {
+            "table_offset": 4,
+            "local_symbol": "$L75409",
+            "function_offset": 69,
+            "destination": "0x1000b1d5"
+          },
+          {
+            "table_offset": 8,
+            "local_symbol": "$L75410",
+            "function_offset": 75,
+            "destination": "0x1000b1db"
+          }
+        ]
+      },
+      "emitted_function_order_identical": true,
+      "noncode_sections": [
+        {
+          "name": ".rdata",
+          "same_extents_and_contents": true
+        },
+        {
+          "name": ".data",
+          "same_extents_and_contents": true
+        },
+        {
+          "name": ".bss",
+          "same_extents_and_contents": true
+        }
+      ],
+      "pole_complete_comparison": {
+        "name": "_PoleFilterAudioCommand",
+        "object": "AudioProcessing.obj",
+        "rebuilt_bytes": 2320,
+        "status": "compared",
+        "original_va": 268505152,
+        "raw_bytes_equal": false,
+        "raw_differing_bytes": 63,
+        "compared_bytes": 2320,
+        "original_size_verified": true,
+        "original_bytes": 2320,
+        "size_equal": true,
+        "relocations": [
+          {
+            "offset": 24,
+            "type": "DIR32",
+            "symbol": "_RDRAM",
+            "addend": 0,
+            "original_target_va": 269925092,
+            "original_target_symbols": [
+              "_RDRAM"
+            ],
+            "expected_target_va": 269925092,
+            "resolution_basis": "identified_symbol",
+            "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1047,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1067,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1189,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1207,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1328,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1348,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1477,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1497,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1626,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1646,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1775,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1795,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1924,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1944,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 2073,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 2093,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 2252,
+            "type": "DIR32",
+            "symbol": "_RDRAM",
+            "addend": 0,
+            "original_target_va": 269925092,
+            "original_target_symbols": [
+              "_RDRAM"
+            ],
+            "expected_target_va": 269925092,
+            "resolution_basis": "identified_symbol",
+            "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          }
+        ],
+        "relocation_target_mismatch_count": 0,
+        "inferred_target_count": 0,
+        "unresolved_target_count": 0,
+        "relocation_masked_equal": false,
+        "relocation_masked_differing_bytes": 7,
+        "relocations_all_resolved": true,
+        "relocation_values_consistent": true,
+        "relocation_targets_verified": true,
+        "relocation_targets_equal": true,
+        "inferred_relocated_bytes_equal": false,
+        "relocated_bytes_equal": false,
+        "first_unmasked_differences": [
+          693,
+          753,
+          782,
+          816,
+          845,
+          884,
+          913
+        ]
+      },
+      "differing_byte_offsets_if_at_most_32": [
+        693,
+        753,
+        782,
+        816,
+        845,
+        884,
+        913
+      ],
+      "pole_raw_body_sha256": "1bee554405161000cd11fe3dd7e949e3848e1289bbf432af8695f61e2074a301"
+    },
+    {
+      "name": "row_int_sample",
+      "source_change": "        for (row = 0; row < 8; ++row) {\n            int rowInput = context->buffer[input + row];\n            for (tap = row + 1; tap < 8; ++tap)\n                accumulator[tap] += rowInput * scaled[tap - row - 1];\n        }",
+      "rationale": "A genuine row input pointer/value scoped inside each row iteration.",
+      "compile_command": [
+        "/usr/bin/python3",
+        "scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/c",
+        "/IZ:\\root\\.ai-tmp\\audio-pole-row-scope.77t1_l69",
+        "/FoZ:\\root\\.ai-tmp\\audio-pole-row-scope.77t1_l69\\row_int_sample\\AudioProcessing.obj",
+        "Z:\\root\\.ai-tmp\\audio-pole-row-scope.77t1_l69\\row_int_sample\\AudioProcessing.c"
+      ],
+      "source_sha256": "b6bc74acbf592753f731593f37aefc35618aecbd34bf06b10547e2aed28e4bf3",
+      "object_sha256": "3fef445798b910264a0404307cafd8bb5b8cc7bbc0f81afa9b791b85cb188ade",
+      "compile_log_sha256": "14fd079940799fe3f259eafd7277dc7cc5db571419d21d76669b401c5e637175",
+      "native_exact_functions_in_unit": 33,
+      "other_raw_bodies_identical_to_baseline": [
+        "_ReadAudioSamples",
+        "_InitializeAudioSqrt",
+        "_LoadAudioEnvelope",
+        "_SaveAudioEnvelope",
+        "_ResetAudioEnvelope",
+        "_AudioCPUHasSSE",
+        "_AudioOSHasSSE",
+        "_AudioClampECX",
+        "_EnvMixerSSE",
+        "_EnvMixer3DNow",
+        "_EnvMixerScalar",
+        "_EnvMixerBlockScalar",
+        "_EnvMixerABI3Scalar",
+        "_EnvMixerABI3_3DNow",
+        "_EnvMixerABI3SSE",
+        "_EnvMixerSpecial",
+        "_ClampAudioSample",
+        "_MixAudioEnvelopeCommand",
+        "_MixAudioEnvelopeClamped",
+        "_MixAudioEnvelope",
+        "_MixAudioEnvelopeLegacy",
+        "_MixAudioEnvelopeUnsigned",
+        "_ScaleAudioBuffer",
+        "_ScaleAudioBufferCommand",
+        "_FilterAudioBlock",
+        "_FilterAudioBuffer",
+        "_ResetAudioProfile",
+        "_AverageAudioProfile",
+        "_AdjustAudioProfileMaximum",
+        "_StartAudioProfile",
+        "_StopAudioProfile",
+        "_DumpAudioCommand",
+        "_DecodeAudioADPCMUnsigned",
+        "_DecodeAudioADPCMBlock"
+      ],
+      "other_relocation_signatures_identical_to_baseline": [
+        "_ReadAudioSamples",
+        "_InitializeAudioSqrt",
+        "_LoadAudioEnvelope",
+        "_SaveAudioEnvelope",
+        "_ResetAudioEnvelope",
+        "_AudioCPUHasSSE",
+        "_AudioOSHasSSE",
+        "_AudioClampECX",
+        "_EnvMixerSSE",
+        "_EnvMixer3DNow",
+        "_EnvMixerScalar",
+        "_EnvMixerBlockScalar",
+        "_EnvMixerABI3Scalar",
+        "_EnvMixerABI3_3DNow",
+        "_EnvMixerABI3SSE",
+        "_EnvMixerSpecial",
+        "_ClampAudioSample",
+        "_MixAudioEnvelopeCommand",
+        "_MixAudioEnvelopeClamped",
+        "_MixAudioEnvelope",
+        "_MixAudioEnvelopeLegacy",
+        "_MixAudioEnvelopeUnsigned",
+        "_ScaleAudioBuffer",
+        "_ScaleAudioBufferCommand",
+        "_FilterAudioBlock",
+        "_FilterAudioBuffer",
+        "_ResetAudioProfile",
+        "_AverageAudioProfile",
+        "_AdjustAudioProfileMaximum",
+        "_StartAudioProfile",
+        "_StopAudioProfile",
+        "_DumpAudioCommand",
+        "_DecodeAudioADPCMUnsigned",
+        "_DecodeAudioADPCMBlock"
+      ],
+      "compiler_generated_seh_scope_identity": {
+        "symbol": "$T75413",
+        "original_va": "0x100311a8",
+        "complete_table_bytes": 12,
+        "materialized_sha256": "c4e8e22e6809481e3cb45b41cc9badc156df1057a68801cbe97661d775c1419a",
+        "unique_complete_original_match": true,
+        "label_destinations": [
+          {
+            "table_offset": 4,
+            "local_symbol": "$L75409",
+            "function_offset": 69,
+            "destination": "0x1000b1d5"
+          },
+          {
+            "table_offset": 8,
+            "local_symbol": "$L75410",
+            "function_offset": 75,
+            "destination": "0x1000b1db"
+          }
+        ]
+      },
+      "emitted_function_order_identical": true,
+      "noncode_sections": [
+        {
+          "name": ".rdata",
+          "same_extents_and_contents": true
+        },
+        {
+          "name": ".data",
+          "same_extents_and_contents": true
+        },
+        {
+          "name": ".bss",
+          "same_extents_and_contents": true
+        }
+      ],
+      "pole_complete_comparison": {
+        "name": "_PoleFilterAudioCommand",
+        "object": "AudioProcessing.obj",
+        "rebuilt_bytes": 2320,
+        "status": "compared",
+        "original_va": 268505152,
+        "raw_bytes_equal": false,
+        "raw_differing_bytes": 1287,
+        "compared_bytes": 2320,
+        "original_size_verified": true,
+        "original_bytes": 2320,
+        "size_equal": true,
+        "relocations": [
+          {
+            "offset": 24,
+            "type": "DIR32",
+            "symbol": "_RDRAM",
+            "addend": 0,
+            "original_target_va": 269925092,
+            "original_target_symbols": [
+              "_RDRAM"
+            ],
+            "expected_target_va": 269925092,
+            "resolution_basis": "identified_symbol",
+            "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1045,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 439811241,
+            "original_target_symbols": [],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1065,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 434306193,
+            "original_target_symbols": [],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1187,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 430505258,
+            "original_target_symbols": [],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1205,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 425131344,
+            "original_target_symbols": [],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1326,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 421395893,
+            "original_target_symbols": [],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1346,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 415890858,
+            "original_target_symbols": [],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1475,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 411631178,
+            "original_target_symbols": [],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1495,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 406126143,
+            "original_target_symbols": [],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1624,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 401866463,
+            "original_target_symbols": [],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1644,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 396361428,
+            "original_target_symbols": [],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1773,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 392101748,
+            "original_target_symbols": [],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1793,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 386596713,
+            "original_target_symbols": [],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1922,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 382337033,
+            "original_target_symbols": [],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1942,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 376831998,
+            "original_target_symbols": [],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 2071,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 372572318,
+            "original_target_symbols": [],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 2091,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 367067283,
+            "original_target_symbols": [],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 2250,
+            "type": "DIR32",
+            "symbol": "_RDRAM",
+            "addend": 0,
+            "original_target_va": 3135507851,
+            "original_target_symbols": [],
+            "expected_target_va": 269925092,
+            "resolution_basis": "identified_symbol",
+            "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          }
+        ],
+        "relocation_target_mismatch_count": 17,
+        "inferred_target_count": 0,
+        "unresolved_target_count": 0,
+        "relocation_masked_equal": false,
+        "relocation_masked_differing_bytes": 1215,
+        "relocations_all_resolved": true,
+        "relocation_values_consistent": false,
+        "relocation_targets_verified": false,
+        "relocation_targets_equal": false,
+        "inferred_relocated_bytes_equal": false,
+        "relocated_bytes_equal": false,
+        "first_unmasked_differences": [
+          41,
+          81,
+          357,
+          693,
+          753,
+          782,
+          816,
+          845,
+          884,
+          913,
+          920,
+          921,
+          922,
+          923,
+          924,
+          925,
+          926,
+          927,
+          928,
+          945,
+          946,
+          947,
+          948,
+          949,
+          950,
+          951,
+          952,
+          953,
+          954,
+          955,
+          956,
+          957
+        ]
+      },
+      "differing_byte_offsets_if_at_most_32": null,
+      "pole_raw_body_sha256": "a83a4fbb2309b734966868fcfe99c75ca0cc02e11eca9ffceca2e41f97914efe"
+    },
+    {
+      "name": "row_short_sample",
+      "source_change": "        for (row = 0; row < 8; ++row) {\n            short rowInput = context->buffer[input + row];\n            for (tap = row + 1; tap < 8; ++tap)\n                accumulator[tap] += rowInput * scaled[tap - row - 1];\n        }",
+      "rationale": "A genuine row input pointer/value scoped inside each row iteration.",
+      "compile_command": [
+        "/usr/bin/python3",
+        "scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/c",
+        "/IZ:\\root\\.ai-tmp\\audio-pole-row-scope.77t1_l69",
+        "/FoZ:\\root\\.ai-tmp\\audio-pole-row-scope.77t1_l69\\row_short_sample\\AudioProcessing.obj",
+        "Z:\\root\\.ai-tmp\\audio-pole-row-scope.77t1_l69\\row_short_sample\\AudioProcessing.c"
+      ],
+      "source_sha256": "450d9b310250449f8a38850ca507aed194903accadc8e7bcddcd6b477e2ee000",
+      "object_sha256": "e2d8f754f317b69d0b84bbfffb47b2c729d6ec472893224276325bbc112770f9",
+      "compile_log_sha256": "fd7d211e6c3f2eb23d08d358b610c6cd2162645091e2e8ad31b23ac8334c84de",
+      "native_exact_functions_in_unit": 33,
+      "other_raw_bodies_identical_to_baseline": [
+        "_ReadAudioSamples",
+        "_InitializeAudioSqrt",
+        "_LoadAudioEnvelope",
+        "_SaveAudioEnvelope",
+        "_ResetAudioEnvelope",
+        "_AudioCPUHasSSE",
+        "_AudioOSHasSSE",
+        "_AudioClampECX",
+        "_EnvMixerSSE",
+        "_EnvMixer3DNow",
+        "_EnvMixerScalar",
+        "_EnvMixerBlockScalar",
+        "_EnvMixerABI3Scalar",
+        "_EnvMixerABI3_3DNow",
+        "_EnvMixerABI3SSE",
+        "_EnvMixerSpecial",
+        "_ClampAudioSample",
+        "_MixAudioEnvelopeCommand",
+        "_MixAudioEnvelopeClamped",
+        "_MixAudioEnvelope",
+        "_MixAudioEnvelopeLegacy",
+        "_MixAudioEnvelopeUnsigned",
+        "_ScaleAudioBuffer",
+        "_ScaleAudioBufferCommand",
+        "_FilterAudioBlock",
+        "_FilterAudioBuffer",
+        "_ResetAudioProfile",
+        "_AverageAudioProfile",
+        "_AdjustAudioProfileMaximum",
+        "_StartAudioProfile",
+        "_StopAudioProfile",
+        "_DumpAudioCommand",
+        "_DecodeAudioADPCMUnsigned",
+        "_DecodeAudioADPCMBlock"
+      ],
+      "other_relocation_signatures_identical_to_baseline": [
+        "_ReadAudioSamples",
+        "_InitializeAudioSqrt",
+        "_LoadAudioEnvelope",
+        "_SaveAudioEnvelope",
+        "_ResetAudioEnvelope",
+        "_AudioCPUHasSSE",
+        "_AudioOSHasSSE",
+        "_AudioClampECX",
+        "_EnvMixerSSE",
+        "_EnvMixer3DNow",
+        "_EnvMixerScalar",
+        "_EnvMixerBlockScalar",
+        "_EnvMixerABI3Scalar",
+        "_EnvMixerABI3_3DNow",
+        "_EnvMixerABI3SSE",
+        "_EnvMixerSpecial",
+        "_ClampAudioSample",
+        "_MixAudioEnvelopeCommand",
+        "_MixAudioEnvelopeClamped",
+        "_MixAudioEnvelope",
+        "_MixAudioEnvelopeLegacy",
+        "_MixAudioEnvelopeUnsigned",
+        "_ScaleAudioBuffer",
+        "_ScaleAudioBufferCommand",
+        "_FilterAudioBlock",
+        "_FilterAudioBuffer",
+        "_ResetAudioProfile",
+        "_AverageAudioProfile",
+        "_AdjustAudioProfileMaximum",
+        "_StartAudioProfile",
+        "_StopAudioProfile",
+        "_DumpAudioCommand",
+        "_DecodeAudioADPCMUnsigned",
+        "_DecodeAudioADPCMBlock"
+      ],
+      "compiler_generated_seh_scope_identity": {
+        "symbol": "$T75413",
+        "original_va": "0x100311a8",
+        "complete_table_bytes": 12,
+        "materialized_sha256": "c4e8e22e6809481e3cb45b41cc9badc156df1057a68801cbe97661d775c1419a",
+        "unique_complete_original_match": true,
+        "label_destinations": [
+          {
+            "table_offset": 4,
+            "local_symbol": "$L75409",
+            "function_offset": 69,
+            "destination": "0x1000b1d5"
+          },
+          {
+            "table_offset": 8,
+            "local_symbol": "$L75410",
+            "function_offset": 75,
+            "destination": "0x1000b1db"
+          }
+        ]
+      },
+      "emitted_function_order_identical": true,
+      "noncode_sections": [
+        {
+          "name": ".rdata",
+          "same_extents_and_contents": true
+        },
+        {
+          "name": ".data",
+          "same_extents_and_contents": true
+        },
+        {
+          "name": ".bss",
+          "same_extents_and_contents": true
+        }
+      ],
+      "pole_complete_comparison": {
+        "name": "_PoleFilterAudioCommand",
+        "object": "AudioProcessing.obj",
+        "rebuilt_bytes": 2336,
+        "status": "compared",
+        "original_va": 268505152,
+        "raw_bytes_equal": false,
+        "raw_differing_bytes": 1310,
+        "compared_bytes": 2336,
+        "original_size_verified": true,
+        "original_bytes": 2320,
+        "size_equal": false,
+        "relocations": [
+          {
+            "offset": 24,
+            "type": "DIR32",
+            "symbol": "_RDRAM",
+            "addend": 0,
+            "original_target_va": 269925092,
+            "original_target_symbols": [
+              "_RDRAM"
+            ],
+            "expected_target_va": 269925092,
+            "resolution_basis": "identified_symbol",
+            "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1055,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 2600539299,
+            "original_target_symbols": [],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1075,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 3927760034,
+            "original_target_symbols": [],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1197,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 2600539441,
+            "original_target_symbols": [],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1215,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 1418517806,
+            "original_target_symbols": [],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1336,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 2600539580,
+            "original_target_symbols": [],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1356,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 4196195771,
+            "original_target_symbols": [],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1485,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 2600539729,
+            "original_target_symbols": [],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1505,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 4196195920,
+            "original_target_symbols": [],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1634,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 2600539878,
+            "original_target_symbols": [],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1654,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 4196196069,
+            "original_target_symbols": [],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1783,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 2600540027,
+            "original_target_symbols": [],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1803,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 4196196218,
+            "original_target_symbols": [],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1932,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 2600540176,
+            "original_target_symbols": [],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 1952,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 4196196367,
+            "original_target_symbols": [],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 2081,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 2600540325,
+            "original_target_symbols": [],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 2101,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 4196196516,
+            "original_target_symbols": [],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          },
+          {
+            "offset": 2260,
+            "type": "DIR32",
+            "symbol": "_RDRAM",
+            "addend": 0,
+            "original_target_va": 2332033024,
+            "original_target_symbols": [],
+            "expected_target_va": 269925092,
+            "resolution_basis": "identified_symbol",
+            "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+            "status": "resolved",
+            "target_equal": false,
+            "target_identity_verified": false
+          }
+        ],
+        "relocation_target_mismatch_count": 17,
+        "inferred_target_count": 0,
+        "unresolved_target_count": 0,
+        "relocation_masked_equal": false,
+        "relocation_masked_differing_bytes": 1257,
+        "relocations_all_resolved": true,
+        "relocation_values_consistent": false,
+        "relocation_targets_verified": false,
+        "relocation_targets_equal": false,
+        "inferred_relocated_bytes_equal": false,
+        "relocated_bytes_equal": false,
+        "first_unmasked_differences": [
+          41,
+          81,
+          357,
+          693,
+          753,
+          782,
+          816,
+          845,
+          884,
+          913,
+          920,
+          921,
+          922,
+          923,
+          924,
+          925,
+          926,
+          927,
+          928,
+          945,
+          946,
+          947,
+          948,
+          949,
+          950,
+          951,
+          952,
+          953,
+          954,
+          955,
+          956,
+          957
+        ]
+      },
+      "differing_byte_offsets_if_at_most_32": null,
+      "pole_raw_body_sha256": "478fc82f3426b1d899673a6ff2de5499dd4d1991416d29330fbe69097032b700"
+    },
+    {
+      "name": "row_byte_pointer",
+      "source_change": "        for (row = 0; row < 8; ++row) {\n            const unsigned char *rowInput = (const unsigned char *)context->buffer + (input + row) * 2;\n            for (tap = row + 1; tap < 8; ++tap)\n                accumulator[tap] += *(const short *)rowInput * scaled[tap - row - 1];\n        }",
+      "rationale": "A genuine row input pointer/value scoped inside each row iteration.",
+      "compile_command": [
+        "/usr/bin/python3",
+        "scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/c",
+        "/IZ:\\root\\.ai-tmp\\audio-pole-row-scope.77t1_l69",
+        "/FoZ:\\root\\.ai-tmp\\audio-pole-row-scope.77t1_l69\\row_byte_pointer\\AudioProcessing.obj",
+        "Z:\\root\\.ai-tmp\\audio-pole-row-scope.77t1_l69\\row_byte_pointer\\AudioProcessing.c"
+      ],
+      "source_sha256": "e844339068d4685d80100eec7aca7862adb277bffd843579eec68ab7d8f61929",
+      "object_sha256": "61ade4fe0812df44350788a4d2a1a2f0e2e9e832304358c302a15749c1eb88ba",
+      "compile_log_sha256": "95cf966b6093110437267671778b4e4b8f32c4f239e28f3aa6c733eb60144e86",
+      "native_exact_functions_in_unit": 33,
+      "other_raw_bodies_identical_to_baseline": [
+        "_ReadAudioSamples",
+        "_InitializeAudioSqrt",
+        "_LoadAudioEnvelope",
+        "_SaveAudioEnvelope",
+        "_ResetAudioEnvelope",
+        "_AudioCPUHasSSE",
+        "_AudioOSHasSSE",
+        "_AudioClampECX",
+        "_EnvMixerSSE",
+        "_EnvMixer3DNow",
+        "_EnvMixerScalar",
+        "_EnvMixerBlockScalar",
+        "_EnvMixerABI3Scalar",
+        "_EnvMixerABI3_3DNow",
+        "_EnvMixerABI3SSE",
+        "_EnvMixerSpecial",
+        "_ClampAudioSample",
+        "_MixAudioEnvelopeCommand",
+        "_MixAudioEnvelopeClamped",
+        "_MixAudioEnvelope",
+        "_MixAudioEnvelopeLegacy",
+        "_MixAudioEnvelopeUnsigned",
+        "_ScaleAudioBuffer",
+        "_ScaleAudioBufferCommand",
+        "_FilterAudioBlock",
+        "_FilterAudioBuffer",
+        "_ResetAudioProfile",
+        "_AverageAudioProfile",
+        "_AdjustAudioProfileMaximum",
+        "_StartAudioProfile",
+        "_StopAudioProfile",
+        "_DumpAudioCommand",
+        "_DecodeAudioADPCMUnsigned",
+        "_DecodeAudioADPCMBlock"
+      ],
+      "other_relocation_signatures_identical_to_baseline": [
+        "_ReadAudioSamples",
+        "_InitializeAudioSqrt",
+        "_LoadAudioEnvelope",
+        "_SaveAudioEnvelope",
+        "_ResetAudioEnvelope",
+        "_AudioCPUHasSSE",
+        "_AudioOSHasSSE",
+        "_AudioClampECX",
+        "_EnvMixerSSE",
+        "_EnvMixer3DNow",
+        "_EnvMixerScalar",
+        "_EnvMixerBlockScalar",
+        "_EnvMixerABI3Scalar",
+        "_EnvMixerABI3_3DNow",
+        "_EnvMixerABI3SSE",
+        "_EnvMixerSpecial",
+        "_ClampAudioSample",
+        "_MixAudioEnvelopeCommand",
+        "_MixAudioEnvelopeClamped",
+        "_MixAudioEnvelope",
+        "_MixAudioEnvelopeLegacy",
+        "_MixAudioEnvelopeUnsigned",
+        "_ScaleAudioBuffer",
+        "_ScaleAudioBufferCommand",
+        "_FilterAudioBlock",
+        "_FilterAudioBuffer",
+        "_ResetAudioProfile",
+        "_AverageAudioProfile",
+        "_AdjustAudioProfileMaximum",
+        "_StartAudioProfile",
+        "_StopAudioProfile",
+        "_DumpAudioCommand",
+        "_DecodeAudioADPCMUnsigned",
+        "_DecodeAudioADPCMBlock"
+      ],
+      "compiler_generated_seh_scope_identity": {
+        "symbol": "$T75415",
+        "original_va": "0x100311a8",
+        "complete_table_bytes": 12,
+        "materialized_sha256": "c4e8e22e6809481e3cb45b41cc9badc156df1057a68801cbe97661d775c1419a",
+        "unique_complete_original_match": true,
+        "label_destinations": [
+          {
+            "table_offset": 4,
+            "local_symbol": "$L75411",
+            "function_offset": 69,
+            "destination": "0x1000b1d5"
+          },
+          {
+            "table_offset": 8,
+            "local_symbol": "$L75412",
+            "function_offset": 75,
+            "destination": "0x1000b1db"
+          }
+        ]
+      },
+      "emitted_function_order_identical": true,
+      "noncode_sections": [
+        {
+          "name": ".rdata",
+          "same_extents_and_contents": true
+        },
+        {
+          "name": ".data",
+          "same_extents_and_contents": true
+        },
+        {
+          "name": ".bss",
+          "same_extents_and_contents": true
+        }
+      ],
+      "pole_complete_comparison": {
+        "name": "_PoleFilterAudioCommand",
+        "object": "AudioProcessing.obj",
+        "rebuilt_bytes": 2320,
+        "status": "compared",
+        "original_va": 268505152,
+        "raw_bytes_equal": false,
+        "raw_differing_bytes": 63,
+        "compared_bytes": 2320,
+        "original_size_verified": true,
+        "original_bytes": 2320,
+        "size_equal": true,
+        "relocations": [
+          {
+            "offset": 24,
+            "type": "DIR32",
+            "symbol": "_RDRAM",
+            "addend": 0,
+            "original_target_va": 269925092,
+            "original_target_symbols": [
+              "_RDRAM"
+            ],
+            "expected_target_va": 269925092,
+            "resolution_basis": "identified_symbol",
+            "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1047,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1067,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1189,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1207,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1328,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1348,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1477,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1497,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1626,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1646,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1775,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1795,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1924,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1944,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 2073,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 2093,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 2252,
+            "type": "DIR32",
+            "symbol": "_RDRAM",
+            "addend": 0,
+            "original_target_va": 269925092,
+            "original_target_symbols": [
+              "_RDRAM"
+            ],
+            "expected_target_va": 269925092,
+            "resolution_basis": "identified_symbol",
+            "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          }
+        ],
+        "relocation_target_mismatch_count": 0,
+        "inferred_target_count": 0,
+        "unresolved_target_count": 0,
+        "relocation_masked_equal": false,
+        "relocation_masked_differing_bytes": 7,
+        "relocations_all_resolved": true,
+        "relocation_values_consistent": true,
+        "relocation_targets_verified": true,
+        "relocation_targets_equal": true,
+        "inferred_relocated_bytes_equal": false,
+        "relocated_bytes_equal": false,
+        "first_unmasked_differences": [
+          693,
+          753,
+          782,
+          816,
+          845,
+          884,
+          913
+        ]
+      },
+      "differing_byte_offsets_if_at_most_32": [
+        693,
+        753,
+        782,
+        816,
+        845,
+        884,
+        913
+      ],
+      "pole_raw_body_sha256": "1bee554405161000cd11fe3dd7e949e3848e1289bbf432af8695f61e2074a301"
+    },
+    {
+      "name": "convolution_pointer",
+      "source_change": "        {\n            short *samples = context->buffer + input;\n            for (row = 0; row < 8; ++row)\n                for (tap = row + 1; tap < 8; ++tap)\n                    accumulator[tap] += samples[row] * scaled[tap - row - 1];\n        }",
+      "rationale": "Input pointer scoped only around the row convolution, after direct gain accumulation.",
+      "compile_command": [
+        "/usr/bin/python3",
+        "scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/c",
+        "/IZ:\\root\\.ai-tmp\\audio-pole-row-scope.77t1_l69",
+        "/FoZ:\\root\\.ai-tmp\\audio-pole-row-scope.77t1_l69\\convolution_pointer\\AudioProcessing.obj",
+        "Z:\\root\\.ai-tmp\\audio-pole-row-scope.77t1_l69\\convolution_pointer\\AudioProcessing.c"
+      ],
+      "source_sha256": "0662311bc6744d517eb39a1f1e6d58a7f9c7bc0b19c52d877f3aee8fe4ecc22c",
+      "object_sha256": "267cf0abe851d6edc40bf81c67b703b73463b63a0fd0c32c3ff513bbcc84ec2e",
+      "compile_log_sha256": "74ace01ea2c3930f744a0ebba8c36edaf11a20a4857004f2a9325a8e3bf87608",
+      "native_exact_functions_in_unit": 33,
+      "other_raw_bodies_identical_to_baseline": [
+        "_ReadAudioSamples",
+        "_InitializeAudioSqrt",
+        "_LoadAudioEnvelope",
+        "_SaveAudioEnvelope",
+        "_ResetAudioEnvelope",
+        "_AudioCPUHasSSE",
+        "_AudioOSHasSSE",
+        "_AudioClampECX",
+        "_EnvMixerSSE",
+        "_EnvMixer3DNow",
+        "_EnvMixerScalar",
+        "_EnvMixerBlockScalar",
+        "_EnvMixerABI3Scalar",
+        "_EnvMixerABI3_3DNow",
+        "_EnvMixerABI3SSE",
+        "_EnvMixerSpecial",
+        "_ClampAudioSample",
+        "_MixAudioEnvelopeCommand",
+        "_MixAudioEnvelopeClamped",
+        "_MixAudioEnvelope",
+        "_MixAudioEnvelopeLegacy",
+        "_MixAudioEnvelopeUnsigned",
+        "_ScaleAudioBuffer",
+        "_ScaleAudioBufferCommand",
+        "_FilterAudioBlock",
+        "_FilterAudioBuffer",
+        "_ResetAudioProfile",
+        "_AverageAudioProfile",
+        "_AdjustAudioProfileMaximum",
+        "_StartAudioProfile",
+        "_StopAudioProfile",
+        "_DumpAudioCommand",
+        "_DecodeAudioADPCMUnsigned",
+        "_DecodeAudioADPCMBlock"
+      ],
+      "other_relocation_signatures_identical_to_baseline": [
+        "_ReadAudioSamples",
+        "_InitializeAudioSqrt",
+        "_LoadAudioEnvelope",
+        "_SaveAudioEnvelope",
+        "_ResetAudioEnvelope",
+        "_AudioCPUHasSSE",
+        "_AudioOSHasSSE",
+        "_AudioClampECX",
+        "_EnvMixerSSE",
+        "_EnvMixer3DNow",
+        "_EnvMixerScalar",
+        "_EnvMixerBlockScalar",
+        "_EnvMixerABI3Scalar",
+        "_EnvMixerABI3_3DNow",
+        "_EnvMixerABI3SSE",
+        "_EnvMixerSpecial",
+        "_ClampAudioSample",
+        "_MixAudioEnvelopeCommand",
+        "_MixAudioEnvelopeClamped",
+        "_MixAudioEnvelope",
+        "_MixAudioEnvelopeLegacy",
+        "_MixAudioEnvelopeUnsigned",
+        "_ScaleAudioBuffer",
+        "_ScaleAudioBufferCommand",
+        "_FilterAudioBlock",
+        "_FilterAudioBuffer",
+        "_ResetAudioProfile",
+        "_AverageAudioProfile",
+        "_AdjustAudioProfileMaximum",
+        "_StartAudioProfile",
+        "_StopAudioProfile",
+        "_DumpAudioCommand",
+        "_DecodeAudioADPCMUnsigned",
+        "_DecodeAudioADPCMBlock"
+      ],
+      "compiler_generated_seh_scope_identity": {
+        "symbol": "$T75413",
+        "original_va": "0x100311a8",
+        "complete_table_bytes": 12,
+        "materialized_sha256": "c4e8e22e6809481e3cb45b41cc9badc156df1057a68801cbe97661d775c1419a",
+        "unique_complete_original_match": true,
+        "label_destinations": [
+          {
+            "table_offset": 4,
+            "local_symbol": "$L75409",
+            "function_offset": 69,
+            "destination": "0x1000b1d5"
+          },
+          {
+            "table_offset": 8,
+            "local_symbol": "$L75410",
+            "function_offset": 75,
+            "destination": "0x1000b1db"
+          }
+        ]
+      },
+      "emitted_function_order_identical": true,
+      "noncode_sections": [
+        {
+          "name": ".rdata",
+          "same_extents_and_contents": true
+        },
+        {
+          "name": ".data",
+          "same_extents_and_contents": true
+        },
+        {
+          "name": ".bss",
+          "same_extents_and_contents": true
+        }
+      ],
+      "pole_complete_comparison": {
+        "name": "_PoleFilterAudioCommand",
+        "object": "AudioProcessing.obj",
+        "rebuilt_bytes": 2320,
+        "status": "compared",
+        "original_va": 268505152,
+        "raw_bytes_equal": false,
+        "raw_differing_bytes": 76,
+        "compared_bytes": 2320,
+        "original_size_verified": true,
+        "original_bytes": 2320,
+        "size_equal": true,
+        "relocations": [
+          {
+            "offset": 24,
+            "type": "DIR32",
+            "symbol": "_RDRAM",
+            "addend": 0,
+            "original_target_va": 269925092,
+            "original_target_symbols": [
+              "_RDRAM"
+            ],
+            "expected_target_va": 269925092,
+            "resolution_basis": "identified_symbol",
+            "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1047,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1067,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1189,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1207,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1328,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1348,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1477,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1497,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1626,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1646,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1775,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1795,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1924,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1944,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 2073,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 2093,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 2252,
+            "type": "DIR32",
+            "symbol": "_RDRAM",
+            "addend": 0,
+            "original_target_va": 269925092,
+            "original_target_symbols": [
+              "_RDRAM"
+            ],
+            "expected_target_va": 269925092,
+            "resolution_basis": "identified_symbol",
+            "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          }
+        ],
+        "relocation_target_mismatch_count": 0,
+        "inferred_target_count": 0,
+        "unresolved_target_count": 0,
+        "relocation_masked_equal": false,
+        "relocation_masked_differing_bytes": 20,
+        "relocations_all_resolved": true,
+        "relocation_values_consistent": true,
+        "relocation_targets_verified": true,
+        "relocation_targets_equal": true,
+        "inferred_relocated_bytes_equal": false,
+        "relocated_bytes_equal": false,
+        "first_unmasked_differences": [
+          693,
+          753,
+          782,
+          816,
+          845,
+          884,
+          913,
+          948,
+          956,
+          963,
+          972,
+          1008,
+          1012,
+          1015,
+          1016,
+          1017,
+          1018,
+          1022,
+          1028,
+          1030
+        ]
+      },
+      "differing_byte_offsets_if_at_most_32": [
+        693,
+        753,
+        782,
+        816,
+        845,
+        884,
+        913,
+        948,
+        956,
+        963,
+        972,
+        1008,
+        1012,
+        1015,
+        1016,
+        1017,
+        1018,
+        1022,
+        1028,
+        1030
+      ],
+      "pole_raw_body_sha256": "8ce770d55dc72825663e123a42360b245e835b22a0197829ef351306ebb316c0"
+    },
+    {
+      "name": "convolution_byte_pointer",
+      "source_change": "        {\n            const unsigned char *samples = (const unsigned char *)context->buffer + input * 2;\n            for (row = 0; row < 8; ++row)\n                for (tap = row + 1; tap < 8; ++tap)\n                    accumulator[tap] += *(const short *)(samples + row * 2) * scaled[tap - row - 1];\n        }",
+      "rationale": "Input pointer scoped only around the row convolution, after direct gain accumulation.",
+      "compile_command": [
+        "/usr/bin/python3",
+        "scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/c",
+        "/IZ:\\root\\.ai-tmp\\audio-pole-row-scope.77t1_l69",
+        "/FoZ:\\root\\.ai-tmp\\audio-pole-row-scope.77t1_l69\\convolution_byte_pointer\\AudioProcessing.obj",
+        "Z:\\root\\.ai-tmp\\audio-pole-row-scope.77t1_l69\\convolution_byte_pointer\\AudioProcessing.c"
+      ],
+      "source_sha256": "f2cb0217589d958ff8f301ff5456e8c4bdab76cd0f7841f4b6a9238d7b4c054b",
+      "object_sha256": "730e99c3c8bbfb74877e797f0ecc19cd91e7e490ef6d9f6bd8d30da66b351cfa",
+      "compile_log_sha256": "415b09157d4b7ae39da34a7bca73b08b342981b03cf2154e0c76058a3a275175",
+      "native_exact_functions_in_unit": 33,
+      "other_raw_bodies_identical_to_baseline": [
+        "_ReadAudioSamples",
+        "_InitializeAudioSqrt",
+        "_LoadAudioEnvelope",
+        "_SaveAudioEnvelope",
+        "_ResetAudioEnvelope",
+        "_AudioCPUHasSSE",
+        "_AudioOSHasSSE",
+        "_AudioClampECX",
+        "_EnvMixerSSE",
+        "_EnvMixer3DNow",
+        "_EnvMixerScalar",
+        "_EnvMixerBlockScalar",
+        "_EnvMixerABI3Scalar",
+        "_EnvMixerABI3_3DNow",
+        "_EnvMixerABI3SSE",
+        "_EnvMixerSpecial",
+        "_ClampAudioSample",
+        "_MixAudioEnvelopeCommand",
+        "_MixAudioEnvelopeClamped",
+        "_MixAudioEnvelope",
+        "_MixAudioEnvelopeLegacy",
+        "_MixAudioEnvelopeUnsigned",
+        "_ScaleAudioBuffer",
+        "_ScaleAudioBufferCommand",
+        "_FilterAudioBlock",
+        "_FilterAudioBuffer",
+        "_ResetAudioProfile",
+        "_AverageAudioProfile",
+        "_AdjustAudioProfileMaximum",
+        "_StartAudioProfile",
+        "_StopAudioProfile",
+        "_DumpAudioCommand",
+        "_DecodeAudioADPCMUnsigned",
+        "_DecodeAudioADPCMBlock"
+      ],
+      "other_relocation_signatures_identical_to_baseline": [
+        "_ReadAudioSamples",
+        "_InitializeAudioSqrt",
+        "_LoadAudioEnvelope",
+        "_SaveAudioEnvelope",
+        "_ResetAudioEnvelope",
+        "_AudioCPUHasSSE",
+        "_AudioOSHasSSE",
+        "_AudioClampECX",
+        "_EnvMixerSSE",
+        "_EnvMixer3DNow",
+        "_EnvMixerScalar",
+        "_EnvMixerBlockScalar",
+        "_EnvMixerABI3Scalar",
+        "_EnvMixerABI3_3DNow",
+        "_EnvMixerABI3SSE",
+        "_EnvMixerSpecial",
+        "_ClampAudioSample",
+        "_MixAudioEnvelopeCommand",
+        "_MixAudioEnvelopeClamped",
+        "_MixAudioEnvelope",
+        "_MixAudioEnvelopeLegacy",
+        "_MixAudioEnvelopeUnsigned",
+        "_ScaleAudioBuffer",
+        "_ScaleAudioBufferCommand",
+        "_FilterAudioBlock",
+        "_FilterAudioBuffer",
+        "_ResetAudioProfile",
+        "_AverageAudioProfile",
+        "_AdjustAudioProfileMaximum",
+        "_StartAudioProfile",
+        "_StopAudioProfile",
+        "_DumpAudioCommand",
+        "_DecodeAudioADPCMUnsigned",
+        "_DecodeAudioADPCMBlock"
+      ],
+      "compiler_generated_seh_scope_identity": {
+        "symbol": "$T75415",
+        "original_va": "0x100311a8",
+        "complete_table_bytes": 12,
+        "materialized_sha256": "c4e8e22e6809481e3cb45b41cc9badc156df1057a68801cbe97661d775c1419a",
+        "unique_complete_original_match": true,
+        "label_destinations": [
+          {
+            "table_offset": 4,
+            "local_symbol": "$L75411",
+            "function_offset": 69,
+            "destination": "0x1000b1d5"
+          },
+          {
+            "table_offset": 8,
+            "local_symbol": "$L75412",
+            "function_offset": 75,
+            "destination": "0x1000b1db"
+          }
+        ]
+      },
+      "emitted_function_order_identical": true,
+      "noncode_sections": [
+        {
+          "name": ".rdata",
+          "same_extents_and_contents": true
+        },
+        {
+          "name": ".data",
+          "same_extents_and_contents": true
+        },
+        {
+          "name": ".bss",
+          "same_extents_and_contents": true
+        }
+      ],
+      "pole_complete_comparison": {
+        "name": "_PoleFilterAudioCommand",
+        "object": "AudioProcessing.obj",
+        "rebuilt_bytes": 2320,
+        "status": "compared",
+        "original_va": 268505152,
+        "raw_bytes_equal": false,
+        "raw_differing_bytes": 76,
+        "compared_bytes": 2320,
+        "original_size_verified": true,
+        "original_bytes": 2320,
+        "size_equal": true,
+        "relocations": [
+          {
+            "offset": 24,
+            "type": "DIR32",
+            "symbol": "_RDRAM",
+            "addend": 0,
+            "original_target_va": 269925092,
+            "original_target_symbols": [
+              "_RDRAM"
+            ],
+            "expected_target_va": 269925092,
+            "resolution_basis": "identified_symbol",
+            "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1047,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1067,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1189,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1207,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1328,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1348,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1477,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1497,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1626,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1646,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1775,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1795,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1924,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 1944,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 2073,
+            "type": "REL32",
+            "symbol": "__alldiv",
+            "addend": 0,
+            "original_target_va": 268574352,
+            "original_target_symbols": [
+              "__alldiv"
+            ],
+            "expected_target_va": 268574352,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 2093,
+            "type": "REL32",
+            "symbol": "__allmul",
+            "addend": 0,
+            "original_target_va": 268574288,
+            "original_target_symbols": [
+              "__allmul"
+            ],
+            "expected_target_va": 268574288,
+            "resolution_basis": "independent_library_mapping",
+            "target_address_evidence": "Independent complete CRT body scan in analysis/audio-libraries.json.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          },
+          {
+            "offset": 2252,
+            "type": "DIR32",
+            "symbol": "_RDRAM",
+            "addend": 0,
+            "original_target_va": 269925092,
+            "original_target_symbols": [
+              "_RDRAM"
+            ],
+            "expected_target_va": 269925092,
+            "resolution_basis": "identified_symbol",
+            "target_address_evidence": "Shared Audio header identity corroborated by native consumers and owning module reconstruction.; Shared RDRAM pointer initialized from the public plugin ABI; AudioPlugin.c.",
+            "status": "resolved",
+            "target_equal": true,
+            "target_identity_verified": true
+          }
+        ],
+        "relocation_target_mismatch_count": 0,
+        "inferred_target_count": 0,
+        "unresolved_target_count": 0,
+        "relocation_masked_equal": false,
+        "relocation_masked_differing_bytes": 20,
+        "relocations_all_resolved": true,
+        "relocation_values_consistent": true,
+        "relocation_targets_verified": true,
+        "relocation_targets_equal": true,
+        "inferred_relocated_bytes_equal": false,
+        "relocated_bytes_equal": false,
+        "first_unmasked_differences": [
+          693,
+          753,
+          782,
+          816,
+          845,
+          884,
+          913,
+          948,
+          956,
+          963,
+          972,
+          1008,
+          1012,
+          1015,
+          1016,
+          1017,
+          1018,
+          1022,
+          1028,
+          1030
+        ]
+      },
+      "differing_byte_offsets_if_at_most_32": [
+        693,
+        753,
+        782,
+        816,
+        845,
+        884,
+        913,
+        948,
+        956,
+        963,
+        972,
+        1008,
+        1012,
+        1015,
+        1016,
+        1017,
+        1018,
+        1022,
+        1028,
+        1030
+      ],
+      "pole_raw_body_sha256": "8ce770d55dc72825663e123a42360b245e835b22a0197829ef351306ebb316c0"
+    }
+  ]
+}
