@@ -1,0 +1,2610 @@
+{
+  "status": "bounded_rejected_source_controls_no_canonical_change",
+  "source_commit": "1637c3c",
+  "source_sha256": "d4c863a7066601ce785fdba72a29ba53399e36aa582494d4ece24f5441a12ff0",
+  "target_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "compiler_flags": [
+    "/O2",
+    "/Ob1",
+    "/MT"
+  ],
+  "compiler_sha256": {
+    "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
+    "toolchains/vc7/bin/c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
+    "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0"
+  },
+  "target_stages": [
+    {
+      "instructions": 369,
+      "mnemonics": {
+        "add": 11,
+        "and": 3,
+        "call": 36,
+        "imul": 16,
+        "jmp": 4,
+        "lea": 7,
+        "mov": 152,
+        "movsx": 19,
+        "movzx": 19,
+        "or": 2,
+        "push": 78,
+        "rep stosd": 1,
+        "sar": 16,
+        "shl": 3,
+        "sub": 1,
+        "xor": 1
+      }
+    },
+    {
+      "instructions": 225,
+      "mnemonics": {
+        "add": 21,
+        "call": 1,
+        "imul": 8,
+        "lea": 19,
+        "mov": 101,
+        "movsx": 8,
+        "movzx": 1,
+        "neg": 7,
+        "push": 1,
+        "sar": 8,
+        "shl": 4,
+        "shr": 17,
+        "sub": 20,
+        "xor": 9
+      }
+    },
+    {
+      "instructions": 626,
+      "mnemonics": {
+        "adc": 1,
+        "add": 79,
+        "and": 4,
+        "call": 2,
+        "cdq": 2,
+        "dec": 3,
+        "imul": 43,
+        "jne": 3,
+        "lea": 72,
+        "mov": 208,
+        "movsx": 76,
+        "movzx": 2,
+        "neg": 3,
+        "nop": 9,
+        "pop": 4,
+        "ret": 1,
+        "sar": 39,
+        "shl": 3,
+        "shr": 33,
+        "sub": 26,
+        "xor": 13
+      }
+    }
+  ],
+  "stage_definition": [
+    "Entry through the instruction preceding the first Butterfly call.",
+    "First Butterfly call through the instruction preceding the second Butterfly call, including the second set of input differences.",
+    "Second Butterfly call through the entire aligned function end, including dewindow loops and tail alignment."
+  ],
+  "source_controls": [
+    {
+      "name": "Mp3-p2-negative",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-p2-negative.c",
+      "source_sha256": "228f2a194e43f124fbc9c3152467053bb10ac6c3a6b6403016d97d20bb79fdf4",
+      "object_sha256": "0c4933eb273ec88647a01c07bf0c7913947bbb3fea62ce448ef64453a30e3376",
+      "comparison_sha256": "164c27e746dcea9827860dd48cf97d4900fc800e7f6ebebe992fef93a75bb68e",
+      "native_bytes": 5040,
+      "non_relocation_differing_positions": 3994,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 222,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 9,
+            "movzx": 6,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 3
+          }
+        },
+        {
+          "instructions": 621,
+          "mnemonics": {
+            "adc": 1,
+            "add": 80,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jmp": 1,
+            "jne": 3,
+            "lea": 72,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 9,
+            "neg": 3,
+            "nop": 13,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 26
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-p2-negative_steps",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-p2-negative_steps.c",
+      "source_sha256": "95e04ce4409346bce8c3a6789daef459e6513e17ca4fa2ae364d59e1afcc65dc",
+      "object_sha256": "8dcf0a477e80260d15cf789865a6db69d2bd0d2f12e56fad1f51e5860f560f78",
+      "comparison_sha256": "164c27e746dcea9827860dd48cf97d4900fc800e7f6ebebe992fef93a75bb68e",
+      "native_bytes": 5040,
+      "non_relocation_differing_positions": 3994,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 222,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 9,
+            "movzx": 6,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 3
+          }
+        },
+        {
+          "instructions": 621,
+          "mnemonics": {
+            "adc": 1,
+            "add": 80,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jmp": 1,
+            "jne": 3,
+            "lea": 72,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 9,
+            "neg": 3,
+            "nop": 13,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 26
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-p2-earlysub",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-p2-earlysub.c",
+      "source_sha256": "c355c3844da489ca4eec5823c6db431a51cbbd00fde2af53672275a2621d1bd3",
+      "object_sha256": "05d6ccb76049ce0fea3be8df895dd95cb0466db0edbde7d43e01aebe2515a336",
+      "comparison_sha256": "aad31ee061054d1986799ba447ff872a7375e5426e147fd5f4edf5a2bbf78a29",
+      "native_bytes": 5040,
+      "non_relocation_differing_positions": 3986,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 222,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 9,
+            "movzx": 6,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 3
+          }
+        },
+        {
+          "instructions": 620,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jmp": 1,
+            "jne": 3,
+            "lea": 72,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 9,
+            "neg": 2,
+            "nop": 13,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-p2-earlyboth",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-p2-earlyboth.c",
+      "source_sha256": "7b0e7efdad8433faf128e70245c3514506f2f403d72c87c78eb8715422cb4f57",
+      "object_sha256": "4d0c412a58da22d0037cd750a24424f16dca53d04cb0a9060add28a10e7e2165",
+      "comparison_sha256": "aad31ee061054d1986799ba447ff872a7375e5426e147fd5f4edf5a2bbf78a29",
+      "native_bytes": 5040,
+      "non_relocation_differing_positions": 3986,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 222,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 9,
+            "movzx": 6,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 3
+          }
+        },
+        {
+          "instructions": 620,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jmp": 1,
+            "jne": 3,
+            "lea": 72,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 9,
+            "neg": 2,
+            "nop": 13,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-p2-earlyshort",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-p2-earlyshort.c",
+      "source_sha256": "31e9373261dccb78088e1304b42b6523aa651a9576e16726df71ed651ddfd019",
+      "object_sha256": "3aecfc695c104c01ef87f0b691f89ec554ff50df11b8df255a213f8620156fae",
+      "comparison_sha256": "aad31ee061054d1986799ba447ff872a7375e5426e147fd5f4edf5a2bbf78a29",
+      "native_bytes": 5040,
+      "non_relocation_differing_positions": 3986,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 222,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 9,
+            "movzx": 6,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 3
+          }
+        },
+        {
+          "instructions": 620,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jmp": 1,
+            "jne": 3,
+            "lea": 72,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 9,
+            "neg": 2,
+            "nop": 13,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-p2-allshortdiff",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-p2-allshortdiff.c",
+      "source_sha256": "2562dad204f12c8fc8d4ab7a97062c4d09eba330053aff3f76ecdef5481e6c7c",
+      "object_sha256": "3289d4f797ec11dee504d3fd06bbd76441e1abdaf95fee0ae6278271eb2efbb4",
+      "comparison_sha256": "024b928d7d0a7e94b099aa0d42a7df827327627dd08fb58871677921993d010c",
+      "native_bytes": 5040,
+      "non_relocation_differing_positions": 3985,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 222,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 9,
+            "movzx": 6,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 3
+          }
+        },
+        {
+          "instructions": 620,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jmp": 1,
+            "jne": 3,
+            "lea": 72,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 9,
+            "neg": 2,
+            "nop": 13,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-p2-allshortinputs",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-p2-allshortinputs.c",
+      "source_sha256": "6362c44101c3c5c389a01d3fbc588e44016819d209838ba7322932813858f39b",
+      "object_sha256": "20a0475643de82b79f614bfeb63d76fb16e1286273ede2e2374d60931006e062",
+      "comparison_sha256": "7eb39ea06d440c3c534ae1a99322bb7367e93ff407899c9fab069adb41f9c95a",
+      "native_bytes": 5248,
+      "non_relocation_differing_positions": 4245,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 368,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 3,
+            "lea": 7,
+            "mov": 152,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 222,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 9,
+            "movzx": 6,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 3
+          }
+        },
+        {
+          "instructions": 645,
+          "mnemonics": {
+            "adc": 1,
+            "add": 77,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jne": 3,
+            "lea": 73,
+            "mov": 242,
+            "movsx": 74,
+            "movzx": 9,
+            "neg": 2,
+            "nop": 3,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-p2-allearlydiff",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-p2-allearlydiff.c",
+      "source_sha256": "aeb2328041f1fb9356ee74588d2cd3fd09e6c4debe70e194f9435c3e63fad7ea",
+      "object_sha256": "a69588f7a472c49772ba0b94996553e787a8588160c67e6cdf69aff856697d15",
+      "comparison_sha256": "024b928d7d0a7e94b099aa0d42a7df827327627dd08fb58871677921993d010c",
+      "native_bytes": 5040,
+      "non_relocation_differing_positions": 3985,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 222,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 9,
+            "movzx": 6,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 3
+          }
+        },
+        {
+          "instructions": 620,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jmp": 1,
+            "jne": 3,
+            "lea": 72,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 9,
+            "neg": 2,
+            "nop": 13,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-p2-short",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-p2-short.c",
+      "source_sha256": "92719f5126de4e060b5c792fc3d47930d011f52707e4968851574def0bdf64cb",
+      "object_sha256": "f34a0037fee943b80ed10871db70f12e5c0342eb8c94934ba2c1a76f0cc6cbba",
+      "comparison_sha256": "424b1be80bf40171232474d6751f9efcab8b5f1ded8f85f33677ea1dee25f4dd",
+      "native_bytes": 5024,
+      "non_relocation_differing_positions": 3992,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 222,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 9,
+            "movzx": 6,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 3
+          }
+        },
+        {
+          "instructions": 617,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jne": 3,
+            "lea": 71,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 2,
+            "neg": 2,
+            "nop": 12,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27,
+            "xor": 7
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-p2-short-neg",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-p2-short-neg.c",
+      "source_sha256": "2a757ad8617bfc25b54baff9a70ffa5c94abef5e7655979772f8b9e34ee5e5d1",
+      "object_sha256": "f444d908cbb9cc273d05f7bef96fc57a75100538c3f548e83d14ea8d8e97a3f0",
+      "comparison_sha256": "18f8a393e8f0cfe7a919e6f55f9e06a352efe9d7723186237fbb0f3ab8230d9e",
+      "native_bytes": 5024,
+      "non_relocation_differing_positions": 3918,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 222,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 9,
+            "movzx": 6,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 3
+          }
+        },
+        {
+          "instructions": 617,
+          "mnemonics": {
+            "adc": 1,
+            "add": 80,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jne": 3,
+            "lea": 71,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 2,
+            "neg": 3,
+            "nop": 11,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 26,
+            "xor": 7
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-p2-ushort",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-p2-ushort.c",
+      "source_sha256": "2a0ee081957dd290e22cb9760b3980aee271a9ad92017435232eab32cc617837",
+      "object_sha256": "9169182d7b3a961583cee410ccf2adb91e91ae78a2d92caffc4c1fe97ac2455c",
+      "comparison_sha256": "424b1be80bf40171232474d6751f9efcab8b5f1ded8f85f33677ea1dee25f4dd",
+      "native_bytes": 5024,
+      "non_relocation_differing_positions": 3992,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 222,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 9,
+            "movzx": 6,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 3
+          }
+        },
+        {
+          "instructions": 617,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jne": 3,
+            "lea": 71,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 2,
+            "neg": 2,
+            "nop": 12,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27,
+            "xor": 7
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-p2-ushort-neg",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-p2-ushort-neg.c",
+      "source_sha256": "dc4d5e8cb1865a7695354a9b96998b8fb8ac2b5b2833d8cc8bbebc1b02349ba0",
+      "object_sha256": "9f181b3cd8bc96af65aa5a79d7ba24db39eb69e218ce1fe6c5ea849f07c0771a",
+      "comparison_sha256": "18f8a393e8f0cfe7a919e6f55f9e06a352efe9d7723186237fbb0f3ab8230d9e",
+      "native_bytes": 5024,
+      "non_relocation_differing_positions": 3918,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 222,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 9,
+            "movzx": 6,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 3
+          }
+        },
+        {
+          "instructions": 617,
+          "mnemonics": {
+            "adc": 1,
+            "add": 80,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jne": 3,
+            "lea": 71,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 2,
+            "neg": 3,
+            "nop": 11,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 26,
+            "xor": 7
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-splitarg-short",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-splitarg-short.c",
+      "source_sha256": "56f7e211c8faa04153212124861ff31fed3029424797d90fa044ff800a3fbc69",
+      "object_sha256": "b1a53ea344d040cb948308f92fef2f263fe405f58f40b27b4acdd4dd6a9a3950",
+      "comparison_sha256": "aad31ee061054d1986799ba447ff872a7375e5426e147fd5f4edf5a2bbf78a29",
+      "native_bytes": 5040,
+      "non_relocation_differing_positions": 3986,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 222,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 9,
+            "movzx": 6,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 3
+          }
+        },
+        {
+          "instructions": 620,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jmp": 1,
+            "jne": 3,
+            "lea": 72,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 9,
+            "neg": 2,
+            "nop": 13,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-splitarg-short-narrow",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-splitarg-short-narrow.c",
+      "source_sha256": "69220ed25ada839f60fdc443ee4726778a363b96f0b6e358483dfd3f04bb13f0",
+      "object_sha256": "d63c8810d36d55b851641a3174c21bf7454e52a6e0551e0dd410442bec929905",
+      "comparison_sha256": "eb38cddaccc7fecce81d2a73be5da27c249071c06af872c7c2873aeaf9078fb8",
+      "native_bytes": 5024,
+      "non_relocation_differing_positions": 3984,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 219,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 8,
+            "movzx": 1,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 6
+          }
+        },
+        {
+          "instructions": 620,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jmp": 1,
+            "jne": 3,
+            "lea": 72,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 2,
+            "neg": 2,
+            "nop": 13,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27,
+            "xor": 7
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-splitarg-int",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-splitarg-int.c",
+      "source_sha256": "187da03ca7f764619cc0bf049f9d3d75398c35e657ce24bc380ae32619c716be",
+      "object_sha256": "2019bb29f61b9aec0fefccf7ecc513c78a49b051017497e046e15caf7a7483fd",
+      "comparison_sha256": "aad31ee061054d1986799ba447ff872a7375e5426e147fd5f4edf5a2bbf78a29",
+      "native_bytes": 5040,
+      "non_relocation_differing_positions": 3986,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 222,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 9,
+            "movzx": 6,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 3
+          }
+        },
+        {
+          "instructions": 620,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jmp": 1,
+            "jne": 3,
+            "lea": 72,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 9,
+            "neg": 2,
+            "nop": 13,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-splitarg-int-narrow",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-splitarg-int-narrow.c",
+      "source_sha256": "38bc8117716f0ead9a3c0551ae981e844722fcb86b316cc1090019450ffe8257",
+      "object_sha256": "7ac18988a394be2a5fffe5239bd14b0eccf7957a758bcf7866244415723d7025",
+      "comparison_sha256": "eb38cddaccc7fecce81d2a73be5da27c249071c06af872c7c2873aeaf9078fb8",
+      "native_bytes": 5024,
+      "non_relocation_differing_positions": 3984,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 219,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 8,
+            "movzx": 1,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 6
+          }
+        },
+        {
+          "instructions": 620,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jmp": 1,
+            "jne": 3,
+            "lea": 72,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 2,
+            "neg": 2,
+            "nop": 13,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27,
+            "xor": 7
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-splitarg-unsignedint",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-splitarg-unsignedint.c",
+      "source_sha256": "f6febdfca012daff646f8b102d2857494a804aa2c97356c1b08277721cee4c3e",
+      "object_sha256": "0951556328fed5c9dff709aef0d18740bb495ebd7b82e76bb6336c6b612ad278",
+      "comparison_sha256": "aad31ee061054d1986799ba447ff872a7375e5426e147fd5f4edf5a2bbf78a29",
+      "native_bytes": 5040,
+      "non_relocation_differing_positions": 3986,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 222,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 9,
+            "movzx": 6,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 3
+          }
+        },
+        {
+          "instructions": 620,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jmp": 1,
+            "jne": 3,
+            "lea": 72,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 9,
+            "neg": 2,
+            "nop": 13,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-splitarg-unsignedint-narrow",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-splitarg-unsignedint-narrow.c",
+      "source_sha256": "4d52a731c8556a248ed1fe88287972c15c0a35fc9fa56a7ee4756d5b2f23b48a",
+      "object_sha256": "460610cfa27f4068b5df32c320167c88a2309aa5e1cb82bc01b831f3f94c31af",
+      "comparison_sha256": "eb38cddaccc7fecce81d2a73be5da27c249071c06af872c7c2873aeaf9078fb8",
+      "native_bytes": 5024,
+      "non_relocation_differing_positions": 3984,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 219,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 8,
+            "movzx": 1,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 6
+          }
+        },
+        {
+          "instructions": 620,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jmp": 1,
+            "jne": 3,
+            "lea": 72,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 2,
+            "neg": 2,
+            "nop": 13,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27,
+            "xor": 7
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-narrowhelper-splitshort",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-narrowhelper-splitshort.c",
+      "source_sha256": "127148411136a6010d35f1a2590b7731785fddf0717531d1ec2c3a4581caa478",
+      "object_sha256": "6a300436ae44596e683a4aed05795f500eaed88a06b898854107836c39650578",
+      "comparison_sha256": "eb38cddaccc7fecce81d2a73be5da27c249071c06af872c7c2873aeaf9078fb8",
+      "native_bytes": 5024,
+      "non_relocation_differing_positions": 3984,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 219,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 8,
+            "movzx": 1,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 6
+          }
+        },
+        {
+          "instructions": 620,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jmp": 1,
+            "jne": 3,
+            "lea": 72,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 2,
+            "neg": 2,
+            "nop": 13,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27,
+            "xor": 7
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-narrowhelper-splitushort",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-narrowhelper-splitushort.c",
+      "source_sha256": "4572f67129905d8124b12e67d134747ed531d2bcbe15a7e8d185307f85e6e356",
+      "object_sha256": "7604a52d2d88f23b89db1224f91e50315bd2ccc70b25dc6dd82e4a08fc8ee38a",
+      "comparison_sha256": "eb38cddaccc7fecce81d2a73be5da27c249071c06af872c7c2873aeaf9078fb8",
+      "native_bytes": 5024,
+      "non_relocation_differing_positions": 3984,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 219,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 8,
+            "movzx": 1,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 6
+          }
+        },
+        {
+          "instructions": 620,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jmp": 1,
+            "jne": 3,
+            "lea": 72,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 2,
+            "neg": 2,
+            "nop": 13,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27,
+            "xor": 7
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-narrowhelper-accshort",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-narrowhelper-accshort.c",
+      "source_sha256": "7a56e2253fa8629733fc207257e833c1c436dd36bd68d31bf4377e7ece242a34",
+      "object_sha256": "751795cd2b4741545472ff6546a038f9ae5d57877eb7711d9cb69d43d94e970f",
+      "comparison_sha256": "eb38cddaccc7fecce81d2a73be5da27c249071c06af872c7c2873aeaf9078fb8",
+      "native_bytes": 5024,
+      "non_relocation_differing_positions": 3984,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 219,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 8,
+            "movzx": 1,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 6
+          }
+        },
+        {
+          "instructions": 620,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jmp": 1,
+            "jne": 3,
+            "lea": 72,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 2,
+            "neg": 2,
+            "nop": 13,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27,
+            "xor": 7
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-narrowhelper-allshort",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-narrowhelper-allshort.c",
+      "source_sha256": "9948f7853f30282b1eb9ef01cda73fc5ff3f607df06fd61cf966ba7a91e20288",
+      "object_sha256": "9b1f68fad608e2dd59d51239045901f8b67acb7f2f846982d0d9d539a93272b2",
+      "comparison_sha256": "38faeb198bdec16b678c22fae53f714a20f1e41e1e3ada40deeab77f868263a0",
+      "native_bytes": 5120,
+      "non_relocation_differing_positions": 3962,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 219,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 8,
+            "movzx": 1,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 6
+          }
+        },
+        {
+          "instructions": 652,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jmp": 1,
+            "jne": 3,
+            "lea": 72,
+            "mov": 204,
+            "movsx": 107,
+            "movzx": 2,
+            "neg": 2,
+            "nop": 13,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27,
+            "xor": 7
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-narrowhelper-allushort",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-narrowhelper-allushort.c",
+      "source_sha256": "ee3a223489b95b4cb88f5545cc2686eb8de79f6310ba720ef3f963c6aebd5546",
+      "object_sha256": "c3874920e54a6ec68d175e87ee9cfb299b65c98167adef2a818a450070277b04",
+      "comparison_sha256": "77b0c90d6e9e2f27b3ef8cf76a86bd7abffde1146acaa0024be428b8db8c27ba",
+      "native_bytes": 5120,
+      "non_relocation_differing_positions": 3963,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 219,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 8,
+            "movzx": 1,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 6
+          }
+        },
+        {
+          "instructions": 652,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jmp": 1,
+            "jne": 3,
+            "lea": 72,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 34,
+            "neg": 2,
+            "nop": 13,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27,
+            "xor": 7
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-narrowhelper-narrowcall",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-narrowhelper-narrowcall.c",
+      "source_sha256": "39eb6c52198617a75f0096ca389ba4d5bc90c08fb732d6e4172af7c80e6f7d84",
+      "object_sha256": "719f0a24909af20dc53bb5fa3d2a44d4a559b4af8232fb40454c35d4f62001cf",
+      "comparison_sha256": "eb38cddaccc7fecce81d2a73be5da27c249071c06af872c7c2873aeaf9078fb8",
+      "native_bytes": 5024,
+      "non_relocation_differing_positions": 3984,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 219,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 8,
+            "movzx": 1,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 6
+          }
+        },
+        {
+          "instructions": 620,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jmp": 1,
+            "jne": 3,
+            "lea": 72,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 2,
+            "neg": 2,
+            "nop": 13,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27,
+            "xor": 7
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-stage-array-int",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-stage-array-int.c",
+      "source_sha256": "276609836daf89276c36cb28383c0cdb1c902db012bdbb36052233faafbaa805",
+      "object_sha256": "4eb94e4780acdc943c7af6994c25e6bb7d0b1f9e6a4501cb2cfd0009daf709c1",
+      "comparison_sha256": "822a90bf3c320cdcab1ebbebfe2acce582f99f8ede8655cab18832a53f06d905",
+      "native_bytes": 5168,
+      "non_relocation_differing_positions": 4136,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 368,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 3,
+            "lea": 6,
+            "mov": 152,
+            "movsx": 19,
+            "movzx": 19,
+            "nop": 1,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 228,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 101,
+            "movsx": 9,
+            "movzx": 9,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 3
+          }
+        },
+        {
+          "instructions": 608,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jne": 3,
+            "lea": 71,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 9,
+            "neg": 2,
+            "nop": 3,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-stage-array-short",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-stage-array-short.c",
+      "source_sha256": "cddbbbfbf6a3643d19d9efa4cf20ce605da0838ff765ea690ce1ad317341b581",
+      "object_sha256": "04cfb97fe984cb49aa72548eaa75f55188e515d40cc074838c1d5d525e9bf8b2",
+      "comparison_sha256": "f7fc6b5d32acb92e73718cf8297611077dfb0c871aa92d61c52e146733d091be",
+      "native_bytes": 5200,
+      "non_relocation_differing_positions": 4401,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 363,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 2,
+            "lea": 5,
+            "mov": 150,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 231,
+          "mnemonics": {
+            "add": 18,
+            "call": 1,
+            "imul": 8,
+            "lea": 22,
+            "mov": 109,
+            "movsx": 8,
+            "movzx": 1,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 7
+          }
+        },
+        {
+          "instructions": 622,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jne": 3,
+            "lea": 71,
+            "mov": 214,
+            "movsx": 76,
+            "movzx": 2,
+            "neg": 2,
+            "nop": 8,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27,
+            "xor": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-stage-array-unsignedshort",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-stage-array-unsignedshort.c",
+      "source_sha256": "564ec34f1826ad6ed3cef5f0c80d5fcaccd334a610dc7322490277cfa37766ce",
+      "object_sha256": "3f2a94b758996ea9798a4d4ea43f4d26891b5b00ad622a6f506abe215feac88c",
+      "comparison_sha256": "f7fc6b5d32acb92e73718cf8297611077dfb0c871aa92d61c52e146733d091be",
+      "native_bytes": 5200,
+      "non_relocation_differing_positions": 4401,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 363,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 2,
+            "lea": 5,
+            "mov": 150,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 231,
+          "mnemonics": {
+            "add": 18,
+            "call": 1,
+            "imul": 8,
+            "lea": 22,
+            "mov": 109,
+            "movsx": 8,
+            "movzx": 1,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 7
+          }
+        },
+        {
+          "instructions": 622,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jne": 3,
+            "lea": 71,
+            "mov": 214,
+            "movsx": 76,
+            "movzx": 2,
+            "neg": 2,
+            "nop": 8,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27,
+            "xor": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-stage-struct-int",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-stage-struct-int.c",
+      "source_sha256": "24b4126913ee6d65b95e73ba6e6e6c500e247bfaa002950ba912931252d076e2",
+      "object_sha256": "b4b4602aa7b1e86bc890d599ec8f02b2b5fcb6d44da9bff5acdfb0e598453c0b",
+      "comparison_sha256": "822a90bf3c320cdcab1ebbebfe2acce582f99f8ede8655cab18832a53f06d905",
+      "native_bytes": 5168,
+      "non_relocation_differing_positions": 4136,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 368,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 3,
+            "lea": 6,
+            "mov": 152,
+            "movsx": 19,
+            "movzx": 19,
+            "nop": 1,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 228,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 101,
+            "movsx": 9,
+            "movzx": 9,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 3
+          }
+        },
+        {
+          "instructions": 608,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jne": 3,
+            "lea": 71,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 9,
+            "neg": 2,
+            "nop": 3,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-stage-struct-short",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-stage-struct-short.c",
+      "source_sha256": "cf2df81ad1155dcf4ba1b5b13d2d04f0054fad5798dba6778ec1a56b23252b6d",
+      "object_sha256": "1b3345e24db3ca30c6364e5c02149f2040b419bd6c6b30c2ca80f3193d87f337",
+      "comparison_sha256": "f6f7d34de820f3b7f4fa6f6199ac520dd547cd0031ee27cc1f1197bcddc13852",
+      "native_bytes": 5136,
+      "non_relocation_differing_positions": 4329,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 363,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 2,
+            "lea": 5,
+            "mov": 150,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 231,
+          "mnemonics": {
+            "add": 18,
+            "call": 1,
+            "imul": 8,
+            "lea": 22,
+            "mov": 109,
+            "movsx": 8,
+            "movzx": 1,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 7
+          }
+        },
+        {
+          "instructions": 604,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jne": 3,
+            "lea": 71,
+            "mov": 192,
+            "movsx": 76,
+            "movzx": 2,
+            "neg": 2,
+            "nop": 12,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27,
+            "xor": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-stage-struct-unsignedshort",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-stage-struct-unsignedshort.c",
+      "source_sha256": "c3f72e4fa091a1e0b6c718d08fbdeb64c32e5b875a5eb4e2c6bcb47277c3a117",
+      "object_sha256": "36677d1478b499d4ff847baf815fadb42251dafece921aba1e8f8330c5ba7eb2",
+      "comparison_sha256": "f6f7d34de820f3b7f4fa6f6199ac520dd547cd0031ee27cc1f1197bcddc13852",
+      "native_bytes": 5136,
+      "non_relocation_differing_positions": 4329,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 363,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 2,
+            "lea": 5,
+            "mov": 150,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 231,
+          "mnemonics": {
+            "add": 18,
+            "call": 1,
+            "imul": 8,
+            "lea": 22,
+            "mov": 109,
+            "movsx": 8,
+            "movzx": 1,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 7
+          }
+        },
+        {
+          "instructions": 604,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jne": 3,
+            "lea": 71,
+            "mov": 192,
+            "movsx": 76,
+            "movzx": 2,
+            "neg": 2,
+            "nop": 12,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27,
+            "xor": 5
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-register-int",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-register-int.c",
+      "source_sha256": "b7e1a327a55fcf05b17d6aec64a390bf37d4455a009a3c75814ba3af85eb5066",
+      "object_sha256": "8bc32ada8e692f2e20e79714966b1a8539e06b6d951eae399a0f0a576e51bdd2",
+      "comparison_sha256": "aad31ee061054d1986799ba447ff872a7375e5426e147fd5f4edf5a2bbf78a29",
+      "native_bytes": 5040,
+      "non_relocation_differing_positions": 3986,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 222,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 9,
+            "movzx": 6,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 3
+          }
+        },
+        {
+          "instructions": 620,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jmp": 1,
+            "jne": 3,
+            "lea": 72,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 9,
+            "neg": 2,
+            "nop": 13,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27
+          }
+        }
+      ]
+    },
+    {
+      "name": "Mp3-register-short",
+      "source": "/root/.ai-tmp/audio-mp3-20261017/Mp3-register-short.c",
+      "source_sha256": "be997dfa436d1b7e76b0f4ccfb714337fc361fe39d01240dcb7ec441764847e1",
+      "object_sha256": "babaeafa444d6c838a7b7d484f7061e4dacaf25fdd074bf874189edb3f16bf95",
+      "comparison_sha256": "eb38cddaccc7fecce81d2a73be5da27c249071c06af872c7c2873aeaf9078fb8",
+      "native_bytes": 5024,
+      "non_relocation_differing_positions": 3984,
+      "complete_match": false,
+      "stages": [
+        {
+          "instructions": 369,
+          "mnemonics": {
+            "add": 11,
+            "and": 3,
+            "call": 36,
+            "imul": 16,
+            "jmp": 4,
+            "lea": 8,
+            "mov": 151,
+            "movsx": 19,
+            "movzx": 19,
+            "or": 2,
+            "push": 78,
+            "rep stosd": 1,
+            "sar": 16,
+            "shl": 3,
+            "sub": 1,
+            "xor": 1
+          }
+        },
+        {
+          "instructions": 219,
+          "mnemonics": {
+            "add": 20,
+            "call": 1,
+            "imul": 8,
+            "lea": 20,
+            "mov": 98,
+            "movsx": 8,
+            "movzx": 1,
+            "neg": 7,
+            "push": 1,
+            "sar": 8,
+            "shl": 4,
+            "shr": 17,
+            "sub": 20,
+            "xor": 6
+          }
+        },
+        {
+          "instructions": 620,
+          "mnemonics": {
+            "adc": 1,
+            "add": 79,
+            "and": 4,
+            "call": 2,
+            "cdq": 2,
+            "dec": 3,
+            "imul": 43,
+            "jmp": 1,
+            "jne": 3,
+            "lea": 72,
+            "mov": 204,
+            "movsx": 75,
+            "movzx": 2,
+            "neg": 2,
+            "nop": 13,
+            "pop": 4,
+            "ret": 1,
+            "sar": 39,
+            "shl": 3,
+            "shr": 33,
+            "sub": 27,
+            "xor": 7
+          }
+        }
+      ]
+    }
+  ],
+  "independent_review": {
+    "report": "/root/.ai-tmp/nemu-audio-mp3-type-review.r4ZgsoD7/review.json",
+    "sha256": "230dd968b99f71203b94e773aa85cc2fb8b9fe38457341d950212cedb2a4a523",
+    "controls": 7,
+    "complete_matches": 0
+  },
+  "findings": [
+    "Narrow local declarations recover the target extension counts for wrapped sums but do not explain its additional zeroing before differences. DWORD spills alone do not establish that the original locals were int.",
+    "Retaining a negated v0 in the second fixed-point stage and later evaluating -(v0 + v8) reproduces the target negation count. This alone does not produce an exact stage or complete function and was not promoted.",
+    "Hoisted difference assignments, ordinary narrow input temporaries, Split helper argument types, helper return-width combinations, register declarations, and local arrays/structs did not produce a complete match. The array/struct controls change stack allocation and are not supported as the recovered layout.",
+    "A narrow MultiplyFraction return adds thirty-two caller extensions in the dewindow stage. The canonical int return remains better supported by the target caller.",
+    "All controls are genuine C alternatives in scratch and none supplies instruction bytes, padding, patches or linked application data. No compiler-flag search was performed in this pass.",
+    "Canonical Mp3DCT remains 5040 bytes versus the original aligned extent of 5104, with 3986 non-relocation differing positions and the previously recorded 48/48 finite behavioral cases. No source change was made, so those behavioral checks were not repeated."
+  ]
+}
