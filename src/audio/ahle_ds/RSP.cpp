@@ -218,19 +218,21 @@ void RSP_StoreVectorExec(RSPInstructionWord opcode)
     case 8:
     {
         address = RSPRegisters[opcode.rs] + offset * 16;
-        CpuU32 displacement = (CpuU8)(address & 7);
+        CpuU8 displacement = (CpuU8)address;
+        displacement &= 7;
         CpuU32 base = address - displacement;
-        for (i = 0; i < 8; i++, displacement += 2)
-            RSP_WriteByte(base + (displacement & 15), RSPVectors[vt][i] >> 7);
+        for (i = 0; i < 8; i++)
+            RSP_WriteByte(base + ((displacement + i * 2) & 15), RSPVectors[vt][i] >> 7);
         break;
     }
     case 9:
     {
         address = RSPRegisters[opcode.rs] + offset * 16;
-        CpuU32 displacement = (CpuU8)(address & 7);
+        CpuU8 displacement = (CpuU8)address;
+        displacement &= 7;
         CpuU32 base = address - displacement;
-        for (i = 0; i < 4; i++, displacement += 4)
-            RSP_WriteByte(base + (displacement & 15), RSPVectors[vt][(element >> 1) + i] >> 7);
+        for (i = 0; i < 4; i++)
+            RSP_WriteByte(base + ((displacement + i * 4) & 15), RSPVectors[vt][(element >> 1) + i] >> 7);
         break;
     }
     case 10:
@@ -2325,19 +2327,21 @@ void RSP_LoadVectorExec(RSPInstructionWord opcode)
     case 8:
     {
         address = RSPRegisters[opcode.rs] + offset * 16;
-        CpuU32 displacement = (CpuU8)(address & 7);
+        CpuU8 displacement = (CpuU8)address;
+        displacement &= 7;
         CpuU32 base = address - displacement;
-        for (i = 0; i < 8; i++, displacement += 2)
-            RSPVectors[vt][i] = RSP_ReadByte(base + (displacement & 15)) << 7;
+        for (i = 0; i < 8; i++)
+            RSPVectors[vt][i] = RSP_ReadByte(base + ((displacement + i * 2) & 15)) << 7;
         break;
     }
     case 9:
     {
         address = RSPRegisters[opcode.rs] + offset * 16;
-        CpuU32 displacement = (CpuU8)(address & 7);
+        CpuU8 displacement = (CpuU8)address;
+        displacement &= 7;
         CpuU32 base = address - displacement;
-        for (i = 0; i < 4; i++, displacement += 4)
-            RSPVectors[vt][(element >> 1) + i] = RSP_ReadByte(base + (displacement & 15)) << 7;
+        for (i = 0; i < 4; i++)
+            RSPVectors[vt][(element >> 1) + i] = RSP_ReadByte(base + ((displacement + i * 4) & 15)) << 7;
         break;
     }
     case 11:

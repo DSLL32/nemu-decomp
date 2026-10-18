@@ -19,7 +19,7 @@
     "native_language_control": "analysis/audio-rsp-language-control.json"
   },
   "source_sha256": {
-    "RSP.cpp": "5aabd9f3295be947fa1a24d196197cd10b92458315dd3a7dccfe5dc078accc46",
+    "RSP.cpp": "f9e8412e6f49a9a613e787fd22715e258a1585b47b03eca67818dcb41bbac2b1",
     "RSPKernel.inc": "7a218993560c457a5149266e391a28fcdb0a1df5a812209c9a9b7111238eb961",
     "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88",
     "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
@@ -39,11 +39,12 @@
       "C-linkage opcode helpers take RSPInstructionWord unions by value. The original caller MOV-immediate/PUSH-register sequence distinguishes this from a scalar unsigned argument.",
       "All 180 materialized native function hashes are unchanged from the earlier separate-unit reconstruction. The retained header table is restored before the guest program.",
       "The earlier C/C++ frontend comparison is historical evidence from its recorded source snapshot, not a whole-unit language control on this final organization.",
-      "Signed lane indices recover the observed four-lane countdown loops in all twelve retained multiply functions. The code remains unmatched; two complete suffixes now match after their first 41 bytes.",
+      "Signed lane indices recover the observed four-lane countdown loops in all twelve retained multiply functions. At that checkpoint the code remained unmatched, with two complete suffixes matching after their first 41 bytes; later entry and clamp refinements resolve all twelve handlers.",
       "Three-arm signed clamping in VMUDM, VMUDN and VMUDH recovers their complete suffixes after the first 41 bytes. At that checkpoint, VMULF, VMUDL and these three functions retained identical 25-byte entry residuals; the later element-first decode order resolves all five.",
       "The five live SP hardware-register scalars are fields of an inferred eight-word bank matching the native Nemu layout. Status, Semaphore and Bist are explicitly inferred retained fields. This preserves all 180 materialized function hashes and all 29 earlier typed data ranges; the unidentified C020 interval remains unresolved.",
       "Element-first operand decoding matches the complete VMULF, VMUDL, VMUDM, VMUDN and VMUDH bodies. An independent fresh native compilation reproduces all 180 recorded candidate hashes, with 153 complete matches.",
-      "Element-first decoding and branch-local clamp results match VMULU, VMACF, VMACU, VMADL, VMADM, VMADN and VMADH. All twelve retained multiply handlers are now exact; the generic multiply helper remains separate and unmatched."
+      "Element-first decoding and branch-local clamp results match VMULU, VMACF, VMACU, VMADL, VMADM, VMADN and VMADH. All twelve retained multiply handlers are now exact; the generic multiply helper remains separate and unmatched.",
+      "Immutable byte displacements and indexed lane offsets reproduce cases 8 and 9 in both native vector-memory helpers. Load remains 17 bytes unmatched across two scheduling sites; the complete-function count remains 160/180."
     ],
     "invariance_evidence": "analysis/audio-rsp-organization.json",
     "language_control": "analysis/audio-rsp-language-control.json",
@@ -59,7 +60,8 @@
     "retained_multiply_clamp_refinement": "analysis/audio-rsp-clamp-refinement.json",
     "sp_register_bank": "analysis/audio-rsp-sp-bank.json",
     "multiply_entry_match": "analysis/audio-rsp-multiply-entry-match.json",
-    "retained_accumulate_match": "analysis/audio-rsp-accumulate-match.json"
+    "retained_accumulate_match": "analysis/audio-rsp-accumulate-match.json",
+    "loadstore_index_refinement": "analysis/audio-rsp-loadstore-refinement.json"
   },
   "coverage": {
     "start": "0x10013b10",
@@ -79,9 +81,9 @@
     "zero_initialized_object_bytes": 17164,
     "unresolved_relocations": 0,
     "method": "Ordinary COFF DIR32 and REL32 relocations materialized using separately identified original targets. Every byte of each recorded span is compared; no masks or executable patches.",
-    "artifact": "/root/.ai-tmp/audio-rsp-accumulate.zoqqom7a/branch-local-result/strict.json",
-    "artifact_sha256": "b936ae8b51e2c4493031f543c8b5b0c6eb340190f1bcd991bed11cc48c253f0c",
-    "source_snapshot": "/root/.ai-tmp/audio-rsp-accumulate.zoqqom7a/branch-local-result",
+    "artifact": "/root/.ai-tmp/audio-rsp-loadstore.ru93d_j0/byte-index/strict.json",
+    "artifact_sha256": "34c645c92d7540241b74451e60dcac0c6bff9c670c4daa6783074e7e66c9e7f3",
+    "source_snapshot": "/root/.ai-tmp/audio-rsp-loadstore.ru93d_j0/byte-index",
     "typed_fields_exact": 11,
     "typed_fields_compared": 11,
     "object_count_note": "Five scalar objects became fields of one aggregate; all 29 prior typed ranges remain separately verified. Field checks overlap aggregates."
@@ -182,9 +184,9 @@
       "original_size": 2256,
       "candidate_size": 2272,
       "exact": false,
-      "differing_bytes": 1707,
+      "differing_bytes": 1232,
       "original_sha256": "9a0fdb88cfb4dc1d86dbacba3d8c1d58939a545ccb4bdd00dc9f7a0ab1ef57ec",
-      "candidate_materialized_sha256": "dcef4c5c70b591b595ab51374e7e8997339a98ff5b44ba46d07da0666396a9d4"
+      "candidate_materialized_sha256": "cf59950dceb57abe23664e0568ff96f8c6377b5f76673d80e409dcdf053b3383"
     },
     {
       "name": "RSP_StoreVector",
@@ -2008,9 +2010,9 @@
       "original_size": 2016,
       "candidate_size": 2016,
       "exact": false,
-      "differing_bytes": 972,
+      "differing_bytes": 17,
       "original_sha256": "bd835b76dfad5f8c6fefe71a14e3db74a32c5ea44a28b06ba6e174519b51889b",
-      "candidate_materialized_sha256": "899d9d4c34195958a94f349090c070d97b9e6d2b96f5b7375f68cd467f2f1a20"
+      "candidate_materialized_sha256": "76964da899e4ebd24d2ba16bd942e8edcbff5afd6ae0920d1bc26d7245bc641b"
     },
     {
       "name": "RSP_LoadVector",
@@ -2321,7 +2323,7 @@
     }
   ],
   "behavior": {
-    "total_cases": 166784,
+    "total_cases": 191360,
     "failures": 0,
     "scope": "Differential execution of original native Audio code and reconstructed candidate code. This supplements instruction comparison and does not establish byte identity for unmatched functions.",
     "reports": [
@@ -2341,7 +2343,10 @@
         "area": "generic_vector_memory",
         "cases": 24576,
         "path": "/root/.ai-tmp/nemu-audio-vector-memory.lbdUAGRh/behavior.json",
-        "sha256": "819679165522fb09af12c5d42fb397dca5fec2443ac1b3dfb1af15d2d5c75b45"
+        "sha256": "819679165522fb09af12c5d42fb397dca5fec2443ac1b3dfb1af15d2d5c75b45",
+        "historical_superseded_cases": 24576,
+        "current_unchanged_function_cases": 0,
+        "note": "Superseded by the fresh indexed-byte-displacement report, including wrapper paths that call the two changed helpers."
       },
       {
         "area": "vector_arithmetic",
@@ -2402,14 +2407,21 @@
         "cases": 14336,
         "path": "/root/.ai-tmp/audio-rsp-accumulate.zoqqom7a/behavior.json",
         "sha256": "f25ab06c9a8427aec9b1dd77f4156c7d580892d7811e7170d07845aa6e7554a0"
+      },
+      {
+        "area": "generic_vector_memory_indexed_byte",
+        "cases": 24576,
+        "path": "/root/.ai-tmp/audio-rsp-loadstore.ru93d_j0/behavior.json",
+        "sha256": "1c30a05e6f6c35523889526229adb1f9a028f3d87784554de116aaaa9c348753"
       }
     ],
     "organization_change": "The unit-organization checkpoint preserves all 180 earlier native hashes. The later signed-index refinement changes twelve unmatched functions and has 6144 new differential cases; all 168 other function hashes and 29 data hashes are unchanged. The later three-arm clamp refinement changes three of those unmatched functions and has 6144 additional native cases; all 177 other function hashes and 29 data hashes remain unchanged.",
     "current_code_cases": 160128,
-    "historical_superseded_cases": 6656,
+    "historical_superseded_cases": 31232,
     "sp_register_bank_change": "No native instruction semantics changed: all 180 complete materialized bodies and all 29 prior typed data ranges are preserved; see analysis/audio-rsp-sp-bank.json.",
     "multiply_entry_change": "Only operand-decoding declaration order changes. All five complete native bodies now equal the original; the other 175 bodies and all typed data remain unchanged. No additional behavior cases are claimed.",
-    "retained_accumulate_change": "Seven native bodies now exactly match the original and have 14,336 fresh differential cases. The other 173 complete body hashes and all typed data hashes are unchanged."
+    "retained_accumulate_change": "Seven native bodies now exactly match the original and have 14,336 fresh differential cases. The other 173 complete body hashes and all typed data hashes are unchanged.",
+    "loadstore_index_change": "Two unmatched helpers have four complete case blocks matching the original and 24,576 fresh native differential cases. The other 178 body hashes and all typed-data hashes are unchanged."
   },
   "shared_nemu_evidence": "analysis/audio-rsp-cross-image.json",
   "limitations": [
