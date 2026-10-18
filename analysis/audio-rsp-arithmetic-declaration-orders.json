@@ -1,0 +1,2117 @@
+{
+  "status": "complete_bounded_declaration_order_controls_no_promotion",
+  "original": "master/Plugin/audio.dll",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "baseline": {
+    "source_commit": "67954de",
+    "source_snapshot": "/root/.ai-tmp/audio-rsp-arithmetic24.ybnh8bmo/source",
+    "source_sha256": "e02030c131406793734e61a5002920f7b4fe2f83e787cf00d6bab4a1da059c61",
+    "object": "/root/.ai-tmp/audio-rsp-arithmetic24.ybnh8bmo/baseline/RSP.obj",
+    "object_sha256": "60a3de68fced090f4ae7e203351b8fecd39b1702559a3845c86f394b3e600984",
+    "comparison": "/root/.ai-tmp/audio-rsp-arithmetic24.ybnh8bmo/baseline/comparison.json",
+    "comparison_sha256": "fad3b1afb265b957fc3b04e34edbd7746e533e872429381391d9b08f930a234b",
+    "functions_compared": 180,
+    "functions_exact": 161,
+    "matching_function_bytes": 40192,
+    "typed_objects_exact": 25,
+    "typed_fields_exact": 11,
+    "scope_note": "Frozen historical161-match baseline. The lead subsequently promoted exact StoreVectorExec in e9f63e9, increasing canonical coverage to162; no current source or coverage metadata is overwritten here."
+  },
+  "reason": "Native multiply and LoadVector were independently solved through decoder declaration order. Earlier native arithmetic evidence had only one full-unit four-field order and six three-field orders in an early isolated fixture.",
+  "method": {
+    "compiler": "VC7 native C++, /O2 /Ob1 /MT /W3 /DWIN32 /DNDEBUG /D_WINDOWS /D_USRDLL",
+    "translation_units_per_probe": 1,
+    "function_count": 180,
+    "fresh_compiles": 30,
+    "source_scope": [
+      "RSP_VADD",
+      "RSP_VADDExec",
+      "RSP_VSUB",
+      "RSP_VSUBExec",
+      "RSP_VSUT"
+    ],
+    "preserved": "All175 other function bodies,161 previously exact complete functions,25 typed data objects and11 typed overlapping fields remain identical in all29 mutated source controls. All native relocation operands resolve.",
+    "cached_element_family": "All24 permutations of vd/vs/vt/element, with element decoded once before the fast path and mask expressions rewritten through that local. This family changes selector representation as well as declaration order. VSUBExec retains the observed global-instruction selector; VADDExec uses its argument.",
+    "independent_selector_family": "All six orders of vd/vs/vt, including the unmodified fresh baseline, preserving existing independent >>22 and >>21 selector formulas and every other source expression."
+  },
+  "summary": [
+    {
+      "name": "RSP_VADD",
+      "original_size": 720,
+      "baseline_candidate_size": 720,
+      "baseline_differing_bytes": 647,
+      "cached_element_candidate_sizes": [
+        688,
+        704
+      ],
+      "cached_element_difference_range": [
+        663,
+        701
+      ],
+      "independent_selector_candidate_sizes": [
+        720
+      ],
+      "independent_selector_difference_range": [
+        524,
+        662
+      ],
+      "original_loop_head": {
+        "offset": 224,
+        "first_instructions": [
+          "lea ecx, [edi - 2]",
+          "mov eax, 1",
+          "shl eax, cl",
+          "movzx esi, dx",
+          "and eax, esi",
+          "mov esi, dword ptr [esp + 0x18]",
+          "neg eax",
+          "sbb eax, eax",
+          "and esi, ecx"
+        ]
+      },
+      "baseline_loop_head": {
+        "offset": 224,
+        "first_instructions": [
+          "mov eax, dword ptr [esp + 0x18]",
+          "mov ebp, dword ptr [esp + 0x1c]",
+          "lea ecx, [esi - 2]",
+          "and eax, ecx",
+          "add eax, ebp",
+          "mov ebp, 1",
+          "shl ebp, cl",
+          "movzx ecx, dx",
+          "and ebp, ecx"
+        ]
+      }
+    },
+    {
+      "name": "RSP_VADDExec",
+      "original_size": 672,
+      "baseline_candidate_size": 672,
+      "baseline_differing_bytes": 488,
+      "cached_element_candidate_sizes": [
+        640,
+        656
+      ],
+      "cached_element_difference_range": [
+        639,
+        656
+      ],
+      "independent_selector_candidate_sizes": [
+        672
+      ],
+      "independent_selector_difference_range": [
+        493,
+        509
+      ],
+      "original_loop_head": {
+        "offset": 176,
+        "first_instructions": [
+          "lea ecx, [edi - 2]",
+          "mov eax, 1",
+          "shl eax, cl",
+          "movzx esi, dx",
+          "and eax, esi",
+          "mov esi, dword ptr [esp + 0x10]",
+          "neg eax",
+          "sbb eax, eax",
+          "and esi, ecx"
+        ]
+      },
+      "baseline_loop_head": {
+        "offset": 176,
+        "first_instructions": [
+          "mov eax, dword ptr [esp + 0x10]",
+          "mov ebp, dword ptr [esp + 0x14]",
+          "lea ecx, [esi - 2]",
+          "and eax, ecx",
+          "add eax, ebp",
+          "mov ebp, 1",
+          "shl ebp, cl",
+          "movzx ecx, dx",
+          "and ebp, ecx"
+        ]
+      }
+    },
+    {
+      "name": "RSP_VSUB",
+      "original_size": 688,
+      "baseline_candidate_size": 688,
+      "baseline_differing_bytes": 623,
+      "cached_element_candidate_sizes": [
+        656,
+        672
+      ],
+      "cached_element_difference_range": [
+        646,
+        670
+      ],
+      "independent_selector_candidate_sizes": [
+        688
+      ],
+      "independent_selector_difference_range": [
+        549,
+        634
+      ],
+      "original_loop_head": {
+        "offset": 192,
+        "first_instructions": [
+          "lea ecx, [edi - 2]",
+          "mov eax, 1",
+          "shl eax, cl",
+          "movzx edx, si",
+          "and eax, edx",
+          "mov edx, dword ptr [esp + 0x18]",
+          "neg eax",
+          "sbb eax, eax",
+          "and edx, ecx"
+        ]
+      },
+      "baseline_loop_head": {
+        "offset": 192,
+        "first_instructions": [
+          "mov eax, dword ptr [esp + 0x18]",
+          "mov ebp, dword ptr [esp + 0x1c]",
+          "lea ecx, [esi - 2]",
+          "and eax, ecx",
+          "add eax, ebp",
+          "add eax, edi",
+          "movsx ebp, word ptr [eax*2 + 0x1012be18]",
+          "movsx eax, word ptr [ebx - 2]",
+          "sub eax, ebp"
+        ]
+      }
+    },
+    {
+      "name": "RSP_VSUBExec",
+      "original_size": 672,
+      "baseline_candidate_size": 672,
+      "baseline_differing_bytes": 505,
+      "cached_element_candidate_sizes": [
+        656
+      ],
+      "cached_element_difference_range": [
+        637,
+        651
+      ],
+      "independent_selector_candidate_sizes": [
+        672
+      ],
+      "independent_selector_difference_range": [
+        511,
+        619
+      ],
+      "original_loop_head": {
+        "offset": 176,
+        "first_instructions": [
+          "lea ecx, [edi - 2]",
+          "mov eax, 1",
+          "shl eax, cl",
+          "movzx edx, si",
+          "and eax, edx",
+          "mov edx, dword ptr [esp + 0x10]",
+          "neg eax",
+          "sbb eax, eax",
+          "and edx, ecx"
+        ]
+      },
+      "baseline_loop_head": {
+        "offset": 176,
+        "first_instructions": [
+          "mov eax, dword ptr [esp + 0x10]",
+          "mov ebp, dword ptr [esp + 0x14]",
+          "lea ecx, [esi - 2]",
+          "and eax, ecx",
+          "add eax, ebp",
+          "add eax, edi",
+          "movsx ebp, word ptr [eax*2 + 0x1012be18]",
+          "movsx eax, word ptr [ebx - 2]",
+          "sub eax, ebp"
+        ]
+      }
+    },
+    {
+      "name": "RSP_VSUT",
+      "original_size": 640,
+      "baseline_candidate_size": 640,
+      "baseline_differing_bytes": 598,
+      "cached_element_candidate_sizes": [
+        624
+      ],
+      "cached_element_difference_range": [
+        569,
+        617
+      ],
+      "independent_selector_candidate_sizes": [
+        640
+      ],
+      "independent_selector_difference_range": [
+        581,
+        590
+      ],
+      "original_loop_head": {
+        "offset": 144,
+        "first_instructions": [
+          "lea ecx, [edi - 2]",
+          "mov eax, 1",
+          "shl eax, cl",
+          "movzx edx, si",
+          "and eax, edx",
+          "mov edx, dword ptr [esp + 0x18]",
+          "neg eax",
+          "sbb eax, eax",
+          "and edx, ecx"
+        ]
+      },
+      "baseline_loop_head": {
+        "offset": 148,
+        "first_instructions": [
+          "mov eax, dword ptr [esp + 0x18]",
+          "mov ebp, dword ptr [esp + 0x1c]",
+          "lea ecx, [esi - 2]",
+          "and eax, ecx",
+          "add eax, ebp",
+          "mov ebp, 1",
+          "shl ebp, cl",
+          "movzx ecx, dx",
+          "and ebp, ecx"
+        ]
+      }
+    }
+  ],
+  "assembly_findings": [
+    "All24 cached-element permutations make every arithmetic body16 or32 bytes shorter than the original. They do not reproduce the native helper selector setup; for example original VADDExec independently derives the >>22 table index and >>21 element after its fast-path branch, while the cached-element control computes the masked element before that branch and derives the index from it.",
+    "All six independent-selector declaration orders preserve original function extents. Every one still enters the main arithmetic loop with selector-mask/offset loads. Each original begins the loop with the lane shift-count LEA, MOV EAX,1, SHL EAX,CL and carry flag extraction. Thus declaration order alone does not recover the shared arithmetic dataflow.",
+    "VADD with vt/vs/vd order has one newly exact original17-byte basic block at relative offsets63..80 in the fast-path condition. No new complete arithmetic-loop basic block is exact in the five pure reorder candidates. This small prefix improvement is not promoted while the shared loop remains unexplained."
+  ],
+  "cached_element_orders": [
+    {
+      "order": [
+        "vd",
+        "vs",
+        "vt",
+        "element"
+      ],
+      "source_sha256": "ad77d1aa355347e56ef5ca786606a7ea60402c9cc89314dbb001e81f99cf8fac",
+      "object_sha256": "4066fba546474c93cbd51612b582b68286aebf93ceb049cea312dcf4107ab630",
+      "comparison_sha256": "afcd03dea57f35f276fd666a90968a463399139113d103f8b581a35c4af72557",
+      "compile_log_sha256": "e6ef6061b1c45ae5fbf1344e9e67a81c013d2c8aac46d24fa1977175d2f53eb1",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 680,
+          "exact": false,
+          "candidate_materialized_sha256": "1f5b540038fb63437de336cb932908a0fef3f8532a8bce094cb986a1681bf173"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 640,
+          "differing_bytes": 651,
+          "exact": false,
+          "candidate_materialized_sha256": "295559238474d5315701fe667ddf31c08f474cc9ba9840dffffdf0537ed414d0"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 658,
+          "exact": false,
+          "candidate_materialized_sha256": "d8ae3666a00845d617ce5f4f77e0c313cbbecef2c4d3f0b2b7003e8783787198"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 651,
+          "exact": false,
+          "candidate_materialized_sha256": "6e84a5b46cb7a56792f97b8d1dd281b90da5a8e87adeab386114afe0cdc2c09b"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 601,
+          "exact": false,
+          "candidate_materialized_sha256": "baa9c6261809f2efc5d7e07dbb080049c52d5a27287f353c66ec7edba58ad823"
+        }
+      ]
+    },
+    {
+      "order": [
+        "vd",
+        "vs",
+        "element",
+        "vt"
+      ],
+      "source_sha256": "1fff0ca636beed267a4f25d9f475624fa68dcd5d3179f0ecb3189e9af872b037",
+      "object_sha256": "851e37e31765d77dcac28654f5395b0a6fc49892fcc2089fbc2573b9eb711ef4",
+      "comparison_sha256": "161a3969f7f303f397352b5331c129eab7e5cf0f939ac5087b976b8aeb232827",
+      "compile_log_sha256": "b5245d61f509747139914607df93fd95cd7d02665b5486501071a8473d337e58",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 681,
+          "exact": false,
+          "candidate_materialized_sha256": "ad3bddd1e8bacd0bc6a4da0d39256f1159265fe255076e7aba73f0e0e99bff4a"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 639,
+          "exact": false,
+          "candidate_materialized_sha256": "8cf7ae46be5129f6875416e29f3cc97b82283803a527065a302f20b46d183960"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 655,
+          "exact": false,
+          "candidate_materialized_sha256": "02a0ec49355291ddc71585c0a5d38ad6ab95322552bf9b76ae043700a1ebe439"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 651,
+          "exact": false,
+          "candidate_materialized_sha256": "6e84a5b46cb7a56792f97b8d1dd281b90da5a8e87adeab386114afe0cdc2c09b"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 616,
+          "exact": false,
+          "candidate_materialized_sha256": "b128a9e0c4c7e5046cca103b42288ebb6dc8cdb14e7bd5df392c3619d07c5957"
+        }
+      ]
+    },
+    {
+      "order": [
+        "vd",
+        "vt",
+        "vs",
+        "element"
+      ],
+      "source_sha256": "e9da9ee048c114fe3852c7d3423a1c2488516f01d9a54457f7043752dcb60f69",
+      "object_sha256": "f1408c28288e3ced6aa2fa674b2151b7e53bb2d21210b89d8555800bdd35a1b2",
+      "comparison_sha256": "f8436ad27c91ad39d979c87f741f496649faa97a7505c28771106ef63481eb56",
+      "compile_log_sha256": "b91d58947f943976f493f9b918ffad1cc5aa8a042172ae5cb12ef9f0f7c913ea",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 680,
+          "exact": false,
+          "candidate_materialized_sha256": "b4b7f889e5008cf3e127803391c1317c78030f719c9356a151daaeda7d5fc6e6"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 640,
+          "differing_bytes": 651,
+          "exact": false,
+          "candidate_materialized_sha256": "94160b3f23a95cbc4a6d5952b0b840152c29549e8a85360a7844d5ee5b4b76d3"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 658,
+          "exact": false,
+          "candidate_materialized_sha256": "b0318aac04467eb0fc931667c4fa02babe68289da967ffc066e202475a487338"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 642,
+          "exact": false,
+          "candidate_materialized_sha256": "3e3628b299e8817fe72d000a694968da01f221c160dba3711b120c1c969b06d7"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 591,
+          "exact": false,
+          "candidate_materialized_sha256": "dda88fb44cb190d049d7ad82ada1b0cb9eac79453f822b85af3bcbc448f78454"
+        }
+      ]
+    },
+    {
+      "order": [
+        "vd",
+        "vt",
+        "element",
+        "vs"
+      ],
+      "source_sha256": "743a92bca6f01cb6190671c890004a31feedcf545585096a844292f97c5c307d",
+      "object_sha256": "91a8a7968050f3e0beb63598aec7a5b9a44e01a68efe7f44e5af193dddf197df",
+      "comparison_sha256": "d8772de6a44a0c548c8886794c721d3ed98a570f1e6e19b6e77c274ec48e3b9f",
+      "compile_log_sha256": "b4613d4761f71d14ecd4d73ff881d7ab4220c63866c55f4d5f61520bca7a5409",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 685,
+          "exact": false,
+          "candidate_materialized_sha256": "0ecf704f86ce4c0c8a254ef4e47c27bd5b58c93835798a54c4e1deb677869685"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 640,
+          "differing_bytes": 654,
+          "exact": false,
+          "candidate_materialized_sha256": "dd8d7d3db628222301e4a8b9a2d0bf5ed4ab11e57b3af2ed8fd055a492d2f16d"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 670,
+          "exact": false,
+          "candidate_materialized_sha256": "f3cbff8230079e742d316a3f42a0eaa32bfb13bc4eacd6c7cb8b07920af9049c"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 642,
+          "exact": false,
+          "candidate_materialized_sha256": "ce3bbca70e45e4c872ff8b127a17e8c824a91341f9e43fc93d5b84d2c5090a94"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 591,
+          "exact": false,
+          "candidate_materialized_sha256": "2ed7eb4c556401a46502f11679dff2d03c951f14b2068be19f1422858799d11a"
+        }
+      ]
+    },
+    {
+      "order": [
+        "vd",
+        "element",
+        "vs",
+        "vt"
+      ],
+      "source_sha256": "bc245e36336d09e4b2780ebfb08bec77f652a8fd0ba4b5579981b4b01e8b5ca3",
+      "object_sha256": "5a1580b283faf091392d8ff5cb09c5f43f7c9339805ea29f0b4fc455dd88ea62",
+      "comparison_sha256": "fb8229e1570a26667369c36cdff9b041faf7519dce0b144ae833790c5df4912e",
+      "compile_log_sha256": "08a41775275421bc4a6cd0a044886c80be4c8e71b834dd26b818fdeac0106323",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 671,
+          "exact": false,
+          "candidate_materialized_sha256": "ed58ef23adffb0a6b53f02a75c2b1933ad4209a63b6db36774f5b6cb0f67f622"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 639,
+          "exact": false,
+          "candidate_materialized_sha256": "10bd9df47b5a1b188e97248aa0e76e56a20ee9938edeb109e583bf399a34da04"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 662,
+          "exact": false,
+          "candidate_materialized_sha256": "5bb9688498dd3b93ab07623140b1eac295eb36e7dff1f0f562942f382ce40615"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 649,
+          "exact": false,
+          "candidate_materialized_sha256": "8be004ebab7b5b698382121157885e4fd3a598d88574e02a130549f72ee91ab7"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 617,
+          "exact": false,
+          "candidate_materialized_sha256": "43f6d04613e0595757fbfadd19ae961d96d98570d6e1e1b0f3f8acd3bfd34d53"
+        }
+      ]
+    },
+    {
+      "order": [
+        "vd",
+        "element",
+        "vt",
+        "vs"
+      ],
+      "source_sha256": "6b6c593d64bdca28d089f24c26601b7981bed33a83f0512ef9c25632351e29f2",
+      "object_sha256": "226138c81f02e8f7059a64c6340f6cdde05ed7e8f1d82de009ef5fc4ec4cf7c5",
+      "comparison_sha256": "2ec13d044304a775f2c16c79038698fc4b16b6fa79a3d429fbfb3f49e1e263ec",
+      "compile_log_sha256": "fe061c98a45ca692143a1906889a2054d9db155315424d43602a8ab101e62c16",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 685,
+          "exact": false,
+          "candidate_materialized_sha256": "6f8d47b14ad0ec8ae51af5eccee0021f5d7111c84640565bdad0f3d9d1d88f3b"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 640,
+          "differing_bytes": 652,
+          "exact": false,
+          "candidate_materialized_sha256": "33bd45b0788656754c225838cb2784a6946c53720e7bb4bc1115c49ebd35312e"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 670,
+          "exact": false,
+          "candidate_materialized_sha256": "f3cbff8230079e742d316a3f42a0eaa32bfb13bc4eacd6c7cb8b07920af9049c"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 642,
+          "exact": false,
+          "candidate_materialized_sha256": "8c2cbed92ab5be299e674dd5a9710f43e03ebcd4061851a0285a4b4bc5bf7898"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 569,
+          "exact": false,
+          "candidate_materialized_sha256": "166209f55efe62c01174a82980bc216625c2e79dc2eca48e16508078138a79f8"
+        }
+      ]
+    },
+    {
+      "order": [
+        "vs",
+        "vd",
+        "vt",
+        "element"
+      ],
+      "source_sha256": "1620125c6f657b12706177bcba3e3825b1e6cb5d4b5e3746699312aeb7bf4520",
+      "object_sha256": "1899e8961bc357b0a8eb90fed30189586240e1d54a4e11ed29c633e2f309ffbc",
+      "comparison_sha256": "70af58e12ae218b1a7f120a95897513b019ad0200ffa7af9b934bad43e60d858",
+      "compile_log_sha256": "2eb9c4ac4db819263b4f80468ba8366af5dd4a534e4b648cd73d38006dfc9391",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 672,
+          "exact": false,
+          "candidate_materialized_sha256": "50df28630837d23c053a34ba790faa58ec8c297c855281ec696b59b6548a43b2"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 640,
+          "differing_bytes": 651,
+          "exact": false,
+          "candidate_materialized_sha256": "135e847517b722e07bb366baa74c95a3829798b45a75e593a87fac23def13722"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 659,
+          "exact": false,
+          "candidate_materialized_sha256": "edd00e440da15325d7557224e7738c2b31073699f9903db04e0f270d494ea184"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 651,
+          "exact": false,
+          "candidate_materialized_sha256": "18374d8061049c2d40849d8a1421ffdac3f23eb5c259939ad029ace9e1c82e73"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 601,
+          "exact": false,
+          "candidate_materialized_sha256": "c464a1513064d57d6b9c5b661269a1fc09baee83d8b465401f72736af6977583"
+        }
+      ]
+    },
+    {
+      "order": [
+        "vs",
+        "vd",
+        "element",
+        "vt"
+      ],
+      "source_sha256": "0ce4a659d81d1b65f95b2b1e274600b2cd0665c1c47ab1a5a574d6f1d073beaa",
+      "object_sha256": "77ee66b13a172570525d5361522e866be4672b209a4af6f63b3a8eb6d32b4e5f",
+      "comparison_sha256": "3f53e9e151f56e1bb3b6e9a87d18e4effe2f3eb094c5e10ffe47b306e551d937",
+      "compile_log_sha256": "d779592516ee651b17db501267e79b1f8a1e5339fd7e36b0b07b6aa943fef7c6",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 680,
+          "exact": false,
+          "candidate_materialized_sha256": "aeae78c8aacddc26815e506b9e20e5e6c6bad36b9fb74b18516365c03159aed4"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 639,
+          "exact": false,
+          "candidate_materialized_sha256": "ff205484de36eba54b89a27eac548a820bdcefedf7cccc261732203166c8fb19"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 670,
+          "exact": false,
+          "candidate_materialized_sha256": "b2aa7359bd1b2dfec104765d65ddbc346968d683e4ca73396b648bbcf32d528a"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 651,
+          "exact": false,
+          "candidate_materialized_sha256": "18374d8061049c2d40849d8a1421ffdac3f23eb5c259939ad029ace9e1c82e73"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 617,
+          "exact": false,
+          "candidate_materialized_sha256": "dacd9dbef6dc321778c34adf75ecdb2cb39727cc3d9b650437b79f46900ae5c1"
+        }
+      ]
+    },
+    {
+      "order": [
+        "vs",
+        "vt",
+        "vd",
+        "element"
+      ],
+      "source_sha256": "1234a652667b69a87314829db92e126d13e2f6767e2b98f55e3aa15edf075e25",
+      "object_sha256": "75cee031a2e21c9f0d3f762bbca2e4a9192d265e8b3422eccbed0b362d5774df",
+      "comparison_sha256": "f2dcb1acf9e4fcb1c0ba0e137455fe7649944eaadf3585978061af949fdb07c6",
+      "compile_log_sha256": "d3e3dec6a3315341ffaaa7bb2a3a163423e309f57a4888e7ba465d6865c3d1e3",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 676,
+          "exact": false,
+          "candidate_materialized_sha256": "d70cd91b2e217f3cf23b1cb66407646f9fa9510a35e65050e203738fdc55b1e7"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 640,
+          "differing_bytes": 651,
+          "exact": false,
+          "candidate_materialized_sha256": "916a75ef8fa32b7346da2666482798cbfdc2e30a6d072e51061b8b57d8c1cc7c"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 664,
+          "exact": false,
+          "candidate_materialized_sha256": "9771388a0cbc76b8b8ec62ba96dd0fcacd6799892b83dc71d4f00a1d45a3bd55"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 637,
+          "exact": false,
+          "candidate_materialized_sha256": "d6fff59034f73ebc50289d0864625e3d01ab5b38080ed93a2dcaa30ec55d43f7"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 593,
+          "exact": false,
+          "candidate_materialized_sha256": "9aba0f98b994c207e9ddf3d8ebdedb2adbf9463e4fb25b3a9fdae30f51e792f5"
+        }
+      ]
+    },
+    {
+      "order": [
+        "vs",
+        "vt",
+        "element",
+        "vd"
+      ],
+      "source_sha256": "a11d5fa5d9836660221e23462b27a48078d9ddb4ff0358365f7e7997a0895135",
+      "object_sha256": "247f09c2c9b4755642ccf3bc971ba93da7a6ed805416f9b28685b7c05590c931",
+      "comparison_sha256": "8ed7ffee4e427116e332fd8e59c15f3c30e8de44d41622bdf475dd121ef1dd66",
+      "compile_log_sha256": "ccf604f5ca99936c64daa796ecf19ca2218a7359fc9f65d6d608cec1303fcf76",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 685,
+          "exact": false,
+          "candidate_materialized_sha256": "5979b50388521cf25cc294e22a0045010698f7aec0636cf9c47bf14da03c976d"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 640,
+          "differing_bytes": 647,
+          "exact": false,
+          "candidate_materialized_sha256": "19037bff3af4eb5b33a58d322c3f0467ce13a1e65c9d6fe5bd5c19deab34e352"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 665,
+          "exact": false,
+          "candidate_materialized_sha256": "8e57096f15f3cb2896cce4b53625222c9cedf70e5223437f1b3f9086fa9a8a22"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 637,
+          "exact": false,
+          "candidate_materialized_sha256": "8465e5ba8492f5562e7cbcef624ecfd2bfb3d9327cdf024fb032abb2205af336"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 593,
+          "exact": false,
+          "candidate_materialized_sha256": "71a3c8aca62d1329f08429a42f43c84eb4c6ca062512102ae6bd8480d0a3c2ad"
+        }
+      ]
+    },
+    {
+      "order": [
+        "vs",
+        "element",
+        "vd",
+        "vt"
+      ],
+      "source_sha256": "8cb73a86cb5496020ef488796dc11215e38879ac15d0d1412e0aedc091ccbc8d",
+      "object_sha256": "3a8b91aa5f63082274efde8ed57d9ec792e57a3b56e0626387211a5523a1d6ca",
+      "comparison_sha256": "89254032b2d80ad01360cc7c9fc385ca903f119958717f7656caf908d12323d3",
+      "compile_log_sha256": "bc2cd0ff7e26f4caa605b2f955589fb42cb24125b821857d4cf9e1bbc90609b9",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 689,
+          "exact": false,
+          "candidate_materialized_sha256": "9a82506b1e566fd6e6e76b75891166de0cd0afed05a9702721f3d1cf1293cd6b"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 639,
+          "exact": false,
+          "candidate_materialized_sha256": "efa0c69daff1064023b94ef836f2bc39e708b9ee52f506c53a0edfd3b4f7700a"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 650,
+          "exact": false,
+          "candidate_materialized_sha256": "c9354feb3a2251b911061a136e27b65b9bf815e41837c4c7f101e07c1c97de92"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 651,
+          "exact": false,
+          "candidate_materialized_sha256": "e1523a2102dc29c6b199d8fd3811e31a1dabedf2e35bd733e4b691380ae46407"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 606,
+          "exact": false,
+          "candidate_materialized_sha256": "2e282f50c48364043011f4ae5452c1da8ae693d8ab62f244816e77f9da46567f"
+        }
+      ]
+    },
+    {
+      "order": [
+        "vs",
+        "element",
+        "vt",
+        "vd"
+      ],
+      "source_sha256": "5b4085fe2c08e058467f3bcc014702569de63de027bda807feb721905e88db78",
+      "object_sha256": "056583c5fb2fbcb336271110bf6b23a2380e6094d9fea9b736dfef3167b011e4",
+      "comparison_sha256": "c1e383552753718958910622c1c638f54b762db521fe8a307f14a91697a866f8",
+      "compile_log_sha256": "3c4e4c033738989442b18a6cf086b343b7c9274a8e35c4b05460d3b6ddb575e4",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 686,
+          "exact": false,
+          "candidate_materialized_sha256": "c918980210d86fe5fc9fe37826c1fe698c89a99cb08979754e3dba4d251ce545"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 640,
+          "differing_bytes": 647,
+          "exact": false,
+          "candidate_materialized_sha256": "f12bd788a8a56549dd760cda329164ca45898cff98e8dd8ca9d9110023c9b53e"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 664,
+          "exact": false,
+          "candidate_materialized_sha256": "2ca34a8e83f1c0b2378cd837b86bdf0770b3a85e773a82eba88ef0d96876aa15"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 637,
+          "exact": false,
+          "candidate_materialized_sha256": "54088854a223fc9e39ab13967c7151cb8ca74b88cc3fce24da1b88390d935c80"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 577,
+          "exact": false,
+          "candidate_materialized_sha256": "6add8b9c9cb64aa44508d4c049720fcfb11b6a70ccbaec802e2d9c973ec5c845"
+        }
+      ]
+    },
+    {
+      "order": [
+        "vt",
+        "vd",
+        "vs",
+        "element"
+      ],
+      "source_sha256": "22f5ee7c49a6390df29e854e88db38bb71215f0c25b069e9144b78a8046e00bc",
+      "object_sha256": "773ce8eaa1cc23fd8ad3d3b7fe5f516151290764a5f19bf14ba52425626f75f1",
+      "comparison_sha256": "958a8cef63caf63c850ec31a507c24ed0af87e2b0723cd2ffcd8c194dddc6164",
+      "compile_log_sha256": "d892278fd2c29cdf9a70f38a90ec56e242a80203953865b6a384ec1ad0b9e1af",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 676,
+          "exact": false,
+          "candidate_materialized_sha256": "afdf527660c4e795f1a020910ef34dfaf0bd5e4f9fc0c322ff4673b92f612f24"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 640,
+          "differing_bytes": 651,
+          "exact": false,
+          "candidate_materialized_sha256": "3e1ab68c5bb10b59a743ec204d2efbeabca967e1b1e59aa362b8df187bea9b97"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 664,
+          "exact": false,
+          "candidate_materialized_sha256": "9771388a0cbc76b8b8ec62ba96dd0fcacd6799892b83dc71d4f00a1d45a3bd55"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 642,
+          "exact": false,
+          "candidate_materialized_sha256": "cc29ae8216fe2264b5989e59f675dbcdd3973d949398ec1b4d737715172a633d"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 587,
+          "exact": false,
+          "candidate_materialized_sha256": "c125f2cb766487f4686563646a43a0a75a01f53f7e7530fc8ac3c93a2ec9c694"
+        }
+      ]
+    },
+    {
+      "order": [
+        "vt",
+        "vd",
+        "element",
+        "vs"
+      ],
+      "source_sha256": "3573d6ed39b2386783055e3866dd6caf1527e56637c5ef9b24e1ce633992ca9a",
+      "object_sha256": "4c7a49e50d6f0035f106077a50cf281d7881553921687b14d5ba8d5c4c2a53fe",
+      "comparison_sha256": "ba88f94bc3f9825403bbfab335ee026b02e6a6210cdcd91f788d8ffa010a1323",
+      "compile_log_sha256": "a6a77bdc36608041e234514dc815c18bb2e2ffa3d5f51e982c398d3571016708",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 676,
+          "exact": false,
+          "candidate_materialized_sha256": "7253251ffb584c26c8980871fc0a80bd2b5e625aafe24f2cc56546cccffc3ca2"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 640,
+          "differing_bytes": 654,
+          "exact": false,
+          "candidate_materialized_sha256": "feb164e2bb88a203d707a064123b32add472404ec214c455944cdeb5665f395b"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 663,
+          "exact": false,
+          "candidate_materialized_sha256": "c1a20d4243a13dff7bfeab2da3fbb0f95e66b117a9c17eec521e5739892b3b83"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 642,
+          "exact": false,
+          "candidate_materialized_sha256": "b79c9d1110d7830561fc67782d9b2fb55b4fc6f61497d4cc3f213e530e82ecc9"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 593,
+          "exact": false,
+          "candidate_materialized_sha256": "54a75e9707561cb93debda2fbf4f029566352dd5df053960b3dc5d113ae69ff4"
+        }
+      ]
+    },
+    {
+      "order": [
+        "vt",
+        "vs",
+        "vd",
+        "element"
+      ],
+      "source_sha256": "6b48783c57356128b375fe38e7f292d26b0484f6607215ae7a0f98df003aa0cf",
+      "object_sha256": "bf45c932af69417ac804f9352ba65b27ef06cd11646f4297ec072939722aa9ae",
+      "comparison_sha256": "d341255fb28b53f42341790008b000176b3f42a80ce24649527d6f29d72dc91d",
+      "compile_log_sha256": "51ff975d31c70a4e0ca13ed59c115dd0f7dec31f6f2196262616137c95c807bc",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 680,
+          "exact": false,
+          "candidate_materialized_sha256": "c439ab67c6b9cf58bfb97e664c7c9421c41a327b9bb76433ffd9db0a8831e4de"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 640,
+          "differing_bytes": 651,
+          "exact": false,
+          "candidate_materialized_sha256": "ec66d5a0bb7384c1f1954f22adc838739613c0a92b88c0c9d46e79092ebcd381"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 651,
+          "exact": false,
+          "candidate_materialized_sha256": "969321af983d7514d04c44521ccfc4cd97fe97f0c3524e5be0621d8e2834bf50"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 637,
+          "exact": false,
+          "candidate_materialized_sha256": "213ceb5133ad2f1deeea0bdf3c8461a1f7042fb75d88f388b602777089a0d600"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 587,
+          "exact": false,
+          "candidate_materialized_sha256": "04bd4b022f3cde8ecbed8ec5b6aeea70c9aa2bf3d56f9a0bdd6314c3e4b39d5b"
+        }
+      ]
+    },
+    {
+      "order": [
+        "vt",
+        "vs",
+        "element",
+        "vd"
+      ],
+      "source_sha256": "5e4bd5236365d68a468edf4fbf5dfc06514f4bcab2318d43a604f4fa0976f5e6",
+      "object_sha256": "6601e0f2e70541244cc2f153a06dca1e531e778f43fe72c7640f6607f037cda3",
+      "comparison_sha256": "9269dcbf4b57a00d247689fab9b426af76716d8401cce8513faa54ffacf9ebe6",
+      "compile_log_sha256": "e70004f226214f8dc327410399d091b2d84c39ecded4361c12b9cc4266f5f142",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 671,
+          "exact": false,
+          "candidate_materialized_sha256": "3e2c9395852a7b14f3b2afafee93aa237120f441a98deaedd2202a2248fda81c"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 640,
+          "differing_bytes": 647,
+          "exact": false,
+          "candidate_materialized_sha256": "96e1d566f53216ed0a1c62170f6a169ff2cf4b7c649dad74eada58621c4ed64a"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 649,
+          "exact": false,
+          "candidate_materialized_sha256": "9b56ed47b28630df4a706905802f6f8cf97fb719bc813b829f66523f9bcdefea"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 637,
+          "exact": false,
+          "candidate_materialized_sha256": "3de86b883123c4e57467288e49799bf15a6373490fbe016871974c5161efd81a"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 595,
+          "exact": false,
+          "candidate_materialized_sha256": "d35807b302e57de6246d83070d409da7d73bf9dc245931ef87705b9c05ac7b77"
+        }
+      ]
+    },
+    {
+      "order": [
+        "vt",
+        "element",
+        "vd",
+        "vs"
+      ],
+      "source_sha256": "20a85e0407947df9258c39639dac7864f3deb769601eb2dbf60a50902e6d032a",
+      "object_sha256": "b943d60846de928a6d45098c81c964206f315443f76eb4416f60ea8594ac06de",
+      "comparison_sha256": "f4e7fa3d8b6e3a078060ce1b617b435b24b46f4148934eb6ae148dd131912603",
+      "compile_log_sha256": "01c10700a891c3481c457878b31ffcc036b2dd3455a8e3f716eafe3adc9b8eb6",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 663,
+          "exact": false,
+          "candidate_materialized_sha256": "ae9970584faea29a32323154a45abcce2612b4265c4ad793a1c07f449c049100"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 640,
+          "differing_bytes": 654,
+          "exact": false,
+          "candidate_materialized_sha256": "9cd2b73c4ff088f995a0b76a17b8004cb41bee0c819abbbd5f041edce4350722"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 649,
+          "exact": false,
+          "candidate_materialized_sha256": "82377eb4954201466f10dc917df809a9c69cc8700660b8e7d29bc170cc7af768"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 642,
+          "exact": false,
+          "candidate_materialized_sha256": "093505e47355cc52310d098b2844257002e0cd5664305a5276b7061b4e17227f"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 593,
+          "exact": false,
+          "candidate_materialized_sha256": "54a75e9707561cb93debda2fbf4f029566352dd5df053960b3dc5d113ae69ff4"
+        }
+      ]
+    },
+    {
+      "order": [
+        "vt",
+        "element",
+        "vs",
+        "vd"
+      ],
+      "source_sha256": "0073000569e30c615ad353d06b5acfeed49e346b8448aba25e25d91885de0161",
+      "object_sha256": "0c013de4ba0890c72185d88f413b62a5321f7d3da264af1477d8212bcaa03c44",
+      "comparison_sha256": "7dcd6cc3fb38e4b98e659a0036b56dd6fdb3f56ea0027983dbb4a9fae2362de0",
+      "compile_log_sha256": "84fdbe4f96a1ebaaa2320325dddf4ae9567b5c29c9815e67eabbb40a165b4b3c",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 671,
+          "exact": false,
+          "candidate_materialized_sha256": "099e8b37b2a32ace35adf73b1468079b44d235b5993683ec93bdae6034d6b188"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 640,
+          "differing_bytes": 651,
+          "exact": false,
+          "candidate_materialized_sha256": "42b36a03320f9e7590e54a0d7aae4e7145bb53fbc61f443a4422c2b0a34d819b"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 646,
+          "exact": false,
+          "candidate_materialized_sha256": "fe9c5ae8db9a31e7252fdd320d9e0081307573941b1535ff0e41ee07c42b7321"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 637,
+          "exact": false,
+          "candidate_materialized_sha256": "11dc7b5a6dfbf4c9741dab15e27edf4c7b102cb39ee00a8bf9d910b9dceec8c8"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 595,
+          "exact": false,
+          "candidate_materialized_sha256": "d35807b302e57de6246d83070d409da7d73bf9dc245931ef87705b9c05ac7b77"
+        }
+      ]
+    },
+    {
+      "order": [
+        "element",
+        "vd",
+        "vs",
+        "vt"
+      ],
+      "source_sha256": "d589e23d4411fe853fd938ade5efe61ec1088a72f082dd8020f1d67b161e1e7e",
+      "object_sha256": "5d54cfe6b6c98dcdb1a808270a9a1e1939295ebc3922f56d7ecde30bfe729f7a",
+      "comparison_sha256": "610a356288edd4cf7bf7c3d6b5fd06ace1c43284bf39f9e8ac893d2455c36c23",
+      "compile_log_sha256": "48432a8ac1d0b7eeab1cc1b05d25ba8cfb66d3f5427cb47a999e8622955549e5",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 672,
+          "exact": false,
+          "candidate_materialized_sha256": "b3f42bd37401c34bfe0ab9908bc1eb96abc47a117b04a1aad6d176f3adc94d91"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 639,
+          "exact": false,
+          "candidate_materialized_sha256": "769cc6ac409413ece7352123211da512641b81a033f01d1e5fcd3bf185f1794b"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 662,
+          "exact": false,
+          "candidate_materialized_sha256": "bc52c806d12e520917f3419c940526aa6c5ef2191c75327a02627d232d1694e3"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 649,
+          "exact": false,
+          "candidate_materialized_sha256": "fd85305089309dac5cf3210c8fb4e30784a83a9b42ae7e2f38b9ad16c431a34a"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 617,
+          "exact": false,
+          "candidate_materialized_sha256": "43f6d04613e0595757fbfadd19ae961d96d98570d6e1e1b0f3f8acd3bfd34d53"
+        }
+      ]
+    },
+    {
+      "order": [
+        "element",
+        "vd",
+        "vt",
+        "vs"
+      ],
+      "source_sha256": "c302178191091bc682954a364bd1473506c08e24a61e19ac2e96686568fb984c",
+      "object_sha256": "4a341af598b7a8dc85d2ab8751a65b4ce5978f56a9a2ed9098f107213a0b6f78",
+      "comparison_sha256": "8922672a592f6c2737c894d6f4c30d00e321d45882f7075936bb7dc629e81f1e",
+      "compile_log_sha256": "a5be86ccb7648d9865d66e849fd1cf8354e538c1dbd330fb81a3fb6c3756c5d4",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 679,
+          "exact": false,
+          "candidate_materialized_sha256": "0c0a73211cf8594cf2ae710aec61b3ef34012cd6699efce249626f87268a91ab"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 640,
+          "differing_bytes": 654,
+          "exact": false,
+          "candidate_materialized_sha256": "054e4457261ea9253fe46755c25452a3d3b5f470de4edae5faed5182c0647655"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 665,
+          "exact": false,
+          "candidate_materialized_sha256": "87750372bf2a74bcf170a3b343b4da44b6a2e8466712989df25afe9fe600439d"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 642,
+          "exact": false,
+          "candidate_materialized_sha256": "b7808596c4de3fc512900129ff51e497890b8eb2088eb6cdf3221697195b0b87"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 616,
+          "exact": false,
+          "candidate_materialized_sha256": "824da9ddcf78b3b2a336b88393353a07972fd11ecba6973b08cea9b837851cca"
+        }
+      ]
+    },
+    {
+      "order": [
+        "element",
+        "vs",
+        "vd",
+        "vt"
+      ],
+      "source_sha256": "ebe578bdda2409ffb409c5fc23f478adbac99f44d1629fb56b38f58e214095d4",
+      "object_sha256": "f6f695712dce015429d2544a791b4828e4ecdc00dcb3354c24ab10f7eaa9d21c",
+      "comparison_sha256": "5fc0d7ca2281c0159bebbe631555f975a1da7f79b7b1f477396e586285a78234",
+      "compile_log_sha256": "314a54a278efd42f4c16f905e8f16533bf9e08f02ad1d65c97a0f0c633df1637",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 689,
+          "exact": false,
+          "candidate_materialized_sha256": "32c204d616d5422dc0d1555f39304f156314319b79fe7bda54d442e1a36b0382"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 639,
+          "exact": false,
+          "candidate_materialized_sha256": "7c0cf3bfe82b00e2bf0ae109047e3caf500c077550a1cb10c597042ac726f7d8"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 668,
+          "exact": false,
+          "candidate_materialized_sha256": "430604cfb676111e764f73942c8ab8b2ef4a2868d5e6a3f33c0ddf9d386e9473"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 651,
+          "exact": false,
+          "candidate_materialized_sha256": "f12a1461e8f0b6e1e59b7e1b9b94b8a3ee30eafd9141e549ef621bb230ef7d85"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 606,
+          "exact": false,
+          "candidate_materialized_sha256": "15684f1bdc2b6b2681746ed30e29546e3c705f57597db0001dcf4cf7b912a908"
+        }
+      ]
+    },
+    {
+      "order": [
+        "element",
+        "vs",
+        "vt",
+        "vd"
+      ],
+      "source_sha256": "6a956f73e1e494a489b64de8b75b152a74a382655c1dc1947a2ad7124c1e434a",
+      "object_sha256": "02be27448851848f35195748a3dbe55da6a4d4b8f82829b180f03c4d88eff3d6",
+      "comparison_sha256": "31c4ebcaec46fe3814fb8fa7ea466a9dde13d4f8a73c21accf5151c2d9ea1161",
+      "compile_log_sha256": "d78cf206929132bfea96a6141a1b8b09e9f5da12b6f82ec1573fe53a31734f70",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 688,
+          "differing_bytes": 701,
+          "exact": false,
+          "candidate_materialized_sha256": "21eb2a67128399ecb9ba404f2f103f61d1c692d5283a1833b029f40df318ec3f"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 640,
+          "differing_bytes": 647,
+          "exact": false,
+          "candidate_materialized_sha256": "658c38ca7c907af9c7b5070630a786f44c6e64478c15a08bc83f9da74ef11716"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 656,
+          "differing_bytes": 664,
+          "exact": false,
+          "candidate_materialized_sha256": "18193da3d693994e5cd36e115aa0911d0f9dae681e875ef8157ac3ca6e0be497"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 637,
+          "exact": false,
+          "candidate_materialized_sha256": "f1f3f66926c29fcbc54c955f87de2aa4efc98f5fcffb93c44d6753c4c6669d19"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 616,
+          "exact": false,
+          "candidate_materialized_sha256": "7bca6507fa4913bd5e40c9b5a02b54df18d609f332119402e7e646efbd9d541d"
+        }
+      ]
+    },
+    {
+      "order": [
+        "element",
+        "vt",
+        "vd",
+        "vs"
+      ],
+      "source_sha256": "2cdb4c36a72125f43bbad8921ad9e43701f178dab9ed2f694fe8c6aff5e6e4f9",
+      "object_sha256": "afabcdc87ddd8f161f58b84a44bbb6953e2b451af4576d1d2f15a0904724c5d7",
+      "comparison_sha256": "3ed1d9ff281bd2106e364e136d2584e1eef38695c57bc4a39c89af5b8c935990",
+      "compile_log_sha256": "42bffa486b937310f99c5dc942ff081711459ce04f095113af022605d5823083",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 704,
+          "differing_bytes": 663,
+          "exact": false,
+          "candidate_materialized_sha256": "ae9970584faea29a32323154a45abcce2612b4265c4ad793a1c07f449c049100"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 640,
+          "differing_bytes": 656,
+          "exact": false,
+          "candidate_materialized_sha256": "e4e850f48cfe6a22bfc52ecbfe1f1df4a1cd986f2461eea5dc692e44bdd725b7"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 672,
+          "differing_bytes": 649,
+          "exact": false,
+          "candidate_materialized_sha256": "561182283911b076195b06701b0ee65cdef052d4f8984cf162fcb335a167ce9a"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 642,
+          "exact": false,
+          "candidate_materialized_sha256": "44e653a9c56f792a8875995dd17c6a7b03b9f0a21b7a638aac16d65de2686a4a"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 591,
+          "exact": false,
+          "candidate_materialized_sha256": "e4c9262404e1b2a4491cbcfe6289f35df29d9d863d9abfcd539f8e82891a2a0e"
+        }
+      ]
+    },
+    {
+      "order": [
+        "element",
+        "vt",
+        "vs",
+        "vd"
+      ],
+      "source_sha256": "74ce159a6d60f84bf13982cbc0564e5637461755b2dbd7b1b19e279401dc0c17",
+      "object_sha256": "e64b46014894861f2ba77ec358c10e40c991e556e21d0431a0f0765eb074e64a",
+      "comparison_sha256": "f17f7fd6ff4c3f29d6ba8b9b7e348997a20a84b632df2a2d56a67f44802fdf06",
+      "compile_log_sha256": "65042b83bcd1f99fcc9d709f91f7369a25c05912a696c6cbdbf35491651a0310",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 688,
+          "differing_bytes": 701,
+          "exact": false,
+          "candidate_materialized_sha256": "8bc5f70d88c658139b0359af4aeaea03fde25ef966d1f7f2b0c5940d5001f49e"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 640,
+          "differing_bytes": 653,
+          "exact": false,
+          "candidate_materialized_sha256": "bbddf5caf190eb872f30fd060133951167f440082c9fa5175c7966371030f576"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 656,
+          "differing_bytes": 664,
+          "exact": false,
+          "candidate_materialized_sha256": "e8c8699eeab3a6da72f96df36c74ffe1c2c01aada9f41aa1f9945be69e2d8427"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 656,
+          "differing_bytes": 637,
+          "exact": false,
+          "candidate_materialized_sha256": "bbc80b4b94fbf4037d58465b54ce6059a1f95407a02c9aaf8218a3080824bfd6"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 624,
+          "differing_bytes": 593,
+          "exact": false,
+          "candidate_materialized_sha256": "d4bea64ae45066d2dc6aaf63b6c720816cce4a9945e6b89461510e038c9f0705"
+        }
+      ]
+    }
+  ],
+  "independent_selector_orders": [
+    {
+      "order": [
+        "vd",
+        "vt",
+        "vs"
+      ],
+      "source_sha256": "f8aae85ced01a92f354af9f2b97eee923e3b1e40b39cde1ac7433e977e297203",
+      "object_sha256": "1a2645aef23881f72dcf492b02e6f70b9067ea4f8baa86f3d2ed3c58ce3696f9",
+      "comparison_sha256": "ef40f578851dab4debef988ae8927f3c58f9f0f1398ec7baebc88363b60e31f2",
+      "compile_log_sha256": "2dedbb5558d8382e294021a19e4680d15a251b2e541c60c076f7ef0a8afcf96e",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "changed_functions": [
+        "RSP_VADD",
+        "RSP_VADDExec",
+        "RSP_VSUB",
+        "RSP_VSUBExec",
+        "RSP_VSUT"
+      ],
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 720,
+          "differing_bytes": 662,
+          "exact": false,
+          "candidate_materialized_sha256": "33fd4b59f9937889bf645bcd390d1a0a444318b528bdae84d78e6a70385b7871"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 672,
+          "differing_bytes": 503,
+          "exact": false,
+          "candidate_materialized_sha256": "95aa259ce7f6b22fb716df5803b3b4f77a35ae0b491df4b818d27e8b204192e3"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 688,
+          "differing_bytes": 634,
+          "exact": false,
+          "candidate_materialized_sha256": "fb27c52f96863ad1c5a4323c23d8aec30faef0243caa4d8b23139fb1e1484265"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 672,
+          "differing_bytes": 615,
+          "exact": false,
+          "candidate_materialized_sha256": "f1f7fcf95e6d919dc0db78ca245d6d50f734a7bcbc26bc8fe0bde2caeb90fb96"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 640,
+          "differing_bytes": 581,
+          "exact": false,
+          "candidate_materialized_sha256": "347057f93325a2596b37183765d582bca3ded7ca91476f2b45ed3c456a9cac2e"
+        }
+      ]
+    },
+    {
+      "order": [
+        "vs",
+        "vd",
+        "vt"
+      ],
+      "source_sha256": "46399f1e52db131e3ec3be927da992821ec1c4c321b6e94bd0105c57124b575e",
+      "object_sha256": "4b3fc13c2f1ea2359c63572b7f5156516196623eaaad41f802ac760d8ffd9beb",
+      "comparison_sha256": "90ff25a1c92bd56741a60524aeb3375d6bd830949e63482ced0c90b709fbdca6",
+      "compile_log_sha256": "afdf553329371ef4fee49186b120469750178cff78dd44f52fbea82736002acd",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "changed_functions": [
+        "RSP_VADD",
+        "RSP_VADDExec",
+        "RSP_VSUB",
+        "RSP_VSUBExec",
+        "RSP_VSUT"
+      ],
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 720,
+          "differing_bytes": 645,
+          "exact": false,
+          "candidate_materialized_sha256": "dad4208e983500336e4d4ac0557e8c8f330fe11d5ad018b27129c0056b162fb1"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 672,
+          "differing_bytes": 493,
+          "exact": false,
+          "candidate_materialized_sha256": "21e6b2320c661f18478845e6e26a88ca7eaeceaddb740620f6e5b498a5aafd86"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 688,
+          "differing_bytes": 625,
+          "exact": false,
+          "candidate_materialized_sha256": "65f939027f87f73a632751ae4d894382756a8c3475198c79b372a4ec191a7891"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 672,
+          "differing_bytes": 511,
+          "exact": false,
+          "candidate_materialized_sha256": "e6cac276f88b448345623d8da8b9f77696a3894d2e5f2c4d0921f9a639cd6cda"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 640,
+          "differing_bytes": 590,
+          "exact": false,
+          "candidate_materialized_sha256": "51b3a642276e3557d81be37184bd950fe0157ee04c063043fa730c921067b06c"
+        }
+      ]
+    },
+    {
+      "order": [
+        "vs",
+        "vt",
+        "vd"
+      ],
+      "source_sha256": "8dc90bc63932121312771ece2b1d48df32148555d91864918c1ff27216c0ddad",
+      "object_sha256": "065000eb0dca921a98acad32068aed9f60646b1105b52e6314bfb8472133c08e",
+      "comparison_sha256": "8aabdcb2e057c12b0c7ee3bb6a3e7f90bef8946533f6015f60f3ea6b586d52b7",
+      "compile_log_sha256": "bd12fc4f6b396d3abf8372dacec4d700fdcb298f659c221a9bc2a053e435913b",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "changed_functions": [
+        "RSP_VADD",
+        "RSP_VADDExec",
+        "RSP_VSUB",
+        "RSP_VSUBExec",
+        "RSP_VSUT"
+      ],
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 720,
+          "differing_bytes": 657,
+          "exact": false,
+          "candidate_materialized_sha256": "2c43ce72e6d88792a7d8baab8c94caa99f1e4b07c3837095b1c2b95a8d7f11c8"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 672,
+          "differing_bytes": 499,
+          "exact": false,
+          "candidate_materialized_sha256": "1d61deaa0f509a44ca2c03deeda313c5557ab77b570076fd39d3e13e5a9a82f1"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 688,
+          "differing_bytes": 549,
+          "exact": false,
+          "candidate_materialized_sha256": "e8ac118864959fae8dd2aa93ef6f283c18518730362bdca7ed0c091b4a99095b"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 672,
+          "differing_bytes": 617,
+          "exact": false,
+          "candidate_materialized_sha256": "8cd68308184c127760dac2ffe6cdb6c6b1eea65a522d2731e98a277da8001067"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 640,
+          "differing_bytes": 582,
+          "exact": false,
+          "candidate_materialized_sha256": "f03c5a21d0ef6581fa4d5f700a76c3ab42c4322c28e4b40c4e5220f50810b0ea"
+        }
+      ]
+    },
+    {
+      "order": [
+        "vt",
+        "vd",
+        "vs"
+      ],
+      "source_sha256": "b67c022393431a041a3e5503da4059fd632abfe0a881f88dadf577dd9626f662",
+      "object_sha256": "337561a07e2de46dab085aef29a7d39d29b297ef58893d75053a4de9ba9db074",
+      "comparison_sha256": "3fc8265c9f57801d4cd40da751e47a540f58d40ec22c458fbf32cbfc4916e345",
+      "compile_log_sha256": "fe523fbae71553d6d77241ae046b545a180ae8a0cc90734b7fba91931f034e1b",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "changed_functions": [
+        "RSP_VADD",
+        "RSP_VADDExec",
+        "RSP_VSUB",
+        "RSP_VSUBExec",
+        "RSP_VSUT"
+      ],
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 720,
+          "differing_bytes": 662,
+          "exact": false,
+          "candidate_materialized_sha256": "33fd4b59f9937889bf645bcd390d1a0a444318b528bdae84d78e6a70385b7871"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 672,
+          "differing_bytes": 509,
+          "exact": false,
+          "candidate_materialized_sha256": "bb47abb4135c0db406071f05a21a6852db0f9f80d62d9ac76783cb7892026722"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 688,
+          "differing_bytes": 634,
+          "exact": false,
+          "candidate_materialized_sha256": "fb27c52f96863ad1c5a4323c23d8aec30faef0243caa4d8b23139fb1e1484265"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 672,
+          "differing_bytes": 615,
+          "exact": false,
+          "candidate_materialized_sha256": "3cc7449870c3804ccccc3c58f27cda46e3af9faa27ddd37dd0f8c531ab428d4e"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 640,
+          "differing_bytes": 581,
+          "exact": false,
+          "candidate_materialized_sha256": "347057f93325a2596b37183765d582bca3ded7ca91476f2b45ed3c456a9cac2e"
+        }
+      ]
+    },
+    {
+      "order": [
+        "vt",
+        "vs",
+        "vd"
+      ],
+      "source_sha256": "bbb087d16116a658fa170df6a8325a9573e9d9e91d7d2a642859cea940020346",
+      "object_sha256": "872ed1242f522df0ed19d6e354ae074af82152c8e6602b006792bbb1148f4815",
+      "comparison_sha256": "eb85506ae689189286d2405c37127a3baee7795d8ca55e503949015da2c590e1",
+      "compile_log_sha256": "3221b458b48ba43704f38b2af71a39a822eb8aa0bcef71e29b0672158c036b9a",
+      "exact_functions": 161,
+      "unchanged_other_function_hashes": 175,
+      "prior_exact_preserved": 161,
+      "changed_functions": [
+        "RSP_VADD",
+        "RSP_VADDExec",
+        "RSP_VSUB",
+        "RSP_VSUBExec",
+        "RSP_VSUT"
+      ],
+      "data_objects_exact": 25,
+      "typed_fields_exact": 11,
+      "unresolved": 0,
+      "functions": [
+        {
+          "name": "RSP_VADD",
+          "original_size": 720,
+          "candidate_size": 720,
+          "differing_bytes": 524,
+          "exact": false,
+          "candidate_materialized_sha256": "6b70603981d13f53d83fbf3cc3a92eb6e41f44a820d53dead512a89cf7bd92c9"
+        },
+        {
+          "name": "RSP_VADDExec",
+          "original_size": 672,
+          "candidate_size": 672,
+          "differing_bytes": 506,
+          "exact": false,
+          "candidate_materialized_sha256": "1e693c22344ecfd4db161dba1fbd89e1afdcd3b6ccc960c160729dca2892c82b"
+        },
+        {
+          "name": "RSP_VSUB",
+          "original_size": 688,
+          "candidate_size": 688,
+          "differing_bytes": 560,
+          "exact": false,
+          "candidate_materialized_sha256": "7c81cbde932909e570ba72371e267848e1b57e0ee27742bca5d2433fc0e47d8a"
+        },
+        {
+          "name": "RSP_VSUBExec",
+          "original_size": 672,
+          "candidate_size": 672,
+          "differing_bytes": 619,
+          "exact": false,
+          "candidate_materialized_sha256": "d7832b27e69785b42d9e44c2ba725da27c9e29eb0f7611e4f4e0b051a61fb0b8"
+        },
+        {
+          "name": "RSP_VSUT",
+          "original_size": 640,
+          "candidate_size": 640,
+          "differing_bytes": 582,
+          "exact": false,
+          "candidate_materialized_sha256": "97161fd2b2e777d81630663f97efaae725c12a30e7ed1fa591c3149d37266d2e"
+        }
+      ]
+    }
+  ],
+  "decision": "Retain canonical source. No complete function becomes exact, and neither family fixes the common carry-before-selector schedule. No type, lifetime, qualifier, helper, instruction or binary-output changes are promoted.",
+  "behavior": "No rejected candidate was promoted or claimed behavior-validated. Existing canonical behavior evidence is unchanged.",
+  "evidence_directory": "/root/.ai-tmp/audio-rsp-arithmetic24.ybnh8bmo",
+  "evidence": {
+    "probe.py": "c1d602990ad2d9f296aaf4932ea571805c28c78203062552ba67da4f6e972b84",
+    "probe-three.py": "1843fee83e3cfed21b4dadf8552dedabdcd0aa24055670d8e7586bf5c248ec5c",
+    "orders.json": "514e2b9a775f84d53f7f9431b1e74f881def3adbe5081a0b69ebee066d8c749d",
+    "independent-orders.json": "7746f26313767d4a22efa1f0363079cada1c93f828c3e6da2497bfc7f5977b32",
+    "loop-heads.json": "2fd2c70711a876d75488ca71d6162d1562f9ac0a78d56c8c8c0553fa36eb7995",
+    "independent-loop-heads.json": "5027212c02fb7fe3a0b6a7aab3f1f32b66c5cd31b0b8be49c07ff31d9580b887",
+    "independent-exact-blocks.json": "0d0fa1fd771d50be4c63b24f764d681759055ddcaed59bd6d83804a69d51ef3f",
+    "VADDExec-original.asm": "8485c2ab7b6993aa49296837bfa01f3d7803c64cd6403db53a748724e3926436",
+    "VADDExec-baseline.asm": "35ce3f8f378fb530f5212f5d05d2c8b5e066977bc09326287c695dfed8d3fbf2",
+    "VADDExec-cached-element.asm": "794060746b48c5b1f77c13b22abbe66c6aef7c69565be95ed5390f84e568ff16"
+  },
+  "source_snapshot_files": {
+    "ABI1.c": "f672bac9d9d813a5bc89ce97ce88d697b61361e90b40a3087d4a8bcd369a6327",
+    "ABI2.c": "1794fd9b3db1991241d2d948f2ef332aff3257178bd4b11e90fdd29afa6442df",
+    "ABI3.c": "28ff355e6019318aa5b61ef3930dfc6b416451cddf382404992c8883eb61c9af",
+    "AMP-LICENSE.txt": "133f385d28039b18f9900e1cd933119ccae0462b495999a2750dea9fb8430640",
+    "Audio.rc": "b551863a11341c7440df2425b5620cda11c9eaef312179e8dd925fd05b12bf93",
+    "AudioADPCM-LICENSE.txt": "9f8db578ada6153af1024a206324a03b9703abbec0e96b6ee3da72ff6eee335e",
+    "AudioADPCMBlock.h": "f506d6ea97b83fcaaa78dc9ff7300bebe37aa36b9f1a01277247ee41767b4c1b",
+    "AudioADPCMLegacy.h": "8509a1760c9dcc9b45334d103d4f09b656502bda0b8d35d039d75d7a75720f32",
+    "AudioCommands.h": "35cae30632b3a466adc0dea680c808b80995cf311b0024d25331224e7368e5f3",
+    "AudioEnvelope.h": "8acbac16a6bc16a06782b48dea25af4e49b99c5a845f866ffe41098ec14517b7",
+    "AudioHLE.c": "a449a37eb2f9fc12b2c7f2a2c5b5e3a3f51a08adeaf241ef0e5d174b8825941a",
+    "AudioHLE.h": "98475c4c2e034a7e1b16a94662078f731afcca5529140bf0d30c7e6901bdd441",
+    "AudioLegacy.c": "d81dde338f0005166893a0825c2c86f82c7956ce75a7cae552c354ca4e78dc41",
+    "AudioLegacy.h": "8f5810c3d8ae923119c733c304064310630cca3201c4b472047267d1417bee98",
+    "AudioLog.c": "84a6f797caaf244d44300550ed13225276bf1c45bf6fb3193be9047dc01226f0",
+    "AudioPlugin.c": "6fed63db83aa3a950d0ce3a2e5e9df4769674aed1b145ab3e0332c5e2c44e260",
+    "AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
+    "AudioProcessing.c": "e66e65ff34e26304fd306b14afb5540d2db060bc631e980af95b398f1a232e62",
+    "AudioProcessing.h": "77bbd94523444df697a169cea26375cc673879493761452cc92add2857284c7b",
+    "AudioResample.c": "67ced2fcbd0e6798f34cd986e5a9b77e4ba963eb03463468b5d7b68120dbde1f",
+    "AudioResampleTables.h": "5b95bd2db83cf7eea18b347cdf32c7a332073868cbcbd45a939f8de4537236f1",
+    "AudioSIMD.h": "627d71fd2a53dcc36e099c214824e397454c8b78d80be503f29f08c91a18bf63",
+    "CPUFeatures.c": "b27644d8cc3b9044125194ed7e6d03ebccfd9c705fd62b653b08667c054a3f0f",
+    "DirectSound.c": "54c293b50a6c2b0195bbc2312b8578fb1d48851d6c44f294ed46c8f522ea7895",
+    "DirectSound.h": "ab5ed735f1ab52226c0c7e7a559d080e10ec5649d2814b177f1a79686135455b",
+    "Jpeg.c": "82ebf8c9d72e8c83d42bb97e3351627462336fb2693d47b449b803d6537988ac",
+    "Mp3.c": "d9dccbd10b72f540528496c33f04f8a63d3b9bd1f39839a70ac8a16ef5a87b3a",
+    "RSP.cpp": "e02030c131406793734e61a5002920f7b4fe2f83e787cf00d6bab4a1da059c61",
+    "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+    "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88",
+    "RSPKernel.inc": "7a218993560c457a5149266e391a28fcdb0a1df5a812209c9a9b7111238eb961",
+    "RSPMicrocode.inc": "12bae4d1c37884c7d5efbf13402d326bf46fafd0ee6064feff3fe0fdd8d2ee0c",
+    "audio.def": "f34ad9fa1d564c407483eabd05363f0c95a4cf69a81f6c4ffcb0dd95ddcb4b34",
+    "transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f"
+  },
+  "limitations": [
+    "These controls exclude the tested declaration orders within the reconstructed expression forms; they do not prove original source spelling.",
+    "The cached-element and independent-selector families are separate hypotheses and must not be conflated.",
+    "Complete-function equality, data identity and whole-DLL layout remain separate claims."
+  ]
+}
