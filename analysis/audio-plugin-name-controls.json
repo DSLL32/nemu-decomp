@@ -296,5 +296,32 @@
     "toolchains/vc7/bin/cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
     "toolchains/vc7/bin/c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
     "toolchains/vc7/bin/c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0"
+  },
+  "export_alias_control": {
+    "reason": "PE export names do not prove original internal COFF function names; an export-alias wrapper could leave unprefixed callback variable names available.",
+    "control": {
+      "prefix": "",
+      "suffix": "",
+      "order": [
+        "CloseDLL",
+        "DllTest",
+        "DllAbout",
+        "RomClosed",
+        "InitiateAudio",
+        "AiDacrateChanged",
+        "AiLenChanged",
+        "AiUpdate",
+        "GetDllInfo",
+        "DllConfig",
+        "ProcessAList",
+        "AiReadLength"
+      ],
+      "relative_order_exact": false,
+      "matching_positions": 2,
+      "source_sha256": "3a7c01fdbfc7b874a8946d8cd34dec534088c29af7aa0b7d7f8f2d87dcb3fb6a",
+      "object_sha256": "1ad4ac621e3371e94ea602997dc396e998f9941616d08250d19f3346d0b5b658"
+    },
+    "generator_sha256": "7d4c848bd8e68ee1cdbb647ad96fdcaf853bc3f79ccf51513bff181081626179",
+    "result": "The complete relative order still differs; no original export aliases or source identifiers are inferred."
   }
 }
