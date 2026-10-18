@@ -4,8 +4,8 @@
   "target_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
   "baseline_source_commit": "962213e",
   "scratch": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb",
-  "driver": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/probe-cfad951c8c419228.py",
-  "driver_sha256": "cfad951c8c4192283717ff096d16f91862923973313996336355c78826677209",
+  "driver": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/probe-160612caed0785ae.py",
+  "driver_sha256": "160612caed0785ae71b892760dc872ea70b74e53476622cf83d855e4d76aeb6a",
   "native_command": [
     "/usr/bin/python3",
     "/root/nemu-decomp/scripts/run_toolchain.py",
@@ -48,7 +48,10 @@
     "Six ordinary wrapper local/cache/comma forms and two existing Opcode-forwarder forms.",
     "Two valid FastMode declaration-order controls within extern C; an invalid outside-extern-C attempt is retained and explicitly rejected.",
     "Two initial-decode orders combined with inside-loop accumulator OR.",
-    "Compound assignment products, unsigned64 casts for unsigned operands (all, case4 only, mixed cases5/6 only), integer flag types and long/signed vector index types."
+    "Compound assignment products, unsigned64 casts for unsigned operands (all, case4 only, mixed cases5/6 only), integer flag types and long/signed vector index types.",
+    "Multiply-specific instruction bitfields, count ternaries, alternate shift condition structures, direct and split lane selector expressions, logical/reversed flag OR, and direct vt/vd reads.",
+    "Cached vs in case2, delayed/loop-local register field decoding, control setup before opcode decoding, and individual decoded-field/control initialization lifetimes.",
+    "With controls preceding opcode decode: shift declaration/zero/case assignment order, separate final result shift, abs shift count, signed clamp bounds, unsigned clamp mask, and mixed unsigned64 product casts."
   ],
   "findings": [
     "No tested form makes either generic multiply function exact.",
@@ -62,7 +65,10 @@
     "All controls use native VC7 compilation. No instructions or binary bytes were patched. No new behavioral equivalence claim is made for unpromoted probes.",
     "The two valid FastMode header declaration-order controls leave all180 bodies unchanged.",
     "Unsigned64 casts for mixed cases5/6 change tail sharing and restore1328 extent, but not the target register allocation or all target sharing. The same cast in unsigned-only case4 has no effect.",
-    "Compound product assignment does not change the corresponding180-function body hashes."
+    "Compound product assignment does not change the corresponding180-function body hashes.",
+    "Later probes retain the frozen962213e baseline (160/180), while concurrent canonical work reached168/180. The unchanged179-function guarantee is relative to that frozen baseline; these probes are not claims about current canonical whole-DLL metrics.",
+    "Moving all controls before opcode decoding reproduces the first0x66 target bytes and the original frame/spill slots, but allocates EBX to accumulatorShift rather than productShift. No complete helper match results. Further shift declaration, initialization, case assignment, abs and cast controls do not resolve it.",
+    "Direct vt/vd expressions, delayed register fields, count/selector/flag expression controls and multiply bitfield views produce no new exact body. No canonical source promotion."
   ],
   "runs": [
     {
@@ -2282,6 +2288,1117 @@
         "RSP.h": "1a15096cd928c7b8935d676cc442c3967e6ff00dd96edcbd21842b6ff59cb718",
         "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
       }
+    },
+    {
+      "label": "flow-case2vs",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1296,
+          "diff": 1252,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1296,
+      "helper_differing_bytes": 1252,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "2f038c48ce81e9cbca1c8b460c79fd58abb21fd589aa0d994c30675fafcd2788",
+      "object_sha256": "4d50fc4804d9f33bb58123e237c80f308d7dfaaf6db69b48a2f0eba7dfd8d21d",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-case2vs/comparison.json",
+      "comparison_sha256": "0c177a2c5a679691987cbefc3635782677283933f7427d288a9910182cfae34c",
+      "source_files_sha256": {
+        "RSP.cpp": "2f038c48ce81e9cbca1c8b460c79fd58abb21fd589aa0d994c30675fafcd2788",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-controls-first",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1088,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1088,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "8c474bc59a5f125a1b5486701878f20c9e3233166599c9ac47083c02b802a1e9",
+      "object_sha256": "08162d7c715ddf6ba0c8dbd47e85a8fc378fd2ad15277fa7560b3279f29a5966",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-controls-first/comparison.json",
+      "comparison_sha256": "f80e4cfac37a9b0209ef9bc885a0c2ebb7909fef76858f524a5ed30374335ef6",
+      "source_files_sha256": {
+        "RSP.cpp": "8c474bc59a5f125a1b5486701878f20c9e3233166599c9ac47083c02b802a1e9",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-directselector",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1456,
+          "diff": 1389,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1456,
+      "helper_differing_bytes": 1389,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "bf58dc32d6040e6ca5bd512976334f4ffee8b7aadb112c9347827ab113ba07ef",
+      "object_sha256": "2ab85069e51948fcb0dad978240f02f02ca34829751cc34bca443eae437b0973",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-directselector/comparison.json",
+      "comparison_sha256": "f669e9d3c0fe9609e70555e2076af7151799b08e0b0b87deee04aa5cd7944294",
+      "source_files_sha256": {
+        "RSP.cpp": "bf58dc32d6040e6ca5bd512976334f4ffee8b7aadb112c9347827ab113ba07ef",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-directvt",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1328,
+          "diff": 1218,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1328,
+      "helper_differing_bytes": 1218,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "cd34d59f6a526b5f67a55ffd78174f4a4bbb140841c8c433c2d6347d726a204f",
+      "object_sha256": "aedf21dfc572e90cc89d72f283bfb37015185a504abfdc42a191e78aae91f3f1",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-directvt/comparison.json",
+      "comparison_sha256": "fc41d16871c2f6969e724b3637e36aa95ae36cfaafb81665e943683b01e559e9",
+      "source_files_sha256": {
+        "RSP.cpp": "cd34d59f6a526b5f67a55ffd78174f4a4bbb140841c8c433c2d6347d726a204f",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-case2vs",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1296,
+          "diff": 1255,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1296,
+      "helper_differing_bytes": 1255,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "71327f71af6a4332acbfad007dbab05a649942fb01799886d09466bc7030ac05",
+      "object_sha256": "77a5b09bad5f4412613bc4a398b1d52be86ef5dff4815675d0ae684f1769afe7",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-case2vs/comparison.json",
+      "comparison_sha256": "18c647d1df9a86c66fcbf86e10eff8ceec1b3bfef25eb0c3cece852c404b1012",
+      "source_files_sha256": {
+        "RSP.cpp": "71327f71af6a4332acbfad007dbab05a649942fb01799886d09466bc7030ac05",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-controls-first",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1076,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1076,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "9e3ae9e83d7942e6dc9188ee86efd2c60de0cae8c57089a7b4767a716ab11cda",
+      "object_sha256": "a724defa501cbc221b56c94f594709e6e660d3aa9fba59a5e5c37f543125fbeb",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-controls-first/comparison.json",
+      "comparison_sha256": "98a6cd6e4dcb773834c8ca38eb3af40a998b057177856c6f0433b2e1c53529b8",
+      "source_files_sha256": {
+        "RSP.cpp": "9e3ae9e83d7942e6dc9188ee86efd2c60de0cae8c57089a7b4767a716ab11cda",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-controls-first-absshift",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1069,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1069,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "05a4528ff53b389bcb005598a0ea9a3d7acdf014b5f2894aa1261d2aed7aa960",
+      "object_sha256": "4c1218cebe45464f4bf8a2369e8a4f3285acbb075f4f1b396268afb1ac1a9734",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-controls-first-absshift/comparison.json",
+      "comparison_sha256": "7bc69e4f5b658a9d514290424d3a2b4fffebbf09980952caa673f1c117b8d96e",
+      "source_files_sha256": {
+        "RSP.cpp": "05a4528ff53b389bcb005598a0ea9a3d7acdf014b5f2894aa1261d2aed7aa960",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-controls-first-resultshift",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1080,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1080,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "b49890538de3f2d99be3b7c6933729aabefc25f9d7a27864632475041485c7e6",
+      "object_sha256": "3f45340748409bb4f9f167931b2ccb4c180f5e8c716e8ee5c5cb63c042da3928",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-controls-first-resultshift/comparison.json",
+      "comparison_sha256": "fe3e425145c5fd83c140f8becf0c4bd31a588fd70c422edf38b8ed39f2542d3e",
+      "source_files_sha256": {
+        "RSP.cpp": "b49890538de3f2d99be3b7c6933729aabefc25f9d7a27864632475041485c7e6",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-controls-first-shiftcaseswap",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1296,
+          "diff": 1081,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1296,
+      "helper_differing_bytes": 1081,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "2e8abc5660548872c614f082a5019a402e87884d9a4da8e3c30e56672be23cba",
+      "object_sha256": "573cc3c915b8f25b3af881e209d21dc0342ace2d06f71c8bb56471181745255c",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-controls-first-shiftcaseswap/comparison.json",
+      "comparison_sha256": "ba648f39c97849aa3e316a6731025d0cd4c8c68257863c9d84bef1c0a4c28732",
+      "source_files_sha256": {
+        "RSP.cpp": "2e8abc5660548872c614f082a5019a402e87884d9a4da8e3c30e56672be23cba",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-controls-first-shiftdeclswap",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1076,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1076,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "870c97c78ab19826174f799ad3804ffeef05dec8f94145986d2a3c654e6e6e91",
+      "object_sha256": "f1496f68bc6278b08e8ddcce150c9d191e826258711f2a176ff776c47eb6bb28",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-controls-first-shiftdeclswap/comparison.json",
+      "comparison_sha256": "ddd90702e0e89f5dcb0e199df31de3370c8b213a13b272e3159dd94b6d0b3abb",
+      "source_files_sha256": {
+        "RSP.cpp": "870c97c78ab19826174f799ad3804ffeef05dec8f94145986d2a3c654e6e6e91",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-controls-first-shiftzeroswap",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1074,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1074,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "9ecae396330f6f0c47b07607fcc1e4defb0e4d5c3cb863e0f144709a9083ca7f",
+      "object_sha256": "3cdac79c6cd3e72c04ec15e336568239a199bf6b477e12cbe8de4adac5003283",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-controls-first-shiftzeroswap/comparison.json",
+      "comparison_sha256": "bdf862f6b90f6ab09108de4c5342a1adf37af549c993b55183d2ca702e92ff5c",
+      "source_files_sha256": {
+        "RSP.cpp": "9ecae396330f6f0c47b07607fcc1e4defb0e4d5c3cb863e0f144709a9083ca7f",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-controls-first-signedclamps",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1076,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1076,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "76c10f6ad764b814a64342e950f10c5bbb3bb9a7c23c6796bd5feb6307d5a1ea",
+      "object_sha256": "2d4d37eec3035c56206ab9fe7e2f50be5eef607b13bf2aebe57e58f392af5542",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-controls-first-signedclamps/comparison.json",
+      "comparison_sha256": "caced3c5a585dee6cd19f0219ada7e87e02787a791ccd03ab2ce77e131f6a11d",
+      "source_files_sha256": {
+        "RSP.cpp": "76c10f6ad764b814a64342e950f10c5bbb3bb9a7c23c6796bd5feb6307d5a1ea",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-controls-first-unsignedmask",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1076,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1076,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "84cb519d29f294eb2db1de91c9e4ec38a5acfd6779970cd53ff26baa0ef1c4b5",
+      "object_sha256": "48fa031ad64518d902e16b32b8f31ddf83187680f2852277f5922ee5132b6fe5",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-controls-first-unsignedmask/comparison.json",
+      "comparison_sha256": "bc3a16cf16cb8f3c70bc571c82af38e9452ea5ff7167e8526260bcca610bfb5f",
+      "source_files_sha256": {
+        "RSP.cpp": "84cb519d29f294eb2db1de91c9e4ec38a5acfd6779970cd53ff26baa0ef1c4b5",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-controls-first-unsignedmixed",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1296,
+          "diff": 1087,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1296,
+      "helper_differing_bytes": 1087,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "6ef7889803d1613daa1103a9a802ce9d3d62f1e11be2e8c3620730defc2d0ef7",
+      "object_sha256": "7a5afd5f9ea6c88c5b40a0470d6921289a9e4c63174c2d6f4e4e1497646cd7e8",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-controls-first-unsignedmixed/comparison.json",
+      "comparison_sha256": "9c91675f301e583c93ec03cdbf727ce8eb698853bfa0672934a3c882453a70d6",
+      "source_files_sha256": {
+        "RSP.cpp": "6ef7889803d1613daa1103a9a802ce9d3d62f1e11be2e8c3620730defc2d0ef7",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-decodeat-clamp",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1280,
+          "diff": 1226,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1280,
+      "helper_differing_bytes": 1226,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "c58f80f4bb975f0dc401a3f570fa3cc605822d0a9de91b7fb66834e1477e9bb0",
+      "object_sha256": "68c39df8173e96678f466b8b31d1b17505abeb3322a69530e1f2608c663bf21d",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-decodeat-clamp/comparison.json",
+      "comparison_sha256": "fb53b941108bbe96a7ec9dbf77ca8234c2c717ab14efed312471e5d7f14c0a0c",
+      "source_files_sha256": {
+        "RSP.cpp": "c58f80f4bb975f0dc401a3f570fa3cc605822d0a9de91b7fb66834e1477e9bb0",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-decodeat-rounding",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1222,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "cd8257cfe5426ffd17f68eb0fada7a318ef01ffad9616bee0a5e55769b4c8bc4",
+      "object_sha256": "d77cb560f2e46730f907bf80f68b4d5b516b89f6291e678a9b591927b19a1903",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-decodeat-rounding/comparison.json",
+      "comparison_sha256": "3afa29d721a039e55507157d396d803a639353935a49213a739536661c735479",
+      "source_files_sha256": {
+        "RSP.cpp": "cd8257cfe5426ffd17f68eb0fada7a318ef01ffad9616bee0a5e55769b4c8bc4",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-decodeat-shift",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1220,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1220,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "4da25f64a1a96e940399df8071dce7d5ee6952a48a7b2467802cc618beec87bf",
+      "object_sha256": "9240eab78fff4016acbc277d7e3f1989345831253b256e5942900d2ffc3b52c3",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-decodeat-shift/comparison.json",
+      "comparison_sha256": "7d35d51cbf19714757c2bb22c390345d710302817668504081f30e66be7be727",
+      "source_files_sha256": {
+        "RSP.cpp": "4da25f64a1a96e940399df8071dce7d5ee6952a48a7b2467802cc618beec87bf",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-decodeat-zero",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1296,
+          "diff": 1196,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1296,
+      "helper_differing_bytes": 1196,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "062f26f1118dfa13274f5334603b7d9a0fdff2bf78a8940583125c6182e32698",
+      "object_sha256": "dd8aa48cee2a3f41cd9e91f45aced56679d01de3cf2f9530299e39edff378692",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-decodeat-zero/comparison.json",
+      "comparison_sha256": "f4a4cd761adc0a8604286e31c64fba7c7041c2669fab8ef00d7f35815bcfa47e",
+      "source_files_sha256": {
+        "RSP.cpp": "062f26f1118dfa13274f5334603b7d9a0fdff2bf78a8940583125c6182e32698",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-directselector",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1472,
+          "diff": 1422,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1472,
+      "helper_differing_bytes": 1422,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "31988f708a4f8df5bcedd6c3774b43d55300bd4582115921b0a43e5a6a19c375",
+      "object_sha256": "5ebcd12604a2c185482b9db3c9ac0afe67b13a6ee11a5dfc11a1373c7ac5a324",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-directselector/comparison.json",
+      "comparison_sha256": "97d261a345361d615184b792acabb1eb961a19908b65dc4428a37916abf5bea9",
+      "source_files_sha256": {
+        "RSP.cpp": "31988f708a4f8df5bcedd6c3774b43d55300bd4582115921b0a43e5a6a19c375",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-directvd",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1296,
+          "diff": 1260,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1296,
+      "helper_differing_bytes": 1260,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "e7cc4d3fd831db2fd0fceac3639bc347b6f8643dd761044c16a7fe9ef3766539",
+      "object_sha256": "146aba9495c2782d60bb92bcc08c8bde003ca3f78e86383661f19e1e7fba8438",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-directvd/comparison.json",
+      "comparison_sha256": "7f3a30ff191d92d309367bde2beec05cfc8be99fca2ec94353da77df3d7b8cdd",
+      "source_files_sha256": {
+        "RSP.cpp": "e7cc4d3fd831db2fd0fceac3639bc347b6f8643dd761044c16a7fe9ef3766539",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-directvt",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1344,
+          "diff": 1154,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1344,
+      "helper_differing_bytes": 1154,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "6e8baad8d1e03d1bd9663c0095d81eda60a484ee657f06179d08fa4a2ebc336d",
+      "object_sha256": "9fa5f5132f157c3735c758f0f64213093d80f30e2963ad707b32e8865b7c76e3",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-directvt/comparison.json",
+      "comparison_sha256": "3f40a1f43d96345b3742e06f746cd5bf412ae57fdaa8284fbe9db1294dbf8cc9",
+      "source_files_sha256": {
+        "RSP.cpp": "6e8baad8d1e03d1bd9663c0095d81eda60a484ee657f06179d08fa4a2ebc336d",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-independentshift",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1328,
+          "diff": 1160,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1328,
+      "helper_differing_bytes": 1160,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "5117045155139a74f0d8f263ab5d854fd73a0511f92313c3b366bd332298e83c",
+      "object_sha256": "c493331bd97e76884d174189e28e997a9abaf3ec6b39f3920ca4669ed1c220f0",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-independentshift/comparison.json",
+      "comparison_sha256": "e265cbdabc39ceb841f81347d581c3b54ee75b52b4e7d9518366dc4ad0e0bd70",
+      "source_files_sha256": {
+        "RSP.cpp": "5117045155139a74f0d8f263ab5d854fd73a0511f92313c3b366bd332298e83c",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-late-vd-vs-vt",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1264,
+          "diff": 1288,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1264,
+      "helper_differing_bytes": 1288,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "988622b7d83b2a32f073ff20eb29e918ea07766a721362265d2675899155c776",
+      "object_sha256": "8c9814c3aa84c2072d765a12556ce01bf3210c14fcf168a7e93676e8baa6ee9d",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-late-vd-vs-vt/comparison.json",
+      "comparison_sha256": "6c511e8112132c62cbe1dc344561490f112f17eef89fcb13f7beb97c9faa9b7c",
+      "source_files_sha256": {
+        "RSP.cpp": "988622b7d83b2a32f073ff20eb29e918ea07766a721362265d2675899155c776",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-late-vs",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1280,
+          "diff": 1267,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1280,
+      "helper_differing_bytes": 1267,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "cf9d72316895cf93366075d4ee6180b4e2f0a5517edd8aecf66adce31495c885",
+      "object_sha256": "11246c453ca007e2214654cf97f6bbf68cabbe2784d3bb099eca62a1b3c1270a",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-late-vs/comparison.json",
+      "comparison_sha256": "2a017faee0cf60caad239535bcbe310598eeaade34558936361e859fbe72e711",
+      "source_files_sha256": {
+        "RSP.cpp": "cf9d72316895cf93366075d4ee6180b4e2f0a5517edd8aecf66adce31495c885",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-logicalor",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1264,
+          "diff": 1255,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1264,
+      "helper_differing_bytes": 1255,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "0f7e1457207ac35ef5f4de8f0fd67ea536987d09f523d8aff40b5fd2cb04b5b2",
+      "object_sha256": "f4c206719ea4b1ee86bc9f2d94c73844e9adcfcd93657c14eb70808d43b20f05",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-logicalor/comparison.json",
+      "comparison_sha256": "846ec51ee06b81638897c0e29ae817b861d4311abacf4d529656589b5c5c6d5d",
+      "source_files_sha256": {
+        "RSP.cpp": "0f7e1457207ac35ef5f4de8f0fd67ea536987d09f523d8aff40b5fd2cb04b5b2",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-loopbound",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1296,
+          "diff": 1254,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1296,
+      "helper_differing_bytes": 1254,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "5fe6ae26f70f7fd1e26a00b4e62e92972997b662c9297e57852f450a0d18df1d",
+      "object_sha256": "11ff9688510a658addb2ba918b6310de64e94a1a66159b98662520e92368da0e",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-loopbound/comparison.json",
+      "comparison_sha256": "e816e453a8f9c3988a4457e18af80abb490cc1e5866e554372f4cd6f9709f2ce",
+      "source_files_sha256": {
+        "RSP.cpp": "5fe6ae26f70f7fd1e26a00b4e62e92972997b662c9297e57852f450a0d18df1d",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-loopfields-vd-vs-vt",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1264,
+          "diff": 1294,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1264,
+      "helper_differing_bytes": 1294,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "2fa5368a90bde18bcbbf7cc4a92fbc58c1de251480e28eafca659299c05367fc",
+      "object_sha256": "afd806d7dbb34a8d68438145683f7293aa1428d02e87da7afacdda6cf1edb90a",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-loopfields-vd-vs-vt/comparison.json",
+      "comparison_sha256": "e163ddb3eb2e56a2403b4da9a3c22d410a195dc2c6c550f3dfb87a646e427aa3",
+      "source_files_sha256": {
+        "RSP.cpp": "2fa5368a90bde18bcbbf7cc4a92fbc58c1de251480e28eafca659299c05367fc",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-mask32",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1175,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1175,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "1427ccf483f6d5b9f2d6e5b4e93b57ae03cbedd208947075c75873af462ee5ba",
+      "object_sha256": "28fec2934802b09222169b81fe240d7dbcdec620bca7139a283409288ec7c536",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-mask32/comparison.json",
+      "comparison_sha256": "71fc644d6d92de77497c851ec939ad651addc31fa76942edf74ff2fbe43ae89d",
+      "source_files_sha256": {
+        "RSP.cpp": "1427ccf483f6d5b9f2d6e5b4e93b57ae03cbedd208947075c75873af462ee5ba",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-nonzeroshift",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1179,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1179,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "ba03e06abc9bc4a4b3c3e639dbf90ce516d0f63b8d3e006e2f2bfb6ca75338e1",
+      "object_sha256": "bae21e0b2b0c36d8082bb15572e73acb31f42c980f5e1ecf976d2317512bba4a",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-nonzeroshift/comparison.json",
+      "comparison_sha256": "67715b73c5ed85e63e7d65ec8893982862c329eda57fc06f18420f36b4a1d7b4",
+      "source_files_sha256": {
+        "RSP.cpp": "ba03e06abc9bc4a4b3c3e639dbf90ce516d0f63b8d3e006e2f2bfb6ca75338e1",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-reverseor",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1175,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1175,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "8585da57cf8b56587f3b198bbccee8be0a4c2ab777e7ecd024931a93ab37846d",
+      "object_sha256": "413e3e4a91c5dff6197dd1de64aebbfda3f47924ede05de2e2793dd360e11d8a",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-reverseor/comparison.json",
+      "comparison_sha256": "0c36ccaf4ddfa21596190103805b9ab7a8f03f21531c38aec85650d8ac74ac6d",
+      "source_files_sha256": {
+        "RSP.cpp": "8585da57cf8b56587f3b198bbccee8be0a4c2ab777e7ecd024931a93ab37846d",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-roundzero-late",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1175,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1175,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "bf4c2937e72ccce38295b7e617e2405f9d4c7ac6d59d9636df6d9a4f222d6bdc",
+      "object_sha256": "c5d746a035267d2872a2ec913adc39eed508766612e0238799bb8ec2fd615734",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-roundzero-late/comparison.json",
+      "comparison_sha256": "84cb6b28106b19cef5f919fb3a226bbbe08dd3cf6028ce222c59a3e424aceea5",
+      "source_files_sha256": {
+        "RSP.cpp": "bf4c2937e72ccce38295b7e617e2405f9d4c7ac6d59d9636df6d9a4f222d6bdc",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-rspbitfields",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1175,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1175,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "61fce5ac0dc48a9902943b3ae0263615726eccc349b1b9fd43ba66c9e7fe1780",
+      "object_sha256": "8a634642e404c8a00d127f85e3cfd2873b2e86a9344ba2e4e0553bb8a99da4a8",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-rspbitfields/comparison.json",
+      "comparison_sha256": "5ba61928933388e158584ff170496b7384c97a151c8acfaf0b0616fcc98a0ebf",
+      "source_files_sha256": {
+        "RSP.cpp": "61fce5ac0dc48a9902943b3ae0263615726eccc349b1b9fd43ba66c9e7fe1780",
+        "RSP.h": "aa44ae219a5cf7060df826231e55d0c461172d4163bbf03572e320b56b39f374",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-splitselector",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1376,
+          "diff": 1300,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1376,
+      "helper_differing_bytes": 1300,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "2b1574a76620d38e112b8ede11b1cfd1e0e77d3f8c0cd12dc8f3a4bf8cb75c7e",
+      "object_sha256": "abc963a47fcdaa18d73a39f4d53da83f397b2941f180982fe87b30f75c360615",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-splitselector/comparison.json",
+      "comparison_sha256": "6d6f9bc6e8580529fd927c9978cc9f62fd54a6081c26a8a9596288f00af1647c",
+      "source_files_sha256": {
+        "RSP.cpp": "2b1574a76620d38e112b8ede11b1cfd1e0e77d3f8c0cd12dc8f3a4bf8cb75c7e",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-splitselector-offsetfirst",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1376,
+          "diff": 1300,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1376,
+      "helper_differing_bytes": 1300,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "dc7e591fc5d2cc93d221d2cb52acdb92dc198a45344d7c84d0eff096da4bc9bf",
+      "object_sha256": "0ae6b8587b901eb591d293631652cca38763d20b7008e7ca3c006bc79e123bd6",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-splitselector-offsetfirst/comparison.json",
+      "comparison_sha256": "341bd072893dd548054f3e536f8b03334200915003b3036fea8e622232e18553",
+      "source_files_sha256": {
+        "RSP.cpp": "dc7e591fc5d2cc93d221d2cb52acdb92dc198a45344d7c84d0eff096da4bc9bf",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-ternarycount",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1296,
+          "diff": 1254,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1296,
+      "helper_differing_bytes": 1254,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "305eb84330244c60eacf74b0af8f9cb2f2ed664e503f69a20757b6432ae6e3bb",
+      "object_sha256": "00ecc02d1fb69f6cbe7765c4684b11af3780125fdccf043f84ff10d185e774b0",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-ternarycount/comparison.json",
+      "comparison_sha256": "d65a477b8d5c3b5a76250a84d7a5fa9cce42a96dd168a60a19bbe87f3c2568fa",
+      "source_files_sha256": {
+        "RSP.cpp": "305eb84330244c60eacf74b0af8f9cb2f2ed664e503f69a20757b6432ae6e3bb",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-unsigned-first",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1174,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1174,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "c028292875d8a1d88fd9713820f62cdd5f5e9fc2d7e871691a6ca3b1c39e91b1",
+      "object_sha256": "cb14b2744601badb8ba2e98c012a0d7e50e359fdd8cf74a7d71eca1fdcdec616",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-unsigned-first/comparison.json",
+      "comparison_sha256": "5301c9fa4ba35a790ed7cd18fe3112453cd4dc2cb3420410c8d1fd2afd985406",
+      "source_files_sha256": {
+        "RSP.cpp": "c028292875d8a1d88fd9713820f62cdd5f5e9fc2d7e871691a6ca3b1c39e91b1",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-unsignedmixed-commutemixed",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1328,
+          "diff": 1013,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1328,
+      "helper_differing_bytes": 1013,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "9662595bbc121e13ef436549f11d53aa87d50d2d0ed46e23602b157a169ed7db",
+      "object_sha256": "e765296cf03e333d495fad48108f25fea0ab1d7bef2663c7bdf613df60236980",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-unsignedmixed-commutemixed/comparison.json",
+      "comparison_sha256": "4d8ae26900a4999c672066c26e60fa67afddfb28d146750161e34f9af3304da0",
+      "source_files_sha256": {
+        "RSP.cpp": "9662595bbc121e13ef436549f11d53aa87d50d2d0ed46e23602b157a169ed7db",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-inside-unsignedmixed-directselector",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1472,
+          "diff": 1422,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1472,
+      "helper_differing_bytes": 1422,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "5adab10ff22a4fe02f49074a810bff69ba79d99adfd484db0bcbce664a5d53ca",
+      "object_sha256": "a793088fe577f0d18752bfd588a9e85a68c084a2f359d7d2fa7ca4a94eb5371d",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-unsignedmixed-directselector/comparison.json",
+      "comparison_sha256": "5e5631c4a0cf6e2dea63dbf08da52b75642a69d8ea948e9087c354fbc673cd4e",
+      "source_files_sha256": {
+        "RSP.cpp": "5adab10ff22a4fe02f49074a810bff69ba79d99adfd484db0bcbce664a5d53ca",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-loopbound",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1296,
+          "diff": 1267,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1296,
+      "helper_differing_bytes": 1267,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "1972e0e529aaf582a32fa27b75c41354af5b4da66b1fcb611f49d0a860753fac",
+      "object_sha256": "6dbf538796c561ca21e4ed216e17eb5f3ad78b55fdc3c05e2d62db9c3aa12f7b",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-loopbound/comparison.json",
+      "comparison_sha256": "6f54504d4b4eeaec856a01e9caaadcb766dc976b34c7195cc61d7a5c2e0fb862",
+      "source_files_sha256": {
+        "RSP.cpp": "1972e0e529aaf582a32fa27b75c41354af5b4da66b1fcb611f49d0a860753fac",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-rspbitfields",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "22e177289bdb57de45fb365920c45422cfc25213bc19d22d32a3f78be441f10e",
+      "object_sha256": "e6b60fb0b2eae9f6a1d34cec5e6f6864f41092f9b935de0698d998a04e717297",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-rspbitfields/comparison.json",
+      "comparison_sha256": "64d01b83758e60fb41e618ac8a33ccc03b2f8e20cbd0f476a731a2f918e3b007",
+      "source_files_sha256": {
+        "RSP.cpp": "22e177289bdb57de45fb365920c45422cfc25213bc19d22d32a3f78be441f10e",
+        "RSP.h": "aa44ae219a5cf7060df826231e55d0c461172d4163bbf03572e320b56b39f374",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-splitselector",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1328,
+          "diff": 1242,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1328,
+      "helper_differing_bytes": 1242,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "a0dce9ee38c250e24fd517d43f32f12beed02b356033d8552cb7738ac7da7b13",
+      "object_sha256": "1ef4b4c5ee5ebdc7e1bd3ec848a63f1fefef410dd95f2ad551fc9d231f70a02c",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-splitselector/comparison.json",
+      "comparison_sha256": "9404e2c9feff7ff0ec87be4a1ac50255cded6a9cecfbe7fb8937cad98ef6d878",
+      "source_files_sha256": {
+        "RSP.cpp": "a0dce9ee38c250e24fd517d43f32f12beed02b356033d8552cb7738ac7da7b13",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-splitselector-offsetfirst",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1328,
+          "diff": 1147,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1328,
+      "helper_differing_bytes": 1147,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "f5785e502b3e6ec9d2970280be52c7de58b0b8a4a7d524b695d40ac6c28bfd00",
+      "object_sha256": "d4f0d3b26fbb014268079bf67313889252d50e067f45760130e9c975b8cb281e",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-splitselector-offsetfirst/comparison.json",
+      "comparison_sha256": "f9d128b9ec4c181962837d4cf4a2edad23a79ea6fda8e3b96bbec072d9429e70",
+      "source_files_sha256": {
+        "RSP.cpp": "f5785e502b3e6ec9d2970280be52c7de58b0b8a4a7d524b695d40ac6c28bfd00",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
+    },
+    {
+      "label": "flow-ternarycount",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1221,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1221,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "f38e3f8968c7f43f45252d07f10c3197c185e7613b3aa3426e602f109254c9ce",
+      "object_sha256": "dbeb4f844c63a7f0d78cc0b35dfecd6a451b53804d2be319b0415865fa6fae75",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-ternarycount/comparison.json",
+      "comparison_sha256": "d49fe4dcb48ec338ceb5b2ade0353023f35b516434c44b1ce3cd697048f5f34e",
+      "source_files_sha256": {
+        "RSP.cpp": "f38e3f8968c7f43f45252d07f10c3197c185e7613b3aa3426e602f109254c9ce",
+        "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+        "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88"
+      }
     }
   ],
   "independent_reviews": [
@@ -2529,5 +3646,6 @@
         "outcome": "No exact candidate or promoted changes; register allocation still favors vs in EBX."
       }
     }
-  ]
+  ],
+  "root_run_count": 133
 }
