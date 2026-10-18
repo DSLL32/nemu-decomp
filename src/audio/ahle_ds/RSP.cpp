@@ -1790,11 +1790,11 @@ void RSP_VNE()
 void RSP_LegacyVGE()
 {
     PC += 4;
+    CpuU32 element = Instruction.rs & 15;
     CpuU32 vd = Instruction.sa;
     CpuU32 vs = Instruction.rd;
     CpuU32 vt = Instruction.rt;
-    CpuU32 element = Instruction.rs & 15;
-    for (int i = 0; i < 8; i++)
+    for (CpuU32 i = 0; i < 8; i++)
     {
         int lane;
         if (element == 0) lane = i;

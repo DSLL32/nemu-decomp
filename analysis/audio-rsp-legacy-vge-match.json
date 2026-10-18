@@ -1,0 +1,368 @@
+{
+  "original": "master/Plugin/audio.dll",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "source": "src/audio/ahle_ds/RSP.cpp",
+  "source_sha256": "eac9ee4ca4f1fcdf359512b3a1137dcddedaf9b148757d40c9623b8643eeae38",
+  "function": "RSP_LegacyVGE",
+  "original_va": "0x1001bb90",
+  "original_extent": 1104,
+  "status": "complete_native_body_exact",
+  "full_dll_byte_exact": false,
+  "source_inference": "Element decoded before destination/source vector indices; unsigned32 lane counter. Names and exact spelling remain inferred.",
+  "evidence": [
+    "Original loop uses a two-iteration countdown over four expanded lanes and a20-byte frame. A signed lane counter instead emits a signed compare/backedge and16-byte frame.",
+    "Unsigned counter alone preserves original extent but leaves operand-allocation differences; element-first decode alone also remains unmatched. Together the complete1104-byte instruction/alignment span matches.",
+    "Every ordinary COFF relocation is materialized using independently identified original targets. No relocation masks or executable changes."
+  ],
+  "controls": {
+    "unsigned-legacy": [
+      {
+        "name": "RSP_LegacyVGE",
+        "size": 1104,
+        "diff": 1056,
+        "exact": false,
+        "was_exact": false
+      }
+    ],
+    "element-first": [
+      {
+        "name": "RSP_LegacyVGE",
+        "size": 1104,
+        "diff": 1004,
+        "exact": false,
+        "was_exact": false
+      }
+    ],
+    "element-first-unsigned": [
+      {
+        "name": "RSP_LegacyVGE",
+        "size": 1104,
+        "diff": 0,
+        "exact": true,
+        "was_exact": false
+      }
+    ]
+  },
+  "function_comparison": {
+    "name": "RSP_LegacyVGE",
+    "symbol": "_RSP_LegacyVGE",
+    "va": 268549008,
+    "body_or_table_extent": 1103,
+    "original_size": 1104,
+    "candidate_size": 1104,
+    "exact": true,
+    "differing_bytes": 0,
+    "first_differences": [],
+    "unresolved": 0,
+    "original_sha256": "ae9e79faac1d9c87f190912d323d15a9b498b61d2309c10e8ec3c52910caa5c0",
+    "candidate_materialized_sha256": "ae9e79faac1d9c87f190912d323d15a9b498b61d2309c10e8ec3c52910caa5c0",
+    "relocations": [
+      {
+        "offset": 5,
+        "type": 6,
+        "symbol": "_RSPControl",
+        "addend": 0,
+        "target": 269663744,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 12,
+        "type": 6,
+        "symbol": "_RSPHardware",
+        "addend": 24,
+        "target": 269664316,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 23,
+        "type": 6,
+        "symbol": "_RSPHardware",
+        "addend": 24,
+        "target": 269664316,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 42,
+        "type": 6,
+        "symbol": "_RSPControl",
+        "addend": 2,
+        "target": 269663746,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 60,
+        "type": 6,
+        "symbol": "_RSPVectors",
+        "addend": 2,
+        "target": 269663770,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 81,
+        "type": 6,
+        "symbol": "_RSPVectors",
+        "addend": 2,
+        "target": 269663770,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 90,
+        "type": 6,
+        "symbol": "_RSPAccumulator",
+        "addend": 8,
+        "target": 269664472,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 189,
+        "type": 6,
+        "symbol": "_RSPVectors",
+        "addend": 0,
+        "target": 269663768,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 223,
+        "type": 6,
+        "symbol": "_RSPControl",
+        "addend": 14,
+        "target": 269663758,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 234,
+        "type": 6,
+        "symbol": "_RSPControl",
+        "addend": 12,
+        "target": 269663756,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 241,
+        "type": 6,
+        "symbol": "_RSPControl",
+        "addend": 16,
+        "target": 269663760,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 278,
+        "type": 6,
+        "symbol": "_RSPControl",
+        "addend": 14,
+        "target": 269663758,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 305,
+        "type": 6,
+        "symbol": "_RSPControl",
+        "addend": 14,
+        "target": 269663758,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 430,
+        "type": 6,
+        "symbol": "_RSPVectors",
+        "addend": 0,
+        "target": 269663768,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 463,
+        "type": 6,
+        "symbol": "_RSPControl",
+        "addend": 14,
+        "target": 269663758,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 474,
+        "type": 6,
+        "symbol": "_RSPControl",
+        "addend": 12,
+        "target": 269663756,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 481,
+        "type": 6,
+        "symbol": "_RSPControl",
+        "addend": 16,
+        "target": 269663760,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 518,
+        "type": 6,
+        "symbol": "_RSPControl",
+        "addend": 14,
+        "target": 269663758,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 545,
+        "type": 6,
+        "symbol": "_RSPControl",
+        "addend": 14,
+        "target": 269663758,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 663,
+        "type": 6,
+        "symbol": "_RSPVectors",
+        "addend": 0,
+        "target": 269663768,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 687,
+        "type": 6,
+        "symbol": "_RSPControl",
+        "addend": 12,
+        "target": 269663756,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 694,
+        "type": 6,
+        "symbol": "_RSPControl",
+        "addend": 16,
+        "target": 269663760,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 729,
+        "type": 6,
+        "symbol": "_RSPControl",
+        "addend": 14,
+        "target": 269663758,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 755,
+        "type": 6,
+        "symbol": "_RSPControl",
+        "addend": 14,
+        "target": 269663758,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 880,
+        "type": 6,
+        "symbol": "_RSPVectors",
+        "addend": 0,
+        "target": 269663768,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 914,
+        "type": 6,
+        "symbol": "_RSPControl",
+        "addend": 14,
+        "target": 269663758,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 925,
+        "type": 6,
+        "symbol": "_RSPControl",
+        "addend": 12,
+        "target": 269663756,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 932,
+        "type": 6,
+        "symbol": "_RSPControl",
+        "addend": 16,
+        "target": 269663760,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 969,
+        "type": 6,
+        "symbol": "_RSPControl",
+        "addend": 14,
+        "target": 269663758,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 996,
+        "type": 6,
+        "symbol": "_RSPControl",
+        "addend": 14,
+        "target": 269663758,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 1088,
+        "type": 6,
+        "symbol": "_RSPControl",
+        "addend": 12,
+        "target": 269663756,
+        "resolution": "identified_symbol"
+      },
+      {
+        "offset": 1094,
+        "type": 6,
+        "symbol": "_RSPControl",
+        "addend": 16,
+        "target": 269663760,
+        "resolution": "identified_symbol"
+      }
+    ]
+  },
+  "whole_translation_unit": {
+    "functions_compared": 180,
+    "exact_before": 167,
+    "exact_after": 168,
+    "other_functions_raw_unchanged": 179,
+    "data_exact": 25,
+    "data_compared": 25,
+    "unresolved_relocations": 0
+  },
+  "compiler_command": [
+    "/usr/bin/python3",
+    "/root/nemu-decomp/scripts/run_toolchain.py",
+    "vc7",
+    "cl",
+    "/nologo",
+    "/c",
+    "/O2",
+    "/Ob1",
+    "/MT",
+    "/W3",
+    "/DWIN32",
+    "/DNDEBUG",
+    "/D_WINDOWS",
+    "/D_USRDLL",
+    "/FoRSP.obj",
+    "RSP.cpp"
+  ],
+  "object": "/root/.ai-tmp/audio-compare-recovery.8nj785tn/element-first-unsigned/RSP.obj",
+  "object_sha256": "c2c1cff8138ccf746b4b8df31c295768738c4cdd53ed653100b408264e936012",
+  "report": "/root/.ai-tmp/audio-compare-recovery.8nj785tn/element-first-unsigned/comparison.json",
+  "report_sha256": "fdcfd7626d12359a089f3b83c0242c148ad636716b04508dfa78e8ac10b33532",
+  "compiler_inputs": {
+    "RSP.cpp": "eac9ee4ca4f1fcdf359512b3a1137dcddedaf9b148757d40c9623b8643eeae38",
+    "AudioADPCMLegacy.h": "8509a1760c9dcc9b45334d103d4f09b656502bda0b8d35d039d75d7a75720f32",
+    "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88",
+    "AudioCommands.h": "35cae30632b3a466adc0dea680c808b80995cf311b0024d25331224e7368e5f3",
+    "AudioEnvelope.h": "8acbac16a6bc16a06782b48dea25af4e49b99c5a845f866ffe41098ec14517b7",
+    "AudioHLE.h": "98475c4c2e034a7e1b16a94662078f731afcca5529140bf0d30c7e6901bdd441",
+    "AudioLegacy.h": "8f5810c3d8ae923119c733c304064310630cca3201c4b472047267d1417bee98",
+    "AudioADPCMBlock.h": "f506d6ea97b83fcaaa78dc9ff7300bebe37aa36b9f1a01277247ee41767b4c1b",
+    "RSPKernel.inc": "7a218993560c457a5149266e391a28fcdb0a1df5a812209c9a9b7111238eb961",
+    "AudioSIMD.h": "627d71fd2a53dcc36e099c214824e397454c8b78d80be503f29f08c91a18bf63",
+    "AudioProcessing.h": "77bbd94523444df697a169cea26375cc673879493761452cc92add2857284c7b",
+    "AudioResampleTables.h": "5b95bd2db83cf7eea18b347cdf32c7a332073868cbcbd45a939f8de4537236f1",
+    "AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
+    "RSPMicrocode.inc": "12bae4d1c37884c7d5efbf13402d326bf46fafd0ee6064feff3fe0fdd8d2ee0c",
+    "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+    "transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f",
+    "DirectSound.h": "ab5ed735f1ab52226c0c7e7a559d080e10ec5649d2814b177f1a79686135455b"
+  }
+}
