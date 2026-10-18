@@ -10,9 +10,9 @@ public:
     ~PtrList() { if (items) free(items); }
     int size() { return count; }
     T *get(int index) { if (index<0 || index>=count) return 0; return items[index]; }
-    void add(T *item) {
+    T *add(T *item) {
         if (!items || !(count&31)) items=(T **)realloc(items,(count+32)*sizeof(T *));
-        items[count++]=item;
+        items[count++]=item; return item;
     }
     void remove(int index) {
         if (items && index>=0 && index<count) {

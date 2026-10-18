@@ -1,0 +1,31 @@
+{
+  "diagnostic_only": true,
+  "full_dll_byte_exact": false,
+  "inferred_return_semantics": "Return the inserted pointer; EAX preserves the input argument through count increment.",
+  "source_sha256": "cb0215377f66c48158e650d3c5dd5d609904da24351a23fa94d78ffb69a12928",
+  "regression": "All 16 ListView/Resizer native signatures and all previously matched UDP functions remain exact outside COFF relocation operands.",
+  "functions": [
+    {
+      "object": "session.obj",
+      "name": "?add@?$PtrList@VByteQueue@@@@QAEPAVByteQueue@@PAV2@@Z",
+      "coff_bytes": 64,
+      "fixed_bytes": 60,
+      "matching_original_vas": [
+        268471328
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
+      "relocation_identities_verified": false,
+      "relocations": [
+        {
+          "offset": 29,
+          "type": 6,
+          "symbol": "__imp__realloc",
+          "coff_addend": 0,
+          "original_operand_or_destination": [
+            268480608
+          ]
+        }
+      ]
+    }
+  ]
+}
