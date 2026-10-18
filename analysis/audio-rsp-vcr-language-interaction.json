@@ -1,0 +1,446 @@
+{
+  "scope": "Two bounded interactions between VCR output selection narrowing and the native VC7 C/C++ frontend. Diagnostic only; no source or language change promoted.",
+  "original": "master/Plugin/audio.dll",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "compiler": "VC7 13.00.9466 native /O2 /Ob1 /MT",
+  "relocation_identity_method": "Raw code bytes, relocation offsets, kinds, addends and named external targets are compared. Compiler-numbered local labels are identified by their actual offset within the same function, not by unstable generated names; no instruction bytes are masked.",
+  "scratch": "/root/.ai-tmp/audio-vcr-language.ag98ap5z",
+  "untouched_baseline": {
+    "source_sha256": "eac9ee4ca4f1fcdf359512b3a1137dcddedaf9b148757d40c9623b8643eeae38",
+    "object_sha256": "6484f41a636b11b3a8dfa7a9f92ddc3c1da5f8a3a53bcfb90f7ab503ea52ed57",
+    "functions_exact": 168,
+    "functions_compared": 180,
+    "typed_objects_exact": 25,
+    "typed_fields_exact": 11
+  },
+  "source_inputs_sha256": {
+    "ABI1.c": "f672bac9d9d813a5bc89ce97ce88d697b61361e90b40a3087d4a8bcd369a6327",
+    "ABI2.c": "1794fd9b3db1991241d2d948f2ef332aff3257178bd4b11e90fdd29afa6442df",
+    "ABI3.c": "28ff355e6019318aa5b61ef3930dfc6b416451cddf382404992c8883eb61c9af",
+    "AudioADPCMBlock.h": "f506d6ea97b83fcaaa78dc9ff7300bebe37aa36b9f1a01277247ee41767b4c1b",
+    "AudioADPCMLegacy.h": "8509a1760c9dcc9b45334d103d4f09b656502bda0b8d35d039d75d7a75720f32",
+    "AudioCommands.h": "35cae30632b3a466adc0dea680c808b80995cf311b0024d25331224e7368e5f3",
+    "AudioEnvelope.h": "8acbac16a6bc16a06782b48dea25af4e49b99c5a845f866ffe41098ec14517b7",
+    "AudioHLE.c": "a449a37eb2f9fc12b2c7f2a2c5b5e3a3f51a08adeaf241ef0e5d174b8825941a",
+    "AudioHLE.h": "98475c4c2e034a7e1b16a94662078f731afcca5529140bf0d30c7e6901bdd441",
+    "AudioLegacy.c": "d81dde338f0005166893a0825c2c86f82c7956ce75a7cae552c354ca4e78dc41",
+    "AudioLegacy.h": "8f5810c3d8ae923119c733c304064310630cca3201c4b472047267d1417bee98",
+    "AudioLog.c": "84a6f797caaf244d44300550ed13225276bf1c45bf6fb3193be9047dc01226f0",
+    "AudioPlugin.c": "6fed63db83aa3a950d0ce3a2e5e9df4769674aed1b145ab3e0332c5e2c44e260",
+    "AudioPlugin.h": "6706874cd2aab9e35fc6f6c2d3d509fce49c92d5a7a96b0d26db1c572f13b62e",
+    "AudioProcessing.c": "e66e65ff34e26304fd306b14afb5540d2db060bc631e980af95b398f1a232e62",
+    "AudioProcessing.h": "77bbd94523444df697a169cea26375cc673879493761452cc92add2857284c7b",
+    "AudioResample.c": "67ced2fcbd0e6798f34cd986e5a9b77e4ba963eb03463468b5d7b68120dbde1f",
+    "AudioResampleTables.h": "5b95bd2db83cf7eea18b347cdf32c7a332073868cbcbd45a939f8de4537236f1",
+    "AudioSIMD.h": "627d71fd2a53dcc36e099c214824e397454c8b78d80be503f29f08c91a18bf63",
+    "CPUFeatures.c": "b27644d8cc3b9044125194ed7e6d03ebccfd9c705fd62b653b08667c054a3f0f",
+    "DirectSound.c": "0183aca5217e7c7847ae02f4e4b74e6436b11ca54e82b8bf6bbfb7d7b77e3cb6",
+    "DirectSound.h": "ab5ed735f1ab52226c0c7e7a559d080e10ec5649d2814b177f1a79686135455b",
+    "Jpeg.c": "82ebf8c9d72e8c83d42bb97e3351627462336fb2693d47b449b803d6537988ac",
+    "Mp3.c": "d9dccbd10b72f540528496c33f04f8a63d3b9bd1f39839a70ac8a16ef5a87b3a",
+    "RSP.cpp": "eac9ee4ca4f1fcdf359512b3a1137dcddedaf9b148757d40c9623b8643eeae38",
+    "RSP.h": "74d21d0e3992ec8d059d4acaf61c563fcddb36f5b0c9a50bc375938a518fd051",
+    "RSPData.inc": "8931037bc6b3a65edc07980f11a984cc36c38c91d9586612d664e7e64bac6b88",
+    "RSPKernel.inc": "7a218993560c457a5149266e391a28fcdb0a1df5a812209c9a9b7111238eb961",
+    "RSPMicrocode.inc": "12bae4d1c37884c7d5efbf13402d326bf46fafd0ee6064feff3fe0fdd8d2ee0c",
+    "transform.h": "a544b6c419b690b7494c1668098e7c94ba202a7d6d7a960be5a0485bf451b26f"
+  },
+  "controls": [
+    {
+      "label": "narrow-signed",
+      "source_change": "Cast ~right to CpuS16 in the low conditional selection; keep the signed32 result and all other expressions.",
+      "scratch": "/root/.ai-tmp/audio-vcr-language.ag98ap5z/narrow-signed",
+      "source_sha256": "e54d98acdd5749c7e02103c6a9508e098bdce1bdf73f50b90870c88842a0595f",
+      "translated_source_sha256": "0c4f1c9d23413cd62352ce6f53b62f27063dfdbebc9de312b179799b2300dda0",
+      "commands": {
+        "original": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/TP",
+          "/Fooriginal.obj",
+          "RSP.cpp"
+        ],
+        "translated-cpp": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/TP",
+          "/Fotranslated-cpp.obj",
+          "RSP-c89.cpp"
+        ],
+        "translated-c": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/TC",
+          "/Fotranslated-c.obj",
+          "RSP-c89.cpp"
+        ]
+      },
+      "syntax_scope_changes": 246,
+      "cpp_translation_raw_function_and_relocation_identity": {
+        "same": 180,
+        "compared": 180
+      },
+      "cpp_translation_typed_byte_identity": {
+        "same": 36,
+        "compared": 36
+      },
+      "original_cpp_raw_changes_from_untouched_current_source": [
+        "_RSP_VCR"
+      ],
+      "results": {
+        "original": {
+          "functions_compared": 180,
+          "functions_exact": 168,
+          "typed_objects_exact": 25,
+          "typed_fields_exact": 11,
+          "unresolved_relocations": 0,
+          "vcr_size": 864,
+          "vcr_differing_bytes": 568,
+          "vcr_first_difference": 281,
+          "vcr_materialized_sha256": "fdecd2365d95c246310241b3dee5de79231789fb27952c5e49c099947e5c25ce"
+        },
+        "translated_cpp": {
+          "functions_compared": 180,
+          "functions_exact": 168,
+          "typed_objects_exact": 25,
+          "typed_fields_exact": 11,
+          "unresolved_relocations": 0,
+          "vcr_size": 864,
+          "vcr_differing_bytes": 568,
+          "vcr_first_difference": 281,
+          "vcr_materialized_sha256": "fdecd2365d95c246310241b3dee5de79231789fb27952c5e49c099947e5c25ce"
+        },
+        "translated_c": {
+          "functions_compared": 180,
+          "functions_exact": 168,
+          "typed_objects_exact": 25,
+          "typed_fields_exact": 11,
+          "unresolved_relocations": 0,
+          "vcr_size": 896,
+          "vcr_differing_bytes": 765,
+          "vcr_first_difference": 2,
+          "vcr_materialized_sha256": "974b909919681bc2f406df7427ae83490f7bd1b1b0ed564d650d09c172850095"
+        }
+      },
+      "cpp_to_c_changes": [
+        {
+          "name": "RSP_VCL",
+          "original_size": 1472,
+          "cpp_size": 1472,
+          "c_size": 1456,
+          "cpp_differences": 784,
+          "c_differences": 1081,
+          "cpp_exact": false,
+          "c_exact": false
+        },
+        {
+          "name": "RSP_VCH",
+          "original_size": 1232,
+          "cpp_size": 1248,
+          "c_size": 1280,
+          "cpp_differences": 1029,
+          "c_differences": 1066,
+          "cpp_exact": false,
+          "c_exact": false
+        },
+        {
+          "name": "RSP_VCR",
+          "original_size": 848,
+          "cpp_size": 864,
+          "c_size": 896,
+          "cpp_differences": 568,
+          "c_differences": 765,
+          "cpp_exact": false,
+          "c_exact": false
+        }
+      ],
+      "coefficient_storage": {
+        "original_cpp_count": 0,
+        "translated_cpp_count": 0,
+        "translated_c_count": 31,
+        "translated_c_bytes": 124,
+        "names": [
+          "b1",
+          "b2",
+          "b3",
+          "b4",
+          "b5",
+          "b6",
+          "b7",
+          "b8",
+          "b9",
+          "b10",
+          "b11",
+          "b12",
+          "b13",
+          "b14",
+          "b15",
+          "b16",
+          "b17",
+          "b18",
+          "b19",
+          "b20",
+          "b21",
+          "b22",
+          "b23",
+          "b24",
+          "b25",
+          "b26",
+          "b27",
+          "b28",
+          "b29",
+          "b30",
+          "b31"
+        ]
+      },
+      "object_sha256": {
+        "original": "c2ac888ef1fad50f8e4b96b32d6dc3fc51b78d92163b984e433eaad0ab185216",
+        "translated-cpp": "43ea26e175afe2e9d52ea7932f61088a246ed4332b0699f5dd0bcd33955639d5",
+        "translated-c": "9c254299e361e35e455b134da1f6a6e63b73b6377f9df1a799abd71d0a39362a"
+      }
+    },
+    {
+      "label": "narrow-raw",
+      "source_change": "Cast each output selection arm to CpuU16; keep the signed32 result and signed arithmetic inputs.",
+      "scratch": "/root/.ai-tmp/audio-vcr-language.ag98ap5z/narrow-raw",
+      "source_sha256": "90790e443d813da5c2ea1b7b6f94df464f7f3efacc5e5fb0e82049815b23ea06",
+      "translated_source_sha256": "bb4df3782a98a10b452629022fa7d0c58f7e29462ebedbe86b9190647e9af7b7",
+      "commands": {
+        "original": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/TP",
+          "/Fooriginal.obj",
+          "RSP.cpp"
+        ],
+        "translated-cpp": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/TP",
+          "/Fotranslated-cpp.obj",
+          "RSP-c89.cpp"
+        ],
+        "translated-c": [
+          "/usr/bin/python3",
+          "/root/nemu-decomp/scripts/run_toolchain.py",
+          "vc7",
+          "cl",
+          "/nologo",
+          "/c",
+          "/O2",
+          "/Ob1",
+          "/MT",
+          "/W3",
+          "/DWIN32",
+          "/DNDEBUG",
+          "/D_WINDOWS",
+          "/D_USRDLL",
+          "/TC",
+          "/Fotranslated-c.obj",
+          "RSP-c89.cpp"
+        ]
+      },
+      "syntax_scope_changes": 246,
+      "cpp_translation_raw_function_and_relocation_identity": {
+        "same": 180,
+        "compared": 180
+      },
+      "cpp_translation_typed_byte_identity": {
+        "same": 36,
+        "compared": 36
+      },
+      "original_cpp_raw_changes_from_untouched_current_source": [
+        "_RSP_VCR"
+      ],
+      "results": {
+        "original": {
+          "functions_compared": 180,
+          "functions_exact": 168,
+          "typed_objects_exact": 25,
+          "typed_fields_exact": 11,
+          "unresolved_relocations": 0,
+          "vcr_size": 864,
+          "vcr_differing_bytes": 568,
+          "vcr_first_difference": 281,
+          "vcr_materialized_sha256": "c1ae58b5a2cd74df10f09c060324734ab62fc4a75e579eed4159ef4749f5b14d"
+        },
+        "translated_cpp": {
+          "functions_compared": 180,
+          "functions_exact": 168,
+          "typed_objects_exact": 25,
+          "typed_fields_exact": 11,
+          "unresolved_relocations": 0,
+          "vcr_size": 864,
+          "vcr_differing_bytes": 568,
+          "vcr_first_difference": 281,
+          "vcr_materialized_sha256": "c1ae58b5a2cd74df10f09c060324734ab62fc4a75e579eed4159ef4749f5b14d"
+        },
+        "translated_c": {
+          "functions_compared": 180,
+          "functions_exact": 168,
+          "typed_objects_exact": 25,
+          "typed_fields_exact": 11,
+          "unresolved_relocations": 0,
+          "vcr_size": 848,
+          "vcr_differing_bytes": 687,
+          "vcr_first_difference": 2,
+          "vcr_materialized_sha256": "7c0cea6a17882c307257ddd477c5212bf043a322603102cf3eeaa309d5850a74"
+        }
+      },
+      "cpp_to_c_changes": [
+        {
+          "name": "RSP_VCL",
+          "original_size": 1472,
+          "cpp_size": 1472,
+          "c_size": 1456,
+          "cpp_differences": 784,
+          "c_differences": 1081,
+          "cpp_exact": false,
+          "c_exact": false
+        },
+        {
+          "name": "RSP_VCH",
+          "original_size": 1232,
+          "cpp_size": 1248,
+          "c_size": 1280,
+          "cpp_differences": 1029,
+          "c_differences": 1066,
+          "cpp_exact": false,
+          "c_exact": false
+        },
+        {
+          "name": "RSP_VCR",
+          "original_size": 848,
+          "cpp_size": 864,
+          "c_size": 848,
+          "cpp_differences": 568,
+          "c_differences": 687,
+          "cpp_exact": false,
+          "c_exact": false
+        }
+      ],
+      "coefficient_storage": {
+        "original_cpp_count": 0,
+        "translated_cpp_count": 0,
+        "translated_c_count": 31,
+        "translated_c_bytes": 124,
+        "names": [
+          "b1",
+          "b2",
+          "b3",
+          "b4",
+          "b5",
+          "b6",
+          "b7",
+          "b8",
+          "b9",
+          "b10",
+          "b11",
+          "b12",
+          "b13",
+          "b14",
+          "b15",
+          "b16",
+          "b17",
+          "b18",
+          "b19",
+          "b20",
+          "b21",
+          "b22",
+          "b23",
+          "b24",
+          "b25",
+          "b26",
+          "b27",
+          "b28",
+          "b29",
+          "b30",
+          "b31"
+        ]
+      },
+      "object_sha256": {
+        "original": "0e750fdb5f2686faeffbd38e6e62552c9483cd905e52dee40e2e8239ef6e4b02",
+        "translated-cpp": "5260ff02be480479d0feec602d3b291a7990558ba30d972bd4e696d0d9db9d00",
+        "translated-c": "ac8d96a39c63eb3d5823b1d580c66242ba7f98e3247568ce8ee90f7a71189867"
+      }
+    }
+  ],
+  "conclusion": [
+    "Neither frontend interaction recovers an exact VCR body. All168 previously exact functions remain exact.",
+    "The syntax conversion uses added ordinary lexical scopes and separates for-loop declarations from their initializers without moving expressions. Compiling that same converted input as C++ preserves all180 raw bodies and relocation records plus25 typed objects and11 fields exactly, independently isolating the frontend effect.",
+    "Under C, only the already-unmatched VCL,VCH,VCR bodies change. Both controls additionally emit all31 four-byte AMP b constants absent from the C++ object. Equal VCR span in the unsigned-arm C control is not a function match.",
+    "Original readonly storage contains13 coefficient blocks and14 dewindow tables; the identified RSP group has dewindow without the coefficient block. The unchanged AMP header reproduces this asymmetry under C++, supporting the existing RSP language attribution jointly with Rich counts and grouping. This remains source-structure inference, not unique proof of original language.",
+    "Canonical RSP source remains C++; the two diagnostic narrowed VCR bodies were not promoted."
+  ],
+  "related_evidence": [
+    "analysis/audio-rsp-language-control.json",
+    "analysis/audio-data-boundaries.json",
+    "analysis/audio-mp3-storage-audit.json",
+    "analysis/audio-rsp-legacy-vge-match.json"
+  ],
+  "script_sha256": {
+    "run.py": "aa19d17eba956d1f305e178bd29b1e532d5f01fcb817d63aeb7b455f4bf18113",
+    "publish.py": "f7e45a0c2c5a4a82ae7f377078ed4c27931b032932c100123e77ffdfea95b295",
+    "check_audio_rsp.py": "828b4c2359f646e8de2d5b06e760c5c5bf90680fcdf96003cc6ee8c09215f661"
+  }
+}
