@@ -1,0 +1,1448 @@
+{
+  "status": "Negative source controls; no canonical source promotion.",
+  "target": "master/Plugin/audio.dll",
+  "target_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "baseline_source_commit": "962213e",
+  "scratch": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb",
+  "driver": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/probe.py",
+  "driver_sha256": "9c93ca8c92cf17a4f46e3266413e57305647bdff7cfe6bb6c36e01ab784ae6dc",
+  "native_command": [
+    "/usr/bin/python3",
+    "/root/nemu-decomp/scripts/run_toolchain.py",
+    "vc7",
+    "cl",
+    "/nologo",
+    "/c",
+    "/O2",
+    "/Ob1",
+    "/MT",
+    "/W3",
+    "/DWIN32",
+    "/DNDEBUG",
+    "/D_WINDOWS",
+    "/D_USRDLL",
+    "/FoRSP.obj",
+    "RSP.cpp"
+  ],
+  "wine_prefix": "/root/.ai-tmp/audio-rsp-prefix-root.rvmxlhuh/wine",
+  "baseline": {
+    "functions": 180,
+    "exact": 160,
+    "typed_objects": 25,
+    "typed_fields": 11,
+    "unresolved": 0,
+    "helper_target_size": 1328,
+    "helper_candidate_size": 1312,
+    "helper_differing_bytes": 1222,
+    "wrapper_target_size": 48,
+    "wrapper_differing_bytes": 10
+  },
+  "scope": [
+    "All24 permutations of accumulate/vd/vs/vt initializations; baseline is one permutation.",
+    "Six shift-local declaration orders and six zero-initialization orders, baseline included.",
+    "Signed loop-index and count controls; narrow8/16-bit vector indices.",
+    "Five coherent lane-selector expression/lifetime forms.",
+    "Separately written case4/case6 initializations and accumulator-OR lifetime forms.",
+    "Inside-loop accumulator OR with source-index, register-hint, shift-local, shift-width and boolean flag controls.",
+    "Signed-short vector lvalue view and removal of redundant second64-bit multiply operand casts.",
+    "Six ordinary wrapper local/cache/comma forms and two existing Opcode-forwarder forms."
+  ],
+  "findings": [
+    "No tested form makes either generic multiply function exact.",
+    "Target productShift stays in EBX while vs is spilled. Current native compiler retains vs in EBX and spills productShift.",
+    "Moving the accumulator OR from a pre-loop local into the loop condition restores the target0x4C frame and the argument-slot reuse for the combined flag, but leaves register allocation and switch-tail sharing different.",
+    "Signed-short vector views and a single64-bit cast per product generate identical code to their corresponding controls.",
+    "register productShift, long instead of int, bool flags, and a local shift copy do not change the inside-loop control body.",
+    "The ordinary wrapper forms reproduce the same48-byte candidate, with10 materialized bytes different due solely to two global loads emitted in reversed order.",
+    "Forwarding through the existing Opcode helper without inline changes the call and fails. Marking that helper inline restores the baseline wrapper but regresses two exact guest-program routines; it is rejected.",
+    "Reported differing-byte counts are positional full-body comparisons with verified relocation targets, not semantic-distance measures.",
+    "All controls use native VC7 compilation. No instructions or binary bytes were patched. No new behavioral equivalence claim is made for unpromoted probes."
+  ],
+  "runs": [
+    {
+      "label": "baseline",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "5aabd9f3295be947fa1a24d196197cd10b92458315dd3a7dccfe5dc078accc46",
+      "object_sha256": "2c9179582dadd25fc24042ae35e00d69e19ec94654f931ef0120bf1512ae54cf",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/baseline/comparison.json",
+      "comparison_sha256": "36d819df6edb066a749496ed29672bee704e40a36655a6bb2cde52ed950df3d5"
+    },
+    {
+      "label": "declaration-order-accumulatorShift-productShift-rounding",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "e50f8342e083ea468cacecfeaaa6edca4ca8aa1ac4e2916999f78110e301b039",
+      "object_sha256": "dd75d7c7f00b96dffb2405bc21762edc3ea6488c9c0939f4a5bb833cede4543b",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/declaration-order-accumulatorShift-productShift-rounding/comparison.json",
+      "comparison_sha256": "6c5a6590f27bdb6addc4dadb0eab13e4d2a5cd2a08b9e7b4b16e2e3c600f69f1"
+    },
+    {
+      "label": "declaration-order-accumulatorShift-rounding-productShift",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "b835253dcedc0ca597bf175caf05f217281c4f194f5438ec6544038aa09c0f0c",
+      "object_sha256": "04908abb9bc2a73fb2fb5b886e579d8036dfb307456946434e0f92db2ffdbab3",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/declaration-order-accumulatorShift-rounding-productShift/comparison.json",
+      "comparison_sha256": "16a9ce58de3b56661c1a8b055c4d40fbffdaca922a9cfe580833e275a69fc77c"
+    },
+    {
+      "label": "declaration-order-productShift-rounding-accumulatorShift",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "4a1220be998aed7a09f252da7635fabce523594c0ac89da61c1f6f1e92a023be",
+      "object_sha256": "3e35a7b2d7bb7bb1d395392cd2be560793e31a1ffa89ed57ab7f3f0ec2ffc65c",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/declaration-order-productShift-rounding-accumulatorShift/comparison.json",
+      "comparison_sha256": "80d5a87ab7e77e6f3c663aa4bf640b806fec4479f14642c7be747d2360a7ee22"
+    },
+    {
+      "label": "declaration-order-rounding-accumulatorShift-productShift",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "ee77d374ed876f49059ca5fcd6984cc75b07701a3457ce93b54eddaac64acc7c",
+      "object_sha256": "def7eb272a44b0e3168514cf02753d3900f54a8d5a39fe148e4dcbe574404477",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/declaration-order-rounding-accumulatorShift-productShift/comparison.json",
+      "comparison_sha256": "b0caeb89824c127969a1fae1a91e55c431366544d61f28abf8211ad11663778a"
+    },
+    {
+      "label": "declaration-order-rounding-productShift-accumulatorShift",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "d32c1f97f1075a4cfe01358c34324550138f8e7f22f8b984107ba9cbdca335ff",
+      "object_sha256": "830990d1292b5f9bf3e30cbbdd9d8fea1de7dd309d6470a0c110df40dc23323e",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/declaration-order-rounding-productShift-accumulatorShift/comparison.json",
+      "comparison_sha256": "c623de8a303ad6a585c8a8168f627be115271671f90787dea5eba8500731ff96"
+    },
+    {
+      "label": "decode-accumulate-vd-vt-vs",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1217,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1217,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "79d9da48ac1384fa6e2e3aea843688c5cb4cf4c59690e6acc98df7da34ac7051",
+      "object_sha256": "c20be49c8603b0c0ea6996a86def6d48a3035641bc8e648b63ad71bcd780c48b",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/decode-accumulate-vd-vt-vs/comparison.json",
+      "comparison_sha256": "8b8e18a85db4fc7d9baf474451bac4bc42f2f88c38e6343665e8dcb302eca94b"
+    },
+    {
+      "label": "decode-accumulate-vs-vd-vt",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "5f53b49753e964a9dfd5494f137265b3ff838d5ce5745454dc3116cc0824d005",
+      "object_sha256": "ab971e116cee8a8f14f4284a6a036bb31af83a687bd9885d703bb5a0d247c459",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/decode-accumulate-vs-vd-vt/comparison.json",
+      "comparison_sha256": "fb89235fd6e613a8e94cbce2d41b2a8713757cef947f34e195423480dfe47779"
+    },
+    {
+      "label": "decode-accumulate-vs-vt-vd",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1226,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1226,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "650d24ebf1fed727c2170c5765ff1ffb5d81abddef60d565dd6660faacfd9e3e",
+      "object_sha256": "8628da6fb08031a39fcaed150aea3622b67284a9a3ed92858410727ff07e0f2a",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/decode-accumulate-vs-vt-vd/comparison.json",
+      "comparison_sha256": "4906cbcafe42cc6868e2dadbd0136165d83550e7d903cf0101625c29d08d071b"
+    },
+    {
+      "label": "decode-accumulate-vt-vd-vs",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1328,
+          "diff": 1141,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1328,
+      "helper_differing_bytes": 1141,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "d4359e2a8b150f4f21cbbc2b2a5fd882c4011fa8276ffd3d6d2f9816550227b4",
+      "object_sha256": "5a71dd832f7b07db156d8a58e6299500d2af5e897e300e1e35d26d0b7caa47e3",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/decode-accumulate-vt-vd-vs/comparison.json",
+      "comparison_sha256": "e5cfa1d7825f31187fa64067d45d6f9f76713f37e0cc8b7ac4739e546bbe9c1e"
+    },
+    {
+      "label": "decode-accumulate-vt-vs-vd",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1226,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1226,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "f01a71991b8af62373b3fa3ed968fbf5988c88961e630e22db616654d0a06075",
+      "object_sha256": "67e178d39cf37ffe9980dc7aceae36eea5110d06112b5a62858c84d98bb9cc44",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/decode-accumulate-vt-vs-vd/comparison.json",
+      "comparison_sha256": "24f20c21a2993c82a7e7d15153ddf9eac21d92e5a90dfe428d41301425b8286a"
+    },
+    {
+      "label": "decode-vd-accumulate-vs-vt",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1246,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1246,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "7f144a99daefa422914161f791f402b3dcf9e244a062fb7da18840b5c1f07003",
+      "object_sha256": "111c386f163a58d10bd0b60968abc73c5f3929d4647e2de3194e78e041509f04",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/decode-vd-accumulate-vs-vt/comparison.json",
+      "comparison_sha256": "db66e97398761d64bd68181344dc3141721fe1acc2ecd64184046ffa9ba0e260"
+    },
+    {
+      "label": "decode-vd-accumulate-vt-vs",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1249,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1249,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "ae79abb8289c279850cb71aa752aaba0bb71298e03d2ec7980a4c85218eca346",
+      "object_sha256": "2d346cb5a019ece16f427affa1ac9fd9dbc5bba115ab37cee1640521a929ab27",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/decode-vd-accumulate-vt-vs/comparison.json",
+      "comparison_sha256": "06790a6a8a48dc0814d9797cd2c6fb8b8e2949bc5c2c11e594cb766c08f801cb"
+    },
+    {
+      "label": "decode-vd-vs-accumulate-vt",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1251,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1251,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "167aa0c045da9c750a273a6bf12e99d9807d877a73db189a7c22caa85ca1f95f",
+      "object_sha256": "a5c417ef820165508ec85464455b00a0a515e5573c31c5ebda6d48c754662fd5",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/decode-vd-vs-accumulate-vt/comparison.json",
+      "comparison_sha256": "51ac4a4efa8ade524eca94b68ce37809930e2e8feba3e740ff7d6d8a4309b413"
+    },
+    {
+      "label": "decode-vd-vs-vt-accumulate",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1248,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1248,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "e131a463f7db6356cbf8852daeff27991e31d07505d2778085aa90988d652013",
+      "object_sha256": "0fb7ec1513462019d6268763f99cd901542e8d1a294b22d213543d67058d77eb",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/decode-vd-vs-vt-accumulate/comparison.json",
+      "comparison_sha256": "c78d1d95f1992da534f12754a438426eb429346d159d5cae1d3b2490e5c2362f"
+    },
+    {
+      "label": "decode-vd-vt-accumulate-vs",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1328,
+          "diff": 1231,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1328,
+      "helper_differing_bytes": 1231,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "aa262aa4144fd457aab7ccaef7390b871a23037851814cd2801a63f3eae94811",
+      "object_sha256": "318d7c5dffb09ff893baf315cec2dc133a363727f8ecdd4849fe0e00e89b82ed",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/decode-vd-vt-accumulate-vs/comparison.json",
+      "comparison_sha256": "38ea17ac58d4d11652faa84e045e0e810e8abb976a448e4fa7e49e5f53b702dc"
+    },
+    {
+      "label": "decode-vd-vt-vs-accumulate",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1248,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1248,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "7a6a5627f30fcd3bed66ed58da62f3cb1e1f103f31f5fc65305f6b93b81738ee",
+      "object_sha256": "bc07cf23e749c8f209e35b105659290c28ec0e35be460ab08efeda086aaf3dc2",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/decode-vd-vt-vs-accumulate/comparison.json",
+      "comparison_sha256": "ae3960bc5a503220704b0f51c7c218b02beb32193f298c8b83ad6d1461f0a808"
+    },
+    {
+      "label": "decode-vs-accumulate-vd-vt",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "0c5f5585fa25847913163f859f9a9c2f6f628fd4137306c54a58ac17fc138dc3",
+      "object_sha256": "1f8d22bf09535e3eb0f4d81a1216208eadcc186292811e50320f487879af915d",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/decode-vs-accumulate-vd-vt/comparison.json",
+      "comparison_sha256": "c64182501b715db21e520784c0e1e27079c98eebb0beec09324deffee7a3d37f"
+    },
+    {
+      "label": "decode-vs-accumulate-vt-vd",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1226,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1226,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "edf0d4badc15fcf35b4b5a567ad1696ba0d9b48c6c581dba7fda28c8734702aa",
+      "object_sha256": "60c6e70430c74047aada08e9898de9b3d02694f0b499cfff8d24e312ecc2af42",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/decode-vs-accumulate-vt-vd/comparison.json",
+      "comparison_sha256": "1a0f701504d3926e15d7a7a5dd4b647b77fa4545d32c58d3c8261ce932c755d3"
+    },
+    {
+      "label": "decode-vs-vd-accumulate-vt",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1251,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1251,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "bbe156448804a70d677beb09b33c7ec040bcde85825d1173f0a132643c3a03e1",
+      "object_sha256": "9514a536cd76ed61e0e9f7a3eec65b42e142a9792b59ab15f651d108ed323a80",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/decode-vs-vd-accumulate-vt/comparison.json",
+      "comparison_sha256": "ace517b034a84aabec8f33db2f4f202b7a99f7a557da79fbe053b64d5f005047"
+    },
+    {
+      "label": "decode-vs-vd-vt-accumulate",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1248,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1248,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "66ed3d5c5d905b13e764901788b3c9d651aa5306368a1c1a66b37f141769e5ca",
+      "object_sha256": "12387a58c3154ba4e8a88b9822b71fb85a8146d44558cd82e5b02149223ad324",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/decode-vs-vd-vt-accumulate/comparison.json",
+      "comparison_sha256": "8c3bccd4ac4f063f78e9244af58d4933e9c2a2a43f529f37a3e31710dc032728"
+    },
+    {
+      "label": "decode-vs-vt-accumulate-vd",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1228,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1228,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "2bbe00e535c16a400ddcfadfd50d9af68adf3366b297f21733aaaa1b520b6b2a",
+      "object_sha256": "6741b8a4155375a97c423a5996fffbd3de25982fdf5ec17d80d013bd3ad8835a",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/decode-vs-vt-accumulate-vd/comparison.json",
+      "comparison_sha256": "32f50b357c4dc435b3bd7afb52887698598cad569e44efd2ef449b14053404fd"
+    },
+    {
+      "label": "decode-vs-vt-vd-accumulate",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1223,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1223,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "9826d11c6a3c522bae0b364bbe21d88b163b1268b74fda11a73650b9cf649266",
+      "object_sha256": "4d97bea0c31f73e797ccf73d73bef5a14c0908c4ea4928d012c5ecaf85d24636",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/decode-vs-vt-vd-accumulate/comparison.json",
+      "comparison_sha256": "a6394d7ffab1995aea13f65f7a21f3c05d8fb88ac8eab3f747eb4cf3a26bca55"
+    },
+    {
+      "label": "decode-vt-accumulate-vd-vs",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1262,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1262,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "c66f0f504ad56f706d17192e7d8761a2fefd187c9a4b44c1b39cea7d184a6854",
+      "object_sha256": "87bbe79c6ee2aaee900616c18f668231b3faee7bb302e28977c1d97cbc467bf6",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/decode-vt-accumulate-vd-vs/comparison.json",
+      "comparison_sha256": "15e5d6b2ae9eac0d0a4d00e2e33c8ec14fbf58a4c1d71c47c738fd6cb64543e1"
+    },
+    {
+      "label": "decode-vt-accumulate-vs-vd",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1328,
+          "diff": 1143,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1328,
+      "helper_differing_bytes": 1143,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "23af85a79d8fdd5532a1a41aa8dc0cd703b7865fc985951ee4c9f87ca0808469",
+      "object_sha256": "21e9d56b03096bf87c8636f257094e63dfcf56b070346d28e67155e217f56afe",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/decode-vt-accumulate-vs-vd/comparison.json",
+      "comparison_sha256": "6d7d626438f05b83da39a6724a6de67510bd10e0ffda2a84dd3e12721206f06b"
+    },
+    {
+      "label": "decode-vt-vd-accumulate-vs",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1253,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1253,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "f61d264bd689f20f781291dea575333fa3419e5c2a1298ad9beb2cd1fe0af3b1",
+      "object_sha256": "6de6004208447ea6b4feee2dfa4331600b22771f8dc6631872b6d912664871fb",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/decode-vt-vd-accumulate-vs/comparison.json",
+      "comparison_sha256": "0de8aa3cba194cb6ba611d9ca2a126eec6f66ee94df247240497712b563bf470"
+    },
+    {
+      "label": "decode-vt-vd-vs-accumulate",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1328,
+          "diff": 1138,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1328,
+      "helper_differing_bytes": 1138,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "bc47e58875fd25ffc64d70d2f589b1f379c23745ce3becd86d451d96d02544fa",
+      "object_sha256": "d28fc1bee0d0ca595ac27dba0cf9ffd41539fe619cf4ba578f4dba6f5cdce7fa",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/decode-vt-vd-vs-accumulate/comparison.json",
+      "comparison_sha256": "2cb4e208e4759ea60846a89740de4d37d4aa9bf6b23323cd835dfbc43d3c842b"
+    },
+    {
+      "label": "decode-vt-vs-accumulate-vd",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1228,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1228,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "b049c096d5a14980b4d3f0b3f4c33990420fc4b6547a5b25cd5f95dda5a0c030",
+      "object_sha256": "c1f3c36defa05e2b7cedbef059353ebff00c643865d010d8712f8c69e7979b08",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/decode-vt-vs-accumulate-vd/comparison.json",
+      "comparison_sha256": "3c4deb09a471447e6974036108518160f2ff693d72b4cf1900182be14554d675"
+    },
+    {
+      "label": "decode-vt-vs-vd-accumulate",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1223,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1223,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "1047f7c3494b23712b01b66aea91a073113dcf0e6385dff74334c0ed80f87e47",
+      "object_sha256": "715a7dcc6569d85f252196471864c77c86d071dcf2ca1cc7fb8dac911a7c712d",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/decode-vt-vs-vd-accumulate/comparison.json",
+      "comparison_sha256": "41516f350188948fb337fed832effcdd3b255262bffa4d3f513c30b22c0c85b6"
+    },
+    {
+      "label": "flow-countint",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "c49fefd8f9c5d0e092c215ed10f41a5bad58f22bb109c219167551399b0c22fb",
+      "object_sha256": "98880035476fd73b4e40b8186f6f6ee4b510007107e60202b67784182fda1a7f",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-countint/comparison.json",
+      "comparison_sha256": "687ca206b92de7ef0466f4fb2be72bddb123f30c6764f57875069b03f855d9a6"
+    },
+    {
+      "label": "flow-inside",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1175,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1175,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "62a3a327b27da2dfeaa8b383ae483de54d1184cd6e90df8111d266c5c76b77dd",
+      "object_sha256": "101036adbcaf1149f20fbcf784264de539dea5322998d64153ca313cb272c2f9",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside/comparison.json",
+      "comparison_sha256": "53dfe62d6ee4b46cd4a1bd02e6b74d0ad741b379fd2332736116b7e6c983e666"
+    },
+    {
+      "label": "flow-inside-boolacc",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1175,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1175,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "f7fd8206facd3ff74a0cc8c5504196a7dc873e3441dc362c2796e20394a8f7ce",
+      "object_sha256": "7c8064a66da8dcaf90033baeb2ed6f52314739287eb41561f7c134e8bbd0ee68",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-boolacc/comparison.json",
+      "comparison_sha256": "1082eaec48c49c84c554b1f56d5182fec194ba99a86108fd8f310113a468dec7"
+    },
+    {
+      "label": "flow-inside-boolround",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1175,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1175,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "af79156277cff2e03c40934beac280f616d7d1da3df5212df6085954335f2f35",
+      "object_sha256": "5d648573fba80cdc11ef249f61c9d0eb10e65274d9026b8699e6905276c121f3",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-boolround/comparison.json",
+      "comparison_sha256": "437a626e34fb5502673572b0e9f3611d9d4f88ab9ef25b146716ae512cf1dd7f"
+    },
+    {
+      "label": "flow-inside-directvs",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1328,
+          "diff": 1252,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1328,
+      "helper_differing_bytes": 1252,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "5c089773f4cce2a5df16982b9f02b4cd46f9955599ebc16cb91cb1447453dd84",
+      "object_sha256": "3f5970266ddd805457862ca99d49612033e77d3b6c1969a4c84a2f3c971eb9cf",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-directvs/comparison.json",
+      "comparison_sha256": "2bc7b2c6509d0f5413c5172869e7f059afdf4197925e1aab411c61d414ac315e"
+    },
+    {
+      "label": "flow-inside-localshift",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1175,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1175,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "da31abe54141ed312b6cf2a78a595b8ba84da3d940f987721dba7b6075e8d2a9",
+      "object_sha256": "29422d427f64a65b9e0169044cb9bdbe99cef53b0b8514d8155ddc3487dd639a",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-localshift/comparison.json",
+      "comparison_sha256": "01e0604a9ba7862155e914cdac7bcf25e33b0de54270ccaaf55f6ac71c6862f3"
+    },
+    {
+      "label": "flow-inside-onecast",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1175,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1175,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "92584f5eb1ccc42efc4221071a458e74fb5880bde3ad80d93e5d43ed56cc3918",
+      "object_sha256": "0c2f2598179757b227cc613cca03fe8092d5aa84b8cf7d8dd9d64f420edc390c",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-onecast/comparison.json",
+      "comparison_sha256": "8e75c4b9cd03512844b6d3920ab35e06e244f83236a6b7c8844a5c0090490316"
+    },
+    {
+      "label": "flow-inside-productShift-char",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1296,
+          "diff": 1216,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1296,
+      "helper_differing_bytes": 1216,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "1309844c98a480e72767d10f09958243e87e1ad4f1df7130a65179c15f06a9e3",
+      "object_sha256": "e4936b34621db645313c273be75926017e4dd280dfbf3fdfa3fa788ccd345ee5",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-productShift-char/comparison.json",
+      "comparison_sha256": "236bb2daca7c901c3d6c1b65182fffb0c8bf0c9ac04e5b194c028801a1aa2eaf"
+    },
+    {
+      "label": "flow-inside-productShift-long",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1175,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1175,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "235d3828be973ec2cd8457f6c7dbb08b6eba78588cda6b08997ecc3b0e193c36",
+      "object_sha256": "95dc6a43a3312480829421c6508ed6ae1d868badb1a8b9b53299c6ba113ef99d",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-productShift-long/comparison.json",
+      "comparison_sha256": "29f812b02493f838b3a4e2fcfb443542b2e58efe52cb8ec7cb24baef0a15d32a"
+    },
+    {
+      "label": "flow-inside-productShift-short",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1179,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1179,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "2ac675f8e1c40d5b448894772eecbab565fad65cd28956b3dac0f81aafc139af",
+      "object_sha256": "97faf43ac6349459404622dc3135a4679e214541bc1b2a143ea6482505158d5b",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-productShift-short/comparison.json",
+      "comparison_sha256": "bf0c18d8b8b46db2bb40b738c44a4612b63967f966571d1ab3334d92d1435e8b"
+    },
+    {
+      "label": "flow-inside-registershift",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1175,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1175,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "08dc74d9d5b4101357c751b052b1132a7a71f98d93bffff1fa48abcb51dee22a",
+      "object_sha256": "801bf81ab7b3d15287ecf4cf2386979f984a1767c2c05e25ffca17b2bb110866",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-registershift/comparison.json",
+      "comparison_sha256": "745910ab85258d8d0a1fa941995a046b646875bbb6ae5fb5bb17ad0a7c641fd2"
+    },
+    {
+      "label": "flow-inside-shortvs",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1280,
+          "diff": 1240,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1280,
+      "helper_differing_bytes": 1240,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "e8f0dcda0382b861a31fb13504611b93e71bc1917f637b77a4a143581f4e98d9",
+      "object_sha256": "904f6173b74d3d2b5eeb400bb73ad870a9fcdffdbbb4a2e8818407283a8814ad",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-shortvs/comparison.json",
+      "comparison_sha256": "25676c8eb06014f092ce9cbbc2607e051d49f25fb9df0c585ae16e11bfbb75be"
+    },
+    {
+      "label": "flow-inside-signedview",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1175,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1175,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "e4db90cda6cc813cf2c0a878ff5fdaaa895f7a473a635b0d05dca34be74a968c",
+      "object_sha256": "7dde8937b79209cf6c9658c92fd5e9ec5c29bf179313fd169f52434fe300dcfa",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-inside-signedview/comparison.json",
+      "comparison_sha256": "d51b7efc7e797c9c6cd69fa9a0d1abf5211e21ef0f614e630126b997828e919b"
+    },
+    {
+      "label": "flow-looplocal",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1207,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1207,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "7f9eaa03cd4a8a82020edd8d627c30e2642f90445f702f26cce886ec35f71b75",
+      "object_sha256": "3d50bd0b6d012cbfb9bce43b8b57c6225636fcc60802226c5a8ac9cbd08fbc01",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-looplocal/comparison.json",
+      "comparison_sha256": "9bd269db5f3a0f9a0903a8fdc7aaaad92b0171273e7bb50312b8312137edc6e3"
+    },
+    {
+      "label": "flow-onecast",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "9aaf6cdf06209c43b7dbe5a66016ae277b53cd8952ea5073a217a45e972a7377",
+      "object_sha256": "0e01b1b213e17fc62b97801ba23359a85c42eef0852348766f5b3944c1d28409",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-onecast/comparison.json",
+      "comparison_sha256": "62367fe8cce52853641e1916205e4aefe484effc0b67f1875dccf4629075e4f2"
+    },
+    {
+      "label": "flow-separate",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1227,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1227,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "11ec13a8b3295e35cbeadfc7e26df635559399a5e0b08683f1c0a481ad6585df",
+      "object_sha256": "980c85be8ec97e0c5995d87b5019d15e6c67ad92b78e1e96b5592b1a8c02e7eb",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-separate/comparison.json",
+      "comparison_sha256": "e9dec07b26a60eb7f0653535be3ed5ffeb4a33ab724d661fd49b1a883efb2a4d"
+    },
+    {
+      "label": "flow-separate-inside",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1175,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1175,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "62a67633c28c9d553a3bb7e94965bdd79e53cd713fd3103f8b6f1b5e9aa84501",
+      "object_sha256": "94829c5ad63ee0ae29777a7a0cca4df9f41bd6bbcc4414492d36a5f5cba60a1a",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-separate-inside/comparison.json",
+      "comparison_sha256": "b52b8eb2f49a3d5ddc52ec5941e482085623efbe3306c6f48f009baa8c9ab7ad"
+    },
+    {
+      "label": "flow-signedview",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "8db491f19adf90db20eeae5a9b46fdd70598afc4489b1424db1baea9c0717eb1",
+      "object_sha256": "228acc2e46c9e993ff42c354334b69d220d768690778d7053511bd9ca8ffa726",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/flow-signedview/comparison.json",
+      "comparison_sha256": "c035072c54e6224c153512f40c64cef97d312ede13b3b59e94710e72596d567b"
+    },
+    {
+      "label": "lane-bitfield",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1221,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1221,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "72625704a33aa0797972988b0474487ebb6fffa39ab0c4862489ec4687f36f54",
+      "object_sha256": "b3d888e7f29de6a6e89666536afcd7a0da604912741174fd199e8e71c7093543",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/lane-bitfield/comparison.json",
+      "comparison_sha256": "13f2d35a1dd07d7b7724a777199662a8ffe642ab8f5eddf3d33f51206059c810"
+    },
+    {
+      "label": "lane-bitfield-tables",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "b133dcf504cc044ef2eb3a113d8d8cc73c6c7938643981dd8359903a7fffe814",
+      "object_sha256": "802e1a2c9f934019fe3ea431a05bf8139b34155f8ec2f837078902e4ec33fbac",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/lane-bitfield-tables/comparison.json",
+      "comparison_sha256": "0f29521ec7e16f4f4a656365e4502d38d6d6db104db9cca3712b86d5c1822c29"
+    },
+    {
+      "label": "lane-full-word",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1221,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1221,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "7488586a6f1dff21d173ad64e6ab805f774d508030eb91f0a6054028764b4d00",
+      "object_sha256": "cd4073f81871b60e1434d236a5de226824976a3a4b239c21a8957466244fc13d",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/lane-full-word/comparison.json",
+      "comparison_sha256": "415f43bb8b8abbc2355f8d08f5cce2a41c4e23de6588090392c9e0ccc0d06d0c"
+    },
+    {
+      "label": "lane-outside",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1229,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1229,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "b594127a600c2e826eb4d772dd7aad08e998c90c1ec5a5de364e452fe5fc3756",
+      "object_sha256": "b7b14bcb079212d627213cc48e61c9663dce5c8daae402bc3d14762aa255ff65",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/lane-outside/comparison.json",
+      "comparison_sha256": "eecfea24b9357422b10621836db98427d0c2c93248b029f63187171c9d8af9c7"
+    },
+    {
+      "label": "lane-signed",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1221,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1221,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "3e6260f8ba05d08a602e381305cf2692525122d73097a475b12201986b33b1f3",
+      "object_sha256": "989d20aee7c314063c896755fdafe15d9a22bc5500b47f8fd31c70748e5c80c3",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/lane-signed/comparison.json",
+      "comparison_sha256": "6264fea04a30970185215cdb4bcb5648ba3a3bc80984f1c4ee26426c168854b4"
+    },
+    {
+      "label": "narrow-vd-16",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1229,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1229,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "03767b16f55285bcb61e95c8fbd77e1de561c4debc417336422db768d42a7b95",
+      "object_sha256": "c2b7b06b2fee6f44553f8f5686e81f2e732cc4b15ad6a8218260a64fb3f3a401",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/narrow-vd-16/comparison.json",
+      "comparison_sha256": "3eb936a4053e16c11a66d5347dc9b2c3a98993a063c3fb55a4d7ea3150690aa2"
+    },
+    {
+      "label": "narrow-vd-8",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1296,
+          "diff": 1248,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1296,
+      "helper_differing_bytes": 1248,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "65227f6ac699d1666eaed21a6c129c598ccc0aa77aaf79f62e64a22ea74e99c6",
+      "object_sha256": "25c0b8e3fd7b0494e9253793e616f2fefd4e16a6c17f23f14eada91a201f2fae",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/narrow-vd-8/comparison.json",
+      "comparison_sha256": "eb641a9839376ed81a4dba34f2a6e4d6db40b74fd9fba3c7f97577a2ef7a9def"
+    },
+    {
+      "label": "narrow-vs-16",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1280,
+          "diff": 1247,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1280,
+      "helper_differing_bytes": 1247,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "a2313f1ba9096932e240a451807584aadf9a7ec3fec10a4f48645edc5fc27e38",
+      "object_sha256": "9d40f1bd605d902626e7579f6859d4d1e4ab699976a0d08bc58f344d967719c5",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/narrow-vs-16/comparison.json",
+      "comparison_sha256": "345b4824b9f03a6831dcdde12743c1768766d83dca9ad9b7ecac431b95fb8377"
+    },
+    {
+      "label": "narrow-vs-8",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1257,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1257,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "1b51829602316faea06a5ba040de4155d3610b96d3e297a0c184adb1dc451fed",
+      "object_sha256": "1b404ea89691570ee12dec051fae5b5a06a682b5ef7dde182daa576b4e9a63ae",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/narrow-vs-8/comparison.json",
+      "comparison_sha256": "b307fe1912ad202159de9d7ad5fe118529011045eb6048af2ee93daba2201341"
+    },
+    {
+      "label": "narrow-vt-16",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1170,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1170,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "c33578493e1941cca93a46897bc678fb48c2bebf4cab71525763d23b8221abb9",
+      "object_sha256": "e82006b424b9e2206646287e226089a3f0364e162cb0855c1c417f1a8affd366",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/narrow-vt-16/comparison.json",
+      "comparison_sha256": "711a1ca27a9d78002b21c65eb23133018c9b4152367b7d0ed916a3218ec4fada"
+    },
+    {
+      "label": "narrow-vt-8",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1328,
+          "diff": 1204,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1328,
+      "helper_differing_bytes": 1204,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "3d8be919a7e118b2c2f70a0b39b50bbf88421423382cea11cd6576037d70ea88",
+      "object_sha256": "3b0e5653198b93410b18421b80bccb24b2d51853045c930703cea3cfe5664dba",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/narrow-vt-8/comparison.json",
+      "comparison_sha256": "fec13143d2a242310b986371ee0640cc37685e21c9a4a49def769aacb77c91df"
+    },
+    {
+      "label": "signed-loop-index",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "95d82cf5397a8335b120be678ecca8b20eb67c0459d21bf0302a118bd2e137e8",
+      "object_sha256": "c152f106dec9b9a7b907a7c913e4b464e3bdd737a82fd03fe563f8d110566db6",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/signed-loop-index/comparison.json",
+      "comparison_sha256": "1eb485eac5cf66e7e9227e586f664cdec56a7ba2edc0322b376ac577062d8d5b"
+    },
+    {
+      "label": "wrapper-cache-both",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "f393334b1c43cbec9dd6bb356a40ba2a13cb21701da5368eb0a2eb74ac3cdbb4",
+      "object_sha256": "8a459f2ae84db52823c253d40d055257c6cf334165ebb61672424862eced42d9",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/wrapper-cache-both/comparison.json",
+      "comparison_sha256": "4b962639f2cef60cfe11791a8c743f7a659c62b4b82448934e01b804e5182e93"
+    },
+    {
+      "label": "wrapper-cache-fast",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "a644fef81a4012737b794fd7b0134ff97f6f13b5663a6cf0305d1c2a2d94c6e3",
+      "object_sha256": "100dca05a5521bab678b9b1d86dd9be0033a45ee415ecec14263bf7ccaf4bd4f",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/wrapper-cache-fast/comparison.json",
+      "comparison_sha256": "3b0fe9d0d1f2dc97a5a3d1dc87ed74fa0d252b8f4660a68d6fb36961e0d3d925"
+    },
+    {
+      "label": "wrapper-cache-kind",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "6e38bac7634c039f4a959ad58e0fb6cca334026ddbb59548919f1aa20c5beb63",
+      "object_sha256": "a8315f0e2bbf69a3dee4d570aed9426f493ba9dabea6688ba9a19de5568d50bf",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/wrapper-cache-kind/comparison.json",
+      "comparison_sha256": "4b051dd76dab83ea7e481c349de4989c05e6ee6197b499ea7e8b885cc89fad2e"
+    },
+    {
+      "label": "wrapper-cache-pc",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "c276056abba650fdc14020f1297ac8f0e5da7a5065972ecbdad279bd67b85afe",
+      "object_sha256": "f22345d74892041c480af9b7dd44ae106e91e80b49127fcd11faffc30d6213a6",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/wrapper-cache-pc/comparison.json",
+      "comparison_sha256": "97fccd45cb99040c710172fa980464fd2731f1461951cd716b26ab938e730eb7"
+    },
+    {
+      "label": "wrapper-comma-pc",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "b2ba89c31175a3c32271400d27311cdc745a42a337d4c652c476afe96e1a805d",
+      "object_sha256": "a8b942286b695cec23e6baa7db745a9ab3045a45ff7ccdb34fdf48c6eb0a15a5",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/wrapper-comma-pc/comparison.json",
+      "comparison_sha256": "5359e3dd21df7590e4c9b468e010a461f5800c2e549df4a9c85bc1a87a158b2a"
+    },
+    {
+      "label": "wrapper-kind-first",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "7b94a5f44674726a8ff9a71a8640b3a06da8e71b36c6ee494e91e41b0cd9dbb8",
+      "object_sha256": "2c5aeaf5a392f171e984e4733f48800d858a28a94fb283bea4edbc4965708715",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/wrapper-kind-first/comparison.json",
+      "comparison_sha256": "53f729794dbc4ed4debca31972401f3569d2812143d8c8328bf7ca52d869752c"
+    },
+    {
+      "label": "wrapper-via-opcode",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiply",
+          "size": 48,
+          "diff": 31,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 31,
+      "source_sha256": "40d657580ce51c7917a44c6faacb4f80028cc825692efa256ebe983f7a8233ec",
+      "object_sha256": "799821cad80a2a1edb0471a81c6368b39b2a47fe088c6cbcb995f934c36d5813",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/wrapper-via-opcode/comparison.json",
+      "comparison_sha256": "fce1ca3b5bcbf4e6444b773dfc1e83b36accee535da1f7a7dc18411158ae2428"
+    },
+    {
+      "label": "wrapper-via-opcode-inline",
+      "exact_functions": 158,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_AudioTransformStage",
+          "size": 1296,
+          "diff": 1034,
+          "was_exact": true
+        },
+        {
+          "name": "RSP_ExecuteAudioMicrocode",
+          "size": 8240,
+          "diff": 7680,
+          "was_exact": true
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "42afbadb75033eca41f8f92f048e18fd9595632609aad2277dc9c65e6092c518",
+      "object_sha256": "640a1feaa222be34c0394af115f8a7074f24d765b36298e754d5d7abd7e1d313",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/wrapper-via-opcode-inline/comparison.json",
+      "comparison_sha256": "547c93481ed66585f87b276a6f0a7fc90e2428446174f3c3d60a81f3344e775a"
+    },
+    {
+      "label": "zero-order-accumulatorShift-rounding-productShift",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1222,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "b347274c9174fb250d65ee5443d26691199d21e5f97d657324d6fa47df2a6912",
+      "object_sha256": "7f7790f0dae0aafff144128e7f8b0e4e51bdde441cb46e78861f647fcc007ccd",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/zero-order-accumulatorShift-rounding-productShift/comparison.json",
+      "comparison_sha256": "75a2bf96b02d78360e30ec625ffa388f8cf1f7210e0160c316ca8171bd6e58ac"
+    },
+    {
+      "label": "zero-order-productShift-accumulatorShift-rounding",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1222,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "2318ce64d2409e70289d723272ac4e920170aef034220fd8e0575e3b7cb6e004",
+      "object_sha256": "7129b071c90259861a8177a868a500432b97dfefc0559fa86b35ec6238c121be",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/zero-order-productShift-accumulatorShift-rounding/comparison.json",
+      "comparison_sha256": "f37a1b613c2693e7b421d2a47b61051c3a00ac84270f6053b64d1f3ab3093c7c"
+    },
+    {
+      "label": "zero-order-productShift-rounding-accumulatorShift",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1222,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "945412ea085a27f43bb04023fde53a849427f83c2c0c89e1bd9d68f5ef3ea895",
+      "object_sha256": "1f93b9fcf08bc5021b9dd3c3052ee475658cfec5f611cadd1834fd3e271a532f",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/zero-order-productShift-rounding-accumulatorShift/comparison.json",
+      "comparison_sha256": "d34d351329381d347fb229a5695b1c2692798683130b9b6b6aae1b7978eca462"
+    },
+    {
+      "label": "zero-order-rounding-accumulatorShift-productShift",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1222,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "91516c43d4aa861432143457adbb0bf2faab737fe9764288eaa03918aee84b74",
+      "object_sha256": "ddb57259245d972b744f00ff4eb912b0d80413c57ff431d533ee149953d23ae0",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/zero-order-rounding-accumulatorShift-productShift/comparison.json",
+      "comparison_sha256": "c59329746594deb0489ea84be2689fcae998a0ea36115307ec79ff7226933ab9"
+    },
+    {
+      "label": "zero-order-rounding-productShift-accumulatorShift",
+      "exact_functions": 160,
+      "exact_typed_objects": 25,
+      "unresolved": 0,
+      "changed": [
+        {
+          "name": "RSP_VectorMultiplyExec",
+          "size": 1312,
+          "diff": 1222,
+          "was_exact": false
+        }
+      ],
+      "helper_size": 1312,
+      "helper_differing_bytes": 1222,
+      "wrapper_differing_bytes": 10,
+      "source_sha256": "40b74e0301648188c53440575a9bb285ff4cb7d62cb526b1c60b59eb87a9b782",
+      "object_sha256": "90085dffa8833471a2886c2b5aca93bcbdae8734c11bd225e14563dd635db31e",
+      "comparison": "/root/.ai-tmp/audio-rsp-generic-root.rzdp9hcb/zero-order-rounding-productShift-accumulatorShift/comparison.json",
+      "comparison_sha256": "34d0237d5934db43a90c1fb03ceb3bf7fa420316263fd2b15bfd92ea1071ca23"
+    }
+  ]
+}
