@@ -1,0 +1,829 @@
+{
+  "status": "scratch_native_source_hypotheses_no_canonical_edits",
+  "original_sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+  "canonical_source_sha256": "82ebf8c9d72e8c83d42bb97e3351627462336fb2693d47b449b803d6537988ac",
+  "primary_source_sha256": "1f4c51dae31d835e0fef05a2463bf9af3c25330138d59498bcee334b41a97137",
+  "frozen_link_inputs": "/root/.ai-tmp/nemu-audio-recovery/whole-integration/runs/708tkzze",
+  "compiler_sha256": {
+    "cl.exe": "05be307f04d8c3a9c211b77e85a63992be4642f14b4de31c04f9bb3d7bb1d65f",
+    "c1.dll": "b4992fc795a21fd808f156f13d129ce8ccc0d6fbcbf4187f0a9db349678db989",
+    "c2.dll": "3755d22dd896ca0045b22b0478d6ad56185d0c98845e2aa2e1d2300460289ad0",
+    "link.exe": "1560d85164dfb763dd13f90f33ff9c6f1cd80f2afada03eed8d0a314593581f1"
+  },
+  "variants": [
+    {
+      "name": "baseline",
+      "source_sha256": "82ebf8c9d72e8c83d42bb97e3351627462336fb2693d47b449b803d6537988ac",
+      "object_sha256": "e1ca17a8acdafbda33e6c4e7877978583232b5b30e1d7d9dc1b42ee7d7bab811",
+      "command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/IZ:\\root\\nemu-decomp\\src\\audio\\ahle_ds",
+        "/FoZ:\\root\\.ai-tmp\\audio-jpeg-retained.d6t9mu0l\\baseline\\Jpeg.obj",
+        "Z:\\root\\.ai-tmp\\audio-jpeg-retained.d6t9mu0l\\baseline\\Jpeg.c"
+      ],
+      "functions": [
+        {
+          "name": "_JpegReadBlock",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegWriteBlock",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegInitializeCosine",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegSwapSample",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegCopyBlock",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegInverseDCT",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegInverseDCTAlternate",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegDecodeMacroblock",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_DCTList",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_poly",
+          "equal": true,
+          "relocated": true
+        }
+      ],
+      "bss_size": 11800,
+      "bss_symbols": [
+        {
+          "name": "_in",
+          "offset": 0
+        },
+        {
+          "name": "_out",
+          "offset": 1536
+        },
+        {
+          "name": "_q1",
+          "offset": 2560
+        },
+        {
+          "name": "_q3",
+          "offset": 2816
+        },
+        {
+          "name": "_rgb",
+          "offset": 3072
+        },
+        {
+          "name": "?u@?1??poly@@9@9",
+          "offset": 7168
+        },
+        {
+          "name": "_q2",
+          "offset": 11520
+        },
+        {
+          "name": "?initialized@?1??JpegInverseDCT@@9@9",
+          "offset": 11776
+        },
+        {
+          "name": "?initialized@?1??JpegInverseDCTAlternate@@9@9",
+          "offset": 11780
+        },
+        {
+          "name": "?u_start@?1??poly@@9@9",
+          "offset": 11784
+        },
+        {
+          "name": "?u_div@?1??poly@@9@9",
+          "offset": 11792
+        }
+      ],
+      "common_symbols": [],
+      "link_command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "link",
+        "/nologo",
+        "/dll",
+        "/incremental:no",
+        "/debug",
+        "/opt:noref",
+        "/opt:noicf",
+        "/subsystem:windows",
+        "/machine:I386",
+        "/base:0x10000000",
+        "/align:4096",
+        "/filealign:4096",
+        "/out:audio.dll",
+        "/pdb:audio.pdb",
+        "/map:audio.map",
+        "/def:audio.def",
+        "ABI1.obj",
+        "ABI2.obj",
+        "AudioHLE.obj",
+        "ABI3.obj",
+        "AudioLegacy.obj",
+        "DirectSound.obj",
+        "AudioLog.obj",
+        "CPUFeatures.obj",
+        "Jpeg.obj",
+        "Mp3.obj",
+        "AudioProcessing.obj",
+        "AudioResample.obj",
+        "AudioPlugin.obj",
+        "RSP.obj",
+        "Audio.res",
+        "Z:\\root\\nemu-decomp\\toolchains\\vc6\\lib\\dsound.lib",
+        "winmm.lib",
+        "kernel32.lib",
+        "user32.lib",
+        "gdi32.lib"
+      ],
+      "linked_common_symbols": {
+        "_AttachedGetDllInfo": "0x1013052c",
+        "_AttachedProcessAList": "0x10130530",
+        "_AttachedAiReadLength": "0x10130534",
+        "_AttachedAiUpdate": "0x10130538",
+        "_AttachedRomClosed": "0x1013053c",
+        "_AttachedInitiateAudio": "0x10130540",
+        "_PluginIMEM": "0x10130544",
+        "_PluginInitialized": "0x10130548",
+        "_AttachedDllAbout": "0x1013054c",
+        "_AttachedDllConfig": "0x10130550",
+        "_AttachedAiLenChanged": "0x10130554",
+        "_PluginDMEM": "0x10130558",
+        "_AttachedCloseDLL": "0x1013055c",
+        "_AttachedAiDacrateChanged": "0x10130560",
+        "_AttachedDllTest": "0x10130564",
+        "_AttachedAudio": "0x10130568",
+        "_AudioProfileCounters": "0x10130580",
+        "_d17": "0x10168580",
+        "_c1": "0x10168582",
+        "_d6": "0x10168584",
+        "_c10": "0x10168586",
+        "_c2": "0x10168588",
+        "_d16": "0x1016858a",
+        "_d2": "0x1016858c",
+        "_d21": "0x1016858e",
+        "_d19": "0x10168590",
+        "_d23": "0x10168592",
+        "_c8": "0x10168594",
+        "_d10": "0x10168596",
+        "_d18": "0x10168598",
+        "_d8": "0x1016859a",
+        "_c5": "0x1016859c",
+        "_d12": "0x1016859e",
+        "_d22": "0x101685a0",
+        "_c4": "0x101685a2",
+        "_d26": "0x101685a4",
+        "_d11": "0x101685a6",
+        "_d0": "0x101685a8",
+        "_c12": "0x101685aa",
+        "_c11": "0x101685ac",
+        "_d5": "0x101685ae",
+        "_c7": "0x101685b0",
+        "_c15": "0x101685b2",
+        "_c9": "0x101685b4",
+        "_d3": "0x101685b6",
+        "_d24": "0x101685b8",
+        "_c0": "0x101685ba",
+        "_d7": "0x101685bc",
+        "_d4": "0x101685be",
+        "_d14": "0x101685c0",
+        "_c6": "0x101685c2",
+        "_d29": "0x101685c4",
+        "_d31": "0x101685c6",
+        "_c3": "0x101685c8",
+        "_d25": "0x101685ca",
+        "_d9": "0x101685cc",
+        "_d30": "0x101685ce",
+        "_c13": "0x101685d0",
+        "_d1": "0x101685d2",
+        "_d28": "0x101685d4",
+        "_d13": "0x101685d6",
+        "_d20": "0x101685d8",
+        "_d15": "0x101685da",
+        "_res": "0x101685e0",
+        "_c14": "0x10168ee0",
+        "_d27": "0x10168ee2",
+        "_LogInstance": "0x10168ee4",
+        "_LogWindow": "0x10168ee8",
+        "_LogEdit": "0x10168eec",
+        "_QueuedBlockReady": "0x10168f00",
+        "_SoundBuffer": "0x101693b0",
+        "_QueueBytes": "0x101693b4",
+        "_AudioErrorText": "0x101693c0",
+        "_AudioEvents": "0x1016b3c0",
+        "_QueueWrite": "0x1016b3c4",
+        "_MIRegisters": "0x1016b3c8",
+        "_AudioIniKey": "0x1016b3e0",
+        "_QueueCount": "0x1016b400",
+        "_HLEWaveFile": "0x1016b404",
+        "_AudioInstance": "0x1016b408",
+        "_ABIFile": "0x1016b40c",
+        "_SoundEvents": "0x1016b420",
+        "_QueuedBlockLength": "0x1016b460",
+        "_IsNTSC": "0x1016b910",
+        "_CPURegisters": "0x1016b914",
+        "_AudioIniFile": "0x1016b920",
+        "_BufferLimit": "0x1016ba24",
+        "_BufferPosition": "0x1016ba28",
+        "_RDRAM": "0x1016ba2c",
+        "_SoundCriticalSection": "0x1016ba40",
+        "_QueuedBlocks": "0x1016ba60",
+        "_AudioAboutText": "0x1016bf20",
+        "_AIRegisters": "0x1016c020",
+        "_CurrentPlayPosition": "0x1016c024",
+        "_DirectSound": "0x1016c028",
+        "_WaveFormat": "0x1016c040",
+        "_HLELogFile": "0x1016c054",
+        "_QueueRead": "0x1016c058",
+        "_PrimaryBuffer": "0x1016c05c",
+        "_TimerUser": "0x1016c060",
+        "_CurrentAudioLength": "0x1016c064",
+        "_AudioIniSection": "0x1016c080",
+        "_AIWaveFile": "0x1016c0c0",
+        "_BufferDescription": "0x1016c0e0",
+        "_AudioWindow": "0x1016c104",
+        "_AudioUCode": "0x1016c108",
+        "_SeenCommands": "0x1016c120",
+        "_AudioTask": "0x1016c1a0",
+        "_AudioState": "0x1016c1e0",
+        "_AudioTaskCount": "0x1016c25c",
+        "___mblcid": "0x1016c260",
+        "___ptmbcinfo": "0x1016c264",
+        "___ismbcodepage": "0x1016c268",
+        "__mbctype": "0x1016c280",
+        "___mbcodepage": "0x1016c384",
+        "___mbulinfo": "0x1016c390",
+        "__mbcasemap": "0x1016c3a0",
+        "___ctype1": "0x1016c4a0",
+        "___ctype1_refcount": "0x1016c4a4",
+        "___lconv_mon_refcount": "0x1016c4a8",
+        "___lconv_intl_refcount": "0x1016c4ac",
+        "___lconv_num_refcount": "0x1016c4b0",
+        "___env_initialized": "0x1016c4b4",
+        "___onexitend": "0x1016c4b8",
+        "___onexitbegin": "0x1016c4bc",
+        "___mbctype_initialized": "0x1016c4c0",
+        "___setlc_active": "0x1016c4c4",
+        "___unguarded_readlc_active": "0x1016c4c8",
+        "__nhandle": "0x1016c4cc",
+        "___pioinfo": "0x1016c4e0",
+        "___sbh_initialized": "0x1016c5e0",
+        "___sbh_pHeaderDefer": "0x1016c5e4",
+        "___sbh_cntHeaderList": "0x1016c5e8",
+        "___sbh_pHeaderList": "0x1016c5ec",
+        "___sbh_threshold": "0x1016c5f0",
+        "___sbh_pHeaderScan": "0x1016c5f4",
+        "___sbh_sizeHeaderList": "0x1016c5f8",
+        "___sbh_indGroupDefer": "0x1016c5fc",
+        "__crtheap": "0x1016c600",
+        "___active_heap": "0x1016c604",
+        "___piob": "0x1016c608",
+        "__bufin": "0x1016c620",
+        "__nstream": "0x1016d620",
+        "__acmdln": "0x1016d624",
+        "__pRawDllMain": "0x1016d628"
+      },
+      "linked_data_virtual_size": 1279532,
+      "link_map_sha256": "c10c408a14b4fb300f19e40afb989cd210068def7e5d136f4e2105099fd52d32",
+      "dll_sha256": "297e1a3254272d5707266545218815c81da7c06cb96933671e5a11d43dd683b5"
+    },
+    {
+      "name": "zdata",
+      "source_sha256": "0fce0a4386898adaeaa6243e727e32f881a5fdedab010110e665e3c462673188",
+      "object_sha256": "cf5547668a2a5f4e7c3c4f448c44b41454145ac9593a4b2c9cb3d92eefdfb503",
+      "command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/IZ:\\root\\nemu-decomp\\src\\audio\\ahle_ds",
+        "/FoZ:\\root\\.ai-tmp\\audio-jpeg-retained.d6t9mu0l\\zdata\\Jpeg.obj",
+        "Z:\\root\\.ai-tmp\\audio-jpeg-retained.d6t9mu0l\\zdata\\Jpeg.c"
+      ],
+      "functions": [
+        {
+          "name": "_JpegReadBlock",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegWriteBlock",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegInitializeCosine",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegSwapSample",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegCopyBlock",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegInverseDCT",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegInverseDCTAlternate",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_JpegDecodeMacroblock",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_DCTList",
+          "equal": true,
+          "relocated": true
+        },
+        {
+          "name": "_poly",
+          "equal": true,
+          "relocated": true
+        }
+      ],
+      "bss_size": 11800,
+      "bss_symbols": [
+        {
+          "name": "_in",
+          "offset": 0
+        },
+        {
+          "name": "_out",
+          "offset": 1536
+        },
+        {
+          "name": "_q1",
+          "offset": 2560
+        },
+        {
+          "name": "_q3",
+          "offset": 2816
+        },
+        {
+          "name": "_rgb",
+          "offset": 3072
+        },
+        {
+          "name": "?u@?1??poly@@9@9",
+          "offset": 7168
+        },
+        {
+          "name": "_q2",
+          "offset": 11520
+        },
+        {
+          "name": "?initialized@?1??JpegInverseDCT@@9@9",
+          "offset": 11776
+        },
+        {
+          "name": "?initialized@?1??JpegInverseDCTAlternate@@9@9",
+          "offset": 11780
+        },
+        {
+          "name": "?u_start@?1??poly@@9@9",
+          "offset": 11784
+        },
+        {
+          "name": "?u_div@?1??poly@@9@9",
+          "offset": 11792
+        }
+      ],
+      "common_symbols": [
+        {
+          "name": "_zdata",
+          "size": 32
+        }
+      ],
+      "link_command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "link",
+        "/nologo",
+        "/dll",
+        "/incremental:no",
+        "/debug",
+        "/opt:noref",
+        "/opt:noicf",
+        "/subsystem:windows",
+        "/machine:I386",
+        "/base:0x10000000",
+        "/align:4096",
+        "/filealign:4096",
+        "/out:audio.dll",
+        "/pdb:audio.pdb",
+        "/map:audio.map",
+        "/def:audio.def",
+        "ABI1.obj",
+        "ABI2.obj",
+        "AudioHLE.obj",
+        "ABI3.obj",
+        "AudioLegacy.obj",
+        "DirectSound.obj",
+        "AudioLog.obj",
+        "CPUFeatures.obj",
+        "Jpeg.obj",
+        "Mp3.obj",
+        "AudioProcessing.obj",
+        "AudioResample.obj",
+        "AudioPlugin.obj",
+        "RSP.obj",
+        "Audio.res",
+        "Z:\\root\\nemu-decomp\\toolchains\\vc6\\lib\\dsound.lib",
+        "winmm.lib",
+        "kernel32.lib",
+        "user32.lib",
+        "gdi32.lib"
+      ],
+      "linked_common_symbols": {
+        "_AttachedGetDllInfo": "0x1013052c",
+        "_AttachedProcessAList": "0x10130530",
+        "_AttachedAiReadLength": "0x10130534",
+        "_AttachedAiUpdate": "0x10130538",
+        "_AttachedRomClosed": "0x1013053c",
+        "_AttachedInitiateAudio": "0x10130540",
+        "_PluginIMEM": "0x10130544",
+        "_PluginInitialized": "0x10130548",
+        "_AttachedDllAbout": "0x1013054c",
+        "_AttachedDllConfig": "0x10130550",
+        "_AttachedAiLenChanged": "0x10130554",
+        "_PluginDMEM": "0x10130558",
+        "_AttachedCloseDLL": "0x1013055c",
+        "_AttachedAiDacrateChanged": "0x10130560",
+        "_AttachedDllTest": "0x10130564",
+        "_AttachedAudio": "0x10130568",
+        "_AudioProfileCounters": "0x10130580",
+        "_d17": "0x10168580",
+        "_c1": "0x10168582",
+        "_d6": "0x10168584",
+        "_c10": "0x10168586",
+        "_c2": "0x10168588",
+        "_d16": "0x1016858a",
+        "_d2": "0x1016858c",
+        "_d21": "0x1016858e",
+        "_d19": "0x10168590",
+        "_d23": "0x10168592",
+        "_c8": "0x10168594",
+        "_d10": "0x10168596",
+        "_d18": "0x10168598",
+        "_d8": "0x1016859a",
+        "_c5": "0x1016859c",
+        "_d12": "0x1016859e",
+        "_d22": "0x101685a0",
+        "_c4": "0x101685a2",
+        "_d26": "0x101685a4",
+        "_d11": "0x101685a6",
+        "_d0": "0x101685a8",
+        "_c12": "0x101685aa",
+        "_c11": "0x101685ac",
+        "_d5": "0x101685ae",
+        "_c7": "0x101685b0",
+        "_c15": "0x101685b2",
+        "_c9": "0x101685b4",
+        "_d3": "0x101685b6",
+        "_d24": "0x101685b8",
+        "_c0": "0x101685ba",
+        "_d7": "0x101685bc",
+        "_d4": "0x101685be",
+        "_d14": "0x101685c0",
+        "_c6": "0x101685c2",
+        "_d29": "0x101685c4",
+        "_d31": "0x101685c6",
+        "_c3": "0x101685c8",
+        "_d25": "0x101685ca",
+        "_d9": "0x101685cc",
+        "_d30": "0x101685ce",
+        "_c13": "0x101685d0",
+        "_d1": "0x101685d2",
+        "_d28": "0x101685d4",
+        "_d13": "0x101685d6",
+        "_d20": "0x101685d8",
+        "_d15": "0x101685da",
+        "_res": "0x101685e0",
+        "_c14": "0x10168ee0",
+        "_d27": "0x10168ee2",
+        "_zdata": "0x10168f00",
+        "_LogInstance": "0x10168f20",
+        "_LogWindow": "0x10168f24",
+        "_LogEdit": "0x10168f28",
+        "_QueuedBlockReady": "0x10168f40",
+        "_SoundBuffer": "0x101693f0",
+        "_QueueBytes": "0x101693f4",
+        "_AudioErrorText": "0x10169400",
+        "_AudioEvents": "0x1016b400",
+        "_QueueWrite": "0x1016b404",
+        "_MIRegisters": "0x1016b408",
+        "_AudioIniKey": "0x1016b420",
+        "_QueueCount": "0x1016b440",
+        "_HLEWaveFile": "0x1016b444",
+        "_AudioInstance": "0x1016b448",
+        "_ABIFile": "0x1016b44c",
+        "_SoundEvents": "0x1016b460",
+        "_QueuedBlockLength": "0x1016b4a0",
+        "_IsNTSC": "0x1016b950",
+        "_CPURegisters": "0x1016b954",
+        "_AudioIniFile": "0x1016b960",
+        "_BufferLimit": "0x1016ba64",
+        "_BufferPosition": "0x1016ba68",
+        "_RDRAM": "0x1016ba6c",
+        "_SoundCriticalSection": "0x1016ba80",
+        "_QueuedBlocks": "0x1016baa0",
+        "_AudioAboutText": "0x1016bf60",
+        "_AIRegisters": "0x1016c060",
+        "_CurrentPlayPosition": "0x1016c064",
+        "_DirectSound": "0x1016c068",
+        "_WaveFormat": "0x1016c080",
+        "_HLELogFile": "0x1016c094",
+        "_QueueRead": "0x1016c098",
+        "_PrimaryBuffer": "0x1016c09c",
+        "_TimerUser": "0x1016c0a0",
+        "_CurrentAudioLength": "0x1016c0a4",
+        "_AudioIniSection": "0x1016c0c0",
+        "_AIWaveFile": "0x1016c100",
+        "_BufferDescription": "0x1016c120",
+        "_AudioWindow": "0x1016c144",
+        "_AudioUCode": "0x1016c148",
+        "_SeenCommands": "0x1016c160",
+        "_AudioTask": "0x1016c1e0",
+        "_AudioState": "0x1016c220",
+        "_AudioTaskCount": "0x1016c29c",
+        "___mblcid": "0x1016c2a0",
+        "___ptmbcinfo": "0x1016c2a4",
+        "___ismbcodepage": "0x1016c2a8",
+        "__mbctype": "0x1016c2c0",
+        "___mbcodepage": "0x1016c3c4",
+        "___mbulinfo": "0x1016c3d0",
+        "__mbcasemap": "0x1016c3e0",
+        "___ctype1": "0x1016c4e0",
+        "___ctype1_refcount": "0x1016c4e4",
+        "___lconv_mon_refcount": "0x1016c4e8",
+        "___lconv_intl_refcount": "0x1016c4ec",
+        "___lconv_num_refcount": "0x1016c4f0",
+        "___env_initialized": "0x1016c4f4",
+        "___onexitend": "0x1016c4f8",
+        "___onexitbegin": "0x1016c4fc",
+        "___mbctype_initialized": "0x1016c500",
+        "___setlc_active": "0x1016c504",
+        "___unguarded_readlc_active": "0x1016c508",
+        "__nhandle": "0x1016c50c",
+        "___pioinfo": "0x1016c520",
+        "___sbh_initialized": "0x1016c620",
+        "___sbh_pHeaderDefer": "0x1016c624",
+        "___sbh_cntHeaderList": "0x1016c628",
+        "___sbh_pHeaderList": "0x1016c62c",
+        "___sbh_threshold": "0x1016c630",
+        "___sbh_pHeaderScan": "0x1016c634",
+        "___sbh_sizeHeaderList": "0x1016c638",
+        "___sbh_indGroupDefer": "0x1016c63c",
+        "__crtheap": "0x1016c640",
+        "___active_heap": "0x1016c644",
+        "___piob": "0x1016c648",
+        "__bufin": "0x1016c660",
+        "__nstream": "0x1016d660",
+        "__acmdln": "0x1016d664",
+        "__pRawDllMain": "0x1016d668"
+      },
+      "linked_data_virtual_size": 1279596,
+      "link_map_sha256": "92bd88271358aed9e9cc9c804d8ddb8469a655abc0546f46fa454235f49ed88f",
+      "dll_sha256": "57377b52bd4f4546a4260e7c2600c85b847b20469f072bdd2839fb5621f70add"
+    },
+    {
+      "name": "ancestor_scope",
+      "source_sha256": "2ef049bd0bdda9372c0bc061ad91a466018c317d991268a87701ab35c7d597f4",
+      "object_sha256": "4fcf19a8ca504a7bc9dd005da805dd4d20c161670d3839aa7ad852945e0e1248",
+      "command": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc7",
+        "cl",
+        "/nologo",
+        "/c",
+        "/O2",
+        "/Ob1",
+        "/MT",
+        "/IZ:\\root\\nemu-decomp\\src\\audio\\ahle_ds",
+        "/FoZ:\\root\\.ai-tmp\\audio-jpeg-retained.d6t9mu0l\\ancestor_scope\\Jpeg.obj",
+        "Z:\\root\\.ai-tmp\\audio-jpeg-retained.d6t9mu0l\\ancestor_scope\\Jpeg.c"
+      ],
+      "functions": [
+        {
+          "name": "_readshort",
+          "equal": true,
+          "relocated": true,
+          "original_bytes": 96,
+          "rebuilt_bytes": 96
+        },
+        {
+          "name": "_writeshort",
+          "equal": true,
+          "relocated": true,
+          "original_bytes": 96,
+          "rebuilt_bytes": 96
+        },
+        {
+          "name": "_dctinit",
+          "equal": true,
+          "relocated": true,
+          "original_bytes": 96,
+          "rebuilt_bytes": 96
+        },
+        {
+          "name": "_JpegSwapSample",
+          "equal": true,
+          "relocated": true,
+          "original_bytes": 16,
+          "rebuilt_bytes": 16
+        },
+        {
+          "name": "_JpegCopyBlock",
+          "equal": true,
+          "relocated": true,
+          "original_bytes": 32,
+          "rebuilt_bytes": 32
+        },
+        {
+          "name": "_dct",
+          "equal": false,
+          "relocated": false,
+          "original_bytes": 976,
+          "rebuilt_bytes": 976
+        },
+        {
+          "name": "_JpegInverseDCTAlternate",
+          "equal": true,
+          "relocated": true,
+          "original_bytes": 976,
+          "rebuilt_bytes": 976
+        },
+        {
+          "name": "_uncompress",
+          "equal": false,
+          "relocated": false,
+          "original_bytes": 1408,
+          "rebuilt_bytes": 1408
+        },
+        {
+          "name": "_DCTList",
+          "equal": true,
+          "relocated": true,
+          "original_bytes": 352,
+          "rebuilt_bytes": 352
+        },
+        {
+          "name": "_poly",
+          "equal": true,
+          "relocated": true,
+          "original_bytes": 6000,
+          "rebuilt_bytes": 6000
+        }
+      ],
+      "bss_size": 11800,
+      "bss_symbols": [
+        {
+          "name": "_in",
+          "offset": 0
+        },
+        {
+          "name": "_out",
+          "offset": 1536
+        },
+        {
+          "name": "_q1",
+          "offset": 2560
+        },
+        {
+          "name": "_q3",
+          "offset": 2816
+        },
+        {
+          "name": "_rgb",
+          "offset": 3072
+        },
+        {
+          "name": "?u@?1??poly@@9@9",
+          "offset": 7168
+        },
+        {
+          "name": "_q2",
+          "offset": 11520
+        },
+        {
+          "name": "?initdone@?1??dct@@9@9",
+          "offset": 11776
+        },
+        {
+          "name": "?initialized@?1??JpegInverseDCTAlternate@@9@9",
+          "offset": 11780
+        },
+        {
+          "name": "?u_start@?1??poly@@9@9",
+          "offset": 11784
+        },
+        {
+          "name": "?u_div@?1??poly@@9@9",
+          "offset": 11792
+        }
+      ],
+      "common_symbols": []
+    }
+  ],
+  "dctdump_literal_check": [
+    {
+      "image": "/root/.ai-tmp/audio-host-history.jg5ustfl/AUDIO.DLL",
+      "sha256": "4e7953e5a4de38c2aaa5be4ef34b644f6af3f2d39a40ff0365a380abc2757ca8",
+      "counts": {
+        "b'dct.log\\x00'": 0,
+        "b'wt\\x00'": 0,
+        "b'%4i \\x00'": 0,
+        "b'Output:\\x00'": 0,
+        "b'Input:\\x00'": 0
+      }
+    },
+    {
+      "image": "/root/nemu-decomp/master/Plugin/audio.dll",
+      "sha256": "f05b3f9e239041758a4aca09a891e2ebebe4136a3b326f8bbc5c160d76c73808",
+      "counts": {
+        "b'dct.log\\x00'": 0,
+        "b'wt\\x00'": 0,
+        "b'%4i \\x00'": 0,
+        "b'Output:\\x00'": 0,
+        "b'Input:\\x00'": 0
+      }
+    }
+  ],
+  "primary_source_url": "https://github.com/emu-russia/UltraHLE/blob/9ba068d67815eb482973a94c120706775bdd258a/src/ZLIST.C",
+  "old_jpeg_storage": {
+    "evidence": "/root/.ai-tmp/audio-storage-history.G9MAzuhF/old-jpeg.asm",
+    "evidence_sha256": "56120321b6b6a006a9e7b692b087f271e095b95de13c021486fe03ce176417c1",
+    "semantic_names_inferred_from_primary_source": true,
+    "private_scalars": {
+      "rgb": "0x1009d394",
+      "out": "0x1009e394",
+      "in": "0x1009e794",
+      "q2_Cb": "0x1009ed94",
+      "q3_Cr": "0x1009ee94",
+      "q1_Y": "0x1009ef94",
+      "init": "0x1009f094"
+    }
+  },
+  "assessment": [
+    "The genuine ancestor ZData object is 32 bytes and emits one common symbol. It preserves every matched body and all private BSS offsets, but the complete native link puts it after the exact MP3 scalar/res group, moving LogInstance by60bytes and growing total .data by64bytes. This breaks a known native adjacency and does not explain the missing preceding storage. Reject retaining file-scope zdata in this JPEG unit.",
+    "Restoring the known ancestor private function names and static scope leaves all six private-array offsets unchanged; dct and uncompress complete native bytes regress. This supplies no storage improvement and cannot be promoted.",
+    "Both original DLL revisions lack all five inspected distinctive dctdump strings. No decoded JPEG function corresponds to dctdump; retaining its FILE pointer alone would detach data from its source function and is unsupported.",
+    "The 2001 private-array ordering is independently different from both the newer target and the current compiler candidate. It corroborates array extents and roles, but does not establish a new source-backed naming or scope change that resolves the newer private order."
+  ],
+  "source_edits_promoted": false,
+  "probe_script_sha256": "7087c5d16a85b34cc474b04822fb07e24b3ecbc155e2bda24f4565f5ec5f34c0",
+  "scratch_report": "/root/.ai-tmp/audio-jpeg-retained.d6t9mu0l/report.json",
+  "canonical_source_change": false
+}
