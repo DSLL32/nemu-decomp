@@ -7,7 +7,7 @@ static HMODULE crashDwm, crashTheme;
 static CrashDwmAttribute crashSetAttribute;
 static CrashWindowTheme crashSetWindowTheme;
 static CrashAllowWindow crashAllowWindow;
-static bool details, dialogDark;
+static bool details, dialogDark, nativeReportScrollbars;
 static HWND detailEdit, detailButton;
 static WNDPROC originalReportProc;
 static HFONT dialogFont, reportFont;
@@ -132,13 +132,17 @@ static void reportFrame(HWND window)
 {
     HDC dc=GetWindowDC(window); if (!dc) return;
     RECT outer; GetWindowRect(window,&outer);
-    reportScrollBar(window,dc,OBJID_HSCROLL,outer); reportScrollBar(window,dc,OBJID_VSCROLL,outer);
-    SCROLLBARINFO horizontal,vertical; ZeroMemory(&horizontal,sizeof(horizontal)); ZeroMemory(&vertical,sizeof(vertical));
-    horizontal.cbSize=sizeof(horizontal); vertical.cbSize=sizeof(vertical);
-    if (GetScrollBarInfo(window,OBJID_HSCROLL,&horizontal) && GetScrollBarInfo(window,OBJID_VSCROLL,&vertical) &&
-        !((horizontal.rgstate[0]|vertical.rgstate[0])&(STATE_SYSTEM_INVISIBLE|STATE_SYSTEM_OFFSCREEN))) {
-        RECT corner={vertical.rcScrollBar.left,horizontal.rcScrollBar.top,vertical.rcScrollBar.right,horizontal.rcScrollBar.bottom};
-        OffsetRect(&corner,-outer.left,-outer.top); FillRect(dc,&corner,dialogBrush);
+    // Native themes paint and animate their own scrollbars during tracking.
+    // Overpainting them after native drawing alternates two thumb shapes.
+    if (!nativeReportScrollbars) {
+        reportScrollBar(window,dc,OBJID_HSCROLL,outer); reportScrollBar(window,dc,OBJID_VSCROLL,outer);
+        SCROLLBARINFO horizontal,vertical; ZeroMemory(&horizontal,sizeof(horizontal)); ZeroMemory(&vertical,sizeof(vertical));
+        horizontal.cbSize=sizeof(horizontal); vertical.cbSize=sizeof(vertical);
+        if (GetScrollBarInfo(window,OBJID_HSCROLL,&horizontal) && GetScrollBarInfo(window,OBJID_VSCROLL,&vertical) &&
+            !((horizontal.rgstate[0]|vertical.rgstate[0])&(STATE_SYSTEM_INVISIBLE|STATE_SYSTEM_OFFSCREEN))) {
+            RECT corner={vertical.rcScrollBar.left,horizontal.rcScrollBar.top,vertical.rcScrollBar.right,horizontal.rcScrollBar.bottom};
+            OffsetRect(&corner,-outer.left,-outer.top); FillRect(dc,&corner,dialogBrush);
+        }
     }
     RECT edge={0,0,outer.right-outer.left,outer.bottom-outer.top};
     HBRUSH border=CreateSolidBrush(RGB(80,80,80));
@@ -147,14 +151,16 @@ static void reportFrame(HWND window)
 }
 static LRESULT CALLBACK reportProc(HWND window,UINT message,WPARAM w,LPARAM l)
 {
-    if (message==repaintReportFrame || (message==WM_TIMER && w==reportScrollTimer)) { reportFrame(window); return 0; }
-    bool tracking=message==WM_NCLBUTTONDOWN && (w==HTHSCROLL || w==HTVSCROLL);
+    if (!nativeReportScrollbars && (message==repaintReportFrame || (message==WM_TIMER && w==reportScrollTimer))) {
+        reportFrame(window); return 0;
+    }
+    bool tracking=!nativeReportScrollbars && message==WM_NCLBUTTONDOWN && (w==HTHSCROLL || w==HTVSCROLL);
     if (tracking) SetTimer(window,reportScrollTimer,30,NULL);
     LRESULT result=CallWindowProcA(originalReportProc,window,message,w,l);
     if (tracking && IsWindow(window)) { KillTimer(window,reportScrollTimer); reportFrame(window); }
-    if (message==WM_PAINT || message==WM_NCPAINT || message==WM_SIZE || message==WM_HSCROLL || message==WM_VSCROLL ||
-        message==WM_NCMOUSEMOVE || message==WM_NCLBUTTONUP) reportFrame(window);
-    if (message==WM_HSCROLL || message==WM_VSCROLL || message==WM_NCMOUSEMOVE || message==WM_NCLBUTTONUP)
+    if (message==WM_PAINT || message==WM_NCPAINT || message==WM_SIZE || (!nativeReportScrollbars &&
+        (message==WM_HSCROLL || message==WM_VSCROLL || message==WM_NCMOUSEMOVE || message==WM_NCLBUTTONUP))) reportFrame(window);
+    if (!nativeReportScrollbars && (message==WM_HSCROLL || message==WM_VSCROLL || message==WM_NCMOUSEMOVE || message==WM_NCLBUTTONUP))
         PostMessage(window,repaintReportFrame,0,0);
     return result;
 }
@@ -185,7 +191,8 @@ static INT_PTR CALLBACK dialogProc(HWND window, UINT message, WPARAM w, LPARAM l
             ES_READONLY|ES_MULTILINE|ES_AUTOVSCROLL|ES_AUTOHSCROLL,WS_EX_CLIENTEDGE,18,150,644,270,ID_REPORT);
         SendMessage(detailEdit,WM_SETFONT,(WPARAM)reportFont,FALSE);
         SendMessage(detailEdit,EM_SETLIMITTEXT,sizeof(report),0);
-        if (dialogDark && crashSetWindowTheme) crashSetWindowTheme(detailEdit,L"DarkMode_Explorer",NULL);
+        nativeReportScrollbars=dialogDark && crashSetWindowTheme &&
+            SUCCEEDED(crashSetWindowTheme(detailEdit,L"DarkMode_Explorer",NULL));
         if (dialogDark) originalReportProc=(WNDPROC)SetWindowLongA(detailEdit,GWL_WNDPROC,(LONG)reportProc);
         dialogSize(window,true); return TRUE;
     }

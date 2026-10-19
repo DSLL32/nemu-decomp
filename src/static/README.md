@@ -151,8 +151,10 @@ ends the faulted process. The reporter is prepared on its own thread during
 startup, after the emulated address space has been reserved.
 
 The reporter caches the application's dark/light preference while the UI is
-healthy. Its dialog paints its own buttons, report border and scrollbars, so
-it does not depend on the faulted UI thread's hooks or VCL. Optional DWM/UxTheme
+healthy. Its dialog paints its own buttons and report border. Windows owns
+the scrollbars when native dark theming succeeds; the custom scrollbar painter
+is used only as a fallback, avoiding competing native/custom thumb paints.
+It does not depend on the faulted UI thread's hooks or VCL. Optional DWM/UxTheme
 exports are resolved at startup only on supported Windows versions. Dialog
 text uses the system message font; details use Lucida Console at the same
 size, with DPI-scaled controls. The fault is the first stack entry, marked
