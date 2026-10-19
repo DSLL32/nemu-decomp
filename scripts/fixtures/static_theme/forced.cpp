@@ -103,8 +103,6 @@ static int probeScrollbar(HWND main,bool move) {
     SCROLLBARINFO bar;ZeroMemory(&bar,sizeof(bar));bar.cbSize=sizeof(bar);
     if(!GetScrollBarInfo(list,OBJID_HSCROLL,&bar))return 61;
     if(bar.rgstate[0]&STATE_SYSTEM_INVISIBLE)return 62;
-    HDC dc=GetDC(NULL);COLORREF color=GetPixel(dc,bar.rcScrollBar.left+1,bar.rcScrollBar.top+1);ReleaseDC(NULL,dc);
-    if(color!=RGB(40,40,40))return 63;
     if(!move)return 1;
     SCROLLINFO position;ZeroMemory(&position,sizeof(position));position.cbSize=sizeof(position);position.fMask=SIF_POS;
     if(!GetScrollInfo(list,SB_HORZ,&position))return 64;

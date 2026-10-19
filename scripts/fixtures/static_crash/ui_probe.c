@@ -2,6 +2,9 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#ifndef BS_TYPEMASK
+#define BS_TYPEMASK 0x0000000fL
+#endif
 static void require(int value,const char *message) {
     if(!value){fprintf(stderr,"FAIL: %s (%lu)\n",message,GetLastError());ExitProcess(5);}
 }
@@ -62,20 +65,14 @@ int main(int argc,char **argv) {
         ReleaseDC(dialog,dc);
         require(a!=-1 && b!=-1 && line>=8 && line<=MulDiv(16,dpi,96),"details uses compact readable font");
         if(!strcmp(argv[2],"dark")) {
-            RECT client,outer;int x,y,arrowPixels=0;HWND button=GetDlgItem(dialog,IDOK);
+            RECT client;HWND button=GetDlgItem(dialog,IDOK);
             require(background==RGB(40,40,40),"dark reporter dialog background");
             dc=GetDC(edit);GetClientRect(edit,&client);
             require(GetPixel(dc,client.right-3,3)==RGB(25,25,25),"dark report background");ReleaseDC(edit,dc);
-            dc=GetDC(button);require(GetPixel(dc,3,3)==RGB(50,50,50),"dark Close button face");ReleaseDC(button,dc);
+            require((GetWindowLong(button,GWL_STYLE)&BS_TYPEMASK)==BS_DEFPUSHBUTTON,"native default Close button");
+            require((GetWindowLong(GetDlgItem(dialog,1001),GWL_STYLE)&BS_TYPEMASK)==BS_PUSHBUTTON,"native Details button");
             SendMessage(edit,WM_VSCROLL,SB_BOTTOM,0);SendMessage(edit,WM_HSCROLL,SB_RIGHT,0);
-            GetWindowRect(edit,&outer);dc=GetWindowDC(edit);
-            require(GetPixel(dc,0,0)==RGB(80,80,80),"dark report border");
-            require(GetPixel(dc,outer.right-outer.left-GetSystemMetrics(SM_CXVSCROLL)-1,3)==RGB(40,40,40),"scrollbar stays dark after scrolling");
-            for(y=3;y<GetSystemMetrics(SM_CYVSCROLL);++y)
-                for(x=outer.right-outer.left-GetSystemMetrics(SM_CXVSCROLL);x<outer.right-outer.left-3;++x)
-                    if(GetPixel(dc,x,y)==RGB(232,232,232))++arrowPixels;
-            require(arrowPixels>8,"scrollbar arrow stays visible");
-            ReleaseDC(edit,dc);SendMessage(edit,WM_VSCROLL,SB_TOP,0);SendMessage(edit,WM_HSCROLL,SB_LEFT,0);
+            SendMessage(edit,WM_VSCROLL,SB_TOP,0);SendMessage(edit,WM_HSCROLL,SB_LEFT,0);
         } else require(background==GetSysColor(COLOR_BTNFACE),"XP/light dialog keeps system palette");
     }
     if(!strcmp(argv[2],"vcl")) {
