@@ -106,7 +106,6 @@ void SetViewport()
 			State.Viewport.MaxZ = 1.0f;
 	#line 110 "3DFunctions.cpp"
 			SafeDX(g_pd3dDevice->EndScene());
-	#line 111 "3DFunctions.cpp"
 			SafeDX(g_pd3dDevice->BeginScene());
 			g_pd3dDevice->SetViewport(&State.Viewport);
 		}
@@ -1337,9 +1336,7 @@ UTILoopInner:
 					Format = D3DFMT_A1R5G5B5;
 #line 1333 "3DFunctions.cpp"
 					SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
-#line 1334 "3DFunctions.cpp"
 					SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
-#line 1335 "3DFunctions.cpp"
 					SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 					targetptr.p16 = (U16*)Rect.pBits;
 					sourceptr.p8 = &TMEMFlipped[Start];
@@ -1365,11 +1362,8 @@ UTILoopInner:
 					break;
 				case 3:  // IA 16
 					Format = D3DFMT_A8R8G8B8;
-#line 1360 "3DFunctions.cpp"
 					SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
-#line 1361 "3DFunctions.cpp"
 					SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
-#line 1362 "3DFunctions.cpp"
 					SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 					targetptr.p16 = (U16*)Rect.pBits;
 					sourceptr.p8 = &TMEMFlipped[Start];
@@ -1401,11 +1395,8 @@ UTILoopInner:
 				break;
 			case 3: // IA
 				Format = D3DFMT_A1R5G5B5;
-#line 1393 "3DFunctions.cpp"
 				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
-#line 1394 "3DFunctions.cpp"
 				SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
-#line 1395 "3DFunctions.cpp"
 				SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 				targetptr.p16 = (U16*)Rect.pBits;
 				sourceptr.p8 = &TMEMFlipped[Start];
@@ -1429,11 +1420,8 @@ UTILoopInner:
 				break;
 			case 4: // I
 				Format = D3DFMT_A8R8G8B8;
-#line 1418 "3DFunctions.cpp"
 				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
-#line 1419 "3DFunctions.cpp"
 				SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
-#line 1420 "3DFunctions.cpp"
 				SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 				targetptr.p32 = (U32*)Rect.pBits;
 				sourceptr.p8 = &TMEMFlipped[Start];
@@ -1463,11 +1451,8 @@ UTILoopInner:
 				case 0:
 				case 2: // RGBA 16
 					Format = D3DFMT_A1R5G5B5;
-#line 1449 "3DFunctions.cpp"
 					SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
-#line 1450 "3DFunctions.cpp"
 					SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
-#line 1451 "3DFunctions.cpp"
 					SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 					targetptr.p16 = (U16*)Rect.pBits;
 					sourceptr.p8 = &TMEMFlipped[Start];
@@ -1486,11 +1471,8 @@ UTILoopInner:
 					break;
 				case 3:  // IA 16
 					Format = D3DFMT_A8R8G8B8;
-#line 1469 "3DFunctions.cpp"
 					SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
-#line 1470 "3DFunctions.cpp"
 					SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
-#line 1471 "3DFunctions.cpp"
 					SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 					targetptr.p32 = (U32*)Rect.pBits;
 					sourceptr.p8 = &TMEMFlipped[Start];
@@ -1514,11 +1496,8 @@ UTILoopInner:
 				break;
 			case 3: // IA
 				Format = D3DFMT_A4R4G4B4;
-#line 1494 "3DFunctions.cpp"
 				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
-#line 1495 "3DFunctions.cpp"
 				SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
-#line 1496 "3DFunctions.cpp"
 				SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 				targetptr.p16 = (U16*)Rect.pBits;
 				sourceptr.p8 = &TMEMFlipped[Start];
@@ -1534,11 +1513,8 @@ UTILoopInner:
 				break;
 			case 4: // I
 				Format = D3DFMT_A8R8G8B8;
-#line 1511 "3DFunctions.cpp"
 				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
-#line 1512 "3DFunctions.cpp"
 				SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
-#line 1513 "3DFunctions.cpp"
 				SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 				targetptr.p32 = (U32*)Rect.pBits;
 				sourceptr.p8 = &TMEMFlipped[Start];
@@ -1557,11 +1533,8 @@ UTILoopInner:
 			switch (tile->fmt){
 			case 0: // RGBA
 				Format = D3DFMT_A1R5G5B5;
-#line 1531 "3DFunctions.cpp"
 				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
-#line 1532 "3DFunctions.cpp"
 				SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
-#line 1533 "3DFunctions.cpp"
 				SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 				targetptr.p16 = (U16*)Rect.pBits;
 				sourceptr.p8 = &TMEMFlipped[Start];
@@ -1581,11 +1554,8 @@ UTILoopInner:
 				break;
 			case 3: // IA
 				Format = D3DFMT_A8R8G8B8;
-#line 1552 "3DFunctions.cpp"
 				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
-#line 1553 "3DFunctions.cpp"
 				SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
-#line 1554 "3DFunctions.cpp"
 				SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 				targetptr.p32 = (U32*)Rect.pBits;
 				sourceptr.p8 = &TMEMFlipped[Start];
@@ -1608,11 +1578,8 @@ UTILoopInner:
 			switch (tile->fmt){
 			case 0: // RGBA
 				Format = D3DFMT_A8R8G8B8;
-#line 1576 "3DFunctions.cpp"
 				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
-#line 1577 "3DFunctions.cpp"
 				SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
-#line 1578 "3DFunctions.cpp"
 				SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 				targetptr.p32 = (U32*)Rect.pBits;
 				sourceptr.p8 = &TMEMFlipped[Start];
@@ -1725,13 +1692,11 @@ UTILoopInner:
 					}
 				}
 			}
-#line 1690 "3DFunctions.cpp"
 			SafeDX(D3DSurface0->UnlockRect());
 			FreeObject(D3DSurface0);
 		} else {
 			// unknown texture type
 			// load black default texture
-#line 1695 "3DFunctions.cpp"
 			SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, D3DFMT_A1R5G5B5, D3DPOOL_MANAGED, &D3DTexture));
 		}
 		if (State.TextureCount >= (MaxTextureCount-5)){
@@ -1774,7 +1739,6 @@ void SetZBufferWrite()
 	bool bUseZ;
 	if ((State.Othermode.fields.rendermodezupd!=0) != State.ZBufferWrite){
 		State.ZBufferWrite = State.Othermode.fields.rendermodezupd!=0;
-#line 1737 "3DFunctions.cpp"
 		SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, State.ZBufferWrite));
 	}
 	if (Options.bForceZBuffer){
@@ -1784,7 +1748,6 @@ void SetZBufferWrite()
 	}
 	if (bUseZ != State.ZEnabled){
 		State.ZEnabled = bUseZ;
-#line 1746 "3DFunctions.cpp"
 		SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ZENABLE, State.ZEnabled));
 	}
 /*
@@ -2043,7 +2006,6 @@ void SendTrisToD3D(TTile *Tile, bool TexturesEnabled, D3DPRIMITIVETYPE BufferTyp
 #line 2003 "3DFunctions.cpp"
 	SafeDX(g_VertexBuffer->Lock(0, State.D3DVertexCacheIndex*sizeof(D3DTNTVERTEX), (BYTE**)&VertexBuffer, 0));
 	memcpy(VertexBuffer, State.D3DVertexCache, State.D3DVertexCacheIndex*sizeof(D3DTNTVERTEX));
-#line 2005 "3DFunctions.cpp"
 	SafeDX(g_VertexBuffer->Unlock());
 	U32 TriCount;
 	switch (BufferType){
@@ -2056,7 +2018,6 @@ void SendTrisToD3D(TTile *Tile, bool TexturesEnabled, D3DPRIMITIVETYPE BufferTyp
 	}
 	for (i=0;i<BlendPasses.Count;i++){
 		SetBlendPass(i);
-#line 2017 "3DFunctions.cpp"
 		SafeDX(g_pd3dDevice->DrawPrimitive(BufferType, 0, TriCount));
 	}
 	State.D3DVertexCacheIndex = 0;
@@ -2124,7 +2085,6 @@ void FlushVertexCache()
 #line 2087 "3DFunctions.cpp"
 				SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &State.TempMatrix));
 			} else {
-#line 2089 "3DFunctions.cpp"
 				SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &State.ProjectionModified));
 			}
 #endif
@@ -2469,10 +2429,8 @@ void S2DEX_Sprite(uObjSprite *Sprite, U32 DoMatrix)
 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, false));
 	D3DXMATRIX Ortho;
 	D3DXMatrixOrthoOffCenterRH(&Ortho, 0, (float)State.cimg.width, ((float)State.cimg.width*0.75f), 0, 0.0f, 1.0f);
-#line 2434 "3DFunctions.cpp"
 	SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &Ortho));
 	State.ProjectionChanged = true;
-#line 2436 "3DFunctions.cpp"
 	SafeDX(g_VertexBuffer->Lock(0, 4*sizeof(D3DTNTVERTEX), (BYTE**)&VertexBuffer, 0));
 	VertexBuffer[0].color = State.FillColor;
 	VertexBuffer[0].x = (float)x1;
@@ -2501,7 +2459,6 @@ void S2DEX_Sprite(uObjSprite *Sprite, U32 DoMatrix)
 	VertexBuffer[3].z = 0.0f;
 	_TexAssignU((&VertexBuffer[3])) = u2;
 	_TexAssignV((&VertexBuffer[3])) = v2;
-#line 2464 "3DFunctions.cpp"
 	SafeDX(g_VertexBuffer->Unlock());
 
 	U32 i;

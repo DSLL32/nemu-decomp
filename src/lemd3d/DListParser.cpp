@@ -457,7 +457,6 @@ void GBI_FILLRECT()
 		State.Viewport.Height = State.WindowHeight;
 #line 487 "DListParser.cpp"
 		SafeDX(g_pd3dDevice->EndScene());
-#line 488 "DListParser.cpp"
 		SafeDX(g_pd3dDevice->BeginScene());
 		g_pd3dDevice->SetViewport(&State.Viewport);
 	}
@@ -514,10 +513,8 @@ void GBI_FILLRECT()
 			SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, false));
 			D3DXMATRIX Ortho;
 			D3DXMatrixOrthoOffCenterRH(&Ortho, 0, (float)State.WindowWidth, (float)State.WindowHeight, 0, 0.0f, 1.0f);
-#line 542 "DListParser.cpp"
 			SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &Ortho));
 			State.ProjectionChanged = true;
-#line 544 "DListParser.cpp"
 			SafeDX(g_VertexBuffer->Lock(0, 4*sizeof(D3DTNTVERTEX), (BYTE**)&VertexBuffer, 0));
 			VertexBuffer[0].color = State.FillColor;
 			VertexBuffer[0].x = (float)Rect.x1;
@@ -538,7 +535,6 @@ void GBI_FILLRECT()
 			VertexBuffer[3].x = (float)Rect.x2;
 			VertexBuffer[3].y = (float)Rect.y2;
 			VertexBuffer[3].z = 0.0f;
-#line 564 "DListParser.cpp"
 			SafeDX(g_VertexBuffer->Unlock());
 
 			BlendPasses.Count = 1;
@@ -690,20 +686,14 @@ void ReleaseCustomSurface()
 	uCustomSurface = 0;
 	FlushVertexCache();
 	LogCommand("Disabling BackBuffer\n");
-#line 2548 "DListParser.cpp"
 	SafeDX(g_pd3dDevice->GetDepthStencilSurface(&DepthStencilSurface));
-#line 2548 "DListParser.cpp"
 	SafeDX(g_pd3dDevice->EndScene());
-#line 2548 "DListParser.cpp"
 	SafeDX(g_pd3dDevice->SetRenderTarget(NormalSurface, DepthStencilSurface));
-#line 2548 "DListParser.cpp"
 	SafeDX(g_pd3dDevice->BeginScene());
 	// Write back contents of Surface to RDRAM
 	D3DLOCKED_RECT Rect;
 	U32 *ImgPtr;
 	U32 x, y;
-
-#line 2548 "DListParser.cpp"
 	SafeDX(surWriteback->LockRect(&Rect, 0, D3DLOCK_READONLY));
 	U32 sx, sy;
 	for (y=0;y<uCustomSurfaceHeight;y+=10){
@@ -734,7 +724,6 @@ void ReleaseCustomSurface()
 					Col;
 		}
 	}
-#line 2548 "DListParser.cpp"
 	SafeDX(surWriteback->UnlockRect());
 }
 */
@@ -1412,7 +1401,6 @@ void GBI3_MOVEWORD()
 		break;
 	case 0x0C:
 		State.WorldMatrix = &State.Identity;
-#line 2548 "DListParser.cpp"
 		//SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &State.TempMatrix));
 		State.bForceMtx = true;
 		State.ProjectionChanged = true;
@@ -1908,14 +1896,11 @@ void GBI10_BG_1CYC()
 
 	D3DTNTVERTEX *VertexBuffer;
 	State.ZBufferWrite = false;
-#line 2548 "DListParser.cpp"
 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, false));
 	D3DXMATRIX Ortho;
 	D3DXMatrixOrthoOffCenterRH(&Ortho, 0, (float)State.cimg.width, ((float)State.cimg.width*0.75f), 0, 0.0f, 1.0f);
-#line 2548 "DListParser.cpp"
 	SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &Ortho));
 	State.ProjectionChanged = true;
-#line 2548 "DListParser.cpp"
 	SafeDX(g_VertexBuffer->Lock(0, 4*sizeof(D3DTNTVERTEX), (U8**)&VertexBuffer, 0));
 	VertexBuffer[0].color = State.FillColor;
 	VertexBuffer[0].x = (float)x1;
@@ -1944,7 +1929,6 @@ void GBI10_BG_1CYC()
 	VertexBuffer[3].z = 0.0f;
 	_TexAssignU((&VertexBuffer[3])) = u2;
 	_TexAssignV((&VertexBuffer[3])) = v2;
-#line 2548 "DListParser.cpp"
 	SafeDX(g_VertexBuffer->Unlock());
 
 	U32 i;
@@ -1962,7 +1946,6 @@ void GBI10_BG_1CYC()
 	BlendPasses.Passes[0].TFactor = 0x30FF00FF;
 
 	SetBlendPass(0);
-#line 2548 "DListParser.cpp"
 	SafeDX(g_pd3dDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2));
 */
 }

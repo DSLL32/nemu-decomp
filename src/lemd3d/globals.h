@@ -1812,7 +1812,6 @@ static void BackgroundTexture(U32 uTexAddr,
 		State.uLastTexCRC[bgCount] = uTexCRC;
 #line 1786 "d:\\meinsc\\lemd3d\\globals.h"
 		SafeDX(texBackground[bgCount]->GetSurfaceLevel(0, &D3DSurface0));
-#line 1787 "d:\\meinsc\\lemd3d\\globals.h"
 		SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 		ImgPtr = (U16*)Rect.pBits;
 		switch (size){
@@ -1854,19 +1853,16 @@ static void BackgroundTexture(U32 uTexAddr,
 			}
 			break;
 		}
-#line 1828 "d:\\meinsc\\lemd3d\\globals.h"
 		SafeDX(D3DSurface0->UnlockRect());
 		FreeObject(D3DSurface0);
 	}
 
 	State.ZBufferWrite = false;
-#line 1833 "d:\\meinsc\\lemd3d\\globals.h"
 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, State.ZBufferWrite));
 	SetViewport();
 	D3DXMATRIX Ortho;
 	
 	D3DXMatrixOrthoOffCenterRH(&Ortho, 0, 1, 0, 1, 0.0f, 1.0f);
-#line 1838 "d:\\meinsc\\lemd3d\\globals.h"
 	SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &Ortho));
 	State.ProjectionChanged = true;
 
@@ -1940,14 +1936,11 @@ static void BackgroundTexture(U32 uTexAddr,
 	BlendPasses.Passes[0].Stages[0].AddressU = D3DTADDRESS_WRAP;
 	BlendPasses.Passes[0].Stages[0].AddressV = D3DTADDRESS_WRAP;
  	D3DTNTVERTEX *locVertexBuffer;
-#line 1911 "d:\\meinsc\\lemd3d\\globals.h"
 	SafeDX(g_VertexBuffer->Lock(0, State.D3DVertexCacheIndex*sizeof(D3DTNTVERTEX), (BYTE**)&locVertexBuffer, 0));
 	memcpy(locVertexBuffer, State.D3DVertexCache, State.D3DVertexCacheIndex*sizeof(D3DTNTVERTEX));
-#line 1913 "d:\\meinsc\\lemd3d\\globals.h"
 	SafeDX(g_VertexBuffer->Unlock());
 	for (i=0;i<BlendPasses.Count;i++){
 		SetBlendPass(i);
-#line 1916 "d:\\meinsc\\lemd3d\\globals.h"
 		SafeDX(g_pd3dDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2));
 	}
 	State.D3DVertexCacheIndex=0;

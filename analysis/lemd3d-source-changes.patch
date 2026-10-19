@@ -1,6 +1,6 @@
 --- google-tag/3DFunctions.cpp
 +++ src/lemd3d/3DFunctions.cpp
-@@ -59,50 +59,57 @@
+@@ -59,50 +59,56 @@
  {
  	U32 StartX, StartY, StartZ, Width, Height, Depth;
  
@@ -91,14 +91,13 @@
 +			State.Viewport.MaxZ = 1.0f;
 +	#line 110 "3DFunctions.cpp"
 +			SafeDX(g_pd3dDevice->EndScene());
-+	#line 111 "3DFunctions.cpp"
 +			SafeDX(g_pd3dDevice->BeginScene());
 +			g_pd3dDevice->SetViewport(&State.Viewport);
 +		}
  	}
  }
  
-@@ -148,8 +155,8 @@
+@@ -148,8 +154,8 @@
  {
  	float tx, ty, tz, recplength;
  	tx = Light->lx*InverseWorld->_11 + Light->ly*InverseWorld->_21 + Light->lz*InverseWorld->_31;
@@ -109,7 +108,7 @@
  
  	recplength = 1.0f / sqrtf(sqr(tx)+sqr(ty)+sqr(tz));
  	// Normalize
-@@ -351,8 +358,9 @@
+@@ -351,8 +357,9 @@
  		}
  		float n1, n2, n3;
  		ProfileStart(2);
@@ -121,7 +120,7 @@
  				xform_lights();
  				n1 = RDRAMVertex->normal.n1/127.0f;
  				n2 = RDRAMVertex->normal.n2/127.0f;
-@@ -387,31 +395,20 @@
+@@ -387,31 +394,20 @@
  									//0xFFFFFFFF |
  									(r<<16) | (g<<8) | b;
  				}
@@ -161,7 +160,7 @@
  			}
  		} else {
  			Vertex->tex[0].u = _10_5ToFloat(RDRAMVertex->color.tc1)*State.texture.TextureScaleS;
-@@ -653,6 +650,9 @@
+@@ -653,6 +649,9 @@
  		Matrix._33 = (1.0f/(1.0f*4));      // multiplied
  	}
  	Matrix._43 = 0.75f;                     // is added
@@ -171,7 +170,7 @@
  
  	if ((uMicroCodeID==_microcode_jfg)||(uMicroCodeID==_microcode_dkr)){
  		State.ProjectionModified = State.World[State.WorldIndex]*Matrix;
-@@ -719,8 +719,7 @@
+@@ -719,8 +718,7 @@
  				_D3DMul_4x4(State.Projection, Matrix, Temp);
  			} else {
  #endif
@@ -181,7 +180,7 @@
  #if DOITALLAMD
  			}
  #endif
-@@ -740,7 +739,7 @@
+@@ -740,7 +738,7 @@
  					_D3DMul_4x4(*State.WorldMatrix, Matrix, Temp);
  				} else {
  #endif
@@ -190,7 +189,7 @@
  #if DOITALLAMD
  				}
  #endif
-@@ -756,7 +755,7 @@
+@@ -756,7 +754,7 @@
  					_D3DMul_4x4(*State.WorldMatrix, Matrix, Temp);
  				} else {
  #endif
@@ -199,7 +198,7 @@
  #if DOITALLAMD
  				}
  #endif
-@@ -787,7 +786,7 @@
+@@ -787,7 +785,7 @@
  	if (tile->masks==0){
  		tile->Width = (S32)(tile->lrs-tile->uls+1);
  		D3DWidth = tile->Width;
@@ -208,7 +207,7 @@
  	} else {
  		POW2Width = 1<<tile->masks;
  		Width = (U32)(tile->lrs-tile->uls+1);
-@@ -844,7 +843,7 @@
+@@ -844,7 +842,7 @@
  	if (tile->maskt==0){
  		tile->Height = (S32)(tile->lrt-tile->ult+1);
  		D3DHeight = tile->Height;
@@ -217,7 +216,7 @@
  	} else {
  		POW2Height = 1<<tile->maskt;
  		Height = (U32)(tile->lrt-tile->ult+1);
-@@ -911,10 +910,10 @@
+@@ -911,10 +909,10 @@
  
  	TTile *tile;
  	tile = &State.Tiles[Command.loadtile.tile];
@@ -232,7 +231,7 @@
  
  	U32 Height, Width;
  	Width = Command.loadtile.sh - Command.loadtile.sl+1;
-@@ -1060,8 +1059,8 @@
+@@ -1060,8 +1058,8 @@
  
  U32 CacheTexture(TTile *tile)
  {
@@ -243,7 +242,7 @@
  	D3DFORMAT Format;
  	D3DLOCKED_RECT Rect;
  	U32 i, UTI, Index;
-@@ -1114,11 +1113,6 @@
+@@ -1114,11 +1112,6 @@
  	if ((S32)D3DHeight<=0)
  		D3DHeight = 1;
  
@@ -255,7 +254,7 @@
  	
  	if (tile->size==3){
  		RDPPitch = tile->line<<4;
-@@ -1128,7 +1122,8 @@
+@@ -1128,7 +1121,8 @@
  	if (RDPPitch==0){
  		// save a fake texture...
  		LogCommand("Error: RDPPitch==0 in CacheTexture\n");
@@ -265,7 +264,7 @@
  		if (State.TextureCount >= (MaxTextureCount-5)){
  			// Delete oldest texture
  			U32 tindex, oldestindex;
-@@ -1272,9 +1267,9 @@
+@@ -1272,9 +1266,9 @@
  	UTI ^= Start;
  	if (State.TMEM[Start].LoadType==_LoadTile){
  		UTI ^= State.TMEM[Start].StartX;
@@ -278,7 +277,7 @@
  	}
  	if (tile->fmt==2){
  		if (tile->size==0){
-@@ -1295,12 +1290,6 @@
+@@ -1295,12 +1289,6 @@
  		if (State.TextureCount){
  			for (i=0;i<State.TextureCount;i++){
  				if ((State.Textures[i].UTI == UTI) &&
@@ -291,150 +290,107 @@
  					(State.Textures[i].D3DObject)){
  					Index = i;
  					break;
-@@ -1346,8 +1335,11 @@
+@@ -1346,7 +1334,8 @@
  				case 0:
  				case 2: // RGBA 16
  					Format = D3DFMT_A1R5G5B5;
 -					SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture, NULL));
 +#line 1333 "3DFunctions.cpp"
 +					SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
-+#line 1334 "3DFunctions.cpp"
  					SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
-+#line 1335 "3DFunctions.cpp"
  					SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
  					targetptr.p16 = (U16*)Rect.pBits;
- 					sourceptr.p8 = &TMEMFlipped[Start];
-@@ -1373,8 +1365,11 @@
+@@ -1373,7 +1362,7 @@
  					break;
  				case 3:  // IA 16
  					Format = D3DFMT_A8R8G8B8;
 -					SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture, NULL));
-+#line 1360 "3DFunctions.cpp"
 +					SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
-+#line 1361 "3DFunctions.cpp"
  					SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
-+#line 1362 "3DFunctions.cpp"
  					SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
  					targetptr.p16 = (U16*)Rect.pBits;
- 					sourceptr.p8 = &TMEMFlipped[Start];
-@@ -1406,8 +1401,11 @@
+@@ -1406,7 +1395,7 @@
  				break;
  			case 3: // IA
  				Format = D3DFMT_A1R5G5B5;
 -				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture, NULL));
-+#line 1393 "3DFunctions.cpp"
 +				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
-+#line 1394 "3DFunctions.cpp"
  				SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
-+#line 1395 "3DFunctions.cpp"
  				SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
  				targetptr.p16 = (U16*)Rect.pBits;
- 				sourceptr.p8 = &TMEMFlipped[Start];
-@@ -1431,8 +1429,11 @@
+@@ -1431,7 +1420,7 @@
  				break;
  			case 4: // I
  				Format = D3DFMT_A8R8G8B8;
 -				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture, NULL));
-+#line 1418 "3DFunctions.cpp"
 +				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
-+#line 1419 "3DFunctions.cpp"
  				SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
-+#line 1420 "3DFunctions.cpp"
  				SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
  				targetptr.p32 = (U32*)Rect.pBits;
- 				sourceptr.p8 = &TMEMFlipped[Start];
-@@ -1462,8 +1463,11 @@
+@@ -1462,7 +1451,7 @@
  				case 0:
  				case 2: // RGBA 16
  					Format = D3DFMT_A1R5G5B5;
 -					SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture, NULL));
-+#line 1449 "3DFunctions.cpp"
 +					SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
-+#line 1450 "3DFunctions.cpp"
  					SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
-+#line 1451 "3DFunctions.cpp"
  					SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
  					targetptr.p16 = (U16*)Rect.pBits;
- 					sourceptr.p8 = &TMEMFlipped[Start];
-@@ -1482,8 +1486,11 @@
+@@ -1482,7 +1471,7 @@
  					break;
  				case 3:  // IA 16
  					Format = D3DFMT_A8R8G8B8;
 -					SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture, NULL));
-+#line 1469 "3DFunctions.cpp"
 +					SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
-+#line 1470 "3DFunctions.cpp"
  					SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
-+#line 1471 "3DFunctions.cpp"
  					SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
  					targetptr.p32 = (U32*)Rect.pBits;
- 					sourceptr.p8 = &TMEMFlipped[Start];
-@@ -1507,8 +1514,11 @@
+@@ -1507,7 +1496,7 @@
  				break;
  			case 3: // IA
  				Format = D3DFMT_A4R4G4B4;
 -				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture, NULL));
-+#line 1494 "3DFunctions.cpp"
 +				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
-+#line 1495 "3DFunctions.cpp"
  				SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
-+#line 1496 "3DFunctions.cpp"
  				SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
  				targetptr.p16 = (U16*)Rect.pBits;
- 				sourceptr.p8 = &TMEMFlipped[Start];
-@@ -1524,8 +1534,11 @@
+@@ -1524,7 +1513,7 @@
  				break;
  			case 4: // I
  				Format = D3DFMT_A8R8G8B8;
 -				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture, NULL));
-+#line 1511 "3DFunctions.cpp"
 +				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
-+#line 1512 "3DFunctions.cpp"
  				SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
-+#line 1513 "3DFunctions.cpp"
  				SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
  				targetptr.p32 = (U32*)Rect.pBits;
- 				sourceptr.p8 = &TMEMFlipped[Start];
-@@ -1544,8 +1557,11 @@
+@@ -1544,7 +1533,7 @@
  			switch (tile->fmt){
  			case 0: // RGBA
  				Format = D3DFMT_A1R5G5B5;
 -				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture, NULL));
-+#line 1531 "3DFunctions.cpp"
 +				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
-+#line 1532 "3DFunctions.cpp"
  				SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
-+#line 1533 "3DFunctions.cpp"
  				SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
  				targetptr.p16 = (U16*)Rect.pBits;
- 				sourceptr.p8 = &TMEMFlipped[Start];
-@@ -1565,8 +1581,11 @@
+@@ -1565,7 +1554,7 @@
  				break;
  			case 3: // IA
  				Format = D3DFMT_A8R8G8B8;
 -				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture, NULL));
-+#line 1552 "3DFunctions.cpp"
 +				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
-+#line 1553 "3DFunctions.cpp"
  				SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
-+#line 1554 "3DFunctions.cpp"
  				SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
  				targetptr.p32 = (U32*)Rect.pBits;
- 				sourceptr.p8 = &TMEMFlipped[Start];
-@@ -1589,8 +1608,11 @@
+@@ -1589,7 +1578,7 @@
  			switch (tile->fmt){
  			case 0: // RGBA
  				Format = D3DFMT_A8R8G8B8;
 -				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture, NULL));
-+#line 1576 "3DFunctions.cpp"
 +				SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, Format, D3DPOOL_MANAGED, &D3DTexture));
-+#line 1577 "3DFunctions.cpp"
  				SafeDX(D3DTexture->GetSurfaceLevel(0, &D3DSurface0));
-+#line 1578 "3DFunctions.cpp"
  				SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
  				targetptr.p32 = (U32*)Rect.pBits;
- 				sourceptr.p8 = &TMEMFlipped[Start];
-@@ -1676,10 +1698,10 @@
+@@ -1676,10 +1665,10 @@
  				}
  			}
  			if ((S32)D3DHeight>(S32)Height){
@@ -446,39 +402,16 @@
  				switch (Format){
  				case D3DFMT_A8R8G8B8:
  					BytesPerLine = D3DWidth<<2;
-@@ -1703,12 +1725,14 @@
- 					}
- 				}
- 			}
-+#line 1690 "3DFunctions.cpp"
- 			SafeDX(D3DSurface0->UnlockRect());
- 			FreeObject(D3DSurface0);
+@@ -1708,7 +1697,7 @@
  		} else {
  			// unknown texture type
  			// load black default texture
 -			SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, D3DFMT_A1R5G5B5, D3DPOOL_MANAGED, &D3DTexture, NULL));
-+#line 1695 "3DFunctions.cpp"
 +			SafeDX(g_pd3dDevice->CreateTexture(D3DWidth, D3DHeight, 1, 0, D3DFMT_A1R5G5B5, D3DPOOL_MANAGED, &D3DTexture));
  		}
  		if (State.TextureCount >= (MaxTextureCount-5)){
  			// Delete oldest texture
-@@ -1750,6 +1774,7 @@
- 	bool bUseZ;
- 	if ((State.Othermode.fields.rendermodezupd!=0) != State.ZBufferWrite){
- 		State.ZBufferWrite = State.Othermode.fields.rendermodezupd!=0;
-+#line 1737 "3DFunctions.cpp"
- 		SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, State.ZBufferWrite));
- 	}
- 	if (Options.bForceZBuffer){
-@@ -1759,6 +1784,7 @@
- 	}
- 	if (bUseZ != State.ZEnabled){
- 		State.ZEnabled = bUseZ;
-+#line 1746 "3DFunctions.cpp"
- 		SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ZENABLE, State.ZEnabled));
- 	}
- /*
-@@ -1771,6 +1797,7 @@
+@@ -1771,6 +1760,7 @@
  
  void HandleTextures(bool TextureEnabled, TTile *tile)
  {
@@ -486,7 +419,7 @@
  	if (TextureEnabled){
  		// check which textures are used
  		if ((State.Othermode.fields.cycletype==2)||(State.Othermode.fields.cycletype==3)){
-@@ -1922,9 +1949,6 @@
+@@ -1922,9 +1912,6 @@
  			State.TextureFilter = D3DTEXF_LINEAR;
  			break;
  		}
@@ -496,7 +429,7 @@
  	}
  }
  
-@@ -1932,19 +1956,6 @@
+@@ -1932,19 +1919,6 @@
  {
  	bool NewDecalMode;
  	NewDecalMode = (State.Othermode.fields.rendermodezmode==3);
@@ -516,7 +449,7 @@
  		if (NewDecalMode && !State.DecalMode){
  			// turn it on
  			State.DecalMode = true;
-@@ -1953,7 +1964,6 @@
+@@ -1953,7 +1927,6 @@
  			State.DecalMode = false;
  			State.ProjectionChanged = true;
  		}
@@ -524,7 +457,7 @@
  	State.TextureChanged = true;
  
  
-@@ -2030,8 +2040,10 @@
+@@ -2030,7 +2003,8 @@
  	}
  #endif
  	D3DTNTVERTEX *VertexBuffer;
@@ -532,20 +465,12 @@
 +#line 2003 "3DFunctions.cpp"
 +	SafeDX(g_VertexBuffer->Lock(0, State.D3DVertexCacheIndex*sizeof(D3DTNTVERTEX), (BYTE**)&VertexBuffer, 0));
  	memcpy(VertexBuffer, State.D3DVertexCache, State.D3DVertexCacheIndex*sizeof(D3DTNTVERTEX));
-+#line 2005 "3DFunctions.cpp"
  	SafeDX(g_VertexBuffer->Unlock());
  	U32 TriCount;
- 	switch (BufferType){
-@@ -2044,142 +2056,10 @@
- 	}
- 	for (i=0;i<BlendPasses.Count;i++){
- 		SetBlendPass(i);
-+#line 2017 "3DFunctions.cpp"
- 		SafeDX(g_pd3dDevice->DrawPrimitive(BufferType, 0, TriCount));
- 	}
+@@ -2049,269 +2023,56 @@
  	State.D3DVertexCacheIndex = 0;
--}
--
+ }
+ 
 -COLORREF GetSurfacePixel(D3DFORMAT Format, D3DLOCKED_RECT Rect, int x, int y){
 -	union {
 -		U8* p8;
@@ -677,10 +602,10 @@
 -#endif
 -	*iWidth = Desc.Width;
 -	*iHeight = Desc.Height;
- }
- 
+-}
+-
  void FlushVertexCache()
-@@ -2187,131 +2067,51 @@
+ {
  	if (State.D3DVertexCacheIndex){
  		if (Options.bVRMLExport){
  			U32 i;
@@ -853,18 +778,15 @@
  		}
  		LogCommand("Rendering %i tris in %s mode\n", State.D3DVertexCacheIndex/3, (State.Othermode.fields.cycletype==0?"1 Cycle":(State.Othermode.fields.cycletype==1?"2 Cycle":(State.Othermode.fields.cycletype==2?"Copy":"Fill"))));
  		SetViewport();
-@@ -2321,8 +2121,10 @@
+@@ -2321,6 +2082,7 @@
  			SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &State.Projection));
  #else
  			if (State.bForceMtx){
 +#line 2087 "3DFunctions.cpp"
  				SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &State.TempMatrix));
  			} else {
-+#line 2089 "3DFunctions.cpp"
  				SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &State.ProjectionModified));
- 			}
- #endif
-@@ -2368,8 +2170,13 @@
+@@ -2368,8 +2130,13 @@
  	float Width, Height;
  	Width = (float)(State.texture.tile->D3DWidth);
  	Height = (float)(State.texture.tile->D3DHeight);
@@ -878,7 +800,7 @@
  	// use which vertex?
  	//if ((!State.GeometryMode.fields.Lighting) && (!State.GeometryMode.fields.SmoothShading)){
  	//	D3DVertexBuffer->color = VertexCache[ColorIndex].color;
-@@ -2591,24 +2398,22 @@
+@@ -2591,24 +2358,22 @@
  
  }
  
@@ -917,7 +839,7 @@
  }
  
  void S2DEX_Sprite(uObjSprite *Sprite, U32 DoMatrix)
-@@ -2660,12 +2465,15 @@
+@@ -2660,12 +2425,13 @@
  
  	D3DTNTVERTEX *VertexBuffer;
  	State.ZBufferWrite = false;
@@ -926,22 +848,14 @@
  	D3DXMATRIX Ortho;
 -	D3DXMatrixOrthoOffCenterRH(&Ortho, 0, (float)State.cimg.width, (float)GetHeight(State.cimg.width), 0, 0.0f, 1.0f);
 +	D3DXMatrixOrthoOffCenterRH(&Ortho, 0, (float)State.cimg.width, ((float)State.cimg.width*0.75f), 0, 0.0f, 1.0f);
-+#line 2434 "3DFunctions.cpp"
  	SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &Ortho));
  	State.ProjectionChanged = true;
 -	SafeDX(g_VertexBuffer->Lock(0, 4*sizeof(D3DTNTVERTEX), (void**)&VertexBuffer, 0));
-+#line 2436 "3DFunctions.cpp"
 +	SafeDX(g_VertexBuffer->Lock(0, 4*sizeof(D3DTNTVERTEX), (BYTE**)&VertexBuffer, 0));
  	VertexBuffer[0].color = State.FillColor;
  	VertexBuffer[0].x = (float)x1;
  	VertexBuffer[0].y = (float)y1;
-@@ -2693,25 +2501,28 @@
- 	VertexBuffer[3].z = 0.0f;
- 	_TexAssignU((&VertexBuffer[3])) = u2;
- 	_TexAssignV((&VertexBuffer[3])) = v2;
-+#line 2464 "3DFunctions.cpp"
- 	SafeDX(g_VertexBuffer->Unlock());
- 
+@@ -2698,20 +2464,22 @@
  	U32 i;
  	switch (DoMatrix){
  	case 0:
@@ -972,7 +886,7 @@
  		}
  */
  		break;
-@@ -2725,23 +2536,11 @@
+@@ -2725,23 +2493,11 @@
  	BlendPasses.Passes[0].Stages[0].AddressV = D3DTADDRESS_MIRROR;
  
  	SetBlendPass(0);
@@ -1231,7 +1145,7 @@
  	LogCommand("GBI_SETTILESIZE: uls: %f, ult: %f, tile: %i, lrs: %f, lrt: %f\n",
  		State.Tiles[i].uls,
  		State.Tiles[i].ult,
-@@ -515,19 +446,20 @@
+@@ -515,19 +446,19 @@
  	Rect.y1 = N64Rect.y1 * State.WindowHeight / GetHeight(State.cimg.width);
  	Rect.y2 = N64Rect.y2 * State.WindowHeight / GetHeight(State.cimg.width);
  	
@@ -1255,13 +1169,12 @@
 -		SafeDX(g_pd3dDevice->SetViewport(&State.Viewport));
 +#line 487 "DListParser.cpp"
 +		SafeDX(g_pd3dDevice->EndScene());
-+#line 488 "DListParser.cpp"
 +		SafeDX(g_pd3dDevice->BeginScene());
 +		g_pd3dDevice->SetViewport(&State.Viewport);
  	}
  
  	if (State.cimg.address == State.zimg.address){
-@@ -578,12 +510,15 @@
+@@ -578,12 +509,13 @@
  		} else {
  			D3DTNTVERTEX *VertexBuffer;
  			State.ZBufferWrite = false;
@@ -1269,27 +1182,22 @@
  			SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, false));
  			D3DXMATRIX Ortho;
  			D3DXMatrixOrthoOffCenterRH(&Ortho, 0, (float)State.WindowWidth, (float)State.WindowHeight, 0, 0.0f, 1.0f);
-+#line 542 "DListParser.cpp"
  			SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &Ortho));
  			State.ProjectionChanged = true;
 -			SafeDX(g_VertexBuffer->Lock(0, 4*sizeof(D3DTNTVERTEX), (void**)&VertexBuffer, 0));
-+#line 544 "DListParser.cpp"
 +			SafeDX(g_VertexBuffer->Lock(0, 4*sizeof(D3DTNTVERTEX), (BYTE**)&VertexBuffer, 0));
  			VertexBuffer[0].color = State.FillColor;
  			VertexBuffer[0].x = (float)Rect.x1;
  			VertexBuffer[0].y = (float)Rect.y1;
-@@ -603,9 +538,9 @@
- 			VertexBuffer[3].x = (float)Rect.x2;
- 			VertexBuffer[3].y = (float)Rect.y2;
+@@ -605,7 +537,6 @@
  			VertexBuffer[3].z = 0.0f;
-+#line 564 "DListParser.cpp"
  			SafeDX(g_VertexBuffer->Unlock());
  
 -/*
  			BlendPasses.Count = 1;
  			BlendPasses.Passes[0].Stages[0].ColorOp = D3DTOP_SELECTARG1;
  			BlendPasses.Passes[0].Stages[0].ColorArg1 = D3DTA_TFACTOR;
-@@ -614,16 +549,9 @@
+@@ -614,16 +545,9 @@
  			BlendPasses.Passes[0].Stages[1].ColorOp = D3DTOP_DISABLE;
  			BlendPasses.Passes[0].Stages[1].AlphaOp = D3DTOP_DISABLE;
  			BlendPasses.Passes[0].TFactor = Color;
@@ -1309,36 +1217,15 @@
  			SafeDX(g_pd3dDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2));
  		}
  	}
-@@ -762,15 +690,20 @@
- 	uCustomSurface = 0;
- 	FlushVertexCache();
- 	LogCommand("Disabling BackBuffer\n");
-+#line 2548 "DListParser.cpp"
- 	SafeDX(g_pd3dDevice->GetDepthStencilSurface(&DepthStencilSurface));
-+#line 2548 "DListParser.cpp"
- 	SafeDX(g_pd3dDevice->EndScene());
-+#line 2548 "DListParser.cpp"
- 	SafeDX(g_pd3dDevice->SetRenderTarget(NormalSurface, DepthStencilSurface));
-+#line 2548 "DListParser.cpp"
- 	SafeDX(g_pd3dDevice->BeginScene());
- 	// Write back contents of Surface to RDRAM
+@@ -770,7 +694,6 @@
  	D3DLOCKED_RECT Rect;
  	U32 *ImgPtr;
  	U32 x, y;
- 
-+#line 2548 "DListParser.cpp"
+-
  	SafeDX(surWriteback->LockRect(&Rect, 0, D3DLOCK_READONLY));
  	U32 sx, sy;
  	for (y=0;y<uCustomSurfaceHeight;y+=10){
-@@ -801,6 +734,7 @@
- 					Col;
- 		}
- 	}
-+#line 2548 "DListParser.cpp"
- 	SafeDX(surWriteback->UnlockRect());
- }
- */
-@@ -846,10 +780,6 @@
+@@ -846,10 +769,6 @@
  	Tri1(Command.tri4_gbi1.v41, Command.tri4_gbi1.v42, Command.tri4_gbi1.v43);
  }
  
@@ -1349,7 +1236,7 @@
  
  void GBI1_QUAD()
  {
-@@ -858,15 +788,7 @@
+@@ -858,15 +777,7 @@
  }
  
  // Microcode 1 and 2 functions...
@@ -1366,7 +1253,7 @@
  
  void GBI12_MTX()
  {
-@@ -888,6 +810,7 @@
+@@ -888,6 +799,7 @@
  		State.TranslateX = Read32(Command.movemem.addr + Segment[Command.movemem.segment] + 8)>>17;
  		State.TranslateY =(Read32(Command.movemem.addr + Segment[Command.movemem.segment] + 8)&BitM16)>>1;
  		State.TranslateZ = Read32(Command.movemem.addr + Segment[Command.movemem.segment] + 12)>>17;
@@ -1374,7 +1261,7 @@
  		LogCommand("GBI12_MOVEMEM: Viewport\n");
  		break;
  	case 0x82: // LookAtY
-@@ -936,10 +859,6 @@
+@@ -936,10 +848,6 @@
  	}
  }
  
@@ -1385,7 +1272,7 @@
  
  void GBI12_DL()
  {
-@@ -959,32 +878,10 @@
+@@ -959,32 +867,10 @@
  	//Log("%X: DL to %X\n", Stack[uStackIndex-1].PC, Stack[uStackIndex-1].PC);
  }
  
@@ -1422,7 +1309,7 @@
  
  void GBI12_CLEARGEOMMODE()
  {
-@@ -1052,6 +949,39 @@
+@@ -1052,6 +938,39 @@
  	LogCommand("GBI12_TEXTURE: Enabled: %i, tile: %i, s: %i, t: %i, lodscale: %i\n", Command.texture.on, Command.texture.tile, Command.texture.s, Command.texture.t, Command.texture.lodscale);
  	FlushVertexCache();
  	State.GeometryMode.fields.TextureEnable			= Command.texture.on!=0;
@@ -1462,7 +1349,7 @@
  	State.texture.tile				= &State.Tiles[Command.texture.tile];
  	switch (Command.texture.s){
  	case 0x8000:
-@@ -1128,8 +1058,8 @@
+@@ -1128,8 +1047,8 @@
  	case 0x0A: // Lightcol
  		if (Command.moveword_gbi12.mw_index%32==0){
  			State.Lights[Command.moveword_gbi12.mw_index/32].r = BITS(Command.moveword_gbi12.data, 24, 8);
@@ -1473,7 +1360,7 @@
  		}
  		LogCommand("GBI12_MOVEWORD: Light color, Index: %i, b?: %i, color:%X\n", Command.moveword_gbi12.mw_index/32, Command.moveword_gbi12.mw_index%32!=0, Command.moveword_gbi12.data);
  		break;
-@@ -1142,32 +1072,8 @@
+@@ -1142,32 +1061,8 @@
  	}
  }
  
@@ -1508,7 +1395,7 @@
  
  void GBI2_VTX()
  {
-@@ -1201,17 +1107,7 @@
+@@ -1201,17 +1096,7 @@
  	}
  }
  
@@ -1527,7 +1414,7 @@
  
  void GBI2_QUAD()
  {
-@@ -1268,10 +1164,6 @@
+@@ -1268,10 +1153,6 @@
  }
  
  // Microcode 3 only
@@ -1538,7 +1425,7 @@
  
  void GBI3_VTX()
  {
-@@ -1360,6 +1252,13 @@
+@@ -1360,6 +1241,13 @@
  	Tri1(Command.tri2_gbi3.v4, Command.tri2_gbi3.v5, Command.tri2_gbi3.v6);
  }
  
@@ -1552,7 +1439,7 @@
  void GBI3_QUAD()
  {
  	LogCommand("GBI3_QUAD\n");
-@@ -1367,10 +1266,6 @@
+@@ -1367,10 +1255,6 @@
  	Tri1(Command.tri2_gbi3.v4, Command.tri2_gbi3.v5, Command.tri2_gbi3.v6);
  }
  
@@ -1563,7 +1450,7 @@
  
  void GBI3_BACKGROUND()
  {
-@@ -1406,58 +1301,9 @@
+@@ -1406,58 +1290,9 @@
  	Tri1((Command.tri4_gbi3.v41lo)|(Command.tri4_gbi3.v41hi<<2), Command.tri4_gbi3.v42, Command.tri4_gbi3.v43);
  }
  
@@ -1625,7 +1512,7 @@
  
  void GBI3_POPMATRIX()
  {
-@@ -1468,7 +1314,20 @@
+@@ -1468,7 +1303,20 @@
  		State.WorldMatrix = &State.World[State.WorldIndex];
  	} else {
  		// Matrix underflow
@@ -1647,7 +1534,7 @@
  	}
  }
  
-@@ -1546,13 +1405,14 @@
+@@ -1546,8 +1394,8 @@
  	case 0x0A: // Lightcol
  		if (Command.moveword_gbi3.mw_index%24==0){
  			State.Lights[Command.moveword_gbi3.mw_index/24].r = BITS(Command.moveword_gbi3.data, 24, 8);
@@ -1658,13 +1545,7 @@
  		}
  		LogCommand("GBI3_MOVEWORD: Lightcol, Index: %i, b?: %i, color:%X\n", Command.moveword_gbi3.mw_index/24, Command.moveword_gbi3.mw_index%24!=0, Command.moveword_gbi3.data);
  		break;
- 	case 0x0C:
- 		State.WorldMatrix = &State.Identity;
-+#line 2548 "DListParser.cpp"
- 		//SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &State.TempMatrix));
- 		State.bForceMtx = true;
- 		State.ProjectionChanged = true;
-@@ -1581,6 +1441,7 @@
+@@ -1581,6 +1429,7 @@
  		State.TranslateX = Read32(Command.movemem_gbi3.addr + Segment[Command.movemem_gbi3.segment] + 8)>>17;
  		State.TranslateY =(Read32(Command.movemem_gbi3.addr + Segment[Command.movemem_gbi3.segment] + 8)&BitM16)>>1;
  		State.TranslateZ = Read32(Command.movemem_gbi3.addr + Segment[Command.movemem_gbi3.segment] + 12)>>17;
@@ -1672,7 +1553,7 @@
  		LogCommand("GBI3_MOVEMEM: Viewport\n");
  		break;
  	case 10: // Light
-@@ -1606,10 +1467,6 @@
+@@ -1606,10 +1455,6 @@
  	}
  }
  
@@ -1683,7 +1564,7 @@
  
  void GBI3_DL()
  {
-@@ -1639,15 +1496,18 @@
+@@ -1639,15 +1484,18 @@
  	}
  }
  
@@ -1706,7 +1587,7 @@
  }
  
  void GBI3_SETOTHERMODELO()
-@@ -1670,13 +1530,7 @@
+@@ -1670,13 +1518,7 @@
  	OthermodeChanged();
  }
  
@@ -1721,7 +1602,7 @@
  void GBI5_MTX()
  {
  	// does not have a real matrix stack - just 3 world matrices
-@@ -1957,8 +1811,8 @@
+@@ -1957,8 +1799,8 @@
  	case 0x0A: // Lightcol
  		if (Command.moveword_gbi12.mw_index%32==0){
  			State.Lights[Command.moveword_gbi12.mw_index/32].r = BITS(Command.moveword_gbi12.data, 24, 8);
@@ -1732,36 +1613,16 @@
  		}
  		LogCommand("GBI12_MOVEWORD: Light color, Index: %i, b?: %i, color:%X\n", Command.moveword_gbi12.mw_index/32, Command.moveword_gbi12.mw_index%32!=0, Command.moveword_gbi12.data);
  		break;
-@@ -2054,11 +1908,14 @@
- 
- 	D3DTNTVERTEX *VertexBuffer;
+@@ -2056,7 +1898,7 @@
  	State.ZBufferWrite = false;
-+#line 2548 "DListParser.cpp"
  	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, false));
  	D3DXMATRIX Ortho;
 -	D3DXMatrixOrthoOffCenterRH(&Ortho, 0, (float)State.cimg.width, (float)GetHeight(State.cimg.width), 0, 0.0f, 1.0f);
 +	D3DXMatrixOrthoOffCenterRH(&Ortho, 0, (float)State.cimg.width, ((float)State.cimg.width*0.75f), 0, 0.0f, 1.0f);
-+#line 2548 "DListParser.cpp"
  	SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &Ortho));
  	State.ProjectionChanged = true;
-+#line 2548 "DListParser.cpp"
  	SafeDX(g_VertexBuffer->Lock(0, 4*sizeof(D3DTNTVERTEX), (U8**)&VertexBuffer, 0));
- 	VertexBuffer[0].color = State.FillColor;
- 	VertexBuffer[0].x = (float)x1;
-@@ -2087,6 +1944,7 @@
- 	VertexBuffer[3].z = 0.0f;
- 	_TexAssignU((&VertexBuffer[3])) = u2;
- 	_TexAssignV((&VertexBuffer[3])) = v2;
-+#line 2548 "DListParser.cpp"
- 	SafeDX(g_VertexBuffer->Unlock());
- 
- 	U32 i;
-@@ -2104,19 +1962,12 @@
- 	BlendPasses.Passes[0].TFactor = 0x30FF00FF;
- 
- 	SetBlendPass(0);
-+#line 2548 "DListParser.cpp"
- 	SafeDX(g_pd3dDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2));
+@@ -2108,15 +1950,7 @@
  */
  }
  
@@ -1778,7 +1639,7 @@
  
  void GBI10_OBJ_SPRITE()
  {
-@@ -2164,6 +2015,171 @@
+@@ -2164,6 +1998,171 @@
  
  }
  
@@ -1950,7 +1811,7 @@
  void GBI10_SELECT_DL()
  {
  	LogCommand("GBI10_SELECT_DL unhandled\n");
-@@ -2184,6 +2200,38 @@
+@@ -2184,6 +2183,38 @@
  	S2DEX_Sprite(&Sprite->sprite);
  */
  }
@@ -1989,7 +1850,7 @@
  
  void GBI10_OBJ_LOADTXTR()
  {
-@@ -2262,7 +2310,7 @@
+@@ -2262,7 +2293,7 @@
  				_D3DMul_4x4(*State.WorldMatrix, Matrix, State.World[LoadIndex]);
  			}
  		} else {
@@ -1998,7 +1859,7 @@
  		}
  #endif
  	} else {
-@@ -2272,20 +2320,6 @@
+@@ -2272,20 +2303,6 @@
  	State.ProjectionChanged = true;
  }
  
@@ -2019,7 +1880,7 @@
  
  void GBI11_SETMTXADD()
  {
-@@ -2311,6 +2345,7 @@
+@@ -2311,6 +2328,7 @@
  		State.TranslateX = Read32(addr + 8)>>17;
  		State.TranslateY =(Read32(addr + 8)&BitM16)>>1;
  		State.TranslateZ = Read32(addr + 12)>>17;
@@ -2027,7 +1888,7 @@
  		LogCommand("GBI_ROGUE_MOVEMEM: Viewport\n");
  		break;
  	case 0x82: // LookAtY
-@@ -2555,22 +2590,6 @@
+@@ -2555,22 +2573,6 @@
  		(Command.raw.hi>>0xA)&0x3F, 0);
  }
  
@@ -2050,7 +1911,7 @@
  
  void DetectMicroCode(U32 uIndex)
  {
-@@ -2588,8 +2607,10 @@
+@@ -2588,8 +2590,10 @@
  	}
  
  	if (0&&UCode_NoN){
@@ -2061,7 +1922,7 @@
  		SafeDX(g_pd3dDevice->SetRenderState(D3DRS_CLIPPING, TRUE));
  	}
  	char szMsg[100];
-@@ -3009,76 +3030,6 @@
+@@ -3009,76 +3013,6 @@
  }
  
  
@@ -2138,7 +1999,7 @@
  void ProcessDisplayList()
  {
  #if PROFILING
-@@ -3187,9 +3138,9 @@
+@@ -3187,9 +3121,9 @@
  			Stack[uStackIndex].PC+=8;
  			Counter++;
  		} while ((!bDListFinished) && (Counter < 100000));
@@ -2211,15 +2072,7 @@
  		return E_FAIL;
  	}
  
-@@ -58,6 +35,7 @@
- 	d3dpp.EnableAutoDepthStencil = TRUE;
- 
- 	// Get Backbuffer format from current settings
-+#line 38 "Direct3d.cpp"
- 	SafeDX(g_pD3D->GetAdapterDisplayMode(AdapterID, &d3ddm ) );
- 	d3dpp.BackBufferFormat = d3ddm.Format;
- 	if (bFullScreen){
-@@ -72,74 +50,75 @@
+@@ -72,8 +49,8 @@
  	if (FAILED(g_pD3D->CreateDevice(AdapterID, DevType, Global_Gfx_Info.hWnd,
  								  D3DCREATE_SOFTWARE_VERTEXPROCESSING|D3DCREATE_MULTITHREADED , 
  								  &d3dpp, &g_pd3dDevice ))){
@@ -2230,45 +2083,13 @@
  		ShowError(s);
  		MessageBox(Global_Gfx_Info.hWnd, s, "Error", MB_OK);
  		return E_FAIL;
- 	}
- 	// Save viewport data...
-+#line 59 "Direct3d.cpp"
- 	SafeDX(g_pd3dDevice->GetViewport(&State.Viewport));
- 	State.Viewport.MinZ = 0.0f;
- 	State.Viewport.MaxZ = 1.0f;
- 	State.WindowWidth = State.Viewport.Width;
- 	State.WindowHeight = State.Viewport.Height;
-+#line 64 "Direct3d.cpp"
- 	SafeDX(g_pd3dDevice->SetViewport(&State.Viewport));
- 	RECT r;
- 	GetClientRect(Global_Gfx_Info.hWnd, &r);
- 
-+#line 68 "Direct3d.cpp"
- 	SafeDX(g_pd3dDevice->GetDeviceCaps(&DeviceCaps));
- 
-+#line 70 "Direct3d.cpp"
- 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE));
-+#line 71 "Direct3d.cpp"
- 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_LIGHTING, FALSE));
-+#line 72 "Direct3d.cpp"
- 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE));
-+#line 73 "Direct3d.cpp"
- 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE));
-+#line 74 "Direct3d.cpp"
- 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ALPHAREF, 1));
-+#line 75 "Direct3d.cpp"
- 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATEREQUAL));
-+#line 76 "Direct3d.cpp"
- 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_SHADEMODE, D3DSHADE_GOURAUD));
- 	//SafeDX(g_pd3dDevice->SetRenderState(D3DRS_DITHERENABLE, TRUE));
+@@ -101,45 +78,26 @@
  
  	U32 i;
  	for (i=0;i<8;i++){
 -		SafeDX(g_pd3dDevice->SetSamplerState(i, D3DSAMP_MAGFILTER, D3DTEXF_LINEAR));
 -		SafeDX(g_pd3dDevice->SetSamplerState(i, D3DSAMP_MINFILTER, D3DTEXF_LINEAR));
-+#line 81 "Direct3d.cpp"
 +		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_MAGFILTER, D3DTEXF_LINEAR));
-+#line 82 "Direct3d.cpp"
 +		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_MINFILTER, D3DTEXF_LINEAR));
  	}
  //	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_FILLMODE, D3DFILL_WIREFRAME));
@@ -2287,31 +2108,23 @@
 -			0,
 -			sizeof(D3DTNTVERTEX)));
 -	SafeDX(g_pd3dDevice->SetFVF(MY_VERTEX_TYPE));
-+#line 87 "Direct3d.cpp"
 +	SafeDX(g_pd3dDevice->CreateVertexBuffer( sizeof(D3DTNTVERTEX)*D3DVertexCacheSize, D3DUSAGE_WRITEONLY, MY_VERTEX_TYPE, D3DPOOL_SYSTEMMEM, &g_VertexBuffer));
-+#line 88 "Direct3d.cpp"
 +	SafeDX(g_pd3dDevice->SetStreamSource( 0, g_VertexBuffer, sizeof(D3DTNTVERTEX)));
-+#line 89 "Direct3d.cpp"
 +	SafeDX(g_pd3dDevice->SetVertexShader(MY_VERTEX_TYPE));
  
  	// Create color textures - we use them to fake color blending if tfactor is used
 -	SafeDX(g_pd3dDevice->CreateTexture(YoshiBGWidth, YoshiBGHeight, 1, 0, D3DFMT_A1R5G5B5, D3DPOOL_MANAGED, &texBackground[0], NULL));
 -	SafeDX(g_pd3dDevice->CreateTexture(YoshiBGWidth, YoshiBGHeight, 1, 0, D3DFMT_A1R5G5B5, D3DPOOL_MANAGED, &texBackground[1], NULL));
 -	SafeDX(g_pd3dDevice->CreateTexture(YoshiBGWidth, YoshiBGHeight, 1, 0, D3DFMT_A1R5G5B5, D3DPOOL_MANAGED, &texBackground[2], NULL));
-+#line 92 "Direct3d.cpp"
 +	SafeDX(g_pd3dDevice->CreateTexture(YoshiBGWidth, YoshiBGHeight, 1, 0, D3DFMT_A1R5G5B5, D3DPOOL_MANAGED, &texBackground[0]));
-+#line 93 "Direct3d.cpp"
 +	SafeDX(g_pd3dDevice->CreateTexture(YoshiBGWidth, YoshiBGHeight, 1, 0, D3DFMT_A1R5G5B5, D3DPOOL_MANAGED, &texBackground[1]));
-+#line 94 "Direct3d.cpp"
 +	SafeDX(g_pd3dDevice->CreateTexture(YoshiBGWidth, YoshiBGHeight, 1, 0, D3DFMT_A1R5G5B5, D3DPOOL_MANAGED, &texBackground[2]));
  	for (i=0;i<8;i++){
 -		SafeDX(g_pd3dDevice->CreateTexture(1, 1, 1, 0, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, &g_ColorTexture[i].D3DObject, NULL));
-+#line 96 "Direct3d.cpp"
 +		SafeDX(g_pd3dDevice->CreateTexture(1, 1, 1, 0, D3DFMT_A8R8G8B8, D3DPOOL_MANAGED, &g_ColorTexture[i].D3DObject));
  		g_ColorTexture[i].Color = 0;
  	}
  //	SafeDX(g_pd3dDevice->CreateRenderTarget(512, 256, d3ddm.Format, D3DMULTISAMPLE_NONE, TRUE, &surWriteback));
-+#line 100 "Direct3d.cpp"
  	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, FALSE));
 -	
 -	// Create some standard combiners...
@@ -2325,7 +2138,7 @@
  	
  	return NOERROR;
  }
-@@ -162,15 +141,6 @@
+@@ -162,15 +120,6 @@
  	for (i=0;i<8;i++){
  		FreeObject(g_ColorTexture[i].D3DObject);
  	}
@@ -2451,7 +2264,7 @@
  
  void DebugShowTexture(){
  	char str[100], strdetails[200], strformat[20];
-@@ -206,12 +112,116 @@
+@@ -206,12 +112,103 @@
  			} else {
  				strcat(strdetails, ", loaded by LoadTile");
  			}
@@ -2469,7 +2282,6 @@
 +	Viewport.Height = State.WindowHeight;
 +	Viewport.MinZ = 0;
 +	Viewport.MaxZ = 1.0f;
-+#line 125 "LemNemu.cpp"
 +	SafeDX(g_pd3dDevice->SetViewport(&Viewport));
 +
 +	D3DRECT Rect;
@@ -2499,29 +2311,21 @@
 +	D3DXMatrixOrthoOffCenterRH(&OrthoMatrix, 0, (float)State.WindowWidth/3, (float)State.WindowHeight/3, 0, 0.0f, 1.0f);
 +#line 142 "LemNemu.cpp"
 +	SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &OrthoMatrix));
-+#line 143 "LemNemu.cpp"
 +	SafeDX(g_pd3dDevice->SetTransform(D3DTS_WORLD, &State.Identity));
 +
 +	// Set texture...
-+#line 146 "LemNemu.cpp"
 +	SafeDX(g_pd3dDevice->SetTexture(0, State.Textures[DebugTextureID].D3DObject));
-+#line 147 "LemNemu.cpp"
 +	SafeDX(g_pd3dDevice->SetTextureStageState(0, D3DTSS_COLOROP, D3DTOP_SELECTARG1));
 +	if (bDebugTextureBackground){
-+#line 149 "LemNemu.cpp"
 +		SafeDX(g_pd3dDevice->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TEXTURE|D3DTA_ALPHAREPLICATE));
 +	} else {
-+#line 151 "LemNemu.cpp"
 +		SafeDX(g_pd3dDevice->SetTextureStageState(0, D3DTSS_COLORARG1, D3DTA_TEXTURE));
 +	}
-+#line 153 "LemNemu.cpp"
 +	SafeDX(g_pd3dDevice->SetTextureStageState(1, D3DTSS_COLOROP, D3DTOP_DISABLE));
-+#line 154 "LemNemu.cpp"
 +	SafeDX(g_pd3dDevice->SetTextureStageState(0, D3DTSS_ALPHAOP, D3DTOP_DISABLE));
 +
 +	// Set up vertex buffer...
 +	D3DTNTVERTEX *VertexBuffer;
-+#line 158 "LemNemu.cpp"
 +	SafeDX(g_VertexBuffer->Lock(0, 4*sizeof(D3DTNTVERTEX), (BYTE**)&VertexBuffer, 0));
 +	VertexBuffer[0].color = 0xFFFFFFFF;
 +	VertexBuffer[0].x = 0.0f;
@@ -2550,14 +2354,10 @@
 +	VertexBuffer[3].z = 0.0f;
 +	VertexBuffer[3].tex[0].u = 1.0f;
 +	VertexBuffer[3].tex[0].v = 1.0f;
-+#line 186 "LemNemu.cpp"
 +	SafeDX(g_VertexBuffer->Unlock());
 +
-+#line 188 "LemNemu.cpp"
 +	SafeDX(g_pd3dDevice->SetTextureStageState(0, D3DTSS_MAGFILTER, D3DTEXF_POINT));
-+#line 189 "LemNemu.cpp"
 +	SafeDX(g_pd3dDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2));
-+#line 190 "LemNemu.cpp"
 +	SafeDX(g_pd3dDevice->EndScene());
 +
  			RECT rDstRect;
@@ -2569,7 +2369,7 @@
  			SafeDX(g_pd3dDevice->Present(0, &rDstRect, 0, 0));
  			SendMessage(hDebugWindowTextureDetails, WM_SETTEXT, 0, (LPARAM)strdetails);
  		}
-@@ -430,7 +440,7 @@
+@@ -430,7 +427,7 @@
  
  EXPORT void CALL DllAbout ( HWND hParent )
  {
@@ -2578,7 +2378,7 @@
  }
  
  EXPORT void CALL DllConfig ( HWND hParent )
-@@ -515,9 +525,8 @@
+@@ -515,9 +512,8 @@
  	}
  	if (Options.bVRMLExport){
  		char sFileName[256];
@@ -2589,7 +2389,7 @@
  		fprintf(fVRML, "#VRML V2.0 utf8\n");
  		fprintf(fVRML, "# Produced by Nemu64 - www.nemu.com\n");
  		fprintf(fVRML, "\n");
-@@ -533,8 +542,6 @@
+@@ -533,8 +529,6 @@
  		fprintf(fVRML, "	on TRUE\n");
  		fprintf(fVRML, "}\n");
  		
@@ -2598,7 +2398,7 @@
  	}
  
  	puCullDone = 0;
-@@ -549,8 +556,6 @@
+@@ -549,8 +543,6 @@
  	*(Global_Gfx_Info.MI_INTR_REG) |= 0x20;
  	Global_Gfx_Info.CheckInterrupts();
  	if (Options.bVRMLExport){
@@ -2655,23 +2455,16 @@
  U32 Texture1, Texture2; // indices into texture array
  
  TCombineScripts CombineScripts;
-@@ -109,11 +107,14 @@
+@@ -109,7 +107,7 @@
  			ColorTextureIndex = 0;
  			ShowError("Error 1 in UseColor");
  		}
 -		LPDIRECT3DSURFACE9 D3DSurface0;
 +		LPDIRECT3DSURFACE8 D3DSurface0;
  		D3DLOCKED_RECT Rect;
-+#line 112 "combiner.cpp"
  		SafeDX(g_ColorTexture[ColorTextureIndex].D3DObject->GetSurfaceLevel(0, &D3DSurface0));
-+#line 113 "combiner.cpp"
  		SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
- 		*((U32*)Rect.pBits) = Color;
-+#line 115 "combiner.cpp"
- 		SafeDX(D3DSurface0->UnlockRect());
- 		g_ColorTexture[ColorTextureIndex].Color = Color;
- 	}
-@@ -365,6 +366,54 @@
+@@ -365,6 +363,41 @@
  }
  
  
@@ -2679,38 +2472,25 @@
 +{
 +#line 265 "combiner.cpp"
 +	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_SRCBLEND, BlendPasses.Passes[Index].SrcBlend));
-+#line 266 "combiner.cpp"
 +	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_DESTBLEND, BlendPasses.Passes[Index].DstBlend));
-+#line 267 "combiner.cpp"
 +	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_TEXTUREFACTOR, BlendPasses.Passes[Index].TFactor));
 +	U32 i; // stage
 +	for (i=0;i<8;i++){
-+#line 270 "combiner.cpp"
 +		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_COLOROP, BlendPasses.Passes[Index].Stages[i].ColorOp));
-+#line 271 "combiner.cpp"
 +		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_ALPHAOP, BlendPasses.Passes[Index].Stages[i].AlphaOp));
 +		if (BlendPasses.Passes[Index].Stages[i].ColorOp == D3DTOP_DISABLE){
 +			break;
 +		}
-+#line 275 "combiner.cpp"
 +		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_COLORARG1, BlendPasses.Passes[Index].Stages[i].ColorArg1));
-+#line 276 "combiner.cpp"
 +		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_COLORARG2, BlendPasses.Passes[Index].Stages[i].ColorArg2));
 +		//SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_COLORARG0, BlendPasses.Passes[Index].Stages[i].ColorArg3));
-+#line 278 "combiner.cpp"
 +		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_ALPHAARG1, BlendPasses.Passes[Index].Stages[i].AlphaArg1));
-+#line 279 "combiner.cpp"
 +		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_ALPHAARG2, BlendPasses.Passes[Index].Stages[i].AlphaArg2));
 +		//SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_ALPHAARG0, BlendPasses.Passes[Index].Stages[i].AlphaArg3));
-+#line 281 "combiner.cpp"
 +		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_ADDRESSU, BlendPasses.Passes[Index].Stages[i].AddressU));
-+#line 282 "combiner.cpp"
 +		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_ADDRESSV, BlendPasses.Passes[Index].Stages[i].AddressV));
-+#line 283 "combiner.cpp"
 +		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_MAGFILTER, State.TextureFilter));
-+#line 284 "combiner.cpp"
 +		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_MINFILTER, State.TextureFilter));
-+#line 285 "combiner.cpp"
 +		SafeDX(g_pd3dDevice->SetTexture(i, BlendPasses.Passes[Index].Stages[i].Texture));
 +		if ((BlendPasses.Passes[Index].Stages[i].ColorArg1==D3DTA_TEXTURE) ||
 +			(BlendPasses.Passes[Index].Stages[i].ColorArg2==D3DTA_TEXTURE) ||
@@ -2726,7 +2506,7 @@
  int _httoi(const TCHAR *value)
  {
    struct CHexMap
-@@ -588,681 +637,10 @@
+@@ -588,681 +621,10 @@
  	qsort(&CombineScripts.Script[0], CombineScripts.Count, sizeof(TScript), &ScriptCompare);
  }
  
@@ -3410,7 +3190,7 @@
  {
  	U32 i;
  	bool LogCombinerOutput, Highlight=false;
-@@ -1428,7 +806,7 @@
+@@ -1428,7 +790,7 @@
  						bConditionFailed = false;
  						CurrentPass = -1;
  						TScriptCommand *Cmd;
@@ -3419,7 +3199,7 @@
  						Prerendered1 = 0;
  						Prerendered2 = 0;
  						for (j=0;j<CombineScripts.Script[CombinerIndex].Length;j++){
-@@ -1870,7 +1248,7 @@
+@@ -1870,7 +1232,7 @@
  										break;
  									}
  									U32 TexIndex;
@@ -3428,7 +3208,7 @@
  									TexIndex = ((Cmd->Param1==0)?Texture1:Texture2);
  									switch (Cmd->Param2){
  									case 0:
-@@ -4408,4 +3786,3 @@
+@@ -4408,4 +3770,3 @@
  		}
  	}
  }
@@ -4260,37 +4040,15 @@
  	D3DLOCKED_RECT Rect;
  
  	
-@@ -1827,7 +1810,9 @@
+@@ -1827,6 +1810,7 @@
  
  	if ((uTexCRC!=State.uLastTexCRC[bgCount]) || (Options.bDisableTextureCache)){
  		State.uLastTexCRC[bgCount] = uTexCRC;
 +#line 1786 "d:\\meinsc\\lemd3d\\globals.h"
  		SafeDX(texBackground[bgCount]->GetSurfaceLevel(0, &D3DSurface0));
-+#line 1787 "d:\\meinsc\\lemd3d\\globals.h"
  		SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
  		ImgPtr = (U16*)Rect.pBits;
- 		switch (size){
-@@ -1869,16 +1854,19 @@
- 			}
- 			break;
- 		}
-+#line 1828 "d:\\meinsc\\lemd3d\\globals.h"
- 		SafeDX(D3DSurface0->UnlockRect());
- 		FreeObject(D3DSurface0);
- 	}
- 
- 	State.ZBufferWrite = false;
-+#line 1833 "d:\\meinsc\\lemd3d\\globals.h"
- 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_ZWRITEENABLE, State.ZBufferWrite));
- 	SetViewport();
- 	D3DXMATRIX Ortho;
- 	
- 	D3DXMatrixOrthoOffCenterRH(&Ortho, 0, 1, 0, 1, 0.0f, 1.0f);
-+#line 1838 "d:\\meinsc\\lemd3d\\globals.h"
- 	SafeDX(g_pd3dDevice->SetTransform(D3DTS_PROJECTION, &Ortho));
- 	State.ProjectionChanged = true;
- 
-@@ -1942,25 +1930,24 @@
+@@ -1942,21 +1926,17 @@
  		ConfigureBlender2();
  	} else {
  		BlendPasses.Count = 1;
@@ -4310,17 +4068,10 @@
 -	UseTexture2=false;
   	D3DTNTVERTEX *locVertexBuffer;
 -	SafeDX(g_VertexBuffer->Lock(0, State.D3DVertexCacheIndex*sizeof(D3DTNTVERTEX), (void**)&locVertexBuffer, 0));
-+#line 1911 "d:\\meinsc\\lemd3d\\globals.h"
 +	SafeDX(g_VertexBuffer->Lock(0, State.D3DVertexCacheIndex*sizeof(D3DTNTVERTEX), (BYTE**)&locVertexBuffer, 0));
  	memcpy(locVertexBuffer, State.D3DVertexCache, State.D3DVertexCacheIndex*sizeof(D3DTNTVERTEX));
-+#line 1913 "d:\\meinsc\\lemd3d\\globals.h"
  	SafeDX(g_VertexBuffer->Unlock());
  	for (i=0;i<BlendPasses.Count;i++){
- 		SetBlendPass(i);
-+#line 1916 "d:\\meinsc\\lemd3d\\globals.h"
- 		SafeDX(g_pd3dDevice->DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, 2));
- 	}
- 	State.D3DVertexCacheIndex=0;
 --- google-tag/prerender.cpp
 +++ src/lemd3d/prerender.cpp
 @@ -37,11 +37,11 @@

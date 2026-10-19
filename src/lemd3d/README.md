@@ -72,8 +72,10 @@ checks, viewport invalidation, matrix multiplication, generated texture
 coordinates, color-only VRML export, and the original state/combiner layouts.
 Historical mistakes in lighting calculations and resource handling are retained
 where the target demonstrates them. Identical command handlers are grouped at
-their observed folding positions. Diagnostic `#line` directives reproduce the
-filenames and line numbers embedded in `DXTrace` calls. The complete changes
+their observed folding positions. The remaining diagnostic `#line` directives
+reproduce original line numbers and the header path embedded in `DXTrace` calls
+where they differ from the reconstructed source locations. Redundant directives
+and directives attached to commented-out calls have been removed. The complete changes
 from normalized upstream text are in
 [lemd3d-source-changes.patch](../../analysis/lemd3d-source-changes.patch).
 Source encodings are Windows-1252 where required.

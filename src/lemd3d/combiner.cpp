@@ -109,12 +109,9 @@ U32 GenerateColorTexture(U32 Color)
 		}
 		LPDIRECT3DSURFACE8 D3DSurface0;
 		D3DLOCKED_RECT Rect;
-#line 112 "combiner.cpp"
 		SafeDX(g_ColorTexture[ColorTextureIndex].D3DObject->GetSurfaceLevel(0, &D3DSurface0));
-#line 113 "combiner.cpp"
 		SafeDX(D3DSurface0->LockRect(&Rect, 0, 0));
 		*((U32*)Rect.pBits) = Color;
-#line 115 "combiner.cpp"
 		SafeDX(D3DSurface0->UnlockRect());
 		g_ColorTexture[ColorTextureIndex].Color = Color;
 	}
@@ -370,38 +367,25 @@ void SetBlendPass(U32 Index)
 {
 #line 265 "combiner.cpp"
 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_SRCBLEND, BlendPasses.Passes[Index].SrcBlend));
-#line 266 "combiner.cpp"
 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_DESTBLEND, BlendPasses.Passes[Index].DstBlend));
-#line 267 "combiner.cpp"
 	SafeDX(g_pd3dDevice->SetRenderState(D3DRS_TEXTUREFACTOR, BlendPasses.Passes[Index].TFactor));
 	U32 i; // stage
 	for (i=0;i<8;i++){
-#line 270 "combiner.cpp"
 		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_COLOROP, BlendPasses.Passes[Index].Stages[i].ColorOp));
-#line 271 "combiner.cpp"
 		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_ALPHAOP, BlendPasses.Passes[Index].Stages[i].AlphaOp));
 		if (BlendPasses.Passes[Index].Stages[i].ColorOp == D3DTOP_DISABLE){
 			break;
 		}
-#line 275 "combiner.cpp"
 		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_COLORARG1, BlendPasses.Passes[Index].Stages[i].ColorArg1));
-#line 276 "combiner.cpp"
 		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_COLORARG2, BlendPasses.Passes[Index].Stages[i].ColorArg2));
 		//SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_COLORARG0, BlendPasses.Passes[Index].Stages[i].ColorArg3));
-#line 278 "combiner.cpp"
 		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_ALPHAARG1, BlendPasses.Passes[Index].Stages[i].AlphaArg1));
-#line 279 "combiner.cpp"
 		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_ALPHAARG2, BlendPasses.Passes[Index].Stages[i].AlphaArg2));
 		//SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_ALPHAARG0, BlendPasses.Passes[Index].Stages[i].AlphaArg3));
-#line 281 "combiner.cpp"
 		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_ADDRESSU, BlendPasses.Passes[Index].Stages[i].AddressU));
-#line 282 "combiner.cpp"
 		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_ADDRESSV, BlendPasses.Passes[Index].Stages[i].AddressV));
-#line 283 "combiner.cpp"
 		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_MAGFILTER, State.TextureFilter));
-#line 284 "combiner.cpp"
 		SafeDX(g_pd3dDevice->SetTextureStageState(i, D3DTSS_MINFILTER, State.TextureFilter));
-#line 285 "combiner.cpp"
 		SafeDX(g_pd3dDevice->SetTexture(i, BlendPasses.Passes[Index].Stages[i].Texture));
 		if ((BlendPasses.Passes[Index].Stages[i].ColorArg1==D3DTA_TEXTURE) ||
 			(BlendPasses.Passes[Index].Stages[i].ColorArg2==D3DTA_TEXTURE) ||
