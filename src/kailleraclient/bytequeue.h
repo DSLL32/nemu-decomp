@@ -23,7 +23,7 @@ public:
     CachedByteQueue();
 };
 
-class ByteQueueList : public C_ItemList<CachedByteQueue> {
+class ByteQueueList : public C_ItemList<ByteQueue> {
 public:
     ByteQueueList();
     inline void clear();

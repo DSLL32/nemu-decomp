@@ -68,9 +68,12 @@ selection. `listview.cpp` and `resizer.cpp` restore shared window helpers.
 The queue hierarchy in `bytequeue.h` is inferred. The two global queues have
 32-byte initializers that write their three fields directly. Cached allocations
 call a separate 16-byte constructor, while append and peek share the same
-implementation. An inline base constructor and an out-of-line cache-entry
-constructor reproduce these distinct patterns without duplicating buffer code.
-The original private names and exact class hierarchy have not been recovered.
+implementation. Cache eviction calls the 48-byte deleting destructor of the
+base buffer type at `0x10008E70`. The cache therefore stores base pointers;
+allocations use the inferred cache-entry subtype with its separate constructor.
+An inline base constructor and an out-of-line cache-entry constructor reproduce
+these distinct patterns without duplicating buffer code. The original private
+names and exact class hierarchy have not been recovered.
 The remaining input-loop instruction difference is a temporary register choice
 for the input pointer; all other session instruction signatures match.
 
