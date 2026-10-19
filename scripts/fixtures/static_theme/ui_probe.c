@@ -45,10 +45,18 @@ static void pixel(HWND window,int x,int y,COLORREF expected) {
     if(actual!=expected)fprintf(stderr,"pixel %d,%d: got %06lx expected %06lx\n",x,y,actual,expected);
     require(actual==expected,"rendered client pixel");
 }
+static void debugger(HWND main_window, int action) {
+    HANDLE result;
+    message(main_window,WM_APP+0x487,action,0);
+    result=GetPropA(main_window,"DebuggerProbeResult");
+    if(result!=(HANDLE)1)fprintf(stderr,"Debugger action %d: %ld\n",action,(LONG)result);
+    require(result==(HANDLE)1,"debugger painter and watch colors");
+}
 int main(int argc,char **argv) {
     STARTUPINFOA startup;
     HWND main_window,list,toolbar,status,settings;
     DWORD code;
+    RECT bounds;POINT point;HDC screen;COLORREF color;
     require(argc==2,"executable argument");
     ZeroMemory(&startup,sizeof(startup));startup.cb=sizeof(startup);
     require(CreateProcessA(argv[1],NULL,NULL,NULL,FALSE,0,NULL,NULL,&startup,&process),"start themed build");
@@ -62,6 +70,17 @@ int main(int argc,char **argv) {
     pixel(list,30,60,RGB(25,25,25));
     pixel(toolbar,600,5,RGB(40,40,40));
     pixel(status,600,5,RGB(40,40,40));
+    debugger(main_window,101);Sleep(150);debugger(main_window,102);
+    /* The divider above the toolbar must use the same dark face. */
+    GetWindowRect(toolbar,&bounds);point.x=bounds.left+600;point.y=bounds.top;
+    screen=GetDC(NULL);color=GetPixel(screen,point.x,point.y);ReleaseDC(NULL,screen);
+    if(color!=RGB(40,40,40)) {
+        fprintf(stderr,"divider %ld,%ld %ld,%ld: %06lx\n",bounds.left,bounds.top,bounds.right,bounds.bottom,color);
+        capture(main_window,"divider-failure.bmp");
+    }
+    require(color==RGB(40,40,40),"dark toolbar divider");
+    capture(main_window,"main-disabled-dark.bmp");
+    debugger(main_window,100);
     capture(main_window,"main-dark.bmp");
     set_mode(main_window,'l');
     require(message(list,LVM_GETBKCOLOR,0,0)==GetSysColor(COLOR_WINDOW),"live light palette");
@@ -81,6 +100,18 @@ int main(int argc,char **argv) {
     settings=await_window("TFormSettings","Input settings");Sleep(400);
     capture(settings,"input-dark.bmp");
     require(PostMessageA(settings,WM_CLOSE,0,0),"close input");await_closed(settings);
+    debugger(main_window,0);
+    settings=await_window("TFormMemory","Memory");Sleep(300);
+    debugger(main_window,10);capture(settings,"memory-dark.bmp");
+    set_mode(settings,'l');debugger(main_window,20);capture(settings,"memory-light.bmp");
+    set_mode(settings,'d');
+    debugger(main_window,1);
+    settings=await_window("TFormDebug","Commands");Sleep(300);
+    debugger(main_window,11);capture(settings,"commands-dark.bmp");
+    debugger(main_window,2);
+    settings=await_window("TFormRegisters","Registers");Sleep(300);
+    debugger(main_window,12);capture(settings,"registers-dark.bmp");
+    debugger(main_window,9);
     require(PostMessageA(main_window,WM_CLOSE,0,0),"normal shutdown");
     require(WaitForSingleObject(process.hProcess,10000)==WAIT_OBJECT_0,"process exits");
     require(GetExitCodeProcess(process.hProcess,&code)&&code==0,"successful exit");

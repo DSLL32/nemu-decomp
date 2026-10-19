@@ -29,6 +29,7 @@ static AllowAppFunction allowApp;
 static PreferredAppFunction preferredApp;
 static ThemeNotificationFunction refreshPolicy, flushMenus;
 static HHOOK windowHook;
+static UINT nonClientMessage;
 static DWORD uiThread, windowsBuild;
 static bool started, updating, dark, vclReady;
 extern "C" void __cdecl NemuStaticVclThemeRefresh(void);
@@ -41,6 +42,8 @@ static RemoveSubclassFunction removeSubclass;
 static DefaultSubclassFunction defaultSubclass;
 static WindowThemeFunction setWindowTheme;
 static HBRUSH colorBrushes[31];
+typedef BOOL (WINAPI *ScrollBarInfoFunction)(HWND, LONG, LPSCROLLBARINFO);
+static ScrollBarInfoFunction scrollBarInfo;
 
 extern "C" BOOL __cdecl NemuStaticThemeIsDark(void) { return dark; }
 extern "C" DWORD WINAPI NemuStaticGetSysColor(int index)
@@ -72,10 +75,13 @@ struct ThemedWindow {
     HWND window;
     ControlKind kind;
     COLORREF background, textBackground, text;
+    HIMAGELIST originalImages, darkImages, originalDisabledImages, darkDisabledImages;
+    DWORD originalStyle;
     bool themed;
     ThemedWindow *next;
 };
 static ThemedWindow *windows;
+static void toolbarImages(ThemedWindow *state);
 static const UINT_PTR subclassId = 0x4e454d55;
 struct ThemedMenu {
     HMENU menu;
@@ -146,7 +152,8 @@ static ControlKind controlKind(HWND window)
     if (!lstrcmpiA(name, STATUSCLASSNAMEA) || !lstrcmpiA(name, "TStatusBar")) return Status;
     if (!lstrcmpiA(name, WC_HEADERA) || !lstrcmpiA(name, "THeaderControl")) return Header;
     if (!lstrcmpiA(name, "BUTTON") || !lstrcmpiA(name, "TButton") ||
-        !lstrcmpiA(name, "TCheckBox") || !lstrcmpiA(name, "TRadioButton")) return Button;
+        !lstrcmpiA(name, "TCheckBox") || !lstrcmpiA(name, "TGroupButton") ||
+        !lstrcmpiA(name, "TRadioButton")) return Button;
     if (!lstrcmpiA(name, WC_TABCONTROLA) || !lstrcmpiA(name, "TPageControl") ||
         !lstrcmpiA(name, "TTabControl")) return Tabs;
     if (!lstrcmpiA(name, "COMBOBOX") || !lstrcmpiA(name, "TComboBox")) return Combo;
@@ -170,6 +177,13 @@ static void controlColors(ThemedWindow *state)
             state->background = TreeView_GetBkColor(window);
             state->text = TreeView_GetTextColor(window);
         }
+    }
+    if (state->kind == Toolbar) {
+        DWORD style = GetWindowLong(window, GWL_STYLE);
+        if (dark) state->originalStyle = style;
+        SetWindowLong(window, GWL_STYLE, dark ? style | CCS_NODIVIDER :
+            (style & ~CCS_NODIVIDER) | (state->originalStyle & CCS_NODIVIDER));
+        toolbarImages(state);
     }
     state->themed = dark; // Set before theme messages reenter the hook.
     if (allowWindow) allowWindow(window, dark);
@@ -204,6 +218,8 @@ static void drawText(HWND window, HDC dc, RECT rect, UINT format)
     DrawTextW(dc, text, -1, &rect, format);
     if (old) SelectObject(dc, old);
 }
+#include "StaticThemeControls.inc"
+
 static void paintButton(HWND window, HDC dc)
 {
     RECT rect; GetClientRect(window, &rect);
@@ -408,10 +424,23 @@ static LRESULT CALLBACK themedProc(HWND window, UINT message, WPARAM wParam, LPA
         ThemedWindow **item = &windows;
         while (*item && *item != state) item = &(*item)->next;
         if (*item) *item = state->next;
+        HIMAGELIST images = state->darkImages, disabledImages = state->darkDisabledImages;
+        if (disabledImages) SendMessage(window, TB_SETDISABLEDIMAGELIST, 0, (LPARAM)state->originalDisabledImages);
+        if (images && (HIMAGELIST)SendMessage(window, TB_GETIMAGELIST, 0, 0) == images)
+            SendMessage(window, TB_SETIMAGELIST, 0, (LPARAM)state->originalImages);
         free(state);
-        return defaultSubclass(window, message, wParam, lParam);
+        LRESULT result = defaultSubclass(window, message, wParam, lParam);
+        if (images) ImageList_Destroy(images);
+        if (disabledImages) ImageList_Destroy(disabledImages);
+        return result;
     }
     if (dark) {
+        if (nonClientMessage && message == nonClientMessage) { paintNonClient(state); return 0; }
+        if (message == WM_TIMER && wParam == subclassId && state->kind == List) {
+            paintNonClient(state); return 0;
+        }
+        if (state->kind == Toolbar && message == WM_PAINT)
+            toolbarImages(state);
         if (message == WM_MEASUREITEM && ((MEASUREITEMSTRUCT *)lParam)->CtlType == ODT_MENU) {
             MEASUREITEMSTRUCT *measure = (MEASUREITEMSTRUCT *)lParam;
             ThemedMenu *item = findMenuItem(measure->itemData);
@@ -476,7 +505,22 @@ static LRESULT CALLBACK themedProc(HWND window, UINT message, WPARAM wParam, LPA
             return 0;
         }
     }
+    bool tracking = dark && state->kind == List && message == WM_NCLBUTTONDOWN &&
+        (wParam == HTHSCROLL || wParam == HTVSCROLL);
+    if (tracking) SetTimer(window, subclassId, 30, NULL);
     LRESULT result = defaultSubclass(window, message, wParam, lParam);
+    if (tracking && IsWindow(window)) {
+        KillTimer(window, subclassId); paintNonClient(state);
+    }
+    if (dark && (message == WM_NCPAINT || message == WM_PAINT || message == WM_SIZE ||
+        message == WM_HSCROLL || message == WM_VSCROLL || message == WM_NCMOUSEMOVE ||
+        message == WM_NCLBUTTONUP || message == WM_NCMOUSELEAVE || message == LVM_SCROLL || message == LVM_ENSUREVISIBLE))
+        paintNonClient(state);
+    // Common controls can repaint their native scrollbars after returning from
+    // a scroll/hover notification. Reapply the skin after that native work.
+    if (dark && nonClientMessage && (message == WM_HSCROLL || message == WM_VSCROLL ||
+        message == WM_NCMOUSEMOVE || message == WM_NCLBUTTONUP || message == WM_NCMOUSELEAVE || message == LVM_SCROLL ||
+        message == LVM_ENSUREVISIBLE)) PostMessage(window, nonClientMessage, 0, 0);
     // Some menu implementations ignore MIM_BACKGROUND in the unused band.
     // Paint only the area after the last item; owner drawing handles the items.
     if (dark && (message == WM_NCPAINT || message == WM_NCACTIVATE) && GetMenu(window)) {
@@ -485,6 +529,11 @@ static LRESULT CALLBACK themedProc(HWND window, UINT message, WPARAM wParam, LPA
         if (GetMenuBarInfo(window, OBJID_MENU, 0, &bar) &&
             GetMenuItemRect(window, menu, GetMenuItemCount(menu)-1, &last)) {
             RECT rect = bar.rcBar, outer; GetWindowRect(window, &outer);
+            // Include the bottom menu rule, which Windows otherwise draws light.
+            RECT rule = rect; rule.top = rule.bottom-1;
+            OffsetRect(&rule, -outer.left, -outer.top);
+            HDC lineDC = GetWindowDC(window);
+            FillRect(lineDC, &rule, NemuStaticGetSysColorBrush(COLOR_MENU)); ReleaseDC(window, lineDC);
             rect.left = last.right; OffsetRect(&rect, -outer.left, -outer.top);
             HDC dc = GetWindowDC(window);
             FillRect(dc, &rect, NemuStaticGetSysColorBrush(COLOR_MENU)); ReleaseDC(window, dc);
@@ -618,6 +667,7 @@ extern "C" void __cdecl NemuStaticThemeInitialize(void)
         version.dwBuildNumber < 17763) return;
     windowsBuild = version.dwBuildNumber;
     uiThread = GetCurrentThreadId();
+    nonClientMessage = RegisterWindowMessageA("Nemu64.StaticTheme.NonClient");
     dwmModule = loadSystemLibrary("dwmapi.dll");
     if (dwmModule) setAttribute = (DwmAttributeFunction)GetProcAddress(dwmModule, "DwmSetWindowAttribute");
     themeModule = loadSystemLibrary("uxtheme.dll");
@@ -627,6 +677,8 @@ extern "C" void __cdecl NemuStaticThemeInitialize(void)
         removeSubclass = (RemoveSubclassFunction)GetProcAddress(common, "RemoveWindowSubclass");
         defaultSubclass = (DefaultSubclassFunction)GetProcAddress(common, "DefSubclassProc");
     }
+    HMODULE user = GetModuleHandleA("user32.dll");
+    if (user) scrollBarInfo = (ScrollBarInfoFunction)GetProcAddress(user, "GetScrollBarInfo");
     if (themeModule) {
         setWindowTheme = (WindowThemeFunction)GetProcAddress(themeModule, "SetWindowTheme");
         shouldUseDark = (ShouldUseDarkFunction)GetProcAddress(themeModule, (LPCSTR)132);
@@ -668,6 +720,8 @@ extern "C" void __cdecl NemuStaticThemeShutdown(void)
             controlColors(state);
             removeSubclass(state->window, themedProc, subclassId);
         }
+        if (state->darkImages) ImageList_Destroy(state->darkImages);
+        if (state->darkDisabledImages) ImageList_Destroy(state->darkDisabledImages);
         free(state);
     }
     for (int i = 0; i < 31; ++i) {
@@ -682,6 +736,7 @@ extern "C" void __cdecl NemuStaticThemeShutdown(void)
     setAttribute = NULL; shouldUseDark = NULL; allowWindow = NULL;
     allowApp = NULL; preferredApp = NULL; refreshPolicy = flushMenus = NULL;
     subclassWindow = NULL; removeSubclass = NULL; defaultSubclass = NULL; setWindowTheme = NULL;
+    scrollBarInfo = NULL; nonClientMessage = 0;
     started = updating = dark = false;
     uiThread = windowsBuild = 0;
 }

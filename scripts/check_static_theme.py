@@ -3,6 +3,7 @@ import shutil
 import sys
 from build_static import ROOT, WORK, win
 from pe_fingerprints import PE32
+from omf_to_coff import Converter, convert
 
 
 def check(run, scratch):
@@ -21,12 +22,21 @@ def check(run, scratch):
 def check_ui(run, scratch):
     fixture = scratch / 'theme-ui'
     fixture.mkdir()
-    for name in ('forced.cpp', 'ui_probe.c'):
+    for name in ('forced.cpp', 'ui_probe.c', 'StaticDebuggerProbe.pas'):
         shutil.copy2(ROOT / 'scripts/fixtures/static_theme' / name, fixture / name)
     shutil.copy2(ROOT / 'scripts/nemu_probe.c', fixture / 'nemu_probe.c')
     run('compile-theme-ui', [sys.executable, str(ROOT / 'scripts/run_toolchain.py'),
         'vc7', 'cl', '/nologo', '/c', '/O2', '/MT', '/I' + win(ROOT / 'src/static'),
         'forced.cpp'], cwd=fixture)
+    for unit in (WORK / 'pascal').glob('*.dcu'):
+        shutil.copy2(unit, fixture / unit.name)
+    run('compile-debugger-pascal', [sys.executable, str(ROOT / 'scripts/run_toolchain.py'),
+        'd6u2', 'dcc32-personal', '-JPN', '-$D-', '-$L-', '-$Y-', '-N.', '-E.',
+        '-U' + win(WORK / 'pascal'), 'StaticDebuggerProbe.pas'], cwd=fixture)
+    source = fixture / 'StaticDebuggerProbe.obj'
+    converter = Converter(source.read_bytes()); converter.declarations()
+    name = next(s.name for s in converter.symbols if s.section and '@ProbeDebugger$' in s.name)
+    convert(source, fixture / 'debugger-probe.obj', {name: '_ProbeDebugger'})
     options = []
     for line in (WORK / 'link.rsp').read_text().splitlines():
         if line.upper().startswith('/MAP:'):
@@ -34,7 +44,7 @@ def check_ui(run, scratch):
         if line.upper().startswith('/OUT:'):
             line = '/OUT:themed.exe'
         if line.lower().endswith('builtins.lib"'):
-            options.append('forced.obj')
+            options.extend(['forced.obj', 'debugger-probe.obj'])
         options.append(line)
     (fixture / 'link.rsp').write_text('\n'.join(options) + '\n')
     run('link-theme-ui', [sys.executable, str(ROOT / 'scripts/run_toolchain.py'),

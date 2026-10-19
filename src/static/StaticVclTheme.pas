@@ -1,12 +1,34 @@
 { Static user-build palette bridge. Reconstructed plugin sources stay intact. }
 unit StaticVclTheme;
 interface
+uses Graphics;
+function StaticThemeColor(Color: TColor): TColor;
 procedure NemuStaticVclThemeRefresh; cdecl;
 implementation
-uses Windows, Messages, Classes, Graphics, Controls, Forms, StdCtrls, ExtCtrls;
+uses Windows, Messages, Classes, Controls, Forms, StdCtrls, ExtCtrls;
 
 function NemuStaticThemeIsDark: LongBool; cdecl;
   external 'nemu64-static.exe' name 'NemuStaticThemeIsDark';
+
+{ Only explicit UI colors in the generated debugger painters use this mapping.
+  Sprite transparency and emulated image data never pass through it. }
+function StaticThemeColor(Color: TColor): TColor;
+begin
+  Result := Color;
+  if not NemuStaticThemeIsDark then Exit;
+  case Color of
+    clWhite: Result := clWindow;
+    clBlack: Result := clWindowText;
+    clBlue: Result := RGB(128,176,255);
+    clRed: Result := RGB(255,110,110);
+    clGray: Result := RGB(160,160,160);
+    $00FFCACA: Result := RGB(42,65,100); { selected instruction }
+    $AEFFFF: Result := RGB(90,75,22);   { read watch: yellow }
+    $FFAEAE: Result := RGB(35,65,105);  { write watch: blue }
+    $D7FFAE: Result := RGB(45,85,40);   { read/write watch: green }
+    $40FFFB: Result := RGB(105,72,12);  { search match: amber }
+  end;
+end;
 
 type
   TControlAccess = class(TControl);

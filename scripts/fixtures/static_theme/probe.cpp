@@ -31,7 +31,7 @@ static HRESULT WINAPI testAttribute(HWND w,DWORD attribute,LPCVOID value,DWORD s
 }
 static HMODULE WINAPI testModule(LPCSTR name) {
  if(!name)return GetModuleHandleA(NULL);
- if(!strcmp(name,"comctl32.dll"))return GetModuleHandleA(name);
+ if(!strcmp(name,"comctl32.dll") || !strcmp(name,"user32.dll"))return GetModuleHandleA(name);
  REQUIRE(!strcmp(name,"ntdll.dll"));return ntMissing?NULL:(HMODULE)1;
 }
 static HMODULE WINAPI testLoad(LPCSTR name) {
@@ -98,6 +98,7 @@ static HWND create(const char *cls,HWND parent) {
 }
 static BOOL CALLBACK dialog(HWND,UINT,WPARAM,LPARAM) { return FALSE; }
 int main() {
+ setvbuf(stdout,NULL,_IONBF,0);setvbuf(stderr,NULL,_IONBF,0);
  WNDCLASSA wc;HWND before,after,child,dlg;unsigned count;
  struct { DLGTEMPLATE header;WORD menu,cls,title; } resource;
  ZeroMemory(&wc,sizeof(wc));wc.lpfnWndProc=DefWindowProcA;wc.hInstance=GetModuleHandleA(NULL);
@@ -144,6 +145,12 @@ int main() {
  HGDIOBJ original=SelectObject(memory,bitmap);
  SendMessageA(bar,WM_PRINTCLIENT,(WPARAM)memory,PRF_CLIENT);
  REQUIRE(GetPixel(memory,3,3)==RGB(40,40,40));
+ RECT face={0,0,20,20};
+ REQUIRE(NemuStaticDrawFrameControl(memory,&face,DFC_BUTTON,DFCS_BUTTONPUSH|DFCS_ADJUSTRECT));
+ REQUIRE(GetPixel(memory,10,10)==RGB(40,40,40)&&face.left==2&&face.right==18);
+ face.left=face.top=0;face.right=face.bottom=20;
+ REQUIRE(NemuStaticDrawEdge(memory,&face,EDGE_RAISED,BF_RECT|BF_MIDDLE|BF_ADJUST));
+ REQUIRE(GetPixel(memory,10,10)==RGB(40,40,40));
  SendMessageA(button,WM_PRINTCLIENT,(WPARAM)memory,PRF_CLIENT);
  REQUIRE(GetPixel(memory,3,3)==RGB(40,40,40));
  HBRUSH brush=(HBRUSH)SendMessageA(before,WM_CTLCOLOREDIT,(WPARAM)memory,(LPARAM)edit);
@@ -155,6 +162,37 @@ int main() {
  REQUIRE(NemuStaticGetSysColor(COLOR_BTNTEXT)==GetSysColor(COLOR_BTNTEXT));
  highContrast=false;SendMessageA(before,WM_SETTINGCHANGE,0,0);
  REQUIRE(ListView_GetBkColor(list)==RGB(25,25,25));
+ // A dark toolbar owns its inverted copy; the browser's shared list is intact.
+ wc.lpszClassName="Nemu64";REQUIRE(RegisterClassA(&wc)!=0);
+ HWND mainWindow=create("Nemu64",NULL),toolbar=create(TOOLBARCLASSNAMEA,mainWindow);
+ HIMAGELIST sourceImages=ImageList_Create(16,16,ILC_COLOR24|ILC_MASK,1,1);
+ RECT imageRect={0,0,16,16};
+ HBITMAP sample=CreateCompatibleBitmap(dc,16,16);HGDIOBJ savedSample=SelectObject(memory,sample);
+ HBRUSH maskKey=CreateSolidBrush(RGB(255,0,255));FillRect(memory,&imageRect,maskKey);DeleteObject(maskKey);
+ RECT glyph={4,4,12,12};FillRect(memory,&glyph,(HBRUSH)GetStockObject(BLACK_BRUSH));SelectObject(memory,savedSample);
+ REQUIRE(ImageList_AddMasked(sourceImages,sample,RGB(255,0,255))==0);DeleteObject(sample);
+ // A masked source may have an opaque background color. Preserve its mask
+ // independently of that drawing preference when deriving dark icons.
+ ImageList_SetBkColor(sourceImages,RGB(192,192,192));
+ SendMessage(toolbar,TB_SETIMAGELIST,0,(LPARAM)sourceImages);
+ SendMessage(toolbar,TB_BUTTONSTRUCTSIZE,sizeof(TBBUTTON),0);
+ TBBUTTON item;ZeroMemory(&item,sizeof(item));item.idCommand=ID_PAUSE;item.fsState=TBSTATE_ENABLED;
+ SendMessage(toolbar,TB_ADDBUTTONS,1,(LPARAM)&item);
+ SendMessage(toolbar,WM_PAINT,0,0);
+ HIMAGELIST darkImages=(HIMAGELIST)SendMessage(toolbar,TB_GETIMAGELIST,0,0);
+ REQUIRE(darkImages!=sourceImages);
+ FillRect(memory,&imageRect,(HBRUSH)GetStockObject(BLACK_BRUSH));
+ REQUIRE(ImageList_Draw(darkImages,0,memory,0,0,ILD_NORMAL));
+ REQUIRE(GetPixel(memory,8,8)==RGB(255,255,255));
+ REQUIRE(GetPixel(memory,0,0)==RGB(0,0,0));
+ HIMAGELIST disabledImages=(HIMAGELIST)SendMessage(toolbar,TB_GETDISABLEDIMAGELIST,0,0);
+ REQUIRE(disabledImages!=NULL);FillRect(memory,&imageRect,(HBRUSH)GetStockObject(BLACK_BRUSH));
+ REQUIRE(ImageList_Draw(disabledImages,0,memory,0,0,ILD_NORMAL));
+ REQUIRE(GetPixel(memory,8,8)==RGB(150,150,150)&&GetPixel(memory,0,0)==RGB(0,0,0));
+ appDark=false;SendMessage(mainWindow,WM_SETTINGCHANGE,0,0);
+ REQUIRE((HIMAGELIST)SendMessage(toolbar,TB_GETIMAGELIST,0,0)==sourceImages);
+ REQUIRE((HIMAGELIST)SendMessage(toolbar,TB_GETDISABLEDIMAGELIST,0,0)!=disabledImages);
+ REQUIRE(DestroyWindow(mainWindow));ImageList_Destroy(sourceImages);
  SelectObject(memory,original);DeleteObject(bitmap);DeleteDC(memory);ReleaseDC(before,dc);
  DestroyWindow(list);DestroyWindow(bar);DestroyWindow(button);DestroyWindow(edit);
  puts("PASS: dark list colors, status/button pixels, edit contrast and high-contrast restoration");

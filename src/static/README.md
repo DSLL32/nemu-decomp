@@ -57,6 +57,21 @@ dark client palette and painting for the ROM list/header, menu bar, toolbar,
 status bar, buttons, tabs and standard dialog fields. Light mode restores the
 control colors; high contrast uses the original Windows colors. Keyboard input,
 control commands and focus cues continue through the original window procedures.
+
+`StaticThemeControls.inc` supplies dark classic button faces/edges, paints the
+ROM list's nonclient scrollbars using their native geometry and interaction,
+and removes the toolbar's light divider. Pause/stop/reset icons use an inverted,
+masked copy of the toolbar image list; magenta remains transparent. A separate
+masked gray image list keeps disabled glyphs visible. The shared browser images
+remain intact. The original image lists and divider flag are restored in light mode.
+
+Generated debugger painters use `StaticThemeColor` for explicit backgrounds,
+register-label resets, current instructions, selections, search results and
+read/write watches. Read watches remain yellow, writes blue, and combined
+watches green, with dark backgrounds and readable foregrounds. The memory
+painter restores its brush color after transparent text, including the address
+and ASCII columns. Other bitmap/image data keeps its original colors.
+
 The adapter detaches before plugin cleanup starts, while the VCL forms are
 still alive, so destruction cannot reenter its UI hooks.
 
@@ -158,6 +173,11 @@ changes and high contrast, with assertions for rendered control pixels.
 A second fixture links the real static UI against a test-only OS preference
 adapter, checks dark client pixels and live light/high-contrast restoration, and
 captures the main window and Delphi settings/input dialogs as BMPs in scratch.
+The same fixture opens the actual commands, memory and register windows using
+a test memory reader, checks all three watch types plus search highlighting,
+refreshes GPR labels, and verifies both dark and original light memory colors.
+It also checks icon inversion/ownership, dark classic button faces, and native
+ROM-list scrolling. This synthetic reader is confined to the test executable.
 The shipped executable contains no forced preference and is checked for
 accidental DWM/UxTheme startup imports. Native Windows rendering still needs
 visual verification. Scratch files and

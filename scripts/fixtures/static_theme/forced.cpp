@@ -2,6 +2,7 @@
    client painter and the actual statically linked VCL/plugin code. */
 #define _WIN32_WINNT 0x0501
 #include <windows.h>
+#include <commctrl.h>
 #include <stdio.h>
 #include <string.h>
 static char mode(void) {
@@ -43,6 +44,64 @@ static BOOL WINAPI spi(UINT action,UINT size,PVOID data,UINT flags) {
     }
     return SystemParametersInfoA(action,size,data,flags);
 }
+extern "C" int __cdecl ProbeDebugger(int action);
+static HOOKPROC productionHook;
+static int probeToolbar(HWND main) {
+    HWND toolbar=FindWindowExA(main,NULL,TOOLBARCLASSNAMEA,NULL);
+    int commands[3]={32804,32777,32800};
+    HIMAGELIST images=(HIMAGELIST)SendMessage(toolbar,TB_GETIMAGELIST,0,0);
+    int width,height; if(!images || !ImageList_GetIconSize(images,&width,&height))return 50;
+    HDC screen=GetDC(NULL),dc=CreateCompatibleDC(screen);
+    HBITMAP bitmap=CreateCompatibleBitmap(screen,width,height);
+    HGDIOBJ original=SelectObject(dc,bitmap);int result=1;
+    for(int i=0;i<3;++i) {
+        SendMessage(toolbar,TB_ENABLEBUTTON,commands[i],TRUE);
+        int index=(int)SendMessage(toolbar,TB_COMMANDTOINDEX,commands[i],0);
+        TBBUTTON button;SendMessage(toolbar,TB_GETBUTTON,index,(LPARAM)&button);
+        RECT rect={0,0,width,height};HBRUSH background=CreateSolidBrush(RGB(17,35,53));
+        FillRect(dc,&rect,background);DeleteObject(background);
+        ImageList_Draw(images,button.iBitmap,dc,0,0,ILD_NORMAL);
+        if(GetPixel(dc,0,0)!=RGB(17,35,53))result=57+i;
+        int visible=0;
+        for(int y=0;y<height;++y)for(int x=0;x<width;++x) {
+            COLORREF c=GetPixel(dc,x,y);
+            if(GetRValue(c)>180 && GetGValue(c)>180 && GetBValue(c)>180)++visible;
+        }
+        if(visible<3)result=51+i;
+    }
+    SelectObject(dc,original);DeleteObject(bitmap);DeleteDC(dc);ReleaseDC(NULL,screen);
+    UpdateWindow(toolbar);
+    return result;
+}
+static int probeScrollbar(HWND main,bool move) {
+    HWND list=FindWindowExA(main,NULL,WC_LISTVIEWA,NULL);
+    SCROLLBARINFO bar;ZeroMemory(&bar,sizeof(bar));bar.cbSize=sizeof(bar);
+    if(!GetScrollBarInfo(list,OBJID_HSCROLL,&bar))return 61;
+    if(bar.rgstate[0]&STATE_SYSTEM_INVISIBLE)return 62;
+    HDC dc=GetDC(NULL);COLORREF color=GetPixel(dc,bar.rcScrollBar.left+1,bar.rcScrollBar.top+1);ReleaseDC(NULL,dc);
+    if(color!=RGB(40,40,40))return 63;
+    if(!move)return 1;
+    SCROLLINFO position;ZeroMemory(&position,sizeof(position));position.cbSize=sizeof(position);position.fMask=SIF_POS;
+    if(!GetScrollInfo(list,SB_HORZ,&position))return 64;
+    int before=position.nPos;SendMessage(list,WM_HSCROLL,SB_LINERIGHT,0);
+    if(!GetScrollInfo(list,SB_HORZ,&position)||position.nPos<=before)return 65;
+    return 1;
+}
+static LRESULT CALLBACK fixtureMessages(int code,WPARAM w,LPARAM l) {
+    const CWPRETSTRUCT *message=(const CWPRETSTRUCT *)l;
+    if(code>=0 && message->message==WM_APP+0x487) {
+        int result=message->wParam==100 ? probeToolbar(message->hwnd) :
+            message->wParam==101 ? probeScrollbar(message->hwnd,true) :
+            message->wParam==102 ? probeScrollbar(message->hwnd,false) : ProbeDebugger((int)message->wParam);
+        SetPropA(message->hwnd,"DebuggerProbeResult",(HANDLE)result);
+    }
+    return productionHook(code,w,l);
+}
+static HHOOK WINAPI installHook(int type,HOOKPROC proc,HINSTANCE instance,DWORD thread) {
+    productionHook=proc;
+    return SetWindowsHookExA(type,fixtureMessages,instance,thread);
+}
+#define SetWindowsHookExA installHook
 #define GetModuleHandleA module
 #define LoadLibraryA load
 #define FreeLibrary release

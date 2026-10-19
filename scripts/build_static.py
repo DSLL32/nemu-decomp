@@ -24,7 +24,8 @@ PASCAL = WORK / 'pascal'
 DEFAULT_FILES = ('config.ini', 'nemu64.ini', 'LemD3DCombine.dat', 'LemD3DCombine.new')
 PROFILE_APIS = {'GetPrivateProfileStringA': 24, 'GetPrivateProfileStructA': 20,
                 'WritePrivateProfileStringA': 16, 'WritePrivateProfileStructA': 20}
-THEME_APIS = {'GetSysColor': 4, 'GetSysColorBrush': 4}
+THEME_APIS = {'GetSysColor': 4, 'GetSysColorBrush': 4,
+              'DrawFrameControl': 16, 'DrawEdge': 16}
 STATIC_APIS = dict(PROFILE_APIS, **THEME_APIS)
 COMPONENTS = [('kailleraclient.dll', False), ('gs_dll.dll', False),
               ('Plugin/audio.dll', True), ('Plugin/Input.dll', True),
@@ -107,6 +108,23 @@ class Build:
                 if folder == 'lemcombinedebugger' and p.stem in ('UnitCombineEditor', 'UnitCombiners'):
                     text = re.sub(r'(?i)\buses\b', 'uses StaticFiles,', text, count=1)
                     text = text.replace('Reset(CombineFile)', 'StaticReset(CombineFile, CombineFilename)')
+                if folder == 'debugger' and p.stem in ('UnitDebugCommands', 'UnitDebugMemory'):
+                    text = re.sub(r'(?i)\buses\b', 'uses StaticVclTheme,', text, count=1)
+                    # Adapt painters and register-color resets, including their
+                    # comparisons. Keep all original colors in light mode.
+                    text = re.sub(r'(?i)(?<![\w$])(clWhite|clBlack|clBlue|clRed|clGray|'
+                                  r'\$00FFCACA|\$AEFFFF|\$FFAEAE|\$D7FFAE|\$40FFFB)(?!\w)',
+                                  r'StaticThemeColor(\1)', text)
+                    if p.stem == 'UnitDebugMemory':
+                        text = text.replace('    Brush.Color := StaticThemeColor(clWhite);\n    FillRect',
+                            '    Font.Color := StaticThemeColor(clBlack);\n'
+                            '    Brush.Color := StaticThemeColor(clWhite);\n    FillRect', 1)
+                        # VCL's bsClear brush normalizes its stored color to
+                        # literal white. Restore the palette before opaque text
+                        # (ASCII/address columns and subsequent rows).
+                        text = text.replace('          Brush.Style := bsSolid;',
+                            '          Brush.Style := bsSolid;\n'
+                            '          Brush.Color := StaticThemeColor(clWhite);')
                 if p.stem.lower() == 'themesrv':
                     # The recovered XP theme painter otherwise paints light
                     # backgrounds over the static build's dark VCL palette.
