@@ -106,7 +106,12 @@ def build(output, input_paths=None, conversion_report=None):
             raise ValueError('Import root is not defined by its unchanged SDK index')
         return name, linked_body, symbols
 
+    generated = set()
+
     def archive(name, rows):
+        if name in generated or Path(name).name != name:
+            raise ValueError('Generated native archive names must be unique basenames')
+        generated.add(name)
         selected = [member(row) for row in rows]
         path = output / name
         path.write_bytes(archive_for(selected))
@@ -136,10 +141,31 @@ def build(output, input_paths=None, conversion_report=None):
     if len(set(descriptor_libraries)) != len(descriptor_libraries):
         raise ValueError('Duplicate import descriptor library')
     keys = []
+    native_placements = set()
+
+    def place_native(side, imported):
+        for index, native in enumerate(recipe.get('native_archives', [])):
+            if native.get(side) != dict(dll=imported['dll'], name=imported['name']):
+                continue
+            if index in native_placements or ('before_import' in native) == ('after_import' in native):
+                raise ValueError('A native CRT archive must have one unique chronology placement')
+            if Path(native['archive']).name != native['archive']:
+                raise ValueError('Native CRT archive name must be a basename')
+            defined = {symbol for row in native['members'] for symbol in member(row)[2]}
+            if native['root'] not in defined:
+                raise ValueError('Native CRT chronology root is not defined by its member')
+            early.extend([archive(native['archive'], native['members']),
+                          '/include:' + native['root']])
+            native_placements.add(index)
+
     for i, row in enumerate(recipe['imports']):
         keys.append((row['dll'], row['name']))
+        place_native('before_import', row)
         early.append(archive('chronology-%03d.lib' % i, [row]))
+        place_native('after_import', row)
         roots.append('/include:' + row['root'])
+    if native_placements != set(range(len(recipe.get('native_archives', [])))):
+        raise ValueError('Native CRT archive placement does not select exactly one import')
     expected = {(row['dll'], name) for row in recipe['expected_imports'] for name in row['names']}
     if len(set(keys)) != len(keys) or set(keys) != expected:
         raise ValueError('Import chronology does not cover the final inventory exactly once')

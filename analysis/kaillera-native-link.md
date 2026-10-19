@@ -132,3 +132,17 @@ match the original SDK, all unlisted members must remain unchanged, and every
 changed member must match its recorded original/derived hashes. Thus the import
 chronology and native code placement remain separate, inspectable linker-input
 operations. The ordinary user Makefile continues to link the source directly.
+
+The native chronology also roots three SDK CRT members in explicit singleton
+archives: `chkstk.obj` and `atonexit.obj` precede the new/EH import records;
+`crtdll.obj` follows EH and precedes the exit/init import thunks. Each member's
+original SDK identity, hash and index declarations are guarded by the same
+recipe. This controls native contribution order without copying reference
+instructions or editing linked bytes. CRT code-group and first-entry alignment
+metadata remain the separate guarded converter's responsibility.
+
+After BSS layout, `build_kaillera_code_inputs.py` exposes the observed application
+COMDAT groups and emits a helper ordering file. The build combines that file
+with the native thunk ordering, rejecting duplicate symbols. Application and
+native import grouping change COFF section metadata; their instruction payloads,
+relocation records and source declarations remain independently inspected.

@@ -1738,5 +1738,70 @@
     }
   ],
   "iat_rva": 45056,
-  "iat_bytes": 424
+  "iat_bytes": 424,
+  "native_archives": [
+    {
+      "archive": "native-chkstk.lib",
+      "members": [
+        {
+          "library": "msvcrt",
+          "member": "build\\intel\\dll_obj\\chkstk.obj",
+          "body_offset": 188398,
+          "sha256": "84cf3e4dd0464ae36595c1a4568bf2059a31d5d97de3b941b99e7a17fa0f80f8",
+          "index_symbols": [
+            "__alloca_probe",
+            "__chkstk"
+          ]
+        }
+      ],
+      "root": "__chkstk",
+      "before_import": {
+        "dll": "msvcrt.dll",
+        "name": "??2@YAPAXI@Z"
+      }
+    },
+    {
+      "archive": "native-atonexit.lib",
+      "members": [
+        {
+          "library": "msvcrt",
+          "member": "build\\intel\\dll_obj\\atonexit.obj",
+          "body_offset": 186316,
+          "sha256": "ba14cb0f16c8be4e27ae18b549b37e94a6e7a204cbd19ad226ac0d6518c9b265",
+          "index_symbols": [
+            "___onexitbegin",
+            "___onexitend",
+            "__onexit",
+            "_atexit"
+          ]
+        }
+      ],
+      "root": "_atexit",
+      "before_import": {
+        "dll": "msvcrt.dll",
+        "name": "??2@YAPAXI@Z"
+      }
+    },
+    {
+      "archive": "native-crtdll.lib",
+      "members": [
+        {
+          "library": "msvcrt",
+          "member": "build\\intel\\dll_obj\\crtdll.obj",
+          "body_offset": 184080,
+          "sha256": "e4b9019a699254cf4653dc8a019917c3d2863ea75e22eb65e31b112116f4bde0",
+          "index_symbols": [
+            "__CRT_INIT@12",
+            "__DllMainCRTStartup@12",
+            "__pRawDllMain"
+          ]
+        }
+      ],
+      "root": "__DllMainCRTStartup@12",
+      "after_import": {
+        "dll": "msvcrt.dll",
+        "name": "__CxxFrameHandler"
+      }
+    }
+  ]
 }

@@ -19,6 +19,7 @@ from check_kaillera import inspect
 from build_kaillera_crt_inputs import build as build_crt_inputs, NAMED_DEF, ORDINAL_DEF
 from build_kaillera_import_inputs import build as build_import_inputs, check_inventory
 from build_kaillera_layout_inputs import build as build_layout_inputs
+from build_kaillera_code_inputs import build as build_code_inputs
 from verify_kaillera import ORIGINAL, ORIGINAL_SHA256, compare
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -85,6 +86,7 @@ def main():
         tracked = [ROOT / 'scripts' / name for name in
                    ('build_kaillera.py', 'build_kaillera_link_inputs.py',
                     'build_kaillera_import_inputs.py', 'build_kaillera_crt_inputs.py',
+                    'build_kaillera_code_inputs.py',
                     'build_kaillera_layout_inputs.py', 'check_kaillera.py',
                     'verify_kaillera.py', 'run_toolchain.py')]
         tracked += [ROOT / 'toolchains' / name for name in
@@ -119,12 +121,20 @@ def main():
         arguments = lambda rows: [winpath(row) if isinstance(row, Path) else row for row in rows]
         link_objects, report['bss_layout_inputs'] = build_layout_inputs(
             objects, output / 'link-inputs' / 'layout')
+        link_objects, application_order, report['application_code_inputs'] = build_code_inputs(
+            link_objects, output / 'link-inputs' / 'code')
+        code_order = output / 'link-inputs' / 'code-order.txt'
+        ordered_names = application_order.read_text().splitlines() + thunk_order.read_text().splitlines()
+        if len(ordered_names) != len(set(ordered_names)):
+            raise ValueError('Application and native thunk order contain duplicate symbols')
+        code_order.write_text('\n'.join(ordered_names) + '\n')
+        report['combined_code_order'] = dict(path=str(code_order), sha256=digest(code_order))
         candidate = output / 'linked' / 'kailleraclient.dll'
         candidate.parent.mkdir(exist_ok=True)
         tool('link-candidate', 'link', ['/nologo', *arguments(early),
             '/dll', '/subsystem:windows', '/machine:i386',
             '/incremental:no', '/opt:ref', '/opt:nowin98',
-            '/order:@' + winpath(thunk_order),
+            '/order:@' + winpath(code_order),
             '/out:' + winpath(candidate), '/map:' + winpath(output / 'kailleraclient.map'),
             '/implib:' + winpath(output / 'kailleraclient.lib'),
             *map(winpath, link_objects), winpath(output / 'kaillera.res'),
