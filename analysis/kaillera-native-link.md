@@ -174,3 +174,34 @@ code members. LINK allocates them in reverse declaration order, producing
 initialized or executable bytes and does not replace any SDK instruction. With
 that discovery order, every native byte from `0x1000A090` through
 `0x1000A266` matches, including all 13 previously differing absolute operands.
+
+## Strict archival metadata restoration
+
+`kaillera-build-metadata.json` records the original Rich provenance, PE placement,
+file/export clocks, and unused relocation virtual allocation. It contains no
+instruction or application-data asset. The 344 bytes after the original section
+headers and all 572 unused raw relocation bytes are zero; no residue asset is
+needed.
+
+`restore_kaillera_metadata.py` first packs and unpacks the untouched native LINK
+output with pinned UPX 1.20. A fixed SHA-256 covers that entire image after
+normalizing only the Rich/header placement, two clocks, and relocation virtual
+size. The first raw section remains at file offset `0x400`, even though UPX
+reports `SizeOfHeaders=0x1000` after decompression. Canonicalization clears only
+`0x80..0x400`, preserves the complete PE/section header at the archived offset,
+and leaves every section byte and active relocation entry in the digest.
+
+Only after that digest matches may the restorer change the actual native linked
+file's Rich/header placement, clocks, and unused relocation virtual size. It
+retains the raw linked input separately. Its native `SizeOfHeaders=0x400` and
+IAT directory (`0xB000`, `0x1A8`) remain intact. A rejected guard must leave the
+native input unchanged. The final verifier still compares every packed byte.
+
+The independent diagnostic controls passed: the current source candidate is
+rejected for its remaining Config constructor differences; a reference fixture
+with the three pre-UPX header fields restored reproduces every packed byte; a
+second fixture with perturbed PE placement, Rich metadata, clocks, and relocation
+virtual size is restored and repacks exactly; changing one instruction byte is
+rejected without modifying its input. These reference fixtures exist only in
+scratch and are not source-build inputs or shipped assets. Scratch-output/input
+path aliasing is also rejected before any file is removed.

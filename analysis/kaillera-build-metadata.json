@@ -1,0 +1,147 @@
+{
+  "original": "master/kailleraclient.dll",
+  "original_size": 56320,
+  "pe_offset": 232,
+  "section_count": 5,
+  "optional_header_size": 224,
+  "header_residue_offset": 680,
+  "header_residue_bytes": 344,
+  "header_residue_all_zero": true,
+  "timestamp": 991440319,
+  "export_timestamp": 991440319,
+  "export_timestamp_file_offset": 43396,
+  "reloc_virtual_size": 3334,
+  "reloc_raw_bytes": 3584,
+  "reloc_unused_bytes": 572,
+  "reloc_unused_all_zero": true,
+  "rich_records": [
+    {
+      "comp_id": "000c1c7b",
+      "count": 3
+    },
+    {
+      "comp_id": "000e1c83",
+      "count": 2
+    },
+    {
+      "comp_id": "000a1fe8",
+      "count": 4
+    },
+    {
+      "comp_id": "00000000",
+      "count": 3
+    },
+    {
+      "comp_id": "00010000",
+      "count": 99
+    },
+    {
+      "comp_id": "00131f62",
+      "count": 11
+    },
+    {
+      "comp_id": "000b1fe8",
+      "count": 15
+    },
+    {
+      "comp_id": "000606b8",
+      "count": 1
+    },
+    {
+      "comp_id": "00041fe8",
+      "count": 3
+    }
+  ],
+  "sections": [
+    {
+      "name": ".text",
+      "virtual_size": 38598,
+      "rva": 4096,
+      "raw_size": 38912,
+      "offset": 1024
+    },
+    {
+      "name": ".rdata",
+      "virtual_size": 3770,
+      "rva": 45056,
+      "raw_size": 4096,
+      "offset": 39936
+    },
+    {
+      "name": ".data",
+      "virtual_size": 3744,
+      "rva": 49152,
+      "raw_size": 2560,
+      "offset": 44032
+    },
+    {
+      "name": ".rsrc",
+      "virtual_size": 5864,
+      "rva": 53248,
+      "raw_size": 6144,
+      "offset": 46592
+    },
+    {
+      "name": ".reloc",
+      "virtual_size": 3334,
+      "rva": 61440,
+      "raw_size": 3584,
+      "offset": 52736
+    }
+  ],
+  "roundtrip_header_fields": {
+    "SizeOfHeaders": 4096,
+    "IAT_directory_RVA": 0,
+    "IAT_directory_size": 0
+  },
+  "original_link_header_fields": {
+    "SizeOfHeaders": 1024,
+    "IAT_directory_RVA": 45056,
+    "IAT_directory_size": 424
+  },
+  "canonicalization": {
+    "input": "UPX 1.20 -9 packed and UPX 1.20 unpacked source-built candidate",
+    "zero_header_file_range": [
+      128,
+      1024
+    ],
+    "preserved_pe_header_relocated_to": 232,
+    "zero_fields": [
+      "IMAGE_FILE_HEADER.TimeDateStamp",
+      ".reloc.Misc.VirtualSize",
+      "IMAGE_EXPORT_DIRECTORY.TimeDateStamp"
+    ],
+    "e_lfanew": 232
+  },
+  "canonical_sha256": "02c5b21d0faa5db30539cfe6a901c3f39c81c80cff76ce457039c7f00f8691a3",
+  "classification": "Historical noncode PE/Rich provenance, clocks, unused relocation allocation, and the three original link-header fields discarded by ordinary UPX decompression. No instruction, program datum, resource, import, export entry, or relocation entry is restored.",
+  "provenance_limit": "Archived Rich records and clocks are taken from the master. Every other byte must match the strict canonical digest before restoration. Header residue and unused relocation raw bytes are zero; no residue asset is required.",
+  "original_packed_size": 28160,
+  "original_packed_sha256": "410503fdfd1e931adf6024df7b8d88c725260b568688c5a5a1ab9897c83ff72d",
+  "original_unpacked_sha256": "f3082e3b5c7ecbd368abd996f7ecfef9a3faa409729d182e8beff8d7baaac6dc",
+  "used_relocation_size": 3012,
+  "header_zero_end": 1024,
+  "roundtrip_header_size": 4096,
+  "roundtrip_iat_directory": [
+    0,
+    0
+  ],
+  "native_header_size": 1024,
+  "native_iat_directory": [
+    45056,
+    424
+  ],
+  "packer_sha256": "6e8b43f3e3287e95a7e9debd065e5915d9a557b1c8191d388939fb1169c79041",
+  "repack_three_header_fields_proof": {
+    "packer": "UPX 1.20w -9",
+    "source": "Pinned-UPX-unpacked reference, diagnostic only",
+    "changed_fields": [
+      "SizeOfHeaders",
+      "IAT_directory_RVA",
+      "IAT_directory_size"
+    ],
+    "packed_size": 28160,
+    "packed_sha256": "410503fdfd1e931adf6024df7b8d88c725260b568688c5a5a1ab9897c83ff72d",
+    "all_packed_bytes_exact": true
+  }
+}

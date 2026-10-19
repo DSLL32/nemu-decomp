@@ -21,6 +21,7 @@ from build_kaillera_import_inputs import build as build_import_inputs, check_inv
 from build_kaillera_layout_inputs import build as build_layout_inputs
 from build_kaillera_code_inputs import build as build_code_inputs
 from verify_kaillera import ORIGINAL, ORIGINAL_SHA256, compare
+from restore_kaillera_metadata import restore as restore_metadata
 
 ROOT = Path(__file__).resolve().parents[1]
 UNITS = ['reliableconnection', 'config', 'message', 'udpconnection',
@@ -86,7 +87,7 @@ def main():
         tracked = [ROOT / 'scripts' / name for name in
                    ('build_kaillera.py', 'build_kaillera_link_inputs.py',
                     'build_kaillera_import_inputs.py', 'build_kaillera_crt_inputs.py',
-                    'build_kaillera_code_inputs.py',
+                    'build_kaillera_code_inputs.py', 'restore_kaillera_metadata.py',
                     'build_kaillera_layout_inputs.py', 'check_kaillera.py',
                     'verify_kaillera.py', 'run_toolchain.py')]
         tracked += [ROOT / 'toolchains' / name for name in
@@ -95,7 +96,8 @@ def main():
                     ('cl.exe', 'c1xx.dll', 'c2.dll', 'lib.exe', 'rc.exe', 'rcdll.dll')]
         tracked += [ROOT / 'toolchains/upx120/upx.exe']
         tracked += [ROOT / 'analysis' / name for name in
-                    ('kaillera-bss-layout.json', 'kaillera-import-chronology.json')]
+                    ('kaillera-bss-layout.json', 'kaillera-import-chronology.json',
+                     'kaillera-build-metadata.json')]
         report['build_input_sha256'] = {str(path.relative_to(ROOT)): digest(path) for path in tracked}
         objects = []
         for unit in UNITS:
@@ -141,6 +143,15 @@ def main():
             *map(winpath, link_objects), winpath(output / 'kaillera.res'),
             winpath(crt_libraries['msvcrt']), *arguments(late)])
         report['native_import_inventory'] = check_inventory(candidate)
+        raw_linked_hash = digest(candidate)
+        try:
+            report['metadata_restoration'] = restore_metadata(
+                candidate, output / 'metadata-guard', command)
+        except ValueError as error:
+            if digest(candidate) != raw_linked_hash:
+                raise RuntimeError('Metadata rejection changed the native linked DLL') from error
+            report['metadata_restoration'] = dict(applied=False, reason=str(error),
+                raw_linked_sha256=raw_linked_hash, native_linked_file_unchanged=True)
         # Keep a descriptive alias without changing the export directory's DLL name.
         shutil.copyfile(candidate, output / 'kailleraclient.unpacked.dll')
         packed = output / 'kailleraclient.dll'
