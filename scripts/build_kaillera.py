@@ -16,6 +16,7 @@ import sys
 import tempfile
 
 from check_kaillera import inspect
+from build_kaillera_link_inputs import build as build_link_inputs
 from verify_kaillera import ORIGINAL, ORIGINAL_SHA256, compare
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -80,7 +81,8 @@ def main():
         report['sources'] = {str(path.relative_to(source)): digest(path)
                              for path in sorted(source.rglob('*')) if path.is_file()}
         tracked = [ROOT / 'scripts' / name for name in
-                   ('build_kaillera.py', 'check_kaillera.py', 'verify_kaillera.py', 'run_toolchain.py')]
+                   ('build_kaillera.py', 'build_kaillera_link_inputs.py', 'check_kaillera.py',
+                    'verify_kaillera.py', 'run_toolchain.py')]
         tracked += [ROOT / 'toolchains' / name for name in
                     ('kaillera-toolchain.json', 'kaillera-packer.json')]
         tracked += [ROOT / 'toolchains/vc6rtm/bin' / name for name in
@@ -95,14 +97,19 @@ def main():
         tool('resources', 'rc', ['/l', '0x40c', '/fo' + winpath(output / 'kaillera.res'), 'kaillera.rc'])
         tool('component-library', 'lib', ['/nologo', '/out:' + winpath(output / 'kaillera-components.lib'),
                                          *map(winpath, objects)])
-        candidate = output / 'kailleraclient.unpacked.dll'
+        import_library = output / 'link-inputs' / 'kernel32.lib'
+        report['link_inputs'] = build_link_inputs(import_library)
+        candidate = output / 'linked' / 'kailleraclient.dll'
+        candidate.parent.mkdir(exist_ok=True)
         tool('link-candidate', 'link', ['/nologo', '/dll', '/subsystem:windows', '/machine:i386',
             '/incremental:no', '/opt:ref', '/opt:nowin98',
             '/out:' + winpath(candidate), '/map:' + winpath(output / 'kailleraclient.map'),
             '/implib:' + winpath(output / 'kailleraclient.lib'),
             *map(winpath, objects), winpath(output / 'kaillera.res'),
-            'kernel32.lib', 'comctl32.lib', 'gdi32.lib', 'msvcrt.lib',
+            winpath(import_library), 'comctl32.lib', 'gdi32.lib', 'msvcrt.lib',
             'user32.lib', 'winmm.lib', 'ws2_32.lib'])
+        # Keep a descriptive alias without changing the export directory's DLL name.
+        shutil.copyfile(candidate, output / 'kailleraclient.unpacked.dll')
         packed = output / 'kailleraclient.dll'
         if packed.exists():
             packed.unlink()
