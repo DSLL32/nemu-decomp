@@ -25,6 +25,6 @@ private:
         int left,right,top,bottom;
         int invalidate;
     };
-    C_ItemList<void> controls;
+    C_ItemList<Item> controls;
 };
 #endif

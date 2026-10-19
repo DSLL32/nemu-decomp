@@ -67,14 +67,14 @@ void Resizer::resize()
     int height=clientHeight;
     int x=0,y=0,width=clientWidth;
     for (int i=0;i<controls.GetSize();i++) {
-        Item *item=(Item *)controls.Get(i);
+        Item *item=controls.Get(i);
         if (height<item->height+item->top+item->bottom && !(item->flags&StretchY)) {
             int difference=item->height+item->top+item->bottom-height;
             int j;
-            for (j=i-1;j>=0;j--) if (((Item *)controls.Get(j))->flags&StretchY) break;
+            for (j=i-1;j>=0;j--) if (controls.Get(j)->flags&StretchY) break;
             if (j>=0) {
-                ((Item *)controls.Get(j))->height-=difference;
-                while (++j!=i) ((Item *)controls.Get(j))->y-=difference;
+                controls.Get(j)->height-=difference;
+                while (++j!=i) controls.Get(j)->y-=difference;
                 height+=difference;
                 y-=difference;
             }
@@ -82,10 +82,10 @@ void Resizer::resize()
         if (width<item->width+item->left+item->right && !(item->flags&StretchX)) {
             int difference=item->width+item->left+item->right-width;
             int j;
-            for (j=i-1;j>=0;j--) if (((Item *)controls.Get(j))->flags&StretchX) break;
+            for (j=i-1;j>=0;j--) if (controls.Get(j)->flags&StretchX) break;
             if (j>=0) {
-                ((Item *)controls.Get(j))->width-=difference;
-                while (++j!=i) ((Item *)controls.Get(j))->x-=difference;
+                controls.Get(j)->width-=difference;
+                while (++j!=i) controls.Get(j)->x-=difference;
                 width+=difference;
                 x-=difference;
             }
@@ -99,9 +99,9 @@ void Resizer::resize()
             x=0;
             width=clientWidth;
             for (int j=i-1;j>=0;j--) {
-                if (((Item *)controls.Get(j))->flags==NewRow) break;
-                if (used<=((Item *)controls.Get(j))->height+((Item *)controls.Get(j))->top+((Item *)controls.Get(j))->bottom)
-                    used=((Item *)controls.Get(j))->height+((Item *)controls.Get(j))->top+((Item *)controls.Get(j))->bottom;
+                if (controls.Get(j)->flags==NewRow) break;
+                if (used<=controls.Get(j)->height+controls.Get(j)->top+controls.Get(j)->bottom)
+                    used=controls.Get(j)->height+controls.Get(j)->top+controls.Get(j)->bottom;
             }
             y+=used;
             height-=used;
@@ -114,7 +114,7 @@ void Resizer::resize()
     HRGN region=CreateRectRgn(0,0,clientWidth,clientHeight);
     HDWP positions=BeginDeferWindowPos(controls.GetSize());
     for (i=0;i<controls.GetSize();i++) {
-        Item *item=(Item *)controls.Get(i);
+        Item *item=controls.Get(i);
         if (item->child) {
             DeferWindowPos(positions,item->child,0,item->x,item->y,item->width,item->height,SWP_NOZORDER);
             if (item->invalidate) {
@@ -135,7 +135,7 @@ void Resizer::resize()
 void Resizer::excludeChildren(HDC dc)
 {
     for (int i=0;i<controls.GetSize();i++) {
-        Item *item=(Item *)controls.Get(i);
+        Item *item=controls.Get(i);
         if (item->child) ExcludeClipRect(dc,item->x,item->y,item->width+item->x,item->height+item->y);
     }
 }
