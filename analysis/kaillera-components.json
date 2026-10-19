@@ -5,8 +5,8 @@
   "full_dll_byte_exact": false,
   "sources": {
     "COPYING.waste": "2a27662ea6f8221112c24df53d618cf2f3308ac876d9266c7329e1a6eb909dea",
-    "README.md": "299d4de832a2824d9e87c31e04389a2632579a496f0d86e29c8df773d586b070",
-    "bytequeue.h": "1696c117d6acd6ca97a40941b88a8ac2583e45cd63f2da31ff26c66bb66352e9",
+    "README.md": "e295bd009d1e2b633335d6df103b1adebae27c83e54efce86b3b6c71b24c145d",
+    "bytequeue.h": "fb3aef2a5df74fe71624b2a39314e5d1eb036c41f20fba8a9f16771b6d243634",
     "client.h": "c5c8c11913e9c2c60d1e2560496ed0ae4be99f28e1a717a1996556bc3154a312",
     "config.cpp": "8afba28081e7502fa728810f0c8044b7ec4501134b53c0ee9329ba12e2bff488",
     "config.h": "ab5553e88e42e701113d09b3cc45f2362ef880d928b237d414bc18c965a5e264",
@@ -41,7 +41,7 @@
     "resizer.h": "3861812f31971d70e6519a9abc549417c26f6845a97508bc9a694df22520e837",
     "serverbrowser.cpp": "3b35d26c864305fd56f635cbcb26266d7c21478805451a3987ad5da3633a5624",
     "serverbrowser.h": "1ec1d4d1643f3b954d417ff14aa47cc666b3d4405aba4f1e398522ff6fbf509e",
-    "session.cpp": "e95db55f9ef2094f724ff1fba1afae2a097975cb21623dd17e98246ce6b2837f",
+    "session.cpp": "42b69d35abf419e526a6fef566445e8577593b66146894d5aaeb327fa728f92f",
     "udpconnection.cpp": "bd80e603cf33df67df1de75ebaeb6a9b9943b00dfdb816223f00039316390c58",
     "udpconnection.h": "c02392f1e376ca4e6e3ebaa51a460f67fc85e4c273057055155f10d6314d49a6"
   },
@@ -383,6 +383,38 @@
       "returncode": 0
     },
     {
+      "label": "import-template-named",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc6rtm",
+        "lib",
+        "/nologo",
+        "/link50compat",
+        "/machine:i386",
+        "/def:Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\native-templates\\named.def",
+        "/out:Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\native-templates\\named.lib"
+      ],
+      "log": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/logs/import-template-named.log",
+      "returncode": 0
+    },
+    {
+      "label": "import-template-ordinal",
+      "argv": [
+        "/usr/bin/python3",
+        "/root/nemu-decomp/scripts/run_toolchain.py",
+        "vc6rtm",
+        "lib",
+        "/nologo",
+        "/link50compat",
+        "/machine:i386",
+        "/def:Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\native-templates\\ordinal.def",
+        "/out:Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\native-templates\\ordinal.lib"
+      ],
+      "log": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/logs/import-template-ordinal.log",
+      "returncode": 0
+    },
+    {
       "label": "link-candidate",
       "argv": [
         "/usr/bin/python3",
@@ -390,12 +422,232 @@
         "vc6rtm",
         "link",
         "/nologo",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\crt\\crt-common-declarations.obj",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\descriptor-kernel32.lib",
+        "/include:__IMPORT_DESCRIPTOR_KERNEL32",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\descriptor-comctl32.lib",
+        "/include:__IMPORT_DESCRIPTOR_COMCTL32",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\descriptor-gdi32.lib",
+        "/include:__IMPORT_DESCRIPTOR_GDI32",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\descriptor-msvcrt.lib",
+        "/include:__IMPORT_DESCRIPTOR_MSVCRT",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\descriptor-user32.lib",
+        "/include:__IMPORT_DESCRIPTOR_USER32",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\descriptor-winmm.lib",
+        "/include:__IMPORT_DESCRIPTOR_WINMM",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\descriptor-ws2_32.lib",
+        "/include:__IMPORT_DESCRIPTOR_WS2_32",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-000.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-001.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-002.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-003.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-004.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-005.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-006.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-007.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-008.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-009.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-010.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-011.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-012.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-013.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-014.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-015.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-016.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-017.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-018.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-019.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-020.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-021.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\native-chkstk.lib",
+        "/include:__chkstk",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\native-atonexit.lib",
+        "/include:_atexit",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-022.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-023.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\native-crtdll.lib",
+        "/include:__DllMainCRTStartup@12",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-024.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-025.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-026.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-027.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-028.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-029.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-030.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-031.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-032.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-033.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-034.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-035.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-036.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-037.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-038.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-039.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-040.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-041.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-042.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-043.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-044.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-045.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-046.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-047.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-048.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-049.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-050.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-051.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-052.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-053.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-054.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-055.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-056.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-057.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-058.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-059.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-060.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-061.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-062.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-063.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-064.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-065.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-066.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-067.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-068.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-069.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-070.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-071.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-072.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-073.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-074.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-075.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-076.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-077.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-078.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-079.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-080.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-081.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-082.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-083.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-084.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-085.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-086.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-087.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-088.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-089.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-090.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-091.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-092.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-093.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-094.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-095.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-096.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-097.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\chronology-098.lib",
+        "/include:__imp__CreateThread@24",
+        "/include:__imp__WaitForSingleObject@8",
+        "/include:__imp__GetTickCount@0",
+        "/include:__imp__GetProcAddress@8",
+        "/include:__imp__GetModuleFileNameA@12",
+        "/include:__imp__LoadLibraryA@4",
+        "/include:__imp__CloseHandle@4",
+        "/include:__imp__GetPrivateProfileStringA@24",
+        "/include:__imp__GetPrivateProfileIntA@16",
+        "/include:__imp__GetModuleHandleA@4",
+        "/include:__imp__MulDiv@12",
+        "/include:__imp__FreeLibrary@4",
+        "/include:__imp__WritePrivateProfileStringA@16",
+        "/include:__imp__InitCommonControls@0",
+        "/include:__imp__ExcludeClipRect@20",
+        "/include:__imp__CreateRectRgn@16",
+        "/include:__imp__CombineRgn@16",
+        "/include:__imp__DeleteObject@4",
+        "/include:__imp__realloc",
+        "/include:__imp__strncpy",
+        "/include:__imp__strncmp",
+        "/include:__imp__time",
+        "/include:__imp_??2@YAPAXI@Z",
+        "/include:__imp____CxxFrameHandler",
+        "/include:__imp__strstr",
+        "/include:__imp_??3@YAXPAX@Z",
+        "/include:__imp____dllonexit",
+        "/include:__imp___onexit",
+        "/include:__imp___initterm",
+        "/include:__imp___adjust_fdiv",
+        "/include:__imp___strdup",
+        "/include:__imp___stricmp",
+        "/include:__imp___strnicmp",
+        "/include:__imp__malloc",
+        "/include:__imp__free",
+        "/include:__imp__atoi",
+        "/include:__imp__TrackPopupMenu@28",
+        "/include:__imp__GetWindowTextA@12",
+        "/include:__imp__GetWindowTextLengthA@4",
+        "/include:__imp__InsertMenuItemA@16",
+        "/include:__imp__AppendMenuA@16",
+        "/include:__imp__CreatePopupMenu@0",
+        "/include:__imp__ScreenToClient@8",
+        "/include:__imp__EndDeferWindowPos@4",
+        "/include:__imp__InvalidateRgn@12",
+        "/include:__imp__MoveWindow@24",
+        "/include:__imp__SetClassLongA@12",
+        "/include:__imp__GetDlgItem@8",
+        "/include:__imp__GetWindowRect@8",
+        "/include:__imp__GetClassNameA@12",
+        "/include:__imp__GetClientRect@8",
+        "/include:__imp__SendMessageA@16",
+        "/include:__imp__wsprintfA",
+        "/include:__imp__IsDialogMessageA@8",
+        "/include:__imp__DestroyWindow@4",
+        "/include:__imp__SetFocus@4",
+        "/include:__imp__SetWindowTextA@8",
+        "/include:__imp__KillTimer@8",
+        "/include:__imp__PeekMessageA@20",
+        "/include:__imp__TranslateMessage@4",
+        "/include:__imp__DispatchMessageA@4",
+        "/include:__imp__EndDialog@8",
+        "/include:__imp__SetTimer@16",
+        "/include:__imp__PostMessageA@16",
+        "/include:__imp__DialogBoxParamA@20",
+        "/include:__imp__GetDesktopWindow@0",
+        "/include:__imp__SetWindowPos@28",
+        "/include:__imp__BeginDeferWindowPos@4",
+        "/include:__imp__DeferWindowPos@32",
+        "/include:__imp__DestroyMenu@4",
+        "/include:__imp__GetForegroundWindow@0",
+        "/include:__imp__ShowWindow@8",
+        "/include:__imp__CreateDialogParamA@20",
+        "/include:__imp__LoadIconA@8",
+        "/include:__imp__MessageBoxA@16",
+        "/include:__imp__GetMessageA@16",
+        "/include:__imp__PlaySoundA@12",
+        "/include:__imp__WSAStartup@8",
+        "/include:__imp__connect@12",
+        "/include:__imp__recvfrom@24",
+        "/include:__imp__WSAGetLastError@0",
+        "/include:__imp__send@16",
+        "/include:__imp__recv@16",
+        "/include:__imp__gethostbyaddr@12",
+        "/include:__imp__select@20",
+        "/include:__imp____WSAFDIsSet@8",
+        "/include:__imp__WSACleanup@0",
+        "/include:__imp__sendto@24",
+        "/include:__imp__inet_addr@4",
+        "/include:__imp__gethostbyname@4",
+        "/include:__imp__htons@4",
+        "/include:__imp__socket@12",
+        "/include:__imp__htonl@4",
+        "/include:__imp__bind@12",
+        "/include:__imp__ioctlsocket@12",
+        "/include:__imp__getsockname@12",
+        "/include:__imp__ntohs@4",
+        "/include:__imp__shutdown@8",
+        "/include:__imp__closesocket@4",
         "/dll",
         "/subsystem:windows",
         "/machine:i386",
         "/incremental:no",
         "/opt:ref",
         "/opt:nowin98",
+        "/order:@Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\code-order.txt",
         "/out:Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\linked\\kailleraclient.dll",
         "/map:Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\kailleraclient.map",
         "/implib:Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\kailleraclient.lib",
@@ -408,21 +660,40 @@
         "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\jnetlib-httpget.obj",
         "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\jnetlib-util.obj",
         "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\listview.obj",
-        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\resizer.obj",
-        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\layout\\connect.obj",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\code\\resizer.obj",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\code\\connect.obj",
         "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\layout\\kailleraclient.obj",
-        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\layout\\session.obj",
-        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\layout\\serverbrowser.obj",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\code\\session.obj",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\code\\serverbrowser.obj",
         "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\kaillera.res",
-        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\kernel32.lib",
-        "comctl32.lib",
-        "gdi32.lib",
-        "msvcrt.lib",
-        "user32.lib",
-        "winmm.lib",
-        "ws2_32.lib"
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\crt\\msvcrt.lib",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\link-inputs\\imports\\discarded-000.lib"
       ],
       "log": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/logs/link-candidate.log",
+      "returncode": 0
+    },
+    {
+      "label": "metadata-guard-pack",
+      "argv": [
+        "wine",
+        "/root/nemu-decomp/toolchains/upx120/upx.exe",
+        "-9",
+        "-oZ:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\metadata-guard\\guard.packed.dll",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\linked\\kailleraclient.dll"
+      ],
+      "log": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/logs/metadata-guard-pack.log",
+      "returncode": 0
+    },
+    {
+      "label": "metadata-guard-unpack",
+      "argv": [
+        "wine",
+        "/root/nemu-decomp/toolchains/upx120/upx.exe",
+        "-d",
+        "-oZ:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\metadata-guard\\guard.unpacked.dll",
+        "Z:\\root\\.ai-tmp\\kaillera-helpers.hJeGTE\\full-review\\output\\metadata-guard\\guard.packed.dll"
+      ],
+      "log": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/logs/metadata-guard-unpack.log",
       "returncode": 0
     },
     {
@@ -461,11 +732,20 @@
     "/DNDEBUG"
   ],
   "executable_bytes_copied_from_reference": false,
-  "metadata_restoration": null,
+  "metadata_restoration": {
+    "applied": false,
+    "reason": "Linked code, data, resources, imports, exports, relocations or layout differ; refusing metadata restoration (canonical SHA-256 a50ba7deee262d32a4093987e4dc186f99f88829a506599d95140e149ef2be4c)",
+    "raw_linked_sha256": "18adfda4aa901c2599e0b73b8a40f514fb4751ed1b00dffda4128caef3b52286",
+    "native_linked_file_unchanged": true
+  },
   "build_input_sha256": {
-    "scripts/build_kaillera.py": "d5ecf624900bb4e14d4864fa2b5bd6a638c9711435e3d84a9e6f518fff4d8a4a",
+    "scripts/build_kaillera.py": "ed4c7758e207164fae101b312f754161f7c15b9bf7ab4aa8578dee37d3041945",
     "scripts/build_kaillera_link_inputs.py": "bfe339e427e2d3f2e7919619dae1f90be9e5be3d677a9c72e9dbbca7c1c38b49",
-    "scripts/build_kaillera_layout_inputs.py": "bb32e5721bc8c94053b540da88f45e4e0a6cc7b42a6d5ada97db2c4c589edf7b",
+    "scripts/build_kaillera_import_inputs.py": "b590e8c27fed7c81d7c8effcc7362cc9bcb2d1f9cc6a4446b2bdf242c20beb95",
+    "scripts/build_kaillera_crt_inputs.py": "98e3a8fc2d84a6f1cc248952bb6eced83e52326c3e3dae25170182df697f74a6",
+    "scripts/build_kaillera_code_inputs.py": "0a1954f411af5b38fdc56c5decf28a3f83a74edd4cee998a805c220528de9146",
+    "scripts/restore_kaillera_metadata.py": "9a47483976149c322a6c83d374636e81c89c6b43b1f5599a17c71ee5f46bbb8f",
+    "scripts/build_kaillera_layout_inputs.py": "270e77bd5ec40758a3b61f66e2c55d207f762adf485cefb3745886baafd6a343",
     "scripts/check_kaillera.py": "9707984d4be37b3f9c92503bf133577ee0f98d202517ae1bf39a40f070d8837e",
     "scripts/verify_kaillera.py": "573a703ed1c0f661d44f3b2bd31b73524d9803621eec0b8323608efda81884c0",
     "scripts/run_toolchain.py": "d97fc39fdd02d508cd76432db9575043438b1da3aad0c391fc7758d125936cf3",
@@ -478,7 +758,1835 @@
     "toolchains/vc6rtm/bin/rc.exe": "582d0e68739b1128199d0ffc12eb62f48a17a3216a791fd6be948ff9e2eb2ffa",
     "toolchains/vc6rtm/bin/rcdll.dll": "5932342fc326b056988cebc710b414592b81c9ba18b9ae247b838a6021f2e434",
     "toolchains/upx120/upx.exe": "6e8b43f3e3287e95a7e9debd065e5915d9a557b1c8191d388939fb1169c79041",
-    "analysis/kaillera-bss-layout.json": "56c38f725df33365ba288ba030c2cb022ba77a436fdc5da17c2cab7f9e8c3e8d"
+    "analysis/kaillera-bss-layout.json": "e2dcf6ad5e5d5a0e5395ed2416842cc2da6cec3c5e41fc4e81f58a49001323b7",
+    "analysis/kaillera-import-chronology.json": "71965706704a022d9a7454abcc01c3165bc49b917437cfa52f2a9e132772ae81",
+    "analysis/kaillera-build-metadata.json": "0823114d9c1a1157fc1d3c2a51b672478fb1a2ee28b518096e74c891f938ccd5"
+  },
+  "crt_link_inputs": {
+    "libraries": {
+      "msvcrt": {
+        "source_sha256": "66cde1a18119df60e3770299c41c1150b9bc5efa5125edf6c8e432836211ff13",
+        "output_sha256": "76aaecf22246fe7ed0e33700bfdff6745d4ab7c40997b0ac7f008e6a356ef03c",
+        "converted_imports": [
+          {
+            "symbol": "__initterm",
+            "short_record_sha256": "de42a833c3db4e36f52c45eaca8280c55a477945dd4b15b20e0af02d92e4605f",
+            "full_coff_sha256": "0245132e8e64991bb0c7bcb8413e672ce869dff47991b219b08b5d068caea5d9"
+          },
+          {
+            "symbol": "___dllonexit",
+            "short_record_sha256": "7d936c9c1801269ccf84e9569b0e73deec12e4728320ebf8df905ad4277ddae8",
+            "full_coff_sha256": "1fd8e41e27886a157c880a19c8c17d2932218089d4e1c46a213e74057bf68f56"
+          },
+          {
+            "symbol": "___CxxFrameHandler",
+            "short_record_sha256": "a576e3a0a72ab164c3e60897de307f9437529c71e03b1e2b53b40f426e2ae09f",
+            "full_coff_sha256": "89e330b422b73e3f704140104e1ac22e4940546e3ec909964df6cd4ea0bb0e19"
+          },
+          {
+            "symbol": "??3@YAXPAX@Z",
+            "short_record_sha256": "50aa8e5882531c7fc6907bb2b3742d8432f2fd40ec0d3ad5b966170a6c2118bb",
+            "full_coff_sha256": "b3f75095c6027ed132d506310053fe27b8dee6447f1f8129be79b47db51e39d4"
+          },
+          {
+            "symbol": "??2@YAPAXI@Z",
+            "short_record_sha256": "36ee8f6a5e7a7235027298086e6476132bffc7b54b89f897c68f32a16588c226",
+            "full_coff_sha256": "24f2e63256a0675403ba671f11e86194fe9a3e8820fc6ad33ec9eb5115f92d57"
+          }
+        ],
+        "crt_code_group_metadata": [
+          {
+            "object": "build\\intel\\dll_obj\\ullshr.obj",
+            "original_sha256": "a9fcf4a41f4a7bfc740aa6f0638fffe24872277f75f73e8e678bec8a291d5e71",
+            "normalized_sha256": "566528a80895b16df7a06fa58af17df1b13071283ab5722096c81c7b71468e37",
+            "alignment": []
+          },
+          {
+            "object": "build\\intel\\dll_obj\\ullrem.obj",
+            "original_sha256": "bdb1dc948aab1630dc045424ba7e7521469432f14567d2dd5e9285bcdf416662",
+            "normalized_sha256": "8497a6e493d4b22bef2fc737ec048da6aca6d695285b57f16f05a1de434cf474",
+            "alignment": []
+          },
+          {
+            "object": "build\\intel\\dll_obj\\ulldiv.obj",
+            "original_sha256": "bd4938a1e8786adc5542e4d475cc2b58605425fb9d1036b313528d79cdebed9e",
+            "normalized_sha256": "cce3add5ebe214342bf7be15b6f87b6822c0dc1ad22b7ce759c36daefe30f2e1",
+            "alignment": []
+          },
+          {
+            "object": "build\\intel\\dll_obj\\llshr.obj",
+            "original_sha256": "8a77f5037f6f29447a1a5bba4694c8288dc0fee03330d167043a92fde78bca87",
+            "normalized_sha256": "a9de44cd6e386a1c57949d210f6a08ba5f9db17e718e83b643ed472462e58aff",
+            "alignment": []
+          },
+          {
+            "object": "build\\intel\\dll_obj\\llshl.obj",
+            "original_sha256": "62684397bc72ca4765fcef24a9cd93ba47f078812c39f31317c679eec1a0fc61",
+            "normalized_sha256": "654e9460afdb504114e89c8421634083da86b47d6a2b616d8fd9a7aeff4bce4c",
+            "alignment": []
+          },
+          {
+            "object": "build\\intel\\dll_obj\\llrem.obj",
+            "original_sha256": "981ea53efef57ad5d431dde5444b483355cb9545bdb8fd6bf803f7136690934a",
+            "normalized_sha256": "3f7442149a300ada5e0df073087e3dc72f16e2d2805b5b9614cebeee27702227",
+            "alignment": []
+          },
+          {
+            "object": "build\\intel\\dll_obj\\llmul.obj",
+            "original_sha256": "62d28d725ed8b801c8ff1444bd43f2d89d42826ff65c6729c8bdb1531b65b767",
+            "normalized_sha256": "9774a13218b5b89de374b025cf49e40be60e03c446730bed617aa58c460c5c71",
+            "alignment": []
+          },
+          {
+            "object": "build\\intel\\dll_obj\\lldiv.obj",
+            "original_sha256": "ef6dc0a1dfbf00096dd998a6f591a2e8436e831ecb718c84bb2b2df4b02969cf",
+            "normalized_sha256": "7a79dc0d48e7354ecec18ecb2177f31f4ee60e8aa0e0c54ba4fff4bdb6af97f4",
+            "alignment": []
+          },
+          {
+            "object": "build\\intel\\dll_obj\\fp8.obj",
+            "original_sha256": "0b7bfc7b07d8f929da7bd31824ef657e5379d329a35ae9a5575f2c087fb807e6",
+            "normalized_sha256": "417a357204e795000529b3bbab40ed52a9a5ebb18a2031a924214691ef6dbf8a",
+            "alignment": []
+          },
+          {
+            "object": "build\\intel\\dll_obj\\dllsupp.obj",
+            "original_sha256": "1fd279ea472f99b6c36f2f470996582b74e91935ea90fba92ed11fa17afd5fed",
+            "normalized_sha256": "1ca1c9beb7427d8caf7cc18d42f4b7a195b2977030cb9358dfbe5f5ddecce136",
+            "alignment": []
+          },
+          {
+            "object": "build\\intel\\dll_obj\\wdllargv.obj",
+            "original_sha256": "7a7cab443832b56762abd8e5949e313623c46b34d2570e411f216b17a2dde756",
+            "normalized_sha256": "dc30c41b3cea5968fc28952c07364190316abce6ec9dfd0f892639d56741d403",
+            "alignment": []
+          },
+          {
+            "object": "build\\intel\\dll_obj\\wcrtexew.obj",
+            "original_sha256": "ed8bdccb5796dcc1b9a6a686fd25f9f9fed72dd92851ba43570bc79cc5d8310d",
+            "normalized_sha256": "48d95b5aa795f147caad4d473d57411ad08369f4a7bff3c58327ff32b9104138",
+            "alignment": []
+          },
+          {
+            "object": "build\\intel\\dll_obj\\wcrtexe.obj",
+            "original_sha256": "eaa4bdd13da8100161a58b0d9a268adba20367d511467b1993d55a3eff1f273b",
+            "normalized_sha256": "3b2f2de4d132bd190244dffd4d13887f6b4d86f990cd62cca6f12098350240ba",
+            "alignment": []
+          },
+          {
+            "object": "build\\intel\\dll_obj\\ti_inst.obj",
+            "original_sha256": "529c741c69a6ef7a038515add129f45e0a5fb5d53a08b1ae064d0639fc7ddbef",
+            "normalized_sha256": "c79834ac080b036f4a25b25a314d86378f44f6dfaaacf8b11e5e577032e2c84b",
+            "alignment": []
+          },
+          {
+            "object": "build\\intel\\dll_obj\\merr.obj",
+            "original_sha256": "2850cea6a86a69f9ae885918593c05deecaf5683913b484d2501e753bac67df3",
+            "normalized_sha256": "4bc851f7c21ad63c3b5ab0d1706f3d3b8034007b252f0784d5c02913b75f315a",
+            "alignment": []
+          },
+          {
+            "object": "build\\intel\\dll_obj\\ehvecdtr.obj",
+            "original_sha256": "e3d541d631cc3c6bd3930788cffc5c6effeca675191d7b27e2fb387bd07acb2a",
+            "normalized_sha256": "f95c1f7df2a08dc3434fc11daf6a832bdfeeb97f5ed96895ba803319a193d9d5",
+            "alignment": []
+          },
+          {
+            "object": "build\\intel\\dll_obj\\ehveccvb.obj",
+            "original_sha256": "1622183f12eb9e39bf409c65c2e5c804474a249bb5f0e8d1f5c5ad5257f8459d",
+            "normalized_sha256": "6686d3487eec8e1cafcf62515f82f553401cccc7ee4bdff440e8e0d3ffa31c73",
+            "alignment": []
+          },
+          {
+            "object": "build\\intel\\dll_obj\\ehvecctr.obj",
+            "original_sha256": "b099a7f0db21209e9f5981385c927bffcaccb1d07e95492c7dc37e682a36d692",
+            "normalized_sha256": "2e175ea411828e27c597f9de91693c58520970fc1bc965557f95035f355e4bc3",
+            "alignment": []
+          },
+          {
+            "object": "build\\intel\\dll_obj\\dllmain.obj",
+            "original_sha256": "507c3555fa9830cd6fa19b393f3c011fd138e219d9408cdaf1d6c96b47d9df5a",
+            "normalized_sha256": "eb25d1bf0e7e2a5c0d76e83539ae53ed11ca03e04a0c5dff784393cf298abf9c",
+            "alignment": []
+          },
+          {
+            "object": "build\\intel\\dll_obj\\dllargv.obj",
+            "original_sha256": "eb9cabd3a46709f77e4ccd43e50be225a0e75ce253118655260d7bb49aee1fd4",
+            "normalized_sha256": "74089d849616ab6afab27059cc7af0727f13fc41a17dbe72f5afe5c17a9a4409",
+            "alignment": []
+          },
+          {
+            "object": "build\\intel\\dll_obj\\dll_argv.obj",
+            "original_sha256": "a1e45e8d08754300a98b1b1ff85238b451581d7b5be73b4ea49826da52c683a5",
+            "normalized_sha256": "1cf97ec828ade624728adea101bc710064659328702ff156ab6363031e2c06ca",
+            "alignment": []
+          },
+          {
+            "object": "build\\intel\\dll_obj\\crtexew.obj",
+            "original_sha256": "9b56e318d0d5d2ac44361c99726f6acc25eb403b11815a8b9ab8edcb87cbccb8",
+            "normalized_sha256": "164043f6a3e2ef82aed01ff96762e044514c200e2c61dbfe48e33196d9950832",
+            "alignment": []
+          },
+          {
+            "object": "build\\intel\\dll_obj\\crtexe.obj",
+            "original_sha256": "bf1e214ca25ec3c659a01765f46007b0b17d82ec4f2b6ebf3e65384f5e02ffc6",
+            "normalized_sha256": "f7ab22ecc418a9792c1ff37834ba0bdfdc6e6d884e41ebef6874915ada181668",
+            "alignment": []
+          },
+          {
+            "object": "build\\intel\\dll_obj\\crtdll.obj",
+            "original_sha256": "e4b9019a699254cf4653dc8a019917c3d2863ea75e22eb65e31b112116f4bde0",
+            "normalized_sha256": "72ba60218003ae894fa4c3b5cbb4426cff552210bca06cc774b72ec09fc5c73b",
+            "alignment": [
+              {
+                "symbol": "__CRT_INIT@12",
+                "original": 1,
+                "recovered": 16
+              }
+            ]
+          },
+          {
+            "object": "build\\intel\\dll_obj\\atonexit.obj",
+            "original_sha256": "ba14cb0f16c8be4e27ae18b549b37e94a6e7a204cbd19ad226ac0d6518c9b265",
+            "normalized_sha256": "ed274ec248aa1d51ea40d457244a5e4d9f0e45604cf544e02ee8051c07d0cce6",
+            "alignment": []
+          },
+          {
+            "object": "build\\intel\\dll_obj\\chkstk.obj",
+            "original_sha256": "84cf3e4dd0464ae36595c1a4568bf2059a31d5d97de3b941b99e7a17fa0f80f8",
+            "normalized_sha256": "453d60f33012c3406ba7f2282d0a522f51541b620c79afa62e46fd0a5bdfaab1",
+            "alignment": []
+          },
+          {
+            "object": "build\\intel\\dll_obj\\atlssup.obj",
+            "original_sha256": "dba7597a54b3d75891f3cb8c840fd4e2a700cbe7e681e884439b6a11e4ff7972",
+            "normalized_sha256": "1c059d69e7c55fce213d8b8301e6225fe93926d267b911c5b2e71172da4b1132",
+            "alignment": []
+          }
+        ]
+      },
+      "ws2_32": {
+        "source_sha256": "dbe9de991aea6662d8857da13e572729b5379377be8e13bdd86e57a51354988e",
+        "output_sha256": "5087c476a7bcb726aad7bbb72ea602c583e34a041fa05147314f93cf2c1dabbd",
+        "converted_imports": [
+          {
+            "symbol": "_WSACleanup@0",
+            "short_record_sha256": "6146c5188c8c14b8340e8e06970a249273557fc3229b0b98357fdb7a6647436d",
+            "full_coff_sha256": "408fe53442c7cec2ac1b92800eff3327c4ac197d2417e95b0f1cee623c0d36ca"
+          },
+          {
+            "symbol": "_WSAGetLastError@0",
+            "short_record_sha256": "202c595fc5e42d36a646272d0b9cb121cc9751ea7cebbe679a91b2edce158e23",
+            "full_coff_sha256": "e65514fde5a946ac06ada00c28612728ed5922ecaa1bc3179bc3c5ba2b589d8a"
+          },
+          {
+            "symbol": "_WSAStartup@8",
+            "short_record_sha256": "513650d0495f7d5d9a02cae762bf37480b708c0a87577da3812ad0c0c93e6496",
+            "full_coff_sha256": "fff509788087adcc890f8dd8899b7ca7c41f98daf09b53cc9b7f9f2059b92b2f"
+          },
+          {
+            "symbol": "___WSAFDIsSet@8",
+            "short_record_sha256": "565e801c4db84b9892a5447d5b2be51e062e708ab5d4912a6ec4037222c6b710",
+            "full_coff_sha256": "272eb1338a63caff42d6f8b8de6f17b044f96e05e85b9398fd671281c8659ff3"
+          },
+          {
+            "symbol": "_bind@12",
+            "short_record_sha256": "03df6577068e804ae21ecc8f8020cf23c36c7c1b091446dff31275e017f1f36b",
+            "full_coff_sha256": "7b21c93aa9d833f3c5e71219402038d8ad6b4ac5c825dea83812bbf78166a2c9"
+          },
+          {
+            "symbol": "_closesocket@4",
+            "short_record_sha256": "b775b8cd1840027845cfd322f64d64803c96a2d6399fa781828bba43c4f157e7",
+            "full_coff_sha256": "cce683ed432b12794908b9c6ca77068caaf003a4e609c38a25798f3fd5bc66b4"
+          },
+          {
+            "symbol": "_connect@12",
+            "short_record_sha256": "29f6add92861deffa37700134c4834e0d063a70ba404350b9555b3b1fab27ff4",
+            "full_coff_sha256": "c6f80c377721e6730a4a770ddd9b4e7f0f348445501b4b1adb53249813cd9fae"
+          },
+          {
+            "symbol": "_gethostbyaddr@12",
+            "short_record_sha256": "989802d3309649603cde694fc055d846264a178b250a93ae7d7beeb632804962",
+            "full_coff_sha256": "2f75e12ea1ad42115df863e42e7112865985dbd7f80a875e58bba4a262efacda"
+          },
+          {
+            "symbol": "_gethostbyname@4",
+            "short_record_sha256": "91b0a49b1a324ddc56cbde5b7123d1b6f7a34b6c4b7c40ae49260bf45646d7c5",
+            "full_coff_sha256": "51db28e897f9a31b7c83b4ebdc57a3919db0640d6e1e88c3da338c24f5312ec4"
+          },
+          {
+            "symbol": "_getsockname@12",
+            "short_record_sha256": "dbe73457baa68736fa453f660c16c74248870629498daf58edd20c44c2cfc4b1",
+            "full_coff_sha256": "23af844c3c95e3199014b94140378ede4c208605a6599ad0567a4be68838e7f8"
+          },
+          {
+            "symbol": "_htonl@4",
+            "short_record_sha256": "0593c948452651afc0ec0cc2fcc3c85316542971aad1030b50e4936c29ae82b0",
+            "full_coff_sha256": "9f41364ca1a69acd258aef15c396f7d1b76bbae6e190633a35ec5969a1c18c68"
+          },
+          {
+            "symbol": "_htons@4",
+            "short_record_sha256": "ac12f0578f6716bb96d083fb073f2722fc8447db87a4d89f2791020e21601698",
+            "full_coff_sha256": "96a958e2a2d0041233062245cf65e0ca8a6edbd60d8abec5c9eac28e68d74049"
+          },
+          {
+            "symbol": "_inet_addr@4",
+            "short_record_sha256": "78c3d3cb4ab360d4351014cc7fe46edef21d166677522d47ee4c15f701bb921e",
+            "full_coff_sha256": "f15448060ca4829ad218699f647ae9b6632437e39a7f030cc3bdb807ecf5f56d"
+          },
+          {
+            "symbol": "_ioctlsocket@12",
+            "short_record_sha256": "4d32cbca89ba488f223f2334df2778b423c304f761a55bb9850012538fad1932",
+            "full_coff_sha256": "2cc5992afa2fd5cc0ee2371151813f12849a839d4fb1f6183b355018dd0277f5"
+          },
+          {
+            "symbol": "_ntohs@4",
+            "short_record_sha256": "848d8d369d5db1b98dd669714dd319df396f6b4b19fff3ba5240c5e6b9e1c115",
+            "full_coff_sha256": "f61735e7d56875da274c488bd69a6efb6b2987a0b2a65588a8e510fcc81c15ba"
+          },
+          {
+            "symbol": "_recv@16",
+            "short_record_sha256": "c543b09bef5a124a4be0069d35ae092120b468d41d2a63d1c9b43e9280f4152e",
+            "full_coff_sha256": "4622b1659342947605dd51be530c7914eabd5686c3dc2354fe2d714ccf9a1307"
+          },
+          {
+            "symbol": "_recvfrom@24",
+            "short_record_sha256": "722a8045379efcd8c598f40fa884800dc0b5d86547c61f0cb0291da708d115d9",
+            "full_coff_sha256": "3df2c49e4a5c6744d264b12720875c042f2e58fc55f0586b882c19a8af905018"
+          },
+          {
+            "symbol": "_select@20",
+            "short_record_sha256": "59f2f6399b059962a27eff9879bd15eee99f7d0866dea5722578a6e94616f2cf",
+            "full_coff_sha256": "77cfb3e0fea3fd32b4cae0f0094dd7f0b521f936e6254b38738be803cd3635fb"
+          },
+          {
+            "symbol": "_send@16",
+            "short_record_sha256": "bc3b34a160007ac5ac46d2433dd06b1e3a3e94dfde7d2ad2992a9568b06ca69a",
+            "full_coff_sha256": "c56dac39ab63955d58e120cfd153d156316907659c330ab042e70341a1d8136a"
+          },
+          {
+            "symbol": "_sendto@24",
+            "short_record_sha256": "5aa7d2cfb0e5c68ca07a295d42d839dd38a3d410656138edfa2202db6d6430e4",
+            "full_coff_sha256": "8f4d3592977871a35d18f53013c85746ed1d7c10f76d3d1b78d096b18111cdb6"
+          },
+          {
+            "symbol": "_shutdown@8",
+            "short_record_sha256": "dd69547b5ae5507e38392c35a6992405b99e3a5949209544844333e55f62be18",
+            "full_coff_sha256": "9530beea56321570e739f335a4bce1507dfbcc4307f49a07c67cbdd572b5f630"
+          },
+          {
+            "symbol": "_socket@12",
+            "short_record_sha256": "f243bac35f2e2e42fa06258de0266af577206fec95848b5a224823138582a0e5",
+            "full_coff_sha256": "f11f182b61fa5272ce062f8c2fc623ff68f43ac35dc83e7b76e2d1bef40ab73d"
+          }
+        ],
+        "crt_code_group_metadata": []
+      }
+    },
+    "executable_bytes_copied_from_reference": false,
+    "application_objects_modified": false,
+    "native_import_instruction_payloads_unchanged": true,
+    "common_declarations": {
+      "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/crt/crt-common-declarations.obj",
+      "sha256": "0559ef16548612323307e61d62631d56f10b5f398a250e196a641168ed2b1624",
+      "declarations": [
+        {
+          "symbol": "___onexitbegin",
+          "member": "build\\intel\\dll_obj\\atonexit.obj",
+          "member_body_offset": 186316,
+          "source_member_sha256": "ba14cb0f16c8be4e27ae18b549b37e94a6e7a204cbd19ad226ac0d6518c9b265",
+          "bytes": 4
+        },
+        {
+          "symbol": "___onexitend",
+          "member": "build\\intel\\dll_obj\\atonexit.obj",
+          "member_body_offset": 186316,
+          "source_member_sha256": "ba14cb0f16c8be4e27ae18b549b37e94a6e7a204cbd19ad226ac0d6518c9b265",
+          "bytes": 4
+        },
+        {
+          "symbol": "__pRawDllMain",
+          "member": "build\\intel\\dll_obj\\crtdll.obj",
+          "member_body_offset": 184080,
+          "source_member_sha256": "e4b9019a699254cf4653dc8a019917c3d2863ea75e22eb65e31b112116f4bde0",
+          "bytes": 4
+        },
+        {
+          "symbol": "__adjust_fdiv",
+          "member": "build\\intel\\dll_obj\\adjustfd.obj",
+          "member_body_offset": 168220,
+          "source_member_sha256": "786e1f59eac9b9f5fd13202178419768b720825a0578a292a9a6814a503ac388",
+          "bytes": 4
+        }
+      ],
+      "section_count": 0,
+      "initialized_or_executable_bytes": 0,
+      "original_sdk_declaration_types_and_sizes_unchanged": true
+    },
+    "code_order": {
+      "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/crt/import-code-order.txt",
+      "sha256": "b184449fc66ab64e634eaa613467d8b3debecc50190afef4b70e5ead5129b0b4"
+    }
+  },
+  "import_chronology": {
+    "recipe_sha256": "71965706704a022d9a7454abcc01c3165bc49b917437cfa52f2a9e132772ae81",
+    "libraries": {
+      "kernel32": {
+        "source_sha256": "cd4a546f71481319aeee455aa0fb51698a094f9d3e6d8339acf445489a263c68",
+        "linking_view_sha256": "4c0570aecf4a2352ad42f2758713c48997966ba5e01d4433c88297a61307f560",
+        "derived_sha256": null
+      },
+      "comctl32": {
+        "source_sha256": "dc4ced17b4735f570361f44b1739ee91f90f69a3705143f10154a3590891213e",
+        "linking_view_sha256": "dc4ced17b4735f570361f44b1739ee91f90f69a3705143f10154a3590891213e",
+        "derived_sha256": null
+      },
+      "gdi32": {
+        "source_sha256": "dc99cf3da3e3e6b2efeee7724a6cb400a615f8e2dde9ebf6df6b3bf3eb3d7c1b",
+        "linking_view_sha256": "dc99cf3da3e3e6b2efeee7724a6cb400a615f8e2dde9ebf6df6b3bf3eb3d7c1b",
+        "derived_sha256": null
+      },
+      "msvcrt": {
+        "source_sha256": "66cde1a18119df60e3770299c41c1150b9bc5efa5125edf6c8e432836211ff13",
+        "linking_view_sha256": "66cde1a18119df60e3770299c41c1150b9bc5efa5125edf6c8e432836211ff13",
+        "derived_sha256": "76aaecf22246fe7ed0e33700bfdff6745d4ab7c40997b0ac7f008e6a356ef03c"
+      },
+      "user32": {
+        "source_sha256": "0a3c34c4daec09c1b9fd163d5d0b2ee9a6cbe0b3e863ae81a1fae3b9f936fd19",
+        "linking_view_sha256": "0a3c34c4daec09c1b9fd163d5d0b2ee9a6cbe0b3e863ae81a1fae3b9f936fd19",
+        "derived_sha256": null
+      },
+      "winmm": {
+        "source_sha256": "bb098679a802afdbc6fdaac03dfe1ea81453a36f6d4768b1c1cd092b1dbe9342",
+        "linking_view_sha256": "bb098679a802afdbc6fdaac03dfe1ea81453a36f6d4768b1c1cd092b1dbe9342",
+        "derived_sha256": null
+      },
+      "ws2_32": {
+        "source_sha256": "dbe9de991aea6662d8857da13e572729b5379377be8e13bdd86e57a51354988e",
+        "linking_view_sha256": "dbe9de991aea6662d8857da13e572729b5379377be8e13bdd86e57a51354988e",
+        "derived_sha256": "5087c476a7bcb726aad7bbb72ea602c583e34a041fa05147314f93cf2c1dabbd"
+      }
+    },
+    "archives": [
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/descriptor-kernel32.lib",
+        "sha256": "108dc699fd66ced2284a0f628ffe5165a9edea6cfc49fdc5ef3319b97a52a460",
+        "members": [
+          {
+            "source_library": "kernel32",
+            "member": "KERNEL32.DLL",
+            "original_member_sha256": "2cb8de3b904b463837bfcca6f9ad7744c53338555bfcc8228b81ed42e81b6e8e",
+            "linked_member_sha256": "2cb8de3b904b463837bfcca6f9ad7744c53338555bfcc8228b81ed42e81b6e8e"
+          },
+          {
+            "source_library": "kernel32",
+            "member": "KERNEL32.DLL",
+            "original_member_sha256": "7bd6f7f8badf2f0915ee3a849a89d3002fbe43c2ee40f0300c75d5bbb1ff67af",
+            "linked_member_sha256": "7bd6f7f8badf2f0915ee3a849a89d3002fbe43c2ee40f0300c75d5bbb1ff67af"
+          },
+          {
+            "source_library": "kernel32",
+            "member": "KERNEL32.DLL",
+            "original_member_sha256": "173a43b8ff871ca24f6b1652f471a1d7f92bc21e662d82cb6be32b45eeac1c9e",
+            "linked_member_sha256": "173a43b8ff871ca24f6b1652f471a1d7f92bc21e662d82cb6be32b45eeac1c9e"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/descriptor-comctl32.lib",
+        "sha256": "7a7df37ca91b6d068824a440bc3ae9527cce35bf842d170e28f4a6d310125dc5",
+        "members": [
+          {
+            "source_library": "comctl32",
+            "member": "COMCTL32.dll",
+            "original_member_sha256": "85315d330524ec278899c2c7518e1d858351dfcd3be328a65852f7262296394d",
+            "linked_member_sha256": "85315d330524ec278899c2c7518e1d858351dfcd3be328a65852f7262296394d"
+          },
+          {
+            "source_library": "comctl32",
+            "member": "COMCTL32.dll",
+            "original_member_sha256": "7cc6299c290db74e93fcc9eee3979a180d4b3d1b852f50fc1edf47f1b91584ab",
+            "linked_member_sha256": "7cc6299c290db74e93fcc9eee3979a180d4b3d1b852f50fc1edf47f1b91584ab"
+          },
+          {
+            "source_library": "comctl32",
+            "member": "COMCTL32.dll",
+            "original_member_sha256": "10f6b4d8dd515d038c8b287068939e691b1f49ab999f51b18af7f9bf59132a85",
+            "linked_member_sha256": "10f6b4d8dd515d038c8b287068939e691b1f49ab999f51b18af7f9bf59132a85"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/descriptor-gdi32.lib",
+        "sha256": "4bab478f6fb782843950d13c54e6885510b1d49af99e7376defca9e632034b75",
+        "members": [
+          {
+            "source_library": "gdi32",
+            "member": "GDI32.dll",
+            "original_member_sha256": "549018836b6773e5df2a1254c7dbf8fb601ee4da93d5d28073ac6ea3d9d79575",
+            "linked_member_sha256": "549018836b6773e5df2a1254c7dbf8fb601ee4da93d5d28073ac6ea3d9d79575"
+          },
+          {
+            "source_library": "gdi32",
+            "member": "GDI32.dll",
+            "original_member_sha256": "1f01831ff83f85bfbe70f4c439581222fa35c3f5e0ea6c4809a17181201683b9",
+            "linked_member_sha256": "1f01831ff83f85bfbe70f4c439581222fa35c3f5e0ea6c4809a17181201683b9"
+          },
+          {
+            "source_library": "gdi32",
+            "member": "GDI32.dll",
+            "original_member_sha256": "eea5228d4d063d1ff11e5902afd6e381117d083e793392afb0ed84bf4ab71735",
+            "linked_member_sha256": "eea5228d4d063d1ff11e5902afd6e381117d083e793392afb0ed84bf4ab71735"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/descriptor-msvcrt.lib",
+        "sha256": "2f35c8c6bd2c1bc493fdb22ce7a3e56496acb88687f4951b6a6b0da1ee9c043c",
+        "members": [
+          {
+            "source_library": "msvcrt",
+            "member": "MSVCRT.dll",
+            "original_member_sha256": "94fbb29a6ed560be306580c539454f341109ff40260f466f24e1341428ef45be",
+            "linked_member_sha256": "94fbb29a6ed560be306580c539454f341109ff40260f466f24e1341428ef45be"
+          },
+          {
+            "source_library": "msvcrt",
+            "member": "MSVCRT.dll",
+            "original_member_sha256": "dcefb29e7bd1180d1bb2bc197e991be38981988f56abd955e108c09caac38965",
+            "linked_member_sha256": "dcefb29e7bd1180d1bb2bc197e991be38981988f56abd955e108c09caac38965"
+          },
+          {
+            "source_library": "msvcrt",
+            "member": "MSVCRT.dll",
+            "original_member_sha256": "334526cdf0f715e5d948c6b8d7d7c1ed4780ff92ee9047137c247dcf4b0d7df5",
+            "linked_member_sha256": "334526cdf0f715e5d948c6b8d7d7c1ed4780ff92ee9047137c247dcf4b0d7df5"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/descriptor-user32.lib",
+        "sha256": "bbcf932c8205aa2233b60e7acb144b47358bcd849fdd269e4422e538001831e0",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "8ffebfdb6b8b55baf602cc15a5320309d275eb9c5bc392ae5a6f84343cbab85f",
+            "linked_member_sha256": "8ffebfdb6b8b55baf602cc15a5320309d275eb9c5bc392ae5a6f84343cbab85f"
+          },
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "06abf9c26b92ca86a060a6caa51cd734a213947e5e9917d11c7279e910f8694e",
+            "linked_member_sha256": "06abf9c26b92ca86a060a6caa51cd734a213947e5e9917d11c7279e910f8694e"
+          },
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "144870d30726bf387a8a07c16d8d2e4dc48365b16c050f66c062c2f762b83366",
+            "linked_member_sha256": "144870d30726bf387a8a07c16d8d2e4dc48365b16c050f66c062c2f762b83366"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/descriptor-winmm.lib",
+        "sha256": "1aa86248a431af203a4935dbf422f4ba1b4db4fac08c543663b53a6eb0fa176e",
+        "members": [
+          {
+            "source_library": "winmm",
+            "member": "WINMM.dll",
+            "original_member_sha256": "cafa46b1fb77135b6512d285eb0889764ecbe67f84f0c7997d60edc76b853379",
+            "linked_member_sha256": "cafa46b1fb77135b6512d285eb0889764ecbe67f84f0c7997d60edc76b853379"
+          },
+          {
+            "source_library": "winmm",
+            "member": "WINMM.dll",
+            "original_member_sha256": "19e0d9c68022c28362381f678af1d1bbd1916dfbae83e9a0ca24ad8b17bde8f5",
+            "linked_member_sha256": "19e0d9c68022c28362381f678af1d1bbd1916dfbae83e9a0ca24ad8b17bde8f5"
+          },
+          {
+            "source_library": "winmm",
+            "member": "WINMM.dll",
+            "original_member_sha256": "28d57a77f0c3a16ba582e37d6c364e194c7d3a3e051e0eff7f29ce6b50fe3309",
+            "linked_member_sha256": "28d57a77f0c3a16ba582e37d6c364e194c7d3a3e051e0eff7f29ce6b50fe3309"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/descriptor-ws2_32.lib",
+        "sha256": "c6a3c193c3dbf32eedabb5702f1cde87328c19375b41c8567ddd15ccd01a98d7",
+        "members": [
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "a75bf7b6fba7233054265c4847ffba259c588f54bcc974d87b0efb4cdd6380af",
+            "linked_member_sha256": "a75bf7b6fba7233054265c4847ffba259c588f54bcc974d87b0efb4cdd6380af"
+          },
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "007db613bc72b098b50c30f1b475a15160f8aebe539cc4d4e1ef47ad4bd7f70f",
+            "linked_member_sha256": "007db613bc72b098b50c30f1b475a15160f8aebe539cc4d4e1ef47ad4bd7f70f"
+          },
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "70168430c686c2027eaef8853a4be1b0db7552fa0ff9421ae149fb7431b10c3e",
+            "linked_member_sha256": "70168430c686c2027eaef8853a4be1b0db7552fa0ff9421ae149fb7431b10c3e"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-000.lib",
+        "sha256": "8979590044d0460567387035d09c1d7c40b5701554b344d01bb50493834f2bfa",
+        "members": [
+          {
+            "source_library": "kernel32",
+            "member": "KERNEL32.DLL",
+            "original_member_sha256": "de418fc8c31491f31155ed51e33182fe2a00223cce56039df6d653937ee858e3",
+            "linked_member_sha256": "de418fc8c31491f31155ed51e33182fe2a00223cce56039df6d653937ee858e3"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-001.lib",
+        "sha256": "1aea6facc4f153560ffb2f6fcbb45c23db172bc58a0f7177cf48e7be41de2271",
+        "members": [
+          {
+            "source_library": "kernel32",
+            "member": "KERNEL32.DLL",
+            "original_member_sha256": "af0adaba5012dfe77e9d87d6b732db570be3cb79064d8465b767c066950e7803",
+            "linked_member_sha256": "af0adaba5012dfe77e9d87d6b732db570be3cb79064d8465b767c066950e7803"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-002.lib",
+        "sha256": "3db3a5bcbc09e6c8eb010fc58d06db224844f009e2a7b98c8788c442bb605bf9",
+        "members": [
+          {
+            "source_library": "kernel32",
+            "member": "KERNEL32.DLL",
+            "original_member_sha256": "1a04effb2e5cc3713148bfa77da42d487d29efbb8c9f03420bac57798ade57c6",
+            "linked_member_sha256": "1a04effb2e5cc3713148bfa77da42d487d29efbb8c9f03420bac57798ade57c6"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-003.lib",
+        "sha256": "e474f71531f42a77dd8a2d186b58b45b208a68050707958fc1077290760f6c4f",
+        "members": [
+          {
+            "source_library": "kernel32",
+            "member": "KERNEL32.DLL",
+            "original_member_sha256": "73cab5f0245c49c3d3f12bd7bb7a1c4ac62bcf79d145f2b5d5b14c21c692cd50",
+            "linked_member_sha256": "73cab5f0245c49c3d3f12bd7bb7a1c4ac62bcf79d145f2b5d5b14c21c692cd50"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-004.lib",
+        "sha256": "9a0bcad9216724c8616f64b9483da8269c19ad60983a8806a4e0432203a48fa5",
+        "members": [
+          {
+            "source_library": "kernel32",
+            "member": "KERNEL32.DLL",
+            "original_member_sha256": "82d14f33caecba8f3b3734c1d4632ce045943175ef6b89939afaac0472afab38",
+            "linked_member_sha256": "82d14f33caecba8f3b3734c1d4632ce045943175ef6b89939afaac0472afab38"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-005.lib",
+        "sha256": "958c9d27822897378d87d44768c3e52b5f5e87d35aefc25e0ba68279c42b1de5",
+        "members": [
+          {
+            "source_library": "kernel32",
+            "member": "KERNEL32.DLL",
+            "original_member_sha256": "14ac7e0e61ec0231267099104b04b9d0987f11d17cd093bd55638ba6b902934d",
+            "linked_member_sha256": "14ac7e0e61ec0231267099104b04b9d0987f11d17cd093bd55638ba6b902934d"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-006.lib",
+        "sha256": "050886f679f866b89b122db73b5459213757c5dccd6a2c6cd5952fbe44b43e47",
+        "members": [
+          {
+            "source_library": "kernel32",
+            "member": "KERNEL32.DLL",
+            "original_member_sha256": "eb63aba9e6abd18ea8b74cad823a339697511a1b650a02c69a55daba3f52ff6a",
+            "linked_member_sha256": "eb63aba9e6abd18ea8b74cad823a339697511a1b650a02c69a55daba3f52ff6a"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-007.lib",
+        "sha256": "c18dfdddaf06be09e786823ea59654449bab493ad0f0ef48fcbf2dea1636b757",
+        "members": [
+          {
+            "source_library": "kernel32",
+            "member": "KERNEL32.DLL",
+            "original_member_sha256": "97dcd5f821531e6e729bc411023a4e0378fa2a7d5f03f15ece31f39af8f37462",
+            "linked_member_sha256": "97dcd5f821531e6e729bc411023a4e0378fa2a7d5f03f15ece31f39af8f37462"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-008.lib",
+        "sha256": "6fddba75974729d2e4b820a841fa0b09b6ef16655ea12b25de2591fa10a91860",
+        "members": [
+          {
+            "source_library": "kernel32",
+            "member": "KERNEL32.DLL",
+            "original_member_sha256": "4e02b83fdf82aff4b9ecdf3404fba3ed8e6f4bec5d96a115f920c35306448eaa",
+            "linked_member_sha256": "4e02b83fdf82aff4b9ecdf3404fba3ed8e6f4bec5d96a115f920c35306448eaa"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-009.lib",
+        "sha256": "7a09010645bf71d0169b096df5eaa525a16908f78f2c96779af0a043b4de7cf4",
+        "members": [
+          {
+            "source_library": "kernel32",
+            "member": "KERNEL32.DLL",
+            "original_member_sha256": "f04297b29ff3c593203185c1c44de53217bee3be90d029104d3ee7d04574355b",
+            "linked_member_sha256": "f04297b29ff3c593203185c1c44de53217bee3be90d029104d3ee7d04574355b"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-010.lib",
+        "sha256": "ecc29be3a63dcaa908f0c1f9f33bf9c62f3ea82e80b447f0c05b554efed29799",
+        "members": [
+          {
+            "source_library": "kernel32",
+            "member": "KERNEL32.DLL",
+            "original_member_sha256": "1b497e53ea6e1dc118d4e6c52becee4c4c0ca187556cc9dcf19b45bfc181ea89",
+            "linked_member_sha256": "1b497e53ea6e1dc118d4e6c52becee4c4c0ca187556cc9dcf19b45bfc181ea89"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-011.lib",
+        "sha256": "1bc9ee750780481b8f8607194184035798930c9ab03b33aa2a080e13998b6d70",
+        "members": [
+          {
+            "source_library": "kernel32",
+            "member": "KERNEL32.DLL",
+            "original_member_sha256": "ab69508a3b69a96197d9f901f419a0a668d995eb4c8b300987d92115de5a4e44",
+            "linked_member_sha256": "ab69508a3b69a96197d9f901f419a0a668d995eb4c8b300987d92115de5a4e44"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-012.lib",
+        "sha256": "2cdc3f1d06e90d2ba020a552618a8409f5a9ab4a85611ccd4c4f13788aa069b5",
+        "members": [
+          {
+            "source_library": "kernel32",
+            "member": "KERNEL32.DLL",
+            "original_member_sha256": "eb7fff18785543d23468b65f4ec5aa6eeb0b8755a5205760aee859564dc25362",
+            "linked_member_sha256": "eb7fff18785543d23468b65f4ec5aa6eeb0b8755a5205760aee859564dc25362"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-013.lib",
+        "sha256": "38659d925a5237b5ab94f43dfcca8bd088fe947d7373ad2bcac0cc85723d32de",
+        "members": [
+          {
+            "source_library": "comctl32",
+            "member": "COMCTL32.dll",
+            "original_member_sha256": "0a838c791b4ca0a308e5a779a48446013d58a7cfabcc3594cd1ab686eeb63b6c",
+            "linked_member_sha256": "0a838c791b4ca0a308e5a779a48446013d58a7cfabcc3594cd1ab686eeb63b6c"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-014.lib",
+        "sha256": "4e5438c3e15c564be8280546b98b9c1c35f7f2781ca017091c5a8d21bd7f10a0",
+        "members": [
+          {
+            "source_library": "gdi32",
+            "member": "GDI32.dll",
+            "original_member_sha256": "b4a28ee5a7b9695960775ec3f3501c5718dafa384c87ac6256384ce77a5b4dfc",
+            "linked_member_sha256": "b4a28ee5a7b9695960775ec3f3501c5718dafa384c87ac6256384ce77a5b4dfc"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-015.lib",
+        "sha256": "a953f9f258aa3cc044a50d05b0ca2f1bfcc45655275a396bb4ec5e2033d7e373",
+        "members": [
+          {
+            "source_library": "gdi32",
+            "member": "GDI32.dll",
+            "original_member_sha256": "0b70265027941267dfb97555279f7902d396d9c6c858cfa8efa778b9e7531527",
+            "linked_member_sha256": "0b70265027941267dfb97555279f7902d396d9c6c858cfa8efa778b9e7531527"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-016.lib",
+        "sha256": "f14915ccf7a998b75ebfaf81f5298442556681a3830f12cdbf74256b62b97d00",
+        "members": [
+          {
+            "source_library": "gdi32",
+            "member": "GDI32.dll",
+            "original_member_sha256": "7455fcdb012a6d706f7508e522a8688f80684f1f323e2335a62cd96d399e2c29",
+            "linked_member_sha256": "7455fcdb012a6d706f7508e522a8688f80684f1f323e2335a62cd96d399e2c29"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-017.lib",
+        "sha256": "0f24a76e95d164bb64d4f1689755f974d735a8a1a0f662bfeafa10b01472740e",
+        "members": [
+          {
+            "source_library": "gdi32",
+            "member": "GDI32.dll",
+            "original_member_sha256": "645427c96cea6757d71c94b5af112275ec37503b9b99914c66a2c82622003136",
+            "linked_member_sha256": "645427c96cea6757d71c94b5af112275ec37503b9b99914c66a2c82622003136"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-018.lib",
+        "sha256": "c5f90cf1f2c5ac46a796aef895e3efcc7f5b6c76877600b776cd41dfb11c1605",
+        "members": [
+          {
+            "source_library": "msvcrt",
+            "member": "MSVCRT.dll",
+            "original_member_sha256": "cc1997a0732a4b81b0e8478c2568a6ed6df470b0f4849ade8da4e5554aba2798",
+            "linked_member_sha256": "cc1997a0732a4b81b0e8478c2568a6ed6df470b0f4849ade8da4e5554aba2798"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-019.lib",
+        "sha256": "43d1e97b32dc42c8e8bb3f49aa271bd45dc2aeb9f3c27f769dee669c70f2fcfd",
+        "members": [
+          {
+            "source_library": "msvcrt",
+            "member": "MSVCRT.dll",
+            "original_member_sha256": "994789e92e2200009a29f84c6a7d75fbd9fe149024fc36b8c631eae123c3f46a",
+            "linked_member_sha256": "994789e92e2200009a29f84c6a7d75fbd9fe149024fc36b8c631eae123c3f46a"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-020.lib",
+        "sha256": "31c02c89112a8324c2b7326dbd9a9242b23d85ab2a02b49ce253f944fdd5dbef",
+        "members": [
+          {
+            "source_library": "msvcrt",
+            "member": "MSVCRT.dll",
+            "original_member_sha256": "0d5ca4dbbeaa8c762701b752952be5cbb751cc5dc661dfb59c6bde3ba8991a80",
+            "linked_member_sha256": "0d5ca4dbbeaa8c762701b752952be5cbb751cc5dc661dfb59c6bde3ba8991a80"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-021.lib",
+        "sha256": "590763f6357ff6bc9dce12da056a092bc517d2ad7b415c4c0a96304a337eb311",
+        "members": [
+          {
+            "source_library": "msvcrt",
+            "member": "MSVCRT.dll",
+            "original_member_sha256": "a6bf192ab6e5df59711004367579c57c0599971d781cb2ce20414030a5ac51a8",
+            "linked_member_sha256": "a6bf192ab6e5df59711004367579c57c0599971d781cb2ce20414030a5ac51a8"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/native-chkstk.lib",
+        "sha256": "02980998ca5c1e394eacc343d56769afb14391d2c789d507f209e9ab0f7c2c4e",
+        "members": [
+          {
+            "source_library": "msvcrt",
+            "member": "build\\intel\\dll_obj\\chkstk.obj",
+            "original_member_sha256": "84cf3e4dd0464ae36595c1a4568bf2059a31d5d97de3b941b99e7a17fa0f80f8",
+            "linked_member_sha256": "453d60f33012c3406ba7f2282d0a522f51541b620c79afa62e46fd0a5bdfaab1"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/native-atonexit.lib",
+        "sha256": "ec717a224918746e7e96e0872ce942de8c0f1e721a6031db4e9f637d735b85c1",
+        "members": [
+          {
+            "source_library": "msvcrt",
+            "member": "build\\intel\\dll_obj\\atonexit.obj",
+            "original_member_sha256": "ba14cb0f16c8be4e27ae18b549b37e94a6e7a204cbd19ad226ac0d6518c9b265",
+            "linked_member_sha256": "ed274ec248aa1d51ea40d457244a5e4d9f0e45604cf544e02ee8051c07d0cce6"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-022.lib",
+        "sha256": "938b93b09fa6cc36e350254e5c7df22c23ea4982cbc3247d24c7fc86af4d755e",
+        "members": [
+          {
+            "source_library": "msvcrt",
+            "member": "MSVCRT.dll",
+            "original_member_sha256": "36ee8f6a5e7a7235027298086e6476132bffc7b54b89f897c68f32a16588c226",
+            "linked_member_sha256": "24f2e63256a0675403ba671f11e86194fe9a3e8820fc6ad33ec9eb5115f92d57"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-023.lib",
+        "sha256": "b3138e7d79fd09f9657ea6e013f45a2bdf6ece1e7e69819f70c4e5a9be68bafa",
+        "members": [
+          {
+            "source_library": "msvcrt",
+            "member": "MSVCRT.dll",
+            "original_member_sha256": "a576e3a0a72ab164c3e60897de307f9437529c71e03b1e2b53b40f426e2ae09f",
+            "linked_member_sha256": "89e330b422b73e3f704140104e1ac22e4940546e3ec909964df6cd4ea0bb0e19"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/native-crtdll.lib",
+        "sha256": "ea0e52b58f4e21fd7e94fb5ecaaf02a4f4bd169307644caad87053320fe758d6",
+        "members": [
+          {
+            "source_library": "msvcrt",
+            "member": "build\\intel\\dll_obj\\crtdll.obj",
+            "original_member_sha256": "e4b9019a699254cf4653dc8a019917c3d2863ea75e22eb65e31b112116f4bde0",
+            "linked_member_sha256": "72ba60218003ae894fa4c3b5cbb4426cff552210bca06cc774b72ec09fc5c73b"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-024.lib",
+        "sha256": "dad21d725922031a5e4eda0ace9ef039f261bb2dfab496e85d0eecf8686b2f03",
+        "members": [
+          {
+            "source_library": "msvcrt",
+            "member": "MSVCRT.dll",
+            "original_member_sha256": "64c4b5f43837aa004f78d722a612cbf3a4b9de9d218cb03b5657fce719af0813",
+            "linked_member_sha256": "64c4b5f43837aa004f78d722a612cbf3a4b9de9d218cb03b5657fce719af0813"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-025.lib",
+        "sha256": "46a969b296d29e25b1da81271dbb8438f4f137c285aea367800c8408d1798ad4",
+        "members": [
+          {
+            "source_library": "msvcrt",
+            "member": "MSVCRT.dll",
+            "original_member_sha256": "50aa8e5882531c7fc6907bb2b3742d8432f2fd40ec0d3ad5b966170a6c2118bb",
+            "linked_member_sha256": "b3f75095c6027ed132d506310053fe27b8dee6447f1f8129be79b47db51e39d4"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-026.lib",
+        "sha256": "841567488c7ada7c134d185f7dd1653a4d5bd160c32d960ef6e30474f2f68064",
+        "members": [
+          {
+            "source_library": "msvcrt",
+            "member": "MSVCRT.dll",
+            "original_member_sha256": "7d936c9c1801269ccf84e9569b0e73deec12e4728320ebf8df905ad4277ddae8",
+            "linked_member_sha256": "1fd8e41e27886a157c880a19c8c17d2932218089d4e1c46a213e74057bf68f56"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-027.lib",
+        "sha256": "54e506650fcd2bb151d1cc4b35ae701b088375e61d6842efb06a9adfdf5d6b28",
+        "members": [
+          {
+            "source_library": "msvcrt",
+            "member": "MSVCRT.dll",
+            "original_member_sha256": "dd6cac5699e6b519177307d2e6ee0f47229eff2c37566df3e7e7af8d2fcbcac3",
+            "linked_member_sha256": "dd6cac5699e6b519177307d2e6ee0f47229eff2c37566df3e7e7af8d2fcbcac3"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-028.lib",
+        "sha256": "c81e2b0740101f075b7039436eb05cdd9bc3df256a874ff5fafd539301f8c92f",
+        "members": [
+          {
+            "source_library": "msvcrt",
+            "member": "MSVCRT.dll",
+            "original_member_sha256": "de42a833c3db4e36f52c45eaca8280c55a477945dd4b15b20e0af02d92e4605f",
+            "linked_member_sha256": "0245132e8e64991bb0c7bcb8413e672ce869dff47991b219b08b5d068caea5d9"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-029.lib",
+        "sha256": "3fcfb493aaf9decc7555c145ebbb4003a188e2c82a81d54acfbc8034cc3d8576",
+        "members": [
+          {
+            "source_library": "msvcrt",
+            "member": "MSVCRT.dll",
+            "original_member_sha256": "78bdaf65b2d5f3ace5f9b7573758462d1d9408ce01dff55cf260d90f75869f99",
+            "linked_member_sha256": "78bdaf65b2d5f3ace5f9b7573758462d1d9408ce01dff55cf260d90f75869f99"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-030.lib",
+        "sha256": "57bfaa32890f0975b00e4d815ae8fcb0eab2f8dfe8467da175cd52080e31f07f",
+        "members": [
+          {
+            "source_library": "msvcrt",
+            "member": "MSVCRT.dll",
+            "original_member_sha256": "fbbf174c8a9752ad784584a809721f067ec2035f55bb2f7c116556d5aa7036b0",
+            "linked_member_sha256": "fbbf174c8a9752ad784584a809721f067ec2035f55bb2f7c116556d5aa7036b0"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-031.lib",
+        "sha256": "1d1440d5fff641e2d62b331d75f8cdb640d7ba81f80e41336a82e80b08a8ae93",
+        "members": [
+          {
+            "source_library": "msvcrt",
+            "member": "MSVCRT.dll",
+            "original_member_sha256": "98a8b834d72784e6d147be455a1249fb1e6710b3cd641753b8749fd48c0f662c",
+            "linked_member_sha256": "98a8b834d72784e6d147be455a1249fb1e6710b3cd641753b8749fd48c0f662c"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-032.lib",
+        "sha256": "2a3aa04e556ec51fb9aafdfc62a903efb06c50f4c337adad41560019dc622950",
+        "members": [
+          {
+            "source_library": "msvcrt",
+            "member": "MSVCRT.dll",
+            "original_member_sha256": "45ec2257269ab1ac8e147f8a01c2532d3b51904eabcb094be732bd66e04309be",
+            "linked_member_sha256": "45ec2257269ab1ac8e147f8a01c2532d3b51904eabcb094be732bd66e04309be"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-033.lib",
+        "sha256": "cc51a91f53af10c5d3bad25d50b922acd415d3a3d0f3f9d7ecb4f6ef93d5d8e4",
+        "members": [
+          {
+            "source_library": "msvcrt",
+            "member": "MSVCRT.dll",
+            "original_member_sha256": "ef90efd6cd3015b38dc88ff525df963d6d96c7f2b318d0ed765a52a3049eb66a",
+            "linked_member_sha256": "ef90efd6cd3015b38dc88ff525df963d6d96c7f2b318d0ed765a52a3049eb66a"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-034.lib",
+        "sha256": "40258f1461293358b93aff086e8e17321439c2ff22968b45ef5821148ba3313c",
+        "members": [
+          {
+            "source_library": "msvcrt",
+            "member": "MSVCRT.dll",
+            "original_member_sha256": "7720454706e89671b5b09efded04b25abedbfebd38a3e6a022095fc1349b17b5",
+            "linked_member_sha256": "7720454706e89671b5b09efded04b25abedbfebd38a3e6a022095fc1349b17b5"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-035.lib",
+        "sha256": "206a7008ef868fea507ec8f6f64e8beb43a145e178a49d1ad7b83bcc510f0315",
+        "members": [
+          {
+            "source_library": "msvcrt",
+            "member": "MSVCRT.dll",
+            "original_member_sha256": "ac32dfa8b6a0084422383a9b551baa23d900cd30bba3c424f2466db978a52a0f",
+            "linked_member_sha256": "ac32dfa8b6a0084422383a9b551baa23d900cd30bba3c424f2466db978a52a0f"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-036.lib",
+        "sha256": "6d1eb712cfb373d3f64bbd6ebf3cc38fb62a112bb51a607b56bccd4dfbdbe405",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "d0105649a5d96ab60851e92ade7c191ce9c2a08dbc796f99312c9b02fff75c7b",
+            "linked_member_sha256": "d0105649a5d96ab60851e92ade7c191ce9c2a08dbc796f99312c9b02fff75c7b"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-037.lib",
+        "sha256": "3d595379ca49b1674070b57b3081f0ba1c17c7f169a35d77f902279dd9a00abf",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "0e1d0efcfec860b7e933a3f4a68052f3b2d304662d79633006537aa384ed43a6",
+            "linked_member_sha256": "0e1d0efcfec860b7e933a3f4a68052f3b2d304662d79633006537aa384ed43a6"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-038.lib",
+        "sha256": "a5bbefc2f386e25d16034ffd2dc41f875b60732a1dc606413badaa4381c6d19c",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "685eb4498751ade30e73947bcda1919fb495a6c422b1c1fea0d8ca52101f2506",
+            "linked_member_sha256": "685eb4498751ade30e73947bcda1919fb495a6c422b1c1fea0d8ca52101f2506"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-039.lib",
+        "sha256": "c28b28f620c59291846e6b2a6e01bcf16c4e6c9817f170bb3afd2fc644fb5ef9",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "7bc2c2b915e65534a75c6b169e56b17dc0edfa03b4bb078c174441368c3e87b6",
+            "linked_member_sha256": "7bc2c2b915e65534a75c6b169e56b17dc0edfa03b4bb078c174441368c3e87b6"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-040.lib",
+        "sha256": "1bb7f20d057a8564c0506aba70734e928c55908356aa0b400b95cb3cf21c8b59",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "c3ad10a8d957045429d98c9516f9c0cbd3ce889e91b9b6927d64b1448bfda118",
+            "linked_member_sha256": "c3ad10a8d957045429d98c9516f9c0cbd3ce889e91b9b6927d64b1448bfda118"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-041.lib",
+        "sha256": "e400cf4f329ed27399901f2f960d9853d7b756c757e0a9b81dab28d3660afa23",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "85718ae35ae2a3d49c9ec31544215423fa7762ac9d732ded554989d51c87b390",
+            "linked_member_sha256": "85718ae35ae2a3d49c9ec31544215423fa7762ac9d732ded554989d51c87b390"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-042.lib",
+        "sha256": "1971f54e88e6c3d2fe4d72d582bf03f0568604c1c40f0ba120ab268ebb351bad",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "fb5c5a547be407fe2728510e383d11ec5e0f179bab9db653c1163fc519bc9cc6",
+            "linked_member_sha256": "fb5c5a547be407fe2728510e383d11ec5e0f179bab9db653c1163fc519bc9cc6"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-043.lib",
+        "sha256": "be58599128ada240b4ac9fd2c2e1d118e5c893f17455a272860ec6996c840172",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "f8660de34c83cb6b94e67b8ccae06e343145ff9a13272d2d1a4f9ff0139e664c",
+            "linked_member_sha256": "f8660de34c83cb6b94e67b8ccae06e343145ff9a13272d2d1a4f9ff0139e664c"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-044.lib",
+        "sha256": "5f3f0d3e10bceb8d346ab7eb7db1a98885142aee50047689a8aa0388f877d9b9",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "1c87e2a04a8e7d701ea4ec5917febdf7c632498ac7697c88dbb598a9517dcfb0",
+            "linked_member_sha256": "1c87e2a04a8e7d701ea4ec5917febdf7c632498ac7697c88dbb598a9517dcfb0"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-045.lib",
+        "sha256": "8957cddac11b03c414ec669a299e37535d0a230f3e069d54256b6633fe91b83a",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "6c94334a1f4b54e6010040bab5771c93ac49bb71f6f88374a119c9afcee099c7",
+            "linked_member_sha256": "6c94334a1f4b54e6010040bab5771c93ac49bb71f6f88374a119c9afcee099c7"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-046.lib",
+        "sha256": "5c65f999f571453be0a5e0c52d73daa705bd5447b6c3270c16cb426bf51ee488",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "b3d4116fe8089a62867014db5a2b501442f3200b3db246b981256136cd487085",
+            "linked_member_sha256": "b3d4116fe8089a62867014db5a2b501442f3200b3db246b981256136cd487085"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-047.lib",
+        "sha256": "89c348c0fe824955e614ad7274776a749e4c2bbc9ef3cf7aeb37f1d494c073ec",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "a9a0f8fe6f39f3601ef380319a4b30cd9d8658e675f72cb2e0592a51feccc1cb",
+            "linked_member_sha256": "a9a0f8fe6f39f3601ef380319a4b30cd9d8658e675f72cb2e0592a51feccc1cb"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-048.lib",
+        "sha256": "30959f3983f2b4768d4281f583ccf96421f281e9f8ffc552859f34a13797a39c",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "2cd41261e3987e9d3f08e98b35aea9a63fcadf3187983673978ae238c1fa02e6",
+            "linked_member_sha256": "2cd41261e3987e9d3f08e98b35aea9a63fcadf3187983673978ae238c1fa02e6"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-049.lib",
+        "sha256": "867b7b9c3488993601758826b28beb77386b36fc68524ae9b750ffd1f1c30feb",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "6c7a70c568209356bcc93a00602f3e72e9080247b7918b7e75c9fafff33fe1fe",
+            "linked_member_sha256": "6c7a70c568209356bcc93a00602f3e72e9080247b7918b7e75c9fafff33fe1fe"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-050.lib",
+        "sha256": "19e98ff3dd60ee0bbd913ccc0dbe08fd8e3656e60c040e30ca3b84b025db77a0",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "c20539b65b00bdd0150378983e86e08840a65bbbc36948978dc600b5074717c6",
+            "linked_member_sha256": "c20539b65b00bdd0150378983e86e08840a65bbbc36948978dc600b5074717c6"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-051.lib",
+        "sha256": "472dd39a722628127dbb487a7ae2241138811db5ecb238acd8db4b3b822d7419",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "e7d2a8ac76f94177c6a1ae906ebdf2357e8acd7b633b20d3da2ebce3f60d7e20",
+            "linked_member_sha256": "e7d2a8ac76f94177c6a1ae906ebdf2357e8acd7b633b20d3da2ebce3f60d7e20"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-052.lib",
+        "sha256": "6b7bad8090bb52c0965e61cfdd0013d3cbf99f0c28e6b2842fbf95230465061a",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "a85d1095cc04a473af398fd5a6ec49295bb7be93a48191f9f0fbb626e107d00d",
+            "linked_member_sha256": "a85d1095cc04a473af398fd5a6ec49295bb7be93a48191f9f0fbb626e107d00d"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-053.lib",
+        "sha256": "3fe426989ec47a57d8a9029d70c5e8dd56d8671528d1c9f5f481caa156b5da2c",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "576ac1e789644c28e867e7c6e084b31345aa8ac9ae4ca6c3faf6aadc52b2cfbf",
+            "linked_member_sha256": "576ac1e789644c28e867e7c6e084b31345aa8ac9ae4ca6c3faf6aadc52b2cfbf"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-054.lib",
+        "sha256": "35f27d12c6dbadf146bdd7e0d3bcd4a78d1f7592319238fb3dac634315849462",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "213fe4d699e90539f2f5df044a2c772ab4d8286f9bccb9d63cd2a36aef68fe14",
+            "linked_member_sha256": "213fe4d699e90539f2f5df044a2c772ab4d8286f9bccb9d63cd2a36aef68fe14"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-055.lib",
+        "sha256": "f724087a96da11d05fffb9d31be2be3b0dee8362c72d7fedcb0552a15bfb5b60",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "be90821fabfb9f7b162c82527f49bce56aa0aa9e58c4875e948bafe2f684044e",
+            "linked_member_sha256": "be90821fabfb9f7b162c82527f49bce56aa0aa9e58c4875e948bafe2f684044e"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-056.lib",
+        "sha256": "75520aa677a02ed5eaeffe36c66e75b69a8b64fde9f4bd57a036bf1c8caf96b3",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "42710faeacd6157b172156be993a26c299ff6b09cae9b5e58b86e8f94c673035",
+            "linked_member_sha256": "42710faeacd6157b172156be993a26c299ff6b09cae9b5e58b86e8f94c673035"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-057.lib",
+        "sha256": "c24ca233958f05216e6a4ba21f538e2eea92aa35ab11e803f3a908d556426bfe",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "0572149050b47adae7b40e0bf6c31bc936319d8ef84f450e14542876b8d8f621",
+            "linked_member_sha256": "0572149050b47adae7b40e0bf6c31bc936319d8ef84f450e14542876b8d8f621"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-058.lib",
+        "sha256": "151b638fd6dfcef41e262e164737d08b7a2b08b57ed2e51cf4536cf72099e912",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "20e5ad5bef9e3243af4dde9ab0c529860a6a0c202e8ded02b0489c002c798068",
+            "linked_member_sha256": "20e5ad5bef9e3243af4dde9ab0c529860a6a0c202e8ded02b0489c002c798068"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-059.lib",
+        "sha256": "9ca8684d7980a46ce56a1619ccf126c0f4cb453f58c8e2b149509ffb591a76eb",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "f184205fda40885f54ea04d58926299cb2e1c42ccbb646fbf5ba04d632002be8",
+            "linked_member_sha256": "f184205fda40885f54ea04d58926299cb2e1c42ccbb646fbf5ba04d632002be8"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-060.lib",
+        "sha256": "5a90493f083157bf227aabaa35563056302b340b4e96483af310c1ebf4456d3d",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "601f7bcb5c68166ea7a20086747ccd556d24240fa1362258c38ae9c21edcd3c3",
+            "linked_member_sha256": "601f7bcb5c68166ea7a20086747ccd556d24240fa1362258c38ae9c21edcd3c3"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-061.lib",
+        "sha256": "bafd7ef25641fcfa722e666e3f89427a1399b5e96345e2d90ba9e6be0e716889",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "db615e742dc044f7870347bc96ce8a45a770e5bc027afffce731ad466ab773d1",
+            "linked_member_sha256": "db615e742dc044f7870347bc96ce8a45a770e5bc027afffce731ad466ab773d1"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-062.lib",
+        "sha256": "55d007f9ab3e3849bfb4a760d2ea91b51b0fa91b8a3702b2d8bcb5e4d8851665",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "b33a30267a094c784f11a421217f7991580757121be3bf3b36ee039d525cfa86",
+            "linked_member_sha256": "b33a30267a094c784f11a421217f7991580757121be3bf3b36ee039d525cfa86"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-063.lib",
+        "sha256": "03637bc1e16c4e3feb0fa2263bdd53ac8389757f9f7d3ef1f14ba865c7e7c5cc",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "aa9fd40cf2b618767bce75c46103f35dfd3f2929ff5326e715296ac1d7bd45e7",
+            "linked_member_sha256": "aa9fd40cf2b618767bce75c46103f35dfd3f2929ff5326e715296ac1d7bd45e7"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-064.lib",
+        "sha256": "ed93379f2183ae941637cc53e0403e0c448c71b3d4b8ce81804b2f630af6e465",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "c59082b3d06ee35b0f9c18fa22301c8fc9b74bbd733da99ddba72e425f6b2b13",
+            "linked_member_sha256": "c59082b3d06ee35b0f9c18fa22301c8fc9b74bbd733da99ddba72e425f6b2b13"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-065.lib",
+        "sha256": "75542f54ce619fb5892cc77670efbe91ef1106aca924c2480e795cc325a3cd42",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "2d1e88ebdc65496c9c52cbe4fa1574c9182a003b20645160e1aa9c6e1b5f2479",
+            "linked_member_sha256": "2d1e88ebdc65496c9c52cbe4fa1574c9182a003b20645160e1aa9c6e1b5f2479"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-066.lib",
+        "sha256": "761886a8b9af4c477252f204d22e9025e5883dc551a6c77f6f42da11009d9f1e",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "e1ef6e47a39fa4717409899964124f03a0779c09b087461d4f03270cf2b0dc01",
+            "linked_member_sha256": "e1ef6e47a39fa4717409899964124f03a0779c09b087461d4f03270cf2b0dc01"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-067.lib",
+        "sha256": "b06b94f3473c3b743b68877a42086f20dcb1b34646c3d34ce728c8968b24c7c0",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "aa53f985e94da9805ae5197d28bb648b034d66293da315f9a117cfe5883270b1",
+            "linked_member_sha256": "aa53f985e94da9805ae5197d28bb648b034d66293da315f9a117cfe5883270b1"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-068.lib",
+        "sha256": "42437b6ed12fcc17d460283374bf5ff36e39552d2fb10c74327d2dc52556fe49",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "92c0f91bff83c651afd777d9d640a9538c2ebcbba83c32f81bf2b572dff144a4",
+            "linked_member_sha256": "92c0f91bff83c651afd777d9d640a9538c2ebcbba83c32f81bf2b572dff144a4"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-069.lib",
+        "sha256": "945c6539b227e5a674b90f7b5bf7e38ed591bf260821df699ff8a9aa6eda8d69",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "697fe18c5685c04c449f58d36f5bf48f1af38200bad214d0003d578d74d9fc57",
+            "linked_member_sha256": "697fe18c5685c04c449f58d36f5bf48f1af38200bad214d0003d578d74d9fc57"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-070.lib",
+        "sha256": "b5aedafb6bf0119a032af5f30ddf9d004622eb5a0e2a786a772d8384c2dd515d",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "584d52647d42b17ce4e617b5e65ee7c0d77c234d65394dc67fb54b1ea1dd40bc",
+            "linked_member_sha256": "584d52647d42b17ce4e617b5e65ee7c0d77c234d65394dc67fb54b1ea1dd40bc"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-071.lib",
+        "sha256": "ff8e1008f2abca30eda9679f4501d4428061533e77c223991297376d2e378e56",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "fc6a5ef29ad3421500fa52caa98c07c1c0baf1545f424e484252f99290ccf871",
+            "linked_member_sha256": "fc6a5ef29ad3421500fa52caa98c07c1c0baf1545f424e484252f99290ccf871"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-072.lib",
+        "sha256": "be82fa6d1f9fa53f7a491b1ae69cf446b68e041fadb84fb006e1c2b3871522c9",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "9caa9d6f9c038445ce01c006bf793e5ca64412d45d08b7e86b1ade6e6ba8c89c",
+            "linked_member_sha256": "9caa9d6f9c038445ce01c006bf793e5ca64412d45d08b7e86b1ade6e6ba8c89c"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-073.lib",
+        "sha256": "abcf83264cb6c24b22fb2b4cdcecc947d823e1534b8816d7571d8b0a2ed9b9bc",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "5f5a02c60bdb9ae7f709aaffa81e8edd4ad6907bed2f159819811fab84c77e41",
+            "linked_member_sha256": "5f5a02c60bdb9ae7f709aaffa81e8edd4ad6907bed2f159819811fab84c77e41"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-074.lib",
+        "sha256": "a1abdbbca7ab2de0c90b09be90edbb1932f72be81656c5caf2c74c7284778003",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "7f353df72733489529bce35aa7c35752f402e32d9cb4dd75f44a55b98ed9c976",
+            "linked_member_sha256": "7f353df72733489529bce35aa7c35752f402e32d9cb4dd75f44a55b98ed9c976"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-075.lib",
+        "sha256": "62860fdeca0141bf7ac5badf488832eac7c78099ccd8e38a16eb7b024edf10e7",
+        "members": [
+          {
+            "source_library": "user32",
+            "member": "USER32.dll",
+            "original_member_sha256": "04808181ee4af5f3f15791c158fc53d4ec9b0280167a41f8d9594bcc6fb5174b",
+            "linked_member_sha256": "04808181ee4af5f3f15791c158fc53d4ec9b0280167a41f8d9594bcc6fb5174b"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-076.lib",
+        "sha256": "08468beb1c4a21ea54ce8997f59915bbac8b004d23f23ef0ca46a6c9cf499825",
+        "members": [
+          {
+            "source_library": "winmm",
+            "member": "WINMM.dll",
+            "original_member_sha256": "aca1ebe6042ac3ee4926fd8cc5efb6454eb3d0f6090ce3a848666302d59b9b1f",
+            "linked_member_sha256": "aca1ebe6042ac3ee4926fd8cc5efb6454eb3d0f6090ce3a848666302d59b9b1f"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-077.lib",
+        "sha256": "91c217259da27ef4847e5f0c0c076a7dcf3f459589e96c0069428e773d44054b",
+        "members": [
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "513650d0495f7d5d9a02cae762bf37480b708c0a87577da3812ad0c0c93e6496",
+            "linked_member_sha256": "fff509788087adcc890f8dd8899b7ca7c41f98daf09b53cc9b7f9f2059b92b2f"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-078.lib",
+        "sha256": "f59fd1246b99cf428ccaae43cb91aba6d5f38624f4402a63207e31747d677244",
+        "members": [
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "29f6add92861deffa37700134c4834e0d063a70ba404350b9555b3b1fab27ff4",
+            "linked_member_sha256": "c6f80c377721e6730a4a770ddd9b4e7f0f348445501b4b1adb53249813cd9fae"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-079.lib",
+        "sha256": "3b34c619567c2f3ccea4d844cdae7ed6fc814bde3d34d4cfc3482833a4c23be7",
+        "members": [
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "722a8045379efcd8c598f40fa884800dc0b5d86547c61f0cb0291da708d115d9",
+            "linked_member_sha256": "3df2c49e4a5c6744d264b12720875c042f2e58fc55f0586b882c19a8af905018"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-080.lib",
+        "sha256": "67767881ac7f2c9168c779536856a9b7922e4b8494d895f7555ba78d5910d6fd",
+        "members": [
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "202c595fc5e42d36a646272d0b9cb121cc9751ea7cebbe679a91b2edce158e23",
+            "linked_member_sha256": "e65514fde5a946ac06ada00c28612728ed5922ecaa1bc3179bc3c5ba2b589d8a"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-081.lib",
+        "sha256": "9ddec5e46abdabc80cda022e1a5458008604f0ddef2320a6ae5886ea809bcf2b",
+        "members": [
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "bc3b34a160007ac5ac46d2433dd06b1e3a3e94dfde7d2ad2992a9568b06ca69a",
+            "linked_member_sha256": "c56dac39ab63955d58e120cfd153d156316907659c330ab042e70341a1d8136a"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-082.lib",
+        "sha256": "33f9c290774f4ebe77bd0b22426a9dcb1fcb1c9fffdfb3fb82af5e21a98ab765",
+        "members": [
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "c543b09bef5a124a4be0069d35ae092120b468d41d2a63d1c9b43e9280f4152e",
+            "linked_member_sha256": "4622b1659342947605dd51be530c7914eabd5686c3dc2354fe2d714ccf9a1307"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-083.lib",
+        "sha256": "2c5b609306837cee8c20e25bf036b8176b9098ec7b403a3b56f7c5a30da6e55b",
+        "members": [
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "989802d3309649603cde694fc055d846264a178b250a93ae7d7beeb632804962",
+            "linked_member_sha256": "2f75e12ea1ad42115df863e42e7112865985dbd7f80a875e58bba4a262efacda"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-084.lib",
+        "sha256": "c0a246b929ed89ffc6ec876f7bb9d2aa86995203d6b3664c26b9d61e4aa352b2",
+        "members": [
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "59f2f6399b059962a27eff9879bd15eee99f7d0866dea5722578a6e94616f2cf",
+            "linked_member_sha256": "77cfb3e0fea3fd32b4cae0f0094dd7f0b521f936e6254b38738be803cd3635fb"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-085.lib",
+        "sha256": "400fdd6d1fbdc2532d9acd475e903da3095e5352a4955c3c7e06f2786c399ce3",
+        "members": [
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "565e801c4db84b9892a5447d5b2be51e062e708ab5d4912a6ec4037222c6b710",
+            "linked_member_sha256": "272eb1338a63caff42d6f8b8de6f17b044f96e05e85b9398fd671281c8659ff3"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-086.lib",
+        "sha256": "2198da0eb3065e5f5d7f13d1c4cf56d9774a50571bb2e0be03b9cb54bb4a219a",
+        "members": [
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "6146c5188c8c14b8340e8e06970a249273557fc3229b0b98357fdb7a6647436d",
+            "linked_member_sha256": "408fe53442c7cec2ac1b92800eff3327c4ac197d2417e95b0f1cee623c0d36ca"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-087.lib",
+        "sha256": "b4b81428f168e68a08d9e0df10799fda1496dda1ab52d779721893b01560c1d4",
+        "members": [
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "5aa7d2cfb0e5c68ca07a295d42d839dd38a3d410656138edfa2202db6d6430e4",
+            "linked_member_sha256": "8f4d3592977871a35d18f53013c85746ed1d7c10f76d3d1b78d096b18111cdb6"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-088.lib",
+        "sha256": "944a45fc62c0f2ac96b4a17b78af48b358587e5638b3671c6ca19ce11ff173c4",
+        "members": [
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "78c3d3cb4ab360d4351014cc7fe46edef21d166677522d47ee4c15f701bb921e",
+            "linked_member_sha256": "f15448060ca4829ad218699f647ae9b6632437e39a7f030cc3bdb807ecf5f56d"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-089.lib",
+        "sha256": "fda361652c6ab31f2d1b09837f1536ad0dbf37a96b643a42a28d5092d3c3a0a9",
+        "members": [
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "91b0a49b1a324ddc56cbde5b7123d1b6f7a34b6c4b7c40ae49260bf45646d7c5",
+            "linked_member_sha256": "51db28e897f9a31b7c83b4ebdc57a3919db0640d6e1e88c3da338c24f5312ec4"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-090.lib",
+        "sha256": "293c128ba3e1a2ec9f8c2f7e0c77a16759e68a70f9f1ca335510cbf1f7196e77",
+        "members": [
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "ac12f0578f6716bb96d083fb073f2722fc8447db87a4d89f2791020e21601698",
+            "linked_member_sha256": "96a958e2a2d0041233062245cf65e0ca8a6edbd60d8abec5c9eac28e68d74049"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-091.lib",
+        "sha256": "4c34ed247ec952862a0e71b16a6017c857a367da3f8d0387f82196e169431922",
+        "members": [
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "f243bac35f2e2e42fa06258de0266af577206fec95848b5a224823138582a0e5",
+            "linked_member_sha256": "f11f182b61fa5272ce062f8c2fc623ff68f43ac35dc83e7b76e2d1bef40ab73d"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-092.lib",
+        "sha256": "2277c63d7af04d4f4a76775534d320e3780ed71765efd4b816ce6df10e766b49",
+        "members": [
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "0593c948452651afc0ec0cc2fcc3c85316542971aad1030b50e4936c29ae82b0",
+            "linked_member_sha256": "9f41364ca1a69acd258aef15c396f7d1b76bbae6e190633a35ec5969a1c18c68"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-093.lib",
+        "sha256": "9b36386d5e9249d6dee1a06fd69e47f7fc2e5e80c84bce59ec2924e9e9bc0d02",
+        "members": [
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "03df6577068e804ae21ecc8f8020cf23c36c7c1b091446dff31275e017f1f36b",
+            "linked_member_sha256": "7b21c93aa9d833f3c5e71219402038d8ad6b4ac5c825dea83812bbf78166a2c9"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-094.lib",
+        "sha256": "54b63ff0e3add20203df4ab0e5952c32c2287d4b9d279507baa89bc3e590e87c",
+        "members": [
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "4d32cbca89ba488f223f2334df2778b423c304f761a55bb9850012538fad1932",
+            "linked_member_sha256": "2cc5992afa2fd5cc0ee2371151813f12849a839d4fb1f6183b355018dd0277f5"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-095.lib",
+        "sha256": "126e089a93791f14eab15264136a639ea4a94d1e70e0fc460320694ad1a54f67",
+        "members": [
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "dbe73457baa68736fa453f660c16c74248870629498daf58edd20c44c2cfc4b1",
+            "linked_member_sha256": "23af844c3c95e3199014b94140378ede4c208605a6599ad0567a4be68838e7f8"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-096.lib",
+        "sha256": "0dbb196f481ef8dfe374f413d7be9683bc30fabd37ba1d1692ef5743842a1d8d",
+        "members": [
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "848d8d369d5db1b98dd669714dd319df396f6b4b19fff3ba5240c5e6b9e1c115",
+            "linked_member_sha256": "f61735e7d56875da274c488bd69a6efb6b2987a0b2a65588a8e510fcc81c15ba"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-097.lib",
+        "sha256": "d8e0338c8d55a10e3d4099c97a8730f38cc4ec67e10255975b1c3600c0802c3d",
+        "members": [
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "dd69547b5ae5507e38392c35a6992405b99e3a5949209544844333e55f62be18",
+            "linked_member_sha256": "9530beea56321570e739f335a4bce1507dfbcc4307f49a07c67cbdd572b5f630"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/chronology-098.lib",
+        "sha256": "45b483093e76068abce0bf70337d97237f11ddb722917e8f3568f9153b8a1adc",
+        "members": [
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "b775b8cd1840027845cfd322f64d64803c96a2d6399fa781828bba43c4f157e7",
+            "linked_member_sha256": "cce683ed432b12794908b9c6ca77068caaf003a4e609c38a25798f3fd5bc66b4"
+          }
+        ]
+      },
+      {
+        "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/discarded-000.lib",
+        "sha256": "f1324a586052a1edcf1cb2b0c19f9f00b4bbbcd3d907be1e83da4f74654bd7e8",
+        "members": [
+          {
+            "source_library": "ws2_32",
+            "member": "WS2_32.dll",
+            "original_member_sha256": "4232ce401baa7ebfa82057117d7530396c6d21fcf9f3f3e2cca3a410b6b53617",
+            "linked_member_sha256": "4232ce401baa7ebfa82057117d7530396c6d21fcf9f3f3e2cca3a410b6b53617"
+          }
+        ]
+      }
+    ],
+    "kernel32_spelling": {
+      "source_sha256": "cd4a546f71481319aeee455aa0fb51698a094f9d3e6d8339acf445489a263c68",
+      "output_sha256": "4c0570aecf4a2352ad42f2758713c48997966ba5e01d4433c88297a61307f560",
+      "changed_dll_name_occurrences": 1537,
+      "short_import_records": 765,
+      "native_objects": 3,
+      "unchanged_executable_sections": 0,
+      "output": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/kernel32.lib",
+      "executable_bytes_copied_from_reference": false
+    },
+    "reference_bytes_copied": false,
+    "import_count": 99,
+    "descriptor_count": 7,
+    "member_bodies_unchanged": false
   },
   "link_inputs": {
     "source_sha256": "cd4a546f71481319aeee455aa0fb51698a094f9d3e6d8339acf445489a263c68",
@@ -487,16 +2595,16 @@
     "short_import_records": 765,
     "native_objects": 3,
     "unchanged_executable_sections": 0,
-    "output": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/kernel32.lib",
+    "output": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/imports/kernel32.lib",
     "executable_bytes_copied_from_reference": false
   },
   "bss_layout_inputs": {
-    "layout_sha256": "56c38f725df33365ba288ba030c2cb022ba77a436fdc5da17c2cab7f9e8c3e8d",
+    "layout_sha256": "e2dcf6ad5e5d5a0e5395ed2416842cc2da6cec3c5e41fc4e81f58a49001323b7",
     "objects": [
       {
         "object": "udpconnection.obj",
-        "source_sha256": "8a3f5497f862f929d1aa4e70213b2c82db545b23c93cc154aa3787923b50a10a",
-        "output_sha256": "e528c0ab3f66f92e8a5a7b120f4bb7f493ad673b27d62bc807a43c1b86da48b8",
+        "source_sha256": "a82b64cda98666722519d37e0b6aacf12a415ed1e66838d67b2ba65a66db989a",
+        "output_sha256": "60e80959c4a0d7810e238ca3e8e190924a5dd031ad24036eb568b65e5d2dfef2",
         "old_bss_size": 544,
         "new_bss_size": 540,
         "allocations": [
@@ -534,8 +2642,8 @@
       },
       {
         "object": "connect.obj",
-        "source_sha256": "64e6246ab00ca31101bd5b43056174a9ed932aa6cb70c3bb350f910f6e9f78a3",
-        "output_sha256": "97d3f83a5c061cd4f09fdd653974def89436e38ef75923f49c1ee8ed8074c77f",
+        "source_sha256": "eb5c663e7b3bcadf0b6830085e5794911bbd6dcd175d4488f08e76cfbbb3b5c5",
+        "output_sha256": "84ddf7ff806d9801356f543fc9f563725d735238c1f8fdfa0706903c67deaefe",
         "old_bss_size": 20,
         "new_bss_size": 20,
         "allocations": [
@@ -573,8 +2681,8 @@
       },
       {
         "object": "kailleraclient.obj",
-        "source_sha256": "8778aa98d793a11d828dbf371598f3f565930a4868a09185c90bb330df1d3ad0",
-        "output_sha256": "aaa79016cc0a75b51a9af5ae21d4a3b2034dec8736b392f39cd54e33bfc521cb",
+        "source_sha256": "27b83dac2133ac7dcbe3c3b7b550495fb0504bb0beacfe93a0da6a79543ec3a8",
+        "output_sha256": "8dfefe327ce0502c6c83abcf6f73ce83b978d3bdf6e9453965b65aae58fedcdd",
         "old_bss_size": 600,
         "new_bss_size": 600,
         "allocations": [
@@ -684,8 +2792,8 @@
       },
       {
         "object": "session.obj",
-        "source_sha256": "dbd6eacbf0e8a2849eb5b10b705a56be9016cde1a5429e4ddea9e43e9eae1b64",
-        "output_sha256": "4ebb88d1244f1a4a80df018ad8c6ac43b607671f6df9a226d3f9bc0df1cc63e7",
+        "source_sha256": "287a895a445ea944a39b5ad67383f35569b383cdf1e6ce03c0acf7e104d26300",
+        "output_sha256": "c6c6dc36cb90f95f7e510d656d59fe30c8cbaea595121292f6630c4cfeba9d39",
         "old_bss_size": 324,
         "new_bss_size": 320,
         "allocations": [
@@ -861,8 +2969,8 @@
       },
       {
         "object": "serverbrowser.obj",
-        "source_sha256": "5e316ca87c112f464c634b3a9e26ad966e017a29201ba0d248d540fac9bc1d98",
-        "output_sha256": "b8d57f923d3f07005f95f58cfdd94dfd6ca1572380edfb1759a6e34adfe4b6a9",
+        "source_sha256": "acffa56898b6a3501757c1bca703e8e345cf681ac04517829534a8a8efc19638",
+        "output_sha256": "5f48c22bfd63f2fda4619b88d10d9e30e4d5de41dc171a27a8e15502e6095086",
         "old_bss_size": 88,
         "new_bss_size": 92,
         "allocations": [
@@ -969,16 +3077,358 @@
     "relocation_records_unchanged": true,
     "reference_bytes_copied": false
   },
+  "application_code_inputs": {
+    "objects": [
+      {
+        "object": "resizer.obj",
+        "source_sha256": "2ac9a8742851919ac6a2943a050b1ad722efb93704fb813c174b3740f576d01b",
+        "output_sha256": "b297c8b07d4ae6ed22accd928036bcb56e144b2c68eb61883be5bc131b14d2bd",
+        "sections": [
+          {
+            "section": 28,
+            "group": ".text$a",
+            "instruction_sha256": "e7c2efe0a3236937ff8d57218fc800328df500bd5f1fbc8c78f346bd08a8af61"
+          }
+        ]
+      },
+      {
+        "object": "connect.obj",
+        "source_sha256": "84ddf7ff806d9801356f543fc9f563725d735238c1f8fdfa0706903c67deaefe",
+        "output_sha256": "792b5f4cfa395f8564736c2fb47ae9dd58bb3546ba1ded366b4b72724bbc4011",
+        "sections": [
+          {
+            "section": 23,
+            "group": ".text$a",
+            "instruction_sha256": "ba7d1522ead1d288cfb795c9d1f2bddb3fbcf76832ab6d74b38ba952d1c6a454"
+          },
+          {
+            "section": 25,
+            "group": ".text$a",
+            "instruction_sha256": "ba7d1522ead1d288cfb795c9d1f2bddb3fbcf76832ab6d74b38ba952d1c6a454"
+          }
+        ]
+      },
+      {
+        "object": "session.obj",
+        "source_sha256": "c6c6dc36cb90f95f7e510d656d59fe30c8cbaea595121292f6630c4cfeba9d39",
+        "output_sha256": "6af0016d9c752b6569a9381e3d77e2be39d03ea387ad53fd29665562032e9e09",
+        "sections": [
+          {
+            "section": 89,
+            "group": ".text$a",
+            "instruction_sha256": "ba7d1522ead1d288cfb795c9d1f2bddb3fbcf76832ab6d74b38ba952d1c6a454"
+          },
+          {
+            "section": 113,
+            "group": ".text$a",
+            "instruction_sha256": "ba7d1522ead1d288cfb795c9d1f2bddb3fbcf76832ab6d74b38ba952d1c6a454"
+          },
+          {
+            "section": 115,
+            "group": ".text$a",
+            "instruction_sha256": "ba7d1522ead1d288cfb795c9d1f2bddb3fbcf76832ab6d74b38ba952d1c6a454"
+          },
+          {
+            "section": 117,
+            "group": ".text$a",
+            "instruction_sha256": "ba7d1522ead1d288cfb795c9d1f2bddb3fbcf76832ab6d74b38ba952d1c6a454"
+          },
+          {
+            "section": 119,
+            "group": ".text$a",
+            "instruction_sha256": "ba7d1522ead1d288cfb795c9d1f2bddb3fbcf76832ab6d74b38ba952d1c6a454"
+          },
+          {
+            "section": 129,
+            "group": ".text$a",
+            "instruction_sha256": "ba7d1522ead1d288cfb795c9d1f2bddb3fbcf76832ab6d74b38ba952d1c6a454"
+          },
+          {
+            "section": 143,
+            "group": ".text$a",
+            "instruction_sha256": "ba7d1522ead1d288cfb795c9d1f2bddb3fbcf76832ab6d74b38ba952d1c6a454"
+          },
+          {
+            "section": 145,
+            "group": ".text$a",
+            "instruction_sha256": "ba7d1522ead1d288cfb795c9d1f2bddb3fbcf76832ab6d74b38ba952d1c6a454"
+          },
+          {
+            "section": 147,
+            "group": ".text$a",
+            "instruction_sha256": "ba7d1522ead1d288cfb795c9d1f2bddb3fbcf76832ab6d74b38ba952d1c6a454"
+          },
+          {
+            "section": 149,
+            "group": ".text$a",
+            "instruction_sha256": "ba7d1522ead1d288cfb795c9d1f2bddb3fbcf76832ab6d74b38ba952d1c6a454"
+          },
+          {
+            "section": 151,
+            "group": ".text$a",
+            "instruction_sha256": "ba7d1522ead1d288cfb795c9d1f2bddb3fbcf76832ab6d74b38ba952d1c6a454"
+          },
+          {
+            "section": 153,
+            "group": ".text$a",
+            "instruction_sha256": "ba7d1522ead1d288cfb795c9d1f2bddb3fbcf76832ab6d74b38ba952d1c6a454"
+          },
+          {
+            "section": 155,
+            "group": ".text$a",
+            "instruction_sha256": "ba7d1522ead1d288cfb795c9d1f2bddb3fbcf76832ab6d74b38ba952d1c6a454"
+          },
+          {
+            "section": 185,
+            "group": ".text$a",
+            "instruction_sha256": "ba7d1522ead1d288cfb795c9d1f2bddb3fbcf76832ab6d74b38ba952d1c6a454"
+          },
+          {
+            "section": 187,
+            "group": ".text$a",
+            "instruction_sha256": "ba7d1522ead1d288cfb795c9d1f2bddb3fbcf76832ab6d74b38ba952d1c6a454"
+          },
+          {
+            "section": 210,
+            "group": ".text$a",
+            "instruction_sha256": "ba7d1522ead1d288cfb795c9d1f2bddb3fbcf76832ab6d74b38ba952d1c6a454"
+          },
+          {
+            "section": 212,
+            "group": ".text$a",
+            "instruction_sha256": "ba7d1522ead1d288cfb795c9d1f2bddb3fbcf76832ab6d74b38ba952d1c6a454"
+          },
+          {
+            "section": 222,
+            "group": ".text$a",
+            "instruction_sha256": "eda4051d0ea734abefd13642d508270a3f6ae90c4d18d01fa62748f5403c3119"
+          },
+          {
+            "section": 224,
+            "group": ".text$a",
+            "instruction_sha256": "b9c56c96696d5b6536807bee396e67cf19710ac5475415ac66e542ffb70e76fa"
+          },
+          {
+            "section": 226,
+            "group": ".text$a",
+            "instruction_sha256": "eb0d65b5a37934497c88aca02cb7ae0ee65b75fa67e2cb191b9181b74d1a9584"
+          },
+          {
+            "section": 228,
+            "group": ".text$a",
+            "instruction_sha256": "db0a5c4d5f2a32ffa5f83f90be4cd7faebacb15be7d04f3bad12faf111a27391"
+          },
+          {
+            "section": 230,
+            "group": ".text$a",
+            "instruction_sha256": "e2078f4a26e20f988500bf47a9a78588de87dbf8714e0764d8918eae34a3d637"
+          },
+          {
+            "section": 232,
+            "group": ".text$a",
+            "instruction_sha256": "7ee8a1edaaa213d94aaee6e56b45ebe4d99580610eaa51a51ee9665c768dabcc"
+          },
+          {
+            "section": 236,
+            "group": ".text$a",
+            "instruction_sha256": "e7c2efe0a3236937ff8d57218fc800328df500bd5f1fbc8c78f346bd08a8af61"
+          },
+          {
+            "section": 238,
+            "group": ".text$a",
+            "instruction_sha256": "4b1156f6391cb31682bc2b99b1f90b730b15eb5b2c789dffeb4ebfdc5600c2ac"
+          },
+          {
+            "section": 240,
+            "group": ".text$a",
+            "instruction_sha256": "168d226590063aef793bc47adf3b17f80c433a22bfa7dcb6b73a8a790844ec66"
+          }
+        ]
+      },
+      {
+        "object": "serverbrowser.obj",
+        "source_sha256": "5f48c22bfd63f2fda4619b88d10d9e30e4d5de41dc171a27a8e15502e6095086",
+        "output_sha256": "95235cf1ce04e5ecb917619188e5b361369136af5e536a1e3f1ead376d30795b",
+        "sections": [
+          {
+            "section": 4,
+            "group": ".text$b",
+            "instruction_sha256": "9f760b763648bf9f93ffa324169a776403fafb81f229b53514562ce23ecc4cad"
+          },
+          {
+            "section": 6,
+            "group": ".text$b",
+            "instruction_sha256": "f820a3a15a030dab5f455e24bee27c3b689fe87744917d9cac5927abb7c61d40"
+          },
+          {
+            "section": 8,
+            "group": ".text$b",
+            "instruction_sha256": "3475063ddc9b8553ce16428d3190f88859ad052efe3a03875658043eb03bdb63"
+          },
+          {
+            "section": 10,
+            "group": ".text$b",
+            "instruction_sha256": "499f1f307c1cb989f968a6b7fcaec591e1828877223d0b0e7e8e8b76cde8c9ca"
+          },
+          {
+            "section": 12,
+            "group": ".text$b",
+            "instruction_sha256": "9f760b763648bf9f93ffa324169a776403fafb81f229b53514562ce23ecc4cad"
+          },
+          {
+            "section": 14,
+            "group": ".text$b",
+            "instruction_sha256": "abe944925d4f3b974a0bd6e1ec5523804233ecf1d23afb41bf05be96ee3ddc59"
+          },
+          {
+            "section": 16,
+            "group": ".text$b",
+            "instruction_sha256": "3475063ddc9b8553ce16428d3190f88859ad052efe3a03875658043eb03bdb63"
+          },
+          {
+            "section": 18,
+            "group": ".text$b",
+            "instruction_sha256": "499f1f307c1cb989f968a6b7fcaec591e1828877223d0b0e7e8e8b76cde8c9ca"
+          },
+          {
+            "section": 20,
+            "group": ".text$b",
+            "instruction_sha256": "9f760b763648bf9f93ffa324169a776403fafb81f229b53514562ce23ecc4cad"
+          },
+          {
+            "section": 22,
+            "group": ".text$b",
+            "instruction_sha256": "abe944925d4f3b974a0bd6e1ec5523804233ecf1d23afb41bf05be96ee3ddc59"
+          },
+          {
+            "section": 24,
+            "group": ".text$b",
+            "instruction_sha256": "3475063ddc9b8553ce16428d3190f88859ad052efe3a03875658043eb03bdb63"
+          },
+          {
+            "section": 26,
+            "group": ".text$b",
+            "instruction_sha256": "499f1f307c1cb989f968a6b7fcaec591e1828877223d0b0e7e8e8b76cde8c9ca"
+          },
+          {
+            "section": 28,
+            "group": ".text$b",
+            "instruction_sha256": "9f760b763648bf9f93ffa324169a776403fafb81f229b53514562ce23ecc4cad"
+          },
+          {
+            "section": 30,
+            "group": ".text$b",
+            "instruction_sha256": "3a35c868e3b82aa581d126682262900ed39fae26baf818f871062b379aa9e9a0"
+          },
+          {
+            "section": 32,
+            "group": ".text$b",
+            "instruction_sha256": "3475063ddc9b8553ce16428d3190f88859ad052efe3a03875658043eb03bdb63"
+          },
+          {
+            "section": 34,
+            "group": ".text$b",
+            "instruction_sha256": "3a35c868e3b82aa581d126682262900ed39fae26baf818f871062b379aa9e9a0"
+          },
+          {
+            "section": 36,
+            "group": ".text$b",
+            "instruction_sha256": "0abab815d4098c3db4923b0970ddc754eca35e944565b4c0193c9b91ae3ba5c4"
+          },
+          {
+            "section": 38,
+            "group": ".text$b",
+            "instruction_sha256": "7ab47d3ae430563a3c4bfe4f80f76be0a2ab3c05a6b49bd5c79aa712e523950b"
+          },
+          {
+            "section": 51,
+            "group": ".text$b",
+            "instruction_sha256": "c8f7305b246c3b5ed0e5ff125ca474d94f6242a7713902c2c048aceeca88e6c4"
+          },
+          {
+            "section": 65,
+            "group": ".text$b",
+            "instruction_sha256": "8b23ffeb1b3e85fa3a87bb79288730b3ae2f1965e941b219a152b5a50f4b2f57"
+          },
+          {
+            "section": 67,
+            "group": ".text$b",
+            "instruction_sha256": "b19c578da005413ba69caf7446f8652950b93322d76ab51b89fcce2ebec15304"
+          },
+          {
+            "section": 69,
+            "group": ".text$b",
+            "instruction_sha256": "7f003e05e1967596d56ca31b8b39db034cf312d86d1e7db68548b0351a5d1b47"
+          },
+          {
+            "section": 73,
+            "group": ".text$b",
+            "instruction_sha256": "6e3d94852d1a76db5c46ed059b736cbd2f3aecff9baf8f49f8d0d13438cd5949"
+          },
+          {
+            "section": 75,
+            "group": ".text$b",
+            "instruction_sha256": "fc04f33c8f40f5bc745a6dc1959e16bea1dea2967d11966f98d3e4969be36c9e"
+          }
+        ]
+      }
+    ],
+    "helper_order": [
+      "??1CachedGameDataMessage@@QAE@XZ",
+      "??1ChatMessage@@QAE@XZ",
+      "??1GameCreatedMessage@@QAE@XZ",
+      "??1GameDataMessage@@QAE@XZ",
+      "??1GameDeletedMessage@@QAE@XZ",
+      "??1GameStartedMessage@@QAE@XZ",
+      "??1GameStatusMessage@@QAE@XZ",
+      "??1GameUserJoinedMessage@@QAE@XZ",
+      "??1GameUserLeftMessage@@QAE@XZ",
+      "??1GameUsersMessage@@QAE@XZ",
+      "??1KickMessage@@QAE@XZ",
+      "??1LoginMessage@@QAE@XZ",
+      "??1PlayerDroppedMessage@@QAE@XZ",
+      "??1PongMessage@@QAE@XZ",
+      "??1ServerStatusMessage@@QAE@XZ",
+      "??1SimpleMessage@@QAE@XZ",
+      "??1UserJoinedMessage@@QAE@XZ",
+      "??1UserLeftMessage@@QAE@XZ",
+      "?Add@?$C_ItemList@VByteQueue@@@@QAEPAVByteQueue@@PAV2@@Z",
+      "??0CachedByteQueue@@QAE@XZ",
+      "?append@ByteQueue@@QAEXPAXH@Z",
+      "?Del@?$C_ItemList@VByteQueue@@@@QAEXH@Z",
+      "?peek@ByteQueue@@QAEXPAXH@Z",
+      "??0ByteQueueList@@QAE@XZ",
+      "??1ByteQueueList@@QAE@XZ",
+      "??1?$C_ItemList@UItem@Resizer@@@@QAE@XZ",
+      "??1?$C_ItemList@VByteQueue@@@@QAE@XZ",
+      "??_GByteQueue@@QAEPAXI@Z"
+    ],
+    "order_sha256": "2cc1141c1a54325a65d96a54dd5e0287e15de646d25f8604e319111413c17b7e",
+    "executable_and_initialized_section_contents_unchanged": true,
+    "relocation_records_and_symbols_unchanged": true,
+    "reference_bytes_copied": false
+  },
+  "combined_code_order": {
+    "path": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/link-inputs/code-order.txt",
+    "sha256": "bbf63634dd6339f0c73c46411234ca07d7402ab37e9396cf3fe3a912c048e2d1"
+  },
+  "native_import_inventory": {
+    "dll_count": 7,
+    "import_count": 99,
+    "iat_rva": 45056,
+    "iat_bytes": 424,
+    "symbolic_inventory_and_iat_addresses_exact": true
+  },
   "candidate": {
     "unpacked": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/linked/kailleraclient.dll",
-    "unpacked_sha256": "8807eb36c253c35f41c53fc58bf025e9365e4f0de3dcfd0b5206513a67119184",
+    "unpacked_sha256": "18adfda4aa901c2599e0b73b8a40f514fb4751ed1b00dffda4128caef3b52286",
     "packed": "/root/.ai-tmp/kaillera-helpers.hJeGTE/full-review/output/kailleraclient.dll",
-    "packed_sha256": "f4e99c59d4a1a446d4ec951e86e95b32ea0b15fc96a47f53fde2aa7b4eb45d45"
+    "packed_sha256": "e71694f88642b01f096ef72d4b047cf19246f06b6133157ac8919340e8232bd0"
   },
   "diagnostic_only": true,
   "complete_dll_available": true,
   "original_code_virtual_bytes": 38598,
-  "unique_masked_signature_code_bytes": 32800,
+  "unique_masked_signature_code_bytes": 35056,
   "functions": [
     {
       "object": "reliableconnection.obj",
@@ -9661,39 +12111,43 @@
     {
       "object": "session.obj",
       "name": "_$E45",
-      "coff_bytes": 16,
-      "fixed_bytes": 8,
+      "coff_bytes": 32,
+      "fixed_bytes": 20,
       "matching_original_vas": [
-        268458154,
-        268458202,
-        268472208,
-        268472240
+        268458240,
+        268458336
       ],
       "instruction_bytes_equal_outside_coff_relocations": true,
       "relocation_identities_verified": false,
       "relocations": [
         {
-          "offset": 1,
+          "offset": 3,
+          "type": 6,
+          "symbol": "?sendByteQueue@@3VByteQueue@@A",
+          "coff_addend": 4,
+          "original_operand_or_destination": [
+            268488108,
+            268488092
+          ]
+        },
+        {
+          "offset": 8,
           "type": 6,
           "symbol": "?sendByteQueue@@3VByteQueue@@A",
           "coff_addend": 0,
           "original_operand_or_destination": [
-            268488200,
-            268488168,
-            268488240,
-            268488240
+            268488104,
+            268488088
           ]
         },
         {
-          "offset": 6,
-          "type": 20,
-          "symbol": "??0ByteQueue@@QAE@XZ",
-          "coff_addend": 0,
+          "offset": 13,
+          "type": 6,
+          "symbol": "?sendByteQueue@@3VByteQueue@@A",
+          "coff_addend": 8,
           "original_operand_or_destination": [
-            268471696,
-            268471712,
-            268453104,
-            268453120
+            268488112,
+            268488096
           ]
         }
       ]
@@ -9881,39 +12335,43 @@
     {
       "object": "session.obj",
       "name": "_$E50",
-      "coff_bytes": 16,
-      "fixed_bytes": 8,
+      "coff_bytes": 32,
+      "fixed_bytes": 20,
       "matching_original_vas": [
-        268458154,
-        268458202,
-        268472208,
-        268472240
+        268458240,
+        268458336
       ],
       "instruction_bytes_equal_outside_coff_relocations": true,
       "relocation_identities_verified": false,
       "relocations": [
         {
-          "offset": 1,
+          "offset": 3,
+          "type": 6,
+          "symbol": "?receiveByteQueue@@3VByteQueue@@A",
+          "coff_addend": 4,
+          "original_operand_or_destination": [
+            268488108,
+            268488092
+          ]
+        },
+        {
+          "offset": 8,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 0,
           "original_operand_or_destination": [
-            268488200,
-            268488168,
-            268488240,
-            268488240
+            268488104,
+            268488088
           ]
         },
         {
-          "offset": 6,
-          "type": 20,
-          "symbol": "??0ByteQueue@@QAE@XZ",
-          "coff_addend": 0,
+          "offset": 13,
+          "type": 6,
+          "symbol": "?receiveByteQueue@@3VByteQueue@@A",
+          "coff_addend": 8,
           "original_operand_or_destination": [
-            268471696,
-            268471712,
-            268453104,
-            268453120
+            268488112,
+            268488096
           ]
         }
       ]
@@ -10039,7 +12497,7 @@
         {
           "offset": 3,
           "type": 6,
-          "symbol": "$L46166",
+          "symbol": "$L46188",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268477248
@@ -10385,7 +12843,7 @@
         {
           "offset": 9,
           "type": 6,
-          "symbol": "$L46384",
+          "symbol": "$L46406",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268477352
@@ -10403,7 +12861,7 @@
         {
           "offset": 68,
           "type": 6,
-          "symbol": "$L46392",
+          "symbol": "$L46414",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268461524
@@ -10412,7 +12870,7 @@
         {
           "offset": 75,
           "type": 6,
-          "symbol": "$L46393",
+          "symbol": "$L46415",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268461504
@@ -12113,7 +14571,7 @@
         {
           "offset": 2704,
           "type": 6,
-          "symbol": "$L45220",
+          "symbol": "$L45234",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268459148
@@ -12122,7 +14580,7 @@
         {
           "offset": 2708,
           "type": 6,
-          "symbol": "$L45179",
+          "symbol": "$L45193",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268459133
@@ -12131,7 +14589,7 @@
         {
           "offset": 2712,
           "type": 6,
-          "symbol": "$L45158",
+          "symbol": "$L45172",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268458879
@@ -12140,7 +14598,7 @@
         {
           "offset": 2716,
           "type": 6,
-          "symbol": "$L45173",
+          "symbol": "$L45187",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268459069
@@ -12149,7 +14607,7 @@
         {
           "offset": 2720,
           "type": 6,
-          "symbol": "$L45183",
+          "symbol": "$L45197",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268461472
@@ -12384,7 +14842,7 @@
         {
           "offset": 9,
           "type": 6,
-          "symbol": "$L46426",
+          "symbol": "$L46448",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268477392
@@ -12609,7 +15067,7 @@
         {
           "offset": 9,
           "type": 6,
-          "symbol": "$L46700",
+          "symbol": "$L46722",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268477683
@@ -12627,7 +15085,7 @@
         {
           "offset": 53,
           "type": 6,
-          "symbol": "$L46702",
+          "symbol": "$L46724",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268465116
@@ -14103,7 +16561,7 @@
         {
           "offset": 3116,
           "type": 6,
-          "symbol": "$L45294",
+          "symbol": "$L45308",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268462762
@@ -14112,7 +16570,7 @@
         {
           "offset": 3120,
           "type": 6,
-          "symbol": "$L45290",
+          "symbol": "$L45304",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268462521
@@ -14121,7 +16579,7 @@
         {
           "offset": 3124,
           "type": 6,
-          "symbol": "$L45280",
+          "symbol": "$L45294",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268465090
@@ -14130,7 +16588,7 @@
         {
           "offset": 3128,
           "type": 6,
-          "symbol": "$L45297",
+          "symbol": "$L45311",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268462995
@@ -14139,7 +16597,7 @@
         {
           "offset": 3132,
           "type": 6,
-          "symbol": "$L45283",
+          "symbol": "$L45297",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268462057
@@ -14148,7 +16606,7 @@
         {
           "offset": 3136,
           "type": 6,
-          "symbol": "$L45280",
+          "symbol": "$L45294",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268465090
@@ -14157,7 +16615,7 @@
         {
           "offset": 3140,
           "type": 6,
-          "symbol": "$L45285",
+          "symbol": "$L45299",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268462161
@@ -14166,7 +16624,7 @@
         {
           "offset": 3144,
           "type": 6,
-          "symbol": "$L45288",
+          "symbol": "$L45302",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268462341
@@ -14175,7 +16633,7 @@
         {
           "offset": 3148,
           "type": 6,
-          "symbol": "$L45280",
+          "symbol": "$L45294",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268465090
@@ -14184,7 +16642,7 @@
         {
           "offset": 3152,
           "type": 6,
-          "symbol": "$L45317",
+          "symbol": "$L45331",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268463368
@@ -14193,7 +16651,7 @@
         {
           "offset": 3156,
           "type": 6,
-          "symbol": "$L45356",
+          "symbol": "$L45370",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268464320
@@ -14202,7 +16660,7 @@
         {
           "offset": 3160,
           "type": 6,
-          "symbol": "$L45319",
+          "symbol": "$L45333",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268463534
@@ -14211,7 +16669,7 @@
         {
           "offset": 3164,
           "type": 6,
-          "symbol": "$L45342",
+          "symbol": "$L45356",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268463933
@@ -14220,7 +16678,7 @@
         {
           "offset": 3168,
           "type": 6,
-          "symbol": "$L45368",
+          "symbol": "$L45382",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268464908
@@ -14229,7 +16687,7 @@
         {
           "offset": 3172,
           "type": 6,
-          "symbol": "$L45280",
+          "symbol": "$L45294",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268465090
@@ -14238,7 +16696,7 @@
         {
           "offset": 3176,
           "type": 6,
-          "symbol": "$L45363",
+          "symbol": "$L45377",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268464642
@@ -14247,7 +16705,7 @@
         {
           "offset": 3180,
           "type": 6,
-          "symbol": "$L45366",
+          "symbol": "$L45380",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268464766
@@ -14256,7 +16714,7 @@
         {
           "offset": 3184,
           "type": 6,
-          "symbol": "$L45280",
+          "symbol": "$L45294",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268465090
@@ -14265,7 +16723,7 @@
         {
           "offset": 3188,
           "type": 6,
-          "symbol": "$L45280",
+          "symbol": "$L45294",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268465090
@@ -14274,7 +16732,7 @@
         {
           "offset": 3192,
           "type": 6,
-          "symbol": "$L45352",
+          "symbol": "$L45366",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268464115
@@ -15348,7 +17806,7 @@
         {
           "offset": 9,
           "type": 6,
-          "symbol": "$L46828",
+          "symbol": "$L46850",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268477784
@@ -16113,7 +18571,7 @@
         {
           "offset": 9,
           "type": 6,
-          "symbol": "$L46883",
+          "symbol": "$L46905",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268477852
@@ -16701,7 +19159,7 @@
         {
           "offset": 9,
           "type": 6,
-          "symbol": "$L46910",
+          "symbol": "$L46932",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268477894
@@ -16786,1094 +19244,1406 @@
       "name": "?modifyPlayValues@@YAHPAXH@Z",
       "coff_bytes": 2256,
       "fixed_bytes": 1636,
-      "matching_original_vas": [],
-      "instruction_bytes_equal_outside_coff_relocations": false,
+      "matching_original_vas": [
+        268468576
+      ],
+      "instruction_bytes_equal_outside_coff_relocations": true,
       "relocation_identities_verified": false,
       "relocations": [
         {
           "offset": 3,
           "type": 6,
-          "symbol": "$L47150",
+          "symbol": "$L47172",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268478064
+          ]
         },
         {
           "offset": 9,
           "type": 6,
           "symbol": "__except_list",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            0
+          ]
         },
         {
           "offset": 17,
           "type": 6,
           "symbol": "__except_list",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            0
+          ]
         },
         {
           "offset": 28,
           "type": 6,
           "symbol": "?runningGame@@3HA",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488220
+          ]
         },
         {
           "offset": 57,
           "type": 6,
           "symbol": "?initialSynced@@3HA",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488236
+          ]
         },
         {
           "offset": 63,
           "type": 6,
           "symbol": "__imp__GetTickCount@0",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268480548
+          ]
         },
         {
           "offset": 80,
           "type": 20,
           "symbol": "??0Message@@QAE@XZ",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268442688
+          ]
         },
         {
           "offset": 94,
           "type": 6,
           "symbol": "?connection@@3PAVKLRCom@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268487644
+          ]
         },
         {
           "offset": 113,
           "type": 20,
           "symbol": "?sendMessage@KLRCom@@QAEXPAVMessage@@@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268439760
+          ]
         },
         {
           "offset": 133,
           "type": 20,
           "symbol": "??1Message@@QAE@XZ",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268442736
+          ]
         },
         {
           "offset": 138,
           "type": 20,
           "symbol": "?showSyncDialog@@YAXXZ",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268470832
+          ]
         },
         {
           "offset": 149,
           "type": 6,
           "symbol": "?syncCancelled@@3HA",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488180
+          ]
         },
         {
           "offset": 164,
           "type": 20,
           "symbol": "?selectSockets@UDPCom@@SAHH@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268445008
+          ]
         },
         {
           "offset": 170,
           "type": 6,
           "symbol": "?connection@@3PAVKLRCom@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268487644
+          ]
         },
         {
           "offset": 191,
           "type": 20,
           "symbol": "??0Message@@QAE@XZ",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268442688
+          ]
         },
         {
           "offset": 197,
           "type": 6,
           "symbol": "?connection@@3PAVKLRCom@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268487644
+          ]
         },
         {
           "offset": 222,
           "type": 20,
           "symbol": "?receiveMessage@KLRCom@@QAEHPAVMessage@@DPAUsockaddr_in@@@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268440240
+          ]
         },
         {
           "offset": 250,
           "type": 20,
           "symbol": "?dispatchMessage@@YAXPAVMessage@@@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268462000
+          ]
         },
         {
           "offset": 273,
           "type": 20,
           "symbol": "??1Message@@QAE@XZ",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268442736
+          ]
         },
         {
           "offset": 295,
           "type": 6,
           "symbol": "?connection@@3PAVKLRCom@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268487644
+          ]
         },
         {
           "offset": 302,
           "type": 20,
           "symbol": "?forceResend@KLRCom@@QAEXH@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268441136
+          ]
         },
         {
           "offset": 317,
           "type": 20,
           "symbol": "?pumpGameMessages@@YAXXZ",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268468320
+          ]
         },
         {
           "offset": 328,
           "type": 6,
           "symbol": "?runningGame@@3HA",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488220
+          ]
         },
         {
           "offset": 337,
           "type": 20,
           "symbol": "?closeSyncDialog@@YAXXZ",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268471264
+          ]
         },
         {
           "offset": 344,
           "type": 6,
           "symbol": "??_C@_05CKBG@Error?$AA@",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268486268
+          ]
         },
         {
           "offset": 349,
           "type": 6,
           "symbol": "??_C@_0CK@GMJB@Timeout?5while?5waiting?5for?5initia@",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268486328
+          ]
         },
         {
           "offset": 355,
           "type": 6,
           "symbol": "__imp__GetForegroundWindow@0",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268480816
+          ]
         },
         {
           "offset": 362,
           "type": 6,
           "symbol": "__imp__MessageBoxA@16",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268480676
+          ]
         },
         {
           "offset": 375,
           "type": 20,
           "symbol": "?closeSyncDialog@@YAXXZ",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268471264
+          ]
         },
         {
           "offset": 380,
           "type": 6,
           "symbol": "?syncCancelled@@3HA",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488180
+          ]
         },
         {
           "offset": 390,
           "type": 6,
           "symbol": "?runningGame@@3HA",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488220
+          ]
         },
         {
           "offset": 408,
           "type": 6,
           "symbol": "?initialSynced@@3HA",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488236
+          ]
         },
         {
-          "offset": 428,
+          "offset": 435,
           "type": 6,
           "symbol": "?sendByteQueue@@3VByteQueue@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488104
+          ]
         },
         {
-          "offset": 443,
+          "offset": 450,
           "type": 6,
           "symbol": "?sendByteQueue@@3VByteQueue@@A",
           "coff_addend": 8,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488112
+          ]
         },
         {
-          "offset": 449,
+          "offset": 456,
           "type": 6,
           "symbol": "__imp__malloc",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268480604
+          ]
         },
         {
-          "offset": 460,
+          "offset": 467,
           "type": 6,
           "symbol": "?sendByteQueue@@3VByteQueue@@A",
           "coff_addend": 4,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488108
+          ]
         },
         {
-          "offset": 469,
+          "offset": 476,
           "type": 6,
           "symbol": "?sendByteQueue@@3VByteQueue@@A",
           "coff_addend": 8,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488112
+          ]
         },
         {
-          "offset": 487,
+          "offset": 494,
           "type": 6,
           "symbol": "?sendByteQueue@@3VByteQueue@@A",
           "coff_addend": 8,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488112
+          ]
         },
         {
-          "offset": 493,
+          "offset": 500,
           "type": 6,
           "symbol": "__imp__realloc",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268480608
+          ]
         },
         {
-          "offset": 501,
+          "offset": 508,
           "type": 6,
           "symbol": "?sendByteQueue@@3VByteQueue@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488104
+          ]
         },
         {
-          "offset": 507,
+          "offset": 514,
           "type": 6,
           "symbol": "?sendByteQueue@@3VByteQueue@@A",
           "coff_addend": 4,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488108
+          ]
         },
         {
-          "offset": 539,
+          "offset": 541,
           "type": 6,
           "symbol": "?sendByteQueue@@3VByteQueue@@A",
           "coff_addend": 4,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488108
+          ]
         },
         {
-          "offset": 544,
+          "offset": 546,
           "type": 6,
           "symbol": "?frameWithinPacket@@3HA",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488176
+          ]
         },
         {
-          "offset": 550,
+          "offset": 552,
           "type": 6,
           "symbol": "?connectionType@@3HA",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268487636
+          ]
         },
         {
-          "offset": 558,
+          "offset": 560,
           "type": 6,
           "symbol": "?frameWithinPacket@@3HA",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488176
+          ]
         },
         {
-          "offset": 566,
+          "offset": 568,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 4,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488092
+          ]
         },
         {
-          "offset": 597,
+          "offset": 599,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488088
+          ]
         },
         {
-          "offset": 626,
+          "offset": 623,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 4,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488092
+          ]
         },
         {
-          "offset": 632,
+          "offset": 629,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488088
+          ]
         },
         {
-          "offset": 640,
+          "offset": 637,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 4,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488092
+          ]
         },
         {
-          "offset": 679,
+          "offset": 676,
           "type": 6,
           "symbol": "__except_list",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            0
+          ]
         },
         {
-          "offset": 691,
+          "offset": 688,
           "type": 6,
           "symbol": "?sentDataCache@@3VByteQueueList@@A",
           "coff_addend": 4,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488204
+          ]
         },
         {
-          "offset": 697,
+          "offset": 694,
           "type": 6,
           "symbol": "?sendByteQueue@@3VByteQueue@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488104
+          ]
         },
         {
-          "offset": 703,
+          "offset": 700,
           "type": 6,
           "symbol": "?sendByteQueue@@3VByteQueue@@A",
           "coff_addend": 4,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488108
+          ]
         },
         {
-          "offset": 713,
+          "offset": 710,
           "type": 6,
           "symbol": "?frameWithinPacket@@3HA",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488176
+          ]
         },
         {
-          "offset": 733,
+          "offset": 730,
           "type": 6,
           "symbol": "?sentDataCache@@3VByteQueueList@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488200
+          ]
         },
         {
-          "offset": 754,
+          "offset": 751,
           "type": 20,
           "symbol": "?peek@ByteQueue@@QAEXPAXH@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268471648
+          ]
         },
         {
-          "offset": 782,
+          "offset": 779,
           "type": 6,
           "symbol": "?sentDataCache@@3VByteQueueList@@A",
           "coff_addend": 4,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488204
+          ]
         },
         {
-          "offset": 796,
+          "offset": 793,
           "type": 20,
           "symbol": "??0Message@@QAE@XZ",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268442688
+          ]
         },
         {
-          "offset": 825,
+          "offset": 822,
           "type": 20,
           "symbol": "?appendWord@Message@@QAEXG@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268443440
+          ]
         },
         {
-          "offset": 840,
+          "offset": 837,
           "type": 20,
           "symbol": "?append@Message@@QAEXPAXH@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268443008
+          ]
         },
         {
-          "offset": 862,
+          "offset": 859,
           "type": 6,
           "symbol": "?connection@@3PAVKLRCom@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268487644
+          ]
         },
         {
-          "offset": 867,
+          "offset": 864,
           "type": 20,
           "symbol": "?sendMessage@KLRCom@@QAEXPAVMessage@@@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268439760
+          ]
         },
         {
-          "offset": 886,
+          "offset": 883,
           "type": 20,
           "symbol": "??1Message@@QAE@XZ",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268442736
+          ]
         },
         {
-          "offset": 892,
+          "offset": 889,
           "type": 6,
           "symbol": "?sentDataCache@@3VByteQueueList@@A",
           "coff_addend": 4,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488204
+          ]
         },
         {
-          "offset": 904,
+          "offset": 901,
           "type": 6,
           "symbol": "?sentDataCache@@3VByteQueueList@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488200
+          ]
         },
         {
-          "offset": 917,
+          "offset": 914,
           "type": 20,
           "symbol": "??_GByteQueue@@QAEPAXI@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268471920
+          ]
         },
         {
-          "offset": 924,
+          "offset": 921,
           "type": 6,
           "symbol": "?sentDataCache@@3VByteQueueList@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488200
+          ]
         },
         {
-          "offset": 929,
+          "offset": 926,
           "type": 20,
           "symbol": "?Del@?$C_ItemList@VByteQueue@@@@QAEXH@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268471536
+          ]
         },
         {
-          "offset": 936,
+          "offset": 933,
           "type": 20,
           "symbol": "??2@YAPAXI@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268476670
+          ]
         },
         {
-          "offset": 965,
+          "offset": 962,
           "type": 20,
-          "symbol": "??0ByteQueue@@QAE@XZ",
+          "symbol": "??0CachedByteQueue@@QAE@XZ",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268471392
+          ]
         },
         {
-          "offset": 987,
+          "offset": 984,
           "type": 20,
           "symbol": "??0Message@@QAE@XZ",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268442688
+          ]
         },
         {
-          "offset": 1016,
+          "offset": 1013,
           "type": 20,
           "symbol": "?appendByte@Message@@QAEXE@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268443392
+          ]
         },
         {
-          "offset": 1022,
+          "offset": 1019,
           "type": 6,
           "symbol": "?connection@@3PAVKLRCom@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268487644
+          ]
         },
         {
-          "offset": 1043,
+          "offset": 1040,
           "type": 20,
           "symbol": "?sendMessage@KLRCom@@QAEXPAVMessage@@@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268439760
+          ]
         },
         {
-          "offset": 1063,
+          "offset": 1060,
           "type": 20,
           "symbol": "??1Message@@QAE@XZ",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268442736
+          ]
         },
         {
-          "offset": 1083,
+          "offset": 1080,
           "type": 20,
           "symbol": "?append@ByteQueue@@QAEXPAXH@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268471408
+          ]
         },
         {
-          "offset": 1089,
+          "offset": 1086,
           "type": 6,
           "symbol": "?sentDataCache@@3VByteQueueList@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488200
+          ]
         },
         {
-          "offset": 1094,
+          "offset": 1091,
           "type": 20,
           "symbol": "?Add@?$C_ItemList@VByteQueue@@@@QAEPAVByteQueue@@PAV2@@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268471328
+          ]
         },
         {
-          "offset": 1099,
+          "offset": 1096,
           "type": 6,
           "symbol": "?frameDelayCount@@3HA",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488228
+          ]
         },
         {
-          "offset": 1105,
+          "offset": 1102,
           "type": 6,
           "symbol": "?syncDelay@@3HA",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488224
+          ]
         },
         {
-          "offset": 1115,
+          "offset": 1112,
           "type": 6,
           "symbol": "?sendByteQueue@@3VByteQueue@@A",
           "coff_addend": 4,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488108
+          ]
         },
         {
-          "offset": 1124,
+          "offset": 1121,
           "type": 6,
           "symbol": "?frameDelayCount@@3HA",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488228
+          ]
         },
         {
-          "offset": 1136,
+          "offset": 1133,
           "type": 6,
           "symbol": "?frameDelayCount@@3HA",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488228
+          ]
         },
         {
-          "offset": 1147,
+          "offset": 1144,
           "type": 20,
           "symbol": "??0Message@@QAE@XZ",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268442688
+          ]
         },
         {
-          "offset": 1153,
+          "offset": 1150,
           "type": 6,
           "symbol": "__imp__GetTickCount@0",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268480548
+          ]
         },
         {
-          "offset": 1177,
+          "offset": 1174,
           "type": 20,
           "symbol": "?selectSockets@UDPCom@@SAHH@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268445008
+          ]
         },
         {
-          "offset": 1183,
+          "offset": 1180,
           "type": 6,
           "symbol": "?connection@@3PAVKLRCom@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268487644
+          ]
         },
         {
-          "offset": 1201,
+          "offset": 1198,
           "type": 6,
           "symbol": "?connection@@3PAVKLRCom@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268487644
+          ]
         },
         {
-          "offset": 1215,
+          "offset": 1212,
           "type": 20,
           "symbol": "?receiveMessage@KLRCom@@QAEHPAVMessage@@DPAUsockaddr_in@@@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268440240
+          ]
         },
         {
-          "offset": 1237,
+          "offset": 1234,
           "type": 6,
           "symbol": "?syncDelay@@3HA",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488224
+          ]
         },
         {
-          "offset": 1243,
+          "offset": 1240,
           "type": 6,
           "symbol": "?connection@@3PAVKLRCom@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268487644
+          ]
         },
         {
-          "offset": 1252,
+          "offset": 1249,
           "type": 20,
           "symbol": "?forceResend@KLRCom@@QAEXH@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268441136
+          ]
         },
         {
-          "offset": 1271,
+          "offset": 1268,
           "type": 20,
           "symbol": "?pumpGameMessages@@YAXXZ",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268468320
+          ]
         },
         {
-          "offset": 1308,
+          "offset": 1305,
           "type": 20,
           "symbol": "?dispatchMessage@@YAXPAVMessage@@@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268462000
+          ]
         },
         {
-          "offset": 1338,
+          "offset": 1335,
           "type": 20,
           "symbol": "??0Message@@QAE@ABV0@@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268442752
+          ]
         },
         {
-          "offset": 1355,
+          "offset": 1352,
           "type": 20,
           "symbol": "?readByte@Message@@QAEEXZ",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268443408
+          ]
         },
         {
-          "offset": 1361,
+          "offset": 1358,
           "type": 6,
           "symbol": "?receivedDataCache@@3VByteQueueList@@A",
           "coff_addend": 4,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488172
+          ]
         },
         {
-          "offset": 1367,
+          "offset": 1364,
           "type": 6,
           "symbol": "?receivedDataCache@@3VByteQueueList@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488168
+          ]
         },
         {
-          "offset": 1439,
+          "offset": 1436,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488088
+          ]
         },
         {
-          "offset": 1454,
+          "offset": 1451,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 8,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488096
+          ]
         },
         {
-          "offset": 1460,
+          "offset": 1457,
           "type": 6,
           "symbol": "__imp__malloc",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268480604
+          ]
         },
         {
-          "offset": 1471,
+          "offset": 1468,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 4,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488092
+          ]
         },
         {
-          "offset": 1477,
+          "offset": 1474,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 8,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488096
+          ]
         },
         {
-          "offset": 1497,
+          "offset": 1494,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 8,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488096
+          ]
         },
         {
-          "offset": 1503,
+          "offset": 1500,
           "type": 6,
           "symbol": "__imp__realloc",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268480608
+          ]
         },
         {
-          "offset": 1511,
+          "offset": 1508,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488088
+          ]
         },
         {
-          "offset": 1517,
+          "offset": 1514,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 4,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488092
+          ]
         },
         {
-          "offset": 1542,
+          "offset": 1539,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 4,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488092
+          ]
         },
         {
-          "offset": 1550,
+          "offset": 1547,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 4,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488092
+          ]
         },
         {
-          "offset": 1557,
+          "offset": 1554,
           "type": 6,
           "symbol": "?connectionType@@3HA",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268487636
+          ]
         },
         {
-          "offset": 1577,
+          "offset": 1574,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488088
+          ]
         },
         {
-          "offset": 1606,
+          "offset": 1603,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 4,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488092
+          ]
         },
         {
-          "offset": 1612,
+          "offset": 1609,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488088
+          ]
         },
         {
-          "offset": 1620,
+          "offset": 1617,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 4,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488092
+          ]
         },
         {
-          "offset": 1660,
+          "offset": 1657,
           "type": 20,
           "symbol": "??0Message@@QAE@ABV0@@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268442752
+          ]
         },
         {
-          "offset": 1677,
+          "offset": 1674,
           "type": 20,
           "symbol": "?readWord@Message@@QAEGXZ",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268443456
+          ]
         },
         {
-          "offset": 1697,
+          "offset": 1694,
           "type": 6,
           "symbol": "?receivedDataCache@@3VByteQueueList@@A",
           "coff_addend": 4,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488172
+          ]
         },
         {
-          "offset": 1718,
+          "offset": 1715,
           "type": 6,
           "symbol": "?receivedDataCache@@3VByteQueueList@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488168
+          ]
         },
         {
-          "offset": 1731,
+          "offset": 1728,
           "type": 20,
           "symbol": "??_GByteQueue@@QAEPAXI@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268471920
+          ]
         },
         {
-          "offset": 1738,
+          "offset": 1735,
           "type": 6,
           "symbol": "?receivedDataCache@@3VByteQueueList@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488168
+          ]
         },
         {
-          "offset": 1743,
+          "offset": 1740,
           "type": 20,
           "symbol": "?Del@?$C_ItemList@VByteQueue@@@@QAEXH@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268471536
+          ]
         },
         {
-          "offset": 1750,
+          "offset": 1747,
           "type": 20,
           "symbol": "??2@YAPAXI@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268476670
+          ]
         },
         {
-          "offset": 1776,
+          "offset": 1773,
           "type": 20,
-          "symbol": "??0ByteQueue@@QAE@XZ",
+          "symbol": "??0CachedByteQueue@@QAE@XZ",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268471392
+          ]
         },
         {
-          "offset": 1799,
+          "offset": 1796,
           "type": 20,
           "symbol": "?append@ByteQueue@@QAEXPAXH@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268471408
+          ]
         },
         {
-          "offset": 1805,
+          "offset": 1802,
           "type": 6,
           "symbol": "?receivedDataCache@@3VByteQueueList@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488168
+          ]
         },
         {
-          "offset": 1810,
+          "offset": 1807,
           "type": 20,
           "symbol": "?Add@?$C_ItemList@VByteQueue@@@@QAEPAVByteQueue@@PAV2@@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268471328
+          ]
         },
         {
-          "offset": 1819,
+          "offset": 1816,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488088
+          ]
         },
         {
-          "offset": 1834,
+          "offset": 1831,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 8,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488096
+          ]
         },
         {
-          "offset": 1840,
+          "offset": 1837,
           "type": 6,
           "symbol": "__imp__malloc",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268480604
+          ]
         },
         {
-          "offset": 1851,
+          "offset": 1848,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 4,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488092
+          ]
         },
         {
-          "offset": 1860,
+          "offset": 1857,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 8,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488096
+          ]
         },
         {
-          "offset": 1878,
+          "offset": 1875,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 8,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488096
+          ]
         },
         {
-          "offset": 1884,
+          "offset": 1881,
           "type": 6,
           "symbol": "__imp__realloc",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268480608
+          ]
         },
         {
-          "offset": 1892,
+          "offset": 1889,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488088
+          ]
         },
         {
-          "offset": 1898,
+          "offset": 1895,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 4,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488092
+          ]
         },
         {
-          "offset": 1923,
+          "offset": 1920,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 4,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488092
+          ]
         },
         {
-          "offset": 1931,
+          "offset": 1928,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 4,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488092
+          ]
         },
         {
-          "offset": 1938,
+          "offset": 1935,
           "type": 6,
           "symbol": "?connectionType@@3HA",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268487636
+          ]
         },
         {
-          "offset": 1958,
+          "offset": 1955,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488088
+          ]
         },
         {
-          "offset": 1987,
+          "offset": 1984,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 4,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488092
+          ]
         },
         {
-          "offset": 1993,
+          "offset": 1990,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488088
+          ]
         },
         {
-          "offset": 2001,
+          "offset": 1998,
           "type": 6,
           "symbol": "?receiveByteQueue@@3VByteQueue@@A",
           "coff_addend": 4,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488092
+          ]
         },
         {
-          "offset": 2049,
+          "offset": 2046,
           "type": 20,
           "symbol": "??0Message@@QAE@ABV0@@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268442752
+          ]
         },
         {
-          "offset": 2082,
+          "offset": 2079,
           "type": 20,
           "symbol": "?readString@Message@@QAEXPADH@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268443232
+          ]
         },
         {
-          "offset": 2087,
+          "offset": 2084,
           "type": 6,
           "symbol": "?chatCallback@@3P6GXPAD0@ZA",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268487316
+          ]
         },
         {
-          "offset": 2127,
+          "offset": 2124,
           "type": 20,
           "symbol": "?dispatchMessage@@YAXPAVMessage@@@Z",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268462000
+          ]
         },
         {
-          "offset": 2155,
+          "offset": 2152,
           "type": 20,
           "symbol": "??1Message@@QAE@XZ",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268442736
+          ]
         },
         {
-          "offset": 2175,
+          "offset": 2172,
           "type": 20,
           "symbol": "??1Message@@QAE@XZ",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268442736
+          ]
         },
         {
-          "offset": 2195,
+          "offset": 2192,
           "type": 6,
           "symbol": "??_C@_05CKBG@Error?$AA@",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268486268
+          ]
         },
         {
-          "offset": 2200,
+          "offset": 2197,
           "type": 6,
           "symbol": "??_C@_0BD@CFFA@Lost?5connection?5?3?$CI?$AA@",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268486308
+          ]
         },
         {
-          "offset": 2206,
+          "offset": 2203,
           "type": 6,
           "symbol": "?runningGame@@3HA",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268488220
+          ]
         },
         {
-          "offset": 2216,
+          "offset": 2213,
           "type": 6,
           "symbol": "__imp__GetForegroundWindow@0",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268480816
+          ]
         },
         {
-          "offset": 2223,
+          "offset": 2220,
           "type": 6,
           "symbol": "__imp__MessageBoxA@16",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268480676
+          ]
         },
         {
-          "offset": 2243,
+          "offset": 2240,
           "type": 20,
           "symbol": "??1Message@@QAE@XZ",
           "coff_addend": 0,
-          "original_operand_or_destination": []
+          "original_operand_or_destination": [
+            268442736
+          ]
         }
       ]
     },
@@ -18283,7 +21053,7 @@
     },
     {
       "object": "session.obj",
-      "name": "??0ByteQueue@@QAE@XZ",
+      "name": "??0CachedByteQueue@@QAE@XZ",
       "coff_bytes": 16,
       "fixed_bytes": 16,
       "matching_original_vas": [
@@ -18362,7 +21132,7 @@
         {
           "offset": 3,
           "type": 6,
-          "symbol": "$L47252",
+          "symbol": "$L47278",
           "coff_addend": 0,
           "original_operand_or_destination": [
             268478088
@@ -22548,43 +25318,43 @@
   ],
   "all_resource_payloads_byte_exact": true,
   "original_sha256": "410503fdfd1e931adf6024df7b8d88c725260b568688c5a5a1ab9897c83ff72d",
-  "rebuilt_sha256": "f4e99c59d4a1a446d4ec951e86e95b32ea0b15fc96a47f53fde2aa7b4eb45d45",
+  "rebuilt_sha256": "e71694f88642b01f096ef72d4b047cf19246f06b6133157ac8919340e8232bd0",
   "original_bytes": 28160,
   "rebuilt_bytes": 28160,
-  "differing_file_bytes": 22074,
+  "differing_file_bytes": 16988,
   "first_differing_offsets": [
     60,
     128,
+    129,
     130,
     131,
     132,
+    133,
     134,
     135,
     136,
+    137,
     138,
     139,
     140,
+    141,
     142,
     143,
     144,
+    145,
     146,
     147,
     148,
+    149,
     150,
     151,
     152,
+    153,
     154,
     155,
     156,
-    158,
-    159,
-    160,
-    162,
-    163,
-    164,
-    166,
-    167,
-    168
+    157,
+    158
   ],
   "remaining": [
     "remaining component instruction differences",
