@@ -19,6 +19,7 @@ from build_static import COMPONENTS
 from static_objects import Glue
 from check_gs import seed_ini
 from check_static_defaults import check as check_defaults, archive_options
+from check_static_theme import check as check_theme
 
 ROOT = Path(__file__).resolve().parents[1]
 EXTERNAL = r'''
@@ -68,6 +69,7 @@ def worker(scratch, executable, report, components=False):
         imports = [g['dll'].lower() for g in PE32(frozen).imports()]
         bundled = {Path(name).name.lower() for name, _ in COMPONENTS} | {'nemu_static.dll'}
         assert not bundled.intersection(imports), 'Loose component import remains'
+        assert not {'dwmapi.dll', 'uxtheme.dll'}.intersection(imports), 'Optional theme DLL imported at startup'
         results['windows_imports'] = sorted(set(imports))
         for name in ('nemu_probe.c', 'nemu_menu_probe.c', 'nemu_menu_probe.def'):
             shutil.copy2(ROOT / 'scripts' / name, scratch)
@@ -79,6 +81,9 @@ def worker(scratch, executable, report, components=False):
             'user32.lib', '/def:nemu_menu_probe.def'])
         compile_source('external.c', ['/LD'])
         if components:
+            check_theme(run, scratch)
+            results['scenarios'].append(dict(name='theme-compatibility', passed=True))
+            print('theme-compatibility: passed', flush=True)
             check_defaults(run, scratch)
             results['scenarios'].append(dict(name='embedded-defaults-archive', passed=True))
             print('embedded-defaults-archive: passed', flush=True)

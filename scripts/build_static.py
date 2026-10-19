@@ -356,6 +356,9 @@ class Build:
         runtime = WORK / 'StaticRuntime.obj'
         self.tool('cl', ['/nologo', '/c', '/O2', '/MT', '/GX', '/I' + win(WORK), '/Fo' + win(runtime), win(ROOT / 'src/static/StaticRuntime.cpp')])
         self.objects.append(runtime)
+        theme = WORK / 'StaticTheme.obj'
+        self.tool('cl', ['/nologo', '/c', '/O2', '/MT', '/Fo' + win(theme), win(ROOT / 'src/static/StaticTheme.cpp')])
+        self.objects.append(theme)
         self.defaults()
         resource = WORK / 'static.res'
         self.report['resources'] = aggregate([(ROOT / 'obj/nemu64/nemu64.res', 0), *self.resource_inputs], resource)

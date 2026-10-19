@@ -37,6 +37,37 @@ working-file/rename path; the embedded `.new` default is empty.
 DLL build and copies its four data files. Changes to the tracked default files
 invalidate the static executable's build target.
 
+## Native Windows dark mode
+
+The static build opts into native dark window frames and eligible native popup
+menus on Windows 10 1809 and later, following the Windows **app** theme setting.
+High contrast takes precedence. Light/dark and accessibility changes are picked
+up while the application runs. The ordinary DLL build retains its original UI.
+
+`StaticTheme.cpp` resolves the optional DWM and UxTheme functions at runtime,
+loading DLLs by their system-directory paths. Neither DLL is a startup import.
+Older Windows returns before looking up dark-mode ordinals. The actual NT
+version is queried dynamically, and the two signatures of UxTheme ordinal 135
+are handled separately for Windows 10 1809 and 1903+. Missing DLLs, missing
+exports and unsupported DWM attributes are tolerated.
+
+A thread-local window-message hook applies the frame preference to existing and
+new top-level windows on the UI thread, including native dialogs, MFC windows
+and Delphi forms, and to recreated form handles. It leaves child controls and
+application drawing to their existing implementations.
+
+This is native frame/menu support, not a complete VCL dark skin. Delphi 6's
+`clWindow`, `clBtnFace`, explicit font colors, custom painting and the old theme
+components retain their client palettes. Those colors do not automatically
+follow Windows' app dark preference. Forms can therefore have dark title bars
+with light contents. Menu bars, owner-drawn menus and individual common controls
+can also retain their existing appearance. A consistent dark client UI would
+require additional VCL/control-specific palette and drawing work.
+
+The DWM frame API is described in [Microsoft's theme guidance](https://learn.microsoft.com/en-us/windows/apps/desktop/modernize/ui/apply-windows-themes).
+The optional UxTheme app/menu APIs are undocumented; a current Microsoft example
+is [PowerToys' implementation](https://github.com/microsoft/PowerToys/blob/main/src/modules/ZoomIt/ZoomIt/Utility.cpp).
+
 ## Ordinary object and library linking
 
 `scripts/build_static.py` builds relocatable objects, archives the components
@@ -115,7 +146,12 @@ of bundled DLLs. The optional
 to synthetic RAM. Another archive fixture compares every embedded INI section
 and key against Windows, exercises Delphi `TIniFile` and text I/O, runs the
 renderer's actual combiner parser with embedded/disk/empty inputs, and verifies
-first-save behavior. Scratch files and
+first-save behavior. The theme compatibility probe uses simulated OS exports
+with real windows, dialogs, thread hooks and message delivery. It checks old
+Windows versions, both ordinal-135 signatures, missing capabilities, live theme
+changes and high contrast; the final executable is checked for accidental
+DWM/UxTheme startup imports. Native Windows dark-mode rendering still needs
+visual verification. Scratch files and
 Wine prefixes are allocated under `~/.ai-tmp`.
 
 The build remains experimental. Validation is under Wine rather than native

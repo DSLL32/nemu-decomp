@@ -1,0 +1,132 @@
+/* Run the production adapter against simulated OS exports, with real HWNDs,
+   thread hooks and message delivery. No dark-mode capability is assumed in Wine. */
+#include <windows.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#define REQUIRE(x) do { if (!(x)) { fprintf(stderr,"FAIL line %d: %s\n",__LINE__,#x); ExitProcess(5); } } while (0)
+static DWORD testMajor, testBuild;
+static bool ntMissing, dllMissing, exportsMissing, shouldMissing, appDark, highContrast, spiFails;
+static DWORD registryType, registrySize, registryValue;
+static unsigned loads, ordinalLookups, oldAppCalls, newAppCalls, flushCalls, windowCalls, dwmCalls, legacyCalls;
+static int lastMode;
+static HWND lastWindow;
+static BOOL lastDark;
+static HRESULT attribute20Result;
+static LONG WINAPI testVersion(OSVERSIONINFOW *v) { v->dwMajorVersion=testMajor;v->dwBuildNumber=testBuild;return 0; }
+static bool WINAPI testShould() { return appDark; }
+static bool WINAPI testAllowWindow(HWND w,bool d) { ++windowCalls;lastWindow=w;lastDark=d;return true; }
+static bool WINAPI testOldApp(bool d) { ++oldAppCalls;lastMode=d?1:0;return true; }
+static int WINAPI testNewApp(int mode) { ++newAppCalls;lastMode=mode;return 0; }
+static void WINAPI testRefresh() {}
+static void WINAPI testFlush() { ++flushCalls; }
+static HRESULT WINAPI testAttribute(HWND w,DWORD attribute,LPCVOID value,DWORD size) {
+ REQUIRE(size==sizeof(BOOL));REQUIRE(IsWindow(w));
+ REQUIRE(!(GetWindowLongA(w,GWL_STYLE)&WS_CHILD));
+ ++dwmCalls;lastWindow=w;lastDark=*(const BOOL *)value;
+ if(attribute==20)return attribute20Result;
+ REQUIRE(attribute==19);++legacyCalls;return S_OK;
+}
+static HMODULE WINAPI testModule(LPCSTR name) {
+ if(!name)return GetModuleHandleA(NULL);
+ REQUIRE(!strcmp(name,"ntdll.dll"));return ntMissing?NULL:(HMODULE)1;
+}
+static HMODULE WINAPI testLoad(LPCSTR name) {
+ char system[MAX_PATH];GetSystemDirectoryA(system,sizeof(system));
+ REQUIRE(!_strnicmp(name,system,strlen(system)));++loads;
+ if(dllMissing)return NULL;
+ if(strstr(name,"\\dwmapi.dll"))return (HMODULE)2;
+ REQUIRE(strstr(name,"\\uxtheme.dll")!=NULL);return (HMODULE)3;
+}
+static BOOL WINAPI testFree(HMODULE) { return TRUE; }
+static FARPROC WINAPI testAddress(HMODULE module,LPCSTR name) {
+ if(module==(HMODULE)1) { REQUIRE(!strcmp(name,"RtlGetVersion"));return (FARPROC)testVersion; }
+ if(module==(HMODULE)2) { REQUIRE(!strcmp(name,"DwmSetWindowAttribute"));return exportsMissing?NULL:(FARPROC)testAttribute; }
+ REQUIRE(module==(HMODULE)3);++ordinalLookups;
+ if(exportsMissing)return NULL;
+ switch((ULONG_PTR)name) {
+ case 132:return shouldMissing?NULL:(FARPROC)testShould;
+ case 133:return (FARPROC)testAllowWindow;
+ case 135:return testBuild>=18362?(FARPROC)testNewApp:(FARPROC)testOldApp;
+ case 104:return (FARPROC)testRefresh;
+ case 136:return (FARPROC)testFlush;
+ default:REQUIRE(0);return NULL;
+ }
+}
+static BOOL WINAPI testSpi(UINT action,UINT,PVOID data,UINT) {
+ REQUIRE(action==SPI_GETHIGHCONTRAST);
+ ((HIGHCONTRASTA *)data)->dwFlags=highContrast?HCF_HIGHCONTRASTON:0;
+ return !spiFails;
+}
+static LONG WINAPI testRegOpen(HKEY,LPCSTR name,DWORD,REGSAM,HKEY *key) {
+ REQUIRE(strstr(name,"Themes\\Personalize")!=NULL);*key=(HKEY)1;return ERROR_SUCCESS;
+}
+static LONG WINAPI testRegRead(HKEY,LPCSTR name,LPDWORD,LPDWORD type,LPBYTE value,LPDWORD size) {
+ REQUIRE(!strcmp(name,"AppsUseLightTheme"));*type=registryType;
+ memcpy(value,&registryValue,sizeof(registryValue));*size=registrySize;return ERROR_SUCCESS;
+}
+static LONG WINAPI testRegClose(HKEY) { return ERROR_SUCCESS; }
+#define GetModuleHandleA testModule
+#define LoadLibraryA testLoad
+#define FreeLibrary testFree
+#define GetProcAddress testAddress
+#define SystemParametersInfoA testSpi
+#define RegOpenKeyExA testRegOpen
+#define RegQueryValueExA testRegRead
+#define RegCloseKey testRegClose
+#include "StaticTheme.cpp"
+
+static void reset(DWORD major,DWORD build) {
+ NemuStaticThemeShutdown();testMajor=major;testBuild=build;
+ ntMissing=dllMissing=exportsMissing=shouldMissing=highContrast=spiFails=false;appDark=true;
+ registryType=REG_DWORD;registrySize=4;registryValue=0;
+ loads=ordinalLookups=oldAppCalls=newAppCalls=flushCalls=windowCalls=dwmCalls=legacyCalls=0;
+ lastMode=-1;lastWindow=NULL;lastDark=FALSE;attribute20Result=S_OK;
+}
+static HWND create(const char *cls,HWND parent) {
+ HWND w=CreateWindowExA(0,cls,"Theme probe",parent?WS_CHILD:WS_OVERLAPPEDWINDOW,
+  0,0,100,100,parent,NULL,GetModuleHandleA(NULL),NULL);
+ REQUIRE(w!=NULL);return w;
+}
+static BOOL CALLBACK dialog(HWND,UINT,WPARAM,LPARAM) { return FALSE; }
+int main() {
+ WNDCLASSA wc;HWND before,after,child,dlg;unsigned count;
+ struct { DLGTEMPLATE header;WORD menu,cls,title; } resource;
+ ZeroMemory(&wc,sizeof(wc));wc.lpfnWndProc=DefWindowProcA;wc.hInstance=GetModuleHandleA(NULL);
+ wc.lpszClassName="TFormThemeProbe";REQUIRE(RegisterClassA(&wc)!=0);
+ before=create("TFormThemeProbe",NULL);
+ reset(5,2600);NemuStaticThemeInitialize();REQUIRE(!loads&&!ordinalLookups&&!windowHook);
+ reset(6,7601);NemuStaticThemeInitialize();REQUIRE(!loads&&!ordinalLookups&&!windowHook);
+ reset(10,17134);NemuStaticThemeInitialize();REQUIRE(!loads&&!ordinalLookups&&!windowHook);
+ reset(10,22000);ntMissing=true;NemuStaticThemeInitialize();REQUIRE(!loads&&!windowHook);
+ puts("PASS: pre-dark-mode Windows never loads DLLs or calls ordinals");
+ reset(10,17763);attribute20Result=E_INVALIDARG;NemuStaticThemeInitialize();
+ REQUIRE(oldAppCalls==1&&!newAppCalls&&lastMode==1&&legacyCalls&&lastDark&&windowHook);
+ count=dwmCalls;after=create("TFormThemeProbe",NULL);REQUIRE(dwmCalls>count&&lastWindow==after);
+ count=dwmCalls;child=create("EDIT",after);REQUIRE(dwmCalls==count);
+ ZeroMemory(&resource,sizeof(resource));resource.header.style=WS_POPUP|WS_CAPTION;resource.header.cx=100;resource.header.cy=100;
+ dlg=CreateDialogIndirectParamA(GetModuleHandleA(NULL),&resource.header,NULL,dialog,0);
+ REQUIRE(dlg&&dwmCalls>count&&lastWindow==dlg);
+ appDark=false;SendMessageA(after,WM_SETTINGCHANGE,0,0);REQUIRE(lastMode==0&&!lastDark);
+ appDark=true;SendMessageA(after,WM_THEMECHANGED,0,0);REQUIRE(lastMode==1&&lastDark);
+ highContrast=true;SendMessageA(after,WM_SETTINGCHANGE,0,0);REQUIRE(lastMode==0&&!lastDark);
+ highContrast=false;SendMessageA(after,WM_SYSCOLORCHANGE,0,0);REQUIRE(lastMode==1&&lastDark);
+ REQUIRE(DestroyWindow(dlg));REQUIRE(DestroyWindow(child));REQUIRE(DestroyWindow(after));
+ puts("PASS: 1809 ABI, legacy attribute, existing/new/dialog handles, child exclusion, live theme and high contrast");
+ reset(10,18362);NemuStaticThemeInitialize();REQUIRE(newAppCalls==1&&!oldAppCalls&&lastMode==1);
+ reset(10,22000);NemuStaticThemeInitialize();REQUIRE(newAppCalls==1&&!oldAppCalls&&!legacyCalls&&lastDark);
+ highContrast=true;SendMessageA(before,WM_SETTINGCHANGE,0,0);REQUIRE(lastMode==0&&!lastDark);
+ reset(10,22000);shouldMissing=true;NemuStaticThemeInitialize();REQUIRE(lastDark&&lastMode==1);
+ registryValue=1;SendMessageA(before,WM_SETTINGCHANGE,0,0);REQUIRE(!lastDark&&lastMode==0);
+ registryValue=0;registryType=REG_SZ;SendMessageA(before,WM_SETTINGCHANGE,0,0);REQUIRE(!lastDark);
+ registryType=REG_DWORD;registrySize=2;SendMessageA(before,WM_SETTINGCHANGE,0,0);REQUIRE(!lastDark);
+ reset(10,22000);spiFails=true;NemuStaticThemeInitialize();REQUIRE(!lastDark&&lastMode==0);
+ puts("PASS: 1903+/Windows 11 ABI, registry fallback, invalid preferences and failed accessibility query");
+ reset(10,22000);attribute20Result=E_INVALIDARG;NemuStaticThemeInitialize();REQUIRE(!legacyCalls);
+ reset(10,22000);dllMissing=true;NemuStaticThemeInitialize();REQUIRE(!windowHook&&!ordinalLookups&&!dwmCalls);
+ reset(10,22000);exportsMissing=true;NemuStaticThemeInitialize();REQUIRE(!windowHook&&!dwmCalls&&!oldAppCalls&&!newAppCalls);
+ NemuStaticThemeShutdown();REQUIRE(!windowHook&&!started&&!setAttribute&&!preferredApp);
+ NemuStaticThemeShutdown();REQUIRE(DestroyWindow(before));
+ puts("PASS: unsupported attributes, absent DLLs/exports and repeatable cleanup");
+ return 0;
+}

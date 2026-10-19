@@ -2,6 +2,7 @@
    executable's real HINSTANCE and the native CRT; no DLL loader is involved. */
 #include <afxwin.h>
 #include "StaticRuntime.h"
+#include "StaticTheme.h"
 
 #pragma pack(push, 1)
 struct DelphiInit { unsigned short priority; void (__cdecl *function)(void); };
@@ -48,6 +49,7 @@ extern "C" bool __cdecl NemuStaticInitialize(HINSTANCE instance)
     rdram = VirtualAlloc(NULL, 0x20000000, MEM_RESERVE, PAGE_READWRITE);
     if (!rdram) return false;
     executableInstance = instance;
+    NemuStaticThemeInitialize();
     StaticDelphiVclInit(0, 0, (int)instance, 0);
     StaticDelphiTlsIndex = _tls_index;
     delphiReady = true;
@@ -87,4 +89,5 @@ extern "C" void __cdecl NemuStaticShutdown(void)
             if (unit.fini[i - 1].function) unit.fini[i - 1].function();
     }
     if (delphiReady) { StaticDelphiVclExit(); delphiReady = false; }
+    NemuStaticThemeShutdown();
 }
