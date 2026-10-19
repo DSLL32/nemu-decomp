@@ -20,7 +20,7 @@ public:
     virtual void sendEmpty();
     static int selectSockets(int seconds);
 private:
-    static C_ItemList<void> connections;
+    static C_ItemList<UDPCom> connections;
     static fd_set sockets;
     static fd_set selected;
     static SOCKET maximumSocket;

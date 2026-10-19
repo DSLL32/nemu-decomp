@@ -22,7 +22,7 @@ UDPCom::~UDPCom()
             maximumSocket=0;
             for (int i=0;i<connections.GetSize();i++) {
                 if (connections.Get(i)!=this) {
-                    SOCKET handle=((UDPCom *)connections.Get(i))->socketHandle;
+                    SOCKET handle=connections.Get(i)->socketHandle;
                     if (handle>maximumSocket) {
                         maximumSocket=handle;
                     }
@@ -118,13 +118,13 @@ int UDPCom::selectSockets(int seconds)
     if (!::select(descriptorCount,&selected,0,0,&timeout)) return 0;
     int count=connections.GetSize();
     for (int i=0;i<count;i++) {
-        UDPCom *connection=(UDPCom *)connections.Get(i);
+        UDPCom *connection=connections.Get(i);
         if (FD_ISSET(connection->socketHandle,&selected)) connection->readable=1;
     }
     return 1;
 }
 
-C_ItemList<void> UDPCom::connections;
+C_ItemList<UDPCom> UDPCom::connections;
 fd_set UDPCom::sockets;
 fd_set UDPCom::selected;
 SOCKET UDPCom::maximumSocket=0;
