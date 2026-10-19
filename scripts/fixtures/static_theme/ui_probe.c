@@ -49,7 +49,7 @@ static void debugger(HWND main_window, int action) {
     HANDLE result;
     message(main_window,WM_APP+0x487,action,0);
     result=GetPropA(main_window,"DebuggerProbeResult");
-    if(result!=(HANDLE)1)fprintf(stderr,"Debugger action %d: %ld\n",action,(LONG)result);
+    if(result!=(HANDLE)1) { fprintf(stderr,"Debugger action %d: %ld\n",action,(LONG)result); capture(main_window,"painter-failure.bmp"); }
     require(result==(HANDLE)1,"debugger painter and watch colors");
 }
 int main(int argc,char **argv) {
@@ -79,6 +79,7 @@ int main(int argc,char **argv) {
         capture(main_window,"divider-failure.bmp");
     }
     require(color==RGB(40,40,40),"dark toolbar divider");
+    debugger(main_window,103);debugger(main_window,104);
     capture(main_window,"main-disabled-dark.bmp");
     debugger(main_window,100);
     capture(main_window,"main-dark.bmp");

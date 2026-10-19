@@ -391,6 +391,10 @@ static LRESULT customDraw(NMHDR *header)
         FillRect(draw->hdc, &draw->rc, NemuStaticGetSysColorBrush(COLOR_BTNFACE));
         return CDRF_NOTIFYITEMDRAW;
     }
+    if (kind == Toolbar && draw->dwDrawStage == CDDS_ITEMPOSTPAINT) {
+        toolbarDropArrow(draw);
+        return CDRF_DODEFAULT;
+    }
     if (draw->dwDrawStage == CDDS_ITEMPREPAINT) {
         if (kind == Toolbar) {
             NMTBCUSTOMDRAW *bar = (NMTBCUSTOMDRAW *)draw;
@@ -399,7 +403,7 @@ static LRESULT customDraw(NMHDR *header)
             bar->clrBtnHighlight = NemuStaticGetSysColor(COLOR_BTNHIGHLIGHT);
             bar->clrHighlightHotTrack = NemuStaticGetSysColor(COLOR_HIGHLIGHT);
             bar->nStringBkMode = bar->nHLStringBkMode = TRANSPARENT;
-            return TBCDRF_HILITEHOTTRACK | TBCDRF_NOETCHEDEFFECT;
+            return TBCDRF_HILITEHOTTRACK | TBCDRF_NOETCHEDEFFECT | CDRF_NOTIFYPOSTPAINT;
         }
         RECT rect = draw->rc;
         FillRect(draw->hdc, &rect, NemuStaticGetSysColorBrush(COLOR_BTNFACE));

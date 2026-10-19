@@ -103,12 +103,42 @@ static void toolbarImages(ThemedWindow *state)
     for (int i = 0; i < buttons; ++i) {
         TBBUTTON button;
         if (!SendMessage(window, TB_GETBUTTON, i, (LPARAM)&button)) continue;
-        if (button.idCommand != ID_PAUSE && button.idCommand != ID_CLOSE_ROM && button.idCommand != ID_RESET) continue;
+        if (button.idCommand != ID_PAUSE && button.idCommand != ID_CLOSE_ROM && button.idCommand != ID_RESET &&
+            button.idCommand != 0x8026 /* Open ROM (eject glyph) */) continue;
         toolbarImage(current, copy, button.iBitmap, width, height, false);
     }
     state->originalImages = current; state->darkImages = copy; state->darkDisabledImages = disabled;
     SendMessage(window, TB_SETIMAGELIST, 0, (LPARAM)copy);
     SendMessage(window, TB_SETDISABLEDIMAGELIST, 0, (LPARAM)disabled);
+}
+
+static void toolbarDropArrow(NMCUSTOMDRAW *draw)
+{
+    // The classic toolbar paints these glyphs with Windows' global text color,
+    // independently of NMTBCUSTOMDRAW.clrText. Replace only the split-arrow
+    // interior after native drawing, retaining its border and hit testing.
+    if (draw->dwItemSpec != 0x801e && draw->dwItemSpec != 0x801f) return;
+    int index = (int)SendMessage(draw->hdr.hwndFrom, TB_COMMANDTOINDEX, draw->dwItemSpec, 0);
+    TBBUTTON button;
+    if (index < 0 || !SendMessage(draw->hdr.hwndFrom, TB_GETBUTTON, index, (LPARAM)&button) ||
+        !(button.fsStyle & TBSTYLE_DROPDOWN)) return;
+    int normalWidth = LOWORD(SendMessage(draw->hdr.hwndFrom, TB_GETBUTTONSIZE, 0, 0));
+    int width = draw->rc.right-draw->rc.left-normalWidth;
+    if (width < 5) return;
+    RECT arrow = draw->rc; arrow.left = arrow.right-width;
+    InflateRect(&arrow, -1, -1);
+    bool enabled = (button.fsState & TBSTATE_ENABLED) != 0;
+    bool hot = (draw->uItemState & (CDIS_HOT | CDIS_SELECTED)) != 0;
+    FillRect(draw->hdc, &arrow, NemuStaticGetSysColorBrush(hot ? COLOR_HIGHLIGHT : COLOR_BTNFACE));
+    HPEN pen = CreatePen(PS_SOLID, 1, NemuStaticGetSysColor(
+        !enabled ? COLOR_GRAYTEXT : hot ? COLOR_HIGHLIGHTTEXT : COLOR_BTNTEXT));
+    HGDIOBJ old = SelectObject(draw->hdc, pen);
+    int x = (arrow.left+arrow.right)/2, y = (arrow.top+arrow.bottom)/2;
+    if (draw->uItemState & CDIS_SELECTED) { ++x; ++y; }
+    for (int i = 0; i < 4; ++i) {
+        MoveToEx(draw->hdc, x-3+i, y-1+i, NULL); LineTo(draw->hdc, x+4-i, y-1+i);
+    }
+    SelectObject(draw->hdc, old); DeleteObject(pen);
 }
 
 static void scrollArrow(HDC dc, RECT rect, bool vertical, bool forward, bool enabled)

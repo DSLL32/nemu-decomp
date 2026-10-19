@@ -48,13 +48,13 @@ extern "C" int __cdecl ProbeDebugger(int action);
 static HOOKPROC productionHook;
 static int probeToolbar(HWND main) {
     HWND toolbar=FindWindowExA(main,NULL,TOOLBARCLASSNAMEA,NULL);
-    int commands[3]={32804,32777,32800};
+    int commands[4]={32804,32777,32800,32806};
     HIMAGELIST images=(HIMAGELIST)SendMessage(toolbar,TB_GETIMAGELIST,0,0);
     int width,height; if(!images || !ImageList_GetIconSize(images,&width,&height))return 50;
     HDC screen=GetDC(NULL),dc=CreateCompatibleDC(screen);
     HBITMAP bitmap=CreateCompatibleBitmap(screen,width,height);
     HGDIOBJ original=SelectObject(dc,bitmap);int result=1;
-    for(int i=0;i<3;++i) {
+    for(int i=0;i<4;++i) {
         SendMessage(toolbar,TB_ENABLEBUTTON,commands[i],TRUE);
         int index=(int)SendMessage(toolbar,TB_COMMANDTOINDEX,commands[i],0);
         TBBUTTON button;SendMessage(toolbar,TB_GETBUTTON,index,(LPARAM)&button);
@@ -71,6 +71,31 @@ static int probeToolbar(HWND main) {
     }
     SelectObject(dc,original);DeleteObject(bitmap);DeleteDC(dc);ReleaseDC(NULL,screen);
     UpdateWindow(toolbar);
+    return result;
+}
+static int probeToolbarArrows(HWND main,bool disabled) {
+    HWND toolbar=FindWindowExA(main,NULL,TOOLBARCLASSNAMEA,NULL);
+    int commands[2]={0x801e,0x801f},result=1;
+    for(int i=0;i<2;++i) {
+        BYTE state=(BYTE)SendMessage(toolbar,TB_GETSTATE,commands[i],0);
+        SendMessage(toolbar,TB_ENABLEBUTTON,commands[i],!disabled);
+        InvalidateRect(toolbar,NULL,TRUE);UpdateWindow(toolbar);GdiFlush();Sleep(50);
+        int index=(int)SendMessage(toolbar,TB_COMMANDTOINDEX,commands[i],0);
+        RECT rect;SendMessage(toolbar,TB_GETITEMRECT,index,(LPARAM)&rect);
+        int width=rect.right-rect.left-LOWORD(SendMessage(toolbar,TB_GETBUTTONSIZE,0,0));
+        POINT point={rect.right-width/2-1,(rect.top+rect.bottom)/2};
+        HDC dc=GetDC(toolbar);COLORREF color=GetPixel(dc,point.x,point.y);ReleaseDC(toolbar,dc);
+        if(color!=(disabled ? RGB(150,150,150) : RGB(232,232,232))) {
+            TBBUTTON b;SendMessage(toolbar,TB_GETBUTTON,index,(LPARAM)&b);
+            char diagnostic[200];wsprintfA(diagnostic,"arrow command %x disabled %d state %x color %lx width %d rect %d,%d-%d,%d\r\n",
+                commands[i],disabled,b.fsState,color,width,rect.left,rect.top,rect.right,rect.bottom);
+            HANDLE log=CreateFileA("arrow-debug.txt",GENERIC_WRITE,FILE_SHARE_READ,NULL,OPEN_ALWAYS,0,NULL);
+            SetFilePointer(log,0,NULL,FILE_END);DWORD written;WriteFile(log,diagnostic,lstrlenA(diagnostic),&written,NULL);CloseHandle(log);
+            result=70+i;
+        }
+        SendMessage(toolbar,TB_SETSTATE,commands[i],state);
+    }
+    InvalidateRect(toolbar,NULL,TRUE);UpdateWindow(toolbar);
     return result;
 }
 static int probeScrollbar(HWND main,bool move) {
@@ -92,7 +117,9 @@ static LRESULT CALLBACK fixtureMessages(int code,WPARAM w,LPARAM l) {
     if(code>=0 && message->message==WM_APP+0x487) {
         int result=message->wParam==100 ? probeToolbar(message->hwnd) :
             message->wParam==101 ? probeScrollbar(message->hwnd,true) :
-            message->wParam==102 ? probeScrollbar(message->hwnd,false) : ProbeDebugger((int)message->wParam);
+            message->wParam==102 ? probeScrollbar(message->hwnd,false) :
+            message->wParam==103 ? probeToolbarArrows(message->hwnd,false) :
+            message->wParam==104 ? probeToolbarArrows(message->hwnd,true) : ProbeDebugger((int)message->wParam);
         SetPropA(message->hwnd,"DebuggerProbeResult",(HANDLE)result);
     }
     return productionHook(code,w,l);

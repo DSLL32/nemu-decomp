@@ -75,9 +75,10 @@ control commands and focus cues continue through the original window procedures.
 
 `StaticThemeControls.inc` supplies dark classic button faces/edges, paints the
 ROM list's nonclient scrollbars using their native geometry and interaction,
-and removes the toolbar's light divider. Pause/stop/reset icons use an inverted,
+and removes the toolbar's light divider. Eject/pause/stop/reset icons use an inverted,
 masked copy of the toolbar image list; magenta remains transparent. A separate
-masked gray image list keeps disabled glyphs visible. The shared browser images
+masked gray image list keeps disabled glyphs visible. Toolbar dropdown arrows
+use the dark foreground after native painting, including their disabled state. The shared browser images
 remain intact. The original image lists and divider flag are restored in light mode.
 
 Generated debugger painters use `StaticThemeColor` for explicit backgrounds,
