@@ -81,13 +81,9 @@ checkbox/radio/group-box gaps, and application artwork. Light mode restores
 the control colors; high contrast uses the original Windows colors. Keyboard input,
 control commands and focus cues continue through the original window procedures.
 
-The USER32 message-box backdrop fallback fills the background during paint as
-well as background erasure, covering the light button footer seen with the
-older themes. The new control theme does not replace this background handling.
-The adapter identifies their system dialog procedure and clips out visible
-children, leaving icons, text and native buttons to their own controls.
-Application dialog paint handlers are retained, and light/high-contrast modes
-use the original system message-box painting.
+USER32 message boxes retain Windows' client-paint and background-erasure
+handlers in every mode. Their child controls receive the eligible native theme
+and supported color messages, with no custom message-box background painter.
 
 `StaticThemeControls.inc` supplies dark faces/edges for VCL's own classic
 painters and removes the toolbar's light divider. It does not paint native

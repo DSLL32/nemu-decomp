@@ -193,26 +193,6 @@ static bool systemMessageBox(HWND window)
     return procedure && VirtualQuery(procedure,&memory,sizeof(memory)) == sizeof(memory) &&
         memory.AllocationBase == GetModuleHandleA("user32.dll");
 }
-struct DialogBackground { HWND window; HDC dc; };
-static BOOL CALLBACK clipDialogChild(HWND child,LPARAM data)
-{
-    DialogBackground *background = (DialogBackground *)data;
-    if (GetParent(child) == background->window && IsWindowVisible(child)) {
-        RECT rect; GetWindowRect(child,&rect);
-        MapWindowPoints(NULL,background->window,(POINT *)&rect,2);
-        ExcludeClipRect(background->dc,rect.left,rect.top,rect.right,rect.bottom);
-    }
-    return TRUE;
-}
-static void paintMessageBackground(HWND window,HDC dc)
-{
-    int saved = SaveDC(dc);
-    DialogBackground background = {window,dc};
-    EnumChildWindows(window,clipDialogChild,(LPARAM)&background);
-    RECT rect; GetClientRect(window,&rect);
-    FillRect(dc,&rect,NemuStaticGetSysColorBrush(COLOR_BTNFACE));
-    if (saved) RestoreDC(dc,saved);
-}
 static void controlColors(ThemedWindow *state)
 {
     HWND window = state->window;
@@ -538,18 +518,9 @@ static LRESULT CALLBACK themedProc(HWND window, UINT message, WPARAM wParam, LPA
             if ((kind == Toolbar || kind == Header) && !usesNativeTheme(((NMHDR *)lParam)->hwndFrom))
                 return customDraw((NMHDR *)lParam);
         }
-        if (state->systemMessage &&
-            (message == WM_PAINT || message == WM_PRINTCLIENT)) {
-            // USER32 paints the themed message-box footer with light colors
-            // after background erasure. Replace only that dialog backdrop;
-            // the message/icon and native buttons are separate child windows.
-            PAINTSTRUCT paint;
-            HDC dc = message == WM_PAINT ? BeginPaint(window,&paint) : (HDC)wParam;
-            paintMessageBackground(window,dc);
-            if (message == WM_PAINT) EndPaint(window,&paint);
-            return 1;
-        }
-        if (message == WM_ERASEBKGND && (state->kind == Panel || (!state->nativeTheme &&
+        // System message boxes retain Windows' paint and background-erasure
+        // handlers. Only application-owned panels use our background fill.
+        if (message == WM_ERASEBKGND && ((state->kind == Panel && !state->systemMessage) || (!state->nativeTheme &&
             (state->kind == Toolbar || state->kind == Status || state->kind == Tabs ||
              (state->kind == Button && customButton(window)))))) {
             RECT rect; GetClientRect(window, &rect);

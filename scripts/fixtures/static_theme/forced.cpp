@@ -46,30 +46,7 @@ static BOOL WINAPI spi(UINT action,UINT size,PVOID data,UINT flags) {
 }
 extern "C" int __cdecl ProbeDebugger(int action);
 static HOOKPROC productionHook;
-static bool systemMessageBox(HWND window);
-static int probeMessageBackground(HWND dialog) {
-    if(!systemMessageBox(dialog))return 110;
-    HWND button=GetDlgItem(dialog,IDOK);if(!button)return 111;
-    if((GetWindowLong(button,GWL_STYLE)&0xf)==BS_OWNERDRAW)return 112;
-    if(mode()=='d') {
-        RECT client;GetClientRect(dialog,&client);
-        HDC screen=GetDC(dialog),dc=CreateCompatibleDC(screen);
-        HBITMAP bitmap=CreateCompatibleBitmap(screen,client.right,client.bottom);ReleaseDC(dialog,screen);
-        HGDIOBJ old=SelectObject(dc,bitmap);
-        RECT buttonRect;GetWindowRect(button,&buttonRect);MapWindowPoints(NULL,dialog,(POINT *)&buttonRect,2);
-        FillRect(dc,&client,(HBRUSH)GetStockObject(WHITE_BRUSH));
-        SendMessage(dialog,WM_PRINTCLIENT,(WPARAM)dc,PRF_CLIENT);
-        bool ok=GetPixel(dc,5,buttonRect.top+2)==RGB(40,40,40) &&
-            GetPixel(dc,buttonRect.left+2,buttonRect.top+2)==RGB(255,255,255);
-        // Native themed buttons can ask their parent to erase a backdrop into
-        // their own DC. That request must still fill the transparent corners.
-        SendMessage(dialog,WM_ERASEBKGND,(WPARAM)dc,0);
-        ok=ok && GetPixel(dc,buttonRect.left+2,buttonRect.top+2)==RGB(40,40,40);
-        SelectObject(dc,old);DeleteObject(bitmap);DeleteDC(dc);
-        if(!ok)return 113;
-    }
-    return 1;
-}
+static int probeMessageBackground(HWND dialog);
 static int probeButtonBackground(HWND dialog) {
     const int buttons[]={IDOK,IDCANCEL,1033,1035,1042};
     bool dark=mode()=='d';
@@ -174,3 +151,37 @@ static HHOOK WINAPI installHook(int type,HOOKPROC proc,HINSTANCE instance,DWORD 
 #define GetProcAddress address
 #define SystemParametersInfoA spi
 #include "StaticTheme.cpp"
+
+static LRESULT CALLBACK messagePainter(HWND window,UINT message,WPARAM w,LPARAM l,UINT_PTR,DWORD_PTR)
+{
+    if(message==WM_PRINTCLIENT || message==WM_ERASEBKGND) {
+        RECT rect;GetClientRect(window,&rect);
+        HBRUSH brush=CreateSolidBrush(RGB(11,71,123));
+        FillRect((HDC)w,&rect,brush);DeleteObject(brush);return 1;
+    }
+    return defaultSubclass(window,message,w,l);
+}
+static int probeMessageBackground(HWND dialog)
+{
+    if(!systemMessageBox(dialog))return 110;
+    HWND button=GetDlgItem(dialog,IDOK);if(!button)return 111;
+    if((GetWindowLong(button,GWL_STYLE)&0xf)==BS_OWNERDRAW)return 112;
+    // Put a simulated Windows painter below the adapter. Both client painting
+    // and background erasure must reach it without any replacement pixels.
+    ThemedWindow *state=windows;while(state && state->window!=dialog)state=state->next;
+    if(!state || !removeSubclass(dialog,themedProc,subclassId))return 113;
+    subclassWindow(dialog,messagePainter,7,0);
+    subclassWindow(dialog,themedProc,subclassId,(DWORD_PTR)state);
+    RECT client;GetClientRect(dialog,&client);
+    HDC screen=GetDC(dialog),dc=CreateCompatibleDC(screen);
+    HBITMAP bitmap=CreateCompatibleBitmap(screen,client.right,client.bottom);ReleaseDC(dialog,screen);
+    HGDIOBJ old=SelectObject(dc,bitmap);
+    SendMessage(dialog,WM_PRINTCLIENT,(WPARAM)dc,PRF_CLIENT);
+    bool ok=GetPixel(dc,3,3)==RGB(11,71,123);
+    FillRect(dc,&client,(HBRUSH)GetStockObject(WHITE_BRUSH));
+    SendMessage(dialog,WM_ERASEBKGND,(WPARAM)dc,0);
+    ok=ok && GetPixel(dc,3,3)==RGB(11,71,123);
+    removeSubclass(dialog,messagePainter,7);
+    SelectObject(dc,old);DeleteObject(bitmap);DeleteDC(dc);
+    return ok ? 1 : 114;
+}
