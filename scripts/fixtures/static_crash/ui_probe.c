@@ -46,12 +46,38 @@ int main(int argc,char **argv) {
     require(!IsWindowVisible(edit),"details initially collapsed");GetWindowRect(dialog,&collapsed);
     SendMessage(dialog,WM_COMMAND,1001,0);GetWindowRect(dialog,&expanded);
     require(IsWindowVisible(edit)&&expanded.bottom-expanded.top>collapsed.bottom-collapsed.top,"Details expands");
+    RedrawWindow(dialog,NULL,NULL,RDW_INVALIDATE|RDW_ERASE|RDW_FRAME|RDW_ALLCHILDREN|RDW_UPDATENOW);
     SendMessageA(edit,WM_GETTEXT,sizeof(text),(LPARAM)text);
     _snprintf(filename,sizeof(filename),"report-%s.txt",argv[2]);file=fopen(filename,"wb");require(file!=NULL,"save test report");
     fwrite(text,strlen(text),1,file);fclose(file);
     require(strstr(text,"Exception: C0000005")!=NULL,"exception code");
     require(strstr(text,"Build: ")!=NULL && strstr(text,"symbols unavail")==NULL,"embedded build and symbol table");
     require(strstr(text,"Stack candidates")!=NULL,"uncertain frames labelled separately");
+    require(strstr(text,"Fault location:")==NULL && strstr(text,"[fault]")!=NULL,"fault appears once at start of stack");
+    {
+        int first=(int)SendMessage(edit,EM_LINEINDEX,0,0),second=(int)SendMessage(edit,EM_LINEINDEX,1,0);
+        LRESULT a=SendMessage(edit,EM_POSFROMCHAR,first,0),b=SendMessage(edit,EM_POSFROMCHAR,second,0);
+        HDC dc=GetDC(dialog);int dpi=GetDeviceCaps(dc,LOGPIXELSY);COLORREF background=GetPixel(dc,5,5);
+        int line=(short)HIWORD(b)-(short)HIWORD(a);
+        ReleaseDC(dialog,dc);
+        require(a!=-1 && b!=-1 && line>=8 && line<=MulDiv(16,dpi,96),"details uses compact readable font");
+        if(!strcmp(argv[2],"dark")) {
+            RECT client,outer;int x,y,arrowPixels=0;HWND button=GetDlgItem(dialog,IDOK);
+            require(background==RGB(40,40,40),"dark reporter dialog background");
+            dc=GetDC(edit);GetClientRect(edit,&client);
+            require(GetPixel(dc,client.right-3,3)==RGB(25,25,25),"dark report background");ReleaseDC(edit,dc);
+            dc=GetDC(button);require(GetPixel(dc,3,3)==RGB(50,50,50),"dark Close button face");ReleaseDC(button,dc);
+            SendMessage(edit,WM_VSCROLL,SB_BOTTOM,0);SendMessage(edit,WM_HSCROLL,SB_RIGHT,0);
+            GetWindowRect(edit,&outer);dc=GetWindowDC(edit);
+            require(GetPixel(dc,0,0)==RGB(80,80,80),"dark report border");
+            require(GetPixel(dc,outer.right-outer.left-GetSystemMetrics(SM_CXVSCROLL)-1,3)==RGB(40,40,40),"scrollbar stays dark after scrolling");
+            for(y=3;y<GetSystemMetrics(SM_CYVSCROLL);++y)
+                for(x=outer.right-outer.left-GetSystemMetrics(SM_CXVSCROLL);x<outer.right-outer.left-3;++x)
+                    if(GetPixel(dc,x,y)==RGB(232,232,232))++arrowPixels;
+            require(arrowPixels>8,"scrollbar arrow stays visible");
+            ReleaseDC(edit,dc);SendMessage(edit,WM_VSCROLL,SB_TOP,0);SendMessage(edit,WM_HSCROLL,SB_LEFT,0);
+        } else require(background==GetSysColor(COLOR_BTNFACE),"XP/light dialog keeps system palette");
+    }
     if(!strcmp(argv[2],"vcl")) {
         require(strstr(text,"Delphi: EAccessViolation")!=NULL,"Delphi exception class/message");
         require(strstr(text,"Captured before exception handlers")!=NULL&&strstr(text,"CrashClick")!=NULL,"pre-unwind Delphi context and stack");
@@ -65,7 +91,7 @@ int main(int argc,char **argv) {
     SendMessage(dialog,WM_COMMAND,1002,0);require(OpenClipboard(NULL),"read copied report");
     {HGLOBAL data=GetClipboardData(CF_TEXT);const char *copied=(const char *)GlobalLock(data);
     require(copied!=NULL&&!strcmp(copied,text),"Copy includes complete report");GlobalUnlock(data);CloseClipboard();}
-    Sleep(100);capture(dialog,"crash-dialog.bmp");
+    Sleep(100);_snprintf(filename,sizeof(filename),"crash-dialog-%s.bmp",argv[2]);capture(dialog,filename);
     SendMessage(dialog,WM_COMMAND,1001,0);require(!IsWindowVisible(edit),"Details collapses");
     PostMessage(dialog,WM_COMMAND,IDOK,0);require(WaitForSingleObject(process.hProcess,10000)==WAIT_OBJECT_0,"Close ends faulted process");
     GetExitCodeProcess(process.hProcess,&code);require(code==0xc0000005,"fatal exception exit code");

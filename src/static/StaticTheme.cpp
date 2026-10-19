@@ -4,6 +4,7 @@
 #include <commctrl.h>
 #include <stdlib.h>
 #include "StaticTheme.h"
+#include "StaticCrash.h"
 
 #ifndef BS_TYPEMASK
 #define BS_TYPEMASK 0x0000000fL
@@ -619,6 +620,7 @@ static void refreshTheme(void)
     updating = true;
     if (refreshPolicy) refreshPolicy();
     dark = applicationPrefersDark();
+    NemuStaticCrashSetDark(dark);
     // Ordinal 135 changed ABI between 1809 and 1903. Resolve just the signature
     // appropriate for the actual NT build; presence alone is insufficient.
     if (preferredApp) preferredApp(dark ? 1 /* AllowDark */ : 0 /* Default */);
@@ -711,6 +713,7 @@ extern "C" void __cdecl NemuStaticThemeShutdown(void)
     if (windowHook) UnhookWindowsHookEx(windowHook);
     windowHook = NULL;
     updating = true; dark = false;
+    NemuStaticCrashSetDark(FALSE);
     if (vclReady) NemuStaticVclThemeRefresh();
     vclReady = false;
     for (ThemedWindow *restore = windows; restore; restore = restore->next)

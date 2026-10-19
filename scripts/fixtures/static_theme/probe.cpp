@@ -81,6 +81,8 @@ static LONG WINAPI testRegClose(HKEY) { return ERROR_SUCCESS; }
 #define RegQueryValueExA testRegRead
 #define RegCloseKey testRegClose
 static unsigned vclRefreshCalls;
+static BOOL crashDark;
+extern "C" void __cdecl NemuStaticCrashSetDark(BOOL enabled) { crashDark=enabled; }
 extern "C" void __cdecl NemuStaticVclThemeRefresh(void) { ++vclRefreshCalls; }
 #include "StaticTheme.cpp"
 
@@ -106,13 +108,13 @@ int main() {
  InitCommonControls();
  before=create("TFormThemeProbe",NULL);
  HMENU menu=CreateMenu();AppendMenuA(menu,MF_STRING,101,"&Probe");SetMenu(before,menu);
- reset(5,2600);NemuStaticThemeInitialize();REQUIRE(!loads&&!ordinalLookups&&!windowHook);
+ reset(5,2600);NemuStaticThemeInitialize();REQUIRE(!loads&&!ordinalLookups&&!windowHook&&!crashDark);
  reset(6,7601);NemuStaticThemeInitialize();REQUIRE(!loads&&!ordinalLookups&&!windowHook);
  reset(10,17134);NemuStaticThemeInitialize();REQUIRE(!loads&&!ordinalLookups&&!windowHook);
  reset(10,22000);ntMissing=true;NemuStaticThemeInitialize();REQUIRE(!loads&&!windowHook);
  puts("PASS: pre-dark-mode Windows never loads DLLs or calls ordinals");
  reset(10,17763);attribute20Result=E_INVALIDARG;NemuStaticThemeInitialize();
- REQUIRE(oldAppCalls==1&&!newAppCalls&&lastMode==1&&legacyCalls&&lastDark&&windowHook);
+ REQUIRE(oldAppCalls==1&&!newAppCalls&&lastMode==1&&legacyCalls&&lastDark&&windowHook&&crashDark);
  MENUITEMINFOA info;ZeroMemory(&info,sizeof(info));info.cbSize=sizeof(info);info.fMask=MIIM_FTYPE;
  REQUIRE(GetMenuItemInfoA(menu,0,TRUE,&info)&&(info.fType&MFT_OWNERDRAW));
  count=dwmCalls;after=create("TFormThemeProbe",NULL);REQUIRE(dwmCalls>count&&lastWindow==after);
@@ -120,10 +122,10 @@ int main() {
  ZeroMemory(&resource,sizeof(resource));resource.header.style=WS_POPUP|WS_CAPTION;resource.header.cx=100;resource.header.cy=100;
  dlg=CreateDialogIndirectParamA(GetModuleHandleA(NULL),&resource.header,NULL,dialog,0);
  REQUIRE(dlg&&dwmCalls>count&&lastWindow==dlg);
- appDark=false;SendMessageA(after,WM_SETTINGCHANGE,0,0);REQUIRE(lastMode==0&&!lastDark);
+ appDark=false;SendMessageA(after,WM_SETTINGCHANGE,0,0);REQUIRE(lastMode==0&&!lastDark&&!crashDark);
  REQUIRE(GetMenuItemInfoA(menu,0,TRUE,&info)&&!(info.fType&MFT_OWNERDRAW));
- appDark=true;SendMessageA(after,WM_THEMECHANGED,0,0);REQUIRE(lastMode==1&&lastDark);
- highContrast=true;SendMessageA(after,WM_SETTINGCHANGE,0,0);REQUIRE(lastMode==0&&!lastDark);
+ appDark=true;SendMessageA(after,WM_THEMECHANGED,0,0);REQUIRE(lastMode==1&&lastDark&&crashDark);
+ highContrast=true;SendMessageA(after,WM_SETTINGCHANGE,0,0);REQUIRE(lastMode==0&&!lastDark&&!crashDark);
  highContrast=false;SendMessageA(after,WM_SYSCOLORCHANGE,0,0);REQUIRE(lastMode==1&&lastDark);
  REQUIRE(DestroyWindow(dlg));REQUIRE(DestroyWindow(child));REQUIRE(DestroyWindow(after));
  puts("PASS: 1809 ABI, legacy attribute, existing/new/dialog handles, child exclusion, live theme and high contrast");

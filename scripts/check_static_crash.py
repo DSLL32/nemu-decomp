@@ -49,7 +49,7 @@ def worker(scratch):
         tool('compile-ui','cl','/nologo','/O2','/MT','ui_probe.c','/link','user32.lib','gdi32.lib')
         # Nothing beside the EXE in the launch directory: no maps/PDBs/DLLs.
         fixture=scratch/'isolated';fixture.mkdir();shutil.copy2(scratch/'probe.exe',fixture/'probe.exe')
-        for mode in ('main','worker','badbp','caught'):
+        for mode in ('main','dark','worker','badbp','caught'):
             output=run('crash-'+mode,['setarch','i386','-R','wine',str(scratch/'ui_probe.exe'),'probe.exe',mode],fixture)
             assert 'PASS:' in output
             print(output.strip(),flush=True)

@@ -35,9 +35,7 @@ static RemoveHandler removeHandler;
 static NemuStaticDescribeCode describeCode;
 static const SymbolHeader *symbols;
 static DWORD symbolSize;
-static bool details;
-static HWND detailEdit, detailButton, copyButton;
-enum { ID_DETAILS = 1001, ID_COPY = 1002, ID_REPORT = 1003 };
+static volatile LONG preferDark;
 
 static bool readMemory(DWORD address, void *output, unsigned size)
 {
@@ -218,12 +216,11 @@ static void buildReport(void)
     append("\r\nRegisters:\r\nEAX=%08lX EBX=%08lX ECX=%08lX EDX=%08lX\r\n"
         "ESI=%08lX EDI=%08lX EBP=%08lX ESP=%08lX\r\nEIP=%08lX EFLAGS=%08lX\r\n",
         c.Eax,c.Ebx,c.Ecx,c.Edx,c.Esi,c.Edi,c.Ebp,c.Esp,c.Eip,c.EFlags);
-    append("\r\nFault location:\r\n"); location((DWORD)crash.exception.ExceptionAddress, false);
-    append("\r\n\r\nStack (compiler FPO recipes / saved frame links):\r\n");
+    append("\r\nStack (faulting instruction first; compiler FPO recipes / saved frame links):\r\n");
     if (crash.snapshot) append("Captured before exception handlers unwound the stack.\r\n");
     DWORD seen[96], frames = 0;
     CONTEXT cursor = c;
-    location(cursor.Eip, false); append("\r\n");
+    location(cursor.Eip, false); append("  [fault]\r\n");
     while (frames < sizeof(seen)/sizeof(seen[0])) {
         DWORD lookup = cursor.Eip-(frames && cursor.Eip ? 1 : 0);
         const FrameRecipe *recipe = findRecipe(lookup);
@@ -274,45 +271,7 @@ static void copyReport(HWND window)
     }
     if (text) GlobalFree(text);
 }
-static INT_PTR CALLBACK dialogProc(HWND window, UINT message, WPARAM w, LPARAM)
-{
-    if (message == WM_INITDIALOG) {
-        SetWindowTextA(window, "Nemu64 - Application Error"); details = false;
-        HFONT font = (HFONT)GetStockObject(DEFAULT_GUI_FONT);
-        HWND icon = CreateWindowExA(0,"STATIC",NULL,WS_CHILD|WS_VISIBLE|SS_ICON,18,18,32,32,window,NULL,application,NULL);
-        SendMessage(icon,STM_SETICON,(WPARAM)LoadIcon(NULL,IDI_ERROR),0);
-        HWND text = CreateWindowExA(0,"STATIC","Nemu64 encountered an error and must close.\r\n\r\nPlease copy the details when reporting this problem.",
-            WS_CHILD|WS_VISIBLE,64,18,345,80,window,NULL,application,NULL);
-        HWND close = CreateWindowExA(0,"BUTTON","Close",WS_CHILD|WS_VISIBLE|WS_TABSTOP|BS_DEFPUSHBUTTON,
-            428,18,90,26,window,(HMENU)IDOK,application,NULL);
-        detailButton = CreateWindowExA(0,"BUTTON","Details >>",WS_CHILD|WS_VISIBLE|WS_TABSTOP,428,58,90,26,window,(HMENU)ID_DETAILS,application,NULL);
-        copyButton = CreateWindowExA(0,"BUTTON","Copy report",WS_CHILD|WS_VISIBLE|WS_TABSTOP,18,110,112,26,window,(HMENU)ID_COPY,application,NULL);
-        detailEdit = CreateWindowExA(WS_EX_CLIENTEDGE,"EDIT",report,WS_CHILD|WS_TABSTOP|WS_VSCROLL|WS_HSCROLL|
-            ES_READONLY|ES_MULTILINE|ES_AUTOVSCROLL|ES_AUTOHSCROLL,18,150,500,270,window,(HMENU)ID_REPORT,application,NULL);
-        HWND controls[] = {text,close,detailButton,copyButton};
-        for (unsigned i = 0; i < sizeof(controls)/sizeof(controls[0]); ++i) SendMessage(controls[i],WM_SETFONT,(WPARAM)font,TRUE);
-        SendMessage(detailEdit,WM_SETFONT,(WPARAM)GetStockObject(ANSI_FIXED_FONT),TRUE);
-        SendMessage(detailEdit,EM_SETLIMITTEXT,sizeof(report),0);
-        RECT rect = {0,0,536,150}; AdjustWindowRectEx(&rect,WS_POPUP|WS_CAPTION|WS_SYSMENU|DS_MODALFRAME,FALSE,WS_EX_DLGMODALFRAME);
-        SetWindowPos(window,HWND_TOPMOST,(GetSystemMetrics(SM_CXSCREEN)-(rect.right-rect.left))/2,
-            (GetSystemMetrics(SM_CYSCREEN)-480)/2,rect.right-rect.left,rect.bottom-rect.top,SWP_SHOWWINDOW);
-        return TRUE;
-    }
-    if (message == WM_COMMAND) {
-        if (LOWORD(w) == IDOK || LOWORD(w) == IDCANCEL) { EndDialog(window, IDOK); return TRUE; }
-        if (LOWORD(w) == ID_COPY) { copyReport(window); return TRUE; }
-        if (LOWORD(w) == ID_DETAILS) {
-            details = !details;
-            RECT rect = {0,0,536,details ? 438 : 150};
-            AdjustWindowRectEx(&rect,WS_POPUP|WS_CAPTION|WS_SYSMENU|DS_MODALFRAME,FALSE,WS_EX_DLGMODALFRAME);
-            SetWindowPos(window,NULL,0,0,rect.right-rect.left,rect.bottom-rect.top,SWP_NOMOVE|SWP_NOZORDER);
-            ShowWindow(detailEdit,details ? SW_SHOW : SW_HIDE);
-            SetWindowTextA(detailButton,details ? "Details <<" : "Details >>"); return TRUE;
-        }
-    }
-    if (message == WM_CLOSE) { EndDialog(window, IDOK); return TRUE; }
-    return FALSE;
-}
+#include "StaticCrashDialog.inc"
 static void showReport(void)
 {
     __try { buildReport(); }
@@ -393,7 +352,7 @@ extern "C" void __cdecl NemuStaticCrashInitialize(HINSTANCE instance)
     if (!GetModuleFileNameA(instance,path,sizeof(path))) lstrcpyA(path,"nemu64-static.exe");
     path[sizeof(path)-1]=0;
     const char *leaf=strrchr(path,'\\');lstrcpynA(executableName,leaf ? leaf+1 : path,sizeof(executableName));
-    loadSymbols(); loadFpo(); reporting = stopping = 0;
+    loadSymbols(); loadFpo(); initializeDialog(); reporting = stopping = 0;
     requestEvent = CreateEventA(NULL,FALSE,FALSE,NULL);
     if (requestEvent) reporterThread = CreateThread(NULL,0,reporter,NULL,0,&reporterId);
     previousFilter = SetUnhandledExceptionFilter(unhandled);
@@ -410,5 +369,6 @@ extern "C" void __cdecl NemuStaticCrashShutdown(void)
     vectoredHandle = NULL; stopping = 1;
     if (reporterThread) { SetEvent(requestEvent); WaitForSingleObject(reporterThread,INFINITE); CloseHandle(reporterThread); }
     if (requestEvent) CloseHandle(requestEvent);
+    shutdownDialog();
     reporterThread = requestEvent = NULL; symbols = NULL; fpo = NULL; application = NULL; describeCode = NULL;
 }

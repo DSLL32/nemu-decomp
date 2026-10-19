@@ -30,6 +30,8 @@ extern "C" __declspec(noinline) DWORD WINAPI CrashWorker(void *) { return CrashM
 int main(int argc,char **argv)
 {
     NemuStaticCrashInitialize(GetModuleHandleA(NULL));
+    // Exercise the reporter thread's palette even when Wine emulates XP.
+    if(argc>1 && !lstrcmpA(argv[1],"dark"))NemuStaticCrashSetDark(TRUE);
     if(argc>1 && !lstrcmpA(argv[1],"caught")) {
         __try { *(volatile unsigned *)0=1; }
         __except(EXCEPTION_EXECUTE_HANDLER) { observed=1; }

@@ -472,11 +472,11 @@ class Build:
         self.objects.append(runtime)
         theme = WORK / 'StaticTheme.obj'
         self.tools.submit('cl', ['/nologo', '/c', '/O2', '/Z7', '/MT', '/Fo' + win(theme), win(ROOT / 'src/static/StaticTheme.cpp')],
-                          theme, [self.native_toolchain, fingerprint(files(ROOT / 'src/static/StaticTheme.cpp', ROOT / 'src/static/StaticThemeControls.inc', ROOT / 'src/static/StaticTheme.h'))])
+                          theme, [self.native_toolchain, fingerprint(files(ROOT / 'src/static/StaticTheme.cpp', ROOT / 'src/static/StaticThemeControls.inc', ROOT / 'src/static/StaticTheme.h', ROOT / 'src/static/StaticCrash.h'))])
         self.objects.append(theme)
         crash = WORK / 'StaticCrash.obj'
         self.tools.submit('cl', ['/nologo', '/c', '/O2', '/Z7', '/MT', '/Fo' + win(crash), win(ROOT / 'src/static/StaticCrash.cpp')],
-                          crash, [self.native_toolchain, fingerprint(files(ROOT / 'src/static/StaticCrash.cpp', ROOT / 'src/static/StaticCrash.h', ROOT / 'src/static/StaticCrashUnwind.inc'))])
+                          crash, [self.native_toolchain, fingerprint(files(ROOT / 'src/static/StaticCrash.cpp', ROOT / 'src/static/StaticCrash.h', ROOT / 'src/static/StaticCrashUnwind.inc', ROOT / 'src/static/StaticCrashDialog.inc'))])
         self.objects.append(crash)
         self.defaults()
         self.tools.wait()

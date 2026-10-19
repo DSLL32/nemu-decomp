@@ -150,6 +150,14 @@ address, x86 registers, and stack locations as module/function/offset. Closing
 ends the faulted process. The reporter is prepared on its own thread during
 startup, after the emulated address space has been reserved.
 
+The reporter caches the application's dark/light preference while the UI is
+healthy. Its dialog paints its own buttons, report border and scrollbars, so
+it does not depend on the faulted UI thread's hooks or VCL. Optional DWM/UxTheme
+exports are resolved at startup only on supported Windows versions. Dialog
+text uses the system message font; details use Lucida Console at the same
+size, with DPI-scaled controls. The fault is the first stack entry, marked
+`[fault]`, rather than repeated in a separate fault-location section.
+
 The runtime uses XP-era kernel32/user32/gdi32 APIs. It needs no PDB, MAP,
 DbgHelp, redistributable crash library, symbol server, or extracted file.
 Optional vectored-exception entry points are resolved from kernel32 at runtime.
@@ -183,7 +191,8 @@ or create Windows controls. There is no claim of recovery after a fatal fault.
 
 Run `python3 scripts/check_static_crash.py` for actual optimized main/worker
 thread faults, damaged-frame-pointer handling, handled-exception behavior, the
-Delphi VCL bridge, an external plugin crash, and dialog/copy/close checks. These
+Delphi VCL bridge, an external plugin crash, dark/light painting, report font
+size, scrolling, and dialog/copy/close checks. These
 fixtures use a disposable Wine prefix configured as XP and an isolated launch
 folder with no PDB/MAP files. Native Windows XP testing remains outstanding.
 
