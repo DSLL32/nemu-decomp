@@ -65,6 +65,39 @@ equality or the live multiplayer path.
 mutation boundary and negative guards using synthetic COFF input, without a
 compiler, Wine, or reference-program bytes.
 
+## Code contribution groups
+
+The original project and private symbol names are unavailable. The matching
+driver therefore describes the recovered contribution order explicitly rather
+than claiming to have recovered the original project settings.
+`build_kaillera_code_inputs.py` changes only eight-byte COFF section-name fields:
+queue helpers and shared destructors form one group, followed by browser code.
+The native LINK `/ORDER` facility orders public helper COMDATs inside that group.
+Compiler exception funclets keep their existing `.text$x` group. The normalizer
+verifies that every section payload, relocation record, and symbol is unchanged.
+The ordinary Makefile does not use these link-input transformations.
+
+This reproduces the public API addresses starting at `0x10005420`, the lobby
+and gameplay function addresses, and the complete helper address sequence from
+`0x10008C10` through `0x10008E70`. The source bodies still require independent
+verification at those addresses. In particular, an identical instruction
+signature at a different function is insufficient evidence for a helper match.
+
+`build_kaillera_crt_inputs.py` makes 27 selected SDK import records available
+in the full COFF format emitted by the pinned native LIB `/LINK50COMPAT` tool.
+It expands symbolic import declarations using freshly generated named and
+ordinal import templates: the 22 Winsock thunks and five CRT thunks retain the
+native six-byte indirect-jump payload and its symbolic IAT relocation. Import
+names, hints, and ordinals come from the pinned SDK declarations. All other
+SDK import records remain unchanged. Native CRT section names supply the
+observed code grouping; CRT instructions and data payloads remain unchanged.
+The import chronology separately recovers the 99 IAT slots using ordinary
+archive indexes and `/INCLUDE` roots. Neither stage reads the target DLL.
+
+These transformations are linker-input metadata reconstruction. They do not
+patch a linked executable or substitute target instruction bytes. Complete
+packed equality remains the acceptance criterion.
+
 ## Native import chronology
 
 `kaillera-import-chronology.json` records a static selection order for 99 SDK
