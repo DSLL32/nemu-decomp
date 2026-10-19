@@ -112,10 +112,9 @@ void UDPCom::sendEmpty()
 
 int UDPCom::selectSockets(int seconds)
 {
-    int descriptorCount=maximumSocket+1;
-    selected=sockets;
     timeval timeout={seconds,0};
-    if (!::select(descriptorCount,&selected,0,0,&timeout)) return 0;
+    selected=sockets;
+    if (!::select(maximumSocket+1,&selected,0,0,&timeout)) return 0;
     int count=connections.GetSize();
     for (int i=0;i<count;i++) {
         UDPCom *connection=connections.Get(i);
