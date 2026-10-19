@@ -8,17 +8,22 @@
 class ByteQueue {
 public:
     ByteQueue();
-    ~ByteQueue() { if (data) free(data); }
-    void append(void *bytes,int length);
-    void peek(void *bytes,int length);
-    void read(void *bytes,int length);
+    inline ~ByteQueue();
+    inline void append(void *bytes,int length);
+    inline void peek(void *bytes,int length);
+    inline void read(void *bytes,int length);
     char *data;
     int used,capacity;
 };
 
-class ByteQueueList : public PtrList<ByteQueue> {
+class ByteQueueList : public PtrList {
 public:
-    void clear() { while (size()>0) { delete get(0); remove(0); } }
-    ~ByteQueueList() { clear(); }
+    ByteQueueList();
+    inline void clear();
+    ~ByteQueueList();
+    inline int find(void *data,int length);
+    inline int dataSize(int index);
+    inline char *dataAt(int index);
+    inline void addData(void *data,int length);
 };
 #endif

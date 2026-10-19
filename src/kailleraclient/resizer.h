@@ -25,6 +25,6 @@ private:
         int left,right,top,bottom;
         int invalidate;
     };
-    PtrList<Item> controls;
+    PtrList controls;
 };
 #endif

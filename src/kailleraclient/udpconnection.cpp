@@ -22,7 +22,7 @@ UDPConnection::~UDPConnection()
             maximumSocket=0;
             for (int i=0;i<connections.size();i++) {
                 if (connections.get(i)!=this) {
-                    SOCKET handle=connections.get(i)->socketHandle;
+                    SOCKET handle=((UDPConnection *)connections.get(i))->socketHandle;
                     if (handle>maximumSocket) {
                         maximumSocket=handle;
                     }
@@ -118,13 +118,13 @@ int UDPConnection::selectSockets(int seconds)
     if (!::select(descriptorCount,&selected,0,0,&timeout)) return 0;
     int count=connections.size();
     for (int i=0;i<count;i++) {
-        UDPConnection *connection=connections.get(i);
+        UDPConnection *connection=(UDPConnection *)connections.get(i);
         if (FD_ISSET(connection->socketHandle,&selected)) connection->readable=1;
     }
     return 1;
 }
 
-PtrList<UDPConnection> UDPConnection::connections;
+PtrList UDPConnection::connections;
 fd_set UDPConnection::sockets;
 fd_set UDPConnection::selected;
 SOCKET UDPConnection::maximumSocket=0;

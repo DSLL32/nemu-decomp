@@ -50,12 +50,6 @@ int ReliableConnection::receiveMessage(Message *message,char peek,sockaddr_in *p
     return 0;
 }
 
-int ReliableConnection::dataAvailable()
-{
-    if (incoming.count) return 1;
-    return UDPConnection::dataAvailable();
-}
-
 int ReliableConnection::receive(char *data,int *length,char peek,sockaddr_in *peer)
 {
     PacketCache *cache=&incoming;
@@ -83,3 +77,11 @@ found:
     cache->removeEarlier(receiveNumber);
     return 0;
 }
+
+int ReliableConnection::dataAvailable()
+{
+    if (incoming.count) return 1;
+    return UDPConnection::dataAvailable();
+}
+
+void ReliableConnection::forceResend(int count) { resend(count); }

@@ -48,7 +48,8 @@ message serialization. `udpconnection.cpp` restores socket multiplexing, peer
 lookup and transport. `reliableconnection.cpp` and `packetcache.h` restore the
 two embedded message caches and resend/receive algorithms. `connect.cpp`
 restores server negotiation and login. `kailleraclient.cpp` restores DllMain and
-the eight public wrappers. Some component instruction differences remain.
+the eight public wrappers. The remaining instruction differences are in the configuration constructor, socket
+polling, and game-input loop.
 `session.cpp` and `serverbrowser.cpp` restore the
 partyline, packet dispatcher, game panels, input synchronization and server
 selection. `listview.cpp` and `resizer.cpp` restore shared window helpers.
@@ -65,9 +66,13 @@ unresolved relocation identities or final executable bytes.
 
 The tracked `toolchains/upx120` is the unmodified historical packer, not a
 reference-program payload. UPX 1.20 `-9` was identified as the original setting.
-Repacking a decompressed reference still differs in a small packed header/tail
-region because decompression does not preserve every original PE header byte.
-No metadata restoration or post-build patch is currently applied.
+Raw decompression of the original packed stream identifies the original
+`SizeOfHeaders` and IAT directory values that UPX's unpack operation changes.
+Restoring only those PE header fields before repacking a decompressed reference
+reproduces all original packed bytes. The proof is in
+[`analysis/kaillera-upx.md`](../../analysis/kaillera-upx.md). The source-built
+candidate must still reproduce the program and layout before any guarded
+container metadata restoration can apply.
 
 `python3 scripts/smoke_kaillera.py bin/kailleraclient.dll` runs the original and
 rebuilt public API under Wine/Xvfb, checking version, initialization, repeated

@@ -14,7 +14,6 @@ extern char username[32];
 extern char selectedServerName[256];
 extern char serverAddress[256];
 extern int serverPort;
-extern char defaultUsername[1];
 extern ReliableConnection *connection;
 extern int localPort;
 extern int connectionType;

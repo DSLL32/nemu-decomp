@@ -31,9 +31,7 @@ static int lobbyClosed;
 static int gameStartFlag=1;
 static HMENU gameMenu;
 
-char *connectionTypes[]={"LAN (60 keyframes/s)","Excellent (30 keyframes/s)",
-    "Good (20 keyframes/s)","Average (15 keyframes/s)",
-    "Low (12 keyframes/s)","Bad (10 keyframes/s)",0};
+
 
 
 void endGame()
@@ -71,19 +69,23 @@ BOOL CALLBACK lobbyDialog(HWND window,UINT message,WPARAM command,LPARAM data)
     switch (message) {
     case WM_NOTIFY: {
         NMLISTVIEW *notice=(NMLISTVIEW *)data;
-        if (notice->hdr.hwndFrom==usersList.window && notice->hdr.code==LVN_COLUMNCLICK) {
+        if (notice->hdr.hwndFrom==usersList.window) {
+            if (notice->hdr.code==LVN_COLUMNCLICK) {
             int column=notice->iSubItem;
             int numeric=(column==1);
             if (column==usersList.sortColumn) usersList.sortDirection=-usersList.sortDirection;
             else usersList.sortDirection=1;
             usersList.numericSort=numeric; usersList.sortColumn=column; usersList.sort();
         }
-        if (notice->hdr.hwndFrom==gamesList.window && notice->hdr.code==LVN_COLUMNCLICK) {
+        }
+        if (notice->hdr.hwndFrom==gamesList.window) {
+            if (notice->hdr.code==LVN_COLUMNCLICK) {
             int column=notice->iSubItem;
             int numeric=(column==4);
             if (column==gamesList.sortColumn) gamesList.sortDirection=-gamesList.sortDirection;
             else gamesList.sortDirection=1;
             gamesList.sortColumn=column; gamesList.numericSort=numeric; gamesList.sort();
+        }
         }
         break;
     }
@@ -97,7 +99,7 @@ BOOL CALLBACK lobbyDialog(HWND window,UINT message,WPARAM command,LPARAM data)
             if (GetWindowTextLength(lobbyInput)) {
                 char text[128]; GetWindowText(lobbyInput,text,127);
                 { connection->sendMessage(&ChatMessage(7,text)); }
-                SetWindowText(lobbyInput,defaultUsername);
+                SetWindowText(lobbyInput,"");
             }
             break;
         case 1010: {
@@ -480,7 +482,7 @@ BOOL CALLBACK hostGameDialog(HWND window,UINT message,WPARAM command,LPARAM data
                 {
                     connection->sendMessage(&ChatMessage(8,text));
                 }
-                SetWindowText(gameInput,defaultUsername);
+                SetWindowText(gameInput,"");
             }
             break;
         case 1020: {
@@ -528,22 +530,25 @@ BOOL CALLBACK joinedGameDialog(HWND window,UINT message,WPARAM command,LPARAM da
         SetWindowText(GetDlgItem(window,1014),currentGameName);
         SetFocus(GetDlgItem(window,1005));
         return 0;
-    case WM_COMMAND:
-        if (LOWORD(command)==1026) {
-            if (GetWindowTextLength(gameInput)) {
-                char text[128]; GetWindowText(gameInput,text,127);
-                {
-                    connection->sendMessage(&ChatMessage(8,text));
-                }
-                SetWindowText(gameInput,defaultUsername);
-            }
-        } else if (LOWORD(command)==IDCANCEL) {
-            {
-                connection->sendMessage(&GameUserLeftMessage(-1));
-            }
-            showGameButtons(1); currentGame=-1; EndDialog(window,0);
+    case WM_COMMAND: {
+        int id=LOWORD(command);
+        switch (id) {
+        case IDCANCEL: break;
+        case 1026: if (GetWindowTextLength(gameInput)) break;
+        default: return 0;
+        }
+        if (id==1026) {
+        {
+            char text[128]; GetWindowText(gameInput,text,127);
+            { connection->sendMessage(&ChatMessage(8,text)); }
+            SetWindowText(gameInput,"");
+        }
+        } else {
+        { connection->sendMessage(&GameUserLeftMessage(-1)); }
+        showGameButtons(1); currentGame=-1; EndDialog(window,0);
         }
         return 0;
+    }
     }
     return 0;
 }
@@ -601,24 +606,24 @@ int modifyPlayValues(void *values,int size)
     int result=0;
     if (!runningGame) return -1;
     if (!initialSynced) {
-        {
-            SimpleMessage packet(21);
-            connection->sendMessage(&packet);
-        }
+        connection->sendMessage(&SimpleMessage(21));
         showSyncDialog();
-        DWORD start=GetTickCount(); bool ready=false; int retries=0;
-        while (!syncCancelled) {
+        DWORD start=GetTickCount(); int ready=0; int retries=0;
+        while (1) {
+            if (syncCancelled) break;
             UDPConnection::selectSockets(0);
             if (connection->dataAvailable()) {
-                Message packet;
-                if (!connection->receiveMessage(&packet)) {
-                    if (packet.type==21) ready=true;
-                    else dispatchMessage(&packet);
+                {
+                    Message packet;
+                    if (!connection->receiveMessage(&packet)) {
+                        if (packet.type==21) ready=1;
+                        else dispatchMessage(&packet);
+                    }
                 }
                 if (ready) break;
             }
-            if (start+10000<GetTickCount()) {
-                connection->setRedundancy(1); start=GetTickCount();
+            if (GetTickCount()>start+10000) {
+                connection->forceResend(1); start=GetTickCount();
                 if (++retries==12) {
                     runningGame=0; closeSyncDialog();
                     MessageBox(GetForegroundWindow(),"Timeout while waiting for initial netsync","Error",0);
@@ -632,38 +637,35 @@ int modifyPlayValues(void *values,int size)
         initialSynced=1;
     }
     sendByteQueue.append(values,size);
-    if (++frameWithinPacket==connectionType) {
+    if (++frameWithinPacket!=connectionType) {
+        if (receiveByteQueue.used) {
+            result=receiveByteQueue.used/(connectionType-frameWithinPacket);
+            receiveByteQueue.read(values,result);
+        }
+    } else {
         frameWithinPacket=0;
         int bytes=sendByteQueue.used;
         char *data=sendByteQueue.data;
-        char temporary[1024];
-        int index;
-        for (index=0;index<sentDataCache.size();index++) {
-            sentDataCache.get(index)->peek(temporary,bytes);
-            if (!memcmp(temporary,data,bytes)) break;
-        }
-        if (index<sentDataCache.size() && index!=-1) {
-            CachedGameDataMessage packet(index); connection->sendMessage(&packet);
+        int index=sentDataCache.find(data,bytes);
+        if (index!=-1) {
+            connection->sendMessage(&CachedGameDataMessage(index));
         } else {
-            {
-                GameDataMessage packet(data,bytes); connection->sendMessage(&packet);
-            }
-            if (sentDataCache.size()==256) { delete sentDataCache.get(0); sentDataCache.remove(0); }
-            ByteQueue *queue=new ByteQueue; queue->append(data,bytes); sentDataCache.add(queue);
+            connection->sendMessage(&GameDataMessage(data,bytes));
+            sentDataCache.addData(data,bytes);
         }
         sendByteQueue.used=0;
         if (++frameDelayCount>=syncDelay+1) {
             frameDelayCount--;
-            bool control;
+            int control;
             do {
-                control=false;
+                control=0;
                 Message packet;
                 int retries=0; DWORD start=GetTickCount();
-                for (;;) {
+                while (1) {
                     UDPConnection::selectSockets(1);
                     if (connection->dataAvailable() && !connection->receiveMessage(&packet)) break;
-                    if (start+2000<GetTickCount()) {
-                        connection->setRedundancy(syncDelay+4); start=GetTickCount();
+                    if (GetTickCount()>start+2000) {
+                        connection->forceResend(syncDelay+4); start=GetTickCount();
                         if (++retries==3) {
                             runningGame=0; MessageBox(GetForegroundWindow(),"Lost connection :(","Error",0);
                             return -1;
@@ -672,39 +674,32 @@ int modifyPlayValues(void *values,int size)
                     pumpGameMessages();
                 }
                 switch (packet.type) {
-                case 8: {
-                    ChatMessage chat(packet);
-                    if (chatCallback) chatCallback(chat.nick,chat.text);
-                    dispatchMessage(&packet); control=true; break;
-                }
                 case 18: {
                     GameDataMessage message(packet);
-                    unsigned int length=message.size;
+                    int length=message.size;
                     char *data=message.buffer;
-                    if (receivedDataCache.size()==256) { delete receivedDataCache.get(0); receivedDataCache.remove(0); }
-                    ByteQueue *queue=new ByteQueue; queue->append(data,length); receivedDataCache.add(queue);
-                    receiveByteQueue.append(data,length);
-                    result=(int)((__int64)(unsigned __int64)length/connectionType);
-                    receiveByteQueue.read(values,result); break;
-                }
-                case 19: {
-                    CachedGameDataMessage message(packet);
-                    int length; char *data;
-                    if (message.index<receivedDataCache.size()) {
-                        ByteQueue *queue=receivedDataCache.get(message.index);
-                        length=queue->used; data=queue->data;
-                    } else { length=0; data=0; }
+                    receivedDataCache.addData(data,length);
                     receiveByteQueue.append(data,length);
                     result=length/connectionType;
                     receiveByteQueue.read(values,result); break;
                 }
-                default: dispatchMessage(&packet); control=true;
+                case 19: {
+                    CachedGameDataMessage message(packet);
+                    int length=receivedDataCache.dataSize(message.index);
+                    char *data=receivedDataCache.dataAt(message.index);
+                    receiveByteQueue.append(data,length);
+                    result=length/connectionType;
+                    receiveByteQueue.read(values,result); break;
+                }
+                case 8: {
+                    ChatMessage chat(packet);
+                    if (chatCallback) chatCallback(chat.nick,chat.text);
+                    dispatchMessage(&packet); control=1; break;
+                }
+                default: dispatchMessage(&packet); control=1;
                 }
             } while (control);
         }
-    } else if (receiveByteQueue.used) {
-        result=receiveByteQueue.used/(connectionType-frameWithinPacket);
-        receiveByteQueue.read(values,result);
     }
     return result;
 }
@@ -751,9 +746,32 @@ void closeSyncDialog()
     DestroyWindow(syncWindow); SetFocus(savedForeground); syncWindow=0;
 }
 
+
+
+inline int ByteQueueList::find(void *data,int length) {
+        char bytes[1024];
+        for (int index=0;index<size();index++) {
+            ((ByteQueue *)get(index))->peek(bytes,length);
+            if (!memcmp(bytes,data,length)) return index;
+        }
+        return -1;
+    }
+
+inline int ByteQueueList::dataSize(int index) { if (index>=size()) return 0; return ((ByteQueue *)get(index))->used; }
+
+inline char *ByteQueueList::dataAt(int index) { if (index>=size()) return 0; return ((ByteQueue *)get(index))->data; }
+
+inline void ByteQueueList::addData(void *data,int length) {
+        if (size()==256) { delete (ByteQueue *)get(0); remove(0); }
+        ByteQueue *queue=new ByteQueue;
+        queue->append(data,length);
+        add(queue);
+    }
+
 ByteQueue::ByteQueue() { used=0; data=0; capacity=0; }
-void ByteQueue::append(void *bytes,int length) {
-        if (length<1) return;
+
+inline void ByteQueue::append(void *bytes,int length) {
+        if (length<=0) return;
         if (!data) { capacity=length<<4; data=(char *)malloc(capacity); }
         else if (used+length>capacity) {
             while (used+length>capacity) capacity*=2;
@@ -762,11 +780,8 @@ void ByteQueue::append(void *bytes,int length) {
         memcpy(data+used,bytes,length);
         used+=length;
     }
-void ByteQueue::peek(void *bytes,int length) {
-        if (length>used) length=used;
-        if (length>0) memcpy(bytes,data,length);
-    }
-void ByteQueue::read(void *bytes,int length) {
+
+inline void ByteQueue::read(void *bytes,int length) {
         if (length>used) length=used;
         if (length>0) {
             memcpy(bytes,data,length);
@@ -774,3 +789,16 @@ void ByteQueue::read(void *bytes,int length) {
             memcpy(data,data+length,used);
         }
     }
+
+inline void ByteQueue::peek(void *bytes,int length) {
+        int size=length<=used?length:used;
+        if (size>0) memcpy(bytes,data,size);
+    }
+
+ByteQueueList::ByteQueueList() {}
+
+inline void ByteQueueList::clear() { while (size()>0) { delete (ByteQueue *)get(0); remove(0); } }
+
+ByteQueueList::~ByteQueueList() { clear(); }
+
+inline ByteQueue::~ByteQueue() { if (data) free(data); }

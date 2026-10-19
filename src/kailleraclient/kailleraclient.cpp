@@ -15,7 +15,6 @@ char username[32];
 char selectedServerName[256];
 char serverAddress[256];
 int serverPort;
-char defaultUsername[1];
 ReliableConnection *connection;
 int localPort;
 int connectionType;
@@ -24,6 +23,10 @@ int (WINAPI *gameCallback)(char *,int,int);
 void (WINAPI *chatCallback)(char *,char *);
 void (WINAPI *droppedCallback)(char *,int);
 void (WINAPI *moreInfosCallback)(char *);
+
+char *connectionTypes[]={"LAN (60 keyframes/s)","Excellent (30 keyframes/s)",
+    "Good (20 keyframes/s)","Average (15 keyframes/s)",
+    "Low (12 keyframes/s)","Bad (10 keyframes/s)",0};
 
 BOOL WINAPI DllMain(HINSTANCE instance,DWORD reason,LPVOID reserved)
 {
@@ -41,7 +44,7 @@ DLLEXP kailleraInit()
     connection=0;
     settings=new Config("kaillera.ini","KailleraClient");
     applicationName="Unknown";
-    strcpy(username,settings->readString("username",defaultUsername));
+    strcpy(username,settings->readString("username",""));
     gameList=0;
     localPort=27886;
     connectionType=settings->readInt("conntype",3);

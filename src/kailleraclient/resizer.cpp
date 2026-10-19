@@ -67,14 +67,14 @@ void Resizer::resize()
     int height=clientHeight;
     int x=0,y=0,width=clientWidth;
     for (int i=0;i<controls.size();i++) {
-        Item *item=controls.get(i);
+        Item *item=(Item *)controls.get(i);
         if (height<item->height+item->top+item->bottom && !(item->flags&StretchY)) {
             int difference=item->height+item->top+item->bottom-height;
             int j;
-            for (j=i-1;j>=0;j--) if (controls.get(j)->flags&StretchY) break;
+            for (j=i-1;j>=0;j--) if (((Item *)controls.get(j))->flags&StretchY) break;
             if (j>=0) {
-                controls.get(j)->height-=difference;
-                while (++j!=i) controls.get(j)->y-=difference;
+                ((Item *)controls.get(j))->height-=difference;
+                while (++j!=i) ((Item *)controls.get(j))->y-=difference;
                 height+=difference;
                 y-=difference;
             }
@@ -82,10 +82,10 @@ void Resizer::resize()
         if (width<item->width+item->left+item->right && !(item->flags&StretchX)) {
             int difference=item->width+item->left+item->right-width;
             int j;
-            for (j=i-1;j>=0;j--) if (controls.get(j)->flags&StretchX) break;
+            for (j=i-1;j>=0;j--) if (((Item *)controls.get(j))->flags&StretchX) break;
             if (j>=0) {
-                controls.get(j)->width-=difference;
-                while (++j!=i) controls.get(j)->x-=difference;
+                ((Item *)controls.get(j))->width-=difference;
+                while (++j!=i) ((Item *)controls.get(j))->x-=difference;
                 width+=difference;
                 x-=difference;
             }
@@ -99,9 +99,9 @@ void Resizer::resize()
             x=0;
             width=clientWidth;
             for (int j=i-1;j>=0;j--) {
-                if (controls.get(j)->flags==NewRow) break;
-                if (used<=controls.get(j)->height+controls.get(j)->top+controls.get(j)->bottom)
-                    used=controls.get(j)->height+controls.get(j)->top+controls.get(j)->bottom;
+                if (((Item *)controls.get(j))->flags==NewRow) break;
+                if (used<=((Item *)controls.get(j))->height+((Item *)controls.get(j))->top+((Item *)controls.get(j))->bottom)
+                    used=((Item *)controls.get(j))->height+((Item *)controls.get(j))->top+((Item *)controls.get(j))->bottom;
             }
             y+=used;
             height-=used;
@@ -114,7 +114,7 @@ void Resizer::resize()
     HRGN region=CreateRectRgn(0,0,clientWidth,clientHeight);
     HDWP positions=BeginDeferWindowPos(controls.size());
     for (i=0;i<controls.size();i++) {
-        Item *item=controls.get(i);
+        Item *item=(Item *)controls.get(i);
         if (item->child) {
             DeferWindowPos(positions,item->child,0,item->x,item->y,item->width,item->height,SWP_NOZORDER);
             if (item->invalidate) {
@@ -135,7 +135,7 @@ void Resizer::resize()
 void Resizer::excludeChildren(HDC dc)
 {
     for (int i=0;i<controls.size();i++) {
-        Item *item=controls.get(i);
+        Item *item=(Item *)controls.get(i);
         if (item->child) ExcludeClipRect(dc,item->x,item->y,item->width+item->x,item->height+item->y);
     }
 }

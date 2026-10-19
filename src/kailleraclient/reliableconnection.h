@@ -15,7 +15,7 @@ public:
     int receiveMessage(Message *message,char peek=0,sockaddr_in *peer=0);
     virtual int receive(char *data,int *length,char peek=0,sockaddr_in *peer=0);
     virtual int dataAvailable();
-    void setRedundancy(int count) { redundancy=count; }
+    void forceResend(int count);
 private:
     unsigned short sendNumber,receiveNumber;
     PacketCache outgoing;
