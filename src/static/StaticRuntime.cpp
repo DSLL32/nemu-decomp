@@ -58,6 +58,7 @@ extern "C" bool __cdecl NemuStaticInitialize(HINSTANCE instance)
         for (unsigned int i = 0; i < unit.initCount; ++i)
             if (unit.init[i].function) unit.init[i].function();
     }
+    NemuStaticThemeVclReady(TRUE);
     if (!AfxWinInit(instance, NULL, GetCommandLineA(), SW_SHOWDEFAULT)) {
         NemuStaticShutdown();
         return false;
@@ -76,6 +77,9 @@ extern "C" bool __cdecl NemuStaticInitialize(HINSTANCE instance)
 }
 extern "C" void __cdecl NemuStaticShutdown(void)
 {
+    // Remove UI hooks and restore palettes while all GUI frameworks are alive.
+    // Teardown can dispatch window messages while VCL controls are half freed.
+    NemuStaticThemeShutdown();
     while (attachedComponents)
         nativeEntries[--attachedComponents](executableInstance, DLL_PROCESS_DETACH, NULL);
     if (mfcReady) {
@@ -89,5 +93,4 @@ extern "C" void __cdecl NemuStaticShutdown(void)
             if (unit.fini[i - 1].function) unit.fini[i - 1].function();
     }
     if (delphiReady) { StaticDelphiVclExit(); delphiReady = false; }
-    NemuStaticThemeShutdown();
 }

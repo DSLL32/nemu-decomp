@@ -19,7 +19,7 @@ from build_static import COMPONENTS
 from static_objects import Glue
 from check_gs import seed_ini
 from check_static_defaults import check as check_defaults, archive_options
-from check_static_theme import check as check_theme
+from check_static_theme import check as check_theme, check_ui as check_theme_ui
 
 ROOT = Path(__file__).resolve().parents[1]
 EXTERNAL = r'''
@@ -84,6 +84,9 @@ def worker(scratch, executable, report, components=False):
             check_theme(run, scratch)
             results['scenarios'].append(dict(name='theme-compatibility', passed=True))
             print('theme-compatibility: passed', flush=True)
+            check_theme_ui(run, scratch)
+            results['scenarios'].append(dict(name='theme-client-ui', passed=True))
+            print('theme-client-ui: passed', flush=True)
             check_defaults(run, scratch)
             results['scenarios'].append(dict(name='embedded-defaults-archive', passed=True))
             print('embedded-defaults-archive: passed', flush=True)

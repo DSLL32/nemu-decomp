@@ -19,6 +19,7 @@
 #include "EasterText.h"
 #ifdef NEMU_STATIC
 #include "../static/StaticRuntime.h"
+#include "../static/StaticTheme.h"
 #define NEMU_STATIC_PROFILE_REDIRECT
 #include "../static/StaticFiles.h"
 #endif
@@ -651,6 +652,10 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previousInstance, LPSTR command
             DispatchMessageA(&message);
         }
     }
+#ifdef NEMU_STATIC
+    // Plugin cleanup destroys Delphi forms and may pump more window messages.
+    NemuStaticThemeShutdown();
+#endif
     CIFree();
     if (SelectedGraphicsPlugin->CloseDLL)
         SelectedGraphicsPlugin->CloseDLL();

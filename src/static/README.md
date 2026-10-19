@@ -51,18 +51,23 @@ version is queried dynamically, and the two signatures of UxTheme ordinal 135
 are handled separately for Windows 10 1809 and 1903+. Missing DLLs, missing
 exports and unsupported DWM attributes are tolerated.
 
-A thread-local window-message hook applies the frame preference to existing and
-new top-level windows on the UI thread, including native dialogs, MFC windows
-and Delphi forms, and to recreated form handles. It leaves child controls and
-application drawing to their existing implementations.
+A thread-local window hook catches new and recreated handles. Optional common
+control subclass helpers are resolved at runtime. The static adapter supplies a
+dark client palette and painting for the ROM list/header, menu bar, toolbar,
+status bar, buttons, tabs and standard dialog fields. Light mode restores the
+control colors; high contrast uses the original Windows colors. Keyboard input,
+control commands and focus cues continue through the original window procedures.
+The adapter detaches before plugin cleanup starts, while the VCL forms are
+still alive, so destruction cannot reenter its UI hooks.
 
-This is native frame/menu support, not a complete VCL dark skin. Delphi 6's
-`clWindow`, `clBtnFace`, explicit font colors, custom painting and the old theme
-components retain their client palettes. Those colors do not automatically
-follow Windows' app dark preference. Forms can therefore have dark title bars
-with light contents. Menu bars, owner-drawn menus and individual common controls
-can also retain their existing appearance. A consistent dark client UI would
-require additional VCL/control-specific palette and drawing work.
+Bundled Delphi code resolves `GetSysColor` and `GetSysColorBrush` to static-build
+wrappers. `StaticVclTheme.pas` invalidates VCL's cached GDI resources and updates
+forms, including labels and panels without HWNDs. Ordinary black text and white
+edit backgrounds use the corresponding system colors; explicit semantic colors
+and artwork retain their meanings. The generated copy of the old XP theme
+component uses classic VCL painting while dark, so it cannot repaint clients
+with a light theme. The reconstructed plugin and Delphi toolchain sources are
+unchanged. Dynamically loaded plugins can still have their own custom painters.
 
 The DWM frame API is described in [Microsoft's theme guidance](https://learn.microsoft.com/en-us/windows/apps/desktop/modernize/ui/apply-windows-themes).
 The optional UxTheme app/menu APIs are undocumented; a current Microsoft example
@@ -149,8 +154,12 @@ renderer's actual combiner parser with embedded/disk/empty inputs, and verifies
 first-save behavior. The theme compatibility probe uses simulated OS exports
 with real windows, dialogs, thread hooks and message delivery. It checks old
 Windows versions, both ordinal-135 signatures, missing capabilities, live theme
-changes and high contrast; the final executable is checked for accidental
-DWM/UxTheme startup imports. Native Windows dark-mode rendering still needs
+changes and high contrast, with assertions for rendered control pixels.
+A second fixture links the real static UI against a test-only OS preference
+adapter, checks dark client pixels and live light/high-contrast restoration, and
+captures the main window and Delphi settings/input dialogs as BMPs in scratch.
+The shipped executable contains no forced preference and is checked for
+accidental DWM/UxTheme startup imports. Native Windows rendering still needs
 visual verification. Scratch files and
 Wine prefixes are allocated under `~/.ai-tmp`.
 

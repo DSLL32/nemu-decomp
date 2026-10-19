@@ -24,6 +24,8 @@ PASCAL = WORK / 'pascal'
 DEFAULT_FILES = ('config.ini', 'nemu64.ini', 'LemD3DCombine.dat', 'LemD3DCombine.new')
 PROFILE_APIS = {'GetPrivateProfileStringA': 24, 'GetPrivateProfileStructA': 20,
                 'WritePrivateProfileStringA': 16, 'WritePrivateProfileStructA': 20}
+THEME_APIS = {'GetSysColor': 4, 'GetSysColorBrush': 4}
+STATIC_APIS = dict(PROFILE_APIS, **THEME_APIS)
 COMPONENTS = [('kailleraclient.dll', False), ('gs_dll.dll', False),
               ('Plugin/audio.dll', True), ('Plugin/Input.dll', True),
               ('Plugin/LemD3D8.dll', True), ('Plugin/debugger.dll', True),
@@ -76,7 +78,8 @@ class Build:
             for p in (base / 'source' / directory).iterdir():
                 if p.suffix.lower() in ('.pas', '.inc'):
                     shutil.copy2(p, PASCAL / p.name.lower())
-        shutil.copy2(ROOT / 'src/static/StaticFiles.pas', PASCAL / 'staticfiles.pas')
+        for name in ('StaticFiles', 'StaticVclTheme'):
+            shutil.copy2(ROOT / ('src/static/' + name + '.pas'), PASCAL / (name.lower() + '.pas'))
         for p in (base / 'lib').glob('*.res'): shutil.copy2(p, PASCAL / p.name)
         flags = ['-JPN', '-$D-', '-$L-', '-$Y-', '-N.', '-E.', '-U.', '-I.', '-R.']
         self.tool('dcc32-personal', ['-y', *flags, 'system.pas'], PASCAL, 'd6u2')
@@ -86,7 +89,7 @@ class Build:
         helper = WORK / 'dfm'
         helper.mkdir(exist_ok=True)
         self.tool('dcc32-personal', ['-Q', '-N.', '-E.', win(ROOT / 'scripts/delphi_dfm.dpr')], helper, 'd6u2')
-        roots, exports = [], {}
+        roots, exports = ['StaticVclTheme'], {}
         shared_sources = {}
         for folder, project in PROJECTS:
             source = ROOT / 'src' / folder
@@ -104,6 +107,14 @@ class Build:
                 if folder == 'lemcombinedebugger' and p.stem in ('UnitCombineEditor', 'UnitCombiners'):
                     text = re.sub(r'(?i)\buses\b', 'uses StaticFiles,', text, count=1)
                     text = text.replace('Reset(CombineFile)', 'StaticReset(CombineFile, CombineFilename)')
+                if p.stem.lower() == 'themesrv':
+                    # The recovered XP theme painter otherwise paints light
+                    # backgrounds over the static build's dark VCL palette.
+                    text = text.replace('  SysUtils;', '  SysUtils;\n\n'
+                        'function NemuStaticThemeIsDark: LongBool; cdecl;\n'
+                        "  external 'nemu64-static.exe' name 'NemuStaticThemeIsDark';")
+                    text = text.replace('Result := FThemesAvailable and FUseThemes;',
+                        'Result := not NemuStaticThemeIsDark and FThemesAvailable and FUseThemes;')
                 target = PASCAL / (mapping[p.stem.lower()].lower() + '.pas')
                 if target.stem.startswith('static_shared_'):
                     signature = pascal_signature(text)
@@ -150,8 +161,14 @@ class Build:
                 path = ROOT / 'toolchains/vc7' / directory / (name + '.lib')
                 if path.exists(): libraries.append(path); break
         aliases = import_library_aliases(libraries)
-        aliases.update({name: '_NemuStatic' + name + '@' + str(size) for name, size in PROFILE_APIS.items()})
+        aliases.update({name: '_NemuStatic' + name + '@' + str(size) for name, size in STATIC_APIS.items()})
         aliases['NemuStaticDefaultData'] = '_NemuStaticDefaultData'
+        aliases['NemuStaticThemeIsDark'] = '_NemuStaticThemeIsDark'
+        bridge = Converter((PASCAL / 'staticvcltheme.obj').read_bytes())
+        bridge.declarations()
+        for symbol in bridge.symbols:
+            if symbol.name.lower().startswith('@staticvcltheme@nemustaticvclthemerefresh$'):
+                aliases[symbol.name] = '_NemuStaticVclThemeRefresh'
         metadata = {}
         for path in sorted(PASCAL.glob('*.obj')):
             image = Converter(path.read_bytes())
@@ -243,7 +260,7 @@ class Build:
             for path in objects:
                 for _, name, section, value, storage in symbols(path.read_bytes()):
                     if storage == 2 and (section != 0 or value): mapping[name] = '__static_' + component + '_' + name
-            for name, size in PROFILE_APIS.items():
+            for name, size in STATIC_APIS.items():
                 original = '_' + name + '@' + str(size)
                 target = '_NemuStatic' + name + '@' + str(size)
                 mapping[original] = target
@@ -304,7 +321,7 @@ class Build:
     def link(self, metadata, order, host_objects):
         print('Generating static bindings and linking nemu64-static.exe...', flush=True)
         declarations, units, registry = [], [], []
-        for name, size in PROFILE_APIS.items():
+        for name, size in STATIC_APIS.items():
             target = '_NemuStatic' + name + '@' + str(size)
             self.glue.pointer('__imp_' + target, target)
         for key in order:

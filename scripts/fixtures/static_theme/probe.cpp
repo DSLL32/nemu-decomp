@@ -1,6 +1,8 @@
 /* Run the production adapter against simulated OS exports, with real HWNDs,
    thread hooks and message delivery. No dark-mode capability is assumed in Wine. */
+#define _WIN32_WINNT 0x0501
 #include <windows.h>
+#include <commctrl.h>
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -29,6 +31,7 @@ static HRESULT WINAPI testAttribute(HWND w,DWORD attribute,LPCVOID value,DWORD s
 }
 static HMODULE WINAPI testModule(LPCSTR name) {
  if(!name)return GetModuleHandleA(NULL);
+ if(!strcmp(name,"comctl32.dll"))return GetModuleHandleA(name);
  REQUIRE(!strcmp(name,"ntdll.dll"));return ntMissing?NULL:(HMODULE)1;
 }
 static HMODULE WINAPI testLoad(LPCSTR name) {
@@ -42,7 +45,9 @@ static BOOL WINAPI testFree(HMODULE) { return TRUE; }
 static FARPROC WINAPI testAddress(HMODULE module,LPCSTR name) {
  if(module==(HMODULE)1) { REQUIRE(!strcmp(name,"RtlGetVersion"));return (FARPROC)testVersion; }
  if(module==(HMODULE)2) { REQUIRE(!strcmp(name,"DwmSetWindowAttribute"));return exportsMissing?NULL:(FARPROC)testAttribute; }
- REQUIRE(module==(HMODULE)3);++ordinalLookups;
+ if(module!=(HMODULE)3)return GetProcAddress(module,name);
+ if((ULONG_PTR)name>65535) { REQUIRE(!strcmp(name,"SetWindowTheme"));return NULL; }
+ ++ordinalLookups;
  if(exportsMissing)return NULL;
  switch((ULONG_PTR)name) {
  case 132:return shouldMissing?NULL:(FARPROC)testShould;
@@ -54,6 +59,7 @@ static FARPROC WINAPI testAddress(HMODULE module,LPCSTR name) {
  }
 }
 static BOOL WINAPI testSpi(UINT action,UINT,PVOID data,UINT) {
+ if(action==SPI_GETNONCLIENTMETRICS)return FALSE;
  REQUIRE(action==SPI_GETHIGHCONTRAST);
  ((HIGHCONTRASTA *)data)->dwFlags=highContrast?HCF_HIGHCONTRASTON:0;
  return !spiFails;
@@ -74,6 +80,8 @@ static LONG WINAPI testRegClose(HKEY) { return ERROR_SUCCESS; }
 #define RegOpenKeyExA testRegOpen
 #define RegQueryValueExA testRegRead
 #define RegCloseKey testRegClose
+static unsigned vclRefreshCalls;
+extern "C" void __cdecl NemuStaticVclThemeRefresh(void) { ++vclRefreshCalls; }
 #include "StaticTheme.cpp"
 
 static void reset(DWORD major,DWORD build) {
@@ -94,7 +102,9 @@ int main() {
  struct { DLGTEMPLATE header;WORD menu,cls,title; } resource;
  ZeroMemory(&wc,sizeof(wc));wc.lpfnWndProc=DefWindowProcA;wc.hInstance=GetModuleHandleA(NULL);
  wc.lpszClassName="TFormThemeProbe";REQUIRE(RegisterClassA(&wc)!=0);
+ InitCommonControls();
  before=create("TFormThemeProbe",NULL);
+ HMENU menu=CreateMenu();AppendMenuA(menu,MF_STRING,101,"&Probe");SetMenu(before,menu);
  reset(5,2600);NemuStaticThemeInitialize();REQUIRE(!loads&&!ordinalLookups&&!windowHook);
  reset(6,7601);NemuStaticThemeInitialize();REQUIRE(!loads&&!ordinalLookups&&!windowHook);
  reset(10,17134);NemuStaticThemeInitialize();REQUIRE(!loads&&!ordinalLookups&&!windowHook);
@@ -102,17 +112,52 @@ int main() {
  puts("PASS: pre-dark-mode Windows never loads DLLs or calls ordinals");
  reset(10,17763);attribute20Result=E_INVALIDARG;NemuStaticThemeInitialize();
  REQUIRE(oldAppCalls==1&&!newAppCalls&&lastMode==1&&legacyCalls&&lastDark&&windowHook);
+ MENUITEMINFOA info;ZeroMemory(&info,sizeof(info));info.cbSize=sizeof(info);info.fMask=MIIM_FTYPE;
+ REQUIRE(GetMenuItemInfoA(menu,0,TRUE,&info)&&(info.fType&MFT_OWNERDRAW));
  count=dwmCalls;after=create("TFormThemeProbe",NULL);REQUIRE(dwmCalls>count&&lastWindow==after);
  count=dwmCalls;child=create("EDIT",after);REQUIRE(dwmCalls==count);
  ZeroMemory(&resource,sizeof(resource));resource.header.style=WS_POPUP|WS_CAPTION;resource.header.cx=100;resource.header.cy=100;
  dlg=CreateDialogIndirectParamA(GetModuleHandleA(NULL),&resource.header,NULL,dialog,0);
  REQUIRE(dlg&&dwmCalls>count&&lastWindow==dlg);
  appDark=false;SendMessageA(after,WM_SETTINGCHANGE,0,0);REQUIRE(lastMode==0&&!lastDark);
+ REQUIRE(GetMenuItemInfoA(menu,0,TRUE,&info)&&!(info.fType&MFT_OWNERDRAW));
  appDark=true;SendMessageA(after,WM_THEMECHANGED,0,0);REQUIRE(lastMode==1&&lastDark);
  highContrast=true;SendMessageA(after,WM_SETTINGCHANGE,0,0);REQUIRE(lastMode==0&&!lastDark);
  highContrast=false;SendMessageA(after,WM_SYSCOLORCHANGE,0,0);REQUIRE(lastMode==1&&lastDark);
  REQUIRE(DestroyWindow(dlg));REQUIRE(DestroyWindow(child));REQUIRE(DestroyWindow(after));
  puts("PASS: 1809 ABI, legacy attribute, existing/new/dialog handles, child exclusion, live theme and high contrast");
+ // Delphi modal forms can have WS_CHILD and a caption (ParentWindow).
+ NemuStaticThemeVclReady(TRUE);
+ HWND owned=create("TFormThemeProbe",before);
+ SetWindowLongA(owned,GWL_STYLE,GetWindowLongA(owned,GWL_STYLE)|WS_CAPTION);
+ count=vclRefreshCalls;ShowWindow(owned,SW_SHOW);
+ REQUIRE(vclRefreshCalls>count);DestroyWindow(owned);
+ NemuStaticThemeVclReady(FALSE);
+ // Real control colors and paint output, then restore original palette.
+ reset(10,22000);NemuStaticThemeInitialize();
+ HWND list=create(WC_LISTVIEWA,before), bar=create(STATUSCLASSNAMEA,before);
+ HWND button=create("BUTTON",before), edit=create("EDIT",before);
+ REQUIRE(ListView_GetBkColor(list)==RGB(25,25,25));
+ REQUIRE(ListView_GetTextColor(list)==RGB(232,232,232));
+ HDC dc=GetDC(before), memory=CreateCompatibleDC(dc);
+ HBITMAP bitmap=CreateCompatibleBitmap(dc,100,100);
+ HGDIOBJ original=SelectObject(memory,bitmap);
+ SendMessageA(bar,WM_PRINTCLIENT,(WPARAM)memory,PRF_CLIENT);
+ REQUIRE(GetPixel(memory,3,3)==RGB(40,40,40));
+ SendMessageA(button,WM_PRINTCLIENT,(WPARAM)memory,PRF_CLIENT);
+ REQUIRE(GetPixel(memory,3,3)==RGB(40,40,40));
+ HBRUSH brush=(HBRUSH)SendMessageA(before,WM_CTLCOLOREDIT,(WPARAM)memory,(LPARAM)edit);
+ REQUIRE(brush==NemuStaticGetSysColorBrush(COLOR_WINDOW));
+ REQUIRE(GetTextColor(memory)==RGB(232,232,232));
+ REQUIRE(GetBkColor(memory)==RGB(25,25,25));
+ highContrast=true;SendMessageA(before,WM_SETTINGCHANGE,0,0);
+ REQUIRE(ListView_GetBkColor(list)==GetSysColor(COLOR_WINDOW));
+ REQUIRE(NemuStaticGetSysColor(COLOR_BTNTEXT)==GetSysColor(COLOR_BTNTEXT));
+ highContrast=false;SendMessageA(before,WM_SETTINGCHANGE,0,0);
+ REQUIRE(ListView_GetBkColor(list)==RGB(25,25,25));
+ SelectObject(memory,original);DeleteObject(bitmap);DeleteDC(memory);ReleaseDC(before,dc);
+ DestroyWindow(list);DestroyWindow(bar);DestroyWindow(button);DestroyWindow(edit);
+ puts("PASS: dark list colors, status/button pixels, edit contrast and high-contrast restoration");
  reset(10,18362);NemuStaticThemeInitialize();REQUIRE(newAppCalls==1&&!oldAppCalls&&lastMode==1);
  reset(10,22000);NemuStaticThemeInitialize();REQUIRE(newAppCalls==1&&!oldAppCalls&&!legacyCalls&&lastDark);
  highContrast=true;SendMessageA(before,WM_SETTINGCHANGE,0,0);REQUIRE(lastMode==0&&!lastDark);
