@@ -75,7 +75,7 @@ struct ThemedWindow {
     COLORREF background, textBackground, text;
     HIMAGELIST originalImages, darkImages, originalDisabledImages, darkDisabledImages;
     DWORD originalStyle, originalButtonEdge;
-    bool themed;
+    bool themed, systemMessage;
     ThemedWindow *next;
 };
 static ThemedWindow *windows;
@@ -171,6 +171,37 @@ static bool customButton(HWND window)
     // keep the native renderer, including hover, focus and default-button cues.
     return type == BS_CHECKBOX || type == BS_AUTOCHECKBOX || type == BS_3STATE || type == BS_AUTO3STATE ||
         type == BS_RADIOBUTTON || type == BS_AUTORADIOBUTTON || type == BS_GROUPBOX;
+}
+static bool systemMessageBox(HWND window)
+{
+    char name[32] = {0}; GetClassNameA(window,name,sizeof(name));
+    if (lstrcmpA(name,"#32770")) return false;
+    // MessageBox uses USER32's dialog procedure. Application-owned dialogs
+    // must retain their own WM_PAINT handlers and custom content.
+    const void *procedure = (const void *)GetWindowLongW(window,DWL_DLGPROC);
+    MEMORY_BASIC_INFORMATION memory;
+    return procedure && VirtualQuery(procedure,&memory,sizeof(memory)) == sizeof(memory) &&
+        memory.AllocationBase == GetModuleHandleA("user32.dll");
+}
+struct DialogBackground { HWND window; HDC dc; };
+static BOOL CALLBACK clipDialogChild(HWND child,LPARAM data)
+{
+    DialogBackground *background = (DialogBackground *)data;
+    if (GetParent(child) == background->window && IsWindowVisible(child)) {
+        RECT rect; GetWindowRect(child,&rect);
+        MapWindowPoints(NULL,background->window,(POINT *)&rect,2);
+        ExcludeClipRect(background->dc,rect.left,rect.top,rect.right,rect.bottom);
+    }
+    return TRUE;
+}
+static void paintMessageBackground(HWND window,HDC dc)
+{
+    int saved = SaveDC(dc);
+    DialogBackground background = {window,dc};
+    EnumChildWindows(window,clipDialogChild,(LPARAM)&background);
+    RECT rect; GetClientRect(window,&rect);
+    FillRect(dc,&rect,NemuStaticGetSysColorBrush(COLOR_BTNFACE));
+    if (saved) RestoreDC(dc,saved);
 }
 static void controlColors(ThemedWindow *state)
 {
@@ -486,6 +517,17 @@ static LRESULT CALLBACK themedProc(HWND window, UINT message, WPARAM wParam, LPA
             ControlKind kind = controlKind(((NMHDR *)lParam)->hwndFrom);
             if (kind == Toolbar || kind == Header) return customDraw((NMHDR *)lParam);
         }
+        if (state->systemMessage &&
+            (message == WM_PAINT || message == WM_PRINTCLIENT)) {
+            // USER32 paints the themed message-box footer with light colors
+            // after background erasure. Replace only that dialog backdrop;
+            // the message/icon and native buttons are separate child windows.
+            PAINTSTRUCT paint;
+            HDC dc = message == WM_PAINT ? BeginPaint(window,&paint) : (HDC)wParam;
+            paintMessageBackground(window,dc);
+            if (message == WM_PAINT) EndPaint(window,&paint);
+            return 1;
+        }
         if (message == WM_ERASEBKGND && (state->kind == Panel || state->kind == Toolbar ||
             state->kind == Status || state->kind == Tabs || (state->kind == Button && customButton(window)))) {
             RECT rect; GetClientRect(window, &rect);
@@ -579,6 +621,7 @@ static void applyWindow(HWND window)
         if (!subclassWindow(window, themedProc, subclassId, (DWORD_PTR)state)) { free(state); return; }
         state->next = windows; windows = state;
     }
+    state->systemMessage = systemMessageBox(window);
     controlColors(state);
     if (!(GetWindowLong(window, GWL_STYLE) & WS_CHILD)) menuColors(window);
 }

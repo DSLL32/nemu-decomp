@@ -75,6 +75,13 @@ and application artwork. Light mode restores the
 control colors; high contrast uses the original Windows colors. Keyboard input,
 control commands and focus cues continue through the original window procedures.
 
+USER32 message boxes need their dialog backdrop filled during paint as well
+as background erasure; otherwise Windows repaints a light button footer.
+The adapter identifies their system dialog procedure and clips out visible
+children, leaving icons, text and native buttons to their own controls.
+Application dialog paint handlers are retained, and light/high-contrast modes
+use the original system message-box painting.
+
 `StaticThemeControls.inc` supplies dark faces/edges for VCL's own classic
 painters and removes the toolbar's light divider. It does not paint native
 scrollbars or install scrollbar repaint timers. Eject/pause/stop/reset icons use an inverted,

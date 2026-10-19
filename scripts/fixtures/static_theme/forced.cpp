@@ -46,6 +46,30 @@ static BOOL WINAPI spi(UINT action,UINT size,PVOID data,UINT flags) {
 }
 extern "C" int __cdecl ProbeDebugger(int action);
 static HOOKPROC productionHook;
+static bool systemMessageBox(HWND window);
+static int probeMessageBackground(HWND dialog) {
+    if(!systemMessageBox(dialog))return 110;
+    HWND button=GetDlgItem(dialog,IDOK);if(!button)return 111;
+    if((GetWindowLong(button,GWL_STYLE)&0xf)==BS_OWNERDRAW)return 112;
+    if(mode()=='d') {
+        RECT client;GetClientRect(dialog,&client);
+        HDC screen=GetDC(dialog),dc=CreateCompatibleDC(screen);
+        HBITMAP bitmap=CreateCompatibleBitmap(screen,client.right,client.bottom);ReleaseDC(dialog,screen);
+        HGDIOBJ old=SelectObject(dc,bitmap);
+        RECT buttonRect;GetWindowRect(button,&buttonRect);MapWindowPoints(NULL,dialog,(POINT *)&buttonRect,2);
+        FillRect(dc,&client,(HBRUSH)GetStockObject(WHITE_BRUSH));
+        SendMessage(dialog,WM_PRINTCLIENT,(WPARAM)dc,PRF_CLIENT);
+        bool ok=GetPixel(dc,5,buttonRect.top+2)==RGB(40,40,40) &&
+            GetPixel(dc,buttonRect.left+2,buttonRect.top+2)==RGB(255,255,255);
+        // Native themed buttons can ask their parent to erase a backdrop into
+        // their own DC. That request must still fill the transparent corners.
+        SendMessage(dialog,WM_ERASEBKGND,(WPARAM)dc,0);
+        ok=ok && GetPixel(dc,buttonRect.left+2,buttonRect.top+2)==RGB(40,40,40);
+        SelectObject(dc,old);DeleteObject(bitmap);DeleteDC(dc);
+        if(!ok)return 113;
+    }
+    return 1;
+}
 static int probeButtonBackground(HWND dialog) {
     const int buttons[]={IDOK,IDCANCEL,1033,1035,1042};
     bool dark=mode()=='d';
@@ -133,7 +157,8 @@ static LRESULT CALLBACK fixtureMessages(int code,WPARAM w,LPARAM l) {
             message->wParam==102 ? probeScrollbar(message->hwnd,false) :
             message->wParam==103 ? probeToolbarArrows(message->hwnd,false) :
             message->wParam==104 ? probeToolbarArrows(message->hwnd,true) :
-            message->wParam==105 ? probeButtonBackground(message->hwnd) : ProbeDebugger((int)message->wParam);
+            message->wParam==105 ? probeButtonBackground(message->hwnd) :
+            message->wParam==106 ? probeMessageBackground(message->hwnd) : ProbeDebugger((int)message->wParam);
         SetPropA(message->hwnd,"DebuggerProbeResult",(HANDLE)result);
     }
     return productionHook(code,w,l);

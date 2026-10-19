@@ -95,7 +95,15 @@ int main(int argc,char **argv) {
     set_mode(settings,'l');debugger(settings,105);
     set_mode(settings,'h');debugger(settings,105);
     set_mode(settings,'d');debugger(settings,105);
-    require(PostMessageA(settings,WM_CLOSE,0,0),"close native audio settings");await_closed(settings);
+    message(GetDlgItem(settings,1036),TBM_SETPOS,TRUE,0);
+    require(PostMessageA(settings,WM_COMMAND,IDOK,0),"apply changed audio buffer size");await_closed(settings);
+    settings=await_window("#32770","Audio Warning");Sleep(300);
+    debugger(settings,106);GetClientRect(settings,&bounds);
+    pixel(settings,bounds.right/2,bounds.bottom-3,RGB(40,40,40));capture(settings,"audio-warning-dark.bmp");
+    set_mode(settings,'l');pixel(settings,bounds.right/2,bounds.bottom-3,GetSysColor(COLOR_BTNFACE));
+    set_mode(settings,'h');pixel(settings,bounds.right/2,bounds.bottom-3,GetSysColor(COLOR_BTNFACE));
+    set_mode(settings,'d');debugger(settings,106);pixel(settings,bounds.right/2,bounds.bottom-3,RGB(40,40,40));
+    require(PostMessageA(settings,WM_COMMAND,IDOK,0),"dismiss audio warning normally");await_closed(settings);
     require(PostMessageA(main_window,WM_COMMAND,32780,0),"open Delphi settings");
     settings=await_window("TFormNemuSettings","Nemu Settings");Sleep(400);
     pixel(settings,5,65,RGB(40,40,40));pixel(settings,5,5,RGB(25,25,25));capture(settings,"settings-dark.bmp");

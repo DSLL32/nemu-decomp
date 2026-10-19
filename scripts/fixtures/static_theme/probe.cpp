@@ -159,6 +159,7 @@ int main() {
  ZeroMemory(&resource,sizeof(resource));resource.header.style=WS_POPUP|WS_CAPTION;resource.header.cx=100;resource.header.cy=100;
  dlg=CreateDialogIndirectParamA(GetModuleHandleA(NULL),&resource.header,NULL,dialog,0);
  REQUIRE(dlg&&dwmCalls>count&&lastWindow==dlg);
+ REQUIRE(!systemMessageBox(dlg));
  appDark=false;SendMessageA(after,WM_SETTINGCHANGE,0,0);REQUIRE(lastMode==0&&!lastDark&&!crashDark);
  REQUIRE(GetMenuItemInfoA(menu,0,TRUE,&info)&&!(info.fType&MFT_OWNERDRAW));
  appDark=true;SendMessageA(after,WM_THEMECHANGED,0,0);REQUIRE(lastMode==1&&lastDark&&crashDark);
