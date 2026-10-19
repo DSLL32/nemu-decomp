@@ -4,6 +4,7 @@
 Generated source adaptations and OMF/COFF intermediates live in obj/static.
 The reconstructed DLL projects are independent of this ordinary user build.
 """
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -20,6 +21,9 @@ from static_resources import aggregate
 ROOT = Path(__file__).resolve().parents[1]
 WORK = ROOT / 'obj/static'
 PASCAL = WORK / 'pascal'
+DEFAULT_FILES = ('config.ini', 'nemu64.ini', 'LemD3DCombine.dat', 'LemD3DCombine.new')
+PROFILE_APIS = {'GetPrivateProfileStringA': 24, 'GetPrivateProfileStructA': 20,
+                'WritePrivateProfileStringA': 16, 'WritePrivateProfileStructA': 20}
 COMPONENTS = [('kailleraclient.dll', False), ('gs_dll.dll', False),
               ('Plugin/audio.dll', True), ('Plugin/Input.dll', True),
               ('Plugin/LemD3D8.dll', True), ('Plugin/debugger.dll', True),
@@ -72,6 +76,7 @@ class Build:
             for p in (base / 'source' / directory).iterdir():
                 if p.suffix.lower() in ('.pas', '.inc'):
                     shutil.copy2(p, PASCAL / p.name.lower())
+        shutil.copy2(ROOT / 'src/static/StaticFiles.pas', PASCAL / 'staticfiles.pas')
         for p in (base / 'lib').glob('*.res'): shutil.copy2(p, PASCAL / p.name)
         flags = ['-JPN', '-$D-', '-$L-', '-$Y-', '-N.', '-E.', '-U.', '-I.', '-R.']
         self.tool('dcc32-personal', ['-y', *flags, 'system.pas'], PASCAL, 'd6u2')
@@ -96,6 +101,9 @@ class Build:
             roots.append(entry)
             for p in local:
                 text = rename_pascal(p.read_text(encoding='latin1'), mapping)
+                if folder == 'lemcombinedebugger' and p.stem in ('UnitCombineEditor', 'UnitCombiners'):
+                    text = re.sub(r'(?i)\buses\b', 'uses StaticFiles,', text, count=1)
+                    text = text.replace('Reset(CombineFile)', 'StaticReset(CombineFile, CombineFilename)')
                 target = PASCAL / (mapping[p.stem.lower()].lower() + '.pas')
                 if target.stem.startswith('static_shared_'):
                     signature = pascal_signature(text)
@@ -113,6 +121,10 @@ class Build:
                 shutil.copy2(p, PASCAL / p.name)
             text = (source / (project + '.dpr')).read_text(encoding='latin1')
             text = rename_pascal(text, mapping)
+            if folder == 'lemcombinedebugger':
+                # Keep the editor's on-disk write/rename path, but don't create
+                # empty files at startup: reads have embedded fallbacks.
+                text = re.sub(r'  if not FileExists\((?:New)?CombineFilename\) then Rewrite\((?:CombineFile|NewFile)\);\n', '', text)
             text = re.sub(r"\s+in\s+'[^']*'", '', text, flags=re.I)
             text = re.sub(r'\{\$R[^}]*\}', '', text, flags=re.I)
             text = re.sub(r'^library\s+\w+;', 'unit ' + entry + ';\ninterface', text, flags=re.I)
@@ -138,6 +150,8 @@ class Build:
                 path = ROOT / 'toolchains/vc7' / directory / (name + '.lib')
                 if path.exists(): libraries.append(path); break
         aliases = import_library_aliases(libraries)
+        aliases.update({name: '_NemuStatic' + name + '@' + str(size) for name, size in PROFILE_APIS.items()})
+        aliases['NemuStaticDefaultData'] = '_NemuStaticDefaultData'
         metadata = {}
         for path in sorted(PASCAL.glob('*.obj')):
             image = Converter(path.read_bytes())
@@ -195,6 +209,15 @@ class Build:
             for path in source.rglob('*'):
                 if path.suffix.lower() not in ('.c', '.cpp', '.h'): continue
                 text = path.read_text(encoding='latin1')
+                if component == 'gfx' and path.name == 'combiner.cpp':
+                    text = '#include "' + win(ROOT / 'src/static/StaticFiles.h').replace('\\', '/') + '"\n' + text
+                    begin = text.index('void LoadDatFile()')
+                    end = text.index('void ConfigureCombiner', begin)
+                    body = text[begin:end].replace('FILE *in;', 'NemuStaticText *in;')
+                    body = re.sub(r'fopen\(DatFilename, "rt?"\)', 'NemuStaticTextOpen(DatFilename)', body)
+                    body = body.replace('while (!feof(in)){\n\t\tfscanf(in, "%s\\n", str);', 'while (NemuStaticTextToken(in, str, sizeof(str)) == 1){')
+                    body = body.replace('feof(in)', 'NemuStaticTextEof(in)').replace('fgets(str, 256, in)', 'NemuStaticTextLine(in, str, sizeof(str))').replace('fclose(in)', 'NemuStaticTextClose(in)')
+                    text = text[:begin] + body + text[end:]
                 if path.name.lower() == 'resource.h':
                     text = re.sub(r'(#define\s+ID[DRIBS]_[A-Za-z_0-9]+\s+)(\d+)',
                                   lambda m: m[1] + str(int(m[2]) + offset), text)
@@ -220,6 +243,11 @@ class Build:
             for path in objects:
                 for _, name, section, value, storage in symbols(path.read_bytes()):
                     if storage == 2 and (section != 0 or value): mapping[name] = '__static_' + component + '_' + name
+            for name, size in PROFILE_APIS.items():
+                original = '_' + name + '@' + str(size)
+                target = '_NemuStatic' + name + '@' + str(size)
+                mapping[original] = target
+                mapping['__imp_' + original] = '__imp_' + target
             private = directory / 'private'
             private.mkdir(exist_ok=True)
             for path in objects:
@@ -254,9 +282,31 @@ class Build:
             self.resource_inputs.append((resource, offset))
 
 
+    def defaults(self):
+        declarations, entries = [], []
+        self.report['embedded_defaults'] = {}
+        for index, name in enumerate(DEFAULT_FILES):
+            data = (ROOT / 'master' / name).read_bytes()
+            symbol = 'defaultData' + str(index)
+            values = [str(byte) for byte in data] + ['0']
+            rows = [', '.join(values[pos:pos + 32]) for pos in range(0, len(values), 32)]
+            declarations.append('static const unsigned char ' + symbol + '[] = {\n' + ',\n'.join(rows) + '\n};')
+            entries.append('    {"' + name + '", (const char *)' + symbol + ', ' + str(len(data)) + '}')
+            self.report['embedded_defaults'][name] = dict(size=len(data), sha256=hashlib.sha256(data).hexdigest())
+        text = '\n'.join(declarations) + '\nstruct DefaultFile { const char *name, *data; unsigned int size; };\n'
+        text += 'static const DefaultFile defaultFiles[] = {\n' + ',\n'.join(entries) + '\n};\n'
+        (WORK / 'StaticDefaults.inc').write_text(text)
+        output = WORK / 'StaticFiles.obj'
+        self.tool('cl', ['/nologo', '/c', '/O2', '/MT', '/GX', '/I' + win(WORK), '/Fo' + win(output), win(ROOT / 'src/static/StaticFiles.cpp')])
+        self.objects.append(output)
+
+
     def link(self, metadata, order, host_objects):
         print('Generating static bindings and linking nemu64-static.exe...', flush=True)
         declarations, units, registry = [], [], []
+        for name, size in PROFILE_APIS.items():
+            target = '_NemuStatic' + name + '@' + str(size)
+            self.glue.pointer('__imp_' + target, target)
         for key in order:
             item = metadata[key]
             image = Converter(Path(item['source']).read_bytes())
@@ -306,6 +356,7 @@ class Build:
         runtime = WORK / 'StaticRuntime.obj'
         self.tool('cl', ['/nologo', '/c', '/O2', '/MT', '/GX', '/I' + win(WORK), '/Fo' + win(runtime), win(ROOT / 'src/static/StaticRuntime.cpp')])
         self.objects.append(runtime)
+        self.defaults()
         resource = WORK / 'static.res'
         self.report['resources'] = aggregate([(ROOT / 'obj/nemu64/nemu64.res', 0), *self.resource_inputs], resource)
         library = WORK / 'builtins.lib'

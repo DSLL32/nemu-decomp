@@ -2,8 +2,9 @@
 
 Run `make static` to produce `bin/nemu64-static.exe`. It includes GameShark,
 Kaillera, audio, input, LemD3D8, debugger, dialogs, profiler, and the combiner
-debugger. Ship it with `config.ini`, `nemu64.ini`, `LemD3DCombine.dat`, and
-`LemD3DCombine.new`. No bundled DLLs or `Plugin/` directory are required.
+debugger. The executable also embeds the tracked `master/` copies of
+`config.ini`, `nemu64.ini`, `LemD3DCombine.dat`, and `LemD3DCombine.new`.
+These files, the bundled DLLs, and the `Plugin/` directory are optional.
 Windows and DirectX DLLs remain system dependencies.
 
 `Plugin/` is optional. The frontend registers built-in implementations first,
@@ -13,6 +14,28 @@ registration when both user builds share a directory. External graphics plugins
 appear in Settings; audio/input providers retain the frontend's load-order
 behavior. An external DLL that itself imports a bundled DLL still requires
 that dependency as a loose DLL.
+
+## Embedded defaults and disk overrides
+
+Reads use an existing disk file in its entirety, including an empty file.
+Only a missing file falls back to its embedded bytes. A missing key in an
+existing INI uses the caller's usual default; it does not inherit that key from
+the embedded INI. Other files such as `Cheats.ini` retain their normal behavior.
+
+The frontend, Pascal settings dialogs, video plugin, and combiner editor share
+this behavior. Default INIs and combiner scripts are read directly from memory.
+Reading or opening a dialog does not extract the four files.
+
+Settings continue to save to disk. On the first INI write, a missing file is
+seeded from its embedded version before applying the edit, preserving the rest
+of its defaults. Normal frontend shutdown saves browser settings and therefore
+creates `config.ini` if needed. Existing disk files are edited normally. The
+combiner editor saves its edits to `LemD3DCombine.dat` using its existing `.new`
+working-file/rename path; the embedded `.new` default is empty.
+
+`make static` builds only the executable. `make` still produces the ordinary
+DLL build and copies its four data files. Changes to the tracked default files
+invalidate the static executable's build target.
 
 ## Ordinary object and library linking
 
@@ -84,10 +107,15 @@ The static executable check uses disposable Wine/Xvfb fixtures with an absent
 plugin directory, an empty one, and an external tool alongside invalid duplicate
 bundled filenames. It checks built-in menus, About/Disclaimer, Delphi
 settings/input and native audio/video dialogs, external tool initialization/cleanup and DLL unload,
-and normal shutdown. It also rejects imports of bundled DLLs. The optional
+and normal shutdown. An additional fixture starts with only the executable
+and verifies that the read-only databases stay absent. It also rejects imports
+of bundled DLLs. The optional
 `--components` check links the existing GameShark fixture against
 `obj/static/builtins.lib` and exercises MFC dialogs, cheat editing, and writes
-to synthetic RAM. Scratch files and
+to synthetic RAM. Another archive fixture compares every embedded INI section
+and key against Windows, exercises Delphi `TIniFile` and text I/O, runs the
+renderer's actual combiner parser with embedded/disk/empty inputs, and verifies
+first-save behavior. Scratch files and
 Wine prefixes are allocated under `~/.ai-tmp`.
 
 The build remains experimental. Validation is under Wine rather than native

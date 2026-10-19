@@ -18,6 +18,7 @@ from pe_fingerprints import PE32
 from build_static import COMPONENTS
 from static_objects import Glue
 from check_gs import seed_ini
+from check_static_defaults import check as check_defaults, archive_options
 
 ROOT = Path(__file__).resolve().parents[1]
 EXTERNAL = r'''
@@ -77,18 +78,23 @@ def worker(scratch, executable, report, components=False):
             'vc7', 'cl', '/nologo', '/ML', '/LD', 'nemu_menu_probe.c', '/link',
             'user32.lib', '/def:nemu_menu_probe.def'])
         compile_source('external.c', ['/LD'])
-        for mode in ('no-plugin-directory', 'empty-plugin-directory', 'external-and-duplicates'):
+        if components:
+            check_defaults(run, scratch)
+            results['scenarios'].append(dict(name='embedded-defaults-archive', passed=True))
+            print('embedded-defaults-archive: passed', flush=True)
+        for mode in ('embedded-defaults', 'no-plugin-directory', 'empty-plugin-directory', 'external-and-duplicates'):
             fixture = scratch / mode
             fixture.mkdir()
             (fixture / 'roms').mkdir()
             shutil.copy2(frozen, fixture / 'nemu64-static.exe')
-            for name in ('config.ini', 'nemu64.ini', 'LemD3DCombine.dat', 'LemD3DCombine.new'):
-                shutil.copy2(ROOT / 'bin' / name, fixture / name)
-            config = (fixture / 'config.ini').read_text(encoding='latin1')
-            config = '\n'.join('Folder=.\\roms\\' if line.startswith('Folder=') else line
-                               for line in config.splitlines()) + '\n'
-            (fixture / 'config.ini').write_text(config, encoding='latin1')
-            if mode != 'no-plugin-directory':
+            for name in (() if mode == 'embedded-defaults' else ('config.ini', 'nemu64.ini', 'LemD3DCombine.dat', 'LemD3DCombine.new')):
+                shutil.copy2(ROOT / 'master' / name, fixture / name)
+            if mode != 'embedded-defaults':
+                config = (fixture / 'config.ini').read_text(encoding='latin1')
+                config = '\n'.join('Folder=.\\roms\\' if line.startswith('Folder=') else line
+                                   for line in config.splitlines()) + '\n'
+                (fixture / 'config.ini').write_text(config, encoding='latin1')
+            if mode not in ('no-plugin-directory', 'embedded-defaults'):
                 (fixture / 'Plugin').mkdir()
             if mode == 'external-and-duplicates':
                 shutil.copy2(scratch / 'external.dll', fixture / 'Plugin' / 'external.dll')
@@ -98,6 +104,13 @@ def worker(scratch, executable, report, components=False):
                         (fixture / 'Plugin' / Path(name).name).write_bytes(b'not a DLL')
             output = run(mode, ['setarch', 'i386', '-R', 'wine',
                 str(scratch / 'nemu_probe.exe'), 'nemu64-static.exe'], cwd=fixture)
+            if mode == 'embedded-defaults':
+                files = {path.name.lower(): path for path in fixture.iterdir()}
+                for name in ('nemu64.ini', 'LemD3DCombine.dat', 'LemD3DCombine.new'):
+                    assert name.lower() not in files, 'Read extracted ' + name
+                # Normal frontend shutdown saves browser settings; the new file
+                # must also retain the built-in graphics section.
+                assert 'Width=800' in files['config.ini'].read_text()
             assert 'Probe completed' in output
             assert 'input-settings' in output
             assert 'audio-settings' in output
@@ -139,16 +152,19 @@ def worker(scratch, executable, report, components=False):
             (fixture / 'glue.obj').write_bytes(glue.emit_coff())
             run('compile-static-gs', [sys.executable, str(ROOT / 'scripts/run_toolchain.py'),
                 'vc7', 'cl', '/nologo', '/c', '/MT', 'gs_probe.c'], cwd=fixture)
-            options = []
-            for line in (ROOT / 'obj/static/link.rsp').read_text().splitlines():
-                if line.upper().startswith(('/OUT:', '/MAP:', '/SUBSYSTEM:', '/LTCG')): continue
-                if line.lower().endswith('.obj"'): continue
-                options.append(line)
+            options = archive_options()
             options += ['/SUBSYSTEM:CONSOLE', '/OUT:gs_probe.exe', 'gs_probe.obj', 'glue.obj']
             (fixture / 'link.rsp').write_text('\n'.join(options) + '\n')
             run('link-static-gs', [sys.executable, str(ROOT / 'scripts/run_toolchain.py'),
                 'vc7', 'link', '@link.rsp'], cwd=fixture)
             output = run('static-gameshark', ['setarch', 'i386', '-R', 'wine', 'gs_probe.exe', 'static'], cwd=fixture)
+            if mode == 'embedded-defaults':
+                files = {path.name.lower(): path for path in fixture.iterdir()}
+                for name in ('nemu64.ini', 'LemD3DCombine.dat', 'LemD3DCombine.new'):
+                    assert name.lower() not in files, 'Read extracted ' + name
+                # Normal frontend shutdown saves browser settings; the new file
+                # must also retain the built-in graphics section.
+                assert 'Width=800' in files['config.ini'].read_text()
             assert 'Probe completed' in output
             assert 'RAM=all-code-types' in output
             results['scenarios'].append(dict(name='static-gameshark-archive', passed=True))

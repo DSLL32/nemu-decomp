@@ -11,6 +11,10 @@
 #include "Plugins.h"
 #include "PIF.h"
 #include "Rom.h"
+#ifdef NEMU_STATIC
+#define NEMU_STATIC_PROFILE_REDIRECT
+#include "../static/StaticFiles.h"
+#endif
 
 char NemuIniPath[260];
 char ConfigurationIniPath[260];

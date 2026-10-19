@@ -1,7 +1,7 @@
 # Optional user build: MSVC LINK produces the executable directly from core
 # objects and a native static library of all bundled components.
 .PHONY: static
-static: $(OUT)/nemu64-static.exe $(addprefix $(OUT)/,$(COPIED))
+static: $(OUT)/nemu64-static.exe
 
 STATIC_BUILD_FILES := $(BUILD_RECIPE) $(ROOT)/scripts/static.mk
 STATIC_SOURCES := $(shell find $(ROOT)/src/static $(ROOT)/src/gs_dll $(ROOT)/src/audio $(ROOT)/src/kailleraclient $(ROOT)/src/lemd3d $(ROOT)/src/input $(ROOT)/src/debugger $(ROOT)/src/dialogs $(ROOT)/src/profile $(ROOT)/src/lemcombinedebugger -type f) \
@@ -10,7 +10,8 @@ STATIC_SOURCES := $(shell find $(ROOT)/src/static $(ROOT)/src/gs_dll $(ROOT)/src
 STATIC_CORE_FLAGS := $(filter-out /ML,$(NEMU_FLAGS)) /MT /DNEMU_STATIC
 STATIC_CORE_OBJS := $(addprefix $(WORK)/static/core/,$(addsuffix .obj,$(NEMU_UNITS) ByteSwap))
 STATIC_ZLIB_OBJS := $(addprefix $(WORK)/static/zlib/,$(addsuffix .obj,$(notdir $(ZLIB_UNITS))))
-STATIC_CORE_HEADERS := $(wildcard $(NEMU_SRC)/*.h $(NEMU_SRC)/*.inc $(NEMU_SRC)/res/*.inc) $(ROOT)/src/static/StaticRuntime.h
+STATIC_DEFAULTS := $(addprefix $(ROOT)/master/,config.ini nemu64.ini LemD3DCombine.dat LemD3DCombine.new)
+STATIC_CORE_HEADERS := $(wildcard $(NEMU_SRC)/*.h $(NEMU_SRC)/*.inc $(NEMU_SRC)/res/*.inc) $(ROOT)/src/static/StaticRuntime.h $(ROOT)/src/static/StaticFiles.h
 
 $(addprefix $(WORK)/static/core/,$(addsuffix .obj,$(NEMU_UNITS))): $(WORK)/static/core/%.obj: $(NEMU_SRC)/%.cpp $(STATIC_CORE_HEADERS) $(WORK)/nemu64/PifTables.inc $(STATIC_BUILD_FILES)
 	@cd "$(ROOT)"
@@ -30,6 +31,6 @@ $(WORK)/static/zlib/$(notdir $(1)).obj: $(ZLIB_SRC)/$(1).c $(wildcard $(ZLIB_SRC
 endef
 $(foreach unit,$(ZLIB_UNITS),$(eval $(call static_zlib_object,$(unit))))
 
-$(OUT)/nemu64-static.exe: $(STATIC_CORE_OBJS) $(STATIC_ZLIB_OBJS) $(WORK)/nemu64/nemu64.res $(STATIC_SOURCES) $(STATIC_BUILD_FILES)
+$(OUT)/nemu64-static.exe: $(STATIC_CORE_OBJS) $(STATIC_ZLIB_OBJS) $(WORK)/nemu64/nemu64.res $(STATIC_SOURCES) $(STATIC_DEFAULTS) $(STATIC_BUILD_FILES)
 	cd "$(ROOT)"
 	$(PYTHON) scripts/build_static.py $(STATIC_CORE_OBJS) $(STATIC_ZLIB_OBJS)

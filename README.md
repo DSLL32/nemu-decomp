@@ -32,6 +32,7 @@ for matching builds and verification.
 bundled components linked from object files and static libraries. It runs without the loose DLLs or a
 `Plugin/` directory, and still scans `Plugin/` for additional dynamic plugins.
 Bundled filenames are skipped during that scan to prevent duplicate registration.
-The four configuration/data files are still needed. See
+The four configuration/data files are embedded as defaults; optional disk files
+override them. See
 [the static build notes](src/static/README.md) for the linking approach,
 validation command, and current limitations.

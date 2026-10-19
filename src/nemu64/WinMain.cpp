@@ -19,6 +19,8 @@
 #include "EasterText.h"
 #ifdef NEMU_STATIC
 #include "../static/StaticRuntime.h"
+#define NEMU_STATIC_PROFILE_REDIRECT
+#include "../static/StaticFiles.h"
 #endif
 
 HWND MainWindow;
