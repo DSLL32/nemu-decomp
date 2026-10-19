@@ -1,6 +1,6 @@
 # Optional static user build
 
-Run `make static` to produce `bin/nemu64-static.exe`. It includes GameShark,
+Run `make -j8 static` to produce `bin/nemu64-static.exe`. It includes GameShark,
 Kaillera, audio, input, LemD3D8, debugger, dialogs, profiler, and the combiner
 debugger. The executable also embeds the tracked `master/` copies of
 `config.ini`, `nemu64.ini`, `LemD3DCombine.dat`, and `LemD3DCombine.new`.
@@ -14,6 +14,21 @@ registration when both user builds share a directory. External graphics plugins
 appear in Settings; audio/input providers retain the frontend's load-order
 behavior. An external DLL that itself imports a bundled DLL still requires
 that dependency as a loose DLL.
+
+## Build performance
+
+`make -j8 static` runs native plugin compilers in parallel as well as the host
+compilers. `STATIC_JOBS=N` overrides the plugin worker count; `make -j1 static`
+is serial. The shared Delphi RTL/VCL and plugin unit graph is compiled as one
+group, then reused until its inputs change.
+
+Content hashes under `obj/static/cache/` track sources, headers, flags, build
+scripts, toolchains, and generated outputs. Native source edits rebuild their
+object; header edits rebuild the affected component. A theme-only C++ edit
+reuses Delphi and all bundled plugin objects. Deleted or modified cached outputs
+are regenerated. Remove `obj/static/cache/` to force the component build again.
+`obj/static/build.log` records command timing and overlapping tool invocations;
+the final build message reports elapsed time, reuse, and peak concurrency.
 
 ## Embedded defaults and disk overrides
 

@@ -4,6 +4,7 @@
 Generated source adaptations and OMF/COFF intermediates live in obj/static.
 The reconstructed DLL projects are independent of this ordinary user build.
 """
+import argparse
 import hashlib
 import json
 import os
@@ -13,10 +14,12 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import time
 
 from omf_to_coff import Converter, convert, import_library_aliases
 from static_objects import Glue, symbols, namespace
 from static_resources import aggregate
+from static_build_cache import Cache, Tools, files, fingerprint, worker_count, write_changed
 
 ROOT = Path(__file__).resolve().parents[1]
 WORK = ROOT / 'obj/static'
@@ -40,8 +43,22 @@ def win(path):
     return 'Z:' + str(Path(path).resolve()).replace('/', '\\')
 
 
-class Build:
+class RecordedGlue(Glue):
     def __init__(self):
+        super().__init__()
+        self.operations = []
+
+    def jump(self, name, target):
+        self.operations.append(['jump', name, target])
+        super().jump(name, target)
+
+    def pointer(self, name, target):
+        self.operations.append(['pointer', name, target])
+        super().pointer(name, target)
+
+
+class Build:
+    def __init__(self, jobs):
         WORK.mkdir(parents=True, exist_ok=True)
         self.env = os.environ.copy()
         if not self.env.get('WINEPREFIX'):
@@ -52,23 +69,49 @@ class Build:
             print('Wine prefix:', self.env['WINEPREFIX'], flush=True)
         self.env.setdefault('WINEARCH', 'win32')
         self.env.setdefault('WINEDEBUG', '-all')
-        self.log = (WORK / 'build.log').open('w')
-        self.glue = Glue()
+        recipe = fingerprint(files(*(ROOT / 'scripts' / name for name in (
+            'build_static.py', 'static_build_cache.py', 'run_toolchain.py',
+            'omf_to_coff.py', 'static_objects.py', 'static_resources.py', 'delphi_dfm.dpr'))))
+        self.cache = Cache(WORK / 'cache', recipe)
+        self.tools = Tools(ROOT, WORK, self.env, self.cache, jobs)
+        self.log = self.tools.log
+        self.native_toolchain = fingerprint(files(ROOT / 'toolchains/vc7'))
+        self.glue = RecordedGlue()
         self.apis = {}
         self.objects = []
         self.resource_inputs = []
         self.report = {}
 
     def tool(self, tool, args, cwd=ROOT, chain='vc7'):
-        command = [sys.executable, str(ROOT / 'scripts/run_toolchain.py'), chain, tool, *map(str,args)]
-        self.log.write(' '.join(command) + '\n'); self.log.flush()
-        result = subprocess.run(command, env=self.env, cwd=cwd, stdout=self.log, stderr=subprocess.STDOUT)
-        if result.returncode:
-            self.log.flush()
-            print((WORK / 'build.log').read_text()[-9000:], file=sys.stderr)
-            raise RuntimeError(f'{tool} failed; see obj/static/build.log')
+        self.tools.run(tool, args, cwd, chain)
 
     def pascal(self):
+        inputs = files(ROOT / 'toolchains/d6u2',
+                       *(ROOT / 'src' / folder for folder, _ in PROJECTS),
+                       ROOT / 'src/static/StaticFiles.pas',
+                       ROOT / 'src/static/StaticVclTheme.pas')
+        signature = [fingerprint(inputs), self.native_toolchain]
+        cached = self.cache.load('pascal-stage', signature)
+        if cached is not None:
+            print('Reusing shared Delphi RTL/VCL and built-in Pascal plugins.', flush=True)
+            self.objects.extend(map(Path, cached['objects']))
+            self.resource_inputs.extend((Path(p), offset) for p, offset in cached['resources'])
+            self.apis.update(cached['apis'])
+            self.report.update(cached['report'])
+            for method, name, target in cached['glue']:
+                getattr(self.glue, method)(name, target)
+            return cached['metadata'], cached['order']
+        self.cache.invalidate('pascal-stage')
+        metadata, order = self.compile_pascal()
+        cached = dict(objects=list(map(str, self.objects)),
+                      resources=[(str(p), offset) for p, offset in self.resource_inputs],
+                      apis=self.apis, report=self.report, glue=self.glue.operations,
+                      metadata=metadata, order=order)
+        outputs = files(PASCAL) + self.objects
+        self.cache.save('pascal-stage', signature, outputs, cached)
+        return metadata, order
+
+    def compile_pascal(self):
         print('Compiling shared Delphi RTL/VCL and built-in Pascal plugins...', flush=True)
         PASCAL.mkdir(exist_ok=True)
         # Regenerate the unit cache as a group; all units must use the same RTL.
@@ -231,7 +274,7 @@ class Build:
 
 
     def native(self):
-        print('Compiling native components into private COFF symbol namespaces...', flush=True)
+        print(f'Building native components with up to {self.tools.jobs} compiler jobs...', flush=True)
         settings = [
             ('gs', 'gs_dll', 4096, 'Addsubcode gs_dll gs_exeDlg GS_interpret NewCodeDlg PropertiesDlg RW_INI_files StdAfx', 'gs_dll.rc'),
             ('audio', 'audio/ahle_ds', 8192, 'ABI1 ABI2 AudioHLE ABI3 AudioLegacy DirectSound AudioLog CPUFeatures Jpeg Mp3 AudioProcessing AudioResample AudioPlugin RSP', 'Audio.rc'),
@@ -240,10 +283,18 @@ class Build:
         for component, folder, offset, units, rc in settings:
             directory = WORK / component
             source = directory / 'src'
-            shutil.copytree(ROOT / 'src' / folder, source, dirs_exist_ok=True)
-            for path in source.rglob('*'):
-                if path.suffix.lower() not in ('.c', '.cpp', '.h'): continue
-                text = path.read_text(encoding='latin1')
+            original = ROOT / 'src' / folder
+            originals = files(original)
+            generated = {source / p.relative_to(original) for p in originals}
+            for stale in files(source) if source.exists() else []:
+                if stale not in generated:
+                    stale.unlink()
+            for original_path in originals:
+                path = source / original_path.relative_to(original)
+                if path.suffix.lower() not in ('.c', '.cpp', '.h'):
+                    write_changed(path, original_path.read_bytes())
+                    continue
+                text = original_path.read_text(encoding='latin1')
                 if component == 'gfx' and path.name == 'combiner.cpp':
                     text = '#include "' + win(ROOT / 'src/static/StaticFiles.h').replace('\\', '/') + '"\n' + text
                     begin = text.index('void LoadDatFile()')
@@ -258,7 +309,13 @@ class Build:
                                   lambda m: m[1] + str(int(m[2]) + offset), text)
                 text = re.sub(r'(MAKEINTRESOURCE[A-W]*\s*\(\s*)(\d+)(\s*\))',
                               lambda m: m[1] + str(int(m[2]) + offset) + m[3], text)
-                path.write_text(text, encoding='latin1')
+                write_changed(path, text.encode('latin1'))
+            # Each TU depends conservatively on its component's headers. A
+            # source edit recompiles only that TU; a header edit rebuilds the
+            # component. Include shared static helpers and SDK/compiler input.
+            headers = [p for p in files(source) if p.suffix.lower() in ('.h', '.inc', '.inl')]
+            headers += files(ROOT / 'src/static/StaticFiles.h')
+            dependency_hash = [self.native_toolchain, fingerprint(headers)]
             objects = []
             for unit in units.split():
                 path = source / (unit + '.cpp')
@@ -267,27 +324,31 @@ class Build:
                 flags = ['/nologo', '/c', '/O2', '/MT', '/GX', '/Gy', '/DWIN32', '/DNDEBUG', '/D_WINDOWS', '/D_USRDLL', '/W3']
                 if component == 'gfx':
                     flags += ['/D_MBCS', '/DLEMNEMU_EXPORTS', '/I' + win(source / 'vendor/amd3d'), '/I' + win(ROOT / 'toolchains/vc7/platformsdk/include/prerelease')]
-                self.tool('cl', [*flags, '/Fo' + win(obj), win(path)])
+                self.tools.submit('cl', [*flags, '/Fo' + win(obj), win(path)], obj,
+                                  [dependency_hash, fingerprint([path])])
                 objects.append(obj)
             if component == 'gfx':
                 for name, tool, filename in [('matrix-c', 'cl', 'matrix.c'), ('matrix-asm', 'ml', 'matrix.asm')]:
                     obj = directory / (name + '.obj')
                     args = ['/nologo', '/c', *(['/coff'] if tool == 'ml' else ['/O2', '/MT']), '/Fo' + win(obj), win(source / 'vendor/amd3d' / filename)]
-                    self.tool(tool, args); objects.append(obj)
+                    self.tools.submit(tool, args, obj,
+                                      [dependency_hash, fingerprint([source / 'vendor/amd3d' / filename])])
+                    objects.append(obj)
+            self.tools.wait()
             mapping = {}
             for path in objects:
                 for _, name, section, value, storage in symbols(path.read_bytes()):
                     if storage == 2 and (section != 0 or value): mapping[name] = '__static_' + component + '_' + name
             for name, size in STATIC_APIS.items():
-                original = '_' + name + '@' + str(size)
+                original_symbol = '_' + name + '@' + str(size)
                 target = '_NemuStatic' + name + '@' + str(size)
-                mapping[original] = target
-                mapping['__imp_' + original] = '__imp_' + target
+                mapping[original_symbol] = target
+                mapping['__imp_' + original_symbol] = '__imp_' + target
             private = directory / 'private'
             private.mkdir(exist_ok=True)
             for path in objects:
                 obj = private / path.name
-                obj.write_bytes(namespace(path.read_bytes(), mapping))
+                write_changed(obj, namespace(path.read_bytes(), mapping))
                 self.objects.append(obj)
             self.report[component + '_symbols'] = mapping
             if component in ('audio', 'gfx'):
@@ -313,7 +374,8 @@ class Build:
             # Compile original resource IDs, then relocate their resource names
             # as one unit (control IDs inside each window stay unchanged).
             resource = directory / 'original.res'
-            self.tool('rc', ['/I' + win(ROOT / 'src' / folder), '/dNDEBUG', '/fo' + win(resource), win(ROOT / 'src' / folder / rc)])
+            self.tools.cached('rc', ['/I' + win(original), '/dNDEBUG', '/fo' + win(resource), win(original / rc)],
+                              resource, [self.native_toolchain, fingerprint(originals)])
             self.resource_inputs.append((resource, offset))
 
 
@@ -330,9 +392,10 @@ class Build:
             self.report['embedded_defaults'][name] = dict(size=len(data), sha256=hashlib.sha256(data).hexdigest())
         text = '\n'.join(declarations) + '\nstruct DefaultFile { const char *name, *data; unsigned int size; };\n'
         text += 'static const DefaultFile defaultFiles[] = {\n' + ',\n'.join(entries) + '\n};\n'
-        (WORK / 'StaticDefaults.inc').write_text(text)
+        write_changed(WORK / 'StaticDefaults.inc', text)
         output = WORK / 'StaticFiles.obj'
-        self.tool('cl', ['/nologo', '/c', '/O2', '/MT', '/GX', '/I' + win(WORK), '/Fo' + win(output), win(ROOT / 'src/static/StaticFiles.cpp')])
+        self.tools.cached('cl', ['/nologo', '/c', '/O2', '/MT', '/GX', '/I' + win(WORK), '/Fo' + win(output), win(ROOT / 'src/static/StaticFiles.cpp')],
+                          output, [self.native_toolchain, fingerprint(files(ROOT / 'src/static/StaticFiles.cpp', ROOT / 'src/static/StaticFiles.h', WORK / 'StaticDefaults.inc'))])
         self.objects.append(output)
 
 
@@ -384,23 +447,27 @@ class Build:
         text += 'struct StaticPlugin { const char *filename; const StaticProcedure *procedures; unsigned int count; };\n'
         text += '\n'.join(registry) + '\nstatic const StaticPlugin plugins[] = {\n' + ',\n'.join(plugin_rows) + '\n};\n'
         text += 'static BOOL (WINAPI *const nativeEntries[])(HINSTANCE, DWORD, LPVOID) = {' + ', '.join(native_entries) + '};\n'
-        (WORK / 'StaticBindings.inc').write_text(text)
+        write_changed(WORK / 'StaticBindings.inc', text)
         glue = WORK / 'StaticGlue.obj'
-        glue.write_bytes(self.glue.emit_coff())
+        write_changed(glue, self.glue.emit_coff())
         self.objects.append(glue)
         runtime = WORK / 'StaticRuntime.obj'
-        self.tool('cl', ['/nologo', '/c', '/O2', '/MT', '/GX', '/I' + win(WORK), '/Fo' + win(runtime), win(ROOT / 'src/static/StaticRuntime.cpp')])
+        self.tools.submit('cl', ['/nologo', '/c', '/O2', '/MT', '/GX', '/I' + win(WORK), '/Fo' + win(runtime), win(ROOT / 'src/static/StaticRuntime.cpp')],
+                          runtime, [self.native_toolchain, fingerprint(files(ROOT / 'src/static/StaticRuntime.cpp', ROOT / 'src/static/StaticRuntime.h', ROOT / 'src/static/StaticTheme.h', WORK / 'StaticBindings.inc'))])
         self.objects.append(runtime)
         theme = WORK / 'StaticTheme.obj'
-        self.tool('cl', ['/nologo', '/c', '/O2', '/MT', '/Fo' + win(theme), win(ROOT / 'src/static/StaticTheme.cpp')])
+        self.tools.submit('cl', ['/nologo', '/c', '/O2', '/MT', '/Fo' + win(theme), win(ROOT / 'src/static/StaticTheme.cpp')],
+                          theme, [self.native_toolchain, fingerprint(files(ROOT / 'src/static/StaticTheme.cpp', ROOT / 'src/static/StaticThemeControls.inc', ROOT / 'src/static/StaticTheme.h'))])
         self.objects.append(theme)
         self.defaults()
+        self.tools.wait()
         resource = WORK / 'static.res'
         self.report['resources'] = aggregate([(ROOT / 'obj/nemu64/nemu64.res', 0), *self.resource_inputs], resource)
         library = WORK / 'builtins.lib'
         response = WORK / 'archive.rsp'
-        response.write_text('/nologo /OUT:"' + win(library) + '"\n' + '\n'.join('"' + win(p) + '"' for p in self.objects))
-        self.tool('lib', ['@' + win(response)])
+        write_changed(response, '/nologo /OUT:"' + win(library) + '"\n' + '\n'.join('"' + win(p) + '"' for p in self.objects))
+        self.tools.cached('lib', ['@' + win(response)], library,
+                          [self.native_toolchain, fingerprint([response, *self.objects])])
         response = WORK / 'link.rsp'
         options = ['/nologo', '/LTCG', '/SUBSYSTEM:WINDOWS', '/INCREMENTAL:NO', '/MACHINE:I386', '/OUT:"' + win(ROOT / 'bin/nemu64-static.exe') + '"', '/MAP:"' + win(WORK / 'nemu64-static.map') + '"', '/LIBPATH:"' + win(ROOT / 'toolchains/vc7/platformsdk/lib/prerelease') + '"', '/DELAYLOAD:d3d8.dll', '/DELAYLOAD:dsound.dll']
         libraries = ['nafxcw.lib', 'libcmt.lib', 'delayimp.lib', 'd3dx8.lib', 'd3d8.lib', 'dxerr8.lib', 'dsound.lib', 'winmm.lib', 'kernel32.lib', 'user32.lib', 'gdi32.lib', 'advapi32.lib', 'ole32.lib', 'oleaut32.lib', 'comctl32.lib', 'comdlg32.lib', 'shell32.lib', 'imm32.lib', 'version.lib', 'wininet.lib', 'wsock32.lib', 'ws2_32.lib', 'mpr.lib', 'uuid.lib', 'winspool.lib']
@@ -408,7 +475,7 @@ class Build:
         # their implementations through ordinary relocations in the archive.
         options += ['/INCLUDE:' + self.report['gs_symbols']['?theApp@@3VCGs_dllApp@@A']]
         options += ['"' + win(p) + '"' for p in host_objects] + ['"' + win(library) + '"', '"' + win(resource) + '"', *libraries]
-        response.write_text('\n'.join(options) + '\n')
+        write_changed(response, '\n'.join(options) + '\n')
         (ROOT / 'bin').mkdir(exist_ok=True)
         self.tool('link', ['@' + win(response)])
         (WORK / 'link-report.json').write_text(json.dumps(self.report, indent=2) + '\n')
@@ -428,10 +495,23 @@ def rename_pascal(text, mapping):
 
 
 def main():
-    build = Build()
-    metadata, order = build.pascal()
-    build.native()
-    build.link(metadata, order, [Path(p) for p in sys.argv[1:]])
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--jobs', type=int, default=worker_count())
+    parser.add_argument('objects', nargs='+', type=Path)
+    args = parser.parse_args()
+    if args.jobs < 1:
+        parser.error('--jobs must be positive')
+    build = Build(args.jobs)
+    started = time.monotonic()
+    try:
+        metadata, order = build.pascal()
+        build.native()
+        build.link(metadata, order, args.objects)
+        print(f'Static build: {time.monotonic() - started:.1f}s; '
+              f'{build.tools.compiled} tool outputs rebuilt, {build.tools.reused} reused; '
+              f'peak {build.tools.maximum} simultaneous tools.', flush=True)
+    finally:
+        build.tools.close()
 
 
 if __name__ == '__main__':

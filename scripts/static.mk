@@ -5,7 +5,7 @@ static: $(OUT)/nemu64-static.exe
 
 STATIC_BUILD_FILES := $(BUILD_RECIPE) $(ROOT)/scripts/static.mk
 STATIC_SOURCES := $(shell find $(ROOT)/src/static $(ROOT)/src/gs_dll $(ROOT)/src/audio $(ROOT)/src/kailleraclient $(ROOT)/src/lemd3d $(ROOT)/src/input $(ROOT)/src/debugger $(ROOT)/src/dialogs $(ROOT)/src/profile $(ROOT)/src/lemcombinedebugger -type f) \
-    $(addprefix $(ROOT)/scripts/,build_static.py static_objects.py static_resources.py omf_to_coff.py delphi_dfm.dpr run_toolchain.py) \
+    $(addprefix $(ROOT)/scripts/,build_static.py static_objects.py static_build_cache.py static_resources.py omf_to_coff.py delphi_dfm.dpr run_toolchain.py) \
     $(shell find $(ROOT)/toolchains/d6u2/source/rtl $(ROOT)/toolchains/d6u2/source/vcl -type f \( -name '*.pas' -o -name '*.inc' \))
 STATIC_CORE_FLAGS := $(filter-out /ML,$(NEMU_FLAGS)) /MT /DNEMU_STATIC
 STATIC_CORE_OBJS := $(addprefix $(WORK)/static/core/,$(addsuffix .obj,$(NEMU_UNITS) ByteSwap))
