@@ -182,15 +182,31 @@ def build(output, named_template, ordinal_template):
                 if any(s['name'] == '.text' for s in coff.sections):
                     before = body
                     body = rebuild(body, coff, {'.text': '.text$w'})
+                    alignment = []
+                    for symbol in coff.symbols:
+                        if symbol['name'] != '__CRT_INIT@12' or symbol['section'] <= 0:
+                            continue
+                        section = coff.sections[symbol['section'] - 1]
+                        flags = section['characteristics']
+                        if section['name'] != '.text' or flags & 0x00f00000 != 0x00100000:
+                            raise ValueError('Unexpected native CRT initialization alignment')
+                        data = bytearray(body)
+                        new_flags = (flags & ~0x00f00000) | 0x00500000
+                        struct.pack_into('<I', data, 20 + 40 * (symbol['section'] - 1) + 36,
+                                         new_flags)
+                        body = bytes(data)
+                        alignment.append(dict(symbol=symbol['name'], original=1, recovered=16))
                     inspection.write_bytes(body)
                     after = COFF(inspection)
                     if [s['data'] for s in coff.sections] != [s['data'] for s in after.sections]:
                         raise ValueError('Native CRT section contents changed')
                     renamed.append(dict(object=name, original_sha256=digest(before),
-                                        normalized_sha256=digest(body)))
+                                        normalized_sha256=digest(body), alignment=alignment))
             members.append((name, body, symbols))
         if len(converted) != (22 if library == 'ws2_32' else 5):
             raise ValueError('SDK import inventory changed')
+        if library == 'msvcrt' and sum(len(row['alignment']) for row in renamed) != 1:
+            raise ValueError('Native CRT initialization contribution changed')
         path = output / (library + '.lib')
         path.write_bytes(archive_for(members))
         if [(n, b) for n, _, b in archive_members(path)] != [(n, b) for n, b, _ in members]:

@@ -91,6 +91,9 @@ native six-byte indirect-jump payload and its symbolic IAT relocation. Import
 names, hints, and ordinals come from the pinned SDK declarations. All other
 SDK import records remain unchanged. Native CRT section names supply the
 observed code grouping; CRT instructions and data payloads remain unchanged.
+The first `crtdll.obj` COMDAT, `__CRT_INIT@12`, also needs the observed 16-byte
+alignment rather than the SDK member's byte alignment; its immediately following
+entry-point COMDAT retains byte alignment. This changes only section metadata.
 The import chronology separately recovers the 99 IAT slots using ordinary
 archive indexes and `/INCLUDE` roots. Neither stage reads the target DLL.
 
