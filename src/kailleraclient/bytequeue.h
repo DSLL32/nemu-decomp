@@ -16,7 +16,7 @@ public:
     int used,capacity;
 };
 
-class ByteQueueList : public C_ItemList<void> {
+class ByteQueueList : public C_ItemList<ByteQueue> {
 public:
     ByteQueueList();
     inline void clear();

@@ -751,18 +751,18 @@ void closeSyncDialog()
 inline int ByteQueueList::find(void *data,int length) {
         char bytes[1024];
         for (int index=0;index<m_size;index++) {
-            ((ByteQueue *)Get(index))->peek(bytes,length);
+            Get(index)->peek(bytes,length);
             if (!memcmp(bytes,data,length)) return index;
         }
         return -1;
     }
 
-inline int ByteQueueList::dataSize(int index) { if (index>=m_size) return 0; return ((ByteQueue *)Get(index))->used; }
+inline int ByteQueueList::dataSize(int index) { if (index>=m_size) return 0; return Get(index)->used; }
 
-inline char *ByteQueueList::dataAt(int index) { if (index>=m_size) return 0; return ((ByteQueue *)Get(index))->data; }
+inline char *ByteQueueList::dataAt(int index) { if (index>=m_size) return 0; return Get(index)->data; }
 
 inline void ByteQueueList::addData(void *data,int length) {
-        if (m_size==256) { delete (ByteQueue *)Get(0); Del(0); }
+        if (m_size==256) { delete Get(0); Del(0); }
         ByteQueue *queue=new ByteQueue;
         queue->append(data,length);
         Add(queue);
@@ -777,7 +777,8 @@ inline void ByteQueue::append(void *bytes,int length) {
             while (used+length>capacity) capacity*=2;
             data=(char *)realloc(data,capacity);
         }
-        memcpy(data+used,bytes,length);
+        int offset=used;
+        memcpy(data+offset,bytes,length);
         used+=length;
     }
 
@@ -797,7 +798,7 @@ inline void ByteQueue::peek(void *bytes,int length) {
 
 ByteQueueList::ByteQueueList() {}
 
-inline void ByteQueueList::clear() { while (m_size>0) { delete (ByteQueue *)Get(0); Del(0); } }
+inline void ByteQueueList::clear() { while (m_size>0) { delete Get(0); Del(0); } }
 
 ByteQueueList::~ByteQueueList() { clear(); }
 
