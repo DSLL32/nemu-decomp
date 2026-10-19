@@ -69,14 +69,21 @@ exports and unsupported DWM attributes are tolerated.
 A thread-local window hook catches new and recreated handles. Optional common
 control subclass helpers are resolved at runtime. Pushbuttons, combo boxes,
 edit fields, lists, trees and their scrollbars retain native rendering, with
-per-control theme names and supported color messages. Custom painting is limited
-to the menu bar, header/status/tab controls, checkbox/radio/group-box gaps,
-and application artwork. Light mode restores the
-control colors; high contrast uses the original Windows colors. Keyboard input,
+per-control theme names and supported color messages. On Windows build 26200+
+the adapter requests `DarkMode_DarkTheme`, using the same availability cutoff
+as [wxWidgets](https://github.com/wxWidgets/wxWidgets/blob/master/src/msw/darkmode.cpp).
+These controls retain native painting, including headers, status bars, tabs,
+checkboxes, radio buttons, group boxes and toolbar arrows. The crash dialog's
+buttons and details edit use the new theme too. Rejected requests fall back to
+the older themes. Older Windows versions keep the existing adapter, where
+custom painting is limited to the menu bar, header/status/tab controls,
+checkbox/radio/group-box gaps, and application artwork. Light mode restores
+the control colors; high contrast uses the original Windows colors. Keyboard input,
 control commands and focus cues continue through the original window procedures.
 
-USER32 message boxes need their dialog backdrop filled during paint as well
-as background erasure; otherwise Windows repaints a light button footer.
+The USER32 message-box backdrop fallback fills the background during paint as
+well as background erasure, covering the light button footer seen with the
+older themes. The new control theme does not replace this background handling.
 The adapter identifies their system dialog procedure and clips out visible
 children, leaving icons, text and native buttons to their own controls.
 Application dialog paint handlers are retained, and light/high-contrast modes
@@ -86,8 +93,8 @@ use the original system message-box painting.
 painters and removes the toolbar's light divider. It does not paint native
 scrollbars or install scrollbar repaint timers. Eject/pause/stop/reset icons use an inverted,
 masked copy of the toolbar image list; magenta remains transparent. A separate
-masked gray image list keeps disabled glyphs visible. Toolbar dropdown arrows
-use the dark foreground after native painting, including their disabled state. The shared browser images
+masked gray image list keeps disabled glyphs visible. With older themes, toolbar
+dropdown arrows use the dark foreground after native painting, including their disabled state. The shared browser images
 remain intact. The original image lists and divider flag are restored in light mode.
 
 Generated debugger painters use `StaticThemeColor` for explicit backgrounds,

@@ -7,7 +7,7 @@ static HMODULE crashDwm, crashTheme;
 static CrashDwmAttribute crashSetAttribute;
 static CrashWindowTheme crashSetWindowTheme;
 static CrashAllowWindow crashAllowWindow;
-static bool details, dialogDark;
+static bool details, dialogDark, crashNativeTheme;
 static HWND detailEdit, detailButton;
 static HFONT dialogFont, reportFont;
 static HBRUSH dialogBrush, reportBrush;
@@ -32,6 +32,7 @@ static void initializeDialog(void)
     Version version = (Version)GetProcAddress(GetModuleHandleA("ntdll.dll"),"RtlGetVersion");
     OSVERSIONINFOW os; ZeroMemory(&os,sizeof(os)); os.dwOSVersionInfoSize=sizeof(os);
     if (!version || version(&os) || os.dwMajorVersion < 10 || os.dwBuildNumber < 17763) return;
+    crashNativeTheme = os.dwBuildNumber >= 26200;
     crashDwm = crashSystemLibrary("dwmapi.dll");
     if (crashDwm) crashSetAttribute=(CrashDwmAttribute)GetProcAddress(crashDwm,"DwmSetWindowAttribute");
     crashTheme = crashSystemLibrary("uxtheme.dll");
@@ -46,6 +47,7 @@ static void shutdownDialog(void)
     if (crashTheme) FreeLibrary(crashTheme);
     crashDwm=crashTheme=NULL;
     crashSetAttribute=NULL; crashSetWindowTheme=NULL; crashAllowWindow=NULL;
+    crashNativeTheme=false;
     NemuStaticCrashSetDark(FALSE);
 }
 static int dialogUnits(int value) { return MulDiv(value,dialogDpi,96); }
@@ -69,8 +71,10 @@ static HWND dialogControl(HWND window, const char *cls, const char *text, DWORD 
     SendMessage(control,WM_SETFONT,(WPARAM)dialogFont,FALSE);
     if (dialogDark) {
         if (crashAllowWindow) crashAllowWindow(control,true);
-        if (crashSetWindowTheme && (!lstrcmpA(cls,"BUTTON") || !lstrcmpA(cls,"EDIT")))
-            crashSetWindowTheme(control,L"DarkMode_Explorer",NULL);
+        if (crashSetWindowTheme && (!lstrcmpA(cls,"BUTTON") || !lstrcmpA(cls,"EDIT"))) {
+            if (!crashNativeTheme || FAILED(crashSetWindowTheme(control,L"DarkMode_DarkTheme",NULL)))
+                crashSetWindowTheme(control,L"DarkMode_Explorer",NULL);
+        }
     }
     return control;
 }

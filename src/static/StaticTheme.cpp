@@ -68,14 +68,14 @@ extern "C" HBRUSH WINAPI NemuStaticGetSysColorBrush(int index)
     return colorBrushes[index];
 }
 
-enum ControlKind { Panel, List, Tree, Toolbar, Status, Header, Button, Tabs, Combo, Edit, Other };
+enum ControlKind { Panel, List, Tree, Toolbar, Status, Header, Button, Tabs, Combo, Edit, NativeOnly, Other };
 struct ThemedWindow {
     HWND window;
     ControlKind kind;
     COLORREF background, textBackground, text;
     HIMAGELIST originalImages, darkImages, originalDisabledImages, darkDisabledImages;
     DWORD originalStyle, originalButtonEdge;
-    bool themed, systemMessage;
+    bool themed, nativeTheme, systemMessage;
     ThemedWindow *next;
 };
 static ThemedWindow *windows;
@@ -159,11 +159,21 @@ static ControlKind controlKind(HWND window)
         !lstrcmpiA(name, "TMemo") || !lstrcmpiA(name, "LISTBOX") ||
         !lstrcmpiA(name, "TListBox")) return Edit;
     if (!lstrcmpiA(name, "nemu64") || !lstrcmpiA(name, "#32770")) return Panel;
+    if (!lstrcmpiA(name, "STATIC") || !lstrcmpiA(name, "SCROLLBAR") ||
+        !lstrcmpiA(name, PROGRESS_CLASSA) || !lstrcmpiA(name, UPDOWN_CLASSA) ||
+        !lstrcmpiA(name, REBARCLASSNAMEA) || !lstrcmpiA(name, TOOLTIPS_CLASSA)) return NativeOnly;
     return Other;
 }
 
+static bool usesNativeTheme(HWND window)
+{
+    for (ThemedWindow *state = windows; state; state = state->next)
+        if (state->window == window) return state->nativeTheme;
+    return false;
+}
 static bool customButton(HWND window)
 {
+    if (usesNativeTheme(window)) return false;
     DWORD style = GetWindowLong(window, GWL_STYLE);
     if (style & (BS_BITMAP|BS_ICON)) return false;
     UINT type = style & BS_TYPEMASK;
@@ -240,14 +250,24 @@ static void controlColors(ThemedWindow *state)
         }
     }
     if (allowWindow) allowWindow(window, dark);
+    state->nativeTheme = false;
     if (setWindowTheme && state->kind != Other && state->kind != Panel) {
-        LPCWSTR theme = L"";
-        if (state->kind == Combo) theme = L"DarkMode_CFD";
-        else if (state->kind == List || state->kind == Tree || state->kind == Edit ||
-            (state->kind == Button && (GetWindowLong(window,GWL_STYLE)&BS_TYPEMASK) != BS_GROUPBOX))
-            theme = L"DarkMode_Explorer";
-        // An empty theme is reserved for the controls we actually paint.
-        setWindowTheme(window, dark ? theme : NULL, dark && !theme[0] ? L"" : NULL);
+        // Match wxWidgets' availability gate. A successful SetWindowTheme by
+        // itself does not prove that an older OS contains this theme class.
+        if (dark && windowsBuild >= 26200) {
+            state->nativeTheme = true; // Theme messages may reenter painting.
+            if (FAILED(setWindowTheme(window,L"DarkMode_DarkTheme",NULL)))
+                state->nativeTheme = false;
+        }
+        if (!state->nativeTheme && (state->kind != NativeOnly || !dark)) {
+            LPCWSTR theme = L"";
+            if (state->kind == Combo) theme = L"DarkMode_CFD";
+            else if (state->kind == List || state->kind == Tree || state->kind == Edit ||
+                (state->kind == Button && (GetWindowLong(window,GWL_STYLE)&BS_TYPEMASK) != BS_GROUPBOX))
+                theme = L"DarkMode_Explorer";
+            // An empty theme is reserved for the controls we actually paint.
+            setWindowTheme(window, dark ? theme : NULL, dark && !theme[0] ? L"" : NULL);
+        }
     }
     if (state->kind == List) {
         ListView_SetBkColor(window, dark ? NemuStaticGetSysColor(COLOR_WINDOW) : state->background);
@@ -515,7 +535,8 @@ static LRESULT CALLBACK themedProc(HWND window, UINT message, WPARAM wParam, LPA
         }
         if (message == WM_NOTIFY && ((NMHDR *)lParam)->code == NM_CUSTOMDRAW) {
             ControlKind kind = controlKind(((NMHDR *)lParam)->hwndFrom);
-            if (kind == Toolbar || kind == Header) return customDraw((NMHDR *)lParam);
+            if ((kind == Toolbar || kind == Header) && !usesNativeTheme(((NMHDR *)lParam)->hwndFrom))
+                return customDraw((NMHDR *)lParam);
         }
         if (state->systemMessage &&
             (message == WM_PAINT || message == WM_PRINTCLIENT)) {
@@ -528,12 +549,13 @@ static LRESULT CALLBACK themedProc(HWND window, UINT message, WPARAM wParam, LPA
             if (message == WM_PAINT) EndPaint(window,&paint);
             return 1;
         }
-        if (message == WM_ERASEBKGND && (state->kind == Panel || state->kind == Toolbar ||
-            state->kind == Status || state->kind == Tabs || (state->kind == Button && customButton(window)))) {
+        if (message == WM_ERASEBKGND && (state->kind == Panel || (!state->nativeTheme &&
+            (state->kind == Toolbar || state->kind == Status || state->kind == Tabs ||
+             (state->kind == Button && customButton(window)))))) {
             RECT rect; GetClientRect(window, &rect);
             FillRect((HDC)wParam, &rect, NemuStaticGetSysColorBrush(COLOR_BTNFACE)); return 1;
         }
-        if ((message == WM_PAINT || message == WM_PRINTCLIENT) &&
+        if (!state->nativeTheme && (message == WM_PAINT || message == WM_PRINTCLIENT) &&
             (state->kind == Status ||
              (state->kind == Tabs && !(GetWindowLong(window, GWL_STYLE) & TCS_OWNERDRAWFIXED)) ||
              (state->kind == Button && customButton(window)))) {
@@ -547,7 +569,7 @@ static LRESULT CALLBACK themedProc(HWND window, UINT message, WPARAM wParam, LPA
         }
     }
     LRESULT result = defaultSubclass(window, message, wParam, lParam);
-    if (dark && state->kind == Toolbar &&
+    if (dark && !state->nativeTheme && state->kind == Toolbar &&
         (message == WM_NCPAINT || message == WM_PAINT || message == WM_SIZE))
         paintToolbarDivider(window);
     // Some menu implementations ignore MIM_BACKGROUND in the unused band.

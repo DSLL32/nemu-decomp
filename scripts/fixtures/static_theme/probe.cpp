@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #define REQUIRE(x) do { if (!(x)) { fprintf(stderr,"FAIL line %d: %s\n",__LINE__,#x); ExitProcess(5); } } while (0)
 static DWORD testMajor, testBuild;
-static bool ntMissing, dllMissing, exportsMissing, shouldMissing, appDark, highContrast, spiFails;
+static bool ntMissing, dllMissing, exportsMissing, shouldMissing, appDark, highContrast, spiFails, rejectNativeTheme;
 static DWORD registryType, registrySize, registryValue;
 static unsigned loads, ordinalLookups, oldAppCalls, newAppCalls, flushCalls, windowCalls, dwmCalls, legacyCalls;
 static int lastMode;
@@ -44,6 +44,7 @@ static HMODULE WINAPI testLoad(LPCSTR name) {
 static BOOL WINAPI testFree(HMODULE) { return TRUE; }
 static HRESULT WINAPI testTheme(HWND window,LPCWSTR name,LPCWSTR)
 {
+ if(rejectNativeTheme && name && !lstrcmpW(name,L"DarkMode_DarkTheme"))return E_FAIL;
  if(name)SetPropA(window,"NativeThemeRequest",(HANDLE)name);
  else RemovePropA(window,"NativeThemeRequest");
  return S_OK;
@@ -125,7 +126,7 @@ static void expectNativePaint(HWND window,HDC dc,bool nonclient)
 }
 static void reset(DWORD major,DWORD build) {
  NemuStaticThemeShutdown();testMajor=major;testBuild=build;
- ntMissing=dllMissing=exportsMissing=shouldMissing=highContrast=spiFails=false;appDark=true;
+ ntMissing=dllMissing=exportsMissing=shouldMissing=highContrast=spiFails=rejectNativeTheme=false;appDark=true;
  registryType=REG_DWORD;registrySize=4;registryValue=0;
  loads=ordinalLookups=oldAppCalls=newAppCalls=flushCalls=windowCalls=dwmCalls=legacyCalls=0;
  lastMode=-1;lastWindow=NULL;lastDark=FALSE;attribute20Result=S_OK;
@@ -248,6 +249,45 @@ int main() {
  SelectObject(memory,original);DeleteObject(bitmap);DeleteDC(memory);ReleaseDC(before,dc);
  DestroyWindow(list);DestroyWindow(bar);DestroyWindow(button);DestroyWindow(edit);DestroyWindow(combo);
  puts("PASS: native button/combo/scrollbar painting, dark palettes, icons and high-contrast restoration");
+ // New theme: our fallback painters must leave native pixels and notifications
+ // intact for controls that previously needed custom rendering.
+ reset(10,26100);NemuStaticThemeInitialize();
+ HWND oldCheck=create("BUTTON",before,BS_AUTOCHECKBOX);
+ REQUIRE(customButton(oldCheck) && !usesNativeTheme(oldCheck));DestroyWindow(oldCheck);
+ reset(10,26200);NemuStaticThemeInitialize();
+ const char *classes[]={"BUTTON","BUTTON","BUTTON",STATUSCLASSNAMEA,WC_TABCONTROLA,
+     WC_HEADERA,TOOLBARCLASSNAMEA,"COMBOBOX","EDIT","STATIC",PROGRESS_CLASSA};
+ DWORD styles[]={BS_AUTOCHECKBOX,BS_AUTORADIOBUTTON,BS_GROUPBOX,0,0,0,0,CBS_DROPDOWN,0,0,0};
+ HWND nativeControls[11];
+ dc=GetDC(before);memory=CreateCompatibleDC(dc);bitmap=CreateCompatibleBitmap(dc,100,100);
+ original=SelectObject(memory,bitmap);
+ for(unsigned n=0;n<11;++n) {
+  HWND control=nativeControls[n]=create(classes[n],before,styles[n]);
+  REQUIRE(usesNativeTheme(control));
+  REQUIRE(!lstrcmpW((LPCWSTR)GetPropA(control,"NativeThemeRequest"),L"DarkMode_DarkTheme"));
+  if(n<3)REQUIRE(!customButton(control));
+  expectNativePaint(control,memory,false);
+  if(n==5 || n==6) {
+   NMCUSTOMDRAW draw;ZeroMemory(&draw,sizeof(draw));draw.hdr.hwndFrom=control;
+   draw.hdr.code=NM_CUSTOMDRAW;draw.dwDrawStage=CDDS_ITEMPREPAINT;draw.hdc=memory;
+   REQUIRE(SendMessage(before,WM_NOTIFY,0,(LPARAM)&draw)==CDRF_DODEFAULT);
+  }
+ }
+ highContrast=true;SendMessage(before,WM_SETTINGCHANGE,0,0);
+ for(unsigned n=0;n<11;++n) {
+  REQUIRE(!usesNativeTheme(nativeControls[n]));
+  REQUIRE(!GetPropA(nativeControls[n],"NativeThemeRequest"));
+ }
+ highContrast=false;SendMessage(before,WM_SETTINGCHANGE,0,0);
+ REQUIRE(usesNativeTheme(nativeControls[0]) && !customButton(nativeControls[0]));
+ for(unsigned n=0;n<11;++n)DestroyWindow(nativeControls[n]);
+ SelectObject(memory,original);DeleteObject(bitmap);DeleteDC(memory);ReleaseDC(before,dc);
+ rejectNativeTheme=true;
+ HWND rejected=create("BUTTON",before,BS_AUTOCHECKBOX);
+ REQUIRE(!usesNativeTheme(rejected) && customButton(rejected));
+ REQUIRE(!lstrcmpW((LPCWSTR)GetPropA(rejected,"NativeThemeRequest"),L"DarkMode_Explorer"));
+ DestroyWindow(rejected);
+ puts("PASS: 26200 native theme bypasses fallback painters, restores high contrast and handles rejected themes");
  reset(10,18362);NemuStaticThemeInitialize();REQUIRE(newAppCalls==1&&!oldAppCalls&&lastMode==1);
  reset(10,22000);NemuStaticThemeInitialize();REQUIRE(newAppCalls==1&&!oldAppCalls&&!legacyCalls&&lastDark);
  highContrast=true;SendMessageA(before,WM_SETTINGCHANGE,0,0);REQUIRE(lastMode==0&&!lastDark);

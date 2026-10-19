@@ -8,9 +8,11 @@
 static HWND themed[4];
 static WNDPROC procedures[4];
 static unsigned themedCount;
+static bool rejectTheme;
 static HRESULT WINAPI theme(HWND window,LPCWSTR name,LPCWSTR)
 {
-    REQUIRE(!lstrcmpW(name,L"DarkMode_Explorer"));
+    if(rejectTheme && !lstrcmpW(name,L"DarkMode_DarkTheme"))return E_FAIL;
+    REQUIRE(!lstrcmpW(name,crashNativeTheme && !rejectTheme ? L"DarkMode_DarkTheme" : L"DarkMode_Explorer"));
     REQUIRE(themedCount<4);
     themed[themedCount]=window;
     procedures[themedCount++]=(WNDPROC)GetWindowLongA(window,GWL_WNDPROC);
@@ -23,9 +25,10 @@ int main(void)
     for (unsigned line=0;line<80;++line)
         lstrcatA(report,"A report line long enough to require horizontal scrolling in the details control. "
             "The module, function, address and other diagnostic columns remain available across a long report row.\r\n");
-    for (unsigned capability=0;capability<2;++capability) {
+    for (unsigned capability=0;capability<4;++capability) {
         NemuStaticCrashSetDark(TRUE); themedCount=0;
         crashSetWindowTheme=capability ? theme : NULL;
+        crashNativeTheme=capability>=2;rejectTheme=capability==3;
         struct { DLGTEMPLATE dialog; WORD menu,cls,title; } layout;
         ZeroMemory(&layout,sizeof(layout));
         layout.dialog.style=WS_POPUP|WS_CAPTION|WS_SYSMENU|DS_MODALFRAME;
