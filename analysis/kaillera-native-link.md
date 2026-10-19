@@ -160,5 +160,17 @@ zero hints, name packing, and resource directory layout when unpacking. Packing
 and unpacking the complete candidate with the pinned tool reproduces every
 import and resource byte in the reference. The only remaining `.rdata` difference
 in that diagnostic roundtrip is its four-byte export timestamp. No import-name
-or resource-directory patch is needed. Source instruction differences, native CRT
-global placement, and archival metadata still prevent complete packed equality.
+or resource-directory patch is needed. Source instruction differences and archival
+metadata still prevent complete packed equality.
+
+The four native CRT COMMON declarations also require their recovered discovery
+order. The CRT adapter reads the original declarations from the pinned SDK's
+`atonexit.obj`, `crtdll.obj`, and `adjustfd.obj`, requiring each to be a unique
+four-byte external COMMON with its original type and storage class. It emits a
+sectionless COFF object containing just these declarations, before selecting CRT
+code members. LINK allocates them in reverse declaration order, producing
+`__adjust_fdiv` at `0x1000CE90`, `__pRawDllMain` at `0x1000CE94`, and
+`___onexitend`/`___onexitbegin` at `0x1000CE98`/`0x1000CE9C`. This input has no
+initialized or executable bytes and does not replace any SDK instruction. With
+that discovery order, every native byte from `0x1000A090` through
+`0x1000A266` matches, including all 13 previously differing absolute operands.

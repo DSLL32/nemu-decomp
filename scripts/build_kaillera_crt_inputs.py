@@ -148,6 +148,63 @@ def expand(short, template, inspection):
     return data, symbol
 
 
+def common_declarations(source, output, inspection):
+    """Supply only the SDK's COMMON declarations in recovered native order.
+
+    LINK allocates COMMON definitions in reverse discovery order.  Their first
+    discovery need not also select the CRT code contributions that use them.
+    This sectionless object provides no initialized or executable allocation.
+    """
+    if digest(Path(source).read_bytes()) != LIBRARIES['msvcrt']:
+        raise ValueError('Pinned SDK COMMON source archive changed')
+    declarations = [
+        ('atonexit.obj', '___onexitbegin'),
+        ('atonexit.obj', '___onexitend'),
+        ('crtdll.obj', '__pRawDllMain'),
+        ('adjustfd.obj', '__adjust_fdiv'),
+    ]
+    members = {}
+    for name, offset, body in archive_members(source):
+        if name.rsplit('\\', 1)[-1] not in {item[0] for item in declarations}:
+            continue
+        short_name = name.rsplit('\\', 1)[-1]
+        if short_name in members:
+            raise ValueError('Duplicate native CRT COMMON source member')
+        inspection.write_bytes(body)
+        members[short_name] = (name, offset, body, COFF(inspection))
+    if set(members) != {member for member, _ in declarations}:
+        raise ValueError('Missing native CRT COMMON source member')
+    symbols, strings, rows = bytearray(), bytearray(4), []
+    for member, name in declarations:
+        source_name, offset, body, coff = members[member]
+        found = [symbol for symbol in coff.symbols if symbol['name'] == name]
+        if len(found) != 1:
+            raise ValueError('Native CRT COMMON declaration is not unique: ' + name)
+        symbol = found[0]
+        if (symbol['section'] != 0 or symbol['value'] != 4 or symbol['type'] != 0 or
+                symbol['storage_class'] != 2 or symbol['auxiliary']):
+            raise ValueError('Native CRT COMMON declaration changed: ' + name)
+        string_offset = len(strings)
+        strings.extend(name.encode('ascii') + b'\0')
+        symbols.extend(struct.pack('<IIIhHBB', 0, string_offset, symbol['value'],
+                                   symbol['section'], symbol['type'],
+                                   symbol['storage_class'], 0))
+        rows.append(dict(symbol=name, member=source_name, member_body_offset=offset,
+                         source_member_sha256=digest(body), bytes=symbol['value']))
+    struct.pack_into('<I', strings, 0, len(strings))
+    header = struct.pack('<HHIIIHH', 0x14c, 0, 0, 20, len(rows), 0, 0)
+    data = header + symbols + strings
+    path = output / 'crt-common-declarations.obj'
+    path.write_bytes(data)
+    checked = COFF(path)
+    if checked.sections or [symbol['name'] for symbol in checked.symbols] != [
+            name for _, name in declarations]:
+        raise ValueError('Native CRT COMMON metadata serialization changed')
+    return dict(path=str(path), sha256=digest(data), declarations=rows,
+                section_count=0, initialized_or_executable_bytes=0,
+                original_sdk_declaration_types_and_sizes_unchanged=True)
+
+
 def build(output, named_template, ordinal_template):
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
@@ -163,6 +220,8 @@ def build(output, named_template, ordinal_template):
         original = source.read_bytes()
         if digest(original) != expected:
             raise ValueError('Pinned SDK archive changed: ' + library)
+        if library == 'msvcrt':
+            report['common_declarations'] = common_declarations(source, output, inspection)
         index, members, converted, renamed = indexes(original), [], [], []
         for name, offset, body in archive_members(source):
             symbols = index.get(offset - 60, [])

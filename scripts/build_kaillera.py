@@ -131,7 +131,8 @@ def main():
         report['combined_code_order'] = dict(path=str(code_order), sha256=digest(code_order))
         candidate = output / 'linked' / 'kailleraclient.dll'
         candidate.parent.mkdir(exist_ok=True)
-        tool('link-candidate', 'link', ['/nologo', *arguments(early),
+        tool('link-candidate', 'link', ['/nologo', winpath(report['crt_link_inputs']['common_declarations']['path']),
+            *arguments(early),
             '/dll', '/subsystem:windows', '/machine:i386',
             '/incremental:no', '/opt:ref', '/opt:nowin98',
             '/order:@' + winpath(code_order),
