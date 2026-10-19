@@ -28,11 +28,11 @@ def worker(scratch):
         return run(label,[sys.executable,str(ROOT/'scripts/run_toolchain.py'),'vc7',name,*args])
     try:
         run('xp-profile',['wine','reg','add',r'HKCU\Software\Wine','/v','Version','/t','REG_SZ','/d','winxp','/f'])
-        for name in ('probe.cpp','ui_probe.c','native-controls.cpp','VclCrashProbe.pas','vcl-main.cpp','external.c'):
+        for name in ('probe.cpp','ui_probe.c','scrollbars.cpp','VclCrashProbe.pas','vcl-main.cpp','external.c'):
             shutil.copy2(ROOT/'scripts/fixtures/static_crash'/name,scratch/name)
-        tool('compile-native-controls','cl','/nologo','/O2','/MT','/I'+win(ROOT/'src/static'),
-             'native-controls.cpp','/link','user32.lib','gdi32.lib')
-        print(run('native-controls',['wine','native-controls.exe']).strip(),flush=True)
+        tool('compile-scrollbars','cl','/nologo','/O2','/MT','/I'+win(ROOT/'src/static'),
+             'scrollbars.cpp','/link','user32.lib','gdi32.lib')
+        print(run('scrollbars',['wine','scrollbars.exe']).strip(),flush=True)
         tool('compile-crash','cl','/nologo','/c','/O2','/Z7','/MT','/I'+win(ROOT/'src/static'),
              '/FoStaticCrash.obj',win(ROOT/'src/static/StaticCrash.cpp'))
         # /GL + /Zi matches the real core and intentionally retains /Oy.

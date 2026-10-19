@@ -67,30 +67,18 @@ are handled separately for Windows 10 1809 and 1903+. Missing DLLs, missing
 exports and unsupported DWM attributes are tolerated.
 
 A thread-local window hook catches new and recreated handles. Optional common
-control subclass helpers are resolved at runtime. Pushbuttons, combo boxes,
-edit fields, lists, trees and their scrollbars retain native rendering, with
-per-control theme names and supported color messages. On Windows build 26200+
-the adapter requests `DarkMode_DarkTheme`, using the same availability cutoff
-as [wxWidgets](https://github.com/wxWidgets/wxWidgets/blob/master/src/msw/darkmode.cpp).
-These controls retain native painting, including headers, status bars, tabs,
-checkboxes, radio buttons, group boxes and toolbar arrows. The crash dialog's
-buttons and details edit use the new theme too. Rejected requests fall back to
-the older themes. Older Windows versions keep the existing adapter, where
-custom painting is limited to the menu bar, header/status/tab controls,
-checkbox/radio/group-box gaps, and application artwork. Light mode restores
-the control colors; high contrast uses the original Windows colors. Keyboard input,
+control subclass helpers are resolved at runtime. The static adapter supplies a
+dark client palette and painting for the ROM list/header, menu bar, toolbar,
+status bar, buttons, tabs and standard dialog fields. Light mode restores the
+control colors; high contrast uses the original Windows colors. Keyboard input,
 control commands and focus cues continue through the original window procedures.
 
-USER32 message boxes retain Windows' client-paint and background-erasure
-handlers in every mode. Their child controls receive the eligible native theme
-and supported color messages, with no custom message-box background painter.
-
-`StaticThemeControls.inc` supplies dark faces/edges for VCL's own classic
-painters and removes the toolbar's light divider. It does not paint native
-scrollbars or install scrollbar repaint timers. Eject/pause/stop/reset icons use an inverted,
+`StaticThemeControls.inc` supplies dark classic button faces/edges, paints the
+ROM list's nonclient scrollbars using their native geometry and interaction,
+and removes the toolbar's light divider. Eject/pause/stop/reset icons use an inverted,
 masked copy of the toolbar image list; magenta remains transparent. A separate
-masked gray image list keeps disabled glyphs visible. With older themes, toolbar
-dropdown arrows use the dark foreground after native painting, including their disabled state. The shared browser images
+masked gray image list keeps disabled glyphs visible. Toolbar dropdown arrows
+use the dark foreground after native painting, including their disabled state. The shared browser images
 remain intact. The original image lists and divider flag are restored in light mode.
 
 Generated debugger painters use `StaticThemeColor` for explicit backgrounds,
@@ -163,10 +151,9 @@ ends the faulted process. The reporter is prepared on its own thread during
 startup, after the emulated address space has been reserved.
 
 The reporter caches the application's dark/light preference while the UI is
-healthy. Windows owns its pushbuttons and the report edit control, including
-the border and scrollbars. The dialog supplies background/text colors and
-requests native dark themes when available; it has no replacement control
-painters, edit subclasses, or scrollbar repaint timers.
+healthy. Its dialog paints its own buttons and report border. Windows owns
+the scrollbars when native dark theming succeeds; the custom scrollbar painter
+is used only as a fallback, avoiding competing native/custom thumb paints.
 It does not depend on the faulted UI thread's hooks or VCL. Optional DWM/UxTheme
 exports are resolved at startup only on supported Windows versions. Dialog
 text uses the system message font; details use Lucida Console at the same
@@ -261,10 +248,8 @@ captures the main window and Delphi settings/input dialogs as BMPs in scratch.
 The same fixture opens the actual commands, memory and register windows using
 a test memory reader, checks all three watch types plus search highlighting,
 refreshes GPR labels, and verifies both dark and original light memory colors.
-It also checks icon inversion/ownership, VCL classic faces, and native
-ROM-list scrolling. Native button/combo/nonclient paint probes ensure the adapter
-does not replace Windows' drawing; Wine pixels are not used as evidence that a
-native dark theme exists. This synthetic reader is confined to the test executable.
+It also checks icon inversion/ownership, dark classic button faces, and native
+ROM-list scrolling. This synthetic reader is confined to the test executable.
 The shipped executable contains no forced preference and is checked for
 accidental DWM/UxTheme startup imports. Native Windows rendering still needs
 visual verification. Scratch files and

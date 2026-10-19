@@ -46,22 +46,6 @@ static BOOL WINAPI spi(UINT action,UINT size,PVOID data,UINT flags) {
 }
 extern "C" int __cdecl ProbeDebugger(int action);
 static HOOKPROC productionHook;
-static int probeMessageBackground(HWND dialog);
-static int probeButtonBackground(HWND dialog) {
-    const int buttons[]={IDOK,IDCANCEL,1033,1035,1042};
-    bool dark=mode()=='d';
-    for(unsigned i=0;i<sizeof(buttons)/sizeof(buttons[0]);++i) {
-        HWND button=GetDlgItem(dialog,buttons[i]);if(!button)return 80+i;
-        HDC dc=CreateCompatibleDC(NULL);SetTextColor(dc,RGB(17,35,53));SetBkColor(dc,RGB(255,255,255));
-        HBRUSH brush=(HBRUSH)SendMessage(dialog,WM_CTLCOLORBTN,(WPARAM)dc,(LPARAM)button);
-        LOGBRUSH color;bool ok=GetObject(brush,sizeof(color),&color)!=0;
-        ok=ok && color.lbColor==(dark ? RGB(40,40,40) : GetSysColor(COLOR_BTNFACE));
-        if(dark)ok=ok && GetBkColor(dc)==RGB(40,40,40) && GetTextColor(dc)==RGB(17,35,53);
-        DeleteDC(dc);if(!ok)return 90+i;
-        if(buttons[i]==1042 && ((GetWindowLong(button,GWL_EXSTYLE)&WS_EX_STATICEDGE)!=0)==dark)return 99;
-    }
-    return 1;
-}
 static int probeToolbar(HWND main) {
     HWND toolbar=FindWindowExA(main,NULL,TOOLBARCLASSNAMEA,NULL);
     int commands[4]={32804,32777,32800,32806};
@@ -119,6 +103,8 @@ static int probeScrollbar(HWND main,bool move) {
     SCROLLBARINFO bar;ZeroMemory(&bar,sizeof(bar));bar.cbSize=sizeof(bar);
     if(!GetScrollBarInfo(list,OBJID_HSCROLL,&bar))return 61;
     if(bar.rgstate[0]&STATE_SYSTEM_INVISIBLE)return 62;
+    HDC dc=GetDC(NULL);COLORREF color=GetPixel(dc,bar.rcScrollBar.left+1,bar.rcScrollBar.top+1);ReleaseDC(NULL,dc);
+    if(color!=RGB(40,40,40))return 63;
     if(!move)return 1;
     SCROLLINFO position;ZeroMemory(&position,sizeof(position));position.cbSize=sizeof(position);position.fMask=SIF_POS;
     if(!GetScrollInfo(list,SB_HORZ,&position))return 64;
@@ -133,9 +119,7 @@ static LRESULT CALLBACK fixtureMessages(int code,WPARAM w,LPARAM l) {
             message->wParam==101 ? probeScrollbar(message->hwnd,true) :
             message->wParam==102 ? probeScrollbar(message->hwnd,false) :
             message->wParam==103 ? probeToolbarArrows(message->hwnd,false) :
-            message->wParam==104 ? probeToolbarArrows(message->hwnd,true) :
-            message->wParam==105 ? probeButtonBackground(message->hwnd) :
-            message->wParam==106 ? probeMessageBackground(message->hwnd) : ProbeDebugger((int)message->wParam);
+            message->wParam==104 ? probeToolbarArrows(message->hwnd,true) : ProbeDebugger((int)message->wParam);
         SetPropA(message->hwnd,"DebuggerProbeResult",(HANDLE)result);
     }
     return productionHook(code,w,l);
@@ -151,37 +135,3 @@ static HHOOK WINAPI installHook(int type,HOOKPROC proc,HINSTANCE instance,DWORD 
 #define GetProcAddress address
 #define SystemParametersInfoA spi
 #include "StaticTheme.cpp"
-
-static LRESULT CALLBACK messagePainter(HWND window,UINT message,WPARAM w,LPARAM l,UINT_PTR,DWORD_PTR)
-{
-    if(message==WM_PRINTCLIENT || message==WM_ERASEBKGND) {
-        RECT rect;GetClientRect(window,&rect);
-        HBRUSH brush=CreateSolidBrush(RGB(11,71,123));
-        FillRect((HDC)w,&rect,brush);DeleteObject(brush);return 1;
-    }
-    return defaultSubclass(window,message,w,l);
-}
-static int probeMessageBackground(HWND dialog)
-{
-    if(!systemMessageBox(dialog))return 110;
-    HWND button=GetDlgItem(dialog,IDOK);if(!button)return 111;
-    if((GetWindowLong(button,GWL_STYLE)&0xf)==BS_OWNERDRAW)return 112;
-    // Put a simulated Windows painter below the adapter. Both client painting
-    // and background erasure must reach it without any replacement pixels.
-    ThemedWindow *state=windows;while(state && state->window!=dialog)state=state->next;
-    if(!state || !removeSubclass(dialog,themedProc,subclassId))return 113;
-    subclassWindow(dialog,messagePainter,7,0);
-    subclassWindow(dialog,themedProc,subclassId,(DWORD_PTR)state);
-    RECT client;GetClientRect(dialog,&client);
-    HDC screen=GetDC(dialog),dc=CreateCompatibleDC(screen);
-    HBITMAP bitmap=CreateCompatibleBitmap(screen,client.right,client.bottom);ReleaseDC(dialog,screen);
-    HGDIOBJ old=SelectObject(dc,bitmap);
-    SendMessage(dialog,WM_PRINTCLIENT,(WPARAM)dc,PRF_CLIENT);
-    bool ok=GetPixel(dc,3,3)==RGB(11,71,123);
-    FillRect(dc,&client,(HBRUSH)GetStockObject(WHITE_BRUSH));
-    SendMessage(dialog,WM_ERASEBKGND,(WPARAM)dc,0);
-    ok=ok && GetPixel(dc,3,3)==RGB(11,71,123);
-    removeSubclass(dialog,messagePainter,7);
-    SelectObject(dc,old);DeleteObject(bitmap);DeleteDC(dc);
-    return ok ? 1 : 114;
-}

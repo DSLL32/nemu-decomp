@@ -16,7 +16,7 @@ def check(run, scratch):
     imports = {row['dll'].lower() for row in PE32(fixture / 'probe.exe').imports()}
     assert not imports.intersection({'dwmapi.dll', 'uxtheme.dll'})
     output = run('theme-compatibility', ['wine', 'probe.exe'], cwd=fixture)
-    assert output.count('PASS:') == 6
+    assert output.count('PASS:') == 5
 
 
 def check_ui(run, scratch):

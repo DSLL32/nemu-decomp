@@ -141,13 +141,71 @@ static void toolbarDropArrow(NMCUSTOMDRAW *draw)
     SelectObject(draw->hdc, old); DeleteObject(pen);
 }
 
-static void paintToolbarDivider(HWND window)
+static void scrollArrow(HDC dc, RECT rect, bool vertical, bool forward, bool enabled)
 {
+    FillRect(dc, &rect, NemuStaticGetSysColorBrush(COLOR_BTNFACE));
+    HPEN pen = CreatePen(PS_SOLID, 1, NemuStaticGetSysColor(enabled ? COLOR_BTNTEXT : COLOR_GRAYTEXT));
+    HGDIOBJ old = SelectObject(dc, pen);
+    int x = (rect.left+rect.right)/2, y = (rect.top+rect.bottom)/2;
+    for (int i = 0; i < 4; ++i) {
+        int direction = forward ? i : -i;
+        if (vertical) { MoveToEx(dc, x-3+i, y-1+direction, NULL); LineTo(dc, x+4-i, y-1+direction); }
+        else { MoveToEx(dc, x-1+direction, y-3+i, NULL); LineTo(dc, x-1+direction, y+4-i); }
+    }
+    SelectObject(dc, old); DeleteObject(pen);
+}
+static void paintScrollBar(HWND window, HDC dc, LONG object, const RECT &outer)
+{
+    SCROLLBARINFO info; ZeroMemory(&info, sizeof(info)); info.cbSize = sizeof(info);
+    if (!scrollBarInfo || !scrollBarInfo(window, object, &info) ||
+        (info.rgstate[0] & (STATE_SYSTEM_INVISIBLE | STATE_SYSTEM_OFFSCREEN))) return;
+    RECT rect = info.rcScrollBar; OffsetRect(&rect, -outer.left, -outer.top);
+    if (IsRectEmpty(&rect)) return;
+    bool vertical = object == OBJID_VSCROLL;
+    FillRect(dc, &rect, NemuStaticGetSysColorBrush(COLOR_WINDOW));
+    RECT first = rect, last = rect, thumb = rect;
+    if (vertical) {
+        first.bottom = first.top + info.dxyLineButton; last.top = last.bottom-info.dxyLineButton;
+        thumb.top = rect.top+info.xyThumbTop; thumb.bottom = rect.top+info.xyThumbBottom;
+    } else {
+        first.right = first.left+info.dxyLineButton; last.left = last.right-info.dxyLineButton;
+        thumb.left = rect.left+info.xyThumbTop; thumb.right = rect.left+info.xyThumbBottom;
+    }
+    scrollArrow(dc, first, vertical, false, !(info.rgstate[1] & STATE_SYSTEM_UNAVAILABLE));
+    scrollArrow(dc, last, vertical, true, !(info.rgstate[5] & STATE_SYSTEM_UNAVAILABLE));
+    if (info.xyThumbBottom > info.xyThumbTop && !(info.rgstate[3] & STATE_SYSTEM_INVISIBLE)) {
+        InflateRect(&thumb, -2, -2);
+        HBRUSH brush = CreateSolidBrush(info.rgstate[3] & STATE_SYSTEM_PRESSED ? RGB(140,140,140) : RGB(100,100,100));
+        FillRect(dc, &thumb, brush); DeleteObject(brush);
+    }
+}
+static void paintNonClient(ThemedWindow *state)
+{
+    HWND window = state->window;
+    if (state->kind != List && state->kind != Edit && state->kind != Toolbar) return;
     HDC dc = GetWindowDC(window);
-    if (!dc) return;
     RECT outer; GetWindowRect(window, &outer);
-    POINT origin = {0,0}; ClientToScreen(window, &origin);
-    RECT divider = {0,0,outer.right-outer.left,origin.y-outer.top};
-    FillRect(dc, &divider, NemuStaticGetSysColorBrush(COLOR_BTNFACE));
+    if (state->kind == Toolbar) {
+        RECT client; GetClientRect(window, &client);
+        POINT origin = {0,0}; ClientToScreen(window, &origin);
+        RECT divider = {0,0,outer.right-outer.left,origin.y-outer.top};
+        FillRect(dc, &divider, NemuStaticGetSysColorBrush(COLOR_BTNFACE));
+    } else {
+        paintScrollBar(window, dc, OBJID_HSCROLL, outer);
+        paintScrollBar(window, dc, OBJID_VSCROLL, outer);
+        if ((GetWindowLong(window, GWL_STYLE) & (WS_HSCROLL|WS_VSCROLL)) == (WS_HSCROLL|WS_VSCROLL) && scrollBarInfo) {
+            SCROLLBARINFO horizontal, vertical; ZeroMemory(&horizontal,sizeof(horizontal));
+            ZeroMemory(&vertical,sizeof(vertical)); horizontal.cbSize=sizeof(horizontal); vertical.cbSize=sizeof(vertical);
+            if (scrollBarInfo(window,OBJID_HSCROLL,&horizontal) && scrollBarInfo(window,OBJID_VSCROLL,&vertical)) {
+                RECT corner={vertical.rcScrollBar.left,horizontal.rcScrollBar.top,vertical.rcScrollBar.right,horizontal.rcScrollBar.bottom};
+                OffsetRect(&corner,-outer.left,-outer.top); FillRect(dc,&corner,NemuStaticGetSysColorBrush(COLOR_BTNFACE));
+            }
+        }
+        if (GetWindowLong(window, GWL_EXSTYLE) & WS_EX_CLIENTEDGE) {
+            RECT edge = {0,0,outer.right-outer.left,outer.bottom-outer.top};
+            FrameRect(dc, &edge, NemuStaticGetSysColorBrush(COLOR_BTNSHADOW));
+            InflateRect(&edge,-1,-1); FrameRect(dc, &edge, NemuStaticGetSysColorBrush(COLOR_BTNSHADOW));
+        }
+    }
     ReleaseDC(window, dc);
 }

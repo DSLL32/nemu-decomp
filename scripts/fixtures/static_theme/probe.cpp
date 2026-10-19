@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #define REQUIRE(x) do { if (!(x)) { fprintf(stderr,"FAIL line %d: %s\n",__LINE__,#x); ExitProcess(5); } } while (0)
 static DWORD testMajor, testBuild;
-static bool ntMissing, dllMissing, exportsMissing, shouldMissing, appDark, highContrast, spiFails, rejectNativeTheme;
+static bool ntMissing, dllMissing, exportsMissing, shouldMissing, appDark, highContrast, spiFails;
 static DWORD registryType, registrySize, registryValue;
 static unsigned loads, ordinalLookups, oldAppCalls, newAppCalls, flushCalls, windowCalls, dwmCalls, legacyCalls;
 static int lastMode;
@@ -42,18 +42,11 @@ static HMODULE WINAPI testLoad(LPCSTR name) {
  REQUIRE(strstr(name,"\\uxtheme.dll")!=NULL);return (HMODULE)3;
 }
 static BOOL WINAPI testFree(HMODULE) { return TRUE; }
-static HRESULT WINAPI testTheme(HWND window,LPCWSTR name,LPCWSTR)
-{
- if(rejectNativeTheme && name && !lstrcmpW(name,L"DarkMode_DarkTheme"))return E_FAIL;
- if(name)SetPropA(window,"NativeThemeRequest",(HANDLE)name);
- else RemovePropA(window,"NativeThemeRequest");
- return S_OK;
-}
 static FARPROC WINAPI testAddress(HMODULE module,LPCSTR name) {
  if(module==(HMODULE)1) { REQUIRE(!strcmp(name,"RtlGetVersion"));return (FARPROC)testVersion; }
  if(module==(HMODULE)2) { REQUIRE(!strcmp(name,"DwmSetWindowAttribute"));return exportsMissing?NULL:(FARPROC)testAttribute; }
  if(module!=(HMODULE)3)return GetProcAddress(module,name);
- if((ULONG_PTR)name>65535) { REQUIRE(!strcmp(name,"SetWindowTheme"));return exportsMissing?NULL:(FARPROC)testTheme; }
+ if((ULONG_PTR)name>65535) { REQUIRE(!strcmp(name,"SetWindowTheme"));return NULL; }
  ++ordinalLookups;
  if(exportsMissing)return NULL;
  switch((ULONG_PTR)name) {
@@ -93,46 +86,15 @@ extern "C" void __cdecl NemuStaticCrashSetDark(BOOL enabled) { crashDark=enabled
 extern "C" void __cdecl NemuStaticVclThemeRefresh(void) { ++vclRefreshCalls; }
 #include "StaticTheme.cpp"
 
-static const COLORREF nativePaintColor=RGB(11,71,123);
-static LRESULT CALLBACK nativePainter(HWND window,UINT message,WPARAM w,LPARAM l,UINT_PTR,DWORD_PTR)
-{
- if(message==WM_PRINTCLIENT || message==WM_ERASEBKGND || message==WM_NCPAINT) {
-  HDC dc=message==WM_NCPAINT ? GetWindowDC(window) : (HDC)w;
-  RECT rect;GetClientRect(window,&rect);
-  if(message==WM_NCPAINT) { GetWindowRect(window,&rect);OffsetRect(&rect,-rect.left,-rect.top); }
-  HBRUSH brush=CreateSolidBrush(nativePaintColor);FillRect(dc,&rect,brush);DeleteObject(brush);
-  if(message==WM_NCPAINT)ReleaseDC(window,dc);
-  return 1;
- }
- return DefSubclassProc(window,message,w,l);
-}
-static void expectNativePaint(HWND window,HDC dc,bool nonclient)
-{
- // Install the simulated native painter below the production adapter. Its
- // pixels must survive, rather than being replaced by the old flat painter.
- ThemedWindow *state=windows;while(state && state->window!=window)state=state->next;
- REQUIRE(state!=NULL);REQUIRE(removeSubclass(window,themedProc,subclassId));
- REQUIRE(SetWindowSubclass(window,nativePainter,7,0));
- REQUIRE(subclassWindow(window,themedProc,subclassId,(DWORD_PTR)state));
- if(nonclient) {
-  SendMessage(window,WM_NCPAINT,1,0);
-  HDC frame=GetWindowDC(window);RECT rect;GetWindowRect(window,&rect);
-  REQUIRE(GetPixel(frame,rect.right-rect.left-8,20)==nativePaintColor);ReleaseDC(window,frame);
- } else {
-  SendMessage(window,WM_PRINTCLIENT,(WPARAM)dc,PRF_CLIENT);REQUIRE(GetPixel(dc,3,3)==nativePaintColor);
-  SendMessage(window,WM_ERASEBKGND,(WPARAM)dc,0);REQUIRE(GetPixel(dc,3,3)==nativePaintColor);
- }
- REQUIRE(RemoveWindowSubclass(window,nativePainter,7));
-}
 static void reset(DWORD major,DWORD build) {
  NemuStaticThemeShutdown();testMajor=major;testBuild=build;
- ntMissing=dllMissing=exportsMissing=shouldMissing=highContrast=spiFails=rejectNativeTheme=false;appDark=true;
+ ntMissing=dllMissing=exportsMissing=shouldMissing=highContrast=spiFails=false;appDark=true;
  registryType=REG_DWORD;registrySize=4;registryValue=0;
  loads=ordinalLookups=oldAppCalls=newAppCalls=flushCalls=windowCalls=dwmCalls=legacyCalls=0;
  lastMode=-1;lastWindow=NULL;lastDark=FALSE;attribute20Result=S_OK;
 }
-static HWND create(const char *cls,HWND parent,DWORD extra=0) {
- HWND w=CreateWindowExA(0,cls,"Theme probe",(parent?WS_CHILD:WS_OVERLAPPEDWINDOW)|extra,
+static HWND create(const char *cls,HWND parent) {
+ HWND w=CreateWindowExA(0,cls,"Theme probe",parent?WS_CHILD:WS_OVERLAPPEDWINDOW,
   0,0,100,100,parent,NULL,GetModuleHandleA(NULL),NULL);
  REQUIRE(w!=NULL);return w;
 }
@@ -160,7 +122,6 @@ int main() {
  ZeroMemory(&resource,sizeof(resource));resource.header.style=WS_POPUP|WS_CAPTION;resource.header.cx=100;resource.header.cy=100;
  dlg=CreateDialogIndirectParamA(GetModuleHandleA(NULL),&resource.header,NULL,dialog,0);
  REQUIRE(dlg&&dwmCalls>count&&lastWindow==dlg);
- REQUIRE(!systemMessageBox(dlg));
  appDark=false;SendMessageA(after,WM_SETTINGCHANGE,0,0);REQUIRE(lastMode==0&&!lastDark&&!crashDark);
  REQUIRE(GetMenuItemInfoA(menu,0,TRUE,&info)&&!(info.fType&MFT_OWNERDRAW));
  appDark=true;SendMessageA(after,WM_THEMECHANGED,0,0);REQUIRE(lastMode==1&&lastDark&&crashDark);
@@ -178,10 +139,7 @@ int main() {
  // Real control colors and paint output, then restore original palette.
  reset(10,22000);NemuStaticThemeInitialize();
  HWND list=create(WC_LISTVIEWA,before), bar=create(STATUSCLASSNAMEA,before);
- HWND button=create("BUTTON",before), edit=create("EDIT",before,ES_MULTILINE|WS_HSCROLL|WS_VSCROLL);
- HWND combo=create("COMBOBOX",before,CBS_DROPDOWNLIST);
- REQUIRE(!lstrcmpW((LPCWSTR)GetPropA(button,"NativeThemeRequest"),L"DarkMode_Explorer"));
- REQUIRE(!lstrcmpW((LPCWSTR)GetPropA(combo,"NativeThemeRequest"),L"DarkMode_CFD"));
+ HWND button=create("BUTTON",before), edit=create("EDIT",before);
  REQUIRE(ListView_GetBkColor(list)==RGB(25,25,25));
  REQUIRE(ListView_GetTextColor(list)==RGB(232,232,232));
  HDC dc=GetDC(before), memory=CreateCompatibleDC(dc);
@@ -195,22 +153,13 @@ int main() {
  face.left=face.top=0;face.right=face.bottom=20;
  REQUIRE(NemuStaticDrawEdge(memory,&face,EDGE_RAISED,BF_RECT|BF_MIDDLE|BF_ADJUST));
  REQUIRE(GetPixel(memory,10,10)==RGB(40,40,40));
- expectNativePaint(button,memory,false);expectNativePaint(combo,memory,false);
- // The native button owns its shape/text, but its transparent corners need
- // the parent's dark brush rather than Windows' default light backdrop.
- SetTextColor(memory,RGB(17,35,53));SetBkColor(memory,RGB(255,255,255));
- HBRUSH buttonBackground=(HBRUSH)SendMessage(before,WM_CTLCOLORBTN,(WPARAM)memory,(LPARAM)button);
- LOGBRUSH buttonBrush;REQUIRE(GetObject(buttonBackground,sizeof(buttonBrush),&buttonBrush));
- REQUIRE(buttonBrush.lbColor==RGB(40,40,40)&&GetBkColor(memory)==RGB(40,40,40));
- REQUIRE(GetTextColor(memory)==RGB(17,35,53));
- SetWindowPos(before,NULL,0,0,240,240,SWP_NOMOVE|SWP_NOZORDER|SWP_SHOWWINDOW);ShowWindow(edit,SW_SHOW);
- expectNativePaint(edit,memory,true);
+ SendMessageA(button,WM_PRINTCLIENT,(WPARAM)memory,PRF_CLIENT);
+ REQUIRE(GetPixel(memory,3,3)==RGB(40,40,40));
  HBRUSH brush=(HBRUSH)SendMessageA(before,WM_CTLCOLOREDIT,(WPARAM)memory,(LPARAM)edit);
  REQUIRE(brush==NemuStaticGetSysColorBrush(COLOR_WINDOW));
  REQUIRE(GetTextColor(memory)==RGB(232,232,232));
  REQUIRE(GetBkColor(memory)==RGB(25,25,25));
  highContrast=true;SendMessageA(before,WM_SETTINGCHANGE,0,0);
- REQUIRE(GetPropA(button,"NativeThemeRequest")==NULL && GetPropA(combo,"NativeThemeRequest")==NULL);
  REQUIRE(ListView_GetBkColor(list)==GetSysColor(COLOR_WINDOW));
  REQUIRE(NemuStaticGetSysColor(COLOR_BTNTEXT)==GetSysColor(COLOR_BTNTEXT));
  highContrast=false;SendMessageA(before,WM_SETTINGCHANGE,0,0);
@@ -247,47 +196,8 @@ int main() {
  REQUIRE((HIMAGELIST)SendMessage(toolbar,TB_GETDISABLEDIMAGELIST,0,0)!=disabledImages);
  REQUIRE(DestroyWindow(mainWindow));ImageList_Destroy(sourceImages);
  SelectObject(memory,original);DeleteObject(bitmap);DeleteDC(memory);ReleaseDC(before,dc);
- DestroyWindow(list);DestroyWindow(bar);DestroyWindow(button);DestroyWindow(edit);DestroyWindow(combo);
- puts("PASS: native button/combo/scrollbar painting, dark palettes, icons and high-contrast restoration");
- // New theme: our fallback painters must leave native pixels and notifications
- // intact for controls that previously needed custom rendering.
- reset(10,26100);NemuStaticThemeInitialize();
- HWND oldCheck=create("BUTTON",before,BS_AUTOCHECKBOX);
- REQUIRE(customButton(oldCheck) && !usesNativeTheme(oldCheck));DestroyWindow(oldCheck);
- reset(10,26200);NemuStaticThemeInitialize();
- const char *classes[]={"BUTTON","BUTTON","BUTTON",STATUSCLASSNAMEA,WC_TABCONTROLA,
-     WC_HEADERA,TOOLBARCLASSNAMEA,"COMBOBOX","EDIT","STATIC",PROGRESS_CLASSA};
- DWORD styles[]={BS_AUTOCHECKBOX,BS_AUTORADIOBUTTON,BS_GROUPBOX,0,0,0,0,CBS_DROPDOWN,0,0,0};
- HWND nativeControls[11];
- dc=GetDC(before);memory=CreateCompatibleDC(dc);bitmap=CreateCompatibleBitmap(dc,100,100);
- original=SelectObject(memory,bitmap);
- for(unsigned n=0;n<11;++n) {
-  HWND control=nativeControls[n]=create(classes[n],before,styles[n]);
-  REQUIRE(usesNativeTheme(control));
-  REQUIRE(!lstrcmpW((LPCWSTR)GetPropA(control,"NativeThemeRequest"),L"DarkMode_DarkTheme"));
-  if(n<3)REQUIRE(!customButton(control));
-  expectNativePaint(control,memory,false);
-  if(n==5 || n==6) {
-   NMCUSTOMDRAW draw;ZeroMemory(&draw,sizeof(draw));draw.hdr.hwndFrom=control;
-   draw.hdr.code=NM_CUSTOMDRAW;draw.dwDrawStage=CDDS_ITEMPREPAINT;draw.hdc=memory;
-   REQUIRE(SendMessage(before,WM_NOTIFY,0,(LPARAM)&draw)==CDRF_DODEFAULT);
-  }
- }
- highContrast=true;SendMessage(before,WM_SETTINGCHANGE,0,0);
- for(unsigned n=0;n<11;++n) {
-  REQUIRE(!usesNativeTheme(nativeControls[n]));
-  REQUIRE(!GetPropA(nativeControls[n],"NativeThemeRequest"));
- }
- highContrast=false;SendMessage(before,WM_SETTINGCHANGE,0,0);
- REQUIRE(usesNativeTheme(nativeControls[0]) && !customButton(nativeControls[0]));
- for(unsigned n=0;n<11;++n)DestroyWindow(nativeControls[n]);
- SelectObject(memory,original);DeleteObject(bitmap);DeleteDC(memory);ReleaseDC(before,dc);
- rejectNativeTheme=true;
- HWND rejected=create("BUTTON",before,BS_AUTOCHECKBOX);
- REQUIRE(!usesNativeTheme(rejected) && customButton(rejected));
- REQUIRE(!lstrcmpW((LPCWSTR)GetPropA(rejected,"NativeThemeRequest"),L"DarkMode_Explorer"));
- DestroyWindow(rejected);
- puts("PASS: 26200 native theme bypasses fallback painters, restores high contrast and handles rejected themes");
+ DestroyWindow(list);DestroyWindow(bar);DestroyWindow(button);DestroyWindow(edit);
+ puts("PASS: dark list colors, status/button pixels, edit contrast and high-contrast restoration");
  reset(10,18362);NemuStaticThemeInitialize();REQUIRE(newAppCalls==1&&!oldAppCalls&&lastMode==1);
  reset(10,22000);NemuStaticThemeInitialize();REQUIRE(newAppCalls==1&&!oldAppCalls&&!legacyCalls&&lastDark);
  highContrast=true;SendMessageA(before,WM_SETTINGCHANGE,0,0);REQUIRE(lastMode==0&&!lastDark);
