@@ -16,6 +16,9 @@
 #include <mmsystem.h>
 #include <string.h>
 #include <stddef.h>
+#ifdef NEMU_STATIC
+#include "../static/StaticCrash.h"
+#endif
 
 
 extern "C" __declspec(dllimport) int __stdcall kailleraModifyPlayValues(void *, int);
@@ -77,6 +80,13 @@ LONG CPUHostException(EXCEPTION_POINTERS *exceptionInfo)
 {
     HostExceptionPointers *exception = (HostExceptionPointers *)exceptionInfo;
     char opcodeMessage[100];
+#ifdef NEMU_STATIC
+    // Native bugs aren't emulated memory accesses. The original handler below
+    // still handles recoverable generated-code faults and memory breakpoints.
+    if (exception->ExceptionRecord->ExceptionCode == EXCEPTION_ACCESS_VIOLATION &&
+        !NemuStaticCrashIsGeneratedCode((DWORD)exception->ExceptionRecord->ExceptionAddress))
+        return NemuStaticCrashReport(exceptionInfo);
+#endif
     switch (exception->ExceptionRecord->ExceptionCode) {
     case EXCEPTION_ACCESS_VIOLATION: {
         CpuU32 index = Dynarec_ConversionCount - 1;
@@ -91,6 +101,9 @@ LONG CPUHostException(EXCEPTION_POINTERS *exceptionInfo)
         int disposition;
         // The original failure path reads an uninitialized local disposition.
         if (index > Dynarec_ConversionCount) {
+#ifdef NEMU_STATIC
+            return NemuStaticCrashReport(exceptionInfo);
+#endif
             char message[60];
             sprintf(message, "Invalid Access Violation: 0x%X. Can't recover execution",
                     exception->ExceptionRecord->ExceptionAddress);
@@ -196,6 +209,9 @@ LONG CPUHostException(EXCEPTION_POINTERS *exceptionInfo)
                 exception->ContextRecord->Eip += 6;
                 break;
             default:
+#ifdef NEMU_STATIC
+                return NemuStaticCrashReport(exceptionInfo);
+#endif
                 sprintf(opcodeMessage, "Unhandled mov(sx/zx) caused exception: %X", ((BYTE *)exception->ExceptionRecord->ExceptionAddress)[0]);
                 ReportCPUError(opcodeMessage);
                 disposition = EXCEPTION_EXECUTE_HANDLER;
@@ -223,6 +239,9 @@ LONG CPUHostException(EXCEPTION_POINTERS *exceptionInfo)
         return disposition;
     }
     default: {
+#ifdef NEMU_STATIC
+        return NemuStaticCrashReport(exceptionInfo);
+#endif
         char message[60];
         sprintf(message, "Unhandled Exception, you should stop emulation: %X",
                 exception->ExceptionRecord->ExceptionCode);

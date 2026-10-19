@@ -20,6 +20,7 @@
 #ifdef NEMU_STATIC
 #include "../static/StaticRuntime.h"
 #include "../static/StaticTheme.h"
+#include "../static/StaticCrash.h"
 #define NEMU_STATIC_PROFILE_REDIRECT
 #include "../static/StaticFiles.h"
 #endif
@@ -522,6 +523,10 @@ UINT CALLBACK StatePreviewHook(HWND dialog, UINT message, WPARAM wParam, LPARAM 
     return 0;
 }
 
+#ifdef NEMU_STATIC
+#include "../static/StaticCrashCore.inc"
+#endif
+
 int WINAPI WinMain(HINSTANCE instance, HINSTANCE previousInstance, LPSTR commandLine, int showCommand)
 {
 #ifdef NEMU_STATIC
@@ -529,6 +534,7 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previousInstance, LPSTR command
         MessageBoxA(NULL, "Error initializing built-in components", "Error", MB_ICONSTOP);
         return 1;
     }
+    NemuStaticCrashSetCodeDescription(StaticDescribeGeneratedCode);
 #endif
     ApplicationInstance = instance;
     WNDCLASSEXA windowClass;

@@ -10,7 +10,7 @@ from static_objects import Glue
 
 def archive_options():
     return [line for line in (WORK / 'link.rsp').read_text().splitlines()
-            if not line.upper().startswith(('/OUT:', '/MAP:', '/SUBSYSTEM:', '/LTCG'))
+            if not line.upper().startswith(('/OUT:', '/MAP:', '/PDB:', '/SUBSYSTEM:', '/LTCG'))
             and not line.lower().endswith('.obj"')]
 
 

@@ -41,6 +41,8 @@ def check_ui(run, scratch):
     for line in (WORK / 'link.rsp').read_text().splitlines():
         if line.upper().startswith('/MAP:'):
             line = '/MAP:themed.map'
+        if line.upper().startswith('/PDB:'):
+            line = '/PDB:themed.pdb'
         if line.upper().startswith('/OUT:'):
             line = '/OUT:themed.exe'
         if line.lower().endswith('builtins.lib"'):

@@ -79,13 +79,13 @@ def dialog(data, offset):
     return data
 
 
-def aggregate(inputs, destination):
+def aggregate(inputs, destination, exclude=()):
     output, seen = bytearray(), {}
     # Standard null header.
     output.extend(struct.pack('<IIHHHHIHHII', 0, 32, 0xffff, 0, 0xffff, 0, 0, 0, 0, 0, 0))
     for path, offset in inputs:
         for typ, name, fixed, data in records(path.read_bytes()):
-            if typ == 0: continue
+            if typ == 0 or (typ, name) in exclude: continue
             if offset:
                 if typ in (16, 24): continue  # executable owns version/manifest
                 if isinstance(name, int):

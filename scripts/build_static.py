@@ -19,6 +19,7 @@ import time
 from omf_to_coff import Converter, convert, import_library_aliases
 from static_objects import Glue, symbols, namespace
 from static_resources import aggregate
+from static_crash_symbols import checked_link
 from static_build_cache import Cache, Tools, files, fingerprint, worker_count, write_changed
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -71,7 +72,7 @@ class Build:
         self.env.setdefault('WINEDEBUG', '-all')
         recipe = fingerprint(files(*(ROOT / 'scripts' / name for name in (
             'build_static.py', 'static_build_cache.py', 'run_toolchain.py',
-            'omf_to_coff.py', 'static_objects.py', 'static_resources.py', 'delphi_dfm.dpr'))))
+            'omf_to_coff.py', 'static_objects.py', 'static_resources.py', 'static_crash_symbols.py', 'static_fpo.py', 'delphi_dfm.dpr'))))
         self.cache = Cache(WORK / 'cache', recipe)
         self.tools = Tools(ROOT, WORK, self.env, self.cache, jobs)
         self.log = self.tools.log
@@ -121,7 +122,20 @@ class Build:
         for directory in ('rtl/sys', 'rtl/common', 'rtl/win', 'vcl'):
             for p in (base / 'source' / directory).iterdir():
                 if p.suffix.lower() in ('.pas', '.inc'):
-                    shutil.copy2(p, PASCAL / p.name.lower())
+                    text = p.read_bytes()
+                    if p.name.lower() == 'forms.pas':
+                        text = text.decode('latin1').replace('\r\n', '\n')
+                        declaration = ("procedure NemuStaticCrashDelphi(Address: Pointer; Kind, Message: PChar); cdecl;\n"
+                            "  external 'nemu64-static.exe' name 'NemuStaticCrashDelphi';\n\n")
+                        text = text.replace('procedure TApplication.HandleException(Sender: TObject);',
+                            declaration + 'procedure TApplication.HandleException(Sender: TObject);')
+                        text = text.replace('procedure TApplication.HandleException(Sender: TObject);\nbegin\n',
+                            'procedure TApplication.HandleException(Sender: TObject);\nbegin\n'
+                            '  if ExceptObject is EExternal then\n'
+                            '    NemuStaticCrashDelphi(ExceptAddr, PChar(AnsiString(Exception(ExceptObject).ClassName)),\n'
+                            '      PChar(Exception(ExceptObject).Message));\n')
+                        text = text.encode('latin1')
+                    (PASCAL / p.name.lower()).write_bytes(text)
         for name in ('StaticFiles', 'StaticVclTheme'):
             shutil.copy2(ROOT / ('src/static/' + name + '.pas'), PASCAL / (name.lower() + '.pas'))
         for p in (base / 'lib').glob('*.res'): shutil.copy2(p, PASCAL / p.name)
@@ -225,6 +239,7 @@ class Build:
         aliases.update({name: '_NemuStatic' + name + '@' + str(size) for name, size in STATIC_APIS.items()})
         aliases['NemuStaticDefaultData'] = '_NemuStaticDefaultData'
         aliases['NemuStaticThemeIsDark'] = '_NemuStaticThemeIsDark'
+        aliases['NemuStaticCrashDelphi'] = '_NemuStaticCrashDelphi'
         bridge = Converter((PASCAL / 'staticvcltheme.obj').read_bytes())
         bridge.declarations()
         for symbol in bridge.symbols:
@@ -321,7 +336,7 @@ class Build:
                 path = source / (unit + '.cpp')
                 if not path.exists(): path = source / (unit + '.c')
                 obj = directory / (unit.replace('/', '_') + '.obj')
-                flags = ['/nologo', '/c', '/O2', '/MT', '/GX', '/Gy', '/DWIN32', '/DNDEBUG', '/D_WINDOWS', '/D_USRDLL', '/W3']
+                flags = ['/nologo', '/c', '/O2', '/Z7', '/MT', '/GX', '/Gy', '/DWIN32', '/DNDEBUG', '/D_WINDOWS', '/D_USRDLL', '/W3']
                 if component == 'gfx':
                     flags += ['/D_MBCS', '/DLEMNEMU_EXPORTS', '/I' + win(source / 'vendor/amd3d'), '/I' + win(ROOT / 'toolchains/vc7/platformsdk/include/prerelease')]
                 self.tools.submit('cl', [*flags, '/Fo' + win(obj), win(path)], obj,
@@ -394,7 +409,7 @@ class Build:
         text += 'static const DefaultFile defaultFiles[] = {\n' + ',\n'.join(entries) + '\n};\n'
         write_changed(WORK / 'StaticDefaults.inc', text)
         output = WORK / 'StaticFiles.obj'
-        self.tools.cached('cl', ['/nologo', '/c', '/O2', '/MT', '/GX', '/I' + win(WORK), '/Fo' + win(output), win(ROOT / 'src/static/StaticFiles.cpp')],
+        self.tools.cached('cl', ['/nologo', '/c', '/O2', '/Z7', '/MT', '/GX', '/I' + win(WORK), '/Fo' + win(output), win(ROOT / 'src/static/StaticFiles.cpp')],
                           output, [self.native_toolchain, fingerprint(files(ROOT / 'src/static/StaticFiles.cpp', ROOT / 'src/static/StaticFiles.h', WORK / 'StaticDefaults.inc'))])
         self.objects.append(output)
 
@@ -452,24 +467,33 @@ class Build:
         write_changed(glue, self.glue.emit_coff())
         self.objects.append(glue)
         runtime = WORK / 'StaticRuntime.obj'
-        self.tools.submit('cl', ['/nologo', '/c', '/O2', '/MT', '/GX', '/I' + win(WORK), '/Fo' + win(runtime), win(ROOT / 'src/static/StaticRuntime.cpp')],
-                          runtime, [self.native_toolchain, fingerprint(files(ROOT / 'src/static/StaticRuntime.cpp', ROOT / 'src/static/StaticRuntime.h', ROOT / 'src/static/StaticTheme.h', WORK / 'StaticBindings.inc'))])
+        self.tools.submit('cl', ['/nologo', '/c', '/O2', '/Z7', '/MT', '/GX', '/I' + win(WORK), '/Fo' + win(runtime), win(ROOT / 'src/static/StaticRuntime.cpp')],
+                          runtime, [self.native_toolchain, fingerprint(files(ROOT / 'src/static/StaticRuntime.cpp', ROOT / 'src/static/StaticRuntime.h', ROOT / 'src/static/StaticTheme.h', ROOT / 'src/static/StaticCrash.h', WORK / 'StaticBindings.inc'))])
         self.objects.append(runtime)
         theme = WORK / 'StaticTheme.obj'
-        self.tools.submit('cl', ['/nologo', '/c', '/O2', '/MT', '/Fo' + win(theme), win(ROOT / 'src/static/StaticTheme.cpp')],
+        self.tools.submit('cl', ['/nologo', '/c', '/O2', '/Z7', '/MT', '/Fo' + win(theme), win(ROOT / 'src/static/StaticTheme.cpp')],
                           theme, [self.native_toolchain, fingerprint(files(ROOT / 'src/static/StaticTheme.cpp', ROOT / 'src/static/StaticThemeControls.inc', ROOT / 'src/static/StaticTheme.h'))])
         self.objects.append(theme)
+        crash = WORK / 'StaticCrash.obj'
+        self.tools.submit('cl', ['/nologo', '/c', '/O2', '/Z7', '/MT', '/Fo' + win(crash), win(ROOT / 'src/static/StaticCrash.cpp')],
+                          crash, [self.native_toolchain, fingerprint(files(ROOT / 'src/static/StaticCrash.cpp', ROOT / 'src/static/StaticCrash.h', ROOT / 'src/static/StaticCrashUnwind.inc'))])
+        self.objects.append(crash)
         self.defaults()
         self.tools.wait()
         resource = WORK / 'static.res'
-        self.report['resources'] = aggregate([(ROOT / 'obj/nemu64/nemu64.res', 0), *self.resource_inputs], resource)
+        symbol_res = WORK / 'crash-symbols.res'
+        fpo_res = WORK / 'crash-fpo.res'
+        def aggregate_resources():
+            self.report['resources'] = aggregate([(ROOT / 'obj/nemu64/nemu64.res', 0),
+                *self.resource_inputs, (symbol_res, 0), (fpo_res, 0)], resource)
         library = WORK / 'builtins.lib'
         response = WORK / 'archive.rsp'
         write_changed(response, '/nologo /OUT:"' + win(library) + '"\n' + '\n'.join('"' + win(p) + '"' for p in self.objects))
         self.tools.cached('lib', ['@' + win(response)], library,
                           [self.native_toolchain, fingerprint([response, *self.objects])])
         response = WORK / 'link.rsp'
-        options = ['/nologo', '/LTCG', '/SUBSYSTEM:WINDOWS', '/INCREMENTAL:NO', '/MACHINE:I386', '/OUT:"' + win(ROOT / 'bin/nemu64-static.exe') + '"', '/MAP:"' + win(WORK / 'nemu64-static.map') + '"', '/LIBPATH:"' + win(ROOT / 'toolchains/vc7/platformsdk/lib/prerelease') + '"', '/DELAYLOAD:d3d8.dll', '/DELAYLOAD:dsound.dll']
+        options = ['/nologo', '/LTCG', '/DEBUG', '/OPT:REF', '/OPT:ICF',
+                   '/PDB:"' + win(WORK / 'nemu64-static.pdb') + '"', '/SUBSYSTEM:WINDOWS', '/INCREMENTAL:NO', '/MACHINE:I386', '/OUT:"' + win(ROOT / 'bin/nemu64-static.exe') + '"', '/MAP:"' + win(WORK / 'nemu64-static.map') + '"', '/LIBPATH:"' + win(ROOT / 'toolchains/vc7/platformsdk/lib/prerelease') + '"', '/DELAYLOAD:d3d8.dll', '/DELAYLOAD:dsound.dll']
         libraries = ['nafxcw.lib', 'libcmt.lib', 'delayimp.lib', 'd3dx8.lib', 'd3d8.lib', 'dxerr8.lib', 'dsound.lib', 'winmm.lib', 'kernel32.lib', 'user32.lib', 'gdi32.lib', 'advapi32.lib', 'ole32.lib', 'oleaut32.lib', 'comctl32.lib', 'comdlg32.lib', 'shell32.lib', 'imm32.lib', 'version.lib', 'wininet.lib', 'wsock32.lib', 'ws2_32.lib', 'mpr.lib', 'uuid.lib', 'winspool.lib']
         # Delphi constructor/initializer records and plugin entry tables root
         # their implementations through ordinary relocations in the archive.
@@ -477,7 +501,11 @@ class Build:
         options += ['"' + win(p) + '"' for p in host_objects] + ['"' + win(library) + '"', '"' + win(resource) + '"', *libraries]
         write_changed(response, '\n'.join(options) + '\n')
         (ROOT / 'bin').mkdir(exist_ok=True)
-        self.tool('link', ['@' + win(response)])
+        build_id = fingerprint([*host_objects, library, ROOT / 'obj/nemu64/nemu64.res',
+                                *(path for path, _ in self.resource_inputs)])[:16]
+        self.report['crash_symbols'] = checked_link(lambda: self.tool('link', ['@' + win(response)]),
+            WORK / 'nemu64-static.map', ROOT / 'bin/nemu64-static.exe', symbol_res, fpo_res,
+            WORK / 'nemu64-static.pdb', aggregate_resources, build_id)
         (WORK / 'link-report.json').write_text(json.dumps(self.report, indent=2) + '\n')
 
 

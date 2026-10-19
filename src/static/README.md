@@ -142,6 +142,51 @@ and conversion metadata are under `obj/static/`. The compiler log is
 This is an ordinary user build, not a byte-matching reconstruction. `make` and
 the historical `scripts/build_*.py` workflows retain their separate DLL builds.
 
+## Crash reports (static build only)
+
+Fatal exceptions display a small Win32 error dialog with expandable Details,
+Copy report, and Close. Details include a build identifier, exception/access
+address, x86 registers, and stack locations as module/function/offset. Closing
+ends the faulted process. The reporter is prepared on its own thread during
+startup, after the emulated address space has been reserved.
+
+The runtime uses XP-era kernel32/user32/gdi32 APIs. It needs no PDB, MAP,
+DbgHelp, redistributable crash library, symbol server, or extracted file.
+Optional vectored-exception entry points are resolved from kernel32 at runtime.
+The observer records context but never treats a handled exception as fatal.
+Generated VCL code forwards unhandled hardware exceptions with a first-chance
+stack snapshot; ordinary validation exceptions and EAbort keep their handlers.
+The core forwards fatal native errors from its CPU exception filter while
+retaining recoverable generated-code memory accesses and memory breakpoints.
+
+The build keeps `/O2`, `/GL`, and frame-pointer omission. `/Zi` on the core and
+`/Z7` on native components provide metadata; each core compilation has a private
+PDB so parallel compiler jobs don't contend for one file. The linker emits
+`obj/static/nemu64-static.pdb`. It is a build artifact, and may be used for native
+C/C++ debugging, but is unnecessary when distributing the EXE.
+
+`scripts/static_fpo.py` extracts the VC7 linker's x86 FrameData unwind recipes.
+The recipes and a compact index of public/local C/C++ and Delphi code symbols
+are embedded as ordinary RCDATA. A second link verifies that code bytes,
+function RVAs, and recipes are unchanged before accepting the executable.
+The runtime evaluates the compiler's bounded postfix recipes. Frames requiring
+a bounded return-address search are marked; code without metadata can use saved
+frame links, which may skip frameless functions. Unsupported/partial-prologue
+states stop that walk. Separately labelled stack candidates are heuristic.
+Inlined/tail-called functions and arbitrary hand-written stack manipulation
+cannot always be reconstructed. Dynrec locations report the code-buffer offset
+and current guest PC; loose DLLs retain module offsets and nearest export names.
+
+Stack walking checks memory and stack bounds and limits all searches. Reporting
+is still best effort if the process is too damaged to run its reporting thread
+or create Windows controls. There is no claim of recovery after a fatal fault.
+
+Run `python3 scripts/check_static_crash.py` for actual optimized main/worker
+thread faults, damaged-frame-pointer handling, handled-exception behavior, the
+Delphi VCL bridge, an external plugin crash, and dialog/copy/close checks. These
+fixtures use a disposable Wine prefix configured as XP and an isolated launch
+folder with no PDB/MAP files. Native Windows XP testing remains outstanding.
+
 ## Object converter
 
 The Python converter uses only the standard library:
