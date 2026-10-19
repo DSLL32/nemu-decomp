@@ -18,6 +18,9 @@ reliable transport's `receive` precedes `dataAvailable`. The UDP registry is
 a class static member, with its definition after the methods: VC6 emits the
 observed guarded destructor for a class static object, unlike a file static
 object. This also places the initialization wrappers after UDP polling.
+The maximum socket member is explicitly initialized to zero. VC6 then places
+the destructor guard at `0x1000CA74` and the socket at `0x1000CA78`, matching
+the target; leaving its definition uninitialized reverses those two slots.
 
 These are link-layout and component findings. Full packed DLL equality is
 still required by `verify_kaillera.py`; relocation-masked instruction matches

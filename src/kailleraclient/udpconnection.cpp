@@ -1,11 +1,6 @@
 #include "udpconnection.h"
 #include "ptrlist.h"
 
-static PtrList<UDPConnection> connections;
-static fd_set sockets;
-static fd_set selected;
-static SOCKET maximumSocket;
-
 UDPConnection::UDPConnection()
 {
     socketHandle=0;
@@ -128,3 +123,8 @@ int UDPConnection::selectSockets(int seconds)
     }
     return 1;
 }
+
+PtrList<UDPConnection> UDPConnection::connections;
+fd_set UDPConnection::sockets;
+fd_set UDPConnection::selected;
+SOCKET UDPConnection::maximumSocket=0;
