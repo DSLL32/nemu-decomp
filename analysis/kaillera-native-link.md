@@ -146,3 +146,19 @@ COMDAT groups and emits a helper ordering file. The build combines that file
 with the native thunk ordering, rejecting duplicate symbols. Application and
 native import grouping change COFF section metadata; their instruction payloads,
 relocation records and source declarations remain independently inspected.
+
+The combined native build reproduces all 22 Winsock thunk addresses beginning
+at `0x1000A000`, deletion at `0x1000A084`, stack probing at `0x1000A090`,
+`_onexit`/`atexit` at `0x1000A0BF`/`0x1000A0EB`, allocation/EH thunks at
+`0x1000A0FE`/`0x1000A104`, CRT initialization/entry at
+`0x1000A110`/`0x1000A1BB`, and the final exit/init thunks at
+`0x1000A258`/`0x1000A25E`. The `.text` virtual size is 38,598 bytes.
+
+A linked image cannot be compared directly with an UPX-unpacked reference to
+judge import metadata equality. UPX 1.20 reconstructs the import lookup area,
+zero hints, name packing, and resource directory layout when unpacking. Packing
+and unpacking the complete candidate with the pinned tool reproduces every
+import and resource byte in the reference. The only remaining `.rdata` difference
+in that diagnostic roundtrip is its four-byte export timestamp. No import-name
+or resource-directory patch is needed. Source instruction differences, native CRT
+global placement, and archival metadata still prevent complete packed equality.
