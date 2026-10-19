@@ -28,3 +28,27 @@ individual layout experiments does not settle the remaining private names.
 These are link-layout and component findings. Full packed DLL equality is
 still required by `verify_kaillera.py`; relocation-masked instruction matches
 alone do not establish it.
+
+## Uninitialized data
+
+`kaillera-bss-layout.json` records the recovered offsets and declaration sizes
+of 71 globals and compiler-generated guards. The offsets are inferred from
+absolute operands in complete, uniquely matched native function signatures.
+Every observed operand for a given declaration agrees. Names remain inferred
+except where publisher binaries or recovered source establish them.
+
+`build_kaillera_layout_inputs.py` supplies this layout to LINK by changing only
+COFF symbol values, uninitialized section allocation sizes, and their matching
+section auxiliary records. It rejects missing or additional declarations,
+changed source allocation sizes, overlapping declarations, initialized data,
+executable allocations, and unexpected auxiliary records. All initialized and
+executable section contents and every relocation record remain unchanged.
+The build consumes the declarative layout, without reading target bytes during
+compilation or linking. The ordinary Makefile build uses the source directly.
+
+The resulting native image reproduces all 59 public addresses in these blocks
+and all 525 checked absolute BSS operands, including private globals and
+member offsets. The `.data` virtual size becomes the target's 3,744 bytes.
+Differential public-API smoke testing also passed after applying the layout.
+These checks establish the data-address reconstruction, not complete DLL
+equality or the live multiplayer path.

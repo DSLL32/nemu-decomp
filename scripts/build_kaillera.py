@@ -17,6 +17,7 @@ import tempfile
 
 from check_kaillera import inspect
 from build_kaillera_link_inputs import build as build_link_inputs
+from build_kaillera_layout_inputs import build as build_layout_inputs
 from verify_kaillera import ORIGINAL, ORIGINAL_SHA256, compare
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -81,13 +82,15 @@ def main():
         report['sources'] = {str(path.relative_to(source)): digest(path)
                              for path in sorted(source.rglob('*')) if path.is_file()}
         tracked = [ROOT / 'scripts' / name for name in
-                   ('build_kaillera.py', 'build_kaillera_link_inputs.py', 'check_kaillera.py',
+                   ('build_kaillera.py', 'build_kaillera_link_inputs.py',
+                    'build_kaillera_layout_inputs.py', 'check_kaillera.py',
                     'verify_kaillera.py', 'run_toolchain.py')]
         tracked += [ROOT / 'toolchains' / name for name in
                     ('kaillera-toolchain.json', 'kaillera-packer.json')]
         tracked += [ROOT / 'toolchains/vc6rtm/bin' / name for name in
                     ('cl.exe', 'c1xx.dll', 'c2.dll', 'lib.exe', 'rc.exe', 'rcdll.dll')]
         tracked += [ROOT / 'toolchains/upx120/upx.exe']
+        tracked += [ROOT / 'analysis/kaillera-bss-layout.json']
         report['build_input_sha256'] = {str(path.relative_to(ROOT)): digest(path) for path in tracked}
         objects = []
         for unit in UNITS:
@@ -99,13 +102,15 @@ def main():
                                          *map(winpath, objects)])
         import_library = output / 'link-inputs' / 'kernel32.lib'
         report['link_inputs'] = build_link_inputs(import_library)
+        link_objects, report['bss_layout_inputs'] = build_layout_inputs(
+            objects, output / 'link-inputs' / 'layout')
         candidate = output / 'linked' / 'kailleraclient.dll'
         candidate.parent.mkdir(exist_ok=True)
         tool('link-candidate', 'link', ['/nologo', '/dll', '/subsystem:windows', '/machine:i386',
             '/incremental:no', '/opt:ref', '/opt:nowin98',
             '/out:' + winpath(candidate), '/map:' + winpath(output / 'kailleraclient.map'),
             '/implib:' + winpath(output / 'kailleraclient.lib'),
-            *map(winpath, objects), winpath(output / 'kaillera.res'),
+            *map(winpath, link_objects), winpath(output / 'kaillera.res'),
             winpath(import_library), 'comctl32.lib', 'gdi32.lib', 'msvcrt.lib',
             'user32.lib', 'winmm.lib', 'ws2_32.lib'])
         # Keep a descriptive alias without changing the export directory's DLL name.
