@@ -64,3 +64,35 @@ equality or the live multiplayer path.
 `python3 scripts/test_kaillera_layout_inputs.py` exercises the metadata-only
 mutation boundary and negative guards using synthetic COFF input, without a
 compiler, Wine, or reference-program bytes.
+
+## Native import chronology
+
+`kaillera-import-chronology.json` records a static selection order for 99 SDK
+import members and seven DLL descriptor groups. `build_kaillera_import_inputs.py`
+pins every SDK archive hash, selected member offset/name/hash, archive index
+symbol list, and `/INCLUDE` root. It generates ordinary archives with unchanged
+selected member bodies. The only stock spelling adjustment remains the guarded
+`KERNEL32.DLL` metadata adaptation described above.
+
+Archive order and final IAT order are not identical in this LINK version. A
+scratch diagnostic first supplied imports in final-table order, observed the
+native permutation, and inverted that positional permutation once. The resulting
+static input order reproduces all 99 import names/ordinals, descriptor order, and
+IAT addresses. The builder does not perform this experiment, read target bytes,
+or reorder a linked image. `check_inventory` verifies the native result against
+the static symbolic recipe, including each DLL's first-thunk address and the
+whole IAT directory (`0xB000`, 424 bytes). Descriptor order differs from the order
+of DLL blocks within the IAT.
+
+One additional unchanged, unrooted `inet_ntoa` import member resolves a reference
+in an unused JNetLib utility before `/OPT:REF` discards that utility. It does not
+appear in the final import inventory. This explicit singleton replaces a fallback
+search of the entire WinSock archive.
+
+The same recipe accepts the separately guarded `build_kaillera_crt_inputs.py`
+output for MSVCRT/WinSock native thunk placement. Every derived archive must match
+its conversion report's output hash; member order/names/index definitions must
+match the original SDK, all unlisted members must remain unchanged, and every
+changed member must match its recorded original/derived hashes. Thus the import
+chronology and native code placement remain separate, inspectable linker-input
+operations. The ordinary user Makefile continues to link the source directly.

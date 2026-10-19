@@ -16,7 +16,8 @@ import sys
 import tempfile
 
 from check_kaillera import inspect
-from build_kaillera_link_inputs import build as build_link_inputs
+from build_kaillera_crt_inputs import build as build_crt_inputs, NAMED_DEF, ORDINAL_DEF
+from build_kaillera_import_inputs import build as build_import_inputs, check_inventory
 from build_kaillera_layout_inputs import build as build_layout_inputs
 from verify_kaillera import ORIGINAL, ORIGINAL_SHA256, compare
 
@@ -83,6 +84,7 @@ def main():
                              for path in sorted(source.rglob('*')) if path.is_file()}
         tracked = [ROOT / 'scripts' / name for name in
                    ('build_kaillera.py', 'build_kaillera_link_inputs.py',
+                    'build_kaillera_import_inputs.py', 'build_kaillera_crt_inputs.py',
                     'build_kaillera_layout_inputs.py', 'check_kaillera.py',
                     'verify_kaillera.py', 'run_toolchain.py')]
         tracked += [ROOT / 'toolchains' / name for name in
@@ -90,7 +92,8 @@ def main():
         tracked += [ROOT / 'toolchains/vc6rtm/bin' / name for name in
                     ('cl.exe', 'c1xx.dll', 'c2.dll', 'lib.exe', 'rc.exe', 'rcdll.dll')]
         tracked += [ROOT / 'toolchains/upx120/upx.exe']
-        tracked += [ROOT / 'analysis/kaillera-bss-layout.json']
+        tracked += [ROOT / 'analysis' / name for name in
+                    ('kaillera-bss-layout.json', 'kaillera-import-chronology.json')]
         report['build_input_sha256'] = {str(path.relative_to(ROOT)): digest(path) for path in tracked}
         objects = []
         for unit in UNITS:
@@ -100,19 +103,33 @@ def main():
         tool('resources', 'rc', ['/l', '0x40c', '/fo' + winpath(output / 'kaillera.res'), 'kaillera.rc'])
         tool('component-library', 'lib', ['/nologo', '/out:' + winpath(output / 'kaillera-components.lib'),
                                          *map(winpath, objects)])
-        import_library = output / 'link-inputs' / 'kernel32.lib'
-        report['link_inputs'] = build_link_inputs(import_library)
+        native = output / 'link-inputs' / 'native-templates'
+        native.mkdir(parents=True, exist_ok=True)
+        for label, text in [('named', NAMED_DEF), ('ordinal', ORDINAL_DEF)]:
+            definition = native / (label + '.def')
+            definition.write_text(text)
+            tool('import-template-' + label, 'lib', ['/nologo', '/link50compat',
+                '/machine:i386', '/def:' + winpath(definition),
+                '/out:' + winpath(native / (label + '.lib'))])
+        crt_libraries, thunk_order, report['crt_link_inputs'] = build_crt_inputs(
+            output / 'link-inputs' / 'crt', native / 'named.lib', native / 'ordinal.lib')
+        early, late, report['import_chronology'] = build_import_inputs(
+            output / 'link-inputs' / 'imports', crt_libraries, report['crt_link_inputs'])
+        report['link_inputs'] = report['import_chronology']['kernel32_spelling']
+        arguments = lambda rows: [winpath(row) if isinstance(row, Path) else row for row in rows]
         link_objects, report['bss_layout_inputs'] = build_layout_inputs(
             objects, output / 'link-inputs' / 'layout')
         candidate = output / 'linked' / 'kailleraclient.dll'
         candidate.parent.mkdir(exist_ok=True)
-        tool('link-candidate', 'link', ['/nologo', '/dll', '/subsystem:windows', '/machine:i386',
+        tool('link-candidate', 'link', ['/nologo', *arguments(early),
+            '/dll', '/subsystem:windows', '/machine:i386',
             '/incremental:no', '/opt:ref', '/opt:nowin98',
+            '/order:@' + winpath(thunk_order),
             '/out:' + winpath(candidate), '/map:' + winpath(output / 'kailleraclient.map'),
             '/implib:' + winpath(output / 'kailleraclient.lib'),
             *map(winpath, link_objects), winpath(output / 'kaillera.res'),
-            winpath(import_library), 'comctl32.lib', 'gdi32.lib', 'msvcrt.lib',
-            'user32.lib', 'winmm.lib', 'ws2_32.lib'])
+            winpath(crt_libraries['msvcrt']), *arguments(late)])
+        report['native_import_inventory'] = check_inventory(candidate)
         # Keep a descriptive alias without changing the export directory's DLL name.
         shutil.copyfile(candidate, output / 'kailleraclient.unpacked.dll')
         packed = output / 'kailleraclient.dll'
