@@ -89,6 +89,13 @@ int main(int argc,char **argv) {
     set_mode(main_window,'h');
     require(message(list,LVM_GETBKCOLOR,0,0)==GetSysColor(COLOR_WINDOW),"high contrast disables dark palette");
     set_mode(main_window,'d');
+    require(PostMessageA(main_window,WM_COMMAND,32776,0),"open native audio settings");
+    settings=await_window("#32770","      Audio Configuration");Sleep(300);
+    debugger(settings,105);capture(settings,"audio-dark.bmp");
+    set_mode(settings,'l');debugger(settings,105);
+    set_mode(settings,'h');debugger(settings,105);
+    set_mode(settings,'d');debugger(settings,105);
+    require(PostMessageA(settings,WM_CLOSE,0,0),"close native audio settings");await_closed(settings);
     require(PostMessageA(main_window,WM_COMMAND,32780,0),"open Delphi settings");
     settings=await_window("TFormNemuSettings","Nemu Settings");Sleep(400);
     pixel(settings,5,65,RGB(40,40,40));pixel(settings,5,5,RGB(25,25,25));capture(settings,"settings-dark.bmp");

@@ -194,6 +194,13 @@ int main() {
  REQUIRE(NemuStaticDrawEdge(memory,&face,EDGE_RAISED,BF_RECT|BF_MIDDLE|BF_ADJUST));
  REQUIRE(GetPixel(memory,10,10)==RGB(40,40,40));
  expectNativePaint(button,memory,false);expectNativePaint(combo,memory,false);
+ // The native button owns its shape/text, but its transparent corners need
+ // the parent's dark brush rather than Windows' default light backdrop.
+ SetTextColor(memory,RGB(17,35,53));SetBkColor(memory,RGB(255,255,255));
+ HBRUSH buttonBackground=(HBRUSH)SendMessage(before,WM_CTLCOLORBTN,(WPARAM)memory,(LPARAM)button);
+ LOGBRUSH buttonBrush;REQUIRE(GetObject(buttonBackground,sizeof(buttonBrush),&buttonBrush));
+ REQUIRE(buttonBrush.lbColor==RGB(40,40,40)&&GetBkColor(memory)==RGB(40,40,40));
+ REQUIRE(GetTextColor(memory)==RGB(17,35,53));
  SetWindowPos(before,NULL,0,0,240,240,SWP_NOMOVE|SWP_NOZORDER|SWP_SHOWWINDOW);ShowWindow(edit,SW_SHOW);
  expectNativePaint(edit,memory,true);
  HBRUSH brush=(HBRUSH)SendMessageA(before,WM_CTLCOLOREDIT,(WPARAM)memory,(LPARAM)edit);

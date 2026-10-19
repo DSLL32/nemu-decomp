@@ -46,6 +46,21 @@ static BOOL WINAPI spi(UINT action,UINT size,PVOID data,UINT flags) {
 }
 extern "C" int __cdecl ProbeDebugger(int action);
 static HOOKPROC productionHook;
+static int probeButtonBackground(HWND dialog) {
+    const int buttons[]={IDOK,IDCANCEL,1033,1035,1042};
+    bool dark=mode()=='d';
+    for(unsigned i=0;i<sizeof(buttons)/sizeof(buttons[0]);++i) {
+        HWND button=GetDlgItem(dialog,buttons[i]);if(!button)return 80+i;
+        HDC dc=CreateCompatibleDC(NULL);SetTextColor(dc,RGB(17,35,53));SetBkColor(dc,RGB(255,255,255));
+        HBRUSH brush=(HBRUSH)SendMessage(dialog,WM_CTLCOLORBTN,(WPARAM)dc,(LPARAM)button);
+        LOGBRUSH color;bool ok=GetObject(brush,sizeof(color),&color)!=0;
+        ok=ok && color.lbColor==(dark ? RGB(40,40,40) : GetSysColor(COLOR_BTNFACE));
+        if(dark)ok=ok && GetBkColor(dc)==RGB(40,40,40) && GetTextColor(dc)==RGB(17,35,53);
+        DeleteDC(dc);if(!ok)return 90+i;
+        if(buttons[i]==1042 && ((GetWindowLong(button,GWL_EXSTYLE)&WS_EX_STATICEDGE)!=0)==dark)return 99;
+    }
+    return 1;
+}
 static int probeToolbar(HWND main) {
     HWND toolbar=FindWindowExA(main,NULL,TOOLBARCLASSNAMEA,NULL);
     int commands[4]={32804,32777,32800,32806};
@@ -117,7 +132,8 @@ static LRESULT CALLBACK fixtureMessages(int code,WPARAM w,LPARAM l) {
             message->wParam==101 ? probeScrollbar(message->hwnd,true) :
             message->wParam==102 ? probeScrollbar(message->hwnd,false) :
             message->wParam==103 ? probeToolbarArrows(message->hwnd,false) :
-            message->wParam==104 ? probeToolbarArrows(message->hwnd,true) : ProbeDebugger((int)message->wParam);
+            message->wParam==104 ? probeToolbarArrows(message->hwnd,true) :
+            message->wParam==105 ? probeButtonBackground(message->hwnd) : ProbeDebugger((int)message->wParam);
         SetPropA(message->hwnd,"DebuggerProbeResult",(HANDLE)result);
     }
     return productionHook(code,w,l);

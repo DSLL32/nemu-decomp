@@ -74,7 +74,7 @@ struct ThemedWindow {
     ControlKind kind;
     COLORREF background, textBackground, text;
     HIMAGELIST originalImages, darkImages, originalDisabledImages, darkDisabledImages;
-    DWORD originalStyle;
+    DWORD originalStyle, originalButtonEdge;
     bool themed;
     ThemedWindow *next;
 };
@@ -194,6 +194,20 @@ static void controlColors(ThemedWindow *state)
         toolbarImages(state);
     }
     state->themed = dark; // Set before theme messages reenter the hook.
+    if (state->kind == Button) {
+        UINT type = GetWindowLong(window,GWL_STYLE)&BS_TYPEMASK;
+        if (type == BS_PUSHBUTTON || type == BS_DEFPUSHBUTTON) {
+            DWORD extended = GetWindowLong(window,GWL_EXSTYLE);
+            if (dark) state->originalButtonEdge = extended&WS_EX_STATICEDGE;
+            // Some original resources add a legacy edge outside the themed
+            // button (notably Audio Configuration's "default" button).
+            DWORD themed = (extended&~WS_EX_STATICEDGE) | (dark ? 0 : state->originalButtonEdge);
+            if (themed != extended) {
+                SetWindowLong(window,GWL_EXSTYLE,themed);
+                SetWindowPos(window,NULL,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE|SWP_FRAMECHANGED);
+            }
+        }
+    }
     if (allowWindow) allowWindow(window, dark);
     if (setWindowTheme && state->kind != Other && state->kind != Panel) {
         LPCWSTR theme = L"";
@@ -459,10 +473,13 @@ static LRESULT CALLBACK themedProc(HWND window, UINT message, WPARAM wParam, LPA
                 return TRUE;
             }
         }
-        if (message >= WM_CTLCOLORMSGBOX && message <= WM_CTLCOLORSTATIC &&
-            !(message == WM_CTLCOLORBTN && !customButton((HWND)lParam))) {
+        if (message >= WM_CTLCOLORMSGBOX && message <= WM_CTLCOLORSTATIC) {
             int bg = message == WM_CTLCOLOREDIT || message == WM_CTLCOLORLISTBOX ? COLOR_WINDOW : COLOR_BTNFACE;
-            textColors((HDC)wParam, bg);
+            // Native pushbuttons still need a matching backdrop behind their
+            // rounded/transparent edges. Let the theme choose their text color.
+            if (message == WM_CTLCOLORBTN && !customButton((HWND)lParam))
+                SetBkColor((HDC)wParam, NemuStaticGetSysColor(bg));
+            else textColors((HDC)wParam, bg);
             return (LRESULT)NemuStaticGetSysColorBrush(bg);
         }
         if (message == WM_NOTIFY && ((NMHDR *)lParam)->code == NM_CUSTOMDRAW) {

@@ -120,12 +120,15 @@ static INT_PTR CALLBACK dialogProc(HWND window, UINT message, WPARAM w, LPARAM l
     }
     if (dialogDark) {
         if (message == WM_CTLCOLORDLG) return (INT_PTR)dialogBrush;
+        if (message == WM_CTLCOLORBTN) {
+            SetBkColor((HDC)w,dialogBackground);
+            return (INT_PTR)dialogBrush;
+        }
         if (message == WM_CTLCOLORSTATIC || message == WM_CTLCOLOREDIT) {
             bool edit=(HWND)l==detailEdit;
             SetTextColor((HDC)w,dialogText); SetBkColor((HDC)w,edit ? reportBackground : dialogBackground);
             return (INT_PTR)(edit ? reportBrush : dialogBrush);
         }
-
     }
     if (message == WM_COMMAND) {
         if (LOWORD(w)==IDOK || LOWORD(w)==IDCANCEL) { EndDialog(window,IDOK); return TRUE; }

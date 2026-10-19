@@ -35,6 +35,11 @@ int main(void)
         REQUIRE((GetWindowLong(GetDlgItem(window,ID_DETAILS),GWL_STYLE)&BS_TYPEMASK)==BS_PUSHBUTTON);
         REQUIRE((GetWindowLong(GetDlgItem(window,ID_COPY),GWL_STYLE)&BS_TYPEMASK)==BS_PUSHBUTTON);
         REQUIRE(GetNextDlgTabItem(window,NULL,FALSE)==GetDlgItem(window,IDOK));
+        HDC dc=GetDC(GetDlgItem(window,IDOK));SetTextColor(dc,RGB(17,35,53));SetBkColor(dc,RGB(255,255,255));
+        HBRUSH brush=(HBRUSH)SendMessage(window,WM_CTLCOLORBTN,(WPARAM)dc,(LPARAM)GetDlgItem(window,IDOK));
+        LOGBRUSH background;REQUIRE(GetObject(brush,sizeof(background),&background));
+        REQUIRE(background.lbColor==dialogBackground && GetBkColor(dc)==dialogBackground);
+        REQUIRE(GetTextColor(dc)==RGB(17,35,53));ReleaseDC(GetDlgItem(window,IDOK),dc);
         SendMessage(window,WM_COMMAND,ID_DETAILS,0); REQUIRE(IsWindowVisible(detailEdit));
         SendMessage(detailEdit,WM_VSCROLL,SB_BOTTOM,0);
         REQUIRE(SendMessage(detailEdit,EM_GETFIRSTVISIBLELINE,0,0)>0);
