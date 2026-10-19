@@ -654,7 +654,9 @@ int modifyPlayValues(void *values,int size)
             sentDataCache.addData(data,bytes);
         }
         sendByteQueue.used=0;
-        if (++frameDelayCount>=syncDelay+1) {
+        if (++frameDelayCount<syncDelay+1) {
+            // Accumulate initial frames before consuming a reply.
+        } else {
             frameDelayCount--;
             int control;
             do {
