@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Build the recovered Kaillera candidate and report remaining differences.
+"""Build and verify the byte-exact Kaillera client reconstruction.
 
-The candidate is not yet byte exact. Instruction coverage is diagnostic;
-verify_kaillera.py alone accepts full packed equality.
+Instruction coverage is diagnostic; verify_kaillera.py accepts only full
+packed equality.
 """
 
 import argparse
@@ -172,8 +172,9 @@ def main():
         report.update(inspect(reference, objects, output / 'kaillera.res'))
         report.update(compare(packed))
         report.update(status='byte-exact' if report['full_dll_byte_exact'] else 'nonmatching-reconstruction', complete_dll_available=True,
-                      remaining=['remaining component instruction differences',
-                                 'final link layout and UPX container reproduction'])
+                      remaining=[] if report['full_dll_byte_exact'] else
+                      ['remaining component instruction differences',
+                       'final link layout and UPX container reproduction'])
         save()
         print(f'Component library: {output / "kaillera-components.lib"}\n'
               f'Resources exact: {report["all_resource_payloads_byte_exact"]}\n'

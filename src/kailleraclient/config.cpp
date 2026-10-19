@@ -63,7 +63,9 @@ Config::Config(char *file,char *sect)
         }
     }
     integers=0;
-    strings=0;
+    StringEntry *emptyStrings;
+    memset(&emptyStrings,0,sizeof(emptyStrings));
+    strings=emptyStrings;
     integerCount=integerCapacity=0;
     stringCount=stringCapacity=0;
     filename[259]=0;

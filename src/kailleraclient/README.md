@@ -1,11 +1,12 @@
-# Kaillera client 0.84 reconstruction — not yet byte exact
+# Kaillera client 0.84 reconstruction
 
 The reference is the 28,160-byte UPX 1.20-packed Kaillera **0.84** client,
 SHA-256 `410503fdfd1e931adf6024df7b8d88c725260b568688c5a5a1ab9897c83ff72d`.
 Its PE timestamp is June 2, 2001. It is an earlier version than the currently
 published 0.9 SDK. The target contains 15 VC6 RTM C++ compiler contributions.
 
-The full application now builds from source. The ordinary working-copy build is
+The complete source-built, UPX-packed DLL matches all 28,160 original bytes.
+The ordinary working-copy build is
 `make kaillera`, which writes `bin/kailleraclient.dll`. The historical build
 command below also packs a candidate with UPX 1.20 and compares every packed
 byte, alongside diagnostic instruction signatures and resource payloads:
@@ -14,7 +15,7 @@ byte, alongside diagnostic instruction signatures and resource payloads:
 python3 scripts/build_kaillera.py --report analysis/kaillera-components.json
 ```
 
-The command exits nonzero until the packed candidate is fully byte exact.
+The command exits nonzero if the packed candidate is not fully byte exact.
 It allocates scratch space and its own Wine prefix under `~/.ai-tmp`;
 `--work ~/.ai-tmp/<directory>` reuses a build directory and prefix.
 The DLL candidate, component library, resources, copied sources, objects and logs remain
@@ -59,8 +60,7 @@ message serialization. `udpconnection.cpp` restores socket multiplexing, peer
 lookup and transport. `reliableconnection.cpp` and `packetcache.h` restore the
 two embedded message caches and resend/receive algorithms. `connect.cpp`
 restores server negotiation and login. `kailleraclient.cpp` restores DllMain and
-the eight public wrappers. The remaining application instruction difference is in the configuration
-constructor.
+the eight public wrappers.
 `session.cpp` and `serverbrowser.cpp` restore the
 partyline, packet dispatcher, game panels, input synchronization and server
 selection. `listview.cpp` and `resizer.cpp` restore shared window helpers.
@@ -84,9 +84,13 @@ two images and group directory represented by `kaillera.ico`. French language
 ID 1036 is retained. Resource identifiers that were not preserved as names are
 numeric.
 
-Remaining work is instruction refinement, complete layout and packing.
-Diagnostic signature matches do not certify
-unresolved relocation identities or final executable bytes.
+The configuration constructor initializes its string-cache pointer through a
+zeroed local pointer before assigning the member. Its original source spelling
+is unavailable; this ordinary initialization form is inferred from the native
+initialization boundary. All seven configuration functions match their unique
+target instruction bodies. Diagnostic signature matches exclude relocation
+operands; the strict packed-file comparison verifies the complete program,
+relocations, data, resources, layout and container together.
 
 The tracked `toolchains/upx120` is the unmodified historical packer, not a
 reference-program payload. UPX 1.20 `-9` was identified as the original setting.
@@ -95,8 +99,10 @@ Raw decompression of the original packed stream identifies the original
 Restoring only those PE header fields before repacking a decompressed reference
 reproduces all original packed bytes. The proof is in
 [`analysis/kaillera-upx.md`](../../analysis/kaillera-upx.md). The source-built
-candidate must still reproduce the program and layout before any guarded
-container metadata restoration can apply.
+candidate reproduces the complete program and layout before guarded container
+metadata restoration applies. The restoration checks a digest of every
+nonmetadata byte and restores only historical PE/Rich provenance, timestamps,
+unused relocation allocation and the three link-header fields UPX discards.
 
 `python3 scripts/smoke_kaillera.py bin/kailleraclient.dll` runs the original and
 rebuilt public API under Wine/Xvfb, checking version, initialization, repeated

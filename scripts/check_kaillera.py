@@ -121,7 +121,7 @@ def main():
         args.report.write_text(json.dumps(result, indent=2) + '\n')
     print(f'Diagnostic unique masked-signature coverage: '
           f'{result["unique_masked_signature_code_bytes"]}/{result["original_code_virtual_bytes"]} bytes')
-    print('Complete DLL byte exact: False (application reconstruction incomplete)')
+    print('Instruction diagnostics only; use verify_kaillera.py for complete DLL equality.')
     return 1
 
 
