@@ -4,7 +4,7 @@
 #include "listview.h"
 #include "control.h"
 
-extern ListView gamesList,usersList,playersList;
+extern W_ListView gamesList,usersList,playersList;
 extern HWND lobbyWindow,gameWindow,syncWindow;
 extern TextControl gameChat,serverChat;
 extern int onlineUsers,currentGame,localUser,localPlayer,totalPlayers;

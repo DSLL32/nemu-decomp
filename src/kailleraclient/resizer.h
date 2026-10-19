@@ -2,7 +2,7 @@
 #ifndef KAILLERA_RESIZER_H
 #define KAILLERA_RESIZER_H
 #include <windows.h>
-#include "ptrlist.h"
+#include "itemlist.h"
 
 class Resizer {
 public:
@@ -25,6 +25,6 @@ private:
         int left,right,top,bottom;
         int invalidate;
     };
-    PtrList controls;
+    C_ItemList<void> controls;
 };
 #endif

@@ -2,7 +2,7 @@
 #ifndef KAILLERA_UDPCONNECTION_H
 #define KAILLERA_UDPCONNECTION_H
 #include <windows.h>
-#include "ptrlist.h"
+#include "itemlist.h"
 
 class UDPCom {
 public:
@@ -20,7 +20,7 @@ public:
     virtual void sendEmpty();
     static int selectSockets(int seconds);
 private:
-    static PtrList connections;
+    static C_ItemList<void> connections;
     static fd_set sockets;
     static fd_set selected;
     static SOCKET maximumSocket;

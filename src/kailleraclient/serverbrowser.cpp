@@ -17,7 +17,7 @@ public:
     HWND window;
 };
 
-ListView serverList;
+W_ListView serverList;
 BrowserControl usernameEdit;
 BrowserControl connectionCombo;
 Resizer browserLayout;
@@ -68,16 +68,16 @@ static BOOL CALLBACK browserDialog(HWND window,UINT message,WPARAM wParam,LPARAM
         settings->flush();
         break;
     case WM_NOTIFY:
-        if (((NMHDR *)lParam)->hwndFrom==serverList.window) {
+        if (((NMHDR *)lParam)->hwndFrom==serverList.m_hwnd) {
             if (((NMHDR *)lParam)->code==NM_DBLCLK) SendMessage(window,WM_COMMAND,IDOK,0);
             else if (((NMHDR *)lParam)->code==LVN_COLUMNCLICK) {
                 int column=((NMLISTVIEW *)lParam)->iSubItem;
                 int numeric=(column==2 || column==4 || column==5);
-                if (column==serverList.sortColumn) serverList.sortDirection=-serverList.sortDirection;
-                else serverList.sortDirection=1;
-                serverList.numericSort=numeric;
-                serverList.sortColumn=column;
-                serverList.sort();
+                if (column==serverList.m_sort_col) serverList.m_sort_dir=-serverList.m_sort_dir;
+                else serverList.m_sort_dir=1;
+                serverList.m_sort_type=numeric;
+                serverList.m_sort_col=column;
+                serverList.Resort();
             }
         }
         break;
@@ -88,18 +88,18 @@ static BOOL CALLBACK browserDialog(HWND window,UINT message,WPARAM wParam,LPARAM
             SetWindowText(usernameEdit,username);
             browserStatus=GetDlgItem(window,1004);
             refreshButton=GetDlgItem(window,1001);
-            serverList.window=GetDlgItem(window,1000);
-            ListView_SetExtendedListViewStyle(serverList.window,0x820);
-            serverList.addColumn("Server name",43);
-            serverList.addColumn("Location",25);
-            serverList.addColumn("Ping",10);
-            serverList.addColumn("Version",10);
-            serverList.addColumn("# Users",10);
-            serverList.addColumn("# Games",12);
-            serverList.addColumn("IP Address");
-            serverList.sortColumn=2;
-            serverList.numericSort=1;
-            serverList.sortDirection=1;
+            serverList.m_hwnd=GetDlgItem(window,1000);
+            ListView_SetExtendedListViewStyle(serverList.m_hwnd,0x820);
+            serverList.AddCol("Server name",43);
+            serverList.AddCol("Location",25);
+            serverList.AddCol("Ping",10);
+            serverList.AddCol("Version",10);
+            serverList.AddCol("# Users",10);
+            serverList.AddCol("# Games",12);
+            serverList.AddCol("IP Address");
+            serverList.m_sort_col=2;
+            serverList.m_sort_type=1;
+            serverList.m_sort_dir=1;
             connectionCombo=GetDlgItem(window,1029);
             if (*connectionTypes) {
                 char **type=connectionTypes;
@@ -135,17 +135,17 @@ static BOOL CALLBACK browserDialog(HWND window,UINT message,WPARAM wParam,LPARAM
         case IDOK:
             if (readUsername(window)) {
                 connectionType=SendMessage(connectionCombo,CB_GETCURSEL,0,0)+1;
-                int row=ListView_GetSelectionMark(serverList.window);
+                int row=ListView_GetSelectionMark(serverList.m_hwnd);
                 if (row!=-1) {
                     LVITEM item;
                     item.iSubItem=6;
                     item.cchTextMax=256;
                     item.pszText=address;
-                    SendMessage(serverList.window,LVM_GETITEMTEXT,row,(LPARAM)&item);
+                    SendMessage(serverList.m_hwnd,LVM_GETITEMTEXT,row,(LPARAM)&item);
                     item.iSubItem=0;
                     item.cchTextMax=255;
                     item.pszText=selectedServerName;
-                    SendMessage(serverList.window,LVM_GETITEMTEXT,row,(LPARAM)&item);
+                    SendMessage(serverList.m_hwnd,LVM_GETITEMTEXT,row,(LPARAM)&item);
                     refreshState=9999;
                     if (connectToServer(window,address)) {
                         KillTimer(window,0xc001d00d);
@@ -225,7 +225,7 @@ static void updateServerList()
         }
         break;
     case 2:
-        ListView_DeleteAllItems(serverList.window);
+        ListView_DeleteAllItems(serverList.m_hwnd);
         delete serverRequest;
         serverRequest=0;
         nextServer=serverResponse;
@@ -242,30 +242,30 @@ static void updateServerList()
             if (p<serverResponse+receivedBytes) {
                 while (*p && *p!='\r' && *p!='\n') p++;
                 *p++=0;
-                int row=serverList.insert(9999,field,serverCount);
+                int row=serverList.InsertItem(9999,field,serverCount);
                 while (*p=='\r' || *p=='\n') p++;
                 field=p;
                 while (*p && *p!=';' && *p!='\r' && *p!='\n') p++;
                 *p++=0;
                 strcpy(address,field);
-                serverList.setText(row,6,field);
+                serverList.SetItemText(row,6,field);
                 field=p;
                 while (*p && *p!=';' && *p!='\r' && *p!='\n') p++;
                 *p++=0;
-                serverList.setText(row,4,field);
+                serverList.SetItemText(row,4,field);
                 field=p;
                 while (*p && *p!=';' && *p!='\r' && *p!='\n') p++;
                 *p++=0;
-                serverList.setText(row,5,field);
+                serverList.SetItemText(row,5,field);
                 field=p;
                 while (*p && *p!=';' && *p!='\r' && *p!='\n') p++;
                 *p++=0;
-                serverList.setText(row,3,field);
+                serverList.SetItemText(row,3,field);
                 field=p;
                 while (*p && *p!=';' && *p!='\r' && *p!='\n') p++;
                 char delimiter=*p;
                 *p++=0;
-                serverList.setText(row,1,field);
+                serverList.SetItemText(row,1,field);
                 if (delimiter==';') {
                     while (*p!='\r' && *p!='\n' && *p) p++;
                     while (*p=='\r' || *p=='\n') p++;
@@ -292,12 +292,12 @@ static void updateServerList()
         UDPCom::selectSockets(0);
         if (pingConnection->dataAvailable()) {
             wsprintf(address,"%i ms",GetTickCount()-pingStarted);
-            serverList.setText(pingRow,2,address);
-            serverList.sort();
+            serverList.SetItemText(pingRow,2,address);
+            serverList.Resort();
             refreshState=3;
         } else if (pingStarted+1000<GetTickCount()) {
-            serverList.setText(pingRow,2,"> 1s");
-            serverList.sort();
+            serverList.SetItemText(pingRow,2,"> 1s");
+            serverList.Resort();
             refreshState=3;
         }
         break;
@@ -327,8 +327,8 @@ static void setBrowserStatus(char *text)
 
 static void browserMessage(char *text)
 {
-    ListView_DeleteAllItems(serverList.window);
-    serverList.insert(0,text,-1);
+    ListView_DeleteAllItems(serverList.m_hwnd);
+    serverList.InsertItem(0,text,-1);
     setBrowserStatus(text);
 }
 

@@ -1,10 +1,10 @@
 #include "udpconnection.h"
-#include "ptrlist.h"
+#include "itemlist.h"
 
 UDPCom::UDPCom()
 {
     socketHandle=0;
-    connections.add(this);
+    connections.Add(this);
     readable=0;
     if (!maximumSocket) {
         FD_ZERO(&sockets);
@@ -20,9 +20,9 @@ UDPCom::~UDPCom()
         FD_CLR(socketHandle,&sockets);
         if (socketHandle==maximumSocket) {
             maximumSocket=0;
-            for (int i=0;i<connections.size();i++) {
-                if (connections.get(i)!=this) {
-                    SOCKET handle=((UDPCom *)connections.get(i))->socketHandle;
+            for (int i=0;i<connections.GetSize();i++) {
+                if (connections.Get(i)!=this) {
+                    SOCKET handle=((UDPCom *)connections.Get(i))->socketHandle;
                     if (handle>maximumSocket) {
                         maximumSocket=handle;
                     }
@@ -30,8 +30,8 @@ UDPCom::~UDPCom()
             }
         }
     }
-    for (int i=0;i<connections.size();i++) {
-        if (connections.get(i)==this) { connections.remove(i); i--; }
+    for (int i=0;i<connections.GetSize();i++) {
+        if (connections.Get(i)==this) { connections.Del(i); i--; }
     }
 }
 
@@ -116,15 +116,15 @@ int UDPCom::selectSockets(int seconds)
     selected=sockets;
     timeval timeout={seconds,0};
     if (!::select(descriptorCount,&selected,0,0,&timeout)) return 0;
-    int count=connections.size();
+    int count=connections.GetSize();
     for (int i=0;i<count;i++) {
-        UDPCom *connection=(UDPCom *)connections.get(i);
+        UDPCom *connection=(UDPCom *)connections.Get(i);
         if (FD_ISSET(connection->socketHandle,&selected)) connection->readable=1;
     }
     return 1;
 }
 
-PtrList UDPCom::connections;
+C_ItemList<void> UDPCom::connections;
 fd_set UDPCom::sockets;
 fd_set UDPCom::selected;
 SOCKET UDPCom::maximumSocket=0;

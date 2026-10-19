@@ -8,11 +8,11 @@
 BOOL CALLBACK lobbyDialog(HWND,UINT,WPARAM,LPARAM);
 void pollLobby();
 
-ListView usersList;
-ListView gamesList;
+W_ListView usersList;
+W_ListView gamesList;
 static TextControl lobbyInput;
 TextControl serverChat;
-ListView playersList;
+W_ListView playersList;
 TextControl gameInput;
 TextControl gameChat;
 ByteQueueList receivedDataCache,sentDataCache;
@@ -69,22 +69,22 @@ BOOL CALLBACK lobbyDialog(HWND window,UINT message,WPARAM command,LPARAM data)
     switch (message) {
     case WM_NOTIFY: {
         NMLISTVIEW *notice=(NMLISTVIEW *)data;
-        if (notice->hdr.hwndFrom==usersList.window) {
+        if (notice->hdr.hwndFrom==usersList.m_hwnd) {
             if (notice->hdr.code==LVN_COLUMNCLICK) {
             int column=notice->iSubItem;
             int numeric=(column==1);
-            if (column==usersList.sortColumn) usersList.sortDirection=-usersList.sortDirection;
-            else usersList.sortDirection=1;
-            usersList.numericSort=numeric; usersList.sortColumn=column; usersList.sort();
+            if (column==usersList.m_sort_col) usersList.m_sort_dir=-usersList.m_sort_dir;
+            else usersList.m_sort_dir=1;
+            usersList.m_sort_type=numeric; usersList.m_sort_col=column; usersList.Resort();
         }
         }
-        if (notice->hdr.hwndFrom==gamesList.window) {
+        if (notice->hdr.hwndFrom==gamesList.m_hwnd) {
             if (notice->hdr.code==LVN_COLUMNCLICK) {
             int column=notice->iSubItem;
             int numeric=(column==4);
-            if (column==gamesList.sortColumn) gamesList.sortDirection=-gamesList.sortDirection;
-            else gamesList.sortDirection=1;
-            gamesList.sortColumn=column; gamesList.numericSort=numeric; gamesList.sort();
+            if (column==gamesList.m_sort_col) gamesList.m_sort_dir=-gamesList.m_sort_dir;
+            else gamesList.m_sort_dir=1;
+            gamesList.m_sort_col=column; gamesList.m_sort_type=numeric; gamesList.Resort();
         }
         }
         break;
@@ -118,14 +118,14 @@ BOOL CALLBACK lobbyDialog(HWND window,UINT message,WPARAM command,LPARAM data)
             break;
         }
         case 1009: {
-            int index=ListView_GetSelectionMark(gamesList.window);
+            int index=ListView_GetSelectionMark(gamesList.m_hwnd);
             if (index==-1) break;
-            gamesList.getText(index,3,joinText,255);
+            gamesList.GetText(index,3,joinText,255);
             if (strcmp(joinText,"Waiting")) {
                 MessageBox(window,"This game is currently playing!\r\n(Joining playing games is not supported yet)","Can't join",0);
                 break;
             }
-            gamesList.getText(index,0,currentGameName,127);
+            gamesList.GetText(index,0,currentGameName,127);
             int found=0;
             for (char *name=gameList;*name && !found;name+=strlen(name)+1)
                 if (!strcmp(name,currentGameName)) found=1;
@@ -133,11 +133,11 @@ BOOL CALLBACK lobbyDialog(HWND window,UINT message,WPARAM command,LPARAM data)
                 MessageBox(window,"This ROM is not available on your computer!","Can't join",0);
                 break;
             }
-            gamesList.getText(index,1,joinText,255);
+            gamesList.GetText(index,1,joinText,255);
             if (strcmp(joinText,applicationName)) MessageBox(window,
                 "This game seems to be running an incompatible emulator versions.\r\nDesynch MAY occur...",
                 "Warning",0);
-            currentGame=gamesList.itemData(index);
+            currentGame=gamesList.GetParam(index);
             connection->sendMessage(&GameUserJoinedMessage(currentGame));
             showJoinedGamePanel();
             return 0;
@@ -154,17 +154,17 @@ BOOL CALLBACK lobbyDialog(HWND window,UINT message,WPARAM command,LPARAM data)
     case WM_INITDIALOG: {
         onlineUsers=0; lobbyWindow=window; currentGameName[0]=0; localUser=-1; lobbyClosed=0;
         updateCaption();
-        usersList.window=GetDlgItem(window,1011);
-        ListView_SetExtendedListViewStyle(usersList.window,0x820);
-        gamesList.window=GetDlgItem(window,1008);
-        ListView_SetExtendedListViewStyle(gamesList.window,0x820);
+        usersList.m_hwnd=GetDlgItem(window,1011);
+        ListView_SetExtendedListViewStyle(usersList.m_hwnd,0x820);
+        gamesList.m_hwnd=GetDlgItem(window,1008);
+        ListView_SetExtendedListViewStyle(gamesList.m_hwnd,0x820);
         lobbyInput=GetDlgItem(window,1005); serverChat=GetDlgItem(window,1006);
-        usersList.addColumn("Nick",30); usersList.addColumn("Ping",25);
-        usersList.addColumn("Connection",30); usersList.addColumn("Status",15);
-        usersList.sortColumn=1; usersList.numericSort=1; usersList.sortDirection=1;
-        gamesList.addColumn("Game",40); gamesList.addColumn("Version",20);
-        gamesList.addColumn("Owner",20); gamesList.addColumn("Status",10); gamesList.addColumn("# Users",10);
-        gamesList.sortColumn=3; gamesList.numericSort=0; gamesList.sortDirection=-1;
+        usersList.AddCol("Nick",30); usersList.AddCol("Ping",25);
+        usersList.AddCol("Connection",30); usersList.AddCol("Status",15);
+        usersList.m_sort_col=1; usersList.m_sort_type=1; usersList.m_sort_dir=1;
+        gamesList.AddCol("Game",40); gamesList.AddCol("Version",20);
+        gamesList.AddCol("Owner",20); gamesList.AddCol("Status",10); gamesList.AddCol("# Users",10);
+        gamesList.m_sort_col=3; gamesList.m_sort_type=0; gamesList.m_sort_dir=-1;
         lastPacketTime=GetTickCount();
         MENUITEMINFO item={sizeof(MENUITEMINFO)};
         gameMenu=CreatePopupMenu();
@@ -376,20 +376,20 @@ void dispatchMessage(Message *packet)
 void addUser(char *name,int ping,int status,int id,int connection)
 {
     char text[512];
-    int item=usersList.insert(0,name,id);
+    int item=usersList.InsertItem(0,name,id);
     wsprintf(text,"%i ms",ping);
-    usersList.setText(item,1,text);
-    usersList.setText(item,2,connectionTypes[connection-1]);
-    usersList.setText(item,3,status==1?"Idle":"Playing");
-    usersList.sort();
+    usersList.SetItemText(item,1,text);
+    usersList.SetItemText(item,2,connectionTypes[connection-1]);
+    usersList.SetItemText(item,3,status==1?"Idle":"Playing");
+    usersList.Resort();
     onlineUsers++;
 }
 
 void removeUser(int id)
 {
     int item;
-    while ((item=usersList.findData(id))!=-1) {
-        ListView_DeleteItem(usersList.window,item);
+    while ((item=usersList.FindItemByParam(id))!=-1) {
+        ListView_DeleteItem(usersList.m_hwnd,item);
         onlineUsers--;
     }
 }
@@ -397,42 +397,42 @@ void removeUser(int id)
 void addGameUser(char *name,int ping,int id,int connection)
 {
     char text[256];
-    int item=playersList.insert(0,name,id);
+    int item=playersList.InsertItem(0,name,id);
     wsprintf(text,"%i ms",ping);
-    playersList.setText(item,1,text);
-    playersList.setText(item,2,connectionTypes[connection-1]);
+    playersList.SetItemText(item,1,text);
+    playersList.SetItemText(item,2,connectionTypes[connection-1]);
 }
 
 void removeGameUser(int id)
 {
     int item;
-    while ((item=playersList.findData(id))!=-1) ListView_DeleteItem(playersList.window,item);
+    while ((item=playersList.FindItemByParam(id))!=-1) ListView_DeleteItem(playersList.m_hwnd,item);
 }
 
 void updateGame(int id,int status,int users,int maximum)
 {
     char text[32];
-    int item=gamesList.findData(id);
+    int item=gamesList.FindItemByParam(id);
     if (item!=-1) {
-        gamesList.setText(item,3,status==0?"Waiting":"Playing");
+        gamesList.SetItemText(item,3,status==0?"Waiting":"Playing");
         wsprintf(text,"%i/%i",users,maximum);
-        gamesList.setText(item,4,text);
-        gamesList.sort();
+        gamesList.SetItemText(item,4,text);
+        gamesList.Resort();
     }
 }
 
 void addGame(char *name,int id,char *application,char *owner,int users,int maximum,int status)
 {
-    int item=gamesList.insert(0,name,id);
-    gamesList.setText(item,1,application);
-    gamesList.setText(item,2,owner);
+    int item=gamesList.InsertItem(0,name,id);
+    gamesList.SetItemText(item,1,application);
+    gamesList.SetItemText(item,2,owner);
     updateGame(id,status,users,maximum);
 }
 
 void removeGame(int id)
 {
-    for (int i=0;i<ListView_GetItemCount(gamesList.window);i++) {
-        if (gamesList.itemData(i)==id) { ListView_DeleteItem(gamesList.window,i); i--; }
+    for (int i=0;i<ListView_GetItemCount(gamesList.m_hwnd);i++) {
+        if (gamesList.GetParam(i)==id) { ListView_DeleteItem(gamesList.m_hwnd,i); i--; }
     }
 }
 
@@ -460,11 +460,11 @@ BOOL CALLBACK hostGameDialog(HWND window,UINT message,WPARAM command,LPARAM data
 {
     switch (message) {
     case WM_INITDIALOG:
-        playersList.window=GetDlgItem(window,1019);
-        ListView_SetExtendedListViewStyle(playersList.window,0x820);
-        playersList.addColumn("Nick",55);
-        playersList.addColumn("Ping",20);
-        playersList.addColumn("Connection",25);
+        playersList.m_hwnd=GetDlgItem(window,1019);
+        ListView_SetExtendedListViewStyle(playersList.m_hwnd,0x820);
+        playersList.AddCol("Nick",55);
+        playersList.AddCol("Ping",20);
+        playersList.AddCol("Connection",25);
         gameChat=GetDlgItem(window,1006);
         gameInput=GetDlgItem(window,1005);
         SetWindowText(GetDlgItem(window,1014),currentGameName);
@@ -486,9 +486,9 @@ BOOL CALLBACK hostGameDialog(HWND window,UINT message,WPARAM command,LPARAM data
             }
             break;
         case 1020: {
-            int index=ListView_GetSelectionMark(playersList.window);
+            int index=ListView_GetSelectionMark(playersList.m_hwnd);
             if (index!=-1) {
-                int id=playersList.itemData(index);
+                int id=playersList.GetParam(index);
                 if (id==localUser) MessageBox(window,"You can't kick yourself!","Error",0);
                 else connection->sendMessage(&KickMessage(id));
             }
@@ -520,11 +520,11 @@ BOOL CALLBACK joinedGameDialog(HWND window,UINT message,WPARAM command,LPARAM da
 {
     switch (message) {
     case WM_INITDIALOG:
-        playersList.window=GetDlgItem(window,1019);
-        ListView_SetExtendedListViewStyle(playersList.window,0x820);
-        playersList.addColumn("Nick",55);
-        playersList.addColumn("Ping",20);
-        playersList.addColumn("Connection",25);
+        playersList.m_hwnd=GetDlgItem(window,1019);
+        ListView_SetExtendedListViewStyle(playersList.m_hwnd,0x820);
+        playersList.AddCol("Nick",55);
+        playersList.AddCol("Ping",20);
+        playersList.AddCol("Connection",25);
         gameChat=GetDlgItem(window,1006);
         gameInput=GetDlgItem(window,1005);
         SetWindowText(GetDlgItem(window,1014),currentGameName);
@@ -556,13 +556,13 @@ BOOL CALLBACK joinedGameDialog(HWND window,UINT message,WPARAM command,LPARAM da
 void showGameContextMenu(int x,int y)
 {
     if (moreInfosCallback) {
-        RECT bounds; GetWindowRect(gamesList.window,&bounds);
+        RECT bounds; GetWindowRect(gamesList.m_hwnd,&bounds);
         int relativeY=y-bounds.top;
         int relativeX=x-bounds.left;
-        int count=ListView_GetItemCount(gamesList.window);
+        int count=ListView_GetItemCount(gamesList.m_hwnd);
         int found=-1;
         for (int i=0;i<count;i++) {
-            RECT item; ListView_GetItemRect(gamesList.window,i,&item,0);
+            RECT item; ListView_GetItemRect(gamesList.m_hwnd,i,&item,0);
             if (item.left<=relativeX && item.right>=relativeX &&
                 item.top<=relativeY && item.bottom>=relativeY) {
                 found=i;
@@ -572,9 +572,9 @@ void showGameContextMenu(int x,int y)
         if (found!=-1) {
             HMENU menu=CreatePopupMenu();
             AppendMenu(menu,0,1,"More infos about this game...");
-            switch (TrackPopupMenu(menu,TPM_RETURNCMD,x,y,0,gamesList.window,0)) {
+            switch (TrackPopupMenu(menu,TPM_RETURNCMD,x,y,0,gamesList.m_hwnd,0)) {
             case 1: {
-                char name[256]; ListView_GetItemText(gamesList.window,found,0,name,255);
+                char name[256]; ListView_GetItemText(gamesList.m_hwnd,found,0,name,255);
                 moreInfosCallback(name);
                 break;
             }
@@ -750,22 +750,22 @@ void closeSyncDialog()
 
 inline int ByteQueueList::find(void *data,int length) {
         char bytes[1024];
-        for (int index=0;index<size();index++) {
-            ((ByteQueue *)get(index))->peek(bytes,length);
+        for (int index=0;index<m_size;index++) {
+            ((ByteQueue *)Get(index))->peek(bytes,length);
             if (!memcmp(bytes,data,length)) return index;
         }
         return -1;
     }
 
-inline int ByteQueueList::dataSize(int index) { if (index>=size()) return 0; return ((ByteQueue *)get(index))->used; }
+inline int ByteQueueList::dataSize(int index) { if (index>=m_size) return 0; return ((ByteQueue *)Get(index))->used; }
 
-inline char *ByteQueueList::dataAt(int index) { if (index>=size()) return 0; return ((ByteQueue *)get(index))->data; }
+inline char *ByteQueueList::dataAt(int index) { if (index>=m_size) return 0; return ((ByteQueue *)Get(index))->data; }
 
 inline void ByteQueueList::addData(void *data,int length) {
-        if (size()==256) { delete (ByteQueue *)get(0); remove(0); }
+        if (m_size==256) { delete (ByteQueue *)Get(0); Del(0); }
         ByteQueue *queue=new ByteQueue;
         queue->append(data,length);
-        add(queue);
+        Add(queue);
     }
 
 ByteQueue::ByteQueue() { used=0; data=0; capacity=0; }
@@ -797,7 +797,7 @@ inline void ByteQueue::peek(void *bytes,int length) {
 
 ByteQueueList::ByteQueueList() {}
 
-inline void ByteQueueList::clear() { while (size()>0) { delete (ByteQueue *)get(0); remove(0); } }
+inline void ByteQueueList::clear() { while (m_size>0) { delete (ByteQueue *)Get(0); Del(0); } }
 
 ByteQueueList::~ByteQueueList() { clear(); }
 

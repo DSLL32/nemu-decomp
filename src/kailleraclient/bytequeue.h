@@ -3,7 +3,7 @@
 #define KAILLERA_BYTEQUEUE_H
 #include <stdlib.h>
 #include <string.h>
-#include "ptrlist.h"
+#include "itemlist.h"
 
 class ByteQueue {
 public:
@@ -16,7 +16,7 @@ public:
     int used,capacity;
 };
 
-class ByteQueueList : public PtrList {
+class ByteQueueList : public C_ItemList<void> {
 public:
     ByteQueueList();
     inline void clear();

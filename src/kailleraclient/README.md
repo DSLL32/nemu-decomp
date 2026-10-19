@@ -45,6 +45,15 @@ application directory and most private C++ names are inferred. The publisher's
 Linux server 0.86 retains RTTI names `UDPCom` and `KLRCom`, which identify the
 shared transport classes; those original names are retained here.
 
+The recovered Nullsoft `C_ItemList<T>` and `W_ListView` helpers come from the
+archived WASTE 1.1 source release. `itemlist.h` replaces the earlier inferred
+pointer list; `listview.cpp` retains the Kaillera-specific column width and
+numeric sorting behavior. The original notices and license are preserved.
+Source hashes, unchanged native matches, and version differences are recorded in
+[`analysis/kaillera-shared-helper-sources.md`](../../analysis/kaillera-shared-helper-sources.md).
+The later WASTE configuration and shared-buffer implementations differ from the
+Kaillera target and are not substituted here.
+
 `config.cpp` reconstructs cached INI reads/writes. `message.cpp` reconstructs
 message serialization. `udpconnection.cpp` restores socket multiplexing, peer
 lookup and transport. `reliableconnection.cpp` and `packetcache.h` restore the
