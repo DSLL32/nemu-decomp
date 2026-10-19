@@ -7,6 +7,9 @@
 #include "FrontendIni.h"
 #include <stdio.h>
 #include <string.h>
+#ifdef NEMU_STATIC
+#include "../static/StaticRuntime.h"
+#endif
 
 char PluginDirectory[MAX_PATH];
 PluginDescriptor PluginCatalog[40];
@@ -35,6 +38,10 @@ void (__cdecl *DCTList)(unsigned int);
 
 bool LoadPlugin(char *filename)
 {
+#ifdef NEMU_STATIC
+    if (PluginModuleCount >= 30 || PluginCount >= 40 || ToolCount >= 40)
+        return false;
+#endif
     char path[MAX_PATH];
     char error[200];
     strcpy(path, PluginDirectory);
@@ -117,19 +124,37 @@ bool LoadPlugins()
     WIN32_FIND_DATAA data;
     UnloadPlugins();
     PluginModuleCount = 0;
+#ifdef NEMU_STATIC
+    PluginCount = 0;
+#endif
     strcpy(PluginDirectory, ApplicationDirectory);
     strcat(PluginDirectory, "Plugin\\");
+#ifdef NEMU_STATIC
+    // Register bundled implementations even when no Plugin directory exists.
+    for (unsigned int i = 0; NemuStaticPluginName(i); ++i)
+        if (!LoadPlugin((char *)NemuStaticPluginName(i))) return false;
+#endif
     strcpy(search, PluginDirectory);
     strcat(search, "*.dll");
     HANDLE handle = FindFirstFileA(search, &data);
     if (handle != INVALID_HANDLE_VALUE) {
         do {
+#ifdef NEMU_STATIC
+            bool bundled = false;
+            for (unsigned int i = 0; NemuStaticPluginName(i); ++i)
+                if (!lstrcmpiA(data.cFileName, NemuStaticPluginName(i))) bundled = true;
+            if (bundled) continue;
+#endif
             LoadPlugin(data.cFileName);
         } while (FindNextFileA(handle, &data));
         FindClose(handle);
         return true;
     }
+#ifdef NEMU_STATIC
+    return PluginModuleCount != 0;
+#else
     return false;
+#endif
 }
 
 void UnloadPlugins()

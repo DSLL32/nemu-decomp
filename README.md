@@ -27,3 +27,11 @@ Wine. All DLLs and `nemu64.exe` are built from source. Only `config.ini`,
 The ordinary Makefile build does not guarantee byte matching; use the separate
 `scripts/build_*.py` reconstruction scripts described in each component's README
 for matching builds and verification.
+
+`make static` builds the experimental `bin/nemu64-static.exe` with all nine
+bundled DLLs linked into the executable. It runs without the loose DLLs or a
+`Plugin/` directory, and still scans `Plugin/` for additional dynamic plugins.
+Bundled filenames are skipped during that scan to prevent duplicate registration.
+The four configuration/data files are still needed. See
+[the static build notes](src/static/README.md) for the linking approach,
+validation command, and current limitations.

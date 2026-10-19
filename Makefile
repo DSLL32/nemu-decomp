@@ -440,6 +440,8 @@ $(eval $(call delphi_project,input,d6u2,Input,-DNEMU_FIX_HID_ENUMERATION))
 $(eval $(call delphi_project,profile,d6rtm,profile))
 $(eval $(call delphi_project,lemcombinedebugger,d6u1,LemCombineDebugger))
 
+include $(ROOT)/scripts/static.mk
+
 
 clean:
 	rm -rf "$(OUT)" "$(WORK)"

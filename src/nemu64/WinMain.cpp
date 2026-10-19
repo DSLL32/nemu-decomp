@@ -17,6 +17,9 @@
 #include <stdio.h>
 #include <string.h>
 #include "EasterText.h"
+#ifdef NEMU_STATIC
+#include "../static/StaticRuntime.h"
+#endif
 
 HWND MainWindow;
 HINSTANCE ApplicationInstance;
@@ -561,7 +564,11 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previousInstance, LPSTR command
         strcat(ApplicationDirectory, "\\");
     InitializeIniPaths();
     RDRAMSize = 0;
+#ifdef NEMU_STATIC
+    RDRAM = (unsigned char*)NemuStaticRdram();
+#else
     RDRAM = (unsigned char*)VirtualAlloc(NULL, 0x20000000, MEM_RESERVE, PAGE_READWRITE);
+#endif
     if (!RDRAM)
         MessageBoxA(MainWindow, "Couldn't reserve rdram-memory", "Error", MB_ICONSTOP);
     ReloadConfiguration();

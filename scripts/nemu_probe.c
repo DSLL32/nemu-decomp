@@ -246,6 +246,13 @@ int main(int argc, char **argv) {
     snapshot(settings, "settings", 0);
     require(PostMessageA(settings, WM_CLOSE, 0, 0), "cancel Settings normally");
     await_closed(settings);
+#ifdef NEMU_STATIC_PROBE
+    require(PostMessageA(main_window, WM_COMMAND, 32778, 0), "open built-in input settings");
+    settings = await_window("TFormSettings", "Input settings");
+    snapshot(settings, "input-settings", 0);
+    require(PostMessageA(settings, WM_CLOSE, 0, 0), "close input settings normally");
+    await_closed(settings);
+#endif
     message(main_window, WM_NULL, 0, 0);
     snapshot(main_window, "main-after-dialogs", 1);
     require(IsWindowEnabled(main_window), "main window enabled after closing dialogs");
