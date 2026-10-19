@@ -9,5 +9,11 @@
   },
   "target_compression_level": 9,
   "repack_of_unpacked_reference_is_exact": false,
-  "remaining_packer_analysis": "UPX decompression does not preserve every original PE header byte. Repacking the unmodified decompressed reference with -9 leaves a small packed tail/header difference. No restoration is applied."
+  "repack_after_restoring_original_link_header_fields_is_exact": true,
+  "original_link_header_fields": {
+    "SizeOfHeaders": 1024,
+    "IAT_directory_RVA": 45056,
+    "IAT_directory_size": 424
+  },
+  "remaining_packer_analysis": "Unmodified UPX 1.20 -9 reproduces all original packed bytes after restoring only the original SizeOfHeaders and IAT directory fields changed by decompression. See analysis/kaillera-upx.md. The source-built candidate remains nonmatching; no output restoration is applied to it."
 }

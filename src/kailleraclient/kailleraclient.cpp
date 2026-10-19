@@ -15,7 +15,7 @@ char username[32];
 char selectedServerName[256];
 char serverAddress[256];
 int serverPort;
-ReliableConnection *connection;
+KLRCom *connection;
 int localPort;
 int connectionType;
 FARPROC flashWindowEx;

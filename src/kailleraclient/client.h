@@ -14,7 +14,7 @@ extern char username[32];
 extern char selectedServerName[256];
 extern char serverAddress[256];
 extern int serverPort;
-extern ReliableConnection *connection;
+extern KLRCom *connection;
 extern int localPort;
 extern int connectionType;
 extern FARPROC flashWindowEx;

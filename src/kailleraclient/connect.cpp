@@ -7,7 +7,7 @@ static int connectState=-1;
 static HWND connectWindow;
 static HWND statusControl;
 static char *connectAddress;
-static UDPConnection *handshake;
+static UDPCom *handshake;
 static int cancelled;
 
 static int pollConnection();
@@ -71,7 +71,7 @@ static int pollConnection()
             while (*p && *p!=':') p++;
             if (*p!=':') return 0;
             *p++=0;
-            handshake=new UDPConnection;
+            handshake=new UDPCom;
             handshake->bind(0);
             handshake->setPeer(connectAddress,atoi(p));
             char greeting[128];
@@ -80,7 +80,7 @@ static int pollConnection()
         }
         break;
     case 1:
-        UDPConnection::selectSockets(0);
+        UDPCom::selectSockets(0);
         if (!handshake->dataAvailable()) goto notReady;
         break;
     case 2:
@@ -107,7 +107,7 @@ static int pollConnection()
             serverPort=atoi(reply+9);
             if (handshake) delete handshake;
             handshake=0;
-            connection=new ReliableConnection;
+            connection=new KLRCom;
             connection->bind(0);
             connection->setPeer(serverAddress,serverPort);
             {
@@ -123,7 +123,7 @@ static int pollConnection()
                 }
                 if (cancelled) return 0;
                 if (!connection) continue;
-                UDPConnection::selectSockets(0);
+                UDPCom::selectSockets(0);
                 if (connection && connection->dataAvailable()) {
                     Message packet;
                     if (!connection->receiveMessage(&packet,1,0)) {

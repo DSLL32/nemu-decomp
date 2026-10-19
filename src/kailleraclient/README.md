@@ -41,7 +41,9 @@ unchanged as `kailleraclient.h`. Its DLL and import library are not vendored.
 Source URLs, archive hashes and imported-file hashes are in
 `analysis/kaillera-provenance.json`. No original private client implementation
 was found in the publisher downloads or public source searches. The flat
-application directory and private C++ names are inferred.
+application directory and most private C++ names are inferred. The publisher's
+Linux server 0.86 retains RTTI names `UDPCom` and `KLRCom`, which identify the
+shared transport classes; those original names are retained here.
 
 `config.cpp` reconstructs cached INI reads/writes. `message.cpp` reconstructs
 message serialization. `udpconnection.cpp` restores socket multiplexing, peer

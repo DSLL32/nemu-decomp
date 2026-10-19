@@ -29,7 +29,7 @@ int pingRow;
 int receivedBytes,serverCount;
 static JNL_HTTPGet *serverRequest;
 char *serverResponse;
-UDPConnection *pingConnection;
+UDPCom *pingConnection;
 int pinging;
 
 static BOOL CALLBACK browserDialog(HWND,UINT,WPARAM,LPARAM);
@@ -276,7 +276,7 @@ static void updateServerList()
                 while (*p && *p!=':') p++;
                 if (*p==':') {
                     *p++=0;
-                    pingConnection=new UDPConnection;
+                    pingConnection=new UDPCom;
                     pingConnection->bind(0);
                     pingConnection->setPeer(address,atoi(p));
                     pingConnection->send("PING",5);
@@ -289,7 +289,7 @@ static void updateServerList()
         }
         break;
     case 4:
-        UDPConnection::selectSockets(0);
+        UDPCom::selectSockets(0);
         if (pingConnection->dataAvailable()) {
             wsprintf(address,"%i ms",GetTickCount()-pingStarted);
             serverList.setText(pingRow,2,address);

@@ -4,11 +4,11 @@
 #include <windows.h>
 #include "ptrlist.h"
 
-class UDPConnection {
+class UDPCom {
 public:
-    UDPConnection();
-    virtual ~UDPConnection();
-    virtual int shareSocket(UDPConnection *other);
+    UDPCom();
+    virtual ~UDPCom();
+    virtual int shareSocket(UDPCom *other);
     virtual int bind(int port);
     virtual int getPort();
     virtual int setPeer(char *hostname,int port);

@@ -2,25 +2,25 @@
 #include <stdlib.h>
 #include <string.h>
 
-ReliableConnection::ReliableConnection()
+KLRCom::KLRCom()
 {
     sendNumber=receiveNumber=0;
     redundancy=3;
 }
 
-ReliableConnection::~ReliableConnection()
+KLRCom::~KLRCom()
 {
 
 }
 
-void ReliableConnection::sendMessage(Message *message)
+void KLRCom::sendMessage(Message *message)
 {
     char data[32768];
     int length=message->pack(data,32767);
     send(data,length);
 }
 
-int ReliableConnection::send(char *data,int length)
+int KLRCom::send(char *data,int length)
 {
     unsigned short number=sendNumber++;
     outgoing.add(number,data,length);
@@ -28,7 +28,7 @@ int ReliableConnection::send(char *data,int length)
     return 0;
 }
 
-int ReliableConnection::resend(int count)
+int KLRCom::resend(int count)
 {
     char data[32768];
     int offset=1;
@@ -37,11 +37,11 @@ int ReliableConnection::resend(int count)
     for (int i=0;i<messages;i++) {
         offset+=outgoing.pack(outgoing.count-i-1,data+offset);
     }
-    UDPConnection::send(data,offset);
+    UDPCom::send(data,offset);
     return 0;
 }
 
-int ReliableConnection::receiveMessage(Message *message,char peek,sockaddr_in *peer)
+int KLRCom::receiveMessage(Message *message,char peek,sockaddr_in *peer)
 {
     char data[32768];
     int length=32768;
@@ -50,7 +50,7 @@ int ReliableConnection::receiveMessage(Message *message,char peek,sockaddr_in *p
     return 0;
 }
 
-int ReliableConnection::receive(char *data,int *length,char peek,sockaddr_in *peer)
+int KLRCom::receive(char *data,int *length,char peek,sockaddr_in *peer)
 {
     PacketCache *cache=&incoming;
     int size;
@@ -59,7 +59,7 @@ int ReliableConnection::receive(char *data,int *length,char peek,sockaddr_in *pe
         char packet[32768];
         memset(packet,0,sizeof(packet));
         size=32767;
-        if (UDPConnection::receive(packet,&size,0,peer)) return 1;
+        if (UDPCom::receive(packet,&size,0,peer)) return 1;
         if (size<2) return 1;
         int count=*(unsigned int *)packet&255;
         char *p=packet+1;
@@ -78,10 +78,10 @@ found:
     return 0;
 }
 
-int ReliableConnection::dataAvailable()
+int KLRCom::dataAvailable()
 {
     if (incoming.count) return 1;
-    return UDPConnection::dataAvailable();
+    return UDPCom::dataAvailable();
 }
 
-void ReliableConnection::forceResend(int count) { resend(count); }
+void KLRCom::forceResend(int count) { resend(count); }

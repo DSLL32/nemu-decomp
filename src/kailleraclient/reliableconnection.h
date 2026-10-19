@@ -5,10 +5,10 @@
 #include "message.h"
 #include "packetcache.h"
 
-class ReliableConnection : public UDPConnection {
+class KLRCom : public UDPCom {
 public:
-    ReliableConnection();
-    virtual ~ReliableConnection();
+    KLRCom();
+    virtual ~KLRCom();
     void sendMessage(Message *message);
     virtual int send(char *data,int length);
     int resend(int count);

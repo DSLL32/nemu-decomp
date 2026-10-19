@@ -204,7 +204,7 @@ void updateCaption()
 
 void pollLobby()
 {
-    UDPConnection::selectSockets(0);
+    UDPCom::selectSockets(0);
     if (connection->dataAvailable()) {
         Message packet;
         if (connection->receiveMessage(&packet)) return;
@@ -611,7 +611,7 @@ int modifyPlayValues(void *values,int size)
         DWORD start=GetTickCount(); int ready=0; int retries=0;
         while (1) {
             if (syncCancelled) break;
-            UDPConnection::selectSockets(0);
+            UDPCom::selectSockets(0);
             if (connection->dataAvailable()) {
                 {
                     Message packet;
@@ -662,7 +662,7 @@ int modifyPlayValues(void *values,int size)
                 Message packet;
                 int retries=0; DWORD start=GetTickCount();
                 while (1) {
-                    UDPConnection::selectSockets(1);
+                    UDPCom::selectSockets(1);
                     if (connection->dataAvailable() && !connection->receiveMessage(&packet)) break;
                     if (GetTickCount()>start+2000) {
                         connection->forceResend(syncDelay+4); start=GetTickCount();

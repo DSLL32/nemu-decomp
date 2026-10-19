@@ -1,7 +1,7 @@
 #include "udpconnection.h"
 #include "ptrlist.h"
 
-UDPConnection::UDPConnection()
+UDPCom::UDPCom()
 {
     socketHandle=0;
     connections.add(this);
@@ -12,7 +12,7 @@ UDPConnection::UDPConnection()
     }
 }
 
-UDPConnection::~UDPConnection()
+UDPCom::~UDPCom()
 {
     if (socketHandle) {
         shutdown(socketHandle,2);
@@ -22,7 +22,7 @@ UDPConnection::~UDPConnection()
             maximumSocket=0;
             for (int i=0;i<connections.size();i++) {
                 if (connections.get(i)!=this) {
-                    SOCKET handle=((UDPConnection *)connections.get(i))->socketHandle;
+                    SOCKET handle=((UDPCom *)connections.get(i))->socketHandle;
                     if (handle>maximumSocket) {
                         maximumSocket=handle;
                     }
@@ -35,7 +35,7 @@ UDPConnection::~UDPConnection()
     }
 }
 
-int UDPConnection::bind(int value)
+int UDPCom::bind(int value)
 {
     port=value;
     sockaddr_in local;
@@ -59,16 +59,16 @@ int UDPConnection::bind(int value)
     return 0;
 }
 
-int UDPConnection::shareSocket(UDPConnection *other)
+int UDPCom::shareSocket(UDPCom *other)
 {
     port=other->port;
     socketHandle=other->socketHandle;
     return 0;
 }
 
-int UDPConnection::getPort() { return port; }
+int UDPCom::getPort() { return port; }
 
-int UDPConnection::setPeer(char *hostname,int value)
+int UDPCom::setPeer(char *hostname,int value)
 {
     memset(&peer,0,sizeof(peer));
     peer.sin_family=AF_INET;
@@ -83,15 +83,15 @@ int UDPConnection::setPeer(char *hostname,int value)
     return 0;
 }
 
-int UDPConnection::setPeer(sockaddr_in *address) { peer=*address; return 0; }
-int UDPConnection::setPeerPort(int value) { peer.sin_port=htons(value); return !peer.sin_port; }
+int UDPCom::setPeer(sockaddr_in *address) { peer=*address; return 0; }
+int UDPCom::setPeerPort(int value) { peer.sin_port=htons(value); return !peer.sin_port; }
 
-int UDPConnection::send(char *data,int length)
+int UDPCom::send(char *data,int length)
 {
     return sendto(socketHandle,data,length,0,(sockaddr *)&peer,sizeof(peer))==SOCKET_ERROR;
 }
 
-int UDPConnection::receive(char *data,int *length,char peek,sockaddr_in *address)
+int UDPCom::receive(char *data,int *length,char peek,sockaddr_in *address)
 {
     sockaddr_in sender;
     int addressLength=sizeof(sender);
@@ -103,14 +103,14 @@ int UDPConnection::receive(char *data,int *length,char peek,sockaddr_in *address
     return 0;
 }
 
-int UDPConnection::dataAvailable() { return readable; }
-void UDPConnection::sendEmpty()
+int UDPCom::dataAvailable() { return readable; }
+void UDPCom::sendEmpty()
 {
     char data[16];
     sendto(socketHandle,data,0,0,(sockaddr *)&peer,sizeof(peer));
 }
 
-int UDPConnection::selectSockets(int seconds)
+int UDPCom::selectSockets(int seconds)
 {
     int descriptorCount=maximumSocket+1;
     selected=sockets;
@@ -118,13 +118,13 @@ int UDPConnection::selectSockets(int seconds)
     if (!::select(descriptorCount,&selected,0,0,&timeout)) return 0;
     int count=connections.size();
     for (int i=0;i<count;i++) {
-        UDPConnection *connection=(UDPConnection *)connections.get(i);
+        UDPCom *connection=(UDPCom *)connections.get(i);
         if (FD_ISSET(connection->socketHandle,&selected)) connection->readable=1;
     }
     return 1;
 }
 
-PtrList UDPConnection::connections;
-fd_set UDPConnection::sockets;
-fd_set UDPConnection::selected;
-SOCKET UDPConnection::maximumSocket=0;
+PtrList UDPCom::connections;
+fd_set UDPCom::sockets;
+fd_set UDPCom::selected;
+SOCKET UDPCom::maximumSocket=0;
