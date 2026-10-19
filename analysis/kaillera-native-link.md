@@ -39,16 +39,28 @@ except where publisher binaries or recovered source establish them.
 
 `build_kaillera_layout_inputs.py` supplies this layout to LINK by changing only
 COFF symbol values, uninitialized section allocation sizes, and their matching
-section auxiliary records. It rejects missing or additional declarations,
-changed source allocation sizes, overlapping declarations, initialized data,
-executable allocations, and unexpected auxiliary records. All initialized and
+section auxiliary records. It records and guards all 71 source symbol offsets, COFF types and storage
+classes, together with source allocation sizes and section attributes. It rejects
+missing, additional or duplicate declarations, changed source offsets, overlapping
+source or destination extents, initialized data, executable allocations, duplicate
+input basenames, invalid section identifiers, and unexpected auxiliary records.
+The extents are the reconstructed declarations' reserved sizes; COFF does not
+encode full C++ array or class type sizes. Changes within alignment padding still
+require the independent source/native-code and complete DLL checks. All initialized and
 executable section contents and every relocation record remain unchanged.
 The build consumes the declarative layout, without reading target bytes during
 compilation or linking. The ordinary Makefile build uses the source directly.
 
 The resulting native image reproduces all 59 public addresses in these blocks
 and all 525 checked absolute BSS operands, including private globals and
-member offsets. The `.data` virtual size becomes the target's 3,744 bytes.
+member offsets. These 525 observations are also recorded individually by count
+in the layout manifest; the earlier 517-observation inventory excluded the eight
+operands in socket polling before that function matched. The `.data` virtual size
+becomes the target's 3,744 bytes.
 Differential public-API smoke testing also passed after applying the layout.
 These checks establish the data-address reconstruction, not complete DLL
 equality or the live multiplayer path.
+
+`python3 scripts/test_kaillera_layout_inputs.py` exercises the metadata-only
+mutation boundary and negative guards using synthetic COFF input, without a
+compiler, Wine, or reference-program bytes.
