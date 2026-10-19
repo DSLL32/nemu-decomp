@@ -59,11 +59,20 @@ message serialization. `udpconnection.cpp` restores socket multiplexing, peer
 lookup and transport. `reliableconnection.cpp` and `packetcache.h` restore the
 two embedded message caches and resend/receive algorithms. `connect.cpp`
 restores server negotiation and login. `kailleraclient.cpp` restores DllMain and
-the eight public wrappers. The remaining instruction differences are in the configuration constructor, socket
-polling, and game-input loop.
+the eight public wrappers. The remaining instruction differences are in the configuration constructor and
+game-input loop.
 `session.cpp` and `serverbrowser.cpp` restore the
 partyline, packet dispatcher, game panels, input synchronization and server
 selection. `listview.cpp` and `resizer.cpp` restore shared window helpers.
+
+The queue hierarchy in `bytequeue.h` is inferred. The two global queues have
+32-byte initializers that write their three fields directly. Cached allocations
+call a separate 16-byte constructor, while append and peek share the same
+implementation. An inline base constructor and an out-of-line cache-entry
+constructor reproduce these distinct patterns without duplicating buffer code.
+The original private names and exact class hierarchy have not been recovered.
+The remaining input-loop instruction difference is a temporary register choice
+for the input pointer; all other session instruction signatures match.
 
 All nine dialogs are editable RC source. Compiling `kaillera.rc` with the
 original VC6 resource compiler reproduces every resource payload, including the

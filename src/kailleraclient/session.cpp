@@ -763,12 +763,12 @@ inline char *ByteQueueList::dataAt(int index) { if (index>=m_size) return 0; ret
 
 inline void ByteQueueList::addData(void *data,int length) {
         if (m_size==256) { delete Get(0); Del(0); }
-        ByteQueue *queue=new ByteQueue;
+        CachedByteQueue *queue=new CachedByteQueue;
         queue->append(data,length);
         Add(queue);
     }
 
-ByteQueue::ByteQueue() { used=0; data=0; capacity=0; }
+CachedByteQueue::CachedByteQueue() {}
 
 inline void ByteQueue::append(void *bytes,int length) {
         if (length<=0) return;

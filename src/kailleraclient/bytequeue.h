@@ -7,7 +7,7 @@
 
 class ByteQueue {
 public:
-    ByteQueue();
+    ByteQueue() { used=0; data=0; capacity=0; }
     inline ~ByteQueue();
     inline void append(void *bytes,int length);
     inline void peek(void *bytes,int length);
@@ -16,7 +16,14 @@ public:
     int used,capacity;
 };
 
-class ByteQueueList : public C_ItemList<ByteQueue> {
+// Cached entries have an out-of-line constructor in the original code.
+// The private type names and this hierarchy are inferred from native emission.
+class CachedByteQueue : public ByteQueue {
+public:
+    CachedByteQueue();
+};
+
+class ByteQueueList : public C_ItemList<CachedByteQueue> {
 public:
     ByteQueueList();
     inline void clear();
