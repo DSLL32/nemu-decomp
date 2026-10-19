@@ -252,6 +252,16 @@ int main(int argc, char **argv) {
     snapshot(settings, "input-settings", 0);
     require(PostMessageA(settings, WM_CLOSE, 0, 0), "close input settings normally");
     await_closed(settings);
+    require(PostMessageA(main_window, WM_COMMAND, 32776, 0), "open built-in audio settings");
+    settings = await_window("#32770", "      Audio Configuration");
+    snapshot(settings, "audio-settings", 0);
+    require(PostMessageA(settings, WM_CLOSE, 0, 0), "close audio settings normally");
+    await_closed(settings);
+    require(PostMessageA(main_window, WM_COMMAND, 32773, 0), "open built-in video settings");
+    settings = await_window("#32770", "Lemmy's video debugger");
+    snapshot(settings, "video-settings", 0);
+    require(PostMessageA(settings, WM_CLOSE, 0, 0), "close video settings normally");
+    await_closed(settings);
 #endif
     message(main_window, WM_NULL, 0, 0);
     snapshot(main_window, "main-after-dialogs", 1);

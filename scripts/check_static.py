@@ -15,7 +15,9 @@ import sys
 import tempfile
 
 from pe_fingerprints import PE32
-from link_static import COMPONENTS
+from build_static import COMPONENTS
+from static_objects import Glue
+from check_gs import seed_ini
 
 ROOT = Path(__file__).resolve().parents[1]
 EXTERNAL = r'''
@@ -40,7 +42,7 @@ BOOL WINAPI DllMain(HINSTANCE instance, DWORD reason, LPVOID reserved) {
 '''
 
 
-def worker(scratch, executable, report):
+def worker(scratch, executable, report, components=False):
     env = dict(os.environ, WINEPREFIX=str(scratch / 'wine'), WINEARCH='win32',
                WINEDEBUG='-all', WINEDLLOVERRIDES='winemenubuilder.exe=d',
                LIBGL_ALWAYS_SOFTWARE='1')
@@ -98,6 +100,8 @@ def worker(scratch, executable, report):
                 str(scratch / 'nemu_probe.exe'), 'nemu64-static.exe'], cwd=fixture)
             assert 'Probe completed' in output
             assert 'input-settings' in output
+            assert 'audio-settings' in output
+            assert 'video-settings' in output
             assert 'Show Profiler...' in output
             assert 'Show Combine modes...' in output
             if mode == 'external-and-duplicates':
@@ -108,6 +112,47 @@ def worker(scratch, executable, report):
                 assert 'External static build probe' not in output
             results['scenarios'].append(dict(name=mode, passed=True))
             print(f'{mode}: passed', flush=True)
+        if components:
+            # Link the existing GameShark behavioral fixture against the same
+            # static archive/resources, exercising MFC without needing a ROM.
+            fixture = scratch / 'gameshark'
+            fixture.mkdir()
+            seed_ini(fixture / 'probe.ini')
+            source = (ROOT / 'scripts/gs_probe.c').read_text()
+            source = source.replace('int main(int argc, char **argv) {',
+                'extern unsigned char __cdecl NemuStaticInitialize(HINSTANCE);\n'
+                'extern void __cdecl NemuStaticShutdown(void);\n'
+                'extern void __cdecl StaticGSInitialize(char *, char *, char *);\n'
+                'extern void __cdecl StaticGSConfigure(void), StaticGSUpdate(void);\n'
+                'int main(int argc, char **argv) {')
+            start = source.index('    library = LoadLibraryA(argv[1]);')
+            end = source.index('    puts("Exports resolved");', start)
+            source = source[:start] + (
+                '    require(NemuStaticInitialize(GetModuleHandleA(NULL)), "static runtime initialization");\n'
+                '    initialize = StaticGSInitialize; configure = StaticGSConfigure; update = StaticGSUpdate;\n') + source[end:]
+            source = source.replace('require(FreeLibrary(library), "DLL unload");', 'NemuStaticShutdown();')
+            (fixture / 'gs_probe.c').write_text(source)
+            glue = Glue()
+            for name, target in [('GSInitialize', '?GSInitialize@@YAXPAD00@Z'),
+                                 ('GSConfigure', '?GSConfigure@@YAXXZ'), ('GSUpdate', '?GSUpdate@@YAXXZ')]:
+                glue.jump('_Static' + name, target)
+            (fixture / 'glue.obj').write_bytes(glue.emit_coff())
+            run('compile-static-gs', [sys.executable, str(ROOT / 'scripts/run_toolchain.py'),
+                'vc7', 'cl', '/nologo', '/c', '/MT', 'gs_probe.c'], cwd=fixture)
+            options = []
+            for line in (ROOT / 'obj/static/link.rsp').read_text().splitlines():
+                if line.upper().startswith(('/OUT:', '/MAP:', '/SUBSYSTEM:', '/LTCG')): continue
+                if line.lower().endswith('.obj"'): continue
+                options.append(line)
+            options += ['/SUBSYSTEM:CONSOLE', '/OUT:gs_probe.exe', 'gs_probe.obj', 'glue.obj']
+            (fixture / 'link.rsp').write_text('\n'.join(options) + '\n')
+            run('link-static-gs', [sys.executable, str(ROOT / 'scripts/run_toolchain.py'),
+                'vc7', 'link', '@link.rsp'], cwd=fixture)
+            output = run('static-gameshark', ['setarch', 'i386', '-R', 'wine', 'gs_probe.exe', 'static'], cwd=fixture)
+            assert 'Probe completed' in output
+            assert 'RAM=all-code-types' in output
+            results['scenarios'].append(dict(name='static-gameshark-archive', passed=True))
+            print('static-gameshark-archive: passed', flush=True)
         results['passed'] = True
     except Exception as error:
         results['error'] = str(error)
@@ -116,7 +161,7 @@ def worker(scratch, executable, report):
         subprocess.run(['wineserver', '-k'], env=env, timeout=15, check=False)
         results['limitations'] = [
             'Wine/Xvfb only; not yet checked on native Windows.',
-            'Covers startup, built-in menus, About/Disclaimer, Delphi Settings/input dialogs, '
+            'Covers startup, built-in menus, About/Disclaimer, Delphi Settings/input and native audio/video dialogs, '
             'external tool initialization/unload, and normal process shutdown.',
             'No ROM execution, audio output, netplay session, or rendering comparison.']
         encoded = json.dumps(results, indent=2) + '\n'
@@ -131,12 +176,13 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('exe', type=Path, nargs='?', default=ROOT / 'bin/nemu64-static.exe')
     parser.add_argument('--report', type=Path)
+    parser.add_argument('--components', action='store_true', help='also link/run the GameShark fixture against obj/static/builtins.lib')
     parser.add_argument('--worker', type=Path, help=argparse.SUPPRESS)
     args = parser.parse_args()
     executable = args.exe.resolve(strict=True)
     report = args.report.resolve() if args.report else None
     if args.worker:
-        return worker(args.worker, executable, report)
+        return worker(args.worker, executable, report, args.components)
     parent = Path.home() / '.ai-tmp'
     parent.mkdir(exist_ok=True)
     scratch = Path(tempfile.mkdtemp(prefix='nemu-static-probe.', dir=parent))
@@ -144,6 +190,8 @@ def main():
     command = ['xvfb-run', '-a', '-s', '-screen 0 1280x1024x24',
                '-e', str(scratch / 'xvfb.log'), sys.executable, str(Path(__file__).resolve()),
                str(executable), '--worker', str(scratch)]
+    if args.components:
+        command.append('--components')
     if report:
         command.extend(['--report', str(report)])
     return subprocess.run(command, env=dict(os.environ, TMPDIR=str(scratch))).returncode

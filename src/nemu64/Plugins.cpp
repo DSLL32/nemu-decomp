@@ -46,69 +46,80 @@ bool LoadPlugin(char *filename)
     char error[200];
     strcpy(path, PluginDirectory);
     strcat(path, filename);
+#ifdef NEMU_STATIC
+    int builtin = NemuStaticPluginIndex(filename);
+    HMODULE module = builtin < 0 ? LoadLibraryA(path) : NULL;
+#define PluginProc(module, name) (builtin >= 0 ? NemuStaticPluginProc(builtin, name) : GetProcAddress(module, name))
+    if (builtin >= 0 || module) {
+#else
+#define PluginProc(module, name) GetProcAddress(module, name)
     HMODULE module = LoadLibraryA(path);
     if (module) {
-        if (GetProcAddress(module, "GetDllInfo")) {
+#endif
+        if (PluginProc(module, "GetDllInfo")) {
             PluginDescriptor *plugin = &PluginCatalog[PluginCount];
             plugin->Size = sizeof(PluginDescriptor);
-            plugin->AiDacrateChanged = (void (__cdecl *)(int))GetProcAddress(module, "AiDacrateChanged");
-            plugin->AiLenChanged = (void (__cdecl *)())GetProcAddress(module, "AiLenChanged");
-            plugin->AiReadLength = (unsigned int (__cdecl *)())GetProcAddress(module, "AiReadLength");
-            plugin->AiUpdate = (void (__cdecl *)(BOOL))GetProcAddress(module, "AiUpdate");
-            plugin->ChangeWindow = (void (__cdecl *)())GetProcAddress(module, "ChangeWindow");
-            plugin->CloseDLL = (void (__cdecl *)())GetProcAddress(module, "CloseDLL");
-            plugin->DllAbout = (void (__cdecl *)(HWND))GetProcAddress(module, "DllAbout");
-            plugin->DllConfig = (void (__cdecl *)(HWND))GetProcAddress(module, "DllConfig");
-            plugin->DllTest = (void (__cdecl *)(HWND))GetProcAddress(module, "DllTest");
-            plugin->DrawScreen = (void (__cdecl *)())GetProcAddress(module, "DrawScreen");
-            plugin->FillRectHack = (void (__cdecl *)())GetProcAddress(module, "FillRectHack");
-            plugin->GetCombinerPointer = (void (__cdecl *)(void **))GetProcAddress(module, "GetCombinerPointer");
-            plugin->GetDllInfo = (void (__cdecl *)(PluginInfo *))GetProcAddress(module, "GetDllInfo");
-            plugin->InitiateAudio = (BOOL (__cdecl *)(AudioInfo))GetProcAddress(module, "InitiateAudio");
-            plugin->InitiateGFX = (BOOL (__cdecl *)(GraphicsInfo))GetProcAddress(module, "InitiateGFX");
-            plugin->MoveScreen = (void (__cdecl *)(int, int))GetProcAddress(module, "MoveScreen");
-            plugin->ProcessAList = (void (__cdecl *)())GetProcAddress(module, "ProcessAList");
-            plugin->ProcessDList = (void (__cdecl *)())GetProcAddress(module, "ProcessDList");
-            plugin->RomClosed = (void (__cdecl *)())GetProcAddress(module, "RomClosed");
-            plugin->RomOpen = (void (__cdecl *)())GetProcAddress(module, "RomOpen");
-            plugin->UpdateScreen = (void (__cdecl *)())GetProcAddress(module, "UpdateScreen");
-            plugin->ViStatusChanged = (void (__cdecl *)())GetProcAddress(module, "ViStatusChanged");
-            plugin->ViWidthChanged = (void (__cdecl *)())GetProcAddress(module, "ViWidthChanged");
-            plugin->VISetUCodeID = (void (__cdecl *)(unsigned int))GetProcAddress(module, "VISetUCodeID");
-            plugin->SetResolution = (void (__cdecl *)(int, int))GetProcAddress(module, "SetResolution");
+            plugin->AiDacrateChanged = (void (__cdecl *)(int))PluginProc(module, "AiDacrateChanged");
+            plugin->AiLenChanged = (void (__cdecl *)())PluginProc(module, "AiLenChanged");
+            plugin->AiReadLength = (unsigned int (__cdecl *)())PluginProc(module, "AiReadLength");
+            plugin->AiUpdate = (void (__cdecl *)(BOOL))PluginProc(module, "AiUpdate");
+            plugin->ChangeWindow = (void (__cdecl *)())PluginProc(module, "ChangeWindow");
+            plugin->CloseDLL = (void (__cdecl *)())PluginProc(module, "CloseDLL");
+            plugin->DllAbout = (void (__cdecl *)(HWND))PluginProc(module, "DllAbout");
+            plugin->DllConfig = (void (__cdecl *)(HWND))PluginProc(module, "DllConfig");
+            plugin->DllTest = (void (__cdecl *)(HWND))PluginProc(module, "DllTest");
+            plugin->DrawScreen = (void (__cdecl *)())PluginProc(module, "DrawScreen");
+            plugin->FillRectHack = (void (__cdecl *)())PluginProc(module, "FillRectHack");
+            plugin->GetCombinerPointer = (void (__cdecl *)(void **))PluginProc(module, "GetCombinerPointer");
+            plugin->GetDllInfo = (void (__cdecl *)(PluginInfo *))PluginProc(module, "GetDllInfo");
+            plugin->InitiateAudio = (BOOL (__cdecl *)(AudioInfo))PluginProc(module, "InitiateAudio");
+            plugin->InitiateGFX = (BOOL (__cdecl *)(GraphicsInfo))PluginProc(module, "InitiateGFX");
+            plugin->MoveScreen = (void (__cdecl *)(int, int))PluginProc(module, "MoveScreen");
+            plugin->ProcessAList = (void (__cdecl *)())PluginProc(module, "ProcessAList");
+            plugin->ProcessDList = (void (__cdecl *)())PluginProc(module, "ProcessDList");
+            plugin->RomClosed = (void (__cdecl *)())PluginProc(module, "RomClosed");
+            plugin->RomOpen = (void (__cdecl *)())PluginProc(module, "RomOpen");
+            plugin->UpdateScreen = (void (__cdecl *)())PluginProc(module, "UpdateScreen");
+            plugin->ViStatusChanged = (void (__cdecl *)())PluginProc(module, "ViStatusChanged");
+            plugin->ViWidthChanged = (void (__cdecl *)())PluginProc(module, "ViWidthChanged");
+            plugin->VISetUCodeID = (void (__cdecl *)(unsigned int))PluginProc(module, "VISetUCodeID");
+            plugin->SetResolution = (void (__cdecl *)(int, int))PluginProc(module, "SetResolution");
             plugin->GetDllInfo(&plugin->Info);
             strcpy(plugin->Filename, filename);
             ++PluginCount;
         }
-        if (GetProcAddress(module, "CIInit")) {
-            CIInit = (void (__cdecl *)(HWND, void *))GetProcAddress(module, "CIInit");
-            CIFree = (void (__cdecl *)())GetProcAddress(module, "CIFree");
-            CIGetJoyData = (void (__cdecl *)())GetProcAddress(module, "CIGetJoyData");
-            CIRumble = (void (__cdecl *)(unsigned int))GetProcAddress(module, "CIRumble");
-            CIConfigure = (void (__cdecl *)(HWND))GetProcAddress(module, "CIConfigure");
+        if (PluginProc(module, "CIInit")) {
+            CIInit = (void (__cdecl *)(HWND, void *))PluginProc(module, "CIInit");
+            CIFree = (void (__cdecl *)())PluginProc(module, "CIFree");
+            CIGetJoyData = (void (__cdecl *)())PluginProc(module, "CIGetJoyData");
+            CIRumble = (void (__cdecl *)(unsigned int))PluginProc(module, "CIRumble");
+            CIConfigure = (void (__cdecl *)(HWND))PluginProc(module, "CIConfigure");
         }
-        if (GetProcAddress(module, "AIInit")) {
-            AIInit = (void (__cdecl *)(HWND, unsigned char *, unsigned int *, unsigned int *, unsigned int *, unsigned int *))GetProcAddress(module, "AIInit");
-            AIFree = (void (__cdecl *)())GetProcAddress(module, "AIFree");
-            AISetReg = (void (__cdecl *)(unsigned int, unsigned int))GetProcAddress(module, "AISetReg");
-            AIGetReg = (unsigned int (__cdecl *)(unsigned int))GetProcAddress(module, "AIGetReg");
-            AIConfigure = (void (__cdecl *)(HWND))GetProcAddress(module, "AIConfigure");
-            AUDList = (void (__cdecl *)(unsigned int))GetProcAddress(module, "AUDList");
-            AISetUCodeID = (void (__cdecl *)(unsigned int))GetProcAddress(module, "AISetUCodeID");
+        if (PluginProc(module, "AIInit")) {
+            AIInit = (void (__cdecl *)(HWND, unsigned char *, unsigned int *, unsigned int *, unsigned int *, unsigned int *))PluginProc(module, "AIInit");
+            AIFree = (void (__cdecl *)())PluginProc(module, "AIFree");
+            AISetReg = (void (__cdecl *)(unsigned int, unsigned int))PluginProc(module, "AISetReg");
+            AIGetReg = (unsigned int (__cdecl *)(unsigned int))PluginProc(module, "AIGetReg");
+            AIConfigure = (void (__cdecl *)(HWND))PluginProc(module, "AIConfigure");
+            AUDList = (void (__cdecl *)(unsigned int))PluginProc(module, "AUDList");
+            AISetUCodeID = (void (__cdecl *)(unsigned int))PluginProc(module, "AISetUCodeID");
         }
-        if (GetProcAddress(module, "ToolInit")) {
-            ToolCatalog[ToolCount].Init = (unsigned int (__cdecl *)(NemuHostInterface *))GetProcAddress(module, "ToolInit");
-            ToolCatalog[ToolCount].Free = (void (__cdecl *)())GetProcAddress(module, "ToolFree");
-            ToolCatalog[ToolCount].Invoke = (void (__cdecl *)(unsigned int, unsigned int))GetProcAddress(module, "ToolFunc");
-            ToolCatalog[ToolCount].GetMenuText = (void (__cdecl *)(char *))GetProcAddress(module, "ToolGetMenuText");
+        if (PluginProc(module, "ToolInit")) {
+            ToolCatalog[ToolCount].Init = (unsigned int (__cdecl *)(NemuHostInterface *))PluginProc(module, "ToolInit");
+            ToolCatalog[ToolCount].Free = (void (__cdecl *)())PluginProc(module, "ToolFree");
+            ToolCatalog[ToolCount].Invoke = (void (__cdecl *)(unsigned int, unsigned int))PluginProc(module, "ToolFunc");
+            ToolCatalog[ToolCount].GetMenuText = (void (__cdecl *)(char *))PluginProc(module, "ToolGetMenuText");
             sprintf(ToolCatalog[ToolCount].MenuText, "%s...", filename);
             ++ToolCount;
         }
-        if (GetProcAddress(module, "NemuSettings"))
-            NemuSettings = (void (__cdecl *)(unsigned int, PluginDescriptor *))GetProcAddress(module, "NemuSettings");
-        if (GetProcAddress(module, "DCTList"))
-            DCTList = (void (__cdecl *)(unsigned int))GetProcAddress(module, "DCTList");
-        PluginModules[PluginModuleCount++] = module;
+        if (PluginProc(module, "NemuSettings"))
+            NemuSettings = (void (__cdecl *)(unsigned int, PluginDescriptor *))PluginProc(module, "NemuSettings");
+        if (PluginProc(module, "DCTList"))
+            DCTList = (void (__cdecl *)(unsigned int))PluginProc(module, "DCTList");
+#ifdef NEMU_STATIC
+        if (module)
+#endif
+            PluginModules[PluginModuleCount++] = module;
         return true;
     }
     else {
@@ -117,6 +128,7 @@ bool LoadPlugin(char *filename)
         return false;
     }
 }
+#undef PluginProc
 
 bool LoadPlugins()
 {
@@ -151,7 +163,7 @@ bool LoadPlugins()
         return true;
     }
 #ifdef NEMU_STATIC
-    return PluginModuleCount != 0;
+    return PluginCount != 0;
 #else
     return false;
 #endif

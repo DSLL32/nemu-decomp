@@ -120,6 +120,8 @@ class Converter:
         self.data_imports = {}
         self.unit_initializers = []
         self.unit_finalizers = []
+        self.dependencies = []
+        self.resources = []
 
     def symbol(self, name, local=False):
         if local or re.match(r'^@(Finalization|initialization)(\$|$)', name):
@@ -269,7 +271,19 @@ class Converter:
                 cell.write(0, bytes(4))
                 cell.relocations.append((0, original, 6))
                 self.data_imports[index] = key
-            elif data[1] == 0xfb and (len(data) < 3 or data[2] not in (8, 10, 12)):
+            elif data[1:3] in (b'\xfb\x08', b'\xfb\x09'):
+                if not data[3:].endswith(b'\0') or b'\0' in data[3:-1]:
+                    raise ConversionError('Malformed Borland dependency filename')
+                target = self.dependencies if data[2] == 8 else self.resources
+                target.append(data[3:-1].decode('latin1'))
+            elif data[1:3] == b'\xfb\x0b':
+                # Resource strings in C++ object mode have a pointer-valued
+                # Identifier, supported directly by System.LoadResString.
+                r = Reader(data[3:])
+                segment = r.index()
+                if r or self.segment(segment) is None:
+                    raise ConversionError('Invalid resource-string segment')
+            elif data[1] == 0xfb and (len(data) < 3 or data[2] not in (10, 12)):
                 raise ConversionError(f'Unsupported Borland COMENT {data.hex()}')
 
     def contents(self):
@@ -358,6 +372,9 @@ class Converter:
     def coff(self):
         self.declarations()
         self.contents()
+        return self.emit_coff()
+
+    def emit_coff(self):
         strings = bytearray(4)
         string_offsets = {}
 
@@ -429,7 +446,8 @@ def convert(source, destination, aliases=None):
                 sections=len(converter.sections), symbols=len(converter.symbols),
                 relocations=sum(len(s.relocations) for s in converter.sections),
                 initialization_symbols=converter.unit_initializers,
-                finalization_symbols=converter.unit_finalizers)
+                finalization_symbols=converter.unit_finalizers,
+                dependencies=converter.dependencies, resources=converter.resources)
 
 
 def import_library_aliases(paths):

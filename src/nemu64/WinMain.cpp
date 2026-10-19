@@ -521,6 +521,12 @@ UINT CALLBACK StatePreviewHook(HWND dialog, UINT message, WPARAM wParam, LPARAM 
 
 int WINAPI WinMain(HINSTANCE instance, HINSTANCE previousInstance, LPSTR commandLine, int showCommand)
 {
+#ifdef NEMU_STATIC
+    if (!NemuStaticInitialize(instance)) {
+        MessageBoxA(NULL, "Error initializing built-in components", "Error", MB_ICONSTOP);
+        return 1;
+    }
+#endif
     ApplicationInstance = instance;
     WNDCLASSEXA windowClass;
     windowClass.cbSize = sizeof(windowClass);
@@ -649,6 +655,9 @@ int WINAPI WinMain(HINSTANCE instance, HINSTANCE previousInstance, LPSTR command
     FreeTools();
     kailleraShutdown();
     UnloadPlugins();
+#ifdef NEMU_STATIC
+    NemuStaticShutdown();
+#endif
     DecommitRDRAM();
     if (!VirtualFree(RDRAM, 0, MEM_RELEASE))
         MessageBoxA(MainWindow, "Couldn't release rdram-memory", "Error", MB_ICONSTOP);

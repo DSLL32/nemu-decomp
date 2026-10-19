@@ -1,76 +1,60 @@
 # Optional static user build
 
-Run `make static` to produce `bin/nemu64-static.exe`. The toolchains and Wine
-requirements are the same as for `make`. Both targets can coexist; the ordinary
-executable and the historical reconstruction scripts retain their DLL builds.
+Run `make static` to produce `bin/nemu64-static.exe`. It includes GameShark,
+Kaillera, audio, input, LemD3D8, debugger, dialogs, profiler, and the combiner
+debugger. Ship it with `config.ini`, `nemu64.ini`, `LemD3DCombine.dat`, and
+`LemD3DCombine.new`. No bundled DLLs or `Plugin/` directory are required.
+Windows and DirectX DLLs remain system dependencies.
 
-The executable includes GameShark, Kaillera, audio, input, LemD3D8, debugger,
-dialogs, profiler, and the combiner debugger. Ship it with `config.ini`,
-`nemu64.ini`, `LemD3DCombine.dat`, and `LemD3DCombine.new`. The loose bundled DLLs
-are intermediate build products and are not needed by this executable.
+`Plugin/` is optional. The frontend registers built-in implementations first,
+then scans that directory for external dynamic plugins using the existing ABI.
+Case-insensitive matches for bundled filenames are skipped to avoid duplicate
+registration when both user builds share a directory. External graphics plugins
+appear in Settings; audio/input providers retain the frontend's load-order
+behavior. An external DLL that itself imports a bundled DLL still requires
+that dependency as a loose DLL.
 
-`Plugin/` is optional. Built-in plugins are registered first, then additional
-DLLs in that directory are loaded through the existing plugin interface.
-Case-insensitive matches for bundled plugin filenames are skipped, so leaving
-the normal build's DLLs in place does not register them twice. Additional
-graphics plugins appear in Settings; additional audio/input providers follow
-the frontend's existing load-order behavior.
+## Ordinary object and library linking
 
-## Linking
+`scripts/build_static.py` builds relocatable objects, archives the components
+with Microsoft `LIB`, and invokes Microsoft `LINK` to produce the executable.
+There is no PE merger, embedded DLL image, module lookup interception, or
+post-link executable patching.
 
-The Delphi 6/VCL projects do not produce Microsoft COFF objects, and several
-components need different compiler runtimes. Instead of porting those projects,
-`scripts/link_static.py` links their source-built PE images offline:
+- Delphi 6 Update 2 compiles the Pascal plugins and shared RTL/VCL with `-JPN`.
+  `scripts/omf_to_coff.py` converts their OMF objects into Microsoft i386 COFF.
+  The static build uses this one Delphi version for all Pascal components.
+- Generated copies of the Pascal units have private unit names so repeated
+  names such as `UnitMain` and `RCP` stay independent. Identical theme component
+  units are shared between debugger and dialogs. Reconstructed sources are
+  unchanged.
+- C/C++ components use VC7 and its static multithreaded CRT/MFC. Their external
+  COFF symbols receive component prefixes to isolate repeated globals and
+  plugin entry points. Compiler relocations and static constructors are kept.
+- Generated COFF jump thunks expose the existing plugin ABI; pointer cells
+  satisfy the core's Kaillera call declarations. A function table registers
+  built-ins directly. Only external plugins go through `LoadLibrary`.
+- `StaticRuntime.cpp` initializes Delphi units in dependency order, connects
+  Delphi threadvars to the native CRT's TLS block, initializes MFC, and calls
+  the native components' attach/detach functions. Every component uses the
+  executable's real `HINSTANCE` and resource namespace.
+- Win32 `.res` inputs and Delphi form resources are collected before linking.
+  Native components get distinct numeric resource ranges; dialog control IDs
+  remain unchanged. Delphi resource strings use the RTL's literal-pointer mode.
+- Emulated RAM is reserved before VCL/MFC initialization. Direct3D and
+  DirectSound use MSVC's standard delay-load support so their drivers load
+  later, after that reservation.
 
-- It places their sections in the executable, applies x86 relocations, resolves
-  imports between bundled components, and combines system import descriptors.
-- Each component retains a private PE header and resource/export namespace.
-  Numeric resource IDs, repeated Delphi unit names, and separate CRT/VCL globals
-  therefore remain independent. Section permissions are preserved.
-- `StaticRuntime.c` provides module lookup for those namespaces and delivers
-  process/thread startup and teardown through an executable TLS callback.
-  Component calls to `VirtualQuery` retain the allocation-base convention used
-  by Delphi to find a class's form resources.
-- RAM is reserved before component initialization. Direct3D/DirectSound system
-  imports are resolved afterward, preserving the normal frontend's ordering;
-  loading their Wine drivers first can exhaust contiguous 32-bit address space.
+Generated sources, objects, `builtins.lib`, linker response files, the link map,
+and conversion metadata are under `obj/static/`. The compiler log is
+`obj/static/build.log`; the build report is `obj/static/link-report.json`.
 
-The resulting executable is a fixed-address PE32 image. Windows maps its code
-and data directly; it neither extracts DLL files nor maps embedded DLLs at
-runtime. Windows/DirectX DLLs are still dependencies. This is a user-build link,
-not a byte-matching reconstruction. The build records input hashes, component
-locations, resolved imports, and output identity in `obj/static/link.json`.
+This is an ordinary user build, not a byte-matching reconstruction. `make` and
+the historical `scripts/build_*.py` workflows retain their separate DLL builds.
 
-## Validation and limits
+## Object converter
 
-```sh
-python3 scripts/check_static.py --report obj/static/smoke.json
-```
-
-The disposable Wine/Xvfb fixtures test an absent plugin directory, an empty
-one, and an external tool DLL alongside invalid duplicate bundled filenames.
-They inspect built-in menus, open About/Disclaimer and the Delphi settings/input
-dialogs, and require normal shutdown. The external plugin must receive process
-attach/detach and tool initialization/cleanup calls. The PE import table is
-checked for loose bundled dependencies. Scratch files and a dedicated Wine
-prefix are created under `~/.ai-tmp`.
-
-This remains experimental: it has been checked under Wine, not native Windows.
-The smoke test does not cover ROM execution, rendered output, audio playback,
-or a live netplay session. The custom linker intentionally rejects input static
-TLS directories, delay-import tables, forwarded exports, and relocation types
-other than x86 HIGHLOW rather than silently producing an invalid executable.
-
-The private component handles are understood by the executable and bundled
-components. They are not registered as DLLs with the Windows loader. External
-plugins using the normal host interface work; an external DLL with a load-time
-import of a bundled DLL still needs that dependency supplied as a loose DLL.
-
-## Conventional object-linking experiment
-
-`scripts/omf_to_coff.py` is an independent Python implementation that converts
-Delphi 6 OMF objects into Microsoft i386 COFF objects. It does not use the PE
-merger or a third-party object converter. For example:
+The Python converter uses only the standard library:
 
 ```sh
 python3 scripts/omf_to_coff.py input.obj output.obj \
@@ -78,38 +62,34 @@ python3 scripts/omf_to_coff.py input.obj output.obj \
     --aliases aliases.json --report conversion.json
 ```
 
-Use Delphi's `-JP` output when compiling units with overloaded routines. The
-compiler's internal mangled names remain intact; a JSON mapping can expose the
-chosen C-compatible entry points, for example `{"@Add$qii": "_Add"}`. The optional
-Microsoft import libraries supply the spelling of foreign C/stdcall symbols.
-Aliases do not change calling conventions or implement a C++ ABI bridge.
+It supports Borland virtual segments as COFF COMDATs, public/external symbols,
+32-bit absolute/relative fixups, iterated data, external-data pointer cells,
+resource/dependency metadata, initialization/finalization tables, and native
+TLS section-relative relocations. Unsupported semantic records fail with an
+error. Compiler debug data is discarded. Aliases change symbol spelling, not
+calling conventions or C++ object layouts.
 
-The converter handles Borland virtual function/data segments as COFF COMDATs,
-32-bit absolute/relative fixups, public/external symbols, iterated data,
-external-data pointer cells, and initialization/finalization records. Threadvar
-offsets become COFF section-relative relocations into `.tls$D`, between the
-Microsoft CRT's TLS sentinels. Unsupported semantic records cause an error;
-the tool deliberately drops compiler debug data, not executable code.
-
-Run the reproducible end-to-end check with:
+## Validation
 
 ```sh
 python3 scripts/check_omf_to_coff.py --report obj/static/omf-to-coff.json
+python3 scripts/check_static.py --components --report obj/static/smoke.json
 ```
 
-It compiles disposable copies of the real `System` and `SysInit` sources plus
-two probe units, converts them, archives them with Microsoft's `LIB`, and links
-a C host with Microsoft's `LINK`. It runs at image bases `0x400000` and
-`0x10000000`, checking globals, cross-unit data imports, callbacks, managed
-strings, initialization/finalization, exception unwinding/finally, and isolated
-thread-local storage on the main and worker threads. No source-built DLLs are
-used. It also checks rejection of a bad checksum and an unsupported import
-record. Scratch files and its Wine prefix stay under `~/.ai-tmp`.
+The converter check links and runs actual Delphi runtime/probe objects at two
+image bases. It exercises managed strings, callbacks, cross-unit globals,
+initialization/finalization, exception unwinding, and thread-local storage.
 
-This proves conventional object/static-library linking for the runtime and
-those probes. It has not yet replaced `make static` or integrated the full VCL
-plugins. The C host currently dispatches unit initializers explicitly and
-connects `SysInit.TlsIndex` to the Microsoft CRT's TLS index. A complete build
-still needs dependency-ordered startup, VCL/form resources, component symbol
-isolation, and the frontend's built-in plugin registration. Native Windows has
-not been tested.
+The static executable check uses disposable Wine/Xvfb fixtures with an absent
+plugin directory, an empty one, and an external tool alongside invalid duplicate
+bundled filenames. It checks built-in menus, About/Disclaimer, Delphi
+settings/input and native audio/video dialogs, external tool initialization/cleanup and DLL unload,
+and normal shutdown. It also rejects imports of bundled DLLs. The optional
+`--components` check links the existing GameShark fixture against
+`obj/static/builtins.lib` and exercises MFC dialogs, cheat editing, and writes
+to synthetic RAM. Scratch files and
+Wine prefixes are allocated under `~/.ai-tmp`.
+
+The build remains experimental. Validation is under Wine rather than native
+Windows. These checks do not establish ROM execution, rendering accuracy, audio
+playback, or a live netplay session.

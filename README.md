@@ -29,7 +29,7 @@ The ordinary Makefile build does not guarantee byte matching; use the separate
 for matching builds and verification.
 
 `make static` builds the experimental `bin/nemu64-static.exe` with all nine
-bundled DLLs linked into the executable. It runs without the loose DLLs or a
+bundled components linked from object files and static libraries. It runs without the loose DLLs or a
 `Plugin/` directory, and still scans `Plugin/` for additional dynamic plugins.
 Bundled filenames are skipped during that scan to prevent duplicate registration.
 The four configuration/data files are still needed. See

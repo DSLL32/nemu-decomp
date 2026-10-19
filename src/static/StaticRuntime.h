@@ -1,8 +1,12 @@
 #ifndef NEMU_STATIC_RUNTIME_H
 #define NEMU_STATIC_RUNTIME_H
 
-/* User-build integration only; the reconstructed DLL projects do not use this. */
-extern "C" __declspec(dllimport) const char *__cdecl NemuStaticPluginName(unsigned int index);
-extern "C" __declspec(dllimport) void *__cdecl NemuStaticRdram(void);
+/* Ordinary user-build integration; historical DLL projects do not use this. */
+extern "C" const char *__cdecl NemuStaticPluginName(unsigned int index);
+extern "C" int __cdecl NemuStaticPluginIndex(const char *name);
+extern "C" FARPROC __cdecl NemuStaticPluginProc(int index, const char *name);
+extern "C" bool __cdecl NemuStaticInitialize(HINSTANCE instance);
+extern "C" void __cdecl NemuStaticShutdown(void);
+extern "C" void *__cdecl NemuStaticRdram(void);
 
 #endif
